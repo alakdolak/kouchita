@@ -441,6 +441,10 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-weight: bold;
     /*display: flex;*/
 }
+#share_box, #share_box_mobile{
+    bottom: -165px !important;
+    left: 0px !important;
+}
 
 .ui_icon.heart:before {
     font-size: 2em;
@@ -462,6 +466,219 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     max-width: 200px;
 }
 
+.listShareIconPc{
+    display: inline-block;
+    float: right;
+    font-size: 17px;
+    line-height: 15px;
+    margin-right: 10px;
+}
+
+.sharePageLabel{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.placeListBody{
+    border-top: 1px solid #e5e5e5;
+    margin-top: 10px;
+}
+
+.placeListSortDiv{
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+
+.placeListBodyContentSection{
+    direction: rtl;
+    padding: 9px 18px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.placeListBodyFilterSection{
+    direction: rtl;
+    padding: 10px;
+    padding-right: 0px;
+}
+
+.filterGroupTitle{
+    padding: 0 0 11px !important;
+    font-size: 20px;
+}
+
+.poiTitle{
+    font-size: 16px;
+    font-weight: normal;
+    color: #000000;
+}
+
+.contentDetailName{
+    width: 95%;
+    margin: 7px 0px;
+}
+
+.listBoxesMainDivs{
+    width: 100%;
+}
+
+.contentImgSection{
+
+}
+
+.contentImg{
+    height: 120px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transition: .3s;
+}
+
+.contentImg:hover{
+    opacity: 0.8;
+}
+
+.rating-count{
+    display: flex;
+    align-items: center;
+}
+
+.rating-widget{
+    margin-left: 5px;
+}
+
+.review_count{
+    color: #666666;
+    font-size: 13px;
+}
+
+.itemState{
+    float: right;
+    padding: 0;
+    font-size: 0.75em;
+    color: #666666;
+}
+
+.heartOnPic{
+    position: absolute;
+    top: 0;
+    right: 3px;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+}
+
+.heartOnPic:hover{
+    color: red;
+}
+
+.filterItem{
+    color: #666666;
+    font-size: 0.75em;
+    padding: 6px 0;
+}
+
+.headerFilter{
+    margin-bottom: 15px;
+}
+
+.option{
+    padding: 0px 5px;
+}
+
+.notingToShowDiv{
+    background: #e2c8c2;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+
+.notingToShowImgDiv{
+    width: 120px;
+}
+
+.notingToShowTextDiv{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.notingToShowClose{
+    font-size: 65px;
+    color: white;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.goToCampain{
+    cursor: pointer;
+    color: blue;
+}
+
+.rebrand_2017 .masthead {
+    margin-bottom: 0px !important;
+}
+.red-heart-fill::before {
+    content: '\e012' !important;
+    color: #ff0000 !important;
+    float: right;
+    font-family: Shazde_Regular2 !important;
+    font-size: 22px;
+    margin-top: 3px;
+}
+.elements{
+    width: 200px;
+    height: 200px;
+    margin: 20px 5px;
+    border: solid gray 3px;
+}
+.filtersExist {
+    padding: 2%;
+    margin: 2%;
+    background-color: #4dc7bc;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.filterCloseIcon {
+    font-size: 1.5em;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.hl_compareBtn {
+    background-color: #fcc156;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0 10px;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+.hl_compareBtn:hover {
+    opacity: 0.75;
+}
+.filterGroupTitle{
+    overflow: visible !important;
+}
+div.prw_rup.prw_common_centered_thumbnail .centering_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    position: relative;
+    top: auto;
+}
+div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
 @media (min-width: 992px) and (max-width: 1189px) {
     .lhr .filterGroupTitle {
         font-size: 18px !important;
@@ -470,31 +687,54 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
         font-size: 12px !important;
     }
 }
+
 @media (max-width: 992px) {
+
     .sorting {
         width: 100% !important;
-        font-size: 14px !important;
+        font-size: 9px !important;
     }
+
     .ordering {
-        width: 18%;
-        font-size: 13px;
+        width: 15% !important;
+        font-size: 11px !important;
     }
+
     .sharePageMainDiv {
         margin-left: -15px;
     }
 }
 
-@media (max-width: 835px) {
+@media (max-width: 845px) {
+
+    .sorting {
+        font-size: 8px !important;
+    }
+
     .lhr .filterGroupTitle {
         font-size: 18px !important;
     }
+
     .ordering {
-        font-size: 11px !important;
+        width: 15% !important;
+        font-size: 10px !important;
     }
 }
 
-
 @media (max-width: 767px) {
+
+    .sorting {
+        font-size: 8px !important;
+    }
+    .notingToShowDiv{
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    .notingToShowTextDiv{
+        margin-top: 15px;
+    }
+
     #PlaceController {
         padding: 5px 15px !important;
         border-right: none;
@@ -519,6 +759,13 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
         margin-left: -170px !important;
         padding: 7px 27px !important;
     }
+    #share_box, #share_box_mobile{
+        bottom: -165px !important;
+        left: 160px !important;
+    }
+    #share_box::before, #share_box_mobile::before{
+        left: 11px !important;
+    }
     .eatery_filters {
         padding: 0 5px;
     }
@@ -538,8 +785,8 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     /*style of ordering*/
     .ordering {
         display: block;
-        width: 100%;
-        font-size: 1.25em;
+        width: 100% !important;
+        font-size: 17px !important;
     }
     .orders {
         padding: 5px;
@@ -565,5 +812,4 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     }
 }
 
-
-
+/*[["\u0633\u0645\u0627\u0642 \u062e\u0634\u06a9 \u0648 \u0646\u06a9\u0648\u0628\u06cc\u062f\u0647","\u06cc\u06a9 \u067e\u06cc\u0645\u0627\u0646\u0647"],["\u0628\u0631\u0646\u062c","\u06cc\u06a9 \u0648 \u0646\u06cc\u0645 \u067e\u06cc\u0645\u0627\u0646\u0647"],["\u0639\u0635\u0627\u0631\u0647 \u0642\u0644\u0645 \u06cc\u0627 \u0645\u0631\u063a","\u0628\u0647 \u0645\u0642\u062f\u0627\u0631 \u0644\u0627\u0632\u0645"],["\u0644\u0648\u0628\u06cc\u0627 \u0686\u0634\u0645 \u0628\u0644\u0628\u0644\u06cc","\u062f\u0648 \u067e\u06cc\u0645\u0627\u0646\u0647"],["\u0633\u0628\u0632\u06cc \u0645\u0639\u0637\u0631 \u0622\u0634 \u062e\u0631\u062f \u0634\u062f\u0647","\u0646\u06cc\u0645 \u06a9\u06cc\u0644\u0648"],["\u06af\u0648\u062c\u0647 \u0641\u0631\u0646\u06af\u06cc","\u06cc\u06a9 \u06a9\u06cc\u0644\u0648"],["\u0646\u0645\u06a9 \u0648 \u0641\u0644\u0641\u0644","\u0628\u0647 \u0645\u0642\u062f\u0627\u0631 \u0644\u0627\u0632\u0645"],["\u0646\u0639\u0646\u0627 \u062f\u0627\u063a\u060c \u067e\u06cc\u0627\u0632 \u062f\u0627\u063a \u0648 \u0633\u06cc\u0631 \u062f\u0627\u063a","\u0628\u0647 \u0645\u0642\u062f\u0627\u0631 \u0644\u0627\u0632\u0645"]]*/

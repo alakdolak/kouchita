@@ -392,7 +392,7 @@ $config = \App\models\ConfigModel::first();
                                     <div class="filterGroupTitle">{{__('امتیاز کاربران')}}</div>
                                     <div class="filterContent ui_label_group inline">
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
+                                            <input onclick="rateFilterFunc(5, this)" type="radio" name="AVGrate" id="p_c5" value="5"/>
                                             <label for="p_c5"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -403,7 +403,7 @@ $config = \App\models\ConfigModel::first();
                                             </div>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
+                                            <input onclick="rateFilterFunc(4, this)" type="radio" name="AVGrate" id="p_c4" value="4"/>
                                             <label for="p_c4"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -415,7 +415,7 @@ $config = \App\models\ConfigModel::first();
                                             <span> {{__('به بالا')}}</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
+                                            <input onclick="rateFilterFunc(3, this)" type="radio" name="AVGrate" id="p_c3" value="3"/>
                                             <label for="p_c3"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -427,7 +427,7 @@ $config = \App\models\ConfigModel::first();
                                             <span> {{__('به بالا')}}</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
+                                            <input onclick="rateFilterFunc(2, this)" type="radio" name="AVGrate" id="p_c2" value="2"/>
                                             <label for="p_c2"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -439,7 +439,7 @@ $config = \App\models\ConfigModel::first();
                                             <span> {{__('به بالا')}}</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
+                                            <input onclick="rateFilterFunc(1, this)" type="radio" name="AVGrate" id="p_c1" value="1"/>
                                             <label for="p_c1"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"

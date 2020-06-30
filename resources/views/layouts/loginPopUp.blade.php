@@ -65,6 +65,7 @@ $authUrl = $client->createAuthUrl();
     {!! csrf_field() !!}
     <input id="form_userName" name="username" type="hidden">
     <input id="form_pass" name="password" type="hidden">
+    <input id="redirectUrl" name="redirectUrl" type="hidden">
 </form>
 
 <div id="mainLoginPopUp" class="mainLoginPupUpBack hidden">
@@ -725,6 +726,7 @@ $authUrl = $client->createAuthUrl();
                         console.log('oklogin')
                         $('#form_userName').val(username);
                         $('#form_pass').val(password);
+                        $('#redirectUrl').val(selectedUrl);
                         $('#second_login').submit();
                     }
                     else if (response == "nok2") {

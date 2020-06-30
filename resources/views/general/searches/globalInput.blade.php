@@ -27,6 +27,7 @@
         $('#globalSearchInput').val('');
 
         $('#globalSearchResult').html('');
+        $('#globalSearchResult').hide();
 
         $('#globalSearch').css('display', 'flex');
 
@@ -34,10 +35,12 @@
     }
 
     function setResultToGlobalSearch(_txt){
+        $('#globalSearchResult').show();
         $('#globalSearchResult').html(_txt);
     }
 
     function clearGlobalResult(){
+        $('#globalSearchResult').hide();
         $('#globalSearchResult').html('');
     }
 

@@ -89,7 +89,7 @@ class UserLoginController extends Controller
             }
         }
 
-        return \redirect()->back();
+        return \redirect(url($_POST['redirectUrl']));
     }
 
     public function logout()

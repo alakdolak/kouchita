@@ -50,198 +50,6 @@
         @endif
     </title>
 
-    <style>
-        .rebrand_2017 .masthead {
-            margin-bottom: 0px !important;
-        }
-        .red-heart-fill::before {
-            content: '\e012' !important;
-            color: #ff0000 !important;
-            float: right;
-            font-family: Shazde_Regular2 !important;
-            font-size: 22px;
-            margin-top: 3px;
-        }
-        .elements{
-            width: 200px;
-            height: 200px;
-            margin: 20px 5px;
-            border: solid gray 3px;
-        }
-        .filtersExist {
-            padding: 2%;
-            margin: 2%;
-            background-color: #4dc7bc;
-            color: white;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-        .filterCloseIcon {
-            font-size: 1.5em;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-        .hl_compareBtn {
-            background-color: #fcc156;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0 10px;
-            text-align: center;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-        .hl_compareBtn:hover {
-            opacity: 0.75;
-        }
-        .filterGroupTitle{
-            overflow: visible !important;
-        }
-        div.prw_rup.prw_common_centered_thumbnail .centering_wrapper{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            position: relative;
-            top: auto;
-        }
-        div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        @media (max-width: 992px) {
-            .ordering {
-                width: 15% !important;
-                font-size: 11px !important;
-            }
-            .sorting {
-                font-size: 9px !important;
-            }
-        }
-        @media (max-width: 845px) {
-            .ordering {
-                width: 15% !important;
-                font-size: 10px !important;
-            }
-            .sorting {
-                font-size: 8px !important;
-            }
-        }
-        @media (max-width: 767px) {
-            .ordering {
-                width: 100% !important;
-                font-size: 17px !important;
-            }
-            .sorting {
-                font-size: 8px !important;
-            }
-        }
-
-        .listShareIconPc{
-            display: inline-block;
-            float: right;
-            font-size: 17px;
-            line-height: 15px;
-            margin-right: 10px;
-        }
-        .sharePageLabel{
-            display: inline-block;
-            margin-right: 10px;
-        }
-        .placeListBody{
-            border-top: 1px solid #e5e5e5;
-            margin-top: 10px;
-        }
-        .placeListSortDiv{
-            margin-bottom: 10px;
-            padding-top: 5px;
-        }
-        .placeListBodyContentSection{
-            direction: rtl;
-            padding: 9px 18px;
-            border-right: 1px solid #e5e5e5;
-        }
-        .placeListBodyFilterSection{
-            direction: rtl;
-            padding: 10px;
-            padding-right: 0px;
-        }
-        .filterGroupTitle{
-            padding: 0 0 11px !important;
-            font-size: 20px;
-        }
-        .poiTitle{
-            font-size: 16px;
-            font-weight: normal;
-            color: #000000;
-        }
-        .contentDetailName{
-            width: 95%;
-            margin: 7px 0px;
-        }
-        .listBoxesMainDivs{
-            width: 100%;
-        }
-        .contentImgSection{
-
-        }
-        .contentImg{
-            height: 120px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            transition: .3s;
-        }
-        .contentImg:hover{
-            opacity: 0.8;
-        }
-        .rating-count{
-            display: flex;
-            align-items: center;
-        }
-        .rating-widget{
-            margin-left: 5px;
-        }
-        .review_count{
-            color: #666666;
-            font-size: 13px;
-        }
-        .itemState{
-            float: right;
-            padding: 0;
-            font-size: 0.75em;
-            color: #666666;
-        }
-        .heartOnPic{
-            position: absolute;
-            top: 0;
-            right: 3px;
-            font-size: 24px;
-            color: black;
-            cursor: pointer;
-        }
-        .heartOnPic:hover{
-            color: red;
-        }
-        .filterItem{
-            color: #666666;
-            font-size: 0.75em;
-            padding: 6px 0;
-        }
-        .headerFilter{
-            margin-bottom: 15px;
-        }
-        .option{
-            padding: 0px 5px;
-        }
-    </style>
-
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW">
@@ -366,6 +174,43 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="notingToShowFilter" class="notingToShowDiv hidden">
+                                <div class="notingToShowImgDiv">
+                                    <img src="{{URL::asset('images/mainPics/notElemList.png')}}" style="width: 100%;">
+                                </div>
+                                <div class="notingToShowTextDiv">
+                                    <span style="font-weight: bold; font-size: 1.5em;">
+                                        {{__('با توجه به فیلتر های اعمال شده نتیجه ای برای نمایش موجود نمی باشد.')}}
+                                    </span>
+                                    <span class="hideOnScreen">
+                                        {{__('لطفا از پنل اعمال فیلتر، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
+                                    </span>
+                                    <span class="hideOnPhone">
+                                        {{__('لطفا از پنل سمت چپ، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
+                                    </span>
+                                </div>
+{{--                                <div class="notingToShowClose iconClose"></div>--}}
+                            </div>
+                            @if($contentCount == 0)
+                                <div id="notingToShowInPlace" class="notingToShowDiv">
+                                    <div class="notingToShowImgDiv">
+                                        <img src="{{URL::asset('images/mainPics/notElemList.png')}}" style="width: 100%;">
+                                    </div>
+                                    <div class="notingToShowTextDiv">
+                                        <span style="font-weight: bold; font-size: 1.5em;">
+                                            {{$errorTxt[0]}}
+                                        </span>
+                                        <span>
+                                            {{$errorTxt[1]}}
+                                        </span>
+                                        <span>
+                                            {!! $errorTxt[2] !!}
+                                        </span>
+                                    </div>
+    {{--                                <div class="notingToShowClose iconClose"></div>--}}
+                                </div>
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -406,12 +251,18 @@
                         <div class="filterGroupTitle">{{__('جستجو‌ی نام')}}</div>
                         <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
                     </div>
+                    @if($kindPlace->id == 11)
+                        <div class="bottomLightBorder headerFilter">
+                            <div class="filterGroupTitle">{{__('جستجو براساس مواد اولیه')}}</div>
+                            <input id="materialSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="materialFilterFunc(this.value)">
+                        </div>
+                    @endif
 
                     <div class="bottomLightBorder headerFilter">
                         <div class="filterGroupTitle">{{__('امتیاز کاربران')}}</div>
                         <div class="filterContent ui_label_group inline">
                             <div class="filterItem lhrFilter filter selected">
-                                <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="c5" value="5"/>
+                                <input onclick="rateFilterFunc(5, this)" type="radio" name="AVGrate" id="c5" value="5"/>
                                 <label for="c5" style="display:inline-block;"><span></span></label>
                                 <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -420,7 +271,7 @@
                                 </div>
                             </div>
                             <div class="filterItem lhrFilter filter selected">
-                                <input  onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="c4" value="4"/>
+                                <input  onclick="rateFilterFunc(4, this)" type="radio" name="AVGrate" id="c4" value="4"/>
                                 <label for="c4" style="display:inline-block;"><span></span></label>
                                 <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -430,7 +281,7 @@
                                 <span> {{__('به بالا')}}</span>
                             </div>
                             <div class="filterItem lhrFilter filter selected">
-                                <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="c3" value="3"/>
+                                <input onclick="rateFilterFunc(3, this)" type="radio" name="AVGrate" id="c3" value="3"/>
                                 <label for="c3" style="display:inline-block;"><span></span></label>
                                 <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -440,7 +291,7 @@
                                 <span> {{__('به بالا')}}</span>
                             </div>
                             <div class="filterItem lhrFilter filter selected">
-                                <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="c2" value="2"/>
+                                <input onclick="rateFilterFunc(2, this)" type="radio" name="AVGrate" id="c2" value="2"/>
                                 <label for="c2"
                                        style="display:inline-block;"><span></span></label>
                                 <div class="rating-widget"
@@ -452,7 +303,7 @@
                                 <span> {{__('به بالا')}}</span>
                             </div>
                             <div class="filterItem lhrFilter filter selected">
-                                <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="c1" value="1"/>
+                                <input onclick="rateFilterFunc(1, this)" type="radio" name="AVGrate" id="c1" value="1"/>
                                 <label for="c1"
                                        style="display:inline-block;"><span></span></label>
                                 <div class="rating-widget"
@@ -479,8 +330,14 @@
                             <div style="display: flex; justify-content: space-between;">
                                 <div class="filterGroupTitle">{{$feature->name}}</div>
                                 @if(count($feature->subFeat) > 5)
-                                    <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">نمایش کامل فیلترها</span>
-                                    <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">پنهان سازی فیلتر‌ها</span>
+                                    <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">
+                                        {{__('نمایش کامل فیلترها')}}
+                                        <span class="downArrowIcon"></span>
+                                    </span>
+                                    <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">
+                                        {{__('پنهان سازی فیلتر‌ها')}}
+                                        <span class="upArrowIcon"></span>
+                                    </span>
                                 @endif
                             </div>
 
@@ -523,6 +380,10 @@
 </div>
 
 <script>
+    function goToCampain(){
+        if(checkLogin('{{route('addPlaceByUser.index')}}'))
+            location.href = '{{route('addPlaceByUser.index')}}';
+    }
 
     $('#compareButton').click(function(e) {
         $("#myCloseBtn").removeClass('hidden');
@@ -542,6 +403,7 @@
     var sort = "rate";
     var featureFilter = [];
     var nameFilter = '';
+    var materialFilter = '';
     var data;
     var init = true;
     var lock = false;
@@ -602,7 +464,6 @@
         $scope.packets = [];
         $scope.oldScrollVal = 600;
 
-
         $scope.sortFunc = function(value) {
             sort = value;
             page = 1;
@@ -636,6 +497,7 @@
                 specialFilters: specialFilters,
                 rateFilter: rateFilter,
                 nameFilter: nameFilter,
+                materialFilter: materialFilter,
                 sort: sort,
                 featureFilter: featureFilter,
                 nearPlaceIdFilter: nearPlaceIdFilter,
@@ -662,6 +524,15 @@
                 $('.totalPlaceCount').text(response.data.totalCount);
                 $('.filterShowCount').text(response.data.placeCount);
 
+                @if($contentCount > 0)
+                    $('#notingToShowFilter').addClass('hidden');
+                    console.log(response.data.placeCount)
+                    console.log(response.data.totalCount)
+                    console.log('-------------------')
+                    if(response.data.placeCount == 0 && response.data.totalCount > 0)
+                        $('#notingToShowFilter').removeClass('hidden');
+                @endif
+
                 for(j = 0; j < response.data.places.length; j++){
                     var k = $scope.packets.length;
                     $scope.packets[$scope.packets.length] = response.data.places[j];
@@ -685,6 +556,7 @@
                     specialFilters: specialFilters,
                     rateFilter: rateFilter,
                     nameFilter: nameFilter,
+                    materialFilter: materialFilter,
                     sort: sort,
                     featureFilter: featureFilter,
                     nearPlaceIdFilter: nearPlaceIdFilter,
@@ -720,6 +592,7 @@
                         specialFilters: specialFilters,
                         rateFilter: rateFilter,
                         nameFilter: nameFilter,
+                        materialFilter: materialFilter,
                         sort: sort,
                         featureFilter: featureFilter,
                         nearPlaceIdFilter: nearPlaceIdFilter,
@@ -803,6 +676,15 @@
         newSearch();
     }
 
+    function materialFilterFunc(_value){
+        if(_value.trim().length > 2)
+            materialFilter = _value;
+        else
+            materialFilter = '';
+
+        newSearch();
+    }
+
     function doKindFilter(_kind, _value){
 
         var is = false;
@@ -844,9 +726,13 @@
             newSearch();
     }
 
-    function rateFilterFunc(value){
-        rateFilter = value;
-        newSearch();
+    function rateFilterFunc(value, _element = ''){
+        if(_element != '' && $(_element).val() == rateFilter)
+            cancelRateFilter();
+        else {
+            rateFilter = value;
+            newSearch();
+        }
     }
 
     function doFilterFeature(value){
@@ -1067,18 +953,21 @@
         angular.element($('.PlaceController')).scope().myPagingFunction();
     }
 
-    function showElement(element) {
-        $(".pop-up").addClass('hidden');
-        $("#" + element).removeClass('hidden');
-    }
-
     function saveToTripList(element){
         var placeId = $(element).attr('value');
         saveToTripPopUp(placeId, kindPlaceId)
     }
-</script>
 
-<script async>
+    function showMoreItems(_id) {
+        $(".extraItem" + _id).removeClass('hidden').addClass('selected');
+        $(".moreItems" + _id).addClass('hidden');
+    }
+    function showLessItems(_id) {
+        $(".extraItem" + _id).addClass('hidden').removeClass('selected');
+        $(".moreItems" + _id).removeClass('hidden');
+    }
+
+
     var mod;
     mod = angular.module("infinite-scroll", []), mod.directive("infiniteScroll", ["$rootScope", "$window", "$timeout", function (i, n, e) {
         return {
@@ -1099,28 +988,6 @@
             }
         }
     }])
-</script>
-
-<script>
-
-    function hideElement(val) {
-        $("#" + val).addClass('hidden');
-        $(".dark").hide();
-    }
-
-    function showElement(val) {
-        $(".dark").show();
-        $("#" + val).removeClass('hidden');
-    }
-
-    function showMoreItems(_id) {
-        $(".extraItem" + _id).removeClass('hidden').addClass('selected');
-        $(".moreItems" + _id).addClass('hidden');
-    }
-    function showLessItems(_id) {
-        $(".extraItem" + _id).addClass('hidden').removeClass('selected');
-        $(".moreItems" + _id).removeClass('hidden');
-    }
 
 </script>
 

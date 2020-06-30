@@ -73,6 +73,7 @@
     content: '\E02C';
 }
 .iconClose:before {
+    font-family: 'Shazde_Regular' !important;
     content: '\E02C';
 }
 .redStar:before {
@@ -216,6 +217,15 @@
     content: '\E04A';
     font-family: Shazde_Regular2 !important;
 }
+.upArrowIcon{
+    display: inline-block;
+    transform: rotate(180deg);
+}
+.upArrowIcon:before{
+    content: '\E04A';
+    font-family: Shazde_Regular2 !important;
+}
+
 .LikeIconEmpty:before{
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;

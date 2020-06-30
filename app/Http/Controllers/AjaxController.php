@@ -360,10 +360,6 @@ class AjaxController extends Controller {
                         $cityConstraint .= $cities;
                 }
             }
-            else{
-                echo 'nok';
-                return;
-            }
 
             if($cityConstraint != '')
                 $allow = false;

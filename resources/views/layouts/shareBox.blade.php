@@ -20,10 +20,25 @@ $config = \App\models\ConfigModel::first();
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه واتس اپ</div>
     </a>
     <script>
-        let encodeurl = encodeURIComponent('{{Request::url()}}');
-        let text = 'whatsapp://send?text=';
-        text += 'در کوچیتا ببینید:' + ' %0a ' + encodeurl;
-        $('.whatsappLink').attr('href', text);
+        let encodeurlShareBox = encodeURIComponent('{{Request::url()}}');
+        let openShareBox = false;
+        let textShareBox = 'whatsapp://send?text=';
+        textShareBox += 'در کوچیتا ببینید:' + ' %0a ' + encodeurlShareBox;
+        $('.whatsappLink').attr('href', textShareBox);
+
+        $(window).on('click', function(e){
+            if(openShareBox){
+                if(!($(e.target).attr('id') == 'share_pic' ||
+                    $(e.target).attr('id') == 'share_pic_mobile' ||
+                    $(e.target.parentElement).attr('id') == 'share_pic' ||
+                    $(e.target.parentElement).attr('id') == 'share_pic_mobile'))
+                {
+                    openShareBox = false;
+                    $('#share_box').hide();
+                    $('#share_box_mobile').hide();
+                }
+            }
+        })
     </script>
 
     <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
@@ -65,8 +80,10 @@ $config = \App\models\ConfigModel::first();
 
     $('#share_pic').click(function () {
         if ($('#share_box').is(":hidden")) {
+            openShareBox = true;
             $('#share_box').show();
         } else {
+            openShareBox = false;
             $('#share_box').hide();
         }
     });

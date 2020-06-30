@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div class="filterContent ui_label_group inline specialFiltersSection">
             <div class="filterItem lhrFilter filter selected">
@@ -58,7 +58,7 @@
     </div>
 </div>
 
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div style="display: flex; justify-content: space-between;">
             <div class="filterGroupTitle">{{__('مناسب برای')}}</div>

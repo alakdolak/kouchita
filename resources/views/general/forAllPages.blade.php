@@ -35,9 +35,9 @@
 <script>
     var hasLogin = {{auth()->check() ? 1 : 0}};
 
-    function checkLogin(){
+    function checkLogin(redirect = '{{Request::url()}}'){
         if (!hasLogin) {
-            showLoginPrompt('{{Request::url()}}');
+            showLoginPrompt(redirect);
             return false;
         }
         else

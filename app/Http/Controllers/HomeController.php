@@ -663,10 +663,8 @@ class HomeController extends Controller
                 $cit = Cities::find($item->cityId);
                 $item->cityName = $cit->name;
                 $item->stateName = State::whereId($cit->stateId)->name;
-                $item->rate = getRate($item->id, $kP)[1];
-                $condition = ['placeId' => $item->id, 'kindPlaceId' => $kP,
-                    'activityId' => $activityId, 'confirm' => 1];
-                $item->review = LogModel::where($condition)->count();
+                $item->rate = $item->fullRate;
+                $item->review = $item->reviewCount;
 
                 $C += (float)$item->C;
                 $D += (float)$item->D;

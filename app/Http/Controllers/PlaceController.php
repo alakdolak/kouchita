@@ -3531,6 +3531,8 @@ class PlaceController extends Controller {
                 $articleUrl = \url('/mainArticle');
                 $n = 'لیست ' . $kindPlace->title . ' ایران';
                 $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
+                $contentCount = \DB::table($kindPlace->tableName)->count();
+
             }
             else if ($mode == "state") {
                 $state = State::whereName($city)->first();
@@ -3539,13 +3541,12 @@ class PlaceController extends Controller {
                     return "نتیجه ای یافت نشد";
 
                 $cityIds = Cities::where('stateId', $city->id)->pluck('id')->toArray();
-                $contentCount = \DB::table($kindPlace->tableName)->whereIn('cityId', $cityIds)->count();
-                if($contentCount < 5)
-                    return \redirect(route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => 'country']));
 
                 $articleUrl = \url('/article/list/city/' . $state->name);
                 $n = ' استان ' . $state->name;
                 $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'kindPage' => 'list'];
+
+                $contentCount = \DB::table($kindPlace->tableName)->whereIn('cityId', $cityIds)->count();
             }
             else if ($mode == "city") {
                 $city = Cities::whereName($city)->first();
@@ -3556,19 +3557,20 @@ class PlaceController extends Controller {
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
-                $contentCount = \DB::table($kindPlace->tableName)->where('cityId', $city->id)->count();
-                if($contentCount < 5)
-                    return \redirect(route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => 'state', 'city' => $state->name]));
-
                 $articleUrl = \url('/article/list/city/' . $city->name);
                 $n = ' شهر ' . $city->name;
                 $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'list'];
+
+                $contentCount = \DB::table($kindPlace->tableName)->where('cityId', $city->id)->count();
             }
-
-
 
             switch ($kindPlaceId){
                 case 1:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'جاذبه ای برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ جاذبه های ' . $locationName['cityName'] . ' را در <span onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'amaken';
                     $kindPlace->title = ' جاذبه های';
                     $meta['title'] = 'عکس+آدرس لیست تمامی جاذبه های گردشگری و اماکن';
@@ -3576,6 +3578,11 @@ class PlaceController extends Controller {
                     $meta['description'] = 'لیست تمامی جاذبه های گردشگری و تفریحی ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس اماکن، نقشه و آدرس و تاریخچه همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
                     break;
                 case 3:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'رستورانی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ رستوران های ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'restaurant';
                     $kindPlace->title = ' رستوران های';
                     $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی رستوران ها و فست فود های ';
@@ -3583,6 +3590,11 @@ class PlaceController extends Controller {
                     $meta['description'] = 'قبل از سفر رستوران های ' . $locationName["name"] . ' رو بشناس و برای رستورانایی که رفتی  نقد بنویس و نظر بده. ما اطلاعات کاملی از رستوران ها و فست فود ها به همراه عکس ا، نقشه و آدرس و معرفی ، همراه با امتیاز بندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
                     break;
                 case 4:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'هتلی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ هتل های ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'hotel';
                     $kindPlace->title = 'اقامتگاه های ';
                     $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی اماکن اقامتی و هتل ها و مهمانسراهای ';
@@ -3590,6 +3602,11 @@ class PlaceController extends Controller {
                     $meta['description'] = 'لیست تمامی مراکز اقامتی و هتل ها و مهمانسراهای ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
                     break;
                 case 6:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'طبیعت گردی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ طبیعت گردی های ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'majara';
                     $kindPlace->title = ' طبیعت گردی های ';
                     $meta['title'] = 'عکس+آدرس+تجهیزات لازم + لیست تمامی جاهای مناسب طبیعت گردی و سفرهای ماجراجویانه ';
@@ -3597,6 +3614,11 @@ class PlaceController extends Controller {
                     $meta['description'] = 'لیست تمامی اماکن مناسب برای طبیعت گردی ، زیباترین روستاها، ییلاق ها و جاذبه های طبیعی ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و تجهیزات لازم و توضیحات همراه با عکس کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر خاطره انگیزی داشته باشید. ';
                     break;
                 case 10:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'سوغات و صنایع دستی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ سوغات و صنایع دستی ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'sogatSanaies';
                     $kindPlace->title = 'سوغات و صنایع دستی ';
                     $meta['title'] = 'عکس+ویژگی+معرفی کامل+ فروشندگان لیست تمامی صنایع دستی و سوغات ';
@@ -3604,6 +3626,11 @@ class PlaceController extends Controller {
                     $meta['description'] = 'لیست تمامی صنایع دستی و سوغات ' . $locationName['name'] . ' که به دست هنرمندان بومی این شهر درست شده است و ما برای شما اطلاعات کاملی به همراه عکس ، ویژگی ها و چگومگی ساخت صنایع دستی و طرز تهیه سوغات خوراکی همراه با توضیحات و عکس و معرفی بهترین فروشندگان توسط کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین خرید ها را در سفر داشته باشید. ';
                     break;
                 case 11:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'غذای محلی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ غذای محلی ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'mahaliFood';
                     $kindPlace->title = 'غذاهای محلی ';
                     $meta['title'] = 'عکس+دستور پخت+میزان کالری+ لیست تمامی غذاهای محلی ';
@@ -3611,6 +3638,11 @@ class PlaceController extends Controller {
                     $meta['description'] = 'ما برای شما غذاهای محلی و سنتی ... همراه با دستور پخت و عکس و میزان کالری که شامل آش ها، سوپ ها، خورشت ها، خوراک ها ،شیرینی ها، نان ها، مربا ها و سالاد ها می باشد را جمع اوری کرده ایم.';
                     break;
                 case 12:
+                    $errorTxt = [];
+                    $errorTxt[0] = 'بوم گردی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
+                    $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
+                    $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ بوم گردی ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
+
                     $placeMode = 'boomgardy';
                     $kindPlace->title = 'بوم گردی های ';
                     $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی بوم گردی های ';
@@ -3619,13 +3651,12 @@ class PlaceController extends Controller {
                     break;
             }
 
-
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
 
-            return view('places.list.list', compact(['features', 'meta', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state']));
+            return view('places.list.list', compact(['features', 'meta', 'errorTxt', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state', 'contentCount']));
         }
         else
             return \redirect(\url('/'));
@@ -3640,6 +3671,7 @@ class PlaceController extends Controller {
         $rateFilter = $request->rateFilter;
         $specialFilters = $request->specialFilters;
         $nameFilter = $request->nameFilter;
+        $materialFilter = $request->materialFilter;
         $nearPlaceIdFilter = $request->nearPlaceIdFilter;
         $nearKindPlaceIdFilter = $request->nearKindPlaceIdFilter;
         $featureFilters = array();
@@ -3676,8 +3708,28 @@ class PlaceController extends Controller {
             return;
         }
 
-        //special filters for each kind place
+        //filter with material in mahalifood
+        if($kindPlace->id == 11 && $materialFilter != null && strlen($materialFilter) > 1) {
 
+            $mat = json_encode($materialFilter);
+            $foods = MahaliFood::whereIn('id', $placeIds)->select(['id', 'material'])->get();
+            $placeIds = [];
+            foreach ($foods as $item){
+                if($item->material != null) {
+                    $pos = strpos($item->material, $mat);
+                    if($pos > 0)
+                        array_push($placeIds, $item->id);
+
+                }
+            }
+
+            if(count($placeIds) == 0){
+                echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
+                return;
+            }
+        }
+
+        //special filters for each kind place
         if($specialFilters != null) {
             $kindValues = [];
             $kindName = [];
@@ -3752,9 +3804,8 @@ class PlaceController extends Controller {
         $placeCount = count($placeIds);
 
         // and sort results by kind
-        if($sort == 'alphabet') {
+        if($sort == 'alphabet')
             $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
-        }
         else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
             $nearKind = Place::find($nearKindPlaceIdFilter);
             $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
@@ -3766,64 +3817,16 @@ class PlaceController extends Controller {
 
             $places = \DB::select('SELECT *, acos(' . sin($D) . ' * sin(D / 180 * 3.14) + ' . cos($D) . ' * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - ' . ($C) . ')) * 6371 as distance FROM ' . $table . ' WHERE id IN (' . implode(",", $placeIds) . ') ORDER BY distance LIMIT ' . $take . ' OFFSET ' . ($page-1) * $take);
         }
-        else{
-            if($sort == 'review')
-                $p = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND (log.activityId = '. $activityId . ' OR log.activityId = ' . $ansActivityId . ' OR log.activityId = ' . $quesActivityId . ') GROUP BY log.placeId ORDER BY `count` DESC');
-            else if($sort == 'seen')
-                $p = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND log.activityId = '. $seenActivityId . ' GROUP BY log.placeId ORDER BY `count` DESC');
-            else{
-                $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
-                $p = DB::select('SELECT log.placeId as placeId, AVG(qua.ans) as rate FROM log INNER JOIN questionUserAns AS qua ON log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND qua.questionId IN (' . implode(",", $questionRate) . ') AND qua.logId = log.id GROUP BY log.placeId ORDER BY rate DESC');
-            }
-
-            $qpId = array();
-            foreach ($p as $item)
-                array_push($qpId, $item->placeId);
-
-            if(($page * $take) >= count($qpId)){
-                $less = ($page * $take) - count($qpId);
-                if($less/$take < 1){
-                    $skip = 0;
-                    $nTake = $less;
-                }
-                else{
-                    $skip = $less - $take;
-                    $nTake = $take;
-                }
-
-                $npId = DB::table($table)->whereIn('id', $placeIds)->whereNotIn('id', $qpId)->skip($skip)->take($nTake)->pluck('id')->toArray();
-
-                $placeIds = array();
-                if(count($npId) < $take){
-                    for($i = (($page-1)*$take); $i < ($page*$take) && $i < count($qpId); $i++)
-                        array_push($placeIds, $qpId[$i]);
-
-                    if(count($placeIds) < 4) {
-                        for($i = 0; $i < count($npId); $i++)
-                            array_push($placeIds, $npId[$i]);
-                    }
-                }
-                else
-                    $placeIds = $npId;
-            }
-            else{
-                $placeIds = array();
-                for ($i = (($page - 1) * $take); $i < ($page * $take); $i++)
-                    array_push($placeIds, $qpId[$i]);
-            }
-
-            $places = array();
-            foreach ($placeIds as $item){
-                $place = DB::table($table)->find($item);
-                array_push($places, $place);
-            }
-        }
+        else if($sort == 'review')
+            $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('reviewCount')->skip(($page - 1) * $take)->take($take)->get();
+        else if($sort == 'seen')
+            $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('seen')->skip(($page - 1) * $take)->take($take)->get();
+        else
+            $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('fullRate')->skip(($page - 1) * $take)->take($take)->get();
 
         foreach ($places as $place) {
             $place->pic = getPlacePic($place->id, $kindPlace->id);
-            $condition = ['placeId' => $place->id, 'kindPlaceId' => $request->kindPlaceId,
-                'activityId' => $activityId, 'confirm' => 1];
-            $place->reviews = LogModel::where($condition)->count();
+            $place->reviews = $place->reviewCount;
             $cityObj = Cities::whereId($place->cityId);
             if($cityObj != null) {
                 $place->city = $cityObj->name;
@@ -3833,8 +3836,7 @@ class PlaceController extends Controller {
                 $place->city = '';
                 $place->state = '';
             }
-            $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
-            $place->avgRate = 0;
+            $place->avgRate = (int)$place->fullRate;
             $place->inTrip = 0;
             $place->redirect = createUrl($kindPlace->id, $place->id, 0, 0);
             if(\auth()->check()){
