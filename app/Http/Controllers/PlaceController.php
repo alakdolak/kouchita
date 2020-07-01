@@ -127,8 +127,8 @@ class PlaceController extends Controller {
         if (LogModel::where($condition)->count() > 0)
             $bookMark = true;
 
-//        $rates = getRate($place->id, $kindPlaceId); // common.php
-        $rates = $place->fullRate;
+        $rates = getRate($place->id, $kindPlaceId); // common.php
+//        $rates = $place->fullRate;
 
         $save = false;
         $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
