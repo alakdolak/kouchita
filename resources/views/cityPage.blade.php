@@ -45,7 +45,6 @@
 
 @include('layouts.header1')
 
-
 <div class="container cpBody">
     <div class="cpBorderBottom cpHeader">
 
@@ -720,14 +719,8 @@
                     x: map.C,
                     y: map.D
                 };
-                let bound = {
-                    minLat : parseFloat(map.minLat),
-                    maxLat : parseFloat(map.maxLat),
-                    minLng : parseFloat(map.minLng),
-                    maxLng : parseFloat(map.maxLng),
-                };
 
-                createMap('cpMap', center, bound, allPlaces);
+                createMap('cpMap', center, allPlaces);
             }
         })
     }

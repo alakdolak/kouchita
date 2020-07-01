@@ -801,6 +801,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'mainPic' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic),
                 'alt' => $item->alt,
                 'name' => $userName,
+                'picName' => $item->name,
                 'userPic' => $uPic,
                 'showInfo' => true,
                 'like' => $item->like,

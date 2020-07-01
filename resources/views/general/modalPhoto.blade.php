@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="rightColPhotosModalMainDiv" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" style="max-height: 85vh;">
+                <div id="rightColPhotosModalMainDiv" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" style="max-height: 85vh; overflow: hidden;">
                     <div class="userInfoPhotoAlbum hideOnPhone">
                         <div class="circleBase type2 commentWriterPicShow">
                             <img id="photoAlbumUserPicOnPhone" class="koochitaCircleLogo" src="" style="border-radius: 50%;">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div id="sidePhotoModal" style="padding: 0px 10px 0px 5px;">
+                    <div id="sidePhotoModal" style="padding: 0px 10px 0px 5px; overflow: auto; max-height: 75vh;">
                         <div id="sideAlbumPic##index##" class="rightColPhotosShowingModal" onclick="##picIndex##">
                             <img src="##sidePic##" alt="##alt##" class="mainAlbumPic">
                         </div>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="photosDescriptionShowingModal">
-                <div id="photoAlbumDescription" style="display: block"></div>
+                <div id="photoAlbumDescription" style="display: block; padding: 11px 10px; color: white;"></div>
             </div>
         </div>
 
@@ -179,10 +179,6 @@
         }
         else
             $('#photoAlbumLikeSection').css('display', 'none');
-
-        // leftHeight = $('#leftColPhotosModalMainDiv').css('height');
-        //
-        // $('#rightColPhotosModalMainDiv').css('max-height', leftHeight);
 
         $('#photoAlbumDescription').text(sidePics[_index]['description']);
     }

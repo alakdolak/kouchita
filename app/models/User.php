@@ -32,6 +32,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\models\User wherePhone($value)
  */
 
+//include_once 'app\Http\Controllers\Common.php';
+
 class User extends Authenticatable{
 
     use Notifiable;
@@ -117,12 +119,63 @@ class User extends Authenticatable{
 
     public function getUserTotalPoint()
     {
-        return getUserPoints(auth()->user()->id);
+        return $this->getUserPointInModel(auth()->user()->id);
     }
 
     public function getUserNearestLevel()
     {
-        return nearestLevel(auth()->user()->id);
+        return $this->nearestLevelInModel(auth()->user()->id);
+    }
+
+    public function nearestLevelInModel($uId)
+    {
+        $points = $this->getUserPointInModel($uId);
+        $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
+
+        if($currLevel == null)
+            $currLevel = Level::orderBy('floor', 'ASC')->first();
+
+        $nextLevel = Level::where('floor', '>', $points)->orderBy('floor', 'ASC')->first();
+
+        if($nextLevel == null)
+            $nextLevel = Level::orderBy('floor', 'ASC')->first();
+
+        return [$currLevel, $nextLevel];
+    }
+
+    public function getUserPointInModel($uId)
+    {
+        $points = \DB::select("SELECT SUM(activity.rate) as total FROM log, activity WHERE confirm = 1 and log.visitorId = " . $uId . " and log.activityId = activity.id");
+
+        if($points == null || count($points) == 0 || $points[0]->total == "")
+            return 0;
+
+        return $points[0]->total;
+    }
+
+    public function getUserPicInModel($id = 0)
+    {
+        $user = User::find($id);
+        if($user != null){
+            if(strpos($user->picture, 'http') !== false)
+                return $user->picture;
+            else{
+                if($user->uploadPhoto == 0){
+                    $deffPic = DefaultPic::find($user->picture);
+
+                    if($deffPic != null)
+                        $uPic = \URL::asset('defaultPic/' . $deffPic->name);
+                    else
+                        $uPic = \URL::asset('_images/nopic/blank.jpg');
+                }
+                else
+                    $uPic = \URL::asset('userProfile/' . $user->picture);
+            }
+        }
+        else
+            $uPic = \URL::asset('_images/nopic/blank.jpg');
+
+        return $uPic;
     }
 
     public function deleteUser(){

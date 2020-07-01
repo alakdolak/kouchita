@@ -92,7 +92,7 @@
 
                         <div class="btnActionEditFrame">
                             <div class="upload" style="margin-left: 10px">
-                                <div onclick="cropImg()" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
+                                <div onclick=" cropImg();" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
                             </div>
 
                             <div class="return">
@@ -604,20 +604,20 @@
     }
 
     function cropImg(){
-        $('#fullPageLoader').css('display', 'flex');
-        var canvas1;
-        canvas1 = cropper.getCroppedCanvas();
-        $('#' + cropResult).attr('src', canvas1.toDataURL());
-
-        cancelCrop();
+        openLoading();
+        setTimeout(function(){
+            var canvas1;
+            canvas1 = cropper.getCroppedCanvas();
+            $('#' + cropResult).attr('src', canvas1.toDataURL());
+            cancelCrop();
+        }, 500);
     }
 
     function cancelCrop(){
         $('#modal').modal('hide');
         $('#photoEditor').removeClass('hidden');
         $('#editPane').addClass('hidden');
-
-        $('#fullPageLoader').css('display', 'none');
+        closeLoading();
     }
 
     function goToPage3() {

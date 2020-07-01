@@ -123,17 +123,21 @@ class PlaceController extends Controller {
         saveViewPerPage($kindPlaceId, $place->id); // common.php
 
         $bookMark = false;
-        $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
-            'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
+        $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id, 'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
         if (LogModel::where($condition)->count() > 0)
             $bookMark = true;
 
-        $rates = getRate($place->id, $kindPlaceId); // common.php
+//        $rates = getRate($place->id, $kindPlaceId); // common.php
+        $rates = $place->fullRate;
 
         $save = false;
         $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
         if ($count[0]->tripPlaceNum > 0)
             $save = true;
+
+        if($place->phone != null)
+            $place->phone = explode('-', $place->phone);
+
 
         $city = Cities::whereId($place->cityId);
         $state = State::whereId($city->stateId);
@@ -205,7 +209,7 @@ class PlaceController extends Controller {
 
         $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => $mainWebSiteUrl];
 
-        return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
+        return view('pages.placeDetails.placeDetails', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
             'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
             'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
@@ -502,182 +506,6 @@ class PlaceController extends Controller {
         }
 
         echo \GuzzleHttp\json_encode([]);
-    }
-
-    public function getLogPhotos()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {
-
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-
-            switch ($kindPlaceId) {
-                case 1:
-                default:
-                    $imgPath = "amaken";
-                    break;
-                case 3:
-                    $imgPath = "restaurant";
-                    break;
-                case 4:
-                    $imgPath = "hotel";
-                    break;
-                case 6:
-                    $imgPath = "majara";
-                    break;
-                case 8:
-                    $place = Adab::whereId($placeId);
-                    if ($place->category == 3) {
-                        ;
-                        $imgPath = "ghazamahali";
-                    } else {
-                        if ($place->category == 1)
-                            $imgPath = "soghat";
-                        else
-                            $imgPath = "sanaye";
-                    }
-                    break;
-            }
-
-            $aksActivityId = Activity::whereName('عکس')->first()->id;
-
-            $logPhotos = DB::select("select picItems.id, picItems.name, count(*) as countNum, text from log, picItems WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and pic <> 0 and picItems.id = log.pic group by(picItems.id)");
-
-            foreach ($logPhotos as $logPhoto) {
-                if (file_exists(__DIR__ . '/../../../../assets/userPhoto/' . $imgPath . '/l-' . $logPhoto->text))
-                    $logPhoto->text = URL::asset('userPhoto/' . $imgPath . '/l-' . $logPhoto->text);
-                else
-                    $logPhoto->text = URL::asset('_images') . '/nopic/blank.jpg';
-            }
-
-            echo \GuzzleHttp\json_encode($logPhotos);
-            return;
-        }
-
-        echo \GuzzleHttp\json_encode([]);
-
-    }
-
-    public function getSlider1Photo()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["val"])) {
-
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $val = makeValidInput($_POST["val"]);
-
-            switch ($kindPlaceId) {
-                case 1:
-                default:
-                    $subDir = "/amaken/";
-                    $place = Amaken::whereId($placeId);
-                    break;
-                case 3:
-                    $subDir = "/restaurant/";
-                    $place = Restaurant::whereId($placeId);
-                    break;
-                case 4:
-                    $subDir = "/hotels/";
-                    $place = Hotel::whereId($placeId);
-                    break;
-                case 6:
-                    $subDir = "/majara/";
-                    $place = Majara::whereId($placeId);
-                    break;
-                case 8:
-                    $place = Adab::whereId($placeId);
-                    if ($place->category == 3)
-                        $subDir = "/adab/ghazamahali/";
-                    else
-                        $subDir = '/adab/soghat/';
-                    break;
-            }
-
-            if ($place != null) {
-                switch ($val) {
-                    case 1:
-                    default:
-                        if (file_exists((__DIR__ . '/../../../../assets/_images') . $subDir . $place->file . '/s-1.jpg'))
-                            echo URL::asset('_images') . $subDir . $place->file . '/s-1.jpg';
-                        else
-                            echo URL::asset('_images/nopic/blank.jpg');
-                        break;
-                    case 2:
-                        if (file_exists((__DIR__ . '/../../../../assets/_images') . $subDir . $place->file . '/s-2.jpg' ))
-                            echo URL::asset('_images') . $subDir . $place->file . '/s-2.jpg' ;
-                        else
-                            echo URL::asset('_images/nopic/blank.jpg');
-                        break;
-                    case 3:
-                        if (file_exists((__DIR__ . '/../../../../assets/_images') . $subDir . $place->file . '/s-3.jpg' ))
-                            echo URL::asset('_images') . $subDir . $place->file . '/s-3.jpg' ;
-                        else
-                            echo URL::asset('_images/nopic/blank.jpg');
-                        break;
-                    case 4:
-                        if (file_exists((__DIR__ . '/../../../../assets/_images') . $subDir . $place->file . '/s-4.jpg'))
-                            echo URL::asset('_images') . $subDir . $place->file . '/s-4.jpg';
-                        else
-                            echo URL::asset('_images/nopic/blank.jpg');
-                        break;
-                    case 5:
-                        if (file_exists((__DIR__ . '/../../../../assets/_images') . $subDir . $place->file . '/s-5.jpg'))
-                            echo URL::asset('_images') . $subDir . $place->file . '/s-5.jpg';
-                        else
-                            echo URL::asset('_images/nopic/blank.jpg');
-                        break;
-                }
-                return;
-            }
-        }
-        echo "nok";
-    }
-
-    public function getSlider2Photo()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["val"])) {}
-
-        $placeId = makeValidInput($_POST["placeId"]);
-        $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-        $val = makeValidInput($_POST["val"]);
-
-        $aksActivityId = Activity::whereName('عکس')->first()->id;
-
-        $tmp = DB::select("select text from log WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and kindPlaceId = " . $kindPlaceId . " and pic <> 0 limit " . $val . ', 1');
-        if ($tmp != null && count($tmp) > 0) {
-            switch ($kindPlaceId) {
-                case 1:
-                default:
-                    $subDir = "/amaken/";
-                    break;
-                case 3:
-                    $subDir = "/restaurant/";
-                    break;
-                case 4:
-                    $subDir = "/hotel/";
-                    break;
-                case 6:
-                    $subDir = "/majara/";
-                    break;
-                case 8:
-                    $subDir = '/adab/';
-                    break;
-            }
-            if (file_exists(__DIR__ . '/../../../../assets/userPhoto' . $subDir . 'l-' . $tmp[0]->text))
-                echo URL::asset('userPhoto' . $subDir . 'l-' . $tmp[0]->text);
-            else
-                echo URL::asset('_images/nopic/blank.jpg');
-            return;
-        }
-
-        echo URL::asset('_images/nopic/blank.jpg');
-        return;
-
-
-        echo "nok";
     }
 
     public function bookMark()
@@ -1002,111 +830,6 @@ class PlaceController extends Controller {
                     }
                 }
             }
-        }
-    }
-
-    function survey()
-    {
-        if (isset($_POST["questionId"]) && isset($_POST["ans"]) && isset($_POST["kindPlaceId"]) && isset($_POST["placeId"])) {
-
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $uId = Auth::user()->id;
-            $activityId = Activity::whereName('نظرسنجی')->first()->id;
-
-            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'visitorId' => $uId,
-                'activityId' => $activityId];
-
-            $ans = makeValidInput($_POST["ans"]);
-            switch ($ans) {
-                case "yes":
-                    $ans = 1;
-                    break;
-                case "no":
-                    $ans = 2;
-                    break;
-                default:
-                    $ans = 3;
-            }
-
-            $log = LogModel::where($condition)->first();
-
-            if ($log == null) {
-                $log = new LogModel();
-                $log->visitorId = $uId;
-                $log->time = getToday()["time"];
-                $log->activityId = $activityId;
-                $log->placeId = $placeId;
-                $log->kindPlaceId = $kindPlaceId;
-                $log->date = date('Y-m-d');
-                $log->save();
-
-                $survey = new Survey();
-                $survey->logId = $log->id;
-                $survey->questionId = makeValidInput($_POST["questionId"]);
-                $survey->ans = $ans;
-
-                $survey->save();
-
-            } else {
-                $condition = ['logId' => $log->id, 'questionId' => makeValidInput($_POST["questionId"])];
-                $survey = Survey::where($condition)->first();
-                if ($survey == null) {
-                    $survey = new Survey();
-                    $survey->logId = $log->id;
-                    $survey->questionId = makeValidInput($_POST["questionId"]);
-                    $survey->ans = $ans;
-                    $survey->save();
-                } else {
-                    $survey->ans = $ans;
-                    $survey->save();
-                }
-            }
-
-        }
-    }
-
-    function getSurvey()
-    {
-
-        if (isset($_POST["questionId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["placeId"])) {
-
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $uId = Auth::user()->id;
-            $activityId = Activity::whereName('نظرسنجی')->first()->id;
-
-            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'visitorId' => $uId,
-                'activityId' => $activityId];
-
-            $log = LogModel::where($condition)->first();
-
-            if ($log == null) {
-                echo "-1";
-                return;
-            }
-
-            $condition = ['questionId' => makeValidInput($_POST["questionId"]), 'logId' => $log->id];
-            $question = Survey::where($condition)->first();
-
-            if ($question == null) {
-                echo "-1";
-                return;
-            }
-
-            $ans = $question->ans;
-            switch ($ans) {
-                case 1:
-                    $ans = "yes";
-                    break;
-                case 2:
-                    $ans = "no";
-                    break;
-                default:
-                    $ans = "noIdea";
-            }
-
-            echo $ans;
         }
     }
 
@@ -2936,7 +2659,6 @@ class PlaceController extends Controller {
 
     }
 
-
     public function fillMyDivWithAdv() {
 
         if (isset($_POST["state"]) && isset($_POST["sectionId"])) {
@@ -3169,131 +2891,6 @@ class PlaceController extends Controller {
 
     }
 
-    public function sogatsanieDetials($placeId, $placeName = "", $mode = "", $err = "")
-    {
-        deleteReviewPic();
-
-        $place = SogatSanaie::find($placeId);
-        $city = Cities::whereId($place->cityId);
-        $state = State::whereId($city->stateId);
-
-        if ($place == null)
-            return Redirect::route('main');
-
-        $hasLogin = true;
-        $kindPlaceId = Place::whereName('صنایع سوغات')->first()->id;
-        $uId = -1;
-
-        if (Auth::check()) {
-            $u = Auth::user();
-            $uId = $u->id;
-            $userCode = $uId . '_' . rand(10000,99999);
-            if($u->uploadPhoto == 0){
-                $deffPic = DefaultPic::find($u->picture);
-
-                if($deffPic != null)
-                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
-                else
-                    $uPic = URL::asset('_images/nopic/blank.jpg');
-            }
-            else{
-                $uPic = URL::asset('userProfile/' . $u->picture);
-            }
-        }
-        else{
-            $hasLogin = false;
-            $userCode = null;
-            $uPic = URL::asset('_images/nopic/blank.jpg');
-        }
-
-        if ($hasLogin) {
-
-            $activityId = Activity::whereName('مشاهده')->first()->id;
-
-            $condition = ['visitorId' => $uId, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-                'activityId' => $activityId];
-            $log = LogModel::where($condition)->first();
-            if ($log == null) {
-                $log = new LogModel();
-                $log->activityId = $activityId;
-                $log->time = getToday()["time"];
-                $log->placeId = $placeId;
-                $log->kindPlaceId = $kindPlaceId;
-                $log->visitorId = $uId;
-                $log->date = date('Y-m-d');
-                $log->save();
-            } else {
-                $log->date = date('Y-m-d');
-                $log->save();
-            }
-        }
-
-        $bookMark = false;
-        $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
-            'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId];
-        if (LogModel::where($condition)->count() > 0)
-            $bookMark = true;
-
-        $rates = getRate($placeId, $kindPlaceId);
-
-        $save = false;
-        $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $placeId . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
-        if ($count[0]->tripPlaceNum > 0)
-            $save = true;
-
-        $photos = [];
-
-        if (!empty($place->picNumber)) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/sogatsanaie/' . $place->file . '/s-' . $place->picNumber))) {
-                $photos[count($photos)] = URL::asset('_images') . '/sogatsanaie/' . $place->file . '/s-' . $place->picNumber;
-                $thumbnail = URL::asset('_images') . '/sogatsanaie/' . $place->file . '/f-' . $place->picNumber;
-            } else {
-                $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
-                $thumbnail = URL::asset('_images/nopic/blank.jpg');
-            }
-        }
-        else {
-            $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
-            $thumbnail = URL::asset('_images/nopic/blank.jpg');
-        }
-
-        $allState = State::all();
-
-        $pics = getAllPlacePicsByKind($kindPlaceId, $placeId);
-        $sitePics = $pics[0];
-        $sitePicsJSON = $pics[1];
-        $photographerPics = $pics[2];
-        $photographerPicsJSON = $pics[3];
-        $userPhotos = $pics[4];
-        $userPhotosJson = $pics[5];
-
-        $result = commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place);
-        $reviewCount = $result[0];
-        $ansReviewCount = $result[1];
-        $userReviewCount = $result[2];
-        $multiQuestion = $result[3];
-        $textQuestion = $result[4];
-        $rateQuestion = $result[5];
-
-        $multiQuestionJSON = json_encode($multiQuestion);
-        $textQuestionJSON = json_encode($textQuestion);
-        $rateQuestionJSON = json_encode($rateQuestion);
-
-        return view('hotel-details.hotel-details', array(
-            'place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
-            'state' => $state, 'avgRate' => $rates[1], 'photos' => $photos,
-            'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
-            'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
-            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
-            'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
-            'rateQuestionJSON' => $rateQuestionJSON, 'textQuestionJSON' => $textQuestionJSON, 'multiQuestionJSON' => $multiQuestionJSON,
-            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState, 'userCode' => $userCode,
-            'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0], 'config' => ConfigModel::first(),
-            'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
-            'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => 'sogatsanaie',
-            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
-    }
-
     public function askQuestion()
     {
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["text"])) {
@@ -3323,6 +2920,7 @@ class PlaceController extends Controller {
 
         return;
     }
+
     public function getQuestions()
     {
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["page"]) && isset($_POST["count"])) {
@@ -3412,6 +3010,7 @@ class PlaceController extends Controller {
 
         return;
     }
+
     public function sendAns()
     {
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
@@ -3454,6 +3053,7 @@ class PlaceController extends Controller {
 
         return;
     }
+
     public function sendAns2()
     {
 
@@ -3488,6 +3088,7 @@ class PlaceController extends Controller {
             }
         }
     }
+
     public function showAllAns()
     {
 
@@ -3656,7 +3257,7 @@ class PlaceController extends Controller {
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
 
-            return view('places.list.list', compact(['features', 'meta', 'errorTxt', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state', 'contentCount']));
+            return view('pages.placeList.placeList', compact(['features', 'meta', 'errorTxt', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state', 'contentCount']));
         }
         else
             return \redirect(\url('/'));

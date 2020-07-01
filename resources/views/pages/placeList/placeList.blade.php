@@ -56,7 +56,7 @@
 
 @include('general.forAllPages')
 
-<div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
+<div id="PAGE">
 
     @include('layouts.header1')
 
@@ -189,7 +189,7 @@
                                         {{__('لطفا از پنل سمت چپ، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
                                     </span>
                                 </div>
-{{--                                <div class="notingToShowClose iconClose"></div>--}}
+                                {{--                                <div class="notingToShowClose iconClose"></div>--}}
                             </div>
                             @if($contentCount == 0)
                                 <div id="notingToShowInPlace" class="notingToShowDiv">
@@ -207,10 +207,10 @@
                                             {!! $errorTxt[2] !!}
                                         </span>
                                     </div>
-    {{--                                <div class="notingToShowClose iconClose"></div>--}}
+                                    {{--                                <div class="notingToShowClose iconClose"></div>--}}
                                 </div>
                             @endif
-                            
+
                         </div>
                     </div>
                 </div>
@@ -318,11 +318,11 @@
                     </div>
 
                     @if($kindPlace->id == 4)
-                        @include('places.list.filters.hotelFilters')
+                        @include('pages.placeList.filters.hotelFilters')
                     @elseif($kindPlace->id == 10)
-                        @include('places.list.filters.sogatSanaieFilters')
+                        @include('pages.placeList.filters.sogatSanaieFilters')
                     @elseif($kindPlace->id == 11)
-                        @include('places.list.filters.mahaliFoodFilters')
+                        @include('pages.placeList.filters.mahaliFoodFilters')
                     @endif
 
                     @foreach($features as $feature)
@@ -414,10 +414,10 @@
     var nearKindPlaceIdFilter = 0;
     var kindPlaceId = '{{$kindPlace->id}}';
 
-    @if(isset($city->id))
-        var cityId = '{{$city->id}}';
-    @else
-        var cityId = 0;
+            @if(isset($city->id))
+    var cityId = '{{$city->id}}';
+            @else
+    var cityId = 0;
     @endif
 
     if(placeMode == 'hotel'){
@@ -525,13 +525,13 @@
                 $('.filterShowCount').text(response.data.placeCount);
 
                 @if($contentCount > 0)
-                    $('#notingToShowFilter').addClass('hidden');
-                    console.log(response.data.placeCount)
-                    console.log(response.data.totalCount)
-                    console.log('-------------------')
-                    if(response.data.placeCount == 0 && response.data.totalCount > 0)
-                        $('#notingToShowFilter').removeClass('hidden');
-                @endif
+                $('#notingToShowFilter').addClass('hidden');
+                console.log(response.data.placeCount)
+                console.log(response.data.totalCount)
+                console.log('-------------------')
+                if(response.data.placeCount == 0 && response.data.totalCount > 0)
+                    $('#notingToShowFilter').removeClass('hidden');
+                        @endif
 
                 for(j = 0; j < response.data.places.length; j++){
                     var k = $scope.packets.length;
@@ -773,9 +773,9 @@
             if(featureFilter[i] != 0) {
                 var name = document.getElementById('feat' + featureFilter[i]).value;
                 text += '<div class="filtersExist">\n' +
-                        '<div>' + name + '</div>\n' +
-                        '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
-                        '</div>';
+                    '<div>' + name + '</div>\n' +
+                    '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
+                    '</div>';
                 hasFilter = true;
             }
         }
@@ -784,9 +784,9 @@
             if(specialFilters[i] != 0) {
                 var name = document.getElementById(specialFilters[i]['kind'] + specialFilters[i]['value']).value;
                 text += '<div class="filtersExist">\n' +
-                        '<div>' + name + '</div>\n' +
-                        '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
-                        '</div>';
+                    '<div>' + name + '</div>\n' +
+                    '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
+                    '</div>';
                 hasFilter = true;
             }
         }

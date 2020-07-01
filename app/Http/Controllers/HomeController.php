@@ -588,30 +588,26 @@ class HomeController extends Controller
         $activityId = Activity::whereName('نظر')->first()->id;
 
         if($request->kind == 'city'){
-            $allAmaken = Amaken::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
-            $allMajara = Majara::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'dastresi', 'picNumber', 'file', 'keyword', 'cityId'])->get();
-            $allHotels = Hotel::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
-            $allRestaurant = Restaurant::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
-            $allBoomgardy = Boomgardy::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
+            $allAmaken = Amaken::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allMajara = Majara::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'dastresi', 'picNumber', 'file', 'keyword', 'cityId', 'reviewCount', 'fullRate'])->get();
+            $allHotels = Hotel::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allRestaurant = Restaurant::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allBoomgardy = Boomgardy::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
         }
         else{
             $allCities = Cities::where('stateId', $request->id)->where('isVillage',0)->pluck('id')->toArray();
 
-            $allAmaken = Amaken::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
-            $allMajara = Majara::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'dastresi', 'picNumber', 'file', 'keyword', 'cityId'])->get();
-            $allHotels = Hotel::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
-            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
-            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone'])->get();
+            $allAmaken = Amaken::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allMajara = Majara::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'dastresi', 'picNumber', 'file', 'keyword', 'cityId', 'reviewCount', 'fullRate'])->get();
+            $allHotels = Hotel::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
         }
         $allPlaces = ['amaken' => $allAmaken, 'hotels' => $allHotels, 'restaurant' => $allRestaurant, 'majara' => $allMajara, 'boomgardy' => $allBoomgardy];
 
         $count = 0;
         $C = 0;
         $D = 0;
-        $minLat = 0;
-        $minLng = 0;
-        $maxLat = 0;
-        $maxLng = 0;
         foreach ($allPlaces as $key => $plac){
             switch ($key){
                 case 'amaken':
@@ -664,22 +660,13 @@ class HomeController extends Controller
                 $item->cityName = $cit->name;
                 $item->stateName = State::whereId($cit->stateId)->name;
                 $item->rate = $item->fullRate;
+                if($item->rate == 0)
+                    $item->rate = 2;
                 $item->review = $item->reviewCount;
 
                 $C += (float)$item->C;
                 $D += (float)$item->D;
                 $count++;
-                if($minLat == 0 || $item->C < $minLat)
-                    $minLat = (float)$item->C;
-
-                if($maxLat == 0 || $item->C > $maxLat)
-                    $maxLat = (float)$item->C;
-
-                if($minLng == 0 || $item->D < $minLng)
-                    $minLng = (float)$item->D;
-
-                if($maxLng == 0 || $item->D > $maxLng)
-                    $maxLng = (float)$item->D;
             }
         }
         if($count > 0) {
@@ -691,12 +678,7 @@ class HomeController extends Controller
             $D = 53.498319;
         }
 
-        $maxLng = $maxLng > 70.99944028718205 ? 70.99944028718205 : $maxLng;
-        $minLng = $minLng > 37.029713724682054 ? 37.029713724682054 : $minLng;
-        $maxLat = $maxLat > 40.79824446616816 ? 40.79824446616816 : $maxLat;
-        $minLat = $minLat > 24.827904222991222 ? 24.827904222991222 : $minLat;
-
-        $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
+        $map = ['C' => $C, 'D' => $D];
 
         echo json_encode(['map' => $map, 'allPlaces' => $allPlaces]);
         return;
@@ -1083,7 +1065,7 @@ class HomeController extends Controller
 
             $kindPlaceId = isset($_POST["kindPlaceId"]) ? makeValidInput($_POST["kindPlaceId"]) : makeValidInput($request->kindPlaceId);
             $key = isset($_POST["key"]) ? makeValidInput($_POST["key"]) : makeValidInput($request->key);
-            $key2 = (isset($_POST["key2"]) ? makeValidInput($_POST["key2"]) : isset($request->key2) ? makeValidInput($request->key2) : '');
+            $key2 = (isset($_POST["key2"]) ? makeValidInput($_POST["key2"]) : (isset($request->key2) ? makeValidInput($request->key2) : ''));
 
             $time = time();
 

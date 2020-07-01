@@ -30,7 +30,7 @@ Route::group(array(), function(){
     Route::get('/sitemap.xml/city', 'SitemapController@city');
 });
 
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'web']), function () {
+Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
     Route::get('/', 'MainController@landingPage')->name('home');
 
@@ -59,11 +59,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'web']), function 
 
     Route::post('getSimilarsMajara', array('as' => 'getSimilarsMajara', 'uses' => 'MajaraController@getSimilarsMajara'));
 
-    Route::post('getLogPhotos', array('as' => 'getLogPhotos', 'uses' => 'PlaceController@getLogPhotos'));
-
-    Route::post('getSlider1Photo', array('as' => 'getSlider1Photo', 'uses' => 'PlaceController@getSlider1Photo'));
-
-    Route::post('getSlider2Photo', array('as' => 'getSlider2Photo', 'uses' => 'PlaceController@getSlider2Photo'));
 
     Route::post('getNearby', array('as' => 'getNearby', 'uses' => 'PlaceController@getNearby'));
 
@@ -76,10 +71,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'web']), function 
     Route::post('showAllAns', array('as' => 'showAllAns', 'uses' => 'PlaceController@showAllAns'));
 
     Route::post('getOpinionRate', array('as' => 'getOpinionRate', 'uses' => 'PlaceController@getOpinionRate'));
-
-    Route::post('survey', array('as' => 'survey', 'uses' => 'PlaceController@survey'));
-
-    Route::post('getSurvey', array('as' => 'getSurvey', 'uses' => 'PlaceController@getSurvey'));
 
     Route::post('getComment', array('as' => 'getComment', 'uses' => 'PlaceController@getComment'));
 
@@ -276,62 +267,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
-Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
-
-    Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
-
-    Route::post('mainSliderImagesDelete', 'HomeController@mainSliderImagesDelete')->name('mainSlider.image.delete');
-
-    Route::post('middleBannerImage', 'HomeController@middleBannerImages')->name('middleBanner.image.store');
-
-    Route::post('middleBannerImagesDelete', 'HomeController@middleBannerImagesDelete')->name('middleBanner.image.delete');
-
-    Route::get('fillState', 'HomeController@fillState');
-
-    Route::get('fillCity', 'HomeController@fillCity');
-
-    Route::get('fillAirLine', 'HomeController@fillAirLine');
-
-    Route::get('fillTrain', 'HomeController@fillTrain');
-
-    Route::get('updateHotelsFile', 'HomeController@updateHotelsFile');
-
-    Route::get('updateAmakensFile', 'HomeController@updateAmakensFile');
-
-//    Route::any('updateBot', 'HomeController@updateBot');
-
-    Route::get('export/{mode}', 'HomeController@export');
-
-    Route::get('removeDuplicate/{key}', 'HomeController@removeDuplicate');
-
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAccess']), function (){
-
-    Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
-
-    Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
-
-    Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
-
-    Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controllerAccess']), function (){
-
-    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'ContentController@removeReview'));
-
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorAccess']), function () {
-
-    Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
-
-    Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
-
-});
-
-
 //authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 //    Route::get('login', 'UserLoginController@login');
@@ -377,15 +312,18 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
+Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 
     Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
 
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage');
+
     Route::post('getCityPageReview', 'HomeController@getCityPageReview')->name('getCityPageReview');
+
     Route::post('getCityPageTopPlace', 'HomeController@getCityPageTopPlace')->name('getCityPageTopPlace');
+
     Route::post('getCityAllPlaces', 'HomeController@getCityAllPlaces')->name('getCityAllPlaces');
 
     Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
@@ -500,9 +438,11 @@ Route::group(array('middleware' => 'nothing'), function () {
 
 // Lists
 Route::group(array('middleware' => 'nothing'), function () {
-    Route::any('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
+
+    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
+
 });
 
 // profile
@@ -662,6 +602,61 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
 });
 
+Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
+
+    Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
+
+    Route::post('mainSliderImagesDelete', 'HomeController@mainSliderImagesDelete')->name('mainSlider.image.delete');
+
+    Route::post('middleBannerImage', 'HomeController@middleBannerImages')->name('middleBanner.image.store');
+
+    Route::post('middleBannerImagesDelete', 'HomeController@middleBannerImagesDelete')->name('middleBanner.image.delete');
+
+    Route::get('fillState', 'HomeController@fillState');
+
+    Route::get('fillCity', 'HomeController@fillCity');
+
+    Route::get('fillAirLine', 'HomeController@fillAirLine');
+
+    Route::get('fillTrain', 'HomeController@fillTrain');
+
+    Route::get('updateHotelsFile', 'HomeController@updateHotelsFile');
+
+    Route::get('updateAmakensFile', 'HomeController@updateAmakensFile');
+
+//    Route::any('updateBot', 'HomeController@updateBot');
+
+    Route::get('export/{mode}', 'HomeController@export');
+
+    Route::get('removeDuplicate/{key}', 'HomeController@removeDuplicate');
+
+});
+
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAccess']), function (){
+
+    Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
+
+    Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
+
+    Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
+
+    Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
+});
+
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controllerAccess']), function (){
+
+    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'ContentController@removeReview'));
+
+});
+
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorAccess']), function () {
+
+    Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
+
+    Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
+
+});
+
 //tour
 Route::group(array('middleware' => 'auth'), function () {
 
@@ -757,24 +752,44 @@ Route::get('exportToExcelTT', 'HomeController@exportExcel');
 // not use
 Route::group(array('middleware' => 'nothing'), function () {
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
+
     Route::post('getMajaraListElems/{city}/{mode}', array('as' => 'getMajaraListElems', 'uses' => 'NotUseController@getMajaraListElems'));
 
     Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'NotUseController@getRestaurantListElems'));
+
     Route::any('restaurantList/{city}/{mode}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
 
     Route::any('hotelList/{city}/{mode}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
+
     Route::post('getHotelListElems/{city}/{mode}/{kind?}', array('as' => 'getHotelListElems', 'uses' => 'NotUseController@getHotelListElems'));
 
     Route::any('amakenList/{city}/{mode}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
+
     Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'NotUseController@getAmakenListElems'));
 
     Route::get('userQuestions', 'NotUseController@userQuestions');
+
     Route::get('userPosts', 'NotUseController@userPosts');
+
     Route::get('userPhotosAndVideos', 'NotUseController@userPhotosAndVideos');
+
     Route::get('gardeshnameEdit', 'NotUseController@gardeshnameEdit');
+
     Route::get('myTripInner', 'NotUseController@myTripInner');
+
     Route::get('business', 'NotUseController@business');
+
     Route::get('userActivitiesProfile', 'NotUseController@userActivitiesProfile');
+
+    Route::post('getLogPhotos', array('as' => 'getLogPhotos', 'uses' => 'NotUseController@getLogPhotos'));
+
+    Route::post('getSlider1Photo', array('as' => 'getSlider1Photo', 'uses' => 'NotUseController@getSlider1Photo'));
+
+    Route::post('getSlider2Photo', array('as' => 'getSlider2Photo', 'uses' => 'NotUseController@getSlider2Photo'));
+
+    Route::post('survey', array('as' => 'survey', 'uses' => 'NotUseController@survey'));
+
+    Route::post('getSurvey', array('as' => 'getSurvey', 'uses' => 'NotUseController@getSurvey'));
 });
 
 //webrtc test

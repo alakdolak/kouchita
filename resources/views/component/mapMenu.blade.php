@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/map.css')}}">
 
-
 <div id="mapDivSample" style="display: none">
+
     <div id="mapMoreInfoPlace" class="mapMoreInfoPlace">
         <div class="iconFamily iconClose closeMapMoreInfo" onclick="$('#mapMoreInfoPlace').removeClass('showMapMoreInfo');"></div>
         <div class="imgMapMoreDiv">
@@ -75,7 +75,6 @@
     let mapId;
     let mapData;
     let mapCenter;
-    let mapBound;
     let googleMapStyle = [
         {
             "elementType": "geometry",
@@ -342,11 +341,10 @@
         moreInfo: '{{URL::asset('images/mapIcon/info.png')}}',
     };
 
-    function createMap(_id, _center, _bounds, _data) {
+    function createMap(_id, _center, _data) {
         mapId = _id;
         mapData = _data;
         mapCenter = _center;
-        mapBound = _bounds;
         $('#' + mapId).html(mapDivs);
         initMap();
     }
@@ -361,11 +359,7 @@
         var mapElementSmall = document.getElementById('mapSection');
         mainMap = new google.maps.Map(mapElementSmall, mapOptions);
 
-        if(mapBound.length > 0 && mapBound[0] != 0){
-            var bounds = new google.maps.LatLngBounds({lat: mapBound['minLat'], lng: mapBound['minLng']}, {lat: mapBound['maxLat'], lng: mapBound['maxLng']});
-            mainMap.fitBounds(bounds);
-        }
-
+        var bounds = new google.maps.LatLngBounds();
         let fk = Object.keys(mapData);
         for (let x of fk) {
             mapData[x].forEach(item => {
@@ -383,8 +377,13 @@
                         openMapMarkerDescription(x, this.id);
                     });
                 mapMarker[x].push(marker);
+
+                loc = new google.maps.LatLng(item['C'], item['D']);
+                bounds.extend(loc);
             });
         }
+        mainMap.fitBounds(bounds);
+        mainMap.panToBounds(bounds);
     }
 
     function openMapMarkerDescription(_kind, _id){

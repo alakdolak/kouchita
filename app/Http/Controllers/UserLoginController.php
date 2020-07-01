@@ -92,8 +92,13 @@ class UserLoginController extends Controller
         return \redirect(url($_POST['redirectUrl']));
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        Auth::guard()->logout();
+
+        $request->session()->invalidate();
+
+        $back = \redirect()->back();
         if(\Session::has('lang'))
             $language = \Session::get('lang');
 

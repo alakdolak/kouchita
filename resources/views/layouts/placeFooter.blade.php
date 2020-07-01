@@ -1,16 +1,3 @@
-<?php
-$config = \App\models\ConfigModel::first();
-    if(auth()->check()){
-        $user = Auth::user();
-        $userLevelFooter = auth()->user()->getUserNearestLevel();
-
-        $userTotalPointFooter = auth()->user()->getUserTotalPoint();
-
-        $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
-
-        $registerUser = verta(\auth()->user()->created_at)->format('Y/m/d');
-    }
-?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
 
 @if(\App::getLocale() == 'en')
@@ -141,7 +128,7 @@ $config = \App\models\ConfigModel::first();
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
-            <span class="ui_icon threeLineIcon"></span>
+            <span class="threeLineIcon"></span>
         </div>
         <div data-toggle="modal" data-target="#profilePossibilities" onclick="showLastPages();// this function in mainSearch.blade.php">
             <span class="footerMenuBarLinks">
@@ -163,14 +150,8 @@ $config = \App\models\ConfigModel::first();
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
                 <div class="profileBtnText">
                     <span>سلام</span>
-                    <span>{{auth()->user()->username}}</span>
+                    <span>{{$userNamename}}</span>
                 </div>
-                <?php
-                    if(auth()->check())
-                        $buPic = getUserPic(auth()->user()->id);
-                    else
-                        $buPic = getUserPic();
-                ?>
                 <div class="profilePicFooter circleBase type2">
                     <img src="{{isset($buPic) ? $buPic : ''}}" style="width: 100%; border-radius: 50%">
                 </div>
@@ -455,11 +436,11 @@ $config = \App\models\ConfigModel::first();
                             </div>
 
                             @if($kindPlace->id == 4)
-                                @include('places.list.filters.hotelFilters')
+                                @include('pages.placeList.filters.hotelFilters')
                             @elseif($kindPlace->id == 10)
-                                @include('places.list.filters.sogatSanaieFilters')
+                                @include('pages.placeList.filters.sogatSanaieFilters')
                             @elseif($kindPlace->id == 11)
-                                @include('places.list.filters.mahaliFoodFilters')
+                                @include('pages.placeList.filters.mahaliFoodFilters')
                             @endif
 
                             @foreach($features as $feature)
@@ -828,13 +809,13 @@ $config = \App\models\ConfigModel::first();
 
                                         <p class="since">
                                             <b>
-                                                {{isset($user->first_name) ? $user->first_name : $user->username}}
+                                                {{isset($userFooter->first_name) ? $userFooter->first_name : $userFooter->username}}
                                             </b>
                                         </p>
                                         <div class="ageSince" style="flex-direction: column;">
                                             <div class="since">{{__('عضو شده از')}}</div>
                                             <div class="since">
-                                                {{$registerUser}}
+{{--                                                {{$registerUser}}--}}
                                             </div>
                                         </div>
                                     </div>
@@ -983,9 +964,6 @@ $config = \App\models\ConfigModel::first();
                             <div class="mainDivHeaderText">
                                 <h3>{{__('شرح فعالیت‌ها')}}</h3>
                             </div>
-                            <?php
-                                $userInfo = auth()->user()->getUserActivityCount();
-                            ?>
                             <div class="activitiesMainDiv">
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('گذاشتن پست')}}</div>

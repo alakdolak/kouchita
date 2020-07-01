@@ -55,6 +55,7 @@
     background-color: #00000073;
 }
 .mapMoreInfoPlace{
+    direction: rtl;
     display: block;
     background: white;
     width: 0px;
