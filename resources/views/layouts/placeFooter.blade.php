@@ -12,22 +12,22 @@
                 <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
-                <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                     <div class="footerIconHor linkedin"></div>
                 </a>
-                <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
                     <div class="footerIconHor facebook"></div>
                 </a>
-                <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
                     <div class="footerIconHor twitter"></div>
                 </a>
-                <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
                     <div class="footerIconHor instagram"></div>
                 </a>
-                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
                     <div class="footerIconHor telegram"></div>
                 </a>
-                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://koochitatv.com">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://koochitatv.com">
                     <div class="footerIconHor aparat"></div>
                 </a>
             </div>
@@ -150,7 +150,7 @@
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
                 <div class="profileBtnText">
                     <span>سلام</span>
-                    <span>{{$userNamename}}</span>
+{{--                    <span>{{$userNamename}}</span>--}}
                 </div>
                 <div class="profilePicFooter circleBase type2">
                     <img src="{{isset($buPic) ? $buPic : ''}}" style="width: 100%; border-radius: 50%">
@@ -679,19 +679,19 @@
 
                 <div class="footerSocialDivPhone">
 
-                    <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
+                    <a rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
                         <div class="footerIconHor twitter"></div>
                     </a>
-                    <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
                         <div class="footerIconHor facebook"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="#">
                         <div class="footerIconHor youtubeBackground"></div>
                     </a>
-                    <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
+                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
                         <div class="footerIconHor telegram"></div>
                     </a>
-                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
+                    <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                         <div class="footerIconHor linkedin"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="#">
@@ -700,10 +700,10 @@
                     <a rel="nofollow" target="_blank" href="#">
                         <div class="footerIconHor whatsappBackground"></div>
                     </a>
-                    <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://aparat.com">
+                    <a class="socialLink" rel="nofollow" target="_blank" href="https://aparat.com">
                         <div class="footerIconHor aparat"></div>
                     </a>
-                    <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                    <a rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
                         <div class="footerIconHor instagram"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="#">
@@ -809,7 +809,7 @@
 
                                         <p class="since">
                                             <b>
-                                                {{isset($userFooter->first_name) ? $userFooter->first_name : $userFooter->username}}
+{{--                                                {{isset($userFooter->first_name) ? $userFooter->first_name : $userFooter->username}}--}}
                                             </b>
                                         </p>
                                         <div class="ageSince" style="flex-direction: column;">
@@ -926,11 +926,11 @@
                                     <div class="modules-membercenter-total-points" style="padding-top: 2px;">
                                         <div class="mainDivTotalPoint">
                                             <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
-                                            <div class="points">{{$userTotalPointFooter}}</div>
+{{--                                            <div class="points">{{$userTotalPointFooter}}</div>--}}
                                         </div>
                                         <div class="points_to_go">
                                         <span style="justify-content: space-between;">
-                                            <b class="points"> {{$nextLevelFooter}} </b>
+{{--                                            <b class="points"> {{$nextLevelFooter}} </b>--}}
                                             <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
                                         </span>
                                         </div>
@@ -944,11 +944,11 @@
                                                 </div>
                                                 <div class="progress_indicator">
 
-                                                    <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
+{{--                                                    <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>--}}
                                                     <div class="meter">
                                                         <span id="progressIdPhone" class="progress"></span>
                                                     </div>
-                                                    <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+{{--                                                    <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>--}}
                                                 </div>
                                                 <div class="text-align-center">
                                                     <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
@@ -967,31 +967,31 @@
                             <div class="activitiesMainDiv">
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('گذاشتن پست')}}</div>
-                                    <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>
+{{--                                    <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('آپلود عکس')}}</div>
-                                    <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>
+{{--                                    <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('آپلود فیلم')}}</div>
-                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>
+{{--                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>
-                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>
+{{--                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>
-                                    <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>
+{{--                                    <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>
-                                    <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>
+{{--                                    <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('امتیازدهی')}}</div>
-                                    <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>
+{{--                                    <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>--}}
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>
@@ -1120,7 +1120,7 @@
             showBookMarksPhone();
 
             function initialProgressFooter() {
-                var b = "{{$userTotalPointFooter / $userLevelFooter[1]->floor}}" * 100;
+                {{--var b = "{{$userTotalPointFooter / $userLevelFooter[1]->floor}}" * 100;--}}
                 $("#progressIdPhone").css("width", b + "%");
             }
             initialProgressFooter();

@@ -60,7 +60,7 @@
 
     @include('layouts.header1')
 
-    @include('general.secondHeader')
+{{--    @include('general.secondHeader')--}}
 
     <div class="container listContainer">
 
@@ -131,7 +131,7 @@
                                     <div class="contentImgSection">
                                         <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important; height: 100%">
                                             <div class="contentImg">
-                                                <img ng-src='[[place.pic]]' class='resizeImgClass' alt='[[place.keyword]]' style="width: 100%">
+                                                <img ng-src='[[place.pic]]' class='resizeImgClass' alt='[[place.keyword]]' onload="fitThisImg(this)" style="width: 100%">
                                             </div>
                                         </a>
 
