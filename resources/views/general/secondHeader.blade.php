@@ -79,7 +79,7 @@
 
     .secHeaderPathDiv{
         margin-right: 10px;
-        min-width: 90px;
+        /*min-width: 90px;*/
     }
 
     .yelCol{
@@ -116,6 +116,7 @@
         }
         .spanMarginSecHead{
             padding: 0px;
+            padding-left: 10px;
         }
     }
 </style>
@@ -263,7 +264,7 @@
     <div class="container-fluid fluidPlacePath secHeadMain">
 
         <div class="container listContainer secHeadNavs spanMarginSecHead">
-            <a class="linkRoute" href="{{url('/')}}" style="width: 80px">
+            <a class="linkRoute" href="{{url('/')}}" style="width: 60px">
                 {{__('صفحه اصلی')}}
             </a>
             @if($locationName['kindState'] != 'country')

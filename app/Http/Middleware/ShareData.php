@@ -19,28 +19,29 @@ class ShareData
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();
-            $userLevelFooter = auth()->user()->getUserNearestLevel();
+            $userLevelFooter = auth()->user()->nearestLevelInModel($userFooter->id);
 
-            $userTotalPointFooter = auth()->user()->getUserTotalPoint();
+            $userTotalPointFooter = auth()->user()->getUserPointInModel($userFooter->id);
 
             $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
 
-            $registerUser = verta(auth()->user()->created_at)->format('Y/m/d');
+            $registerUser = verta($userFooter->created_at)->format('Y/m/d');
 
             $userInfo = auth()->user()->getUserActivityCount();
 
-            $buPic = auth()->user()->getUserPicInModel(auth()->user()->id);
+            $buPic = auth()->user()->getUserPicInModel($userFooter->id);
 
-            $userNamename = auth()->user()->username;
+            $userNamename = $userFooter->username;
 
-            View::share(['userNamename' => $userNamename, 'userInfo' => $userInfo,
+            View::share(['userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
                         'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
                         'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter ]);
         }
-        else
+        else {
             $buPic = \URL::asset('_images/nopic/blank.jpg');
+            View::share(['buPic' => $buPic, 'config' => $config]);
+        }
 
-        View::share(['buPic' => $buPic, 'config' => $config]);
 
         return $next($request);
     }
