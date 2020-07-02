@@ -777,21 +777,6 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
             $userName = $user->username;
 
         if($user != null) {
-
-            $diffTime = getDifferenceTimeString($item->created_at);
-
-            if($user->uploadPhoto == 0){
-                $deffPic = DefaultPic::find($user->picture);
-
-                if($deffPic != null)
-                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
-                else
-                    $uPic = URL::asset('_images/nopic/blank.jpg');
-            }
-            else{
-                $uPic = URL::asset('userProfile/' . $user->picture);
-            }
-
             $s = [
                 'id' => $item->id,
                 's' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/s-' . $item->pic),
@@ -802,20 +787,19 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'alt' => $item->alt,
                 'name' => $userName,
                 'picName' => $item->name,
-                'userPic' => $uPic,
+                'userPic' =>  getUserPic($user->id),
                 'showInfo' => true,
                 'like' => $item->like,
                 'dislike' => $item->dislike,
                 'description' => $item->description,
-                'fromUpload' => $diffTime,
-                'userLike' => $item->userLike];
+                'fromUpload' => getDifferenceTimeString($item->created_at),
+                'userLike' => $item->userLike
+            ];
 
             array_unshift($photographerPics, $s);
         }
     }
     $photographerPicsJSON = json_encode($photographerPics);
-
-
 
     return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON];
 }

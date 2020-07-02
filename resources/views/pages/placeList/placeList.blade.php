@@ -60,7 +60,7 @@
 
     @include('layouts.header1')
 
-{{--    @include('general.secondHeader')--}}
+    @include('general.secondHeader')
 
     <div class="container listContainer">
 

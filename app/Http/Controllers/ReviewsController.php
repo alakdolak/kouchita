@@ -105,9 +105,9 @@ class ReviewsController extends Controller
 
             echo json_encode(['ok', $filename]);
         }
-        else{
+        else
             echo 'nok3';
-        }
+
         return;
     }
 

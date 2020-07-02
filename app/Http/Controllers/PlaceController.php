@@ -102,6 +102,8 @@ class PlaceController extends Controller {
         else
             $place = DB::table($kindPlace->tableName)->where('slug', $slug)->first();
 
+//        dd($place);
+
         if($place == null)
             return \redirect(\url('/'));
 
@@ -135,7 +137,7 @@ class PlaceController extends Controller {
         if ($count[0]->tripPlaceNum > 0)
             $save = true;
 
-        if($place->phone != null)
+        if(isset($place->phone) && $place->phone != null)
             $place->phone = explode('-', $place->phone);
 
 

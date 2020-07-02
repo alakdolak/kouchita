@@ -805,7 +805,7 @@
 
                                 <div class="profileBlock">
 
-                                    <div id="" class="targets profileInfosDetails col-xs-8">
+                               ح     <div id="" class="targets profileInfosDetails col-xs-8">
 
                                         <p class="since">
                                             <b>

@@ -85,7 +85,7 @@
     .yelCol{
         color: #eab836;
     }
-    .listContainer{
+    .listSecHeadContainer{
         font-size: 20px;
         flex-wrap: nowrap;
     }
@@ -94,6 +94,9 @@
         padding-top: 10px;
         overflow-y: hidden;
         overflow-x: auto;
+    }
+    .linkRoute{
+        min-width: 60px;
     }
 
 
@@ -108,7 +111,7 @@
 
     @media (max-width: 650px){
 
-        .listContainer{
+        .listSecHeadContainer{
             width: fit-content;
         }
         .linkRoute {
@@ -263,8 +266,8 @@
 @if(isset($kindPlace))
     <div class="container-fluid fluidPlacePath secHeadMain">
 
-        <div class="container listContainer secHeadNavs spanMarginSecHead">
-            <a class="linkRoute" href="{{url('/')}}" style="width: 60px">
+        <div class="container listSecHeadContainer secHeadNavs spanMarginSecHead">
+            <a class="linkRoute" href="{{url('/')}}">
                 {{__('صفحه اصلی')}}
             </a>
             @if($locationName['kindState'] != 'country')

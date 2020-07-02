@@ -5,7 +5,12 @@
         <div class="modal-content" style="background-color: #141518; border: none;">
             <div id="showingPhotosMainDivHeader">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <div id="photoAlbumTitle" class="showingPhotosTitle"></div>
+                <div class="showingPhotosTitle">
+                    <div style="display: flex; direction: rtl">
+                        <div id="photoAlbumTitle"></div>
+                        <div id="photoAlbumNamePic"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="userInfoPhotoAlbum hideOnScreen">
@@ -133,6 +138,10 @@
         choosenIndex = _index;
         $('.chooseSidePhotoAlbum').removeClass('chooseSidePhotoAlbum');
         $('#photoAlbumDescription').text('');
+        $('#photoAlbumNamePic').text('');
+
+        if(sidePics[_index]['picName'] != undefined)
+            $('#photoAlbumNamePic').text(' - ' + sidePics[_index]['picName']);
 
         $('#photoAlbumUploadTimeOnScreen').text(sidePics[_index]['uploadTime']);
         $('#photoAlbumUploadTimeOnPhone').text(sidePics[_index]['uploadTime']);
