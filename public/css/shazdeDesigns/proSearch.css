@@ -398,11 +398,12 @@ DIV.ppr_rup.ppr_priv_masthead_search .body_text {
     overflow: auto;
 }
 
-/*@media (min-width: 1188px) {*/
-/*    .ui_container {*/
-/*         max-width: initial;*/
-/*    }*/
-/*}*/
+.proSearchFindCityList{
+    cursor: pointer;
+}
+.proSearchFindCityList:hover{
+    background-color: lightgrey;
+}
 
 @media (max-width: 767px) {
 

@@ -186,7 +186,7 @@ class PostController extends Controller {
         $pageLimit = ceil(Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count() / 5);
 
 
-        return view('posts.mainArticle',compact(['stateCome', 'cityCome', 'placeCome', 'category', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'relatedPost', 'page', 'pageLimit']) );
+        return view('Article.mainArticle',compact(['stateCome', 'cityCome', 'placeCome', 'category', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'relatedPost', 'page', 'pageLimit']) );
     }
 
     public function paginationArticle(Request $request)
@@ -342,7 +342,7 @@ class PostController extends Controller {
             $mainWebSiteUrl .= '/' . $request->path();
             $localStorageData = ['kind' => 'article', 'name' => $post->title, 'city' => '', 'state' => '', 'mainPic' => $post->pic, 'redirect' => $mainWebSiteUrl];
 
-            return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments', 'localStorageData']));
+            return view('Article.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments', 'localStorageData']));
         }
         return \redirect(\url('/'));
 
@@ -412,7 +412,7 @@ class PostController extends Controller {
 
             $category = $this->getAllCategory();
             $pageLimit = ceil($post / 5);
-            return \view('posts.searchArticle', compact(['stateCome', 'cityCome', 'placeCome', 'category', 'pageLimit', 'type', 'search']));
+            return \view('Article.searchArticle', compact(['stateCome', 'cityCome', 'placeCome', 'category', 'pageLimit', 'type', 'search']));
         }
 
         return \redirect(\url('mainArticle'));

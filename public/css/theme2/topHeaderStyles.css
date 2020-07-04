@@ -21,44 +21,7 @@ p {
     line-height: 30px;
     font-size: 14px !important;
 }
-/*in Phone size*/
-@media only screen and (max-width: 767px) {
-    h1 {
-        font-size: 20px !important;
-    }
-    h2{
-        font-size: 14px !important;
-    }
-    h3 {
-        font-size: 14px !important;
-    }
-    h4{
-        font-size: 14px !important;
-    }
-    h5 {
-        font-size: 14px !important;
-    }
-    h6{
-        font-size: 14px !important;
-    }
-}
 
-/*in Phone*/
-@media only screen and (max-width: 767px) {
-    .hideOnPhone {
-        display: none !important;
-        width: 0;
-        height: 0;
-    }
-}
-/*in Screen*/
-@media only screen and (min-width:768px) {
-    .hideOnScreen {
-        display: none !important;
-        width: 0;
-        height: 0;
-    }
-}
 .hidden {
     display: none !important;
 }
@@ -144,6 +107,98 @@ a:link {
     height: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
+}
+.confirmButton{
+    background-color: #4dc7bc;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.lessShowText{
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.showOnTablet{
+    display: none;
+}
+
+.topLightBorder{
+    border-top: 1px solid #e5e5e5;
+}
+.leftLightBorder{
+    border-left: 1px solid #e5e5e5;
+}
+.rightLightBorder{
+    border-right: 1px solid #e5e5e5;
+}
+.bottomLightBorder{
+    border-bottom: 1px solid #e5e5e5;
+}
+.unselectedText{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+@media (max-width: 991px) {
+    .hideOnTablet{
+        display: none !important;
+    }
+    .showOnTablet{
+        display: inherit;
+    }
+    .listContainer{
+        position: relative;
+        padding: 0 24px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+
+/*in Phone size*/
+@media only screen and (max-width: 767px) {
+    h1 {
+        font-size: 20px !important;
+    }
+    h2{
+        font-size: 14px !important;
+    }
+    h3 {
+        font-size: 14px !important;
+    }
+    h4{
+        font-size: 14px !important;
+    }
+    h5 {
+        font-size: 14px !important;
+    }
+    h6{
+        font-size: 14px !important;
+    }
+}
+
+/*in Phone*/
+@media only screen and (max-width: 767px) {
+    .hideOnPhone {
+        display: none !important;
+        width: 0;
+        height: 0;
+    }
+}
+/*in Screen*/
+@media only screen and (min-width:768px) {
+    .hideOnScreen {
+        display: none !important;
+        width: 0;
+        height: 0;
+    }
 }
 
 @keyframes gradient {

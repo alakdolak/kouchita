@@ -4,25 +4,17 @@
 <head>
     @include('layouts.topHeader')
     <title>
-        کوچیتا |
-        صفحه
+        {{__('کوچیتا |صفحه')}}
         {{$place->name}}</title>
+
     <meta content="article" property="og:type"/>
     <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name="og:title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name="twitter:title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
     <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='og:description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='twitter:description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
     <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
-
-    {{--<meta name="keywords" content="{{$post->keyword}}">--}}
-    {{--<meta property="og:title" content=" {{$post->seoTitle}} " />--}}
-    {{--<meta property="og:description" content=" {{$post->meta}}" />--}}
-    {{--<meta name="twitter:title" content=" {{$post->seoTitle}} " />--}}
-    {{--<meta name="twitter:description" content=" {{$post->meta}}" />--}}
-    {{--<meta name="description" content=" {{$post->meta}}"/>--}}
-    {{--<meta property="article:author " content="{{$post->user->username}}" />--}}
-    {{--<meta property="article:section" content="article" />--}}
-    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
-    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
-    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
 
     @if(isset($place->image))
         <meta property="og:image" content="{{URL::asset($place->image)}}"/>
@@ -39,74 +31,26 @@
     <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print'
-          href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
-
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css')}}"/>
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css')}}'/>
-
-    <script>
-        var searchDir = '{{route('totalSearch')}}';
-        var getStates = '{{route('getStates')}}';
-        var getGoyesh = '{{route('getGoyesh')}}';
-        var url;
-    </script>
-
-    <style>
-
-        h3{
-            margin: 0px;
-        }
-
-        .cityImgSlider{
-            overflow: hidden;
-            height: 340px;
-        }
-        .topImage{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions, #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion{
-            margin-left: 10px;
-        }
-        .navigatorLinks{
-            color: #053a3e;
-            transition: .2s !important;
-        }
-        .navigatorLinks:hover{
-            color: #eab836;
-        }
-    </style>
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css')}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css')}}'/>
 
 </head>
 
-<body class="rebrand_2017 desktop HomeRebranded  js_logging">
+<body>
 
 @include('general.forAllPages')
 
-<div class="header hideOnPhone">
-    @include('layouts.placeHeader')
-</div>
+@include('layouts.header1')
 
-<div class="ui_container cpBody">
+<div class="container cpBody">
     <div class="cpBorderBottom cpHeader">
 
         <div class="cpHeaderRouteOfCityName">
             <a href="{{url('/')}}" class="navigatorLinks">
-                <span>صفحه اصلی</span>
+                <span>{{__('صفحه اصلی')}}</span>
             </a>
             <span style="color: #eab836"> > </span>
             @if(isset($place->state))
@@ -114,602 +58,345 @@
                     <span>استان {{$place->state}}</span>
                 </a>
                 <span style="color: #eab836"> > </span>
-                <span class="navigatorLinks">{{$place->name}}</span>
+                <span class="navigatorLinks" style="font-size: 13px">{{$place->name}}</span>
             @else
-                <span class="navigatorLinks">{{$place->name}}</span>
+                <span class="navigatorLinks" style="font-size: 13px">{{$place->name}}</span>
             @endif
-            {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>
 
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
 
     <div class="row">
-        <div class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
-            <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
-                @foreach($reviews as $item)
-                    <div class="postMainDivShown float-right position-relative">
-                        <div class="commentWriterDetailsShow">
-                            <div class="circleBase type2 commentWriterPicShow">
-                                <img src="{{$item->userPic}}" alt="{{$item->user->username}}" style="width: 100%; height: 100%; border-radius: 50%;">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnTablet">
+            <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
+                {{__('تازه ترین پست ها')}}
+            </div>
+            <div id="reviewSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="display: none">
+                <div class="postMainDivShown float-right position-relative">
+                    <div class="commentWriterDetailsShow">
+                        <div class="circleBase type2 commentWriterPicShow">
+                            <img src="##userPic##" alt="##userName##" style="width: 100%; height: 100%; border-radius: 50%;">
+                        </div>
+                        <div class="commentWriterExperienceDetails">
+                            <b class="userProfileName">##userName##</b>
+                            <div style="font-size: 10px">{{__('در')}}
+                                <a href="##url##" target="_blank">
+                                    <span class="commentWriterExperiencePlace">##placeName##، {{__('شهر')}} ##placeCity##، {{__('استان')}} ##placeState##</span>
+                                </a>
                             </div>
-                            <div class="commentWriterExperienceDetails">
-                                <b class="userProfileName">{{$item->user->username}}</b>
-                                <div style="font-size: 10px">در
-                                    <a href="{{$item->url}}" target="_blank">
-                                        <span class="commentWriterExperiencePlace">{{$item->place->name}}، شهر {{$item->city->name}}، استان {{$item->state->name}}</span>
-                                    </a>
-                                </div>
-                                <div style="font-size: 10px;">
-                                    {{$item->timeAgo}}
-                                </div>
+                            <div style="font-size: 12px;">##timeAgo##</div>
+                        </div>
+                    </div>
+                    <div class="commentContentsShow position-relative">
+                        <p class="SummarizedPostTextShown ##haveSummery##">
+                            ##summery##
+                            <span class="showMoreText" onclick="showMoreText(this)"></span>
+                        </p>
+                        <p class="compvarePostTextShown display-none">
+                            ##text##
+                            <span class="showLessText" onclick="showLessText(this)">{{__('کمتر')}}</span>
+                        </p>
+                        <p class="compvarePostTextShown" style="display: ##notSummery##">
+                            ##text##
+                        </p>
+                    </div>
+                    <div class="commentPhotosShow">
+                        <div class="photosCol col-xs-12" onclick="showReviewPics(##id##)" style="display: ##havePic##">
+                            <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                <img src="##firstPic##" class="resizeImgClass" style="position: absolute; width: 100%;" onload="fitThisImg(this)">
+                            </div>
+                            <div class="numberOfPhotosMainDiv" style="display: ##morePic##">
+                                <div class="numberOfPhotos">##picCount##+</div>
+                                <div>{{__('عکس')}}</div>
                             </div>
                         </div>
-                        <div class="commentContentsShow position-relative">
-                            @if(isset($item->summery))
-                                <p class="SummarizedPostTextShown" style="white-space: pre-line">
-                                    {{$item->summery}}
-                                    <span class="showMoreText" onclick="showMoreText(this)"></span>
-                                </p>
-                                <p class="compvarePostTextShown display-none" style="white-space: pre-line">
-                                    {{$item->text}}
-                                    <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                                </p>
-                            @else
-                                <p class="compvarePostTextShown">
-                                    {{$item->text}}
-                                </p>
-                            @endif
-                        </div>
-                        <div class="commentPhotosShow">
-                            @if(count($item->pics) > 0)
-                            <div class="photosCol col-xs-12" onclick="showReviewPics({{$item->id}})">
-                                <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-                                    <img src="{{$item->pics[0]->picUrl}}" class="resizeImgClass" style="position: absolute; width: 100%;">
-                                </div>
-                                @if(count($item->pics) > 1)
-                                    <div class="numberOfPhotosMainDiv">
-                                        <div class="numberOfPhotos">{{count($item->pics) - 1}}+</div>
-                                        <div>عکس</div>
-                                    </div>
-                                @endif
+                        <div class="quantityOfLikes">
+                            <div>
+                                <span>##like##</span>
+                                <span class="iconFamily LikeIcon" style="color: #666666;"></span>
                             </div>
-                            @endif
-                            <div class="quantityOfLikes">
-                                <span>{{$item->like}}</span>
-                                نفر دوست داشتند،
-                                <span>{{$item->disLike}}</span>
-                                نفر دوست نداشتند و
-                                <span>{{$item->comments}}</span>
-                                نفر نظر دادند.
+                            <div>
+                                <span>##disLike##</span>
+                                <span class="iconFamily DisLikeIcon" style="color: #666666;"></span>
+                            </div>
+                            <div>
+                                <span>##comments##</span>
+                                <span class="iconFamily CommentIcon" style="color: #666666;"></span>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                </div>
+            </div>
+            <div id="reviewPlaceHolderSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="width: 100%">
+                @for($i = 0; $i < 2; $i++)
+                    <div class="postMainDivShown float-right position-relative">
+                        <div class="commentWriterDetailsShow">
+                            <div class="placeHolderAnime" style="width: 55px; height: 55px; float: right; border-radius: 50%"></div>
+                            <div class="commentWriterExperienceDetails" style="display: flex; flex-direction: column; padding-right: 10px">
+                                <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"></div>
+                                <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"> </div>
+                                <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"></div>
+                            </div>
+                        </div>
+                        <div class="commentContentsShow position-relative">
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine" style="width: 60%"></div>
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine" style="width: 90%"></div>
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine" style="width: 20%"></div>
+                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
+                        </div>
+                        <div class="commentPhotosShow" style="border-top: 1px solid #e5e5e5; padding-top: 8px; margin-top: 5px;">
+                            <div class=" placeHolderAnime reviewPicPlaceHolder"></div>
+                        </div>
+                    </div>
+                @endfor
             </div>
         </div>
 
-        <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
-
+        <div id="cpBorderLeft" class="col-lg-9 col-md-12">
             <div class="row cpMainBox">
-                <div class="col-md-8 col-xs-12 pd-0Imp mg-bt-10">
+                <div class="col-md-8 col-xs-12 pd-0Imp">
                     @if(isset($place->pic))
                         <div class="cityPagePics swiper-container">
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
                                 @for($i = 0; $i < count($place->pic) && $i < 5; $i++)
                                     <div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
-                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}">
+                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}" onload="resizeFitImg(this)">
                                     </div>
                                 @endfor
                             </div>
-                            <!-- Add Pagination -->
                             <div class="swiper-pagination"></div>
-                            <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div>
                     @else
-                        <img class="cpPic" src="{{$place->image}}">
+                        <img class="cityPagePics cpPic" src="{{$place->image}}">
                     @endif
+                    <div class="col-xs-12 underSlider hideOnTablet">
+                            <div class="cpLittleMenu infoLittleMenu">
+                                <img src="{{URL::asset('images/icons/info.png')}}" style="">
+                            </div>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/cinema.png')}}" alt="{{__('سینما')}}">
+                                <div class="textCityPageIcon">{{__('سینما')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قتادی')}}">
+                                <div class="textCityPageIcon">{{__('قتادی')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/mortarboard(1).png')}}" alt="{{__('آموزش')}}">
+                                <div class="textCityPageIcon">{{__('آموزش')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/culture.png')}}" alt="{{__('فرهنگ')}}">
+                                <div class="textCityPageIcon">{{__('فرهنگ')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/barbershop.png')}}" alt="{{__('آرایشگاه')}}">
+                                <div class="textCityPageIcon">{{__('آرایشگاه')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/fuel.png')}}" alt="{{__('سوخت')}}">
+                                <div class="textCityPageIcon">{{__('سوخت')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                        </div>
                 </div>
                 <div class="col-md-4 col-xs-12 pd-0Imp">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon hotel"></div>
-                            <div class="textCityPageIcon">هتل</div>
-                            <div class="textCityPageIcon">{{count($allHotels)}}</div>
+                            <div class="textCityPageIcon">{{__('هتل')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['hotel']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="#">
                             <div class="cityPageIcon ticket"></div>
-                            <div class="textCityPageIcon">بلیط</div>
+                            <div class="textCityPageIcon">{{__('بلیط')}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon atraction"></div>
-                            <div class="textCityPageIcon">جاذبه ها</div>
-                            <div class="textCityPageIcon">{{count($allAmaken)}}</div>
+                            <div class="textCityPageIcon">{{__('جاذبه ها')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['amaken']}}</div>
                         </a>
                     </div>
-                    <div class="clear-both"></div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $kind. '/' . $place->listName )}}">
                             <div class="cityPageIcon restaurant"></div>
-                            <div class="textCityPageIcon">رستوران</div>
-                            <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
+                            <div class="textCityPageIcon">{{__('رستوران')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['restaurant']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon soghat"></div>
-                            <div class="textCityPageIcon">سوغات</div>
-                            <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
+                            <div class="textCityPageIcon">{{__('سوغات')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['sogatSanaie']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon ghazamahali"></div>
-                            <div class="textCityPageIcon">غذای محلی</div>
-                            <div class="textCityPageIcon">{{count($allMahaliFood)}}</div>
+                            <div class="textCityPageIcon">{{__('غذای محلی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['mahaliFood']}}</div>
                         </a>
                     </div>
-                    <div class="clear-both"></div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
-                            <div class="textCityPageIcon">طبیعت گردی</div>
-                            <div class="textCityPageIcon">{{count($allMajara)}}</div>
+                            <div class="textCityPageIcon">{{__('طبیعت گردی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['majara']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon sanaye"></div>
-                            <div class="textCityPageIcon">صنایع‌دستی</div>
-                            <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
+                            <div class="textCityPageIcon">{{__('صنایع‌دستی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['sogatSanaie']}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
-                            <div class="textCityPageIcon">لباس محلی</div>
+                            <div class="textCityPageIcon">{{__('لباس محلی')}}</div>
                         </div>
                     </div>
-                    <div class="clear-both"></div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon boom"></div>
-                            <div class="textCityPageIcon">بوم گردی</div>
-                            <div class="textCityPageIcon">{{count($allBoomgardy)}}</div>
+                            <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['boomgardy']}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon estelah"></div>
-                            <div class="textCityPageIcon">اصطلاحات محلی</div>
+                            <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>
                         </div>
-                        {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
-                    {{$place->description}}
-                </div>
-
-                <div class="mainSuggestionMainDiv cpBorderBottom ng-scope">
-
-                    @if(count($topPlaces['amaken']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                            <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                                <div class="shelf_title_container h3">
-                                                    <h3>محبوب‌ترین جاذبه‌ها&zwnj;</h3>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                        <div class="cpMainSug swiper-container">
-                                            <div class="swiper-wrapper position-relative">
-                                                @foreach($topPlaces['amaken'] as $item)
-                                                    <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if(count($topPlaces['restaurant']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین رستوران‌ها&zwnj;</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['restaurant'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="{{$item->url}}" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide topImage">
-                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                <span class="ng-binding">{{$item->state->name}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon safarnameIcon"></div>
+                            <div class="textCityPageIcon">{{__('سفر نامه')}}</div>
                         </div>
                     </div>
-                    @endif
-
-                    @if(count($topPlaces['hotels']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین هتل‌ها&zwnj;</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['hotels'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 zpr">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/gym.png')}}" alt="{{__('ورزشی')}}">
+                            <div class="textCityPageIcon">{{__('ورزشی')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/tag.png')}}" alt="{{__('فروشگاه')}}">
+                            <div class="textCityPageIcon">{{__('فروشگاه')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/hospital(1).png')}}" alt="{{__('پزشکی')}}">
+                            <div class="textCityPageIcon">{{__('پزشکی')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
                     </div>
-                    @endif
-
-                    @if(count($topPlaces['majara']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین طبیعت گردی&zwnj;</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['majara'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 zpr showOnTablet">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/cinema.png')}}" alt="{{__('سینما')}}">
+                            <div class="textCityPageIcon">{{__('سینما')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قتادی')}}">
+                            <div class="textCityPageIcon">{{__('قتادی')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/mortarboard(1).png')}}" alt="{{__('آموزش')}}">
+                            <div class="textCityPageIcon">{{__('آموزش')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
                     </div>
-                    @endif
-
-                    @if(count($topPlaces['sogatSanaie']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین سوغات و صنایع‌دستی&zwnj;</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['sogatSanaie'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 zpr showOnTablet">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/culture.png')}}" alt="{{__('فرهنگ')}}">
+                            <div class="textCityPageIcon">{{__('فرهنگ')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/barbershop.png')}}" alt="{{__('آرایشگاه')}}">
+                            <div class="textCityPageIcon">{{__('آرایشگاه')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/fuel.png')}}" alt="{{__('سوخت')}}">
+                            <div class="textCityPageIcon">{{__('سوخت')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
                     </div>
-                    @endif
-
-                    @if(count($topPlaces['mahaliFood']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین غذاهای محلی&zwnj;</h3>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['mahaliFood'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
                 </div>
 
             </div>
 
-            <div class="col-xs-12">
-                <div class="widget-head widget-head-45">
-                    <strong class="widget-title">پر طرفدار ها</strong>
-                    <div class="widget-head-bar"></div>
-                    <div class="widget-head-line"></div>
+            <div class="row">
+                @if(strlen($place->description) > 10)
+                    <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
+                        {{$place->description}}
+                    </div>
+                @endif
+
+                <div id="topPlacesSection" class="mainSuggestionMainDiv cpBorderBottom ng-scope" style="display: none">
+                    <div id="##id##" class="topPlacesDivInCity">
+                        <div class="topPlacesDivInCityHeader">
+                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                            <a href="##url##">
+                                <div class="shelf_title_container h3">
+                                    <h3>##name##</h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-container mainSuggestion" style="padding-top: 15px">
+                            <div id="##id##Content" class="swiper-wrapper thisfirsPlaceHolder" style="direction: rtl; position: relative;"></div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <script>
+                createSuggestionPackPlaceHolderClassName('thisfirsPlaceHolder')
+            </script>
+
+            <div class="col-xs-12 articleDiv">
                 <div class="row">
                     <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="{{$post[0]->url}}"
-                               title="{{$post[0]->slug}}">
+                            <a class="im-entry-thumb-link" href="{{$post[0]->url}}" title="{{$post[0]->slug}}">
                                 <img class="lazy-img" src="{{$post[0]->pic}}" alt="{{$post[0]->keyword}}" style="opacity: 1;">
                             </a>
                             <header class="im-entry-header">
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
-                                            <a style="background-color: #666; color: #fff !important;" href="{{$post[0]->catURL}}"
-                                               title="{{$post[0]->category}}">{{$post[0]->category}}</a>
+                                            <a style="background-color: #666; color: #fff !important;" href="{{$post[0]->catURL}}"title="{{$post[0]->category}}">{{$post[0]->category}}</a>
                                         </div>
                                     </div>
                                 </div>
                                 <h3 class="im-entry-title">
-                                    <a href="{{$post[0]->url}}" rel="bookmark">{{$post[0]->title}}</a>
+                                    <a href="{{$post[0]->url}}" style="font-size: 20px">{{$post[0]->title}}</a>
                                 </h3>
                             </header>
                         </div>
-                        <div class="im-entry">
+                        <div class="im-entry mainArticleDiv">
                             <div class="iranomag-meta clearfix">
                                 <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated">{{$post[0]->date}}</span>
+                                    <span class="entry-date published updated withColor">{{$post[0]->date}}</span>
                                 </div>
 
-                                <div class="comments-link im-meta-item">
+                                <div class="comments-link im-meta-item withColor">
                                     <i class="fa fa-comment-o"></i>{{$post[0]->msgs}}
                                 </div>
 
-                                <div class="author vcard im-meta-item">
+                                <div class="author vcard im-meta-item withColor">
                                     <i class="fa fa-user"></i>{{$post[0]->username}}
                                 </div>
 
-                                <div class="post-views im-meta-item">
+                                <div class="post-views im-meta-item withColor">
                                     <i class="fa fa-eye"></i>{{$post[0]->seen}}
                                 </div>
                             </div>
@@ -721,18 +408,17 @@
                                 @for($i = 1; $i <= 4 && $i < count($post); $i++)
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
-                                        <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
-                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
+                                        <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}" style="height: 100%;">
+                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="resizeFitImg(this)">
                                         </a>
                                     </figure>
                                     <div class="im-widget-entry">
                                         <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a href="{{$post[$i]->url}}"
-                                                   title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
-                                            </h4>
+                                            <a class="im-widget-entry-title lessShowText" href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
+                                                {{$post[$i]->title}}
+                                            </a>
                                         </header>
-                                        <div class="iranomag-meta clearfix">
+                                        <div class="iranomag-meta clearfix marg5">
                                             <div class="posted-on im-meta-item">
                                                 <span class="entry-date published updated">{{$post[$i]->date}}</span>
                                             </div>
@@ -755,69 +441,289 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 cpBorderBottom">
-                <div class="cpMap" style="background-color: darkred">
-                    <div id="cpMap" class="prv_map clickable full-width full-height"></div>
-                </div>
-                <div class="cpMapList" id="show">
-                    <img class="cpMapCategory" id="hotelImg" src="{{URL::asset('images/mapIcon/mhotel.png')}}"
-                         onclick="toggleIconInMap('hotelImg')">
-                    <img class="cpMapCategory" id="restImg" src="{{URL::asset('images/mapIcon/mrest.png')}}"
-                         onclick="toggleIconInMap('restImg')">
-                    <img class="cpMapCategory" id="fastImg" src="{{URL::asset('images/mapIcon/mfast.png')}}"
-                         onclick="toggleIconInMap('fastImg')">
-                    <img class="cpMapCategory" id="musImg" src="{{URL::asset('images/mapIcon/matr_mus.png')}}"
-                         onclick="toggleIconInMap('musImg')">
-                    <img class="cpMapCategory" id="plaImg" src="{{URL::asset('images/mapIcon/matr_pla.png')}}"
-                         onclick="toggleIconInMap('plaImg')">
-                    <img class="cpMapCategory" id="shcImg" src="{{URL::asset('images/mapIcon/matr_shc.png')}}"
-                         onclick="toggleIconInMap('shcImg')">
-                    <img class="cpMapCategory" id="funImg" src="{{URL::asset('images/mapIcon/matr_fun.png')}}"
-                         onclick="toggleIconInMap('funImg')">
-                    <img class="cpMapCategory" id="advImg" src="{{URL::asset('images/mapIcon/matr_adv.png')}}"
-                         onclick="toggleIconInMap('advImg')">
-                    <img class="cpMapCategory" id="natImg" src="{{URL::asset('images/mapIcon/matr_nat.png')}}"
-                         onclick="toggleIconInMap('natImg')">
-                </div>
+            <div class="col-xs-12 cpBorderBottom" style="padding: 0px">
+                <div id="cpMap" class="cpMap placeHolderAnime" style="height: 500px"></div>
             </div>
 
         </div>
     </div>
 </div>
 
-
-
 @include('layouts.placeFooter')
 
-@include('hotelDetailsPopUp')
+@include('component.mapMenu')
 
-<script src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
-{{--<script !src="">console.log('hello')</script>--}}
 <script>
+
+    @if(isset($place->pic))
+        var cityPic = JSON.parse('{!! $place->pic !!}');
+
+        function showSliderPic(){
+            var cityPicForAlbum = [];
+
+            for(var i = 0; i < cityPic.length; i++){
+                cityPicForAlbum[i] = {
+                    'id' : cityPic[i]['id'],
+                    'sidePic' : cityPic[i]['pic'],
+                    'mainPic' : cityPic[i]['pic'],
+                    'userPic' : '',
+                    'userName' : 'کوچیتا',
+                    'uploadTime' : '',
+                    'showInfo' : false,
+                }
+            }
+
+            createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
+        };
+
+
+        var picSwiper = new Swiper('.cityPagePics', {
+            slidesPerGroup: 1,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            loopFillGroupWithBlank: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        var changeSliderNum = 0;
+        picSwiper.on('slideChange', function () {
+
+            if(showCityPicNumber < cityPic.length) {
+                if (changeSliderNum == 3) {
+                    let nuum = 0;
+                    while (nuum < 5 && showCityPicNumber < cityPic.length) {
+                        slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
+                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '" onload="resizeFitImg(this)">\n' +
+                            '                                    </div>';
+                        picSwiper.addSlide(showCityPicNumber + 1, slide);
+                        nuum++;
+                        showCityPicNumber++;
+                    }
+                    resizeFitImg('resizeImgClass');
+
+                    changeSliderNum = 0;
+                } else
+                    changeSliderNum++;
+            }
+
+        });
+
+    @endif
+
     resizeFitImg('resizeImgClass');
 
-    var reviews = {!! json_encode($reviews) !!};
-    var cityPic = JSON.parse('{!! $place->pic !!}');
+    var reviews;
     var showCityPicNumber = 5;
     var cityName1 = '{{ $place->name }}';
+    var reveiewSample = 0;
+    var topPlacesSample = 0;
+    var topPlacesSections = [
+        {
+            name: '{{__('محبوب‌ترین بوم گردی ها')}}',
+            id: 'topBoomgardyCityPage',
+            url: '{{route('place.list', ['kindPlaceId' => 12, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+        },
+        {
+            name: '{{__('محبوبترین جاذبه ها')}}',
+            id: 'topAmakenCityPage',
+            url: '{{route('place.list', ['kindPlaceId' => 1, 'mode' => $kind, 'city' => $locationName['cityNameUrl'] ])}}'
+        },
+        {
+            name: '{{__('محبوب‌ترین رستوران‌ها')}}',
+            id: 'topRestaurantInCity',
+            url: '{{route('place.list', ['kindPlaceId' => 3, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+        },
+        {
+            name: '{{__('محبوب‌ترین اقامتگاه ها')}}',
+            id: 'topHotelCityPage',
+            url: '{{route('place.list', ['kindPlaceId' => 4, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+        },
+        {
+            name: '{{__('محبوب‌ترین طبیعت گردی ها')}}',
+            id: 'topMajaraCityPage',
+            url: '{{route('place.list', ['kindPlaceId' => 6, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+        },
+        {
+            name: '{{__('محبوب‌ترین صنابع دستی و سوغات')}}',
+            id: 'topSogatCityPage',
+            url: '{{route('place.list', ['kindPlaceId' => 10, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+        },
+        {
+            name: '{{__('محبوب‌ترین غذاهای محلی')}}',
+            id: 'topFoodCityPage',
+            url: '{{route('place.list', ['kindPlaceId' => 11, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+        },
+    ];
 
-    function showSliderPic(){
-        var cityPicForAlbum = [];
+    if(topPlacesSample == 0){
+        topPlacesSample = $('#topPlacesSection').html();
+        $('#topPlacesSection').html('');
+        $('#topPlacesSection').show();
+        createTopPlacesSection();
+    }
 
-        for(var i = 0; i < cityPic.length; i++){
-            cityPicForAlbum[i] = {
-                'id' : cityPic[i]['id'],
-                'sidePic' : cityPic[i]['pic'],
-                'mainPic' : cityPic[i]['pic'],
-                'userPic' : '',
-                'userName' : 'کوچیتا',
-                'uploadTime' : '',
-                'showInfo' : false,
+    if(reveiewSample == 0){
+        reveiewSample = $('#reviewSection').html();
+        $('#reviewSection').html('');
+    }
+
+    function runMainSwiper(){
+        var swiper = new Swiper('.mainSuggestion', {
+            loop: true,
+            updateOnWindowResize: true,
+            navigation: {
+                prevEl: '.swiper-button-next',
+                nextEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function(){
+                    this.update();
+                },
+                resize: function () {
+                    resizeFitImg('resizeImgClass');
+                    this.update()
+                },
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                550: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                991: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                10000: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                }
             }
+        });
+    }
+    function createCityPageSuggestion(_id, _item, _callBack){
+        createSuggestionPack(_id, _item, function() {
+            $('#' + _id).find('.suggestionPackDiv').addClass('swiper-slide');
+
+            if(_callBack === 'function')
+                _callBack();
+        });
+    }
+
+    function getReviews(){
+
+        $.ajax({
+            type: 'post',
+            url : '{{route("getCityPageReview")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                placeId: '{{$place->id}}',
+                kind: '{{$kind}}'
+            },
+            success: function(response){
+                reviews = JSON.parse(response);
+                createReviewSections();
+            }
+        })
+    }
+    function createReviewSections(){
+        reviews.forEach(item => {
+            let text = reveiewSample;
+            let fk = Object.keys(item);
+            for (let x of fk) {
+                let t = '##' + x + '##';
+                let re = new RegExp(t, "g");
+                text = text.replace(re, item[x]);
+            }
+            $('#reviewSection').append(text);
+        });
+
+        $('#reviewSection').css('display', 'block');
+        $('#reviewPlaceHolderSection').remove();
+
+        resizeFitImg('resizeImgClass');
+    }
+
+    function getTopPlaces(){
+
+        $.ajax({
+            type: 'post',
+            url : '{{route("getCityPageTopPlace")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id: '{{$place->id}}',
+                kind: '{{$kind}}',
+                city: '{{$locationName['cityNameUrl']}}'
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                createTopPlacesDiv(response)
+            }
+        })
+    }
+    function createTopPlacesSection(){
+        topPlacesSections.forEach(item => {
+            let text = topPlacesSample;
+            let fk = Object.keys(item);
+            for (let x of fk) {
+                let t = '##' + x + '##';
+                let re = new RegExp(t, "g");
+                text = text.replace(re, item[x]);
+            }
+            $('#topPlacesSection').append(text);
+        });
+    }
+    function createTopPlacesDiv(_result){
+        let fk = Object.keys(_result);
+
+        for (let x of fk) {
+            if(_result[x].length > 4)
+                createCityPageSuggestion(x + 'Content', _result[x], () => resizeFitImg('resizeImgClass'));
+            else
+                $('#' + x).hide();
         }
 
-        createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
-    };
+        runMainSwiper();
+        var height = $('#cpBorderLeft').height();
+        $('#commentSection').css('height', height);
+    }
+
+    function getAllPlacesForMap(){
+        $.ajax({
+            type: 'post',
+            url: '{{route("getCityAllPlaces")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                kind : '{{$kind}}',
+                id: '{{$place->id}}'
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                let map = response.map;
+                let allPlaces = response.allPlaces;
+
+                let center = {
+                    x: map.C,
+                    y: map.D
+                };
+
+                createMap('cpMap', center, allPlaces);
+            }
+        })
+    }
 
     function showReviewPics(_id){
         var selectReview = 0;
@@ -860,338 +766,13 @@
     }
 
     $(window).ready(function(){
-        var height = $('#cpBorderLeft').height();
-        $('.cpCommentBox').css('max-height', height);
-    });
+        getReviews();
+        getTopPlaces();
+        getAllPlacesForMap();
+    })
+
 </script>
 
-{{--map--}}
-<script>
-    var x = '{{$place->x}}';
-    var y = '{{$place->y}}';
-    var all_amaken = {!! $allPlaces[0] !!};
-    var all_majara = {!! $allPlaces[3] !!};
-    var all_hotels = {!! $allPlaces[1] !!};
-    var all_restaurant = {!! $allPlaces[2] !!};
-    var iconBase = '{{URL::asset('images/mapIcon') . '/'}}';
-    var icons = {
-        hotel: {
-            icon: iconBase + 'mhotel.png'
-        },
-        amaken1: {
-            icon: iconBase + 'matr_pla.png'
-        },
-        amaken2: {
-            icon: iconBase + 'matr_mus.png'
-        },
-        amaken3: {
-            icon: iconBase + 'matr_shc.png'
-        },
-        amaken4: {
-            icon: iconBase + 'matr_nat.png'
-        },
-        amaken5: {
-            icon: iconBase + 'matr_fun.png'
-        },
-        fastfood: {
-            icon: iconBase + 'mfast.png'
-        },
-        rest: {
-            icon: iconBase + 'mrest.png'
-        },
-        adv: {
-            icon: iconBase + 'matr_adv.png'
-        },
-    };
-
-    var markersHotel = [];
-    var markersRest = [];
-    var markersFast = [];
-    var markersMus = [];
-    var markersPla = [];
-    var markersShc = [];
-    var markersFun = [];
-    var markersAdv = [];
-    var markersNat = [];
-    var majaraMap = [];
-    var map2;
-
-    function init() {
-        var x = '{{$map["C"]}}';
-        var y = '{{$map["D"]}}';
-        var minLat = parseFloat("{{$map['minLat']}}");
-        var maxLat = parseFloat("{{$map['maxLat']}}");
-        var minLng = parseFloat("{{$map['minLng']}}");
-        var maxLng = parseFloat("{{$map['maxLng']}}");
-
-        var mapOptions = {
-            center: new google.maps.LatLng(x, y),
-            zoom: 5,
-            // How you would like to style the map.
-            // This is where you would paste any style found on Snazzy Maps.
-            styles: [{
-                "featureType": "landscape",
-                "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-            }, {
-                "featureType": "road.highway",
-                "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
-            }, {
-                "featureType": "road.arterial",
-                "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-            }, {
-                "featureType": "road.local",
-                "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
-            }, {
-                "featureType": "water",
-                "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
-            }, {
-                "featureType": "poi",
-                "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
-            }]
-        };
-        var mapElementSmall = document.getElementById('cpMap');
-        map2 = new google.maps.Map(mapElementSmall, mapOptions);
-
-        var bounds = new google.maps.LatLngBounds({lat: minLat, lng: minLng}, {lat: maxLat, lng: maxLng});
-        map2.fitBounds(bounds);
-
-        var marker;
-
-        // set amaken marker
-        for (i = 0; i < all_amaken.length; i++) {
-            if (all_amaken[i].mooze == 1)
-                kindAmaken = 'amaken2';
-            else if (all_amaken[i].tarikhi == 1)
-                kindAmaken = 'amaken1';
-            else if (all_amaken[i].tabiatgardi == 1)
-                kindAmaken = 'amaken4';
-            else if (all_amaken[i].tafrihi == 1)
-                kindAmaken = 'amaken5';
-            else if (all_amaken[i].markazkharid == 1)
-                kindAmaken = 'amaken3';
-            else
-                kindAmaken = 'amaken2';
-
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_amaken[i]['C'], all_amaken[i]['D']),
-                icon: {
-                    url: icons[kindAmaken].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_amaken[i]['name'],
-                url: all_amaken[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-
-            if (all_amaken[i].mooze == 1)
-                markersMus[markersMus.length] = marker;
-            else if (all_amaken[i].tarikhi == 1)
-                markersPla[markersPla.length] = marker;
-            else if (all_amaken[i].tabiatgardi == 1)
-                markersNat[markersNat.length] = marker;
-            else if (all_amaken[i].tafrihi == 1)
-                markersFun[markersFun.length] = marker;
-            else if (all_amaken[i].markazkharid == 1)
-                markersShc[markersShc.length] = marker;
-            else
-                markersMus[markersMus.length] = marker;
-        }
-
-        // set hotels marker
-        for (i = 0; i < all_hotels.length; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_hotels[i]['C'], all_hotels[i]['D']),
-                icon: {
-                    url: icons['hotel'].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_hotels[i]['name'],
-                url: all_hotels[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-
-            markersHotel[i] = marker;
-        }
-
-        // set majara marker
-        for (i = 0; i < all_majara.length; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_majara[i]['C'], all_majara[i]['D']),
-                icon: {
-                    url: icons['adv'].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_majara[i]['name'],
-                url: all_majara[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-            majaraMap[i] = marker;
-        }
-
-        // set restaurant marker
-        for (i = 0; i < all_restaurant.length; i++) {
-            if (all_restaurant[i].kind_id == 1)
-                kindRestaurant = 'rest';
-            else
-                kindRestaurant = 'fastfood';
-
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_restaurant[i]['C'], all_restaurant[i]['D']),
-                icon: {
-                    url: icons[kindRestaurant].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_restaurant[i]['name'],
-                url: all_restaurant[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-
-
-            if (all_restaurant[i].kind_id == 1)
-                markersRest[markersRest.length] = marker;
-            else
-                markersFast[markersFast.length] = marker;
-        }
-    }
-
-    function toggleIconInMap(_id) {
-        var src = document.getElementById(_id).src;
-        var sec = src.split('.');
-        var kind;
-
-        if (src.includes('off')) {
-            src = src.replace('off', '');
-            src2 = src;
-            kind = 1;
-        } else {
-            src2 = sec[0];
-            for(i = 1; i < sec.length; i++){
-                if(i == sec.length-1)
-                    src2 +=  'off.' + sec[i];
-                else
-                    src2 += '.' + sec[i];
-            }
-            kind = 0;
-        }
-        document.getElementById(_id).src = src2;
-
-        if (_id == 'hotelImg') {
-            setInMap(kind, markersHotel);
-        } else if (_id == 'restImg') {
-            setInMap(kind, markersRest);
-        } else if (_id == 'fastImg') {
-            setInMap(kind, markersFast);
-        } else if (_id == 'musImg') {
-            setInMap(kind, markersMus);
-        } else if (_id == 'plaImg') {
-            setInMap(kind, markersPla);
-        } else if (_id == 'shcImg') {
-            setInMap(kind, markersShc);
-        } else if (_id == 'funImg') {
-            setInMap(kind, markersFun);
-        } else if (_id == 'advImg') {
-            setInMap(kind, majaraMap);
-        } else if (_id == 'natImg') {
-            setInMap(kind, markersNat);
-        }
-    }
-
-    function setInMap(isSet, marker) {
-        if (isSet == 1) {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['i'].setMap(map2)
-        }
-        else {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['i'].setMap(null)
-        }
-
-    }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
-<script>
-    var swiper = new Swiper('.cpMainSug', {
-        slidesPerGroup: 1,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            450: {
-                slidesPerView: 1,
-                spaceBetween: 0,
-            },
-            520: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            992: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            },
-            10000: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-            }
-        }
-    });
-
-    var picSwiper = new Swiper('.cityPagePics', {
-        slidesPerGroup: 1,
-        loop: true,
-        autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-        },
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-
-    var changeSliderNum = 0;
-    picSwiper.on('slideChange', function () {
-
-        if(showCityPicNumber < cityPic.length) {
-            if (changeSliderNum == 3) {
-                let nuum = 0;
-                while (nuum < 5 && showCityPicNumber < cityPic.length) {
-                    slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
-                        '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '">\n' +
-                        '                                    </div>';
-                    picSwiper.addSlide(showCityPicNumber + 1, slide);
-                    nuum++;
-                    showCityPicNumber++;
-                }
-                resizeFitImg('resizeImgClass');
-
-                changeSliderNum = 0;
-            } else
-                changeSliderNum++;
-        }
-
-    });
-</script>
 
 </body>
 

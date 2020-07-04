@@ -19,7 +19,7 @@
                     </div>
                 </a>
                 <div class="suggestionPackDetailDiv">
-                    <a href="##url##" class="suggestionPackName">##name##</a>
+                    <a href="##url##" class="suggestionPackName lessShowText">##name##</a>
                     <div class="suggestionPackReviewRow" style="display: ##citySection##">
                         <span class="ui_bubble_rating bubble_##rate##0"></span>
                         <span class="suggestionPackReviewCount"> ##review## </span>
@@ -135,6 +135,11 @@
 
     function createSuggestionPackPlaceHolder(_id, _callback = ''){
         $('#' + _id).append(suggestionPlaceHolderSample);
+        if(typeof _callback == 'function')
+            _callback();
+    }
+    function createSuggestionPackPlaceHolderClassName(_class, _callback = ''){
+        $('.' + _class).append(suggestionPlaceHolderSample);
         if(typeof _callback == 'function')
             _callback();
     }

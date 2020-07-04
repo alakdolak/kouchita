@@ -20,10 +20,10 @@ $config = \App\models\ConfigModel::first();
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه واتس اپ</div>
     </a>
     <script>
-        let encodeurl = encodeURIComponent('{{Request::url()}}');
-        let text = 'whatsapp://send?text=';
-        text += 'در کوچیتا ببینید:' + ' %0a ' + encodeurl;
-        $('.whatsappLink').attr('href', text);
+        let encodeurlShareBox = encodeURIComponent('{{Request::url()}}');
+        let textShareBox = 'whatsapp://send?text=';
+        textShareBox += 'در کوچیتا ببینید:' + ' %0a ' + encodeurlShareBox;
+        $('.whatsappLink').attr('href', textShareBox);
     </script>
 
     <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
@@ -42,15 +42,16 @@ $config = \App\models\ConfigModel::first();
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه پین ترست</div>
     </a>
     <div class="position-relative inputBoxSharePage mg-tp-5">
-        <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress('shareLinkInput')" style="cursor: pointer;">
+        <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress(this)" style="cursor: pointer;">
         <img src="{{URL::asset("images/shareBoxImg/copy.png")}}" id="copyImgInputShareLink">
     </div>
 </div>
 
 <script>
+    let openShareBox = false;
 
-    function copyLinkAddress(_id){
-        var copyText = document.getElementById(_id);
+    function copyLinkAddress(_element){
+        var copyText = _element;
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
@@ -65,10 +66,34 @@ $config = \App\models\ConfigModel::first();
 
     $('#share_pic').click(function () {
         if ($('#share_box').is(":hidden")) {
+            openShareBox = true;
             $('#share_box').show();
+            $('.shareIconDiv').addClass('sharePageIconFill');
+            $('.shareIconDiv').removeClass('sharePageIcon');
         } else {
+            openShareBox = false;
             $('#share_box').hide();
+
+            $('.shareIconDiv').removeClass('sharePageIconFill');
+            $('.shareIconDiv').addClass('sharePageIcon');
         }
     });
+
+    $(window).on('click', function(e){
+        if(openShareBox){
+            if(!($(e.target).attr('id') == 'share_pic' || $(e.target).hasClass('sharePageLabel')||
+                $(e.target).attr('id') == 'share_pic_mobile' ||
+                $(e.target.parentElement).attr('id') == 'share_pic' ||
+                $(e.target.parentElement).attr('id') == 'share_pic_mobile'))
+            {
+                openShareBox = false;
+                $('#share_box').hide();
+                $('#share_box_mobile').hide();
+
+                $('.shareIconDiv').removeClass('sharePageIconFill');
+                $('.shareIconDiv').addClass('sharePageIcon');
+            }
+        }
+    })
 </script>
 

@@ -1,14 +1,3 @@
-<?php
-$config = \App\models\ConfigModel::first();
-    if(auth()->check()){
-        $user = Auth::user();
-        $userLevelFooter = auth()->user()->getUserNearestLevel();
-//        dd($userLevelFooter);
-        $userTotalPointFooter = auth()->user()->getUserTotalPoint();
-
-        $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
-    }
-?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
 
 @if(\App::getLocale() == 'en')
@@ -23,22 +12,22 @@ $config = \App\models\ConfigModel::first();
                 <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
-                <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                     <div class="footerIconHor linkedin"></div>
                 </a>
-                <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
                     <div class="footerIconHor facebook"></div>
                 </a>
-                <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
                     <div class="footerIconHor twitter"></div>
                 </a>
-                <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
                     <div class="footerIconHor instagram"></div>
                 </a>
-                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
                     <div class="footerIconHor telegram"></div>
                 </a>
-                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://koochitatv.com">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://koochitatv.com">
                     <div class="footerIconHor aparat"></div>
                 </a>
             </div>
@@ -135,10 +124,11 @@ $config = \App\models\ConfigModel::first();
         <div class="clear-both"></div>
     </div>
 
+    <div class="hideOnScreen" style="width: 100%; height: 100px;"></div>
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
-            <span class="ui_icon more-horizontal"></span>
+            <span class="threeLineIcon"></span>
         </div>
         <div data-toggle="modal" data-target="#profilePossibilities" onclick="showLastPages();// this function in mainSearch.blade.php">
             <span class="footerMenuBarLinks">
@@ -146,7 +136,7 @@ $config = \App\models\ConfigModel::first();
                 @if(Request::is('placeList/*'))
                     {{__('اعمال فیلتر')}}
                 @else
-                    {{__('امکانات کاربر')}}
+                    {{__('امکانات ویژه')}}
                 @endif
 
             </span>
@@ -154,28 +144,24 @@ $config = \App\models\ConfigModel::first();
         </div>
         <div onclick="openMainSearch(0) // in mainSearch.blade.php">
             <span class="footerMenuBarLinks">{{__('جست‌و‌جو')}}</span>
-            <span class="ui_icon search"></span>
+            <span class="iconFamily searchIcon" style="font-size: 20px;"></span>
         </div>
         @if(Auth::check())
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
                 <div class="profileBtnText">
                     <span>سلام</span>
-                    <span>{{auth()->user()->username}}</span>
+                    <span>{{$userNamename}}</span>
                 </div>
-                <?php
-                    if(auth()->check())
-                        $buPic = getUserPic(auth()->user()->id);
-                    else
-                        $buPic = getUserPic();
-                ?>
                 <div class="profilePicFooter circleBase type2">
                     <img src="{{isset($buPic) ? $buPic : ''}}" style="width: 100%; border-radius: 50%">
                 </div>
             </div>
         @else
             <div class="login-button">
-                <span class="footerMenuBarLinks">ورود</span>
-                <span class="ui_icon member"></span>
+                <span class="footerMenuBarLinks" style="display: flex; align-items: center">
+                    ورود
+                    <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
+                </span>
             </div>
         @endif
     </div>
@@ -187,6 +173,7 @@ $config = \App\models\ConfigModel::first();
         <div class="modal fade" id="profilePossibilities">
             @if(Request::is('article/*') || Request::is('mainArticle'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
                     <div class="lp_ar_filters">
@@ -196,7 +183,7 @@ $config = \App\models\ConfigModel::first();
                             <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('دسته‌بندی مطالب')}}</div>
                             <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('مطالب مشابه')}}</div>
                         @endif
-                         </div>
+                    </div>
                     {{--right menu--}}
                     <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
                         <div class="gnContentsCategory">
@@ -339,32 +326,40 @@ $config = \App\models\ConfigModel::first();
                 </div>
             @elseif(Request::is('placeList/*'))
                 <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" style="padding: 7px">
-                    <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+                    <div style="min-height: 60px">
+                        <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
-                    <div class="lp_ar_filters">
-                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('اعمال فیلتر')}}</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('نحوه مرتب‌سازی')}}</div>
+                        <div class="lp_ar_filters">
+                            <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('اعمال فیلتر')}}</div>
+                            <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('نحوه مرتب‌سازی')}}</div>
+                        </div>
                     </div>
+
                     {{--right menu--}}
-                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController">
-                        <div id="EATERY_FILTERS_CONT" class="eatery_filters">
-                            <div class="prw_rup prw_restaurants_restaurant_filters">
-                                <div id="jfy_filter_bar_establishmentTypeFilters"
-                                     class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                    <div id="filterBox" style="flex-direction: column;">
-                                        <div style="font-size: 15px; margin: 10px 0px;">
-                                            <span>{{__('فیلترهای اعمال شده')}}</span>
-                                            <span style="float: left">
-                                                <span>----</span><span style="margin: 0 5px">{{__('مورد از')}}</span><span>----</span>
-                                            </span>
-                                        </div>
-                                        <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
-                                            {{__('پاک کردن فیلترها')}}
-                                        </div>
-                                        <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
+                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController" style="overflow: hidden; height: auto">
+
+                        <div class="bottomLightBorder prw_rup prw_restaurants_restaurant_filters">
+                            <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                <div id="filterBox" style="flex-direction: column;">
+                                    <div style="font-size: 15px; margin: 10px 0px;">
+                                        <span>{{__('فیلترهای اعمال شده')}}</span>
+                                        <span style="float: left">
+                                            <span class="filterShowCount">----</span>
+                                            <span style="margin: 0 5px">{{__('مورد از')}}</span>
+                                            <span class="totalPlaceCount">----</span>
+                                        </span>
                                     </div>
+                                    <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
+                                        {{__('پاک کردن فیلترها')}}
+                                    </div>
+                                    <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div id="EATERY_FILTERS_CONT" class="eatery_filters">
+
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                     <div class="filterGroupTitle">{{__('جستجو‌ی نام')}}</div>
@@ -377,7 +372,7 @@ $config = \App\models\ConfigModel::first();
                                     <div class="filterGroupTitle">{{__('امتیاز کاربران')}}</div>
                                     <div class="filterContent ui_label_group inline">
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
+                                            <input onclick="rateFilterFunc(5, this)" type="radio" name="AVGrate" id="p_c5" value="5"/>
                                             <label for="p_c5"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -388,7 +383,7 @@ $config = \App\models\ConfigModel::first();
                                             </div>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
+                                            <input onclick="rateFilterFunc(4, this)" type="radio" name="AVGrate" id="p_c4" value="4"/>
                                             <label for="p_c4"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -400,7 +395,7 @@ $config = \App\models\ConfigModel::first();
                                             <span> {{__('به بالا')}}</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
+                                            <input onclick="rateFilterFunc(3, this)" type="radio" name="AVGrate" id="p_c3" value="3"/>
                                             <label for="p_c3"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -412,7 +407,7 @@ $config = \App\models\ConfigModel::first();
                                             <span> {{__('به بالا')}}</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
+                                            <input onclick="rateFilterFunc(2, this)" type="radio" name="AVGrate" id="p_c2" value="2"/>
                                             <label for="p_c2"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -424,7 +419,7 @@ $config = \App\models\ConfigModel::first();
                                             <span> {{__('به بالا')}}</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
+                                            <input onclick="rateFilterFunc(1, this)" type="radio" name="AVGrate" id="p_c1" value="1"/>
                                             <label for="p_c1"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -440,11 +435,11 @@ $config = \App\models\ConfigModel::first();
                             </div>
 
                             @if($kindPlace->id == 4)
-                                @include('places.list.filters.hotelFilters')
+                                @include('pages.placeList.filters.hotelFilters')
                             @elseif($kindPlace->id == 10)
-                                @include('places.list.filters.sogatSanaieFilters')
+                                @include('pages.placeList.filters.sogatSanaieFilters')
                             @elseif($kindPlace->id == 11)
-                                @include('places.list.filters.mahaliFoodFilters')
+                                @include('pages.placeList.filters.mahaliFoodFilters')
                             @endif
 
                             @foreach($features as $feature)
@@ -517,28 +512,15 @@ $config = \App\models\ConfigModel::first();
                 </div>
             @else
                 <div class="mainPopUp leftPopUp recentViewLeftBar">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+
                     {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
                             <div class="lp_others_titles"> {{__('بازدید‌های اخیر')}} </div>
                             <div class="mainContainerBookmarked">
                                 <div id="phoneRecentlyView">
-                                    <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap">
-{{--                                        <a class="lp_others_recentView" target="_self" href="##placeRedirect##">--}}
-{{--                                            <div class="lp_others_rvPicBox col-xs-8">--}}
-{{--                                                <img src="##placePic##" style="width: 100%;">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-xs-4 placeDetailsLeftBar">--}}
-{{--                                                <div class="">##placeName##</div>--}}
-{{--                                                <div class="lp_others_rating">--}}
-{{--                                                    <div class="ui_bubble_rating bubble_##placeRate##0"></div>--}}
-{{--                                                    <br>##placeReviews## {{__('نقد')}}--}}
-{{--                                                </div>--}}
-{{--                                                <div class="">##placeCity##</div>--}}
-{{--                                            </div>--}}
-{{--                                        </a>--}}
-                                    </div>
-
+                                    <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap"></div>
                                 </div>
                                 <div class="bottomBarContainer"></div>
                             </div>
@@ -569,7 +551,7 @@ $config = \App\models\ConfigModel::first();
                                                 </div>
                                             </a>
                                         @else
-                                            <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px">
+                                            <div style="display: flex; justify-content: center; align-items: center; height: 50vh; background: white;">
                                                 <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}" style="text-align: center;"> {{__('auth.ورود / ثبت نام')}}</div>
                                             </div>
                                         @endif
@@ -620,54 +602,141 @@ $config = \App\models\ConfigModel::first();
         </div>
 
         <div class="modal fade" id="otherPossibilities">
-            <div class="mainPopUp leftPopUp">
-
+            <div class="mainPopUp leftPopUp" style="overflow-y: auto">
+                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#otherPossibilities').modal('hide')"></div>
                 @if(isset($locationName))
                     <div class="pSC_tilte">
-                    <div>
-                        {{__('شما در حال حاضر در')}}
-                        <span class="pSC_cityTilte">{{$locationName['name']}}</span>
-                        {{__('هستید')}}
+                        <div style="text-align: center">
+                            {{__('در')}}
+                            <span class="pSC_cityTilte" >{{$locationName['name']}}</span>
+                            {{__('بیشتر مشاهده کنید')}}
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-danger" onclick="openProSearch()">{{__('تغییر دهید')}}</button>
-                </div>
-                    <div class="pSC_cityDescription">
-                    {{__('شما می‌توانید به راحتی صفحات زیر را در')}}
-                    <span>{{$locationName['name']}}</span>
-                    {{__('مشاهده نمایید')}}
-                </div>
                     <div class="pSC_boxOfDetails">
-                    <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
-                    <div class="pSC_boxOfCityDetailsText">
-                        <span onclick="window.location.href = '{{url("cityPage/" . $locationName['kindState'] . "/" . $locationName["cityNameUrl"])}}'">{{__('مشاهده صفحه')}}{{$locationName['cityName']}}</span>
-                        @if(isset($locationName['state']))
-                            <span class="pSC_boxOfCityDetailsText2">{{__('در استان')}} {{$locationName['state']}}</span>
-                        @endif
+                        <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
+                        <div>
+                            <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
+                                <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{__('اطالاعات')}} {{$locationName['cityNameUrl']}}
+                                </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails">{{__('اقامتگاه ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('رستوران ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
+                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails">{{__('سفرنامه')}} </a>
+                                <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
+                                    {{__('تلویزیون گردشگری کوچیتا')}}
+                                    <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
+                                </a>
+
+                                @if($locationName['kindState'] == 'city')
+                                    <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder" style="border-top: solid #a1a1a1 1px !important;">
+                                        {{__('مشاهده')}}
+                                        {{__('استان')}}
+                                        {{$locationName['state']}}
+                                    </a>
+                                @endif
+                            </div>
+                            <div style="margin-top: 15px; text-align: left;">
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
+                            </div>
+                        </div>
+                        <div class="overflowOptimizer"></div>
                     </div>
-                    <div>
-                        <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('جاذبه‌های')}} {{$locationName['cityName']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('هتل‌های')}} {{$locationName['cityName']}}</div>
-                        </div>
-                        <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('رستوران‌های')}} {{$locationName['cityName']}}</div>
-                        </div>
-                        <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('صنایع‌دستی‌های')}} {{$locationName['cityName']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('غذاهای محلی‌')}}{{$locationName['cityName']}}</div>
+
+                @else
+                    <div class="pSC_tilte">
+                        <div>
+                            {{__('در کل ایران بیشتر مشاهده کنید')}}
                         </div>
                     </div>
-                    <div class="overflowOptimizer"></div>
-                </div>
+                    <div class="pSC_boxOfDetails">
+                        <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
+                        <div>
+                            <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
+                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('اقامتگاه ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('رستوران ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
+                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails" style="width: 100%">{{__('سفرنامه')}} </a>
+                                <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
+                                    {{__('تلویزیون گردشگری کوچیتا')}}
+                                    <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
+                                </a>
+                            </div>
+                            <div style="margin-top: 15px; text-align: left;">
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
+                            </div>
+                        </div>
+                        <div class="overflowOptimizer"></div>
+                    </div>
                 @endif
+
+                <div class="footerSocialDivPhone">
+
+                    <a rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
+                        <div class="footerIconHor twitter"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                        <div class="footerIconHor facebook"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor youtubeBackground"></div>
+                    </a>
+                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
+                        <div class="footerIconHor telegram"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
+                        <div class="footerIconHor linkedin"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor pinterest"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor whatsappBackground"></div>
+                    </a>
+                    <a class="socialLink" rel="nofollow" target="_blank" href="https://aparat.com">
+                        <div class="footerIconHor aparat"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                        <div class="footerIconHor instagram"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor newsBackground"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">
+                        <div class="footerIconHor bogenBackground"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="http://www.sisootech.com/">
+                        <div class="footerIconHor sisootechBackground"></div>
+                    </a>
+
+                </div>
+                <div class="footerLanguageSectionPhone">
+                    <div class="footerLanguageDivPhone">
+                        <div class="footerLanguageTextPhone">
+                            {{__('زبان')}}
+                        </div>
+                        <div class="footerLanguageInputPhone">
+                            <select class="chooseLanguagePhone" onchange="goToLanguage(this.value)">
+                                <option value="0">انتخاب زبان</option>
+                                <option value="fa">فارسی</option>
+                                <option value="en">Englisg</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
-                        <img src="{{URL::asset('images/icons/mainIcon.svg')}}" class="content-icon" width="100%">
+                        <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
                     </div>
                     <div class="phoneDescription">
-                        <div class="phoneDescriptionText">
+                        <div class="phoneDescriptionText" style="overflow: hidden">
                             کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر
                             و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
                             ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در
@@ -727,233 +796,227 @@ $config = \App\models\ConfigModel::first();
 
         @if(auth()->check())
             <div class="modal fade" id="profile">
-            <div class="mainPopUp rightPopUp">
-                <div id="lp_register">
-                    <div>
-                        <div class="modules-membercenter-member-profile position-relative">
+                <div class="mainPopUp rightPopUp">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profile').modal('hide')" style="top: -10px"></div>
+                    <div id="lp_register">
+                        <div>
+                            <div class="modules-membercenter-member-profile position-relative">
 
-                            <div class="profileBlock">
+                                <div class="profileBlock">
 
-                                <div id="" class="targets profileInfosDetails col-xs-8">
+                               ح     <div id="" class="targets profileInfosDetails col-xs-8">
 
-                                    <p class="since">
-                                        <b>
-                                            {{isset($user->first_name) ? $user->first_name : $user->username}}
-                                        </b>
-                                    </p>
-                                    <div class="ageSince">
-                                        <div class="since">{{__('عضو شده از')}}</div>
-                                        <div class="since">
-    {{--                                        {{$user->created}}--}}
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xs-4">
-    {{--                                @if(!$user->uploadPhoto)--}}
-                                        <img class="avatarUrl"
-                                             src="{{isset($buPic) ? $buPic : ''}}"
-                                             height="60" width="60"/>
-    {{--                                @else--}}
-    {{--                                    <img class="avatarUrl"--}}
-    {{--                                         src="{{URL::asset('userProfile') . "/" . $user->picture}}"--}}
-    {{--                                         height="60" width="60"/>--}}
-    {{--                                @endif--}}
-                                </div>
-                            </div>
-
-                            <div class="aboutMeDesc">
-                                <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
-                                    {{__('ویرایش اطلاعات')}}
-                                    <div class="glyphicon glyphicon-chevron-down"></div>
-                                    <div class="glyphicon glyphicon-chevron-up display-none"></div>
-                                </div>
-                                <div class="editProfileMenu item display-none">
-                                    <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">{{__('ویرایش اطلاعات کاربری')}}</a>
-                                    <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
-                                    <a name="subscriptions" class="menu-link" href="">{{__('اشتراک ها')}}</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profileBtnActionMobile">
-                            <a type="button" class="btn btn-warning pp_btns" href="{{route('profile')}}">{{__('صفحه پروفایل')}}</a>
-                            <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
-                            <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
-                        </div>
-                    </div>
-                    @if(isset($profilePage) && $profilePage == 1)
-                        <div class="profileMenuResponsive">
-                            @if($mode == "profile")
-                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
-                                </div>
-                            @else
-                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
-                                </div>
-                            @endif
-                            @if($mode == "profileActivities")
-                                <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
-                                </div>
-                            @else
-                                <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
-                                </div>
-                            @endif
-                            @if($mode == "badge")
-                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
-                                    <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
-                                </div>
-                            @else
-                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
-                                    <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
-                                </div>
-                            @endif
-
-                            <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
-                                <a href="{{route('soon')}}">سفرنامه من</a>
-                                <div id="helpSpan_5" class="helpSpans hidden row">
-                                    <span class="introjs-arrow"></span>
-                                    <div class="col-xs-12">
-                                        <p>{{__('با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.')}}</p>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">{{__('بعدی')}}</button>
-                                        <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">{{__('قبلی')}}</button>
-                                        <button class="btn btn-danger exitBtnHelp">{{__('خروج')}}</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{--                <li id="Saves" class="saves"></li>--}}
-                            @if($mode == "message")
-                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
-                                    <a id="messageLinkColor1" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                </div>
-                            @else
-                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
-                                    <a id="messageLinkColor2" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                </div>
-                            @endif
-                        </div>
-                    @else
-                        <div class="profileScoreMainDiv">
-                            <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
-                                <div class="title" id="myHonorsText">
-                                    <h3>{{__('امتیازات من')}}</h3>
-                                </div>
-
-                                <a class="link" {{--onclick="initHelp(16, [], 'MAIN', 100, 400)"--}}>
-                                    <div></div>
-                                </a>
-                            </div>
-
-                            <div class="memberPointInfo">
-                                <div class="modules-membercenter-total-points">
-                                    <div data-direction="left" class="targets">
-                                        <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
-                                            <div class="label"> {{__('امتیاز کل شما')}} </div>
-                                        </div>
-                                    </div>
-                                    <div class="mainDivTotalPoint">
-                                        <div class="points">{{$userTotalPointFooter}}</div>
-                                        <a href="">{{__('سیستم امتیازدهی')}}</a>
-                                    </div>
-                                    <div class="points_to_go">
-                                    <span>
-                                        <b class="points"> {{$nextLevelFooter}} </b>
-                                        <span>{{__('امتیاز  مانده به مرحله بعد')}}</span>
-                                    </span>
-                                    </div>
-                                </div>
-                                <div class="modules-membercenter-level-progress">
-                                    <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                        <div onclick="showElement('levelDiv')">
-                                            <div class="labels">
-                                                <div class="right label">{{__('مرحله فعلی')}}</div>
-                                                <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
+                                        <p class="since">
+                                            <b>
+                                                {{isset($userFooter->first_name) ? $userFooter->first_name : $userFooter->username}}
+                                            </b>
+                                        </p>
+                                        <div class="ageSince" style="flex-direction: column;">
+                                            <div class="since">{{__('عضو شده از')}}</div>
+                                            <div class="since">
+                                                {{$registerUser}}
                                             </div>
-                                            <div class="progress_indicator">
+                                        </div>
+                                    </div>
 
-                                                <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
-                                                <div class="meter">
-                                                    <span id="progressIdPhone" class="progress"></span>
+
+                                    <div class="col-xs-4">
+        {{--                                @if(!$user->uploadPhoto)--}}
+                                            <img class="avatarUrl"
+                                                 src="{{isset($buPic) ? $buPic : ''}}"
+                                                 height="60" width="60"/>
+        {{--                                @else--}}
+        {{--                                    <img class="avatarUrl"--}}
+        {{--                                         src="{{URL::asset('userProfile') . "/" . $user->picture}}"--}}
+        {{--                                         height="60" width="60"/>--}}
+        {{--                                @endif--}}
+                                    </div>
+                                </div>
+
+                                <div class="aboutMeDesc">
+                                    <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
+                                        {{__('اطلاعات کاربری')}}
+                                        <div class="glyphicon glyphicon-chevron-down"></div>
+                                        <div class="glyphicon glyphicon-chevron-up display-none"></div>
+                                    </div>
+                                    <div class="editProfileMenu item display-none">
+                                        <a name="edit-profile" class="menu-link " href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profileBtnActionMobile">
+                                <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
+                                <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
+                                <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
+                            </div>
+                        </div>
+                        @if(isset($profilePage) && $profilePage == 1)
+                            <div class="profileMenuResponsive">
+                                @if($mode == "profile")
+                                    <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                    </div>
+                                @else
+                                    <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                    </div>
+                                @endif
+                                @if($mode == "profileActivities")
+                                    <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                    </div>
+                                @else
+                                    <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                    </div>
+                                @endif
+                                @if($mode == "badge")
+                                    <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                        <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
+                                    </div>
+                                @else
+                                    <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                        <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
+                                    </div>
+                                @endif
+
+                                <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
+                                    <a href="{{route('soon')}}">سفرنامه من</a>
+                                    <div id="helpSpan_5" class="helpSpans hidden row">
+                                        <span class="introjs-arrow"></span>
+                                        <div class="col-xs-12">
+                                            <p>{{__('با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.')}}</p>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">{{__('بعدی')}}</button>
+                                            <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">{{__('قبلی')}}</button>
+                                            <button class="btn btn-danger exitBtnHelp">{{__('خروج')}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{--                <li id="Saves" class="saves"></li>--}}
+                                @if($mode == "message")
+                                    <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                        <a id="messageLinkColor1" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                    </div>
+                                @else
+                                    <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                        <a id="messageLinkColor2" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                    </div>
+                                @endif
+                            </div>
+                        @else
+                            <div class="profileScoreMainDiv">
+                                <div class="memberPointInfo">
+                                    <div style=" color: #0076ac; font-size: 20px; margin-top: 5px; display: flex; justify-content: space-between; align-items: center">
+                                        <div>
+                                            {{__('امتیازات من')}}
+                                        </div>
+                                        <div style="font-size: 10px">
+                                            <a href="">{{__('سیستم امتیازدهی')}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="modules-membercenter-total-points" style="padding-top: 2px;">
+                                        <div class="mainDivTotalPoint">
+                                            <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
+                                            <div class="points">{{$userTotalPointFooter}}</div>
+                                        </div>
+                                        <div class="points_to_go">
+                                        <span style="justify-content: space-between;">
+                                            <b class="points"> {{$nextLevelFooter}} </b>
+                                            <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="modules-membercenter-level-progress">
+                                        <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
+                                            <div onclick="showElement('levelDiv')">
+                                                <div class="labels">
+                                                    <div class="right label">{{__('مرحله فعلی')}}</div>
+                                                    <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
                                                 </div>
-                                                <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+                                                <div class="progress_indicator">
+
+                                                    <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
+                                                    <div class="meter">
+                                                        <span id="progressIdPhone" class="progress"></span>
+                                                    </div>
+                                                    <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+                                                </div>
+                                                <div class="text-align-center">
+                                                    <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
+                                                </div>
+                                                <div class="clear fix"></div>
                                             </div>
-                                            <div class="text-align-center">
-                                                <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
-                                            </div>
-                                            <div class="clear fix"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                    <div class="userProfileActivitiesMainDiv rightColBoxes">
-                        <div class="mainDivHeaderText">
-                            <h3>{{__('شرح فعالیت‌ها')}}</h3>
-                        </div>
-                        <?php
-                            $userInfo = auth()->user()->getUserActivityCount();
-                        ?>
-                        <div class="activitiesMainDiv">
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('گذاشتن پست')}}</div>
-                                <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>
+                        @endif
+                        <div class="userProfileActivitiesMainDiv rightColBoxes">
+                            <div class="mainDivHeaderText">
+                                <h3>{{__('شرح فعالیت‌ها')}}</h3>
                             </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('آپلود عکس')}}</div>
-                                <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('آپلود فیلم')}}</div>
-                                <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>
-                                <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>
-                                <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>
-                                <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('امتیازدهی')}}</div>
-                                <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>
-                                <div class="activityNumbers">{{__('پاسخ')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('ویرایش مکان')}}</div>
-                                <div class="activityNumbers">{{__('مکان')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پیشنهاد مکان جدید')}}</div>
-                                <div class="activityNumbers">{{__('مکان')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('نوشتن مقاله')}}</div>
-                                <div class="activityNumbers">{{__('مقاله')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('معرفی دوستان')}}</div>
-                                <div class="activityNumbers">{{__('معرفی')}} 7</div>
+                            <div class="activitiesMainDiv">
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('گذاشتن پست')}}</div>
+                                    <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('آپلود عکس')}}</div>
+                                    <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('آپلود فیلم')}}</div>
+                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>
+                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>
+                                    <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>
+                                    <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('امتیازدهی')}}</div>
+                                    <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>
+                                    <div class="activityNumbers">{{__('پاسخ')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('ویرایش مکان')}}</div>
+                                    <div class="activityNumbers">{{__('مکان')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پیشنهاد مکان جدید')}}</div>
+                                    <div class="activityNumbers">{{__('مکان')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('نوشتن مقاله')}}</div>
+                                    <div class="activityNumbers">{{__('مقاله')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('معرفی دوستان')}}</div>
+                                    <div class="activityNumbers">{{__('معرفی')}} 7</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
 
@@ -981,9 +1044,6 @@ $config = \App\models\ConfigModel::first();
             $('#' + id).removeClass('hidden');
         }
 
-    </script>
-
-    <script>
         function showMorefooter() {
             $('.footMoreLessBtnText').toggleClass('hidden');
             $('#aboutShazde').toggleClass('aboutShazdeMoreLess');

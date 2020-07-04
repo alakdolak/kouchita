@@ -1,9 +1,10 @@
 .notifAlert {
-    width: 250px;
+    width: fit-content;
     text-align: center;
     position: fixed;
-    bottom: -10%;
-    right: 1%;
+    bottom: -30%;
+    right: auto;
+    left: auto;
     direction: rtl;
     z-index: 10000;
     border-radius: 10px 10px 0 0;
@@ -13,7 +14,7 @@
     padding: 10px;
     font-size: 1.2em;
     color: white;
-    transition: 1s;
+    transition: .5s;
 }
 
 .greenAlert{
@@ -42,9 +43,7 @@
 @media (max-width:766px) {
     .notifAlert {
         position: fixed;
-        bottom: -10%;
-        right: 50%;
-        transform: translate(50%);
+        bottom: -30%;
         z-index: 9;
     }
 

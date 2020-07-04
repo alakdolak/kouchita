@@ -25,6 +25,7 @@ use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
 use App\models\Place;
+use App\models\PlacePic;
 use App\models\PlaceTag;
 use App\models\Post;
 use App\models\PostCategory;
@@ -80,6 +81,7 @@ class HomeController extends Controller
 
     public function mainSliderStore(Request $request)
     {
+//        dd($request->all());
         if(\auth()->check() && \auth()->user()->level == 1) {
             $location = __DIR__ . '/../../../../assets/_images/sliderPic';
 
@@ -95,14 +97,21 @@ class HomeController extends Controller
                     $slider->alt = 'کوچیتا';
 
                     if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
-
-                        if (file_exists($location . '/' . $slider->pic))
+                        if (is_file($location . '/' . $slider->pic))
                             unlink($location . '/' . $slider->pic);
-
                         $fileName =  time() . $_FILES['pic']['name'];
                         $destinationPic = $location . '/' . $fileName;
                         move_uploaded_file( $_FILES['pic']['tmp_name'], $destinationPic);
                         $slider->pic = $fileName;
+                    }
+
+                    if (isset($_FILES['backPic']) && $_FILES['backPic']['error'] == 0){
+                        if (is_file($location . '/' . $slider->backgroundPic))
+                            unlink($location . '/' . $slider->backgroundPic);
+                        $fileName =  (time()+1) . $_FILES['backPic']['name'];
+                        $destinationPic = $location . '/' . $fileName;
+                        move_uploaded_file( $_FILES['backPic']['tmp_name'], $destinationPic);
+                        $slider->backgroundPic = $fileName;
                     }
                     $slider->save();
                     echo json_encode(['ok', $slider->id]);
@@ -123,6 +132,13 @@ class HomeController extends Controller
                     $destinationPic = $location . '/' . $fileName;
                     compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
                     $slider->pic = $fileName;
+
+                    if (isset($_FILES['backPic']) && $_FILES['backPic']['error'] == 0){
+                        $fileName =  (time()+1) . $_FILES['backPic']['name'];
+                        $destinationPic = $location . '/' . $fileName;
+                        move_uploaded_file( $_FILES['backPic']['tmp_name'], $destinationPic);
+                        $slider->backgroundPic = $fileName;
+                    }
 
                     $slider->save();
 
@@ -147,6 +163,9 @@ class HomeController extends Controller
 
                 if (file_exists($location . '/' . $slider->pic))
                     unlink($location . '/' . $slider->pic);
+
+                if (file_exists($location . '/' . $slider->backgroundPic))
+                    unlink($location . '/' . $slider->backgroundPic);
 
                 $slider->delete();
                 echo 'ok';
@@ -294,13 +313,13 @@ class HomeController extends Controller
             $locationName = ["name" => $place->name, 'state' => $place->state, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
-            $allAmaken = Amaken::where('cityId', $place->id)->get();
-            $allMajara = Majara::where('cityId', $place->id)->get();
-            $allHotels = Hotel::where('cityId', $place->id)->get();
-            $allRestaurant = Restaurant::where('cityId', $place->id)->get();
-            $allMahaliFood = MahaliFood::where('cityId', $place->id)->get();
-            $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->get();
-            $allBoomgardy = Boomgardy::where('cityId', $place->id)->get();
+            $allAmaken = Amaken::where('cityId', $place->id)->count();
+            $allMajara = Majara::where('cityId', $place->id)->count();
+            $allHotels = Hotel::where('cityId', $place->id)->count();
+            $allRestaurant = Restaurant::where('cityId', $place->id)->count();
+            $allMahaliFood = MahaliFood::where('cityId', $place->id)->count();
+            $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->count();
+            $allBoomgardy = Boomgardy::where('cityId', $place->id)->count();
 
             $pics = CityPic::where('cityId', $place->id)->get();
             if(count($pics) == 0){
@@ -340,13 +359,6 @@ class HomeController extends Controller
                     $place->image = $place->pic[0]->pic;
 
             }
-
-            $topAmaken = $this->getTopPlaces(1, 'city', $place->id);
-            $topRestaurant = $this->getTopPlaces(3, 'city', $place->id);
-            $topHotel = $this->getTopPlaces(4, 'city', $place->id);
-            $topMajra = $this->getTopPlaces(6, 'city', $place->id);
-            $topSogatSanaies = $this->getTopPlaces(10, 'city', $place->id);
-            $topMahaliFood = $this->getTopPlaces(11, 'city', $place->id);
         }
         else {
             $place->listName = $place->name;
@@ -357,13 +369,13 @@ class HomeController extends Controller
             $allCities = Cities::where('stateId', $place->id)->where('isVillage',0)->pluck('id')->toArray();
 
             $allAmakenId = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
-            $allAmaken = Amaken::whereIn('cityId', $allCities)->get();
-            $allMajara = Majara::whereIn('cityId', $allCities)->get();
-            $allHotels = Hotel::whereIn('cityId', $allCities)->get();
-            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->get();
-            $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->get();
-            $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->get();
-            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->get();
+            $allAmaken = Amaken::whereIn('cityId', $allCities)->count();
+            $allMajara = Majara::whereIn('cityId', $allCities)->count();
+            $allHotels = Hotel::whereIn('cityId', $allCities)->count();
+            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->count();
+            $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->count();
+            $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->count();
+            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->count();
 
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
@@ -389,137 +401,16 @@ class HomeController extends Controller
             }
             else
                 $place->image = URL::asset('_images/city/' . $place->id . '/'.$place->image);
-
-            $topAmaken = $this->getTopPlaces(1, 'state', $place->id);
-            $topRestaurant = $this->getTopPlaces(3, 'state', $place->id);
-            $topHotel = $this->getTopPlaces(4, 'state', $place->id);
-            $topMajra = $this->getTopPlaces(6, 'state', $place->id);
-            $topSogatSanaies = $this->getTopPlaces(10, 'state', $place->id);
-            $topMahaliFood = $this->getTopPlaces(11, 'state', $place->id);
         }
-
-        $topPlaces = ['amaken' => $topAmaken, 'restaurant' => $topRestaurant, 'hotels' => $topHotel, 'majara' => $topMajra, 'sogatSanaie' => $topSogatSanaies, 'mahaliFood' => $topMahaliFood];
-        $allPlaces = [$allAmaken, $allHotels, $allRestaurant, $allMajara];
-
-        $take = 15;
-        $reviews = $this->getCityReviews($kind, $place->id, $take);
-        if(count($reviews) != $take){
-            $lessReview = [];
-            $notIn = [];
-            foreach ($reviews as $item)
-                array_push($notIn, $item->id);
-
-            if($kind == 'city'){
-                $less = $take - count($reviews);
-                $lessReview = $this->getCityReviews('state', $place->stateId, $less, $notIn);
-                foreach ($lessReview as $item)
-                    array_push($reviews, $item);
-            }
-
-            $less = $take - count($reviews);
-            if($less != 0){
-                $notIn = [];
-                foreach ($reviews as $item)
-                    array_push($notIn, $item->id);
-
-                $lessReview = $this->getCityReviews('country', 0, $less, $notIn);
-                foreach ($lessReview as $item)
-                    array_push($reviews, $item);
-            }
-        }
-
-        foreach ($reviews as $item) {
-            $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
-            $item->disLike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
-            $item->comments = getAnsToComments($item->id)[1];
-
-            $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
-            $item->userPic = getUserPic($item->user->id);
-
-            $kindPlace = Place::find($item->kindPlaceId);
-            $item->mainFile = $kindPlace->fileName;
-            $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-            $item->kindPlace = $kindPlace->name;
-            $item->url = createUrl($kindPlace->id, $item->place->id, 0, 0);
-
-            $item->pics = ReviewPic::where('logId', $item->id)->get();
-            $item = getReviewPicsURL($item);
-
-            $item->city = Cities::find($item->place->cityId);
-            $item->state = State::find($item->city->stateId);
-
-
-            $time = $item->date . '';
-            if(strlen($item->time) == 1)
-                $item->time = '000' . $item->time;
-            else if(strlen($item->time) == 2)
-                $item->time = '00' . $item->time;
-            else if(strlen($item->time) == 3)
-                $item->time = '0' . $item->time;
-
-            if(strlen($item->time) == 4) {
-                $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
-                $item->timeAgo = getDifferenceTimeString($time);
-            }
-            else
-                $item->timeAgo = '';
-
-            if(strlen($item->text) > 80)
-                $item->summery = mb_substr($item->text, 0, 80, 'utf-8');
-
-        }
-
-        $count = 0;
-        $C = 0;
-        $D = 0;
-        $minLat = 0;
-        $minLng = 0;
-        $maxLat = 0;
-        $maxLng = 0;
-        foreach ($allPlaces as $key => $plac){
-            switch ($key){
-                case 0:
-                    $kP = 1;
-                    break;
-                case 1:
-                    $kP = 4;
-                    break;
-                case 2:
-                    $kP = 3;
-                    break;
-                case 3:
-                    $kP = 6;
-                    break;
-
-            }
-            foreach ($plac as $item){
-                $item->url = route('placeDetails', ['kindPlaceId' => $kP, 'placeId' => $item->id]);
-
-                $C += (float)$item->C;
-                $D += (float)$item->D;
-                if($minLat == 0 || $item->C < $minLat)
-                    $minLat = (float)$item->C;
-
-                if($maxLat == 0 || $item->C > $maxLat)
-                    $maxLat = (float)$item->C;
-
-                if($minLng == 0 || $item->D < $minLng)
-                    $minLng = (float)$item->D;
-
-                if($maxLng == 0 || $item->D > $maxLng)
-                    $maxLng = (float)$item->D;
-            }
-            $count += count($plac);
-        }
-        if($count > 0) {
-            $C /= $count;
-            $D /= $count;
-        }
-        else{
-            $C = 32.681757;
-            $D = 53.498319;
-        }
-        $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
+        $placeCounts = [
+            'amaken' => $allAmaken,
+            'majara' => $allMajara,
+            'hotel' => $allHotels,
+            'restaurant' => $allRestaurant,
+            'mahaliFood' => $allMahaliFood,
+            'sogatSanaie' => $allSogatSanaie,
+            'boomgardy' => $allBoomgardy,
+        ];
 
         $post = [];
         $postId = [];
@@ -549,7 +440,6 @@ class HomeController extends Controller
         }
         else
             $post = Post::where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
-
         foreach ($post as $item){
             $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
             if($item->date == null)
@@ -567,12 +457,231 @@ class HomeController extends Controller
         $mainWebSiteUrl = \url('/');
         $mainWebSiteUrl .= '/' . $request->path();
         if($kind == 'state')
-            $localStorageData = ['kind' => 'state', 'name' => $place->name , 'city' => '', 'state' => '', 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
+            $localStorageData = ['kind' => 'state', 'name' => $place->name , 'city' => '', 'state' => $place->listName, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
         else
-            $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => '', 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
+            $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => $place->listName, 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
 
-//        dd($locationName);
-        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'allBoomgardy', 'reviews', 'topPlaces']));
+        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'placeCounts']));
+    }
+
+    public function getCityPageReview(Request $request)
+    {
+        $take = 15;
+        $reviews = $this->getCityReviews($request->kind, $request->placeId, $take);
+        if(count($reviews) != $take){
+            $lessReview = [];
+            $notIn = [];
+            foreach ($reviews as $item)
+                array_push($notIn, $item->id);
+
+            if($request->kind == 'city'){
+                $place = Cities::find($request->placeId);
+                $less = $take - count($reviews);
+                $lessReview = $this->getCityReviews('state', $place->stateId, $less, $notIn);
+                foreach ($lessReview as $item)
+                    array_push($reviews, $item);
+            }
+
+            $less = $take - count($reviews);
+            if($less != 0){
+                $notIn = [];
+                foreach ($reviews as $item)
+                    array_push($notIn, $item->id);
+
+                $lessReview = $this->getCityReviews('country', 0, $less, $notIn);
+                foreach ($lessReview as $item)
+                    array_push($reviews, $item);
+            }
+        }
+
+        foreach ($reviews as $item) {
+            $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
+            $item->disLike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
+            $item->comments = getAnsToComments($item->id)[1];
+
+            $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
+            $item->userName = $item->user->username;
+            $item->userPic = getUserPic($item->user->id);
+
+            $kindPlace = Place::find($item->kindPlaceId);
+            $item->mainFile = $kindPlace->fileName;
+            $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+            $item->placeName = $item->place->name;
+            $item->kindPlace = $kindPlace->name;
+            $item->url = createUrl($kindPlace->id, $item->place->id, 0, 0);
+
+            $item->pics = ReviewPic::where('logId', $item->id)->get();
+            $item = getReviewPicsURL($item);
+            if(count($item->pics) > 0){
+                $item->havePic = 'block';
+                $item->firstPic = $item->pics[0]->picUrl;
+                if(count($item->pics) > 1){
+                    $item->morePic = 'block';
+                    $item->picCount = count($item->pics) - 1;
+                }
+                else{
+                    $item->morePic = 'none';
+                }
+            }
+            else
+                $item->havePic = 'none';
+
+            $item->city = Cities::find($item->place->cityId);
+            $item->state = State::find($item->city->stateId);
+            $item->placeCity = $item->city->name;
+            $item->placeState = $item->state->name;
+
+            $time = $item->date . '';
+            if(strlen($item->time) == 1)
+                $item->time = '000' . $item->time;
+            else if(strlen($item->time) == 2)
+                $item->time = '00' . $item->time;
+            else if(strlen($item->time) == 3)
+                $item->time = '0' . $item->time;
+
+            if(strlen($item->time) == 4) {
+                $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
+                $item->timeAgo = getDifferenceTimeString($time);
+            }
+            else
+                $item->timeAgo = '';
+
+            if(strlen($item->text) > 180) {
+                $item->summery = mb_substr($item->text, 0, 180, 'utf-8');
+                $item->haveSummery = '';
+                $item->notSummery = 'none';
+            }
+            else {
+                $item->haveSummery = 'display-none';
+                $item->notSummery = 'block';
+            }
+
+        }
+
+        echo json_encode($reviews);
+        return;
+    }
+
+    public function getCityPageTopPlace(Request $request)
+    {
+        $topAmaken = $this->getTopPlaces(1, $request->kind, $request->id);
+        $topRestaurant = $this->getTopPlaces(3, $request->kind, $request->id);
+        $topHotel = $this->getTopPlaces(4, $request->kind, $request->id);
+        $topMajra = $this->getTopPlaces(6, $request->kind, $request->id);
+        $topSogatSanaies = $this->getTopPlaces(10, $request->kind, $request->id);
+        $topMahaliFood = $this->getTopPlaces(11, $request->kind, $request->id);
+        $topBoomgardy = $this->getTopPlaces(12, $request->kind, $request->id);
+        $topPlaces = [  'topBoomgardyCityPage' => $topBoomgardy,
+                        'topAmakenCityPage' => $topAmaken,
+                        'topRestaurantInCity' => $topRestaurant,
+                        'topHotelCityPage' => $topHotel,
+                        'topMajaraCityPage' => $topMajra,
+                        'topSogatCityPage' => $topSogatSanaies,
+                        'topFoodCityPage' => $topMahaliFood];
+
+        echo json_encode($topPlaces);
+        return;
+    }
+
+    public function getCityAllPlaces(Request $request)
+    {
+        $activityId = Activity::whereName('نظر')->first()->id;
+
+        if($request->kind == 'city'){
+            $allAmaken = Amaken::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allMajara = Majara::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'dastresi', 'picNumber', 'file', 'keyword', 'cityId', 'reviewCount', 'fullRate'])->get();
+            $allHotels = Hotel::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allRestaurant = Restaurant::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allBoomgardy = Boomgardy::where('cityId', $request->id)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+        }
+        else{
+            $allCities = Cities::where('stateId', $request->id)->where('isVillage',0)->pluck('id')->toArray();
+
+            $allAmaken = Amaken::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allMajara = Majara::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'dastresi', 'picNumber', 'file', 'keyword', 'cityId', 'reviewCount', 'fullRate'])->get();
+            $allHotels = Hotel::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->select(['id', 'name', 'slug', 'C', 'D', 'address', 'picNumber', 'file', 'keyword', 'cityId', 'phone', 'reviewCount', 'fullRate'])->get();
+        }
+        $allPlaces = ['amaken' => $allAmaken, 'hotels' => $allHotels, 'restaurant' => $allRestaurant, 'majara' => $allMajara, 'boomgardy' => $allBoomgardy];
+
+        $count = 0;
+        $C = 0;
+        $D = 0;
+        foreach ($allPlaces as $key => $plac){
+            switch ($key){
+                case 'amaken':
+                    $kindPlace = Place::find(1);
+                    $kP = 1;
+                    break;
+                case 'hotels':
+                    $kindPlace = Place::find(4);
+                    $kP = 4;
+                    break;
+                case 'restaurant':
+                    $kindPlace = Place::find(3);
+                    $kP = 3;
+                    break;
+                case 'majara':
+                    $kindPlace = Place::find(6);
+                    $kP = 6;
+                    break;
+                case 'boomgardy':
+                    $kindPlace = Place::find(12);
+                    $kP = 12;
+                    break;
+            }
+            foreach ($plac as $item){
+                if($item->C > 39.817043976810254 || $item->D > 62.148940583173776 || $item->C < 24.337168697512585 || $item->D < 43.75341666481935){
+                    $item->C = 37.404470200738906;
+                    $item->D = 51.81568255996895;
+                    $item->save();
+                }
+
+                $location = __DIR__ .'/../../../../assets/_images/' . $kindPlace->fileName . '/' . $item->file;
+                $item->pic = null;
+                if(is_file($location . '/f-' . $item->picNumber))
+                    $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $item->picNumber);
+                else{
+                    $placePics = PlacePic::where('placeId', $item->id)->where('kindPlaceId', $kP)->get();
+                    foreach ($placePics as $pp){
+                        if(is_file($location . '/f-' . $pp->picNumber)) {
+                            $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $pp->picNumber);
+                            $getPic = true;
+                            break;
+                        }
+                    }
+                }
+                if($item->pic == null)
+                    $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
+
+                $item->url = route('placeDetails', ['kindPlaceId' => $kP, 'placeId' => $item->id]);
+                $cit = Cities::find($item->cityId);
+                $item->cityName = $cit->name;
+                $item->stateName = State::whereId($cit->stateId)->name;
+                $item->rate = $item->fullRate;
+                if($item->rate == 0)
+                    $item->rate = 2;
+                $item->review = $item->reviewCount;
+
+                $C += (float)$item->C;
+                $D += (float)$item->D;
+                $count++;
+            }
+        }
+        if($count > 0) {
+            $C /= $count;
+            $D /= $count;
+        }
+        else{
+            $C = 32.681757;
+            $D = 53.498319;
+        }
+
+        $map = ['C' => $C, 'D' => $D];
+
+        echo json_encode(['map' => $map, 'allPlaces' => $allPlaces]);
+        return;
     }
 
     public function checkUserNameAndPass()
@@ -956,7 +1065,7 @@ class HomeController extends Controller
 
             $kindPlaceId = isset($_POST["kindPlaceId"]) ? makeValidInput($_POST["kindPlaceId"]) : makeValidInput($request->kindPlaceId);
             $key = isset($_POST["key"]) ? makeValidInput($_POST["key"]) : makeValidInput($request->key);
-            $key2 = (isset($_POST["key2"]) ? makeValidInput($_POST["key2"]) : isset($request->key2) ? makeValidInput($request->key2) : '');
+            $key2 = (isset($_POST["key2"]) ? makeValidInput($_POST["key2"]) : (isset($request->key2) ? makeValidInput($request->key2) : ''));
 
             $time = time();
 
@@ -1715,15 +1824,14 @@ class HomeController extends Controller
                 $item->pic = getPlacePic($item->id, $kindPlace->id);
                 $item->url = createUrl($kindPlace->id, $item->id, 0, 0);
                 $item->rate = getRate($item->id, $kindPlace->id)[1];
-                $item->city = Cities::find($item->cityId);
-                $item->state = State::find($item->city->stateId);
+                $item->cityV = Cities::find($item->cityId);
+                $item->city =  $item->cityV->name;
+                $item->state = State::find($item->cityV->stateId)->name;
 
                 $condition = ['activityId' => $activityId, 'placeId' => $item->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1, 'relatedTo' => 0];
-                $item->reviews = LogModel::where($condition)->count();
+                $item->review = LogModel::where($condition)->count();
             }
         }
-
-
         return $places;
     }
 

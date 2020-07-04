@@ -6,16 +6,19 @@
     max-width: 350px;
     background: transparent !important;
 }
+
 .suggestionPackContent{
     padding: 12px;
     background: white;
 }
+
 .imageGoldPin{
     position: absolute;
     top: -15px;
     right: 20px;
     z-index: 1;
 }
+
 .suggestionPackMainBody{
     background: white;
     width: 100%;
@@ -30,22 +33,20 @@
     padding: 10px 0 0;
     margin-bottom: -4px;
 }
+
 .suggestionPackName{
     font-size: 16px;
     line-height: 20px;
     color: #333333;
     display: block;
     margin-bottom: 4px;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    outline: none;
     text-decoration: none !important;
 }
+
 .suggestionPackName:hover{
     color: #333333;
 }
+
 .suggestionPackReviewRow{
     display: flex;
     width: 100%;
@@ -57,9 +58,11 @@
     white-space: nowrap;
     font-size: medium;
 }
+
 .suggestionPackReviewCount{
     margin: 0 5px;
 }
+
 .suggestionPackCityRow{
     padding-top: 2px;
     font-size: 12px;
@@ -85,18 +88,21 @@
     margin-bottom: 0;
     height: 200px;
 }
+
 .suggestionPackPicDiv{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
+
 .suggestionPackPic{
     transition: .2s;
     position: relative;
     cursor: pointer;
     width: 100%;
 }
+
 .suggestionPackPic:hover{
     opacity: .9;
     transform: scale(1.1);

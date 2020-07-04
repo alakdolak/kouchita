@@ -375,7 +375,7 @@ function hideElement(element) {
 function bookMark() {
 
     if (!hasLogin) {
-        showLoginPrompt();
+        showLoginPrompt(thisUrl);
         return;
     }
 
@@ -387,21 +387,14 @@ function bookMark() {
             'kindPlaceId': kindPlaceId
         },
         success: function (response) {
-            if (response == "ok"){
-                if($('#bookMarkIcon').hasClass('castle')){
-                    $('#bookMarkIcon').removeClass('castle');
-                    $('#bookMarkIcon').addClass('castle-fill');
-                    showSuccessNotifi('این صفحه ذخیره شد', 'left', 'green')
-                }
-                else if($('#bookMarkIcon').hasClass('castle-fill')){
-                    $('#bookMarkIcon').removeClass('castle-fill');
-                    $('#bookMarkIcon').addClass('castle');
-                    showSuccessNotifi('این صفحه از حالت ذخیره خارج شد', 'left', 'red')
-
-                }
-
+            if (response == "ok-del"){
+                changeBookmarkIcon();
+                showSuccessNotifi('این صفحه از حالت ذخیره خارج شد', 'left', 'red');
             }
-            // document.location.href = hotelDetails;
+            else if(response == 'ok-add'){
+                changeBookmarkIcon();
+                showSuccessNotifi('این صفحه ذخیره شد', 'left', '#0076a3');
+            }
         }
     })
 }

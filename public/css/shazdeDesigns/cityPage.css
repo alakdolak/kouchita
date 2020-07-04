@@ -15,7 +15,7 @@
 
 .cpHeaderCityName {
     margin-top: 20px;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 800
 }
 
@@ -31,7 +31,29 @@
 .cpPic {
     width: 100%;
     height: auto;
-    max-height: 340px;
+    max-height: 330px;
+}
+
+.zpr{
+    padding-right: 0px;
+}
+.underSlider{
+    display: flex;
+    padding: 0;
+    margin-top: 10px;
+}
+.cityPagePics{
+    width: 98%;
+    margin-right: 0;
+}
+.infoLittleMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+}
+.cpLittleMenuImg{
+    margin-bottom: 10px;
 }
 
 /*css of little menu*/
@@ -42,6 +64,10 @@
     cursor: pointer;
     padding: 1px !important;
     height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .cpLittleMenu:hover {
@@ -67,6 +93,7 @@
     padding: 25px;
     text-align: justify;
     font-size: 18px;
+    padding-top: 0px;
 }
 
 /*css of firends box*/
@@ -104,15 +131,16 @@
 
 .cpMap {
     width: 100%;
-    height: 350px;
+    height: 500px;
 }
-.cpMapList {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: #f3f3f3;
+.reviewPlaceHolderTextLine{
+    width: 100%;
+    margin-bottom: 0px;
+    height: 7px;
+}
+.reviewPicPlaceHolder{
+    width: 100%;
+    height: 200px;
 }
 
 .cpMapCategory {
@@ -135,11 +163,18 @@
 }
 
 .cpBorderBottom {
-    border-bottom: 2px solid #f3f3f3;
     margin: 2px 0;
     cursor: default;
 }
-
+.content-2col, .content-column, .content-featured{
+    margin-bottom: 0px;
+}
+.articleDiv{
+    border-top: 2px solid #f3f3f3;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f3f3f3;
+    padding-top: 20px;
+}
 /*end of css of borders*/
 
 .cpBorderBottom .btn-success , .seeAllArticlesBtn{
@@ -150,8 +185,8 @@
 
 /*css of comment box*/
 .cpCommentBox {
-    max-height: 4250px;
-    overflow: auto;
+    /*max-height: 4250px;*/
+    overflow: hidden;
 }
 /*end of css of comment box*/
 
@@ -228,13 +263,21 @@
 
 .widget ul li {
     list-style: none;
-    margin-bottom: 20px;
-    position: relative
+    margin-bottom: 13px;
+    position: relative;
+    height: 60px;
+}
+.marg5{
+    margin-top: 5px;
 }
 
 .widget ul li a {
     color: rgba(0, 0, 0, .75);
-    display: inline-block
+    height: 100%;
+    overflow: hidden;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }
 
 .im-widget {
@@ -284,7 +327,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 90px
+    width: 90px;
+    height: 100%;
 }
 
 .im-widget-thumb-featured {
@@ -357,7 +401,10 @@
 
 .im-widget-entry-header .im-widget-entry-title {
     line-height: 1.6;
-    margin: 0
+    margin: 0;
+    width: 100%;
+    justify-content: flex-start;
+    display: inline-block !important;
 }
 
 .im-widget-entry-featured-title {
@@ -367,6 +414,25 @@
 
 .im-widget-entry-header .im-widget-entry-title a {
     margin-top: -2px
+}
+
+.mainArticleDiv{
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    z-index: 9;
+    padding-right: 30px;
+}
+.withColor{
+    color: white !important;
+}
+.mainReviewSection{
+    float: left;
+    overflow: hidden;
+    padding-right: 10px;
+    padding-left: 0;
+    margin-top: 13px;
+    border-right: 2px solid #f3f3f3;
 }
 
 .im-widget-entry-featured-title a {
@@ -478,7 +544,85 @@
     margin-top: 15px;
 }
 
+h3{
+    margin: 0px;
+}
 
+.cityImgSlider{
+    overflow: hidden;
+    height: 330px;
+}
+.topImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navigatorLinks{
+    color: #053a3e;
+    transition: .2s !important;
+    font-size: 15px;
+}
+.navigatorLinks:hover{
+    color: #eab836;
+}
+
+.cpLittleMenu{
+    transition: .3s !important;
+}
+.commentContentsShow > p{
+    font-size: 13px !important;
+    font-weight: bold;
+}
+.showMoreText::before{
+    bottom: -13px;
+}
+.postsMainDivInSpecificMode .quantityOfLikes{
+    width: 100%;
+    font-size: 23px;
+    padding-top: 10px;
+    text-align: right;
+    line-height: 15px;
+    justify-content: flex-end;
+    display: flex;
+    color: #1876a3;
+}
+.postsMainDivInSpecificMode .quantityOfLikes div{
+    display: flex;
+    margin-left: 10px;
+}
+.postsMainDivInSpecificMode .postMainDivShown{
+    width: 97%;
+    border: solid 1px #f3f3f3;
+    margin: 1%;
+    box-shadow: 0 0 5px 0px #646464;
+    margin-bottom: 15px;
+}
+.postsMainDivInSpecificMode .photosCol{
+    margin-bottom: 9px;
+}
+
+.topPlacesDivInCity{
+    margin: 40px 10px;
+    padding: 20px 20px;
+    background: #053a3e;
+    margin-top: 0px;
+}
+.topPlacesDivInCityHeader{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.topPlacesDivInCityHeader a {
+    margin: 0 5px;
+    color: #eab836;
+}
+.topPlacesDivInCityHeader div{
+    margin: 0px;
+}
+
+.content-2col .im-entry{
+    min-height: auto;
+}
 .nagLogo{
     width: 50px;
 }
@@ -502,7 +646,8 @@
         font-size: 14px
     }
     .im-widget-entry-header .im-widget-entry-title {
-        font-size: 13px
+        font-size: 13px;
+        width: 100%;
     }
 
     .cpMapList {
@@ -523,9 +668,34 @@
     .content-2col .im-entry {
         min-height: 45px !important;
     }
+
+    .cpDescription{
+        padding: 25px 5px;
+    }
+    .im-entry-title{
+        padding-bottom: 50px !important;
+    }
+}
+
+
+@media (max-width: 992px) and (min-width: 768px) {
+    .commentWriterExperienceDetails {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .cpBody{
+        width: 95% !important;
+        max-width: 100%;
+    }
+    .widget ul{
+        padding-top: 20px;
+    }
 }
 
 @media (max-width:540px) {
+
     .cpMapCategory {
         width: 50px;
         margin: 0px 2px;
@@ -535,8 +705,9 @@
     }
 }
 
-@media (max-width: 992px) and (min-width: 768px) {
-    .commentWriterExperienceDetails {
+@media (max-width:400px) {
+
+    .posted-on .im-meta-item{
         width: 100% !important;
     }
 }

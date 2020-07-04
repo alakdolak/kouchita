@@ -116,7 +116,6 @@
         $('#mainSearchInput').attr('placeholder', pn);
 
         $('#searchPane').removeClass('hidden');
-        $('#darkModeMainPage').toggle();
         $('#mainSearchInput').val('');
         $('#mainSearchInput').focus();
 

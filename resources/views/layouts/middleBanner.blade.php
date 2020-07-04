@@ -295,26 +295,20 @@
                 </script>
             @endif
 
-            <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                <div class="prw_rup prw_shelves_shelf_widget">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title">
-                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                <div class="shelf_title_container h3">
-                                    <h3>{{__('تازه‌های کوچیتا')}}</h3>
-                                </div>
-                            </div>
+            <div id="newKoochita">
+                <div class="shelf_title">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('تازه‌های کوچیتا')}}</h3>
+                    </div>
+                </div>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div class="mainSuggestion swiper-container">
+                        <div id="newInKoochita" class="swiper-wrapper suggestionBody">
+                            {{--fill with createMainPageSuggestion function--}}
                         </div>
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                            <div class="mainSuggestion swiper-container">
-                                <div id="newInKoochita" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
@@ -348,28 +342,20 @@
                 @endif
             </div>
 
-            <div id="foodSuggestion" class="homepage_shelves_widget ng-scope">
-                <div class="prw_rup prw_shelves_shelf_widget">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title">
-                                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                    <div class="shelf_title_container h3">
-                                        <h3>{{__('محبوب‌ترین غذا‌ها')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
+            <div id="foodSuggestion">
+                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('محبوب‌ترین غذا‌ها')}}</h3>
+                    </div>
+                </a>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div id="mainSuggestion" class="mainSuggestion swiper-container">
+                        <div id="topFood" class="swiper-wrapper suggestionBody">
+                            {{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                            <div id="mainSuggestion" class="mainSuggestion swiper-container">
-                                <div id="topFood" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
@@ -397,28 +383,20 @@
                 </div>
             @endif
 
-            <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope">
-                <div class="prw_rup prw_shelves_shelf_widget" style="">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title" >
-                                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                    <div class="shelf_title_container h3">
-                                        <h3>{{__('سفر طبیعت‌گردی')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
+            <div id="tabiatSuggestion">
+                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('سفر طبیعت‌گردی')}}</h3>
+                    </div>
+                </a>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div class="mainSuggestion swiper-container">
+                        <div id="topTabiat" class="swiper-wrapper suggestionBody">
+                            {{--fill with createMainPageSuggestion function--}}
                         </div>
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                            <div class="mainSuggestion swiper-container">
-                                <div id="topTabiat" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
@@ -609,28 +587,20 @@
                 </script>
             @endif
 
-            <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope">
-                <div class="prw_rup prw_shelves_shelf_widget">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title">
-                                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                    <div class="shelf_title_container h3">
-                                        <h3>{{__('محبوب‌ترین رستوران‌ها')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
+            <div id="restaurantSuggestion">
+                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('محبوب‌ترین رستوران‌ها')}}</h3>
+                    </div>
+                </a>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div class="mainSuggestion swiper-container">
+                        <div id="topRestaurant" class="swiper-wrapper suggestionBody">
+                            {{--fill with createMainPageSuggestion function--}}
                         </div>
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                            <div class="mainSuggestion swiper-container">
-                                <div id="topRestaurant" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
@@ -663,28 +633,20 @@
                 </div>
             @endif
 
-            <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope">
-                <div class="prw_rup prw_shelves_shelf_widget" style="">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title">
-                                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                    <div class="shelf_title_container h3">
-                                        <h3>{{__('سفر تاریخی-فرهنگی')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
+            <div id="tarikhiSuggestion">
+                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('سفر تاریخی-فرهنگی')}}</h3>
+                    </div>
+                </a>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div class="mainSuggestion swiper-container">
+                        <div id="topTarikhi" class="swiper-wrapper suggestionBody">
+                            {{--fill with createMainPageSuggestion function--}}
                         </div>
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                            <div class="mainSuggestion swiper-container">
-                                <div id="topTarikhi" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
@@ -772,26 +734,20 @@
                 </div>
             </center>
 
-            <div id="kharidSuggestion" class="homepage_shelves_widget ng-scope">
-                <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title">
-                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                <div class="shelf_title_container h3">
-                                    <h3>{{__('مراکز خرید')}}</h3>
-                                </div>
-                            </div>
+            <div id="kharidSuggestion">
+                <div class="shelf_title">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('مراکز خرید')}}</h3>
+                    </div>
+                </div>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div class="mainSuggestion swiper-container">
+                        <div id="topKharid" class="swiper-wrapper suggestionBody">
+                            {{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                            <div class="mainSuggestion swiper-container">
-                                <div id="topKharid" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
@@ -808,29 +764,20 @@
                 </div>
             @endif
 
-            <div id="articleSuggestion" class="homepage_shelves_widget ng-scope">
-                <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
-                    <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                        <div class="shelf_header">
-                            <div class="shelf_title">
-                                <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
-                                    <div class="shelf_title_container h3">
-                                        <h3>{{__('محبوب‌ترین سفرنامه‌ها')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
+            <div id="articleSuggestion">
+                <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+                        <h3>{{__('محبوب‌ترین سفرنامه‌ها')}}</h3>
+                    </div>
+                </a>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                    <div class="mainSuggestion swiper-container">
+                        <div id="topArticle" class="swiper-wrapper suggestionBody">
+                            {{--fill with createMainPageSuggestion function--}}
                         </div>
-
-                        <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                            <div class="mainSuggestion swiper-container">
-                                <div id="topArticle" class="swiper-wrapper suggestionBody">
-                                    {{--                            fill with createMainPageSuggestion function--}}
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>

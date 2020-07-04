@@ -88,46 +88,66 @@ footer li > img, .small-ico {
 }
 
 .linkedin {
-    background-image: url('../../images/icons/linkedin.png');
+    background-image: url('../../images/icons/social/linkedin.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
-
 .facebook {
-    background-image: url('../../images/icons/facebook.png');
+    background-image: url('../../images/icons/social/facebook.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
-
 .pinterest {
-    background-image: url('../../images/icons/pintrest.png');
+    background-image: url('../../images/icons/social/pintrest.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
-
 .instagram {
-    background-image: url('../../images/icons/instagram.png');
+    background-image: url('../../images/icons/social/instagram.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
-
 .telegram {
-    background-image: url('../../images/icons/telegram.png');
+    background-image: url('../../images/icons/social/telegram.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
-
 .aparat {
-    background-image: url('../../images/icons/aparat.png');
+    background-image: url('../../images/icons/social/aparat.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.twitter {
+    background-image: url('../../images/icons/social/twitter.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.youtubeBackground {
+    background-image: url('../../images/icons/social/youtube.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.bogenBackground {
+    background-image: url('../../images/icons/social/bogen.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.sisootechBackground {
+    background-image: url('../../images/icons/social/sisootech.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.newsBackground {
+    background-image: url('../../images/icons/social/news.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.whatsappBackground {
+    background-image: url('../../images/icons/social/whatapp.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
 
-.twitter {
-    background-image: url('../../images/icons/twitter.png');
-    background-repeat: no-repeat;
-    display: inline-block;
-}
 
 .selectLanguage {
     background: #FFF;
@@ -216,7 +236,7 @@ footer li > img, .small-ico {
 /*phone style*/
 
 .phoneFooterStyle {
-    position: absolute;
+    position: relative;
     bottom: 0;
     background-color: #fcc156;
     color: #16174f;
@@ -224,12 +244,13 @@ footer li > img, .small-ico {
     padding: 20px 10px;
     display: flex;
     justify-content: center;
+    margin-top: 35px;
 }
 
 .phoneFooterLogo {
-    width: 80px;
+    width: 190px;
     position: absolute;
-    top: -25px;
+    top: -22px;
 }
 
 .phoneDescription {
@@ -241,7 +262,6 @@ footer li > img, .small-ico {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 135px;
 }
 
 .phoneDescriptionText {
@@ -261,7 +281,6 @@ footer li > img, .small-ico {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 15px 0;
     font-weight: 700;
     font-size: initial;
 }
@@ -271,6 +290,9 @@ footer li > img, .small-ico {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    padding: 15px 0px;
+    height: 70px;
+    width: 100%;
 }
 
 .footerPhoneMenuBar > div > div.profileBtnText {
@@ -525,12 +547,10 @@ footer li > img, .small-ico {
 }
 
 .lp_ar_contentOfFilters{
-    max-height: 80vh;
+    height: calc(100vh - 145px);
     overflow-y: auto;
     overflow-x: hidden;
 }
-
-
 
 footer .modules-membercenter-member-profile {
     width: 60%;
@@ -644,21 +664,21 @@ footer #myHonorsText > h3 {
     top: 10px;
     background: white;
     padding-left: 5px;
-    color: #0076ac;
-    font-size: 20px;
 }
 
 footer .memberPointInfo {
     display: flex;
     flex-direction: column;
-    /*margin-top: 30px;*/
+    margin-top: 0px;
+    border-top: 1px solid #c4c4c4;
 }
 
 footer .memberPointInfo .modules-membercenter-total-points {
     display: flex;
-    align-items: center;
-    justify-content: right;
+    align-items: flex-start;
+    justify-content: center;
     padding: 13px 0;
+    flex-direction: column;
     border-bottom: 1px solid #c4c4c4;
 }
 
@@ -682,7 +702,6 @@ footer .modules-membercenter-total-points .points {
 }
 
 footer .modules-membercenter-total-points .targets {
-    border-left: 1px solid #c4c4c4;
     padding: 26px 0;
     width: 89px;
     text-align: center;
@@ -694,15 +713,16 @@ footer .modules-membercenter-total-points .points_to_go {
     font-family: helvetica, arial, sans-serif !important;
     color: #666 !important;
     text-align: center;
-    width: 55%;
+    width: 100% !important;
 }
 
 footer .mainDivTotalPoint {
-    border-left: 1px solid #c4c4c4;
-    width: 25%;
+    width: 100% !important;
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 footer .mainDivTotalPoint a {
@@ -897,6 +917,7 @@ footer .activityNumbers {
     font-size: 1em;
     padding: 30px 20px;
     color: #0076a3;
+    padding-bottom: 0px !important;
 }
 
 .pSC_tilte > div:first-child {
@@ -912,7 +933,7 @@ footer .activityNumbers {
 }
 
 .pSC_cityTilte {
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .pSC_cityDescription {
@@ -927,6 +948,7 @@ footer .activityNumbers {
     font-size: 1em;
     text-align: center;
     padding: 20px 10px;
+    padding-bottom: 10px;
 }
 
 .pSC_choiseDetailsText {
@@ -958,16 +980,27 @@ footer .activityNumbers {
 
 .pSC_boxOfCityDetails {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-bottom: solid #a1a1a1 1px;
 }
 
+.newCityInPhoneFooter{
+    background: darkred;
+    border: none;
+    font-size: 13px;
+    padding: 7px;
+    border-radius: 5px;
+}
 .pSC_cityDetails {
     width: 50%;
-    border: solid #a1a1a1;
-    padding: 15px 0;
+    padding: 10px 12px;
+    text-align: right;
     border-width: 2px 2px 2px 0;
-    border-bottom: solid white;
     cursor: pointer;
+    color: black;
+    border: none;
+    border-bottom: solid #a1a1a1 1px;
 }
 
 .pSC_cityDetails.pSC_cityDetails_selected {
@@ -978,8 +1011,15 @@ footer .activityNumbers {
     border-bottom: solid #f0ad4e;
 }
 
-.pSC_cityDetails:nth-child(1) {
-    border-right: none;
+.pSC_cityDetails:nth-of-type(even){
+    border-right: solid #a1a1a1 1px;
+}
+.koochitaTvRowPhoneFooter{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none !important;
 }
 
 .pSC_boxOfCityDetails:last-child  {
@@ -1170,6 +1210,62 @@ footer .profileMenuLinks {
     border-width: 2px 0;
 }
 
+.footerSocialDivPhone{
+    background-color: #fcc156;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.footerSocialDivPhone a{
+    min-width: 15%;
+}
+.footerLanguageSectionPhone{
+    display: flex;
+    margin-top: 11px;
+    padding: 0px 10px;
+    justify-content: center;
+}
+.footerLanguageDivPhone{
+    display: flex;
+    direction: ltr;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffdd9e;
+    border-radius: 5px;
+    padding: 0px 5px;
+    font-size: 12px;
+    border: #FCC156 solid 2px;
+}
+.footerLanguageTextPhone{
+    height: 100%;
+    border-right: solid 1px gray;
+    padding-right: 5px;
+    margin-right: 5px;
+}
+.footerLanguageInputPhone{
+
+}
+.chooseLanguagePhone{
+    border: none;
+    background: inherit;
+}
+
+.closeFooterPopupIcon{
+    position: absolute;
+    left: 5px;
+    top: 0px;
+    font-size: 40px;
+    color: #4DC7BC;
+}
+
+.eatery_filters{
+    height: auto;
+    overflow: hidden;
+}
+
+.shareSection{
+    position: relative;
+}
 
 @media (max-width: 1300px) {
     .footerRside {
@@ -1229,7 +1325,7 @@ footer .profileMenuLinks {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     .footerPhoneMenuBar {
@@ -1297,6 +1393,16 @@ footer .profileMenuLinks {
 }
 
 @media (max-width: 767px){
+
+    .eatery_filters{
+        height: calc(100vh - 225px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .shareSection{
+        position: absolute;
+        top: 0px;
+    }
     .FilterTopController{
         display: flex;
         justify-content: center;
@@ -1306,6 +1412,11 @@ footer .profileMenuLinks {
 
     .footerPhoneMenuBar {
         display: flex;
+    }
+    .footerIconHor{
+        width: 40px;
+        height: 35px;
+        background-size: 35px;
     }
 }
 
@@ -1317,16 +1428,13 @@ footer .profileMenuLinks {
 
     .pSC_boxOfDetails {
         overflow: auto;
-        height: inherit;
+        /*height: inherit;*/
     }
 
     .pSC_tilte {
         padding: 15px 20px;
     }
 
-    .pSC_boxOfCityDetailsText, .pSC_cityDetails {
-        padding: 10px 0;
-    }
 }
 
 @media (max-width: 630px) {
@@ -1361,7 +1469,7 @@ footer .profileMenuLinks {
     }
 
     .pSC_cityDetails {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     footer .modules-membercenter-total-points .targets {

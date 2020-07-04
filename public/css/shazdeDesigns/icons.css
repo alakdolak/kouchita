@@ -11,6 +11,7 @@
 }
 .atraction:before {
     content: '\E002';
+    font-family: 'Shazde_Regular2' !important;
 }
 .restaurant:before {
     content: '\E001';
@@ -24,6 +25,13 @@
 .majara:before {
     content: '\E009';
 }
+.majaraIcon:before {
+    content: '\E009';
+    font-family: Shazde_Regular2 !important;
+}
+.moreInfoIcon{
+    font-family: monospace;
+}
 .sanaye:before {
     content: '\E00A';
 }
@@ -35,6 +43,8 @@
 }
 .boomIcon:before {
     content: '\E05B';
+    font-family: 'Shazde_Regular2' !important;
+
 }
 
 .estelah:before {
@@ -63,6 +73,7 @@
     content: '\E02C';
 }
 .iconClose:before {
+    font-family: 'Shazde_Regular' !important;
     content: '\E02C';
 }
 .redStar:before {
@@ -143,6 +154,10 @@
     margin-bottom: 5px;
     text-align: center;
 }
+.mirorIcon{
+    display: inline-block;
+    transform: rotate(90deg);
+}
 
 .LikeIcon:before{
     content: '\E057' !important;
@@ -160,10 +175,23 @@
     content: '\E1F6';
     font-family: Shazde_Regular2 !important;
 }
+.emptyShareIcon:before{
+    content: '\e1f5' !important;
+    font-family: Shazde_Regular2 !important;
+}
 .HeartIcon:before{
     content: '\e012' !important;
     font-family: Shazde_Regular2 !important;
 }
+.empty-heart:before{
+    content: '\e011' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.fill-heart:before{
+    content: '\e012' !important;
+    font-family: Shazde_Regular2 !important;
+}
+
 .BookMarkIcon:before{
     content: "\E0DE" !important;
     font-family: Shazde_Regular2 !important;
@@ -189,12 +217,29 @@
     content: '\E04A';
     font-family: Shazde_Regular2 !important;
 }
+.upArrowIcon{
+    display: inline-block;
+    transform: rotate(180deg);
+}
+.upArrowIcon:before{
+    content: '\E04A';
+    font-family: Shazde_Regular2 !important;
+}
+
 .LikeIconEmpty:before{
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;
 }
 .DisLikeIconEmpty:before{
     content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+}
+.threeDotIcon:before{
+    content: '\E091';
+    font-family: Shazde_Regular2 !important;
+}
+.threeLineIcon:before{
+    content: '\E035';
     font-family: Shazde_Regular2 !important;
 }
 

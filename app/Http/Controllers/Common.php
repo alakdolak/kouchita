@@ -389,31 +389,13 @@ function getNearestMedals($uId) {
 function getRate($placeId, $kindPlaceId) {
 
     try {
-        switch ($kindPlaceId) {
-            case 1:
-                $place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 3:
-                $place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 4:
-                $place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 6:
-                $place = Majara::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 10:
-                $place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 11:
-                $place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-        }
+        $kindPlace = Place::find($kindPlaceId);
+        $place = \DB::table($kindPlace->tableName)->find($placeId);
 
         $city = Cities::find($place->cityId);
         $state = State::find($city->stateId);
 
-        $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+        $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ' ) AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
 
         $questionId = array();
         foreach ($section as $item)
@@ -430,11 +412,12 @@ function getRate($placeId, $kindPlaceId) {
 
         $avgRate = 0;
 
-//    $rates = DB::select('select avg(rate) as avgRate from log, questionUserAns WHERE log.id = logId and placeId = ' . $placeId . " and kindPlaceId = " . $kindPlaceId . " and activityId = " . Activity::whereName('امتیاز')->first()->id . " group by(visitorId)");
+
         if($questionId != null && count($questionId) != 0)
-            $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
+            $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and  log.confirm = 1 and log.kindPlaceId = " . $kindPlaceId . " and  qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
         else
             $rates = array();
+
 
         $separatedRates = [0, 0, 0, 0, 0];
         foreach ($rates as $rate) {
@@ -678,9 +661,7 @@ function compressImage($source, $destination, $quality){
 function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $sitePics = array();
-    $sitePicsJSON = array();
-    $photographerPicsJSON = array();
-    $photographerPics = array();
+    $userVideo = [];
 
     if(auth()->check())
         $user = auth()->user();
@@ -691,27 +672,31 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
 
-    $userPhotos = DB::select('SELECT pic.* , users.* FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
+    $userPhotos = DB::select('SELECT pic.* , users.username, users.id as userId FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
     foreach ($userPhotos as $item){
-
         $item->pic = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
-
-        if ($item->first_name != null)
-            $item->username = $item->first_name . ' ' . $item->last_name;
-
-        if($item->uploadPhoto == 0){
-            $deffPic = DefaultPic::find($item->picture);
-
-            if($deffPic != null)
-                $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
-            else
-                $item->userPic = URL::asset('_images/nopic/blank.jpg');
-        }
-        else{
-            $item->userPic = URL::asset('userProfile/' . $item->picture);
-        }
+        $item->userPic = getUserPic($item->userId);
+        $item->time = getDifferenceTimeString($item->created_at);
     }
     $userPhotosJSON = json_encode($userPhotos);
+
+    $userVideo = DB::select('SELECT pic.*, users.username, users.id as userId FROM reviewPics AS pic, log, users WHERE pic.isVideo = 1 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
+    foreach ($userVideo as $item){
+        $videoArray = explode('.', $item->pic);
+        $videoPicName = '';
+        for($k = 0; $k < count($videoArray)-1; $k++)
+            $videoPicName .= $videoArray[$k] . '.';
+        $videoPicName .= 'png';
+
+        $item->picName = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $videoPicName);
+        $item->videoUrl = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
+
+        $item->video = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
+        $item->userPic = getUserPic($item->userId);
+
+        $item->time = getDifferenceTimeString($item->created_at);
+    }
+    $userVideoJSON = json_encode($userVideo);
 
     $koochitaPic = URL::asset('images/icons/mainIcon.svg');
     if(is_file(__DIR__ .'/../../../../assets/_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber)) {
@@ -789,26 +774,9 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     foreach ($photographerPic as $item){
         $user = User::find($item->userId);
-        $userName = $user->first_name . ' ' . $user->last_name;
-        if($userName == ' ')
-            $userName = $user->username;
+        $userName = $user->username;
 
         if($user != null) {
-
-            $diffTime = getDifferenceTimeString($item->created_at);
-
-            if($user->uploadPhoto == 0){
-                $deffPic = DefaultPic::find($user->picture);
-
-                if($deffPic != null)
-                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
-                else
-                    $uPic = URL::asset('_images/nopic/blank.jpg');
-            }
-            else{
-                $uPic = URL::asset('userProfile/' . $user->picture);
-            }
-
             $s = [
                 'id' => $item->id,
                 's' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/s-' . $item->pic),
@@ -818,22 +786,22 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'mainPic' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic),
                 'alt' => $item->alt,
                 'name' => $userName,
-                'userPic' => $uPic,
+                'picName' => $item->name,
+                'userPic' =>  getUserPic($user->id),
                 'showInfo' => true,
                 'like' => $item->like,
                 'dislike' => $item->dislike,
                 'description' => $item->description,
-                'fromUpload' => $diffTime,
-                'userLike' => $item->userLike];
+                'fromUpload' => getDifferenceTimeString($item->created_at),
+                'userLike' => $item->userLike
+            ];
 
             array_unshift($photographerPics, $s);
         }
     }
     $photographerPicsJSON = json_encode($photographerPics);
 
-
-
-    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON];
+    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON, $userVideo, $userVideoJSON];
 }
 
 function deleteReviewPic(){
@@ -1042,6 +1010,14 @@ function saveViewPerPage($kindPlaceId, $placeId){
 
     $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
     if(!(Cookie::has($value) == $value)) {
+
+        try {
+            $kindPlace = Place::find($kindPlaceId);
+            if ($kindPlace != null)
+                \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `seen`= `seen`+1  WHERE `id` = ' . $placeId);
+        }
+        catch (\Exception $exception){}
+
         $activityId = Activity::whereName('مشاهده')->first()->id;
         $log = new LogModel();
         $log->time = getToday()["time"];
@@ -1229,20 +1205,47 @@ function getCityPic($cityId){
 }
 
 //    http://image.intervention.io/
-function resizeImage($pic, $size){
+function resizeImage($pic, $size, $fileName = ''){
     try {
         $image = $pic;
-        $randNum = random_int(100,999);
-        $fileName = time() . $randNum. '.' . $image->getClientOriginalExtension();
+        if($fileName == '') {
+            $randNum = random_int(100, 999);
+            $fileName = time() . $randNum . '.' . $image->getClientOriginalExtension();
+        }
 
         foreach ($size as $item){
             $input['imagename'] = $item['name'] .  $fileName ;
-            $destinationPath = public_path($item['destination']);
+            $destinationPath = $item['destination'];
             $img = \Image::make($image->getRealPath());
-            $img->resize($item['width'], $item['height'], function ($constraint) {
+            $width = $img->width();
+            $height = $img->height();
+
+            if($item['height'] != null && $item['width'] != null){
+                $ration = $width/$height;
+                $nWidth = $ration * $item['height'];
+                $nHeight = $item['width'] / $ration;
+                if($nWidth < $item['width']) {
+                    $height = $nHeight;
+                    $width = $item['width'];
+                }
+                else if($nHeight < $item['height']) {
+                    $width = $nWidth;
+                    $height = $item['height'];
+                }
+            }
+            else {
+                if ($item['width'] == null || $width > $item['width'])
+                    $width = $item['width'];
+
+                if ($item['height'] == null || $height > $item['height'])
+                    $height = $item['height'];
+            }
+
+            $img->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($destinationPath.'/'.$input['imagename']);
         }
+
         return $fileName;
     }
     catch (Exception $exception){
@@ -1338,8 +1341,6 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     }
     return $output;
 }
-
-
 
 
 //time

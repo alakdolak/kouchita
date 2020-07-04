@@ -18,9 +18,6 @@
 
 <script src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>
 <script>
-    // $(document).ready(function() {
-    //     $("#globalSearchInput").farsiInput();
-    // });
 
     function createSearchInput(_doFuncName, _placeHolderTxt){
         // _doFuncName must be string
@@ -30,6 +27,7 @@
         $('#globalSearchInput').val('');
 
         $('#globalSearchResult').html('');
+        $('#globalSearchResult').hide();
 
         $('#globalSearch').css('display', 'flex');
 
@@ -37,10 +35,12 @@
     }
 
     function setResultToGlobalSearch(_txt){
+        $('#globalSearchResult').show();
         $('#globalSearchResult').html(_txt);
     }
 
     function clearGlobalResult(){
+        $('#globalSearchResult').hide();
         $('#globalSearchResult').html('');
     }
 

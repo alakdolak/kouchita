@@ -14,38 +14,6 @@
 @stop
 
 @section('meta')
-    {{--    <meta name="keywords" content="{{$place->keyword}}">--}}
-    {{--    <meta property="og:description" content="{{$place->meta}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag1}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag2}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag3}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag4}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag5}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag6}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag7}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag8}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag9}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag10}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag11}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag12}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag13}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag14}}"/>--}}
-    {{--    <meta property="article:tag" content="{{$place->tag15}}"/>--}}
-    {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
-    {{--    <meta name="twitter:description" content="{{$place->meta}}"/>--}}
-    {{--    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>--}}
-    {{--    <meta property="og:url" content="{{Request::url()}}"/>--}}
-    {{--    @if(count($photos) > 0)--}}
-    {{--        <meta property="og:image" content="{{$photos[0]}}"/>--}}
-    {{--        <meta property="og:image:secure_url" content="{{$photos[0]}}"/>--}}
-    {{--        <meta property="og:image:width" content="550"/>--}}
-    {{--        <meta property="og:image:height" content="367"/>--}}
-    {{--        <meta name="twitter:image" content="{{$photos[0]}}"/>--}}
-    {{--    @endif--}}
-    {{--    <meta content="article" property="og:type"/>--}}
-    {{--    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>--}}
-
-
 
 @stop
 

@@ -78,16 +78,16 @@
 <script>
     let searchRequestNumber = 0;
 
-    function openMainSearch(){
-        showLastPages();
-
-        $('#searchPane').removeClass('hidden');
-        $('#darkModeMainPage').toggle();
-        $('#searchPanInput').val('');
-        $('#searchPanInput').focus();
-
-        $("#searchPangResult").empty();
-    };
+    // function openMainSearch(){
+    //     showLastPages();
+    //
+    //     $('#searchPane').removeClass('hidden');
+    //     $('#darkModeMainPage').toggle();
+    //     $('#searchPanInput').val('');
+    //     $('#searchPanInput').focus();
+    //
+    //     $("#searchPangResult").empty();
+    // };
 
     function searchMain(e, val = '') {
         if (val.trim().length < 2) {

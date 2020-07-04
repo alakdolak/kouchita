@@ -1,3 +1,4 @@
+{{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css')}}">--}}
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 
@@ -25,7 +26,6 @@
 @include('component.suggestionPack')
 
 
-
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @else
@@ -35,9 +35,9 @@
 <script>
     var hasLogin = {{auth()->check() ? 1 : 0}};
 
-    function checkLogin(){
+    function checkLogin(redirect = '{{Request::url()}}'){
         if (!hasLogin) {
-            showLoginPrompt('{{Request::url()}}');
+            showLoginPrompt(redirect);
             return false;
         }
         else
@@ -66,6 +66,11 @@
             img.css('width', '100%');
             img.css('height', 'auto');
         }
+    }
+
+    function goToLanguage(_lang){
+        if(_lang != 0)
+            location.href = '{{url('language/')}}/' + _lang;
     }
 
     $(document).ready(function(){

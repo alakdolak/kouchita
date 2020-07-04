@@ -23,6 +23,13 @@
         <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPage.css')}}">
     @endif
 
+    <style>
+        .backgroundColorForSlider{
+            background-size: cover;
+            background-position: right;
+        }
+    </style>
+
     {{--urls--}}
     <script>
         var searchDir = '{{route('totalSearch')}}';
@@ -40,12 +47,10 @@
             }
         };
 
-        window.history.forward();
-        function noBack(){ window.history.forward();}
     </script>
 </head>
 
-<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" style="background-color: #EAFBFF;">
+<body style="background-color: #EAFBFF;">
 
     @include('general.forAllPages')
 
@@ -53,7 +58,7 @@
 
     <div id="mainDivContainerMainPage">
         <div class="mainBannerSlider">
-            <!-- Swiper -->
+
             <div id="mainSlider" class="swiper-container backgroundColorForSlider">
                 <div class="swiper-wrapper">
                     @foreach($sliderPic as $item)
@@ -62,9 +67,7 @@
                         </div>
                     @endforeach
                 </div>
-                <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
-                <!-- Add Arrows -->
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
@@ -80,21 +83,6 @@
                 </div>
             </div>
 
-        </div>
-
-        <div class="hideOnScreen">
-            <div id="mainSlider" class="swiper-container backgroundColorForSlider">
-                <div class="swiper-wrapper">
-                    @foreach($sliderPic as $item)
-                        <div class="swiper-slide mobileHeight imgOfSliderBox">
-                            <img src="{{$item->pic}}" class="imgOfSlider">
-                        </div>
-                    @endforeach
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
         </div>
     </div>
 
@@ -124,13 +112,25 @@
     });
 
     swiper.on('slideChange', function(){
-        $('.backgroundColorForSlider').css('background-color', mainSliderPics[swiper.realIndex]['textBackground'])
-        consoleText(mainSliderPics[swiper.realIndex]['text'], 'text', mainSliderPics[swiper.realIndex]['textColor']);
+
+        if(mainSliderPics[swiper.realIndex]['backgroundPic'] != null)
+            $('.backgroundColorForSlider').css('background-image', 'url("' + mainSliderPics[swiper.realIndex]['backgroundPic'] + '")');
+        else
+            $('.backgroundColorForSlider').css('background-color', mainSliderPics[swiper.realIndex]['textBackground']);
+
+        if(mainSliderPics[swiper.realIndex]['text'] != null)
+            consoleText(mainSliderPics[swiper.realIndex]['text'], 'text', mainSliderPics[swiper.realIndex]['textColor']);
     });
 
     var setInterText = 0;
-    consoleText(mainSliderPics[0]['text'], 'text', mainSliderPics[0]['textColor']);
-    $('.backgroundColorForSlider').css('background-color', mainSliderPics[0]['textBackground']);
+    if(mainSliderPics[0]['text'] != null)
+        consoleText(mainSliderPics[0]['text'], 'text', mainSliderPics[0]['textColor']);
+
+    if(mainSliderPics[0]['backgroundPic'] != null)
+        $('.backgroundColorForSlider').css('background-image', 'url("' + mainSliderPics[0]['backgroundPic'] + '")');
+    else
+        $('.backgroundColorForSlider').css('background-color', mainSliderPics[0]['textBackground']);
+
     function consoleText(words, id, colors) {
         document.getElementById('text').innerHTML = '';
 

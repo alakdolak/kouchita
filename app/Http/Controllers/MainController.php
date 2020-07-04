@@ -6,15 +6,18 @@ use App\models\Activity;
 use App\models\Amaken;
 use App\models\BannerPics;
 use App\models\Boomgardy;
+use App\models\Cities;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\MainSliderPic;
+use App\models\Place;
 use App\models\Post;
 use App\models\PostComment;
 use App\models\Restaurant;
 use App\models\SectionPage;
 use App\models\SogatSanaie;
+use App\models\State;
 use App\models\User;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
@@ -30,11 +33,8 @@ class MainController extends Controller
     }
 
     public function showMainPage($mode = "mainPage") {
-        $kindPlaceId= 0;
 
-        $sliderPic = MainSliderPic::all();
-        foreach ($sliderPic as $item)
-            $item->pic = URL::asset('_images/sliderPic/'. $item->pic);
+        $kindPlaceId= 0;
 
         $today = getToday()['date'];
         $hotelCount = Hotel::all()->count();
@@ -69,6 +69,13 @@ class MainController extends Controller
         foreach ($articleBanner as $item){
             $item->url = createUrl(0, 0, 0, 0, $item->id);
             $item->pic = createPicUrl($item->id);
+        }
+
+        $sliderPic = MainSliderPic::all();
+        foreach ($sliderPic as $item) {
+            $item->pic = URL::asset('_images/sliderPic/' . $item->pic);
+            if($item->backgroundPic != null)
+                $item->backgroundPic = URL::asset('_images/sliderPic/' . $item->backgroundPic);
         }
 
         $middleBan = [];
@@ -404,7 +411,5 @@ class MainController extends Controller
 //            }
 //        }
     }
-
-
 
 }
