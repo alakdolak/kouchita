@@ -590,7 +590,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('setPlaceRate', array('as' => 'setPlaceRate', 'uses' => 'PlaceController@setPlaceRate'));
 
-    Route::post('bookMark', array('as' => 'bookMark', 'uses' => 'PlaceController@bookMark'));
+    Route::post('setBookMark', array('as' => 'setBookMark', 'uses' => 'PlaceController@setBookMark'));
 
     Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
 

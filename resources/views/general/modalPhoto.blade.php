@@ -77,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div id="sidePhotoModal" style="padding: 0px 10px 0px 5px; overflow: auto; max-height: 75vh;">
+                    <div id="sidePhotoModal" class="sidePhotoAlbumDiv">
                         <div id="sideAlbumPic##index##" class="rightColPhotosShowingModal" onclick="##picIndex##">
                             <img src="##sidePic##" alt="##alt##" class="mainAlbumPic">
                         </div>

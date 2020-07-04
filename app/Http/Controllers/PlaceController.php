@@ -158,6 +158,8 @@ class PlaceController extends Controller {
         $photographerPicsJSON = $pics[3];
         $userPhotos = $pics[4];
         $userPhotosJson = $pics[5];
+        $userVideo = $pics[6];
+        $userVideoJson = $pics[7];
 
         $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);  // common.php
         $reviewCount = $result[0];
@@ -219,7 +221,7 @@ class PlaceController extends Controller {
             'rateQuestionJSON' => $rateQuestionJSON, 'textQuestionJSON' => $textQuestionJSON, 'multiQuestionJSON' => $multiQuestionJSON,
             'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState, 'userCode' => $userCode,
             'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0],
-            'photos' => $photos, 'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
+            'photos' => $photos, 'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson, 'userVideo' => $userVideo, 'userVideoJson' => $userVideoJson,
             'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'kindPlace' => $kindPlace,
             'placeMode' => $kindPlace->tableName, 'rooms' => $rooms, 'jsonRoom' => $jsonRoom, 'video' => $video,
@@ -510,7 +512,7 @@ class PlaceController extends Controller {
         echo \GuzzleHttp\json_encode([]);
     }
 
-    public function bookMark()
+    public function setBookMark()
     {
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {
 
@@ -525,7 +527,7 @@ class PlaceController extends Controller {
 
             if ($log != null) {
                 $log->delete();
-                echo "ok";
+                echo "ok-del";
                 return;
             }
 
@@ -538,7 +540,7 @@ class PlaceController extends Controller {
             $log->activityId = Activity::whereName('نشانه گذاری')->first()->id;
             try {
                 $log->save();
-                echo "ok";
+                echo "ok-add";
             } catch (Exception $x) {
             }
         }

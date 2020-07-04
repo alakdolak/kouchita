@@ -38,7 +38,7 @@
                         </span>
                     </div>
                     <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0 mobile-mode">
-                        <span onclick="bookMark(); changeBookmarkIcon()" class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                        <span onclick="bookMark();" class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
                             <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castles"}} "></div>
                             <div class="saveAsBookmarkLabel">
                                 {{__('ذخیره این صفحه')}}
@@ -159,11 +159,6 @@
             $('.saveAsBookmarkIcon').addClass('castle-fill').removeClass('castles');
         else
             $('.saveAsBookmarkIcon').addClass('castles').removeClass('castle-fill');
-    }
-
-    function toggleShareIcon(elmt) {
-        $(elmt).children('div.first').toggleClass('sharePageIcon');
-        $(elmt).children('div.first').toggleClass('sharePageIconFill');
     }
 
     $('#share_pic_mobile').click(function () {

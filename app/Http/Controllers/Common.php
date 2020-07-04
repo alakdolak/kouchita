@@ -661,9 +661,7 @@ function compressImage($source, $destination, $quality){
 function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $sitePics = array();
-    $sitePicsJSON = array();
-    $photographerPicsJSON = array();
-    $photographerPics = array();
+    $userVideo = [];
 
     if(auth()->check())
         $user = auth()->user();
@@ -674,27 +672,31 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
 
-    $userPhotos = DB::select('SELECT pic.* , users.* FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
+    $userPhotos = DB::select('SELECT pic.* , users.username, users.id as userId FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
     foreach ($userPhotos as $item){
-
         $item->pic = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
-
-        if ($item->first_name != null)
-            $item->username = $item->first_name . ' ' . $item->last_name;
-
-        if($item->uploadPhoto == 0){
-            $deffPic = DefaultPic::find($item->picture);
-
-            if($deffPic != null)
-                $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
-            else
-                $item->userPic = URL::asset('_images/nopic/blank.jpg');
-        }
-        else{
-            $item->userPic = URL::asset('userProfile/' . $item->picture);
-        }
+        $item->userPic = getUserPic($item->userId);
+        $item->time = getDifferenceTimeString($item->created_at);
     }
     $userPhotosJSON = json_encode($userPhotos);
+
+    $userVideo = DB::select('SELECT pic.*, users.username, users.id as userId FROM reviewPics AS pic, log, users WHERE pic.isVideo = 1 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
+    foreach ($userVideo as $item){
+        $videoArray = explode('.', $item->pic);
+        $videoPicName = '';
+        for($k = 0; $k < count($videoArray)-1; $k++)
+            $videoPicName .= $videoArray[$k] . '.';
+        $videoPicName .= 'png';
+
+        $item->picName = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $videoPicName);
+        $item->videoUrl = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
+
+        $item->video = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
+        $item->userPic = getUserPic($item->userId);
+
+        $item->time = getDifferenceTimeString($item->created_at);
+    }
+    $userVideoJSON = json_encode($userVideo);
 
     $koochitaPic = URL::asset('images/icons/mainIcon.svg');
     if(is_file(__DIR__ .'/../../../../assets/_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber)) {
@@ -772,9 +774,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     foreach ($photographerPic as $item){
         $user = User::find($item->userId);
-        $userName = $user->first_name . ' ' . $user->last_name;
-        if($userName == ' ')
-            $userName = $user->username;
+        $userName = $user->username;
 
         if($user != null) {
             $s = [
@@ -801,7 +801,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     }
     $photographerPicsJSON = json_encode($photographerPics);
 
-    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON];
+    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON, $userVideo, $userVideoJSON];
 }
 
 function deleteReviewPic(){

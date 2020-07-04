@@ -1,6 +1,53 @@
+<link rel="stylesheet" href="{{URL::asset('js/emoji/lib/css/emoji.css')}}">
+
+<script src="{{URL::asset('js/emoji/lib/js/config.js')}}"></script>
+<script src="{{URL::asset('js/emoji/lib/js/util.js')}}"></script>
+<script src="{{URL::asset('js/emoji/lib/js/jquery.emojiarea.js')}}"></script>
+<script src="{{URL::asset('js/emoji/lib/js/emoji-picker.js')}}"></script>
+
+<style>
+    .emoji-picker-icon{
+        cursor: pointer;
+        position: absolute;
+        font-size: 20px;
+        z-index: 100;
+        transition: none;
+        color: black;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        height: 20px;
+        left: 30px;
+        width: 20px;
+        bottom: 20px;
+        right: auto;
+        background-image: url(http://localhost/kouchita/public/images/smile.png);
+        background-size: contain;
+        opacity: 1;
+        top: auto;
+    }
+    .emoji-menu{
+        right: auto;
+        left: 0px;
+    }
+    .inputBoxInputComment{
+        height: auto !important;
+        text-align: right !important;
+        border: none !important;
+        max-height: 1000px;
+    }
+    .emoji-wysiwyg-editor{
+        border: none !important;
+        font-size: 17px;
+        font-weight: bold;
+    }
+</style>
+
 <div class="postModalMainDiv hidden" id="reviewMainDivDetails">
     <div class="modal-dialog">
-        <form action="{{route('storeReview')}}" method="post">
+        <form id="writeReviewForm" action="{{route('storeReview')}}" method="post">
             {!! csrf_field() !!}
             <input type="hidden" name="kindPlaceId" value="{{$kindPlaceId}}">
             <input type="hidden" name="placeId" value="{{$place->id}}">
@@ -13,25 +60,41 @@
 
             <div class="modal-content">
                 <div class="postMainDivHeader" style="display: flex; justify-content: space-between">
-                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal"
-                            onclick="closeNewPostModal(); showMobileTabLink()">&times;
+                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal()">&times;
                     </button>
-                    دیدگاه شما
+                    {{__('دیدگاه شما')}}
                 </div>
                 <div class="commentInputMainDivModal">
                     <div class="inputBoxGeneralInfo inputBox postInputBoxModal">
                         <div class="profilePicForPostModal circleBase type2">
-                            <img src="{{ $userPic }}"
-                                 style="width: 100%; height: 100%; border-radius: 50%;">
+                            <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
                         @if(auth()->check())
-                            <textarea id="postTextArea" class="inputBoxInput inputBoxInputComment"
+                            <textarea id="postTextArea" class="inputBoxInput inputBoxInputComment openEmojiIcon"
                                       name="text" type="text"
-                                      placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
-                                      style="overflow:hidden"></textarea>
+                                      placeholder="{{ auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
+                                      style="overflow:hidden" data-emojiable="true"></textarea>
                         @endif
-                        <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">
+
+{{--                        <div id="emojiIcons" class="commentSmileyIcon " style="width: 300px; text-align: left">--}}
+{{--                            <img class="commentSmileyIcon " src="{{URL::asset('images/smile.png')}}">--}}
+{{--                        </div>--}}
+
+                        <script>
+                            $(function() {
+                                // Initializes and creates emoji set from sprite sheet
+                                window.emojiPicker = new EmojiPicker({
+                                    emojiable_selector: '[data-emojiable=true]',
+                                    assetsPath: '{{URL::asset('js/emoji/lib/img')}}',
+                                    popupButtonClasses: 'openEmojiIcon'
+                                });
+
+                                window.emojiPicker.discover();
+                            });
+                        </script>
+
                     </div>
+
                     <div class="clear-both"></div>
                     <div class="row">
                         <div class="commentPhotosMainDiv" id="reviewShowPics"></div>
@@ -40,12 +103,8 @@
                     <div class="addParticipantName">
                         <span class="addParticipantSpan">با</span>
                         <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
-                                    <textarea id="assignedSearch" class="inputBoxInput"
-                                              placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"
-                                              onkeyup="searchUser(this.value)"></textarea>
-
+                            <textarea id="assignedSearch" class="inputBoxInput" placeholder="{{__('چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید')}}" onkeyup="searchUser(this.value)"></textarea>
                             <div class="assignedResult" id="assignedResultReview"></div>
-
                             <div class="participantDivMainDiv" id="participantDivMainDiv"></div>
                         </div>
                     </div>
@@ -57,7 +116,7 @@
                     <div class="commentOptionsBoxes">
                         <label for="picReviewInput0">
                             <span class="addPhotoCommentIcon"></span>
-                            <span class="commentOptionsText">عکس اضافه کنید.</span>
+                            <span class="commentOptionsText">{{__('عکس اضافه کنید.')}}</span>
                         </label>
                     </div>
                     <input type="file" id="picReviewInput0" accept="image/*" style="display: none"
@@ -65,30 +124,28 @@
                     <div class="commentOptionsBoxes">
                         <label for="videoReviewInput">
                             <span class="addVideoCommentIcon"></span>
-                            <span class="commentOptionsText">ویدیو اضافه کنید.</span>
+                            <span class="commentOptionsText">{{__('ویدیو اضافه کنید.')}}</span>
                         </label>
                     </div>
-                    <input type="file" id="videoReviewInput" accept="video/*" style="display: none"
-                           onchange="uploadReviewVideo(this, 0)">
+                    <input type="file" id="videoReviewInput" accept="video/*" style="display: none" onchange="uploadReviewVideo(this, 0)">
                     <div class="commentOptionsBoxes">
                         <label for="video360ReviewInput">
                             <span class="add360VideoCommentIcon"></span>
-                            <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                            <span class="commentOptionsText">{{__('ویدیو 360 اضافه کنید.')}}</span>
                         </label>
                     </div>
-                    <input type="file" id="video360ReviewInput" accept="video/*" style="display: none"
-                           onchange="uploadReviewVideo(this, 1)">
+                    <input type="file" id="video360ReviewInput" accept="video/*" style="display: none" onchange="uploadReviewVideo(this, 1)">
                     <div class="commentOptionsBoxes">
                         <span class="tagFriendCommentIcon"></span>
-                        <span class="commentOptionsText">دوستانتان را TAG کنید.</span>
+                        <span class="commentOptionsText">{{__('دوستانتان را TAG کنید.')}}</span>
                     </div>
                 </center>
+
                 @foreach($textQuestion as $item)
                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                         <span class="addOriginCity">{{$item->description}}</span>
                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
-                                    <textarea id="question_{{$item->id}}" name="textAns[]"
-                                              class="inputBoxInput inputBoxInputComment"></textarea>
+                            <textarea id="question_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
                             <input type="hidden" name="textId[]" value="{{$item->id}}">
                         </div>
                     </div>
@@ -123,13 +180,13 @@
                     @for($i = 0; $i < count($rateQuestion); $i++)
                         <div class="display-inline-block full-width">
                             <b id="rateName_{{$i}}"
-                               class="col-xs-3 font-size-15 line-height-108 pd-lt-0">بد نبود</b>
+                               class="col-xs-3 font-size-15 line-height-108 pd-lt-0"></b>
                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-0">
                                 <div class="font-size-25" style="display: flex;">
-                                            <span id="rate_5_{{$i}}" class="starRating"
-                                                  onmouseover="momentChangeRate({{$i}}, 5, 'in')"
-                                                  onmouseleave="momentChangeRate({{$i}}, 5, 'out')"
-                                                  onclick="chooseQuestionRate({{$i}}, 5, {{$rateQuestion[$i]->id}})"></span>
+                                    <span id="rate_5_{{$i}}" class="starRating"
+                                          onmouseover="momentChangeRate({{$i}}, 5, 'in')"
+                                          onmouseleave="momentChangeRate({{$i}}, 5, 'out')"
+                                          onclick="chooseQuestionRate({{$i}}, 5, {{$rateQuestion[$i]->id}})"></span>
                                     <span id="rate_4_{{$i}}" class="starRating"
                                           onmouseover="momentChangeRate({{$i}}, 4, 'in')"
                                           onmouseleave="momentChangeRate({{$i}}, 4, 'out')"
@@ -138,11 +195,11 @@
                                           onmouseover="momentChangeRate({{$i}}, 3, 'in')"
                                           onmouseleave="momentChangeRate({{$i}}, 3, 'out')"
                                           onclick="chooseQuestionRate({{$i}}, 3, {{$rateQuestion[$i]->id}})"></span>
-                                    <span id="rate_2_{{$i}}" class="starRatingGreen"
+                                    <span id="rate_2_{{$i}}" class="starRating"
                                           onmouseover="momentChangeRate({{$i}}, 2, 'in')"
                                           onmouseleave="momentChangeRate({{$i}}, 2, 'out')"
                                           onclick="chooseQuestionRate({{$i}}, 2, {{$rateQuestion[$i]->id}})"></span>
-                                    <span id="rate_1_{{$i}}" class="starRatingGreen"
+                                    <span id="rate_1_{{$i}}" class="starRating"
                                           onmouseover="momentChangeRate({{$i}}, 1, 'in')"
                                           onmouseleave="momentChangeRate({{$i}}, 1, 'out')"
                                           onclick="chooseQuestionRate({{$i}}, 1, {{$rateQuestion[$i]->id}})"></span>
@@ -153,9 +210,8 @@
                     @endfor
                 </div>
 
-
-                <button class="postMainDivFooter" type="submit">
-                    ارسال دیدگاه
+                <button class="postMainDivFooter" type="button" onclick="sendWriteReview()">
+                    {{__('ارسال دیدگاه')}}
                 </button>
             </div>
         </form>
@@ -300,16 +356,25 @@
 </div>
 
 <script>
+
+    // $('#postTextArea').emoji()
+    // $('#emojiIcon').emoji()
+
+    var rateQuestion = {!! $rateQuestionJSON !!} ;
+    var rateQuestionAns = [];
+    var allReviews;
+    var reviewsCount;
     var assignedUser = [];
     var reviewPicNumber = 0;
     var reviewMultiAns = [];
     var reviewMultiAnsQuestionId = [];
     var reviewMultiAnsId = [];
-
     var reviewRateAnsQuestionId = [];
     var reviewRateAnsId = [];
-
     var imgCropNumber;
+
+    for (i = 0; i < rateQuestion.length; i++)
+        rateQuestionAns[i] = 0;
 
     function momentChangeRate(_index, _value, _kind){
 
@@ -357,6 +422,9 @@
                 }
             }
             switch (_value) {
+                case 0:
+                    text = '';
+                    break;
                 case 1:
                     text = 'اصلا راضی نبودم';
                     break;
@@ -463,7 +531,10 @@
         if (input.files && input.files[0]) {
             var lastNumber = reviewPicNumber;
             var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
-                '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload"></div>\n' +
+                '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload">' +
+                '<div id="reviewPicLoaderBackGround_' + reviewPicNumber + '" class="loaderReviewBackGround"></div>' +
+                '<div id="reviewPicLoaderPercent_' + reviewPicNumber + '" class="loaderReviewPercent"></div>' +
+                '</div>\n' +
                 '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
                 '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
                 '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
@@ -484,7 +555,8 @@
             data.append('pic', input.files[0]);
             data.append('code', userCode);
 
-            var uploadReviewPicLoader = $('#reviewPicLoader_' + reviewPicNumber);
+            var uploadReviewPicLoader = $('#reviewPicLoaderBackGround_' + reviewPicNumber);
+            var uploadReviewPicLoaderPercent = $('#reviewPicLoaderPercent_' + reviewPicNumber);
             $.ajax({
                 type: 'post',
                 url: reviewUploadPic,
@@ -504,10 +576,11 @@
                             size = 160 - (percent * 1.6);
                             size += 'px';
 
-                            console.log(percentage)
+                            uploadReviewPicLoaderPercent.text(percentage);
 
-                            leftBottom = (percent * 1.6)/2 - 30;
+                            leftBottom = (percent * 1.6)/2;
                             leftBottom += 'px';
+
                             uploadReviewPicLoader.css('width', size);
                             uploadReviewPicLoader.css('height', size);
 
@@ -554,7 +627,10 @@
 
         var lastNumber = reviewPicNumber;
         var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">' +
-            '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload"></div>\n' +
+            '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload">' +
+            '<div id="reviewPicLoaderBackGround_' + reviewPicNumber + '" class="loaderReviewBackGround"></div>' +
+            '<div id="reviewPicLoaderPercent_' + reviewPicNumber + '" class="loaderReviewPercent"></div>' +
+            '</div>\n' +
             '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
             '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
             '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
@@ -609,7 +685,8 @@
                     URL.revokeObjectURL(url);
                     data.append('videoPic', image);
 
-                    var uploadReviewPicLoader = $('#reviewPicLoader_' + reviewPicNumber);
+                    var uploadReviewPicLoader = $('#reviewPicLoaderBackGround_' + reviewPicNumber);
+                    var uploadReviewPicLoaderPercent = $('#reviewPicLoaderPercent_' + reviewPicNumber);
                     $.ajax({
                         type: 'post',
                         url: reviewUploadVideo,
@@ -628,9 +705,10 @@
                                     size = 160 - (percent * 1.6);
                                     size += 'px';
 
+                                    uploadReviewPicLoaderPercent.text(percentage);
                                     console.log(percentage);
 
-                                    leftBottom = (percent * 1.6)/2 - 30;
+                                    leftBottom = (percent * 1.6)/2;
                                     leftBottom += 'px';
                                     uploadReviewPicLoader.css('width', size);
                                     uploadReviewPicLoader.css('height', size);
@@ -991,6 +1069,12 @@
                 }
             })
         });
+    }
+
+    function sendWriteReview(){
+        let text = $('#postTextArea').val();
+        console.log(text);
+        $('#writeReviewForm').submit();
     }
 
 </script>

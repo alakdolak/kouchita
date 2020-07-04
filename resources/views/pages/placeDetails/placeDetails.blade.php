@@ -55,16 +55,18 @@ if ($total == 0)
         var nearAmaken = [];
         var nearMajara = [];
 
+        var thisUrl = '{{Request::url()}}'
         var userCode = '{{$userCode}}';
         var userPic = '{{$userPic}}';
         var userPhotos = {!! $userPhotosJson !!};
+        var userVideo = {!! $userVideoJson !!};
         var placeMode = '{{$placeMode}}';
         var getQuestions = '{{route('getQuestions')}}';
         var likeLog = '{{route('likeLog')}}';
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
         var reviewUploadVideo = '{{route('reviewUploadVideo')}}';
-        var bookMarkDir = '{{route('bookMark')}}';
+        var bookMarkDir = '{{route('setBookMark')}}';
         var getPlaceTrips = '{{route('placeTrips')}}';
         var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
         var soon = '{{route('soon')}}';
@@ -103,7 +105,6 @@ if ($total == 0)
     <script async src="{{URL::asset('js/album.js')}}"></script>
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
-
     <style>
         .affix {
             max-width: 100%;
@@ -121,9 +122,8 @@ if ($total == 0)
 
         .changeWidth {
             @if(session('goDate'))
- width: 14% !important;
+             width: 14% !important;
         @endif
-
         }
 
         .rtl .ui_bubble_rating:after, .rtl .ui_bubble_rating:before {
@@ -164,7 +164,30 @@ if ($total == 0)
             display: flex;
             align-items: center;
         }
+        DIV.prw_rup.prw_common_centered_image .imgWrap{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translate(0%, 0%);
+            -webkit-transform: translate(0%, 0%);
+            -moz-transform: translate(0%, 0%);
+            -ms-transform: translate(0%, 0%);
+        }
 
+        #share_box_mobile{
+            bottom: -190px;
+        }
+        #share_box{
+            bottom: -205px !important;
+        }
+        #share_box::before{
+            left: 50% !important;
+        }
     </style>
 @stop
 
@@ -222,42 +245,22 @@ if ($total == 0)
                     </a>
                     <div class="clear-both"></div>
                     <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                            <span onclick="bookMark(); changeBookmarkIcon()"
-                                  class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
-                                <div id="bookMarkIcon"
-                                     class="saveAsBookmarkIcon {{auth()->check() && ($bookMark) ? "castle-fill" : "castles"}}"></div>
-                                <div class="saveAsBookmarkLabel">
-                                    ذخیره این صفحه
-                                </div>
-                            </span>
-                        <div id="helpSpan_8" class="helpSpans hidden row">
-                            <span class="introjs-arrow"></span>
-                            <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا
-                                هر وقت که خواستید دوباره به آن باز گردید.</p>
-                            <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی
-                            </button>
-                            <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی
-                            </button>
-                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                        </div>
+                        <span onclick="bookMark();"
+                              class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                            <div id="bookMarkIcon" class="saveAsBookmarkIcon {{auth()->check() && ($bookMark) ? "castle-fill" : "castles"}}"></div>
+                            <div class="saveAsBookmarkLabel">
+                                {{__('ذخیره این صفحه')}}
+                            </div>
+                        </span>
                     </div>
 
                     <div id="share_pic" class="wideScreen targets float-left col-xs-6 pd-0">
-                            <span class="ui_button save-location-7306673 sharePageMainDiv"
-                                  onclick="toggleShareIcon(this)">
-                                <div class="sharePageIcon first"></div>
-                                <div class="sharePageLabel">
-                                    اشتراک‌گذاری صفحه
-                                </div>
-                            </span>
-                        <div id="helpSpan_8" class="helpSpans hidden row">
-                            <span class="introjs-arrow"></span>
-                            <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر
-                                وقت که خواستید دوباره به آن باز گردید.</p>
-                            <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
-                            <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
-                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                        </div>
+                        <span class="ui_button save-location-7306673 sharePageMainDiv">
+                            <div class="shareIconDiv sharePageIcon first"></div>
+                            <div class="sharePageLabel">
+                                {{__('اشتراک‌گذاری صفحه')}}
+                            </div>
+                        </span>
                     </div>
                     @include('layouts.shareBox')
 
@@ -278,7 +281,7 @@ if ($total == 0)
                                                                 <img class="eachPicOfSlider resizeImgClass"
                                                                      src="{{$photographerPics[$i]['s']}}"
                                                                      alt="{{$photographerPics[$i]['alt']}}"
-                                                                     style="width: 100%;">
+                                                                     style="width: 100%;"  onload="fitThisImg(this)">
                                                                 <div class="see_all_count_wrap">
                                                                     <span class="see_all_count">
                                                                         <div class="circleBase type2"
@@ -316,15 +319,13 @@ if ($total == 0)
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if(count($sitePics) != 0)
-                                                    <span class="imgWrap imgWrap1stTemp"
-                                                          onclick="showPhotoAlbum('sitePics')">
-                                                            <img alt="{{$place->alt}}" src="{{$thumbnail}}"
-                                                                 class="centeredImg" width="100%"/>
-                                                        </span>
+                                                    <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
+                                                        <img alt="{{$place->alt}}" src="{{$thumbnail}}" class="resizeImgClass centeredImg" width="100%" onload="fitThisImg(this)"/>
+                                                    </span>
                                                 @else
                                                     <span class="imgWrap imgWrap1stTemp">
                                                             <img src="{{URL::asset('images/mainPics/nopictext1.jpg')}}"
-                                                                 class="centeredImg" width="100%"/>
+                                                                 class="resizeImgClass centeredImg" width="100%" onload="fitThisImg(this)"/>
                                                         </span>
                                                 @endif
                                             </div>
@@ -343,10 +344,10 @@ if ($total == 0)
                                             <div class="prw_rup prw_common_centered_image" {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}>
                                         <span class="imgWrap imgWrap1stTemp">
                                             @if(count($userPhotos) != 0)
-                                                <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
+                                                <img src="{{$userPhotos[0]->pic}}" class="resizeImgClass centeredImg" width="100%" onload="fitThisImg(this)"/>
                                             @else
                                                 <img src="{{URL::asset('images/mainPics/nopictext1.jpg')}}"
-                                                     class="centeredImg" width="100%"/>
+                                                     class="resizeImgClass centeredImg" width="100%" onload="fitThisImg(this)"/>
                                             @endif
                                         </span>
                                             </div>
@@ -361,14 +362,18 @@ if ($total == 0)
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
-                                        <span class="imgWrap imgWrap1stTemp">
-                                            <img src="https://static.tacdn.com/img2/x.gif" id="imgWrap3rdLine"
-                                                 class="centeredImg" width="100%"/>
+                                        <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('userVideo')">
+                                            @if(count($userVideo) > 0)
+                                                <img src="{{$userVideo[0]->picName}}" class="resizeImgClass" onload="fitThisImg(this)">
+                                            @else
+                                                <img src="{{URL::asset('images/mainPics/nopictext1.jpg')}}"
+                                                     class="centeredImg" width="100%"/>
+                                            @endif
                                         </span>
                                             </div>
                                             <div class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>
-                                                ویدیو و فیلم 360 - {{(!isset($video) || $video == null) ? 0 : 1}}
+                                                ویدیو و فیلم 360 - {{ count($userVideo) }}
                                             </div>
                                         </div>
                                     </div>
@@ -1431,7 +1436,7 @@ if ($total == 0)
 
         function newPostModal(kind = '') {
             if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInSaveToTripMode);
+                showLoginPrompt('{{Request::url()}}');
                 return;
             }
 
@@ -1625,6 +1630,7 @@ if ($total == 0)
         var photographerPicsForAlbum = [];
         var sitePicsForAlbum = [];
         var userPhotosForAlbum = [];
+        var userVideoForAlbum = [];
 
         for (var i = 0; i < photographerPics.length; i++) {
             photographerPicsForAlbum[i] = {
@@ -1670,6 +1676,20 @@ if ($total == 0)
                 'mainPic': userPhotos[i]['pic'],
                 'userPic': userPhotos[i]['userPic'],
                 'userName': userPhotos[i]['username'],
+                'uploadTime': userPhotos[i]['time'],
+                'showInfo': false,
+            }
+        }
+
+        for (var i = 0; i < userVideo.length; i++) {
+            userVideoForAlbum[i] = {
+                'id': userVideo[i]['id'],
+                'sidePic': userVideo[i]['picName'],
+                'mainPic': userVideo[i]['picName'],
+                'userPic': userVideo[i]['userPic'],
+                'userName': userVideo[i]['username'],
+                'video': userVideo[i]['video'],
+                'uploadTime': userVideo[i]['time'],
                 'showInfo': false,
             }
         }
@@ -1681,21 +1701,13 @@ if ($total == 0)
                 createPhotoModal('عکس های سایت', sitePicsForAlbum);
             else if (_kind == 'userPics')
                 createPhotoModal('عکس های کاربران', userPhotosForAlbum);
+            else if (_kind == 'userVideo')
+                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);
         }
 
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
 
-    </script>
-
-    <script>
-        var rateQuestion = {!! $rateQuestionJSON !!} ;
-        var rateQuestionAns = [];
-        var allReviews;
-        var reviewsCount;
-
-        for (i = 0; i < rateQuestion.length; i++)
-            rateQuestionAns[i] = 2;
     </script>
 
     @include('layouts.pop-up-create-trip_in_hotel_details')

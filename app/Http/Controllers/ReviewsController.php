@@ -181,7 +181,7 @@ class ReviewsController extends Controller
             $log->date = Carbon::now()->format('Y-m-d');
             $log->time = getToday()['time'];
             $log->activityId = $activity->id;
-            if($request->text != null)
+            if ($request->text != null)
                 $log->text = $request->text;
             else
                 $log->text = '';
@@ -191,52 +191,52 @@ class ReviewsController extends Controller
             $reviewPic = ReviewPic::where('code', $request->code)->get();
             \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
 
-            if(count($reviewPic) > 0){
+            if (count($reviewPic) > 0) {
                 $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
-                if(!file_exists($location))
+                if (!file_exists($location))
                     mkdir($location);
                 $location .= '/' . $place->file;
-                if(!file_exists($location))
+                if (!file_exists($location))
                     mkdir($location);
 
                 $limboLocation = __DIR__ . '/../../../../assets/limbo/';
 
-                foreach ($reviewPic as $item){
+                foreach ($reviewPic as $item) {
                     $file = $limboLocation . $item->pic;
-                    $dest = $location . '/' .  $item->pic;
-                    if(file_exists($file))
-                        rename( $file , $dest);
+                    $dest = $location . '/' . $item->pic;
+                    if (file_exists($file))
+                        rename($file, $dest);
 
-                    if($item->isVideo == 1){
+                    if ($item->isVideo == 1) {
                         $videoArray = explode('.', $item->pic);
                         $videoName = '';
-                        for($k = 0; $k < count($videoArray)-1; $k++)
+                        for ($k = 0; $k < count($videoArray) - 1; $k++)
                             $videoName .= $videoArray[$k] . '.';
                         $videoName .= 'png';
 
                         $file = $limboLocation . $videoName;
-                        $dest = $location . '/' .  $videoName;
-                        if(file_exists($file))
-                            rename( $file , $dest);
+                        $dest = $location . '/' . $videoName;
+                        if (file_exists($file))
+                            rename($file, $dest);
                     }
                 }
             }
 
             $assignedUser = json_decode($request->assignedUser);
-            if($assignedUser != null) {
-                foreach ($assignedUser as $item) {
-                    $newAssigned = new ReviewUserAssigned();
-                    $newAssigned->logId = $log->id;
+            if ($assignedUser != null) {
+                    foreach ($assignedUser as $item) {
+                        $newAssigned = new ReviewUserAssigned();
+                        $newAssigned->logId = $log->id;
 
-                    $user = User::where('username', $item)->orWhere('email', $item)->first();
-                    if ($user != null)
-                        $newAssigned->userId = $user->id;
-                    else
-                        $newAssigned->email = $item;
+                        $user = User::where('username', $item)->orWhere('email', $item)->first();
+                        if ($user != null)
+                            $newAssigned->userId = $user->id;
+                        else
+                            $newAssigned->email = $item;
 
-                    $newAssigned->save();
+                        $newAssigned->save();
+                    }
                 }
-            }
 
             if($request->textId != null && $request->textAns != null){
                 $textQuestion = $request->textId;
@@ -295,9 +295,7 @@ class ReviewsController extends Controller
             $ans = array();
             $isFilter = false;
             $isPicFilter = false;
-            $isTextFilter = false;
             $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
-            $textFilter = '';
             $onlyPic = 0;
 
             $count = 0;
@@ -573,13 +571,10 @@ class ReviewsController extends Controller
 
                 $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $videoName);
                 $item2->videoUrl = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
-
             }
             else{
                 $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
             }
-//            $item2->width = getimagesize($item2->url)[0];
-//            $item2->height = getimagesize($item2->url)[1];
         }
         return $item;
     }

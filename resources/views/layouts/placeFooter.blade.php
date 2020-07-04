@@ -162,7 +162,6 @@
                     ورود
                     <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
                 </span>
-                <span class="ui_icon member"></span>
             </div>
         @endif
     </div>
