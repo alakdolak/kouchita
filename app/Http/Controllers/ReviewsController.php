@@ -221,22 +221,27 @@ class ReviewsController extends Controller
                     }
                 }
             }
+            else if($request->text == null){
+                $log->subject = 'dontShowThisText';
+                $log->confirm = 1;
+                $log->save();
+            }
 
             $assignedUser = json_decode($request->assignedUser);
             if ($assignedUser != null) {
-                    foreach ($assignedUser as $item) {
-                        $newAssigned = new ReviewUserAssigned();
-                        $newAssigned->logId = $log->id;
+                foreach ($assignedUser as $item) {
+                    $newAssigned = new ReviewUserAssigned();
+                    $newAssigned->logId = $log->id;
 
-                        $user = User::where('username', $item)->orWhere('email', $item)->first();
-                        if ($user != null)
-                            $newAssigned->userId = $user->id;
-                        else
-                            $newAssigned->email = $item;
+                    $user = User::where('username', $item)->orWhere('email', $item)->first();
+                    if ($user != null)
+                        $newAssigned->userId = $user->id;
+                    else
+                        $newAssigned->email = $item;
 
-                        $newAssigned->save();
-                    }
+                    $newAssigned->save();
                 }
+            }
 
             if($request->textId != null && $request->textAns != null){
                 $textQuestion = $request->textId;
@@ -281,8 +286,21 @@ class ReviewsController extends Controller
                     }
                 }
             }
+
+
+            if($log->subject != 'dontShowThisText')
+                $log = $this->reviewTrueType($log);
+            else
+                $log = [];
+
+            $code = $uId . '_' . rand(10000,99999);
+
+            echo json_encode(['status' => 'ok', 'result' => $log, 'code' => $code]);
         }
-        return \redirect()->back();
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
     }
 
     public function getReviews(Request $request){
@@ -310,7 +328,7 @@ class ReviewsController extends Controller
             else
                 $uId = 0;
 
-            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1))';
+            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject != "dontShowThisText"';
 
             if(isset($request->filters)) {
                 foreach ($request->filters as $item) {
@@ -437,88 +455,8 @@ class ReviewsController extends Controller
             if(count($logs) == 0)
                 echo 'nok1';
             else{
-                foreach ($logs as $key => $item){
-
-                    $anss = getAnsToComments($item->id);
-                    $ansToReview = $anss[0];
-                    $item->ansNum = $anss[1];
-
-                    if(count($ansToReview) > 0)
-                        $item->comment = $ansToReview;
-                    else
-                        $item->comment = array();
-
-                    $item->user = User::select(['id', 'first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
-                    if ($item->user->first_name != null)
-                        $item->usernameReviewWriter = $item->user->first_name . ' ' . $item->user->last_name;
-                    else
-                        $item->usernameReviewWriter = $item->user->username;
-
-                    $item->userPic = getUserPic($item->user->id);
-
-                    $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
-
-                    $kindPlace = Place::find($item->kindPlaceId);
-                    $item->mainFile = $kindPlace->fileName;
-                    $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                    $item->kindPlace = $kindPlace->name;
-
-                    $item->pics = ReviewPic::where('logId', $item->id)->get();
-                    $item = $this->imageStyleCreate($item);
-
-                    $item->city = Cities::find($item->place->cityId);
-                    $item->state = State::find($item->city->stateId);
-
-                    if (count($item->assigned) != 0) {
-                        foreach ($item->assigned as $item2) {
-                            if ($item2->userId != null) {
-                                $u = User::find($item2->userId);
-                                if ($u != null) {
-                                    if ($u->first_name != null)
-                                        $item2->name = $u->first_name . ' ' . $u->last_name;
-                                    else
-                                        $item2->name = $u->username;
-                                }
-                            }
-                        }
-                    }
-
-                    $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionUserAns AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
-                    if (count($item->ans) != 0) {
-                        foreach ($item->ans as $item2) {
-                            if ($item2->ansType == 'multi') {
-                                $anss = QuestionAns::where('questionId', $item2->id)->where('id', $item2->ans)->first();
-                                $item2->ans = $anss->ans;
-                                $item2->ansId = $anss->id;
-                            }
-                        }
-                    }
-
-                    $time = $item->date . '';
-                    if(strlen($item->time) == 1)
-                        $item->time = '000' . $item->time;
-                    else if(strlen($item->time) == 2)
-                        $item->time = '00' . $item->time;
-                    else if(strlen($item->time) == 3)
-                        $item->time = '0' . $item->time;
-
-                    if(strlen($item->time) == 4) {
-                        $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
-                        $item->timeAgo = getDifferenceTimeString($time);
-                    }
-                    else
-                        $item->timeAgo = '';
-
-                    $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
-                    $item->dislike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
-
-                    if (\auth()->check()) {
-                        $u = \auth()->user();
-                        $item->userLike = LogFeedBack::where('logId', $item->id)->where('userId', $u->id)->first();
-                    } else
-                        $item->userLike = null;
-
-                }
+                foreach ($logs as $key => $item)
+                    $item = $this->reviewTrueType($item);
 
                 echo json_encode([$logs, $logCount]);
             }
@@ -577,5 +515,81 @@ class ReviewsController extends Controller
             }
         }
         return $item;
+    }
+
+    private function reviewTrueType($_log){
+        $anss = getAnsToComments($_log->id);
+        $ansToReview = $anss[0];
+        $_log->ansNum = $anss[1];
+
+        if(count($ansToReview) > 0)
+            $_log->comment = $ansToReview;
+        else
+            $_log->comment = array();
+
+        $_log->user = User::select(['id', 'first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($_log->visitorId);
+        $_log->usernameReviewWriter = $_log->user->username;
+
+        $_log->userPic = getUserPic($_log->user->id);
+
+        $_log->assigned = ReviewUserAssigned::where('logId', $_log->id)->get();
+
+        $kindPlace = Place::find($_log->kindPlaceId);
+        $_log->mainFile = $kindPlace->fileName;
+        $_log->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_log->placeId);
+        $_log->kindPlace = $kindPlace->name;
+
+        $_log->pics = ReviewPic::where('logId', $_log->id)->get();
+        $_log = $this->imageStyleCreate($_log);
+
+        $_log->city = Cities::find($_log->place->cityId);
+        $_log->state = State::find($_log->city->stateId);
+
+        if (count($_log->assigned) != 0) {
+            foreach ($_log->assigned as $_log2) {
+                if ($_log2->userId != null) {
+                    $u = User::find($_log2->userId);
+                    if ($u != null)
+                        $_log2->name = $u->username;
+                }
+            }
+        }
+
+        $_log->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionUserAns AS us , questions AS qus WHERE us.logId = ' . $_log->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
+        if (count($_log->ans) != 0) {
+            foreach ($_log->ans as $_log2) {
+                if ($_log2->ansType == 'multi') {
+                    $anss = QuestionAns::where('questionId', $_log2->id)->where('id', $_log2->ans)->first();
+                    $_log2->ans = $anss->ans;
+                    $_log2->ansId = $anss->id;
+                }
+            }
+        }
+
+        $time = $_log->date . '';
+        if(strlen($_log->time) == 1)
+            $_log->time = '000' . $_log->time;
+        else if(strlen($_log->time) == 2)
+            $_log->time = '00' . $_log->time;
+        else if(strlen($_log->time) == 3)
+            $_log->time = '0' . $_log->time;
+
+        if(strlen($_log->time) == 4) {
+            $time .= ' ' . substr($_log->time, 0, 2) . ':' . substr($_log->time, 2, 2);
+            $_log->timeAgo = getDifferenceTimeString($time);
+        }
+        else
+            $_log->timeAgo = '';
+
+        $_log->like = LogFeedBack::where('logId', $_log->id)->where('like', 1)->count();
+        $_log->dislike = LogFeedBack::where('logId', $_log->id)->where('like', -1)->count();
+
+        if (\auth()->check()) {
+            $u = \auth()->user();
+            $_log->userLike = LogFeedBack::where('logId', $_log->id)->where('userId', $u->id)->first();
+        } else
+            $_log->userLike = null;
+
+        return $_log;
     }
 }

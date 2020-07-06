@@ -1,67 +1,21 @@
-<link rel="stylesheet" href="{{URL::asset('js/emoji/lib/css/emoji.css')}}">
-
-<script src="{{URL::asset('js/emoji/lib/js/config.js')}}"></script>
-<script src="{{URL::asset('js/emoji/lib/js/util.js')}}"></script>
-<script src="{{URL::asset('js/emoji/lib/js/jquery.emojiarea.js')}}"></script>
-<script src="{{URL::asset('js/emoji/lib/js/emoji-picker.js')}}"></script>
-
-<style>
-    .emoji-picker-icon{
-        cursor: pointer;
-        position: absolute;
-        font-size: 20px;
-        z-index: 100;
-        transition: none;
-        color: black;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-        height: 20px;
-        left: 30px;
-        width: 20px;
-        bottom: 20px;
-        right: auto;
-        background-image: url(http://localhost/kouchita/public/images/smile.png);
-        background-size: contain;
-        opacity: 1;
-        top: auto;
-    }
-    .emoji-menu{
-        right: auto;
-        left: 0px;
-    }
-    .inputBoxInputComment{
-        height: auto !important;
-        text-align: right !important;
-        border: none !important;
-        max-height: 1000px;
-    }
-    .emoji-wysiwyg-editor{
-        border: none !important;
-        font-size: 17px;
-        font-weight: bold;
-    }
-</style>
+<link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css')}}">
+<script src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
 
 <div class="postModalMainDiv hidden" id="reviewMainDivDetails">
     <div class="modal-dialog">
-        <form id="writeReviewForm" action="{{route('storeReview')}}" method="post">
-            {!! csrf_field() !!}
-            <input type="hidden" name="kindPlaceId" value="{{$kindPlaceId}}">
-            <input type="hidden" name="placeId" value="{{$place->id}}">
-            <input type="hidden" name="code" value="{{$userCode}}">
-            <input type="hidden" name="assignedUser" id="assignedMemberToReview">
-            <input type="hidden" name="multiAns" id="multiAnsInput">
-            <input type="hidden" name="multiQuestion" id="multiQuestionInput">
-            <input type="hidden" name="rateAns" id="rateAnsInput">
-            <input type="hidden" name="rateQuestion" id="rateQuestionInput">
+        <div>
+            <input type="hidden" id="storeReviewKindPlaceId" name="kindPlaceId" value="{{$kindPlaceId}}">
+            <input type="hidden" id="storeReviewPlaceId" name="placeId" value="{{$place->id}}">
+            <input type="hidden" id="storeReviewCode" name="code" value="{{$userCode}}">
+            <input type="hidden" id="assignedMemberToReview" name="assignedUser">
+            <input type="hidden" id="multiAnsInput" name="multiAns">
+            <input type="hidden" id="multiQuestionInput" name="multiQuestion">
+            <input type="hidden" id="rateAnsInput" name="rateAns">
+            <input type="hidden" id="rateQuestionInput" name="rateQuestion">
 
             <div class="modal-content">
                 <div class="postMainDivHeader" style="display: flex; justify-content: space-between">
-                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal()">&times;
-                    </button>
+                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal()">&times;</button>
                     {{__('دیدگاه شما')}}
                 </div>
                 <div class="commentInputMainDivModal">
@@ -69,30 +23,15 @@
                         <div class="profilePicForPostModal circleBase type2">
                             <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
-                        @if(auth()->check())
-                            <textarea id="postTextArea" class="inputBoxInput inputBoxInputComment openEmojiIcon"
-                                      name="text" type="text"
-                                      placeholder="{{ auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
-                                      style="overflow:hidden" data-emojiable="true"></textarea>
-                        @endif
-
-{{--                        <div id="emojiIcons" class="commentSmileyIcon " style="width: 300px; text-align: left">--}}
-{{--                            <img class="commentSmileyIcon " src="{{URL::asset('images/smile.png')}}">--}}
-{{--                        </div>--}}
+                        <textarea id="postTextArea" class="inputBoxInput inputBoxInputComment openEmojiIcon"
+                                  name="text" type="text"
+                                  placeholder="{{ auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
+                                  style="overflow:hidden" data-emo onchange="checkReviewToSend()"></textarea>
+                        <div id="emojiIcons" class="commentSmileyIcon " style="width: 300px; text-align: left"></div>
 
                         <script>
-                            $(function() {
-                                // Initializes and creates emoji set from sprite sheet
-                                window.emojiPicker = new EmojiPicker({
-                                    emojiable_selector: '[data-emojiable=true]',
-                                    assetsPath: '{{URL::asset('js/emoji/lib/img')}}',
-                                    popupButtonClasses: 'openEmojiIcon'
-                                });
-
-                                window.emojiPicker.discover();
-                            });
+                            $("#postTextArea").emojioneArea();
                         </script>
-
                     </div>
 
                     <div class="clear-both"></div>
@@ -145,8 +84,8 @@
                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                         <span class="addOriginCity">{{$item->description}}</span>
                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
-                            <textarea id="question_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
-                            <input type="hidden" name="textId[]" value="{{$item->id}}">
+                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
+                            <input type="hidden" id="textQuestionId_{{$item->id}}" name="textId[]" value="{{$item->id}}">
                         </div>
                     </div>
                 @endforeach
@@ -210,11 +149,17 @@
                     @endfor
                 </div>
 
-                <button class="postMainDivFooter" type="button" onclick="sendWriteReview()">
+                <button id="sendReviewButton" class="postMainDivFooter" type="button" onclick="sendWriteReview()" disabled>
                     {{__('ارسال دیدگاه')}}
                 </button>
+
+                <div id="sendReviewLoader" class="postMainDivFooter" style="display: none; justify-content: center; align-items: center; color: #cccccc;">
+                    <img src="{{URL::asset('images/icons/mGear.svg')}}" style="width: 30px; height: 30px;">
+                    {{__('در حال ارسال دیدگاه')}}
+                </div>
+
             </div>
-        </form>
+        </div>
         <div id="editReviewPictures" class="backDark hidden">
                     <span class="ui_overlay ui_modal photoUploadOverlay editSection">
                         <div class="body_text" style="padding-top: 12px">
@@ -357,10 +302,8 @@
 
 <script>
 
-    // $('#postTextArea').emoji()
-    // $('#emojiIcon').emoji()
-
     var rateQuestion = {!! $rateQuestionJSON !!} ;
+    var textQuestions = {!! json_encode($textQuestion) !!};
     var rateQuestionAns = [];
     var allReviews;
     var reviewsCount;
@@ -372,6 +315,7 @@
     var reviewRateAnsQuestionId = [];
     var reviewRateAnsId = [];
     var imgCropNumber;
+    var fileUploadNum = 0;
 
     for (i = 0; i < rateQuestion.length; i++)
         rateQuestionAns[i] = 0;
@@ -460,6 +404,8 @@
 
         document.getElementById('rateQuestionInput').value = JSON.stringify(reviewRateAnsQuestionId);
         document.getElementById('rateAnsInput').value = JSON.stringify(reviewRateAnsId);
+
+        checkReviewToSend();
     }
 
     function searchUser(_value){
@@ -476,7 +422,7 @@
 
                         if(_value.includes('@') && _value.includes('.')){
                             text = '<ul>';
-                            text += '<li style="color: blue;" onclick="assignedUserToReview(\'' + _value + '\')"  style="cursor: pointer"> دعوت کردن دوست خود : ' + _value + '</li>';
+                            text += '<li style="color: blue;" onclick="assignedUserToReview(\'' + _value + '\', 0)"  style="cursor: pointer"> دعوت کردن دوست خود : ' + _value + '</li>';
                             text += '</ul>';
 
                             document.getElementById('assignedResultReview').innerHTML = text;
@@ -487,13 +433,13 @@
                         var userEmail = user[0];
                         var userName = user[1];
 
+                        console.log(user);
+
                         text = '<ul>';
-                        for(i = 0; i < userName.length; i++){
+                        for(i = 0; i < userName.length; i++)
                             text += '<li onclick="assignedUserToReview(\'' + userName[i]['username'] + '\')" style="cursor: pointer">' + userName[i]['username'] + '</li>';
-                        }
-                        for(i = 0; i < userEmail.length; i++){
+                        for(i = 0; i < userEmail.length; i++)
                             text += '<li onclick="assignedUserToReview(\'' + userEmail[i]['email'] + '\')" style="cursor: pointer">' + userEmail[i]['email'] + '</li>';
-                        }
                         text += '</ul>';
                         document.getElementById('assignedResultReview').innerHTML = text;
 
@@ -506,7 +452,7 @@
 
     }
 
-    function assignedUserToReview(_email){
+    function assignedUserToReview(_email, _id){
 
         var text = '<div class="participantDiv">\n' +
             '<span class="removeParticipantBtn" onclick="removeAssignedUserToReview(this, \'' + _email + '\')"></span>' + _email + '</div>';
@@ -542,7 +488,6 @@
                 '</div>';
             $('#reviewShowPics').append(text);
 
-
             var reader = new FileReader();
             reader.onload = function(e) {
                 var mainPic = e.target.result;
@@ -553,7 +498,7 @@
             var data = new FormData();
 
             data.append('pic', input.files[0]);
-            data.append('code', userCode);
+            data.append('code', $('#storeReviewCode').val());
 
             var uploadReviewPicLoader = $('#reviewPicLoaderBackGround_' + reviewPicNumber);
             var uploadReviewPicLoaderPercent = $('#reviewPicLoaderPercent_' + reviewPicNumber);
@@ -602,6 +547,8 @@
                             fileName = response[1];
                             document.getElementById('fileName_' + lastNumber).value = fileName;
                             $('#reviewPicLoader_' + lastNumber).remove();
+                            fileUploadNum++;
+                            checkReviewToSend();
                         } catch (e) {
                             $('#reviewPic_' + lastNumber).remove();
                         }
@@ -620,7 +567,7 @@
 
         var data = new FormData();
         data.append('video', input.files[0]);
-        data.append('code', userCode);
+        data.append('code',  $('#storeReviewCode').val());
         data.append('isVideo', 1);
         if(_is360 == 1)
             data.append('is360', 1);
@@ -726,6 +673,8 @@
                                 fileName = response[1];
                                 document.getElementById('fileName_' + lastNumber).value = fileName;
                                 $('#reviewPicLoader_' + lastNumber).remove();
+                                fileUploadNum++;
+                                checkReviewToSend();
                             } catch (e) {
                                 $('#reviewPic_' + lastNumber).remove();
                             }
@@ -767,6 +716,8 @@
 
         document.getElementById('multiQuestionInput').value = JSON.stringify(reviewMultiAnsQuestionId);
         document.getElementById('multiAnsInput').value = JSON.stringify(reviewMultiAnsId);
+
+        checkReviewToSend();
     }
 
     function deleteUploadedReviewFile(_number){
@@ -777,11 +728,13 @@
             url: deleteReviewPicUrl,
             data: {
                 'name': fileName,
-                'code': userCode
+                'code':  $('#storeReviewCode').val()
             },
             success: function(response){
-                if(response == 'ok'){
+                if(response == 'ok') {
                     $('#reviewPic_' + _number).remove();
+                    fileUploadNum--;
+                    checkReviewToSend();
                 }
                 else{
                     alert('problem')
@@ -1046,7 +999,7 @@
         var data = new FormData();
         var name = document.getElementById('fileName_' + imgCropNumber).value;
 
-        data.append('code', userCode);
+        data.append('code',  $('#storeReviewCode').val());
         data.append('name', name);
 
         canvas1 = cropper.getCroppedCanvas();
@@ -1073,8 +1026,131 @@
 
     function sendWriteReview(){
         let text = $('#postTextArea').val();
-        console.log(text);
-        $('#writeReviewForm').submit();
+        if(checkReviewToSend()) {
+            let textId = [];
+            let textAns = [];
+
+            textQuestions.forEach(item => {
+                textAns.push($('#textQuestionAns_'+item.id).val());
+                textId.push(item.id);
+            });
+
+            $('#sendReviewButton').hide();
+            $('#sendReviewLoader').css('display', 'flex');
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("storeReview")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    kindPlaceId: $('#storeReviewKindPlaceId').val(),
+                    placeId: $('#storeReviewPlaceId').val(),
+                    code: $('#storeReviewCode').val(),
+                    assignedUser: $('#assignedMemberToReview').val(),
+                    multiAns: $('#multiAnsInput').val(),
+                    multiQuestion: $('#multiQuestionInput').val(),
+                    rateAns: $('#rateAnsInput').val(),
+                    rateQuestion: $('#rateQuestionInput').val(),
+                    text: $('#postTextArea').val(),
+                    textId: textId,
+                    textAns: textAns,
+                },
+                success: function(response){
+                    try{
+                        response = JSON.parse(response);
+                        if(response.status == 'ok'){
+                            console.log(response);
+                            $('#storeReviewCode').val(response.code);
+                            showSuccessNotifi('{{__('دیدگاه شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
+
+                            reviewPage = 1;
+                            loadReviews();
+
+                            clearStoreReview();
+                        }
+                        else{
+                            console.log(response);
+                            showSuccessNotifi('{{__('در ثبت دیدگاه مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
+                        }
+                    }
+                    catch (e) {
+                        console.log(e);
+                        showSuccessNotifi('{{__('در ثبت دیدگاه مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
+                    }
+
+                    $('#sendReviewButton').show();
+                    $('#sendReviewLoader').hide();
+                },
+                error: function(err){
+                    console.log(err);
+                    showSuccessNotifi('{{__('در ثبت دیدگاه مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
+
+                    $('#sendReviewButton').show();
+                    $('#sendReviewLoader').hide();
+                }
+            })
+        }
+    }
+
+    function checkReviewToSend(){
+
+        let error = false;
+        let text = $('#postTextArea').val();
+
+        if(text.trim().length > 0)
+            error = true;
+
+        if(fileUploadNum > 0)
+            error = true;
+
+        if(reviewRateAnsId.length > 0)
+            error = true;
+
+        if(reviewMultiAnsId.length > 0)
+            error = true;
+
+        if(error) {
+            $('#sendReviewButton').prop('disabled', false);
+            return true;
+        }
+        else {
+            $('#sendReviewButton').prop('disabled', true);
+            return false;
+        }
+    }
+
+    function clearStoreReview(){
+        $('#reviewShowPics').html('');
+        $('#assignedMemberToReview').val('');
+        $('#multiAnsInput').val('');
+        $('#multiQuestionInput').val('');
+        $('#rateAnsInput').val('');
+        $('#rateQuestionInput').val('');
+        $('#postTextArea').val('');
+
+        fileUploadNum = 0;
+        reviewRateAnsId = [];
+        reviewMultiAnsId = [];
+        assignedUser = [];
+        reviewRateAnsQuestionId = [];
+        reviewMultiAnsQuestionId = [];
+
+        for(i = 0; i < rateQuestion.length; i++){
+            rateQuestionAns[i] = 0;
+            momentChangeRate(i, 0, 'out');
+        }
+
+        $($('#postTextArea').next().children()[0]).html('');
+
+        textQuestions.forEach(item => $('#textQuestionAns_'+item.id).val('') );
+        closeNewPostModal();
+    }
+
+    function closeNewPostModal() {
+        $('#darkModal').hide();
+        $(".postModalMainDiv").addClass('hidden');
+
+        $('.showNewTextReviewArea').val($('#postTextArea').val())
     }
 
 </script>

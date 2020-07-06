@@ -194,6 +194,8 @@ if ($total == 0)
 
 @section('main')
 
+    @include('general.secondHeader')
+
     @include('component.mapMenu')
 
     {{--alarm--}}
@@ -235,7 +237,10 @@ if ($total == 0)
             <div class="greyBackground"></div>
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
 
-                @include('pages.placeDetails.component.writeReviewSection')
+                @if(auth()->check())
+                    @include('pages.placeDetails.component.writeReviewSection')
+                @endif
+
 
                 <div id="bestPrice" class="meta position-relative"
                      style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
@@ -383,22 +388,21 @@ if ($total == 0)
 
                     </div>
                     <a class="postLink" href="#reviewMainDivDetails">
-                        <div class="postMainDiv" onclick="hideMobileTabLink()">
+                        <div id="mainStoreReviewDiv" class="postMainDiv">
                             <div class="postMainDivHeader">
-                                دیدگاه شما
+                                {{__('دیدگاه شما')}}
                             </div>
                             <div id="commentInputMainDiv">
                                 <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox">
                                     <div id="profilePicForComment" class="profilePicForPost circleBase type2">
-                                        <img src="{{ $userPic }}"
-                                             style="width: 100%; height: 100%; border-radius: 50%;">
+                                        <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
                                     </div>
                                     @if(auth()->check())
-                                        <textarea class="inputBoxInput inputBoxInputComment" type="text"
-                                                  placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
+                                        <textarea class="inputBoxInput inputBoxInputComment showNewTextReviewArea" type="text"
+                                                  placeholder="{{auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
                                                   onclick="newPostModal('textarea')" readonly></textarea>
                                     @else
-                                        <textarea class="inputBoxInput inputBoxInputComment" type="text"
+                                        <textarea class="inputBoxInput inputBoxInputComment showNewTextReviewArea" type="text"
                                                   placeholder=" چه فکر یا احساسی داری.....؟"
                                                   onclick="newPostModal('textarea')" readonly></textarea>
                                     @endif
@@ -409,30 +413,26 @@ if ($total == 0)
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=picReviewInput0 onclick=newPostModal()' : 'onclick=newPostModal()'}}>
                                         <span class="addPhotoCommentIcon"></span>
-                                        <span class="commentOptionsText">عکس اضافه کنید.</span>
+                                        <span class="commentOptionsText">{{__('عکس اضافه کنید.')}}</span>
                                     </label>
-                                </div><!--
-                     -->
+                                </div>
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=videoReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
                                         <span class="addVideoCommentIcon"></span>
-                                        <span class="commentOptionsText">ویدیو اضافه کنید.</span>
+                                        <span class="commentOptionsText">{{__('ویدیو اضافه کنید.')}}</span>
                                     </label>
-                                </div><!--
-                     -->
+                                </div>
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=video360ReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
                                         <span class="add360VideoCommentIcon"></span>
-                                        <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                                        <span class="commentOptionsText">{{__('ویدیو 360 اضافه کنید.')}}</span>
                                     </label>
-                                </div><!--
-                     -->
+                                </div>
                                 <div class="commentOptionsBoxes" id="bodyLinks" onclick="newPostModal('tag')">
                                     <span class="tagFriendCommentIcon"></span>
-                                    <span class="commentOptionsText">دوستانتان را tag کنید.</span>
-                                </div><!--
-                     -->
-                                <div class="moreSettingPostManDiv commentOptionsBoxes">
+                                    <span class="commentOptionsText">{{__('دوستانتان را tag کنید.')}}</span>
+                                </div>
+                                <div class="moreSettingPostManDiv commentOptionsBoxes" onclick="newPostModal()">
                                     <span class="moreSettingPost"></span>
                                 </div>
                             </div>
@@ -839,8 +839,7 @@ if ($total == 0)
                                                         </div>
                                                         <div class="prw_rup prw_common_atf_header_bl"
                                                              id="clientConnectionsLines">
-                                                            <div class="blEntry address mg-bt-10"
-                                                                 id="clientConnectionsAddress">
+                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
                                                                 <span class="ui_icon map-pin"></span>
                                                                 @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
                                                                     <span class="street-address">آدرس : </span>
@@ -1433,34 +1432,24 @@ if ($total == 0)
         //     }
         // }
 
-
         function newPostModal(kind = '') {
             if (!hasLogin) {
                 showLoginPrompt('{{Request::url()}}');
                 return;
             }
 
+            document.getElementById("mainStoreReviewDiv").scrollIntoView();
+
             $("#darkModal").show();
             $(".postModalMainDiv").removeClass('hidden');
-
 
             setTimeout(function () {
                 if (kind == 'textarea')
                     document.getElementById("postTextArea").focus();
                 else if (kind == 'tag')
                     $('#assignedSearch').focus();
-
-                if (kind != 'textarea')
-                    $('html').scrollTop($('#reviewMainDivDetails').position()['top'])
-
             }, 500);
         }
-
-        function closeNewPostModal() {
-            $('#darkModal').hide() ,
-                $(".postModalMainDiv").addClass('hidden')
-        }
-
         function editPhotosNewPost() {
             $('#editPane').removeClass('hidden')
         }

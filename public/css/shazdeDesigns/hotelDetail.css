@@ -2961,7 +2961,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     line-height: 1.5;
     height: 25px;
     font-size: 15px;
-    color: #c6c6c6;
+    /*color: #c6c6c6;*/
+    color: black;
     font-weight: 700;
     width: inherit;
 }
@@ -3140,7 +3141,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     line-height: 1.5;
     height: 25px;
     font-size: 15px;
-    color: #c6c6c6;
+    /*color: #c6c6c6;*/
+    color: black;
     font-weight: 700;
 }
 

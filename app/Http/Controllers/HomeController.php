@@ -1267,215 +1267,240 @@ class HomeController extends Controller
 
     public function getAlerts()
     {
-
         $uId = Auth::user()->id;
         $result = [];
         $counter = 0;
 
-        $msgs = Message::whereSenderId($uId)->whereSeenSender(0)->orderBy('date', 'DESC')->take(5)->get();
-        foreach ($msgs as $msg) {
-            $result[$counter]["customText"] = "پیام شما به " . User::whereId($msg->receiverId)->username . " ارسال شد";
-            $result[$counter]["placeId"] = -1;
-            $result[$counter++]["kindPlaceId"] = -1;
+//        $msgs = Message::whereSenderId($uId)->whereSeenSender(0)->orderBy('date', 'DESC')->take(5)->get();
+//        foreach ($msgs as $msg) {
+//            $result[$counter]["customText"] = "پیام شما به " . User::whereId($msg->receiverId)->username . " ارسال شد";
+//            $result[$counter]["placeId"] = -1;
+//            $result[$counter++]["kindPlaceId"] = -1;
+//
+//            $msg->seenSender = 1;
+//            $msg->save();
+//        }
 
-            $msg->seenSender = 1;
-            $msg->save();
-        }
+//        if ($counter < 5) {
+//            $msgs = Message::whereReceiverId($uId)->whereSeenReceiver(0)->orderBy('date', 'DESC')->take(5 - $counter)->get();
+//            foreach ($msgs as $msg) {
+//                $result[$counter]["customText"] = "شما یک پیام جدید از " . User::whereId($msg->senderId)->username . " دریافت نموده اید";
+//                $result[$counter]["placeId"] = -1;
+//                $result[$counter++]["kindPlaceId"] = -1;
+//
+//                $msg->seenReceiver = 1;
+//                $msg->save();
+//            }
+//        }
+//        if ($counter < 5) {
+//
+//            $ansActivity = Activity::whereName('پاسخ')->first();
+//            $commentActivity = Activity::whereName('نظر')->first();
+//            $reportActivity = Activity::whereName('گزارش')->first();
+//            $questionActivity = Activity::whereName('سوال')->first();
+//
+//
+//            $logs = DB::select('select DISTINCT l.id, l.activityId, l.placeId, l.kindPlaceId, l.seen, l.text from log l, activity a WHERE a.id = l.activityId and confirm = 1 and (a.id = ' . $ansActivity->id . ' or a.id = ' . $commentActivity->id . ' or a.id = ' . $reportActivity->id . ' or a.id = ' . $questionActivity->id . ') and (a.visibility = 1 or a.id = ' . $reportActivity->id . ') and visitorId = ' . $uId . ' and seen = 0 or ' .
+//                '((select count(*) from opOnActivity o where l.id = o.logId and seen = 0) > 0 or (select count(*) from log l2 where l2.activityId = ' . $reportActivity->id . ' and l2.relatedTo = l.id and l2.seen = 0) > 0)'
+//                . ' order by l.date desc limit ' . (4 - $counter));
+//
+//            if ($logs != null && count($logs) > 0) {
+//
+//                foreach ($logs as $log) {
+//
+//                    if ($reportActivity->id != $log->activityId)
+//                        $log->text = (strlen($log->text) > 50) ? substr($log->text, 0, 50) . '...' : $log->text;
+//
+//                    switch ($log->activityId) {
+//
+//                        case $ansActivity->id:
+//
+//                            if ($log->seen == 0) {
+//                                if ($ansActivity->rate == 0)
+//                                    $result[$counter]["customText"] = " پاسخ " . $log->text . " شما توسط ادمین تایید گردید ";
+//                                else
+//                                    $result[$counter]["customText"] = " پاسخ " . $log->text . " شما توسط ادمین تایید گردید و  " . $ansActivity->rate . " امتیاز بابت آن دریافت کردید";
+//
+//                                $result[$counter]["placeId"] = $log->placeId;
+//                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
+//                                $log = LogModel::whereId($log->id);
+//                                $log->seen = 1;
+//                                $log->save();
+//                            }
+//
+//                            $key = "پاسخ";
+//                            break;
+//
+//                        case $questionActivity->id:
+//
+//                            if ($log->seen == 0) {
+//                                if ($questionActivity->rate == 0)
+//                                    $result[$counter]["customText"] = " سوال " . $log->text . " شما توسط ادمین تایید گردید ";
+//                                else
+//                                    $result[$counter]["customText"] = " سوال " . $log->text . " شما توسط ادمین تایید گردید و  " . $questionActivity->rate . " امتیاز بابت آن دریافت کردید";
+//
+//                                $result[$counter]["placeId"] = $log->placeId;
+//                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
+//                                $log = LogModel::whereId($log->id);
+//                                $log->seen = 1;
+//                                $log->save();
+//                            }
+//
+//                            $key = "سوال";
+//                            break;
+//
+//                        case $commentActivity->id:
+//
+//                            if ($log->seen == 0) {
+//
+//                                if ($commentActivity->rate == 0)
+//                                    $result[$counter]["customText"] = " نقد " . $log->text . " شما توسط ادمین تایید گردید ";
+//                                else
+//                                    $result[$counter]["customText"] = " نقد " . $log->text . " شما توسط ادمین تایید گردید و " . $commentActivity->rate . " امتیاز بابت آن دریافت کردید ";
+//
+//                                $result[$counter]["placeId"] = $log->placeId;
+//                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
+//                                $log = LogModel::whereId($log->id);
+//                                $log->seen = 1;
+//                                $log->save();
+//                            }
+//
+//                            $key = "نقد";
+//                            break;
+//
+//                        case $reportActivity->id:
+//
+//                            $log = LogModel::whereId($log->id);
+//                            $log->seen = 1;
+//                            $log->save();
+//
+//                            $reports = Report::whereLogId($log->id)->get();
+//
+//                            if (!empty($log->text))
+//                                $log->text .= ' و ';
+//                            $first = true;
+//
+//                            if ($reports != null && count($reports) > 0) {
+//                                foreach ($reports as $report) {
+//                                    if ($first) {
+//                                        $log->text .= ReportsType::whereId($report->reportKind)->description;
+//                                        $first = false;
+//                                    } else
+//                                        $log->text .= ' و ' . ReportsType::whereId($report->reportKind)->description;
+//                                }
+//                            }
+//
+//                            if ($reportActivity->rate == 0)
+//                                $result[$counter]["customText"] = " گزارش " . $log->text . " شما توسط ادمین تایید گردید ";
+//                            else
+//                                $result[$counter]["customText"] = " گزارش " . $log->text . " شما توسط ادمین تایید گردید و " . $reportActivity->rate . " امتیاز بابت آن دریافت کردید ";
+//
+//                            $result[$counter]["placeId"] = $log->placeId;
+//                            $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
+//                            break;
+//                    }
+//
+//                    if ($counter < 5) {
+//                        $tmp = OpOnActivity::whereLogId($log->id)->whereSeen(0)->orderBy('time', 'DESC')->take(4 - $counter)->get();
+//                        if ($tmp != null && count($tmp) > 0) {
+//
+//                            foreach ($tmp as $itr) {
+//
+//                                $itr->seen = 1;
+//                                $itr->save();
+//
+//                                if ($itr->like_ == 1)
+//                                    $result[$counter]["customText"] = User::whereId($itr->uId)->username . " از شما بابت " . $key . ' ' . $log->text . " تشکر کرد ";
+//                                else
+//                                    $result[$counter]["customText"] = User::whereId($itr->uId)->username . " از " . $key . ' ' . $log->text . " شما راضی نبود ";
+//
+//                                $result[$counter]["placeId"] = $log->placeId;
+//                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
+//                            }
+//                        }
+//                    }
+//
+//                    if ($counter < 5 && isset($key)) {
+//                        $reportLogs = LogModel::whereActivityId($reportActivity->id)->whereRelatedTo($log->id)->whereSeen(0)->take(4 - $counter)->get();
+//                        if ($reportLogs != null && count($reportLogs) > 0) {
+//                            foreach ($reportLogs as $reportLog) {
+//
+//                                $reportLog->seen = 1;
+//                                $reportLog->save();
+//
+//                                $reports = Report::whereLogId($reportLog->id)->get();
+//
+//                                if (!empty($reportLog->text))
+//                                    $reportLog->text .= ' و ';
+//                                $first = true;
+//
+//                                if ($reports != null && count($reports) > 0) {
+//                                    foreach ($reports as $report) {
+//                                        if ($first) {
+//                                            $reportLog->text .= ReportsType::whereId($report->reportKind)->description;
+//                                            $first = false;
+//                                        } else
+//                                            $reportLog->text .= ' و ' . ReportsType::whereId($report->reportKind)->description;
+//                                    }
+//                                }
+//
+//                                $result[$counter]["customText"] = $key . " شما به دلیل  " . $reportLog->text . " گزارش گردید ";
+//                                $result[$counter]["placeId"] = $log->placeId;
+//                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        for ($i = 0; $i < count($result); $i++) {
+//            if($result[$i]['kindPlaceId'] == -1)
+//                $result[$i]['url'] = -1;
+//            else{
+//                $kindPlace = Place::find($result[$i]['kindPlaceId']);
+//                $place = \DB::table($kindPlace->tableName)->find($result[$i]['placeId']);
+//                $result[$i]['url'] = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $place->slug]);
+//                $targetFile = URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-1.jpg');
+//            }
+//
+//            if (isset($targetFile) && $targetFile != "") {
+//                if (@file_get_contents($targetFile))
+//                    $result[$i]['pic'] = $targetFile;
+//                else
+//                    $result[$i]['pic'] = URL::asset('_images/nopic/blank.jpg');
+//            }
+//        }
 
-        if ($counter < 5) {
-            $msgs = Message::whereReceiverId($uId)->whereSeenReceiver(0)->orderBy('date', 'DESC')->take(5 - $counter)->get();
-            foreach ($msgs as $msg) {
-                $result[$counter]["customText"] = "شما یک پیام جدید از " . User::whereId($msg->senderId)->username . " دریافت نموده اید";
-                $result[$counter]["placeId"] = -1;
-                $result[$counter++]["kindPlaceId"] = -1;
+        $user = \auth()->user();
+        $acceptActivityName = ['نظر', 'سوال', 'پاسخ', 'گزارش'];
+        $acceptActivityId = Activity::whereIn('name', $acceptActivityName)->pluck('id')->toArray();
+        $logs = LogModel::Join('activity', 'activity.id', '=', 'log.activityId')->where('seen', 0)->where('visitorId', $user->id)->whereIn('activityId', $acceptActivityId)->orderByDesc('date')->orderByDesc('time')->get();
 
-                $msg->seenReceiver = 1;
-                $msg->save();
-            }
-        }
+        $result = [];
+        foreach($logs as $log){
+            $kindPlace = Place::find($log->kindPlaceId);
+            if($kindPlace != null){
+                $place = \DB::table($kindPlace->tableName)->find($log->placeId);
+                if($place != null){
+                    $url = createUrl($kindPlace->id, $place->id, 0, 0, 0);
+                    $text = $log->name . ' شما با موفقیت برای ' . $place->name ;
 
-        if ($counter < 5) {
+                    if($log->confirm == 1)
+                        $text .= ' توسط مدیر سایت تایید شد.';
+                    else
+                        $text .= ' ثبت شد.';
 
-            $ansActivity = Activity::whereName('پاسخ')->first();
-            $commentActivity = Activity::whereName('نظر')->first();
-            $reportActivity = Activity::whereName('گزارش')->first();
-            $questionActivity = Activity::whereName('سوال')->first();
+//                    $log->seen = 1;
+//                    $log->save();
 
-
-            $logs = DB::select('select DISTINCT l.id, l.activityId, l.placeId, l.kindPlaceId, l.seen, l.text from log l, activity a WHERE a.id = l.activityId and confirm = 1 and (a.id = ' . $ansActivity->id . ' or a.id = ' . $commentActivity->id . ' or a.id = ' . $reportActivity->id . ' or a.id = ' . $questionActivity->id . ') and (a.visibility = 1 or a.id = ' . $reportActivity->id . ') and visitorId = ' . $uId . ' and seen = 0 or ' .
-                '((select count(*) from opOnActivity o where l.id = o.logId and seen = 0) > 0 or (select count(*) from log l2 where l2.activityId = ' . $reportActivity->id . ' and l2.relatedTo = l.id and l2.seen = 0) > 0)'
-                . ' order by l.date desc limit ' . (4 - $counter));
-
-            if ($logs != null && count($logs) > 0) {
-
-                foreach ($logs as $log) {
-
-                    if ($reportActivity->id != $log->activityId)
-                        $log->text = (strlen($log->text) > 50) ? substr($log->text, 0, 50) . '...' : $log->text;
-
-                    switch ($log->activityId) {
-
-                        case $ansActivity->id:
-
-                            if ($log->seen == 0) {
-                                if ($ansActivity->rate == 0)
-                                    $result[$counter]["customText"] = " پاسخ " . $log->text . " شما توسط ادمین تایید گردید ";
-                                else
-                                    $result[$counter]["customText"] = " پاسخ " . $log->text . " شما توسط ادمین تایید گردید و  " . $ansActivity->rate . " امتیاز بابت آن دریافت کردید";
-
-                                $result[$counter]["placeId"] = $log->placeId;
-                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
-                                $log = LogModel::whereId($log->id);
-                                $log->seen = 1;
-                                $log->save();
-                            }
-
-                            $key = "پاسخ";
-                            break;
-
-                        case $questionActivity->id:
-
-                            if ($log->seen == 0) {
-                                if ($questionActivity->rate == 0)
-                                    $result[$counter]["customText"] = " سوال " . $log->text . " شما توسط ادمین تایید گردید ";
-                                else
-                                    $result[$counter]["customText"] = " سوال " . $log->text . " شما توسط ادمین تایید گردید و  " . $questionActivity->rate . " امتیاز بابت آن دریافت کردید";
-
-                                $result[$counter]["placeId"] = $log->placeId;
-                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
-                                $log = LogModel::whereId($log->id);
-                                $log->seen = 1;
-                                $log->save();
-                            }
-
-                            $key = "سوال";
-                            break;
-
-                        case $commentActivity->id:
-
-                            if ($log->seen == 0) {
-
-                                if ($commentActivity->rate == 0)
-                                    $result[$counter]["customText"] = " نقد " . $log->text . " شما توسط ادمین تایید گردید ";
-                                else
-                                    $result[$counter]["customText"] = " نقد " . $log->text . " شما توسط ادمین تایید گردید و " . $commentActivity->rate . " امتیاز بابت آن دریافت کردید ";
-
-                                $result[$counter]["placeId"] = $log->placeId;
-                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
-                                $log = LogModel::whereId($log->id);
-                                $log->seen = 1;
-                                $log->save();
-                            }
-
-                            $key = "نقد";
-                            break;
-
-                        case $reportActivity->id:
-
-                            $log = LogModel::whereId($log->id);
-                            $log->seen = 1;
-                            $log->save();
-
-                            $reports = Report::whereLogId($log->id)->get();
-
-                            if (!empty($log->text))
-                                $log->text .= ' و ';
-                            $first = true;
-
-                            if ($reports != null && count($reports) > 0) {
-                                foreach ($reports as $report) {
-                                    if ($first) {
-                                        $log->text .= ReportsType::whereId($report->reportKind)->description;
-                                        $first = false;
-                                    } else
-                                        $log->text .= ' و ' . ReportsType::whereId($report->reportKind)->description;
-                                }
-                            }
-
-                            if ($reportActivity->rate == 0)
-                                $result[$counter]["customText"] = " گزارش " . $log->text . " شما توسط ادمین تایید گردید ";
-                            else
-                                $result[$counter]["customText"] = " گزارش " . $log->text . " شما توسط ادمین تایید گردید و " . $reportActivity->rate . " امتیاز بابت آن دریافت کردید ";
-
-                            $result[$counter]["placeId"] = $log->placeId;
-                            $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
-                            break;
-                    }
-
-                    if ($counter < 5) {
-                        $tmp = OpOnActivity::whereLogId($log->id)->whereSeen(0)->orderBy('time', 'DESC')->take(4 - $counter)->get();
-                        if ($tmp != null && count($tmp) > 0) {
-
-                            foreach ($tmp as $itr) {
-
-                                $itr->seen = 1;
-                                $itr->save();
-
-                                if ($itr->like_ == 1)
-                                    $result[$counter]["customText"] = User::whereId($itr->uId)->username . " از شما بابت " . $key . ' ' . $log->text . " تشکر کرد ";
-                                else
-                                    $result[$counter]["customText"] = User::whereId($itr->uId)->username . " از " . $key . ' ' . $log->text . " شما راضی نبود ";
-
-                                $result[$counter]["placeId"] = $log->placeId;
-                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
-                            }
-                        }
-                    }
-
-                    if ($counter < 5 && isset($key)) {
-                        $reportLogs = LogModel::whereActivityId($reportActivity->id)->whereRelatedTo($log->id)->whereSeen(0)->take(4 - $counter)->get();
-                        if ($reportLogs != null && count($reportLogs) > 0) {
-                            foreach ($reportLogs as $reportLog) {
-
-                                $reportLog->seen = 1;
-                                $reportLog->save();
-
-                                $reports = Report::whereLogId($reportLog->id)->get();
-
-                                if (!empty($reportLog->text))
-                                    $reportLog->text .= ' و ';
-                                $first = true;
-
-                                if ($reports != null && count($reports) > 0) {
-                                    foreach ($reports as $report) {
-                                        if ($first) {
-                                            $reportLog->text .= ReportsType::whereId($report->reportKind)->description;
-                                            $first = false;
-                                        } else
-                                            $reportLog->text .= ' و ' . ReportsType::whereId($report->reportKind)->description;
-                                    }
-                                }
-
-                                $result[$counter]["customText"] = $key . " شما به دلیل  " . $reportLog->text . " گزارش گردید ";
-                                $result[$counter]["placeId"] = $log->placeId;
-                                $result[$counter++]["kindPlaceId"] = $log->kindPlaceId;
-                            }
-                        }
-                    }
+                    array_push($result, [ 'text' => $text, 'url' => $url ]);
                 }
             }
         }
 
-        for ($i = 0; $i < count($result); $i++) {
-            if($result[$i]['kindPlaceId'] == -1)
-                $result[$i]['url'] = -1;
-            else{
-                $kindPlace = Place::find($result[$i]['kindPlaceId']);
-                $place = \DB::table($kindPlace->tableName)->find($result[$i]['placeId']);
-                $result[$i]['url'] = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $place->slug]);
-                $targetFile = URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-1.jpg');
-            }
-
-            if (isset($targetFile) && $targetFile != "") {
-                if (@file_get_contents($targetFile))
-                    $result[$i]['pic'] = $targetFile;
-                else
-                    $result[$i]['pic'] = URL::asset('_images/nopic/blank.jpg');
-            }
-        }
-
         echo \GuzzleHttp\json_encode($result);
-
+        return;
     }
 
 
