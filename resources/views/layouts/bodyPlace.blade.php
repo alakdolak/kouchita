@@ -44,8 +44,6 @@
 
             @include('layouts.header1')
 
-            @include('general.secondHeader')
-
             @yield('main')
 
             @include('layouts.placeFooter')

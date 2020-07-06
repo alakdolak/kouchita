@@ -471,6 +471,9 @@ $authUrl = $client->createAuthUrl();
 
     function checkInputPhoneRegister() {
         let phone = $('#phoneRegister').val();
+        console.log(phone)
+        phone = fixNumbers(phone);
+
         if(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9){
             openLoading();
             $.ajax({
@@ -529,6 +532,8 @@ $authUrl = $client->createAuthUrl();
         else
             phoneNum = $('#phoneRegister').val();
 
+        phoneNum = fixNumbers(phoneNum);
+
         $.ajax({
             type: 'post',
             url: resendActivationCodeDir,
@@ -571,6 +576,9 @@ $authUrl = $client->createAuthUrl();
         let phoneNum = $('#' + _phoneId).val();
         let code = $('#' + _codeId).val();
 
+        phoneNum = fixNumbers(phoneNum);
+        code = fixNumbers(code);
+
         if(code.trim().length > 0) {
             openLoading();
             $.ajax({
@@ -596,9 +604,7 @@ $authUrl = $client->createAuthUrl();
                 }
             });
         }
-
     }
-
 
     function decreaseTime() {
         $(".reminderTime").text((reminderTime % 60) + " : " + Math.floor(reminderTime / 60));
@@ -647,6 +653,9 @@ $authUrl = $client->createAuthUrl();
         let phone = $('#phoneRegister').val();
         let actCode = $('#activationCode').val();
         let inviteCode = $("#invitationCode").val();
+
+        phone = fixNumbers(phone);
+
 
         $.ajax({
             type: 'post',
@@ -750,6 +759,8 @@ $authUrl = $client->createAuthUrl();
 
     function sendForgetPassPhone(){
         let phoneNum = $('#phoneForgetPass').val();
+        phoneNum = fixNumbers(phoneNum);
+
         if(phoneNum.trim().length == 11 && phoneNum[0] == 0 && phoneNum[1] == 9){
             openLoading();
             $.ajax({
@@ -809,7 +820,7 @@ $authUrl = $client->createAuthUrl();
         let newPass = $('#newPassword').val();
         let phone = $('#phoneForgetPass').val();
         let code = $('#activationCodeForgetPass').val();
-
+        phone = fixNumbers(phone);
         if(newPass.trim().length > 0){
             openLoading();
             $.ajax({
@@ -901,9 +912,16 @@ $authUrl = $client->createAuthUrl();
         }
     }
 
-</script>
+    function fixNumbers(str){
+        let persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
+        let arabicNumbers  = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
+        if(typeof str === 'string') {
+            for (var i = 0; i < 10; i++)
+                str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+        }
+        return str;
+    };
 
-<script>
     $(document).ready(function () {
         $(".login-button").click(function () {
             showLoginPrompt('{{Request::url()}}')

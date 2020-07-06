@@ -276,7 +276,6 @@ class UserLoginController extends Controller
 
     public function checkPhoneNum()
     {
-
         if (isset($_POST["phoneNum"])) {
 
             $phoneNum = makeValidInput($_POST["phoneNum"]);

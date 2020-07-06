@@ -128,7 +128,7 @@
                                 <a class="headerBookMarkHeaderName" href="#" target="_self"> {{__('تمامی پیام ها')}}</a>
                             </div>
                             <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
-                            <div id="headerMsgPlaceHolder">
+                            <div id="headerMsgPlaceHolder" class="alertMsgResultDiv" style="width: 230px">
                                 <div class="headerBookMarkLink">
                                     <div class="headerBookMarContentImgDiv">
                                         <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
@@ -281,31 +281,36 @@
                     url: '{{route('getAlerts')}}',
                     success: function (response) {
                         response = JSON.parse(response);
+                        console.log(response);
+
                         var newElement = "";
 
-                        if (response.length < 5 && response.length > 0)
-                            $("#showMoreItemsAlert").removeClass('hidden');
-                        else
-                            $("#showMoreItemsAlert").addClass('hidden');
+                        // if (response.length < 5 && response.length > 0)
+                        //     $("#showMoreItemsAlert").removeClass('hidden');
+                        // else
+                        //     $("#showMoreItemsAlert").addClass('hidden');
                         for (i = 0; i < response.length; i++) {
 
-                            if (response[i].url != -1)
-                                newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                            else
-                                newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                            // if (response[i].url != -1)
+                            //     newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                            // else
+                                newElement += '<a href="' + response[i].url + '" style="cursor: pointer; padding: 10px; text-align: right;" target="_blank"><div class="modules-engagement-notification-dropdown" style="padding: 10px"><div style="margin: 0px;" class="notifdd_empty"><span>' + response[i].text + '</span></div></div></a>';
                         }
 
                         if (response.length == 0)
                             newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">{{__('هیچ پیامی موجود نیست')}} </div></div></div>';
-                        else
-                            getAlertsCount();
 
-                        locked = false;
-                        superAccess = false;
-                        $('#alertItems').empty().append(newElement);
 
-                        $('#headerMsgPlaceHolder').hide();
-                        $('#alertItems').show();
+                        $('#alertPane').text(response.length);
+                        $('.alertMsgResultDiv').html(newElement);
+
+                        // locked = false;
+                        // superAccess = false;
+                        // $('#alertItems').empty().append(newElement);
+                        //
+                        // $('#headerMsgPlaceHolder').hide();
+                        // $('#alertItems').show();
+
                     }
                 });
             }
