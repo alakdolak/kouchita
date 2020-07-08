@@ -75,6 +75,7 @@
     let mapId;
     let mapData;
     let mapCenter;
+    let forceCenter;
     let googleMapStyle = [
         {
             "elementType": "geometry",
@@ -341,10 +342,11 @@
         moreInfo: '{{URL::asset('images/mapIcon/info.png')}}',
     };
 
-    function createMap(_id, _center, _data) {
+    function createMap(_id, _center, _data, _forceCenter = false) {
         mapId = _id;
         mapData = _data;
         mapCenter = _center;
+        forceCenter = _forceCenter;
         $('#' + mapId).html(mapDivs);
         initMap();
     }
@@ -352,7 +354,7 @@
     function initMap() {
         var mapOptions = {
             center: new google.maps.LatLng(mapCenter['x'],  mapCenter['y']),
-            zoom: 5,
+            zoom: 15,
             styles: googleMapStyle
         };
 
@@ -382,8 +384,10 @@
                 bounds.extend(loc);
             });
         }
-        mainMap.fitBounds(bounds);
-        mainMap.panToBounds(bounds);
+        if(!forceCenter) {
+            mainMap.fitBounds(bounds);
+            mainMap.panToBounds(bounds);
+        }
     }
 
     function openMapMarkerDescription(_kind, _id){

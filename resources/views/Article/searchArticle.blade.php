@@ -1,4 +1,4 @@
-@extends('posts.articleLayout')
+@extends('Article.articleLayout')
 
 @section('head')
     <title>لیست مقالات</title>

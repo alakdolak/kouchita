@@ -594,6 +594,8 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
 
+    Route::post('/alert/seen', 'HomeController@seenAlerts')->name('alert.seen');
+
     Route::post('getAlertsNum', array('as' => 'getAlertsNum', 'uses' => 'HomeController@getAlertsCount'));
 
     Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));

@@ -130,7 +130,6 @@ class PlaceController extends Controller {
             $bookMark = true;
 
         $rates = getRate($place->id, $kindPlaceId); // common.php
-//        $rates = $place->fullRate;
 
         $save = false;
         $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
@@ -281,61 +280,29 @@ class PlaceController extends Controller {
                 break;
         }
 
-        $place->kind = '';
+        $place->kind = [];
         if($place->jewelry == 1)
-            $place->kind .= 'زیورآلات';
-        if($place->cloth == 1){
-            if($place->kind != '')
-                $place->kind .= ' , ';
+            array_push($place->kind, 'زیورآلات');
+        if($place->cloth == 1)
+            array_push($place->kind, 'پارچه و پوشیدنی');
+        if($place->applied == 1)
+            array_push($place->kind, 'لوازم کاربردی منزل');
+        if($place->decorative == 1)
+            array_push($place->kind, 'لوازم تزئینی');
 
-            $place->kind .= 'پارچه و پوشیدنی';
-        }
-        if($place->applied == 1){
-            if($place->kind != '')
-                $place->kind .= ' , ';
-
-            $place->kind .= 'لوازم کاربردی منزل';
-        }
-        if($place->decorative == 1){
-            if($place->kind != '')
-                $place->kind .= ' , ';
-
-            $place->kind .= 'لوازم تزئینی';
-        }
-
-        $place->taste = '';
+        $place->taste = [];
         if($place->torsh == 1)
-            $place->taste .= 'ترش';
-        if($place->shirin == 1){
-            if($place->taste != '')
-                $place->taste .= ' , ';
-
-            $place->taste .= 'شیرین';
-        }
-        if($place->talkh == 1){
-            if($place->taste != '')
-                $place->taste .= ' , ';
-
-            $place->taste .= 'تلخ';
-        }
-        if($place->malas == 1){
-            if($place->taste != '')
-                $place->taste .= ' , ';
-
-            $place->taste .= 'ملس';
-        }
-        if($place->shor == 1){
-            if($place->taste != '')
-                $place->taste .= ' , ';
-
-            $place->taste .= 'شور';
-        }
-        if($place->tond == 1){
-            if($place->taste != '')
-                $place->taste .= ' , ';
-
-            $place->taste .= 'تند';
-        }
+            array_push($place->taste, 'ترش');
+        if($place->shirin == 1)
+            array_push($place->taste, 'شیرین');
+        if($place->talkh == 1)
+            array_push($place->taste, 'تلخ');
+        if($place->malas == 1)
+            array_push($place->taste, 'ملس');
+        if($place->shor == 1)
+            array_push($place->taste, 'شور');
+        if($place->tond == 1)
+            array_push($place->taste, 'تند');
 
         return $place;
     }
@@ -389,22 +356,33 @@ class PlaceController extends Controller {
         $D = (float)$D * 3.14 / 180;
         $C = (float)$C * 3.14 / 180;
 
-        $tableNames = ['hotels', 'restaurant', 'amaken', 'majara'];
+        $tableNames = ['hotels', 'restaurant', 'amaken', 'majara', 'boomgardies'];
         foreach ($tableNames as $tableName){
             $kindPlace = Place::where('tableName', $tableName)->first();
             if($kindPlace != null) {
-                $nearbys = DB::select("SELECT *, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM " . $tableName . " HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
+                $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
                 foreach ($nearbys as $nearby) {
-                    $nearby->pic = getPlacePic($nearby->id, $kindPlace->id);
 
-                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
-                                  'activityId' => Activity::whereName('نظر')->first()->id];
-                    $nearby->reviews = LogModel::where($condition)->count();
+//                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
+//                                  'activityId' => Activity::whereName('نظر')->first()->id];
+//                    $nearby->rate = getRate($nearby->id, $kindPlace->id)[1];
+//                    $nearby->review = LogModel::where($condition)->count();
+
+                    $nearby->pic = getPlacePic($nearby->id, $kindPlace->id);
                     $nearby->distance = round($nearby->distance, 2);
-                    $nearby->rate = getRate($nearby->id, $kindPlace->id)[1];
+                    $nearby->review = $nearby->reviewCount;
+                    $nearby->rate = floor($nearby->fullRate);
                     $nearby->url =  createUrl($kindPlace->id, $nearby->id, 0, 0, 0);
-                    $nearby->city = Cities::find($nearby->cityId);
-                    $nearby->state = State::find($nearby->city->stateId);
+                    if($nearby->cityId != 0) {
+                        $nearby->city = Cities::find($nearby->cityId);
+                        $nearby->state = State::find($nearby->city->stateId);
+
+                        $nearby->cityName = $nearby->city->name;
+                        $nearby->stateName = $nearby->state->name;
+
+                        $nearby->city = $nearby->city->name;
+                        $nearby->state = $nearby->state->name;
+                    }
                 }
 
                 switch ($kindPlace->id){
@@ -420,11 +398,14 @@ class PlaceController extends Controller {
                     case 6:
                         $nearbyMajaras = $nearbys;
                         break;
+                    case 12:
+                        $nearbyBoomgardi = $nearbys;
+                        break;
                 }
             }
         }
 
-        return [$nearbyHotels, $nearbyRestaurants, $nearbyAmakens, $nearbyMajaras];
+        return ['hotels' => $nearbyHotels, 'restaurant' => $nearbyRestaurants, 'amaken' => $nearbyAmakens, 'majara' => $nearbyMajaras, 'boomgardy' => $nearbyBoomgardi];
     }
 
     public function getNearby()
@@ -437,7 +418,6 @@ class PlaceController extends Controller {
             else
                 $count = 4;
 
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
             $kindPlace = Place::find($_POST["kindPlaceId"]);
             if($kindPlace == null){
                 echo 'nok';

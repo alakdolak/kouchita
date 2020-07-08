@@ -1,4 +1,4 @@
-@extends('posts.articleLayout')
+@extends('Article.articleLayout')
 
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">

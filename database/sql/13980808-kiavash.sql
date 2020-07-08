@@ -1,1 +1,0 @@
-ALTER TABLE `specialadvice` ADD `cityId` INT(11) NOT NULL DEFAULT '0' AFTER `kindPlaceId`;

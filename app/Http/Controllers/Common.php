@@ -1082,7 +1082,7 @@ function getPlacePic($placeId = 0, $kindPlaceId = 0, $kind = 'f'){
         if($place != null && $place->file != 'none' && $place->file != null){
             $location = __DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/' . $kind . '-' . $place->picNumber;
             if (is_file($location))
-                return URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber);
+                return URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/' . $kind . '-' . $place->picNumber);
         }
     }
 

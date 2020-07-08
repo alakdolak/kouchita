@@ -188,6 +188,19 @@ if ($total == 0)
         #share_box::before{
             left: 50% !important;
         }
+        .introductionShowMore{
+            cursor: pointer;
+            color: #4dc7bc;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: white;
+            padding: 0px 17px;
+        }
+        .introductionShowMoreLess{
+            position: relative;
+            padding: 0px;
+        }
     </style>
 @stop
 
@@ -519,19 +532,17 @@ if ($total == 0)
                     </nav>
                 @endif
 
-                <div class="exceptQAndADiv" id="generalDescLinkRel">
+                <div class="exceptQAndADiv" id="generalDescLinkRel" style="display: inline-block">
                     <div class="topBarContainerGeneralDesc display-none"></div>
 
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div id="mobileIntroductionMainDivId"
-                                         class="mobileIntroductionMainDiv tabContentMainWrap">
+                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap" style="padding-right: 15px;">
                                         @if($placeMode == 'mahaliFood')
                                             <div class="tabLinkMainDiv">
-                                                <button class="tabLink"
-                                                        onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
                                                     دستور پخت
                                                 </button><!--
                                      -->
@@ -566,7 +577,7 @@ if ($total == 0)
                                         @endif
 
                                         <?php
-                                        if ($kindPlaceId == 4) {
+                                        if ($kindPlaceId == 4 ||$kindPlaceId == 12) {
                                             $showInfo = 12;
                                             $showReviewRate = 4;
                                             $showFeatures = 8;
@@ -633,11 +644,11 @@ if ($total == 0)
                                                         <h3 class="block_title">دستور پخت:</h3>
                                                     </div>
                                                     <div class="toggleDescription" style="position: relative">
-                                                        <div class="overviewContent descriptionOfPlaceMiddleContent"
+                                                        <div class="unselectedText overviewContent descriptionOfPlaceMiddleContent"
                                                              id="introductionText">
                                                             {!! $place->recipes !!}
                                                         </div>
-                                                        <span class="showMoreDescriptionInDetails"></span>
+                                                            <span class="showMoreDescriptionInDetails"></span>
                                                     </div>
                                                 </div>
 
@@ -732,14 +743,18 @@ if ($total == 0)
                                                 <div id="generalDescriptionMobile"
                                                      class="ui_column is-{{$showInfo}} generalDescription tabContent">
                                                     <div class="block_header">
-                                                        <h3 class="block_title">معرفی کلی </h3>
+                                                        <h3 class="block_title">{{__('معرفی کلی')}} </h3>
                                                     </div>
                                                     <div class="toggleDescription" style="position: relative">
-                                                        <div class="overviewContent descriptionOfPlaceMiddleContent"
+                                                        <div class="unselectedText overviewContent descriptionOfPlaceMiddleContent"
                                                              id="introductionText">
                                                             {!! $place->description !!}
+                                                            @if($kindPlaceId != 4)
+                                                                <span class="introductionShowMore">
+                                                                    بیشتر
+                                                                </span>
+                                                            @endif
                                                         </div>
-                                                        <span class="showMoreDescriptionInDetails"></span>
                                                     </div>
                                                 </div>
                                                 <div id="detailsAndFeaturesMobile"
@@ -891,9 +906,11 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                             @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-{{--                                                @include('hotel-details.mapSection')--}}
-
+                                                    <div style="margin-top: 25px; padding-left: 15px;">
+                                                        <div id="mainMap" class="mainMap placeHolderAnime"></div>
+                                                    </div>
                                                 @include('layouts.extendedMap')
+
                                             @endif
                                         @endif
 
@@ -1243,11 +1260,15 @@ if ($total == 0)
 
                     </div>
                     <div class="clear-both"></div>
+
+
                     @include('hotel-details.questionSection')
+
                 </div>
 
                 @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                    @include('hotel-details.similarLocation')
+                        @include('component.rowSuggestion')
+{{--                    @include('pages.placeDetails.component.similarLocation')--}}
                 @endif
             </div>
         </div>
@@ -1317,8 +1338,121 @@ if ($total == 0)
     @include('hotelDetailsPopUp')
 
     <script>
-        $(document).ready(function () {
+        var topPlacesSections = [
+            {
+                name: '{{__('بوم گردی های نزدیک')}}',
+                id: 'nearDivboomgardy',
+                url: '#'
+            },
+            {
+                name: '{{__('جاذبه های نزدیک')}}',
+                id: 'nearDivamaken',
+                url: '#'
+            },
+            {
+                name: '{{__('محبوب‌ترین رستوران‌ها')}}',
+                id: 'nearDivrestaurant',
+                url: '#'
+            },
+            {
+                name: '{{__('اقامتگاه های نزدیک')}}',
+                id: 'nearDivhotels',
+                url: '#'
+            },
+            {
+                name: '{{__('طبیعت گردی های نزدیک')}}',
+                id: 'nearDivmajara',
+                url: '#'
+            },
+        ];
 
+        initPlaceRowSection(topPlacesSections);
+
+        function initNearbySwiper() {
+            var swiper = new Swiper('.mainSuggestion', {
+                slidesPerGroup: 1,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 4000,
+                },
+                breakpoints: {
+
+                    450: {
+                        slidesPerView: 1,
+                        spaceBetween: 15,
+                    },
+
+                    520: {
+                        slidesPerView: 2,
+                        spaceBetween: 15,
+                    },
+
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+
+                    10000: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        }
+
+        function getNearbyToPlace(){
+            // getNearby
+            $.ajax({
+                type: 'post',
+                url: '{{route("getNearby")}}',
+                data: {
+                    'placeId': placeId,
+                    'kindPlaceId' : kindPlaceId,
+                    'count' : 10,
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    let center = {
+                        x: '{{$place->C}}',
+                        y: '{{$place->D}}'
+                    };
+
+                    createMap('mainMap', center, response[0], true);
+
+                    createSuggestionRowWithData(response[0])
+                }
+            });
+        }
+
+        function createSuggestionRowWithData(_result){
+            let fk = Object.keys(_result);
+            for (let x of fk) {
+                if(_result[x].length > 4) {
+                    createSuggestionPack('nearDiv' + x + 'Content', _result[x], function () { // in suggestionPack.blade.php
+                        $('#nearDiv' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
+                        resizeFitImg('resizeImgClass')
+                    });
+                }
+                else
+                    $('#' + x).hide();
+            }
+
+            initNearbySwiper();
+        }
+
+        getNearbyToPlace();
+
+        $(document).ready(function () {
             var a = $(window).width();
             if (630 < a && a <= 768)
                 $('.tabLinkMainWrapMainDIV').affix({offset: {top: 820}});
@@ -1327,24 +1461,24 @@ if ($total == 0)
             else if (a <= 415)
                 $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1050}});
 
+            autosize($(".inputBoxInputComment"));
+            autosize($(".inputBoxInputAnswer"));
         });
-    </script>
 
-
-    <script>
         var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();
         var heightOfFeature = $('.featureOfPlaceMiddleContent').height();
         var heightOfContent = $('.rateOfPlaceMiddleContent').height();
-        var minHeightOfConent = [heightOfDescription, heightOfFeature, heightOfContent];
+        var minHeightOfConent = [heightOfFeature, heightOfContent];
         var sortHeightOfContent = minHeightOfConent.sort(function (a, b) {
             return a - b
         });
         var selectedHegihtForDescription = sortHeightOfContent[1] - 50;
 
-        if (heightOfDescription > selectedHegihtForDescription)
-            $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
-        else
-            $('.showMoreDescriptionInDetails').css('display', 'none');
+        if(heightOfDescription < selectedHegihtForDescription)
+            $('.introductionShowMore').css('display', 'none');
+
+        lineHeight = Math.floor(selectedHegihtForDescription / 25); // 25 line-heigh description
+        selectedHegihtForDescription = lineHeight * 25;
 
         @if($kindPlaceId == 4)
             selectedHegihtForDescription = 305;
@@ -1357,25 +1491,33 @@ if ($total == 0)
         function toggleMainDescription() {
             if (showFullDescription) {
                 $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
+                $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '0px');
                 @if($placeMode != 'mahaliFood')
-                $('.generalDescription').css('width', '');
-                $('.featureOfPlaceMiddle').css('width', '');
-                $('.rateOfPlaceMiddle').css('width', '');
+                    $('.generalDescription').css('width', '');
+                    $('.featureOfPlaceMiddle').css('width', '');
+                    $('.rateOfPlaceMiddle').css('width', '');
                 @endif
-                    showFullDescription = false;
+                $('.introductionShowMore').text('بیشتر');
+                $('.introductionShowMore').removeClass('introductionShowMoreLess');
+                showFullDescription = false;
             } else {
                 $('.descriptionOfPlaceMiddleContent').css('max-height', '20000px');
+                $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '30px');
                 @if($placeMode != 'mahaliFood')
-                $('.generalDescription').css('width', '100%');
-                $('.featureOfPlaceMiddle').css('width', '50%');
-                $('.rateOfPlaceMiddle').css('width', '50%');
+                    $('.generalDescription').css('width', '100%');
+                    $('.featureOfPlaceMiddle').css('width', '50%');
+                    $('.rateOfPlaceMiddle').css('width', '50%');
                 @endif
-                    showFullDescription = true;
+                $('.introductionShowMore').text('کمتر');
+                $('.introductionShowMore').addClass('introductionShowMoreLess');
+                showFullDescription = true;
             }
         }
 
-        $('.showMoreDescriptionInDetails').on('click', toggleMainDescription);
-        $('.descriptionOfPlaceMiddleContent').on('click', toggleMainDescription);
+        @if($kindPlaceId != 4 && $kindPlaceId != 12)
+            $('.descriptionOfPlaceMiddleContent').on('click', toggleMainDescription);
+        @endif
+
 
         function isPhotographer() {
             if (!checkLogin())
@@ -1390,9 +1532,6 @@ if ($total == 0)
             additionalData = JSON.stringify(additionalData);
             openUploadPhotoModal(_title, '{{route('addPhotoToPlace')}}', '{{$place->id}}', '{{$kindPlaceId}}', additionalData);
         }
-
-        autosize($(".inputBoxInputComment"));
-        autosize($(".inputBoxInputAnswer"));
 
         function openCity(cityName, elmnt, color, fontColor) {
             var i, tabcontent, tablinks;
@@ -1419,26 +1558,17 @@ if ($total == 0)
 
         }
 
-        // Get the element with id="defaultOpen" and click on it
-        // document.getElementById("defaultOpen").click();
-        // function hideMobileTabLink() {
-        //     if($(window).width() < 992) {
-        //         $('.tabLinkMainWrapMainDivMobile').hide();
-        //     }
-        // }
-        // function showMobileTabLink() {
-        //     if($(window).width() < 992) {
-        //         $('.tabLinkMainWrapMainDivMobile').show()
-        //     }
-        // }
-
         function newPostModal(kind = '') {
             if (!hasLogin) {
                 showLoginPrompt('{{Request::url()}}');
                 return;
             }
 
-            document.getElementById("mainStoreReviewDiv").scrollIntoView();
+            $('html, body').animate({
+                scrollTop: $('#mainStoreReviewDiv').offset().top
+            }, 800);
+
+            // document.getElementById("mainStoreReviewDiv").scrollIntoView();
 
             $("#darkModal").show();
             $(".postModalMainDiv").removeClass('hidden');
@@ -1565,19 +1695,19 @@ if ($total == 0)
             });
 
             $('.postsBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').removeClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
+                // $('.tabLinkMainWrapMainDIV').addClass('affix');
+                // $('.topBarContainerGeneralDesc').addClass('display-none');
+                // $('.topBarContainerPosts').removeClass('display-none');
+                // $('.topBarContainerQAndAs').addClass('display-none');
+                // $('.topBarContainerSimilarLocations').addClass('display-none');
 
                 setTimeout(function () {
                     $('.generalDescBtnTopBar').parent().removeClass('active');
                     $('.postsBtnTopBar').parent().addClass('active');
                 }, 50);
 
-                $('.QAndAsBtnTopBar').parent().removeClass('active');
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
+                // $('.QAndAsBtnTopBar').parent().removeClass('active');
+                // $('.similarLocationsBtnTopBar').parent().removeClass('active');
             });
 
             $('.QAndAsBtnTopBar').click(function () {

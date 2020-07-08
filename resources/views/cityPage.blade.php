@@ -337,30 +337,9 @@
                         {{$place->description}}
                     </div>
                 @endif
+                @include('component.rowSuggestion')
 
-                <div id="topPlacesSection" class="mainSuggestionMainDiv cpBorderBottom ng-scope" style="display: none">
-                    <div id="##id##" class="topPlacesDivInCity">
-                        <div class="topPlacesDivInCityHeader">
-                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                            <a href="##url##">
-                                <div class="shelf_title_container h3">
-                                    <h3>##name##</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-container mainSuggestion" style="padding-top: 15px">
-                            <div id="##id##Content" class="swiper-wrapper thisfirsPlaceHolder" style="direction: rtl; position: relative;"></div>
-                            <div class="swiper-pagination"></div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-            <script>
-                createSuggestionPackPlaceHolderClassName('thisfirsPlaceHolder')
-            </script>
 
             <div class="col-xs-12 articleDiv">
                 <div class="row">
@@ -522,51 +501,45 @@
     var showCityPicNumber = 5;
     var cityName1 = '{{ $place->name }}';
     var reveiewSample = 0;
-    var topPlacesSample = 0;
     var topPlacesSections = [
-        {
-            name: '{{__('محبوب‌ترین بوم گردی ها')}}',
-            id: 'topBoomgardyCityPage',
-            url: '{{route('place.list', ['kindPlaceId' => 12, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
-        },
-        {
-            name: '{{__('محبوبترین جاذبه ها')}}',
-            id: 'topAmakenCityPage',
-            url: '{{route('place.list', ['kindPlaceId' => 1, 'mode' => $kind, 'city' => $locationName['cityNameUrl'] ])}}'
-        },
-        {
-            name: '{{__('محبوب‌ترین رستوران‌ها')}}',
-            id: 'topRestaurantInCity',
-            url: '{{route('place.list', ['kindPlaceId' => 3, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
-        },
-        {
-            name: '{{__('محبوب‌ترین اقامتگاه ها')}}',
-            id: 'topHotelCityPage',
-            url: '{{route('place.list', ['kindPlaceId' => 4, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
-        },
-        {
-            name: '{{__('محبوب‌ترین طبیعت گردی ها')}}',
-            id: 'topMajaraCityPage',
-            url: '{{route('place.list', ['kindPlaceId' => 6, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
-        },
-        {
-            name: '{{__('محبوب‌ترین صنابع دستی و سوغات')}}',
-            id: 'topSogatCityPage',
-            url: '{{route('place.list', ['kindPlaceId' => 10, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
-        },
-        {
-            name: '{{__('محبوب‌ترین غذاهای محلی')}}',
-            id: 'topFoodCityPage',
-            url: '{{route('place.list', ['kindPlaceId' => 11, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
-        },
-    ];
+            {
+                name: '{{__('محبوب‌ترین بوم گردی ها')}}',
+                id: 'topBoomgardyCityPage',
+                url: '{{route('place.list', ['kindPlaceId' => 12, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+            },
+            {
+                name: '{{__('محبوبترین جاذبه ها')}}',
+                id: 'topAmakenCityPage',
+                url: '{{route('place.list', ['kindPlaceId' => 1, 'mode' => $kind, 'city' => $locationName['cityNameUrl'] ])}}'
+            },
+            {
+                name: '{{__('محبوب‌ترین رستوران‌ها')}}',
+                id: 'topRestaurantInCity',
+                url: '{{route('place.list', ['kindPlaceId' => 3, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+            },
+            {
+                name: '{{__('محبوب‌ترین اقامتگاه ها')}}',
+                id: 'topHotelCityPage',
+                url: '{{route('place.list', ['kindPlaceId' => 4, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+            },
+            {
+                name: '{{__('محبوب‌ترین طبیعت گردی ها')}}',
+                id: 'topMajaraCityPage',
+                url: '{{route('place.list', ['kindPlaceId' => 6, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+            },
+            {
+                name: '{{__('محبوب‌ترین صنابع دستی و سوغات')}}',
+                id: 'topSogatCityPage',
+                url: '{{route('place.list', ['kindPlaceId' => 10, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+            },
+            {
+                name: '{{__('محبوب‌ترین غذاهای محلی')}}',
+                id: 'topFoodCityPage',
+                url: '{{route('place.list', ['kindPlaceId' => 11, 'mode' => $kind, 'city' => $locationName['cityNameUrl']])}}'
+            },
+        ];
 
-    if(topPlacesSample == 0){
-        topPlacesSample = $('#topPlacesSection').html();
-        $('#topPlacesSection').html('');
-        $('#topPlacesSection').show();
-        createTopPlacesSection();
-    }
+    initPlaceRowSection(topPlacesSections);
 
     if(reveiewSample == 0){
         reveiewSample = $('#reviewSection').html();
@@ -612,14 +585,6 @@
                     spaceBetween: 20,
                 }
             }
-        });
-    }
-    function createCityPageSuggestion(_id, _item, _callBack){
-        createSuggestionPack(_id, _item, function() {
-            $('#' + _id).find('.suggestionPackDiv').addClass('swiper-slide');
-
-            if(_callBack === 'function')
-                _callBack();
         });
     }
 
@@ -674,24 +639,15 @@
             }
         })
     }
-    function createTopPlacesSection(){
-        topPlacesSections.forEach(item => {
-            let text = topPlacesSample;
-            let fk = Object.keys(item);
-            for (let x of fk) {
-                let t = '##' + x + '##';
-                let re = new RegExp(t, "g");
-                text = text.replace(re, item[x]);
-            }
-            $('#topPlacesSection').append(text);
-        });
-    }
     function createTopPlacesDiv(_result){
         let fk = Object.keys(_result);
-
         for (let x of fk) {
-            if(_result[x].length > 4)
-                createCityPageSuggestion(x + 'Content', _result[x], () => resizeFitImg('resizeImgClass'));
+            if(_result[x].length > 4){
+                createSuggestionPack(x + 'Content', _result[x], function() { // in suggestionPack.blade.php
+                    $('#' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
+                    resizeFitImg('resizeImgClass')
+                });
+            }
             else
                 $('#' + x).hide();
         }
