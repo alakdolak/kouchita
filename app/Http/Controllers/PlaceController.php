@@ -102,8 +102,6 @@ class PlaceController extends Controller {
         else
             $place = DB::table($kindPlace->tableName)->where('slug', $slug)->first();
 
-//        dd($place);
-
         if($place == null)
             return \redirect(\url('/'));
 
@@ -472,7 +470,7 @@ class PlaceController extends Controller {
                 }
 
                 foreach ($allPosts as $item) {
-                    $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                    $item->review = PostComment::wherePostId($item->id)->whereStatus(true)->count();
                     $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
                     if ($item->date == null)
                         $item->date = \verta($item->created_at)->format('Ym%d');
@@ -480,6 +478,8 @@ class PlaceController extends Controller {
                     $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
                     $item->category = PostCategory::find($mainCategory->categoryId)->name;
                     $item->url = route('article.show', ['slug' => $item->slug]);
+
+                    $item->name = $item->title;
                 }
 
                 $places = $this->getNearbies($place->C, $place->D, $count);

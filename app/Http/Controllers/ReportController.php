@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
+
 
 class ReportController extends Controller {
 
@@ -126,6 +128,17 @@ class ReportController extends Controller {
 
         return view('reportControl', array('currPage' => $page, 'user' => Auth::user(), 'logs' => $logs, 'total' => LogModel::whereActivityId(Activity::whereName('گزارش')->first()->id)->count()));
 
+    }
+
+    public function getReportQuestions(Request $request){
+        if(isset($request->kindPlaceId)){
+            $reports = ReportsType::where('kindPlaceId', $request->kindPlaceId)->get();
+            echo json_encode(['status' => 'ok', 'result' => $reports]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
     }
 
 }
