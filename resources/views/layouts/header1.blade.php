@@ -127,8 +127,7 @@
                             <div class="headerBookMarkHeader">
                                 <a class="headerBookMarkHeaderName" href="#" target="_self"> {{__('تمامی پیام ها')}}</a>
                             </div>
-                            <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
-                            <div id="headerMsgPlaceHolder" class="alertMsgResultDiv" style="width: 230px">
+                            <div id="headerMsgPlaceHolder" class="alertMsgResultDiv" style="width: 300px; overflow-y: auto">
                                 <div class="headerBookMarkLink">
                                     <div class="headerBookMarContentImgDiv">
                                         <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
@@ -213,8 +212,11 @@
 
 
 <script>
+    let openHeadersTab = false;
 
     function hideAllTopNavs(){
+        openHeadersTab = false;
+
         $("#alert").hide();
         $("#bookmarkmenu").hide();
         $("#languageMenu").hide();
@@ -249,6 +251,15 @@
             getAlertsCount();
         });
 
+        $(window).on('click', function(){
+            if(openHeadersTab)
+                hideAllTopNavs();
+        });
+
+        function openHeaderTabsVariable(){
+            setTimeout(() => openHeadersTab = true, 500);
+        }
+
         function getAlertsCount() {
 
             $.ajax({
@@ -263,15 +274,15 @@
             });
         }
 
-        function scrolled(o) {
-            //visible height + pixel scrolled = total height
-            if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
-                if(!locked) {
-                    superAccess = true;
-                    getAlertItems();
-                }
-            }
-        }
+        // function scrolled(o) {
+        //     //visible height + pixel scrolled = total height
+        //     if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
+        //         if(!locked) {
+        //             superAccess = true;
+        //             getAlertItems();
+        //         }
+        //     }
+        // }
 
         function getAlertItems() {
 
@@ -281,45 +292,70 @@
                     url: '{{route('getAlerts')}}',
                     success: function (response) {
                         response = JSON.parse(response);
-                        console.log(response);
-
                         var newElement = "";
+                        if (response.length > 0)
+                            response.forEach(item => {
 
-                        // if (response.length < 5 && response.length > 0)
-                        //     $("#showMoreItemsAlert").removeClass('hidden');
-                        // else
-                        //     $("#showMoreItemsAlert").addClass('hidden');
-                        for (i = 0; i < response.length; i++) {
+                                if(item.click != 0)
+                                    item.color = 'white';
 
-                            // if (response[i].url != -1)
-                            //     newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                            // else
-                                newElement += '<a href="' + response[i].url + '" style="cursor: pointer; padding: 10px; text-align: right;" target="_blank"><div class="modules-engagement-notification-dropdown" style="padding: 10px"><div style="margin: 0px;" class="notifdd_empty"><span>' + response[i].text + '</span></div></div></a>';
-                        }
-
-                        if (response.length == 0)
+                                newElement +=   '<div class="alertMsgHeaderContent" style="background: ' + item.color + '" onclick="setSeenAlert(' + item.id + ', this)">\n' +
+                                                '<div class="alertMsgHeaderContentImgDiv">\n' +
+                                                '<img src="' + item.pic + '" alt="" class="resizeImgClass" onload="fitThisImg(this)" style="width: 100%">\n' +
+                                                '</div>\n' +
+                                                '<div class="alertMsgHeaderContentTextDiv">\n' +
+                                                '<div class="alertMsgHeaderContentText">' + item.msg + '</div>\n' +
+                                                '<div class="alertMsgHeaderContentTime">' + item.time + '</div>\n' +
+                                                '</div>\n' +
+                                                '</div>';
+                            });
+                        else
                             newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">{{__('هیچ پیامی موجود نیست')}} </div></div></div>';
 
-
-                        $('#alertPane').text(response.length);
-                        $('.alertMsgResultDiv').html(newElement);
-
-                        // locked = false;
-                        // superAccess = false;
-                        // $('#alertItems').empty().append(newElement);
-                        //
-                        // $('#headerMsgPlaceHolder').hide();
-                        // $('#alertItems').show();
-
+                            $('.alertMsgResultDiv').html(newElement);
                     }
                 });
             }
+        }
+
+        let seenToZero = false;
+        function setSeenAlert(_id = 0, _element = ''){
+            let kind;
+            if(_id == 0)
+                kind = 'seen';
+            else
+                kind = 'click';
+
+            if(kind == 'seen' && seenToZero)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("alert.seen")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: _id,
+                    kind: kind
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    if(response.status == 'ok'){
+                        if(kind == 'seen') {
+                            $('#alertPane').html(0);
+                            seenToZero = true;
+                        }
+                        else
+                            $(_element).css('background', 'white');
+                    }
+                }
+            })
         }
 
         $('#memberTop').click(function(e) {
             if( $("#profile-drop").is(":hidden")) {
                 hideAllTopNavs();
                 $("#profile-drop").show();
+                openHeaderTabsVariable()
             }
             else {
                 hideAllTopNavs();
@@ -331,6 +367,7 @@
                 hideAllTopNavs();
                 $("#bookmarkmenu").css('display', 'block');
                 showBookMarks('bookMarksDiv');
+                openHeaderTabsVariable()
             }
             else
                 hideAllTopNavs();
@@ -340,6 +377,7 @@
             if( $("#languageMenu").is(":hidden")){
                 hideAllTopNavs();
                 $("#languageMenu").css('display', 'block');
+                openHeaderTabsVariable()
             }
             else
                 hideAllTopNavs();
@@ -349,11 +387,12 @@
             if( $("#alert").is(":hidden")) {
                 hideAllTopNavs();
                 $("#alert").css('display', 'block');
+                setSeenAlert(0, '');
                 getAlertItems();
+                openHeaderTabsVariable();
             }
-            else {
+            else
                 hideAllTopNavs();
-            }
         });
 
         $("#Settings").on({
@@ -444,6 +483,7 @@
                 }
             });
         }
+
         function showRecentlyViews(element) {
             if( $("#my-trips-not").is(":hidden")){
                 hideAllTopNavs();

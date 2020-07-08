@@ -267,7 +267,7 @@
     <div class="container-fluid fluidPlacePath secHeadMain">
 
         <div class="container listSecHeadContainer secHeadNavs spanMarginSecHead">
-            <a class="linkRoute" href="{{url('/')}}">
+            <a class="linkRoute" href="{{url('/main')}}">
                 {{__('صفحه اصلی')}}
             </a>
             @if($locationName['kindState'] != 'country')

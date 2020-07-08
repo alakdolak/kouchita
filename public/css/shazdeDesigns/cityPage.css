@@ -601,30 +601,8 @@ h3{
     margin-bottom: 9px;
 }
 
-.topPlacesDivInCity{
-    margin: 40px 10px;
-    padding: 20px 20px;
-    background: #053a3e;
-    margin-top: 0px;
-}
-.topPlacesDivInCityHeader{
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.topPlacesDivInCityHeader a {
-    margin: 0 5px;
-    color: #eab836;
-}
-.topPlacesDivInCityHeader div{
-    margin: 0px;
-}
-
 .content-2col .im-entry{
     min-height: auto;
-}
-.nagLogo{
-    width: 50px;
 }
 
 @media (max-width: 992px) {

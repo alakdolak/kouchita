@@ -1,56 +1,86 @@
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/placeDetailsTable.css')}}">
+
 <div class="row" style="font-size: 15px">
 
     @if($place->eatable == 0)
-
-        @if($place->style != '0')
-            <div class="col-sm-12" style="float: right;">
-                <div class="row">
-                    <div class="col-sm-4">{{$place->fragile}}</div>
-                    <div class="col-sm-4">{{$place->style}}</div>
-                    <div class="col-sm-4" style="color: #4dc7bc">سبک:</div>
-                </div>
+        <div class="descriptionSections">
+            <div class="titleSection">
+                <span class="titleSectionSpan">
+                    {{__('سبک :')}}
+                </span>
             </div>
-        @endif
+            <div class="contentSection col-xs-4">{{$place->style}}</div>
+            <div class="contentSection col-xs-4">{{$place->fragile}}</div>
+        </div>
     @else
-        <div class="col-sm-12" style="float: right;">
-            <div class="row">
-                <div class="col-sm-8">{{$place->taste}}</div>
-                <div class="col-sm-4" style="color: #4dc7bc">مزه:</div>
+        <div class="descriptionSections">
+            <div class="titleSection">
+                <span class="titleSectionSpan">
+                    {{__('مزه :')}}
+                </span>
             </div>
+            @foreach($place->taste as $test)
+                <div class="contentSection col-xs-3">{{$test}}</div>
+            @endforeach
         </div>
     @endif
 
-    <div class="col-sm-12" style="float: right;">
-        <div class="row">
-            <div class="col-sm-8">{{$place->size}}</div>
-            <div class="col-sm-4" style="color: #4dc7bc">ابعاد:</div>
+
+    <div class="descriptionSections">
+        <div class="titleSection">
+            <span class="titleSectionSpan">
+                {{__('ابعاد :')}}
+            </span>
         </div>
+        <div class="contentSection col-xs-3">{{$place->size}}</div>
     </div>
-    <div class="col-sm-12" style="float: right;">
-        <div class="row">
-            <div class="col-sm-8">{{$place->weight}}</div>
-            <div class="col-sm-4" style="color: #4dc7bc">وزن:</div>
+    <div class="descriptionSections">
+        <div class="titleSection">
+            <span class="titleSectionSpan">
+                {{__('وزن :')}}
+            </span>
         </div>
+        <div class="contentSection col-xs-3">{{$place->weight}}</div>
     </div>
-    <div class="col-sm-12" style="float: right;">
-        <div class="row">
-            <div class="col-sm-8">{{$place->price}}</div>
-            <div class="col-sm-4" style="color: #4dc7bc">کلاس قیمتی:</div>
+    <div class="descriptionSections">
+        <div class="titleSection">
+            <span class="titleSectionSpan">
+                {{__('کلاس قیمتی :')}}
+            </span>
         </div>
+        <div class="contentSection col-xs-3">{{$place->price}}</div>
     </div>
 
     @if($place->eatable == 0)
-        <div class="col-sm-12" style="float: right;">
-            <div class="row">
-                <div class="col-sm-8">{{$place->kind}}</div>
-                <div class="col-sm-4" style="color: #4dc7bc">نوع:</div>
+        <div class="descriptionSections">
+            <div class="titleSection">
+                <span class="titleSectionSpan">
+                    {{__('نوع :')}}
+                </span>
             </div>
+            @foreach($place->kind as $kind)
+                <div class="contentSection col-xs-3">{{$kind}}</div>
+            @endforeach
         </div>
-        <div class="col-sm-12" style="float: right;">
-            <div class="row">
-                <div class="col-sm-8">{{$place->material}}</div>
-                <div class="col-sm-4" style="color: #4dc7bc">جنس:</div>
+        <div class="descriptionSections">
+            <div class="titleSection">
+                <span class="titleSectionSpan">
+                    {{__('جنس :')}}
+                </span>
             </div>
+            @if($place->material != null)
+                <div class="contentSection col-xs-3">{{$place->material}}</div>
+            @endif
         </div>
+
     @endif
 </div>
+
+
+<script>
+    var checkFeatures = $('.descriptionSections');
+    for(var i = 0; i < checkFeatures.length; i++){
+        if(checkFeatures[i].children.length < 2)
+            checkFeatures[i].remove();
+    }
+</script>

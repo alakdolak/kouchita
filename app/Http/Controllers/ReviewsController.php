@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Adab;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
@@ -240,6 +241,18 @@ class ReviewsController extends Controller
                         $newAssigned->email = $item;
 
                     $newAssigned->save();
+
+                    if($user != null){
+                        $newAlert = new Alert();
+                        $newAlert->subject = 'assignedUserToReview';
+                        $newAlert->referenceTable = 'reviewUserAssigned';
+                        $newAlert->referenceId = $newAssigned->id;
+                        $newAlert->userId = $user->id;
+                        $newAlert->seen = 0;
+                        $newAlert->click = 0;
+                        $newAlert->save();
+                    }
+
                 }
             }
 
@@ -287,15 +300,18 @@ class ReviewsController extends Controller
                 }
             }
 
-
-            if($log->subject != 'dontShowThisText')
-                $log = $this->reviewTrueType($log);
-            else
-                $log = [];
+            $newAlert = new Alert();
+            $newAlert->subject = 'addReview';
+            $newAlert->referenceTable = 'log';
+            $newAlert->referenceId = $log->id;
+            $newAlert->userId = $uId;
+            $newAlert->seen = 0;
+            $newAlert->click = 0;
+            $newAlert->save();
 
             $code = $uId . '_' . rand(10000,99999);
 
-            echo json_encode(['status' => 'ok', 'result' => $log, 'code' => $code]);
+            echo json_encode(['status' => 'ok', 'code' => $code]);
         }
         else
             echo json_encode(['status' => 'nok']);

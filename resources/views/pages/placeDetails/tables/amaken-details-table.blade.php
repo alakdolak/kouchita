@@ -1,6 +1,4 @@
 
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/placeDetailsTable.css')}}">
-
 @foreach($features as $item)
     <div class="descriptionSections">
         <div class="titleSection">

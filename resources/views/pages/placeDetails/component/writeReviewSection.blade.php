@@ -149,7 +149,7 @@
                     @endfor
                 </div>
 
-                <button id="sendReviewButton" class="postMainDivFooter" type="button" onclick="sendWriteReview()" disabled>
+                <button id="sendReviewButton" class="postMainDivFooter" type="button" onclick="checkReviewToSend('send');">
                     {{__('ارسال دیدگاه')}}
                 </button>
 
@@ -1059,13 +1059,10 @@
                     try{
                         response = JSON.parse(response);
                         if(response.status == 'ok'){
-                            console.log(response);
                             $('#storeReviewCode').val(response.code);
                             showSuccessNotifi('{{__('دیدگاه شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
-
                             reviewPage = 1;
                             loadReviews();
-
                             clearStoreReview();
                         }
                         else{
@@ -1092,7 +1089,7 @@
         }
     }
 
-    function checkReviewToSend(){
+    function checkReviewToSend(_kind = ''){
 
         let error = false;
         let text = $('#postTextArea').val();
@@ -1110,13 +1107,12 @@
             error = true;
 
         if(error) {
-            $('#sendReviewButton').prop('disabled', false);
+            if(_kind == 'send')
+                sendWriteReview();
             return true;
         }
-        else {
-            $('#sendReviewButton').prop('disabled', true);
+        else
             return false;
-        }
     }
 
     function clearStoreReview(){

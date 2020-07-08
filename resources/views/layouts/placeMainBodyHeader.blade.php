@@ -21,7 +21,7 @@
                 </span>
                 <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
                     <span>
-                        {{$reviewCount}}
+                        {{$place->reviewCount}}
                         {{__('نقد')}}
                     </span>
                 </span>

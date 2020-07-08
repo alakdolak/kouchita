@@ -23,3 +23,6 @@ ALTER TABLE `majara` ADD `fullRate` FLOAT(5)  NOT NULL DEFAULT '0' AFTER `review
 ALTER TABLE `boomgardies` ADD `fullRate` FLOAT(5)  NOT NULL DEFAULT '0' AFTER `reviewCount`;
 ALTER TABLE `restaurant` ADD `fullRate` FLOAT(5)  NOT NULL DEFAULT '0' AFTER `reviewCount`;
 ALTER TABLE `sogatSanaies` ADD `fullRate` FLOAT(5)  NOT NULL DEFAULT '0' AFTER `reviewCount`;
+
+-- 2020-07-06
+--  'alert' Table

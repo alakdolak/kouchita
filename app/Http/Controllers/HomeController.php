@@ -7,6 +7,7 @@ use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\Adab;
 use App\models\AirLine;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\BannerPics;
 use App\models\Boomgardy;
@@ -38,6 +39,7 @@ use App\models\ReportsType;
 use App\models\Restaurant;
 use App\models\RetrievePas;
 use App\models\ReviewPic;
+use App\models\ReviewUserAssigned;
 use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Train;
@@ -57,6 +59,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Assign;
 use function Sodium\crypto_box_publickey_from_secretkey;
 
 
@@ -1217,60 +1220,108 @@ class HomeController extends Controller
 
     public function getAlertsCount()
     {
-
-        $uId = Auth::user()->id;
-        $sum = 0;
-        $sum += Message::whereSenderId($uId)->whereSeenSender(0)->orderBy('date', 'DESC')->count();
-        $sum += Message::whereReceiverId($uId)->whereSeenReceiver(0)->orderBy('date', 'DESC')->count();
-
-        $ansActivity = Activity::whereName('پاسخ')->first();
-        $commentActivity = Activity::whereName('نظر')->first();
-        $reportActivity = Activity::whereName('گزارش')->first();
-        $questionActivity = Activity::whereName('سوال')->first();
-
-        $logs = DB::select('select DISTINCT l.id, l.activityId, l.placeId, l.kindPlaceId, l.seen, l.text from log l, activity a WHERE a.id = l.activityId and confirm = 1 and (a.id = ' . $ansActivity->id . ' or a.id = ' . $commentActivity->id . ' or a.id = ' . $reportActivity->id . ' or a.id = ' . $questionActivity->id . ') and (a.visibility = 1 or a.id = ' . $reportActivity->id . ') and visitorId = ' . $uId . ' and seen = 0 or ' .
-            '((select count(*) from opOnActivity o where l.id = o.logId and seen = 0) > 0 or (select count(*) from log l2 where l2.activityId = ' . $reportActivity->id . ' and l2.relatedTo = l.id and l2.seen = 0) > 0)'
-        );
-
-        if ($logs != null && count($logs) > 0) {
-
-            foreach ($logs as $log) {
-                switch ($log->activityId) {
-
-                    case $ansActivity->id:
-                        if ($log->seen == 0)
-                            $sum++;
-                        break;
-
-                    case $questionActivity->id:
-                        if ($log->seen == 0)
-                            $sum++;
-                        break;
-
-                    case $commentActivity->id:
-                        if ($log->seen == 0)
-                            $sum++;
-                        break;
-
-                    case $reportActivity->id:
-                        $sum++;
-                        break;
-                }
-
-                $sum += OpOnActivity::whereLogId($log->id)->whereSeen(0)->orderBy('time', 'DESC')->count();
-                $sum += LogModel::whereActivityId($reportActivity->id)->whereRelatedTo($log->id)->whereSeen(0)->count();
-
-            }
-        }
+        $sum = Alert::where('userId', Auth::user()->id)->where('seen', 0)->count();
         echo $sum;
     }
 
     public function getAlerts()
     {
-        $uId = Auth::user()->id;
+        $greenColor = '#4dc7bc26';
+        $redColor = '#ffe1e1';
         $result = [];
-        $counter = 0;
+        $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('created_at')->take(5)->get();
+        foreach ($alerts as $item) {
 
+            $item->time = getDifferenceTimeString($item->created_at);
+
+            if($item->subject == 'addReview' || $item->subject == 'confirmReview' || $item->subject == 'deleteReviewPic' || $item->subject == 'deleteReviewVideo' ){
+                $reference = \DB::table($item->referenceTable)->find($item->referenceId);
+                if($reference != null) {
+                    $kindPlaceId = $reference->kindPlaceId;
+                    $placeId = $reference->placeId;
+                    $kindPlace = Place::find($kindPlaceId);
+                    $place = \DB::table($kindPlace->tableName)->find($placeId);
+                    $placeUrl = createUrl($kindPlaceId, $placeId, 0, 0, 0);
+
+                    if ($item->subject == 'addReview'){
+                        $alertText = 'دیدگاه شما با موفقیت برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'ثبت گردید.';
+                        $item->color = $greenColor;
+                    }
+                    else if ($item->subject == 'confirmReview') {
+                        $alertText = 'دیدگاه شما توسط مدیر سایت برای ' . ' <a href="' . $placeUrl . '" class="alertUrl"> ' . $place->name . ' </a> ' . 'تایید شد.';
+                        $item->color = $greenColor;
+                    }
+                    else if ($item->subject == 'deleteReviewPic') {
+                        $alertText = 'عکسی از دیدگاه شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'به دلیل مغایرت با قوانین سایت حذف گردید.';
+                        $item->color = $redColor;
+                    }
+                    else if ($item->subject == 'deleteReviewVideo') {
+                        $alertText = 'ویدیویی از دیدگاه شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'به دلیل مغایرت با قوانین سایت حذف گردید.';
+                        $item->color = $redColor;
+                    }
+                    $item->msg = $alertText;
+                    $item->pic = getPlacePic($placeId, $kindPlaceId, 'l');
+
+                    array_push($result, $item);
+                }
+                else
+                    $item->delete();
+            }
+            else if($item->subject == 'deleteReview'){
+                $reference = \DB::table($item->referenceTable)->find($item->referenceId);
+                if($reference != null) {
+                    $kindPlace = Place::where('tableName', $item->referenceTable)->first();
+                    $placeId = $reference->id;
+                    $place = \DB::table($kindPlace->tableName)->find($placeId);
+                    $placeUrl = createUrl($kindPlace->id, $placeId, 0, 0, 0);
+
+                    $alertText = 'نظر شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . ' بدلیل مغایرت با قوانین سایت حذف گردید.';
+
+                    $item->color = $redColor;
+                    $item->msg = $alertText;
+                    $item->pic = getPlacePic($placeId, $kindPlace->id, 'l');
+                    array_push($result, $item);
+                }
+                else
+                    $item->delete();
+            }
+            else if($item->subject == 'assignedUserToReview'){
+                $reference = \DB::table($item->referenceTable)->find($item->referenceId);
+                if($reference != null){
+                    $assigned = $reference;
+                    $log = LogModel::find($assigned->logId);
+                    if($log != null){
+                        $kindPlace = Place::find($log->kindPlaceId);
+                        $place = \DB::table($kindPlace->tableName)->find($log->placeId);;
+                        $rUser = User::find($log->visitorId);
+                        if($kindPlace != null && $place != null && $rUser != null){
+                            $placeUrl = createUrl($kindPlace->id, $place->id, 0, 0, 0);
+                            $alertText = $rUser->username . ' شما را در پست خود در ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'تگ کرده است.';
+
+                            $item->color = $greenColor;
+                            $item->msg = $alertText;
+                            $item->pic = getPlacePic($place->id, $kindPlace->id, 'l');
+                            array_push($result, $item);
+                        }
+                        else
+                            $item->delete();
+                    }
+                    else
+                        $item->delete();
+                }
+                else
+                    $item->delete();
+
+
+            }
+        }
+
+        echo \GuzzleHttp\json_encode($result);
+        return;
+
+//        $uId = Auth::user()->id;
+//        $result = [];
+//        $counter = 0;
 //        $msgs = Message::whereSenderId($uId)->whereSeenSender(0)->orderBy('date', 'DESC')->take(5)->get();
 //        foreach ($msgs as $msg) {
 //            $result[$counter]["customText"] = "پیام شما به " . User::whereId($msg->receiverId)->username . " ارسال شد";
@@ -1471,35 +1522,24 @@ class HomeController extends Controller
 //                    $result[$i]['pic'] = URL::asset('_images/nopic/blank.jpg');
 //            }
 //        }
+    }
 
-        $user = \auth()->user();
-        $acceptActivityName = ['نظر', 'سوال', 'پاسخ', 'گزارش'];
-        $acceptActivityId = Activity::whereIn('name', $acceptActivityName)->pluck('id')->toArray();
-        $logs = LogModel::Join('activity', 'activity.id', '=', 'log.activityId')->where('seen', 0)->where('visitorId', $user->id)->whereIn('activityId', $acceptActivityId)->orderByDesc('date')->orderByDesc('time')->get();
-
-        $result = [];
-        foreach($logs as $log){
-            $kindPlace = Place::find($log->kindPlaceId);
-            if($kindPlace != null){
-                $place = \DB::table($kindPlace->tableName)->find($log->placeId);
-                if($place != null){
-                    $url = createUrl($kindPlace->id, $place->id, 0, 0, 0);
-                    $text = $log->name . ' شما با موفقیت برای ' . $place->name ;
-
-                    if($log->confirm == 1)
-                        $text .= ' توسط مدیر سایت تایید شد.';
-                    else
-                        $text .= ' ثبت شد.';
-
-//                    $log->seen = 1;
-//                    $log->save();
-
-                    array_push($result, [ 'text' => $text, 'url' => $url ]);
-                }
+    public function seenAlerts(Request $request)
+    {
+        if(isset($request->id) && isset($request->kind)){
+            if($request->kind == 'seen'){
+                Alert::where('userId', \auth()->user()->id)->where('seen', 0)->update(['seen' => 1]);
+                echo json_encode(['status' => 'ok']);
+            }
+            else{
+                Alert::find($request->id)->update(['click' => 1]);
+//                dd(Alert::find($request->id));
+                echo json_encode(['status' => 'ok']);
             }
         }
+        else
+            echo json_encode(['status' => 'nok']);
 
-        echo \GuzzleHttp\json_encode($result);
         return;
     }
 
