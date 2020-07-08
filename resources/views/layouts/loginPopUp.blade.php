@@ -855,7 +855,7 @@ $authUrl = $client->createAuthUrl();
         }
     }
 
-    function showLoginPrompt(url) {
+    function showLoginPrompt(url = '{{Request::url()}}') {
         selectedUrl = url;
         $("#username_main").val("");
         $("#password_main").val("");

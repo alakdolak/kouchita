@@ -715,6 +715,59 @@ function customReport() {
     }
 }
 
+let getReportsQuestionsVar = false;
+function getReportsQuestions(){
+    if(!getReportsQuestionsVar) {
+        $.ajax({
+            type: 'post',
+            url: getReportsDir,
+            data: {
+                'kindPlaceId': kindPlaceId
+            },
+            success: function (response) {
+
+                console.log(response);
+                return;
+
+                getReportsQuestionsVar = true;
+                response = JSON.parse(response);
+
+                var newElement = "<div id='reportContainer' class='row'>";
+                if (response != "") {
+                    for (i = 0; i < response.length; i++) {
+                        newElement += "<div class='col-xs-12'>";
+                        newElement += "<div class='ui_input_checkbox'>";
+                        if (response[i].selected == true)
+                            newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' checked value='" + response[i].id + "'>";
+                        else
+                            newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' value='" + response[i].id + "'>";
+                        newElement += "<label class='labelForCheckBox' for='report_" + response[i].id + "'>";
+                        newElement += "<span></span>&nbsp;&nbsp;";
+                        newElement += response[i].description;
+                        newElement += "</label>";
+                        newElement += "</div></div>";
+                    }
+                }
+                newElement += "<div class='col-xs-12'>";
+                newElement += "<div class='ui_input_checkbox'>";
+                newElement += "<input id='custom-checkBox' onchange='customReport()' type='checkbox' name='reports' value='-1'>";
+                newElement += "<label class='labelForCheckBox' for='custom-checkBox'>";
+                newElement += "<span></span>&nbsp;&nbsp;";
+                newElement += "سایر موارد</label>";
+                newElement += "</div></div>";
+                newElement += "<div id='custom-define-report'></div>";
+                newElement += "</div>";
+                $("#reports").append(newElement);
+                if (response != "" && response.length > 0 && response[0].text != "") {
+                    customReport();
+                    $("#customDefinedReport").val(response[0].text);
+                }
+            }
+        });
+    }
+}
+getReportsQuestions();
+
 function getReports(logId) {
     $("#reports").empty();
     $.ajax({
@@ -802,10 +855,10 @@ function closeReportPrompt() {
 
 function showReportPrompt(logId) {
     if (!hasLogin) {
-        url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
-        showLoginPrompt(url);
+        showLoginPrompt();
         return;
     }
+
     $('.dark').show();
     selectedLogId = logId;
     getReports(logId);

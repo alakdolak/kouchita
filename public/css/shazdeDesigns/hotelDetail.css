@@ -1550,7 +1550,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 #bestPriceInnerDiv {
-    background: black;
+    background: #3a3a3a;
     border: 10px solid #4DC7BC;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
     width: 350px;
@@ -3406,12 +3406,24 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: right;
     cursor: pointer;
 }
-
 .questionsActionsMoreDetails > span:hover {
     color: #0076a3;
 }
-
 .questionsActionsMoreDetails > span:not(:last-child) {
+    border-bottom: 1px solid #999999;
+}
+
+.questionsActionsMoreDetails > a {
+    padding: 5px 0;
+    display: block;
+    text-align: right;
+    cursor: pointer;
+    color: #7f7f7f;
+}
+.questionsActionsMoreDetails > a:hover {
+    color: #0076a3;
+}
+.questionsActionsMoreDetails > a:not(:last-child) {
     border-bottom: 1px solid #999999;
 }
 

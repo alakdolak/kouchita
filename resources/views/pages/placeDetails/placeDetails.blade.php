@@ -50,12 +50,7 @@ if ($total == 0)
     @endif
 
     <script>
-        var nearHotel = [];
-        var nearRestuarant = [];
-        var nearAmaken = [];
-        var nearMajara = [];
-
-        var thisUrl = '{{Request::url()}}'
+        var thisUrl = '{{Request::url()}}';
         var userCode = '{{$userCode}}';
         var userPic = '{{$userPic}}';
         var userPhotos = {!! $userPhotosJson !!};
@@ -87,7 +82,7 @@ if ($total == 0)
         var sendAnsDir = '{{route('sendAns')}}';
         var showAllAnsDir = '{{route('showAllAns')}}';
         var filterComments = '{{route('filterComments')}}';
-        var getReportsDir = '{{route('getReports')}}';
+        var getReportsDir = '{{route('getReportQuestions')}}';
         var sendReportDir = '{{route('sendReport2')}}';
         var getPhotoFilter = '{{route('getPhotoFilter')}}';
         var getPhotosDir = '{{route('getPhotos')}}';
@@ -254,13 +249,210 @@ if ($total == 0)
                     @include('pages.placeDetails.component.writeReviewSection')
                 @endif
 
+                    <style>
+                        .tvSection{
+                            position: relative;
+                            height: 430px;
+                        }
+                        .tvLogoDiv{
+                            position: relative;
+                            background: #4DC7BC;
+                            width: 55%;
+                            display: flex;
+                            margin-left: auto;
+                            padding: 0px 0px 5px 5px;
+                        }
+                        .tvSeeMore{
+                            position: absolute;
+                            background: #4DC7BC;
+                            color: white;
+                            bottom: 0px;
+                            left: 0px;
+                            padding: 10px 10px;
+                            font-size: 22px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding-left: 0px;
+                        }
+                        .tvSeeMore:hover{
+                            color: white;
+                        }
+                        .tvSeeMoreIcons{
+                            position: relative;
+                            width: 30px;
+                            display: flex;
+                            justify-content: flex-start;
+                            height: 30px;
+                            align-items: center;
+                            margin-right: 10px;
+                        }
+                        .tvSeeMoreIcons > i{
+                            width: 10px;
+                            font-size: 30px;
+                            font-style: normal;
+                        }
+                        .tvContentDiv{
+                            padding: 0px 10px;
+                            direction: rtl;
+                            margin-top: 5px;
+                        }
+                        .tvContentText{
+                            color: white;
+                            text-align: justify;
+                            font-size: 15px;
+                            line-height: 25px;
+                        }
+                        .tvContentVideo{
+                            width: 100%;
+                            height: 230px;
+                            background: #232323;
+                            margin-top: 10px;
+                            border-radius: 10px;
+                            padding: 5px;
+                        }
+                        .tvVideoPic{
+                            position: relative;
+                            width: 100%;
+                            height: 140px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            overflow: hidden;
+                            border-radius: 10px;
+                        }
+                        .tvVideoName{
+                            color: white;
+                            font-size: 12px;
+                            margin-top: 10px;
+                            padding-right: 10px;
+                            display: block;
+                        }
+                        .tvUserContentDiv{
+                            display: flex;
+                            align-items: center;
+                            padding-right: 10px;
+                            margin-top: 10px;
+                        }
+                        .tvUserPic{
+                            width: 40px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+                            overflow: hidden;
+                        }
+                        .tvUserInfo{
+                            margin-right: 10px;
+                            font-size: 11px;
+                        }
+                        .tvUserName{
+                            color: #0076a3;
+                        }
+                        .tvUserTime{
+                            color: white;
+                        }
+                        .tvImgHover{
+                            position: absolute;
+                            display: none;
+                            justify-content: center;
+                            align-items: center;
+                            top: 0px;
+                            right: 0px;
+                            width: 100%;
+                            height: 100%;
+                            background: #00000085;
+                        }
+                        .tvVideoPic:hover .tvImgHover{
+                            display: flex;
+                        }
+                        .tvOverPic{
+                            position: absolute;
+                            background: #000000d1;
+                            display: flex;
+                            color: white;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                            border-radius: 10px;
+                        }
+                        .tvSeenSection{
+                            top: 10px;
+                            left: 20px;
+                        }
+                        .tvLikeSection{
+                            bottom: 10px;
+                            left: 20px;
+                        }
+                        .tvLike{
 
-                <div id="bestPrice" class="meta position-relative"
-                     style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
-                    <a id="targetHelp_9" href="{{route('streaming.index')}}" target="_blank"
-                       class="targets  float-left">
-                        <div class="meta_inner" id="bestPriceInnerDiv"></div>
-                    </a>
+                        }
+                        .tvLike > i{
+                            font-style: normal;
+                            display: inline-block;
+                            width: 6px;
+                            display: inline-flex;
+                            justify-content: center;
+                        }
+                    </style>
+
+                <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                    <div id="targetHelp_9" class="targets  float-left">
+                        <div id="bestPriceInnerDiv" class="tvSection">
+                            <a href="https://koochitatv.com" class="tvLogoDiv" target="_blank">
+                                <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" style="max-height: 100%; max-width: 100%;">
+                            </a>
+                            <div class="tvContentDiv">
+                                <div class="tvContentText">
+                                    کوچیتا تی وی برای تماشای آنلاین و زنده محتواهای بصری و صوتی در تمامی حوزه های گردشگری و سفر
+                                </div>
+                                <div class="tvContentVideo">
+                                    <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoPic" target="_blank">
+                                        <div class="tvImgHover">
+                                            <img src="{{URL::asset('images/icons/play.png')}}" style="width: 50px">
+                                        </div>
+                                        <div class="tvOverPic tvSeenSection">
+                                            <span>10</span>
+                                            <img src="{{URL::asset('images/icons/eye.png')}}" style="height: 15px; margin-right: 5px">
+                                        </div>
+                                        <div class="tvOverPic tvLikeSection">
+                                            <div class="tvLike">
+                                                <span>20</span>
+                                                <i class="DisLikeIcon"></i>
+                                            </div>
+                                            <div class="tvLike" style="margin-right: 10px">
+                                                <span>20</span>
+                                                <i class="LikeIcon"></i>
+                                            </div>
+                                        </div>
+                                        <img src="https://static.koochita.com/_images/video/68/1593441472836.jpg" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                    </a>
+                                    <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoName showLessText" target="_blank">
+                                        گفت و گو با نوا جمشیدی
+                                    </a>
+                                    <div class="tvUserContentDiv">
+                                        <div class="tvUserPic">
+                                            <img src="https://static.koochita.com/_images/defaultPic/2.jpg" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                        </div>
+                                        <div class="tvUserInfo">
+                                            <div class="tvUserName"> KoochitaTv </div>
+                                            <div class="tvUserTime"> دیروز </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="https://koochitatv.com" class="tvSeeMore" target="_blank">
+                                <div class="tvSeeMoreIcons">
+                                    <i class="leftArrowIcon"></i>
+                                    <i class="leftArrowIcon"></i>
+                                </div>
+                                {{__('بیشتر ببینید')}}
+                            </a>
+                        </div>
+                    </div>
                     <div class="clear-both"></div>
                     <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
                         <span onclick="bookMark();"
@@ -906,9 +1098,9 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                             @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                                                    <div style="margin-top: 25px; padding-left: 15px;">
-                                                        <div id="mainMap" class="mainMap placeHolderAnime"></div>
-                                                    </div>
+                                                <div style="margin-top: 25px; padding-left: 15px;">
+                                                    <div id="mainMap" class="mainMap placeHolderAnime"></div>
+                                                </div>
                                                 @include('layouts.extendedMap')
 
                                             @endif
@@ -1274,30 +1466,31 @@ if ($total == 0)
         </div>
     </div>
 
-    <span id="reportPane" class="ui_overlay ui_modal editTags hidden"
-          style="position: fixed; left: 24%; right: 24%; top:19%; bottom: auto;overflow: auto;max-height: 500px;">
-    <div class="header_text">گزارش</div>
-    <div class="subheader_text">
-   گزارش خود را از بین موضوعات موجود انتخاب نمایید
-    </div>
-    <div class="body_text">
-        <fieldset id="memberTags">
-            <div class="reports" id="reports">
-            </div>
-        </fieldset>
-        <br>
-        <div class="submitOptions">
-            <button onclick="sendReport()" class="btn btn-success"
-                    style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
-            <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
+    <span id="reportPane" class="ui_overlay ui_modal editTags hidden" style="position: fixed; left: 24%; right: 24%; top:19%; bottom: auto;overflow: auto;max-height: 500px;">
+        <div class="header_text">گزارش</div>
+        <div class="subheader_text">
+       گزارش خود را از بین موضوعات موجود انتخاب نمایید
         </div>
-        <div id="errMsgReport" style="color: red"></div>
-    </div>
-    <div onclick="closeReportPrompt()" class="ui_close_x"></div>
-</span>
+        <div class="body_text">
+            <fieldset id="memberTags">
+                <div class="reports" id="reports">
+                    <div id="reportContainer">
+
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <div class="submitOptions">
+                <button onclick="sendReport()" class="btn btn-success"
+                        style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
+                <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
+            </div>
+            <div id="errMsgReport" style="color: red"></div>
+        </div>
+        <div onclick="closeReportPrompt()" class="ui_close_x"></div>
+    </span>
 
     @if(isset($video) && $video != null)
-        {{--vr--}}
         <div class="modal" id="myModal">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -1311,7 +1504,6 @@ if ($total == 0)
                 </div>
             </div>
         </div>
-
 
         <script>
             var player;
@@ -1337,121 +1529,140 @@ if ($total == 0)
 
     @include('hotelDetailsPopUp')
 
-    <script>
-        var topPlacesSections = [
-            {
-                name: '{{__('بوم گردی های نزدیک')}}',
-                id: 'nearDivboomgardy',
-                url: '#'
-            },
-            {
-                name: '{{__('جاذبه های نزدیک')}}',
-                id: 'nearDivamaken',
-                url: '#'
-            },
-            {
-                name: '{{__('محبوب‌ترین رستوران‌ها')}}',
-                id: 'nearDivrestaurant',
-                url: '#'
-            },
-            {
-                name: '{{__('اقامتگاه های نزدیک')}}',
-                id: 'nearDivhotels',
-                url: '#'
-            },
-            {
-                name: '{{__('طبیعت گردی های نزدیک')}}',
-                id: 'nearDivmajara',
-                url: '#'
-            },
-        ];
-
-        initPlaceRowSection(topPlacesSections);
-
-        function initNearbySwiper() {
-            var swiper = new Swiper('.mainSuggestion', {
-                slidesPerGroup: 1,
-                loop: true,
-                loopFillGroupWithBlank: true,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+    @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
+        <script>
+            var topPlacesSections = [
+                {
+                    name: '{{__('بوم گردی های نزدیک')}}',
+                    id: 'nearDivboomgardy',
+                    url: '#'
                 },
-                autoplay: {
-                    delay: 4000,
+                {
+                    name: '{{__('جاذبه های نزدیک')}}',
+                    id: 'nearDivamaken',
+                    url: '#'
                 },
-                breakpoints: {
+                {
+                    name: '{{__('محبوب‌ترین رستوران‌ها')}}',
+                    id: 'nearDivrestaurant',
+                    url: '#'
+                },
+                {
+                    name: '{{__('اقامتگاه های نزدیک')}}',
+                    id: 'nearDivhotels',
+                    url: '#'
+                },
+                {
+                    name: '{{__('طبیعت گردی های نزدیک')}}',
+                    id: 'nearDivmajara',
+                    url: '#'
+                },
+                {
+                    name: '{{__('سفرنامه ها')}}',
+                    id: 'articleSuggestion',
+                    url: '#'
+                },
+            ];
 
-                    450: {
-                        slidesPerView: 1,
-                        spaceBetween: 15,
+            initPlaceRowSection(topPlacesSections);
+
+            function initNearbySwiper() {
+                var swiper = new Swiper('.mainSuggestion', {
+                    slidesPerGroup: 1,
+                    loop: true,
+                    loopFillGroupWithBlank: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
                     },
-
-                    520: {
-                        slidesPerView: 2,
-                        spaceBetween: 15,
+                    autoplay: {
+                        delay: 4000,
                     },
+                    breakpoints: {
 
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 30,
-                    },
+                        450: {
+                            slidesPerView: 1,
+                            spaceBetween: 15,
+                        },
 
-                    992: {
-                        slidesPerView: 3,
-                        spaceBetween: 30,
-                    },
+                        520: {
+                            slidesPerView: 2,
+                            spaceBetween: 15,
+                        },
 
-                    10000: {
-                        slidesPerView: 4,
-                        spaceBetween: 30,
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 30,
+                        },
+
+                        992: {
+                            slidesPerView: 3,
+                            spaceBetween: 30,
+                        },
+
+                        10000: {
+                            slidesPerView: 4,
+                            spaceBetween: 30,
+                        }
                     }
-                }
-            });
-        }
-
-        function getNearbyToPlace(){
-            // getNearby
-            $.ajax({
-                type: 'post',
-                url: '{{route("getNearby")}}',
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId' : kindPlaceId,
-                    'count' : 10,
-                },
-                success: function(response){
-                    response = JSON.parse(response);
-                    let center = {
-                        x: '{{$place->C}}',
-                        y: '{{$place->D}}'
-                    };
-
-                    createMap('mainMap', center, response[0], true);
-
-                    createSuggestionRowWithData(response[0])
-                }
-            });
-        }
-
-        function createSuggestionRowWithData(_result){
-            let fk = Object.keys(_result);
-            for (let x of fk) {
-                if(_result[x].length > 4) {
-                    createSuggestionPack('nearDiv' + x + 'Content', _result[x], function () { // in suggestionPack.blade.php
-                        $('#nearDiv' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
-                        resizeFitImg('resizeImgClass')
-                    });
-                }
-                else
-                    $('#' + x).hide();
+                });
             }
 
-            initNearbySwiper();
-        }
+            function getNearbyToPlace(){
+                // getNearby
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("getNearby")}}',
+                    data: {
+                        'placeId': placeId,
+                        'kindPlaceId' : kindPlaceId,
+                        'count' : 10,
+                    },
+                    success: function(response){
+                        response = JSON.parse(response);
+                        let center = {
+                            x: '{{$place->C}}',
+                            y: '{{$place->D}}'
+                        };
 
-        getNearbyToPlace();
+                        createMap('mainMap', center, response[0], true);
 
+                        createSuggestionRowWithData(response[0]);
+                        createArticleRowWithData(response[1]);
+                    }
+                });
+            }
+
+            function createSuggestionRowWithData(_result){
+                let fk = Object.keys(_result);
+                for (let x of fk) {
+                    if(_result[x].length > 4) {
+                        createSuggestionPack('nearDiv' + x + 'Content', _result[x], function () { // in suggestionPack.blade.php
+                            $('#nearDiv' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
+                            resizeFitImg('resizeImgClass')
+                        });
+                    }
+                    else
+                        $('#' + x).hide();
+                }
+
+                initNearbySwiper();
+            }
+
+            function createArticleRowWithData(_articles){
+
+                createSuggestionPack('articleSuggestionContent', _articles, function () { // in suggestionPack.blade.php
+                    $('#articleSuggestionContent').find('.suggestionPackDiv').addClass('swiper-slide');
+                    initNearbySwiper();
+                });
+            }
+
+            getNearbyToPlace();
+
+        </script>
+    @endif
+
+    <script>
         $(document).ready(function () {
             var a = $(window).width();
             if (630 < a && a <= 768)
@@ -1580,6 +1791,7 @@ if ($total == 0)
                     $('#assignedSearch').focus();
             }, 500);
         }
+
         function editPhotosNewPost() {
             $('#editPane').removeClass('hidden')
         }
@@ -1833,11 +2045,6 @@ if ($total == 0)
 
     <script>
         $(document).ready(function () {
-            {{--$('.login-button').click(function () {--}}
-            {{--    var url = '{{Request::url()}}';--}}
-            {{--    $(".dark").show();--}}
-            {{--    showLoginPrompt(url);--}}
-            {{--});--}}
             @if($mode == "bookMark")
             bookMark();
             @elseif($mode == "saveToTrip")

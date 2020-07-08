@@ -445,6 +445,11 @@ Route::group(array('middleware' => 'nothing'), function () {
 
 });
 
+//reports
+Route::group(array('middleware' => 'nothing'), function(){
+    Route::post('getReportQuestions', 'ReportController@getReportQuestions')->name('getReportQuestions');
+});
+
 // profile
 Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 

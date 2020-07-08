@@ -84,11 +84,17 @@
                     '<span class="commentActionsIcon"></span>\n' +
                     '</div>\n' +
                     '<div class="questionsActionsMoreDetails display-none">\n' +
-                    '<span>گزارش پست</span>\n' +
-                    '<span>مشاهده صفحه شازده سینا</span>\n' +
-                    '<span>مشاهده تمامی پست‌ها</span>\n' +
-                    '<span>صفحه قوانین و مقررات</span>\n' +
-                    '</div>\n';
+                    '<span onclick="showReportPrompt(' + reviews[i]["id"] + ')">گزارش پست</span>\n' +
+                    '<a target="_blank" href="{{url("otherProfile")}}/' + reviews[i]["user"]["username"] + '"  >مشاهده صفحه ' + reviews[i]["user"]["username"] + '</a>\n' +
+                    '<a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
+
+                @if(auth()->check())
+                    // if() {
+                        text += '<span>آرشیو پست</span>\n' +
+                            '<span onclick="deleteReviewByUser(' + reviews[i]["id"] + ')" style="color: red"> حذف پست</span>\n';
+                    // }
+                @endif
+                text +='</div>\n';
             }
 
             text += '<div class="commentWriterDetailsShow">\n' +
@@ -860,6 +866,10 @@
     function showCommentsAnswers2(_id, element){
         $('.ansComment_' + _id).toggleClass("display-inline-blockImp");
         $(element).text($(element).text() == 'دیدن پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'دیدن پاسخ‌ها');
+    }
+
+    function deleteReviewByUser(){
+
     }
 
 </script>

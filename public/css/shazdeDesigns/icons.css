@@ -217,6 +217,14 @@
     content: '\E04A';
     font-family: Shazde_Regular2 !important;
 }
+.leftArrowFullIcon:before{
+    content: '\E043';
+    font-family: Shazde_Regular2 !important;
+}
+.leftArrowIcon:before{
+    content: '\E041';
+    font-family: Shazde_Regular2 !important;
+}
 .upArrowIcon{
     display: inline-block;
     transform: rotate(180deg);
