@@ -322,70 +322,64 @@
                 // rate ans
                 for(j = 0; j < reviews[i]["ans"].length; j++){
                     if(reviews[i]["ans"][j]['ansType'] == 'rate'){
+                        let ansTexttt = '';
                         text += '<div class="display-inline-block full-width">\n';
-                        text +='<b class="col-xs-4 font-size-15 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
+                        text +='<b class="col-xs-6 font-size-14 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
+                        text +='<div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-3 text-align-left">\n';
 
                         if(reviews[i]["ans"][j]['ans'] == 5){
-                            text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n';
-                            text +='                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '                                                       <span class="starRatingGreen"></span>\n' +
-                                '                                                       <span class="starRatingGreen"></span>\n' +
-                                '                                                       <span class="starRatingGreen"></span>\n' +
-                                '                                                       <span class="starRatingGreen"></span>\n' +
-                                '                                                       <span class="starRatingGreen"></span>\n' +
-                                '                                                   </div>\n' +
-                                '                                               </div>\n';
-                            text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">عالی بود</b>\n';
+                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '</div>\n';
+                            ansTexttt = 'عالی بود';
                         }
                         else if(reviews[i]["ans"][j]['ans'] == 4){
-                            text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
-                                '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                </div>\n' +
-                                '                                            </div>\n';
-                            text +='<b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">خوب بود</b>\n';
+                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '</div>\n';
+                            ansTexttt = 'خوب بود';
                         }
                         else if(reviews[i]["ans"][j]['ans'] == 3){
-                            text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
-                                '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                </div>\n' +
-                                '                                            </div>\n';
-                            text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">معمولی بود</b>\n';
+                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '</div>\n';
+                            ansTexttt = 'معمولی بود';
                         }
                         else if(reviews[i]["ans"][j]['ans'] == 2){
-                            text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
-                                '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                </div>\n' +
-                                '                                            </div>\n';
-                            text +='<b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">بد نبود</b>\n';
+                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '</div>\n';
+                            ansTexttt = 'بد نبود';
                         }
                         else if(reviews[i]["ans"][j]['ans'] == 1){
-                            text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
-                                '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '                                                    <span class="starRatingGreen"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                    <span class="starRating"></span>\n' +
-                                '                                                </div>\n' +
-                                '                                            </div>\n';
-                            text +='<b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">اصلا راضی نبودم</b>\n';
+                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
+                                '<span class="starRatingGreen"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '<span class="starRating"></span>\n' +
+                                '</div>\n';
+                            ansTexttt = 'اصلا راضی نبودم';
                         }
 
+                        text += '</div>\n';
+                        text +='<b class="col-xs-3 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n';
                         text += '</div>\n';
                     }
                 }

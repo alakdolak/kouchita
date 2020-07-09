@@ -2133,7 +2133,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .secondCol {
-    padding: 0 5px 0 0;
+    padding: 0;
 }
 
 .quintupletPhotoDiv .secondCol > div {
@@ -2197,7 +2197,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentRatingHeader > span {
     color: #16174f;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .commentRatingsDetailsBtn {
@@ -3729,13 +3729,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .userProfileName {
     display: inline-block;
-    font-size: 15px;
+    font-size: 16px;
     width: 65%;
 }
 
 .postPlaceAndTime {
     display: flex;
     flex-direction: column;
+    font-size: 14px;
 }
 
 .commentWriterExperiencePlace, .answersWriterExperiencePlace {
@@ -3757,8 +3758,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .photosCol > div {
-    margin-top: 10px;
-    border: 2px solid black;
+    margin-top: 4px;
+    border: 1px solid black;
     cursor: pointer;
 }
 
