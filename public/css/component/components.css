@@ -1,0 +1,344 @@
+.reportBackGround{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000000c2;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    top: 0;
+}
+.reportBodyDiv{
+    background: white;
+    position: relative;
+    width: 900px;
+    border-radius: 5px;
+    direction: rtl;
+    padding: 60px;
+}
+.closeReport{
+    left: 10px !important;
+    right: auto !important;
+    top: 10px !important;
+}
+.reportHeaderTxt{
+    display: block;
+    margin: -5px 0 8px;
+    font-size: 26px;
+    line-height: 30px;
+    color: #4a4a4a;
+}
+.reportContainer{
+    width: 100%;
+    font-size: 12px;
+    margin-top: 20px;
+    margin-right: 40px;
+}
+.reportsRow{
+    margin-top: 5px;
+}
+.submitReportOptions{
+    direction: ltr;
+}
+
+
+.mapIconsCommon{
+    width: 60px;
+    height: 60px;
+    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+    margin-left: 10px;
+}
+.offMapIcons{
+    background: #494949 !important;
+}
+.mapIconIcon{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 2px;
+    font-size: 32px;
+}
+.boomgardyMapIcon{
+    background: #00aeef;
+}
+.hotelMapIcon{
+    background: #00516f;
+}
+.amakenMapIcon{
+    background: #ec008c;
+}
+.restaurantMapIcon{
+    background: #fff200;
+}
+.majaraMapIcon{
+    background: #ed1c24;
+}
+.moreInfoMapIcon{
+    background: #01771a;
+}
+.mapMenuList {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    max-width: 100%;
+    background-color: #00000073;
+}
+.mapMoreInfoPlace{
+    direction: rtl;
+    display: block;
+    background: white;
+    width: 0px;
+    height: 275px;
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    top: 10px;
+    padding: 0px;
+    overflow: hidden;
+    transition: .3s;
+    max-width: 90%;
+    box-shadow: 0 0 5px 0px #646464;
+}
+.closeMapMoreInfo{
+    position: absolute;
+    top: -21px;
+    left: 0px;
+    font-size: 75px;
+    color: #4dc7bc;
+    cursor: pointer;
+}
+.imgMapMoreDiv{
+    position: relative;
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 160px;
+    overflow: hidden;
+}
+.contentMapMore{
+    padding-right: 10px;
+}
+.linkMapMore div{
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+.nameMapMore{
+    color: black;
+    font-size: 20px;
+    margin-top: 5px;
+}
+.nameMapMore:hover{
+    color: black;
+}
+.rateMapMore{
+    font-size: 16px;
+    margin-top: 3px;
+    color: #666666;
+}
+.mapMoreState{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #666666;
+}
+.mapMoreIcon{
+    position: absolute;
+    left: 10px;
+    width: 50px;
+    bottom: 10px;
+}
+.mapMoreIconImg{
+    width: 100%;
+}
+.mapMoreInfoImg{
+    width: 100%;
+    height: 150px;
+    max-height: 150px;
+}
+
+.moreMapSaveButtonDiv{
+    position: absolute;
+    top: 0px;
+    font-size: 25px;
+    right: 5px;
+    cursor: pointer;
+}
+.moreMapSaveButtonDiv:hover .empty-heart{
+    color: red;
+}
+.showMapMoreInfo{
+    width: 300px;
+    padding: 10px;
+}
+
+.suggestionPackDiv{
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    max-width: 350px;
+    background: transparent !important;
+}
+
+.suggestionPackContent{
+    padding: 12px;
+    background: white;
+}
+
+.imageGoldPin{
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    z-index: 1;
+}
+
+.suggestionPackMainBody{
+    background: white;
+    width: 100%;
+    flex-basis: auto;
+    position: relative;
+}
+.suggestionPackDetailDiv{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    direction: rtl;
+    padding: 10px 0 0;
+    margin-bottom: -4px;
+}
+
+.suggestionPackName{
+    font-size: 16px;
+    line-height: 20px;
+    color: #333333;
+    display: block;
+    margin-bottom: 4px;
+    text-decoration: none !important;
+}
+
+.suggestionPackName:hover{
+    color: #333333;
+}
+
+.suggestionPackReviewRow{
+    display: flex;
+    width: 100%;
+    margin-bottom: 4px;
+    color: #b7b7b7;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: medium;
+}
+
+.suggestionPackReviewCount{
+    margin: 0 5px;
+}
+
+.suggestionPackCityRow{
+    padding-top: 2px;
+    font-size: 12px;
+    line-height: 16px;
+    display: block;
+    margin-bottom: 4px;
+    color: #b7b7b7;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.suggestionPackPicLink{
+    position: relative;
+    display: block;
+    border-radius: 2px;
+    background-color: #fff;
+    opacity: 1;
+    transition: opacity linear 100ms;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 0;
+    height: 200px;
+}
+
+.suggestionPackPicDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.suggestionPackPic{
+    transition: .2s;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+}
+
+.suggestionPackPic:hover{
+    opacity: .9;
+    transform: scale(1.1);
+}
+
+.suggestionPlaceHolderDiv{
+    width: 100%;
+}
+
+.topPlacesDivInCity{
+    margin: 40px 10px;
+    padding: 20px 20px;
+    background: #053a3e;
+    margin-top: 0px;
+}
+.topPlacesDivInCityHeader{
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.topPlacesDivInCityHeader a {
+    margin: 0 5px;
+    color: #eab836;
+}
+.topPlacesDivInCityHeader div{
+    margin: 0px;
+}
+
+.nagLogoRowSuggestion{
+    width: 50px;
+}
+
+@media (max-width:540px) {
+    .mapMenuList{
+        flex-direction: column;
+    }
+    .mapIconsCommon{
+        width: 35px;
+        height: 35px;
+        margin-left: 0px;
+        margin-bottom: 10px;
+    }
+    .mapIconIcon{
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+    }
+}

@@ -1229,45 +1229,12 @@ class HomeController extends Controller
         $greenColor = '#4dc7bc26';
         $redColor = '#ffe1e1';
         $result = [];
-        $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('created_at')->take(5)->get();
+        $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->take(5)->get();
         foreach ($alerts as $item) {
 
             $item->time = getDifferenceTimeString($item->created_at);
 
-            if($item->subject == 'addReview' || $item->subject == 'confirmReview' || $item->subject == 'deleteReviewPic' || $item->subject == 'deleteReviewVideo' ){
-                $reference = \DB::table($item->referenceTable)->find($item->referenceId);
-                if($reference != null) {
-                    $kindPlaceId = $reference->kindPlaceId;
-                    $placeId = $reference->placeId;
-                    $kindPlace = Place::find($kindPlaceId);
-                    $place = \DB::table($kindPlace->tableName)->find($placeId);
-                    $placeUrl = createUrl($kindPlaceId, $placeId, 0, 0, 0);
-
-                    if ($item->subject == 'addReview'){
-                        $alertText = 'دیدگاه شما با موفقیت برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'ثبت گردید.';
-                        $item->color = $greenColor;
-                    }
-                    else if ($item->subject == 'confirmReview') {
-                        $alertText = 'دیدگاه شما توسط مدیر سایت برای ' . ' <a href="' . $placeUrl . '" class="alertUrl"> ' . $place->name . ' </a> ' . 'تایید شد.';
-                        $item->color = $greenColor;
-                    }
-                    else if ($item->subject == 'deleteReviewPic') {
-                        $alertText = 'عکسی از دیدگاه شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'به دلیل مغایرت با قوانین سایت حذف گردید.';
-                        $item->color = $redColor;
-                    }
-                    else if ($item->subject == 'deleteReviewVideo') {
-                        $alertText = 'ویدیویی از دیدگاه شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'به دلیل مغایرت با قوانین سایت حذف گردید.';
-                        $item->color = $redColor;
-                    }
-                    $item->msg = $alertText;
-                    $item->pic = getPlacePic($placeId, $kindPlaceId, 'l');
-
-                    array_push($result, $item);
-                }
-                else
-                    $item->delete();
-            }
-            else if($item->subject == 'deleteReview'){
+            if($item->subject == 'deleteReview'){
                 $reference = \DB::table($item->referenceTable)->find($item->referenceId);
                 if($reference != null) {
                     $kindPlace = Place::where('tableName', $item->referenceTable)->first();
@@ -1286,7 +1253,7 @@ class HomeController extends Controller
                     $item->delete();
             }
             else if($item->subject == 'assignedUserToReview'){
-                $reference = \DB::table($item->referenceTable)->find($item->referenceId);
+                $reference = ReviewUserAssigned::find($item->referenceId);
                 if($reference != null){
                     $assigned = $reference;
                     $log = LogModel::find($assigned->logId);
@@ -1311,9 +1278,50 @@ class HomeController extends Controller
                 }
                 else
                     $item->delete();
-
-
             }
+            else if($item->referenceTable == 'log'){
+                $reference = LogModel::find($item->referenceId);
+                if($reference != null) {
+                    $kindPlaceId = $reference->kindPlaceId;
+                    $placeId = $reference->placeId;
+                    $kindPlace = Place::find($kindPlaceId);
+                    $place = \DB::table($kindPlace->tableName)->find($placeId);
+                    $placeUrl = createUrl($kindPlaceId, $placeId, 0, 0, 0);
+
+                    if ($item->subject == 'addReview'){
+                        $alertText = 'دیدگاه شما با موفقیت برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'ثبت گردید.';
+                        $item->color = $greenColor;
+                    }
+                    else if ($item->subject == 'confirmReview') {
+                        $alertText = 'دیدگاه شما توسط مدیر سایت برای ' . ' <a href="' . $placeUrl . '" class="alertUrl"> ' . $place->name . ' </a> ' . 'تایید شد.';
+                        $item->color = $greenColor;
+                    }
+                    else if ($item->subject == 'deleteReviewPic') {
+                        $alertText = 'عکسی از دیدگاه شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'به دلیل مغایرت با قوانین سایت حذف گردید.';
+                        $item->color = $redColor;
+                    }
+                    else if ($item->subject == 'deleteReviewVideo') {
+                        $alertText = 'ویدیویی از دیدگاه شما برای ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . 'به دلیل مغایرت با قوانین سایت حذف گردید.';
+                        $item->color = $redColor;
+                    }
+                    else if ($item->subject == 'addReport') {
+                        $alertText = 'گزارش شما برای پستی در ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . ' با موفقیت ثبت شد.';
+                        $item->color = $greenColor;
+                    }
+                    else if ($item->subject == 'confirmReport') {
+                        $alertText = 'گزارش شما برای پستی در ' . '<a href="' . $placeUrl . '" class="alertUrl">' . $place->name . '</a>' . ' توسط مدیریت بازدید شد. با تشکر از همکاری شما.';
+                        $item->color = $greenColor;
+                    }
+
+                    $item->msg = $alertText;
+                    $item->pic = getPlacePic($placeId, $kindPlaceId, 'l');
+
+                    array_push($result, $item);
+                }
+                else
+                    $item->delete();
+            }
+
         }
 
         echo \GuzzleHttp\json_encode($result);

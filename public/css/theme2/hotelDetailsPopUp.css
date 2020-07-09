@@ -84,21 +84,21 @@
     overflow: hidden;
 }
 
-#reportPane, #rules {
-    position: fixed;
-    left: 24%;
-    right: 24%;
-    top: 19%;
-    bottom: auto;
-    overflow: auto;
-    max-height: 500px;
-}
+/*#reportPane, #rules {*/
+/*    position: fixed;*/
+/*    left: 24%;*/
+/*    right: 24%;*/
+/*    top: 19%;*/
+/*    bottom: auto;*/
+/*    overflow: auto;*/
+/*    max-height: 500px;*/
+/*}*/
 
-#reportPane .body_text .submitOptions button {
-    color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
-}
+/*#reportPane .body_text .submitOptions button {*/
+/*    color: #FFF;*/
+/*    background-color: #4dc7bc;*/
+/*    border-color: #4dc7bc;*/
+/*}*/
 
 #errMsgReport {
     color: red

@@ -942,6 +942,19 @@ function getAnsToComments($logId){
     return [$ansToReview, $countAns];
 }
 
+function deleteAnses($logId){
+    $activity = Activity::where('name', 'پاسخ')->first();
+    $log = LogModel::where('activityId', $activity)->where('id', $logId)->first();
+    if($log != null){
+        LogFeedBack::where('logId', $logId)->delete();
+        $related = LogModel::where('activityId', $activity)->where('relatedTo', $logId)->get();
+        foreach ($related as $item)
+            deleteAnses($item->id);
+        $log->delete();
+    }
+    return true;
+}
+
 function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
 
     $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');

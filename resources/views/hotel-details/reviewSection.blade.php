@@ -22,6 +22,24 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteReviewsModal" role="dialog" style="direction: rtl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{__('پاک کردن نقد')}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>آیا از حذف نقد خود اطمینان دارید؟ در صورت حذف عکس ها و فیلم ها افزوده شده پاک می شوند و قابل بازیابی نمی باشد.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('لغو')}}</button>
+                <button type="button" class="btn btn-danger" onclick="doDeleteReviewByUser()">{{__('بله، حذف شود')}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var loadShowReview = false;
     var reviewPerPage = 0;
@@ -77,22 +95,22 @@
         var text = '';
 
         for(let i = 0; i < reviews.length; i++){
-            text += '<div id="review_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n';
+            text += '<div id="showReview_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n';
 
             if(reviews[i]['confirm'] == 1){
                 text += '<div class="commentActions" onclick="showAnswersActionBox(this)">\n' +
                     '<span class="commentActionsIcon"></span>\n' +
                     '</div>\n' +
                     '<div class="questionsActionsMoreDetails display-none">\n' +
-                    '<span onclick="showReportPrompt(' + reviews[i]["id"] + ')">گزارش پست</span>\n' +
+                    '<span onclick="showReportPrompt(' + reviews[i]["id"] + ', ' + kindPlaceId + ')">گزارش پست</span>\n' +
                     '<a target="_blank" href="{{url("otherProfile")}}/' + reviews[i]["user"]["username"] + '"  >مشاهده صفحه ' + reviews[i]["user"]["username"] + '</a>\n' +
                     '<a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
 
                 @if(auth()->check())
-                    // if() {
+                    if(reviews[i].yourReview) {
                         text += '<span>آرشیو پست</span>\n' +
                             '<span onclick="deleteReviewByUser(' + reviews[i]["id"] + ')" style="color: red"> حذف پست</span>\n';
-                    // }
+                    }
                 @endif
                 text +='</div>\n';
             }
@@ -868,8 +886,36 @@
         $(element).text($(element).text() == 'دیدن پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'دیدن پاسخ‌ها');
     }
 
-    function deleteReviewByUser(){
-
+    let deletedReview = 0;
+    function deleteReviewByUser(_reviewId){
+        deletedReview = _reviewId;
+        $('#deleteReviewsModal').modal('show');
+    }
+    function doDeleteReviewByUser(){
+        openLoading();
+        $.ajax({
+            type: 'post',
+            url: '{{route("review.delete")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id: deletedReview
+            },
+            success: function(response){
+                closeLoading();
+                if(response == 'ok'){
+                    $('#deleteReviewsModal').modal('hide');
+                    $('#showReview_' + deletedReview).remove();
+                    showSuccessNotifi('نظر شما با موفقیت حذف شد.', 'left', 'green');
+                }
+                else
+                    showSuccessNotifi('در حذف نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید.', 'left', 'red');
+            },
+            error: function(err){
+                console.log(err);
+                closeLoading();
+                showSuccessNotifi('در حذف نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید.', 'left', 'red');
+            }
+        })
     }
 
 </script>

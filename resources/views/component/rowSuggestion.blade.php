@@ -1,34 +1,8 @@
-<style>
-
-    .topPlacesDivInCity{
-        margin: 40px 10px;
-        padding: 20px 20px;
-        background: #053a3e;
-        margin-top: 0px;
-    }
-    .topPlacesDivInCityHeader{
-        direction: rtl;
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .topPlacesDivInCityHeader a {
-        margin: 0 5px;
-        color: #eab836;
-    }
-    .topPlacesDivInCityHeader div{
-        margin: 0px;
-    }
-
-    .nagLogo{
-        width: 50px;
-    }
-</style>
 
 <div id="topPlacesSection" class="mainSuggestionMainDiv cpBorderBottom ng-scope" style="display: none;">
     <div id="##id##" class="topPlacesDivInCity">
         <div class="topPlacesDivInCityHeader">
-            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogoRowSuggestion" alt="کوچیتا">
             <a href="##url##">
                 <div class="shelf_title_container h3">
                     <h3>##name##</h3>

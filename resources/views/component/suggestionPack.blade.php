@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{URL::asset('css/component/suggestionPack.css')}}">
-
 @if(\App::getLocale() == 'en')
     <style>
         .suggestionPackDetailDiv{

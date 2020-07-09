@@ -4,7 +4,7 @@
     <div class="modal-dialog" style="margin-top: 2%">
         <div class="modal-content" style="background-color: #141518; border: none;">
             <div id="showingPhotosMainDivHeader">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" onclick="closePhotoAlbumModal()">&times;</button>
                 <div class="showingPhotosTitle">
                     <div style="display: flex; direction: rtl">
                         <div id="photoAlbumTitle"></div>
@@ -128,7 +128,7 @@
 
                 $('#sidePhotoModal').append(text);
             }
-        $('#photoAlbumModal').modal('show');
+        $('#photoAlbumModal').modal({backdrop: 'static', keyboard: false});
         chooseAlbumMainPhoto(0);
     }
 
@@ -204,7 +204,6 @@
     }
 
     function setLikeNumberInPhotoAlbum(_count, _kind){
-
         if(_kind == 'like') {
             $('#photoAlbumLikeCount').text(_count);
             sidePics[choosenIndex]['like'] = _count;
@@ -213,6 +212,10 @@
             $('#photoAlbumDisLikeCount').text(_count);
             sidePics[choosenIndex]['dislike'] = _count;
         }
+    }
 
+    function closePhotoAlbumModal(){
+        $('#mainVideoPhotoAlbum').attr('src', '');
+        $('#photoAlbumModal').modal('hide');
     }
 </script>

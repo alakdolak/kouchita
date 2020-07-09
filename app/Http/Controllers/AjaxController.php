@@ -101,56 +101,6 @@ class AjaxController extends Controller {
 
     }
 
-    public function getReports() {
-
-        $kindPlaceId = Place::whereName('پیام')->first()->id;
-
-        echo json_encode(ReportsType::whereKindPlaceId($kindPlaceId)->get());
-
-    }
-
-    public function getReports2() {
-
-        if(isset($_POST["logId"])) {
-
-            $logId = makeValidInput($_POST["logId"]);
-            $log = LogModel::whereId($logId);
-            $reports = ReportsType::whereKindPlaceId($log->kindPlaceId)->get();
-            
-            $uId = Auth::user()->id;
-
-            $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName('گزارش')->first()->id,
-                'relatedTo' => $logId, 'subject' => ''];
-            $log = LogModel::where($condition)->first();
-
-            if($log == null) {
-                foreach ($reports as $report) {
-                    $report->selected = false;
-                }
-                $reports[0]->text = "";
-            }
-
-            else {
-                foreach ($reports as $report) {
-                    $condition = ['logId' => $log->id, 'reportKind' => $report->id];
-                    if(Report::where($condition)->count() > 0)
-                        $report->selected = true;
-                    else
-                        $report->selected = false;
-                }
-
-                if($log->text != "")
-                    $reports[0]->text = $log->text;
-                else
-                    $reports[0]->text = "";
-            }
-
-            echo json_encode($reports);
-
-        }
-
-    }
-
     public function getPlaceKinds() {
         echo json_encode(Place::whereVisibility(1)->get());
     }

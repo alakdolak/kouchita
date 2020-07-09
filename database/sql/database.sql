@@ -26,3 +26,6 @@ ALTER TABLE `sogatSanaies` ADD `fullRate` FLOAT(5)  NOT NULL DEFAULT '0' AFTER `
 
 -- 2020-07-06
 --  'alert' Table
+
+-- 2020-07-08
+ALTER TABLE `reports` CHANGE `reportKind` `reportsTypeId` INT(10) UNSIGNED NOT NULL;

@@ -80,8 +80,6 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
     Route::post('showUserBriefDetail', array('as' => 'showUserBriefDetail', 'uses' => 'PlaceController@showUserBriefDetail'));
 
-    Route::post('report', array('as' => 'report', 'uses' => 'PlaceController@report'));
-
     Route::get('showReview/{logId}', array('as' => 'showReview', 'uses' => 'PlaceController@showReview'));
 
     Route::post('getPhotos', array('as' => 'getPhotos', 'uses' => 'PlaceController@getPhotos'));
@@ -344,10 +342,6 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getCities', 'AjaxController@getCitiesDir')->name('getCitiesDir');
 
-    Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'AjaxController@getReports'));
-
-    Route::post('getReports2', array('as' => 'getReports', 'uses' => 'AjaxController@getReports2'));
-
     Route::post('searchForMyContacts', array('as' => 'searchForMyContacts', 'uses' => 'AjaxController@searchForMyContacts'));
 
     Route::post('searchEstelah', array('as' => 'searchEstelah', 'uses' => 'AjaxController@searchEstelah'));
@@ -400,6 +394,8 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('review/ans', 'ReviewsController@ansReview')->name('ansReview');
 
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
+
+    Route::post('review/delete', 'ReviewsController@deleteReview')->name('review.delete');
 });
 
 //posts
@@ -448,6 +444,22 @@ Route::group(array('middleware' => 'nothing'), function () {
 //reports
 Route::group(array('middleware' => 'nothing'), function(){
     Route::post('getReportQuestions', 'ReportController@getReportQuestions')->name('getReportQuestions');
+
+    Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'ReportController@getReports1'));
+
+    Route::post('getReports2', array('as' => 'getReports', 'uses' => 'ReportController@getReports2'));
+
+    Route::post('report', array('as' => 'report', 'uses' => 'ReportController@report'));
+
+    Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
+
+    Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
+
+    Route::post('storeReport', array('as' => 'storeReport', 'uses' => 'ReportController@storeReport'));
+
+    Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'ReportController@sendReceiveReport'));
+
+    Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'ReportController@sendReport'));
 });
 
 // profile
@@ -477,13 +489,9 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('sendMsgAjax', array('as' => 'sendMsgAjax', 'uses' => 'MessageController@sendMsgAjax'));
 
-    Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'MessageController@sendReceiveReport'));
-
     Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
 
     Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
-
-    Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'MessageController@sendReport'));
 
     Route::post('blockUser', array('as' => 'block', 'uses' => 'MessageController@blockUser'));
 
@@ -583,8 +591,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('sendAns2', array('as' => 'sendAns2', 'uses' => 'PlaceController@sendAns2'));
 
-    Route::post('sendReport2', array('as' => 'sendReport2', 'uses' => 'PlaceController@sendReport'));
-
     Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
 
     Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
@@ -653,14 +659,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controllerAccess']), function (){
 
     Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'ContentController@removeReview'));
-
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorAccess']), function () {
-
-    Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
-
-    Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
 
 });
 

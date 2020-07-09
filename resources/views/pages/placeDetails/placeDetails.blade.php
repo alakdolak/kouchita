@@ -82,8 +82,6 @@ if ($total == 0)
         var sendAnsDir = '{{route('sendAns')}}';
         var showAllAnsDir = '{{route('showAllAns')}}';
         var filterComments = '{{route('filterComments')}}';
-        var getReportsDir = '{{route('getReportQuestions')}}';
-        var sendReportDir = '{{route('sendReport2')}}';
         var getPhotoFilter = '{{route('getPhotoFilter')}}';
         var getPhotosDir = '{{route('getPhotos')}}';
         var findUser = '{{route('findUser')}}';
@@ -205,6 +203,8 @@ if ($total == 0)
     @include('general.secondHeader')
 
     @include('component.mapMenu')
+
+    @include('component.reportModal')
 
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
@@ -1466,29 +1466,7 @@ if ($total == 0)
         </div>
     </div>
 
-    <span id="reportPane" class="ui_overlay ui_modal editTags hidden" style="position: fixed; left: 24%; right: 24%; top:19%; bottom: auto;overflow: auto;max-height: 500px;">
-        <div class="header_text">گزارش</div>
-        <div class="subheader_text">
-       گزارش خود را از بین موضوعات موجود انتخاب نمایید
-        </div>
-        <div class="body_text">
-            <fieldset id="memberTags">
-                <div class="reports" id="reports">
-                    <div id="reportContainer">
 
-                    </div>
-                </div>
-            </fieldset>
-            <br>
-            <div class="submitOptions">
-                <button onclick="sendReport()" class="btn btn-success"
-                        style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
-                <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
-            </div>
-            <div id="errMsgReport" style="color: red"></div>
-        </div>
-        <div onclick="closeReportPrompt()" class="ui_close_x"></div>
-    </span>
 
     @if(isset($video) && $video != null)
         <div class="modal" id="myModal">

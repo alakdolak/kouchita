@@ -6,6 +6,7 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\Alert;
 use App\models\Amaken;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
@@ -58,13 +59,12 @@ class ReviewsController extends Controller
 
                 echo json_encode(['ok', $filename]);
             }
-            else{
+            else
                 echo 'nok2';
-            }
         }
-        else{
+        else
             echo 'nok3';
-        }
+
         return;
     }
 
@@ -514,6 +514,85 @@ class ReviewsController extends Controller
         }
     }
 
+    public function deleteReview(Request $request)
+    {
+        if(\auth()->check()){
+            $user = \auth()->user();
+            if(isset($request->id)){
+                $review = LogModel::find($request->id);
+                if($review != null && $review->visitorId == $user->id){
+                    $kindPlace = Place::find($review->kindPlaceId);
+                    $place = \DB::table($kindPlace->tableName)->find($review->placeId);
+                    $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlace->fileName . '/' . $place->file;
+                    $reviewPics = ReviewPic::where('logId', $review->id)->get();
+                    foreach ($reviewPics as $pic){
+                        if(is_file($location.'/'.$pic->pic))
+                            unlink($location.'/'.$pic->pic);
+                        $pic->delete();
+                    }
+
+                    $userAssigned = ReviewUserAssigned::where('logId', $review->id)->get();
+                    foreach ($userAssigned as $item){
+                        Alert::where('referenceId', $item->id)->where('referenceTable', 'reviewUserAssigned')->delete();
+                        $item->delete();
+                    }
+
+                    LogFeedBack::where('logId', $review->id)->delete();
+
+                    $anses = LogModel::where('relatedTo', $review->id)->get();
+                    foreach ($anses as $item)
+                        deleteAnses($item->id);
+
+                    QuestionUserAns::where('logId', $review->id)->delete();
+                    Report::where('logId', $review->id)->delete();
+
+                    $alert = new Alert();
+                    $alert->userId = $user->id;
+                    $alert->subject = 'deleteReviewByUser';
+                    $alert->referenceTable = $kindPlace->tableName;
+                    $alert->referenceId = $place->id;
+                    $alert->save();
+
+                    $rates = getRate($place->id, $kindPlace->id)[1];
+                    switch ($kindPlace->id){
+                        case 1:
+                            Amaken::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                        case 3:
+                            Restaurant::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                        case 4:
+                            Hotel::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                        case 6:
+                            Majara::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                        case 10:
+                            SogatSanaie::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                        case 11:
+                            MahaliFood::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                        case 12:
+                            Boomgardy::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+                            break;
+                    }
+
+                    $review->delete();
+                    echo 'ok';
+                }
+                else
+                    echo 'nok2';
+            }
+            else
+                echo 'nok1';
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
     private function imageStyleCreate($item){
         foreach ($item->pics as $item2) {
             if($item2->isVideo == 1){
@@ -526,9 +605,8 @@ class ReviewsController extends Controller
                 $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $videoName);
                 $item2->videoUrl = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
             }
-            else{
+            else
                 $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
-            }
         }
         return $item;
     }
@@ -600,12 +678,16 @@ class ReviewsController extends Controller
         $_log->like = LogFeedBack::where('logId', $_log->id)->where('like', 1)->count();
         $_log->dislike = LogFeedBack::where('logId', $_log->id)->where('like', -1)->count();
 
+        $_log->yourReview = false;
         if (\auth()->check()) {
             $u = \auth()->user();
             $_log->userLike = LogFeedBack::where('logId', $_log->id)->where('userId', $u->id)->first();
+            if($_log->visitorId == $u->id)
+                $_log->yourReview = true;
         } else
             $_log->userLike = null;
 
         return $_log;
     }
+
 }
