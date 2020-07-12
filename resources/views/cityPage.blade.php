@@ -68,7 +68,7 @@
     </div>
 
     <div class="row">
-        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnTablet">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnPhone">
             <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
                 {{__('تازه ترین پست ها')}}
             </div>
@@ -156,7 +156,7 @@
             </div>
         </div>
 
-        <div id="cpBorderLeft" class="col-lg-9 col-md-12">
+        <div id="cpBorderLeft" class="col-lg-9 col-sm-9">
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp">
                     @if(isset($place->pic))

@@ -853,10 +853,13 @@ function getDifferenceTimeString($time){
 }
 
 function getAnsToComments($logId){
+    $uId = 0;
+    if(auth()->check())
+        $uId = auth()->user()->id;
 
     $a = Activity::where('name', 'پاسخ')->first();
 
-    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id FROM log WHERE log.confirm = 1 AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
+    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id, log.confirm, log.date, log.time FROM log WHERE (log.confirm = 1 || log.visitorId = ' . $uId . ') AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
 
     $countAns = 0;
     if(count($ansToReview) > 0) {
@@ -864,7 +867,6 @@ function getAnsToComments($logId){
         $ansToReviewUserId = array();
         $countAns += count($ansToReview);
         for ($i = 0; $i < count($ansToReview); $i++) {
-
             array_push($logIds, $ansToReview[$i]->id);
             array_push($ansToReviewUserId, $ansToReview[$i]->visitorId);
 
@@ -878,7 +880,6 @@ function getAnsToComments($logId){
             }
             else
                 $ansToReview[$i]->ansNum = 0;
-
         }
 
         $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM logFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
@@ -911,24 +912,24 @@ function getAnsToComments($logId){
 
             for ($j = 0; $j < count($ansToReviewUser); $j++) {
                 if ($ansToReview[$i]->visitorId == $ansToReviewUser[$j]->id) {
-                    if ($ansToReviewUser[$j]->first_name != null)
-                        $ansToReview[$i]->username = $ansToReviewUser[$j]->first_name . ' ' . $ansToReviewUser[$j]->last_name;
-                    else
-                        $ansToReview[$i]->username = $ansToReviewUser[$j]->username;
-
-                    if($ansToReviewUser[$j]->uploadPhoto == 0){
-                        $deffPic = DefaultPic::find($ansToReviewUser[$j]->picture);
-
-                        if($deffPic != null)
-                            $ansToReview[$i]->userPic = URL::asset('defaultPic/' . $deffPic->name);
-                        else
-                            $ansToReview[$i]->userPic = URL::asset('_images/nopic/blank.jpg');
-                    }
-                    else{
-                        $ansToReview[$i]->userPic = URL::asset('userProfile/' . $ansToReviewUser[$j]->picture);
-                    }
-
+                    $ansToReview[$i]->username = $ansToReviewUser[$j]->username;
+                    $ansToReview[$i]->userPic = getUserPic($ansToReviewUser[$j]->id);
                     $ansToReview[$i]->userLike = LogFeedBack::where('logId', $ansToReview[$i]->id)->where('userId', $ansToReviewUser[$j]->id)->first();
+
+                    $time = $ansToReview[$i]->date . '';
+                    if(strlen($ansToReview[$i]->time) == 1)
+                        $ansToReview[$i]->time = '000' . $ansToReview[$i]->time;
+                    else if(strlen($ansToReview[$i]->time) == 2)
+                        $ansToReview[$i]->time = '00' . $ansToReview[$i]->time;
+                    else if(strlen($ansToReview[$i]->time) == 3)
+                        $ansToReview[$i]->time = '0' . $ansToReview[$i]->time;
+
+                    if(strlen($ansToReview[$i]->time) == 4) {
+                        $time .= ' ' . substr($ansToReview[$i]->time, 0, 2) . ':' . substr($ansToReview[$i]->time, 2, 2);
+                        $ansToReview[$i]->timeAgo = getDifferenceTimeString($time);
+                    }
+                    else
+                        $ansToReview[$i]->timeAgo = '';
 
                     break;
                 }

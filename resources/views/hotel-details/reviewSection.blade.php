@@ -44,7 +44,9 @@
     var loadShowReview = false;
     var reviewPerPage = 0;
     var reviewPage = 1;
-    var reviewPerPageNum = [3, 5, 10];
+    var showReviewAnsInOneSee = 4; // this number mean show ans in first time and not click on "showAllReviews"
+    // var reviewPerPageNum = [3, 5, 10];
+    var reviewPerPageNum = [20, 30, 40];
     var firstTimeFilterShow = 1;
 
     function loadReviews(){
@@ -92,6 +94,7 @@
     loadReviews();
 
     function showReviews(reviews){
+
         var text = '';
 
         for(let i = 0; i < reviews.length; i++){
@@ -143,11 +146,10 @@
                 '</div>\n' +
                 '</div>\n' +
                 '</div>\n' +
-                '<div class="commentContentsShow">\n';
-            text += '<div style="font-size: 18px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
-                '</div>\n';
-
-            text += '<div class="commentPhotosShow">\n';
+                '<div class="commentContentsShow">' +
+                '<div style="font-size: 18px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
+                '</div>\n' +
+                '<div class="commentPhotosShow">\n';
 
             let reviewPicsCount = reviews[i]["pics"].length;
 
@@ -263,7 +265,6 @@
                     '</div>\n';
             }
 
-
             text +='<div class="quantityOfLikes">\n' +
                 '<span id="reviewLikeNum' + reviews[i]["id"] + '">' + reviews[i]["like"] + '</span>\n' +
                 'نفر دوست داشتند،\n' +
@@ -288,14 +289,16 @@
                 '<span>تهران</span>\n' +
                 'انجام شده است\n' +
                 '</div>\n';
-            text +='<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی\n' +
-                '<div class="commentRatingsDetailsBtnIcon">\n' +
-                '<i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '</div>\n';
 
             if(reviews[i]["ans"].length != 0) {
+
+                text +='<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی\n' +
+                    '<div class="commentRatingsDetailsBtnIcon">\n' +
+                    '<i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</div>\n';
+
                 text +='<div class="commentRatingsDetailsBox display-none">\n';
 
                 //text ans
@@ -323,64 +326,33 @@
                 for(j = 0; j < reviews[i]["ans"].length; j++){
                     if(reviews[i]["ans"][j]['ansType'] == 'rate'){
                         let ansTexttt = '';
-                        text += '<div class="display-inline-block full-width">\n';
-                        text +='<b class="col-xs-6 font-size-14 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
-                        text +='<div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-3 text-align-left">\n';
-
-                        if(reviews[i]["ans"][j]['ans'] == 5){
-                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '</div>\n';
+                        if(reviews[i]["ans"][j]['ans'] == 5)
                             ansTexttt = 'عالی بود';
-                        }
-                        else if(reviews[i]["ans"][j]['ans'] == 4){
-                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '</div>\n';
+                        else if(reviews[i]["ans"][j]['ans'] == 4)
                             ansTexttt = 'خوب بود';
-                        }
-                        else if(reviews[i]["ans"][j]['ans'] == 3){
-                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '</div>\n';
+                        else if(reviews[i]["ans"][j]['ans'] == 3)
                             ansTexttt = 'معمولی بود';
-                        }
-                        else if(reviews[i]["ans"][j]['ans'] == 2){
-                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '</div>\n';
+                        else if(reviews[i]["ans"][j]['ans'] == 2)
                             ansTexttt = 'بد نبود';
-                        }
-                        else if(reviews[i]["ans"][j]['ans'] == 1){
-                            text +='<div class="ui_star_rating stars_10 font-size-25">\n' +
-                                '<span class="starRatingGreen"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '<span class="starRating"></span>\n' +
-                                '</div>\n';
+                        else if(reviews[i]["ans"][j]['ans'] == 1)
                             ansTexttt = 'اصلا راضی نبودم';
+
+                        text += '<div class="display-inline-block full-width">\n' +
+                                '<b class="col-xs-6 font-size-14 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n' +
+                                '<div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-3 text-align-left">\n' +
+                                '<div class="ui_star_rating stars_10 font-size-25">\n';
+
+                        for(let starN = 0; starN < 6; starN++){
+                            if(starN <= reviews[i]["ans"][j]['ans'])
+                                text += '<span class="starRatingGreen autoCursor"></span>\n';
+                            else
+                                text += '<span class="starRating autoCursor"></span>\n';
                         }
 
-                        text += '</div>\n';
-                        text +='<b class="col-xs-3 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n';
-                        text += '</div>\n';
+                        text += '</div>\n' +
+                                '</div>\n' +
+                                '<b class="col-xs-3 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n' +
+                                '</div>\n';
                     }
                 }
 
@@ -393,27 +365,19 @@
             var disLikeIconClass = ' commentsDislikeIconFeedback';
 
             if(reviews[i]['userLike'] != null && reviews[i]['userLike']['like'] == 1){
-                likeClass = 'color-red';
+                likeClass = 'coloredFullIcon';
                 likeIconClass = ' commentsLikeClickedIconFeedback';
             }
             else if(reviews[i]['userLike'] != null && reviews[i]['userLike']['like'] == -1){
-                disLikeClass = 'color-darkred';
+                disLikeClass = 'coloredFullIcon';
                 disLikeIconClass = ' commentsDislikeClickedIconFeedback';
             }
 
 
             text +='                                <div class="commentFeedbackChoices">\n' +
-                '                                    <div class="postsActionsChoices col-xs-3">\n' +
-                '                                        <div class="postLikeChoice display-inline-block ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);">\n' +
-                '                                            <span id="likeIcon' + reviews[i]["id"] + '" class="' + likeIconClass + ' firstIcon"></span>\n' +
-                '                                            <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>\n' +
-                '                                        </div>\n' +
-                '                                    </div>\n' +
-                '                                    <div class="postsActionsChoices col-xs-3">\n' +
-                '                                        <div class="postDislikeChoice display-inline-block ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);">\n' +
-                '                                            <span id="disLikeIcon' + reviews[i]["id"] + '" class="' + disLikeIconClass + ' firstIcon"></span>\n' +
-                '                                            <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>\n' +
-                '                                        </div>\n' +
+                '                                    <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: space-evenly;">\n' +
+                '                                        <div class="cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">دوست داشتم</div>\n' +
+                '                                        <div class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">دوست نداشتم</div>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="postsActionsChoices col-xs-3">\n' +
                 '                                        <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">\n' +
@@ -430,63 +394,74 @@
                 '                                        </div>\n' +
                 '                                    </div>\n' +
                 '                                </div>\n' +
-                '\n' +
-                '                                <div class="commentsMainBox display-none">\n' +
-                '                                    <div class="dark-blue mg-bt-10">\n' +
-                '                                        <span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ')">مشاهده ' + reviews[i]["comment"].length + ' نظر باقیمانده</span>\n' +
-                '                                    </div>\n';
+                '                                <div class="commentsMainBox display-none">\n';
+            if(showReviewAnsInOneSee < reviews[i]["comment"].length) {
+                text += '<div class="dark-blue mg-bt-10">\n' +
+                        '<span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ')">مشاهده ' + (reviews[i]["comment"].length - showReviewAnsInOneSee) + ' نظر باقیمانده</span>\n' +
+                        '</div>\n';
+            }
 
+            // comments
             var checkAllReviews = true;
-            // ans
             for(j = 0; j < reviews[i]["comment"].length; j++){
 
-                if(j > 0 && checkAllReviews){
-                    text += '<div id="allReviews_' + reviews[i]["id"] + '" style=" width: 100%;">';
+                let hasLiked = '';
+                let hasDisLiked = '';
+                let textInConfirm = '';
+                if(reviews[i]["comment"][j]["confirm"] == 0 )
+                    textInConfirm =  '<span class="label label-success" style="margin-right: 12px; font-size: 9px; font-weight: normal; cursor: default">{{__('در انتظار تایید')}}</span>';
+
+                if(reviews[i]["comment"][j]["like"] == 1)
+                    hasLiked = 'coloredFullIcon';
+                else if(reviews[i]["comment"][j]["dislike"] == 1)
+                    hasDisLiked = 'coloredFullIcon';
+
+                if(j > showReviewAnsInOneSee-1 && checkAllReviews){
+                    text += '<div id="allReviews_' + reviews[i]["id"] + '" style=" width: 100%; display: none">';
                     checkAllReviews = false;
                 }
-                text +='                             <div class="eachCommentMainBox">\n' +
-                    '                                        <div class="circleBase type2 commentsWriterProfilePic">' +
-                    '                                             <img src="' + reviews[i]["comment"][j]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                    '                                        </div>\n' +
-                    '                                        <div class="commentsContentMainBox">\n' +
-                    '                                            <b class="userProfileName display-inline-block">' + reviews[i]["comment"][j]["username"] + '</b>\n' +
-                    '                                            <p>' + reviews[i]["comment"][j]["text"] + '</p>\n' +
-                    '                                            <div class="commentsStatisticsBar">\n' +
-                    '                                                <div class="float-right display-inline-black">\n' +
-                    '                                                    <span id="reviewLikeNum' + reviews[i]["comment"][j]["id"] + '" class="likeStatisticIcon commentsStatisticSpan color-red">' + reviews[i]["comment"][j]["like"] + '</span>\n' +
-                    '                                                    <span id="reviewDisLikeNum' + reviews[i]["comment"][j]["id"] + '" class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + reviews[i]["comment"][j]["dislike"] + '</span>\n' +
-                    '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + reviews[i]["comment"][j]["ansNum"] + '</span>\n' +
-                    '                                                </div>\n';
-                if(reviews[i]["comment"][j]["ansNum"] > 0)
-                    text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + reviews[i]["comment"][j]["id"] + ', this)">دیدن پاسخ‌ها</div>\n';
+                text += '<div id="reviewSection_' + reviews[i]["comment"][j]["id"] + '" class="eachCommentMainBox">\n' +
+                        '   <div class="circleBase type2 commentsWriterProfilePic">' +
+                        '       <img src="' + reviews[i]["comment"][j]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                        '   </div>\n' +
+                        '   <div class="commentsContentMainBox">\n' +
+                        '       <b class="userProfileName">' +
+                                    reviews[i]["comment"][j]["username"] +
+                                    textInConfirm +
+                        '          <span class="ansCommentTimeAgo">' + reviews[i]["comment"][j]["timeAgo"] + '</span>\n' +
+                        '       </b>\n' +
+                        '       <p>' + reviews[i]["comment"][j]["text"] + '</p>\n' +
+                        '       <div class="commentsStatisticsBar">\n' +
+                        '           <div style="display: inline-flex">\n' +
+                        '               <span id="reviewLikeNum' + reviews[i]["comment"][j]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + reviews[i]["comment"][j]["id"] + ', 1, this)">' + reviews[i]["comment"][j]["like"] + '</span>\n' +
+                        '               <span id="reviewDisLikeNum' + reviews[i]["comment"][j]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + reviews[i]["comment"][j]["id"] + ', 0, this)">' + reviews[i]["comment"][j]["dislike"] + '</span>\n' +
+                        '               <span class="replayBtn" onclick="replayReviewToComments(' + reviews[i]["comment"][j]["id"] + ')">پاسخ دهید</span>\n' +
+                        '           </div>\n';
 
-                text += '                                    </div>\n' +
-                    '                                        </div>\n' +
-                    '                                        <div class="commentsActionsBtns">\n' +
-                    '                                            <div onclick="likeReview(' + reviews[i]["comment"][j]["id"] + ', 1); likeTheAnswers2(this)">\n' +
-                    '                                                <span class="likeActionBtn"></span>\n' +
-                    '                                                <span class="likeActionClickedBtn display-none"></span>\n' +
-                    '                                            </div>\n' +
-                    '                                            <div onclick="likeReview(' + reviews[i]["comment"][j]["id"] + ', 0); dislikeTheAnswers2(this)">\n' +
-                    '                                                <span class="dislikeActionBtn"></span>\n' +
-                    '                                                <span class="dislikeActionClickedBtn display-none"></span>\n' +
-                    '                                            </div>\n' +
-                    '                                            <div class="clear-both"></div>\n' +
-                    '                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>\n' +
-                    '                                        </div>\n' +
-                    '                                        <div class="replyToCommentMainDiv display-none">\n' +
-                    '                                            <div class="circleBase type2 newCommentWriterProfilePic">' +
-                    '                                             <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                    '</div>\n' +
-                    '                                            <div class="inputBox">\n' +
-                    '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["comment"][j]["username"] + '</b>\n' +
-                    '                                                <textarea id="ansForReviews_' + reviews[i]["comment"][j]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
-                    '                                                <button class="btn btn-primary" onclick="sendAnsOfReviews(' + reviews[i]["comment"][j]["id"] + ',1)"> ارسال</button>\n' +
-                    '                                            </div>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n';
+                if(reviews[i]["comment"][j]["ansNum"] > 0) {
+                    text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + reviews[i]["comment"][j]["id"] + ', this)">' +
+                            '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">' + reviews[i]["comment"][j]["ansNum"] + '</span>' +
+                            '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                            '</div>\n';
+                }
 
+                text += '   </div>\n' +
+                        '</div>\n' +
+                        '<div class="replyToCommentMainDiv ansTextAreaReview display-none">\n' +
+                        '   <div class="circleBase type2 newCommentWriterProfilePic">' +
+                        '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                        '   </div>\n' +
+                        '   <div class="inputBox">\n' +
+                        '       <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["comment"][j]["username"] + '</b>\n' +
+                        '       <textarea id="ansForReviews_' + reviews[i]["comment"][j]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)"></textarea>\n' +
+                        '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + reviews[i]["comment"][j]["id"] + ',1)" > ارسال</button>\n' +
+                        '   </div>\n' +
+                        '</div>\n' +
+                        '</div>\n';
+
+                text += '<div class=" display-none ansComment_' + reviews[i]["comment"][j]["id"] + '" style="width: calc(100% - 50px); margin-right: 50px;">';
                 text += createAnsToComment(reviews[i]["comment"][j]["comment"], reviews[i]["comment"][j]["username"], reviews[i]["comment"][j]["id"]);
+                text += '</div>';
 
                 if(j == reviews[i]["comment"].length && !checkAllReviews)
                     text += '</div>';
@@ -495,26 +470,31 @@
             text += '</div></div>\n';
 
             // new ans
-            text +='<div class="newCommentPlaceMainDiv">\n' +
-                '<div class="circleBase type2 newCommentWriterProfilePic">' +
-                '<img src="' + userPic + '" style="">\n' +
-                '</div>\n' +
-                '<div class="inputBox">\n' +
-                '<b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["usernameReviewWriter"] + '</b>\n' +
-                '<textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_' + reviews[i]["id"] + '" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
-                '<button class="btn btn-primary" onclick="sendAnsOfReviews(' + reviews[i]["id"] + ', 0)"> ارسال</button>\n' +
-                '</div>\n' +
-                '<div></div>\n' +
-                '</div>\n' +
-                '</div></div>\n';
-
+            text += '<div class="newCommentPlaceMainDiv">\n' +
+                    '<div class="circleBase type2 newCommentWriterProfilePic">' +
+                    '<img src="' + userPic + '" style="">\n' +
+                    '</div>\n' +
+                    '<div class="inputBox">\n' +
+                    '<textarea id="ansForReviews_' + reviews[i]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)"></textarea>\n' +
+                    '<button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + reviews[i]["id"] + ', 0)" > ارسال</button>\n' +
+                    '</div>\n' +
+                    '<div></div>\n' +
+                    '</div>\n' +
+                    '</div></div>\n';
         }
 
         document.getElementById('showReviewsMain').innerHTML = text;
 
         setTimeout(function(){
             resizeFitImg('resizeImgClass');
-        }, 500);
+            autosize($('[id^="ansForReviews_"]'));
+            // $(".inputTextWithEmoji").emojioneArea();
+        }, 100);
+    }
+
+    function replayReviewToComments(_id){
+        $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
+        $('#reviewSection_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
     }
 
     function likeReview(_logId, _like, _element){
@@ -533,116 +513,16 @@
                 response = JSON.parse(response);
                 if(response[0] == 'ok'){
 
-                    // changeReviewLikeNumber(allReviews, _logId, _like);
                     like = response[1];
                     dislike = response[2];
                     document.getElementById('reviewLikeNum'+_logId).innerText = like;
                     document.getElementById('reviewDisLikeNum'+_logId).innerText = dislike;
 
-                    if(_like == 1) {
-                        $(_element).addClass('color-red');
-                        $(_element).children("span.firstIcon").removeClass('commentsLikeIconFeedback');
-                        $(_element).children("span.firstIcon").addClass('commentsLikeClickedIconFeedback');
-
-                        $(_element).parent().next().children().removeClass('color-darkred');
-                        $(_element).parent().next().children().children("span.firstIcon").removeClass('commentsDislikeClickedIconFeedback');
-                        $(_element).parent().next().children().children("span.firstIcon").addClass('commentsDislikeIconFeedback');
-                    }
-                    else{
-                        $(_element).addClass('color-darkred');
-                        $(_element).children("span.firstIcon").removeClass('commentsDislikeIconFeedback');
-                        $(_element).children("span.firstIcon").addClass('commentsDislikeClickedIconFeedback');
-
-                        $(_element).parent().prev().children().removeClass('color-red');
-                        $(_element).parent().prev().children().children("span.firstIcon").removeClass('commentsLikeClickedIconFeedback');
-                        $(_element).parent().prev().children().children("span.firstIcon").addClass('commentsLikeIconFeedback');
-                    }
+                    $(_element).parent().find('.likedislikeAnsReviews').removeClass('coloredFullIcon');
+                    $(_element).addClass('coloredFullIcon');
                 }
             }
         })
-    }
-
-    function changeReviewLikeNumber(_review, _logId, _like){
-
-        for(var i = 0; i < _review.length; i++){
-            if(_review[i]["id"] == _logId){
-                if(_review[i]["userLike"] != null && _review[i]["userLike"]["like"] == 1){
-                    if(_like != 1){
-                        var num = document.getElementById('reviewLikeNum' + _logId).innerText;
-                        num--;
-                        document.getElementById('reviewLikeNum' + _logId).innerText = num;
-
-                        num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
-                        num++;
-                        document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
-
-                        _review[i]["userLike"]["like"] = -1;
-                    }
-                }
-                else if(_review[i]["userLike"] != null && _review[i]["userLike"]["like"] == -1){
-                    if(_like == 1){
-                        var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
-                        num--;
-                        document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
-
-                        num = document.getElementById('reviewLikeNum' + _logId).innerText;
-                        num++;
-                        document.getElementById('reviewLikeNum' + _logId).innerText = num;
-
-                        _review[i]["userLike"]["like"] = 1;
-                    }
-                }
-                else{
-                    if(_like == 1){
-                        var num = document.getElementById('reviewLikeNum' + _logId).innerText;
-                        num++;
-                        document.getElementById('reviewLikeNum' + _logId).innerText = num;
-                    }
-                    else{
-                        var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
-                        num++;
-                        document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
-                    }
-                    _review[i]["userLike"]["like"] = _like;
-                }
-            }
-            else if(_review[i]["comment"].length > 0){
-                changeReviewLikeNumber(_review[i]["comment"], _logId, _like);
-            }
-        }
-
-        // if(_like == 1){
-        //     var num = document.getElementById('reviewLikeNum' + _logId).innerText;
-        //     num++;
-        //     document.getElementById('reviewLikeNum' + _logId).innerText = num;
-        //
-        //     if($('#likeIcon' + _logId).hasClass('commentsLikeClickedIconFeedback')){
-        //         num--;
-        //         document.getElementById('reviewLikeNum' + _logId).innerText = num;
-        //     }
-        //     else if($('#disLikeIcon' + _logId).hasClass('commentsDislikeClickedIconFeedback')){
-        //         var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
-        //         num--;
-        //         document.getElementById('reviewDisLikeNum' + _logId).innerText = (num);
-        //     }
-        //
-        // }
-        // else{
-        //     var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
-        //     num++;
-        //     document.getElementById('reviewDisLikeNum' + _logId).innerText = (num);
-        //
-        //     if($('#disLikeIcon' + _logId).hasClass('commentsDislikeClickedIconFeedback')){
-        //         num--;
-        //         document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
-        //     }
-        //     else if($('#likeIcon' + _logId).hasClass('commentsLikeClickedIconFeedback')){
-        //         var num = document.getElementById('reviewLikeNum' + _logId).innerText;
-        //         num--;
-        //         document.getElementById('reviewLikeNum' + _logId).innerText = num;
-        //     }
-        // }
-
     }
 
     function sendAnsOfReviews(_logId, _ans){
@@ -651,7 +531,7 @@
             return;
 
         var text = document.getElementById('ansForReviews_' + _logId).value;
-        if(text != null && text != ''){
+        if(text.trim().length > 0){
             $.ajax({
                 type: 'post',
                 url: '{{route('ansReview')}}',
@@ -661,8 +541,18 @@
                     'ansAns' : _ans
                 },
                 success: function(response){
-                    if(response == 'ok')
-                        window.location.reload();
+                    if(response == 'ok'){
+                        loadReviews();
+                        showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
+                    }
+                    else{
+                        console.log(response);
+                        showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
+                    }
+                },
+                catch(e){
+                    console.log(e);
+                    showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
                 }
             })
         }
@@ -805,60 +695,75 @@
 
         for(var k = 0; k < comment.length; k++) {
 
-            text += '<div class=" display-none ansComment_' + topId + '" style="width: 100%;">' +
-                '<div class="eachCommentMainBox mg-rt-45">\n' +
-                '                                        <div class="circleBase type2 commentsWriterProfilePic">' +
-                '                                             <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '                                        </div>\n' +
-                '                                        <div class="commentsContentMainBox">\n' +
-                '                                            <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
-                '                                            <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
-                '                                            <div class="clear-both"></div>\n' +
-                '                                            <p>' + comment[k]["text"] + '</p>\n' +
-                '                                            <div class="commentsStatisticsBar">\n' +
-                '                                                <div class="float-right display-inline-black">\n' +
-                '                                                    <span id="reviewLikeNum' + comment[k]["id"] + '" class="likeStatisticIcon commentsStatisticSpan color-red">' + comment[k]["like"] + '</span>\n' +
-                '                                                    <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + comment[k]["dislike"] + '</span>\n' +
-                '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + comment[k]["ansNum"] + '</span>\n' +
-                '                                                </div>\n';
+            console.log(comment);
+            let hasLiked = '';
+            let hasDisLiked = '';
+            let textInConfirm = '';
+            if(comment[k]["confirm"] == 0)
+                textInConfirm =  '<span class="label label-success" style="margin-right: 12px; font-size: 9px; font-weight: normal; cursor: default">{{__('در انتظار تایید')}}</span>';
 
-            if(comment[k]["ansNum"] > 0)
-                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">دیدن پاسخ‌ها</div>\n';
-
-            text +='                                            </div>\n' +
-                '                                        </div>\n' +
-                '                                        <div class="commentsActionsBtns">\n' +
-                '                                            <div onclick="likeReview(' + comment[k]["id"] + ', 1); likeTheAnswers2(this)">\n' +
-                '                                                <span class="likeActionBtn"></span>\n' +
-                '                                                <span class="likeActionClickedBtn display-none"></span>\n' +
-                '                                            </div>\n' +
-                '                                            <div onclick="likeReview(' + comment[k]["id"] + ', 0); dislikeTheAnswers2(this)">\n' +
-                '                                                <span class="dislikeActionBtn"></span>\n' +
-                '                                                <span class="dislikeActionClickedBtn display-none"></span>\n' +
-                '                                            </div>\n' +
-                '                                            <div class="clear-both"></div>\n' +
-                '                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>\n' +
-                '                                        </div>\n' +
-                '                                        <div class="replyToCommentMainDiv display-none">\n' +
-                '                                            <div class="circleBase type2 newCommentWriterProfilePic">' +
-                '                                                <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '                                            </div>\n' +
-                '                                            <div class="inputBox">\n' +
-                '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
-                '                                                <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
-                '                                                <button class="btn btn-primary" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)"> ارسال</button>\n' +
-                '                                            </div>\n' +
-                '                                        </div>\n' +
-                '                                    </div>\n';
-
-            if(comment[k]["ansNum"] > 0) {
-                text += createAnsToComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"]);
+            if(comment[k]["userLike"]) {
+                if (comment[k]["userLike"]["like"] == 1)
+                    hasLiked = 'coloredFullIcon';
+                else if (comment[k]["userLike"]["like"] == -1)
+                    hasDisLiked = 'coloredFullIcon';
             }
 
+            text += '<div id="reviewSection_' + comment[k]["id"] + '" class="eachCommentMainBox">\n' +
+                    '<div class="circleBase type2 commentsWriterProfilePic">' +
+                    '<img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                    '</div>\n' +
+                    '<div class="commentsContentMainBox">\n' +
+                    '<div>' +
+                    '<b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
+                    '<b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
+                    textInConfirm +
+                    '</div>\n' +
+                    '<div class="clear-both"></div>\n' +
+                    '<p>' + comment[k]["text"] + '</p>\n' +
+                    '<div class="commentsStatisticsBar">\n' +
+                    '<div style="display: inline-flex;">\n' +
+                    '<span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
+                    '<span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["dislike"] + '</span>\n' +
+                    '<span class="replayBtn" onclick="replayReviewToComments(' + comment[k]["id"] + ')">پاسخ دهید</span>\n' +
+                    '</div>\n';
+
+            if(comment[k]["ansNum"] > 0) {
+                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">' +
+                    '<span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
+                    '<span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                    '</div>\n';
+            }
+
+            text += '</div>\n' +
+                    '</div>\n' +
+                    '<div class="replyToCommentMainDiv display-none">\n' +
+                    '<div class="circleBase type2 newCommentWriterProfilePic">' +
+                    '<img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                    '</div>\n' +
+                    '<div class="inputBox">\n' +
+                    '<b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
+                    '<textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)"></textarea>\n' +
+                    '<button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)" > ارسال</button>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</div>\n';
+
+            text += '<div class=" display-none ansComment_' +  comment[k]["id"] + '" style="width: 100%">';
+            if(comment[k]["ansNum"] > 0)
+                text += createAnsToComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"]);
             text += '</div>';
         }
 
         return text;
+    }
+
+    function checkFullSubmit(_element){
+        let text = $(_element).val();
+        if(text.trim().length > 0)
+            $(_element).next().removeAttr('disabled');
+        else
+            $(_element).next().attr('disabled', 'disabled');
     }
 
     window.addEventListener('scroll', function() {
@@ -877,7 +782,8 @@
 
     function showCommentsAnswers2(_id, element){
         $('.ansComment_' + _id).toggleClass("display-inline-blockImp");
-        $(element).text($(element).text() == 'دیدن پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'دیدن پاسخ‌ها');
+        textElement = $(element).find('.seeAllText');
+        textElement.text(textElement.text() == 'مشاهده پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'مشاهده پاسخ‌ها');
     }
 
     let deletedReview = 0;

@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css')}}">
-<script src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
 
 <div class="postModalMainDiv hidden" id="reviewMainDivDetails">
     <div class="modal-dialog">

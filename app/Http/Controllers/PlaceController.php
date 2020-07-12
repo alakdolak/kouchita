@@ -134,8 +134,14 @@ class PlaceController extends Controller {
         if ($count[0]->tripPlaceNum > 0)
             $save = true;
 
-        if(isset($place->phone) && $place->phone != null)
-            $place->phone = explode('-', $place->phone);
+        if(isset($place->phone) && $place->phone != null) {
+            if(strpos($place->phone, '-') !== false)
+                $place->phone = explode('-', $place->phone);
+            else if(strpos($place->phone,'_') !== false)
+                $place->phone = explode('_', $place->phone);
+            else if(strpos($place->phone, ',') !== false)
+                $place->phone = explode(',', $place->phone);
+        }
 
 
         $city = Cities::whereId($place->cityId);

@@ -37,6 +37,7 @@ if ($total == 0)
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css')}}">
 
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
@@ -90,6 +91,7 @@ if ($total == 0)
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
     </script>
 
+    <script src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>

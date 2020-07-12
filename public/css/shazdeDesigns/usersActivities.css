@@ -685,6 +685,8 @@ body {
 }
 
 .answersWriterExperienceDetails {
+    display: inline-flex;
+    flex-direction: column;
     color: #666666;
     margin-bottom: 10px;
     direction: rtl;

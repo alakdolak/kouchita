@@ -249,6 +249,7 @@
 
         $(document).ready(function () {
             getAlertsCount();
+            getAlertItems();
         });
 
         $(window).on('click', function(){
@@ -274,18 +275,7 @@
             });
         }
 
-        // function scrolled(o) {
-        //     //visible height + pixel scrolled = total height
-        //     if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
-        //         if(!locked) {
-        //             superAccess = true;
-        //             getAlertItems();
-        //         }
-        //     }
-        // }
-
         function getAlertItems() {
-
             if(msgHeaderData == null) {
                 $.ajax({
                     type: 'post',

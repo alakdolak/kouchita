@@ -526,9 +526,9 @@
                             </div>
                         </div>
 
-                        <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: scroll">
+                        <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: hidden; padding: 25px 10px; height: calc(100vh - 100px);">
                             <div id="phoneMessages" class="lp_others_titles"> {{__('اعلانات')}} </div>
-                            <div id="noMessagePhone" class="lp_others_noMessages">{{__('هیچ پیام جدیدی موجود نیست')}}</div>
+                            <div id="noMessagePhone" class="lp_others_noMessages alertMsgResultDiv" style="height: 100%; overflow-y: auto">{{__('هیچ پیام جدیدی موجود نیست')}}</div>
                         </div>
 
                         <div class="lp_others_content hidden" id="lp_others_mark">
@@ -1052,36 +1052,8 @@
 
     @if(Auth::check())
         <script>
-            var recentlySample = 0;
-            var bookMarkSample = 0;
-
-            function getAlertItemsPhone() {
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('getAlerts')}}',
-                    success: function (response) {
-
-                        response = JSON.parse(response);
-
-                        if(response.length == 0)
-                            $('#noMessagePhone').css('display', '');
-                        else{
-                            $('#noMessagePhone').css('display', 'none');
-                            var newElement = "";
-
-                            for(i = 0; i < response.length; i++) {
-                                if (response[i].url != -1)
-                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                                else
-                                    newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                            }
-
-                            $('#phoneMessages').append(newElement);
-                        }
-                    }
-                });
-            }
-
+            let recentlySample = 0;
+            let bookMarkSample = 0;
             let getPhoneBookMarks = false;
             function showBookMarksPhone() {
 

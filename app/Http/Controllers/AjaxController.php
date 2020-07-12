@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Adab;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
@@ -504,6 +505,7 @@ class AjaxController extends Controller {
                 $condition = ['userId' => $u->id, 'logId' => $request->logId];
                 $like = LogFeedBack::where($condition)->first();
 
+                $subject = '';
                 if($like == null){
                     $like = new LogFeedBack();
                     $like->logId = $request->logId;
@@ -521,6 +523,26 @@ class AjaxController extends Controller {
                         $like->like = -1;
                     $like->save();
                 }
+
+                if($like->like == 1)
+                    $subject .= 'like';
+                elseif($like->like == -1)
+                    $subject .= 'dislike';
+
+                $log = LogModel::find($request->logId);
+                $reviewAct = Activity::where('name', 'نظر')->first();
+                $ansAct = Activity::where('name', 'پاسخ')->first();
+                if($log->activityId == $reviewAct->id)
+                    $subject .= 'Review';
+                elseif($log->activityId == $ansAct->id)
+                    $subject .= 'Ans';
+
+                $alert = new Alert();
+                $alert->subject = $subject;
+                $alert->referenceTable = 'logFeedBack';
+                $alert->referenceId = $like->id;
+                $alert->userId = $log->visitorId;
+                $alert->save();
 
                 $like = LogFeedBack::where('logId', $request->logId)->where('like', 1)->count();
                 $dislike = LogFeedBack::where('logId', $request->logId)->where('like', -1)->count();

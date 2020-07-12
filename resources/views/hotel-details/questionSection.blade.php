@@ -21,26 +21,33 @@
                         پاسخ موجود می‌باشد.
                     </div>
                     <a class="seeAllQMainLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
-                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">مشاهده همه سؤالات و پاسخ‌ها
+                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">
+                            مشاهده همه سؤالات و پاسخ‌ها
                         </div>
                     </a>
-                    <div class="clear-both"></div>
+
                     <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
-                        <div class="circleBase type2 newQuestionWriterProfilePic">
-                            <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
-                        </div>
                         <div class="questionInputBoxMainDiv">
-                            <div class="inputBox questionInputBox">
-                                <textarea id="questionInput" class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟" onclick="checkLogin()"></textarea>
-                                <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">
+                            <div class="circleBase type2 newQuestionWriterProfilePic">
+                                <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div class="sendQuestionBtn" onclick="sendQuestion()">ارسال</div>
+                            <div class="inputBox questionInputBox">
+                                <textarea id="questionInput"
+                                          class="inputBoxInput inputBoxInputComment"
+                                          type="text" placeholder="شما چه سؤالی دارید؟"
+                                          onclick="checkLogin()"></textarea>
+{{--                                <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">--}}
+                                <div class="sendQuestionBtn" onclick="sendQuestion()">ارسال</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="questionSectionDiv"></div>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-12" style="padding: 0px;">
+        <div id="questionSectionDiv"></div>
     </div>
 
     <div id="questionPaginationDiv" class="col-xs-12 questionsMainDivFooter position-relative" style="margin-top: 0px;">
@@ -84,13 +91,19 @@
                     'placeId': placeId,
                     'kindPlaceId' : kindPlaceId,
                     'text' : text,
-                    // 'id' : _id
                 },
                 success: function(response){
                     if(response == 'ok') {
-                        showSuccessNotifi('سئوال شما با موفقیت ثبت شد');
-                        document.getElementById('questionInput').value = '';
+                        getQuestion();
+                        showSuccessNotifi('{{__('سئوال شما با موفقیت ثبت شد')}}', 'left', '#0076a3');
+                        $('#questionInput').val('');
                     }
+                    else
+                        showSuccessNotifi('{{__('در ثبت سوال شما مشگلی پیش امد لطفا دوباره تلاش کنید')}}', 'left', 'red');
+                },
+                error: function(err){
+                    console.log(err);
+                    showSuccessNotifi('{{__('در ثبت سوال شما مشگلی پیش امد لطفا دوباره تلاش کنید')}}', 'left', 'red');
                 }
             })
         }
@@ -135,33 +148,32 @@
 
     function createQuestionSection(ques){
         var text = '';
-
         for(var i = 0; i < ques.length; i++){
             text += '<div class="answersBoxMainDiv">\n';
             if(ques[i]['confirm'] == 1){
-                text += '                        <div class="answersActions" onclick="showAnswersActionBox(this)">\n' +
-                    '                            <span class="answersActionsIcon"></span>\n' +
-                    '                        </div>\n'+
-                    '                     <div class="questionsActionsMoreDetails display-none">\n' +
-                    '                            <span>گزارش پست</span>\n' +
-                    '                            <span>مشاهده صفحه شازده سینا</span>\n' +
-                    '                            <span>مشاهده تمامی پست‌ها</span>\n' +
-                    '                            <span>صفحه قوانین و مقررات</span>\n' +
-                    '                        </div>\n';
+                text += '<div class="answersActions" onclick="showAnswersActionBox(this)">\n' +
+                        '   <span class="answersActionsIcon"></span>\n' +
+                        '</div>\n'+
+                        '<div class="questionsActionsMoreDetails display-none">\n' +
+                        '   <span>گزارش پست</span>\n' +
+                        '   <span>مشاهده صفحه شازده سینا</span>\n' +
+                        '   <span>مشاهده تمامی پست‌ها</span>\n' +
+                        '   <span>صفحه قوانین و مقررات</span>\n' +
+                        '</div>\n';
             }
 
+            text += '<div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">\n' +
+                    '                            مشاهده سوال\n' +
+                    '</div>\n' +
+                    '<div class="answersWriterDetailsShow">\n' +
+                    '   <div class="circleBase type2 answersWriterPicShow">' +
+                    '       <img src="' + ques[i]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
+                    '   </div>\n' +
+                    '   <div class="answersWriterExperienceDetails">\n' +
+                    '   <b class="userProfileNameAnswers">' + ques[i]["username"] + '</b>\n' +
+                    '   <div class="display-inline-block">در\n' +
+                    '       <span class="answersWriterExperiencePlace">' + ques[i]["place"]["name"] + '، شهر ' + ques[i]["city"]["name"] + '، استان ' + ques[i]["state"]["name"] + '</span>\n';
 
-            text += '                        <div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">\n' +
-                '                            مشاهده سوال\n' +
-                '                        </div>\n' +
-                '                        <div class="answersWriterDetailsShow">\n' +
-                '                            <div class="circleBase type2 answersWriterPicShow">' +
-                '                               <img src="' + ques[i]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
-                '                            </div>\n' +
-                '                            <div class="answersWriterExperienceDetails">\n' +
-                '                                <b class="userProfileNameAnswers">' + ques[i]["username"] + '</b>\n' +
-                '                                <div class="display-inline-block">در\n' +
-                '                                    <span class="answersWriterExperiencePlace">' + ques[i]["place"]["name"] + '، شهر ' + ques[i]["city"]["name"] + '، استان ' + ques[i]["state"]["name"] + '</span>\n';
             if(ques[i]['confirm'] == 0)
                 text += '<span class="label label-success">در انتظار تایید</span>';
 

@@ -5,9 +5,13 @@
         تعداد اتاق
     </span>
     </div>
-    <div class="contentSection col-xs-3">
-        {{$place->room_num}}
-        {{__('واحد')}}
+    <div class="contentSection col-xs-3" style="direction: rtl;">
+        <span>
+            {{$place->room_num}}
+        </span>
+        <span>
+            {{__('واحد')}}
+        </span>
     </div>
 </div>
 
