@@ -14,30 +14,13 @@ class UserLoginController extends Controller
 {
     public function login()
     {
-        dd('in1');
         return redirect(route('main'));
     }
 
     public function mainDoLogin()
     {
-//        dd('in');
         echo 'ok';
         return;
-        //        if (isset($_POST["username"]) && isset($_POST["password"])) {
-//
-//            $username = makeValidInput($_POST['username']);
-//            $password = makeValidInput($_POST['password']);
-//
-//            if (Auth::attempt(['username' => $username, 'password' => $password], true)) {
-//                if(Auth::user()->status != 0) {
-//                    RetrievePas::whereUId(Auth::user()->id)->delete();
-////                    return \Redirect::intended('/');
-//                }
-//            }
-//        }
-//
-//        return;
-//        return \Redirect::route('main');
     }
 
     public function doLogin()
@@ -48,16 +31,15 @@ class UserLoginController extends Controller
             $password = makeValidInput($_POST['password']);
 
             $credentials  = ['username' => $username, 'password' => $password];
+            $credentialsPhone  = ['phone' => $username, 'password' => $password];
+            $credentialsEmail  = ['email' => $username, 'password' => $password];
 
-            if (Auth::attempt($credentials, true)) {
+            if (Auth::attempt($credentials, true) || Auth::attempt($credentialsPhone, true) || Auth::attempt($credentialsEmail, true)) {
                 $user = Auth::user();
                 if ($user->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
-
-                    if(!Auth::check()) {
-                        dd('in');
+                    if(!Auth::check())
                         Auth::login($user);
-                    }
 
                     echo "ok";
                 }

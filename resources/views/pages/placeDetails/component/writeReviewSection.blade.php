@@ -82,7 +82,7 @@
                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                         <span class="addOriginCity">{{$item->description}}</span>
                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
-                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
+                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment" style="border: solid gray 1px"></textarea>
                             <input type="hidden" id="textQuestionId_{{$item->id}}" name="textId[]" value="{{$item->id}}">
                         </div>
                     </div>

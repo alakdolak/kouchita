@@ -36,8 +36,11 @@
                                           class="inputBoxInput inputBoxInputComment"
                                           type="text" placeholder="شما چه سؤالی دارید؟"
                                           onclick="checkLogin()"></textarea>
-{{--                                <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">--}}
-                                <div class="sendQuestionBtn" onclick="sendQuestion()">ارسال</div>
+                                <div class="sendQuestionBtn" onclick="sendQuestion(this)">ارسال</div>
+                                <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>
+                                    <img src="{{URL::asset('images/icons/mGear.svg')}}" style="width: 30px; height: 30px;">
+                                    {{__('در حال ثبت سوال')}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,9 +59,9 @@
             <span id="showQuestionPerPage"></span>
             پست در هر صفحه
         </div>
-        <a class="col-xs-3 showQuestionsNumsFilterLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
-            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
-        </a>
+{{--        <a class="col-xs-3 showQuestionsNumsFilterLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">--}}
+{{--            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>--}}
+{{--        </a>--}}
         <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
             <span class="float-right">صفحه</span>
             <span id="questionPagination"></span>
@@ -66,6 +69,25 @@
     </div>
 
 </div>
+
+<div class="modal fade" id="deleteQuestionModal" role="dialog" style="direction: rtl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{__('پاک کردن سوال')}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>آیا از حذف سوال خود اطمینان دارید؟</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('لغو')}}</button>
+                <button type="button" class="btn btn-danger" onclick="doDeleteQuestionByUser()">{{__('بله، حذف شود')}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     var questions;
@@ -76,7 +98,7 @@
     var answerCount;
     var isQuestionCount = true;
 
-    function sendQuestion(){
+    function sendQuestion(_element){
 
         if(!checkLogin())
             return;
@@ -84,6 +106,8 @@
         var text = document.getElementById('questionInput').value;
 
         if(text != null && text != ''){
+            $(_element).toggle();
+            $(_element).next().toggle();
             $.ajax({
                 type: 'post',
                 url : '{{route("askQuestion")}}',
@@ -93,6 +117,9 @@
                     'text' : text,
                 },
                 success: function(response){
+                    $(_element).toggle();
+                    $(_element).next().toggle();
+
                     if(response == 'ok') {
                         getQuestion();
                         showSuccessNotifi('{{__('سئوال شما با موفقیت ثبت شد')}}', 'left', '#0076a3');
@@ -102,7 +129,8 @@
                         showSuccessNotifi('{{__('در ثبت سوال شما مشگلی پیش امد لطفا دوباره تلاش کنید')}}', 'left', 'red');
                 },
                 error: function(err){
-                    console.log(err);
+                    $(_element).toggle();
+                    $(_element).next().toggle();
                     showSuccessNotifi('{{__('در ثبت سوال شما مشگلی پیش امد لطفا دوباره تلاش کنید')}}', 'left', 'red');
                 }
             })
@@ -149,23 +177,26 @@
     function createQuestionSection(ques){
         var text = '';
         for(var i = 0; i < ques.length; i++){
-            text += '<div class="answersBoxMainDiv">\n';
+            text += '<div id="questionSection_' + ques[i]["id"] + '" class="answersBoxMainDiv">\n';
             if(ques[i]['confirm'] == 1){
                 text += '<div class="answersActions" onclick="showAnswersActionBox(this)">\n' +
                         '   <span class="answersActionsIcon"></span>\n' +
                         '</div>\n'+
                         '<div class="questionsActionsMoreDetails display-none">\n' +
-                        '   <span>گزارش پست</span>\n' +
-                        '   <span>مشاهده صفحه شازده سینا</span>\n' +
-                        '   <span>مشاهده تمامی پست‌ها</span>\n' +
-                        '   <span>صفحه قوانین و مقررات</span>\n' +
-                        '</div>\n';
+                        '   <span onclick="showReportPrompt(' + ques[i]["id"] +  ', ' + kindPlaceId + ')">{{__("گزارش سوال")}}</span>\n' +
+                        '   <a target="_blank" href="{{url("otherProfile")}}/' + ques[i]["username"] + '"  >{{__("مشاهده صفحه")}} ' + ques[i]["username"] + '</a>\n' +
+                        '   <a href="{{route("policies")}}" target="_blank">{{__("صفحه قوانین و مقررات")}}</a>\n';
+
+                @if(auth()->check())
+                    if(ques[i].yourReview) {
+                        text += '<span>آرشیو سوال</span>\n' +
+                                '<span onclick="deleteQuestionByUser(' + ques[i]["id"] + ')" style="color: red"> حذف سوال</span>\n';
+                    }
+                @endif
+                    text += '</div>\n';
             }
 
-            text += '<div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">\n' +
-                    '                            مشاهده سوال\n' +
-                    '</div>\n' +
-                    '<div class="answersWriterDetailsShow">\n' +
+            text += '<div class="answersWriterDetailsShow">\n' +
                     '   <div class="circleBase type2 answersWriterPicShow">' +
                     '       <img src="' + ques[i]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
                     '   </div>\n' +
@@ -190,37 +221,27 @@
                 '                                نفر پاسخ دادند\n' +
                 '                            </div>\n';
 
-            if(ques[i]["ansNum"] > 0)
-                text += '<div class="showAnswersToggle" onclick="showAllAnswers(' + ques[i]["id"] + ')">دیدن پاسخ‌ها</div>\n';
+            if(ques[i]["ansNum"] > 0) {
+                text += '<div class="dark-blue float-right display-inline-black cursor-pointer" onclick="showAllAnswers(' + ques[i]["id"] + ', this)" style="direction: rtl">' +
+                        '<span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + ques[i]["ansNum"] + '</span>' +
+                        '<span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                        '</div>\n';
+            }
 
             text += '<b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(' + ques[i]["id"] + ')">پاسخ دهید</b>\n' +
                     '</div>\n';
 
-            // text += createAnsToQuestion(ques[i]["comment"], '0px', ques[i]["id"], '');
-
+            text += '<div id="ansToQuestion' + ques[i]["id"] + '" class="display-none last">\n' +
+                    '   <div class="newAnswerPlaceMainDiv">\n';
+            text += createAnsToSection(ques[i]["id"], ques[i]["username"]);
+            text += '   </div>\n' +
+                    '</div>\n';
             text += createAnsToQuestionComment(ques[i]["comment"], ques[i]["username"], ques[i]["id"]);
-
-
-            text +='                        <div id="ansToQuestion' + ques[i]["id"] + '" class="display-none last">\n' +
-                '                            <div class="newAnswerPlaceMainDiv">\n' +
-                '                                <div class="circleBase type2 newAnswerWriterProfilePic">' +
-                '                                   <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">\n'+
-                '                                </div>\n' +
-                '                                <div class="inputBox">\n' +
-                '                                    <b class="replyAnswerTitle">در پاسخ به نظر ' + ques[i]["username"] + '</b>\n' +
-                '                                    <textarea id="questionAns' + ques[i]["id"] + '" class="inputBoxInput inputBoxInputAnswer" type="text"\n' +
-                '                                              placeholder="شما چه نظری دارید؟"></textarea>\n' +
-                '                                    <img class="commentSmileyIcon"\n' +
-                '                                         src="{{URL::asset("images/smile.png")}}">\n' +
-                '                                </div>\n' +
-                '                                <div class="sendQuestionBtn" onclick="sendAns(' + ques[i]["id"] + ')">ارسال</div>\n' +
-                '                                <div></div>\n' +
-                '                            </div>\n' +
-                '                        </div>\n' +
-                '                    </div>';
+            text += '</div>';
         }
 
         document.getElementById('questionSectionDiv').innerHTML = text;
+        autosize($('#questionSectionDiv').find('textarea'));
     }
 
     function createAnsToQuestionComment(comment, repTo, topId, newClass = ''){
@@ -228,55 +249,52 @@
 
         for(var k = 0; k < comment.length; k++) {
 
-            text += '<div class="ansComment_' + topId + '" style="width: 100%; direction: rtl">' +
-                '<div class="eachCommentMainBox ' + newClass + '">\n' +
-                '                                        <div class="circleBase type2 commentsWriterProfilePic">' +
-                '                                             <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '                                        </div>\n' +
-                '                                        <div class="commentsContentMainBox">\n' +
-                '                                            <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
-                '                                            <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
-                '                                            <div class="clear-both"></div>\n' +
-                '                                            <p>' + comment[k]["text"] + '</p>\n' +
-                '                                            <div class="commentsStatisticsBar">\n' +
-                '                                                <div class="float-right display-inline-black">\n' +
-                '                                                    <span id="reviewLikeNum' + comment[k]["id"] + '" class="likeStatisticIcon commentsStatisticSpan color-red">' + comment[k]["like"] + '</span>\n' +
-                '                                                    <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + comment[k]["dislike"] + '</span>\n' +
-                '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + comment[k]["ansNum"] + '</span>\n' +
-                '                                                </div>\n';
+            let hasLiked = '';
+            let hasDisLiked = '';
+            let confirmHtml = '';
+            if(comment[k]['confirm'] == 0)
+                confirmHtml = '<span class="label label-success" style="font-size: 10px; margin-right: 10px">در انتظار تایید</span>';
+
+            if(comment[k]['userLike'] && comment[k]['userLike']['like'] == 1)
+                hasLiked = 'coloredFullIcon';
+            else if(comment[k]['userLike'] && comment[k]['userLike']['like'] == -1)
+                hasDisLiked = 'coloredFullIcon';
+
+            text += '<div id="reviewSection_' + comment[k]["id"] + '" class="ansComment_' + topId + '" style="width: 100%; direction: rtl">' +
+                    '   <div class="eachCommentMainBox ' + newClass + '">\n' +
+                    '       <div class="circleBase type2 commentsWriterProfilePic">' +
+                    '           <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                    '       </div>\n' +
+                    '       <div class="commentsContentMainBox">\n' +
+                    '           <div class="ansOfQuestionsUserInfo">' +
+                    '           <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
+                    '           <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
+                                confirmHtml +
+                    '           </div>' +
+                    '           <p>' + comment[k]["text"] + '</p>\n' +
+                    '           <div class="commentsStatisticsBar">\n';
+
+            if(comment[k]["ansNum"] > 0){
+                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showAllAnswers(' + comment[k]["id"] + ', this)" style="direction: rtl">' +
+                        '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
+                        '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                        '</div>\n';
+            }
+
+            text += '</div>\n' +
+                    '</div>\n' +
+                    '<div class="commentsActionsBtns">\n' +
+                    '   <span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
+                    '   <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["dislike"] + '</span>\n' +
+                    '   <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: #0076a3">پاسخ دهید</span>\n' +
+                    '</div>\n' +
+                    '<div class="replyToCommentMainDiv display-none" style="margin-top: 5px;">\n';
+            text+=  createAnsToSection(comment[k]["id"], comment[k]["username"]);
+            text+=  '</div>\n' +
+                    '</div>\n';
 
             if(comment[k]["ansNum"] > 0)
-                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showAllAnswers(' + comment[k]["id"] + ')">دیدن پاسخ‌ها</div>\n';
-
-            text +='                                            </div>\n' +
-                '                                        </div>\n' +
-                '                                        <div class="commentsActionsBtns">\n' +
-                '                                            <div onclick="likeReview(' + comment[k]["id"] + ', 1); likeTheAnswers2(this)">\n' +
-                '                                                <span class="likeActionBtn"></span>\n' +
-                '                                                <span class="likeActionClickedBtn display-none"></span>\n' +
-                '                                            </div>\n' +
-                '                                            <div onclick="likeReview(' + comment[k]["id"] + ', 0); dislikeTheAnswers2(this)">\n' +
-                '                                                <span class="dislikeActionBtn"></span>\n' +
-                '                                                <span class="dislikeActionClickedBtn display-none"></span>\n' +
-                '                                            </div>\n' +
-                '                                            <div class="clear-both"></div>\n' +
-                '                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>\n' +
-                '                                        </div>\n' +
-                '                                        <div class="replyToCommentMainDiv display-none">\n' +
-                '                                            <div class="circleBase type2 newCommentWriterProfilePic">' +
-                '                                                <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '                                            </div>\n' +
-                '                                            <div class="inputBox">\n' +
-                '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
-                '                                                <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
-                '                                                <button class="btn btn-primary" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)"> ارسال</button>\n' +
-                '                                            </div>\n' +
-                '                                        </div>\n' +
-                '                                    </div>\n';
-
-            if(comment[k]["ansNum"] > 0) {
-                text += createAnsToQuestionComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"], 'mg-rt-45');
-            }
+                text += createAnsToQuestionComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"], 'lessWidthForAns');
 
             text += '</div>';
         }
@@ -285,14 +303,16 @@
         return text;
     }
 
-    function sendAns(_id){
+    function sendAnsToQuestion(_element, _id){
 
         if(!checkLogin())
             return;
 
-        var text = document.getElementById('questionAns' + _id).value;
+        var text = $('#questionAns' + _id).val();
+        if(text.trim().length > 1){
+            $(_element).toggle();
+            $(_element).next().toggle();
 
-        if(text != null && text != ''){
             $.ajax({
                 type: 'post',
                 url : '{{route("sendAns")}}',
@@ -303,13 +323,20 @@
                     'relatedTo' : _id
                 },
                 success: function(response){
+                    $(_element).toggle();
+                    $(_element).next().toggle();
+
                     if(response == 'ok') {
-                        showSuccessNotifi('پاسخ شما با موفقیت ثبت شد');
+                        showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد')}}', 'left', '#0076a3');
                         document.getElementById('questionAns' + _id).value = '';
                     }
-                    else if(response == 'nok2'){
-                        alert('شما نمی توانید به سوال تایید نشده پاسخ دهید.')
-                    }
+                    else
+                        showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
+                },
+                error: function(err){
+                    $(_element).toggle();
+                    $(_element).next().toggle();
+                    showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             })
         }
@@ -334,70 +361,11 @@
         })
     }
 
-    function createAnsToQuestion(_ques, _padding, _id, _width){
-        var text = '<div id="ansOfQuestion' + _id + '" class="display-none ansOfQuestion">';
+    function showAllAnswers(_id, _element){
+        let textElement = $(_element).find('.seeAllText');
 
-        for(var j = 0; j < _ques.length; j++)   {
-            text +='                      <div style="margin-bottom: 10px;">' +
-                '                            <div class="answerPlaceMainDiv" style="border-top: none; padding-right: ' + _padding + '; ">\n' +
-                '                            <div class="circleBase type2 answerWriterProfilePic">' +
-                '                               <img src="' + _ques[j]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '                            </div>\n' +
-                '                            <div class="answerBoxText" style=" width: ' + _width + '">\n' +
-                '                                <b class="replyWriterUsername">' + _ques[j]["username"] + '</b>\n' +
-                _ques[j]["text"] +
-                '                                <div class="answerStatistics" style="display: flex; align-items: center;">\n' +
-                '                                    <span class="numberOfLikeAnswer">' + _ques[j]["like"] + '</span>\n' +
-                '                                    <span class="numberOfDislikeAnswer">' + _ques[j]["dislike"] + '</span>\n' +
-                '                                    <div class="numberOfAnswers" style="font-size: 10px">\n' +
-                '                                         <span>' + _ques[j]["ansNum"] + '</span>\n' +
-                '                                          نفر پاسخ دادند\n' +
-                '                                    </div>';
-
-            if(_ques[j]["ansNum"] > 0)
-                text += '<div class="showAnswersToggle" style="font-size: 10px" onclick="showAllAnswers(' + _ques[j]["id"] + ')">دیدن پاسخ‌ها</div>';
-
-            text +='                                </div>\n' +
-                '                            </div>\n' +
-                '                            <div class="actionToAnswer" style="margin: 0px 20px 0 0">\n' +
-                '                                <div class="display-inline-block float-right" onclick="likeQuestion(' +  _ques[j]["id"] + ', 1)">\n' +
-                '                                    <span class="likeAnswer"></span>\n' +
-                '                                    <span class="likeAnswerClicked display-none"></span>\n' +
-                '                                </div>\n' +
-                '                                <div class="display-inline-block float-right" onclick="likeQuestion(' +  _ques[j]["id"]+ ', 0)">\n' +
-                '                                    <span class="dislikeAnswer"></span>\n' +
-                '                                    <span class="dislikeAnswerClicked display-none"></span>\n' +
-                '                                </div>\n' +
-                '                                <div><b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(' + _ques[j]["id"] + ')" style="font-size: 13px">پاسخ دهید</b></div>\n' +
-                '                            </div>\n' +
-                '                        </div>\n';
-
-            text+='                            <div id="ansToQuestion' + _ques[j]["id"] + '" class="newAnswerPlaceMainDiv" style="border-top: none; display: none; margin-top: 0px;">\n' +
-                '                                <div class="circleBase type2 newAnswerWriterProfilePic">' +
-                '                                   <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">\n'+
-                '                                </div>\n' +
-                '                                <div class="inputBox" style="width: 80%;">\n' +
-                '                                    <b class="replyAnswerTitle">در پاسخ به نظر ' + _ques[j]["username"] + '</b>\n' +
-                '                                    <textarea id="questionAns' + _ques[j]["id"]  + '" class="inputBoxInput inputBoxInputAnswer" type="text"\n' +
-                '                                              placeholder="شما چه نظری دارید؟"></textarea>\n' +
-                '                                    <img class="commentSmileyIcon"\n' +
-                '                                         src="{{URL::asset("images/smile.png")}}">\n' +
-                '                                </div>\n' +
-                '                                <div class="sendQuestionBtn" onclick="sendAns(' + _ques[j]["id"]  + ')">ارسال</div>\n' +
-                '                                <div></div>\n' +
-                '                            </div>' +
-                '                       </div>\n';
-
-            text += createAnsToQuestion(_ques[j]["comment"], '60px', _ques[j]["id"], '79%');
-        }
-
-        text += '</div>';
-
-        return text;
-    }
-
-    function showAllAnswers(_id){
         $("#ansOfQuestion" + _id).toggle();
+        textElement.text(textElement.text() == 'مشاهده پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'مشاهده پاسخ‌ها');
     }
 
     function replyToAnswers(_id){
@@ -413,6 +381,7 @@
         document.getElementById('questionPerView' + questionPerPage).classList.remove('color-blue');
         document.getElementById('questionPerView' + _count).classList.add('color-blue');
         questionPerPage = _count;
+        questionPage = 1;
         getQuestion();
     }
 
@@ -423,12 +392,7 @@
 
     function createQuestionPagination(questionCount){
         var text = '';
-        var page = Math.round(questionCount/questionPerPageNum[questionPerPage]);
-
-        if(page < 2)
-            document.getElementById('questionPaginationDiv').style.display = 'none';
-        else
-            document.getElementById('questionPaginationDiv').style.display = 'block';
+        var page = Math.ceil(questionCount/questionPerPageNum[questionPerPage]);
 
         createQuestionPerPage();
 
@@ -497,7 +461,6 @@
     }
 
     function createQuestionPerPage(){
-
         var text = '';
 
         for(var i = 0; i < questionPerPageNum.length; i++){
@@ -511,6 +474,66 @@
         }
 
         document.getElementById('showQuestionPerPage').innerHTML = text;
+    }
+
+    function createAnsToSection(_id, _ansToUserName){
+        text =  '<div class="circleBase type2 newCommentWriterProfilePic">' +
+                '   <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                '</div>\n' +
+                '<div class="inputBox">\n' +
+                '<b class="replyAnswerTitle">در پاسخ به سوال ' + _ansToUserName + '</b>\n' +
+                '<div class="questAnsText">\n' +
+                '   <textarea id="questionAns' + _id + '" class="inputBoxInput inputBoxInputAnswer" type="text"\n' +
+                '       placeholder="شما چه پاسخی دارید؟"></textarea>\n' +
+                '   <div class="sendQuestionBtn" onclick="sendAnsToQuestion(this, ' + _id + ')">{{__(("ارسال"))}}</div>\n' +
+                '   <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
+                '       <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
+                '       {{__("در حال ثبت سوال")}}\n' +
+                '   </div>' +
+                '</div>\n' +
+                '</div>';
+
+        return text;
+    }
+
+    function replayAnsToAns(_id){
+        if($('#reviewSection_' + _id).find('.replyToCommentMainDiv').hasClass("display-inline-blockImp"))
+            $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
+        else{
+            $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
+            $('#reviewSection_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
+        }
+    }
+
+    let deletedQuestion = 0;
+    function deleteQuestionByUser(_reviewId){
+        deletedQuestion = _reviewId;
+        $('#deleteQuestionModal').modal('show');
+    }
+    function doDeleteQuestionByUser(){
+        openLoading();
+        $.ajax({
+            type: 'post',
+            url: '{{route("deleteQuestion")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id: deletedQuestion
+            },
+            success: function(response){
+                closeLoading();
+                if(response == 'ok'){
+                    $('#deleteQuestionModal').modal('hide');
+                    $('#questionSection_' + deletedQuestion).remove();
+                    showSuccessNotifi('سوال شما با موفقیت حذف شد.', 'left', 'green');
+                }
+                else
+                    showSuccessNotifi('در حذف سوال شما مشکلی پیش آمده لطفا دوباره تلاش کنید.', 'left', 'red');
+            },
+            error: function(err){
+                closeLoading();
+                showSuccessNotifi('در حذف سوال شما مشکلی پیش آمده لطفا دوباره تلاش کنید.', 'left', 'red');
+            }
+        })
     }
 
 </script>

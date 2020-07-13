@@ -66,6 +66,8 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
     Route::post('askQuestion', array('as' => 'askQuestion', 'uses' => 'PlaceController@askQuestion'));
 
+    Route::post('deleteQuestion', 'PlaceController@deleteQuestion')->name('deleteQuestion');
+
     Route::post('getCommentsCount', array('as' => 'getCommentsCount', 'uses' => 'PlaceController@getCommentsCount'));
 
     Route::post('showAllAns', array('as' => 'showAllAns', 'uses' => 'PlaceController@showAllAns'));

@@ -79,9 +79,9 @@ $authUrl = $client->createAuthUrl();
                 <div style="margin-bottom: 10px;">{{__('در حال حاضر عضو کوچیتا هستید؟!')}}</div>
                 <div>
                     <div class="loginRowsPopup">
-                        <span class="pd-tp-8 inputLabelText"> {{__('نام کاربری')}} </span>
-                        <input class="loginInputTemp " type="text" id="username_main" maxlength="40" required
-                               autofocus>
+                        <span class="pd-tp-8 inputLabelText"> {{__('تلفن همراه یا ایمیل یا نام کاربری')}} </span>
+                        <input id="username_main" class="loginInputTemp"
+                               type="text"  maxlength="40"  required autofocus>
                     </div>
                     <div class="loginRowsPopup">
                         <span class="pd-tp-8 inputLabelText">{{__('رمز عبور')}}</span>

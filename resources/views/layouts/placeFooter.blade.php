@@ -1087,7 +1087,6 @@
                 }
             }
 
-            getAlertItemsPhone();
             showBookMarksPhone();
 
             function initialProgressFooter() {

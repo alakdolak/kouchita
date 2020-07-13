@@ -84,6 +84,7 @@
 }
 .searchIcon:before{
     content: "\e056";
+    font-family: "Shazde_Regular"!important;
 }
 
 

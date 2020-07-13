@@ -914,7 +914,8 @@ function getAnsToComments($logId){
                 if ($ansToReview[$i]->visitorId == $ansToReviewUser[$j]->id) {
                     $ansToReview[$i]->username = $ansToReviewUser[$j]->username;
                     $ansToReview[$i]->userPic = getUserPic($ansToReviewUser[$j]->id);
-                    $ansToReview[$i]->userLike = LogFeedBack::where('logId', $ansToReview[$i]->id)->where('userId', $ansToReviewUser[$j]->id)->first();
+                    if(auth()->check())
+                        $ansToReview[$i]->userLike = LogFeedBack::where('logId', $ansToReview[$i]->id)->where('userId', auth()->user()->id)->first();
 
                     $time = $ansToReview[$i]->date . '';
                     if(strlen($ansToReview[$i]->time) == 1)

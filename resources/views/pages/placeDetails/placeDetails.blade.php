@@ -639,7 +639,7 @@ if ($total == 0)
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">{{__('دوستانتان را tag کنید.')}}</span>
                                 </div>
-                                <div class="moreSettingPostManDiv commentOptionsBoxes" onclick="newPostModal()">
+                                <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
                                     <span class="moreSettingPost"></span>
                                 </div>
                             </div>
@@ -733,7 +733,7 @@ if ($total == 0)
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap" style="padding-right: 15px;">
+                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
                                         @if($placeMode == 'mahaliFood')
                                             <div class="tabLinkMainDiv">
                                                 <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
@@ -1100,7 +1100,7 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                             @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                                                <div style="margin-top: 25px; padding-left: 15px;">
+                                                <div class="topMainMapDiv">
                                                     <div id="mainMap" class="mainMap placeHolderAnime"></div>
                                                 </div>
                                                 @include('layouts.extendedMap')

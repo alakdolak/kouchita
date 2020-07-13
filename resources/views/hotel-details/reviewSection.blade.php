@@ -493,8 +493,12 @@
     }
 
     function replayReviewToComments(_id){
-        $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
-        $('#reviewSection_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
+        if($('#reviewSection_' + _id).find('.replyToCommentMainDiv').hasClass("display-inline-blockImp"))
+            $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
+        else{
+            $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
+            $('#reviewSection_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
+        }
     }
 
     function likeReview(_logId, _like, _element){
@@ -545,13 +549,10 @@
                         loadReviews();
                         showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
                     }
-                    else{
-                        console.log(response);
+                    else
                         showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
-                    }
                 },
                 catch(e){
-                    console.log(e);
                     showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
                 }
             })
@@ -695,7 +696,6 @@
 
         for(var k = 0; k < comment.length; k++) {
 
-            console.log(comment);
             let hasLiked = '';
             let hasDisLiked = '';
             let textInConfirm = '';
@@ -730,9 +730,9 @@
 
             if(comment[k]["ansNum"] > 0) {
                 text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">' +
-                    '<span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
-                    '<span class="seeAllText">مشاهده پاسخ‌ها</span>' +
-                    '</div>\n';
+                        '<span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
+                        '<span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                        '</div>\n';
             }
 
             text += '</div>\n' +
@@ -811,7 +811,6 @@
                     showSuccessNotifi('در حذف نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید.', 'left', 'red');
             },
             error: function(err){
-                console.log(err);
                 closeLoading();
                 showSuccessNotifi('در حذف نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید.', 'left', 'red');
             }

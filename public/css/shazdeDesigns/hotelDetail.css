@@ -2065,6 +2065,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0 12px;
 }
 
+.mobileIntroductionMainDiv.tabContentMainWrap{
+    padding-right: 15px;
+}
+
 .mobileIntroductionMainDiv #reviewsMainDiv {
     padding: 0 12px;
 }
@@ -2360,8 +2364,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
     position: absolute;
-    top: -4px;
-    right: 25px;
+    top: -5px;
+    right: 0px;
     cursor: pointer;
 }
 
@@ -2377,6 +2381,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     width: 100%;
     margin-bottom: 30px;
+}
+
+.ansOfQuestion .eachCommentMainBox{
+    border-top: 1px solid #E5E5E5;
+    padding-top: 10px;
+    margin-bottom: 0px;
 }
 
 .commentsWriterProfilePic {
@@ -2405,12 +2415,17 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentsActionsBtns {
-    display: inline-block;
+    display: flex;
     float: right;
-    margin-right: 20px;
+    margin-right: 50px;
     position: relative;
-    /*padding-top: 30px;*/
     cursor: pointer;
+    margin-top: 5px;
+}
+
+.lessWidthForAns{
+    margin-right: 45px;
+    width: calc(100% - 45px);
 }
 
 .commentsActionsBtns > div:not(:nth-child(3)) {
@@ -2566,7 +2581,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .newCommentPlaceMainDiv .inputBox, .newAnswerPlaceMainDiv .inputBox {
-    width: 90%;
+    width: calc(100% - 60px);
     float: right;
     position: relative;
 }
@@ -2665,9 +2680,19 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .newAnswerPlaceMainDiv {
-    margin-top: 20px;
+    margin: 0px;
     border-top: 1px solid #E5E5E5;
-    padding: 10px 0;
+    padding: 10px 0px 0px 0px;
+}
+.questAnsText{
+    display: flex;
+    direction: rtl;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.ansOfQuestionsUserInfo{
+    display: flex;
+    align-items: center;
 }
 
 .newAnswerWriterProfilePic {
@@ -2797,13 +2822,24 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .inputBoxSearchFilter {
     width: 100%;
     background: white;
-    margin-top: 10px;
+    position: relative;
 }
 
 .inputBoxSearchFilter .inputBoxInput {
     line-height: 2;
     text-align: right;
     font-size: 15px;
+    border: solid #cccccc 1px;
+    border-radius: 5px;
+    padding: 3px;
+}
+.inputBoxSearchFilter .searchIcon{
+    border: none;
+    position: absolute;
+    left: 10px;
+    top: 3px;
+    font-size: 26px;
+    background: none;
 }
 
 .adsMainDiv {
@@ -3378,6 +3414,17 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
     width: fit-content;
     padding-bottom: 5px;
+}
+
+.sendingQuestionLoading{
+    background: #0076a3;
+    color: #cccccc;
+    justify-content: center;
+    font-size: 12px;
+    display: flex;
+    width: 145px;
+    align-items: center;
+    padding: 0;
 }
 
 .answersBoxMainDiv {
@@ -4092,6 +4139,11 @@ td > div {
     width: 55px;
     height: 55px;
 }
+
+.topMainMapDiv{
+    margin-top: 25px;
+    padding-left: 15px;
+}
 /*responsive for tablets*/
 @media only screen and (min-width: 992px) {
 
@@ -4216,6 +4268,18 @@ td > div {
 }
 
 @media only screen and (max-width: 991px) {
+    .topMainMapDiv{
+        padding-right: 15px;
+    }
+    #commentsAndAddressMobile{
+        border: none;
+    }
+    .mobileIntroductionMainDiv.tabContentMainWrap{
+        padding: 0px;
+    }
+    .exceptQAndADiv{
+        width: 100%;
+    }
     .descriptionSections{
         width: 100% !important;
     }
