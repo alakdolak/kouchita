@@ -5157,11 +5157,11 @@ td > div {
 
     .questionInputBoxMainDiv {
         float: right;
-        width: 280px;
+        width: 100%;
     }
 
     .questionInputBox {
-        width: 79%;
+        width: calc(100% - 65px);
         float: right;
     }
 
@@ -5307,7 +5307,6 @@ td > div {
 
     .questionInputBoxMainDiv {
         float: right;
-        width: 235px;
         position: relative;
         margin-bottom: 25px;
     }
