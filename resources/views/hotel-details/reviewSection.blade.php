@@ -69,10 +69,8 @@
                     }
                     document.getElementById('showReviewsMain').innerHTML = '';
 
-                    console.log('نقدی ثبت نشده است');
                     $('#pcPostButton').attr('href', '#editReviewPictures');
                     $('#pcPostButton').attr('onclick', 'newPostModal()');
-
                     $('#openPostPhone').attr('onclick', 'newPostModal()');
                 }
                 else{
@@ -80,8 +78,9 @@
                     allReviews = response[0];
                     reviewsCount = response[1];
 
-                    if(reviewsCount < 3 && firstTimeFilterShow == 1)
+                    if(reviewsCount < 6 && firstTimeFilterShow == 1) {
                         document.getElementById('postFilters').style.display = 'none';
+                    }
 
                     firstTimeFilterShow = 0;
 
@@ -147,7 +146,7 @@
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="commentContentsShow">' +
-                '<div style="font-size: 18px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
+                '<div style="font-size: 15px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
                 '</div>\n' +
                 '<div class="commentPhotosShow">\n';
 
@@ -374,8 +373,8 @@
             }
 
 
-            text +='                                <div class="commentFeedbackChoices">\n' +
-                '                                    <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: space-evenly;">\n' +
+            text +='                                <div class="row commentFeedbackChoices">\n' +
+                '                                    <div class="postsActionsChoices fullInTablet col-xs-6" style="display: flex; justify-content: space-around;">\n' +
                 '                                        <div class="cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">دوست داشتم</div>\n' +
                 '                                        <div class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">دوست نداشتم</div>\n' +
                 '                                    </div>\n' +

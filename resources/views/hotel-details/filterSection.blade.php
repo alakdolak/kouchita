@@ -3,11 +3,16 @@
         <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
     </div>
     <div class="display-inline-block full-width font-size-15">
-        تعداد <span id="reviewCountSearch">{{$reviewCount}}</span> پست، <span id="reviewCommentCount">{{$ansReviewCount}}</span> نظر و <span id="reviewUserCount">{{$userReviewCount}}</span> کاربر مختلف
+        تعداد
+        <span id="reviewCountSearch">{{$reviewCount}}</span>
+        پست،
+        <span id="reviewCommentCount">{{$ansReviewCount}}</span>
+        نظر و
+        <span id="reviewUserCount">{{$userReviewCount}}</span>
+        کاربر مختلف
     </div>
     <div class="filterHelpText">
-        با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را
-        پیدا کنید
+        با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را پیدا کنید
         <div class="showFiltersMenus display-none" onclick="showPostsFilterBar()">
             <span class="float-right">بستن منو</span>
             <span class="float-left position-relative width-50"></span>

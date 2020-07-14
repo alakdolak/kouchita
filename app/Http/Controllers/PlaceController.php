@@ -141,7 +141,7 @@ class PlaceController extends Controller {
                 $place->phone = explode('-', $place->phone);
             else if(strpos($place->phone,'_') !== false)
                 $place->phone = explode('_', $place->phone);
-            else if(strpos($place->phone, ',') !== false)
+            else
                 $place->phone = explode(',', $place->phone);
         }
 

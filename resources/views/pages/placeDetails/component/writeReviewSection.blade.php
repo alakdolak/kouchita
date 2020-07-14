@@ -82,7 +82,7 @@
                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                         <span class="addOriginCity">{{$item->description}}</span>
                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
-                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment" style="border: solid gray 1px"></textarea>
+                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment" style="border: solid gray 1px; border-radius: 5px"></textarea>
                             <input type="hidden" id="textQuestionId_{{$item->id}}" name="textId[]" value="{{$item->id}}">
                         </div>
                     </div>
@@ -157,6 +157,7 @@
                 </div>
 
             </div>
+
         </div>
         <div id="editReviewPictures" class="backDark hidden">
                     <span class="ui_overlay ui_modal photoUploadOverlay editSection">
@@ -318,6 +319,30 @@
     for (i = 0; i < rateQuestion.length; i++)
         rateQuestionAns[i] = 0;
 
+    function newPostModal(kind = '') {
+        if (!hasLogin) {
+            showLoginPrompt('{{Request::url()}}');
+            return;
+        }
+
+        $('html, body').animate({
+            scrollTop: $('#mainStoreReviewDiv').offset().top
+        }, 800);
+
+        // document.getElementById("mainStoreReviewDiv").scrollIntoView();
+
+        $("#darkModal").show();
+        // $('body').css('overflow-y', 'hidden');
+        $(".postModalMainDiv").removeClass('hidden');
+
+        setTimeout(function () {
+            if (kind == 'textarea')
+                document.getElementById("postTextArea").focus();
+            else if (kind == 'tag')
+                $('#assignedSearch').focus();
+        }, 500);
+    }
+
     function momentChangeRate(_index, _value, _kind){
 
         if(_kind == 'in') {
@@ -419,8 +444,8 @@
                         document.getElementById('assignedResultReview').innerHTML = '';
 
                         if(_value.includes('@') && _value.includes('.')){
-                            text = '<ul>';
-                            text += '<li style="color: blue;" onclick="assignedUserToReview(\'' + _value + '\', 0)"  style="cursor: pointer"> دعوت کردن دوست خود : ' + _value + '</li>';
+                            text = '<ul style="list-style: none;">';
+                            text += '<li onclick="assignedUserToReview(\'' + _value + '\', 0)"  style="cursor: pointer; color: blue;"> دعوت کردن دوست خود : ' + _value + '</li>';
                             text += '</ul>';
 
                             document.getElementById('assignedResultReview').innerHTML = text;

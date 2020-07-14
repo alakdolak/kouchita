@@ -2265,6 +2265,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
 }
 
+.postShareChoice, .postCommentChoice{
+    position: relative;
+}
+
 .postLikeChoice:hover {
     color: red;
 }
@@ -2335,7 +2339,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px;
     position: absolute;
     top: -2px;
-    right: 9px;
+    right: 0px;
     cursor: pointer;
 }
 
@@ -2923,8 +2927,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .addParticipantSpan {
     display: inline-block;
     float: right;
-    padding: 2px 10px 0 0;
     font-size: 18px;
+    background: #d2d2d2;
+    text-align: center;
+    width: 20px;
 }
 
 .commentPhotosDiv, .commentVideosDiv {
@@ -3088,13 +3094,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     z-index: 9;
     font-size: 20px;
     background-color: #d0d0d0;
+    border-radius: 5px;
+    /*padding: 3px 10px 3px 0px;*/
+}
+.assignedResultReview li{
+    padding-right: 5px;
 }
 
 .removeParticipantBtn::before {
     content: '\E02C';
     font-family: Shazde_Regular2 !important;
     position: absolute;
-    background-color: #c7c7c7;
+    background-color: #e5e5e5;
     left: 10px;
     font-size: 18px;
     line-height: 0.8;
@@ -4144,6 +4155,14 @@ td > div {
     margin-top: 25px;
     padding-left: 15px;
 }
+
+.stickyFixTop{
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    z-index: 9;
+    box-shadow: 0px 7px 20px 0px #cccccc;
+}
 /*responsive for tablets*/
 @media only screen and (min-width: 992px) {
 
@@ -4194,7 +4213,7 @@ td > div {
     }
 
     .moreSettingPostManDiv {
-        display: none;
+        display: none !important;
     }
 
     .postModalMainDiv {
@@ -4268,6 +4287,9 @@ td > div {
 }
 
 @media only screen and (max-width: 991px) {
+    .stickyFixTop{
+        right: 0px;
+    }
     .topMainMapDiv{
         padding-right: 15px;
     }
@@ -4411,7 +4433,7 @@ td > div {
     }
 
     .moreSettingPostManDiv {
-        display: none;
+        display: none !important;
     }
 
     /*introduction bar*/
@@ -4546,9 +4568,15 @@ td > div {
     }
 
     .postModalMainDiv {
+        position: fixed;
+        width: 100%;
+        overflow-x: hidden;
+        top: 0;
+        overflow-y: auto;
+        height: 100vh;
+        z-index: 9999;
         right: 0;
         left: 0;
-        top: 350px;
     }
 
     .postModalMainDiv > .modal-dialog {
@@ -4771,10 +4799,6 @@ td > div {
         margin-top: 135px;
     }
 
-    .postModalMainDiv {
-        top: 475px;
-    }
-
     .addParticipantInputBoxPostModal {
         width: 95%;
     }
@@ -4806,7 +4830,7 @@ td > div {
     }
 
     .addOriginCityInputBoxPostModal {
-        width: 75%;
+        width: 97%;
         float: right;
         margin-right: 10px;
     }
@@ -4859,6 +4883,9 @@ td > div {
 
     .postsActionsChoices {
         font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
@@ -4919,6 +4946,20 @@ td > div {
 
     .commentMoreSettingBar {
         justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 520px){
+    .fullInTablet{
+        width: 100% !important;
+    }
+    .postsActionsChoices{
+        font-size: 15px;
+        width: 50%;
+        margin-top: 5px;
+    }
+    .showCommentsIconFeedback::before{
+        right: 0px;
     }
 }
 
@@ -5124,7 +5165,12 @@ td > div {
 }
 
 @media (max-width: 400px) {
-
+    #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
+        font-size: 10px;
+    }
+    .commentRatingHeader,.commentRatingsDetailsBtn{
+        font-size: 10px;
+    }
     .traditionalFoodDescription > div {
         font-size: 17px;
     }
@@ -5152,7 +5198,7 @@ td > div {
     }
 
     .commentOptionsText {
-        font-size: 10px;
+        font-size: 9px;
         line-height: 2.1;
     }
 
@@ -5161,14 +5207,8 @@ td > div {
     }
 
     .addParticipantInputBoxPostModal > textarea {
-        /*width: 63%;*/
-        /*font-size: 9px;*/
-        /*line-height: 2.5;*/
+        font-size: 13px;
     }
-
-    /*.participantDivMainDiv {*/
-    /*    width: 37%;*/
-    /*}*/
 
     .addOriginCityInputBoxPostModal {
         width: 95%;
@@ -5279,6 +5319,7 @@ td > div {
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
         width: 100%;
+        font-size: 10px;
     }
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(2) {

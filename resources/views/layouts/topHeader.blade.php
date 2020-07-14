@@ -25,6 +25,7 @@
 <script src="{{URL::asset('js/angular.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
+
 <style>
 
 @if(\App::getLocale() == 'en')
@@ -55,8 +56,6 @@
     gtag('config', 'UA-158914626-1');
 
     var homeURL = "{{route('home')}}";
-    console.log('{{csrf_token()}}');
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

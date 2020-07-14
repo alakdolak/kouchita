@@ -239,7 +239,7 @@ if ($total == 0)
         </div>
     </span>
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative" style="margin-bottom: 10px">
 
         @include('layouts.placeMainBodyHeader')
 
@@ -677,48 +677,55 @@ if ($total == 0)
 
     <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
-            <div id="BODYCON"
-                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
+            <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
                 @if($placeMode == 'mahaliFood')
-                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix"
-                         data-offset-top="800">
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse"   >
                         <div class="container-fluid tabLinkMainWrapMainDiv tabLinkMainWrapMainDiv_Food">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId" onclick="colorThisNav(this)">
+                                            سؤالات
+                                        </a>
                                     </li>
                                     <li>
-                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar"
-                                           href="#mainDivPlacePost">پست</a>
+                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
+                                            پست
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">دستور
-                                            پخت</a>
+                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel" onclick="colorThisNav(this)">
+                                            دستور پخت
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </nav>
                 @else
-                    <nav class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix" data-offset-top="800">
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse">
                         <div class="container-fluid tabLinkMainWrapMainDiv">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar"
-                                           href="#similarLocationsMainDiv">مکان‌های مشابه</a>
+                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#topPlacesSection" onclick="colorThisNav(this)">
+                                            مکان‌های مشابه
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId" onclick="colorThisNav(this)">
+                                            سؤالات
+                                        </a>
                                     </li>
                                     <li>
-                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar"
-                                           href="#mainDivPlacePost">پست</a>
+                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
+                                            پست
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی
-                                            کلی</a>
+                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel" onclick="colorThisNav(this)">
+                                            معرفی کلی
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -727,8 +734,6 @@ if ($total == 0)
                 @endif
 
                 <div class="exceptQAndADiv" id="generalDescLinkRel" style="display: inline-block">
-                    <div class="topBarContainerGeneralDesc display-none"></div>
-
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
@@ -1435,7 +1440,6 @@ if ($total == 0)
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
                         <div class="topHeaderBarPosts display-none">
                             <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
-                            {{--                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>--}}
                             <span class="float-left">مشاهده همه پست‌ها</span>
                         </div>
 
@@ -1446,7 +1450,7 @@ if ($total == 0)
                             @include('hotel-details.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
-                                {{--                                @include('features.advertise3D')--}}
+                                {{--@include('features.advertise3D')--}}
                             </center>
                         </div>
 
@@ -1643,17 +1647,65 @@ if ($total == 0)
     @endif
 
     <script>
-        $(document).ready(function () {
-            var a = $(window).width();
-            if (630 < a && a <= 768)
-                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 820}});
-            else if (415 < a && a <= 630)
-                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1000}});
-            else if (a <= 415)
-                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1050}});
+        $(window).on('scroll', function(e){
+            let topOfSticky = document.getElementById('BODYCON').getBoundingClientRect().top;
+            if(topOfSticky < 20 && !$('#sticky').hasClass('stickyFixTop'))
+                $('#sticky').addClass('stickyFixTop');
+            else if(topOfSticky >= 25 && $('#sticky').hasClass('stickyFixTop'))
+                $('#sticky').removeClass('stickyFixTop');
 
+            let topOfInfo = document.getElementById('generalDescLinkRel').getBoundingClientRect().top;
+            let topOfQA = document.getElementById('QAndAMainDivId').getBoundingClientRect().top;
+            let topOfPost = document.getElementById('mainDivPlacePost').getBoundingClientRect().top;
+
+            if(topOfInfo < 0) {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $('.generalDescBtnTopBar').css('color', '#4DC7BC');
+            }
+            else
+                $('.generalDescBtnTopBar').css('color', 'black');
+
+            if(topOfPost < 0) {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $('.postsBtnTopBar').css('color', '#4DC7BC');
+            }
+            else
+                $('.postsBtnTopBar').css('color', 'black');
+
+            if(topOfQA < 0) {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $('.QAndAsBtnTopBar').css('color', '#4DC7BC');
+            }
+            else
+                $('.QAndAsBtnTopBar').css('color', 'black');
+
+            let topOfSimilar = document.getElementById('topPlacesSection');
+            if(topOfSimilar){
+                topOfSimilar = topOfSimilar.getBoundingClientRect().top;
+                if(topOfSimilar < 0) {
+                    $('.tabLinkMainWrap').css('color', 'black');
+                    $('.similarLocationsBtnTopBar').css('color', '#4DC7BC');
+                }
+                else
+                    $('.similarLocationsBtnTopBar').css('color', 'black');
+            }
+        });
+
+        function colorThisNav(_elemnt){
+            setTimeout(() => {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $(_elemnt).css('color', '#4DC7BC');
+            }, 100)
+        }
+
+
+        $(document).ready(function () {
             autosize($(".inputBoxInputComment"));
             autosize($(".inputBoxInputAnswer"));
+
+            if (window.matchMedia('(max-width: 373px)').matches) {
+                $('.eachCommentMainBox').removeClass('mg-rt-45')
+            }
         });
 
         var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();
@@ -1749,33 +1801,6 @@ if ($total == 0)
 
         }
 
-        function newPostModal(kind = '') {
-            if (!hasLogin) {
-                showLoginPrompt('{{Request::url()}}');
-                return;
-            }
-
-            $('html, body').animate({
-                scrollTop: $('#mainStoreReviewDiv').offset().top
-            }, 800);
-
-            // document.getElementById("mainStoreReviewDiv").scrollIntoView();
-
-            $("#darkModal").show();
-            $(".postModalMainDiv").removeClass('hidden');
-
-            setTimeout(function () {
-                if (kind == 'textarea')
-                    document.getElementById("postTextArea").focus();
-                else if (kind == 'tag')
-                    $('#assignedSearch').focus();
-            }, 500);
-        }
-
-        function editPhotosNewPost() {
-            $('#editPane').removeClass('hidden')
-        }
-
         function showAnswersActionBox(element) {
             $(element).next().toggle() ,
                 $(element).toggleClass("bg-color-darkgrey")
@@ -1856,85 +1881,6 @@ if ($total == 0)
             $('.filterBarDivs').toggle();
             $('.visitKindTypeFilter').toggleClass('border-none')
         }
-
-        $(document).ready(function () {
-            if (window.matchMedia('(max-width: 373px)').matches) {
-                $('.eachCommentMainBox').removeClass('mg-rt-45')
-            }
-        });
-
-        $(window).scroll(function () {
-            if (!$('.tabLinkMainWrapMainDIV').hasClass('affix')) {
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-            }
-        });
-
-        $(document).ready(function () {
-            $('.generalDescBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').removeClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-
-                setTimeout(function () {
-                    $('.generalDescBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.postsBtnTopBar').parent().removeClass('active');
-                $('.QAndAsBtnTopBar').parent().removeClass('active');
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.postsBtnTopBar').click(function () {
-                // $('.tabLinkMainWrapMainDIV').addClass('affix');
-                // $('.topBarContainerGeneralDesc').addClass('display-none');
-                // $('.topBarContainerPosts').removeClass('display-none');
-                // $('.topBarContainerQAndAs').addClass('display-none');
-                // $('.topBarContainerSimilarLocations').addClass('display-none');
-
-                setTimeout(function () {
-                    $('.generalDescBtnTopBar').parent().removeClass('active');
-                    $('.postsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                // $('.QAndAsBtnTopBar').parent().removeClass('active');
-                // $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.QAndAsBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').removeClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-                $('.generalDescBtnTopBar').parent().removeClass('active');
-
-                setTimeout(function () {
-                    $('.postsBtnTopBar').parent().removeClass('active');
-                    $('.QAndAsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.similarLocationsBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').removeClass('display-none');
-                $('.generalDescBtnTopBar').parent().removeClass('active');
-                $('.postsBtnTopBar').parent().removeClass('active');
-
-                setTimeout(function () {
-                    $('.QAndAsBtnTopBar').parent().removeClass('active');
-                    $('.similarLocationsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-            });
-        })
-
     </script>
 
     <script>
