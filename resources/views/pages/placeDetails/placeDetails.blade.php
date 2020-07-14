@@ -1438,7 +1438,7 @@ if ($total == 0)
                     </div>
 
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
-                        <div class="topHeaderBarPosts display-none">
+                        <div id="phoneReviewFilterHeader" class="topHeaderBarPosts display-none">
                             <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
                             <span class="float-left">مشاهده همه پست‌ها</span>
                         </div>

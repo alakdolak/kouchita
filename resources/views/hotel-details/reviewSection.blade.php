@@ -80,6 +80,7 @@
 
                     if(reviewsCount < 6 && firstTimeFilterShow == 1) {
                         document.getElementById('postFilters').style.display = 'none';
+                        document.getElementById('phoneReviewFilterHeader').style.display = 'none';
                     }
 
                     firstTimeFilterShow = 0;
@@ -265,12 +266,12 @@
             }
 
             text +='<div class="quantityOfLikes">\n' +
-                '<span id="reviewLikeNum' + reviews[i]["id"] + '">' + reviews[i]["like"] + '</span>\n' +
-                'نفر دوست داشتند،\n' +
-                '<span id="reviewDisLikeNum' + reviews[i]["id"] + '">' + reviews[i]["dislike"] + '</span>\n' +
-                'نفر دوست نداشتند و\n' +
-                '<span>' + reviews[i]["ansNum"] + '</span>\n' +
-                'نفر نظر دادند.\n' +
+                // '<span id="reviewLikeNum' + reviews[i]["id"] + '">' + reviews[i]["like"] + '</span>\n' +
+                // 'نفر دوست داشتند،\n' +
+                // '<span id="reviewDisLikeNum' + reviews[i]["id"] + '">' + reviews[i]["dislike"] + '</span>\n' +
+                // 'نفر دوست نداشتند و\n' +
+                // '<span>' + reviews[i]["ansNum"] + '</span>\n' +
+                // 'نفر نظر دادند.\n' +
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="commentRatingsDetailsShow">\n' +
@@ -373,27 +374,32 @@
             }
 
 
-            text +='                                <div class="row commentFeedbackChoices">\n' +
-                '                                    <div class="postsActionsChoices fullInTablet col-xs-6" style="display: flex; justify-content: space-around;">\n' +
-                '                                        <div class="cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">دوست داشتم</div>\n' +
-                '                                        <div class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">دوست نداشتم</div>\n' +
-                '                                    </div>\n' +
-                '                                    <div class="postsActionsChoices col-xs-3">\n' +
-                '                                        <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">\n' +
-                '                                            <span class="showCommentsIconFeedback firstIcon"></span>\n' +
-                '                                            <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>\n' +
-                '                                            <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>\n' +
-                '                                        </div>\n' +
-                '                                    </div>\n' +
-                '                                    <div class="postsActionsChoices col-xs-3">\n' +
-                '                                        <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">\n' +
-                '                                            <span class="commentsShareIconFeedback firstIcon"></span>\n' +
-                '                                            <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>\n' +
-                '                                            <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>\n' +
-                '                                        </div>\n' +
-                '                                    </div>\n' +
-                '                                </div>\n' +
-                '                                <div class="commentsMainBox display-none">\n';
+            text += '<div class="row commentFeedbackChoices">\n' +
+                    '   <div class="postsActionsChoices fullInTablet col-xs-6" style="display: flex; justify-content: space-around;">\n' +
+                    '       <div id="reviewLikeNum' + reviews[i]["id"] + '" class="cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">' +
+                    reviews[i]["like"] +
+                    '       </div>\n' +
+                    '       <div id="reviewDisLikeNum' + reviews[i]["id"] + '" class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">' +
+                    reviews[i]["dislike"] +
+                    '       </div>\n' +
+                    '   </div>\n' +
+                    '   <div class="postsActionsChoices col-xs-3">\n' +
+                    '       <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">\n' +
+                    '           <span>' + reviews[i]["ansNum"] + '</span>' +
+                    '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
+                    '           <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>\n' +
+                    '           <span class="mg-rt-25 cursor-pointer">مشاهده نظرها</span>\n' +
+                    '       </div>\n' +
+                    '   </div>\n' +
+                    '   <div class="postsActionsChoices col-xs-3">\n' +
+                    '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">\n' +
+                    '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
+                    '           <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>\n' +
+                    '           <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>\n' +
+                    '       </div>\n' +
+                    '   </div>\n' +
+                    '</div>\n' +
+                    '<div class="commentsMainBox display-none">\n';
             if(showReviewAnsInOneSee < reviews[i]["comment"].length) {
                 text += '<div class="dark-blue mg-bt-10">\n' +
                         '<span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ')">مشاهده ' + (reviews[i]["comment"].length - showReviewAnsInOneSee) + ' نظر باقیمانده</span>\n' +
