@@ -3859,7 +3859,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 20px;
     display: flex;
     justify-content: center;
-    direction: ltr;
+    direction: rtl;
     cursor: pointer;
 }
 .likedislikeAnsReviews:after{
@@ -4273,10 +4273,6 @@ td > div {
 
     .showPostsNumsFilterLink, .postsMainDivFooter > div {
         padding-right: 0;
-    }
-
-    .questionInputBox {
-        width: 87%;
     }
 
     .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
@@ -4757,6 +4753,9 @@ td > div {
 
 @media only screen and (max-width: 630px) {
 
+    .commentFeedbackChoices{
+        padding: 5px 0px 0px 0px;
+    }
     /*bottomBarHeader*/
     .replyToCommentMainDiv {
         width: 100%;
@@ -4955,11 +4954,6 @@ td > div {
     .postsMainDivFooter > a {
         font-size: 11px;
     }
-
-    .questionInputBox {
-        width: 73%;
-    }
-
     .newAnswerPlaceMainDiv .inputBox {
         width: calc(100% - 50px);
     }
@@ -4979,7 +4973,7 @@ td > div {
     }
     .postsActionsChoices{
         font-size: 15px;
-        width: 50%;
+        /*width: 50%;*/
         margin-top: 5px;
     }
     .showCommentsIconFeedback::before{
@@ -5077,7 +5071,7 @@ td > div {
 
     .postsActionsChoices {
         font-size: 14px;
-        width: 50%;
+        /*width: 50%;*/
         /*text-align: center;*/
     }
 
@@ -5318,8 +5312,8 @@ td > div {
 
     .sendQuestionBtn {
         position: absolute;
-        top: 55px;
         padding: 5px 10px;
+        left: 0px;
     }
 
     .showingQuestionCompletely {

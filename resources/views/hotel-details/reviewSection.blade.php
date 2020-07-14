@@ -374,28 +374,34 @@
             }
 
 
-            text += '<div class="row commentFeedbackChoices">\n' +
-                    '   <div class="postsActionsChoices fullInTablet col-xs-6" style="display: flex; justify-content: space-around;">\n' +
-                    '       <div id="reviewLikeNum' + reviews[i]["id"] + '" class="cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">' +
-                    reviews[i]["like"] +
+            text += '<div class="commentFeedbackChoices">\n' +
+                    '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: space-around;">\n' +
+                    '       <div class="cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">' +
+                    '           <span id="reviewLikeNum' + reviews[i]["id"] + '">' +
+                                reviews[i]["like"] +
+                    '           </span>' +
+                    '            <span class="hideOnPhone">نفر</span> ' +
                     '       </div>\n' +
-                    '       <div id="reviewDisLikeNum' + reviews[i]["id"] + '" class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">' +
+                    '       <div class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">' +
+                    '<span id="reviewDisLikeNum' + reviews[i]["id"] + '">' +
                     reviews[i]["dislike"] +
-                    '       </div>\n' +
+                    '</span>' +
+                    '            <span class="hideOnPhone">نفر</span> ' +
+                    ' </div>\n' +
                     '   </div>\n' +
                     '   <div class="postsActionsChoices col-xs-3">\n' +
                     '       <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">\n' +
                     '           <span>' + reviews[i]["ansNum"] + '</span>' +
                     '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
                     '           <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>\n' +
-                    '           <span class="mg-rt-25 cursor-pointer">مشاهده نظرها</span>\n' +
+                    '           <span class="mg-rt-25 cursor-pointer hideOnPhone">مشاهده نظرها</span>\n' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '   <div class="postsActionsChoices col-xs-3">\n' +
-                    '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">\n' +
+                    '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)" style="min-width: 20px; min-height: 14px;">\n' +
                     '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
                     '           <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>\n' +
-                    '           <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>\n' +
+                    '           <span class="mg-rt-20 cursor-pointer hideOnPhone">اشتراک‌گذاری</span>\n' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '</div>\n' +
