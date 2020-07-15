@@ -2253,6 +2253,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-bottom: 1px solid #e5e5e5;
     color: #666666;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .postsActionsChoices {
@@ -2380,6 +2381,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsMainBox {
     border-bottom: 1px solid #e5e5e5;
+    width: 100%;
 }
 
 .eachCommentMainBox {
