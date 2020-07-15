@@ -236,16 +236,18 @@
             text += createAnsToSection(ques[i]["id"], ques[i]["username"]);
             text += '   </div>\n' +
                     '</div>\n';
-            text += createAnsToQuestionComment(ques[i]["comment"], ques[i]["username"], ques[i]["id"]);
-            text += '</div>';
+            text += '<div id="ansOfQuestion' + ques[i]["id"] + '" class="display-none ansOfQuestion">';
+            text += createAnsToQuestionComment(ques[i]["comment"], ques[i]["username"], ques[i]["id"], '', true);
+            text += '</div>' +
+                    '</div>';
         }
 
         document.getElementById('questionSectionDiv').innerHTML = text;
         autosize($('#questionSectionDiv').find('textarea'));
     }
 
-    function createAnsToQuestionComment(comment, repTo, topId, newClass = ''){
-        var text = '<div id="ansOfQuestion' + topId + '" class="display-none ansOfQuestion">';
+    function createAnsToQuestionComment(comment, repTo, topId, newClass = '', hasParent){
+        var text = '';
 
         for(var k = 0; k < comment.length; k++) {
 
@@ -260,46 +262,56 @@
             else if(comment[k]['userLike'] && comment[k]['userLike']['like'] == -1)
                 hasDisLiked = 'coloredFullIcon';
 
-            text += '<div id="reviewSection_' + comment[k]["id"] + '" class="ansComment_' + topId + '" style="width: 100%; direction: rtl">' +
+            text += '<div id="reviewSection_' + comment[k]["id"] + '" class="ansComment_' + topId + ' wholeAnsSection">' +
                     '   <div class="eachCommentMainBox ' + newClass + '">\n' +
                     '       <div class="circleBase type2 commentsWriterProfilePic">' +
                     '           <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                     '       </div>\n' +
                     '       <div class="commentsContentMainBox">\n' +
                     '           <div class="ansOfQuestionsUserInfo">' +
-                    '           <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
-                    '           <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
-                                confirmHtml +
-                    '           </div>' +
+                    '               <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
+                    '               <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
+                                    confirmHtml +
+                '               </div>' +
                     '           <p>' + comment[k]["text"] + '</p>\n' +
-                    '           <div class="commentsStatisticsBar">\n';
-
+                    '       </div>\n' +
+                    '   </div>\n' +
+                    '   <div class="commentsActionsBtns" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0px;">\n' +
+                    '       <div style="display: flex; width: auto">' +
+                    '           <span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
+                    '           <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["dislike"] + '</span>\n' +
+                    '           <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: #0076a3">پاسخ دهید</span>\n' +
+                    '       </div>';
             if(comment[k]["ansNum"] > 0){
-                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showAllAnswers(' + comment[k]["id"] + ', this)" style="direction: rtl">' +
-                        '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
-                        '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                text += '<div style="width: auto; display: flex; margin: 0;">' +
+                        '   <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showAllAnswers(' + comment[k]["id"] + ', this)" style="direction: rtl">' +
+                        '       <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
+                        '       <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                        '   </div>\n' +
                         '</div>\n';
             }
+             text += '</div>\n' +
+                     '<div class="replyToCommentMainDiv display-none" style="margin-top: 5px; margin-bottom: 10px">\n';
+            text+=      createAnsToSection(comment[k]["id"], comment[k]["username"]);
+            text+=  '</div>\n';
 
-            text += '</div>\n' +
-                    '</div>\n' +
-                    '<div class="commentsActionsBtns">\n' +
-                    '   <span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
-                    '   <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["dislike"] + '</span>\n' +
-                    '   <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: #0076a3">پاسخ دهید</span>\n' +
-                    '</div>\n' +
-                    '<div class="replyToCommentMainDiv display-none" style="margin-top: 5px;">\n';
-            text+=  createAnsToSection(comment[k]["id"], comment[k]["username"]);
-            text+=  '</div>\n' +
-                    '</div>\n';
+            var borderCalss = '';
+            if(hasParent === true)
+                hasParent = 'check';
+            else if(hasParent == 'check') {
+                hasParent = false;
+                borderCalss = 'borderInMobile'
+            }
 
-            if(comment[k]["ansNum"] > 0)
+            if(comment[k]["ansNum"] > 0) {
+                text += '<div id="ansOfQuestion' + comment[k]["id"] + '" class="display-none ansOfQuestion ' + borderCalss + '">';
                 text += createAnsToQuestionComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"], 'lessWidthForAns');
+                text += '</div>';
+            }
 
             text += '</div>';
         }
 
-        text += '</div>';
         return text;
     }
 
@@ -327,6 +339,7 @@
                     $(_element).next().toggle();
 
                     if(response == 'ok') {
+                        getQuestion();
                         showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد')}}', 'left', '#0076a3');
                         document.getElementById('questionAns' + _id).value = '';
                     }
@@ -510,6 +523,7 @@
         deletedQuestion = _reviewId;
         $('#deleteQuestionModal').modal('show');
     }
+
     function doDeleteQuestionByUser(){
         openLoading();
         $.ajax({
