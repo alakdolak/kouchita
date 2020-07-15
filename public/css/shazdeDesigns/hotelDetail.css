@@ -2516,7 +2516,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsStatisticSpan {
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 15px;
     font-size: 14px;
     position: relative;
     cursor: pointer;
@@ -3466,7 +3466,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .questionContentMainBox {
-    padding: 0 10px 30px;
+    padding: 0 10px 10px;
     text-align: justify;
     direction: rtl;
     font-size: 14px;
@@ -3851,6 +3851,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: flex;
     flex-direction: column;
     margin-right: 10px;
+    width: calc(100% - 60px);
 }
 
 .userProfileName {

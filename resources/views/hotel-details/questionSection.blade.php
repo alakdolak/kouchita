@@ -1,5 +1,5 @@
 
-<div id="QAndAMainDivId" class="tabContentMainWrap" style="display: flex; flex-direction: column">
+<div id="QAndAMainDivId" class="tabContentMainWrap" style="display: flex; flex-direction: column; margin-top: 15px">
     <div class="topBarContainerQAndAs display-none"></div>
     <div class="col-md-12 col-xs-12 QAndAMainDiv" style="margin-bottom: 10px;">
         <div class="mainDivQuestions">
@@ -208,27 +208,23 @@
             if(ques[i]['confirm'] == 0)
                 text += '<span class="label label-success">در انتظار تایید</span>';
 
-                text += '                                </div>\n' +
-                '                                <div>' + ques[i]["timeAgo"] + '</div>\n' +
-                '                            </div>\n' +
-                '                        </div>\n' +
-                '                        <div class="clear-both"></div>\n' +
-                '                        <div class="questionContentMainBox" style="white-space: pre-line">' + ques[i]["text"] + '</div>\n' +
-                '                        <div class="clear-both"></div>\n' +
-                '                        <div class="questionSubMenuBar">\n' +
-                '                            <div class="numberOfAnswers">\n' +
-                '                                <span>' + ques[i]["ansNum"] + '</span>\n' +
-                '                                نفر پاسخ دادند\n' +
-                '                            </div>\n';
+            text += '   </div>\n' +
+                    '   <div>' + ques[i]["timeAgo"] + '</div>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '   <div class="clear-both"></div>\n' +
+                    '   <div class="questionContentMainBox" style="white-space: pre-line">' + ques[i]["text"] + '</div>\n' +
+                    '   <div class="clear-both"></div>\n' +
+                    '   <div class="questionSubMenuBar">\n';
 
             if(ques[i]["ansNum"] > 0) {
                 text += '<div class="dark-blue float-right display-inline-black cursor-pointer" onclick="showAllAnswers(' + ques[i]["id"] + ', this)" style="direction: rtl">' +
-                        '<span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + ques[i]["ansNum"] + '</span>' +
-                        '<span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                        '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + ques[i]["ansNum"] + '</span>' +
+                        '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
                         '</div>\n';
             }
 
-            text += '<b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(' + ques[i]["id"] + ')">پاسخ دهید</b>\n' +
+            text += '   <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(' + ques[i]["id"] + ')">پاسخ دهید</b>\n' +
                     '</div>\n';
 
             text += '<div id="ansToQuestion' + ques[i]["id"] + '" class="display-none last">\n' +
