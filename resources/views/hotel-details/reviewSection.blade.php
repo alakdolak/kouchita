@@ -269,8 +269,9 @@
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="commentRatingsDetailsShow">\n' +
-                    '<div class="display-inline-block full-width" style="margin: 0px; display: flex; align-items: center; justify-content: space-between">\n' +
-                    '<div class="commentRatingHeader">\n';
+                    '<div class="display-inline-block full-width" style="margin: 0px; display: flex; align-items: center; justify-content: space-between; flex-direction: column;">\n' +
+                    '<div style="width: 100%;">' +
+                    '   <div class="commentRatingHeader">\n';
 
             text += 'بازدید ';
 
@@ -352,6 +353,8 @@
 
                 text += '</div>\n';
             }
+
+            text += '</div>';
 
             var likeClass = '';
             var disLikeClass = '';
