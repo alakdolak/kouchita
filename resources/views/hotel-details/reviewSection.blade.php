@@ -271,9 +271,8 @@
                     '<div class="commentRatingsDetailsShow">\n' +
                     '<div class="display-inline-block full-width" style="margin: 0px; display: flex; align-items: center; justify-content: space-between; flex-direction: column;">\n' +
                     '<div style="width: 100%;">' +
-                    '   <div class="commentRatingHeader">\n';
-
-            text += 'بازدید ';
+                    '   <div class="commentRatingHeader">\n' +
+                    'بازدید ';
 
             if(reviews[i]["assigned"].length != 0)
                 text +='<span> با دوستان</span>\n';
