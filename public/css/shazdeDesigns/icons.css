@@ -62,9 +62,15 @@
 }
 .plus:before {
     content: '\E031';
+    font-family: 'Shazde_Regular' !important
 }
 .plus2:before {
     content: '\E02F';
+    font-family: 'Shazde_Regular' !important
+}
+.calendarIcon:before{
+    content: "\e015";
+    font-family: 'Shazde_Regular' !important
 }
 .minus:before {
     content: '\E034';

@@ -1511,7 +1511,7 @@ if ($total == 0)
         </script>
     @endif
 
-    @include('hotelDetailsPopUp')
+{{--    @include('hotelDetailsPopUp')--}}
 
     @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
         <script>

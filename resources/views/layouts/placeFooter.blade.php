@@ -518,11 +518,10 @@
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
                             <div class="lp_others_titles"> {{__('بازدید‌های اخیر')}} </div>
-                            <div class="mainContainerBookmarked">
+                            <div class="mainContainerBookmarked" style="height: calc(100vh - 170px);">
                                 <div id="phoneRecentlyView">
                                     <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap"></div>
                                 </div>
-                                <div class="bottomBarContainer"></div>
                             </div>
                         </div>
 
@@ -533,19 +532,19 @@
 
                         <div class="lp_others_content hidden" id="lp_others_mark">
                             <div class="lp_others_titles"> {{__('نشون کرده')}} </div>
-                            <div class="mainContainerBookmarked">
+                            <div class="mainContainerBookmarked" style="height: calc(100vh - 170px);">
                                 <div id="phoneBookMarks">
                                     <div class="masthead-recent-class">
                                         @if(\auth()->check())
                                             <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
-                                                <div class="lp_others_rvPicBox col-xs-8">
+                                                <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
                                                     <img src="##placePic##" style="width: 100%;">
                                                 </div>
                                                 <div class="col-xs-4 placeDetailsLeftBar">
                                                     <div class="">##placeName##</div>
-                                                    <div class="lp_others_rating">
+                                                    <div class="lp_others_rating" style="display: flex; align-items: center; justify-content: center">
                                                         <div class="ui_bubble_rating bubble_##placeRate##0"></div>
-                                                        <br>##placeReviews## نقد
+                                                        ##placeReviews## نقد
                                                     </div>
                                                     <div class="">##placeCity##</div>
                                                 </div>
@@ -557,7 +556,6 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="bottomBarContainer"></div>
                             </div>
                         </div>
 
