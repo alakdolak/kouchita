@@ -45,6 +45,8 @@
 
 @include('layouts.header1')
 
+@include('component.smallShowReview')
+
 <div class="container cpBody">
     <div class="cpBorderBottom cpHeader">
 
@@ -72,88 +74,8 @@
             <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
                 {{__('تازه ترین پست ها')}}
             </div>
-            <div id="reviewSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="display: none">
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow">
-                            <img src="##userPic##" alt="##userName##" style="width: 100%; height: 100%; border-radius: 50%;">
-                        </div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">##userName##</b>
-                            <div style="font-size: 10px">{{__('در')}}
-                                <a href="##url##" target="_blank">
-                                    <span class="commentWriterExperiencePlace">##placeName##، {{__('شهر')}} ##placeCity##، {{__('استان')}} ##placeState##</span>
-                                </a>
-                            </div>
-                            <div style="font-size: 12px;">##timeAgo##</div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown ##haveSummery##">
-                            ##summery##
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="compvarePostTextShown display-none">
-                            ##text##
-                            <span class="showLessText" onclick="showLessText(this)">{{__('کمتر')}}</span>
-                        </p>
-                        <p class="compvarePostTextShown" style="display: ##notSummery##">
-                            ##text##
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12" onclick="showReviewPics(##id##)" style="display: ##havePic##">
-                            <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-                                <img src="##firstPic##" class="resizeImgClass" style="position: absolute; width: 100%;" onload="fitThisImg(this)">
-                            </div>
-                            <div class="numberOfPhotosMainDiv" style="display: ##morePic##">
-                                <div class="numberOfPhotos">##picCount##+</div>
-                                <div>{{__('عکس')}}</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <div>
-                                <span>##like##</span>
-                                <span class="iconFamily LikeIcon" style="color: #666666;"></span>
-                            </div>
-                            <div>
-                                <span>##disLike##</span>
-                                <span class="iconFamily DisLikeIcon" style="color: #666666;"></span>
-                            </div>
-                            <div>
-                                <span>##comments##</span>
-                                <span class="iconFamily CommentIcon" style="color: #666666;"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="reviewPlaceHolderSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="width: 100%">
-                @for($i = 0; $i < 2; $i++)
-                    <div class="postMainDivShown float-right position-relative">
-                        <div class="commentWriterDetailsShow">
-                            <div class="placeHolderAnime" style="width: 55px; height: 55px; float: right; border-radius: 50%"></div>
-                            <div class="commentWriterExperienceDetails" style="display: flex; flex-direction: column; padding-right: 10px">
-                                <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"></div>
-                                <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"> </div>
-                                <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"></div>
-                            </div>
-                        </div>
-                        <div class="commentContentsShow position-relative">
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine" style="width: 60%"></div>
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine" style="width: 90%"></div>
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine" style="width: 20%"></div>
-                            <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLine"></div>
-                        </div>
-                        <div class="commentPhotosShow" style="border-top: 1px solid #e5e5e5; padding-top: 8px; margin-top: 5px;">
-                            <div class=" placeHolderAnime reviewPicPlaceHolder"></div>
-                        </div>
-                    </div>
-                @endfor
-            </div>
+            <div id="reviewSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="display: none"></div>
+            <div id="reviewPlaceHolderSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="width: 100%"></div>
         </div>
 
         <div id="cpBorderLeft" class="col-lg-9 col-sm-9">
@@ -434,6 +356,9 @@
 
 <script>
 
+    getSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
+    getSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
+
     @if(isset($place->pic))
         var cityPic = JSON.parse('{!! $place->pic !!}');
 
@@ -454,7 +379,6 @@
 
             createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
         };
-
 
         var picSwiper = new Swiper('.cityPagePics', {
             slidesPerGroup: 1,
@@ -500,7 +424,6 @@
     var reviews;
     var showCityPicNumber = 5;
     var cityName1 = '{{ $place->name }}';
-    var reveiewSample = 0;
     var topPlacesSections = [
             {
                 name: '{{__('محبوب‌ترین بوم گردی ها')}}',
@@ -540,11 +463,6 @@
         ];
 
     initPlaceRowSection(topPlacesSections);
-
-    if(reveiewSample == 0){
-        reveiewSample = $('#reviewSection').html();
-        $('#reviewSection').html('');
-    }
 
     function runMainSwiper(){
         var swiper = new Swiper('.mainSuggestion', {
@@ -589,7 +507,6 @@
     }
 
     function getReviews(){
-
         $.ajax({
             type: 'post',
             url : '{{route("getCityPageReview")}}',
@@ -604,15 +521,11 @@
             }
         })
     }
+
     function createReviewSections(){
+
         reviews.forEach(item => {
-            let text = reveiewSample;
-            let fk = Object.keys(item);
-            for (let x of fk) {
-                let t = '##' + x + '##';
-                let re = new RegExp(t, "g");
-                text = text.replace(re, item[x]);
-            }
+            text = createSmallReviewHtml(item); // in component.smallShowReview.blade.php;
             $('#reviewSection').append(text);
         });
 
@@ -679,46 +592,6 @@
                 createMap('cpMap', center, allPlaces);
             }
         })
-    }
-
-    function showReviewPics(_id){
-        var selectReview = 0;
-        var reviewPicForAlbum = [];
-
-        for(i = 0; i < reviews.length; i++){
-            if(reviews[i]['id'] == _id){
-                selectReview = reviews[i];
-                break;
-            }
-        }
-
-        if(selectReview != 0){
-            revPic = selectReview['pics'];
-            for(var i = 0; i < revPic.length; i++){
-                reviewPicForAlbum[i] = {
-                    'id' : revPic[i]['id'],
-                    'sidePic' : revPic[i]['picUrl'],
-                    'mainPic' : revPic[i]['picUrl'],
-                    'video' : revPic[i]['videoUrl'],
-                    'userPic' : selectReview['userPic'],
-                    'userName' : selectReview['user']['username'],
-                    'uploadTime' : selectReview['timeAgo'],
-                    'showInfo' : false,
-                }
-            }
-
-            createPhotoModal('عکس های پست', reviewPicForAlbum);
-        }
-    }
-
-    function showMoreText(element){
-        $(element).parent().addClass('display-none');
-        $(element).parent().next().removeClass('display-none');
-    }
-
-    function showLessText(element){
-        $(element).parent().addClass('display-none');
-        $(element).parent().prev().removeClass('display-none');
     }
 
     $(window).ready(function(){

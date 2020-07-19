@@ -169,10 +169,10 @@
                          </div>
                          <div class="footerTextBox stFooter">
                              <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
-                             <a href="{{route('policies')}}" class="footerPolicyLink">{{__('صفحه مقررات')}}</a>
+                             <a href="{{route('policies')}}" target="_blank" class="footerPolicyLink">{{__('صفحه مقررات')}}</a>
                          </div>
                      </div>
-                     <div class="template itemRow loading" style="height: 100%; overflow-y: auto;">
+                     <div class="template itemRow loading" style="height: 100%; overflow-y: auto; width: 100%">
                          <div class="row">
                              <div class="col-xs-7">
                                  <div>
@@ -250,7 +250,7 @@
                                          <div class="secondStepPolicyText">
                                              {{__('تایید میکنم تمامی حقوق مرتبط با انتشار این تصویر متعلق به من می باشد. تایید می نمایم در صورت حضور چهره دیگران در تصویر، آن ها نیز از انتشار این عکس راضی می باشند.')}}
                                              <div id="photoUploadTipsLink" class="headerLink tipsLink" style="display: inline-block">
-                                                 <span onclick="$('#guidelinesOverlay').removeClass('hidden')">{{__('صفحه مقررات')}}</span>
+                                                 <a href="{{route("policies")}}" target="_blank">{{__('صفحه مقررات')}}</a>
                                                  <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
                                                      <div class="header_text"></div>
                                                      <div class="body_text">

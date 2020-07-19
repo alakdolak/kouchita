@@ -15,19 +15,24 @@ Route::get('seeLanguage', function(){
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
-Route::post('resizePostImages', 'HomeController@resizePostImages');
-
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
+
 Route::post('getPostComments', ['as' => 'getPostComments', 'uses' => 'PostController@getPostComments']);
+
 Route::post('sendPostComment', ['as' => 'sendPostComment', 'uses' => 'PostController@sendPostComment']);
 
 //sitemap
 Route::group(array(), function(){
     Route::get('/sitemap.xml', 'SitemapController@index');
+
     Route::get('/sitemap.xml/places', 'SitemapController@places');
+
     Route::get('/sitemap.xml/lists', 'SitemapController@lists');
+
     Route::get('/sitemap.xml/posts', 'SitemapController@posts');
+
     Route::get('/sitemap.xml/city', 'SitemapController@city');
+
 });
 
 Route::group(array('middleware' => ['throttle:30', 'web']), function () {
@@ -58,7 +63,6 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
     Route::post('getSimilarsRestaurant', array('as' => 'getSimilarsRestaurant', 'uses' => 'RestaurantController@getSimilarsRestaurant'));
 
     Route::post('getSimilarsMajara', array('as' => 'getSimilarsMajara', 'uses' => 'MajaraController@getSimilarsMajara'));
-
 
     Route::post('getNearby', array('as' => 'getNearby', 'uses' => 'PlaceController@getNearby'));
 
@@ -426,6 +430,10 @@ Route::group(array('middleware' => 'nothing'), function () {
             return view('userActivities.userArticles');
         elseif($page == 'post')
             return view('userActivities.userPosts');
+        elseif($page == 'profile')
+            return view('userActivities.profileUsers');
+        elseif($page == 'save')
+            return view('userActivities.sameParts');
         elseif($page == 'photo')
             return view('userActivities.userPhotosAndVideos');
         elseif($page == 'question')
@@ -467,6 +475,10 @@ Route::group(array('middleware' => 'nothing'), function(){
 // profile
 Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
+    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
+
+    Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
+
     Route::get('authLive', 'ProfileController@authLive')->name('authLive');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
@@ -502,8 +514,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
     Route::get('badge', array('as' => 'badge', 'uses' => 'BadgeController@showBadges'));
 
     Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
-
-    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
 
     Route::get('accountInfo', array('as' => 'accountInfo', 'uses' => 'ProfileController@accountInfo'));
 

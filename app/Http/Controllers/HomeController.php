@@ -497,69 +497,8 @@ class HomeController extends Controller
             }
         }
 
-        foreach ($reviews as $item) {
-            $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
-            $item->disLike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
-            $item->comments = getAnsToComments($item->id)[1];
-
-            $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto', 'id'])->find($item->visitorId);
-            $item->userName = $item->user->username;
-            $item->userPic = getUserPic($item->user->id);
-
-            $kindPlace = Place::find($item->kindPlaceId);
-            $item->mainFile = $kindPlace->fileName;
-            $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-            $item->placeName = $item->place->name;
-            $item->kindPlace = $kindPlace->name;
-            $item->url = createUrl($kindPlace->id, $item->place->id, 0, 0);
-
-            $item->pics = ReviewPic::where('logId', $item->id)->get();
-            $item = getReviewPicsURL($item);
-            if(count($item->pics) > 0){
-                $item->havePic = 'block';
-                $item->firstPic = $item->pics[0]->picUrl;
-                if(count($item->pics) > 1){
-                    $item->morePic = 'block';
-                    $item->picCount = count($item->pics) - 1;
-                }
-                else{
-                    $item->morePic = 'none';
-                }
-            }
-            else
-                $item->havePic = 'none';
-
-            $item->city = Cities::find($item->place->cityId);
-            $item->state = State::find($item->city->stateId);
-            $item->placeCity = $item->city->name;
-            $item->placeState = $item->state->name;
-
-            $time = $item->date . '';
-            if(strlen($item->time) == 1)
-                $item->time = '000' . $item->time;
-            else if(strlen($item->time) == 2)
-                $item->time = '00' . $item->time;
-            else if(strlen($item->time) == 3)
-                $item->time = '0' . $item->time;
-
-            if(strlen($item->time) == 4) {
-                $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
-                $item->timeAgo = getDifferenceTimeString($time);
-            }
-            else
-                $item->timeAgo = '';
-
-            if(strlen($item->text) > 180) {
-                $item->summery = mb_substr($item->text, 0, 180, 'utf-8');
-                $item->haveSummery = '';
-                $item->notSummery = 'none';
-            }
-            else {
-                $item->haveSummery = 'display-none';
-                $item->notSummery = 'block';
-            }
-
-        }
+        foreach ($reviews as $item)
+            $item = reviewTrueType($item); // in common.php
 
         echo json_encode($reviews);
         return;

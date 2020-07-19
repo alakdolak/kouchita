@@ -99,6 +99,26 @@
     var choosenIndex;
 
     function createPhotoModal(_title, _pics){
+        // _pics = [
+        //     {
+        //         'id' : ,
+        //         'sidePic' : ,
+        //         'mainPic' : ,
+        //         'userPic' : ,
+        //         'userName' : ,
+        //         'showInfo' : show like or not (true , false) ,
+        //         'like' : ,   (optional)
+        //         'dislike' : ,    (optional)
+        //         'alt' : ,    (optional)
+        //         'uploadTime' : , (optional)
+        //         'video': if video, (optional)
+        //         'description' : ,    (optional)
+        //         'userLike' : if user like this img?,     (optional)
+        //         'likeFunc' : function when click on like,    (optional)
+        //         'disLikeFunc' : function when click on dislike,  (optional)
+        //     }
+        // ]
+
         if(srcSidePic == 0)
             srcSidePic = $('#sidePhotoModal').html();
 

@@ -104,6 +104,8 @@ class User extends Authenticatable{
         $questionCount = LogModel::whereActivityId($questionActivity->id)->where('visitorId', $user->id)->count();
         $ansCount = LogModel::whereActivityId($ansActivity->id)->where('visitorId', $user->id)->count();
         $scoreCount = count(\DB::select('SELECT questionUserAns.logId as PlaceCount FROM questionUserAns INNER JOIN log ON log.visitorId = ' . $user->id . ' AND questionUserAns.logId = log.id GROUP BY PlaceCount'));
+        $addPlace = UserAddPlace::where('userId', $user->id)->count();
+
         $userCount = [
             'postCount' => $postCount,
             'picCount' => $picCount,
@@ -112,6 +114,7 @@ class User extends Authenticatable{
             'questionCount' => $questionCount,
             'ansCount' => $ansCount,
             'scoreCount' => $scoreCount,
+            'addPlace' => $addPlace,
         ];
 
         return $userCount;

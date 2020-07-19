@@ -18,6 +18,7 @@ use App\models\PlacePic;
 use App\models\QuestionAns;
 use App\models\Restaurant;
 use App\models\ReviewPic;
+use App\models\ReviewUserAssigned;
 use App\models\SogatSanaie;
 use App\models\State;
 use App\models\User;
@@ -804,6 +805,106 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON, $userVideo, $userVideoJSON];
 }
 
+function reviewTrueType($_log){
+    $user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto', 'id'])->find($_log->visitorId);
+    $_log->userName = $user->username;
+    $_log->userPageUrl = route('otherProfile', ['username' => $user->username]);
+    $_log->userPic = getUserPic($user->id);
+    $_log->like = LogFeedBack::where('logId', $_log->id)->where('like', 1)->count();
+    $_log->disLike = LogFeedBack::where('logId', $_log->id)->where('like', -1)->count();
+
+    $getAnses = getAnsToComments($_log->id);
+    $_log->answersCount = $getAnses[1];
+    if(count($getAnses[0]) > 0)
+        $_log->answers = $getAnses[0];
+    else
+        $_log->answers = array();
+
+    $kindPlace = Place::find($_log->kindPlaceId);
+    $_log->mainFile = $kindPlace->fileName;
+    $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_log->placeId);
+    $_log->placeName = $place->name;
+    $_log->kindPlace = $kindPlace->name;
+    $_log->placeUrl = createUrl($kindPlace->id, $place->id, 0, 0);
+    $_log->pics = ReviewPic::where('logId', $_log->id)->get();
+    $_log = getReviewPicsURL($_log, $place->file);
+    if(count($_log->pics) > 0){
+        $_log->hasPic = true;
+        $_log->mainPic = $_log->pics[0]->picUrl;
+        if(count($_log->pics) > 1){
+            $_log->morePic = true;
+            $_log->picCount = count($_log->pics) - 1;
+        }
+        else
+            $_log->morePic = false;
+    }
+    else {
+        $_log->hasPic = false;
+        $_log->picCount = 0;
+    }
+
+    $_log->city = Cities::find($place->cityId);
+    $_log->state = State::find($_log->city->stateId);
+    $_log->placeCity = $_log->city->name;
+    $_log->placeState = $_log->state->name;
+    $_log->where = $place->name . ' شهر ' .  $_log->city->name . ' ، استان ' . $_log->state->name;
+
+    $time = $_log->date . '';
+    if(strlen($_log->time) == 1)
+        $_log->time = '000' . $_log->time;
+    else if(strlen($_log->time) == 2)
+        $_log->time = '00' . $_log->time;
+    else if(strlen($_log->time) == 3)
+        $_log->time = '0' . $_log->time;
+
+    if(strlen($_log->time) == 4) {
+        $time .= ' ' . substr($_log->time, 0, 2) . ':' . substr($_log->time, 2, 2);
+        $_log->timeAgo = getDifferenceTimeString($time);
+    }
+    else
+        $_log->timeAgo = '';
+
+    if(strlen($_log->text) > 180) {
+        $_log->summery = mb_substr($_log->text, 0, 180, 'utf-8');
+        $_log->hasSummery = true;
+    }
+    else
+        $_log->hasSummery = false;
+
+    $_log->assigned = ReviewUserAssigned::where('logId', $_log->id)->get();
+    if (count($_log->assigned) != 0) {
+        foreach ($_log->assigned as $item) {
+            if ($item->userId != null) {
+                $u = User::find($item->userId);
+                if ($u != null)
+                    $item->name = $u->username;
+            }
+        }
+    }
+
+    $_log->questionAns = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionUserAns AS us , questions AS qus WHERE us.logId = ' . $_log->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
+    if (count($_log->questionAns) != 0) {
+        foreach ($_log->questionAns as $item) {
+            if ($item->ansType == 'multi') {
+                $anss = QuestionAns::where('questionId', $item->id)->where('id', $item->ans)->first();
+                $item->ans = $anss->ans;
+                $item->ansId = $anss->id;
+            }
+        }
+    }
+
+    $_log->yourReview = false;
+    if (\auth()->check()) {
+        $u = \auth()->user();
+        $_log->userLike = LogFeedBack::where('logId', $_log->id)->where('userId', $u->id)->first();
+        if($_log->visitorId == $u->id)
+            $_log->yourReview = true;
+    }
+    else
+        $_log->userLike = null;
+    return $_log;
+}
+
 function deleteReviewPic(){
     $pics = ReviewPic::where('logId', null)->get();
     foreach ($pics as $item){
@@ -870,16 +971,16 @@ function getAnsToComments($logId){
             array_push($logIds, $ansToReview[$i]->id);
             array_push($ansToReviewUserId, $ansToReview[$i]->visitorId);
 
-            $ansToReview[$i]->comment = array();
+            $ansToReview[$i]->answers = array();
 
             if($ansToReview[$i]->subject == 'ans') {
                 $anss = getAnsToComments($ansToReview[$i]->id);
-                $ansToReview[$i]->comment = $anss[0];
-                $ansToReview[$i]->ansNum = $anss[1];
-                $countAns += $ansToReview[$i]->ansNum;
+                $ansToReview[$i]->answers = $anss[0];
+                $ansToReview[$i]->answersCount = $anss[1];
+                $countAns += $ansToReview[$i]->answersCount;
             }
             else
-                $ansToReview[$i]->ansNum = 0;
+                $ansToReview[$i]->answersCount = 0;
         }
 
         $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM logFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
@@ -902,17 +1003,17 @@ function getAnsToComments($logId){
 
             for ($j = 0; $j < count($dislikeLogIds); $j++) {
                 if ($ansToReview[$i]->id == $dislikeLogIds[$j]->logId) {
-                    $ansToReview[$i]->dislike = $dislikeLogIds[$j]->dislikeCount;
+                    $ansToReview[$i]->disLike = $dislikeLogIds[$j]->dislikeCount;
                     $dl = true;
                     break;
                 }
             }
             if (!$dl)
-                $ansToReview[$i]->dislike = 0;
+                $ansToReview[$i]->disLike = 0;
 
             for ($j = 0; $j < count($ansToReviewUser); $j++) {
                 if ($ansToReview[$i]->visitorId == $ansToReviewUser[$j]->id) {
-                    $ansToReview[$i]->username = $ansToReviewUser[$j]->username;
+                    $ansToReview[$i]->userName = $ansToReviewUser[$j]->username;
                     $ansToReview[$i]->userPic = getUserPic($ansToReviewUser[$j]->id);
                     if(auth()->check())
                         $ansToReview[$i]->userLike = LogFeedBack::where('logId', $ansToReview[$i]->id)->where('userId', auth()->user()->id)->first();
@@ -997,9 +1098,8 @@ function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
     $reviewCount = count($reviews);
 
     $ansReviewCount = 0;
-    foreach ($reviews as $item){
+    foreach ($reviews as $item)
         $ansReviewCount += getAnsToComments($item->id)[1];
-    }
 
     $userReviweCount = DB::select('SELECT visitorId FROM log WHERE placeId = ' . $placeId . ' AND kindPlaceId = '. $kindPlaceId . ' AND confirm = 1 AND activityId = ' . $a2->id . ' AND CHARACTER_LENGTH(text) > 2 GROUP BY visitorId');
     $userReviweCount = count($userReviweCount);
@@ -1046,7 +1146,7 @@ function saveViewPerPage($kindPlaceId, $placeId){
     }
 }
 
-function getReviewPicsURL($review){
+function getReviewPicsURL($review, $placeFile){
     foreach ($review->pics as $item2) {
         if($item2->isVideo == 1){
             $videoArray = explode('.', $item2->pic);
@@ -1055,12 +1155,11 @@ function getReviewPicsURL($review){
                 $videoName .= $videoArray[$k] . '.';
             $videoName .= 'png';
 
-            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $videoName);
-            $item2->videoUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $item2->pic);
+            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $videoName);
+            $item2->videoUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $item2->pic);
         }
-        else{
-            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $item2->pic);
-        }
+        else
+            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $item2->pic);
     }
     return $review;
 }

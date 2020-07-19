@@ -102,10 +102,10 @@
 
 {{--                @include('layouts.modalPhotos')--}}
 
-                @include('userPosts.blade.php')
-                @include('userPhotosAndVideos.blade.php')
-                @include('userQuestions.blade.php')
-                @include('userArticles.blade.php')
+                @include('userActivities.userPosts')
+                @include('userActivities.userPhotosAndVideos')
+                @include('userActivities.userQuestions')
+                @include('userActivities.userArticles')
 
             </div>
             <div class="userProfileDetailsMainDiv col-xs-4">

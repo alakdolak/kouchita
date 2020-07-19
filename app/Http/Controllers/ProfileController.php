@@ -14,6 +14,7 @@ use App\models\Medal;
 use App\models\PhotographersPic;
 use App\models\Place;
 use App\models\PlaceFeatures;
+use App\models\ReviewPic;
 use App\models\State;
 use App\models\User;
 use App\models\UserAddPlace;
@@ -32,38 +33,6 @@ use Illuminate\Http\Request;
 
 
 class ProfileController extends Controller {
-
-    public function sendMyInvitationCode() {
-
-        if(isset($_POST["phoneNum"])) {
-
-            $user = Auth::user();
-
-            $last = InvitationCode::whereUId($user->id)->orderBy('sendTime', 'DESC')->first();
-
-            if($last != null) {
-                if(time() - $last->sendTime < 90) {
-                    echo "nok";
-                    return;
-                }
-            }
-
-            $send = new InvitationCode();
-            $send->phoneNum = makeValidInput($_POST["phoneNum"]);
-            $send->sendTime = time();
-            $send->uId = $user->id;
-
-            try {
-                $send->save();
-                sendSMS(makeValidInput($_POST["phoneNum"]), $user->username, 'invite', $user->invitationCode);
-                echo "ok";
-                return;
-            }
-            catch (Exception $x) {}
-        }
-
-        echo "nok";
-    }
 
     public function showProfile() {
         $user = Auth::user();
@@ -132,11 +101,132 @@ class ProfileController extends Controller {
 
         $userCount = $user->getUserActivityCount();
 
+        $user->score = \auth()->user()->getUserTotalPoint();
+        $nearLvl = \auth()->user()->getUserNearestLevel();
+
+        $location = __DIR__ . '/../../../../assets/userPhoto/';
+
+        $allUserPics = [];
+        $photographer = PhotographersPic::where('userId', $user->id)->where('status', 1)->orderByDesc('created_at')->get();
+        for($i = 0, $j = 0; $i < count($photographer) && $j < 3 ; $i++){
+            $kindPlace = Place::find($photographer[$i]->kindPlaceId);
+            $pl = \DB::table($kindPlace->tableName)->find($photographer[$i]->placeId);
+            $location1 = $location.'/'.$kindPlace->fileName.'/'.$pl->file.'/'.$photographer[$i]->pic;
+            if(is_file($location1)) {
+                $p = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/' . $photographer[$i]->pic);
+                $insert = [
+                    'id' => 'photographer_' . $photographer[$i]->id,
+                    'mainPic' => $p,
+                    'sidePic' => $p,
+                    'userName' => $user->username,
+                    'userPic' => $user->picture,
+                    'like' => $photographer[$i]->like,
+                    'dislike' => $photographer[$i]->like,
+                    'alt' => $photographer[$i]->alt,
+                    'showInfo' => true,
+                    'uploadTime' => getDifferenceTimeString($photographer[$i]->created_at),
+                    'description' => $photographer[$i]->description,
+                ];
+                array_push($allUserPics, $insert);
+                $j++;
+            }
+        }
+
+        $revAct = Activity::where('name', 'نظر')->first();
+        $reviewLog = LogModel::where('visitorId', $user->id)->where('activityId', $revAct->id)->orderByDesc('date')->get();
+        $reviewLogId = LogModel::where('visitorId', $user->id)->where('activityId', $revAct->id)->orderByDesc('date')->pluck('id')->toArray();
+        $reviewPic = ReviewPic::where('isVideo', 0)->where('is360', 0)->whereIn('logId', $reviewLogId)->get();
+        for($i = 0, $j = 0; $i < count($reviewPic) && $j < 3; $i++){
+            foreach ($reviewLog as $log){
+                if($log->id == $reviewPic[$i]->logId){
+                    $kindPlace = Place::find($log->kindPlaceId);
+                    $pl = \DB::table($kindPlace->tableName)->find($log->placeId);
+                    break;
+                }
+            }
+
+            $location1 = $location .'/'.$kindPlace->fileName.'/'.$pl->file.'/'.$reviewPic[$i]->pic;
+            if(is_file($location1)) {
+                $p = \URL::asset('userPhoto/'.$kindPlace->fileName.'/'.$pl->file.'/'.$reviewPic[$i]->pic);
+                $insert = [
+                    'id' => 'review_' . $reviewPic[$i]->id,
+                    'mainPic' => $p,
+                    'sidePic' => $p,
+                    'userName' => $user->username,
+                    'userPic' => $user->picture,
+                    'showInfo' => false,
+                    'uploadTime' => getDifferenceTimeString($photographer[$i]->created_at),
+                ];
+                array_push($allUserPics, $insert);
+                $j++;
+            }
+        }
+
+        return view('profile.mainProfile', compact(['user', 'nearLvl', 'nearestMedals', 'userCount', 'allUserPics']));
+
         return view('profile.profile', array('activities' => $activities, 'userCount' => $userCount,
             'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
             'userLevels' => nearestLevel($user->id), 'medals' => $medals,
             'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
 
+    }
+
+    public function getUserReviews(Request $request)
+    {
+        $reviews = [];
+        $reviewAct = Activity::where('name', 'نظر')->first();
+        if(isset($request->userId)){
+            $user = User::find($request->userId);
+            $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->where('confirm', 1)->orderByDesc('date')->get();
+            $status = 'ok';
+        }
+        else if(\auth()->check()){
+            $user = \auth()->user();
+            $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->orderByDesc('date')->get();
+            $status = 'ok';
+        }
+        else
+            $status = 'nok';
+
+        foreach ($reviews as $item)
+            $item = reviewTrueType($item); // in common.php
+
+
+        echo json_encode(['status' => $status, 'result' => $reviews]);
+        return;
+    }
+
+
+    public function sendMyInvitationCode() {
+
+        if(isset($_POST["phoneNum"])) {
+
+            $user = Auth::user();
+
+            $last = InvitationCode::whereUId($user->id)->orderBy('sendTime', 'DESC')->first();
+
+            if($last != null) {
+                if(time() - $last->sendTime < 90) {
+                    echo "nok";
+                    return;
+                }
+            }
+
+            $send = new InvitationCode();
+            $send->phoneNum = makeValidInput($_POST["phoneNum"]);
+            $send->sendTime = time();
+            $send->uId = $user->id;
+
+            try {
+                $send->save();
+                sendSMS(makeValidInput($_POST["phoneNum"]), $user->username, 'invite', $user->invitationCode);
+                echo "ok";
+                return;
+            }
+            catch (Exception $x) {}
+        }
+
+        echo "nok";
     }
 
     public function showOtherProfile($username, $mode = "") {

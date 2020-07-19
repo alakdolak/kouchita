@@ -4179,6 +4179,13 @@ td > div {
     direction: rtl;
     flex-direction: column;
 }
+
+.inConfirm{
+    margin-right: 12px;
+    font-size: 9px;
+    font-weight: normal;
+    cursor: default;
+}
 /*responsive for tablets*/
 @media only screen and (min-width: 992px) {
 

@@ -98,40 +98,42 @@
         var text = '';
 
         for(let i = 0; i < reviews.length; i++){
+            console.log(reviews[i]);
+
             text += '<div id="showReview_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n';
 
             if(reviews[i]['confirm'] == 1){
                 text += '<div class="commentActions" onclick="showAnswersActionBox(this)">\n' +
-                    '<span class="commentActionsIcon"></span>\n' +
-                    '</div>\n' +
-                    '<div class="questionsActionsMoreDetails display-none">\n' +
-                    '<span onclick="showReportPrompt(' + reviews[i]["id"] + ', ' + kindPlaceId + ')">گزارش پست</span>\n' +
-                    '<a target="_blank" href="{{url("otherProfile")}}/' + reviews[i]["user"]["username"] + '"  >مشاهده صفحه ' + reviews[i]["user"]["username"] + '</a>\n' +
-                    '<a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
+                        '   <span class="commentActionsIcon"></span>\n' +
+                        '</div>\n' +
+                        '   <div class="questionsActionsMoreDetails display-none">\n' +
+                        '       <span onclick="showReportPrompt(' + reviews[i]["id"] + ', ' + kindPlaceId + ')">{{__("گزارش پست")}}</span>\n' +
+                        '       <a target="_blank" href="' + reviews[i]["userPageUrl"] + '"  >{{__("مشاهده صفحه")}} ' + reviews[i]["userName"] + '</a>\n' +
+                        '       <a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
 
                 @if(auth()->check())
                     if(reviews[i].yourReview) {
                         text += '<span>آرشیو پست</span>\n' +
-                            '<span onclick="deleteReviewByUser(' + reviews[i]["id"] + ')" style="color: red"> حذف پست</span>\n';
+                            '<span onclick="deleteReviewByUser(' + reviews[i]["id"] + ')" style="color: red"> {{__('حذف پست')}}</span>\n';
                     }
                 @endif
                 text +='</div>\n';
             }
 
             text += '<div class="commentWriterDetailsShow">\n' +
-                '<div class="circleBase type2 commentWriterPicShow">' +
-                '<img src="' + reviews[i]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
-                '</div>\n' +
-                '<div class="commentWriterExperienceDetails">\n' +
-                '<b class="userProfileName">' + reviews[i]["usernameReviewWriter"] + '</b>\n' +
-                '<div class="postPlaceAndTime"> \n' +
-                '<div class="display-inline-block">در\n' +
-                '<span class="commentWriterExperiencePlace">' + reviews[i]["place"]["name"] + '، شهر ' + reviews[i]["city"]["name"] + '، استان ' + reviews[i]["state"]["name"] + '</span>\n';
+                    '   <div class="circleBase type2 commentWriterPicShow">' +
+                    '       <img src="' + reviews[i]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
+                    '   </div>\n' +
+                    '   <div class="commentWriterExperienceDetails">\n' +
+                    '       <b class="userProfileName">' + reviews[i]["userName"] + '</b>\n' +
+                    '       <div class="postPlaceAndTime"> \n' +
+                    '           <div class="display-inline-block">در\n' +
+                    '               <span class="commentWriterExperiencePlace">' + reviews[i]["where"] + '</span>\n';
 
             if(reviews[i]['confirm'] == 0)
-                text += '<span class="label label-success">{{__('در انتظار تایید')}}</span>';
+                text += '           <span class="label label-success">{{__('در انتظار تایید')}}</span>';
 
-            text +='</div>\n';
+            text +=' </div>\n';
 
             if(reviews[i]["assigned"].length != 0) {
                 text += '<div>با\n';
@@ -143,63 +145,63 @@
             }
 
             text += '<div>' + reviews[i]["timeAgo"] + '</div>\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '<div class="commentContentsShow">' +
-                '<div style="font-size: 15px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
-                '</div>\n' +
-                '<div class="commentPhotosShow">\n';
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '<div class="commentContentsShow">' +
+                    '   <div style="font-size: 15px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
+                    '</div>\n' +
+                    '<div class="commentPhotosShow">\n';
 
             let reviewPicsCount = reviews[i]["pics"].length;
 
             if(reviewPicsCount > 5) {
                 text += '<div class="commentPhotosMainDiv quintupletPhotoDiv">\n' +
-                    '<div class="photosCol secondCol col-xs-6">\n' +
-                    '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
-                    '</div>\n' +
-                    '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
-                    '</div>\n' +
-                    '</div>\n' +
-                    '<div class="photosCol firstCol col-xs-6">\n' +
-                    '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
-                    '</div>\n' +
-                    '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
-                    '</div>\n' +
-                    '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">\n' +
-                    '<img src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
-                    '<div class="morePhotoLinkPosts">\n' +
-                    'به علاوه\n' +
-                    '<span>' + (reviewPicsCount - 4) + '</span>\n' +
-                    'عکس و ویدیو دیگر\n' +
-                    '</div>\n' +
-                    '</div>\n' +
-                    '</div>\n' +
-                    '</div>\n';
+                        '<div class="photosCol secondCol col-xs-6">\n' +
+                        '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
+                        '<img src="' + reviews[i]["pics"][0]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                        '</div>\n' +
+                        '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
+                        '<img src="' + reviews[i]["pics"][1]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                        '</div>\n' +
+                        '</div>\n' +
+                        '<div class="photosCol firstCol col-xs-6">\n' +
+                        '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
+                        '<img src="' + reviews[i]["pics"][2]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                        '</div>\n' +
+                        '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
+                        '<img src="' + reviews[i]["pics"][3]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                        '</div>\n' +
+                        '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">\n' +
+                        '<img src="' + reviews[i]["pics"][4]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                        '<div class="morePhotoLinkPosts">\n' +
+                        'به علاوه\n' +
+                        '<span>' + (reviewPicsCount - 4) + '</span>\n' +
+                        'عکس و ویدیو دیگر\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>\n';
             }
             else if(reviewPicsCount == 5){
                 text += '<div class="commentPhotosMainDiv quintupletPhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0"  src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0"  src="' + reviews[i]["pics"][0]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img  id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img  id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_2"  src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_2"  src="' + reviews[i]["pics"][2]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_3"  src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_3"  src="' + reviews[i]["pics"][3]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_4" src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_4" src="' + reviews[i]["pics"][4]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -208,18 +210,18 @@
                 text += '<div class="commentPhotosMainDiv quadruplePhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_3" src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_3" src="' + reviews[i]["pics"][3]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -228,15 +230,15 @@
                 text += '<div class="commentPhotosMainDiv tripletPhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -245,12 +247,12 @@
                 text += '<div class="commentPhotosMainDiv doublePhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -259,7 +261,7 @@
                 text += '<div class="commentPhotosMainDiv doublePhotoDiv">\n' +
                     '<div class="photosCol firstCol col-xs-12">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -269,9 +271,9 @@
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="commentRatingsDetailsShow">\n' +
-                    '<div class="display-inline-block full-width" style="margin: 0px; display: flex; align-items: center; justify-content: space-between; flex-direction: column;">\n' +
-                    '<div style="width: 100%;">' +
-                    '   <div class="commentRatingHeader">\n' +
+                    '   <div class="display-inline-block full-width" style="margin: 0px; display: flex; align-items: center; justify-content: space-between; flex-direction: column;">\n' +
+                    '       <div style="width: 100%;">' +
+                    '           <div class="commentRatingHeader">\n' +
                     'بازدید ';
 
             if(reviews[i]["assigned"].length != 0)
@@ -284,75 +286,71 @@
                 'انجام شده است\n' +
                 '</div>\n';
 
-            if(reviews[i]["ans"].length != 0) {
-
+            if(reviews[i]["answers"].length != 0) {
                 text +='<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی\n' +
                         '   <div class="commentRatingsDetailsBtnIcon">\n' +
-                        '   <i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
-                        '</div>\n' +
+                        '       <i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
+                        '   </div>\n' +
                         '</div>\n' +
                         '</div>\n';
 
                 text +='<div class="commentRatingsDetailsBox display-none">\n';
 
-                //text ans
-                for(j = 0; j < reviews[i]["ans"].length; j++){
-                    if(reviews[i]["ans"][j]['ansType'] == 'text'){
-                        text += '<div class="display-inline-block full-width">\n';
-                        text +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
-                        text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
-                        text += '</div>\n';
+                let textAnsHtml = '';
+                let multiAnsHtml = '';
+                let rateAnsHtml = '';
+                for(j = 0; j < reviews[i]["questionAns"].length; j++){
+                    let questionAns = reviews[i]["questionAns"][j];
+
+                    if(questionAns['ansType'] == 'text'){
+                        textAnsHtml += '<div class="display-inline-block full-width">\n';
+                        textAnsHtml +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + questionAns["description"] + '</b>\n';
+                        textAnsHtml +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + questionAns["ans"] + '</b>\n';
+                        textAnsHtml += '</div>\n';
                     }
-                }
-
-                // multi ans
-                for(j = 0; j < reviews[i]["ans"].length; j++){
-                    if(reviews[i]["ans"][j]['ansType'] == 'multi'){
-                        text += '<div class="display-inline-block full-width">\n';
-                        text +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
-                        text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
-                        text += '</div>\n';
+                    else if(questionAns['ansType'] == 'multi'){
+                        multiAnsHtml += '<div class="display-inline-block full-width">\n';
+                        multiAnsHtml +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + questionAns["description"] + '</b>\n';
+                        multiAnsHtml +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + questionAns["ans"] + '</b>\n';
+                        multiAnsHtml += '</div>\n';
                     }
-
-                }
-
-                // rate ans
-                for(j = 0; j < reviews[i]["ans"].length; j++){
-                    if(reviews[i]["ans"][j]['ansType'] == 'rate'){
+                    else if(questionAns['ansType'] == 'rate'){
                         let ansTexttt = '';
-                        if(reviews[i]["ans"][j]['ans'] == 5)
+                        if(questionAns['ans'] == 5)
                             ansTexttt = 'عالی بود';
-                        else if(reviews[i]["ans"][j]['ans'] == 4)
+                        else if(questionAns['ans'] == 4)
                             ansTexttt = 'خوب بود';
-                        else if(reviews[i]["ans"][j]['ans'] == 3)
+                        else if(questionAns['ans'] == 3)
                             ansTexttt = 'معمولی بود';
-                        else if(reviews[i]["ans"][j]['ans'] == 2)
+                        else if(questionAns['ans'] == 2)
                             ansTexttt = 'بد نبود';
-                        else if(reviews[i]["ans"][j]['ans'] == 1)
+                        else if(questionAns['ans'] == 1)
                             ansTexttt = 'اصلا راضی نبودم';
 
-                        text += '<div class="display-inline-block full-width">\n' +
-                                '<b class="col-xs-6 font-size-14 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n' +
-                                '<div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-3 text-align-left">\n' +
-                                '<div class="ui_star_rating stars_10 font-size-25">\n';
+                        rateAnsHtml += '<div class="display-inline-block full-width">\n' +
+                                        '   <b class="col-xs-6 font-size-14 line-height-203" style="float: right">' + questionAns["description"] + '</b>\n' +
+                                        '   <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-3 text-align-left">\n' +
+                                        '       <div class="ui_star_rating stars_10 font-size-25">\n';
 
                         for(let starN = 0; starN < 6; starN++){
-                            if(starN <= reviews[i]["ans"][j]['ans'])
-                                text += '<span class="starRatingGreen autoCursor"></span>\n';
+                            if(starN <= questionAns['ans'])
+                                rateAnsHtml += '<span class="starRatingGreen autoCursor"></span>\n';
                             else
-                                text += '<span class="starRating autoCursor"></span>\n';
+                                rateAnsHtml += '<span class="starRating autoCursor"></span>\n';
                         }
 
-                        text += '</div>\n' +
-                                '</div>\n' +
-                                '<b class="col-xs-3 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n' +
-                                '</div>\n';
+                        rateAnsHtml +=  '       </div>\n' +
+                                        '   </div>\n' +
+                                        '   <b class="col-xs-3 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n' +
+                                        '</div>\n';
                     }
                 }
 
+                text += textAnsHtml;
+                text += multiAnsHtml;
+                text += rateAnsHtml;
                 text += '</div>\n';
             }
-
             text += '</div>';
 
             var likeClass = '';
@@ -379,14 +377,14 @@
                     '       </div>\n' +
                     '       <div class="cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">' +
                     '           <span id="reviewDisLikeNum' + reviews[i]["id"] + '">' +
-                                reviews[i]["dislike"] +
+                                reviews[i]["disLike"] +
                     '           </span>' +
                     '           <span class="hideOnPhone">نفر</span> ' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '   <div class="postsActionsChoices col-xs-3">\n' +
                     '       <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">\n' +
-                    '           <span>' + reviews[i]["ansNum"] + '</span>' +
+                    '           <span>' + reviews[i]["answersCount"] + '</span>' +
                     '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
                     '           <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>\n' +
                     '           <span class="mg-rt-25 cursor-pointer hideOnPhone">مشاهده نظرها</span>\n' +
@@ -402,27 +400,26 @@
                     '</div>\n' +
                     '<div class="commentsMainBox display-none">\n';
 
-            if(showReviewAnsInOneSee < reviews[i]["comment"].length) {
+            if(showReviewAnsInOneSee < reviews[i]["answers"].length) {
                 text += '<div class="dark-blue mg-bt-10">\n' +
-                        '   <span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ')">مشاهده ' + (reviews[i]["comment"].length - showReviewAnsInOneSee) + ' نظر باقیمانده</span>\n' +
+                        '   <span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ')">{{__("مشاهده")}} ' + (reviews[i]["answersCount"] - showReviewAnsInOneSee) + ' {{__("نظر باقیمانده")}}</span>\n' +
                         '</div>\n';
             }
 
-            // comments
             var checkAllReviews = true;
-            for(j = 0; j < reviews[i]["comment"].length; j++){
-
+            for(j = 0; j < reviews[i]["answers"].length; j++){
+                let answers = reviews[i]["answers"][j];
                 let seeAnses = '';
                 let hasLiked = '';
                 let hasDisLiked = '';
                 let textInConfirm = '';
 
-                if(reviews[i]["comment"][j]["confirm"] == 0 )
-                    textInConfirm = '<span class="label label-success" style="margin-right: 12px; font-size: 9px; font-weight: normal; cursor: default">{{__('در انتظار تایید')}}</span>';
+                if(answers["confirm"] == 0 )
+                    textInConfirm = '<span class="label label-success inConfirm">{{__('در انتظار تایید')}}</span>';
 
-                if(reviews[i]["comment"][j]["like"] == 1)
+                if(answers["like"] == 1)
                     hasLiked = 'coloredFullIcon';
-                else if(reviews[i]["comment"][j]["dislike"] == 1)
+                else if(answers["dislike"] == 1)
                     hasDisLiked = 'coloredFullIcon';
 
 
@@ -430,32 +427,32 @@
                     text += '<div id="allReviews_' + reviews[i]["id"] + '" style=" width: 100%; display: none">';
                     checkAllReviews = false;
                 }
-                if(reviews[i]["comment"][j]["ansNum"] > 0) {
-                    seeAnses += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + reviews[i]["comment"][j]["id"] + ', this)">' +
-                                '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">' + reviews[i]["comment"][j]["ansNum"] + '</span>' +
+                if(answers["answersCount"] > 0) {
+                    seeAnses += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + answers["id"] + ', this)">' +
+                                '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">' + answers["answersCount"] + '</span>' +
                                 '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
                                 '</div>\n';
                 }
 
-                text += '<div  id="reviewSection_' + reviews[i]["comment"][j]["id"] + '" style="margin-bottom: 15px"> ' +
+                text += '<div  id="reviewSection_' + answers["id"] + '" style="margin-bottom: 15px"> ' +
                         '<div class="eachCommentMainBox" style="margin-bottom: 0px">\n' +
                         '   <div class="circleBase type2 commentsWriterProfilePic">' +
-                        '       <img src="' + reviews[i]["comment"][j]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                        '       <img src="' + answers["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                         '   </div>\n' +
                         '   <div class="commentsContentMainBox">\n' +
                         '       <b class="userProfileName">' +
-                                    reviews[i]["comment"][j]["username"] +
+                                    answers["userName"] +
                                     textInConfirm +
-                        '          <span class="ansCommentTimeAgo">' + reviews[i]["comment"][j]["timeAgo"] + '</span>\n' +
+                        '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
                         '       </b>\n' +
-                        '       <p>' + reviews[i]["comment"][j]["text"] + '</p>\n'+
+                        '       <p>' + answers["text"] + '</p>\n'+
                         '    </div>\n' +
                         '</div>\n' +
                         '<div style="display: flex; justify-content: space-between;">\n' +
                         '   <div style="display: inline-flex">\n' +
-                        '       <span id="reviewLikeNum' + reviews[i]["comment"][j]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + reviews[i]["comment"][j]["id"] + ', 1, this)">' + reviews[i]["comment"][j]["like"] + '</span>\n' +
-                        '       <span id="reviewDisLikeNum' + reviews[i]["comment"][j]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + reviews[i]["comment"][j]["id"] + ', 0, this)">' + reviews[i]["comment"][j]["dislike"] + '</span>\n' +
-                        '       <span class="replayBtn replayReview" onclick="replayReviewToComments(' + reviews[i]["comment"][j]["id"] + ')">پاسخ دهید</span>\n' +
+                        '       <span id="reviewLikeNum' + answers["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + answers["id"] + ', 1, this)">' + answers["like"] + '</span>\n' +
+                        '       <span id="reviewDisLikeNum' + answers["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + answers["id"] + ', 0, this)">' + answers["disLike"] + '</span>\n' +
+                        '       <span class="replayBtn replayReview" onclick="replayReviewToComments(' + answers["id"] + ')">پاسخ دهید</span>\n' +
                         '   </div>\n';
                 text += seeAnses;
                 text += '</div>' +
@@ -464,18 +461,18 @@
                         '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                         '   </div>\n' +
                         '   <div class="inputBox setButtonToBot">\n' +
-                        '       <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["comment"][j]["username"] + '</b>\n' +
-                        '       <textarea id="ansForReviews_' + reviews[i]["comment"][j]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)"></textarea>\n' +
-                        '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + reviews[i]["comment"][j]["id"] + ',1)" style="height: fit-content"> ارسال</button>\n' +
+                        '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
+                        '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)"></textarea>\n' +
+                        '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + answers["id"] + ',1)" style="height: fit-content"> ارسال</button>\n' +
                         '   </div>\n' +
                         '</div>\n'+
                         '</div>\n';
 
-                text += '<div class="borderInMobile display-none ansComment_' + reviews[i]["comment"][j]["id"] + '" style="margin-top: 0px">';
-                text += createAnsToComment(reviews[i]["comment"][j]["comment"], reviews[i]["comment"][j]["username"], reviews[i]["comment"][j]["id"]);
+                text += '<div class="borderInMobile display-none ansComment_' + answers["id"] + '" style="margin-top: 0px">';
+                text += createAnsToComment(answers["answers"], answers["id"]);
                 text += '</div>';
 
-                if(j == reviews[i]["comment"].length && !checkAllReviews)
+                if(j == reviews[i]["answers"].length && !checkAllReviews)
                     text += '</div>';
             }
 
@@ -491,9 +488,8 @@
                     '       <textarea id="ansForReviews_' + reviews[i]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)" style="padding-bottom: 10px"></textarea>\n' +
                     '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + reviews[i]["id"] + ', 0)" > ارسال</button>\n' +
                     '   </div>\n' +
-                    '<div>';
-
-            text += '</div>\n' +
+                    '<div>'+
+                    '</div>\n' +
                     '</div>\n' +
                     '</div>' +
                     '</div>' +
@@ -708,9 +704,9 @@
         document.getElementById('showReviewPerPage').innerHTML = text;
     }
 
-    function createAnsToComment(comment, repTo, topId){
-        var text = '';
+    function createAnsToComment(comment, repTo){
 
+        var text = '';
         for(var k = 0; k < comment.length; k++) {
             let hasLiked = '';
             let hasDisLiked = '';
@@ -731,23 +727,24 @@
                     '       <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                     '   </div>\n' +
                     '   <div class="commentsContentMainBox">\n' +
-                    '       <div>' +
-                    '           <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
+                    '       <div style="display: flex;">' +
+                    '           <b class="userProfileName float-right">' + comment[k]["userName"] + '</b>\n' +
                     '           <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
                             textInConfirm +
                     '       </div>\n' +
-                    '       <p>' + comment[k]["text"] + '</p>\n' +
+                    '       <div>' + comment[k]["text"] + '</div>\n' +
                     '   </div>' +
                     '</div>\n' +
                     '<div>\n' +
                     '   <div style="display: inline-flex;">\n' +
                     '       <span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
-                    '       <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["dislike"] + '</span>\n' +
-                    '       <span class="replayBtn" onclick="replayReviewToComments(' + comment[k]["id"] + ')">{{__('پاسخ دهید')}}</span>\n' +
+                    '       <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["disLike"] + '</span>\n' +
+                    '       <span class="replayBtn replayReview" onclick="replayReviewToComments(' + comment[k]["id"] + ')">{{__('پاسخ دهید')}}</span>\n' +
                     '   </div>\n';
-                if(comment[k]["ansNum"] > 0) {
+
+                if(comment[k]["answersCount"] > 0) {
                     text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">' +
-                            '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
+                            '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["answersCount"] + '</span>' +
                             '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
                             '</div>\n';
                 }
@@ -757,16 +754,16 @@
                         '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                         '   </div>\n' +
                         '   <div class="inputBox setButtonToBot">\n' +
-                        '       <b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
+                        '       <b class="replyCommentTitle">{{__("در پاسخ به نظر")}} ' + comment[k]["username"] + '</b>\n' +
                         '       <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmit(this)"></textarea>\n' +
-                        '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)" > ارسال</button>\n' +
+                        '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)" > {{__("ارسال")}}</button>\n' +
                         '   </div>\n' +
                         '</div>\n' +
                         '</div>\n';
 
             text += '<div class=" display-none ansComment_' +  comment[k]["id"] + '" style="width: 100%">';
-            if(comment[k]["ansNum"] > 0)
-                text += createAnsToComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"]);
+            if(comment[k]["answersCount"] > 0)
+                text += createAnsToComment(comment[k]["answers"], comment[k]["userName"]);
             text += '</div>';
         }
 
