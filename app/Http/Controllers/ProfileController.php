@@ -155,7 +155,7 @@ class ProfileController extends Controller {
                     'userName' => $user->username,
                     'userPic' => $user->picture,
                     'showInfo' => false,
-                    'uploadTime' => getDifferenceTimeString($photographer[$i]->created_at),
+                    'uploadTime' => getDifferenceTimeString($reviewPic[$i]->created_at),
                 ];
                 array_push($allUserPics, $insert);
                 $j++;
