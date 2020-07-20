@@ -580,11 +580,11 @@
         for(var i = 0; i < revPic.length; i++){
             reviewPicForAlbum[i] = {
                 'id' : revPic[i]['id'],
-                'sidePic' : revPic[i]['url'],
-                'mainPic' : revPic[i]['url'],
+                'sidePic' : revPic[i]['picUrl'],
+                'mainPic' : revPic[i]['picUrl'],
                 'video' : revPic[i]['videoUrl'],
                 'userPic' : allReviews[_index]['userPic'],
-                'userName' : allReviews[_index]['usernameReviewWriter'],
+                'userName' : allReviews[_index]['userName'],
                 'showInfo' : false,
             }
         }

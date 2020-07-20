@@ -79,7 +79,7 @@
 
                     <div id="sidePhotoModal" class="sidePhotoAlbumDiv">
                         <div id="sideAlbumPic##index##" class="rightColPhotosShowingModal" onclick="##picIndex##">
-                            <img src="##sidePic##" alt="##alt##" class="mainAlbumPic">
+                            <img src="##sidePic##" alt="##alt##" class="mainAlbumPic resizeImgClass" onload="fitThisImg(this)">
                         </div>
                     </div>
 

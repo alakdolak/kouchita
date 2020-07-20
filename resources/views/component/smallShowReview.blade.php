@@ -225,7 +225,7 @@
         justify-content: center;
         align-items: center;
 
-        /*display: none;*/
+        display: none;
     }
     .fullReviewBody{
         background: white;

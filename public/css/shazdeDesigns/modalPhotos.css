@@ -80,6 +80,7 @@
 .showingPhotosModal .commentWriterExperienceDetails , .showingPhotosModal .answersWriterExperienceDetails {
     display: inline-block;
     float: right;
+
 }
 
 .showingPhotosModal #photoAlbumUploadTimeOnScreen {
