@@ -206,7 +206,6 @@ if ($total == 0)
 
     @include('component.mapMenu')
 
-    @include('component.reportModal')
 
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
@@ -1806,14 +1805,7 @@ if ($total == 0)
                 $(element).toggleClass("bg-color-darkgrey")
         }
 
-        function showRatingDetails(element) {
-            if ($(element).parent().next().hasClass('commentRatingsDetailsBox')) {
-                $(element).parent().next().toggle();
-                $(element).children().children().toggleClass('glyphicon-triangle-bottom');
-                $(element).children().children().toggleClass('glyphicon-triangle-top')
-                $(element).parent().toggleClass('mg-bt-10');
-            }
-        }
+
 
         function filterChoices(element) {
             $(element).toggleClass('bg-color-yellowImp')

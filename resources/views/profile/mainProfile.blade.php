@@ -19,13 +19,13 @@
 
     <div class="userPostsPage">
         <div class="userProfilePageCoverImg"></div>
-        <center class="mainBodyUserProfile userPosts">
+        <div class="mainBodyUserProfile userPosts">
             <div class="mainDivContainerProfilePage">
                 @include('profile.layout.sameParts')
 
                 @include('profile.innerParts.userPostsInner')
             </div>
-        </center>
+        </div>
     </div>
 
     <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>

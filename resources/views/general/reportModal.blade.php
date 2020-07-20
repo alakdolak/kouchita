@@ -1,4 +1,59 @@
 <style>
+    .reportBackGround{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #000000c2;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        top: 0px;
+        right: 0px;
+    }
+
+    .radionReportInput{
+        display: flex;
+    }
+
+    .reportBodyDiv{
+        background: white;
+        position: relative;
+        width: 900px;
+        border-radius: 5px;
+        direction: rtl;
+        padding: 60px;
+    }
+
+    .closeReport{
+        left: 10px !important;
+        right: auto !important;
+        top: 10px !important;
+    }
+
+    .reportHeaderTxt{
+        display: block;
+        margin: -5px 0 8px;
+        font-size: 26px;
+        line-height: 30px;
+        color: #4a4a4a;
+    }
+
+    .reportContainer{
+        width: 100%;
+        font-size: 12px;
+        margin-top: 20px;
+        margin-right: 40px;
+    }
+
+    .reportsRow{
+        margin-top: 5px;
+    }
+
+    .submitReportOptions{
+        direction: ltr;
+    }
+
     .reportLabel{
         display:flex;
         cursor: pointer;
@@ -67,7 +122,7 @@
                     let text = '';
                     response.result.forEach(item => {
                         text +=  '<div class="row reportsRow">\n' +
-                            '<div class="filterItem lhrFilter filter selected">\n' +
+                            '<div class="filterItem lhrFilter filter selected radionReportInput">\n' +
                             '<input id="report_' + item.id + '" name="reportValue" type="radio" value="' + item.id + '" onchange="openReportTxt(this.value)"/>\n' +
                             '<label class="reportLabel" for="report_' + item.id + '">\n' +
                             '<span></span>\n' +
@@ -78,7 +133,7 @@
                     });
 
                     text +=  '<div class="row reportsRow">\n' +
-                        '<div class="filterItem lhrFilter filter selected">\n' +
+                        '<div class="filterItem lhrFilter filter selected radionReportInput">\n' +
                         '<input id="report_more" name="reportValue" type="radio" value="more" onchange="openReportTxt(this.value)"/>\n' +
                         '<label class="reportLabel" for="report_more">\n' +
                         '<span></span>\n' +

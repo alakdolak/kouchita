@@ -73,6 +73,28 @@ a:link {
 .autoCursor:before{
     cursor: auto !important;
 }
+
+input[type="checkbox"] + label span, input[type="radio"] + label span{
+    margin: -4px 0 0 0 !important;
+}
+input[type="checkbox"] + label span, input[type="radio"] + label span{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url(../../images/check_radio_sheet.png) left top no-repeat;
+    cursor: pointer;
+}
+input[type="checkbox"], input[type="radio"]{
+    display: none;
+}
+input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span{
+    background: url(../../images/check_radio_sheet.png) -19px top no-repeat;
+}
+input[type="checkbox"] + label, input[type="radio"] + label{
+    color: #666666;
+}
 .loaderDiv{
     position: fixed;
     width: 100%;

@@ -98,10 +98,7 @@
         var text = '';
 
         for(let i = 0; i < reviews.length; i++){
-            console.log(reviews[i]);
-
             text += '<div id="showReview_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n';
-
             if(reviews[i]['confirm'] == 1){
                 text += '<div class="commentActions" onclick="showAnswersActionBox(this)">\n' +
                         '   <span class="commentActionsIcon"></span>\n' +
@@ -400,12 +397,6 @@
                     '</div>\n' +
                     '<div class="commentsMainBox display-none">\n';
 
-            if(showReviewAnsInOneSee < reviews[i]["answers"].length) {
-                text += '<div class="dark-blue mg-bt-10">\n' +
-                        '   <span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ')">{{__("مشاهده")}} ' + (reviews[i]["answersCount"] - showReviewAnsInOneSee) + ' {{__("نظر باقیمانده")}}</span>\n' +
-                        '</div>\n';
-            }
-
             var checkAllReviews = true;
             for(j = 0; j < reviews[i]["answers"].length; j++){
                 let answers = reviews[i]["answers"][j];
@@ -469,15 +460,21 @@
                         '</div>\n';
 
                 text += '<div class="borderInMobile display-none ansComment_' + answers["id"] + '" style="margin-top: 0px">';
-                text += createAnsToComment(answers["answers"], answers["id"]);
+                text += createAnsToComment(answers["answers"], answers["userName"]);
                 text += '</div>';
 
                 if(j == reviews[i]["answers"].length && !checkAllReviews)
                     text += '</div>';
             }
 
-            text += '</div>' +
+            text += '</div>' ;
+            if(showReviewAnsInOneSee < reviews[i]["answers"].length) {
+                let remainnn = reviews[i]["answers"].length - showReviewAnsInOneSee;
+                text += '<div class="dark-blue mg-bt-10">\n' +
+                    '   <span class="cursor-pointer" onclick="showAllReviews(' + reviews[i]["id"] + ', ' + remainnn + ', this)">{{__("مشاهده")}} ' + (reviews[i]["answersCount"] - showReviewAnsInOneSee) + ' {{__("نظر باقیمانده")}}</span>\n' +
                     '</div>\n';
+            }
+            text += '</div>' ;
 
             // new ans
             text += '<div class="newCommentPlaceMainDiv">\n' +
@@ -592,8 +589,15 @@
         createPhotoModal('عکس های پست', reviewPicForAlbum);
     }
 
-    function showAllReviews(_id){
+    function showAllReviews(_id, _remain, _element){
+        let ter;
         $('#allReviews_' + _id).toggle();
+        if($('#allReviews_' + _id).css('display') == 'none')
+            ter = 'مشاهده ' + _remain + ' نظر باقی مانده ';
+        else
+            ter = 'بستن ' + _remain + ' نظر ';
+
+        $(_element).text(ter);
     }
 
     function changePerPage(_count){
@@ -776,6 +780,15 @@
             $(_element).next().removeAttr('disabled');
         else
             $(_element).next().attr('disabled', 'disabled');
+    }
+
+    function showRatingDetails(element) {
+        if ($(element).parent().next().hasClass('commentRatingsDetailsBox')) {
+            $(element).parent().next().toggle();
+            $(element).children().children().toggleClass('glyphicon-triangle-bottom');
+            $(element).children().children().toggleClass('glyphicon-triangle-top')
+            $(element).parent().toggleClass('mg-bt-10');
+        }
     }
 
     window.addEventListener('scroll', function() {

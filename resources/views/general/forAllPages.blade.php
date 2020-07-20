@@ -23,6 +23,8 @@
 
 @include('general.addToTripModal')
 
+@include('general.reportModal')
+
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @else

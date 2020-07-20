@@ -1755,6 +1755,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     /*margin: 10px 0;*/
     /*border: 1px solid #cccccc;*/
 }
+
 .submitAnsInReview{
     background-color: #f2f2f2;
     color: #0076a3;
@@ -2100,7 +2101,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .quintupletPhotoDiv .firstCol > div {
-    height: 130px;
+    height: 133px;
 }
 
 .doublePhotoDiv .firstCol > div {
@@ -2108,7 +2109,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .tripletPhotoDiv .firstCol > div {
-    height: 140px;
+    height: 142px;
 }
 
 .quadruplePhotoDiv .firstCol > div {
@@ -2227,7 +2228,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-bottom: 1px solid #e5e5e5;
     color: #666666;
     margin-top: 5px;
-    margin-bottom: 10px;
 }
 
 .postsActionsChoices {

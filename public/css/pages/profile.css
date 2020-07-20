@@ -17,6 +17,7 @@ body {
 .mainDivContainerProfilePage {
     max-width: 1188px;
     padding: 0 24px;
+    margin: 0px auto;
 }
 
 .circleBase {
@@ -80,6 +81,7 @@ body {
     float: inherit;
     width: 800px;
     position: relative;
+    margin: 0px auto;
 }
 
 .postsMainFiltrationBar > span:hover {
