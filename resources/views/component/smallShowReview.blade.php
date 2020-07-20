@@ -61,7 +61,7 @@
         border-top: 1px solid #E5E5E5;
     }
     .photosCol > div{
-        margin-top: 10px;
+        margin-top: 2px;
         border: 2px solid black;
         cursor: pointer;
     }
@@ -166,7 +166,7 @@
             </div>
             <div class="quantityOfLikesSmallReview">
 
-                <div class="smallReviewShowMore">
+                <div class="smallReviewShowMore" onclick="seeFullModeReview(##id##)">
                     مشاهده کامل پست
                 </div>
                 <div>
@@ -177,7 +177,7 @@
                     <span>##disLike##</span>
                     <span class="iconFamily DisLikeIcon" style="color: #666666;"></span>
                 </div>
-                <div style="font-size: 20px;">
+                <div style="font-size: 20px;" onclick="seeFullModeReview(##id##)">
                     <span>##answersCount##</span>
                     <span class="iconFamily CommentIcon" style="color: #666666;"></span>
                 </div>
@@ -208,6 +208,406 @@
         </div>
         <div class="commentPhotosShow" style="border-top: 1px solid #e5e5e5; padding-top: 8px; margin-top: 5px;">
             <div class=" placeHolderAnime reviewPicPlaceHolder"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .fullReviewModal{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        right: 0px;
+        background: #000000b8;
+        z-index: 99;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /*display: none;*/
+    }
+    .fullReviewBody{
+        background: white;
+        border-radius: 5px;
+        width: 700px;
+        padding: 15px;
+        direction: rtl;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+    }
+    .closeFullReview{
+        position: absolute;
+        left: 5px;
+        top: 0px;
+        font-size: 30px;
+        color: #4DC7BC;
+        cursor: pointer;
+    }
+    .fullReviewHeader{
+        display: flex;
+    }
+    .fullReviewUserPicDiv{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .fullReviewUserInfoDiv{
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+    }
+    .fullReviewWhere{
+        color: #16174f;
+        cursor: pointer;
+        font-size: 11px;
+        display: flex;
+    }
+    .fullReviewUsername{
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        color: #0076a3;
+        font-weight: bold;
+    }
+    .fullReviewTime{
+        font-size: 11px;
+        color: #666666;
+        text-align: right;
+    }
+    .confirmFullreview{
+        color: white;
+        background: #5cb85c;
+        padding: 2px 5px;
+        border-radius: 3px;
+    }
+    .fullReviewBorderBottom{
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .fullReviewText{
+        font-size: 15px;
+        margin: 10px 0;
+        white-space: pre-line;
+        text-align: justify;
+        margin-bottom: 0px;
+    }
+    .fullReviewSeeDiv{
+        padding-bottom: 5px;
+    }
+    .fullReviewSpace{
+        color: #666666;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0px;
+        font-size: 12px;
+    }
+    .fullReviewSeeQuestionDiv{
+        background: #e5e5e5;
+        border-radius: 3px;
+        padding: 15px 9px;
+        width: 100%;
+        text-align: right;
+    }
+    .fullReviewQuestionDiv{
+        display: flex;
+        color: #666666;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    .questionFace{
+        width: 60%;
+    }
+    .questionAnss{
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        width: 40%;
+        justify-content: space-evenly;
+    }
+    .fullReviewStartAns{
+
+    }
+    .fullReviewSeenSeason span{
+        color: #16174f;
+    }
+    .fullReviewSeenBut{
+        cursor: pointer;
+    }
+    .fullReviewPicSection{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .topMainReviewPic{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .commentPhotosMainDiv {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        direction: rtl;
+    }
+
+    .firstCol {
+        padding: 0 0 0 5px;
+    }
+
+    .fivePhotoDiv .firstCol > div {
+        height: 132px;
+    }
+
+    .twoPhotoDiv .firstCol > div {
+        height: 200px;
+    }
+
+    .threePhotoDiv .firstCol > div {
+        height: 143px;
+    }
+
+    .fourPhotoDiv .firstCol > div {
+        height: 200px;
+    }
+
+    .secondCol {
+        padding: 0;
+    }
+
+    .fivePhotoDiv .secondCol > div {
+        height: 200px;
+    }
+
+    .twoPhotoDiv .secondCol > div {
+        height: 200px;
+    }
+
+    .singlePhotoDiv .secondCol{
+        width: 100%;
+        height: 200px;
+    }
+
+    .threePhotoDiv .secondCol > div {
+        height: 290px;
+    }
+
+    .fourPhotoDiv .secondCol > div {
+        height: 200px;
+    }
+
+    .morePhotoLinkPostsFullReview {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    .morePhotoLinkPostsFullReview > span {
+        width: 100%;
+        font-size: 22px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .photosColFullReview{
+        display: flex;
+        flex-direction: column;
+        width: 49%;
+        margin-left: 4px;
+    }
+
+    .photosColFullReview > div{
+        margin-top: 4px;
+        border: 1px solid black;
+        cursor: pointer;
+    }
+
+    .replyToCommentMainDiv{
+
+    }
+</style>
+
+<div id="fullReviewModal" class="fullReviewModal">
+    <div class="fullReviewBody">
+        <span class="closeFullReview iconClose" onclick="closeFullReview()"></span>
+        <div class="fullReviewHeader">
+            <div class="fullReviewUserPicDiv">
+                <img id="fullReviewUserPic" src="http://localhost/assets/defaultPic/5.jpg" class="resizeImgClass" style="width: 100%">
+            </div>
+            <div class="fullReviewUserInfoDiv">
+                <div class="fullReviewUsername">
+                    admin
+                </div>
+                <div class="fullReviewWhere">
+                    <a href="#" style="color: #16174f">
+                        در رستوران شیرین نخل شهر اصفهان ، استان اصفهان
+                    </a>
+                    <div class="confirmFullreview">{{__('در انتظار تایید')}}</div>
+                </div>
+                <div class="fullReviewTime">
+                    19 ساعت پیش
+                </div>
+            </div>
+        </div>
+        <div class="fullReviewText fullReviewBorderBottom">
+{{--            سلام یه متن بلند سلام یه متن بلند سلام یه متن بلندسلام یه متن بلند--}}
+{{--            سلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلام یه متن بلندسلا--}}
+
+            <div class="fullReviewPicSection">
+
+                <div class="commentPhotosMainDiv fivePhotoDiv">
+                    <div class="photosColFullReview secondCol col-xs-6">
+                        <div class="topMainReviewPic"  onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            </div>
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            </div>
+                        </div>
+                    <div class="photosColFullReview firstCol col-xs-6">
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            </div>
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            </div>
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            <div class="morePhotoLinkPostsFullReview">
+                                به علاوه
+                                <span>10</span>
+                                عکس و ویدیو دیگر
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="commentPhotosMainDiv fourPhotoDiv">
+                    <div class="photosColFullReview secondCol col-xs-6">
+                        <div class="topMainReviewPic"  onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                    <div class="photosColFullReview firstCol col-xs-6">
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentPhotosMainDiv threePhotoDiv">
+                    <div class="photosColFullReview secondCol col-xs-6">
+                        <div class="topMainReviewPic"  onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                    <div class="photosColFullReview firstCol col-xs-6">
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentPhotosMainDiv twoPhotoDiv">
+                    <div class="photosColFullReview secondCol col-xs-6">
+                        <div class="topMainReviewPic"  onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                    <div class="photosColFullReview firstCol col-xs-6">
+                        <div class="topMainReviewPic" onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentPhotosMainDiv singlePhotoDiv">
+                    <div class="photosColFullReview secondCol">
+                        <div class="topMainReviewPic"  onclick="showReviewPics(1)">
+                            <img src="http://localhost/assets/userPhoto/restaurant/res_shirin_nakhl_isfahan/1594647649_Iran1.jpg" class=" resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fullReviewSeeDiv fullReviewBorderBottom">
+            <div class="fullReviewSpace">
+                <div class="fullReviewSeenSeason">
+                    بازدید در فصل
+                    <span>بهار</span>
+                    و از مبدأ
+                    <span>تهران</span>
+                    انجام شده است
+                </div>
+                <div class="fullReviewSeenBut" onclick="showFullReviewQuestions(this)">
+                    <span>
+                        مشاهده جزئیات امتیازدهی
+                    </span>
+                    <span class="downArrowIcon upArrowIcon"></span>
+                </div>
+            </div>
+            <div id="fullReviewQuestionsSection" class="fullReviewSeeQuestionDiv">
+                <div class="fullReviewQuestionDiv">
+                    <div class="questionFace">ایا از غذا و رفتار کارکنان رستوران راضی بودید؟</div>
+                    <div class="questionAnss">نه رفتارشون زیاد جالب نبود. طوری رفتار می کردند که انگاه ما گارسون هستیم</div>
+                </div>
+                <div class="fullReviewQuestionDiv">
+                    <div class="questionFace">ایا از غذا و رفتار کارکنان رستوران راضی بودید؟</div>
+                    <div class="questionAnss">
+                        <div class="fullReviewStartAns">
+                            <span class="starRatingGreen autoCursor"></span>
+                            <span class="starRatingGreen autoCursor"></span>
+                            <span class="starRatingGreen autoCursor"></span>
+                            <span class="starRating autoCursor"></span>
+                            <span class="starRating autoCursor"></span>
+                        </div>
+                        <span>راضی نبودم</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div></div>
+        <div></div>
+        <div>
+            <div class="replyToCommentMainDiv ansTextAreaReview display-none" style="margin-top: 0px">
+               <div class="circleBase type2 newCommentWriterProfilePic">
+                       <img src="" style="width: 100%; height: 100%; border-radius: 50%;">
+                   </div>
+               <div class="inputBox setButtonToBot">
+                   <b class="replyCommentTitle">در پاسخ به نظر admin</b>
+                   <textarea id="ansForReviews_1"
+                             class="inputBoxInput inputBoxInputComment inputTextWithEmoji"
+                             rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"
+                             onchange="checkFullSubmit(this)"></textarea>
+                   <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviews(1,1)" style="height: fit-content"> ارسال</button>
+               </div>
+            </div>
         </div>
     </div>
 </div>
@@ -317,6 +717,19 @@
     function showSmallReviewLessText(element){
         $(element).parent().toggle();
         $(element).parent().prev().toggle();
+    }
+
+    function closeFullReview(){
+        $('#fullReviewModal').css('display', 'none');
+    }
+
+    function seeFullModeReview(_id){
+
+    }
+
+    function showFullReviewQuestions(_element){
+        $(_element).parent().next().toggleClass('hidden');
+        $(_element).find('.downArrowIcon').toggleClass('upArrowIcon');
     }
 
 </script>

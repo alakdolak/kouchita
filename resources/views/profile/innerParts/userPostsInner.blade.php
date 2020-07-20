@@ -9,8 +9,8 @@
             <span>قدمی‌ترین‌ها</span>
             <span>بهترین‌ها</span>
             <span>داغ‌ترین‌ها</span>
-            <span>بدترین‌ها</span>
-            <span>بیشترین همراهان</span>
+{{--            <span>بدترین‌ها</span>--}}
+{{--            <span>بیشترین همراهان</span>--}}
         </div>
     </div>
 
@@ -19,8 +19,8 @@
             <div class="inputBox">
                 <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>
             </div>
-            <span>نمایش تکی</span>
-            <span>نمایش جدولی</span>
+{{--            <span>نمایش تکی</span>--}}
+{{--            <span>نمایش جدولی</span>--}}
         </div>
 
         <div class="postsMainDivInSpecificMode col-xs-12">

@@ -1168,7 +1168,7 @@ class HomeController extends Controller
         $greenColor = '#4dc7bc26';
         $redColor = '#ffe1e1';
         $result = [];
-        $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->take(5)->get();
+        $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->get();
 
         foreach ($alerts as $item) {
             $item->time = getDifferenceTimeString($item->created_at);
@@ -1380,6 +1380,9 @@ class HomeController extends Controller
                 else
                     $item->delete();
             }
+
+            if(count($result) == 5)
+                break;
         }
 
         echo \GuzzleHttp\json_encode($result);

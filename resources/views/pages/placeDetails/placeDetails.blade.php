@@ -1967,7 +1967,7 @@ if ($total == 0)
 
     </script>
 
-    @include('layouts.pop-up-create-trip_in_hotel_details')
+{{--    @include('layouts.pop-up-create-trip_in_hotel_details')--}}
 
     <script>
         $(document).ready(function () {

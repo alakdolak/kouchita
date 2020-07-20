@@ -286,7 +286,7 @@
                 'انجام شده است\n' +
                 '</div>\n';
 
-            if(reviews[i]["answers"].length != 0) {
+            if(reviews[i]["questionAns"].length != 0) {
                 text +='<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی\n' +
                         '   <div class="commentRatingsDetailsBtnIcon">\n' +
                         '       <i class="glyphicon glyphicon-triangle-bottom"></i>\n' +

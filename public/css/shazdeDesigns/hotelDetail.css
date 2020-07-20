@@ -3299,38 +3299,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 /*    !*display: none;*!*/
 /*}*/
 
-.starRatingGreen::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: #4DC7BC;
-    font-size: 25px;
-}
-
-.starRating::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: white;
-    font-size: 25px;
-}
-
-.starRatingGold::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: #fcc156;
-    font-size: 25px;
-}
-
-.starRatingGrey::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: #e5e5e5;
-    font-size: 25px;
-}
-
 .starRatingGrey, .starRatingGold, .starRatingGreen, .starRating {
     cursor: pointer;
 }
@@ -4138,9 +4106,6 @@ td > div {
     padding-right: 5px;
 }
 
-.autoCursor:before{
-    cursor: auto !important;
-}
 
 .answersWriterDetailsShow{
     display: flex;

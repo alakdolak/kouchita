@@ -257,7 +257,37 @@
     content: '\E035';
     font-family: Shazde_Regular2 !important;
 }
+.starRatingGreen::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #4DC7BC;
+    font-size: 25px;
+}
 
+.starRating::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: white;
+    font-size: 25px;
+}
+
+.starRatingGold::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #fcc156;
+    font-size: 25px;
+}
+
+.starRatingGrey::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #e5e5e5;
+    font-size: 25px;
+}
 
 .ui_bubble_rating {
     display: inline-block;

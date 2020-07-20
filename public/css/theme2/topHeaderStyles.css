@@ -70,6 +70,9 @@ a:link {
     font-size: 16px;
 }
 
+.autoCursor:before{
+    cursor: auto !important;
+}
 .loaderDiv{
     position: fixed;
     width: 100%;
