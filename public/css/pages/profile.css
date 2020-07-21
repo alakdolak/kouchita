@@ -67,9 +67,13 @@ body {
 
 .userProfilePostsFiltration {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 5px;
+}
+.userProfilePostsFiltration > span{
+    text-align: center;
+    width: fit-content;
 }
 
 .postsMainFiltrationBar {
@@ -86,28 +90,6 @@ body {
 
 .postsMainFiltrationBar > span:hover {
     border-bottom: 5px solid #0076a3;
-}
-
-.userProfilePostsFiltration > span:nth-child(2),
-.userProfilePostsFiltration > span:nth-child(3) {
-    width: 12%;
-}
-
-.userProfilePostsFiltration > span:nth-child(4),
-.userProfilePostsFiltration > span:nth-child(6) {
-    width: 9%;
-}
-
-.userProfilePostsFiltration > span:nth-child(5) {
-    width: 10%;
-}
-
-.userProfilePostsFiltration > span:first-child {
-    width: 16%;
-}
-
-.userProfilePostsFiltration > span:last-child {
-    width: 18%;
 }
 
 .userPosts .showUsersPostsLink,
@@ -1168,6 +1150,11 @@ body {
     font-size: 15px;
 }
 
+.userProfilePostsFiltration > span.active{
+    border-bottom: 5px solid #0076a3;
+    text-align: center;
+}
+
 /*responsive for tablets*/
 
 @media (max-width: 1188px) {
@@ -1403,6 +1390,7 @@ body {
     }
 
     .userProfileInfo {
+        text-align: center;
         right: inherit;
         top: -95px;
         padding: 5px 25px;

@@ -18,7 +18,7 @@
 
 
     <div class="userPostsPage">
-        <div class="userProfilePageCoverImg"></div>
+        <div class="userProfilePageCoverImg" style="background-image: url('{{URL::asset('images/mainPics/background/4.jpg')}}'); background-size: cover"></div>
         <div class="mainBodyUserProfile userPosts">
             <div class="mainDivContainerProfilePage">
                 @include('profile.layout.sameParts')

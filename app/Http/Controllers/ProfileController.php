@@ -174,7 +174,7 @@ class ProfileController extends Controller {
 
     public function getUserReviews(Request $request)
     {
-        $reviews = [];
+        $result = [];
         $reviewAct = Activity::where('name', 'نظر')->first();
         if(isset($request->userId)){
             $user = User::find($request->userId);
@@ -192,6 +192,18 @@ class ProfileController extends Controller {
         foreach ($reviews as $item)
             $item = reviewTrueType($item); // in common.php
 
+        $reviews = $reviews->toArray();
+
+        if(isset($request->sort) && $request->sort != 'new') {
+            $sort = false;
+            if($request->sort == 'top')
+                $sort = array_column($reviews, 'like');
+            else if($request->sort == 'hot')
+                $sort = array_column($reviews, 'answersCount');
+
+            if($sort)
+                array_multisort($sort, SORT_DESC, $reviews);
+        }
 
         echo json_encode(['status' => $status, 'result' => $reviews]);
         return;

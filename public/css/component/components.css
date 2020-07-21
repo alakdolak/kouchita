@@ -725,6 +725,7 @@
 .commentRatingsDetailsBox {
     background: #e5e5e5;
     padding: 15px 9px;
+    width: 100%;
 }
 
 .commentRatingsDetailsBox .starRating, .commentRatingsDetailsBox .starRatingGreen {
@@ -1394,6 +1395,7 @@
         width: 90%;
         padding: 0px;
         max-height: calc(100vh - 90px);
+        height: fit-content;
     }
 
     .mainFullReviewDiv{
@@ -1580,15 +1582,13 @@
     .fullReviewLikeAnsSeeAllSection{
         display: block;
     }
+
     .fullReviewSeeAnses{
         text-align: left;
     }
+
     .fullReviewLikeAnsSeeAllSection > div{
         width: 100%;
-    }
-
-    .commentWriterExperienceDetails {
-        width: 85%;
     }
 }
 

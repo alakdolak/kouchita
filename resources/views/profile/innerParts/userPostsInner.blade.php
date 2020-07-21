@@ -5,10 +5,9 @@
     <div class="userProfilePostsFiltrationContainer">
         <div class="userProfilePostsFiltration">
             <span>نمایش بر اساس</span>
-            <span>جدیدترین‌ها</span>
-            <span>قدمی‌ترین‌ها</span>
-            <span>بهترین‌ها</span>
-            <span>داغ‌ترین‌ها</span>
+            <span class="active" onclick="changeSortPost('new', this)">جدیدترین‌ها</span>
+            <span onclick="changeSortPost('top', this)">بهترین‌ها</span>
+            <span onclick="changeSortPost('hot', this)">داغ‌ترین‌ها</span>
 {{--            <span>بدترین‌ها</span>--}}
 {{--            <span>بیشترین همراهان</span>--}}
         </div>
@@ -31,23 +30,30 @@
 </div>
 
 <script>
+    let reviewSort = 'new';
     let hasPlaceHolder = true;
     let allReviews = [];
     let userPageId = {{isset($userId) ? $userId : 0}};
 
-    getSmallReviewPlaceHolder('leftPostSection'); // in component.smallShowReview.blade.php
-    getSmallReviewPlaceHolder('rightPostSection'); // in component.smallShowReview.blade.php
+    function getReviewsUserReview(){
+        $('#leftPostSection').html('');
+        $('#rightPostSection').html('');
 
-    function getReviews(){
+        setSmallReviewPlaceHolder('leftPostSection'); // in component.smallShowReview.blade.php
+        setSmallReviewPlaceHolder('rightPostSection'); // in component.smallShowReview.blade.php
+        hasPlaceHolder = true;
+
         let data;
         if(userPageId == 0)
             data = {
-                _token: '{{csrf_token()}}'
+                _token: '{{csrf_token()}}',
+                sort: reviewSort
             };
         else
             data = {
                 _token: '{{csrf_token()}}',
-                userId: userPageId
+                userId: userPageId,
+                sort: reviewSort
             };
 
         $.ajax({
@@ -88,5 +94,12 @@
         });
     }
 
-    getReviews();
+    function changeSortPost(_kind, _element){
+        $(_element).parent().find('.active').removeClass('active');
+        $(_element).addClass('active');
+        reviewSort = _kind;
+        getReviewsUserReview()
+    }
+
+    getReviewsUserReview();
 </script>

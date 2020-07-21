@@ -189,7 +189,7 @@
         return text;
     }
 
-    function getSmallReviewPlaceHolder(_id){
+    function setSmallReviewPlaceHolder(_id){
         $('#' + _id).append(smallReviewPlaceHolder);
     }
 

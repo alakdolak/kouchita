@@ -356,8 +356,8 @@
 
 <script>
 
-    getSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
-    getSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
+    setSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
+    setSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
 
     @if(isset($place->pic))
         var cityPic = JSON.parse('{!! $place->pic !!}');
