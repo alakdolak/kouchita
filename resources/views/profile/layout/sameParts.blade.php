@@ -20,6 +20,7 @@
         <span class="otherActivitiesChoices">سایر موارد</span>
     </div>
 </div>
+
 <div class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
     <div class="userProfileLevelMainDiv rightColBoxes">
         <div class="mainDivHeaderText">
@@ -32,7 +33,10 @@
                     <div class="inner"></div>
                 </div>
             </div>
-            <div class="levelDetailsMainDiv" style="height: 45px;"></div>
+            <div class="levelDetailsMainDiv" style="height: 45px;">
+                <div>سطح بعدی</div>
+                <div>سطح فعلی</div>
+            </div>
             <div class="levelIconDiv nextLevel">
                 <div class="upperBox">{{$nearLvl[1]->name}}</div>
                 <div class="outer">
@@ -42,17 +46,20 @@
             <div class="w3-black">
                 <div class="w3-blue" style="width:75%"></div>
             </div>
+            <div style="text-align: center; font-size: 12px; margin-top: 30px;">
+                مشاهده سیستم سطح بندی
+            </div>
         </div>
     </div>
     <div class="userProfileLevelMainDiv rightColBoxes">
         <div class="mainDivHeaderText">
-            <h3>امتیازات من</h3>
+            <h3>امتیاز کاربر</h3>
             <div>سیستم امتیاز دهی</div>
         </div>
         <div class="userProfileLevelDetails" style="padding-bottom: 0px">
             <div style="display: flex; justify-content: space-between">
                 <div class="points" style="color: #963019; font-size: 23px;">{{$user->score}}</div>
-                <div class="" style="font-size: 17px; color: #656565; font-weight: bold"> {{__('امتیاز کل شما')}} </div>
+                <div class="" style="font-size: 17px; color: #656565; font-weight: bold"> {{__('امتیاز کل کاربر')}} </div>
             </div>
             <div style="display: flex; justify-content: space-between">
                 <div class="" style="font-size: 14px; color: #656565;"> {{__('امتیاز  مانده به مرحله بعد')}} </div>
@@ -77,8 +84,9 @@
     <div class="userProfileActivitiesMainDiv rightColBoxes">
         <div class="mainDivHeaderText">
             <h3>شرح فعالیت‌ها</h3>
+            <div class="hideOnScreen" onclick="showUserActivity(this)">مشاهده</div>
         </div>
-        <div class="activitiesMainDiv">
+        <div class="activitiesMainDiv hideOnPhone">
             <div class="activitiesLinesDiv">
                 <div class="activityTitle">گذاشتن پست</div>
                 <div class="activityNumbers">پست {{$userCount['postCount']}}</div>
@@ -148,5 +156,13 @@
     let allUserPics = {!! json_encode($allUserPics) !!};
     function showAllPicUser(){
         createPhotoModal('عکس های شما', allUserPics);
+    }
+
+    function showUserActivity(_element){
+        $(_element).parent().next().toggleClass('hideOnPhone');
+        if($(_element).text() == 'مشاهده')
+            $(_element).text('بستن');
+        else
+            $(_element).text('مشاهده');
     }
 </script>

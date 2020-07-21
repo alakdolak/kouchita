@@ -293,7 +293,7 @@
         if(_reviews['confirm'] == 0)
             text += globalConfirmText;
 
-        text +=' </div>\n';
+        text +='            </div>\n';
 
         if(_reviews["assigned"].length != 0) {
             text += '<div>با\n';
@@ -528,7 +528,7 @@
                                 textInConfirm +
                     '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
                     '       </b>\n' +
-                    '       <p>' + answers["text"] + '</p>\n'+
+                    '       <p class="fullReviewAnsText">' + answers["text"] + '</p>\n'+
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="fullReviewLikeAnsSeeAllSection">\n' +
@@ -737,7 +737,7 @@
                 '           <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
                 textInConfirm +
                 '       </div>\n' +
-                '       <div>' + comment[k]["text"] + '</div>\n' +
+                '       <div class="fullReviewAnsText">' + comment[k]["text"] + '</div>\n' +
                 '   </div>' +
                 '</div>\n' +
                 '<div class="fullReviewLikeAnsSeeAllSection">\n' +

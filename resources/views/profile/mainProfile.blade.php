@@ -10,7 +10,7 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
 {{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">--}}
 @stop
 

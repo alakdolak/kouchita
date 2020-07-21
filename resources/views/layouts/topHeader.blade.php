@@ -16,9 +16,9 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v1=2')}}'/>
 <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css')}}">
-<link rel="stylesheet" href="{{URL::asset('css/component/components.css?v1=1')}}">
+<link rel="stylesheet" href="{{URL::asset('css/component/components.css?v1=2')}}">
 
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

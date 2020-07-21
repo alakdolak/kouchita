@@ -261,6 +261,7 @@ body {
 .userProfileLevelDetails {
     position: relative;
     padding: 5px 25px 30px;
+    padding-bottom: 0px;
 }
 
 .levelIconDiv.currentLevel {
@@ -316,9 +317,17 @@ body {
 
 .levelDetailsMainDiv {
     text-align: right;
-    padding-right: 45px;
-    font-size: 15px;
+    padding: 0;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #656565;
+    font-size: 13px;
+    height: 45px;
 }
+
 
 .levelDetailsPoints {
     direction: rtl;

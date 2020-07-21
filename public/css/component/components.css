@@ -1377,6 +1377,12 @@
         width: 45px;
         height: 45px;
     }
+
+    .fullReviewAnsText{
+        width: calc(100% + 60px);
+        margin-right: -40px;
+        margin-top: 15px;
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -1387,7 +1393,7 @@
     .fullReviewBody{
         width: 90%;
         padding: 0px;
-        max-height: calc(100vh - 75px);
+        max-height: calc(100vh - 90px);
     }
 
     .mainFullReviewDiv{
@@ -1464,7 +1470,7 @@
 
     .postsActionsChoices{
         font-size: 15px;
-        margin-top: 5px;
+        /*margin-top: 5px;*/
     }
 
     .showCommentsIconFeedback::before{
@@ -1499,10 +1505,6 @@
         font-size: 14px;
         /*width: 50%;*/
         /*text-align: center;*/
-    }
-
-    .postsActionsChoices:nth-child(1), .postsActionsChoices:nth-child(2) {
-        margin-bottom: 10px;
     }
 
     .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
