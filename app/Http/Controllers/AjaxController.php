@@ -846,4 +846,21 @@ class AjaxController extends Controller {
 
         return;
     }
+
+    public function getSingleReview(Request $request)
+    {
+        if(isset($request->reviewId)){
+            $review = LogModel::find($request->reviewId);
+            if($review != null) {
+                $review = reviewTrueType($review);
+                echo json_encode(['status' => 'ok', 'result' => $review]);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
 }

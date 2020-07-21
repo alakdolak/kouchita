@@ -1,7 +1,7 @@
 @extends('layouts.bodyPlace')
 
 @section('title')
-
+    <title>صفحه کاربری</title>
 @stop
 
 @section('meta')

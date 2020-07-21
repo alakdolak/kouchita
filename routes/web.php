@@ -344,6 +344,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
 
+    Route::post('getSingleReview', 'AjaxController@getSingleReview')->name('getSingleReview');
+
     Route::post('getTags', 'AjaxController@getTags')->name('getTags');
 
     Route::post('getCities', 'AjaxController@getCitiesDir')->name('getCitiesDir');

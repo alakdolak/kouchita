@@ -88,14 +88,5 @@
         });
     }
 
-    function seeFullModeReview(_id){ // call from min review in component.smallShowReview
-        let review = null;
-        allReviews.forEach(item => {
-            if(item.id == _id)
-                review = item;
-        });
-        showFullReviews(review) // in component.smallShowReview
-    }
-
     getReviews();
 </script>
