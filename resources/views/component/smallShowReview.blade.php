@@ -51,7 +51,7 @@
                 <div class="reviewDisLikeNumber_##id## reviewDisLikeIcon_##id## DisLikeIconEmpty likedislikeAnsReviews ##disLikeClass##" onclick="likeReviewInFullReview(##id##, -1, this)">##disLike##</div>
                 <div style="font-size: 20px;" onclick="getSingleFullReview(##id##)">
                     <span>##answersCount##</span>
-                    <span class="iconFamily CommentIcon" style="color: #666666;"></span>
+                    <span class="EmptyCommentIcon"></span>
                 </div>
 
             </div>
@@ -309,7 +309,7 @@
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="commentContentsShow">' +
-                '   <div style="font-size: 15px; margin: 10px 0; white-space: pre-line">' + _reviews["text"] + '</div>\n' +
+                '   <div class="fullReviewText">' + _reviews["text"] + '</div>\n' +
                 '</div>\n' +
                 '<div class="fullReviewCommentPhotosShow">\n';
 

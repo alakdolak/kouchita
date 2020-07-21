@@ -187,6 +187,10 @@
     content: '\E06C';
     font-family: Shazde_Regular2 !important;
 }
+.EmptyCommentIcon:before{
+    content: '\E06B';
+    font-family: Shazde_Regular2 !important;
+}
 .ShareIcon:before{
     content: '\E1F6';
     font-family: Shazde_Regular2 !important;

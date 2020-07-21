@@ -293,6 +293,7 @@
     box-shadow: 0 0 5px 0px #646464;
     margin-bottom: 15px;
     direction: rtl;
+    background: white;
 }
 
 .quantityOfLikesSmallReview{
@@ -305,6 +306,7 @@
     display: flex;
     color: #1876a3;
     border-top: 1px solid #e5e5e5;
+    align-items: center;
 
 }
 
@@ -730,13 +732,14 @@
 }
 
 .commentFeedbackChoices {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     width: 100%;
     border-top: 1px solid #E5E5E5;
-    padding: 5px 0;
+    /*padding: 5px 0;*/
     border-bottom: 1px solid #e5e5e5;
     color: #666666;
-    margin-top: 5px;
+    margin: 5px 0px;
 }
 
 .postsActionsChoices {
@@ -826,9 +829,9 @@
     content: '\E1F5';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
-    position: absolute;
-    top: -4px;
-    right: 0px;
+    /*position: absolute;*/
+    /*top: -4px;*/
+    /*right: 0px;*/
     cursor: pointer;
 }
 
@@ -851,14 +854,6 @@
     display: inline-block;
     width: 100%;
     margin-bottom: 30px;
-}
-
-.commentsWriterProfilePic {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    float: right;
-    margin: 5px 0 0 5px;
 }
 
 .commentsContentMainBox {
@@ -914,7 +909,7 @@
     width: 40px;
     height: 40px;
     float: right;
-    margin: 5px 0 0 5px;
+    margin: 5px 0 0 0px;
 }
 
 .commentsContentMainBox {
@@ -1332,11 +1327,24 @@
     cursor: pointer;
 }
 
+.fullReviewText{
+    font-size: 15px;
+    margin: 10px 0;
+    white-space: pre-line
+}
+
 @media only screen and (max-width: 767px) {
     .replyToCommentMainDiv{
-        background-color: #f2f2f2;
+        background-color: #ebebeb;
         border-radius: 10px;
         padding: 5px 5px 0px 0px;
+        width: 99%;
+        margin: 40px 0 0px;
+    }
+
+    .commentsWriterProfilePic{
+        width: 30px;
+        height: 30px;
     }
 
     .eachCommentMainBox{
@@ -1354,26 +1362,36 @@
     }
 
     .newCommentPlaceMainDiv{
-        background-color: #f2f2f2;
+        background-color: #ebebeb;
         padding: 5px 5px 0px 0px;
         border-radius: 5px;
     }
 
-    .replyToCommentMainDiv {
-        width: 99%;
-        margin: 40px 0 0px;
+    .newCommentPlaceMainDiv .inputBox{
+        border: none;
     }
-
+    .replyToCommentMainDiv .inputBox{
+        border: none;
+    }
+    .commentWriterPicShow{
+        width: 45px;
+        height: 45px;
+    }
 }
 
 @media only screen and (max-width: 700px) {
     .fullReviewModal{
         align-items: unset;
     }
+
     .fullReviewBody{
         width: 90%;
         padding: 0px;
         max-height: calc(100vh - 75px);
+    }
+
+    .mainFullReviewDiv{
+        padding: 10px;
     }
 }
 
@@ -1426,6 +1444,7 @@
 }
 
 @media (max-width:540px) {
+
     .mapMenuList{
         flex-direction: column;
     }
@@ -1450,6 +1469,10 @@
 
     .showCommentsIconFeedback::before{
         right: 12px;
+    }
+
+    .fullReviewText{
+        font-size: 14px;
     }
 }
 
