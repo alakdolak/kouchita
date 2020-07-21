@@ -102,6 +102,7 @@ class ProfileController extends Controller {
         $userCount = $user->getUserActivityCount();
 
         $user->score = \auth()->user()->getUserTotalPoint();
+        $user->scoreNextLvl = 0;
         $nearLvl = \auth()->user()->getUserNearestLevel();
 
         $location = __DIR__ . '/../../../../assets/userPhoto/';

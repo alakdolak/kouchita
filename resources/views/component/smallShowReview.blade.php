@@ -682,7 +682,7 @@
 
     function showReviewPicsFullReview(_id){
         var reviewPicForAlbum = [];
-        revPic = showFullReview;
+        var revPic = showFullReview['pics'];
 
         for(var i = 0; i < revPic.length; i++){
             reviewPicForAlbum[i] = {
@@ -690,8 +690,8 @@
                 'sidePic' : revPic[i]['picUrl'],
                 'mainPic' : revPic[i]['picUrl'],
                 'video' : revPic[i]['videoUrl'],
-                'userPic' : pics['userPic'],
-                'userName' : pics['userName'],
+                'userPic' : showFullReview['userPic'],
+                'userName' : showFullReview['userName'],
                 'showInfo' : false,
             }
         }

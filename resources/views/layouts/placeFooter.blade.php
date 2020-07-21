@@ -801,8 +801,7 @@
                             <div class="modules-membercenter-member-profile position-relative">
 
                                 <div class="profileBlock">
-
-                               ح     <div id="" class="targets profileInfosDetails col-xs-8">
+                                    <div id="" class="targets profileInfosDetails col-xs-8">
 
                                         <p class="since">
                                             <b>
@@ -848,7 +847,7 @@
                             </div>
                             <div class="profileBtnActionMobile">
                                 <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
-                                <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
+                                <a href="{{URL('profile')}}" type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
                                 <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
                             </div>
                         </div>
@@ -926,10 +925,10 @@
                                             <div class="points">{{$userTotalPointFooter}}</div>
                                         </div>
                                         <div class="points_to_go">
-                                        <span style="justify-content: space-between;">
-                                            <b class="points"> {{$nextLevelFooter}} </b>
-                                            <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
-                                        </span>
+                                            <span style="justify-content: space-between;">
+                                                <b class="points"> {{$nextLevelFooter}} </b>
+                                                <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="modules-membercenter-level-progress">

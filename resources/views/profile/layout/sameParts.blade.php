@@ -6,7 +6,8 @@
     <div class="userProfileInfo">
 {{--        <div>{{$user->first_name}} {{$user->last_name}}</div>--}}
         <div>{{$user->username}}</div>
-        <div>عضو شده از
+        <div>
+            عضو شده از
             <span>{{$user->created}}</span>
         </div>
     </div>
@@ -31,10 +32,7 @@
                     <div class="inner"></div>
                 </div>
             </div>
-            <div class="levelDetailsMainDiv">
-                <div class="levelDetailsText">کاربر سطح {{$nearLvl[0]->name}}</div>
-                <div class="levelDetailsPoints">{{$user->score}} امتیاز</div>
-            </div>
+            <div class="levelDetailsMainDiv" style="height: 45px;"></div>
             <div class="levelIconDiv nextLevel">
                 <div class="upperBox">{{$nearLvl[1]->name}}</div>
                 <div class="outer">
@@ -44,6 +42,23 @@
             <div class="w3-black">
                 <div class="w3-blue" style="width:75%"></div>
             </div>
+        </div>
+    </div>
+    <div class="userProfileLevelMainDiv rightColBoxes">
+        <div class="mainDivHeaderText">
+            <h3>امتیازات من</h3>
+            <div>سیستم امتیاز دهی</div>
+        </div>
+        <div class="userProfileLevelDetails" style="padding-bottom: 0px">
+            <div style="display: flex; justify-content: space-between">
+                <div class="points" style="color: #963019; font-size: 23px;">{{$user->score}}</div>
+                <div class="" style="font-size: 17px; color: #656565; font-weight: bold"> {{__('امتیاز کل شما')}} </div>
+            </div>
+            <div style="display: flex; justify-content: space-between">
+                <div class="" style="font-size: 14px; color: #656565;"> {{__('امتیاز  مانده به مرحله بعد')}} </div>
+                <div class="points" style="color: #963019; font-size: 23px;">{{$user->scoreNextLvl}}</div>
+            </div>
+
         </div>
     </div>
     <div class="userProfileMedalsMainDiv rightColBoxes">
