@@ -75,7 +75,7 @@ $kindPlaceId = 10; ?>
                     <span>کد شناسایی تور: 100-001-1200-01</span>
                     <span>با تشکر از شما</span>
                 </div>
-                <a href="{{URL('profile')}}">
+                <a href="{{route('profile')}}">
                     <button id="goToProfile" class="btn float-left">رفتن به پروفایل</button>
                 </a>
             </div>

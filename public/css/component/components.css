@@ -338,6 +338,7 @@
     font-size: 9px;
     font-weight: normal;
     cursor: default;
+    background: #0076a3;
 }
 
 .smallReviewShowMore{
@@ -411,6 +412,7 @@
     direction: rtl;
     text-align: right;
     padding-right: 65px;
+    width: calc(100% - 35px);
 }
 
 .reviewPlaceHolderTextLineSmallReview{
@@ -432,19 +434,6 @@
 
 /*smallShowReview*/
 
-.fullReviewModal{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    right: 0px;
-    background: #000000b8;
-    z-index: 99;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .fullReviewBody{
     background: white;
     border-radius: 5px;
@@ -460,7 +449,7 @@
     position: absolute;
     left: 5px;
     top: 0px;
-    font-size: 30px;
+    font-size: 22px;
     color: #4DC7BC;
     cursor: pointer;
 }
@@ -470,29 +459,23 @@
     direction: rtl;
     background: white;
     margin-top: 10px;
-    padding: 10px 20px;
     position: relative;
     width: 100%;
 }
 
 .moreOptionFullReview {
     position: absolute;
-    top: 5px;
-    left: 15px;
-    height: 32px;
-    width: 45px;
-    background-color: #e5e5e5;
+    top: 20px;
+    left: -15px;
+    background: #720d19;
+    color: white;
+    font-size: 40px;
+    border-radius: 0px 10px 10px 0px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    float: right;
-    direction: rtl;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
     cursor: pointer;
-    margin: 5px;
-    padding: 5px 10px;
 }
 
 .moreOptionFullReviewIcon {
@@ -692,7 +675,7 @@
 }
 
 .commentRatingHeader > span {
-    color: #16174f;
+    color: #720d19;
     /*cursor: pointer;*/
 }
 
@@ -737,7 +720,7 @@
     align-items: center;
     width: 100%;
     border-top: 1px solid #E5E5E5;
-    /*padding: 5px 0;*/
+    padding: 3px 0px;
     border-bottom: 1px solid #e5e5e5;
     color: #666666;
     margin: 5px 0px;
@@ -809,9 +792,9 @@
 .showCommentsIconFeedback::before {
     content: '\E06B';
     font-family: Shazde_Regular2 !important;
-    font-size: 20px;
+    font-size: 26px;
     position: absolute;
-    top: -2px;
+    top: -8px;
     right: 12px;
     cursor: pointer;
 }
@@ -819,9 +802,9 @@
 .showCommentsClickedIconFeedback::before {
     content: '\E06C';
     font-family: Shazde_Regular2 !important;
-    font-size: 20px;
+    font-size: 25px;
     position: absolute;
-    top: -2px;
+    top: -8px;
     right: 9px;
     cursor: pointer;
 }
@@ -829,11 +812,11 @@
 .commentsShareIconFeedback::before {
     content: '\E1F5';
     font-family: Shazde_Regular2 !important;
-    font-size: 20px;
-    /*position: absolute;*/
-    /*top: -4px;*/
-    /*right: 0px;*/
+    font-size: 25px;
+    position: absolute;
+    top: -1px;
     cursor: pointer;
+    line-height: 0;
 }
 
 .commentsShareClickedIconFeedback::before {
@@ -1102,6 +1085,8 @@
     width: calc(100% - 60px);
     float: right;
     position: relative;
+    display: flex;
+    align-items: flex-end;
 }
 
 .replyToCommentMainDiv .inputBox {
@@ -1236,7 +1221,7 @@
     cursor: pointer;
 }
 .likedislikeAnsReviews:after{
-    font-size: 26px;
+    font-size: 32px;
     direction: ltr;
     width: 30px;
 }
@@ -1249,7 +1234,7 @@
     font-family: Shazde_Regular2 !important;
 }
 .LikeIconEmpty.likedislikeAnsReviews.coloredFullIcon{
-    color: red;
+    color: #0d6650;
 }
 .LikeIconEmpty.likedislikeAnsReviews.coloredFullIcon:after{
     content: '\E057' !important;
@@ -1335,6 +1320,7 @@
 }
 
 @media only screen and (max-width: 767px) {
+
     .replyToCommentMainDiv{
         background-color: #ebebeb;
         border-radius: 10px;
@@ -1387,10 +1373,9 @@
 }
 
 @media only screen and (max-width: 700px) {
-    .fullReviewModal{
-        align-items: unset;
+    .moreOptionFullReview{
+        left: 0px;
     }
-
     .fullReviewBody{
         width: 90%;
         padding: 0px;
@@ -1420,21 +1405,12 @@
         align-items: center;
     }
 
-    .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
-        top: -4px;
-    }
-
     .commentsLikeIconFeedback::before, .commentsLikeClickedIconFeedback::before {
         top: -11px;
     }
 
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
-    }
-
-    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
-        font-size: 17px;
-        top: -5px;
     }
 
     .newCommentPlaceMainDiv .inputBox {
@@ -1505,28 +1481,14 @@
 
     .postsActionsChoices {
         font-size: 14px;
-        /*width: 50%;*/
-        /*text-align: center;*/
-    }
-
-    .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
-        /*right: 57px;*/
-        top: -3px;
     }
 
     .commentsLikeIconFeedback::before, .commentsLikeClickedIconFeedback::before {
         top: -10px;
-        /*right: 79px;*/
     }
 
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -6px;
-        /*right: 79px;*/
-    }
-
-    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
-        top: -4px;
-        /*right: 74px;*/
     }
 
     .commentRatingsDetailsBox > div > b:nth-child(1) {

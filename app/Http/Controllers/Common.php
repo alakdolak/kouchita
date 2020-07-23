@@ -807,22 +807,16 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
 function reviewTrueType($_log){
     $user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto', 'id'])->find($_log->visitorId);
+    $kindPlace = Place::find($_log->kindPlaceId);
+    $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_log->placeId);
+
     $_log->userName = $user->username;
     $_log->userPageUrl = route('otherProfile', ['username' => $user->username]);
     $_log->userPic = getUserPic($user->id);
     $_log->like = LogFeedBack::where('logId', $_log->id)->where('like', 1)->count();
     $_log->disLike = LogFeedBack::where('logId', $_log->id)->where('like', -1)->count();
 
-    $getAnses = getAnsToComments($_log->id);
-    $_log->answersCount = $getAnses[1];
-    if(count($getAnses[0]) > 0)
-        $_log->answers = $getAnses[0];
-    else
-        $_log->answers = array();
-
-    $kindPlace = Place::find($_log->kindPlaceId);
     $_log->mainFile = $kindPlace->fileName;
-    $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_log->placeId);
     $_log->placeName = $place->name;
     $_log->kindPlace = $kindPlace->name;
     $_log->placeUrl = createUrl($kindPlace->id, $place->id, 0, 0);
@@ -842,6 +836,13 @@ function reviewTrueType($_log){
         $_log->hasPic = false;
         $_log->picCount = 0;
     }
+
+    $getAnses = getAnsToComments($_log->id);
+    $_log->answersCount = $getAnses[1];
+    if(count($getAnses[0]) > 0)
+        $_log->answers = $getAnses[0];
+    else
+        $_log->answers = array();
 
     $_log->city = Cities::find($place->cityId);
     $_log->state = State::find($_log->city->stateId);
@@ -1160,6 +1161,8 @@ function getReviewPicsURL($review, $placeFile){
         }
         else
             $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $item2->pic);
+
+        $item2->picKind = 'review';
     }
     return $review;
 }

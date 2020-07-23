@@ -152,7 +152,7 @@
                         <div id="profile-drop" class="arrowTopDiv headerAuthMenu">
                             <ul class="global-nav-profile-menu">
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('صفحه کاربری')}}</a>
+                                    <a href="{{route('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('صفحه کاربری')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
                                     <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('جوایز و مدال ها')}}</a>

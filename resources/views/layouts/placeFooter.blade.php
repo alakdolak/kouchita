@@ -517,8 +517,15 @@
                     {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
-                            <div class="lp_others_titles"> {{__('بازدید‌های اخیر')}} </div>
-                            <div class="mainContainerBookmarked" style="height: calc(100vh - 170px);">
+                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none;"> {{__('بازدید‌های اخیر')}} </div>
+                            <div class="headerSearchBar" style="width: 100%; margin-bottom: 10px">
+                                <span class="headerSearchIcon iconFamily footerSearchBar searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php">
+                                    <span style="font-size: 15px; text-align: center; width: 100%;">
+                                        به کجا می روید؟
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="mainContainerBookmarked" style="height: calc(100vh - 170px); border-top: 1px solid #cccccc">
                                 <div id="phoneRecentlyView">
                                     <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap"></div>
                                 </div>
@@ -538,7 +545,7 @@
                                         @if(\auth()->check())
                                             <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
                                                 <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
-                                                    <img src="##placePic##" style="width: 100%;">
+                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
                                                 </div>
                                                 <div class="col-xs-4 placeDetailsLeftBar">
                                                     <div class="">##placeName##</div>
@@ -623,7 +630,7 @@
                                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
-                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails">{{__('سفرنامه')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('صنایع دستی')}} </a>
                                 <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
                                     {{__('تلویزیون گردشگری کوچیتا')}}
                                     <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
@@ -660,13 +667,15 @@
                                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
-                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails" style="width: 100%">{{__('سفرنامه')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}" class="pSC_cityDetails"  style="width: 100%">{{__('صنایع دستی')}} </a>
+
                                 <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
                                     {{__('تلویزیون گردشگری کوچیتا')}}
                                     <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
                                 </a>
                             </div>
-                            <div style="margin-top: 15px; text-align: left;">
+                            <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: #0d6650">{{__('جستجو کنید')}}</button>
                                 <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>
@@ -837,7 +846,7 @@
                                         <div class="glyphicon glyphicon-chevron-up display-none"></div>
                                     </div>
                                     <div class="editProfileMenu item display-none">
-                                        <a name="edit-profile" class="menu-link " href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                         <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
                                         <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
                                         <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
@@ -847,7 +856,7 @@
                             </div>
                             <div class="profileBtnActionMobile">
                                 <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
-                                <a href="{{URL('profile')}}" type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
+                                <a href="{{route('profile')}}" type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
                                 <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
                             </div>
                         </div>
@@ -855,20 +864,20 @@
                             <div class="profileMenuResponsive">
                                 @if($mode == "profile")
                                     <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a id="profileLinkColor1" href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                     </div>
                                 @else
                                     <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a id="profileLinkColor2" href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                     </div>
                                 @endif
                                 @if($mode == "profileActivities")
                                     <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                        <a id="profileLinkColor1" href="{{route('profile')}}">{{__('فعالیت‌های من')}}</a>
                                     </div>
                                 @else
                                     <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                        <a id="profileLinkColor2" href="{{route('profile')}}">{{__('فعالیت‌های من')}}</a>
                                     </div>
                                 @endif
                                 @if($mode == "badge")

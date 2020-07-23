@@ -21,8 +21,8 @@
         </div>
         <div class="alertDescriptionBox">
             <div id="warningBody" class="alertDescription"></div>
-            <div style="display: flex; justify-content: center; align-items: center">
-{{--                <button class="alertBtn rightBtn" onclick="closeWarning()">فعلا، نه</button>--}}
+            <div style="display: flex; justify-content: flex-end; align-items: center">
+                <button id="warningModalCallBackShow" class="alertBtn rightBtn" onclick="cancelWarning()" style="display: none; color: #761c19; background: white;">فعلا، نه</button>
                 <button class="alertBtn leftBtn" onclick="closeWarning()">{{__('بسیار خب')}}</button>
             </div>
         </div>
@@ -32,6 +32,8 @@
 <div id="successNotifiAlert" class="notifAlert"></div>
 
 <script>
+    let alertWarningCallBack = false;
+
     function showSuccessNotifi(_msg, _side = 'right', _color = '#0076ac'){
         $('#successNotifiAlert').text(_msg);
         $('#successNotifiAlert').addClass('topAlert');
@@ -53,14 +55,26 @@
 
     }
 
+    function openWarning(_text, _callBack = false){
+        alertWarningCallBack = _callBack;
 
-    function openWarning(_text){
+        if(typeof _callBack === 'function')
+            $('#warningModalCallBackShow').show();
+        else
+            $('#warningModalCallBackShow').hide();
+
         $('#warningBody').html(_text);
         $('#warningBoxDiv').css('display', 'flex');
     }
 
-    function closeWarning(){
+    function cancelWarning(){
         $('#warningBoxDiv').css('display', 'none');
+    }
+
+    function closeWarning(){
+        if(alertWarningCallBack !== false && typeof alertWarningCallBack === 'function')
+            alertWarningCallBack();
+        cancelWarning()
     }
 
     function openErrorAlert(_text){

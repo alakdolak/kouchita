@@ -402,8 +402,6 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('review/ans', 'ReviewsController@ansReview')->name('ansReview');
 
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
-
-    Route::post('review/delete', 'ReviewsController@deleteReview')->name('review.delete');
 });
 
 //posts
@@ -474,12 +472,19 @@ Route::group(array('middleware' => 'nothing'), function(){
     Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'ReportController@sendReport'));
 });
 
-// profile
-Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
+// profile common
+Route::group(['middleware' => ['throttle:30']], function(){
+    Route::get('profile/index/{username?}', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
 
-    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
+    Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
 
     Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
+
+    Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
+});
+
+// profile
+Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::get('authLive', 'ProfileController@authLive')->name('authLive');
 
@@ -629,6 +634,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
 });
 
+// admin access
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
 
     Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
@@ -657,10 +663,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), func
 
     Route::get('removeDuplicate/{key}', 'HomeController@removeDuplicate');
 
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAccess']), function (){
-
     Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
 
     Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
@@ -668,11 +670,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
     Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
 
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controllerAccess']), function (){
-
-    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'ContentController@removeReview'));
 
 });
 
@@ -721,48 +718,14 @@ Route::group(array('middleware' => 'auth'), function () {
     });
 });
 
-//streaming
-Route::middleware(['web', 'vodShareData'])->group(function (){
-    Route::get('streaming/index', 'StreamingController@indexStreaming')->name('streaming.index');
+// delete contents
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('streaming/show/{code}', 'StreamingController@showStreaming')->name('streaming.show');
+    Route::post('review/delete', 'DeleteContentController@deleteReview')->name('review.delete');
 
-    Route::get('streaming/live/{room?}', 'StreamingController@streamingLive')->name('streaming.live');
-
-    Route::post('streaming/search', 'StreamingController@search')->name('streaming.search');
-
-    Route::get('streaming/list/{kind}/{value}', 'StreamingController@videoList')->name('streaming.list');
-
-    Route::post('streaming/getListElems', 'StreamingController@getVideoListElems')->name('streaming.list.getElems');
-
-    Route::middleware(['auth'])->group(function () {
-        Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');
-
-        Route::post('streaming/storeVideo', 'StreamingController@storeVideo')->name('streaming.storeVideo');
-
-        Route::post('streaming/storeVideoInfo', 'StreamingController@storeVideoInfo')->name('streaming.storeVideoInfo');
-
-        Route::post('streaming/setVideoFeedback', 'StreamingController@setVideoFeedback')->name('streaming.setVideoFeedback');
-
-        Route::post('streaming/setVideoComment', 'StreamingController@setVideoComment')->name('streaming.setVideoComment');
-
-        Route::post('streaming/live/sendBroadcastMsg', 'StreamingController@sendBroadcastMsg')->name('sendBroadcastMsg');
-        Route::post('streaming/live/setVideoFeedback', 'StreamingController@setLiveFeedback')->name('streaming.live.setLiveFeedback');
-
-    });
-
-    Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
-
-    Route::get('/setVideoDuration', 'StreamingController@setVideoDuration');
-
-    Route::get('/confirmAll', 'StreamingController@confirmAll');
-
-    Route::get('broadCastTest/{room}', function($room){
-        return view('test.test', compact(['room']));
-    });
+    Route::post('album/pics/delete', 'DeleteContentController@deleteAlbumPic')->name('album.pic.delete');
 
 });
-
 
 Route::get('emailtest/{email}', 'HomeController@emailtest');
 
@@ -770,6 +733,8 @@ Route::get('exportToExcelTT', 'HomeController@exportExcel');
 
 // not use
 Route::group(array('middleware' => 'nothing'), function () {
+//    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
+
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
 
     Route::post('getMajaraListElems/{city}/{mode}', array('as' => 'getMajaraListElems', 'uses' => 'NotUseController@getMajaraListElems'));
@@ -809,64 +774,4 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('survey', array('as' => 'survey', 'uses' => 'NotUseController@survey'));
 
     Route::post('getSurvey', array('as' => 'getSurvey', 'uses' => 'NotUseController@getSurvey'));
-});
-
-//webrtc test
-Route::group(array(), function(){
-
-    Route::get('webrtcN', function(){
-        return view('webrtc.webrtcn');
-    });
-    Route::post('signalWebrtc', function(\Illuminate\Http\Request $request){
-        dd($request->all());
-    });
-
-
-    Route::get('webrtcTech', function(){
-        return redirect(url('webrtcPage?kind=teacher&name=teacher'));
-    });
-
-    Route::get('webrtcStudent', function(){
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < 10; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return redirect(url('webrtcPage?kind=student&name='.$randomString));
-    });
-
-    Route::get('webrtcPage', function(){
-
-        $data = array( "format" => "urls" );
-        $data_json = json_encode($data);
-
-        $curl = curl_init();
-        curl_setopt_array( $curl, array (
-            CURLOPT_HTTPHEADER => array("Content-Type: application/json","Content-Length: " . strlen($data_json)),
-            CURLOPT_POSTFIELDS => $data_json,
-            CURLOPT_URL => "https://global.xirsys.net/_turn/MyFirstApp",
-            CURLOPT_USERPWD => "kiavash:89364dca-82f5-11ea-9fb1-0242ac130003",
-            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-            CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_RETURNTRANSFER => 1
-        ));
-
-        $resp = curl_exec($curl);
-        if(curl_error($curl)){
-            echo "Curl error: " . curl_error($curl);
-        };
-        curl_close($curl);
-        $urls = $resp;
-//    $urls = json_decode($resp);
-//dd($urls);
-        $kind = $_GET['kind'];
-        $name = $_GET['name'];
-
-        return view('webrtc.webrtc', compact(['kind', 'name', 'urls']));
-    });
-
-    Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
-        dd($request);
-    });
 });

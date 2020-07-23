@@ -83,28 +83,39 @@ class User extends Authenticatable{
         return User::find($value);
     }
 
-    public function getUserActivityCount(){
-        $user = \Auth::user();
+    public static function getUserActivityCount($uId){
+        $user = User::find($uId);
 
-        $postActivity = Activity::whereName('نظر')->first();
-        $questionActivity = Activity::whereName('سوال')->first();
-        $ansActivity = Activity::whereName('پاسخ')->first();
-        $postCount = LogModel::whereActivityId($postActivity->id)->where('visitorId', $user->id)->count();
-        $picCount = PhotographersPic::where('userId', $user->id)->count();
+        $postCount = 0;
+        $picCount = 0;
+        $videoCount = 0;
+        $video360Count = 0;
+        $questionCount = 0;
+        $ansCount = 0;
+        $scoreCount = 0;
+        $addPlace = 0;
 
-        $picLog = ReviewPic::where('isVideo', 0)->where('is360', 0)->pluck('logId')->toArray();
-        $picCount += LogModel::whereIn('id', $picLog)->where('visitorId', $user->id)->count();
+        if($user != null) {
+            $postActivity = Activity::whereName('نظر')->first();
+            $questionActivity = Activity::whereName('سوال')->first();
+            $ansActivity = Activity::whereName('پاسخ')->first();
+            $postCount = LogModel::whereActivityId($postActivity->id)->where('visitorId', $user->id)->count();
+            $picCount = PhotographersPic::where('userId', $user->id)->count();
 
-        $videoLog = ReviewPic::where('isVideo', 1)->where('is360', 0)->pluck('logId')->toArray();
-        $videoCount = LogModel::whereIn('id', $videoLog)->where('visitorId', $user->id)->count();
+            $picLog = ReviewPic::where('isVideo', 0)->where('is360', 0)->pluck('logId')->toArray();
+            $picCount += LogModel::whereIn('id', $picLog)->where('visitorId', $user->id)->count();
 
-        $videoCLog = ReviewPic::where('isVideo', 1)->where('is360', 1)->pluck('logId')->toArray();
-        $video360Count = LogModel::whereIn('id', $videoCLog)->where('visitorId', $user->id)->count();
+            $videoLog = ReviewPic::where('isVideo', 1)->where('is360', 0)->pluck('logId')->toArray();
+            $videoCount = LogModel::whereIn('id', $videoLog)->where('visitorId', $user->id)->count();
 
-        $questionCount = LogModel::whereActivityId($questionActivity->id)->where('visitorId', $user->id)->count();
-        $ansCount = LogModel::whereActivityId($ansActivity->id)->where('visitorId', $user->id)->count();
-        $scoreCount = count(\DB::select('SELECT questionUserAns.logId as PlaceCount FROM questionUserAns INNER JOIN log ON log.visitorId = ' . $user->id . ' AND questionUserAns.logId = log.id GROUP BY PlaceCount'));
-        $addPlace = UserAddPlace::where('userId', $user->id)->count();
+            $videoCLog = ReviewPic::where('isVideo', 1)->where('is360', 1)->pluck('logId')->toArray();
+            $video360Count = LogModel::whereIn('id', $videoCLog)->where('visitorId', $user->id)->count();
+
+            $questionCount = LogModel::whereActivityId($questionActivity->id)->where('visitorId', $user->id)->count();
+            $ansCount = LogModel::whereActivityId($ansActivity->id)->where('visitorId', $user->id)->count();
+            $scoreCount = count(\DB::select('SELECT questionUserAns.logId as PlaceCount FROM questionUserAns INNER JOIN log ON log.visitorId = ' . $user->id . ' AND questionUserAns.logId = log.id GROUP BY PlaceCount'));
+            $addPlace = UserAddPlace::where('userId', $user->id)->count();
+        }
 
         $userCount = [
             'postCount' => $postCount,
@@ -130,9 +141,9 @@ class User extends Authenticatable{
         return $this->nearestLevelInModel(auth()->user()->id);
     }
 
-    public function nearestLevelInModel($uId)
+    public static function nearestLevelInModel($uId)
     {
-        $points = $this->getUserPointInModel($uId);
+        $points = User::getUserPointInModel($uId);
         $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
 
         if($currLevel == null)
@@ -146,7 +157,7 @@ class User extends Authenticatable{
         return [$currLevel, $nextLevel];
     }
 
-    public function getUserPointInModel($uId)
+    public static function getUserPointInModel($uId)
     {
         $points = \DB::select("SELECT SUM(activity.rate) as total FROM log, activity WHERE confirm = 1 and log.visitorId = " . $uId . " and log.activityId = activity.id");
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\models\User;
 use Closure;
 use Illuminate\Support\Facades\View;
 
@@ -27,7 +28,7 @@ class ShareData
 
             $registerUser = verta($userFooter->created_at)->format('Y/m/d');
 
-            $userInfo = auth()->user()->getUserActivityCount();
+            $userInfo = User::getUserActivityCount($userFooter->id);
 
             $buPic = auth()->user()->getUserPicInModel($userFooter->id);
 

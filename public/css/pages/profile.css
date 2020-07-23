@@ -43,9 +43,9 @@ body {
     background-color: rgba(255,255,255,0.5);
     border-radius: 15px;
     position: absolute;
-    right: 0;
+    right: 60px;
     top: -65px;
-    padding: 5px 95px 5px 25px;
+    padding: 5px 50px 5px 25px;
     cursor: default;
 }
 
@@ -88,24 +88,22 @@ body {
     margin: 0px auto;
 }
 
-.postsMainFiltrationBar > span:hover {
+.postsMainFiltrationBar > a:hover {
     border-bottom: 5px solid #0076a3;
 }
 
-.userPosts .showUsersPostsLink,
-.userArticles .showUsersArticlesLink,
-.userQuestions .showUsersQAndAsLink,
-.userPhotosAndVideos .showUsersPhotosAndVideosLink {
+.profileHeaderLinksTab.active {
     border-bottom: 5px solid #0076a3;
 }
 
-.postsMainFiltrationBar > span , .userProfilePostsFiltration > span {
-    margin: 0 30px;
+.postsMainFiltrationBar > a , .userProfilePostsFiltration > span {
+    margin: 0 28px;
     font-size: 14px;
     padding: 10px 0 5px;
     border-bottom: 5px solid white;
     cursor: pointer;
     float: right;
+    color: black;
 }
 
 .otherActivitiesChoices::after {
@@ -136,13 +134,6 @@ body {
     margin: 0 16px;
     border-bottom: none;
     padding-bottom: 10px;
-}
-
-.userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
-    font-weight: 700;
-    font-size: 14px;
-    color: #0076a3;
-    padding: 8px 0;
 }
 
 .userProfilePostsSearchContainer {
@@ -208,7 +199,9 @@ body {
 .rightColBoxes {
     background-color: white;
     padding: 0 10px 15px;
+    margin-top: 15px;
 }
+
 
 .mainDivHeaderText {
     padding: 10px 0;
@@ -222,7 +215,7 @@ body {
     font-weight: 700;
     line-height: 32px;
     position: absolute;
-    top: 5px;
+    top: 0px;
     right: -5px;
     background: white;
     padding: 0 10px;
@@ -1152,8 +1145,182 @@ body {
 
 .userProfilePostsFiltration > span.active{
     border-bottom: 5px solid #0076a3;
+    color: #0076a3;
     text-align: center;
+    font-weight: 700;
 }
+
+.userProfileBio{
+    text-align: justify;
+    direction: rtl;
+    font-size: 12px;
+}
+
+.userProfileTagsSection{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.userProfileTags{
+    font-size: 11px;
+    background: #0d6650;
+    color: white;
+    padding: 2px 7px;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.userProfileScoreSection{
+    display: flex;
+    direction: rtl;
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.userProfileScoreSection > div,.userProfileScoreSection > a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.userProfileScoreSection > a{
+    padding-right: 4px;
+}
+
+.userTripMainBody{
+    position: relative;
+    background: white;
+    border-radius: 5px;
+    width: 700px;
+    max-height: calc(100vh - 90px);
+    /*height: fit-content;*/
+    padding: 10px;
+    direction: rtl;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.myBioInput{
+    width: 100%;
+    resize: none;
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 2px #4DC7BC;
+    background: #e4e4e4;
+    font-size: 13px;
+}
+
+.myTripHeaders{
+    color: #053a3e;
+    font-size: 21px;
+}
+
+.tripModalBody{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tripButton{
+    padding: 4px 10px;
+    border: solid 2px #4DC7BC;
+    border-radius: 16px;
+    cursor: pointer;
+    color: #656565;
+    margin: 5px;
+}
+
+.tripButton.active{
+    background: #4DC7BC;
+    color: white;
+}
+
+.saveBioButton{
+    background: #0076a3;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 7px;
+    margin-left: 15px;
+}
+
+.cancelBioButton{
+    background: none;
+    color: #0076a3;
+    border: none;
+    padding: 4px 10px;
+}
+
+.bioClassSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.msgHeaderButton{
+    cursor: pointer;
+    background: whitesmoke;
+    color: black;
+    padding: 2px 5px;
+    border-radius: 6px;
+}
+
+.settingHeaderButton{
+    cursor: pointer;
+    background: whitesmoke;
+    color: black;
+    padding: 2px 5px;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.profilePicturesRow{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    /*margin-bottom: 10px;*/
+}
+
+.profilePicturesRow.kind0{
+    height: 100px;
+}
+
+.profilePicturesRow.kind1{
+    height: 200px;
+}
+
+.profilePicturesRow.kind2{
+    height: 150px;
+}
+
+.profilePicturesRow.kind3{
+    height: 250px;
+}
+
+.profilePictureDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    border: solid 2px whitesmoke;
+    cursor: pointer;
+}
+
+.profilePictureDiv img{
+    transition: .2s;
+}
+
+.profilePictureDiv:hover img{
+    transform: scale(1.1);
+}
+
 
 /*responsive for tablets*/
 
@@ -1202,7 +1369,7 @@ body {
     }
 
     .userProfileInfo {
-        right: 100px;
+        right: 140px;
     }
 
     .postsMainFiltrationBar {
@@ -1210,7 +1377,7 @@ body {
         padding-right: 13%;
     }
 
-    .postsMainFiltrationBar > span {
+    .postsMainFiltrationBar > a {
         display: flex;
         justify-content: center;
         margin: 0 2.6%;
@@ -1333,18 +1500,13 @@ body {
         right: 10px;
     }
 
-    .postsMainFiltrationBar > span {
+    .postsMainFiltrationBar > a {
         font-size: 12px;
     }
 
     .profilePicUserProfile {
         width: 160px;
         height: 160px;
-    }
-
-    .userProfileInfo {
-        top: -80px;
-        right: 90px;
     }
 
     .userProfileInfo > div:not(:last-child) {
@@ -1435,7 +1597,7 @@ body {
         scrollbar-width: none;
     }
 
-    .postsMainFiltrationBar > span {
+    .postsMainFiltrationBar > a {
         float: initial;
         width: auto;
     }
@@ -1449,7 +1611,6 @@ body {
         overflow-x: auto;
         white-space: nowrap;
         scrollbar-width: none;
-        justify-content: right;
     }
 
     .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {

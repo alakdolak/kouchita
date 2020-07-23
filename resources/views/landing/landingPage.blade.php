@@ -120,7 +120,7 @@
             </div>
             <hr style="margin: 0px">
 
-            <div id="loginSection" class="loginInputDiv" style="display: block">
+            <div id="loginSection" class="loginInputDiv" style="display: none">
                 <div class="loginText">
                     @lang('ورود به کوچیتا')
                 </div>
@@ -143,7 +143,11 @@
                 </div>
             </div>
 
-            <div id="phoneSection" class="loginInputDiv" style="display: none">
+            <div id="phoneSection" class="loginInputDiv" style="display: block">
+                <div class="loginText">
+                    @lang('ثبت نام در کوچیتا')
+                </div>
+
                 <div class="form-group">
                     <label for="phone">@lang('شماره تماس')</label>
                     <input type="text" class="form-control" id="phone" style="height: 40px" placeholder="09xxxxxxxx">
@@ -152,6 +156,10 @@
 
                 <div class="loginButtonsMainDiv" style="background: #0d6650" onclick="phoneRegister()">
                     @lang('ثبت')
+                </div>
+
+                <div class="registerNow" onclick="loginPage()">
+                    @lang('ورود به کوچیتا')
                 </div>
             </div>
 
@@ -266,6 +274,11 @@
     function registerStart(){
         $('#loginSection').hide();
         $('#phoneSection').show();
+    }
+
+    function loginPage() {
+        $('#loginSection').show();
+        $('#phoneSection').hide();
     }
 
 

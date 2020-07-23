@@ -554,7 +554,7 @@ if(Auth::check()) {
                                     <div class="global-nav-overlays-container">
                                         <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
                                             <ul class="global-nav-profile-menu">
-                                                <li class="subItemHeaderNavBar"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
+                                                <li class="subItemHeaderNavBar"><a href="{{route('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
                                                 <li class="subItemHeaderNavBar rule"><a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
                                                 <li class="subItemHeaderNavBar"><a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
                                                 <li class="subItemHeaderNavBar"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>

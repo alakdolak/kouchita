@@ -7,7 +7,7 @@
             <div class="circleBase type2 commentWriterPicShow">
                 <img src="##userPic##" alt="##userName##" style="width: 100%; height: 100%; border-radius: 50%;">
             </div>
-            <div class="commentWriterExperienceDetails">
+            <div class="commentWriterExperienceDetails" style="width: 100%">
                 <div style="display: flex; align-items: center">
                     <a href="##userPageUrl##" target="_blank" class="userProfileName" style="font-weight: bold">##userName##</a>
                     <span class="label label-success smallReviewIsConfirm" style="display: ##isConfrim##">{{__('در انتظار تایید')}}</span>
@@ -45,13 +45,13 @@
             </div>
             <div class="quantityOfLikesSmallReview">
                 <div class="smallReviewShowMore" onclick="getSingleFullReview(##id##)">
-                    مشاهده کامل پست
+                    مشاهده
                 </div>
                 <div class="reviewLikeNumber_##id## reviewLikeIcon_##id## LikeIconEmpty likedislikeAnsReviews ##likeClass##" onclick="likeReviewInFullReview(##id##, 1, this)">##like##</div>
                 <div class="reviewDisLikeNumber_##id## reviewDisLikeIcon_##id## DisLikeIconEmpty likedislikeAnsReviews ##disLikeClass##" onclick="likeReviewInFullReview(##id##, -1, this)">##disLike##</div>
                 <div style="font-size: 20px;" onclick="getSingleFullReview(##id##)">
                     <span>##answersCount##</span>
-                    <span class="EmptyCommentIcon"></span>
+                    <span class="EmptyCommentIcon" style="font-size: 24px"></span>
                 </div>
 
             </div>
@@ -84,26 +84,8 @@
     </div>
 </div>
 
-<div id="fullReviewModal" class="fullReviewModal hidden">
+<div id="fullReviewModal" class="modalBlackBack hidden">
     <div id="fullReview" class="fullReviewBody"></div>
-</div>
-
-<div class="modal fade" id="deleteReviewsModalReviewPage" role="dialog" style="direction: rtl">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{__('پاک کردن نقد')}}</h4>
-            </div>
-            <div class="modal-body">
-                <p>آیا از حذف نقد خود اطمینان دارید؟ در صورت حذف عکس ها و فیلم ها افزوده شده پاک می شوند و قابل بازیابی نمی باشد.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('لغو')}}</button>
-                <button type="button" class="btn btn-danger" onclick="doDeleteReviewByUserInReviews()">{{__('بله، حذف شود')}}</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -208,13 +190,15 @@
             revPic = selectReview['pics'];
             for(var i = 0; i < revPic.length; i++){
                 reviewPicForAlbum[i] = {
-                    'id' : revPic[i]['id'],
+                    'id' : 'review_' + revPic[i]['id'],
                     'sidePic' : revPic[i]['picUrl'],
                     'mainPic' : revPic[i]['picUrl'],
                     'video' : revPic[i]['videoUrl'],
                     'userPic' : selectReview['userPic'],
                     'userName' : selectReview['userName'],
                     'uploadTime' : selectReview['timeAgo'],
+                    'where' : selectReview['where'],
+                    'whereUrl' : selectReview['placeUrl'],
                     'showInfo' : false,
                 }
             }
@@ -238,7 +222,7 @@
 
     var showReviewAnsInOneSee = 4; // this number mean show ans in first time and not click on "showAllReviewCommentsFullReview"
     var deletedReview = 0;
-    var globalConfirmText = '<span class="label label-success" style="margin-right: 12px; font-size: 9px; font-weight: normal; cursor: default">{{__('در انتظار تایید')}}</span>';
+    var globalConfirmText = '<span class="label label-success smallReviewIsConfirm">{{__('در انتظار تایید')}}</span>';
     var showFullReview = null;
     function getSingleFullReview(_id){
         $.ajax({
@@ -265,9 +249,9 @@
         var kindPlaceId = _reviews['kindPlaceId'];
 
         text += '<div id="showReview_' + _reviews["id"] + '" class="mainFullReviewDiv">\n'+
-                '<div class="moreOptionFullReview" onclick="showFullReviewOptions(this)">\n' +
-                '   <span class="moreOptionFullReviewIcon"></span>\n' +
-                '</div>\n' +
+                '   <div class="moreOptionFullReview" onclick="showFullReviewOptions(this)">\n' +
+                '       <span class="threeDotIconVertical"></span>\n' +
+                '   </div>\n' +
                 '   <div class="moreOptionFullReviewDetails hidden">\n' +
                 '       <span onclick="showReportPrompt(' + _reviews["id"] + ', ' + kindPlaceId + ')">{{__("گزارش پست")}}</span>\n' +
                 '       <a target="_blank" href="' + _reviews["userPageUrl"] + '"  >{{__("مشاهده صفحه")}} ' + _reviews["userName"] + '</a>\n' +
@@ -288,7 +272,7 @@
                 '       <b class="userProfileName userProfileNameFullReview">' + _reviews["userName"] + '</b>\n' +
                 '       <div class="fullReviewPlaceAndTime"> \n' +
                 '           <div class="display-inline-block">در\n' +
-                '               <span class="commentWriterExperiencePlace">' + _reviews["where"] + '</span>\n';
+                '               <a href="' + _reviews["placeUrl"] + '" class="commentWriterExperiencePlace">' + _reviews["where"] + '</a>\n';
 
         if(_reviews['confirm'] == 0)
             text += globalConfirmText;
@@ -455,37 +439,34 @@
 
 
         text += '<div class="commentFeedbackChoices">\n' +
-            '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: space-around;">\n' +
-            '       <div class="reviewLikeIcon_' + _reviews["id"] + ' cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 1, this);" style="font-size: 15px; direction: rtl">' +
-            '           <span class="reviewLikeNumber_' + _reviews["id"] + '">' +
-                            _reviews["like"] +
-            '           </span>' +
-            '            <span class="hideOnPhone">نفر</span> ' +
-            '       </div>\n' +
-            '       <div class="reviewDisLikeIcon_' + _reviews["id"] + ' cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 0, this);" style="font-size: 15px; direction: rtl">' +
-            '           <span class="reviewDisLikeNumber_' + _reviews["id"] + '">' +
-                            _reviews["disLike"] +
-            '           </span>' +
-            '           <span class="hideOnPhone">نفر</span> ' +
-            '       </div>\n' +
-            '   </div>\n' +
-            '   <div class="postsActionsChoices col-xs-3">\n' +
-            '       <div class="postCommentChoice display-inline-block" onclick="showCommentToReviewFullReview(this)">\n' +
-            '           <span>' + _reviews["answersCount"] + '</span>' +
-            '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
-            '           <span class="showCommentsClickedIconFeedback secondIcon" style="display: none"></span>\n' +
-            '           <span class="mg-rt-25 cursor-pointer hideOnPhone">مشاهده نظرها</span>\n' +
-            '       </div>\n' +
-            '   </div>\n' +
-            '   <div class="postsActionsChoices col-xs-3">\n' +
-            '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">\n' +
-            '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
-            '           <span class="commentsShareClickedIconFeedback secondIcon" style="display: none"></span>\n' +
-            '           <span class="mg-rt-10 cursor-pointer hideOnPhone">اشتراک‌گذاری</span>\n' +
-            '       </div>\n' +
-            '   </div>\n' +
-            '</div>\n' +
-            '<div class="commentsMainBox hidden">\n';
+                '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-start;">\n' +
+                '       <div class="reviewLikeIcon_' + _reviews["id"] + ' cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 1, this);" style="font-size: 15px; direction: rtl; margin-left: 15px;">' +
+                '           <span class="reviewLikeNumber_' + _reviews["id"] + '">' +
+                                _reviews["like"] +
+                '           </span>' +
+                '       </div>\n' +
+                '       <div class="reviewDisLikeIcon_' + _reviews["id"] + ' cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 0, this);" style="font-size: 15px; direction: rtl; margin-left: 15px;">' +
+                '           <span class="reviewDisLikeNumber_' + _reviews["id"] + '">' +
+                                _reviews["disLike"] +
+                '           </span>' +
+                '       </div>\n' +
+                '       <div class="postCommentChoice" onclick="showCommentToReviewFullReview(this)" style="margin-left: 15px;">\n' +
+                '           <span>' + _reviews["answersCount"] + '</span>' +
+                '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
+                '           <span class="showCommentsClickedIconFeedback secondIcon" style="display: none"></span>\n' +
+                '       </div>\n' +
+                '   </div>\n' +
+                '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-end;">\n' +
+                '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">\n' +
+                '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
+                '           <span class="commentsShareClickedIconFeedback secondIcon" style="display: none"></span>\n' +
+                '       </div>\n' +
+                '       <div style="margin-right: 20px; font-size: 20px;">' +
+                '           <span class="BookMarkIconEmpty"></span>' +
+                '       </div>' +
+                '   </div>\n' +
+                '</div>\n' +
+                '<div class="commentsMainBox hidden">\n';
 
         var checkAllReviews = true;
 
@@ -539,7 +520,7 @@
                     '   </div>\n'+
                         seeAnses +
                     '</div>' +
-                    '<div class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 0px">\n' +
+                    '<div class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">\n' +
                     '   <div class="circleBase newCommentWriterProfilePic">' +
                     '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                     '   </div>\n' +
@@ -686,12 +667,14 @@
 
         for(var i = 0; i < revPic.length; i++){
             reviewPicForAlbum[i] = {
-                'id' : revPic[i]['id'],
+                'id' : 'review_' + revPic[i]['id'],
                 'sidePic' : revPic[i]['picUrl'],
                 'mainPic' : revPic[i]['picUrl'],
                 'video' : revPic[i]['videoUrl'],
                 'userPic' : showFullReview['userPic'],
                 'userName' : showFullReview['userName'],
+                'where' : showFullReview['where'],
+                'whereUrl' : showFullReview['placeUrl'],
                 'showInfo' : false,
             }
         }
@@ -791,7 +774,8 @@
 
     function deleteReviewByUserInReviews(_reviewId){
         deletedReview = _reviewId;
-        $('#deleteReviewsModalReviewPage').modal('show');
+        text = 'آیا از حذف نقد خود اطمینان دارید؟ در صورت حذف عکس ها و فیلم ها افزوده شده پاک می شوند و قابل بازیابی نمی باشد.';
+        openWarning(text, doDeleteReviewByUserInReviews); // in general.alert.blade.php
     }
 
     function doDeleteReviewByUserInReviews(){
@@ -807,7 +791,6 @@
                 closeLoading();
                 if(response == 'ok'){
                     closeFullReview();
-                    $('#deleteReviewsModalReviewPage').modal('hide');
                     $('#showReview_' + deletedReview).remove();
                     $('#smallReviewHtml_' + deletedReview).remove();
                     showSuccessNotifi('نظر شما با موفقیت حذف شد.', 'left', 'green');

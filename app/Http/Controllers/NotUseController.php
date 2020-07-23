@@ -792,4 +792,23 @@ class NotUseController extends Controller
         }
     }
 
+    public function removeReview() {
+
+        if(isset($_POST["logId"])) {
+
+            $logId = makeValidInput($_POST["logId"]);
+            $log = LogModel::whereId($logId);
+
+            if($log != null && (Auth::user()->level == 1 || Auth::user()->id == $log->visitorId)) {
+
+                LogModel::whereRelatedTo($logId)->delete();
+                LogModel::destroy($logId);
+
+                echo "ok";
+            }
+
+        }
+
+    }
+
 }

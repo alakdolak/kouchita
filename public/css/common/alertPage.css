@@ -66,8 +66,7 @@
     backdrop-filter: blur(2px);
     position: fixed;
     top: 0;
-    z-index: 1000;
-    display: flex;
+    z-index: 999999;
     justify-content: center;
     display: none;
 }
@@ -96,12 +95,12 @@
     text-align: center;
 }
 .alertDescription {
-    font-size: 25px;
+    font-size: 18px;
     padding: 5px 0 25px;
     font-weight: bold;
 }
 .alertBtn {
-    width: 150px;
+    width: 100px;
     line-height: 20px;
     padding: 6px 12px;
     font-weight: 600;

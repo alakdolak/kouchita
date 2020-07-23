@@ -193,6 +193,7 @@
 
 .showingPhotosModal .leftColPhotosModalMainDiv {
     padding: 25px 70px 25px;
+    position: relative;
 }
 
 .showingPhotosModal .selectedPhotoShowingModal {

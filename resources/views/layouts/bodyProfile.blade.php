@@ -78,20 +78,20 @@
             <ul class="persistent-header position-relative">
                 @if($mode == "profile")
                     <li id="Profile" class="profile">
-                        <a id="profileLinkColor1" href="{{URL('profile')}}">صفحه کاربری</a>
+                        <a id="profileLinkColor1" href="{{route('profile')}}">صفحه کاربری</a>
                     </li>
                 @else
                     <li id="Profile" class="profile">
-                        <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
+                        <a id="profileLinkColor2" href="{{route('profile')}}">صفحه کاربری</a>
                     </li>
                 @endif
                 @if($mode == "profile")
                     <li id="Profile" class="profile">
-                        <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>
+                        <a id="profileLinkColor1" href="{{route('profile')}}">فعالیت‌های من</a>
                     </li>
                 @else
                     <li id="Profile" class="profile">
-                        <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>
+                        <a id="profileLinkColor2" href="{{route('profile')}}">فعالیت‌های من</a>
                     </li>
                 @endif
                 @if($mode == "badge")
