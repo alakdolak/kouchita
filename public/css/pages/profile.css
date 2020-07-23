@@ -106,6 +106,10 @@ body {
     color: black;
 }
 
+.userProfilePostsFiltration > span{
+    margin: 0px;
+}
+
 .otherActivitiesChoices::after {
     content: '\E04A';
     font-family: Shazde_Regular2 !important;

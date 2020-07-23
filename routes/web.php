@@ -336,9 +336,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
     Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
     Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
     Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
-
-    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
-    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');
 });
 
 //ajaxController
@@ -732,8 +729,11 @@ Route::get('emailtest/{email}', 'HomeController@emailtest');
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
 
 // not use
-Route::group(array('middleware' => 'nothing'), function () {
+Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 //    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
+    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllReview');
+
+    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllQuestions');
 
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
 
@@ -741,13 +741,13 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'NotUseController@getRestaurantListElems'));
 
-    Route::any('restaurantList/{city}/{mode}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
+    Route::any('restaurantList/{city}/{mode}/{chert?}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
 
-    Route::any('hotelList/{city}/{mode}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
+    Route::any('hotelList/{city}/{mode}/{chert?}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
 
     Route::post('getHotelListElems/{city}/{mode}/{kind?}', array('as' => 'getHotelListElems', 'uses' => 'NotUseController@getHotelListElems'));
 
-    Route::any('amakenList/{city}/{mode}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
+    Route::any('amakenList/{city}/{mode}/{chert?}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
 
     Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'NotUseController@getAmakenListElems'));
 

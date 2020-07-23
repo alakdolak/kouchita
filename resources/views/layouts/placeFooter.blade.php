@@ -517,7 +517,7 @@
                     {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
-                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none;"> {{__('بازدید‌های اخیر')}} </div>
+                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px; margin-bottom: 5px;"> {{__('بازدید‌های اخیر')}} </div>
                             <div class="headerSearchBar" style="width: 100%; margin-bottom: 10px">
                                 <span class="headerSearchIcon iconFamily footerSearchBar searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php">
                                     <span style="font-size: 15px; text-align: center; width: 100%;">
