@@ -43,7 +43,6 @@
             }
         }
     </style>
-    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
 @endsection
 

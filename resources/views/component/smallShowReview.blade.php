@@ -527,7 +527,7 @@
                     '   <div class="inputBox setButtonToBot">\n' +
                     '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
                     '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                    '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1)" style="height: fit-content"> ارسال</button>\n' +
+                    '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1)" style="height: fit-content"> ارسال</button>\n' +
                     '   </div>\n' +
                     '</div>\n'+
                     '</div>\n';
@@ -557,7 +557,7 @@
             '   </div>\n' +
             '   <div class="inputBox setButtonToBot">\n' +
             '       <textarea id="ansForReviews_' + _reviews["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)" style="padding-bottom: 10px"></textarea>\n' +
-            '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + _reviews["id"] + ', 0)" > ارسال</button>\n' +
+            '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + _reviews["id"] + ', 0)" > ارسال</button>\n' +
             '   </div>\n' +
             '<div>'+
             '</div>\n' +
@@ -744,7 +744,7 @@
                 '   <div class="inputBox setButtonToBot">\n' +
                 '       <b class="replyCommentTitle">{{__("در پاسخ به نظر")}} ' + comment[k]["username"] + '</b>\n' +
                 '       <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                '       <button class="btn btn-primary submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + comment[k]["id"] + ', 1)" > {{__("ارسال")}}</button>\n' +
+                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + comment[k]["id"] + ', 1)" > {{__("ارسال")}}</button>\n' +
                 '   </div>\n' +
                 '</div>\n' +
                 '</div>\n';

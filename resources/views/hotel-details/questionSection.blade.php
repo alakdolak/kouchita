@@ -265,7 +265,7 @@
                     '       </div>\n' +
                     '       <div class="commentsContentMainBox">\n' +
                     '           <div class="ansOfQuestionsUserInfo">' +
-                    '               <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
+                    '               <b class="userProfileName float-right">' + comment[k]["userName"] + '</b>\n' +
                     '               <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
                                     confirmHtml +
                 '               </div>' +
@@ -275,7 +275,7 @@
                     '   <div class="commentsActionsBtns" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0px;">\n' +
                     '       <div style="display: flex; width: auto">' +
                     '           <span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
-                    '           <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["dislike"] + '</span>\n' +
+                    '           <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["disLike"] + '</span>\n' +
                     '           <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: #0076a3">پاسخ دهید</span>\n' +
                     '       </div>';
             if(comment[k]["ansNum"] > 0){

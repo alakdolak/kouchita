@@ -540,9 +540,14 @@
 
 .commentPhotosMainDiv{
     width: 100%;
+    direction: ltr;
+    display: flex;
 }
-.firstCol {
-    padding: 0 0 0 5px;
+.fullReveiwPhotosCol.firstCol {
+    padding: 0 0 0 5px !important;
+}
+.fullReveiwPhotosCol.secondCol{
+    padding: 0px !important;
 }
 
 .quintupletPhotoDiv .firstCol > div {
@@ -1137,6 +1142,7 @@
 }
 
 .replyToCommentMainDiv .inputBoxInput {
+    transition: 0s;
     text-align: right;
     font-size: 12px;
     border: none;

@@ -33,7 +33,6 @@
     </center>
     </div>
 
-    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 
     <script>
         autosize(document.getElementsByClassName("inputBoxInputSearch"));

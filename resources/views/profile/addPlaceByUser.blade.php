@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">
     <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css')}}">
 
-    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
     @if(app()->getLocale() == 'en')
         <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/addPlaceByUser.css')}}">

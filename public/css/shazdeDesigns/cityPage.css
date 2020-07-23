@@ -429,7 +429,7 @@
 .mainReviewSection{
     float: left;
     overflow: hidden;
-    padding-right: 10px;
+    padding-right: 2px;
     padding-left: 0;
     margin-top: 13px;
     border-right: 2px solid #f3f3f3;
@@ -568,10 +568,6 @@ h3{
 
 .cpLittleMenu{
     transition: .3s !important;
-}
-.commentContentsShow > p{
-    font-size: 13px !important;
-    font-weight: bold;
 }
 .showMoreText::before{
     bottom: -13px;

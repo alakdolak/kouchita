@@ -96,7 +96,6 @@ if ($total == 0)
     <script src= {{URL::asset("js/jalali.js") }}></script>
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
-    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
