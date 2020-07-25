@@ -2180,11 +2180,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 12px;
 }
 
-.commentRatingHeader > span {
-    color: #16174f;
-    /*cursor: pointer;*/
-}
-
 .commentRatingsDetailsBtn {
     display: inline-block;
     width: 35%;
@@ -2218,31 +2213,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentRatingsDetailsBox .starRating, .commentRatingsDetailsBox .starRatingGreen {
     cursor: default;
-}
-
-.commentFeedbackChoices {
-    display: inline-block;
-    width: 100%;
-    border-top: 1px solid #E5E5E5;
-    padding: 10px 0;
-    border-bottom: 1px solid #e5e5e5;
-    color: #666666;
-    margin-top: 5px;
-}
-
-.postsActionsChoices {
-    padding: 0 9px;
-    font-size: 15px;
-    float: right;
-}
-
-.postLikeChoice, .postDislikeChoice, .postCommentChoice, .postShareChoice {
-    display: inline-block;
-    cursor: pointer;
-}
-
-.postShareChoice, .postCommentChoice{
-    position: relative;
 }
 
 .postLikeChoice:hover {
@@ -2326,26 +2296,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: absolute;
     top: -2px;
     right: 9px;
-    cursor: pointer;
-}
-
-.commentsShareIconFeedback::before {
-    content: '\E1F5';
-    font-family: Shazde_Regular2 !important;
-    font-size: 20px;
-    position: absolute;
-    top: -4px;
-    right: 0px;
-    cursor: pointer;
-}
-
-.commentsShareClickedIconFeedback::before {
-    content: '\E1F6';
-    font-family: Shazde_Regular2 !important;
-    font-size: 20px;
-    position: absolute;
-    top: -5px;
-    right: 0px;
     cursor: pointer;
 }
 
@@ -3825,12 +3775,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;
 }
-.LikeIconEmpty.likedislikeAnsReviews.coloredFullIcon{
-    color: red;
-}
-.LikeIconEmpty.likedislikeAnsReviews.coloredFullIcon:after{
-    content: '\E057' !important;
-}
 
 .DisLikeIconEmpty.likedislikeAnsReviews:before{
     content: '';
@@ -4895,13 +4839,6 @@ td > div {
         padding: 5px 0;
     }
 
-    .postsActionsChoices {
-        font-size: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
     .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
         top: -4px;
     }
@@ -4913,12 +4850,6 @@ td > div {
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
     }
-
-    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
-        font-size: 17px;
-        top: -5px;
-    }
-
     .newCommentPlaceMainDiv .inputBox {
         width: calc(100% - 50px);
     }
@@ -4961,11 +4892,6 @@ td > div {
 @media only screen and (max-width: 520px){
     .fullInTablet{
         width: 100% !important;
-    }
-    .postsActionsChoices{
-        font-size: 15px;
-        /*width: 50%;*/
-        margin-top: 5px;
     }
     .showCommentsIconFeedback::before{
         right: 12px;
@@ -5060,16 +4986,6 @@ td > div {
         font-size: 13px;
     }
 
-    .postsActionsChoices {
-        font-size: 14px;
-        /*width: 50%;*/
-        /*text-align: center;*/
-    }
-
-    .postsActionsChoices:nth-child(1), .postsActionsChoices:nth-child(2) {
-        margin-bottom: 10px;
-    }
-
     .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
         /*right: 57px;*/
         top: -3px;
@@ -5085,10 +5001,6 @@ td > div {
         /*right: 79px;*/
     }
 
-    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
-        top: -4px;
-        /*right: 74px;*/
-    }
 
     .commentRatingsDetailsBox > div > b:nth-child(1) {
         float: right;

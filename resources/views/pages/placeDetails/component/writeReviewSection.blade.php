@@ -456,8 +456,6 @@
                         var userEmail = user[0];
                         var userName = user[1];
 
-                        console.log(user);
-
                         text = '<ul>';
                         for(i = 0; i < userName.length; i++)
                             text += '<li onclick="assignedUserToReview(\'' + userName[i]['username'] + '\')" style="cursor: pointer">' + userName[i]['username'] + '</li>';
@@ -477,8 +475,9 @@
 
     function assignedUserToReview(_email, _id){
 
-        var text = '<div class="participantDiv">\n' +
-            '<span class="removeParticipantBtn" onclick="removeAssignedUserToReview(this, \'' + _email + '\')"></span>' + _email + '</div>';
+        var text =  '<div class="participantDiv">\n' +
+                    '   <span class="removeParticipantBtn" onclick="removeAssignedUserToReview(this, \'' + _email + '\')" style="cursor:pointer;"></span>' + _email +
+                    '</div>';
 
         assignedUser[assignedUser.length] = _email;
 
@@ -493,6 +492,7 @@
         $(element).parent().remove();
         var index = assignedUser.indexOf(_email);
         assignedUser[index] = null;
+        document.getElementById('assignedMemberToReview').value = JSON.stringify(assignedUser);
     }
 
     function uploadReviewPics(input){

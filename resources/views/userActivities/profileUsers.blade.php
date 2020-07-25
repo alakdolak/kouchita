@@ -100,8 +100,6 @@
                     </div>
                 </div>
 
-{{--                @include('layouts.modalPhotos')--}}
-
                 @include('userActivities.userPosts')
                 @include('userActivities.userPhotosAndVideos')
                 @include('userActivities.userQuestions')

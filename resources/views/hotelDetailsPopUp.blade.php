@@ -40,8 +40,6 @@
     }
 </script>
 
-@include('layouts.photoAlbum')
-
 <span class='ui_overlay ui_popover arrow_right img_popUp hidden' id="lastSpanHotelDetailsPopUp"></span>
 
 <script>

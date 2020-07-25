@@ -2896,13 +2896,13 @@ class PlaceController extends Controller {
                     $allAnswerCount += getAnsToComments($log->id)[1];
 
                 $user = User::whereId($log->visitorId);
-                $log->username = $user->username;
+                $log->userName = $user->username;
                 $log->userPic = getUserPic($user->id);
 
                 $anss = getAnsToComments($log->id);
 
-                $log->comment = $anss[0];
-                $log->ansNum = $anss[1];
+                $log->answers = $anss[0];
+                $log->answersCount = $anss[1];
 
                 $kindPlace = Place::find($log->kindPlaceId);
                 $log->mainFile = $kindPlace->fileName;
@@ -2911,7 +2911,6 @@ class PlaceController extends Controller {
 
                 $log->city = Cities::find($log->place->cityId);
                 $log->state = State::find($log->city->stateId);
-
 
                 $time = $log->date . '';
                 if(strlen($log->time) == 1)

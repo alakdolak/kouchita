@@ -161,7 +161,7 @@
                                     <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">{{__('پیام‌ها')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">{{__('اطلاعات کاربر')}}</a>
+                                    <a href="{{route('profile.accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">{{__('اطلاعات کاربر')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
                                     <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">{{__('auth.خروج')}}</a>

@@ -41,7 +41,7 @@
                 <div class="circleBase type2 commentWriterPicShow">
                     <img class="koochitaCircleLogo photoAlbumUserPic" src="" style="border-radius: 50%;">
                 </div>
-                <div class="commentWriterExperienceDetails">
+                <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                     <b class="userProfileName photoAlbumUserName"></b>
                     <a href="#" target="_blank" class="photoAlbumWhere" ></a>
                     <div>
@@ -97,7 +97,7 @@
                         <div class="circleBase type2 commentWriterPicShow">
                             <img class="koochitaCircleLogo photoAlbumUserPic" src="" style="border-radius: 50%;">
                         </div>
-                        <div class="commentWriterExperienceDetails">
+                        <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                             <b class="userProfileName photoAlbumUserName"></b>
                             <a href="#" target="_blank" class="photoAlbumWhere" ></a>
                             <div>

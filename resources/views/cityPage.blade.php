@@ -377,7 +377,7 @@
                 }
             }
 
-            createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
+            createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum); // in general.photoAlbumModal.blade.php
         };
 
         var picSwiper = new Swiper('.cityPagePics', {

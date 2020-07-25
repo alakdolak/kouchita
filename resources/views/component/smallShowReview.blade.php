@@ -1,5 +1,3 @@
-{{--<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">--}}
-
 
 <div id="reviewSmallSection">
     <div id="smallReviewHtml_##id##" class="smallReviewMainDivShown float-right position-relative">
@@ -17,6 +15,7 @@
                         <span class="commentWriterExperiencePlace">##where##</span>
                     </a>
                 </div>
+                <div class="userAssignedSmall" style="font-size: 11px">##userAssigned##</div>
                 <div style="font-size: 12px;">##timeAgo##</div>
             </div>
         </div>
@@ -168,6 +167,19 @@
         re = new RegExp(t, "g");
         text = text.replace(re, disLikeClass);
 
+        var assignedUser = '';
+        if(item["assigned"].length != 0) {
+            assignedUser += '<div>با\n';
+            for(j = 0; j < item["assigned"].length; j++) {
+                if(item["assigned"][j]["name"])
+                    assignedUser += '<a href="{{url("profile/index")}}/' + item["assigned"][j]["name"] + '" target="_blank" style="color: #0076a3">' + item["assigned"][j]["name"] + '</a>،\n';
+            }
+            assignedUser += '</div>\n';
+        }
+        t = '##userAssigned##';
+        re = new RegExp(t, "g");
+        text = text.replace(re, assignedUser);
+
         return text;
     }
 
@@ -178,7 +190,6 @@
     function showSmallReviewPics(_id){
         var selectReview = 0;
         var reviewPicForAlbum = [];
-
         for(i = 0; i < allReviewsCreated.length; i++){
             if(allReviewsCreated[i]['id'] == _id){
                 selectReview = allReviewsCreated[i];
@@ -202,7 +213,7 @@
                     'showInfo' : false,
                 }
             }
-            createPhotoModal('عکس های پست', reviewPicForAlbum);
+            createPhotoModal('عکس های پست', reviewPicForAlbum);// in general.photoAlbumModal.blade.php
         }
     }
 
@@ -224,6 +235,8 @@
     var deletedReview = 0;
     var globalConfirmText = '<span class="label label-success smallReviewIsConfirm">{{__('در انتظار تایید')}}</span>';
     var showFullReview = null;
+    var showFullReviewKind = null;
+
     function getSingleFullReview(_id){
         $.ajax({
             type: 'post',
@@ -236,17 +249,34 @@
                 response = JSON.parse(response);
                 if(response.status == 'ok'){
                     showFullReview = response.result;
-                    showFullReviews(showFullReview);
+                    showFullReviews({
+                        review: showFullReview,
+                        kind: 'modal'
+                    });
                 }
             }
         })
     }
 
-    function showFullReviews(_reviews){
-        $('#fullReviewModal').removeClass('hidden');
+    function showFullReviews(_input){
+        let _reviews = _input.review;
+        let _kind = _input.kind;
+        let _sectionId = _input.sectionId;
+        let _sendAnsCallBack = _input.sendAnsCallBack;
+
+        // _kind = 'modal' open in modal
+        // _kind = 'export' return the ui generated
+        // _kind = 'append' append to _sectionId
+
+        _reviews['showKind'] = _kind;
+        _reviews['showSectionId'] = _sectionId;
+        _reviews['sendAnsCallBack'] = _sendAnsCallBack  ;
 
         var text = '';
         var kindPlaceId = _reviews['kindPlaceId'];
+        var hasConfirmed = '';
+        if(_reviews['confirm'] == 0)
+            hasConfirmed = globalConfirmText;
 
         text += '<div id="showReview_' + _reviews["id"] + '" class="mainFullReviewDiv">\n'+
                 '   <div class="moreOptionFullReview" onclick="showFullReviewOptions(this)">\n' +
@@ -269,21 +299,18 @@
                 '       <img src="' + _reviews["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
                 '   </div>\n' +
                 '   <div class="commentWriterExperienceDetails">\n' +
-                '       <b class="userProfileName userProfileNameFullReview">' + _reviews["userName"] + '</b>\n' +
+                '       <a href="{{url('profile/index')}}/' + _reviews["userName"] + '" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">' + _reviews["userName"] + '</a>\n' +
                 '       <div class="fullReviewPlaceAndTime"> \n' +
                 '           <div class="display-inline-block">در\n' +
-                '               <a href="' + _reviews["placeUrl"] + '" class="commentWriterExperiencePlace">' + _reviews["where"] + '</a>\n';
-
-        if(_reviews['confirm'] == 0)
-            text += globalConfirmText;
-
-        text +='            </div>\n';
+                '               <a href="' + _reviews["placeUrl"] + '" class="commentWriterExperiencePlace">' + _reviews["where"] + '</a>\n'+
+                                hasConfirmed +
+                '            </div>\n';
 
         if(_reviews["assigned"].length != 0) {
             text += '<div>با\n';
             for(j = 0; j < _reviews["assigned"].length; j++) {
                 if(_reviews["assigned"][j]["name"])
-                    text += '<a href="#" style="color: #0076a3">' + _reviews["assigned"][j]["name"] + '</a>،\n';
+                    text += '<a href="{{url("profile/index")}}/' + _reviews["assigned"][j]["name"] + '" target="_blank" style="color: #0076a3">' + _reviews["assigned"][j]["name"] + '</a>،\n';
             }
             text += '</div>\n';
         }
@@ -316,7 +343,7 @@
             picDivClassName = 'singlePhotoDiv';
 
         for(let k = 0; k < reviewPicsCount && k < 5; k++) {
-            let ttt =  '   <div class="topMainReviewPic" onclick="showReviewPicsFullReview(' + _reviews["id"] + ')">' +
+            let ttt =  '   <div class="topMainReviewPic" onclick="showSmallReviewPics(' + _reviews["id"] + ')">' +
                        '       <img src="' + _reviews["pics"][k]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n';
             if(reviewPicsCount > 5 && k == 4) {
                 ttt += '<div class="morePhotoLinkPosts">\n' +
@@ -457,7 +484,7 @@
                 '       </div>\n' +
                 '   </div>\n' +
                 '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-end;">\n' +
-                '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">\n' +
+                '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)" style="direction: ltr">\n' +
                 '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
                 '           <span class="commentsShareClickedIconFeedback secondIcon" style="display: none"></span>\n' +
                 '       </div>\n' +
@@ -466,7 +493,7 @@
                 '       </div>' +
                 '   </div>\n' +
                 '</div>\n' +
-                '<div class="commentsMainBox hidden">\n';
+                '<div id="sectionOfAnsToReview_' + _reviews["id"] + '" class="commentsMainBox hidden">\n';
 
         var checkAllReviews = true;
 
@@ -498,14 +525,16 @@
                             '</div>\n';
             }
 
-            text += '<div  id="reviewSection_' + answers["id"] + '" style="margin-bottom: 15px"> ' +
+            text += '<div  id="ansOfReview_' + answers["id"] + '" style="margin-bottom: 15px"> ' +
                     '<div class="eachCommentMainBox" style="margin-bottom: 0px">\n' +
                     '   <div class="circleBase type2 commentsWriterProfilePic">' +
                     '       <img src="' + answers["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                     '   </div>\n' +
                     '   <div class="commentsContentMainBox">\n' +
                     '       <b class="userProfileName userProfileNameFullReview">' +
-                                answers["userName"] +
+                    '           <a href="{{url("profile/index")}}/ ' + _reviews["userName"] +'" target="_blank" style="font-weight:bold">' +
+                                    answers["userName"] +
+                    '           </a>' +
                                 textInConfirm +
                     '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
                     '       </b>\n' +
@@ -566,8 +595,19 @@
             '</div>' +
             '</div>\n';
 
-        $('#fullReview').html(text);
-        $('#fullReview').append('<div class="closeFullReview iconClose" onclick="closeFullReview()"></div>');
+        if(_kind == 'modal') {
+            $('#fullReviewModal').removeClass('hidden');
+            $('#fullReview').html(text);
+            $('#fullReview').append('<div class="closeFullReview iconClose" onclick="closeFullReview()"></div>');
+        }
+        else if(_kind == 'append') {
+            $('#' + _sectionId).append(text);
+            allReviewsCreated.push(_reviews);
+        }
+        else if(_kind == 'export') {
+            allReviewsCreated.push(_reviews);
+            return text;
+        }
 
         setTimeout(function(){
             resizeFitImg('resizeImgClass');
@@ -576,11 +616,11 @@
     }
 
     function openReplayToReviewCommentFullReview(_id){
-        if($('#reviewSection_' + _id).find('.replyToCommentMainDiv').hasClass("display-inline-blockImp"))
+        if($('#ansOfReview_' + _id).find('.replyToCommentMainDiv').hasClass("display-inline-blockImp"))
             $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
         else{
             $('.replyToCommentMainDiv').removeClass("display-inline-blockImp");
-            $('#reviewSection_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
+            $('#ansOfReview_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
         }
     }
 
@@ -661,27 +701,6 @@
 
     }
 
-    function showReviewPicsFullReview(_id){
-        var reviewPicForAlbum = [];
-        var revPic = showFullReview['pics'];
-
-        for(var i = 0; i < revPic.length; i++){
-            reviewPicForAlbum[i] = {
-                'id' : 'review_' + revPic[i]['id'],
-                'sidePic' : revPic[i]['picUrl'],
-                'mainPic' : revPic[i]['picUrl'],
-                'video' : revPic[i]['videoUrl'],
-                'userPic' : showFullReview['userPic'],
-                'userName' : showFullReview['userName'],
-                'where' : showFullReview['where'],
-                'whereUrl' : showFullReview['placeUrl'],
-                'showInfo' : false,
-            }
-        }
-
-        createPhotoModal('عکس های پست', reviewPicForAlbum); // in general.modalPhoto.blade.php
-    }
-
     function showAllReviewCommentsFullReview(_id, _remain, _element){
         let ter;
         $('#allReviews_' + _id).toggle();
@@ -709,14 +728,14 @@
                     hasDisLiked = 'coloredFullIcon';
             }
 
-            text += '<div id="reviewSection_' + comment[k]["id"] + '" style="margin-bottom: 15px">' +
+            text += '<div id="ansOfReview_' + comment[k]["id"] + '" style="margin-bottom: 15px">' +
                 '<div class="eachCommentMainBox"  style="margin-bottom: 0px">\n' +
                 '   <div class="circleBase type2 commentsWriterProfilePic">' +
                 '       <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                 '   </div>\n' +
                 '   <div class="commentsContentMainBox">\n' +
                 '       <div class="userProfileName userProfileNameFullReview">' +
-                '           <b class="userProfileName userProfileNameFullReview float-right">' + comment[k]["userName"] + '</b>\n' +
+                '           <a href="{{url("profile/index")}}/' + comment[k]["userName"] + '" target="_blank" class="userProfileName userProfileNameFullReview float-right" target="_blank" style="font-weight:bold">' + comment[k]["userName"] + '</a>\n' +
                 '           <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
                 textInConfirm +
                 '       </div>\n' +

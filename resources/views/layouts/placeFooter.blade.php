@@ -849,8 +849,8 @@
                                         <a name="edit-profile" class="menu-link " href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                         <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
                                         <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                        <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
-                                        <a name="edit-photo" class="menu-link " href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{route('profile.accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{route('profile.editPhoto')}}">{{__('ویرایش عکس')}}</a>
                                     </div>
                                 </div>
                             </div>

@@ -176,7 +176,6 @@
 
 <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
-
 <div id="addPlaceToTripPrompt" class="tripModalBack">
     <span class="tripModalBase">
         <div class="body_text">

@@ -231,8 +231,12 @@ class ReviewsController extends Controller
                     $newAssigned->logId = $log->id;
 
                     $user = User::where('username', $item)->orWhere('email', $item)->first();
-                    if ($user != null)
+                    if ($user != null) {
                         $newAssigned->userId = $user->id;
+                        $findUser = ReviewUserAssigned::where('logId', $log->id)->where('userId', $user->id)->first();
+                        if($findUser != null)
+                            continue;
+                    }
                     else
                         $newAssigned->email = $item;
 

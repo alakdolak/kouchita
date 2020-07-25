@@ -438,7 +438,6 @@
     background: white;
     border-radius: 5px;
     width: 700px;
-    padding: 15px;
     direction: rtl;
     max-height: 90vh;
     overflow-y: auto;
@@ -461,12 +460,13 @@
     margin-top: 10px;
     position: relative;
     width: 100%;
+    padding: 15px;
 }
 
 .moreOptionFullReview {
     position: absolute;
     top: 20px;
-    left: -15px;
+    left: 0px;
     background: #720d19;
     color: white;
     font-size: 40px;

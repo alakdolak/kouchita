@@ -517,7 +517,7 @@
                 },
                 success: function (response) {
                     if (response == "ok")
-                        document.location.href = '{{route('accountInfo')}}';
+                        document.location.href = '{{route('profile.accountInfo')}}';
                     else {
                         $("#errAuth").empty().append('کد وارد شده نامعتبر می باشد');
                     }

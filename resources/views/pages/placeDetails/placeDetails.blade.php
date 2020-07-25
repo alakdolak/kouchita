@@ -205,6 +205,8 @@ if ($total == 0)
 
     @include('component.mapMenu')
 
+    @include('component.smallShowReview')
+
 
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
@@ -1944,13 +1946,13 @@ if ($total == 0)
 
         function showPhotoAlbum(_kind) {
             if (_kind == 'photographer')
-                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);
+                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);// in general.photoAlbumModal.blade.php
             else if (_kind == 'sitePics')
-                createPhotoModal('عکس های سایت', sitePicsForAlbum);
+                createPhotoModal('عکس های سایت', sitePicsForAlbum);// in general.photoAlbumModal.blade.php
             else if (_kind == 'userPics')
-                createPhotoModal('عکس های کاربران', userPhotosForAlbum);
+                createPhotoModal('عکس های کاربران', userPhotosForAlbum);// in general.photoAlbumModal.blade.php
             else if (_kind == 'userVideo')
-                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);
+                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
         }
 
         // Get the element with id="defaultOpen" and click on it

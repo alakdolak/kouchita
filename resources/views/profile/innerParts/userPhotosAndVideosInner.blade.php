@@ -112,7 +112,7 @@
     }
 
     function showThisPictures(_index){
-        createPhotoModal('آلبوم عکس', nowShow, _index); // in general.modalPhoto.blade.php
+        createPhotoModal('آلبوم عکس', nowShow, _index); // in general.photoAlbumModal.blade.php
     }
 
     function changeShowPic(_kind){

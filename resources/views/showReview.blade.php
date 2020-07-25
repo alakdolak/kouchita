@@ -296,8 +296,6 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
 
     @include('layouts.placeFooter')
 
-    @include('layouts.photoAlbum')
-
     <div class="ui_backdrop dark" style="display: none;"></div>
 
     @if(!Auth::check())
@@ -408,7 +406,7 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
                     newElement += "<div class='memberOverlay simple container moRedesign'>";
                     newElement += "<div class='innerContent'>";
                     newElement += "<div class='memberOverlayRedesign g10n'>";
-                    newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
+                    newElement += "<a href='" + homeURL + "/profile/index/" + username + "'>";
                     newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
                     newElement += "</a>";
                     newElement += "<div class='memberreviewbadge'>";

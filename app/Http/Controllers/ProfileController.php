@@ -190,16 +190,15 @@ class ProfileController extends Controller {
 
     public function getUserReviews(Request $request)
     {
-        $result = [];
         $reviewAct = Activity::where('name', 'نظر')->first();
-        if(isset($request->userId)){
-            $user = User::find($request->userId);
-            $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->where('confirm', 1)->orderByDesc('date')->get();
-            $status = 'ok';
-        }
-        else if(\auth()->check()){
+        if(\auth()->check() && ( $request->userId == \auth()->user()->id || !isset($request->userId) ) ){
             $user = \auth()->user();
             $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->orderByDesc('date')->get();
+            $status = 'ok';
+        }
+        else if(isset($request->userId)){
+            $user = User::find($request->userId);
+            $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->where('confirm', 1)->orderByDesc('date')->get();
             $status = 'ok';
         }
         else
@@ -401,10 +400,6 @@ class ProfileController extends Controller {
         echo "nok";
     }
 
-    public function showOtherProfile($username, $mode = "") {
-        return \redirect(route('profile', ['username' => $username]));
-    }
-    
     public function checkAuthCode() {
 
         if(isset($_POST["phoneNum"]) && isset($_POST["code"])) {
@@ -594,7 +589,7 @@ class ProfileController extends Controller {
                     Auth::login($user);
                     session(['msg' => 'رمز عبور با موفقیت تغییر یافت']);
 
-                    return Redirect::to(route('accountInfo'));
+                    return Redirect::to(route('profile.accountInfo'));
                 } else {
                     $msg = "پسورد جدید و تکرار آن یکی نیستند";
                 }
@@ -651,7 +646,7 @@ class ProfileController extends Controller {
         $err = "";
 
         if(isset($_POST["cancel"]))
-            return Redirect::to("editPhoto");
+            return Redirect::to("profile/editPhoto");
 
         if(isset($_FILES["newPic"])) {
 
@@ -685,7 +680,7 @@ class ProfileController extends Controller {
         }
 
         if(empty($err) ) {
-            return Redirect::to("editPhoto");
+            return Redirect::to("profile/editPhoto");
         }
 
         return $this->editPhoto($err);
@@ -897,13 +892,5 @@ class ProfileController extends Controller {
             echo json_encode(['status' => 'nok']);
 
         return;
-    }
-
-    public function authLive()
-    {
-        $name = $_GET['name'];
-        $user = \auth()->user();
-
-        return \redirect(\url('streaming/live/' . $name . '?name=' . $user->username));
     }
 }

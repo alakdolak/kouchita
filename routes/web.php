@@ -104,8 +104,6 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
     Route::get('estelahat/{goyesh}', array('as' => 'estelahat', 'uses' => 'HomeController@estelahat'));
 
-    Route::get('otherProfile/{username}/{mode?}', array('as' => 'otherProfile', 'uses' => 'ProfileController@showOtherProfile'));
-
     Route::get('otherBadge/{username}', array('as' => 'otherBadge', 'uses' => 'BadgeController@showOtherBadge'));
 
     Route::post('getActivities', array('as' => 'ajaxRequestToGetActivities', 'uses' => 'ActivityController@getActivities'));
@@ -483,12 +481,20 @@ Route::group(['middleware' => ['throttle:30']], function(){
 // profile
 Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
-    Route::get('authLive', 'ProfileController@authLive')->name('authLive');
+    Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
+
+    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
+
+    Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
+
     Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
+
     Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
+
     Route::post('addPlace/storeImg', 'ProfileController@storeImgAddPlaceByUser')->name('addPlaceByUser.storeImg');
+
     Route::post('addPlace/deleteImg', 'ProfileController@deleteImgAddPlaceByUser')->name('addPlaceByUser.deleteImg');
 
     Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
@@ -519,13 +525,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
 
-    Route::get('accountInfo', array('as' => 'accountInfo', 'uses' => 'ProfileController@accountInfo'));
-
     Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
-
-    Route::get('editPhoto', array('as' => 'editPhoto', 'uses' => 'ProfileController@editPhoto'));
-
-    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
     Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
 

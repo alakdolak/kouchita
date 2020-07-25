@@ -67,7 +67,7 @@ function showDetails(username) {
             newElement += "<div class='innerContent'>";
             newElement += "<div class='memberOverlayRedesign g10n'>";
             newElement += "<a href='#'>";
-            newElement += "<h3 onclick='document.location.href = \"" + homeURL + "/otherProfile/" + username + "\"' class='username reviewsEnhancements'>" + username + "</h3>";
+            newElement += "<h3 onclick='document.location.href = \"" + homeURL + "/profile/index/" + username + "\"' class='username reviewsEnhancements'>" + username + "</h3>";
             newElement += "</a>";
             newElement += "<div class='memberreviewbadge'>";
             newElement += "<div class='badgeinfo'>";

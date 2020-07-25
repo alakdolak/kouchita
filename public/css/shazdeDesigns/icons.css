@@ -3,6 +3,14 @@
 }
 
 /*....................*/
+.emptyCameraIcon:before{
+    content: '\E010';
+    font-family: 'Shazde_Regular2' !important;
+}
+.fullCameraIcon:before{
+    content: '\E0A4';
+    font-family: 'Shazde_Regular2' !important;
+}
 .hotel:before {
     content: '\E000';
 }

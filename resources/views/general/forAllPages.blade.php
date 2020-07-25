@@ -9,7 +9,7 @@
 
 @include('general.adminInPage')
 
-@include('general.modalPhoto')
+@include('general.photoAlbumModal')
 
 @include('general.searches.proSearch')
 

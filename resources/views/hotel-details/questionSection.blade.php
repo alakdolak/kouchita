@@ -175,6 +175,7 @@
     getQuestion();
 
     function createQuestionSection(ques){
+        console.log(ques);
         var text = '';
         for(var i = 0; i < ques.length; i++){
             text += '<div id="questionSection_' + ques[i]["id"] + '" class="answersBoxMainDiv">\n';
@@ -184,7 +185,7 @@
                         '</div>\n'+
                         '<div class="questionsActionsMoreDetails display-none">\n' +
                         '   <span onclick="showReportPrompt(' + ques[i]["id"] +  ', ' + kindPlaceId + ')">{{__("گزارش سوال")}}</span>\n' +
-                        '   <a target="_blank" href="{{url("otherProfile")}}/' + ques[i]["username"] + '"  >{{__("مشاهده صفحه")}} ' + ques[i]["username"] + '</a>\n' +
+                        '   <a target="_blank" href="{{url("profile/index")}}/' + ques[i]["userName"] + '"  >{{__("مشاهده صفحه")}} ' + ques[i]["userName"] + '</a>\n' +
                         '   <a href="{{route("policies")}}" target="_blank">{{__("صفحه قوانین و مقررات")}}</a>\n';
 
                 @if(auth()->check())
@@ -201,7 +202,7 @@
                     '       <img src="' + ques[i]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
                     '   </div>\n' +
                     '   <div class="answersWriterExperienceDetails">\n' +
-                    '   <b class="userProfileNameAnswers">' + ques[i]["username"] + '</b>\n' +
+                    '   <b class="userProfileNameAnswers">' + ques[i]["userName"] + '</b>\n' +
                     '   <div class="display-inline-block">در\n' +
                     '       <span class="answersWriterExperiencePlace">' + ques[i]["place"]["name"] + '، شهر ' + ques[i]["city"]["name"] + '، استان ' + ques[i]["state"]["name"] + '</span>\n';
 
@@ -217,9 +218,9 @@
                     '   <div class="clear-both"></div>\n' +
                     '   <div class="questionSubMenuBar">\n';
 
-            if(ques[i]["ansNum"] > 0) {
+            if(ques[i]["answersCount"] > 0) {
                 text += '<div class="dark-blue float-right display-inline-black cursor-pointer" onclick="showAllAnswers(' + ques[i]["id"] + ', this)" style="direction: rtl">' +
-                        '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + ques[i]["ansNum"] + '</span>' +
+                        '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + ques[i]["answersCount"] + '</span>' +
                         '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
                         '</div>\n';
             }
@@ -229,11 +230,11 @@
 
             text += '<div id="ansToQuestion' + ques[i]["id"] + '" class="display-none last">\n' +
                     '   <div class="newAnswerPlaceMainDiv">\n';
-            text += createAnsToSection(ques[i]["id"], ques[i]["username"]);
+            text += createAnsToSection(ques[i]["id"], ques[i]["userName"]);
             text += '   </div>\n' +
                     '</div>\n';
             text += '<div id="ansOfQuestion' + ques[i]["id"] + '" class="display-none ansOfQuestion">';
-            text += createAnsToQuestionComment(ques[i]["comment"], ques[i]["username"], ques[i]["id"], '', true);
+            text += createAnsToQuestionComment(ques[i]["answers"], ques[i]["userName"], ques[i]["id"], '', true);
             text += '</div>' +
                     '</div>';
         }
@@ -274,21 +275,21 @@
                     '   </div>\n' +
                     '   <div class="commentsActionsBtns" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0px;">\n' +
                     '       <div style="display: flex; width: auto">' +
-                    '           <span id="reviewLikeNum' + comment[k]["id"] + '" class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReview(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
-                    '           <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReview(' + comment[k]["id"] + ', 0, this)">' + comment[k]["disLike"] + '</span>\n' +
+                    '           <span class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeQuestion(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
+                    '           <span class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeQuestion(' + comment[k]["id"] + ', 0, this)">' + comment[k]["disLike"] + '</span>\n' +
                     '           <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: #0076a3">پاسخ دهید</span>\n' +
                     '       </div>';
-            if(comment[k]["ansNum"] > 0){
+            if(comment[k]["answersCount"] > 0){
                 text += '<div style="width: auto; display: flex; margin: 0;">' +
                         '   <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showAllAnswers(' + comment[k]["id"] + ', this)" style="direction: rtl">' +
-                        '       <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["ansNum"] + '</span>' +
+                        '       <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">' + comment[k]["answersCount"] + '</span>' +
                         '       <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
                         '   </div>\n' +
                         '</div>\n';
             }
              text += '</div>\n' +
                      '<div class="replyToCommentMainDiv display-none" style="margin-top: 5px; margin-bottom: 10px">\n';
-            text+=      createAnsToSection(comment[k]["id"], comment[k]["username"]);
+            text+=      createAnsToSection(comment[k]["id"], comment[k]["userName"]);
             text+=  '</div>\n';
 
             var borderCalss = '';
@@ -299,9 +300,9 @@
                 borderCalss = 'borderInMobile'
             }
 
-            if(comment[k]["ansNum"] > 0) {
+            if(comment[k]["answersCount"] > 0) {
                 text += '<div id="ansOfQuestion' + comment[k]["id"] + '" class="display-none ansOfQuestion ' + borderCalss + '">';
-                text += createAnsToQuestionComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"], 'lessWidthForAns');
+                text += createAnsToQuestionComment(comment[k]["answers"], comment[k]["userName"], comment[k]["id"], 'lessWidthForAns');
                 text += '</div>';
             }
 
@@ -349,25 +350,6 @@
                 }
             })
         }
-    }
-
-    function likeQuestion(_logId, _like){
-
-        if(!checkLogin())
-            return;
-
-        $.ajax({
-            type: 'post',
-            url: likeLog,
-            data:{
-                'logId' : _logId,
-                'like' : _like
-            },
-            success: function(response){
-                if(response == 'ok')
-                    alert('نظر شما با موفقیت ثبت شد.')
-            }
-        })
     }
 
     function showAllAnswers(_id, _element){
@@ -489,9 +471,9 @@
         text =  '<div class="circleBase type2 newCommentWriterProfilePic">' +
                 '   <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                 '</div>\n' +
-                '<div class="inputBox">\n' +
+                '<div class="inputBox" style="flex-direction: column">\n' +
                 '<b class="replyAnswerTitle">در پاسخ به سوال ' + _ansToUserName + '</b>\n' +
-                '<div class="questAnsText">\n' +
+                '<div class="questAnsText" style="width: 100%;">\n' +
                 '   <textarea id="questionAns' + _id + '" class="inputBoxInput inputBoxInputAnswer" type="text"\n' +
                 '       placeholder="شما چه پاسخی دارید؟"></textarea>\n' +
                 '   <div class="sendQuestionBtn" onclick="sendAnsToQuestion(this, ' + _id + ')">{{__(("ارسال"))}}</div>\n' +
@@ -513,6 +495,53 @@
             $('#reviewSection_' + _id).find('.replyToCommentMainDiv').toggleClass("display-inline-blockImp");
         }
     }
+
+    function likeQuestion(_logId, _like, _element){
+
+        if(!checkLogin())
+            return;
+
+        $.ajax({
+            type: 'post',
+            url: '{{route('likeLog')}}',
+            data:{
+                'logId' : _logId,
+                'like' : _like
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                if(response[0] == 'ok'){
+                    like = response[1];
+                    dislike = response[2];
+
+                    $(_element).parent().find('.coloredFullIcon').removeClass('coloredFullIcon');
+                    $(_element).parent().find('.LikeIconEmpty').text(like);
+                    $(_element).parent().find('.DisLikeIconEmpty').text(dislike);
+
+                    if(_like == 1)
+                        $(_element).parent().find('.LikeIconEmpty').addClass('coloredFullIcon');
+                    else
+                        $(_element).parent().find('.DisLikeIconEmpty').addClass('coloredFullIcon');
+
+
+                    for(let i = 0; i < allReviewsCreated.length; i++){
+                        if(allReviewsCreated[i].id == _logId){
+                            if(allReviewsCreated[i]['userLike'] == null)
+                                allReviewsCreated[i]['userLike'] = [];
+                            allReviewsCreated[i]['userLike']['like'] = _like;
+                            allReviewsCreated[i]['like'] = like;
+                            allReviewsCreated[i]['disLike'] = dislike;
+
+                            showFullReview = allReviewsCreated[i];
+                            break;
+                        }
+                    }
+
+                }
+            }
+        })
+    }
+
 
     let deletedQuestion = 0;
     function deleteQuestionByUser(_reviewId){
@@ -545,5 +574,6 @@
             }
         })
     }
+
 
 </script>

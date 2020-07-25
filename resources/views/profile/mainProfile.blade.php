@@ -16,22 +16,35 @@
 
 @section('main')
     <div class="userPostsPage">
-        <div class="userProfilePageCoverImg" style="background-image: url('{{URL::asset('images/mainPics/background/4.jpg')}}'); background-size: cover"></div>
+        <div class="userProfilePageCoverImg" style="background-image: url('{{URL::asset('images/mainPics/background/4.jpg')}}'); background-size: cover">
+            @if(isset($myPage) && $myPage)
+                <div class="addPicForUser" style=" top: 10px; left: 15px;">
+                    <span class="emptyCameraIcon addPicByUser"></span>
+                </div>
+            @endif
+        </div>
         <div class="mainBodyUserProfile userPosts">
             <div class="mainDivContainerProfilePage">
 
                 <div class="userPageBodyTopBar">
-                    <div class="circleBase profilePicUserProfile">
-                        <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                    <div class="userPagePicSection">
+                        <div class="circleBase profilePicUserProfile">
+                            <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                        @if(isset($myPage) && $myPage)
+                            <a href="{{route('profile.editPhoto')}}" class="addPicForUser" style=" top: 10px; right: 15px;">
+                                <span class="emptyCameraIcon addPicByUser"></span>
+                            </a>
+                        @endif
                     </div>
                     <div class="userProfileInfo">
                         <div>{{$user->username}}</div>
                         <div style="display: flex; font-size: 12px;">
                             @if(isset($myPage) && $myPage)
-                                <div class="settingHeaderButton">
+                                <a href="{{route('profile.accountInfo')}}" class="settingHeaderButton">
                                     <span>ویرایش</span>
                                     <span class="settingIcon"></span>
-                                </div>
+                                </a>
                                 <div class="msgHeaderButton">صندوق پیام</div>
                             @else
                                 <div class="msgHeaderButton">ارسال پیام</div>
@@ -251,7 +264,7 @@
         let userPageId = {{$user->id}};
 
         function showAllPicUser(){
-            createPhotoModal('عکس های شما', allUserPics);
+            createPhotoModal('عکس های شما', allUserPics);// in general.photoAlbumModal.blade.php
         }
 
         function showUserActivity(_element){

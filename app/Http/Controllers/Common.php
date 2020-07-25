@@ -811,7 +811,7 @@ function reviewTrueType($_log){
     $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_log->placeId);
 
     $_log->userName = $user->username;
-    $_log->userPageUrl = route('otherProfile', ['username' => $user->username]);
+    $_log->userPageUrl = route('profile', ['username' => $user->username]);
     $_log->userPic = getUserPic($user->id);
     $_log->like = LogFeedBack::where('logId', $_log->id)->where('like', 1)->count();
     $_log->disLike = LogFeedBack::where('logId', $_log->id)->where('like', -1)->count();

@@ -143,7 +143,7 @@
                     تنظیمات
                     <div class="settingsArrow"></div>
                     <div class="settingsDropDown" id="settingDropDownMainDiv">
-                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>
+                        <a href="{{route('profile.accountInfo')}}">اطلاعات کاربر</a>
                         <?php
                             $level = Auth::user()->level;
                         ?>

@@ -1219,8 +1219,6 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
 
-    @include('layouts.photoAlbum')
-
     <span class='ui_overlay ui_popover arrow_right img_popUp hidden' style='z-index: 100000 !important; position: absolute; bottom: auto; direction: rtl; margin: -25px 20px 0 0'></span>
 
     <span id="addPlaceToTripPrompt" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in hidden" style="position: fixed; width: 60%; left: 20%; right: auto; top: 20%; bottom: auto;">

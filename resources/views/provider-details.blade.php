@@ -3396,7 +3396,7 @@
                         newElement += "<div class='memberOverlay simple container moRedesign'>";
                         newElement += "<div class='innerContent'>";
                         newElement += "<div class='memberOverlayRedesign g10n'>";
-                        newElement += "<a href='" + homePath + "/otherProfile/" + username + "'>";
+                        newElement += "<a href='" + homePath + "/profile/index/" + username + "'>";
                         newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
                         newElement += "</a>";
                         newElement += "<div class='memberreviewbadge'>";
