@@ -208,6 +208,11 @@ body {
         overflow: hidden;
         -moz-overflow:hidden;
     }
+    .topPic{
+        position: fixed;
+        top: 0px;
+        right: 0px;
+    }
     .sidePic2{
         left: auto;
     }
