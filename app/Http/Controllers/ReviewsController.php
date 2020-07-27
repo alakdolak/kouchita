@@ -6,6 +6,7 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\Alert;
 use App\models\Amaken;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
@@ -40,13 +41,13 @@ class ReviewsController extends Controller
     {
         $location = __DIR__ . '/../../../../assets/limbo';
 
-        if(!file_exists($location))
+        if (!file_exists($location))
             mkdir($location);
 
-        if(isset($_FILES['pic']) && isset($request->code) && $_FILES['pic']['error'] == 0){
+        if (isset($_FILES['pic']) && isset($request->code) && $_FILES['pic']['error'] == 0) {
 
-            $valid_ext = array('image/jpeg','image/png');
-            if(in_array($_FILES['pic']['type'], $valid_ext)){
+            $valid_ext = array('image/jpeg', 'image/png');
+            if (in_array($_FILES['pic']['type'], $valid_ext)) {
                 $filename = time() . '_' . pathinfo($_FILES['pic']['name'], PATHINFO_FILENAME) . '.jpg';
                 $destinationMainPic = $location . '/' . $filename;
                 compressImage($_FILES['pic']['tmp_name'], $destinationMainPic, 60);
@@ -57,14 +58,11 @@ class ReviewsController extends Controller
                 $newPicReview->save();
 
                 echo json_encode(['ok', $filename]);
-            }
-            else{
+            } else
                 echo 'nok2';
-            }
-        }
-        else{
+        } else
             echo 'nok3';
-        }
+
         return;
     }
 
@@ -72,10 +70,10 @@ class ReviewsController extends Controller
     {
         $location = __DIR__ . '/../../../../assets/limbo';
 
-        if(!file_exists($location))
+        if (!file_exists($location))
             mkdir($location);
 
-        if(isset($_FILES['video']) && isset($request->code)){
+        if (isset($_FILES['video']) && isset($request->code)) {
             $filename = time() . '_' . $_FILES['video']['name'];
             $destinationMainPic = $location . '/' . $filename;
             move_uploaded_file($_FILES['video']['tmp_name'], $destinationMainPic);
@@ -86,59 +84,58 @@ class ReviewsController extends Controller
             $data = base64_decode($img);
             $videoArray = explode('.', $filename);
             $videoName = '';
-            for($k = 0; $k < count($videoArray)-1; $k++)
+            for ($k = 0; $k < count($videoArray) - 1; $k++)
                 $videoName .= $videoArray[$k] . '.';
             $videoName .= 'png';
 
-            $file =  __DIR__ . '/../../../../assets/limbo/' . $videoName;
+            $file = __DIR__ . '/../../../../assets/limbo/' . $videoName;
             $success = file_put_contents($file, $data);
 
             $newPicReview = new ReviewPic();
             $newPicReview->pic = $filename;
             $newPicReview->code = $request->code;
-            if(isset($request->isVideo) && $request->isVideo == 1)
+            if (isset($request->isVideo) && $request->isVideo == 1)
                 $newPicReview->isVideo = 1;
-            if(isset($request->is360) && $request->is360 == 1) {
+            if (isset($request->is360) && $request->is360 == 1) {
                 $newPicReview->is360 = 1;
                 $newPicReview->isVideo = 1;
             }
             $newPicReview->save();
 
             echo json_encode(['ok', $filename]);
-        }
-        else
+        } else
             echo 'nok3';
 
         return;
     }
 
-    public function deleteReviewPic(Request $request){
+    public function deleteReviewPic(Request $request)
+    {
         $code = $request->code;
         $name = $request->name;
 
         $pics = ReviewPic::where('code', $code)->where('pic', $name)->first();
 
-        if($pics != null){
-            if($pics->isVideo == 1){
+        if ($pics != null) {
+            if ($pics->isVideo == 1) {
                 $videoArray = explode('.', $pics->pic);
                 $videoName = '';
-                for($k = 0; $k < count($videoArray)-1; $k++)
+                for ($k = 0; $k < count($videoArray) - 1; $k++)
                     $videoName .= $videoArray[$k] . '.';
                 $videoName .= 'png';
 
                 $location2 = __DIR__ . '/../../../../assets/limbo/' . $videoName;
 
-                if(file_exists($location2)) {
+                if (file_exists($location2)) {
                     unlink($location2);
                 }
             }
             $location = __DIR__ . '/../../../../assets/limbo/' . $pics->pic;
-            if(file_exists($location))
+            if (file_exists($location))
                 unlink($location);
             $pics->delete();
             echo 'ok';
-        }
-        else
+        } else
             echo 'nok';
 
         return;
@@ -146,12 +143,12 @@ class ReviewsController extends Controller
 
     public function doEditReviewPic(Request $request)
     {
-        if(isset($request->code) && isset($request->name)){
+        if (isset($request->code) && isset($request->name)) {
             $name = $request->name;
             $code = $request->code;
 
             $location = __DIR__ . '/../../../../assets/limbo/' . $name;
-            if(file_exists($location))
+            if (file_exists($location))
                 unlink($location);
 
             move_uploaded_file($_FILES['pic']['tmp_name'], $location);
@@ -166,7 +163,7 @@ class ReviewsController extends Controller
     {
         $activity = Activity::where('name', 'نظر')->first();
 
-        if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
+        if (isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)) {
 
             $placeId = $request->placeId;
             $uId = Auth::user()->id;
@@ -221,8 +218,7 @@ class ReviewsController extends Controller
                             rename($file, $dest);
                     }
                 }
-            }
-            else if($request->text == null){
+            } else if ($request->text == null) {
                 $log->subject = 'dontShowThisText';
                 $log->confirm = 1;
                 $log->save();
@@ -235,14 +231,18 @@ class ReviewsController extends Controller
                     $newAssigned->logId = $log->id;
 
                     $user = User::where('username', $item)->orWhere('email', $item)->first();
-                    if ($user != null)
+                    if ($user != null) {
                         $newAssigned->userId = $user->id;
+                        $findUser = ReviewUserAssigned::where('logId', $log->id)->where('userId', $user->id)->first();
+                        if($findUser != null)
+                            continue;
+                    }
                     else
                         $newAssigned->email = $item;
 
                     $newAssigned->save();
 
-                    if($user != null){
+                    if ($user != null) {
                         $newAlert = new Alert();
                         $newAlert->subject = 'assignedUserToReview';
                         $newAlert->referenceTable = 'reviewUserAssigned';
@@ -256,11 +256,11 @@ class ReviewsController extends Controller
                 }
             }
 
-            if($request->textId != null && $request->textAns != null){
+            if ($request->textId != null && $request->textAns != null) {
                 $textQuestion = $request->textId;
                 $textAns = $request->textAns;
-                for($i = 0; $i < count($textAns); $i++){
-                    if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
+                for ($i = 0; $i < count($textAns); $i++) {
+                    if ($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null) {
                         $newAns = new QuestionUserAns();
                         $newAns->logId = $log->id;
                         $newAns->questionId = $textQuestion[$i];
@@ -270,12 +270,12 @@ class ReviewsController extends Controller
                 }
             }
 
-            if($request->multiQuestion != null && $request->multiAns != null) {
+            if ($request->multiQuestion != null && $request->multiAns != null) {
                 $multiQuestion = json_decode($request->multiQuestion);
                 $multiAns = json_decode($request->multiAns);
 
-                for($i = 0; $i < count($multiAns); $i++){
-                    if($multiAns[$i] != null && $multiAns[$i] != '' && $multiQuestion[$i] != null){
+                for ($i = 0; $i < count($multiAns); $i++) {
+                    if ($multiAns[$i] != null && $multiAns[$i] != '' && $multiQuestion[$i] != null) {
                         $newAns = new QuestionUserAns();
                         $newAns->logId = $log->id;
                         $newAns->questionId = $multiQuestion[$i];
@@ -285,12 +285,12 @@ class ReviewsController extends Controller
                 }
             }
 
-            if($request->rateQuestion != null && $request->rateAns != null) {
+            if ($request->rateQuestion != null && $request->rateAns != null) {
                 $rateQuestion = json_decode($request->rateQuestion);
                 $rateAns = json_decode($request->rateAns);
 
-                for($i = 0; $i < count($rateAns); $i++){
-                    if($rateAns[$i] != null && $rateAns[$i] != '' && $rateQuestion[$i] != null){
+                for ($i = 0; $i < count($rateAns); $i++) {
+                    if ($rateAns[$i] != null && $rateAns[$i] != '' && $rateQuestion[$i] != null) {
                         $newAns = new QuestionUserAns();
                         $newAns->logId = $log->id;
                         $newAns->questionId = $rateQuestion[$i];
@@ -309,19 +309,19 @@ class ReviewsController extends Controller
             $newAlert->click = 0;
             $newAlert->save();
 
-            $code = $uId . '_' . rand(10000,99999);
+            $code = $uId . '_' . rand(10000, 99999);
 
             echo json_encode(['status' => 'ok', 'code' => $code]);
-        }
-        else
+        } else
             echo json_encode(['status' => 'nok']);
 
         return;
     }
 
-    public function getReviews(Request $request){
+    public function getReviews(Request $request)
+    {
 
-        if(isset($request->placeId) && isset($request->kindPlaceId)){
+        if (isset($request->placeId) && isset($request->kindPlaceId)) {
             $activity = Activity::where('name', 'نظر')->first();
             $a = Activity::where('name', 'پاسخ')->first();
 
@@ -334,40 +334,37 @@ class ReviewsController extends Controller
 
             $count = 0;
             $num = 0;
-            if(isset($request->count))
+            if (isset($request->count))
                 $count = $request->count;
-            if(isset($request->num))
+            if (isset($request->num))
                 $num = $request->num;
 
-            if(\auth()->check())
+            if (\auth()->check())
                 $uId = \auth()->user()->id;
             else
                 $uId = 0;
 
             $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject != "dontShowThisText"';
 
-            if(isset($request->filters)) {
+            if (isset($request->filters)) {
                 foreach ($request->filters as $item) {
                     if ($item != null && $item['kind'] != 'onlyPic' && $item['kind'] != 'textSearch') {
                         array_push($ques, $item['id']);
                         array_push($ans, $item['value']);
-                    }
-                    else if($item != null && $item['kind'] == 'onlyPic'){
+                    } else if ($item != null && $item['kind'] == 'onlyPic') {
 
-                        if($item['value'] != 3) {
+                        if ($item['value'] != 3) {
                             $onlyPic = $item['value'];
                             $isPicFilter = true;
-                        }
-                        else{
-                            if($sqlQuery != '')
+                        } else {
+                            if ($sqlQuery != '')
                                 $sqlQuery .= ' AND';
                             $sqlQuery = ' CHARACTER_LENGTH(text) > 150';
                         }
 
-                    }
-                    else if($item != null && $item['kind'] == 'textSearch'){
+                    } else if ($item != null && $item['kind'] == 'textSearch') {
 
-                        if($sqlQuery != '')
+                        if ($sqlQuery != '')
                             $sqlQuery .= ' AND';
 
                         $sqlQuery .= ' text LIKE "%' . $item['value'] . '%"';
@@ -409,9 +406,9 @@ class ReviewsController extends Controller
                     }
                 }
 
-                if($isPicFilter){
+                if ($isPicFilter) {
 
-                    if($sqlQuery == '')
+                    if ($sqlQuery == '')
                         $sqlQuery = '1';
 
                     $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->get();
@@ -420,18 +417,18 @@ class ReviewsController extends Controller
                     foreach ($logs as $item)
                         array_push($loo, $item->id);
 
-                    if($onlyPic != 3){
+                    if ($onlyPic != 3) {
                         $ni = DB::select('SELECT logId, GROUP_CONCAT(isVideo) AS video FROM reviewPics WHERE logId IN (' . implode(",", $loo) . ') GROUP BY logId;');
 
                         $lo = array();
-                        foreach ($ni as $item){
-                            switch ($onlyPic){
+                        foreach ($ni as $item) {
+                            switch ($onlyPic) {
                                 case 1:
-                                    if(strpos($item->video, '1') === false)
+                                    if (strpos($item->video, '1') === false)
                                         array_push($lo, $item->logId);
                                     break;
                                 case 2:
-                                    if(strpos($item->video, '0') === false) {
+                                    if (strpos($item->video, '0') === false) {
                                         array_push($lo, $item->logId);
                                     }
                                     break;
@@ -446,33 +443,32 @@ class ReviewsController extends Controller
 
                 }
 
-                if(count($lo) > 0){
-                    if($sqlQuery != '')
+                if (count($lo) > 0) {
+                    if ($sqlQuery != '')
                         $sqlQuery .= ' AND';
 
                     $sqlQuery .= ' id IN (' . implode(",", $lo) . ')';
-                }
-                else if(($isPicFilter || count($ques) > 0) && count($lo) == 0){
+                } else if (($isPicFilter || count($ques) > 0) && count($lo) == 0) {
                     echo 'nok1';
                     return;
                 }
 
             }
 
-            if($sqlQuery == '')
+            if ($sqlQuery == '')
                 $sqlQuery = '1';
 
             $logCount = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->count();
-            if($num == 0 && $count == 0)
+            if ($num == 0 && $count == 0)
                 $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
             else
-                $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($num-1)*$count)->take($count)->get();
+                $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($num - 1) * $count)->take($count)->get();
 
-            if(count($logs) == 0)
+            if (count($logs) == 0)
                 echo 'nok1';
-            else{
+            else {
                 foreach ($logs as $key => $item)
-                    $item = $this->reviewTrueType($item);
+                    $item = reviewTrueType($item); // in common.php
 
                 echo json_encode([$logs, $logCount]);
             }
@@ -484,13 +480,13 @@ class ReviewsController extends Controller
 
     public function ansReview(Request $request)
     {
-        if(\auth()->check()) {
+        if (\auth()->check()) {
             if (isset($request->text) && isset($request->logId)) {
                 if (strlen($request->text) > 2) {
                     $u = Auth::user();
-                    $a = Activity::where('name','پاسخ')->first();
+                    $a = Activity::where('name', 'پاسخ')->first();
                     $mainLog = LogModel::find($request->logId);
-                    if($mainLog != null) {
+                    if ($mainLog != null) {
                         $newLog = New LogModel();
                         $newLog->placeId = $mainLog->placeId;
                         $newLog->kindPlaceId = $mainLog->kindPlaceId;
@@ -502,7 +498,7 @@ class ReviewsController extends Controller
                         $newLog->relatedTo = $mainLog->id;
                         $newLog->save();
 
-                        if(isset($request->ansAns) && $request->ansAns == 1){
+                        if (isset($request->ansAns) && $request->ansAns == 1) {
                             $mainLog->subject = 'ans';
                             $mainLog->save();
                         }
@@ -513,99 +509,6 @@ class ReviewsController extends Controller
             }
         }
     }
-
-    private function imageStyleCreate($item){
-        foreach ($item->pics as $item2) {
-            if($item2->isVideo == 1){
-                $videoArray = explode('.', $item2->pic);
-                $videoName = '';
-                for($k = 0; $k < count($videoArray)-1; $k++)
-                    $videoName .= $videoArray[$k] . '.';
-                $videoName .= 'png';
-
-                $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $videoName);
-                $item2->videoUrl = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
-            }
-            else{
-                $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
-            }
-        }
-        return $item;
-    }
-
-    private function reviewTrueType($_log){
-        $anss = getAnsToComments($_log->id);
-        $ansToReview = $anss[0];
-        $_log->ansNum = $anss[1];
-
-        if(count($ansToReview) > 0)
-            $_log->comment = $ansToReview;
-        else
-            $_log->comment = array();
-
-        $_log->user = User::select(['id', 'first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($_log->visitorId);
-        $_log->usernameReviewWriter = $_log->user->username;
-
-        $_log->userPic = getUserPic($_log->user->id);
-
-        $_log->assigned = ReviewUserAssigned::where('logId', $_log->id)->get();
-
-        $kindPlace = Place::find($_log->kindPlaceId);
-        $_log->mainFile = $kindPlace->fileName;
-        $_log->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_log->placeId);
-        $_log->kindPlace = $kindPlace->name;
-
-        $_log->pics = ReviewPic::where('logId', $_log->id)->get();
-        $_log = $this->imageStyleCreate($_log);
-
-        $_log->city = Cities::find($_log->place->cityId);
-        $_log->state = State::find($_log->city->stateId);
-
-        if (count($_log->assigned) != 0) {
-            foreach ($_log->assigned as $_log2) {
-                if ($_log2->userId != null) {
-                    $u = User::find($_log2->userId);
-                    if ($u != null)
-                        $_log2->name = $u->username;
-                }
-            }
-        }
-
-        $_log->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionUserAns AS us , questions AS qus WHERE us.logId = ' . $_log->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
-        if (count($_log->ans) != 0) {
-            foreach ($_log->ans as $_log2) {
-                if ($_log2->ansType == 'multi') {
-                    $anss = QuestionAns::where('questionId', $_log2->id)->where('id', $_log2->ans)->first();
-                    $_log2->ans = $anss->ans;
-                    $_log2->ansId = $anss->id;
-                }
-            }
-        }
-
-        $time = $_log->date . '';
-        if(strlen($_log->time) == 1)
-            $_log->time = '000' . $_log->time;
-        else if(strlen($_log->time) == 2)
-            $_log->time = '00' . $_log->time;
-        else if(strlen($_log->time) == 3)
-            $_log->time = '0' . $_log->time;
-
-        if(strlen($_log->time) == 4) {
-            $time .= ' ' . substr($_log->time, 0, 2) . ':' . substr($_log->time, 2, 2);
-            $_log->timeAgo = getDifferenceTimeString($time);
-        }
-        else
-            $_log->timeAgo = '';
-
-        $_log->like = LogFeedBack::where('logId', $_log->id)->where('like', 1)->count();
-        $_log->dislike = LogFeedBack::where('logId', $_log->id)->where('like', -1)->count();
-
-        if (\auth()->check()) {
-            $u = \auth()->user();
-            $_log->userLike = LogFeedBack::where('logId', $_log->id)->where('userId', $u->id)->first();
-        } else
-            $_log->userLike = null;
-
-        return $_log;
-    }
 }
+
+  

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Adab;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\BannerPics;
 use App\models\Boomgardy;
@@ -12,6 +13,7 @@ use App\models\Comment;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
 use App\models\Hotel;
+use App\models\LogFeedBack;
 use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\MainSliderPic;
@@ -134,8 +136,14 @@ class PlaceController extends Controller {
         if ($count[0]->tripPlaceNum > 0)
             $save = true;
 
-        if(isset($place->phone) && $place->phone != null)
-            $place->phone = explode('-', $place->phone);
+        if(isset($place->phone) && $place->phone != null) {
+            if(strpos($place->phone, '-') !== false)
+                $place->phone = explode('-', $place->phone);
+            else if(strpos($place->phone,'_') !== false)
+                $place->phone = explode('_', $place->phone);
+            else
+                $place->phone = explode(',', $place->phone);
+        }
 
 
         $city = Cities::whereId($place->cityId);
@@ -1117,91 +1125,6 @@ class PlaceController extends Controller {
             }
 
             echo json_encode($logs);
-        }
-
-    }
-
-    public function report()
-    {
-
-        if (isset($_POST["logId"])) {
-
-            $logId = makeValidInput($_POST["logId"]);
-
-            $logTmp = LogModel::whereId($logId);
-            $uId = Auth::user()->id;
-            $activityId = Activity::whereName('گزارش')->first()->id;
-            $condition = ["visitorId" => $uId, 'relatedTo' => $logId, 'activityId' => $activityId];
-
-            if (LogModel::where($condition)->count() == 0) {
-
-                $log = new LogModel();
-                $log->placeId = $logTmp->placeId;
-                $log->time = getToday()["time"];
-                $log->kindPlaceId = $logTmp->kindPlaceId;
-                $log->visitorId = $uId;
-                $log->date = date('Y-m-d');
-                $log->relatedTo = $logId;
-                $log->activityId = $activityId;
-
-                try {
-                    $log->save();
-                } catch (Exception $x) {
-                };
-            }
-        }
-    }
-
-    public function sendReport()
-    {
-
-        if (isset($_POST["logId"]) && isset($_POST["reports"]) && isset($_POST["customMsg"])) {
-
-            $logId = makeValidInput($_POST["logId"]);
-            $logTmp = LogModel::whereId($logId);
-            $reports = $_POST["reports"];
-            $customMsg = makeValidInput($_POST["customMsg"]);
-            $uId = Auth::user()->id;
-            $activityId = Activity::whereName('گزارش')->first()->id;
-            $condition = ["visitorId" => $uId, "activityId" => $activityId,
-                "relatedTo" => $logId, 'subject' => ''];
-            $log = LogModel::where($condition)->first();
-
-            if ($log == null) {
-                $log = new LogModel();
-                $log->visitorId = $uId;
-                $log->time = getToday()["time"];
-                $log->placeId = $logTmp->placeId;
-                $log->kindPlaceId = $logTmp->kindPlaceId;
-                $log->activityId = $activityId;
-                $log->relatedTo = $logId;
-                $log->date = date('Y-m-d');
-                $log->save();
-            }
-
-            $log->text = "";
-            $log->save();
-
-            $tmpLog = LogModel::whereId($logId);
-            $tmpLog->date = date('Y-m-d');
-            $tmpLog->save();
-
-            Report::whereLogId($log->id)->delete();
-
-            for ($i = 0; $i < count($reports); $i++) {
-                $report = makeValidInput($reports[$i]);
-
-                if ($report == -1) {
-                    $log->text = $customMsg;
-                    $log->save();
-                } else {
-                    $newReport = new Report();
-                    $newReport->logId = $log->id;
-                    $newReport->reportKind = $report;
-                    $newReport->save();
-                }
-            }
-            echo "ok";
         }
 
     }
@@ -2897,10 +2820,48 @@ class PlaceController extends Controller {
             $log->confirm = 0;
             $log->save();
 
+            $alert = new Alert();
+            $alert->userId = $uId;
+            $alert->subject = 'addQuestion';
+            $alert->referenceTable = 'log';
+            $alert->referenceId = $log->id;
+            $alert->save();
+
             echo "ok";
         }
         else
             echo 'nok1';
+
+        return;
+    }
+
+    public function deleteQuestion(Request $request)
+    {
+        if(\auth()->check()){
+            $uId = \auth()->user()->id;
+            $log = LogModel::find($request->id);
+            if($log != null){
+                $this->deleteRelatedQuestion($request->id);
+                echo 'ok';
+            }
+            else
+                echo 'nok1';
+        }
+        else
+            echo 'auth';
+
+        return;
+    }
+
+    private function deleteRelatedQuestion($id){
+        $log = LogModel::find($id);
+        if($log != null){
+            LogFeedBack::where('logId', $log->id)->delete();
+            $logRelated = LogModel::where('relatedTo', $log->id)->get();
+            foreach ($logRelated as $item)
+                $this->deleteRelatedQuestion($item->id);
+            $log->delete();
+        }
 
         return;
     }
@@ -2924,41 +2885,24 @@ class PlaceController extends Controller {
             $sqlQuery = ' placeId = ' . $placeId . ' AND kindPlaceId = ' . $kindPlaceId . ' AND activityId = ' . $activityId . ' AND relatedTo = 0 AND (( visitorId = ' . $uId . ' AND confirm = 0) OR (confirm = 1))';
             $logs = LogModel::whereRaw($sqlQuery)->skip(($page - 1) * $count)->take($count)->get();
 
-//            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'activityId' => $activityId, 'confirm' => 1, 'relatedTo' => 0];
-//            $logs = LogModel::where($condition)->skip(($page - 1) * $count)->take($count)->get();
-
             $allCount = 0;
             $allAnswerCount = 0;
 
             if($_POST['isQuestionCount'])
                 $allCount = LogModel::whereRaw($sqlQuery)->count();
-//                $allCount = LogModel::where($condition)->count();
 
             foreach ($logs as $log) {
-
                 if($_POST['isQuestionCount'])
                     $allAnswerCount += getAnsToComments($log->id)[1];
 
                 $user = User::whereId($log->visitorId);
-                if ($user->first_name != null)
-                    $log->username = $user->first_name . ' ' . $user->last_name;
-                else
-                    $log->username = $user->username;
-                
-                if($user->uploadPhoto == 0){
-                    $deffPic = DefaultPic::find($user->picture);
-                    if($deffPic != null)
-                        $log->userPic = URL::asset('defaultPic/' . $deffPic->name);
-                    else
-                        $log->userPic = URL::asset('_images/nopic/blank.jpg');
-                }
-                else
-                    $log->userPic = URL::asset('userProfile/' . $user->picture);
+                $log->userName = $user->username;
+                $log->userPic = getUserPic($user->id);
 
                 $anss = getAnsToComments($log->id);
 
-                $log->comment = $anss[0];
-                $log->ansNum = $anss[1];
+                $log->answers = $anss[0];
+                $log->answersCount = $anss[1];
 
                 $kindPlace = Place::find($log->kindPlaceId);
                 $log->mainFile = $kindPlace->fileName;
@@ -2967,7 +2911,6 @@ class PlaceController extends Controller {
 
                 $log->city = Cities::find($log->place->cityId);
                 $log->state = State::find($log->city->stateId);
-
 
                 $time = $log->date . '';
                 if(strlen($log->time) == 1)
@@ -2985,6 +2928,12 @@ class PlaceController extends Controller {
                     $log->timeAgo = '';
 
                 $log->date = convertDate($log->date);
+
+                $log->yourReview = false;
+                if(\auth()->check()){
+                    if($log->visitorId == \auth()->user()->id)
+                        $log->yourReview = true;
+                }
             }
 
             echo json_encode([$logs, $allCount, $allAnswerCount]);
@@ -3008,7 +2957,7 @@ class PlaceController extends Controller {
             $uId = Auth::user()->id;
 
             $tmp = LogModel::whereId($relatedTo);
-            if ($tmp == null || $tmp->confirm != 1) {
+            if ($tmp == null) {
                 echo 'nok2';
                 return;
             }
@@ -3029,6 +2978,13 @@ class PlaceController extends Controller {
                 $tmp->subject = 'ans';
                 $tmp->save();
             }
+
+            $alert = new Alert();
+            $alert->userId = $uId;
+            $alert->subject = 'addAns';
+            $alert->referenceTable = 'log';
+            $alert->referenceId = $log->id;
+            $alert->save();
 
             echo "ok";
         }

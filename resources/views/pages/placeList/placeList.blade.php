@@ -29,8 +29,8 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css?v=1')}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v=1')}}'/>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
@@ -136,9 +136,9 @@
                                         </a>
 
                                         @if(auth()->check())
-                                            <div id="moreMapHeart" class="heartOnPic" onclick="saveToTripList(this)" value="">
+                                            <div id="moreMapHeart" class="heartOnPic" onclick="saveToTripList(this)" value="[[place.id]]">
                                                 {{--fill-heart--}}
-                                                <span class="empty-heart"></span>
+                                                <span class="empty-heart [[place.inTrip]]"></span>
                                             </div>
                                         @endif
                                     </div>
@@ -374,7 +374,7 @@
 
     </div>
 
-    @include('hotelDetailsPopUp')
+{{--    @include('hotelDetailsPopUp')--}}
 
     @include('layouts.placeFooter')
 </div>
@@ -525,13 +525,10 @@
                 $('.filterShowCount').text(response.data.placeCount);
 
                 @if($contentCount > 0)
-                $('#notingToShowFilter').addClass('hidden');
-                console.log(response.data.placeCount)
-                console.log(response.data.totalCount)
-                console.log('-------------------')
-                if(response.data.placeCount == 0 && response.data.totalCount > 0)
-                    $('#notingToShowFilter').removeClass('hidden');
-                        @endif
+                    $('#notingToShowFilter').addClass('hidden');
+                    if(response.data.placeCount == 0 && response.data.totalCount > 0)
+                        $('#notingToShowFilter').removeClass('hidden');
+                @endif
 
                 for(j = 0; j < response.data.places.length; j++){
                     var k = $scope.packets.length;

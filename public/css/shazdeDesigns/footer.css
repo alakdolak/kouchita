@@ -448,7 +448,7 @@ footer li > img, .small-ico {
 /*the others style*/
 
 .lp_others_content {
-    padding: 25px;
+    padding: 10px;
     height: inherit;
 }
 
@@ -1265,6 +1265,11 @@ footer .profileMenuLinks {
 
 .shareSection{
     position: relative;
+}
+
+.footerSearchBar{
+    transform: none;
+    align-items: center;
 }
 
 @media (max-width: 1300px) {

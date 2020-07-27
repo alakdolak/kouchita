@@ -113,7 +113,7 @@
                                                         <li class="subItem rule"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a></li>
                                                         <li class="subItem "><a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a></li>
                                                         <li class="subItem rule"><a href="{{route('msgs')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
-                                                        <li class="subItem"><a href="{{route('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
+                                                        <li class="subItem"><a href="{{route('profile.accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
                                                         <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
                                                     </ul></div>
                                             </div>
@@ -184,9 +184,9 @@
         <div class="modules-membercenter-persistent-header-achievements " style="background-color: #fcc156 !important;">
             <ul class="persistent-header">
                 @if($mode == "profile")
-                    <li id="Profile" class="profile"><a style="color: #963019 !important" href="{{route('otherProfile', ['username' => $user->username])}}">صفحه کاربری</a> </li>
+                    <li id="Profile" class="profile"><a style="color: #963019 !important" href="{{route('profile', ['username' => $user->username])}}">صفحه کاربری</a> </li>
                 @else
-                    <li id="Profile" class="profile"><a style="color: #16174f" href="{{route('otherProfile', ['username' => $user->username])}}">صفحه کاربری</a> </li>
+                    <li id="Profile" class="profile"><a style="color: #16174f" href="{{route('profile', ['username' => $user->username])}}">صفحه کاربری</a> </li>
                 @endif
                 @if($mode == "badge")
                     <li id="BadgeCollection" class="badgeCollection"><a style="color: #963019 !important" href="{{route('otherBadge', ['username' => $user->username])}}">مدال های گردشگری</a> </li>

@@ -4,9 +4,9 @@
     @section('main')
         <script src="{{URL::asset('js/jsNeededForProfile.js')}}"></script>
 
-        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
 
         <script>
 
@@ -385,8 +385,8 @@
                                                 {{--<img id="arrowUp" src="{{URL::asset('images/arrow_up.png')}}" class="profLinksArrowDown" hidden="hidden" height="15" width="15"/>--}}
                                                 <div id="arrowUp" class="glyphicon glyphicon-chevron-up display-none"></div>
                                                 <div class="overlayContents item">
-                                                    <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">ویرایش اطلاعات کاربری</a>
-                                                    <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">ویرایش عکس</a>
+                                                    <a name="edit-profile" class="menu-link" href="{{route('profile.accountInfo')}}">ویرایش اطلاعات کاربری</a>
+                                                    <a name="edit-photo" class="menu-link" href="{{route('profile.editPhoto')}}">ویرایش عکس</a>
                                                     <a name="subscriptions" class="menu-link" href="">اشتراک‌ها</a>
                                                 </div>
 
@@ -395,8 +395,8 @@
                                             <div id="infoDiv" class="profileLinksDropdown overlay oldoly noBackdrop relative relAbove item display-none">
 
                                                 <div class="inner" id="overlayInnerDiv">
-                                                    <a name="edit-profile" class="menu-link" href="{{route('accountInfo')}}">ویرایش اطلاعات کاربری</a>
-                                                    <a name="edit-photo" class="menu-link" href="{{route('editPhoto')}}">ویرایش عکس</a>
+                                                    <a name="edit-profile" class="menu-link" href="{{route('profile.accountInfo')}}">ویرایش اطلاعات کاربری</a>
+                                                    <a name="edit-photo" class="menu-link" href="{{route('profile.editPhoto')}}">ویرایش عکس</a>
                                                     <a name="subscriptions" class="menu-link" href="{{route('soon')}}">اشتراک‌ها</a>
                                                 </div>
                                             </div>
@@ -416,7 +416,7 @@
 
 
                                 <div class="aboutMeDesc">
-                                    <a href="{{URL('accountInfo')}}" class="update">به روز رسانی اطلاعات </a>
+                                    <a href="{{route('profile.accountInfo')}}" class="update">به روز رسانی اطلاعات </a>
                                 </div>
 
 

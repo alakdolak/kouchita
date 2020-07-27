@@ -97,24 +97,6 @@ DIV.ppr_rup.ppr_priv_location_detail_header {
     height: 8px;
     background: #ccc;
 }
-
-.is-create-trip {
-    color: #00AF87 !important;
-    background-blend-mode: overlay;
-    width: 150px;
-    height: 150px;
-    cursor: pointer;
-    margin: 0 0 10px 0;
-    border-radius: 2px;
-    display: -webkit-box;
-    display: flex;
-    line-height: initial;
-    transition: background-color .2s ease, corder-color .2s ease;
-    border: 1px solid #f5f5f5;
-    justify-content: space-around;
-    background-color: #e5e5e5;
-}
-
 .ui_icon:before {
     content: "\e02f";
     display: inline-block;
@@ -127,14 +109,6 @@ DIV.ppr_rup.ppr_priv_location_detail_header {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     speak: none;
-}
-
-.is-create-trip .tile-content {
-    align-self: center;
-    margin: 10px;
-    padding: 0;
-    box-sizing: inherit;
-    cursor: pointer;
 }
 
 .castles:before {
@@ -1657,7 +1631,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .sharePageLabel {
-    margin-right: 20px;
+    margin-right: 17px;
 }
 
 .ui_icon.casino::before, .ui_icon.casino::before {
@@ -1774,12 +1748,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 2px 10px;
     font-size: 0.8em;
     display: inline-block;
-    border: 1px solid #cccccc;
     border-radius: 5px;
-    background-color: #ebebeb;
+    background-color: #f2f2f2;
     line-height: 1.42857143;
-    /*margin: 10px 0;*/
     width: auto;
+    /*margin: 10px 0;*/
+    /*border: 1px solid #cccccc;*/
+}
+
+.submitAnsInReview{
+    background-color: #f2f2f2;
+    color: #0076a3;
+    padding: 2px;
 }
 
 .inputBoxInput {
@@ -2060,12 +2040,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0 12px;
 }
 
+.mobileIntroductionMainDiv.tabContentMainWrap{
+    padding-right: 15px;
+}
+
 .mobileIntroductionMainDiv #reviewsMainDiv {
     padding: 0 12px;
 }
 
 .userProfileNameAnswers {
-    font-size: 19px;
+    font-size: 16px;
     line-height: 1.7;
 }
 
@@ -2108,7 +2092,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentPhotosMainDiv {
     display: inline-block;
     width: 100%;
-    padding: 0 15px;
+    padding: 0;
     direction: rtl;
 }
 
@@ -2117,7 +2101,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .quintupletPhotoDiv .firstCol > div {
-    height: 130px;
+    height: 133px;
 }
 
 .doublePhotoDiv .firstCol > div {
@@ -2125,7 +2109,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .tripletPhotoDiv .firstCol > div {
-    height: 140px;
+    height: 142px;
 }
 
 .quadruplePhotoDiv .firstCol > div {
@@ -2133,7 +2117,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .secondCol {
-    padding: 0 5px 0 0;
+    padding: 0;
 }
 
 .quintupletPhotoDiv .secondCol > div {
@@ -2182,7 +2166,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentRatingsDetailsShow {
-    padding-top: 10px;
     color: #666666;
     margin-bottom: 10px;
     display: inline-block;
@@ -2190,14 +2173,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentRatingHeader {
+    padding: 3px 0px;
     display: inline-block;
     width: 60%;
     float: right;
-}
-
-.commentRatingHeader > span {
-    color: #16174f;
-    cursor: pointer;
+    font-size: 12px;
 }
 
 .commentRatingsDetailsBtn {
@@ -2233,26 +2213,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentRatingsDetailsBox .starRating, .commentRatingsDetailsBox .starRatingGreen {
     cursor: default;
-}
-
-.commentFeedbackChoices {
-    display: inline-block;
-    width: 100%;
-    border-top: 1px solid #E5E5E5;
-    padding: 10px 0;
-    border-bottom: 1px solid #e5e5e5;
-    color: #666666;
-}
-
-.postsActionsChoices {
-    padding: 0 9px;
-    font-size: 15px;
-    float: right;
-}
-
-.postLikeChoice, .postDislikeChoice, .postCommentChoice, .postShareChoice {
-    display: inline-block;
-    cursor: pointer;
 }
 
 .postLikeChoice:hover {
@@ -2325,7 +2285,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px;
     position: absolute;
     top: -2px;
-    right: 9px;
+    right: 12px;
     cursor: pointer;
 }
 
@@ -2339,38 +2299,25 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
 }
 
-.commentsShareIconFeedback::before {
-    content: '\E1F5';
-    font-family: Shazde_Regular2 !important;
-    font-size: 20px;
-    position: absolute;
-    top: -4px;
-    right: 0px;
-    cursor: pointer;
-}
-
-.commentsShareClickedIconFeedback::before {
-    content: '\E1F6';
-    font-family: Shazde_Regular2 !important;
-    font-size: 20px;
-    position: absolute;
-    top: -4px;
-    right: 25px;
-    cursor: pointer;
-}
-
 /*.commentsShareFeedback , .commentsShareFeedback , .commentsDislikeFeedback , .commentsLikeFeedback {*/
 /*    cursor: pointer;*/
 /*}*/
 
 .commentsMainBox {
     border-bottom: 1px solid #e5e5e5;
+    width: 100%;
 }
 
 .eachCommentMainBox {
     display: inline-block;
     width: 100%;
     margin-bottom: 30px;
+}
+
+.ansOfQuestion .eachCommentMainBox{
+    border-top: 1px solid #E5E5E5;
+    padding-top: 10px;
+    margin-bottom: 0px;
 }
 
 .commentsWriterProfilePic {
@@ -2383,7 +2330,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsContentMainBox {
     display: inline-block;
-    width: 60%;
+    width: calc(100% - 50px);
     background-color: #f2f2f2;
     border-radius: 10px;
     padding: 2px 10px 7px;
@@ -2391,14 +2338,26 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
     position: relative;
 }
+.ansCommentTimeAgo{
+    font-size: 11px;
+    margin-right: 5px;
+    color: #9e9e9e;
+    font-weight: normal;
+}
 
 .commentsActionsBtns {
-    display: inline-block;
+    display: flex;
     float: right;
-    margin-right: 20px;
+    margin-right: 50px;
     position: relative;
-    /*padding-top: 30px;*/
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.lessWidthForAns{
+    margin-right: 45px;
+    width: calc(100% - 45px);
 }
 
 .commentsActionsBtns > div:not(:nth-child(3)) {
@@ -2472,15 +2431,21 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     position: absolute;
     width: 100%;
-    bottom: -25px;
+    bottom: -30px;
     right: 0;
+    z-index: 9;
+}
+.replayReview.replayBtn{
+    color: #0076a3;
+    cursor: pointer;
 }
 
 .commentsStatisticSpan {
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 15px;
     font-size: 14px;
     position: relative;
+    cursor: pointer;
 }
 
 .likeStatisticIcon::before {
@@ -2518,6 +2483,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     width: 100%;
 }
+.ansTextAreaReview{
+    width: calc(100% - 55px) !important;
+    margin-right: 50px !important;
+}
 
 .newCommentPlaceMainDiv button, .replyToCommentMainDiv button {
     float: left;
@@ -2532,7 +2501,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .replyToCommentMainDiv {
     display: inline-block;
-    width: 70%;
+    width: 99%;
     margin: 30px 0 15px;
 }
 
@@ -2545,22 +2514,56 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .newCommentPlaceMainDiv .inputBox, .newAnswerPlaceMainDiv .inputBox {
-    width: 90%;
+    width: calc(100% - 60px);
     float: right;
     position: relative;
 }
 
 .replyToCommentMainDiv .inputBox {
-    width: 85%;
+    width: calc(100% - 50px);
     float: right;
     position: relative;
+}
+
+.newCommentPlaceMainDiv .emojionearea .emojionearea-editor{
+    min-height: 20px;
+}
+.newCommentPlaceMainDiv .emojionearea-button{
+    position: absolute !important;
+    right: 5px !important;
+    bottom: 5px !important;
+}
+
+.replyToCommentMainDiv .emojionearea .emojionearea-editor{
+    min-height: 20px;
+}
+.replyToCommentMainDiv .emojionearea-button{
+    position: absolute !important;
+    right: 5px !important;
+    bottom: 5px !important;
+}
+.replyToCommentMainDiv .inputBoxInput, .newAnswerPlaceMainDiv .inputBoxInput {
+    position: unset !important;
+    background: inherit;
+    margin-top: 15px;
+}
+.replyToCommentMainDiv .emojionearea .emojionearea-picker.emojionearea-picker-position-top{
+    left: auto !important;
+    right: 0 !important;
+}
+
+.newCommentPlaceMainDiv .emojionearea .emojionearea-picker.emojionearea-picker-position-top{
+    left: auto !important;
+    right: 0 !important;
 }
 
 .newCommentPlaceMainDiv .inputBoxInput, .newAnswerPlaceMainDiv .inputBoxInput {
     text-align: right;
     font-size: 12px;
     border: none;
-    height: 39px;
+    /*height: 39px;*/
+    background: inherit;
+    position: unset !important;
 }
 
 .replyToCommentMainDiv .inputBoxInput {
@@ -2584,8 +2587,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-top: 15px;
     height: 35px;
     resize: none;
-    width: 92%;
+    width: 100%;
     float: right;
+    color: black;
 }
 
 .newCommentPlaceMainDiv .commentSmileyIcon {
@@ -2609,9 +2613,19 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .newAnswerPlaceMainDiv {
-    margin-top: 20px;
+    margin: 0px;
     border-top: 1px solid #E5E5E5;
-    padding: 10px 0;
+    padding: 10px 0px 0px 0px;
+}
+.questAnsText{
+    display: flex;
+    direction: rtl;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.ansOfQuestionsUserInfo{
+    display: flex;
+    align-items: center;
 }
 
 .newAnswerWriterProfilePic {
@@ -2737,17 +2751,32 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     justify-content: center;
     align-items: center;
 }
+.setButtonToBot{
+    display: flex;
+    align-items: flex-end;
+}
 
 .inputBoxSearchFilter {
     width: 100%;
     background: white;
-    margin-top: 10px;
+    position: relative;
 }
 
 .inputBoxSearchFilter .inputBoxInput {
     line-height: 2;
     text-align: right;
     font-size: 15px;
+    border: solid #cccccc 1px;
+    border-radius: 5px;
+    padding: 3px;
+}
+.inputBoxSearchFilter .searchIcon{
+    border: none;
+    position: absolute;
+    left: 10px;
+    top: 3px;
+    font-size: 26px;
+    background: none;
 }
 
 .adsMainDiv {
@@ -2831,8 +2860,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .addParticipantSpan {
     display: inline-block;
     float: right;
-    padding: 2px 10px 0 0;
     font-size: 18px;
+    background: #d2d2d2;
+    text-align: center;
+    width: 20px;
 }
 
 .commentPhotosDiv, .commentVideosDiv {
@@ -2996,13 +3027,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     z-index: 9;
     font-size: 20px;
     background-color: #d0d0d0;
+    border-radius: 5px;
+    /*padding: 3px 10px 3px 0px;*/
+}
+.assignedResultReview li{
+    padding-right: 5px;
 }
 
 .removeParticipantBtn::before {
     content: '\E02C';
     font-family: Shazde_Regular2 !important;
     position: absolute;
-    background-color: #c7c7c7;
+    background-color: #e5e5e5;
     left: 10px;
     font-size: 18px;
     line-height: 0.8;
@@ -3213,38 +3249,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 /*    !*display: none;*!*/
 /*}*/
 
-.starRatingGreen::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: #4DC7BC;
-    font-size: 25px;
-}
-
-.starRating::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: white;
-    font-size: 25px;
-}
-
-.starRatingGold::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: #fcc156;
-    font-size: 25px;
-}
-
-.starRatingGrey::before {
-    content: '\E00B';
-    cursor: pointer;
-    font-family: Shazde_Regular2 !important;
-    color: #e5e5e5;
-    font-size: 25px;
-}
-
 .starRatingGrey, .starRatingGold, .starRatingGreen, .starRating {
     cursor: pointer;
 }
@@ -3278,9 +3282,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .questionInputBox {
     float: right;
-    width: 85%;
+    width: calc(100% - 60px);
     position: relative;
     border: none;
+    padding-left: 0;
+    display: flex;
+    align-items: flex-end;
+    direction: rtl;
 }
 
 .newQuestionContainer > b:nth-child(1) {
@@ -3304,27 +3312,39 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
     height: 45px;
     padding-top: 10px;
-    width: 92%;
-    float: right;
+    width: 99%;
 }
 
 .sendQuestionBtn {
-    display: inline-block;
-    float: right;
-    background: #0076a3;
-    color: white;
+    background-color: #f2f2f2;
+    color: #0076a3;
     padding: 13px 10px;
     font-weight: 700;
     font-size: 15px;
     border-radius: 5px;
     margin-right: 5px;
     cursor: pointer;
+    width: fit-content;
+    padding-bottom: 5px;
+}
+
+.sendingQuestionLoading{
+    background: #0076a3;
+    color: #cccccc;
+    justify-content: center;
+    font-size: 12px;
+    display: flex;
+    width: 145px;
+    align-items: center;
+    padding: 0;
 }
 
 .answersBoxMainDiv {
+    /*border-top: 1px solid #E5E5E5;*/
     position: relative;
-    border-bottom: 1px solid #e5e5e5;
-    padding-top: 10px;
+    background: white;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .showingQuestionCompletely {
@@ -3340,8 +3360,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .questionContentMainBox {
-    border-bottom: 1px solid #E5E5E5;
-    padding: 0 10px 30px;
+    padding: 0 10px 10px;
     text-align: justify;
     direction: rtl;
     font-size: 14px;
@@ -3722,20 +3741,59 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .answersWriterExperienceDetails {
-    display: inline-block;
-    float: right;
-    width: 57%;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    width: calc(100% - 60px);
 }
 
 .userProfileName {
-    display: inline-block;
-    font-size: 15px;
-    width: 65%;
+    font-size: 16px;
+    /*width: 65%;*/
+    display: flex;
+    align-items: center;
+}
+
+.likedislikeAnsReviews{
+    align-items: center;
+    font-size: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    direction: rtl;
+    cursor: pointer;
+}
+.likedislikeAnsReviews:after{
+    font-size: 26px;
+}
+
+.LikeIconEmpty.likedislikeAnsReviews:before{
+    content: '';
+}
+.LikeIconEmpty.likedislikeAnsReviews:after{
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
+}
+
+.DisLikeIconEmpty.likedislikeAnsReviews:before{
+    content: '';
+}
+.DisLikeIconEmpty.likedislikeAnsReviews:after{
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+}
+.DisLikeIconEmpty.likedislikeAnsReviews.coloredFullIcon{
+    color: darkred;
+}
+.DisLikeIconEmpty.likedislikeAnsReviews.coloredFullIcon:after{
+    content: '\E058' !important;
 }
 
 .postPlaceAndTime {
     display: flex;
     flex-direction: column;
+    font-size: 11px;
 }
 
 .commentWriterExperiencePlace, .answersWriterExperiencePlace {
@@ -3752,13 +3810,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentPhotosShow {
+    font-size: 12px;
     padding-bottom: 10px;
     border-bottom: 1px solid #e5e5e5;
 }
 
 .photosCol > div {
-    margin-top: 10px;
-    border: 2px solid black;
+    margin-top: 4px;
+    border: 1px solid black;
     cursor: pointer;
 }
 
@@ -3991,8 +4050,201 @@ td > div {
     padding-right: 5px;
 }
 
-/*responsive for tablets*/
 
+.answersWriterDetailsShow{
+    display: flex;
+    direction: rtl;
+}
+.answersWriterPicShow{
+    width: 55px;
+    height: 55px;
+}
+
+.topMainMapDiv{
+    margin-top: 25px;
+    padding-left: 15px;
+}
+
+.stickyFixTop{
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    z-index: 9;
+    box-shadow: 0px 7px 20px 0px #cccccc;
+}
+
+.borderInMobile{
+    width: calc(100% - 50px);
+    margin-right: 50px;
+
+    border-right: solid 1px #cccccc;
+    padding-right: 10px;
+    margin-bottom: 15px;
+}
+
+.wholeAnsSection{
+    width: 100%;
+    display: flex;
+    direction: rtl;
+    flex-direction: column;
+}
+
+.inConfirm{
+    margin-right: 12px;
+    font-size: 9px;
+    font-weight: normal;
+    cursor: default;
+}
+
+
+.tvSection{
+    position: relative;
+    height: 430px;
+}
+.tvLogoDiv{
+    position: relative;
+    background: #4DC7BC;
+    width: 55%;
+    display: flex;
+    margin-left: auto;
+    padding: 0px 0px 5px 5px;
+}
+.tvSeeMore{
+    position: absolute;
+    background: #4DC7BC;
+    color: white;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px 10px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0px;
+}
+.tvSeeMore:hover{
+    color: white;
+}
+.tvSeeMoreIcons{
+    position: relative;
+    width: 30px;
+    display: flex;
+    justify-content: flex-start;
+    height: 30px;
+    align-items: center;
+    margin-right: 10px;
+}
+.tvSeeMoreIcons > i{
+    width: 10px;
+    font-size: 30px;
+    font-style: normal;
+}
+.tvContentDiv{
+    padding: 0px 10px;
+    direction: rtl;
+    margin-top: 5px;
+}
+.tvContentText{
+    color: white;
+    text-align: justify;
+    font-size: 15px;
+    line-height: 25px;
+}
+.tvContentVideo{
+    width: 100%;
+    height: 230px;
+    background: #232323;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
+}
+.tvVideoPic{
+    position: relative;
+    width: 100%;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.tvVideoName{
+    color: white;
+    font-size: 12px;
+    margin-top: 10px;
+    padding-right: 10px;
+    display: block;
+}
+.tvUserContentDiv{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+.tvUserPic{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.tvUserInfo{
+    margin-right: 10px;
+    font-size: 11px;
+}
+.tvUserName{
+    color: #0076a3;
+}
+.tvUserTime{
+    color: white;
+}
+.tvImgHover{
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background: #00000085;
+}
+.tvVideoPic:hover .tvImgHover{
+    display: flex;
+}
+.tvOverPic{
+    position: absolute;
+    background: #000000d1;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+}
+.tvSeenSection{
+    top: 10px;
+    left: 20px;
+}
+.tvLikeSection{
+    bottom: 10px;
+    left: 20px;
+}
+.tvLike{
+
+}
+.tvLike > i{
+    font-style: normal;
+    display: inline-block;
+    width: 6px;
+    display: inline-flex;
+    justify-content: center;
+}
+/*responsive for tablets*/
 @media only screen and (min-width: 992px) {
 
     .mobile-mode, #share_pic_mobile, #mobileIntroductionMainDivId .tabLinkMainDiv {
@@ -4042,7 +4294,7 @@ td > div {
     }
 
     .moreSettingPostManDiv {
-        display: none;
+        display: none !important;
     }
 
     .postModalMainDiv {
@@ -4088,10 +4340,6 @@ td > div {
         padding-right: 0;
     }
 
-    .questionInputBox {
-        width: 87%;
-    }
-
     .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
         margin: 0 26px;
     }
@@ -4116,6 +4364,21 @@ td > div {
 }
 
 @media only screen and (max-width: 991px) {
+    .stickyFixTop{
+        right: 0px;
+    }
+    .topMainMapDiv{
+        padding-right: 15px;
+    }
+    #commentsAndAddressMobile{
+        border: none;
+    }
+    .mobileIntroductionMainDiv.tabContentMainWrap{
+        padding: 0px;
+    }
+    .exceptQAndADiv{
+        width: 100%;
+    }
     .descriptionSections{
         width: 100% !important;
     }
@@ -4247,7 +4510,7 @@ td > div {
     }
 
     .moreSettingPostManDiv {
-        display: none;
+        display: none !important;
     }
 
     /*introduction bar*/
@@ -4351,12 +4614,14 @@ td > div {
         display: inline-block;
     }
 
-    .questionInputBox {
-        width: 80%;
-    }
-
     .QAndAMainDiv {
         margin-top: 0;
+    }
+
+    .newQuestionMainDiv{
+        background-color: #f2f2f2;
+        padding: 5px 5px 10px 0px;
+        border-radius: 5px;
     }
 }
 
@@ -4373,6 +4638,36 @@ td > div {
 }
 
 @media only screen and (max-width: 767px) {
+    .lessWidthForAns{
+        margin-right: 15px;
+        width: calc(100% - 15px);
+    }
+    .replyToCommentMainDiv{
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        padding: 5px 5px 0px 0px;
+    }
+
+    .eachCommentMainBox{
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        padding: 5px 5px 0px 0px;
+    }
+
+    .borderInMobile{
+        border-right: solid 1px #cccccc;
+        width: calc(100% - 15px);
+        margin-right: 15px;
+        padding-right: 10px;
+        margin-bottom: 15px;
+    }
+
+    .newCommentPlaceMainDiv, .answerPlaceMainDiv, .newAnswerPlaceMainDiv{
+        background-color: #f2f2f2;
+        padding: 5px 5px 0px 0px;
+        border-radius: 5px;
+    }
+
     #helpBtnMainDiv {
         top: -105px;
     }
@@ -4382,9 +4677,15 @@ td > div {
     }
 
     .postModalMainDiv {
+        position: fixed;
+        width: 100%;
+        overflow-x: hidden;
+        top: 0;
+        overflow-y: auto;
+        height: 100vh;
+        z-index: 9999;
         right: 0;
         left: 0;
-        top: 350px;
     }
 
     .postModalMainDiv > .modal-dialog {
@@ -4511,19 +4812,14 @@ td > div {
         height: 10px;
     }
 
-    .commentsContentMainBox {
-        width: 85%;
-    }
-
     .replyBtn {
         float: left;
     }
 
     .replyToCommentMainDiv {
         width: 99%;
-        margin: 40px 0 15px;
+        margin: 40px 0 0px;
     }
-
 
     .navbar-collapse.collapse {
         display: block!important;
@@ -4541,6 +4837,9 @@ td > div {
 
 @media only screen and (max-width: 630px) {
 
+    .commentFeedbackChoices{
+        padding: 5px 0px 0px 0px;
+    }
     /*bottomBarHeader*/
     .replyToCommentMainDiv {
         width: 100%;
@@ -4607,10 +4906,6 @@ td > div {
         margin-top: 135px;
     }
 
-    .postModalMainDiv {
-        top: 475px;
-    }
-
     .addParticipantInputBoxPostModal {
         width: 95%;
     }
@@ -4642,7 +4937,7 @@ td > div {
     }
 
     .addOriginCityInputBoxPostModal {
-        width: 75%;
+        width: 97%;
         float: right;
         margin-right: 10px;
     }
@@ -4693,10 +4988,6 @@ td > div {
         padding: 5px 0;
     }
 
-    .postsActionsChoices {
-        font-size: 12px;
-    }
-
     .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
         top: -4px;
     }
@@ -4708,14 +4999,8 @@ td > div {
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
     }
-
-    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
-        font-size: 17px;
-        top: -5px;
-    }
-
     .newCommentPlaceMainDiv .inputBox {
-        width: 88%;
+        width: calc(100% - 50px);
     }
 
     .commentRatingsDetailsBox > div > b {
@@ -4740,13 +5025,8 @@ td > div {
     .postsMainDivFooter > a {
         font-size: 11px;
     }
-
-    .questionInputBox {
-        width: 73%;
-    }
-
     .newAnswerPlaceMainDiv .inputBox {
-        width: 82%;
+        width: calc(100% - 50px);
     }
 
     .answerBoxText {
@@ -4758,7 +5038,23 @@ td > div {
     }
 }
 
+@media only screen and (max-width: 520px){
+    .fullInTablet{
+        width: 100% !important;
+    }
+    .showCommentsIconFeedback::before{
+        right: 12px;
+    }
+}
+
 @media only screen and (max-width: 480px) {
+    .commentRatingHeader{
+        width: 100%;
+    }
+    .commentRatingsDetailsBtn{
+        width: 100%;
+    }
+
     DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
         font-size: 10px;
     }
@@ -4831,26 +5127,12 @@ td > div {
         left: 0;
     }
 
-    .newCommentPlaceMainDiv .inputBox {
-        width: 84%;
-    }
-
     .filterBarDivs {
         padding: 0;
     }
 
     .topHeaderBarPosts > span {
         font-size: 13px;
-    }
-
-    .postsActionsChoices {
-        font-size: 14px;
-        width: 50%;
-        /*text-align: center;*/
-    }
-
-    .postsActionsChoices:nth-child(1), .postsActionsChoices:nth-child(2) {
-        margin-bottom: 10px;
     }
 
     .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
@@ -4868,10 +5150,6 @@ td > div {
         /*right: 79px;*/
     }
 
-    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
-        top: -4px;
-        /*right: 74px;*/
-    }
 
     .commentRatingsDetailsBox > div > b:nth-child(1) {
         float: right;
@@ -4925,11 +5203,11 @@ td > div {
 
     .questionInputBoxMainDiv {
         float: right;
-        width: 280px;
+        width: 100%;
     }
 
     .questionInputBox {
-        width: 79%;
+        width: calc(100% - 65px);
         float: right;
     }
 
@@ -4960,7 +5238,12 @@ td > div {
 }
 
 @media (max-width: 400px) {
-
+    #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
+        font-size: 10px;
+    }
+    .commentRatingHeader,.commentRatingsDetailsBtn{
+        font-size: 10px;
+    }
     .traditionalFoodDescription > div {
         font-size: 17px;
     }
@@ -4988,7 +5271,7 @@ td > div {
     }
 
     .commentOptionsText {
-        font-size: 10px;
+        font-size: 9px;
         line-height: 2.1;
     }
 
@@ -4997,14 +5280,8 @@ td > div {
     }
 
     .addParticipantInputBoxPostModal > textarea {
-        /*width: 63%;*/
-        /*font-size: 9px;*/
-        /*line-height: 2.5;*/
+        font-size: 13px;
     }
-
-    /*.participantDivMainDiv {*/
-    /*    width: 37%;*/
-    /*}*/
 
     .addOriginCityInputBoxPostModal {
         width: 95%;
@@ -5040,13 +5317,8 @@ td > div {
         font-size: 13px;
     }
 
-    .newCommentPlaceMainDiv .inputBox {
-        width: 82%;
-    }
-
     .commentsActionsBtns {
         margin: 0;
-        padding-top: 22px;
         float: left;
     }
 
@@ -5080,20 +5352,13 @@ td > div {
 
     .questionInputBoxMainDiv {
         float: right;
-        width: 235px;
         position: relative;
-        margin-bottom: 25px;
-    }
-
-    .questionInputBox {
-        width: 100%;
-        float: right;
     }
 
     .sendQuestionBtn {
         position: absolute;
-        top: 55px;
         padding: 5px 10px;
+        left: 0px;
     }
 
     .showingQuestionCompletely {
@@ -5115,6 +5380,7 @@ td > div {
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
         width: 100%;
+        font-size: 10px;
     }
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(2) {

@@ -281,7 +281,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     width: auto;
 }
 .headerSearchBar{
-    width: 300px;
+    width: 250px;
     height: 35px;
     background-color: lightgrey;
     border-radius: 4px

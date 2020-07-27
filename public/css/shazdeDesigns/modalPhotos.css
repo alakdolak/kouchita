@@ -80,6 +80,7 @@
 .showingPhotosModal .commentWriterExperienceDetails , .showingPhotosModal .answersWriterExperienceDetails {
     display: inline-block;
     float: right;
+
 }
 
 .showingPhotosModal #photoAlbumUploadTimeOnScreen {
@@ -192,6 +193,7 @@
 
 .showingPhotosModal .leftColPhotosModalMainDiv {
     padding: 25px 70px 25px;
+    position: relative;
 }
 
 .showingPhotosModal .selectedPhotoShowingModal {

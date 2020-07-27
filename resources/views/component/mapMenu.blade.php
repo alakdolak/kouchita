@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{URL::asset('css/component/map.css')}}">
 
 <div id="mapDivSample" style="display: none">
 

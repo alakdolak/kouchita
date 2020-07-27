@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Adab;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
@@ -97,56 +98,6 @@ class AjaxController extends Controller {
                 echo URL::asset('_images/nopic/blank.jpg');
             else
                 echo URL::asset('_images/' . $target);
-        }
-
-    }
-
-    public function getReports() {
-
-        $kindPlaceId = Place::whereName('پیام')->first()->id;
-
-        echo json_encode(ReportsType::whereKindPlaceId($kindPlaceId)->get());
-
-    }
-
-    public function getReports2() {
-
-        if(isset($_POST["logId"])) {
-
-            $logId = makeValidInput($_POST["logId"]);
-            $log = LogModel::whereId($logId);
-            $reports = ReportsType::whereKindPlaceId($log->kindPlaceId)->get();
-            
-            $uId = Auth::user()->id;
-
-            $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName('گزارش')->first()->id,
-                'relatedTo' => $logId, 'subject' => ''];
-            $log = LogModel::where($condition)->first();
-
-            if($log == null) {
-                foreach ($reports as $report) {
-                    $report->selected = false;
-                }
-                $reports[0]->text = "";
-            }
-
-            else {
-                foreach ($reports as $report) {
-                    $condition = ['logId' => $log->id, 'reportKind' => $report->id];
-                    if(Report::where($condition)->count() > 0)
-                        $report->selected = true;
-                    else
-                        $report->selected = false;
-                }
-
-                if($log->text != "")
-                    $reports[0]->text = $log->text;
-                else
-                    $reports[0]->text = "";
-            }
-
-            echo json_encode($reports);
-
         }
 
     }
@@ -554,6 +505,7 @@ class AjaxController extends Controller {
                 $condition = ['userId' => $u->id, 'logId' => $request->logId];
                 $like = LogFeedBack::where($condition)->first();
 
+                $subject = '';
                 if($like == null){
                     $like = new LogFeedBack();
                     $like->logId = $request->logId;
@@ -571,6 +523,26 @@ class AjaxController extends Controller {
                         $like->like = -1;
                     $like->save();
                 }
+
+                if($like->like == 1)
+                    $subject .= 'like';
+                elseif($like->like == -1)
+                    $subject .= 'dislike';
+
+                $log = LogModel::find($request->logId);
+                $reviewAct = Activity::where('name', 'نظر')->first();
+                $ansAct = Activity::where('name', 'پاسخ')->first();
+                if($log->activityId == $reviewAct->id)
+                    $subject .= 'Review';
+                elseif($log->activityId == $ansAct->id)
+                    $subject .= 'Ans';
+
+                $alert = new Alert();
+                $alert->subject = $subject;
+                $alert->referenceTable = 'logFeedBack';
+                $alert->referenceId = $like->id;
+                $alert->userId = $log->visitorId;
+                $alert->save();
 
                 $like = LogFeedBack::where('logId', $request->logId)->where('like', 1)->count();
                 $dislike = LogFeedBack::where('logId', $request->logId)->where('like', -1)->count();
@@ -871,6 +843,23 @@ class AjaxController extends Controller {
             }
             echo json_encode(['tags' => $tags, 'send' => $tag, 'same' => $same]);
         }
+
+        return;
+    }
+
+    public function getSingleReview(Request $request)
+    {
+        if(isset($request->reviewId)){
+            $review = LogModel::find($request->reviewId);
+            if($review != null) {
+                $review = reviewTrueType($review);
+                echo json_encode(['status' => 'ok', 'result' => $review]);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
 
         return;
     }

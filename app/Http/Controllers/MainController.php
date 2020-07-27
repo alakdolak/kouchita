@@ -28,7 +28,7 @@ class MainController extends Controller
 {
     public function landingPage()
     {
-        createSeeLog(0, 0, 'landing', '');
+//        createSeeLog(0, 0, 'landing', '');
         return view('landing.landingPage');
     }
 

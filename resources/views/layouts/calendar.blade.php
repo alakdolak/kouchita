@@ -1,4 +1,4 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/calendar.css')}}' data-rup='long_lived_global_legacy'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/calendar.css?v=1')}}' data-rup='long_lived_global_legacy'/>
 
 <div id="calendarModal" class="modalBack calendarModal">
     <div id="container1" class="calenderBase">

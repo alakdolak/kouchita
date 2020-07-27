@@ -1,9 +1,9 @@
 
-<link rel="stylesheet" href="{{URL::asset('css/common/header.css')}}">
-<link rel="stylesheet" href="{{URL::asset('css/common/header1.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=1')}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v=1')}}">
 
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css?v=1')}}">
 @endif
 
 @if(!Request::is('main') && !Request::is('main/*') && !Request::is('/'))
@@ -36,7 +36,7 @@
         <a href="{{route('main')}}" class="headerPcLogoDiv" >
             <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="{{__('کوچیتا')}}" class="headerPcLogo"/>
         </a>
-        @if(Request::is('main') || Request::is('main/*') || Request::is('/'))
+        @if(Request::is('main') || Request::is('main/*') || Request::is('profile') || Request::is('profile/*') || Request::is('/'))
             <div class="headerSearchBar">
                 <span class="headerSearchIcon iconFamily searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php"></span>
             </div>
@@ -152,7 +152,7 @@
                         <div id="profile-drop" class="arrowTopDiv headerAuthMenu">
                             <ul class="global-nav-profile-menu">
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('صفحه کاربری')}}</a>
+                                    <a href="{{route('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('صفحه کاربری')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
                                     <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('جوایز و مدال ها')}}</a>
@@ -161,7 +161,7 @@
                                     <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">{{__('پیام‌ها')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">{{__('اطلاعات کاربر')}}</a>
+                                    <a href="{{route('profile.accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">{{__('اطلاعات کاربر')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
                                     <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">{{__('auth.خروج')}}</a>
@@ -249,6 +249,7 @@
 
         $(document).ready(function () {
             getAlertsCount();
+            getAlertItems();
         });
 
         $(window).on('click', function(){
@@ -274,18 +275,7 @@
             });
         }
 
-        // function scrolled(o) {
-        //     //visible height + pixel scrolled = total height
-        //     if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
-        //         if(!locked) {
-        //             superAccess = true;
-        //             getAlertItems();
-        //         }
-        //     }
-        // }
-
         function getAlertItems() {
-
             if(msgHeaderData == null) {
                 $.ajax({
                     type: 'post',

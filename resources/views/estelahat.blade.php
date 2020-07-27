@@ -4,8 +4,8 @@
 @section('header')
     @parent
 
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/estelahat.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/estelahat.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
 
     <script>
 

@@ -354,7 +354,7 @@ if(Auth::check()) {
     }
 </script>
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/recentlyViewAndMyTripsInDetails.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/recentlyViewAndMyTripsInDetails.css?v=1')}}' />
 
 <div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container">
     <div>

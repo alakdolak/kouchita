@@ -3,9 +3,9 @@
 
 @section('main')
 
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
 
     <script>
 

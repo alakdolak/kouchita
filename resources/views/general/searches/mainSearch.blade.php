@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="{{URL::asset('css/mainSearch.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/mainSearch.css?v=1')}}">
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css?v=1')}}">
 @endif
 
 <div id="searchPane" class="searchPaneDiv hidden">

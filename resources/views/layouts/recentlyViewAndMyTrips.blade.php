@@ -301,7 +301,7 @@ if(Auth::check()) {
 }
 ?>
 
-<link rel="stylesheet" href="{{URL::asset('css/theme2/recentlyViewAndMyTrips.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/theme2/recentlyViewAndMyTrips.css?v=1')}}">
 
 <script>
 

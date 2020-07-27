@@ -198,12 +198,11 @@ class MyTripsController extends Controller {
 
     public function addTrip() {
 
-
         if(isset($_POST["tripName"])) {
 
             $tripName = makeValidInput($_POST["tripName"]);
 
-            if (isset($_POST["dateInputEnd"]) && isset($_POST["dateInputStart"])) {
+            if (isset($_POST["dateInputEnd"]) && isset($_POST["dateInputStart"]) && $_POST["dateInputEnd"] != '' && $_POST["dateInputStart"] != '' ) {
                 $dateInputStart = makeValidInput($_POST["dateInputStart"]);
                 $dateInputEnd = makeValidInput($_POST["dateInputEnd"]);
 
@@ -421,10 +420,12 @@ class MyTripsController extends Controller {
 
             foreach ($tripPlaces as $tripPlace) {
                 $allow = true;
-                for($i = 0; $i < count($selectedTrips); $i++) {
-                    if($tripPlace->tripId == $selectedTrips[$i]) {
-                        $allow = false;
-                        break;
+                if($selectedTrips != 'empty') {
+                    for ($i = 0; $i < count($selectedTrips); $i++) {
+                        if ($tripPlace->tripId == $selectedTrips[$i]) {
+                            $allow = false;
+                            break;
+                        }
                     }
                 }
                 if($allow) {

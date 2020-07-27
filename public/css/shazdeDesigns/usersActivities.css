@@ -283,6 +283,7 @@ body {
     font-size: 24px;
     font-weight: 700;
     cursor: default;
+    text-align: center;
 }
 
 .userProfileLevelDetails .inner {
@@ -685,6 +686,8 @@ body {
 }
 
 .answersWriterExperienceDetails {
+    display: inline-flex;
+    flex-direction: column;
     color: #666666;
     margin-bottom: 10px;
     direction: rtl;

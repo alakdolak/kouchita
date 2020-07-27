@@ -4,7 +4,7 @@
     @parent
 
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/showAllPlaces.css?v=1')}}">
 
@@ -1218,8 +1218,6 @@
     <script src="{{URL::asset('js/jsNeededForShowAllPlaces.js')}}"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
-
-    @include('layouts.photoAlbum')
 
     <span class='ui_overlay ui_popover arrow_right img_popUp hidden' style='z-index: 100000 !important; position: absolute; bottom: auto; direction: rtl; margin: -25px 20px 0 0'></span>
 

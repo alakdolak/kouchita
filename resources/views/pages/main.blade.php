@@ -16,11 +16,11 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v=1')}}'/>
 
 
     @if(\App::getLocale() == 'en')
-        <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPage.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPage.css?v=1')}}">
     @endif
 
     <style>

@@ -12,8 +12,8 @@
 
     @include('layouts.pop-up-create-trip')
 
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
     <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible position-relative">
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2 position-relative">

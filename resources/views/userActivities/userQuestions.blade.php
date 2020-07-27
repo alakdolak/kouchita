@@ -7,7 +7,7 @@
 //?>
 @section('title')
     {{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css?v=1')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
     {{--    <title>{{$place->name}} | {{$city->name}} | کوچیتا</title>--}}
@@ -51,14 +51,14 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
 
     {{--vr--}}
 
     {{--    @if(isset($video) && $video != null)--}}
-    {{--        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">--}}
-    {{--        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">--}}
+    {{--        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v=1')}}">--}}
+    {{--        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v=1')}}">--}}
     {{--        <script src="{{URL::asset('vr2/video.js')}}"></script>--}}
     {{--        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>--}}
     {{--    @endif--}}
@@ -79,7 +79,6 @@
         </center>
     </div>
 
-    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 
     <script>
         autosize(document.getElementsByClassName("inputBoxInputSearch"));

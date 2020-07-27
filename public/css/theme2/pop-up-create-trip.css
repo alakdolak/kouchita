@@ -90,15 +90,6 @@
     right: 7px;
 }
 
-#date_input_start, #date_input_end {
-    padding: 7px;
-    position: absolute;
-    top: 1px;
-    right: 35px;
-    border: none;
-    background: transparent;
-}
-
 .rtl {
     direction: rtl;
 }

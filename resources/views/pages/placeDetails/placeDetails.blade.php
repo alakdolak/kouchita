@@ -36,15 +36,16 @@ if ($total == 0)
     <title>{{isset($place->setTitle) ? $place->setTitle : $place->name}} </title>
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v=1')}}">
 
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
     {{--vr--}}
     @if(isset($video) && $video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v=1')}}">
         <script src="{{URL::asset('vr2/video.js')}}"></script>
         <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
     @endif
@@ -82,8 +83,6 @@ if ($total == 0)
         var sendAnsDir = '{{route('sendAns')}}';
         var showAllAnsDir = '{{route('showAllAns')}}';
         var filterComments = '{{route('filterComments')}}';
-        var getReportsDir = '{{route('getReportQuestions')}}';
-        var sendReportDir = '{{route('sendReport2')}}';
         var getPhotoFilter = '{{route('getPhotoFilter')}}';
         var getPhotosDir = '{{route('getPhotos')}}';
         var findUser = '{{route('findUser')}}';
@@ -92,11 +91,11 @@ if ($total == 0)
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
     </script>
 
+    <script src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
-    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
@@ -206,6 +205,9 @@ if ($total == 0)
 
     @include('component.mapMenu')
 
+    @include('component.smallShowReview')
+
+
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
         <div class="shTIcon clsIcon"></div>
@@ -237,7 +239,7 @@ if ($total == 0)
         </div>
     </span>
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative" style="margin-bottom: 10px">
 
         @include('layouts.placeMainBodyHeader')
 
@@ -247,157 +249,16 @@ if ($total == 0)
 
                 @if(auth()->check())
                     @include('pages.placeDetails.component.writeReviewSection')
+                @else
+                    <script>
+                        function newPostModal(kind = '') {
+                            if (!hasLogin) {
+                                showLoginPrompt('{{Request::url()}}');
+                                return;
+                            }
+                        }
+                    </script>
                 @endif
-
-                    <style>
-                        .tvSection{
-                            position: relative;
-                            height: 430px;
-                        }
-                        .tvLogoDiv{
-                            position: relative;
-                            background: #4DC7BC;
-                            width: 55%;
-                            display: flex;
-                            margin-left: auto;
-                            padding: 0px 0px 5px 5px;
-                        }
-                        .tvSeeMore{
-                            position: absolute;
-                            background: #4DC7BC;
-                            color: white;
-                            bottom: 0px;
-                            left: 0px;
-                            padding: 10px 10px;
-                            font-size: 22px;
-                            font-weight: bold;
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            padding-left: 0px;
-                        }
-                        .tvSeeMore:hover{
-                            color: white;
-                        }
-                        .tvSeeMoreIcons{
-                            position: relative;
-                            width: 30px;
-                            display: flex;
-                            justify-content: flex-start;
-                            height: 30px;
-                            align-items: center;
-                            margin-right: 10px;
-                        }
-                        .tvSeeMoreIcons > i{
-                            width: 10px;
-                            font-size: 30px;
-                            font-style: normal;
-                        }
-                        .tvContentDiv{
-                            padding: 0px 10px;
-                            direction: rtl;
-                            margin-top: 5px;
-                        }
-                        .tvContentText{
-                            color: white;
-                            text-align: justify;
-                            font-size: 15px;
-                            line-height: 25px;
-                        }
-                        .tvContentVideo{
-                            width: 100%;
-                            height: 230px;
-                            background: #232323;
-                            margin-top: 10px;
-                            border-radius: 10px;
-                            padding: 5px;
-                        }
-                        .tvVideoPic{
-                            position: relative;
-                            width: 100%;
-                            height: 140px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            overflow: hidden;
-                            border-radius: 10px;
-                        }
-                        .tvVideoName{
-                            color: white;
-                            font-size: 12px;
-                            margin-top: 10px;
-                            padding-right: 10px;
-                            display: block;
-                        }
-                        .tvUserContentDiv{
-                            display: flex;
-                            align-items: center;
-                            padding-right: 10px;
-                            margin-top: 10px;
-                        }
-                        .tvUserPic{
-                            width: 40px;
-                            height: 40px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 50%;
-                            overflow: hidden;
-                        }
-                        .tvUserInfo{
-                            margin-right: 10px;
-                            font-size: 11px;
-                        }
-                        .tvUserName{
-                            color: #0076a3;
-                        }
-                        .tvUserTime{
-                            color: white;
-                        }
-                        .tvImgHover{
-                            position: absolute;
-                            display: none;
-                            justify-content: center;
-                            align-items: center;
-                            top: 0px;
-                            right: 0px;
-                            width: 100%;
-                            height: 100%;
-                            background: #00000085;
-                        }
-                        .tvVideoPic:hover .tvImgHover{
-                            display: flex;
-                        }
-                        .tvOverPic{
-                            position: absolute;
-                            background: #000000d1;
-                            display: flex;
-                            color: white;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 5px;
-                            border-radius: 10px;
-                        }
-                        .tvSeenSection{
-                            top: 10px;
-                            left: 20px;
-                        }
-                        .tvLikeSection{
-                            bottom: 10px;
-                            left: 20px;
-                        }
-                        .tvLike{
-
-                        }
-                        .tvLike > i{
-                            font-style: normal;
-                            display: inline-block;
-                            width: 6px;
-                            display: inline-flex;
-                            justify-content: center;
-                        }
-                    </style>
 
                 <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
@@ -637,7 +498,7 @@ if ($total == 0)
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">{{__('دوستانتان را tag کنید.')}}</span>
                                 </div>
-                                <div class="moreSettingPostManDiv commentOptionsBoxes" onclick="newPostModal()">
+                                <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
                                     <span class="moreSettingPost"></span>
                                 </div>
                             </div>
@@ -675,48 +536,55 @@ if ($total == 0)
 
     <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
-            <div id="BODYCON"
-                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
+            <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
                 @if($placeMode == 'mahaliFood')
-                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix"
-                         data-offset-top="800">
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse"   >
                         <div class="container-fluid tabLinkMainWrapMainDiv tabLinkMainWrapMainDiv_Food">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId" onclick="colorThisNav(this)">
+                                            سؤالات
+                                        </a>
                                     </li>
                                     <li>
-                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar"
-                                           href="#mainDivPlacePost">پست</a>
+                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
+                                            پست
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">دستور
-                                            پخت</a>
+                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel" onclick="colorThisNav(this)">
+                                            دستور پخت
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </nav>
                 @else
-                    <nav class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix" data-offset-top="800">
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse">
                         <div class="container-fluid tabLinkMainWrapMainDiv">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar"
-                                           href="#similarLocationsMainDiv">مکان‌های مشابه</a>
+                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#topPlacesSection" onclick="colorThisNav(this)">
+                                            مکان‌های مشابه
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId" onclick="colorThisNav(this)">
+                                            سؤالات
+                                        </a>
                                     </li>
                                     <li>
-                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar"
-                                           href="#mainDivPlacePost">پست</a>
+                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
+                                            پست
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی
-                                            کلی</a>
+                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel" onclick="colorThisNav(this)">
+                                            معرفی کلی
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -725,13 +593,11 @@ if ($total == 0)
                 @endif
 
                 <div class="exceptQAndADiv" id="generalDescLinkRel" style="display: inline-block">
-                    <div class="topBarContainerGeneralDesc display-none"></div>
-
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap" style="padding-right: 15px;">
+                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
                                         @if($placeMode == 'mahaliFood')
                                             <div class="tabLinkMainDiv">
                                                 <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
@@ -1098,7 +964,7 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                             @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                                                <div style="margin-top: 25px; padding-left: 15px;">
+                                                <div class="topMainMapDiv">
                                                     <div id="mainMap" class="mainMap placeHolderAnime"></div>
                                                 </div>
                                                 @include('layouts.extendedMap')
@@ -1431,9 +1297,8 @@ if ($total == 0)
                     </div>
 
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
-                        <div class="topHeaderBarPosts display-none">
+                        <div id="phoneReviewFilterHeader" class="topHeaderBarPosts display-none">
                             <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
-                            {{--                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>--}}
                             <span class="float-left">مشاهده همه پست‌ها</span>
                         </div>
 
@@ -1444,7 +1309,7 @@ if ($total == 0)
                             @include('hotel-details.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
-                                {{--                                @include('features.advertise3D')--}}
+                                {{--@include('features.advertise3D')--}}
                             </center>
                         </div>
 
@@ -1466,29 +1331,7 @@ if ($total == 0)
         </div>
     </div>
 
-    <span id="reportPane" class="ui_overlay ui_modal editTags hidden" style="position: fixed; left: 24%; right: 24%; top:19%; bottom: auto;overflow: auto;max-height: 500px;">
-        <div class="header_text">گزارش</div>
-        <div class="subheader_text">
-       گزارش خود را از بین موضوعات موجود انتخاب نمایید
-        </div>
-        <div class="body_text">
-            <fieldset id="memberTags">
-                <div class="reports" id="reports">
-                    <div id="reportContainer">
 
-                    </div>
-                </div>
-            </fieldset>
-            <br>
-            <div class="submitOptions">
-                <button onclick="sendReport()" class="btn btn-success"
-                        style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
-                <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
-            </div>
-            <div id="errMsgReport" style="color: red"></div>
-        </div>
-        <div onclick="closeReportPrompt()" class="ui_close_x"></div>
-    </span>
 
     @if(isset($video) && $video != null)
         <div class="modal" id="myModal">
@@ -1527,7 +1370,7 @@ if ($total == 0)
         </script>
     @endif
 
-    @include('hotelDetailsPopUp')
+{{--    @include('hotelDetailsPopUp')--}}
 
     @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
         <script>
@@ -1663,17 +1506,65 @@ if ($total == 0)
     @endif
 
     <script>
-        $(document).ready(function () {
-            var a = $(window).width();
-            if (630 < a && a <= 768)
-                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 820}});
-            else if (415 < a && a <= 630)
-                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1000}});
-            else if (a <= 415)
-                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1050}});
+        $(window).on('scroll', function(e){
+            let topOfSticky = document.getElementById('BODYCON').getBoundingClientRect().top;
+            if(topOfSticky < 20 && !$('#sticky').hasClass('stickyFixTop'))
+                $('#sticky').addClass('stickyFixTop');
+            else if(topOfSticky >= 25 && $('#sticky').hasClass('stickyFixTop'))
+                $('#sticky').removeClass('stickyFixTop');
 
+            let topOfInfo = document.getElementById('generalDescLinkRel').getBoundingClientRect().top;
+            let topOfQA = document.getElementById('QAndAMainDivId').getBoundingClientRect().top;
+            let topOfPost = document.getElementById('mainDivPlacePost').getBoundingClientRect().top;
+
+            if(topOfInfo < 0) {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $('.generalDescBtnTopBar').css('color', '#4DC7BC');
+            }
+            else
+                $('.generalDescBtnTopBar').css('color', 'black');
+
+            if(topOfPost < 0) {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $('.postsBtnTopBar').css('color', '#4DC7BC');
+            }
+            else
+                $('.postsBtnTopBar').css('color', 'black');
+
+            if(topOfQA < 0) {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $('.QAndAsBtnTopBar').css('color', '#4DC7BC');
+            }
+            else
+                $('.QAndAsBtnTopBar').css('color', 'black');
+
+            let topOfSimilar = document.getElementById('topPlacesSection');
+            if(topOfSimilar){
+                topOfSimilar = topOfSimilar.getBoundingClientRect().top;
+                if(topOfSimilar < 0) {
+                    $('.tabLinkMainWrap').css('color', 'black');
+                    $('.similarLocationsBtnTopBar').css('color', '#4DC7BC');
+                }
+                else
+                    $('.similarLocationsBtnTopBar').css('color', 'black');
+            }
+        });
+
+        function colorThisNav(_elemnt){
+            setTimeout(() => {
+                $('.tabLinkMainWrap').css('color', 'black');
+                $(_elemnt).css('color', '#4DC7BC');
+            }, 100)
+        }
+
+
+        $(document).ready(function () {
             autosize($(".inputBoxInputComment"));
             autosize($(".inputBoxInputAnswer"));
+
+            if (window.matchMedia('(max-width: 373px)').matches) {
+                $('.eachCommentMainBox').removeClass('mg-rt-45')
+            }
         });
 
         var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();
@@ -1769,46 +1660,12 @@ if ($total == 0)
 
         }
 
-        function newPostModal(kind = '') {
-            if (!hasLogin) {
-                showLoginPrompt('{{Request::url()}}');
-                return;
-            }
-
-            $('html, body').animate({
-                scrollTop: $('#mainStoreReviewDiv').offset().top
-            }, 800);
-
-            // document.getElementById("mainStoreReviewDiv").scrollIntoView();
-
-            $("#darkModal").show();
-            $(".postModalMainDiv").removeClass('hidden');
-
-            setTimeout(function () {
-                if (kind == 'textarea')
-                    document.getElementById("postTextArea").focus();
-                else if (kind == 'tag')
-                    $('#assignedSearch').focus();
-            }, 500);
-        }
-
-        function editPhotosNewPost() {
-            $('#editPane').removeClass('hidden')
-        }
-
         function showAnswersActionBox(element) {
             $(element).next().toggle() ,
                 $(element).toggleClass("bg-color-darkgrey")
         }
 
-        function showRatingDetails(element) {
-            if ($(element).parent().next().hasClass('commentRatingsDetailsBox')) {
-                $(element).parent().next().toggle();
-                $(element).children().children().toggleClass('glyphicon-triangle-bottom');
-                $(element).children().children().toggleClass('glyphicon-triangle-top')
-                $(element).parent().toggleClass('mg-bt-10');
-            }
-        }
+
 
         function filterChoices(element) {
             $(element).toggleClass('bg-color-yellowImp')
@@ -1876,85 +1733,6 @@ if ($total == 0)
             $('.filterBarDivs').toggle();
             $('.visitKindTypeFilter').toggleClass('border-none')
         }
-
-        $(document).ready(function () {
-            if (window.matchMedia('(max-width: 373px)').matches) {
-                $('.eachCommentMainBox').removeClass('mg-rt-45')
-            }
-        });
-
-        $(window).scroll(function () {
-            if (!$('.tabLinkMainWrapMainDIV').hasClass('affix')) {
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-            }
-        });
-
-        $(document).ready(function () {
-            $('.generalDescBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').removeClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-
-                setTimeout(function () {
-                    $('.generalDescBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.postsBtnTopBar').parent().removeClass('active');
-                $('.QAndAsBtnTopBar').parent().removeClass('active');
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.postsBtnTopBar').click(function () {
-                // $('.tabLinkMainWrapMainDIV').addClass('affix');
-                // $('.topBarContainerGeneralDesc').addClass('display-none');
-                // $('.topBarContainerPosts').removeClass('display-none');
-                // $('.topBarContainerQAndAs').addClass('display-none');
-                // $('.topBarContainerSimilarLocations').addClass('display-none');
-
-                setTimeout(function () {
-                    $('.generalDescBtnTopBar').parent().removeClass('active');
-                    $('.postsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                // $('.QAndAsBtnTopBar').parent().removeClass('active');
-                // $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.QAndAsBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').removeClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-                $('.generalDescBtnTopBar').parent().removeClass('active');
-
-                setTimeout(function () {
-                    $('.postsBtnTopBar').parent().removeClass('active');
-                    $('.QAndAsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.similarLocationsBtnTopBar').click(function () {
-                $('.tabLinkMainWrapMainDIV').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').removeClass('display-none');
-                $('.generalDescBtnTopBar').parent().removeClass('active');
-                $('.postsBtnTopBar').parent().removeClass('active');
-
-                setTimeout(function () {
-                    $('.QAndAsBtnTopBar').parent().removeClass('active');
-                    $('.similarLocationsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-            });
-        })
-
     </script>
 
     <script>
@@ -2027,13 +1805,13 @@ if ($total == 0)
 
         function showPhotoAlbum(_kind) {
             if (_kind == 'photographer')
-                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);
+                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);// in general.photoAlbumModal.blade.php
             else if (_kind == 'sitePics')
-                createPhotoModal('عکس های سایت', sitePicsForAlbum);
+                createPhotoModal('عکس های سایت', sitePicsForAlbum);// in general.photoAlbumModal.blade.php
             else if (_kind == 'userPics')
-                createPhotoModal('عکس های کاربران', userPhotosForAlbum);
+                createPhotoModal('عکس های کاربران', userPhotosForAlbum);// in general.photoAlbumModal.blade.php
             else if (_kind == 'userVideo')
-                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);
+                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
         }
 
         // Get the element with id="defaultOpen" and click on it
@@ -2041,7 +1819,7 @@ if ($total == 0)
 
     </script>
 
-    @include('layouts.pop-up-create-trip_in_hotel_details')
+{{--    @include('layouts.pop-up-create-trip_in_hotel_details')--}}
 
     <script>
         $(document).ready(function () {

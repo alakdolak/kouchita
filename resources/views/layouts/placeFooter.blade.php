@@ -1,7 +1,7 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v=1')}}' />
 
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v=1')}}">
 @endif
 
 {{--footer html--}}
@@ -517,35 +517,41 @@
                     {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
-                            <div class="lp_others_titles"> {{__('بازدید‌های اخیر')}} </div>
-                            <div class="mainContainerBookmarked">
+                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px; margin-bottom: 5px;"> {{__('بازدید‌های اخیر')}} </div>
+                            <div class="headerSearchBar" style="width: 100%; margin-bottom: 10px">
+                                <span class="headerSearchIcon iconFamily footerSearchBar searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php">
+                                    <span style="font-size: 15px; text-align: center; width: 100%;">
+                                        به کجا می روید؟
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="mainContainerBookmarked" style="height: calc(100vh - 170px); border-top: 1px solid #cccccc">
                                 <div id="phoneRecentlyView">
                                     <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap"></div>
                                 </div>
-                                <div class="bottomBarContainer"></div>
                             </div>
                         </div>
 
-                        <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: scroll">
+                        <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: hidden; padding: 25px 10px; height: calc(100vh - 100px);">
                             <div id="phoneMessages" class="lp_others_titles"> {{__('اعلانات')}} </div>
-                            <div id="noMessagePhone" class="lp_others_noMessages">{{__('هیچ پیام جدیدی موجود نیست')}}</div>
+                            <div id="noMessagePhone" class="lp_others_noMessages alertMsgResultDiv" style="height: 100%; overflow-y: auto">{{__('هیچ پیام جدیدی موجود نیست')}}</div>
                         </div>
 
                         <div class="lp_others_content hidden" id="lp_others_mark">
                             <div class="lp_others_titles"> {{__('نشون کرده')}} </div>
-                            <div class="mainContainerBookmarked">
+                            <div class="mainContainerBookmarked" style="height: calc(100vh - 170px);">
                                 <div id="phoneBookMarks">
                                     <div class="masthead-recent-class">
                                         @if(\auth()->check())
                                             <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
-                                                <div class="lp_others_rvPicBox col-xs-8">
-                                                    <img src="##placePic##" style="width: 100%;">
+                                                <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
+                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
                                                 </div>
                                                 <div class="col-xs-4 placeDetailsLeftBar">
                                                     <div class="">##placeName##</div>
-                                                    <div class="lp_others_rating">
+                                                    <div class="lp_others_rating" style="display: flex; align-items: center; justify-content: center">
                                                         <div class="ui_bubble_rating bubble_##placeRate##0"></div>
-                                                        <br>##placeReviews## نقد
+                                                        ##placeReviews## نقد
                                                     </div>
                                                     <div class="">##placeCity##</div>
                                                 </div>
@@ -557,7 +563,6 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="bottomBarContainer"></div>
                             </div>
                         </div>
 
@@ -625,7 +630,7 @@
                                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
-                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails">{{__('سفرنامه')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('صنایع دستی')}} </a>
                                 <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
                                     {{__('تلویزیون گردشگری کوچیتا')}}
                                     <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
@@ -662,13 +667,15 @@
                                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
-                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails" style="width: 100%">{{__('سفرنامه')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}" class="pSC_cityDetails"  style="width: 100%">{{__('صنایع دستی')}} </a>
+
                                 <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
                                     {{__('تلویزیون گردشگری کوچیتا')}}
                                     <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
                                 </a>
                             </div>
-                            <div style="margin-top: 15px; text-align: left;">
+                            <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: #0d6650">{{__('جستجو کنید')}}</button>
                                 <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>
@@ -803,8 +810,7 @@
                             <div class="modules-membercenter-member-profile position-relative">
 
                                 <div class="profileBlock">
-
-                               ح     <div id="" class="targets profileInfosDetails col-xs-8">
+                                    <div id="" class="targets profileInfosDetails col-xs-8">
 
                                         <p class="since">
                                             <b>
@@ -840,17 +846,17 @@
                                         <div class="glyphicon glyphicon-chevron-up display-none"></div>
                                     </div>
                                     <div class="editProfileMenu item display-none">
-                                        <a name="edit-profile" class="menu-link " href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                         <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
                                         <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                        <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
-                                        <a name="edit-photo" class="menu-link " href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{route('profile.accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{route('profile.editPhoto')}}">{{__('ویرایش عکس')}}</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="profileBtnActionMobile">
                                 <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
-                                <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
+                                <a href="{{route('profile')}}" type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
                                 <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
                             </div>
                         </div>
@@ -858,20 +864,20 @@
                             <div class="profileMenuResponsive">
                                 @if($mode == "profile")
                                     <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a id="profileLinkColor1" href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                     </div>
                                 @else
                                     <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a id="profileLinkColor2" href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
                                     </div>
                                 @endif
                                 @if($mode == "profileActivities")
                                     <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                        <a id="profileLinkColor1" href="{{route('profile')}}">{{__('فعالیت‌های من')}}</a>
                                     </div>
                                 @else
                                     <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                        <a id="profileLinkColor2" href="{{route('profile')}}">{{__('فعالیت‌های من')}}</a>
                                     </div>
                                 @endif
                                 @if($mode == "badge")
@@ -928,10 +934,10 @@
                                             <div class="points">{{$userTotalPointFooter}}</div>
                                         </div>
                                         <div class="points_to_go">
-                                        <span style="justify-content: space-between;">
-                                            <b class="points"> {{$nextLevelFooter}} </b>
-                                            <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
-                                        </span>
+                                            <span style="justify-content: space-between;">
+                                                <b class="points"> {{$nextLevelFooter}} </b>
+                                                <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="modules-membercenter-level-progress">
@@ -1052,36 +1058,8 @@
 
     @if(Auth::check())
         <script>
-            var recentlySample = 0;
-            var bookMarkSample = 0;
-
-            function getAlertItemsPhone() {
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('getAlerts')}}',
-                    success: function (response) {
-
-                        response = JSON.parse(response);
-
-                        if(response.length == 0)
-                            $('#noMessagePhone').css('display', '');
-                        else{
-                            $('#noMessagePhone').css('display', 'none');
-                            var newElement = "";
-
-                            for(i = 0; i < response.length; i++) {
-                                if (response[i].url != -1)
-                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                                else
-                                    newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                            }
-
-                            $('#phoneMessages').append(newElement);
-                        }
-                    }
-                });
-            }
-
+            let recentlySample = 0;
+            let bookMarkSample = 0;
             let getPhoneBookMarks = false;
             function showBookMarksPhone() {
 
@@ -1115,7 +1093,6 @@
                 }
             }
 
-            getAlertItemsPhone();
             showBookMarksPhone();
 
             function initialProgressFooter() {

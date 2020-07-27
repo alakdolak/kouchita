@@ -7,7 +7,7 @@ if ($total == 0)
 ?>
 @section('title')
     {{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css?v=1')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
     <title>{{$place->name}} | {{$city->name}} | کوچیتا</title>
@@ -37,22 +37,22 @@ if ($total == 0)
 @section('header')
     @parent
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetailAllReviewsAndQuestions.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetailAllReviewsAndQuestions.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css?v=1')}}">
 
 
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css?v=1')}}">
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
 
@@ -60,8 +60,8 @@ if ($total == 0)
     {{--vr--}}
 
     @if(isset($video) && $video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v=1')}}">
         <script src="{{URL::asset('vr2/video.js')}}"></script>
         <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
     @endif
@@ -519,7 +519,6 @@ if ($total == 0)
 
     </script>
 
-    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 
     <script>
         autosize(document.getElementsByClassName("inputBoxInputComment"));

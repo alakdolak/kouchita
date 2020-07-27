@@ -43,7 +43,7 @@
 </script>
 
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/recentlyViewAndMyTripsInMain.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/recentlyViewAndMyTripsInMain.css?v=1')}}' />
 
 <script>
     function getRecentlyViews(containerId) {

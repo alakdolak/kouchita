@@ -11,23 +11,23 @@
     <title>Gentelella Alela! | </title>
 
     <!-- Bootstrap -->
-    <link href="{{URL::asset('css2/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/bootstrap/dist/css/bootstrap.min.css?v=1')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{URL::asset('css2/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/font-awesome/css/font-awesome.min.css?v=1')}}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="{{URL::asset('css2/nprogress/nprogress.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/nprogress/nprogress.css?v=1')}}" rel="stylesheet">
     <!-- iCheck -->
-    <link href="{{URL::asset('css2/iCheck/skins/flat/green.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/iCheck/skins/flat/green.css?v=1')}}" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
-    <link href="{{URL::asset('css2/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css?v=1')}}" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="{{URL::asset('css2/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
+    <link href="{{URL::asset('css2/jqvmap/dist/jqvmap.min.css?v=1')}}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="{{URL::asset('css2/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/bootstrap-daterangepicker/daterangepicker.css?v=1')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{URL::asset('css2/build/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('css2/build/css/custom.min.css?v=1')}}" rel="stylesheet">
 </head>
 
 <body class="nav-md">

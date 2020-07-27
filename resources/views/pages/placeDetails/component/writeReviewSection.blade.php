@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css')}}">
-<script src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
 
 <div class="postModalMainDiv hidden" id="reviewMainDivDetails">
     <div class="modal-dialog">
@@ -84,7 +82,7 @@
                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                         <span class="addOriginCity">{{$item->description}}</span>
                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
-                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
+                            <textarea id="textQuestionAns_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment" style="border: solid gray 1px; border-radius: 5px"></textarea>
                             <input type="hidden" id="textQuestionId_{{$item->id}}" name="textId[]" value="{{$item->id}}">
                         </div>
                     </div>
@@ -159,6 +157,7 @@
                 </div>
 
             </div>
+
         </div>
         <div id="editReviewPictures" class="backDark hidden">
                     <span class="ui_overlay ui_modal photoUploadOverlay editSection">
@@ -421,8 +420,8 @@
                         document.getElementById('assignedResultReview').innerHTML = '';
 
                         if(_value.includes('@') && _value.includes('.')){
-                            text = '<ul>';
-                            text += '<li style="color: blue;" onclick="assignedUserToReview(\'' + _value + '\', 0)"  style="cursor: pointer"> دعوت کردن دوست خود : ' + _value + '</li>';
+                            text = '<ul style="list-style: none;">';
+                            text += '<li onclick="assignedUserToReview(\'' + _value + '\', 0)"  style="cursor: pointer; color: blue;"> دعوت کردن دوست خود : ' + _value + '</li>';
                             text += '</ul>';
 
                             document.getElementById('assignedResultReview').innerHTML = text;
@@ -432,8 +431,6 @@
                         var user = JSON.parse(response);
                         var userEmail = user[0];
                         var userName = user[1];
-
-                        console.log(user);
 
                         text = '<ul>';
                         for(i = 0; i < userName.length; i++)
@@ -454,8 +451,9 @@
 
     function assignedUserToReview(_email, _id){
 
-        var text = '<div class="participantDiv">\n' +
-            '<span class="removeParticipantBtn" onclick="removeAssignedUserToReview(this, \'' + _email + '\')"></span>' + _email + '</div>';
+        var text =  '<div class="participantDiv">\n' +
+                    '   <span class="removeParticipantBtn" onclick="removeAssignedUserToReview(this, \'' + _email + '\')" style="cursor:pointer;"></span>' + _email +
+                    '</div>';
 
         assignedUser[assignedUser.length] = _email;
 
@@ -470,6 +468,7 @@
         $(element).parent().remove();
         var index = assignedUser.indexOf(_email);
         assignedUser[index] = null;
+        document.getElementById('assignedMemberToReview').value = JSON.stringify(assignedUser);
     }
 
     function uploadReviewPics(input){

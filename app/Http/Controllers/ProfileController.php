@@ -14,6 +14,7 @@ use App\models\Medal;
 use App\models\PhotographersPic;
 use App\models\Place;
 use App\models\PlaceFeatures;
+use App\models\ReviewPic;
 use App\models\State;
 use App\models\User;
 use App\models\UserAddPlace;
@@ -32,6 +33,340 @@ use Illuminate\Http\Request;
 
 
 class ProfileController extends Controller {
+
+    private function sideProfilePages($uId){
+        $user = User::find($uId);
+        $user->picture = getUserPic($uId);
+        $sideInfos = [];
+
+        $sideInfos['nearestMedals'] = getNearestMedals($uId);
+        $sideInfos['username'] = $user->username;
+        $sideInfos['userPicture'] = $user->picture;
+        $sideInfos['introduction'] = $user->introduction;
+        $sideInfos['tripStyle'] = UserTripStyles::join('tripStyle', 'tripStyle.id', 'userTripStyles.tripStyleId')->where('userTripStyles.uId', $uId)->get();
+        $sideInfos['userActivityCount'] = User::getUserActivityCount($uId);
+        $sideInfos['userScore'] = User::getUserPointInModel($uId);
+        $sideInfos['nearLvl'] = User::nearestLevelInModel($uId);
+
+        $location = __DIR__ . '/../../../../assets/userPhoto/';
+        $allUserPics = [];
+        $photographer = PhotographersPic::where('userId', $uId)->where('status', 1)->orderByDesc('created_at')->get();
+        for($i = 0, $j = 0; $i < count($photographer) && $j < 3 ; $i++){
+            $kindPlace = Place::find($photographer[$i]->kindPlaceId);
+            $pl = \DB::table($kindPlace->tableName)->find($photographer[$i]->placeId);
+            $location1 = $location.'/'.$kindPlace->fileName.'/'.$pl->file.'/'.$photographer[$i]->pic;
+            if(is_file($location1)) {
+                $p = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/' . $photographer[$i]->pic);
+                $insert = [
+                    'id' => 'photographer_' . $photographer[$i]->id,
+                    'mainPic' => $p,
+                    'sidePic' => $p,
+                    'userName' => $user->username,
+                    'userPic' => $user->picture,
+                    'like' => $photographer[$i]->like,
+                    'dislike' => $photographer[$i]->like,
+                    'alt' => $photographer[$i]->alt,
+                    'showInfo' => true,
+                    'uploadTime' => getDifferenceTimeString($photographer[$i]->created_at),
+                    'description' => $photographer[$i]->description,
+                ];
+                array_push($allUserPics, $insert);
+                $j++;
+            }
+        }
+
+        $revAct = Activity::where('name', 'نظر')->first();
+        $reviewLog = LogModel::where('visitorId', $uId)->where('activityId', $revAct->id)->orderByDesc('date')->get();
+        $reviewLogId = LogModel::where('visitorId', $uId)->where('activityId', $revAct->id)->orderByDesc('date')->pluck('id')->toArray();
+        $reviewPic = ReviewPic::where('isVideo', 0)->where('is360', 0)->whereIn('logId', $reviewLogId)->get();
+        for($i = 0, $j = 0; $i < count($reviewPic) && $j < 3; $i++){
+            foreach ($reviewLog as $log){
+                if($log->id == $reviewPic[$i]->logId){
+                    $kindPlace = Place::find($log->kindPlaceId);
+                    $pl = \DB::table($kindPlace->tableName)->find($log->placeId);
+                    break;
+                }
+            }
+
+            $location1 = $location .'/'.$kindPlace->fileName.'/'.$pl->file.'/'.$reviewPic[$i]->pic;
+            if(is_file($location1)) {
+                $p = \URL::asset('userPhoto/'.$kindPlace->fileName.'/'.$pl->file.'/'.$reviewPic[$i]->pic);
+                $insert = [
+                    'id' => 'review_' . $reviewPic[$i]->id,
+                    'mainPic' => $p,
+                    'sidePic' => $p,
+                    'userName' => $user->username,
+                    'userPic' => $user->picture,
+                    'showInfo' => false,
+                    'uploadTime' => getDifferenceTimeString($reviewPic[$i]->created_at),
+                ];
+                array_push($allUserPics, $insert);
+                $j++;
+            }
+        }
+
+        $sideInfos['allUserPics'] = $allUserPics;
+
+        return $sideInfos;
+    }
+
+    public function showProfile($username = '') {
+        $myPage = false;
+        if($username != '') {
+            $user = User::where('username', $username)->first();
+            if($user == null)
+                return \redirect(route('main'));
+
+            if(\auth()->check() && $user->id == \auth()->user()->id)
+                $myPage = true;
+            else
+                $myPage = false;
+        }
+        else if($username == '' && \auth()->check()) {
+            $user = Auth::user();
+            $myPage = true;
+        }
+        else
+            return \redirect(route('main'));
+
+        $uId = $user->id;
+        $sideInfos = $this->sideProfilePages($uId);
+
+        $counts = array();
+        $counter = 0;
+        $activities = Activity::whereVisibility(1)->orderBy('rate', 'ASC')->get();
+        foreach ($activities as $activity) {
+            $activity->name = $activity->actualName;
+            $condition = ["visitorId" => $user->id, "activityId" => $activity->id, 'confirm' => 1];
+            $counts[$counter++] = LogModel::where($condition)->count();
+        }
+        $recentlyBadges = [['badgeId' => -1, 'badgeDate' => -1],
+                            ['badgeId' => -1, 'badgeDate' => -1],
+                            ['badgeId' => -1, 'badgeDate' => -1]];
+        $badges = Medal::all();
+        foreach ($badges as $badge) {
+            $date = getBadgeDate($badge->activityId, $badge->floor, $uId, $badge->kindPlaceId);
+            if($date != -1) {
+                if($date > $recentlyBadges[0]['badgeDate']) {
+                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
+                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
+                    $recentlyBadges[1]['badgeDate'] = $recentlyBadges[0]['badgeDate'];
+                    $recentlyBadges[1]['badgeId'] = $recentlyBadges[0]['badgeId'];
+                    $recentlyBadges[0]['badgeDate'] = $date;
+                    $recentlyBadges[0]['badgeId'] = $badge->id;
+                }
+                else if($date > $recentlyBadges[1]['badgeDate']) {
+                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
+                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
+                    $recentlyBadges[1]['badgeDate'] = $date;
+                    $recentlyBadges[1]['badgeId'] = $badge->id;
+                }
+                else if($date > $recentlyBadges[2]['badgeDate']) {
+                    $recentlyBadges[2]['badgeDate'] = $date;
+                    $recentlyBadges[2]['badgeId'] = $badge->id;
+                }
+            }
+        }
+        $limit = (count($recentlyBadges) >= 3) ? 3 : count($recentlyBadges);
+        array_splice($recentlyBadges, $limit);
+        $outMedals = [];
+        foreach ($recentlyBadges as $badge) {
+            if($badge['badgeId'] != -1) {
+                $badgeTmp = Medal::whereId($badge['badgeId']);
+                $badgeTmp->activityId = Activity::whereId($badgeTmp->activityId)->name;
+                $outMedals[count($outMedals)] = $badgeTmp;
+            }
+        }
+        $medals = getMedals($user->id);
+
+        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage']));
+
+        return view('profile.profile', array('activities' => $activities, 'userActivityCount' => $userActivityCount,
+            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
+            'userLevels' => nearestLevel($user->id), 'medals' => $medals,
+            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
+    }
+
+
+    public function getUserReviews(Request $request)
+    {
+        $reviewAct = Activity::where('name', 'نظر')->first();
+        if(\auth()->check() && ( $request->userId == \auth()->user()->id || !isset($request->userId) ) ){
+            $user = \auth()->user();
+            $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->orderByDesc('date')->get();
+            $status = 'ok';
+        }
+        else if(isset($request->userId)){
+            $user = User::find($request->userId);
+            $reviews = LogModel::where('activityId', $reviewAct->id)->where('visitorId', $user->id)->where('confirm', 1)->orderByDesc('date')->get();
+            $status = 'ok';
+        }
+        else
+            $status = 'nok';
+
+        foreach ($reviews as $item)
+            $item = reviewTrueType($item); // in common.php
+
+        $reviews = $reviews->toArray();
+
+        if(isset($request->sort) && $request->sort != 'new') {
+            $sort = false;
+            if($request->sort == 'top')
+                $sort = array_column($reviews, 'like');
+            else if($request->sort == 'hot')
+                $sort = array_column($reviews, 'answersCount');
+
+            if($sort)
+                array_multisort($sort, SORT_DESC, $reviews);
+        }
+
+        echo json_encode(['status' => $status, 'result' => $reviews]);
+        return;
+    }
+
+    public function getUserPicsAndVideo(Request $request)
+    {
+        $user = User::find($request->userId);
+        $uId = $user->id;
+        $user->picture = getUserPic($uId);
+
+        $allUserPics = [];
+        $location = __DIR__ . '/../../../../assets/userPhoto/';
+        $allUserPics = [];
+        $photographer = PhotographersPic::where('userId', $uId)->where('status', 1)->orderByDesc('created_at')->get();
+        for($i = 0; $i < count($photographer) ; $i++){
+            $kindPlace = Place::find($photographer[$i]->kindPlaceId);
+            $pl = \DB::table($kindPlace->tableName)->find($photographer[$i]->placeId);
+            $city = Cities::find($pl->cityId);
+            $state = State::find($city->stateId);
+
+            $location1 = $location.'/'.$kindPlace->fileName.'/'.$pl->file.'/s-'.$photographer[$i]->pic;
+            if(is_file($location1)) {
+                $p = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/s-' . $photographer[$i]->pic);
+                $side = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/l-' . $photographer[$i]->pic);
+                $insert = [
+                    'id' => 'photographer_' . $photographer[$i]->id,
+                    'mainPic' => $p,
+                    'sidePic' => $side,
+                    'userName' => $user->username,
+                    'userPic' => $user->picture,
+                    'like' => $photographer[$i]->like,
+                    'dislike' => $photographer[$i]->like,
+                    'alt' => $photographer[$i]->alt,
+                    'showInfo' => true,
+                    'fileKind' => 'pic',
+                    'uploadTime' => getDifferenceTimeString($photographer[$i]->created_at),
+                    'created_at' => $photographer[$i]->created_at,
+                    'description' => $photographer[$i]->description,
+                    'where' => 'در ' . $pl->name . ' شهر ' . $city->name . ' استان ' . $state->name ,
+                    'whereUrl' => createUrl($photographer[$i]->kindPlaceId, $photographer[$i]->placeId, 0, 0, 0),
+                ];
+                array_push($allUserPics, $insert);
+            }
+        }
+
+        $revAct = Activity::where('name', 'نظر')->first();
+        $reviewLog = LogModel::where('visitorId', $uId)->where('activityId', $revAct->id)->orderByDesc('date')->get();
+        $reviewLogId = LogModel::where('visitorId', $uId)->where('activityId', $revAct->id)->orderByDesc('date')->pluck('id')->toArray();
+        $reviewPic = ReviewPic::whereIn('logId', $reviewLogId)->get();
+        for($i = 0; $i < count($reviewPic); $i++){
+            foreach ($reviewLog as $log){
+                if($log->id == $reviewPic[$i]->logId){
+                    $kindPlace = Place::find($log->kindPlaceId);
+                    $pl = \DB::table($kindPlace->tableName)->find($log->placeId);
+                    $city = Cities::find($pl->cityId);
+                    $state = State::find($city->stateId);
+                    break;
+                }
+            }
+
+            if($reviewPic[$i]->isVideo == 1){
+                $videoArray = explode('.', $reviewPic[$i]->pic);
+                $videoName = '';
+                for($k = 0; $k < count($videoArray)-1; $k++)
+                    $videoName .= $videoArray[$k] . '.';
+                $videoName .= 'png';
+
+                $loca1 = $location .'/'. $kindPlace->fileName . '/' . $pl->file . '/' . $videoName;
+                $loca2 = $location .'/'. $kindPlace->fileName . '/' . $pl->file . '/' . $reviewPic[$i]->pic;
+
+                if(is_file($loca1) && is_file($loca2)) {
+                    $p = URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/' . $videoName);
+                    $v = URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/' . $reviewPic[$i]->pic);
+
+                    $insert = [
+                        'id' => 'review_' . $reviewPic[$i]->id,
+                        'mainPic' => $p,
+                        'sidePic' => $p,
+                        'video' => $v,
+                        'fileKind' => $reviewPic[$i]->is360 == 1 ? 'video360' : 'video',
+                        'userName' => $user->username,
+                        'userPic' => $user->picture,
+                        'showInfo' => false,
+                        'uploadTime' => getDifferenceTimeString($reviewPic[$i]->created_at),
+                        'created_at' => $reviewPic[$i]->created_at,
+                        'where' => 'در ' . $pl->name . ' شهر ' . $city->name . ' استان ' . $state->name ,
+                        'whereUrl' => createUrl($kindPlace->id, $pl->id, 0, 0, 0),
+                    ];
+                    array_push($allUserPics, $insert);
+                }
+            }
+            else {
+                $location1 = $location . '/' . $kindPlace->fileName . '/' . $pl->file . '/' . $reviewPic[$i]->pic;
+                if (is_file($location1)) {
+                    $p = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/' . $reviewPic[$i]->pic);
+                    $insert = [
+                        'id' => 'review_' . $reviewPic[$i]->id,
+                        'mainPic' => $p,
+                        'sidePic' => $p,
+                        'fileKind' => 'pic',
+                        'userName' => $user->username,
+                        'userPic' => $user->picture,
+                        'showInfo' => false,
+                        'uploadTime' => getDifferenceTimeString($reviewPic[$i]->created_at),
+                        'created_at' => $reviewPic[$i]->created_at,
+                        'where' => 'در ' . $pl->name . ' شهر ' . $city->name . ' استان ' . $state->name ,
+                        'whereUrl' => createUrl($kindPlace->id, $pl->id, 0, 0, 0),
+                    ];
+                    array_push($allUserPics, $insert);
+                }
+            }
+        }
+
+        $sort = array_column($allUserPics, 'created_at');
+        array_multisort($sort, SORT_DESC, $allUserPics);
+
+        echo json_encode(['status' => 'ok', 'result' => $allUserPics]);
+
+        return;
+    }
+
+    public function updateMyBio(Request $request)
+    {
+        $user = Auth::user();
+        $tripStyles = $request->tripStyles;
+        UserTripStyles::where('uId', $user->id)->delete();
+        if($tripStyles != null){
+            foreach ($tripStyles as $trip){
+                if($trip != 0){
+                    $userTripStyle = new UserTripStyles();
+                    $userTripStyle->uId = $user->id;
+                    $userTripStyle->tripStyleId = $trip;
+                    $userTripStyle->save();
+                }
+            }
+        }
+
+        $user->introduction = $request->myBio;
+        $user->save();
+
+        $tripStyles = UserTripStyles::join('tripStyle', 'tripStyle.id', 'userTripStyles.tripStyleId')
+            ->where('uId', $user->id)->get();
+
+        echo json_encode(['status' => 'ok', 'tripStyles' => $tripStyles, 'introduction' => $user->introduction]);
+        return;
+    }
+
 
     public function sendMyInvitationCode() {
 
@@ -65,150 +400,6 @@ class ProfileController extends Controller {
         echo "nok";
     }
 
-    public function showProfile() {
-        $user = Auth::user();
-        $uId = $user->id;
-
-        $user->created = convertDate($user->created_at);
-
-        $activities = Activity::whereVisibility(1)->orderBy('rate', 'ASC')->get();
-
-        $counts = array();
-        $counter = 0;
-
-        foreach ($activities as $activity) {
-            $activity->name = $activity->actualName;
-            $condition = ["visitorId" => $user->id, "activityId" => $activity->id, 'confirm' => 1];
-            $counts[$counter++] = LogModel::where($condition)->count();
-        }
-
-        $recentlyBadges = [['badgeId' => -1, 'badgeDate' => -1],
-            ['badgeId' => -1, 'badgeDate' => -1],
-            ['badgeId' => -1, 'badgeDate' => -1]];
-
-        $badges = Medal::all();
-        foreach ($badges as $badge) {
-            $date = getBadgeDate($badge->activityId, $badge->floor, $uId, $badge->kindPlaceId);
-            if($date != -1) {
-                if($date > $recentlyBadges[0]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
-                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
-                    $recentlyBadges[1]['badgeDate'] = $recentlyBadges[0]['badgeDate'];
-                    $recentlyBadges[1]['badgeId'] = $recentlyBadges[0]['badgeId'];
-                    $recentlyBadges[0]['badgeDate'] = $date;
-                    $recentlyBadges[0]['badgeId'] = $badge->id;
-                }
-                else if($date > $recentlyBadges[1]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
-                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
-                    $recentlyBadges[1]['badgeDate'] = $date;
-                    $recentlyBadges[1]['badgeId'] = $badge->id;
-                }
-                else if($date > $recentlyBadges[2]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $date;
-                    $recentlyBadges[2]['badgeId'] = $badge->id;
-                }
-            }
-        }
-
-        $limit = (count($recentlyBadges) >= 3) ? 3 : count($recentlyBadges);
-        array_splice($recentlyBadges, $limit);
-        $outMedals = [];
-
-        foreach ($recentlyBadges as $badge) {
-            if($badge['badgeId'] != -1) {
-                $badgeTmp = Medal::whereId($badge['badgeId']);
-                $badgeTmp->activityId = Activity::whereId($badgeTmp->activityId)->name;
-                $outMedals[count($outMedals)] = $badgeTmp;
-            }
-        }
-
-        $user->picture = getUserPic($user->id);
-
-        $medals = getMedals($user->id);
-        $nearestMedals = getNearestMedals($user->id);
-
-        $user->tripStyle = UserTripStyles::join('tripStyle', 'tripStyle.id', 'userTripStyles.tripStyleId')->where('userTripStyles.uId', $user->id)->get();
-
-        $userCount = $user->getUserActivityCount();
-
-        return view('profile.profile', array('activities' => $activities, 'userCount' => $userCount,
-            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
-            'userLevels' => nearestLevel($user->id), 'medals' => $medals,
-            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
-
-    }
-
-    public function showOtherProfile($username, $mode = "") {
-
-        $uId = User::whereUserName($username)->first();
-
-        if($uId == null)
-            return Redirect::to('profile');
-
-        $uId = $uId->id;
-
-        $user = User::whereId($uId);
-        $user->created = convertDate($user->created_at);
-
-        $activities = Activity::whereVisibility(1)->get();
-
-        $counts = array();
-        $counter = 0;
-
-        foreach ($activities as $activity) {
-            $activity->name = $activity->actualName;
-            $condition = ["visitorId" => $user->id, "activityId" => $activity->id];
-            $counts[$counter++] = LogModel::where($condition)->count();
-        }
-
-        $user->picture = getUserPic($user->id);
-
-        $recentlyBadges = [['badgeId' => -1, 'badgeDate' => -1],
-            ['badgeId' => -1, 'badgeDate' => -1],
-            ['badgeId' => -1, 'badgeDate' => -1]];
-
-        $badges = Medal::all();
-        foreach ($badges as $badge) {
-            $date = getBadgeDate($badge->activityId, $badge->floor, $uId, $badge->kindPlaceId);
-            if($date != -1) {
-                if($date > $recentlyBadges[0]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
-                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
-                    $recentlyBadges[1]['badgeDate'] = $recentlyBadges[0]['badgeDate'];
-                    $recentlyBadges[1]['badgeId'] = $recentlyBadges[0]['badgeId'];
-                    $recentlyBadges[0]['badgeDate'] = $date;
-                    $recentlyBadges[0]['badgeId'] = $badge->id;
-                }
-                else if($date > $recentlyBadges[1]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
-                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
-                    $recentlyBadges[1]['badgeDate'] = $date;
-                    $recentlyBadges[1]['badgeId'] = $badge->id;
-                }
-                else if($date > $recentlyBadges[2]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $date;
-                    $recentlyBadges[2]['badgeId'] = $badge->id;
-                }
-            }
-        }
-
-        $outMedals = [];
-
-        foreach ($recentlyBadges as $badge) {
-            if($badge['badgeId'] != -1) {
-                $badgeTmp = Medal::whereId($badge['badgeId']);
-                $badgeTmp->activityId = Activity::whereId($badgeTmp->activityId)->name;
-                $outMedals[count($outMedals)] = $badgeTmp;
-            }
-        }
-
-        return view('otherProfile', array('user' => $user, 'activities' => $activities,
-            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::all(),
-            'userLevels' => nearestLevel($user->id), 'recentlyBadges' => $outMedals, 'mode2' => $mode));
-
-    }
-    
     public function checkAuthCode() {
 
         if(isset($_POST["phoneNum"]) && isset($_POST["code"])) {
@@ -398,7 +589,7 @@ class ProfileController extends Controller {
                     Auth::login($user);
                     session(['msg' => 'رمز عبور با موفقیت تغییر یافت']);
 
-                    return Redirect::to(route('accountInfo'));
+                    return Redirect::to(route('profile.accountInfo'));
                 } else {
                     $msg = "پسورد جدید و تکرار آن یکی نیستند";
                 }
@@ -455,7 +646,7 @@ class ProfileController extends Controller {
         $err = "";
 
         if(isset($_POST["cancel"]))
-            return Redirect::to("editPhoto");
+            return Redirect::to("profile/editPhoto");
 
         if(isset($_FILES["newPic"])) {
 
@@ -489,7 +680,7 @@ class ProfileController extends Controller {
         }
 
         if(empty($err) ) {
-            return Redirect::to("editPhoto");
+            return Redirect::to("profile/editPhoto");
         }
 
         return $this->editPhoto($err);
@@ -701,13 +892,5 @@ class ProfileController extends Controller {
             echo json_encode(['status' => 'nok']);
 
         return;
-    }
-
-    public function authLive()
-    {
-        $name = $_GET['name'];
-        $user = \auth()->user();
-
-        return \redirect(\url('streaming/live/' . $name . '?name=' . $user->username));
     }
 }

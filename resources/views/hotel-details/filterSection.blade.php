@@ -3,11 +3,16 @@
         <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
     </div>
     <div class="display-inline-block full-width font-size-15">
-        تعداد <span id="reviewCountSearch">{{$reviewCount}}</span> پست، <span id="reviewCommentCount">{{$ansReviewCount}}</span> نظر و <span id="reviewUserCount">{{$userReviewCount}}</span> کاربر مختلف
+        تعداد
+        <span id="reviewCountSearch">{{$reviewCount}}</span>
+        پست،
+        <span id="reviewCommentCount">{{$ansReviewCount}}</span>
+        نظر و
+        <span id="reviewUserCount">{{$userReviewCount}}</span>
+        کاربر مختلف
     </div>
     <div class="filterHelpText">
-        با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را
-        پیدا کنید
+        با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را پیدا کنید
         <div class="showFiltersMenus display-none" onclick="showPostsFilterBar()">
             <span class="float-right">بستن منو</span>
             <span class="float-left position-relative width-50"></span>
@@ -17,10 +22,12 @@
 
         @foreach($multiQuestion as $key => $item)
             <div class="visitKindTypeFilter filterTypeDiv">
-                                            <span class="float-right line-height-2">
-                                                {{$item->description}}
-                                            </span>
-                <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeReviewFilter({{$item->id}}, 'multi')" style="cursor: pointer">حذف فیلتر</span>
+                <span class="float-right line-height-2">
+                    {{$item->description}}
+                </span>
+                <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5"
+                      onclick="removeReviewFilter({{$item->id}}, 'multi')"
+                      style="cursor: pointer">حذف فیلتر</span>
                 <div class="clear-both"></div>
                 <center>
                     @foreach($item->ans as $item2 )
@@ -47,9 +54,9 @@
 
         @foreach($rateQuestion as $index => $item)
             <div class="commentsRatesFilter filterTypeDiv">
-                                            <span class="float-right line-height-2">
-                                                {{$item->description}}
-                                            </span>
+                <span class="float-right line-height-2">
+                    {{$item->description}}
+                </span>
                 <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeReviewFilter({{$item->id}}, 'rate')" style="cursor: pointer">حذف فیلتر</span>
                 <div class="clear-both"></div>
                 <center>
@@ -73,17 +80,16 @@
             </div>
         @endforeach
 
-        <div class="searchFilter filterTypeDiv">
-                                        <span class="float-right line-height-205">
-                                            جست و جو کنید
-                                        </span>
-            <div class="clear-both"></div>
-            <center>
-                <div class="inputBoxSearchFilter inputBox">
-                    <input class="inputBoxInput" type="text"
-                           placeholder="عبارت مورد نظر خود را جست و جو کنید" onchange="textSearch(this.value)">
-                </div>
-            </center>
+        <div class="searchFilter filterTypeDiv" style="display: flex; flex-direction: column;">
+            <span class="float-right line-height-205" style="display: flex; align-items: center;">
+                جست و جو کنید
+                <span id="removeTextReviewSearch" class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="$('#reviewSearchInput').val(''); textSearch(); " style="cursor: pointer; display: none;">حذف فیلتر</span>
+            </span>
+
+            <div class="inputBoxSearchFilter inputBox">
+                <input id="reviewSearchInput" class="inputBoxInput" type="text" placeholder="عبارت مورد نظر خود را جست و جو کنید" onchange="textSearch()">
+                <button class="searchIcon" onclick="textSearch()"></button>
+            </div>
         </div>
 
     </div>
@@ -266,13 +272,19 @@
         doReviewFilter();
     }
 
-    function textSearch(_value){
+    function textSearch(){
+        let textSearch = $('#reviewSearchInput').val();
+
+        if(textSearch.trim().length == 0)
+            $('#removeTextReviewSearch').hide();
+        else
+            $('#removeTextReviewSearch').show();
 
         var is = false;
         for(i = 0; i < reviewFilters.length; i++){
             if(reviewFilters[i] != null && reviewFilters[i]['kind'] == 'textSearch' && reviewFilters[i]['id'] == 0){
                 is = true;
-                reviewFilters[i]['value'] = _value;
+                reviewFilters[i]['value'] = textSearch;
                 break;
             }
         }
@@ -280,7 +292,7 @@
             reviewFilters[reviewFilters.length] = {
                 'kind' : 'textSearch',
                 'id' : 0,
-                'value' : _value
+                'value' : textSearch
             }
         }
         doReviewFilter();

@@ -15,19 +15,24 @@ Route::get('seeLanguage', function(){
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
-Route::post('resizePostImages', 'HomeController@resizePostImages');
-
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
+
 Route::post('getPostComments', ['as' => 'getPostComments', 'uses' => 'PostController@getPostComments']);
+
 Route::post('sendPostComment', ['as' => 'sendPostComment', 'uses' => 'PostController@sendPostComment']);
 
 //sitemap
 Route::group(array(), function(){
     Route::get('/sitemap.xml', 'SitemapController@index');
+
     Route::get('/sitemap.xml/places', 'SitemapController@places');
+
     Route::get('/sitemap.xml/lists', 'SitemapController@lists');
+
     Route::get('/sitemap.xml/posts', 'SitemapController@posts');
+
     Route::get('/sitemap.xml/city', 'SitemapController@city');
+
 });
 
 Route::group(array('middleware' => ['throttle:30', 'web']), function () {
@@ -59,12 +64,13 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
     Route::post('getSimilarsMajara', array('as' => 'getSimilarsMajara', 'uses' => 'MajaraController@getSimilarsMajara'));
 
-
     Route::post('getNearby', array('as' => 'getNearby', 'uses' => 'PlaceController@getNearby'));
 
     Route::post('getQuestions', array('as' => 'getQuestions', 'uses' => 'PlaceController@getQuestions'));
 
     Route::post('askQuestion', array('as' => 'askQuestion', 'uses' => 'PlaceController@askQuestion'));
+
+    Route::post('deleteQuestion', 'PlaceController@deleteQuestion')->name('deleteQuestion');
 
     Route::post('getCommentsCount', array('as' => 'getCommentsCount', 'uses' => 'PlaceController@getCommentsCount'));
 
@@ -79,8 +85,6 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
     Route::get('seeAllAns/{questionId}/{mode?}/{logId?}', array('as' => 'seeAllAns', 'uses' => 'PlaceController@seeAllAns'));
 
     Route::post('showUserBriefDetail', array('as' => 'showUserBriefDetail', 'uses' => 'PlaceController@showUserBriefDetail'));
-
-    Route::post('report', array('as' => 'report', 'uses' => 'PlaceController@report'));
 
     Route::get('showReview/{logId}', array('as' => 'showReview', 'uses' => 'PlaceController@showReview'));
 
@@ -99,8 +103,6 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
     Route::get('policies', array('as' => 'policies', 'uses' => 'HomeController@showPoliciess'));
 
     Route::get('estelahat/{goyesh}', array('as' => 'estelahat', 'uses' => 'HomeController@estelahat'));
-
-    Route::get('otherProfile/{username}/{mode?}', array('as' => 'otherProfile', 'uses' => 'ProfileController@showOtherProfile'));
 
     Route::get('otherBadge/{username}', array('as' => 'otherBadge', 'uses' => 'BadgeController@showOtherBadge'));
 
@@ -332,21 +334,16 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
     Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
     Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
     Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
-
-    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
-    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');
 });
 
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
 
+    Route::post('getSingleReview', 'AjaxController@getSingleReview')->name('getSingleReview');
+
     Route::post('getTags', 'AjaxController@getTags')->name('getTags');
 
     Route::post('getCities', 'AjaxController@getCitiesDir')->name('getCitiesDir');
-
-    Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'AjaxController@getReports'));
-
-    Route::post('getReports2', array('as' => 'getReports', 'uses' => 'AjaxController@getReports2'));
 
     Route::post('searchForMyContacts', array('as' => 'searchForMyContacts', 'uses' => 'AjaxController@searchForMyContacts'));
 
@@ -428,6 +425,10 @@ Route::group(array('middleware' => 'nothing'), function () {
             return view('userActivities.userArticles');
         elseif($page == 'post')
             return view('userActivities.userPosts');
+        elseif($page == 'profile')
+            return view('userActivities.profileUsers');
+        elseif($page == 'save')
+            return view('userActivities.sameParts');
         elseif($page == 'photo')
             return view('userActivities.userPhotosAndVideos');
         elseif($page == 'question')
@@ -448,17 +449,52 @@ Route::group(array('middleware' => 'nothing'), function () {
 //reports
 Route::group(array('middleware' => 'nothing'), function(){
     Route::post('getReportQuestions', 'ReportController@getReportQuestions')->name('getReportQuestions');
+
+    Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'ReportController@getReports1'));
+
+    Route::post('getReports2', array('as' => 'getReports', 'uses' => 'ReportController@getReports2'));
+
+    Route::post('report', array('as' => 'report', 'uses' => 'ReportController@report'));
+
+    Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
+
+    Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
+
+    Route::post('storeReport', array('as' => 'storeReport', 'uses' => 'ReportController@storeReport'));
+
+    Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'ReportController@sendReceiveReport'));
+
+    Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'ReportController@sendReport'));
+});
+
+// profile common
+Route::group(['middleware' => ['throttle:30']], function(){
+    Route::get('profile/index/{username?}', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
+
+    Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
+
+    Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
+
+    Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
 });
 
 // profile
 Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
-    Route::get('authLive', 'ProfileController@authLive')->name('authLive');
+    Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
+
+    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
+
+    Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
+
     Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
+
     Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
+
     Route::post('addPlace/storeImg', 'ProfileController@storeImgAddPlaceByUser')->name('addPlaceByUser.storeImg');
+
     Route::post('addPlace/deleteImg', 'ProfileController@deleteImgAddPlaceByUser')->name('addPlaceByUser.deleteImg');
 
     Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
@@ -477,13 +513,9 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('sendMsgAjax', array('as' => 'sendMsgAjax', 'uses' => 'MessageController@sendMsgAjax'));
 
-    Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'MessageController@sendReceiveReport'));
-
     Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
 
     Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
-
-    Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'MessageController@sendReport'));
 
     Route::post('blockUser', array('as' => 'block', 'uses' => 'MessageController@blockUser'));
 
@@ -493,15 +525,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
 
-    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
-
-    Route::get('accountInfo', array('as' => 'accountInfo', 'uses' => 'ProfileController@accountInfo'));
-
     Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
-
-    Route::get('editPhoto', array('as' => 'editPhoto', 'uses' => 'ProfileController@editPhoto'));
-
-    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
     Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
 
@@ -583,8 +607,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('sendAns2', array('as' => 'sendAns2', 'uses' => 'PlaceController@sendAns2'));
 
-    Route::post('sendReport2', array('as' => 'sendReport2', 'uses' => 'PlaceController@sendReport'));
-
     Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
 
     Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
@@ -609,6 +631,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
 });
 
+// admin access
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
 
     Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
@@ -637,10 +660,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), func
 
     Route::get('removeDuplicate/{key}', 'HomeController@removeDuplicate');
 
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAccess']), function (){
-
     Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
 
     Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
@@ -648,19 +667,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
     Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
 
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controllerAccess']), function (){
-
-    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'ContentController@removeReview'));
-
-});
-
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorAccess']), function () {
-
-    Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
-
-    Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
 
 });
 
@@ -709,68 +715,39 @@ Route::group(array('middleware' => 'auth'), function () {
     });
 });
 
-//streaming
-Route::middleware(['web', 'vodShareData'])->group(function (){
-    Route::get('streaming/index', 'StreamingController@indexStreaming')->name('streaming.index');
+// delete contents
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('streaming/show/{code}', 'StreamingController@showStreaming')->name('streaming.show');
+    Route::post('review/delete', 'DeleteContentController@deleteReview')->name('review.delete');
 
-    Route::get('streaming/live/{room?}', 'StreamingController@streamingLive')->name('streaming.live');
-
-    Route::post('streaming/search', 'StreamingController@search')->name('streaming.search');
-
-    Route::get('streaming/list/{kind}/{value}', 'StreamingController@videoList')->name('streaming.list');
-
-    Route::post('streaming/getListElems', 'StreamingController@getVideoListElems')->name('streaming.list.getElems');
-
-    Route::middleware(['auth'])->group(function () {
-        Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');
-
-        Route::post('streaming/storeVideo', 'StreamingController@storeVideo')->name('streaming.storeVideo');
-
-        Route::post('streaming/storeVideoInfo', 'StreamingController@storeVideoInfo')->name('streaming.storeVideoInfo');
-
-        Route::post('streaming/setVideoFeedback', 'StreamingController@setVideoFeedback')->name('streaming.setVideoFeedback');
-
-        Route::post('streaming/setVideoComment', 'StreamingController@setVideoComment')->name('streaming.setVideoComment');
-
-        Route::post('streaming/live/sendBroadcastMsg', 'StreamingController@sendBroadcastMsg')->name('sendBroadcastMsg');
-        Route::post('streaming/live/setVideoFeedback', 'StreamingController@setLiveFeedback')->name('streaming.live.setLiveFeedback');
-
-    });
-
-    Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
-
-    Route::get('/setVideoDuration', 'StreamingController@setVideoDuration');
-
-    Route::get('/confirmAll', 'StreamingController@confirmAll');
-
-    Route::get('broadCastTest/{room}', function($room){
-        return view('test.test', compact(['room']));
-    });
+    Route::post('album/pics/delete', 'DeleteContentController@deleteAlbumPic')->name('album.pic.delete');
 
 });
-
 
 Route::get('emailtest/{email}', 'HomeController@emailtest');
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
 
 // not use
-Route::group(array('middleware' => 'nothing'), function () {
+Route::group(array('middleware' => ['nothing', 'notUse']), function () {
+//    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
+    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllReview');
+
+    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllQuestions');
+
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
 
     Route::post('getMajaraListElems/{city}/{mode}', array('as' => 'getMajaraListElems', 'uses' => 'NotUseController@getMajaraListElems'));
 
     Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'NotUseController@getRestaurantListElems'));
 
-    Route::any('restaurantList/{city}/{mode}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
+    Route::any('restaurantList/{city}/{mode}/{chert?}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
 
-    Route::any('hotelList/{city}/{mode}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
+    Route::any('hotelList/{city}/{mode}/{chert?}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
 
     Route::post('getHotelListElems/{city}/{mode}/{kind?}', array('as' => 'getHotelListElems', 'uses' => 'NotUseController@getHotelListElems'));
 
-    Route::any('amakenList/{city}/{mode}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
+    Route::any('amakenList/{city}/{mode}/{chert?}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
 
     Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'NotUseController@getAmakenListElems'));
 
@@ -797,64 +774,4 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('survey', array('as' => 'survey', 'uses' => 'NotUseController@survey'));
 
     Route::post('getSurvey', array('as' => 'getSurvey', 'uses' => 'NotUseController@getSurvey'));
-});
-
-//webrtc test
-Route::group(array(), function(){
-
-    Route::get('webrtcN', function(){
-        return view('webrtc.webrtcn');
-    });
-    Route::post('signalWebrtc', function(\Illuminate\Http\Request $request){
-        dd($request->all());
-    });
-
-
-    Route::get('webrtcTech', function(){
-        return redirect(url('webrtcPage?kind=teacher&name=teacher'));
-    });
-
-    Route::get('webrtcStudent', function(){
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < 10; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return redirect(url('webrtcPage?kind=student&name='.$randomString));
-    });
-
-    Route::get('webrtcPage', function(){
-
-        $data = array( "format" => "urls" );
-        $data_json = json_encode($data);
-
-        $curl = curl_init();
-        curl_setopt_array( $curl, array (
-            CURLOPT_HTTPHEADER => array("Content-Type: application/json","Content-Length: " . strlen($data_json)),
-            CURLOPT_POSTFIELDS => $data_json,
-            CURLOPT_URL => "https://global.xirsys.net/_turn/MyFirstApp",
-            CURLOPT_USERPWD => "kiavash:89364dca-82f5-11ea-9fb1-0242ac130003",
-            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-            CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_RETURNTRANSFER => 1
-        ));
-
-        $resp = curl_exec($curl);
-        if(curl_error($curl)){
-            echo "Curl error: " . curl_error($curl);
-        };
-        curl_close($curl);
-        $urls = $resp;
-//    $urls = json_decode($resp);
-//dd($urls);
-        $kind = $_GET['kind'];
-        $name = $_GET['name'];
-
-        return view('webrtc.webrtc', compact(['kind', 'name', 'urls']));
-    });
-
-    Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
-        dd($request);
-    });
 });

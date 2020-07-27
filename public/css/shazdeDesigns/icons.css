@@ -3,6 +3,14 @@
 }
 
 /*....................*/
+.emptyCameraIcon:before{
+    content: '\E010';
+    font-family: 'Shazde_Regular2' !important;
+}
+.fullCameraIcon:before{
+    content: '\E0A4';
+    font-family: 'Shazde_Regular2' !important;
+}
 .hotel:before {
     content: '\E000';
 }
@@ -62,15 +70,22 @@
 }
 .plus:before {
     content: '\E031';
+    font-family: 'Shazde_Regular' !important
 }
 .plus2:before {
     content: '\E02F';
+    font-family: 'Shazde_Regular' !important
+}
+.calendarIcon:before{
+    content: "\e015";
+    font-family: 'Shazde_Regular' !important
 }
 .minus:before {
     content: '\E034';
 }
 .close:before {
     content: '\E02C';
+    font-family: 'Shazde_Regular' !important;
 }
 .iconClose:before {
     font-family: 'Shazde_Regular' !important;
@@ -84,6 +99,7 @@
 }
 .searchIcon:before{
     content: "\e056";
+    font-family: "Shazde_Regular"!important;
 }
 
 
@@ -167,8 +183,21 @@
     content: '\E058' !important;
     font-family: Shazde_Regular2 !important;
 }
+.LikeIconEmpty:before{
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
+}
+.DisLikeIconEmpty:before{
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+}
+
 .CommentIcon:before{
     content: '\E06C';
+    font-family: Shazde_Regular2 !important;
+}
+.EmptyCommentIcon:before{
+    content: '\E06B';
     font-family: Shazde_Regular2 !important;
 }
 .ShareIcon:before{
@@ -198,11 +227,15 @@
 }
 .BookMarkIconEmpty:before{
     content: "\e0dd" !important;
+    font-family: Shazde_Regular2 !important;
 }
 .safarnameIcon:before{
     content: '\E0D9' !important;
     font-family: Shazde_Regular2 !important;
-
+}
+.settingIcon:before{
+    content: "\E090" !important;
+    font-family: Shazde_Regular2 !important;
 }
 .MyTripsIcon:before{
     content: "\e0c5" !important;
@@ -233,24 +266,49 @@
     content: '\E04A';
     font-family: Shazde_Regular2 !important;
 }
-
-.LikeIconEmpty:before{
-    content: '\E1F9';
-    font-family: Shazde_Regular2 !important;
-}
-.DisLikeIconEmpty:before{
-    content: '\E1F8';
-    font-family: Shazde_Regular2 !important;
-}
 .threeDotIcon:before{
     content: '\E091';
+    font-family: Shazde_Regular2 !important;
+}
+.threeDotIconVertical:before{
+    content: '\E092';
     font-family: Shazde_Regular2 !important;
 }
 .threeLineIcon:before{
     content: '\E035';
     font-family: Shazde_Regular2 !important;
 }
+.starRatingGreen::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #4DC7BC;
+    font-size: 25px;
+}
 
+.starRating::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: white;
+    font-size: 25px;
+}
+
+.starRatingGold::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #fcc156;
+    font-size: 25px;
+}
+
+.starRatingGrey::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #e5e5e5;
+    font-size: 25px;
+}
 
 .ui_bubble_rating {
     display: inline-block;
