@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="{{URL::asset('css/pages/landingPage.css?v=1')}}">
     @if(app()->getLocale() == 'en')
-        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/landingPage.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/landingPage.css?v=2')}}">
     @endif
 </head>
 <body style="background: black; overflow-x: hidden">
