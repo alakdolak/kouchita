@@ -206,7 +206,7 @@ body {
 @media (max-width: 767px) {
     body{
         overflow: hidden;
-        -moz-overflow:hidden
+        -moz-overflow:hidden;
     }
     .sidePic2{
         left: auto;
