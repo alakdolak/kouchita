@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-<link rel="stylesheet" href="{{URL::asset('css/theme2/pop-up-create-trip.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/theme2/pop-up-create-trip.css?v=1')}}">
 <style>
     .tripModalBack{
         position: fixed;

@@ -1,7 +1,7 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v=1')}}' />
 
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v=1')}}">
 @endif
 
 {{--footer html--}}

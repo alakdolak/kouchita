@@ -57,7 +57,7 @@
 
     @include('layouts.pop-up-create-trip')
 
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css?v=1')}}">
 
     <center class="row">
         <div class="col-xs-12">

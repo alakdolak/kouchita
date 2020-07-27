@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/component/editor.css')}}'/>
+<link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css?v=1')}}">
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/component/editor.css?v=1')}}'/>
 
 @if(\App::getLocale() == 'en')
     <style>

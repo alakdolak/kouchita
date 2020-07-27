@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/placeDetailsTable.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/placeDetailsTable.css?v=1')}}">
 
     <div class="descriptionSections">
         <div class="row">

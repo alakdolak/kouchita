@@ -7,7 +7,7 @@
 ?>
 @section('title')
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css?v=1')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
     {{--<title>{{$place->name}} | {{$city->name}} | کوچیتا</title>--}}
@@ -52,15 +52,15 @@
 @section('header')
     @parent
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/tourDetails.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/tourDetails.css?v=1')}}">
 
 @stop
 

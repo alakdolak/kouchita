@@ -1,7 +1,7 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/placeHeader.css')}}' data-rup='long_lived_global_legacy'/>
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' data-rup='long_lived_global_legacy'/>
-<link rel="stylesheet" type='text/css' href="{{URL::asset('css/common/header.css')}}">
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/placeHeader.css?v=1')}}' data-rup='long_lived_global_legacy'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}' data-rup='long_lived_global_legacy'/>
+<link rel="stylesheet" type='text/css' href="{{URL::asset('css/common/header.css?v=1')}}">
 
 <?php
 

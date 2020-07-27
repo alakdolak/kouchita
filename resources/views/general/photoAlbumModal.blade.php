@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=1')}}">
 
 <style>
     .deletePicIconsPhotoAlbum{

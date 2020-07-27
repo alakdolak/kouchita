@@ -5,21 +5,21 @@
     <title>معرفی مطلب جدید</title>
 
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css?v=1')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}' />
 
-    <link rel="stylesheet" href="{{URL::asset('css/pages/addPlaceByUser.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/addPlaceByUser.css?v=1')}}">
 
-    <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">
-    <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css')}}">
+    <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css?v=1')}}">
+    <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css?v=1')}}">
 
 
     @if(app()->getLocale() == 'en')
-        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/addPlaceByUser.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/addPlaceByUser.css?v=1')}}">
     @endif
 
 @stop

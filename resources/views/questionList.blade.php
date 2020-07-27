@@ -3,7 +3,7 @@
     <head>
 
         @include('layouts.topHeader')
-        <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hotel_review.css')}}'/>
+        <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hotel_review.css?v=1')}}'/>
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/travel_answers_page.css?v=1')}}'/>
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/overlays_defer.css?v=1')}}'/>
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/long_lived_global_legacy_3.css?v=1')}}'/>

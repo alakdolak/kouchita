@@ -36,16 +36,16 @@ if ($total == 0)
     <title>{{isset($place->setTitle) ? $place->setTitle : $place->name}} </title>
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v=1')}}">
 
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
     {{--vr--}}
     @if(isset($video) && $video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v=1')}}">
         <script src="{{URL::asset('vr2/video.js')}}"></script>
         <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
     @endif

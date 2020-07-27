@@ -1,7 +1,7 @@
 <?php
 $config = \App\models\ConfigModel::first();
 ?>
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/shareBox.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/shareBox.css?v=1')}}'/>
 
 <div id="share_box" style="width: 200px">
     <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}

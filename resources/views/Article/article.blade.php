@@ -1,7 +1,7 @@
 @extends('Article.articleLayout')
 
 @section('head')
-    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css?v=1')}}">
 
     <title> {{$post->seoTitle}} </title>
     <meta content="article" property="og:type"/>

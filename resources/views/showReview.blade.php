@@ -8,7 +8,7 @@
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/attraction_sur.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/attraction_sur_deferrable.css?v=1')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
 
     <title>{{$log->subject}}</title>

@@ -21,9 +21,9 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-    <link rel="stylesheet" href="{{URL::asset('css/pages/landingPage.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/landingPage.css?v=1')}}">
     @if(app()->getLocale() == 'en')
-        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/landingPage.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/landingPage.css?v=1')}}">
     @endif
 </head>
 <body style="background: black; overflow-x: hidden">

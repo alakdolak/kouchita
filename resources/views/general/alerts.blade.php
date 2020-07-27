@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/common/alertPage.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/alertPage.css?v=1')}}">
 
 <div id="alertBoxDiv" class="alertDarkBack">
     <div class="alertBox">

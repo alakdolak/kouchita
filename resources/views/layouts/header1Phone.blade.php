@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1Phone.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1Phone.css?v=1')}}">
 
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">

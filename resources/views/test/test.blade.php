@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>koochita test</title>
 {{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css?v=1')}}' />
     <script src="{{URL::asset('js/jQuery.js')}}"></script>
 
     <style>

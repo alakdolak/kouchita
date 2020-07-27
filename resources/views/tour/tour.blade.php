@@ -12,9 +12,9 @@
     <link rel='stylesheet' type='text/css' media='screen, print'
           href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/home_rebranded.css')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/hr_north_star.css')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/tourMainPage.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/home_rebranded.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/tourMainPage.css?v=1')}}'/>
 
     <script>
         var homePath = '{{route('home')}}';

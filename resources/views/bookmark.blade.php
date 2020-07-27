@@ -11,8 +11,8 @@
 
     @include('layouts.pop-up-create-trip')
 
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/bookmark.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/bookmark.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
 
     <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible">
         <div id="BODYCON" ng-app="mainApp" class="col easyClear poolB adjust_padding new_meta_chevron_v2">

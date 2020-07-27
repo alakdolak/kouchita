@@ -39,7 +39,7 @@ $authUrl = $client->createAuthUrl();
 
 ?>
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
 <style>
     .registerLeftSection{

@@ -1,4 +1,4 @@
-{{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css')}}">--}}
+{{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css?v=1')}}">--}}
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 

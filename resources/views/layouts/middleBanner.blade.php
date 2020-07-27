@@ -1,4 +1,4 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css?v=1')}}'/>
 
 <div class="container">
     <div class="ppr_rup ppr_priv_homepage_shelves">

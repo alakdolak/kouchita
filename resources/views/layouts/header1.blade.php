@@ -1,9 +1,9 @@
 
-<link rel="stylesheet" href="{{URL::asset('css/common/header.css')}}">
-<link rel="stylesheet" href="{{URL::asset('css/common/header1.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=1')}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v=1')}}">
 
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css?v=1')}}">
 @endif
 
 @if(!Request::is('main') && !Request::is('main/*') && !Request::is('/'))

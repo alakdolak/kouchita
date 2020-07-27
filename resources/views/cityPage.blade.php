@@ -33,9 +33,9 @@
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
 
-    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
-    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css')}}'/>
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v=1')}}">
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css?v=1')}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
 
 </head>
 

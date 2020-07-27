@@ -255,8 +255,6 @@ function createCode() {
 }
 
 function sendMail($text, $recipient, $subject) {
-
-
     require_once __DIR__ . '/../../../vendor/autoload.php';
     
     $mail = new PHPMailer(true);                           // Passing `true` enables exceptions
@@ -559,7 +557,6 @@ function sendSMS($destNum, $text, $template, $token2 = "") {
 }
 
 //email
-
 function welcomeEmail($username, $email){
     $header = 'به کوچیتا خوش آمدید';
     $userName = $username;
@@ -570,6 +567,7 @@ function welcomeEmail($username, $email){
     else
         return false;
 }
+
 function forgetPassEmail($userName, $link, $email){
     $header = 'فراموشی رمز عبور';
     $view = \View::make('emails.forgetPass', compact(['header', 'userName', 'link']));
@@ -579,6 +577,7 @@ function forgetPassEmail($userName, $link, $email){
     else
         return false;
 }
+
 function sendEmail($text, $subject, $to){
     $mail = new PHPMailer(true);
     try {

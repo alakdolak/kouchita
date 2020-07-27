@@ -13,11 +13,11 @@
 <link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 <link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css?v=1')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css?v=1')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css?v=1')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v1=2')}}'/>
-<link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css')}}">
+<link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css?v=1')}}">
 <link rel="stylesheet" href="{{URL::asset('css/component/components.css?v1=2')}}">
 
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>

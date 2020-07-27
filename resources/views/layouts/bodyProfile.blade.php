@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/universal_new.css?v=1')}}' data-rup='universal_new'/>
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
-        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/bodyProfile.css')}}' data-rup='long_lived_global_legacy'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/bodyProfile.css?v=1')}}' data-rup='long_lived_global_legacy'/>
 
 
 
@@ -35,10 +35,10 @@
         <?php endif; ?>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
         <!--[if IE 6]>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css')}}" />
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css?v=1')}}" />
         <![endif]-->
         <!--[if IE 7]>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE7.css')}}" />
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE7.css?v=1')}}" />
         <![endif]-->
 
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/modules_member_center.css?v=4')}}' data-rup='modules_member_center'/>

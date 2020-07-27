@@ -1,4 +1,4 @@
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hotelDetailsPopUp.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hotelDetailsPopUp.css?v=1')}}'/>
 
 <span id="addPlaceToTripPrompt"
       class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in hidden details-pop-up">
