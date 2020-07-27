@@ -250,7 +250,7 @@ if ($total == 0)
                 @if(auth()->check())
                     @include('pages.placeDetails.component.writeReviewSection')
                 @else
-                    <script>
+                    <script !src="">
                         function newPostModal(kind = '') {
                             if (!hasLogin) {
                                 showLoginPrompt('{{Request::url()}}');
