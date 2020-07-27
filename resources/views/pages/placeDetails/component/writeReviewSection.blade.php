@@ -319,30 +319,6 @@
     for (i = 0; i < rateQuestion.length; i++)
         rateQuestionAns[i] = 0;
 
-    function newPostModal(kind = '') {
-        if (!hasLogin) {
-            showLoginPrompt('{{Request::url()}}');
-            return;
-        }
-
-        $('html, body').animate({
-            scrollTop: $('#mainStoreReviewDiv').offset().top
-        }, 800);
-
-        // document.getElementById("mainStoreReviewDiv").scrollIntoView();
-
-        $("#darkModal").show();
-        // $('body').css('overflow-y', 'hidden');
-        $(".postModalMainDiv").removeClass('hidden');
-
-        setTimeout(function () {
-            if (kind == 'textarea')
-                document.getElementById("postTextArea").focus();
-            else if (kind == 'tag')
-                $('#assignedSearch').focus();
-        }, 500);
-    }
-
     function momentChangeRate(_index, _value, _kind){
 
         if(_kind == 'in') {

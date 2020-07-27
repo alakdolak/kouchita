@@ -249,157 +249,16 @@ if ($total == 0)
 
                 @if(auth()->check())
                     @include('pages.placeDetails.component.writeReviewSection')
+                @else
+                    <script>
+                        function newPostModal(kind = '') {
+                            if (!hasLogin) {
+                                showLoginPrompt('{{Request::url()}}');
+                                return;
+                            }
+                        }
+                    </script>
                 @endif
-
-                    <style>
-                        .tvSection{
-                            position: relative;
-                            height: 430px;
-                        }
-                        .tvLogoDiv{
-                            position: relative;
-                            background: #4DC7BC;
-                            width: 55%;
-                            display: flex;
-                            margin-left: auto;
-                            padding: 0px 0px 5px 5px;
-                        }
-                        .tvSeeMore{
-                            position: absolute;
-                            background: #4DC7BC;
-                            color: white;
-                            bottom: 0px;
-                            left: 0px;
-                            padding: 10px 10px;
-                            font-size: 22px;
-                            font-weight: bold;
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            padding-left: 0px;
-                        }
-                        .tvSeeMore:hover{
-                            color: white;
-                        }
-                        .tvSeeMoreIcons{
-                            position: relative;
-                            width: 30px;
-                            display: flex;
-                            justify-content: flex-start;
-                            height: 30px;
-                            align-items: center;
-                            margin-right: 10px;
-                        }
-                        .tvSeeMoreIcons > i{
-                            width: 10px;
-                            font-size: 30px;
-                            font-style: normal;
-                        }
-                        .tvContentDiv{
-                            padding: 0px 10px;
-                            direction: rtl;
-                            margin-top: 5px;
-                        }
-                        .tvContentText{
-                            color: white;
-                            text-align: justify;
-                            font-size: 15px;
-                            line-height: 25px;
-                        }
-                        .tvContentVideo{
-                            width: 100%;
-                            height: 230px;
-                            background: #232323;
-                            margin-top: 10px;
-                            border-radius: 10px;
-                            padding: 5px;
-                        }
-                        .tvVideoPic{
-                            position: relative;
-                            width: 100%;
-                            height: 140px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            overflow: hidden;
-                            border-radius: 10px;
-                        }
-                        .tvVideoName{
-                            color: white;
-                            font-size: 12px;
-                            margin-top: 10px;
-                            padding-right: 10px;
-                            display: block;
-                        }
-                        .tvUserContentDiv{
-                            display: flex;
-                            align-items: center;
-                            padding-right: 10px;
-                            margin-top: 10px;
-                        }
-                        .tvUserPic{
-                            width: 40px;
-                            height: 40px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 50%;
-                            overflow: hidden;
-                        }
-                        .tvUserInfo{
-                            margin-right: 10px;
-                            font-size: 11px;
-                        }
-                        .tvUserName{
-                            color: #0076a3;
-                        }
-                        .tvUserTime{
-                            color: white;
-                        }
-                        .tvImgHover{
-                            position: absolute;
-                            display: none;
-                            justify-content: center;
-                            align-items: center;
-                            top: 0px;
-                            right: 0px;
-                            width: 100%;
-                            height: 100%;
-                            background: #00000085;
-                        }
-                        .tvVideoPic:hover .tvImgHover{
-                            display: flex;
-                        }
-                        .tvOverPic{
-                            position: absolute;
-                            background: #000000d1;
-                            display: flex;
-                            color: white;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 5px;
-                            border-radius: 10px;
-                        }
-                        .tvSeenSection{
-                            top: 10px;
-                            left: 20px;
-                        }
-                        .tvLikeSection{
-                            bottom: 10px;
-                            left: 20px;
-                        }
-                        .tvLike{
-
-                        }
-                        .tvLike > i{
-                            font-style: normal;
-                            display: inline-block;
-                            width: 6px;
-                            display: inline-flex;
-                            justify-content: center;
-                        }
-                    </style>
 
                 <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
