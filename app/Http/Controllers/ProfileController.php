@@ -11,6 +11,7 @@ use App\models\InvitationCode;
 use App\models\Level;
 use App\models\LogModel;
 use App\models\Medal;
+use App\models\PhotographersLog;
 use App\models\PhotographersPic;
 use App\models\Place;
 use App\models\PlaceFeatures;
@@ -233,7 +234,11 @@ class ProfileController extends Controller {
         $allUserPics = [];
         $location = __DIR__ . '/../../../../assets/userPhoto/';
         $allUserPics = [];
-        $photographer = PhotographersPic::where('userId', $uId)->where('status', 1)->orderByDesc('created_at')->get();
+        if(\auth()->check() && \auth()->user()->id == $uId)
+            $photographer = PhotographersPic::where('userId', $uId)->orderByDesc('created_at')->get();
+        else
+            $photographer = PhotographersPic::where('userId', $uId)->where('status', 1)->orderByDesc('created_at')->get();
+
         for($i = 0; $i < count($photographer) ; $i++){
             $kindPlace = Place::find($photographer[$i]->kindPlaceId);
             $pl = \DB::table($kindPlace->tableName)->find($photographer[$i]->placeId);
@@ -244,6 +249,14 @@ class ProfileController extends Controller {
             if(is_file($location1)) {
                 $p = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/s-' . $photographer[$i]->pic);
                 $side = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/l-' . $photographer[$i]->pic);
+                $userLike = 0;
+                if(\auth()->check()){
+                    $mUId = \auth()->user()->id;
+                    $logLike = PhotographersLog::where('userId', $mUId)->where('picId', $photographer[$i]->id)->first();
+                    if($logLike != null)
+                        $userLike = $logLike->like;
+                }
+
                 $insert = [
                     'id' => 'photographer_' . $photographer[$i]->id,
                     'mainPic' => $p,
@@ -251,9 +264,10 @@ class ProfileController extends Controller {
                     'userName' => $user->username,
                     'userPic' => $user->picture,
                     'like' => $photographer[$i]->like,
-                    'dislike' => $photographer[$i]->like,
+                    'dislike' => $photographer[$i]->dislike,
                     'alt' => $photographer[$i]->alt,
                     'showInfo' => true,
+                    'userLike' => $userLike,
                     'fileKind' => 'pic',
                     'uploadTime' => getDifferenceTimeString($photographer[$i]->created_at),
                     'created_at' => $photographer[$i]->created_at,

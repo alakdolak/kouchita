@@ -34,7 +34,6 @@ var data;
 function startCropper(ratio) {
 
   if(first) {
-
     'use strict';
     Cropper = window.Cropper;
     URL = window.URL || window.webkitURL;
@@ -60,18 +59,6 @@ function startCropper(ratio) {
   options = {
     aspectRatio: ratio,
     preview: '.img-preview',
-    ready: function (e) {
-      console.log(e.type);
-    },
-    cropstart: function (e) {
-      console.log(e.type, e.detail.action);
-    },
-    cropmove: function (e) {
-      console.log(e.type, e.detail.action);
-    },
-    cropend: function (e) {
-      console.log(e.type, e.detail.action);
-    }
   };
 
   cropper = new Cropper(image, options);
@@ -147,12 +134,9 @@ function startCropper(ratio) {
 
       switch (data.method) {
         case 'rotate':
-          if (cropped && options.viewMode > 0) {
+          if (cropped && options.viewMode > 0)
             cropper.clear();
-          }
-
           break;
-
         case 'getCroppedCanvas':
           try {
             data.option = JSON.parse(data.option);
@@ -170,9 +154,7 @@ function startCropper(ratio) {
 
           break;
       }
-
       result = cropper[data.method](data.option, data.secondOption);
-
       switch (data.method) {
         case 'rotate':
           if (cropped && options.viewMode > 0) {
@@ -180,31 +162,12 @@ function startCropper(ratio) {
           }
 
           break;
-
         case 'scaleX':
         case 'scaleY':
           target.setAttribute('data-option', -data.option);
           break;
-
         case 'getCroppedCanvas':
           if (result) {
-            // Bootstrap's Modal
-
-//             var http = new XMLHttpRequest();
-//             var url = 'http://localhost:8080/pro_shazdemosafer/public/savePic';
-//             var params = "url=" + result.toDataURL(uploadedImageType) + "&fileName=" + uploadedImageName;
-//             http.open("POST", url, true);
-//
-// //Send the proper header information along with the request
-//             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//
-//             http.onreadystatechange = function() {//Call a function when the state changes.
-//               if(http.readyState == 4 && http.status == 200) {
-//                 alert(http.responseText);
-//               }
-//             }
-//             http.send(params);
-
             if(mode == 1)
               $('#rectanglePicUploadPhoto').attr('src', result.toDataURL(uploadedImageType));
             else
@@ -212,14 +175,6 @@ function startCropper(ratio) {
 
             $("#editPane").addClass('hidden');
             $("#photoEditor").removeClass('hidden');
-
-            // $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-            // download.href = result.toDataURL(uploadedImageType);
-            //
-            // if (!download.disabled) {
-            //   download.download = uploadedImageName;
-            //   download.href = result.toDataURL(uploadedImageType);
-            // }
           }
 
           break;
@@ -300,8 +255,6 @@ function startCropper(ratio) {
     inputImage.disabled = true;
     inputImage.parentNode.className += ' disabled';
   }
-
-    console.log('inn4');
 }
 
 function setMode(m) {

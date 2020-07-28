@@ -724,7 +724,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $item->picNumber),
                 'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $item->picNumber),
                 't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $item->picNumber),
-                'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $item->picNumber),
+                'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $item->picNumber),
                 'alt' => $place->alt,
                 'name' => 'کوچیتا',
                 'userPic' => $koochitaPic,
@@ -778,7 +778,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
         if($user != null) {
             $s = [
-                'id' => $item->id,
+                'id' => 'photographer_'.$item->id,
                 's' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/s-' . $item->pic),
                 'f' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/f-' . $item->pic),
                 'l' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/l-' . $item->pic),

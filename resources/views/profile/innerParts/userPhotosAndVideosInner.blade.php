@@ -158,5 +158,4 @@
 
         createPictureRow();
     }
-
 </script>

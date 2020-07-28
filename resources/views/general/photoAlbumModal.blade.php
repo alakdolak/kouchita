@@ -42,7 +42,7 @@
                     <img class="koochitaCircleLogo photoAlbumUserPic" src="" style="border-radius: 50%;">
                 </div>
                 <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
-                    <b class="userProfileName photoAlbumUserName"></b>
+                    <a href="#" class="userProfileName photoAlbumUserName"></a>
                     <a href="#" target="_blank" class="photoAlbumWhere" ></a>
                     <div>
                         <div class="photoAlbumUploadTime"></div>
@@ -62,10 +62,10 @@
                                 <div id="photoAlbumLikeSection" class="photoAlbumLikeSection" style="display:none;">
                                     <div>
                                         <div class="feedBackBtn" style="margin: 0px;">
-                                            <div id="photoAlbumTopDisLike" class="dislikeBox photoAlbumTopLike disLikePhotoAlbum" style="border-radius: 50px; background-color: #303134;">
+                                            <div id="photoAlbumTopDisLike" class="dislikeBox photoAlbumTopLike disLikePhotoAlbum" onclick="likeAlbumPic(this,-1)">
                                                 <div id="photoAlbumDisLikeCount" style="font-size: 25px"></div>
                                             </div>
-                                            <div id="photoAlbumTopLike" class="likeBox photoAlbumTopLike likePhotoAlbum" style="border-radius: 50px; background-color: #303134;">
+                                            <div id="photoAlbumTopLike" class="likeBox photoAlbumTopLike likePhotoAlbum" onclick="likeAlbumPic(this,1)">
                                                 <div id="photoAlbumLikeCount" style="font-size: 25px"></div>
                                             </div>
                                         </div>
@@ -80,10 +80,10 @@
                             <div id="photoAlbumLikeSection" class="photoAlbumLikeSection" style="display:none;">
                                 <div>
                                     <div class="feedBackBtn" style="margin: 0px;">
-                                        <div id="photoAlbumTopDisLike" class="dislikeBox photoAlbumTopLike disLikePhotoAlbum" style="border-radius: 50px; background-color: #303134;">
+                                        <div id="photoAlbumTopDisLike" class="dislikeBox photoAlbumTopLike disLikePhotoAlbum" onclick="likeAlbumPic(this,-1)">
                                             <div id="photoAlbumDisLikeCount" style="font-size: 25px"></div>
                                         </div>
-                                        <div id="photoAlbumTopLike" class="likeBox photoAlbumTopLike likePhotoAlbum" style="border-radius: 50px; background-color: #303134;">
+                                        <div id="photoAlbumTopLike" class="likeBox photoAlbumTopLike likePhotoAlbum" onclick="likeAlbumPic(this,1)">
                                             <div id="photoAlbumLikeCount" style="font-size: 25px"></div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                             <img class="koochitaCircleLogo photoAlbumUserPic" src="" style="border-radius: 50%;">
                         </div>
                         <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
-                            <b class="userProfileName photoAlbumUserName"></b>
+                            <a href="#" class="userProfileName photoAlbumUserName"></a>
                             <a href="#" target="_blank" class="photoAlbumWhere" ></a>
                             <div>
                                 <div class="photoAlbumUploadTime" style="color: #9aa0a6;"></div>
@@ -165,8 +165,6 @@
         //         'video': if video, (optional)
         //         'description' : ,    (optional)
         //         'userLike' : if user like this img?,     (optional)
-        //         'likeFunc' : function when click on like,    (optional)
-        //         'disLikeFunc' : function when click on dislike,  (optional)
         //     }
         // ]
 
@@ -216,6 +214,7 @@
 
         $('.photoAlbumUploadTime').text(sidePics[_index]['uploadTime']);
         $('.photoAlbumUserName').text(sidePics[_index]['userName']);
+        $('.photoAlbumUserName').attr('href', "{{url('profile/index')}}/" + sidePics[_index]['userName']);
         $('.photoAlbumWhere').text(sidePics[_index]['where'] ? sidePics[_index]['where'] : '');
         $('.photoAlbumWhere').attr('href', sidePics[_index]['whereUrl']);
         $('.photoAlbumUserPic').attr('src', sidePics[_index]['userPic']);
@@ -245,11 +244,8 @@
             $('#photoAlbumDisLikeCount').text(sidePics[_index]['dislike']);
             $('#photoAlbumLikeCount').text(sidePics[_index]['like']);
 
-            funcLike = sidePics[_index]['likeFunc'] + '(' + sidePics[_index]['id'] + ', 1)';
-            funcDislike = sidePics[_index]['disLikeFunc'] + '(' + sidePics[_index]['id'] + ', -1)';
-
-            $('#photoAlbumTopLike').attr('onclick', funcLike);
-            $('#photoAlbumTopDisLike').attr('onclick', funcDislike);
+            $('#photoAlbumTopLike').attr('picId', sidePics[_index]['id']);
+            $('#photoAlbumTopDisLike').attr('picId', sidePics[_index]['id']);
 
             if(sidePics[_index]['userLike'] == 1)
                 likePhotoAlbum(1);
@@ -324,5 +320,32 @@
                 showSuccessNotifi('{{__('در حذف عکس مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red'); // in general.alert.blade.php
             }
         })
+    }
+
+
+
+    function likeAlbumPic(_element, _like){
+        if(!checkLogin())
+            return;
+
+        let id = $('#photoAlbumTopLike').attr('picId');
+
+        $.ajax({
+            type: 'post',
+            url: '{{route('likePhotographer')}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id : id,
+                like : _like
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                if(response.status == 'ok'){
+                    setLikeNumberInPhotoAlbum(response.like, 'like');
+                    setLikeNumberInPhotoAlbum(response.disLike, 'dislike');
+                    likePhotoAlbum(_like);
+                }
+            }
+        });
     }
 </script>

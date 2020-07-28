@@ -256,6 +256,8 @@
     position: relative;
     cursor: pointer;
     padding: 0px;
+    border-radius: 50px;
+    background-color: #303134;
 }
 .likePhotoAlbum{
     border-radius: 50px;

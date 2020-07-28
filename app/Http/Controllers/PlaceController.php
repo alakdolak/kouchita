@@ -536,7 +536,6 @@ class PlaceController extends Controller {
 
     function getCommentsCount()
     {
-
         if (isset($_POST["filters"]) && isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
             isset($_POST["tag"])) {
 
@@ -2381,72 +2380,65 @@ class PlaceController extends Controller {
                     if(!file_exists($location))
                         mkdir($location);
 
-                    if($request->fileKind == 'mainFile'){
+                    if(isset($request->fileName) && $request->fileName == 'null'){
                         $filename = time() . '_' . str_random(3) . '.jpg';
-                        $destination = $location . '/' . $filename;
-                        $result = compressImage($_FILES['pic']['tmp_name'], $destination, 80);
-
-                        if($result) {
-                            $photographer = new PhotographersPic();
-                            $photographer->userId = Auth::user()->id;
-                            $photographer->name = $request->name;
-                            $photographer->pic = $filename;
-                            $photographer->kindPlaceId = $kindPlaceId;
-                            $photographer->placeId = $placeId;
-                            $photographer->alt = $request->alt;
-                            $photographer->description = $request->description;
-                            $photographer->like = 0;
-                            $photographer->dislike = 0;
-                            $photographer->isSitePic = 0;
-                            $photographer->isPostPic = 0;
-                            $photographer->status = 0;
-                            $photographer->save();
-
-                            echo json_encode(['ok', $filename]);
-                        }
-                        else
-                            echo json_encode(['nok4']);
+                        $photographer = new PhotographersPic();
+                        $photographer->userId = Auth::user()->id;
+                        $photographer->name = $request->name;
+                        $photographer->pic = $filename;
+                        $photographer->kindPlaceId = $kindPlaceId;
+                        $photographer->placeId = $placeId;
+                        $photographer->alt = $request->alt;
+                        $photographer->description = $request->description;
+                        $photographer->like = 0;
+                        $photographer->dislike = 0;
+                        $photographer->isSitePic = 0;
+                        $photographer->isPostPic = 0;
+                        $photographer->status = 0;
+                        $photographer->save();
                     }
-                    else{
-                        if($request->fileKind == 'squ'){
-                            $size = [
-                                [
-                                    'width' => 150,
-                                    'height' => null,
-                                    'name' => 't-',
-                                    'destination' => $location
-                                ],
-                                [
-                                    'width' => 200,
-                                    'height' => null,
-                                    'name' => 'l-',
-                                    'destination' => $location
-                                ],
-                            ];
-                        }
-                        else{
-                            $size = [
-                                [
-                                    'width' => 350,
-                                    'height' => 250,
-                                    'name' => 'f-',
-                                    'destination' => $location
-                                ],
-                                [
-                                    'width' => 600,
-                                    'height' => 400,
-                                    'name' => 's-',
-                                    'destination' => $location
-                                ],
-                            ];
-                        }
-                        $image = $request->file('pic');
-                        $result = resizeImage($image, $size, $request->fileName);
-                        if($result)
-                            echo json_encode(['ok', $request->fileName]);
-                        else
-                            echo json_encode(['nok5']);
+                    else
+                        $filename = $request->fileName;
+
+                    if($request->fileKind == 'squ')
+                        $size = [
+                            [
+                                'width' => 150,
+                                'height' => null,
+                                'name' => 't-',
+                                'destination' => $location
+                            ],
+                            [
+                                'width' => 200,
+                                'height' => null,
+                                'name' => 'l-',
+                                'destination' => $location
+                            ],
+                        ];
+                    else
+                        $size = [
+                            [
+                                'width' => 350,
+                                'height' => 250,
+                                'name' => 'f-',
+                                'destination' => $location
+                            ],
+                            [
+                                'width' => 600,
+                                'height' => 400,
+                                'name' => 's-',
+                                'destination' => $location
+                            ],
+                        ];
+
+                    $image = $request->file('pic');
+                    $result = resizeImage($image, $size, $filename);
+                    if($result) {
+                        $url = \URL::asset('userPhoto/' . $kindPlaceName . '/' . $place->file.'/f-'.$request->fileName);
+                        echo json_encode(['ok', $filename, $url]);
                     }
+                    else
+                        echo json_encode(['nok5']);
                 }
                 else
                     echo json_encode(['nok3']);
@@ -2743,59 +2735,51 @@ class PlaceController extends Controller {
         }
 
         if(isset($request->id) && isset($request->like)){
-            $photo = PhotographersPic::find($request->id);
-            if($photo != null){
-                $userStatus = PhotographersLog::where('picId', $photo->id)->where('userId', $user->id)->first();
+            $id = explode('_', $request->id);
+            if($id[0] == 'photographer') {
+                $photo = PhotographersPic::find($id[1]);
+                if ($photo != null) {
+                    $userStatus = PhotographersLog::where('picId', $photo->id)->where('userId', $user->id)->first();
 
-                if($userStatus == null){
-                    $log = new PhotographersLog();
+                    if ($userStatus == null) {
+                        $userStatus = new PhotographersLog();
 
-                    if($request->like == 1) {
-                        $log->like = 1;
-                        $photo->like++;
+                        if ($request->like == 1) {
+                            $userStatus->like = 1;
+                            $photo->like++;
+                        } else if ($request->like == -1) {
+                            $userStatus->like = -1;
+                            $photo->dislike++;
+                        }
+
+                        $userStatus->userId = $user->id;
+                        $userStatus->picId = $photo->id;
                     }
-                    else if($request->like == -1){
-                        $log->like = -1;
-                        $photo->dislike++;
-                    }
-
-                    $log->userId = $user->id;
-                    $log->picId = $photo->id;
-
-                    $log->save();
-                    $photo->save();
-
-                    echo json_encode(['ok', $photo->like, $photo->dislike]);
-                }
-                else{
-
-                    if($userStatus->like == 1)
-                        $photo->like--;
-                    else if($userStatus->like == -1)
-                        $photo->dislike--;
-
-                    if($request->like == 1){
-                        $userStatus->like = 1;
-                        $photo->like++;
-                    }
-                    else if($request->like == -1){
-                        $userStatus->like = -1;
-                        $photo->dislike++;
+                    else {
+                        if ($userStatus->like == 1)
+                            $photo->like--;
+                        else if ($userStatus->like == -1)
+                            $photo->dislike--;
+                        if ($request->like == 1) {
+                            $userStatus->like = 1;
+                            $photo->like++;
+                        } else if ($request->like == -1) {
+                            $userStatus->like = -1;
+                            $photo->dislike++;
+                        }
                     }
 
                     $userStatus->save();
                     $photo->save();
-
-                    echo json_encode(['ok', $photo->like, $photo->dislike]);
+                    echo json_encode(['status' => 'ok', 'like' => $photo->like, 'disLike' => $photo->dislike]);
                 }
+                else
+                    echo json_encode(['nok3']);
             }
-            else
-                echo json_encode(['nok3']);
         }
         else
             echo json_encode(['nok4']);
         return;
-
     }
 
     public function askQuestion()
