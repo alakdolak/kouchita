@@ -340,6 +340,8 @@
     var placeIdUploadPhoto;
     var kindPlaceIdUploadPhoto;
     var repeatTime = 3;
+    var squerImg;
+    var reqImg;
 
     //drag and drop file
     dropzone.on('dragover', function() {
@@ -434,9 +436,6 @@
         $('#editPane').removeClass('hidden');
     }
 
-
-    var squerImg;
-    var reqImg;
     function resizeImg(){
         var name = document.getElementById('uploadPhotoPicName').value;
         var alt = document.getElementById('uploadPhotoPicAlt').value;
@@ -458,45 +457,7 @@
             uploadPhotoFormData.append('description', description);
             uploadPhotoFormData.append('additionalData', additionalData);
 
-            var req = document.getElementById('rectanglePicUploadPhoto');
-            var squ = document.getElementById('squarePicUploadPhoto');
-
-            var cropperSqu = new Cropper(squ, {
-                ready: function () {
-                    var squerCanvas = cropperSqu.getCroppedCanvas({
-                        width: 250,
-                        height: 250,
-                    });
-                    squerCanvas.toBlob(function (blob){
-                        squerImg = blob;
-                        cropperSqu.destroy();
-                        cropperSqu = null;
-
-                        var cropperReq = new Cropper(req, {
-                            ready: function () {
-                                var reqCanvas = cropperReq.getCroppedCanvas({
-                                    width: 600,
-                                    height: 400,
-                                });
-                                reqCanvas.toBlob(function (blob) {
-                                    reqImg = blob;
-
-                                    cropperReq.destroy();
-                                    cropperReq = null;
-
-                                    // uploadPhotoFormData.append('pic', '');
-                                    // uploadPhotoFormData.append('fileName', '');
-                                    // uploadPhotoFormData.append('fileKind', '');
-
-                                    mainImage = b64toBlob(mainPicUploadPhoto);
-                                    submitUpload('mainFile');
-                                });
-
-                            }
-                        });
-                    });
-                }
-            });
+            submitUpload('squ');
         }
         else {
             var text = '';
@@ -527,11 +488,11 @@
             case 'mainFile':
                 im = mainImage;
                 break;
-            case 'req':
-                im = reqImg;
-                break;
             case 'squ':
                 im = squerImg;
+                break;
+            case 'req':
+                im = reqImg;
                 break;
         }
 
@@ -553,16 +514,16 @@
                     mainFileName = response[1];
                     switch (type){
                         case 'mainFile':
-                            submitUpload('req');
-                            break;
-                        case 'req':
                             submitUpload('squ');
                             break;
                         case 'squ':
-                            mainFilesUploaded[mainFilesUploaded.length] = mainPicUploadPhoto;
+                            submitUpload('req');
+                            break;
+                        case 'req':
+                            mainFilesUploaded[mainFilesUploaded.length] = response[2];
+                            mainFileName = null;
                             goToPage3();
                             break;
-
                     }
                 }
                 else if(response[0] == 'nok1'){
@@ -607,7 +568,25 @@
         openLoading();
         setTimeout(function(){
             var canvas1;
-            canvas1 = cropper.getCroppedCanvas();
+            if(cropResult == 'squarePicUploadPhoto') {
+                canvas1 = cropper.getCroppedCanvas({
+                    minWidth: 250,
+                    minHeight: 250,
+                });
+                canvas1.toBlob(function (blob) {
+                    squerImg = blob;
+                });
+            }
+            else {
+                canvas1 = cropper.getCroppedCanvas({
+                    minWidth: 600,
+                    minHeight: 400,
+                });
+                canvas1.toBlob(function (blob) {
+                    reqImg = blob;
+                });
+            }
+
             $('#' + cropResult).attr('src', canvas1.toDataURL());
             cancelCrop();
         }, 500);
@@ -624,39 +603,39 @@
         $("#fullPageLoader").css('display', 'none');
 
         var text = '';
-
+        var picWidth = Math.floor(100/mainFilesUploaded.length);
         for (var i = 0; i < mainFilesUploaded.length; i++){
-            text += '<div class="uploadedImgShowDiv">\n' +
-                '<img src="' + mainFilesUploaded[i] + '" class="uploadedImgPic">\n' +
-                '</div>';
+            text += '<div class="uploadedImgShowDiv" style=" width: ' + picWidth + '%">\n' +
+                    ' <img src="' + mainFilesUploaded[i] + '" class="uploadedImgPic" style="height: 100%; width: auto; ">\n' +
+                    '</div>';
         }
 
         $('#uploadedImgDiv').html(text);
         $(".itemRow").css('display', 'none');
         $(".successScreen").removeClass('hidden');
 
-        var withOfDiv = $("#uploadedImgDiv").width();
-        var heightOfDiv = $("#uploadedImgDiv").height();
-
-        if(withOfDiv > 767){
-            if(mainFilesUploaded.length <= 2)
-                withOfDiv /= 2;
-            else if(mainFilesUploaded.length == 3)
-                withOfDiv /= 3;
-            else
-                withOfDiv /= 4;
-
-            if(heightOfDiv < withOfDiv)
-                withOfDiv = heightOfDiv;
-        }
-        else{
-            if(mainFilesUploaded.length > 1)
-                withOfDiv /= 2;
-        }
-        withOfDiv -= 10;
-
-        $('.uploadedImgShowDiv').css('width', withOfDiv);
-        $('.uploadedImgShowDiv').css('height', withOfDiv);
+        // var withOfDiv = $("#uploadedImgDiv").width();
+        // var heightOfDiv = $("#uploadedImgDiv").height();
+        //
+        // if(withOfDiv > 767){
+        //     if(mainFilesUploaded.length <= 2)
+        //         withOfDiv /= 2;
+        //     else if(mainFilesUploaded.length == 3)
+        //         withOfDiv /= 3;
+        //     else
+        //         withOfDiv /= 4;
+        //
+        //     if(heightOfDiv < withOfDiv)
+        //         withOfDiv = heightOfDiv;
+        // }
+        // else{
+        //     if(mainFilesUploaded.length > 1)
+        //         withOfDiv /= 2;
+        // }
+        // withOfDiv -= 10;
+        //
+        // $('.uploadedImgShowDiv').css('width', withOfDiv);
+        // $('.uploadedImgShowDiv').css('height', withOfDiv);
     }
 
     function b64toBlob(dataURI) {
