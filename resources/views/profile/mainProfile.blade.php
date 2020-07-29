@@ -55,7 +55,7 @@
                         <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
                         <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
                         <a href="#" class="profileHeaderLinksTab">سؤال‌ و جواب</a>
-                        <a href="#" class="profileHeaderLinksTab">سفرنامه ها</a>
+                        <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">سفرنامه ها</a>
                         <a href="#" class="profileHeaderLinksTab">جایزه و امتیاز</a>
                         <a href="#" class="profileHeaderLinksTab">سایر موارد</a>
                     </div>
@@ -220,8 +220,12 @@
                     @include('profile.innerParts.userPostsInner')
                 </div>
 
-                <div id="picMainBody"  class="prodileSections hidden">
+                <div id="picMainBody" class="prodileSections hidden">
                     @include('profile.innerParts.userPhotosAndVideosInner')
+                </div>
+
+                <div id="safarnamehBody" class="prodileSections hidden">
+                    @include('profile.innerParts.userArticlesInner')
                 </div>
 
             </div>
@@ -350,6 +354,11 @@
                 $('#pictureTab').addClass('active');
                 $('#picMainBody').removeClass('hidden');
                 getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
+            }
+            else if(_kind === 'safarnameh') {
+                $('#safarnamehTab').addClass('active');
+                $('#safarnamehBody').removeClass('hidden');
+                // getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
             }
         }
 

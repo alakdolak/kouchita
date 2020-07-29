@@ -2357,6 +2357,7 @@ class PlaceController extends Controller {
 
     public function addPhotoToPlace(Request $request)
     {
+
         $placeId = $request->placeId;
         $kindPlaceId = $request->kindPlaceId;
 

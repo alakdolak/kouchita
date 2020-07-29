@@ -27,6 +27,7 @@
     @endif
 </head>
 <body style="background: black; overflow-x: hidden">
+
 @include('general.loading')
 
     <div class="topPic">
@@ -54,49 +55,6 @@
                     </button>
                 </div>
             </div>
-
-{{--            <div class="sidePic2">--}}
-{{--                <div class="topSidePic2" onclick="toggleBottom()">--}}
-{{--                    <div>--}}
-{{--                        <span class="introChar">معرفی</span>  کنید--}}
-{{--                    </div>--}}
-
-{{--                    <div class="arrowDiv">--}}
-{{--                        <img id="arrowImg" class="arrowImgTop" src="{{URL::asset('images/camping/fa/box.png')}}">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div id="topSidePic2Content" class="sidePic2Content" style="display: none;">--}}
-
-{{--                    <div class="sidePic2Links">--}}
-{{--                        اقامتگاه بوم--}}
-{{--                        گردی--}}
-{{--                        <div class="circleRed"></div>--}}
-{{--                    </div>--}}
-{{--                    <div class="sidePic2Links">--}}
-{{--                        --}}{{--                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" style="color: white">--}}
-{{--                        رستوران--}}
-{{--                        <div class="circleRed"></div>--}}
-{{--                        --}}{{--                    </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="sidePic2Links">--}}
-{{--                        جاذبه های دیدنی--}}
-{{--                        <div class="circleRed"></div>--}}
-{{--                    </div>--}}
-{{--                    <div class="sidePic2Links">--}}
-{{--                        صنایع دستی--}}
-{{--                        <div class="circleRed"></div>--}}
-{{--                    </div>--}}
-{{--                    <div class="sidePic2Links">--}}
-{{--                        غذای محلی--}}
-{{--                        <div class="circleRed"></div>--}}
-{{--                    </div>--}}
-{{--                    <div class="sidePic2Links lastSidePic2Lind">--}}
-{{--                        سوغات--}}
-{{--                        <div class="circleRed"></div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
         </div>
     </div>
 
@@ -280,7 +238,6 @@
         $('#loginSection').show();
         $('#phoneSection').hide();
     }
-
 
     function toggleBottom(){
         $('#topSidePic2Content').slideToggle(500);

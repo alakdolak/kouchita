@@ -29,6 +29,65 @@
     </style>
 @endif
 
+<style>
+    .headerCampaignModalBody{
+        width: 60%;
+        height: 90vh;
+        position: relative;
+    }
+    .headerCampingTop{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 5px;
+        border-radius: 10px;
+    }
+    .headerCampingBottom{
+        width: 100%;
+        height: 40%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .headerCampingBottom > div{
+        width: calc(50% - 4px);
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 13px;
+        overflow: hidden;
+    }
+    .headerCampingBottom > div > img{
+        width: 100%;
+    }
+
+    .closeLanding{
+        font-size: 40px;
+        position: absolute;
+        top: 15px;
+        color: red;
+        left: 10px;
+        height: 35px;
+        width: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid 1px;
+        border-radius: 50%;
+        z-index: 9;
+    }
+
+    @media (max-width: 1000px){
+        .headerCampaignModalBody{
+            width: 92%;
+        }
+    }
+</style>
+
 
     {{--pc header--}}
 <div class="mainHeader hideOnPhone">
@@ -71,10 +130,10 @@
                     </div>
                 </div>
 
-                <div class="headerAuthButton" onclick="openUploadPost()">
+                <div class="headerAuthButton" onclick="showCampingModal()">
                     <span class="headerIconCommon iconFamily addPostIcon"></span>
                     <div class="nameOfIconHeaders">
-                        {{__('پست')}}
+                        {{__('کمپین')}}
                     </div>
                 </div>
 
@@ -209,10 +268,30 @@
     </a>
 </div>
 
+<div id="campingHeader" class="modalBlackBack" style="z-index: 9999;  display: none">
+    <div class="headerCampaignModalBody">
+        <span class="iconClose closeLanding" onclick="$('#campingHeader').hide();"></span>
+        <a href="{{route('addPlaceByUser.index')}}" class="headerCampingTop">
+            <img src="{{URL::asset('images/camping/landing.jpg')}}" class="resizeImgClass" style="width: 100%;">
+        </a>
+        <div class="headerCampingBottom">
+            <div>
+                <img src="{{URL::asset('images/camping/safarnameh.jpg')}}" class="resizeImgClass">
+            </div>
+            <div onclick="$('#campingHeader').hide(); openUploadPost()">
+                <img src="{{URL::asset('images/camping/axasi2.jpg')}}" class="resizeImgClass">
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
     let openHeadersTab = false;
+
+    function showCampingModal(){
+        $('#campingHeader').css('display', 'flex');
+    }
 
     function hideAllTopNavs(){
         openHeadersTab = false;

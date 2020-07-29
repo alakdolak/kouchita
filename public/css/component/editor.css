@@ -359,7 +359,7 @@
 .secondStepPolicyText {
     padding: 0 5px 0 10px;;
     text-align: justify;
-    font-size: 12px;
+    font-size: 8px;
     line-height: 2;
 }
 
@@ -368,10 +368,11 @@
 }
 
 .imageVerificationBtn {
-    position: absolute;
-    bottom: 0;
-    width: 100px;
-    left: 10px;
+    position: relative;
+    margin-left: 0;
+    margin-right: auto;
+    width: fit-content;
+    margin-top: 15px;
 }
 
 .imageVerificationBtn > button {
@@ -672,24 +673,23 @@
     width: 1px;
     background: #ccc;
 }
-
+.inputUploadPhotosError{
+    background: red !important;
+    color: white !important;
+}
+.tickInputUploadPhotosError{
+    border: solid 2px;
+    border-radius: 5px;
+    color: red;
+    background-position-y: -2px !important;
+}
 .ui_modal.photoUploadOverlay .body_text,
 .ui_modal.photoUploadOverlay .body_text .photoUploadInner {
     height: 100%;
     direction: rtl;
 }
 .photoUploader .footer {
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
-    /*width: 100%;*/
-    /*padding: 7px;*/
-    /*box-sizing: border-box;*/
-    /*overflow: hidden;*/
-    /*border: 0;*/
-    margin: 15px 0;
-    padding: 15px 15px 0;
-    border-top: 1px solid #cccccc;
+    margin-bottom: 15px;
 }
 .uploaderDlg a {
     color: #069;
@@ -1270,6 +1270,13 @@
     margin-top: 15px;
 }
 
+.photographerErrors{
+    color: red;
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 0px;
+}
+
 @media (max-width: 1340px) {
     #photoEditor, #editPane {
         left: 20%;
@@ -1303,6 +1310,9 @@
 }
 
 @media (max-width: 767px) {
+    .uploadPicMainSection{
+        flex-direction: column;
+    }
     #photoEditor .body_text{
         height: 80vh !important;
     }
@@ -1370,6 +1380,16 @@
 
     .uploaderDlg .startScreen {
         height: 70vh;
+    }
+    .secondFooterVerification{
+        width: 100%;
+        display: flex;
+        direction: ltr;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .photographerErrors{
+        position: relative;
     }
 }
 
