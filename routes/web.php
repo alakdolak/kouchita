@@ -477,10 +477,14 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
 
     Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
+
+    Route::post('/profile/getSafarnameh', 'ProfileController@getSafarnameh')->name('profile.getSafarnameh');
 });
 
 // profile
 Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
+
+    Route::post('profile/safarnameh/new', 'ProfileController@storeNewSafarnameh')->name('profile.safarnameh.new');
 
     Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
 
