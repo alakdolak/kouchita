@@ -13,8 +13,8 @@
     <div class="userProfileArticles">
         <div class="userProfilePostsSearchContainer">
             <div class="inputBox">
-                            <textarea class="inputBoxInput inputBoxInputSearch" type="text"
-                                      placeholder="جستجو کنید"></textarea>
+                <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>
+                <button class="btn btn-primary">نوشتن سفرنامه</button>
             </div>
         </div>
         <div class="usersArticlesMainDiv">

@@ -173,8 +173,8 @@
                          </div>
                      </div>
                      <div class="template itemRow loading" style="height: 100%; overflow-y: auto; width: 100%">
-                         <div class="row">
-                             <div class="col-xs-7">
+                         <div class="row uploadPicMainSection" style="display: flex">
+                             <div class="col-xs-7" style="margin-bottom: 10px;">
                                  <div>
                                      <div class="epPicBox">
                                          <div class="epPic">
@@ -183,7 +183,7 @@
                                              </div>
                                          </div>
                                          <div class="step6picText epicText">{{__('قاب مستطیل')}}</div>
-                                         <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicUploadPhoto');" style="cursor: pointer;">{{__('ویرایش')}}</div>
+                                         <div class="epEditPicText" onclick="doEdit(1.77, 'rectanglePicUploadPhoto');" style="cursor: pointer;">{{__('ویرایش')}}</div>
                                      </div>
                                      <div class="epPicBox">
                                          <div class="epPic">
@@ -202,7 +202,7 @@
                                          {{__('تغییر عکس')}}
                                      </button>
                                 </div>
-
+                                 <div class="photographerErrors hideOnPhone"></div>
                              </div>
                              <div class="col-xs-5 uploadPicInfoSection">
 
@@ -217,15 +217,18 @@
 
                                 <div id="uploadPhotoPicNameDiv" class="epInputBox">
                                     <div class="epInputBoxText">
-                                        <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>{{__('نام عکس')}}</div>
+                                        <div class="epInputBoxRequired">
+                                            <div class="icons epInputIconRequired redStar"></div>
+                                            {{__('نام عکس')}}
+                                        </div>
                                     </div>
-                                    <input class="epInputBoxInput" id="uploadPhotoPicName" onkeydown="document.getElementById('uploadPhotoPicNameDiv').classList.remove('errorField')">
+                                    <input class="epInputBoxInput" id="uploadPhotoPicName" onkeydown="$('#uploadPhotoPicNameDiv').removeClass('inputUploadPhotosError')">
                                 </div>
                                 <div id="uploadPhotoPicAltDiv" class="epInputBox">
                                     <div class="epInputBoxText">
                                         <div class="epInputBoxRequired">{{__('نام جایگزین')}}</div>
                                     </div>
-                                    <input class="epInputBoxInput" id="uploadPhotoPicAlt" onkeydown="document.getElementById('uploadPhotoPicAltDiv').classList.remove('errorField')">
+                                    <input class="epInputBoxInput" id="uploadPhotoPicAlt" onkeydown="$('#uploadPhotoPicAltDiv').removeClass('inputUploadPhotosError')">
                                 </div>
                                 <div class="epRedNotice">{{__('نام جایگزین توصیف کننده موضوعی است که از تصویر استنباط می شود')}}</div>
 
@@ -234,22 +237,17 @@
                                    <textarea class="epAddresText" placeholder="{{__('توضیحات همراه با عکس برای دوستانتان نمایش داده می شود.حداقل 100 کاراکتر')}}" maxlength="100" id="uploadPhotoDescription"></textarea>
                                 </div>
 
-                                 <div id="photographerErrors" style="color: red;"></div>
-
-                             </div>
-                             <div class="col-xs-12 footer secondStepFooter">
-
                                  <div class="termsLabel">
-                                     <div>
+                                     <div style="display: flex">
                                          <div class="secondStepPolicyCheckBox">
-                                             <input id="uploadPhotoRole" type="checkbox">
+                                             <input id="uploadPhotoRole" type="checkbox" onchange="clickUploadRoleButton()">
                                              <label for="uploadPhotoRole">
-                                                 <span></span>
+                                                 <span id="uploadCheckBoxPolici"></span>
                                              </label>
                                          </div>
                                          <div class="secondStepPolicyText">
                                              {{__('تایید میکنم تمامی حقوق مرتبط با انتشار این تصویر متعلق به من می باشد. تایید می نمایم در صورت حضور چهره دیگران در تصویر، آن ها نیز از انتشار این عکس راضی می باشند.')}}
-                                             <div id="photoUploadTipsLink" class="headerLink tipsLink" style="display: inline-block">
+                                             <div id="photoUploadTipsLink" class="headerLink tipsLink" style="display: inline-block; font-size: 10px;">
                                                  <a href="{{route("policies")}}" target="_blank">{{__('صفحه مقررات')}}</a>
                                                  <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
                                                      <div class="header_text"></div>
@@ -276,13 +274,20 @@
                                          </div>
                                      </div>
                                  </div>
+
                                  <div class="upload secondFooterVerification">
-                                     <div onclick="resizeImg()" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
-                                     {{--<div onclick="goToPage3()" class="uploadBtn ui_button primary">1111</div>--}}
+                                      <div onclick="resizeImg()" class="uploadBtn ui_button primary confirmButton" style="padding: 8px 20px;">{{__('تایید و انتشار')}}</div>
+                                      <div class="photographerErrors hideOnScreen"></div>
                                  </div>
+
                              </div>
+{{--                             <div class="col-xs-12 footer secondStepFooter">--}}
+{{--                                 <div id="photographerErrors" style="color: red; position: absolute; bottom: 0px"></div>--}}
+{{--                                 <div class="upload secondFooterVerification">--}}
+{{--                                     <div onclick="resizeImg()" class="uploadBtn ui_button primary confirmButton" style="padding: 8px 20px;">{{__('تایید و انتشار')}}</div>--}}
+{{--                                 </div>--}}
+{{--                             </div>--}}
                          </div>
-                         {{--<div onclick="back()" class="removeBtn action ui_close_x"></div>--}}
                      </div>
                      <div class="successScreen hidden">
                          <div class="successTextBox">
@@ -393,6 +398,7 @@
     }
 
     function submitPhoto(input) {
+        mainImage = input;
 
         $('#uploadPhotoPicName').val('');
         $('#uploadPhotoPicAlt').val('');
@@ -444,7 +450,7 @@
         placeIdUploadPhoto = $('#placeIdUploadPhoto').val();
         kindPlaceIdUploadPhoto = $('#kindPlaceIdUploadPhoto').val();
 
-        document.getElementById('photographerErrors').innerText = '';
+        $('.photographerErrors').text('')
 
         if($('#uploadPhotoRole').is(":checked") && name.trim().length > 0 && description.trim().length <= 100 && kindPlaceIdUploadPhoto != 0 && placeIdUploadPhoto != 0) {
 
@@ -462,28 +468,31 @@
         else {
             var text = '';
             if(name == null || name == '') {
-                document.getElementById('uploadPhotoPicNameDiv').classList.add('errorField');
+                $('#uploadPhotoPicNameDiv').addClass('inputUploadPhotosError');
                 text = '{{__('فیلد های بالا را پر کنید.')}}\n';
             }
             if(description.trim().length > 100){
-                document.getElementById('uploadPhotoPicAltDiv').classList.add('errorField');
+                $('#uploadPhotoPicAltDiv').addClass('inputUploadPhotosError');
                 text += '{{__('توضیح باید کمتر از 100 کاراکتر باشد.')}}\n';
             }
 
             if(placeIdUploadPhoto == 0 || placeIdUploadPhoto == 0){
-                document.getElementById('uploadPhotoPicAltDiv').classList.add('errorField');
+                $('#uploadPhotoPicAltDiv').addClass('inputUploadPhotosError');
                 text += '{{__('لطفا مشخص کنید که عکس برای چه مکانی است.')}}\n';
             }
 
-            if(!$('#photographerRole').is(":checked"))
+            if(!$('#photographerRole').is(":checked")) {
                 text += '{{__('تایید مقررات اجباری است')}}';
+                $('#uploadCheckBoxPolici').addClass('tickInputUploadPhotosError');
+                $('.secondStepPolicyText').css('color', 'red');
+            }
 
-            document.getElementById('photographerErrors').innerText = text;
+            $('.photographerErrors').text(text);
         }
     }
 
     function submitUpload(type){
-        var im;
+        var im = null;
         switch (type){
             case 'mainFile':
                 im = mainImage;
@@ -495,6 +504,9 @@
                 im = reqImg;
                 break;
         }
+
+        if(im == undefined)
+            im = mainImage;
 
         uploadPhotoFormData.set('pic', im);
         uploadPhotoFormData.set('fileName', mainFileName);
@@ -738,5 +750,11 @@
         $('#kindPlaceIdUploadPhoto').val(_kindPlaceId);
         $('#placeNameUploadPhoto').val(name);
         closeSearchInput();
+    }
+
+    function clickUploadRoleButton(){
+        $('#uploadCheckBoxPolici').removeClass('tickInputUploadPhotosError');
+        $('.secondStepPolicyText').css('color', '#4a4a4a');
+
     }
 </script>

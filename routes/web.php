@@ -37,11 +37,12 @@ Route::group(array(), function(){
 
 Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
-    Route::get('/', 'MainController@landingPage')->name('home');
-
-    Route::get('/landingPage', 'MainController@landingPage')->name('landingPage');
+    Route::get('/', 'MainController@showMainPage')->name('home');
 
     Route::get('main', 'MainController@showMainPage')->name('main');
+
+//    Route::get('/', 'MainController@landingPage')->name('home');
+    Route::get('/landingPage', 'MainController@landingPage')->name('landingPage');
 
     Route::get('main/{mode}', function(){
         return redirect(url('/'));

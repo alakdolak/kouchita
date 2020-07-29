@@ -99,6 +99,10 @@ if ($total == 0)
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
     <style>
+        .albumInfo{
+            width: 100%;
+            text-align: right !important;
+        }
         .affix {
             max-width: 100%;
             left: 0px;
