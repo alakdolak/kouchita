@@ -316,7 +316,6 @@
     }
 
 
->>>>>>> e2dd14765a1f4a66ec397d04fccd1ccb33a7c04c
     function hideAllTopNavs(){
         openHeadersTab = false;
 
