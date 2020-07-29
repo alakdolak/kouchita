@@ -231,6 +231,13 @@
 
                 </div>
             @else
+                <div class="headerAuthButton" onclick="showCampingModal()" style="margin-left: 15px">
+                    <span class="headerIconCommon iconFamily addPostIcon" style="height: 26px;"></span>
+                    <div class="nameOfIconHeaders" style="line-height: 12px">
+                        {{__('کمپین')}}
+                    </div>
+                </div>
+
                 <div class="mainLoginButton languageButton">
                     <a style="color: #0e3a46;" href="{{url('language/fa')}}">
                         فارسی
@@ -268,18 +275,18 @@
     </a>
 </div>
 
-<div id="campingHeader" class="modalBlackBack" style="z-index: 9999;  display: none">
+<div id="campingHeader" class="modalBlackBack" style="z-index: 999;  display: none">
     <div class="headerCampaignModalBody">
         <span class="iconClose closeLanding" onclick="$('#campingHeader').hide();"></span>
-        <a href="{{route('addPlaceByUser.index')}}" class="headerCampingTop">
-            <img src="{{URL::asset('images/camping/landing.jpg')}}" class="resizeImgClass" style="width: 100%;">
-        </a>
+        <div class="headerCampingTop" onclick="goToLanding()">
+            <img src="{{URL::asset('images/camping/landing.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+        </div>
         <div class="headerCampingBottom">
             <div>
-                <img src="{{URL::asset('images/camping/safarnameh.jpg')}}" class="resizeImgClass">
+                <img src="{{URL::asset('images/camping/nSafarnameh.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div onclick="$('#campingHeader').hide(); openUploadPost()">
-                <img src="{{URL::asset('images/camping/axasi2.jpg')}}" class="resizeImgClass">
+                <img src="{{URL::asset('images/camping/nAxasi.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
         </div>
     </div>
@@ -291,7 +298,23 @@
 
     function showCampingModal(){
         $('#campingHeader').css('display', 'flex');
+        resizeFitImg('resizeImgClass');
     }
+
+    function goToLanding(){
+        if(!checkLogin('{{route("addPlaceByUser.index")}}'))
+            return;
+        else
+            location.href = '{{route("addPlaceByUser.index")}}';
+    }
+
+    function openUploadPost(){
+        if(!checkLogin('{{route("addPlaceByUser.index")}}'))
+            return;
+        else
+            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
+    }
+
 
     function hideAllTopNavs(){
         openHeadersTab = false;
@@ -561,10 +584,6 @@
             }
             else
                 hideAllTopNavs();
-        }
-
-        function openUploadPost(){
-            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
         }
 
     </script>

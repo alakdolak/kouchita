@@ -76,16 +76,6 @@
             </div>
         </div>
     </div>
-
-<script !src="">
-    function goToLanding(){
-        if(!checkLogin('{{route("addPlaceByUser.index")}}'))
-            return;
-        else
-            location.href = '{{route("addPlaceByUser.index")}}';
-    }
-</script>
-
     @include('general.forAllPages')
 
     @include('layouts.header1')

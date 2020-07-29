@@ -142,7 +142,7 @@
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                {{__('اقامتگاه‌ها')}}
+                {{__('اقامتگاه')}}
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
@@ -159,7 +159,7 @@
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                {{__('رستوران‌ها')}}
+                {{__('رستوران‌')}}
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
@@ -176,7 +176,7 @@
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                {{__('جاذبه‌ها')}}
+                {{__('جاذبه‌')}}
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
@@ -244,7 +244,7 @@
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                {{__('بوم گردی ها')}}
+                {{__('بوم گردی')}}
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
