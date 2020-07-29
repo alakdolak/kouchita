@@ -16,12 +16,14 @@ use App\models\PhotographersPic;
 use App\models\Place;
 use App\models\PlaceFeatures;
 use App\models\ReviewPic;
+use App\models\Safarnameh;
 use App\models\State;
 use App\models\User;
 use App\models\UserAddPlace;
 use App\models\UserTripStyles;
 use Carbon\Carbon;
 use Exception;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -188,6 +190,37 @@ class ProfileController extends Controller {
             'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
     }
 
+    public function storeNewSafarnameh(Request $request)
+    {
+        $user = Auth::user();
+        $newSafarnameh = new Safarnameh();
+        $newSafarnameh->userId = Auth::user()->id;
+        $newSafarnameh->title = $request->title;
+        $newSafarnameh->text = $request->text;
+        $newSafarnameh->summery = $request->summery;
+
+        $location = __DIR__ . '/../../../../assets/userPhoto/' . $user->id;
+        if(!file_exists($location))
+            mkdir($location);
+        $size = [
+            [
+                'width' => 600,
+                'height' => null,
+                'name' => '',
+                'destination' => $location
+            ],
+        ];
+
+        $image = $request->file('pic');
+        $fileName = resizeImage($image, $size);
+
+        $newSafarnameh->pic = $fileName;
+        $newSafarnameh->save();
+
+        echo 'ok';
+    }
+
+
 
     public function getUserReviews(Request $request)
     {
@@ -351,6 +384,27 @@ class ProfileController extends Controller {
         array_multisort($sort, SORT_DESC, $allUserPics);
 
         echo json_encode(['status' => 'ok', 'result' => $allUserPics]);
+
+        return;
+    }
+
+    public function getSafarnameh(Request $request)
+    {
+        $userId = $request->userId;
+        $username = User::find($userId)->username;
+
+        if(\auth()->check() && \auth()->user()->id == $userId)
+            $safarnameh = Safarnameh::where('userId', $userId)->get();
+        else
+            $safarnameh = Safarnameh::where('userId', $userId)->where('confirm', 1)->get();
+
+        foreach ($safarnameh as $item) {
+            $item->pic = \URL::asset('userPhoto/' . $userId . '/' . $item->pic);
+            $item->time = verta($item->created_at)->format('Y/m/d');
+            $item->username = $username;
+        }
+
+        echo json_encode(['status'  => 'ok', 'result' => $safarnameh]);
 
         return;
     }

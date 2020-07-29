@@ -61,6 +61,7 @@
                     </div>
                 </div>
 
+
                 <div class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
                     @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0)
                         <div class="userProfileLevelMainDiv rightColBoxes">
@@ -342,6 +343,8 @@
         }
 
         function changePages(_kind){
+            var url = new URL(location.href);
+
             $('.postsMainFiltrationBar').find('.active').removeClass('active');
             $('.prodileSections').addClass('hidden');
 
@@ -358,7 +361,7 @@
             else if(_kind === 'safarnameh') {
                 $('#safarnamehTab').addClass('active');
                 $('#safarnamehBody').removeClass('hidden');
-                // getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
+                getSafarnamehs(); // in profile.innerParts.userArticlesInner
             }
         }
 
@@ -367,6 +370,8 @@
             changePages('review');
         else if(url.hash === '#picture')
             changePages('picture');
+        else if(url.hash === '#safarnameh')
+            changePages('safarnameh');
 
     </script>
 

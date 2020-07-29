@@ -1047,6 +1047,10 @@ body {
     border: 1px solid black;
     margin: 5px 0;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .articleImgMainDiv > img {

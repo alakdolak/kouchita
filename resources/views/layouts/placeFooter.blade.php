@@ -142,9 +142,9 @@
             </span>
             <span class="ui_icon memberPossibilities"></span>
         </div>
-        <div onclick="openMainSearch(0) // in mainSearch.blade.php">
-            <span class="footerMenuBarLinks">{{__('جست‌و‌جو')}}</span>
-            <span class="iconFamily searchIcon" style="font-size: 20px;"></span>
+        <div onclick="showCampingModal() // in header1.blade.php">
+            <span class="footerMenuBarLinks">{{__('کمپین')}}</span>
+            <span class="iconFamily headerIconCommon iconFamily addPostIcon" style="font-size: 20px;"></span>
         </div>
         @if(Auth::check())
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
@@ -545,7 +545,7 @@
                                         @if(\auth()->check())
                                             <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
                                                 <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
-                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="resizeFitImg(this)">
                                                 </div>
                                                 <div class="col-xs-4 placeDetailsLeftBar">
                                                     <div class="">##placeName##</div>
