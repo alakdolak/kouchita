@@ -60,6 +60,7 @@
         align-items: center;
         border-radius: 13px;
         overflow: hidden;
+        cursor: pointer;
     }
     .headerCampingBottom > div > img{
         width: 100%;
@@ -282,7 +283,7 @@
             <img src="{{URL::asset('images/camping/landing.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
         <div class="headerCampingBottom">
-            <div>
+            <div onclick="goToSafarnameh()">
                 <img src="{{URL::asset('images/camping/nSafarnameh.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div onclick="$('#campingHeader').hide(); openUploadPost()">
@@ -313,6 +314,12 @@
             return;
         else
             openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
+    }
+    function goToSafarnameh(){
+        if(!checkLogin('{{route("addPlaceByUser.index")}}'))
+            return;
+        else
+            location.href = '{{url('profile/index')}}#safarnameh';
     }
 
 
@@ -585,6 +592,8 @@
             else
                 hideAllTopNavs();
         }
+
+
 
     </script>
 @endif
