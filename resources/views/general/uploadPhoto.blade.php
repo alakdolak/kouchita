@@ -168,7 +168,7 @@
 
                          </div>
                          <div class="footerTextBox stFooter">
-                             <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
+                             <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگذاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
                              <a href="{{route('policies')}}" target="_blank" class="footerPolicyLink">{{__('صفحه مقررات')}}</a>
                          </div>
                      </div>
@@ -292,12 +292,12 @@
                      <div class="successScreen hidden">
                          <div class="successTextBox">
                             <div class="successText">{{__('موفق شدید')}}</div>
-                            <div class="successTextDes">{{__('عکس شما برای ما ارسال گردید و پس از بررسی بارگزاری خواهد شد')}}</div>
+                            <div class="successTextDes">{{__('عکس شما برای ما ارسال گردید و پس از بررسی بارگذاری خواهد شد')}}</div>
                          </div>
                          <div class="uploadNextPicBtnBox">
 
                              <label for="uploadPhotoInputPic" style="width: 250px;">
-                                 <div class="uploadNextPicBtn ui_button primary confirmButton">{{__('بارگزاری عکس بعدی')}}</div>
+                                 <div class="uploadNextPicBtn ui_button primary confirmButton">{{__('بارگذاری عکس بعدی')}}</div>
                              </label>
 
                              <div class="uploadNextPicDeny" onclick="closePhotoModal()">{{__('نه، برای بعد')}}</div>
@@ -305,7 +305,7 @@
                          </div>
                          <div id="uploadedImgDiv" class="uploadedImgDiv"></div>
                          <div class="footerTextBox" style="position: absolute; bottom: 0">
-                             <span>{{__('پس از تایید عکس امتیاز شما در پروفایل افزایش خواهد یافت. به گزاشتن عکس ادامه دهید تا علاوه بر امتیاز بتوانید نشان های افتخار مخصوص عکس را برنده شوید.')}}</span>
+                             <span>{{__('پس از تایید عکس امتیاز شما در پروفایل افزایش خواهد یافت. به گذاشتن عکس ادامه دهید تا علاوه بر امتیاز بتوانید نشان های افتخار مخصوص عکس را برنده شوید.')}}</span>
                              <a href="{{route('policies')}}" class="footerPolicyLink" onclick="">{{__('صفحه مقررات')}}</a>
                          </div>
 
@@ -541,7 +541,7 @@
                 else if(response[0] == 'nok1'){
                     if(repeatTime != 0){
                         $("#fullPageLoader").css('display', 'none');
-                        alert('{{__('در بارگزاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                        alert('{{__('در بارگذاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
                     }
                     else{
                         repeatTime--;
@@ -559,7 +559,7 @@
             },
             error: function(err){
                 $("#fullPageLoader").css('display', 'none');
-                alert('{{__('در بارگزاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                alert('{{__('در بارگذاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
             }
         })
     }

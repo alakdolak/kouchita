@@ -69,6 +69,7 @@ body {
     justify-content: space-around;
     align-items: center;
     margin-bottom: 5px;
+    border-radius: 10px;
 }
 .userProfilePostsFiltration > span{
     text-align: center;
@@ -116,7 +117,11 @@ body {
 }
 
 .userProfileActivitiesDetailsMainDiv {
-    margin-top: 20px;
+    margin-top: 5px;
+    padding: 0px 5px;
+}
+.userProfileDetailsMainDiv{
+    padding: 0px 5px;
 }
 
 .userProfilePostsFiltrationContainer {
@@ -142,8 +147,9 @@ body {
 .userProfilePostsSearchContainer {
     display: inline-block;
     width: 100%;
-    padding: 5px 15px 5px 0;
+    padding: 5px 15px;
     margin-bottom: 5px;
+    border-radius: 10px;
 }
 
 .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(1) {
@@ -202,7 +208,8 @@ body {
 .rightColBoxes {
     background-color: white;
     padding: 0 10px 15px;
-    margin-top: 15px;
+    margin-top: 5px;
+    border-radius: 10px;
 }
 
 
@@ -211,6 +218,7 @@ body {
     border-bottom: 1px solid #e5e5e5;
     margin: 20px 0;
     position: relative;
+    margin-top: 0px;
 }
 
 .mainDivHeaderText > h3, .mainDivHeaderText > div {
@@ -1034,10 +1042,7 @@ body {
     padding: 20px;
     display: inline-block;
     width: 100%;
-}
-
-.usersArticlesMainDiv:not(:nth-child(2)){
-    margin-top: -5px;
+    border-radius: 10px;
 }
 
 .articleImgMainDiv {
@@ -1549,12 +1554,6 @@ body {
     }
 
     .userProfileDetailsMainDiv {
-        padding: 0 5px;
-    }
-
-    /*main bar*/
-
-    .userProfileActivitiesDetailsMainDiv {
         padding: 0 5px;
     }
 

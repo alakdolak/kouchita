@@ -144,7 +144,7 @@
         </div>
         <div onclick="showCampingModal() // in header1.blade.php">
             <span class="footerMenuBarLinks">{{__('کمپین')}}</span>
-            <span class="iconFamily headerIconCommon iconFamily addPostIcon" style="font-size: 20px;"></span>
+            <span class="iconFamily iconFamily addPostIcon" style="font-size: 20px;"></span>
         </div>
         @if(Auth::check())
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
@@ -644,7 +644,8 @@
                                     </a>
                                 @endif
                             </div>
-                            <div style="margin-top: 15px; text-align: left;">
+                            <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: #0d6650">{{__('جستجو کنید')}}</button>
                                 <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>
@@ -855,7 +856,7 @@
                                 </div>
                             </div>
                             <div class="profileBtnActionMobile">
-                                <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
+                                <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); showCampingModal() // in header1.blade.php">{{__('کمپین')}}</div>
                                 <a href="{{route('profile')}}" type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
                                 <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
                             </div>

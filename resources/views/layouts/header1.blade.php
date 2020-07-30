@@ -29,67 +29,6 @@
     </style>
 @endif
 
-<style>
-    .headerCampaignModalBody{
-        width: 60%;
-        height: 90vh;
-        position: relative;
-    }
-    .headerCampingTop{
-        width: 100%;
-        height: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        margin-bottom: 5px;
-        border-radius: 10px;
-    }
-    .headerCampingBottom{
-        width: 100%;
-        height: 40%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .headerCampingBottom > div{
-        width: calc(50% - 4px);
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 13px;
-        overflow: hidden;
-        cursor: pointer;
-    }
-    .headerCampingBottom > div > img{
-        width: 100%;
-    }
-
-    .closeLanding{
-        font-size: 40px;
-        position: absolute;
-        top: 15px;
-        color: red;
-        left: 10px;
-        height: 35px;
-        width: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: solid 1px;
-        border-radius: 50%;
-        z-index: 9;
-    }
-
-    @media (max-width: 1000px){
-        .headerCampaignModalBody{
-            width: 92%;
-        }
-    }
-</style>
-
-
     {{--pc header--}}
 <div class="mainHeader hideOnPhone">
     <div class="container headerContainer">

@@ -893,10 +893,10 @@
 
 
     <div class="modal fade" id="mapModal">
-        <div class="modal-dialog modal-lg" style="width: 95%;">
-            <div class="modal-content" style="height: 100vh;">
+        <div class="modal-dialog modal-lg" style="width: 95%; margin-top: 5px">
+            <div class="modal-content" style="height: 97vh;">
                 <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: calc(100vh - 200px); background-color: red"></div>
+                    <div id="map" style="width: 100%; height: calc(100vh - 100px); background-color: red"></div>
                 </div>
 
                 <!-- Modal footer -->
