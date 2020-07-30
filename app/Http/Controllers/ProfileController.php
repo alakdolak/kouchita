@@ -709,7 +709,7 @@ class ProfileController extends Controller {
         }
     }
 
-    public function doEditPhoto() {
+    public function doEditPhoto(Request $request) {
 
         $err = "";
 
@@ -725,25 +725,27 @@ class ProfileController extends Controller {
 
             if($user->uploadPhoto == 0 || $user->picture != $file["name"]) {
 
-                $fileName = time() . $file["name"];
-                $targetFile = __DIR__ . "/../../../../assets/userProfile/" . $fileName;
+                $targetFile = __DIR__ . "/../../../../assets/userProfile";
 
-                if (!file_exists($targetFile)) {
-                    $err = uploadCheck($targetFile, "newPic", "تغییر تصویر کاربری", 3000000, -1);
-                    if (empty($err)) {
-                        $destinationMainPic = $targetFile;
+                $size = [
+                    [
+                        'width' => 300,
+                        'height' => null,
+                        'name' => '',
+                        'destination' => $targetFile
+                    ],
+                ];
 
-                        $err = compressImage($_FILES['newPic']['tmp_name'], $destinationMainPic, 60);
-                        if($err) {
-                            if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->picture))
-                                unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
-                            $user->picture = $fileName;
-                            $user->uploadPhoto = 1;
-                            $user->save();
-                            $err = '';
-                        }
-                    }
-                }
+
+                $image = $request->file('newPic');
+                $fileName = resizeImage($image, $size);
+
+                if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->picture))
+                    unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
+                $user->picture = $fileName;
+                $user->uploadPhoto = 1;
+                $user->save();
+                $err = '';
             }
         }
 
