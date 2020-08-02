@@ -1,19 +1,17 @@
 
 @include('component.smallShowReview')
 
-<div class="userProfileActivitiesDetailsMainDiv userActivitiesPosts col-sm-8 col-xs-12">
-    <div class="userProfilePostsFiltrationContainer">
-        <div class="userProfilePostsFiltration">
-            <span class="active" onclick="changeSortPost('new', this)">جدیدترین‌ها</span>
-            <span onclick="changeSortPost('top', this)">بهترین‌ها</span>
-            <span onclick="changeSortPost('hot', this)">داغ‌ترین‌ها</span>
-        </div>
+<div class="userProfilePostsFiltrationContainer">
+    <div class="userProfilePostsFiltration">
+        <span class="active" onclick="changeSortPost('new', this)">جدیدترین‌ها</span>
+        <span onclick="changeSortPost('top', this)">بهترین‌ها</span>
+        <span onclick="changeSortPost('hot', this)">داغ‌ترین‌ها</span>
     </div>
+</div>
 
-    <div class="postsMainDivInSpecificMode col-xs-12">
-        <div id="leftPostSection" class="postsLeftDivInSpecificMode col-xs-6"></div>
-        <div id="rightPostSection" class="postsRightDivInSpecificMode col-xs-6"></div>
-    </div>
+<div class="postsMainDivInSpecificMode col-xs-12">
+    <div id="leftPostSection" class="postsLeftDivInSpecificMode col-xs-6"></div>
+    <div id="rightPostSection" class="postsRightDivInSpecificMode col-xs-6"></div>
 </div>
 
 <script>
@@ -84,4 +82,3 @@
     }
 
 </script>
-

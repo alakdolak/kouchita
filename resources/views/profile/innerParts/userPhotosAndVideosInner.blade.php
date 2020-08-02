@@ -1,17 +1,14 @@
 
-<div class="userProfileActivitiesDetailsMainDiv userActivitiesPhotos col-sm-8 col-xs-12">
-    <div class="userProfilePhotosAndVideos">
-        <div class="userProfilePostsSearchContainer">
-            <div class="userProfilePostsFiltration">
-                <span id="userPhotoAllTab" class="active" onclick="changeShowPic('all')">همه</span>
-                <span id="userPhotoPicTab" onclick="changeShowPic('pic')">عکس</span>
-                <span id="userPhotoVideoTab" onclick="changeShowPic('video')">فیلم</span>
-                <span id="userPhoto360Tab" onclick="changeShowPic('video360')">فیلم 360</span>
-            </div>
+<div class="userProfilePhotosAndVideos">
+    <div class="userProfilePostsSearchContainer">
+        <div class="userProfilePostsFiltration">
+            <span id="userPhotoAllTab" class="active" onclick="changeShowPic('all')">همه</span>
+            <span id="userPhotoPicTab" onclick="changeShowPic('pic')">عکس</span>
+            <span id="userPhotoVideoTab" onclick="changeShowPic('video')">فیلم</span>
+            <span id="userPhoto360Tab" onclick="changeShowPic('video360')">فیلم 360</span>
         </div>
-        <div id="pictureSection" class="photosAndVideosMainDiv"></div>
     </div>
-
+    <div id="pictureSection" class="photosAndVideosMainDiv"></div>
 </div>
 
 <script>

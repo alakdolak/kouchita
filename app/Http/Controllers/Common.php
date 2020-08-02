@@ -1205,6 +1205,27 @@ function getPlacePic($placeId = 0, $kindPlaceId = 0, $kind = 'f'){
     return URL::asset('images/mainPics/nopicv01.jpg');
 }
 
+function getStatePic($stateId = 0, $cityId = 0){
+    $locationPic = __DIR__ . '/../../../../assets/_images/city';
+    if($cityId != 0){
+        $place = Cities::find($cityId);
+        $pics = CityPic::where('cityId', $cityId)->get();
+        if(count($pics) == 0)
+            return URL::asset('_images/nopic/blank.jpg');
+        else{
+            $locationPic1 = $locationPic .'/' . $place->id . '/' . $place->image;
+            if(is_file($locationPic1))
+                return URL::asset('_images/city/' . $place->id  . '/' . $place->image);
+            else
+                return URL::asset('_images/city/' . $place->id  . '/' . $place->pic[0]->pic);
+        }
+    }
+    else if($stateId != 0)
+        return URL::asset('images/mainPics/nopicv01.jpg');
+    else
+        return URL::asset('images/mainPics/nopicv01.jpg');
+}
+
 function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
     if($stateId != 0){
         $state = State::find($stateId);
