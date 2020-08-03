@@ -625,7 +625,6 @@ class APIController extends Controller {
         }
 
         return response()->json($this->content);
-
     }
 
     public function logout() {

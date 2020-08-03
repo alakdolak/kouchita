@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-
 if (Auth::check())
     return Redirect::to(route('main'));
 
@@ -36,9 +35,11 @@ generating the authentication URL later.
  ************************************************/
 $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
-
 ?>
-
+<script>
+    // document.cookie = "koochitaLastPage=" + location.href;
+    document.cookie = "koochitaLastPage=http://localhost/kouchita/public/article/%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86";
+</script>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
 <style>
@@ -99,35 +100,35 @@ $authUrl = $client->createAuthUrl();
                         {{--<div class="g-signin2" data-onsuccess="onSignIn"></div>--}}
                         <a href="{{$authUrl}}" class="googleA">
                             <div class="g-signin2">
-                            <div style="height:36px;width:120px;" class="abcRioButton abcRioButtonLightBlue">
-                                <div class="abcRioButtonContentWrapper"
-                                     style="display: flex; box-shadow: 0 2px 4px 0 rgba(0,0,0,.25); direction: ltr; cursor: pointer">
-                                    <div class="abcRioButtonIcon" style="padding:8px">
-                                        <div style="width:18px;height:18px;"
-                                             class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px"
-                                                 height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg">
-                                                <g>
-                                                    <path fill="#EA4335"
-                                                          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path
-                                                            fill="#4285F4"
-                                                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path
-                                                            fill="#FBBC05"
-                                                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path
-                                                            fill="#34A853"
-                                                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path
-                                                            fill="none" d="M0 0h48v48H0z"></path>
-                                                </g>
-                                            </svg>
+                                <div style="height:36px;width:120px;" class="abcRioButton abcRioButtonLightBlue">
+                                    <div class="abcRioButtonContentWrapper"
+                                         style="display: flex; box-shadow: 0 2px 4px 0 rgba(0,0,0,.25); direction: ltr; cursor: pointer">
+                                        <div class="abcRioButtonIcon" style="padding:8px">
+                                            <div style="width:18px;height:18px;"
+                                                 class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px"
+                                                     height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg">
+                                                    <g>
+                                                        <path fill="#EA4335"
+                                                              d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path
+                                                                fill="#4285F4"
+                                                                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path
+                                                                fill="#FBBC05"
+                                                                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path
+                                                                fill="#34A853"
+                                                                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path
+                                                                fill="none" d="M0 0h48v48H0z"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
                                         </div>
+                                        <span style="font-size:13px;line-height:34px; margin-left: 15px;"
+                                              class="abcRioButtonContents">
+                                            <span id="not_signed_inyx5syaq6qblq">Sign in</span>
+                                        </span>
                                     </div>
-                                    <span style="font-size:13px;line-height:34px; margin-left: 15px;"
-                                          class="abcRioButtonContents">
-                                        <span id="not_signed_inyx5syaq6qblq">Sign in</span>
-                                    </span>
                                 </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                     <p id="loginErr"></p>

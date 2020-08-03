@@ -965,11 +965,17 @@ class ProfileController extends Controller {
             $kindPlace[$key]['features'] = $features;
         }
 
-        $logs = createSeeLog(0, 0, 'addPlace', 'start');
-        $getLog = LogModel::where(['placeId' => 0, 'kindPlaceId' => 0, 'subject' => 'addPlace', 'text' => 'start', 'time' => $logs[0], 'date' => $logs[1], 'activityId' => 1, 'visitorId' => \auth()->user()->id])->get();
-        for($i = 1; $i < count($getLog); $i++){
-            if(isset($getLog[$i]))
-                $getLog[$i]->delete();
+        if(\auth()->check()) {
+            $logs = createSeeLog(0, 0, 'addPlace', 'start');
+            $getLog = LogModel::where(['placeId' => 0, 'kindPlaceId' => 0,
+                'subject' => 'addPlace', 'text' => 'start',
+                'time' => $logs[0], 'date' => $logs[1], 'activityId' => 1,
+                'visitorId' => \auth()->user()->id])->get();
+
+            for ($i = 1; $i < count($getLog); $i++) {
+                if (isset($getLog[$i]))
+                    $getLog[$i]->delete();
+            }
         }
 
         return view('profile.addPlaceByUser', compact(['states', 'kindPlace']));

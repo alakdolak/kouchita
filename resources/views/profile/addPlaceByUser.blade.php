@@ -944,7 +944,7 @@
     <script src="{{URL::asset('packages/dropzone/dropzone.js')}}"></script>
     <script src="{{URL::asset('packages/dropzone/dropzone-amd-module.js')}}"></script>
 
-    <script defer>
+    <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
             @if(app()->getLocale() == 'fa')
@@ -956,9 +956,7 @@
             @endif
             autosize($('textarea'));
         });
-    </script>
 
-    <script>
         let categories = [
             {
                 'name': '{{__('بوم گردی')}}',
@@ -1115,18 +1113,20 @@
         });
 
         categories.forEach((item, index) => {
-            text =  '<div class="categories" onclick="selectCategory(this, ' + index + ');">\n' +
-                '<div class="icons iconsOfCategories ' + item["icon"] + '"></div>\n' +
-                '<div>' + item["name"] + '</div>\n' +
-                '</div>';
+            text =  '<div id="category_' + index + '" class="categories" onclick="selectCategory(this, ' + index + ');">\n' +
+                    '   <div class="icons iconsOfCategories ' + item["icon"] + '"></div>\n' +
+                    '   <div>' + item["name"] + '</div>\n' +
+                    '</div>';
             $('#selectCategoryDiv').append(text);
         });
 
-        function selectCategory (elem, _categoryIndex) {
+        function selectCategory (elem, _categoryIndex){
+
             $($('.choosedCategory')[0]).removeClass('choosedCategory');
             $(elem).addClass('choosedCategory');
 
             selectedCategory = categories[_categoryIndex];
+            location.href = location.origin + location.pathname + '#' + selectedCategory.kind;
             $('#nextStep').attr('disabled', false);
 
             $('.selectCategoryDiv').removeClass('hidden');
@@ -1142,7 +1142,6 @@
             $('#step4MainTitle').text(selectedCategory['step4']);
             $('#step5MainTitle').text(selectedCategory['step5']);
             $('#step6MainTitle').text(selectedCategory['step6']);
-
 
             $('.onlyForHotelsRest').css('display', 'none');
             $('.onlyForHotelsRestBoom').css('display', 'none');
@@ -1173,7 +1172,6 @@
 
         let currentSteps = 1;
         function changeSteps(inc){
-
             $('#nextStep').attr('disabled', true);
 
             if(currentSteps == 1 && selectedCategory == null)
@@ -1235,6 +1233,9 @@
         }
 
         function doChangeStep(inc){
+            if(!checkLogin(location.href))
+                return;
+
             $('html, body').animate({ scrollTop: 0 }, 'fast');
 
             $('.bodyOfSteps').addClass('hidden');
@@ -1630,6 +1631,17 @@
             })
         }
 
+        let hash = location.hash;
+        if(hash != '' && hash != '#'){
+            for(i = 0; i < categories.length; i++){
+                if('#'+categories[i].kind == hash){
+                    selectCategory($('#category_' + i), i);
+                    changeSteps(1);
+                    break;
+                }
+            }
+        }
+
     </script>
 
     <script>
@@ -1762,6 +1774,7 @@
 
             setNewMarker();
         }
+
         function getLat(location){
             if(marker != 0)
                 marker.setMap(null);
