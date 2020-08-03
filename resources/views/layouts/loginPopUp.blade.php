@@ -37,8 +37,7 @@ $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
 ?>
 <script>
-    // document.cookie = "koochitaLastPage=" + location.href;
-    document.cookie = "koochitaLastPage=http://localhost/kouchita/public/article/%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86";
+    document.cookie = "koochitaLastPage=" + location.href;
 </script>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
