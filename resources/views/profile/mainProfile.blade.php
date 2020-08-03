@@ -11,7 +11,6 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
-{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">--}}
 @stop
 
 @section('main')
@@ -61,8 +60,7 @@
                     </div>
                 </div>
 
-
-                <div class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
+                <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
                     @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0)
                         <div class="userProfileLevelMainDiv rightColBoxes">
                             <div class="mainDivHeaderText">
@@ -217,17 +215,20 @@
                     </div>
                 </div>
 
-                <div id="reviewMainBody" class="prodileSections hidden">
-                    @include('profile.innerParts.userPostsInner')
+                <div id="userProfileMainContentSection" class="userProfileActivitiesDetailsMainDiv userActivitiesArticles col-sm-8 col-xs-12">
+                    <div id="reviewMainBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userPostsInner')
+                    </div>
+
+                    <div id="picMainBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userPhotosAndVideosInner')
+                    </div>
+
+                    <div id="safarnamehBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userSafarnameh')
+                    </div>
                 </div>
 
-                <div id="picMainBody" class="prodileSections hidden">
-                    @include('profile.innerParts.userPhotosAndVideosInner')
-                </div>
-
-                <div id="safarnamehBody" class="prodileSections hidden">
-                    @include('profile.innerParts.userArticlesInner')
-                </div>
 
             </div>
         </div>
@@ -343,7 +344,7 @@
         }
 
         function changePages(_kind){
-            var url = new URL(location.href);
+            cancelFullMainContent();
 
             $('.postsMainFiltrationBar').find('.active').removeClass('active');
             $('.prodileSections').addClass('hidden');
@@ -361,8 +362,18 @@
             else if(_kind === 'safarnameh') {
                 $('#safarnamehTab').addClass('active');
                 $('#safarnamehBody').removeClass('hidden');
-                getSafarnamehs(); // in profile.innerParts.userArticlesInner
+                getSafarnamehs(); // in profile.innerParts.userSafarnameh
             }
+        }
+
+        function fullMainContent(){
+            $('#userProfileSideInfos').hide();
+            $('#userProfileMainContentSection').addClass('fullWidthBoot');
+        }
+
+        function cancelFullMainContent(){
+            $('#userProfileSideInfos').show();
+            $('#userProfileMainContentSection').removeClass('fullWidthBoot');
         }
 
         var url = new URL(location.href);

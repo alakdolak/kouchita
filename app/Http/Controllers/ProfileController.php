@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\Age;
+use App\models\Amaken;
 use App\models\Cities;
 use App\models\DefaultPic;
 use App\models\InvitationCode;
@@ -15,9 +16,13 @@ use App\models\PhotographersLog;
 use App\models\PhotographersPic;
 use App\models\Place;
 use App\models\PlaceFeatures;
+use App\models\Restaurant;
 use App\models\ReviewPic;
 use App\models\Safarnameh;
+use App\models\SafarnamehPlaceRelation;
+use App\models\SafarnamehTagRelation;
 use App\models\State;
+use App\models\Tag;
 use App\models\User;
 use App\models\UserAddPlace;
 use App\models\UserTripStyles;
@@ -184,10 +189,10 @@ class ProfileController extends Controller {
 
         return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage']));
 
-        return view('profile.profile', array('activities' => $activities, 'userActivityCount' => $userActivityCount,
-            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
-            'userLevels' => nearestLevel($user->id), 'medals' => $medals,
-            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
+//        return view('profile.profile', array('activities' => $activities, 'userActivityCount' => $userActivityCount,
+//            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
+//            'userLevels' => nearestLevel($user->id), 'medals' => $medals,
+//            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
     }
 
     public function storeNewSafarnameh(Request $request)
@@ -212,12 +217,167 @@ class ProfileController extends Controller {
         ];
 
         $image = $request->file('pic');
+
         $fileName = resizeImage($image, $size);
 
         $newSafarnameh->pic = $fileName;
+
         $newSafarnameh->save();
 
+        $places = \GuzzleHttp\json_decode($request->placePick);
+        foreach ($places as $place){
+            $pRel = new SafarnamehPlaceRelation();
+            $pRel->safarnamehId = $newSafarnameh->id;
+            if($place->kindPlaceId == 'state' || $place->kindPlaceId == 'city') {
+                $pRel->kindPlaceId = 0;
+                $pRel->kind = $place->kindPlaceId;
+            }
+            else
+                $pRel->kindPlaceId = $place->kindPlaceId;
+
+            $pRel->placeId = $place->placeId;
+            $pRel->save();
+        }
+
+        $tags = explode(',', $request->tags);
+        foreach ($tags as $tag){
+            if($tag != ''){
+                $checkTag = Tag::where('name', $tag)->first();
+                if($checkTag == null){
+                    $checkTag = new Tag();
+                    $checkTag->name = $tag;
+                    $checkTag->save();
+                }
+                $safarTag = new SafarnamehTagRelation();
+                $safarTag->safarnamehId = $newSafarnameh->id;
+                $safarTag->tagId = $checkTag->id;
+                $safarTag->save();
+            }
+        }
+
         echo 'ok';
+    }
+
+    public function storeSafarnamehPics(Request $request)
+    {
+        $user = Auth::user();
+        if( $_FILES['file'] && $_FILES['file']['error'] == 0){
+            $fileName = time() . $_FILES['file']['name'];
+            $location = __DIR__ . '/../../../../assets/userPhoto/'.$user->id;
+            if (!file_exists($location))
+                mkdir($location);
+
+            $size = [
+                [
+                    'width' => 900,
+                    'height' => null,
+                    'name' => '',
+                    'destination' => $location
+                ],
+            ];
+
+            $image = $request->file('file');
+            $fileName = resizeImage($image, $size);
+
+            echo json_encode(['url' => \URL::asset('userPhoto/' . $user->id . '/' . $fileName)]);
+        }
+        else
+            echo false;
+
+        return;
+    }
+
+    public function placeSuggestion(Request $request)
+    {
+        $startTime = microtime(true);
+        $inPlace = [];
+        $deletedWord = ['هتل','اقامتگاه','مهمانسرا','رستوران','فست فود'];
+        $text = strip_tags($request->text);
+
+        $states = State::all();
+        foreach ($states as $item){
+            if(strpos($text, $item->name) !== false || strpos($text, 'استان ' . $item->name) !== false) {
+                array_push($inPlace, ['kindPlaceId' => 'state', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'استان ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => '']);
+            }
+        }
+
+//        $cities = Cities::where('isVillage', 0)->get();
+//        foreach ($cities as $item){
+//            if(strpos($text, $item->name) !== false || strpos($text, 'شهر ' . $item->name) !== false)
+//                array_push($inPlace, ['kindPlaceId' => 'city', 'placeId' => $item->id, 'name' => $item->name]);
+//        }
+
+//        $village = Cities::where('isVillage', '!=',0)->get();
+//        foreach ($village as $item){
+//            if(strpos($text, $item->name) !== false || strpos($text, 'روستا ' . $item->name) !== false)
+//                array_push($inPlace, ['kindPlaceId' => 'village', 'placeId' => $item->id, 'name' => $item->name]);
+//        }
+
+        $kindPlace = Place::whereNotNull('tableName')->get();
+        foreach ($kindPlace as $kind) {
+            $allPlace = \DB::table($kind->tableName)->select(['id', 'name', 'cityId'])->get();
+            foreach ($allPlace as $item){
+                foreach ($deletedWord as $word)
+                    str_replace($word, '', $item->name);
+
+                if(strpos($text, $item->name) !== false) {
+                    $pic = getPlacePic($item->id, $kind ->id, 'f');
+                    $cit = Cities::find($item->cityId);
+                    $sta = State::find($cit->stateId);
+                    $stasent = 'استان ' . $sta->name . ' ، شهر' . $cit->name;
+                    array_push($inPlace, ['kindPlaceId' => $kind->id, 'kindPlaceName' => $kind->name, 'placeId' => $item->id, 'name' => $item->name, 'pic' => $pic, 'state' => $stasent]);
+                }
+            }
+        }
+
+        $endTime = microtime(true);
+
+        echo json_encode(['result' => $inPlace, 'time' => ($endTime-$startTime)]);
+        return ;
+    }
+
+    public function searchSuggestion(Request $request)
+    {
+        $inPlace = [];
+        $kindPlace = $request->kindPlace;
+        if($kindPlace == 'state' || $kindPlace == 'village' || $kindPlace == 'city'){
+            if($kindPlace == 'state'){
+                $result = State::where('name', 'LIKE', '%'.$request->text.'%')->get();
+                foreach ($result as $item)
+                    array_push($inPlace, ['kindPlaceId' => 'state', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'استان ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => '']);
+            }
+            else if($kindPlace == 'city'){
+                $result = Cities::where('name', 'LIKE','%'.$request->text.'%')->where('isVillage', 0)->get();
+
+                foreach ($result as $item) {
+                    $state = State::find($item->stateId);
+                    array_push($inPlace, ['kindPlaceId' => 'city', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'شهر ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => 'در استان ' . $state->name]);
+                }
+            }
+            else{
+                $result = Cities::where('name', 'LIKE', '%'.$request->text.'%')->where('isVillage','!=', 0)->get();
+                foreach ($result as $item) {
+                    $state = State::find($item->stateId);
+                    $city = Cities::find($item->isVillage);
+                    array_push($inPlace, ['kindPlaceId' => 'city', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'شهر ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => 'در استان ' . $state->name . ' ، در شهر ' . $city->name]);
+                }
+            }
+        }
+        else{
+            $kindPlace = Place::where('tableName', $kindPlace)->first();
+            $places = \DB::table($kindPlace->tableName)->where('name', 'LIKE','%'.$request->text.'%')->get();
+            foreach ($places as $pl){
+                $pic = getPlacePic($pl->id, $kindPlace->id, 'f');
+                $cit = Cities::find($pl->cityId);
+                $sta = State::find($cit->stateId);
+                $stasent = 'استان ' . $sta->name . ' ، شهر' . $cit->name;
+                array_push($inPlace, ['kindPlaceId' => $kindPlace->id, 'kindPlaceName' => $kindPlace->name, 'placeId' => $pl->id, 'name' => $pl->name, 'pic' => $pic, 'state' => $stasent]);
+            }
+        }
+
+
+        echo json_encode(['status' => 'ok', 'result' => $inPlace]);
+        return ;
     }
 
 
@@ -735,7 +895,6 @@ class ProfileController extends Controller {
                         'destination' => $targetFile
                     ],
                 ];
-
 
                 $image = $request->file('newPic');
                 $fileName = resizeImage($image, $size);

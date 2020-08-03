@@ -9,11 +9,16 @@ class MyUploadAdapter {
 
     // Starts the upload process.
     upload() {
+        // return {
+        //     default: 'http://localhost/assets/userProfile/1596107949490.jpg'
+        // };
+
         return new Promise( ( resolve, reject ) => {
             this._initRequest();
             this._initListeners( resolve, reject );
             this._sendRequest();
         } );
+
     }
 
     // Aborts the upload process.
@@ -33,6 +38,7 @@ class MyUploadAdapter {
 
     // Initializes XMLHttpRequest listeners.
     _initListeners( resolve, reject ) {
+
         const xhr = this.xhr;
         const loader = this.loader;
         const genericErrorText = 'Couldn\'t upload file:' + ` ${ loader.file.name }.`;
@@ -65,7 +71,6 @@ class MyUploadAdapter {
 
     // Prepares the data and sends the request.
     _sendRequest() {
-
         let csrf = this.csrf;
         let url = this.url;
         let data2 = this.data2;

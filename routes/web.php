@@ -486,6 +486,13 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('profile/safarnameh/new', 'ProfileController@storeNewSafarnameh')->name('profile.safarnameh.new');
 
+    Route::post('profile/safarnameh/storePic', 'ProfileController@storeSafarnamehPics')->name('profile.safarnameh.storePic');
+
+    Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
+
+    Route::post('profile/safarnameh/searchSuggestion', 'ProfileController@searchSuggestion')->name('profile.safarnameh.searchSuggestion');
+
+
     Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
 
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
