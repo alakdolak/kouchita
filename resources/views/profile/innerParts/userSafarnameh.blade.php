@@ -1,96 +1,6 @@
 
 <script src="{{asset('js/ckeditor5/ckeditor5.js')}}"></script>
 <script src="{{asset('js/ckeditor5/ckeditorUpload.js')}}"></script>
-<style>
-    .newSafarnamehSection{
-        width: 100%;
-        background: white;
-        padding: 10px;
-        direction: rtl;
-        text-align: right;
-        border-radius: 10px;
-    }
-
-    .newSafarnamehSection .row{
-        width: 100%;
-        margin: 0px;
-    }
-
-    .backSafarnameh{
-        border: none;
-        background: white;
-        margin: 0px 12px;
-        color: #0076a3;
-    }
-
-    .submitSafarnameh{
-        background: #0d6650;
-        border-color: #0d6650;
-        border-radius: 11px;
-    }
-    .newSafarnamehImgSection{
-        margin-top: 10px;
-        margin-right: 15px;
-        cursor: pointer;
-        width: fit-content;
-    }
-
-    .textEditor{
-        height: 60vh;
-        border: solid 1px var(--ck-color-toolbar-border) !important;
-        border-top: none !important;
-        border-radius: 5px !important;
-    }
-    .addPlaceButton{
-        border: none;
-        background: #0d6650;
-        font-size: 10px;
-        cursor: pointer;
-        color: white;
-        font-weight: 100;
-        padding: 3px 5px;
-        border-radius: 10px;
-    }
-    .newSafarnamehFooter{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        border-top: solid 1px #cccccc;
-        margin-top: 20px;
-        padding-top: 20px;
-    }
-
-    .searchResultPlacess{
-        display: none;
-        position: absolute;
-        width: 90%;
-        background: white;
-        border: solid 1px gray;
-        border-radius: 10px;
-        max-height: 50vh;
-        overflow: auto;
-        z-index: 9;
-    }
-    .searchResultPlacess > div{
-        margin-bottom: 10px;
-        margin: 10px;
-        padding: 5px;
-        cursor: pointer;
-    }
-    .searchResultPlacess > div:hover{
-        background: #6666;
-        border-radius: 10px;
-    }
-    .placeSuggKind{
-        float: right;
-    }
-    @media (max-width: 991px) {
-        .placeSuggKind{
-            float: none;
-        }
-    }
-</style>
 
 <div id="safarnamehList" class="userProfileArticles">
     <div class="userProfilePostsFiltrationContainer">
@@ -298,10 +208,8 @@
             .then( editor => {
                 const toolbarContainer = document.querySelector( '.toolbar-container');
                 toolbarContainer.prepend( editor.ui.view.toolbar.element );
-
                 window.editor = editor;
                 textEditor = editor;
-
                 editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
                     let data = {
                         id: '{{auth()->user()->id}}',

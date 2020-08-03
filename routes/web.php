@@ -4,6 +4,10 @@ use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
+Route::get('setCookie', function(){
+   setcookie('koochitaLastPage', 'http://localhost/kouchita/public/addPlace/index#ghazamahali' ,time() + (86400 * 30), '/');
+   return redirect(\route('main'));
+});
 
 Route::get('language/{lang}', function($lang){
     Session::put('lang', $lang);
@@ -258,10 +262,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::post('getTicketWarning', ['as' => 'getTicketWarning', 'uses' => 'TicketController@getTicketWarning']);
 
-    Route::get('new', function () {
-        return view('new');
-    });
-
     Route::post('newPlaceForMap' ,array('as' => 'newPlaceForMap' , 'uses' =>'PlaceController@newPlaceForMap'));
 
     Route::post('getPlacePicture' ,array('as' => 'getPlacePicture' , 'uses' =>'PlaceController@getPlacePicture'));
@@ -479,6 +479,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
 
     Route::post('/profile/getSafarnameh', 'ProfileController@getSafarnameh')->name('profile.getSafarnameh');
+
+    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
 });
 
 // profile
@@ -498,8 +500,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
     Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
-
-    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
 
     Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
 
