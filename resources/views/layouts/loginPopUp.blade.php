@@ -35,16 +35,7 @@ generating the authentication URL later.
  ************************************************/
 $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
-
-if(isset($_COOKIE['koochitaLastPage']) && $_COOKIE['koochitaLastPage'] != "null") {
-    $url = $_COOKIE['koochitaLastPage'];
-    setcookie("koochitaLastPage", "null", time() - 36000);
-}
-
 ?>
-<script>
-    document.cookie = "koochitaLastPage=" + location.href;
-</script>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
 <style>
