@@ -612,8 +612,14 @@ class UserLoginController extends Controller
 
     public function loginWithGoogle()
     {
+        $url = route('main');
+        if(isset($_COOKIE['koochitaLastPage']) && $_COOKIE['koochitaLastPage'] != "null") {
+            $url = $_COOKIE['koochitaLastPage'];
+            setcookie("koochitaLastPage", "null", time() - 36000);
+        }
+
         if (Auth::check())
-            return \Redirect::to(route('main'));
+            return \Redirect::to($url);
 
         if (isset($_GET['code'])) {
 
@@ -697,13 +703,7 @@ class UserLoginController extends Controller
             Auth::attempt(['username' => $userCheckEmail->username, 'password' => $user->id], true);
         }
 
-        if(isset($_COOKIE['koochitaLastPage']) && $_COOKIE['koochitaLastPage'] != "null") {
-            $url = $_COOKIE['koochitaLastPage'];
-            setcookie("koochitaLastPage", "null", time() - 36000);
-            return redirect(url($url));
-        }
-
-        return \Redirect::to(route('main'));
+        return \Redirect::to($url);
     }
 
     public function registerWithPhone(Request $request)
