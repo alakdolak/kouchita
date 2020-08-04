@@ -36,7 +36,7 @@ generating the authentication URL later.
 $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
 
-$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$url = $_SERVER['REQUEST_URI'];
 $authUrl = str_replace('state', 'state='.$url, $authUrl);
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
