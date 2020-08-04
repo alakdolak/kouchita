@@ -612,8 +612,9 @@ class UserLoginController extends Controller
 
     public function loginWithGoogle()
     {
-        dd($_GET);
         $url = route('main');
+        if(isset($_GET['state']))
+            $url = $_GET['state'];
 
         if (Auth::check())
             return \Redirect::to($url);
