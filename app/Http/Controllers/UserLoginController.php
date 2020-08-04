@@ -616,6 +616,7 @@ class UserLoginController extends Controller
         if(isset($_COOKIE['koochitaLastPage']) && $_COOKIE['koochitaLastPage'] != "null") {
             $url = $_COOKIE['koochitaLastPage'];
             setcookie("koochitaLastPage", "null", time() - 36000);
+            dd($url, $_COOKIE);
         }
 
         if (Auth::check())
