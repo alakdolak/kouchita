@@ -613,10 +613,10 @@ class UserLoginController extends Controller
     public function loginWithGoogle()
     {
         $url = route('main');
+        dd($url, $_COOKIE);
         if(isset($_COOKIE['koochitaLastPage']) && $_COOKIE['koochitaLastPage'] != "null") {
             $url = $_COOKIE['koochitaLastPage'];
             setcookie("koochitaLastPage", "null", time() - 36000);
-            dd($url, $_COOKIE);
         }
 
         if (Auth::check())
