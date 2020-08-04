@@ -612,6 +612,7 @@ class UserLoginController extends Controller
 
     public function loginWithGoogle()
     {
+        dd($_GET);
         $url = route('main');
 
         if (Auth::check())

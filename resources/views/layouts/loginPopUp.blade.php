@@ -35,6 +35,9 @@ generating the authentication URL later.
  ************************************************/
 $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
+
+$authUrl = str_replace('state', 'state=https://koochita.com/addPlace/index', $authUrl);
+
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 

@@ -4,11 +4,6 @@ use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
-Route::get('setCookie', function(){
-   setcookie('koochitaLastPage', 'http://localhost/kouchita/public/addPlace/index#ghazamahali' ,time() + (86400 * 30), '/');
-   return redirect(\route('main'));
-});
-
 Route::get('language/{lang}', function($lang){
     Session::put('lang', $lang);
     return redirect()->back();
