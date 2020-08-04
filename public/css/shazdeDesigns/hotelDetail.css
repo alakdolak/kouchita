@@ -3335,7 +3335,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     justify-content: center;
     font-size: 12px;
     display: flex;
-    width: 145px;
+    min-width: 145px;
     align-items: center;
     padding: 0;
 }

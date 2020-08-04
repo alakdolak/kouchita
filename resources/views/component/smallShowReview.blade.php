@@ -556,7 +556,11 @@
                     '   <div class="inputBox setButtonToBot">\n' +
                     '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
                     '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                    '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1)" style="height: fit-content"> ارسال</button>\n' +
+                    '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1, this)" style="height: fit-content"> {{__("ارسال")}} </button>\n' +
+                    '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
+                    '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
+                    '           {{__("در حال ثبت سوال")}}\n' +
+                    '       </div>'+
                     '   </div>\n' +
                     '</div>\n'+
                     '</div>\n';
@@ -586,7 +590,11 @@
             '   </div>\n' +
             '   <div class="inputBox setButtonToBot">\n' +
             '       <textarea id="ansForReviews_' + _reviews["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)" style="padding-bottom: 10px"></textarea>\n' +
-            '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + _reviews["id"] + ', 0)" > ارسال</button>\n' +
+            '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + _reviews["id"] + ', 0, this)" > {{__("ارسال")}}</button>\n' +
+            '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
+            '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
+            '           {{__("در حال ثبت سوال")}}\n' +
+            '       </div>'+
             '   </div>\n' +
             '<div>'+
             '</div>\n' +
@@ -670,13 +678,15 @@
         })
     }
 
-    function sendAnsOfReviewsFullReview(_logId, _ans){
+    function sendAnsOfReviewsFullReview(_logId, _ans, _elems){
 
         if(!checkLogin())
             return;
 
         var text = document.getElementById('ansForReviews_' + _logId).value;
         if(text.trim().length > 0){
+            $(_elems).hide();
+            $(_elems).next().show();
             $.ajax({
                 type: 'post',
                 url: '{{route('ansReview')}}',
@@ -686,14 +696,19 @@
                     'ansAns' : _ans
                 },
                 success: function(response){
+                    $(_elems).show();
+                    $(_elems).next().hide();
+
                     if(response == 'ok') {
-                        getSingleFullReview(showFullReview.id);
                         showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
+                        getSingleFullReview(showFullReview.id);
                     }
                     else
                         showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
                 },
                 catch(e){
+                    $(_elems).show();
+                    $(_elems).next().hide();
                     showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
                 }
             })
@@ -763,7 +778,11 @@
                 '   <div class="inputBox setButtonToBot">\n' +
                 '       <b class="replyCommentTitle">{{__("در پاسخ به نظر")}} ' + comment[k]["username"] + '</b>\n' +
                 '       <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + comment[k]["id"] + ', 1)" > {{__("ارسال")}}</button>\n' +
+                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + comment[k]["id"] + ', 1, this)" > {{__("ارسال")}} </button>\n' +
+                '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
+                '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
+                '           {{__("در حال ثبت سوال")}}\n' +
+                '       </div>'+
                 '   </div>\n' +
                 '</div>\n' +
                 '</div>\n';
