@@ -124,7 +124,7 @@
                             <div id="headingWrapper" class="headerNoSaves jfy_beta " style="">
                                 <h1 id="HEADING" style="cursor: pointer" onclick="document.location.href = hotelDetails;">{{$placeName}}</h1>
                                 <div class="info wrap">
-                                    <div class="rating" style="float: right !important;color: #4dc7bc;">
+                                    <div class="rating" style="float: right !important;color: var(--koochita-light-green);">
                                         @if($rate == 5)
                                             <span class="ui_bubble_rating bubble_50" style="font-size:16px;" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
                                         @elseif($rate == 4)
@@ -294,7 +294,7 @@
             </fieldset>
             <br>
             <div class="submitOptions">
-                <button onclick="sendReport()" class="btn btn-success" style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
+                <button onclick="sendReport()" class="btn btn-success" style="color: #FFF;background-color: var(--koochita-light-green);border-color:var(--koochita-light-green);">تایید</button>
                 <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
             </div>
             <div id="errMsgReport" style="color: red"></div>

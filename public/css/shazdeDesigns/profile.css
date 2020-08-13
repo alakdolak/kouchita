@@ -72,7 +72,7 @@
 }
 
 #arrowDown, #arrowUp {
-    color: #0076a3;
+    color: var(--koochita-blue);
     font-size: 10px;
 }
 
@@ -155,7 +155,7 @@
     float: right;
     padding: 0 20px;
     width: max-content;
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     border: none;
 }
 
@@ -306,8 +306,8 @@
 }
 
 #submitBtnTripStyle {
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 .
 }
 
@@ -428,7 +428,7 @@
     right: -5px;
     background: white;
     padding: 0 10px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     margin: 0;
 }
 
@@ -464,7 +464,7 @@
 #MODULES_MEMBER_CENTER .activityNumbers {
     position: absolute;
     font-size: 14px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     top: 19px;
     left: 0;
     cursor: pointer;
@@ -585,7 +585,7 @@
 }
 
 .modules-membercenter-member-profile .profileBlock .nameContent .name .profileLinks {
-    border-color: #0076a3;
+    border-color: var(--koochita-blue);
 }
 
 .modules-membercenter-member-profile .profileBlock .nameContent {
@@ -597,7 +597,7 @@
 
 .editInfosBoxText {
     font-size: 13px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     margin-left: 5px;
 }
 
@@ -665,7 +665,7 @@
     top: -15px;
     background-color: #ededed;
     padding-left: 5px;
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 #targetHelp_15 {
@@ -680,7 +680,7 @@
 }
 
 .myActivitiesMainDiv .showUsersPostsLink {
-    border-color: #0076a3;
+    border-color: var(--koochita-blue);
 }
 
 .myActivitiesMainDiv .userActivitiesPosts {

@@ -51,7 +51,7 @@
 }
 
 .globalSearchCloseIcon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 2em;
     position: absolute;
     top: 0;

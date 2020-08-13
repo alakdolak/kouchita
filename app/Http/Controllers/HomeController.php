@@ -1165,7 +1165,7 @@ class HomeController extends Controller
 
     public function getAlerts()
     {
-        $greenColor = '#4dc7bc26';
+        $greenColor = 'var(--koochita-light-green)26';
         $redColor = '#ffe1e1';
         $result = [];
         $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->get();

@@ -37,7 +37,7 @@
             text-align: center;
             font-weight: bold;
             font-size: 23px;
-            color: #053a3e;
+            color: var(--koochita-dark-green);
             padding-top: 20px;
         }
 

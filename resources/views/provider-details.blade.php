@@ -53,7 +53,7 @@
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm"
           style="padding: 10px 10px 1px !important; z-index: 201; display: none">
-        <div class="shTIcon clsIcon" style="float: left; color: #4DC7BC; font-size: 2em"></div>
+        <div class="shTIcon clsIcon" style="float: left; color: var(--koochita-light-green); font-size: 2em"></div>
         <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
         <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
         <div class="ui_column ui_picker alarmBoxCityName">
@@ -786,7 +786,7 @@
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div style="margin: 15px 0 !important;">
                                     <div id="showMore" onclick="showMore()"
-                                         style="float: left; cursor: pointer;color:#4dc7bc; font-size: 13px;"
+                                         style="float: left; cursor: pointer;color:var(--koochita-light-green); font-size: 13px;"
                                          class="hidden">بیشتر
                                     </div>
                                     <div class="overviewContent" id="introductionText"
@@ -2428,7 +2428,7 @@
                         for (i = 0; i < response.length; i++) {
                             newElement += "<div class='col-xs-3' style='cursor: pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
                             if (response[i].select == "1") {
-                                newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid #4DC7BC;cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
+                                newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid var(--koochita-light-green);cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
                                 selectedTrips[selectedTrips.length] = response[i].id;
                             }
                             else
@@ -2513,7 +2513,7 @@
                     }
                 }
                 if (allow) {
-                    $("#trip_" + id).css('border', '2px solid #4DC7BC');
+                    $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
                     selectedTrips[selectedTrips.length] = id;
                 }
             }
@@ -3764,7 +3764,7 @@
                         'position': 'relative',
                         'border': '5px solid #333',
                         'padding': '10px',
-                        'background-color': '#4dc7bc',
+                        'background-color': 'var(--koochita-light-green)',
                         'z-index': 1000001,
                         'cursor': 'auto'
                     });

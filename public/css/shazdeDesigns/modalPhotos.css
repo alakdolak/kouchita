@@ -5,7 +5,7 @@
     transition: 0.2s;
 }
 .showingPhotosModal .showingPhotosTitle {
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     color: white;
     font-weight: 700;
     padding: 10px;
@@ -64,7 +64,7 @@
 }
 
 .showingPhotosModal .chooseSidePhotoAlbum{
-    border: #0076a3 solid 3px;
+    border: var(--koochita-blue) solid 3px;
     border-radius: 0px !important;
 }
 

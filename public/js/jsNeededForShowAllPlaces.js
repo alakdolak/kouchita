@@ -222,7 +222,7 @@ function addToSelectedTrips(id) {
     }
 
     if(allow) {
-        $("#trip_" + id).css('border', '2px solid #4DC7BC');
+        $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
         selectedTrips[selectedTrips.length] = id;
     }
 }
@@ -257,7 +257,7 @@ function saveToTripWithIdx(placeId, kindPlaceId) {
                 newElement += "<div class='col-xs-3' style='cursor: pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
 
                 if(response[i].select == "1") {
-                    newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid #4DC7BC;cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
+                    newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid var(--koochita-light-green);cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
                     selectedTrips[selectedTrips.length] = response[i].id;
                 }
                 else

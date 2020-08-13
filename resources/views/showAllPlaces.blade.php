@@ -171,7 +171,7 @@
             padding: 0 !important;
         }
         .titleInTable {
-            color: #4dc7bc;
+            color: var(--koochita-light-green);
         }
     </style>
 
@@ -1109,7 +1109,7 @@
 
                                         <DIV id="similars" class="ppr_rup ppr_priv_hr_btf_similar_hotels">
                                             <div class="outerShell block_wrap">
-                                                <div class="block_header" style="border-bottom: 1px solid #4DC7BC !important;">
+                                                <div class="block_header" style="border-bottom: 1px solid var(--koochita-light-green) !important;">
                                                     @if($placeModes[$k] == "hotel")
                                                         <div class="block_title">هتل های مشابه</div>
                                                     @elseif($placeModes[$k] == "amaken")
@@ -1232,7 +1232,7 @@
             </div>
         </div>
         <div class="submitOptions" style="direction: rtl">
-            <button onclick="assignPlaceToTrip()" style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;" class="btn btn-success">تایید</button>
+            <button onclick="assignPlaceToTrip()" style="color: #FFF;background-color: var(--koochita-light-green);border-color:var(--koochita-light-green);" class="btn btn-success">تایید</button>
             <input type="submit" onclick="hideElement('addPlaceToTripPrompt')" value="خیر" class="btn btn-default">
             <p style="margin-top: 10px" id="errorAssignPlace"></p>
         </div>

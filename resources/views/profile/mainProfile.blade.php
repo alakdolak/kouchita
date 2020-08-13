@@ -73,12 +73,12 @@
                                 @if($sideInfos['introduction'] != null)
                                     {{$sideInfos['introduction']}}
                                 @elseif(isset($myPage) && $myPage)
-                                    <div style="font-size: 14px; color: #0076a3; text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">خودتان را به دیگران معرفی کنید.</div>
+                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">خودتان را به دیگران معرفی کنید.</div>
                                 @endif
                             </div>
                             <div id="myTripStyles" class="userProfileTagsSection">
                                 @if(count($sideInfos['tripStyle']) == 0 && $sideInfos['introduction'] != null && isset($myPage) && $myPage)
-                                    <div style="font-size: 14px; color: #0076a3; text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>
+                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>
                                 @else
                                     @foreach($sideInfos['tripStyle'] as $item)
                                         <div class="userProfileTags">{{$item->name}}</div>

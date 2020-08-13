@@ -172,7 +172,7 @@
             assignedUser += '<div>با\n';
             for(j = 0; j < item["assigned"].length; j++) {
                 if(item["assigned"][j]["name"])
-                    assignedUser += '<a href="{{url("profile/index")}}/' + item["assigned"][j]["name"] + '" target="_blank" style="color: #0076a3">' + item["assigned"][j]["name"] + '</a>،\n';
+                    assignedUser += '<a href="{{url("profile/index")}}/' + item["assigned"][j]["name"] + '" target="_blank" style="color: var(--koochita-blue)">' + item["assigned"][j]["name"] + '</a>،\n';
             }
             assignedUser += '</div>\n';
         }
@@ -310,7 +310,7 @@
             text += '<div>با\n';
             for(j = 0; j < _reviews["assigned"].length; j++) {
                 if(_reviews["assigned"][j]["name"])
-                    text += '<a href="{{url("profile/index")}}/' + _reviews["assigned"][j]["name"] + '" target="_blank" style="color: #0076a3">' + _reviews["assigned"][j]["name"] + '</a>،\n';
+                    text += '<a href="{{url("profile/index")}}/' + _reviews["assigned"][j]["name"] + '" target="_blank" style="color: var(--koochita-blue)">' + _reviews["assigned"][j]["name"] + '</a>،\n';
             }
             text += '</div>\n';
         }
@@ -700,7 +700,7 @@
                     $(_elems).next().hide();
 
                     if(response == 'ok') {
-                        showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
+                        showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد.')}}', 'left', 'var(--koochita-blue)');
                         getSingleFullReview(showFullReview.id);
                     }
                     else

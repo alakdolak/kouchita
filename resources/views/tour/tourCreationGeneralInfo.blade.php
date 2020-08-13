@@ -51,7 +51,7 @@ $state = 'تهران';
             cursor: pointer;
         }
         .tourKindIcons:hover{
-            background: #4dc7bc;
+            background: var(--koochita-light-green);
         }
         @for($i = 0; $i < count($tourDifficult); $i++)
             #tourDifficult{{$i}}:before{
@@ -199,7 +199,7 @@ $state = 'تهران';
                         <script>
                             $(document).ready(function () {
                                 $(".tourLevelIcons").mouseenter(function () {
-                                    $(this).css("background-color", "#4DC7BC"),
+                                    $(this).css("background-color", "var(--koochita-light-green)"),
                                         $(this).css("color", "white");
                                 });
                                 $(".tourLevelIcons").mouseleave(function () {

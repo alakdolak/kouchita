@@ -91,7 +91,7 @@
 
         </div>
         <div class="revisionOfCapacityChanges"> تغییر در تعداد مسافرین نیاز بررسی دوباره ظرفیت می باشد </div>
-        {{--<button onclick="document.location.href = '{{route('home')}}' + '/buyInnerFlight/3/' + '{{$ticket->id}}/' + $('#finalAdultNo').html() + '/' + $('#finalChildNo').html() + '/' + $('#finalInfantNo').html()" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> بررسی مجدد </button>--}}
+        {{--<button onclick="document.location.href = '{{route('home')}}' + '/buyInnerFlight/3/' + '{{$ticket->id}}/' + $('#finalAdultNo').html() + '/' + $('#finalChildNo').html() + '/' + $('#finalInfantNo').html()" class="btn afterBuyBtn" type="button" style="background-color: var(--koochita-light-green)"> بررسی مجدد </button>--}}
     </div>
     <div id="hurryUpErr" class="hidden">
         <span> عجله کنید </span>
@@ -130,7 +130,7 @@
                 {{--<div class="display-inline-block">--}}
                     {{--@if($step == 0 && Auth::check())--}}
                         {{--<div style="font-size: 1.1em; font-weight: 300; color: #050c93; display: inline-block"> <span id="passengerInfo_{{$step}}"></span><span>&nbsp;</span><span>اول</span> </div>--}}
-                        {{--<button onclick="getMyTicketInfo()" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> من هستم </button>--}}
+                        {{--<button onclick="getMyTicketInfo()" class="btn afterBuyBtn" type="button" style="background-color: var(--koochita-light-green)"> من هستم </button>--}}
                         {{--<div style="font-size: 0.9em; display: inline-block"> اطلاعات موجود از پروفایل شما پر می گردد </div>--}}
                     {{--@else--}}
                         {{--<div style="font-size: 1.1em; font-weight: 300; color: #050c93; display: inline-block" id="passengerInfo_{{$step}}"></div>--}}
@@ -140,7 +140,7 @@
                     {{--<button onclick="deletePassenger('{{$step}}', '{{$modes[$step]}}')" class="btn afterBuyBtn" type="button" style="background-color: #92321b"> حذف مسافر </button>--}}
 
                     {{--@if(Auth::check())--}}
-                        {{--<button onclick="toggleOldPassenger('{{$step}}')" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> مسافرین سابق </button>--}}
+                        {{--<button onclick="toggleOldPassenger('{{$step}}')" class="btn afterBuyBtn" type="button" style="background-color: var(--koochita-light-green)"> مسافرین سابق </button>--}}
 
                         {{--<div class="class_passengerOldPane item hidden" id="oldPassengerPane_{{$step}}" onmouseleave="addClassHidden('oldPassengerPane_{{$step}}'); passengerNoSelect = false;">--}}
                             {{--<div>--}}

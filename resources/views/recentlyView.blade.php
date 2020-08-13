@@ -182,7 +182,7 @@
                                                             <span style="float: right;">[[place.name]]</span>
                                                             <div id="[[($index == 0 && packet.no == 1) ? 'targetHelp_10' : '']]" class="targets" style="float: left;">
                                                                 <button style="padding: 1px 13px !important;" ng-click="addToTrip(place.placeId, place.kindPlaceId)" class="ui_button secondary trip-add-dates">
-                                                                    <span style="color: #4DC7BC;" class="ui_icon my-trips"></span>
+                                                                    <span style="color: var(--koochita-light-green);" class="ui_icon my-trips"></span>
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -237,7 +237,7 @@
             </div>
         </div>
         <div class="submitOptions" style="direction: rtl">
-            <button style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;" onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
+            <button style="color: #FFF;background-color: var(--koochita-light-green);border-color:var(--koochita-light-green);" onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
             <input type="submit" onclick="hideElement('addPlaceToTripPrompt')" value="خیر" class="btn btn-default">
         </div>
         <div class="ui_close_x" onclick="hideElement('addPlaceToTripPrompt')"></div>
@@ -440,7 +440,7 @@
 
                         newElement += "<div class='col-xs-6'>";
                         if(response["date"] != null)
-                            newElement += "<p style='float: left;padding: 5px 0;color: #4DC7BC;'>تاریخ بازدید: " + response["date"] + "</p>";
+                            newElement += "<p style='float: left;padding: 5px 0;color: var(--koochita-light-green);'>تاریخ بازدید: " + response["date"] + "</p>";
                         newElement += "</div>";
                         newElement += "<div class='col-xs-6'>";
                         newElement += "<p onclick='document.location.href = \""+ response['url'] +"\"' style='cursor: pointer; font-size: 1.5em; padding: 5px 0;'>" + response["name"] + "</p>";
@@ -480,7 +480,7 @@
                             }
 
                             newElement += "<div class='col-xs-2' style='margin-top: 10px;'>";
-                            newElement += "<button class='btn btn-primary' onclick='addComment(\"" + tripPlaceId + "\")' data-toggle='tooltip' title='ارسال نظر' style='color: #FFF; background-color: #4dc7bc; border-color:#4dc7bc; border-radius: 5%; width: 100%; margin-top: 17px;'>ارسال</button>";
+                            newElement += "<button class='btn btn-primary' onclick='addComment(\"" + tripPlaceId + "\")' data-toggle='tooltip' title='ارسال نظر' style='color: #FFF; background-color: var(--koochita-light-green); border-color:var(--koochita-light-green); border-radius: 5%; width: 100%; margin-top: 17px;'>ارسال</button>";
                             newElement += "</div>";
 
                             newElement += "<div class='col-xs-10' style='margin-top: 10px;'>";
@@ -1544,7 +1544,7 @@
                     'position': 'relative',
                     'border': '5px solid #333',
                     'padding': '10px',
-                    'background-color': '#4dc7bc',
+                    'background-color': 'var(--koochita-light-green)',
                     'z-index': 1000001,
                     'cursor': 'auto'
                 });

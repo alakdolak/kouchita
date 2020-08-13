@@ -187,7 +187,7 @@ if ($total == 0)
         }
         .introductionShowMore{
             cursor: pointer;
-            color: #4dc7bc;
+            color: var(--koochita-light-green);
             position: absolute;
             left: 0;
             bottom: 0;
@@ -360,7 +360,7 @@ if ($total == 0)
                                                                     <span class="see_all_count">
                                                                         <div class="circleBase type2"
                                                                              id="photographerIdPic"
-                                                                             style="background-color: #4DC7BC;">
+                                                                             style="background-color: var(--koochita-light-green);">
                                                                             <img src="{{$photographerPics[$i]['userPic']}}"
                                                                                  style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
@@ -602,17 +602,17 @@ if ($total == 0)
                                     <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
                                         @if($placeMode == 'mahaliFood')
                                             <div class="tabLinkMainDiv">
-                                                <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     دستور پخت
                                                 </button><!--
                                      -->
                                                 <button class="tabLink"
-                                                        onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
+                                                        onclick="openCity('detailsAndFeaturesMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     کالری
                                                 </button><!--
                                      -->
                                                 <button class="tabLink"
-                                                        onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
+                                                        onclick="openCity('generalDescriptionMobile', this, 'white', 'var(--koochita-light-green)')"
                                                         id="defaultOpen">
                                                     مواد و لوازم
                                                 </button>
@@ -620,17 +620,17 @@ if ($total == 0)
                                         @else
                                             <div class="tabLinkMainDiv">
                                                 <button class="tabLink"
-                                                        onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                        onclick="openCity('commentsAndAddressMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     نظرات و آدرس
                                                 </button><!--
                                      -->
                                                 <button class="tabLink"
-                                                        onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
+                                                        onclick="openCity('detailsAndFeaturesMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     امکانات و ویژگی‌ها
                                                 </button><!--
                                      -->
                                                 <button class="tabLink"
-                                                        onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
+                                                        onclick="openCity('generalDescriptionMobile', this, 'white', 'var(--koochita-light-green)')"
                                                         id="defaultOpen">معرفی کلی
                                                 </button>
                                             </div>
@@ -1197,21 +1197,21 @@ if ($total == 0)
 
             if(topOfInfo < 0) {
                 $('.tabLinkMainWrap').css('color', 'black');
-                $('.generalDescBtnTopBar').css('color', '#4DC7BC');
+                $('.generalDescBtnTopBar').css('color', 'var(--koochita-light-green)');
             }
             else
                 $('.generalDescBtnTopBar').css('color', 'black');
 
             if(topOfPost < 0) {
                 $('.tabLinkMainWrap').css('color', 'black');
-                $('.postsBtnTopBar').css('color', '#4DC7BC');
+                $('.postsBtnTopBar').css('color', 'var(--koochita-light-green)');
             }
             else
                 $('.postsBtnTopBar').css('color', 'black');
 
             if(topOfQA < 0) {
                 $('.tabLinkMainWrap').css('color', 'black');
-                $('.QAndAsBtnTopBar').css('color', '#4DC7BC');
+                $('.QAndAsBtnTopBar').css('color', 'var(--koochita-light-green)');
             }
             else
                 $('.QAndAsBtnTopBar').css('color', 'black');
@@ -1221,7 +1221,7 @@ if ($total == 0)
                 topOfSimilar = topOfSimilar.getBoundingClientRect().top;
                 if(topOfSimilar < 0) {
                     $('.tabLinkMainWrap').css('color', 'black');
-                    $('.similarLocationsBtnTopBar').css('color', '#4DC7BC');
+                    $('.similarLocationsBtnTopBar').css('color', 'var(--koochita-light-green)');
                 }
                 else
                     $('.similarLocationsBtnTopBar').css('color', 'black');
@@ -1231,7 +1231,7 @@ if ($total == 0)
         function colorThisNav(_elemnt){
             setTimeout(() => {
                 $('.tabLinkMainWrap').css('color', 'black');
-                $(_elemnt).css('color', '#4DC7BC');
+                $(_elemnt).css('color', 'var(--koochita-light-green)');
             }, 100)
         }
 
@@ -1686,7 +1686,7 @@ if ($total == 0)
                     'position': 'relative',
                     'border': '5px solid #333',
                     'padding': '10px',
-                    'background-color': '#4dc7bc',
+                    'background-color': 'var(--koochita-light-green)',
                     'z-index': 1000001,
                     'cursor': 'auto'
                 });

@@ -112,7 +112,7 @@
                 </div>
                 <p id="phoneError" style="color: red"></p>
 
-                <div class="loginButtonsMainDiv" style="background: #0d6650" onclick="phoneRegister()">
+                <div class="loginButtonsMainDiv" style="background: var(--koochita-green)" onclick="phoneRegister()">
                     @lang('ثبت')
                 </div>
 
@@ -142,7 +142,7 @@
                 <div class="pd-tp-8">
                     <p id="loginErrActivationCode" style="color: red"></p>
 
-                    <div class="loginButtonsMainDiv" style="background: #0d6650" onclick="showLoginPassword()">
+                    <div class="loginButtonsMainDiv" style="background: var(--koochita-green)" onclick="showLoginPassword()">
                         @lang('ثبت')
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                     <p id="loginErrUserName" style="color: red"></p>
-                    <button id="submitAndFinishBtn" class="loginButtonsMainDiv" style="background: #0d6650" onclick="checkRecaptcha()" disabled>
+                    <button id="submitAndFinishBtn" class="loginButtonsMainDiv" style="background: var(--koochita-green)" onclick="checkRecaptcha()" disabled>
                         @lang('ثبت نام')
                     </button>
                 </div>

@@ -507,7 +507,7 @@ function showPlaceInfo(id, placeId, kindPlaceId, x, y, tripPlaceId, rowId) {
 
             newElement += "<div class='col-xs-6'>";
             if(response["date"] != null)
-                newElement += "<p style='float: left;padding: 5px 0;color: #4DC7BC;'>تاریخ بازدید: " + response["date"] + "</p>";
+                newElement += "<p style='float: left;padding: 5px 0;color: var(--koochita-light-green);'>تاریخ بازدید: " + response["date"] + "</p>";
             newElement += "</div>";
             newElement += "<div class='col-xs-6'>";
             newElement += "<p onclick='document.location.href = \""+ response['url'] +"\"' style='cursor: pointer; font-size: 1.5em; padding: 5px 0;'>" + response["name"] + "</p>";
@@ -547,7 +547,7 @@ function showPlaceInfo(id, placeId, kindPlaceId, x, y, tripPlaceId, rowId) {
                 }
 
                 newElement += "<div class='col-xs-2' style='margin-top: 10px;'>";
-                newElement += "<button class='btn btn-primary' onclick='addComment(\"" + tripPlaceId + "\")' data-toggle='tooltip' title='ارسال نظر' style='color: #FFF; background-color: #4dc7bc; border-color:#4dc7bc; border-radius: 5%; width: 100%; margin-top: 17px;'>ارسال</button>";
+                newElement += "<button class='btn btn-primary' onclick='addComment(\"" + tripPlaceId + "\")' data-toggle='tooltip' title='ارسال نظر' style='color: #FFF; background-color: var(--koochita-light-green); border-color:var(--koochita-light-green); border-radius: 5%; width: 100%; margin-top: 17px;'>ارسال</button>";
                 newElement += "</div>";
 
                 newElement += "<div class='col-xs-10' style='margin-top: 10px;'>";

@@ -790,7 +790,7 @@
                         'position': 'relative',
                         'border': '5px solid #333',
                         'padding': '10px',
-                        'background-color': '#4dc7bc',
+                        'background-color': 'var(--koochita-light-green)',
                         'z-index': 1000001,
                         'cursor': 'auto'
                     });

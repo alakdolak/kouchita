@@ -1166,13 +1166,13 @@ a:focus {
     box-shadow: none;
 }
 .ui_button.primary {
-    border-color: #4dc7bc;
-    background-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
+    background-color: var(--koochita-light-green);
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.25);
     color: #fff;
 }
 .rtl .ui_button.primary {
-    border-color: #4dc7bc #4dc7bc #4dc7bc #4dc7bc ;
+    border-color: var(--koochita-light-green) var(--koochita-light-green) var(--koochita-light-green) var(--koochita-light-green) ;
     box-shadow: -1px 1px 0 0 rgba(0, 0, 0, 0.25);
 }
 .ui_button.primary.chevron:after {
@@ -1196,8 +1196,8 @@ a:focus {
 }
 .offer:active .ui_button.primary:not(.disabled),
 .ui_button.primary:not(.disabled):active {
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     box-shadow: none;
 }
 .ui_button.standard {
@@ -3185,7 +3185,7 @@ form span.error_msg {
     position: absolute;
     top: 0;
     left: 0;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 .ui_bubble_rating.bubble_0:after,
 .ui_bubble_rating.bubble_00:after {

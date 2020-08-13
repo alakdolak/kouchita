@@ -1080,7 +1080,7 @@
                         response = JSON.parse(response);
                         if(response.status == 'ok'){
                             $('#storeReviewCode').val(response.code);
-                            showSuccessNotifi('{{__('دیدگاه شما با موفقیت ثبت شد.')}}', 'left', '#0076a3');
+                            showSuccessNotifi('{{__('دیدگاه شما با موفقیت ثبت شد.')}}', 'left', 'var(--koochita-blue)');
                             reviewPage = 1;
                             loadReviews();
                             clearStoreReview();

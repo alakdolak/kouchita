@@ -13,7 +13,7 @@ footer ul {
     list-style: none;
 }
 .screenFooterStyle {
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     direction: rtl;
     padding: 20px;
     text-align: right;
@@ -24,7 +24,7 @@ footer ul {
     font-size: 17px;
     font-weight: 800;
     padding: 0 4px 4px;
-    color: #053a3e;
+    color: var(--koochita-dark-green);
 }
 
 .footMenu {
@@ -32,7 +32,7 @@ footer ul {
 }
 
 .footMenu > a {
-    color: #720d19 !important;
+    color: var(--koochita-red) !important;
 }
 
 .footShowTabletMenu {
@@ -187,7 +187,7 @@ footer li > img, .small-ico {
 }
 
 .aboutShazdeLink > a {
-    color: #720d19 !important;
+    color: var(--koochita-red) !important;
     font-size: 14px;
     font-weight: 800;
 }
@@ -220,7 +220,7 @@ footer li > img, .small-ico {
 }
 
 .footMoreLessBtn {
-    color: #053a3e;
+    color: var(--koochita-dark-green);
     text-align: center;
     font-size: 14px;
     font-weight: 800;
@@ -238,7 +238,7 @@ footer li > img, .small-ico {
 .phoneFooterStyle {
     position: relative;
     bottom: 0;
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     color: #16174f;
     direction: rtl;
     padding: 20px 10px;
@@ -306,7 +306,7 @@ footer li > img, .small-ico {
 }
 
 .profileBtnText > span:nth-child(2){
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .profilePic.circleBase {
@@ -406,9 +406,9 @@ footer li > img, .small-ico {
 }
 
 .lp_selectedMenu {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     padding: 10px 0 15px;
-    border-top: 5px solid #4DC7BC;
+    border-top: 5px solid var(--koochita-light-green);
 }
 
 .lp_selectedMenu > div:nth-child(2) {
@@ -476,7 +476,7 @@ footer li > img, .small-ico {
     width: 300px;
     height: 300px;
     background-color: #e5e5e5;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 3em;
     display: flex;
     justify-content: center;
@@ -861,7 +861,7 @@ footer .mainDivHeaderText > h3 {
     right: -5px;
     background: white;
     padding: 0 10px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     margin: 0;
 }
 
@@ -898,7 +898,7 @@ footer .activityTitle {
 footer .activityNumbers {
     position: absolute;
     font-size: 14px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     top: 19px;
     left: 0;
     cursor: pointer;
@@ -916,7 +916,7 @@ footer .activityNumbers {
     justify-content: space-between;
     font-size: 1em;
     padding: 30px 20px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     padding-bottom: 0px !important;
 }
 
@@ -1211,7 +1211,7 @@ footer .profileMenuLinks {
 }
 
 .footerSocialDivPhone{
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -1234,7 +1234,7 @@ footer .profileMenuLinks {
     border-radius: 5px;
     padding: 0px 5px;
     font-size: 12px;
-    border: #FCC156 solid 2px;
+    border: var(--koochita-yellow) solid 2px;
 }
 .footerLanguageTextPhone{
     height: 100%;
@@ -1255,7 +1255,7 @@ footer .profileMenuLinks {
     left: 5px;
     top: 0px;
     font-size: 40px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .eatery_filters{

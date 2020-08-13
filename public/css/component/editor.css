@@ -2,8 +2,8 @@
     font-size: 15px;
     padding: 10px;
     border-radius: 5px;
-    border-color: #4dc7bc !important;
-    background-color: #4dc7bc !important;
+    border-color: var(--koochita-light-green) !important;
+    background-color: var(--koochita-light-green) !important;
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, .25);
     color: #fff;
     cursor: pointer;
@@ -182,8 +182,8 @@
 }
 
 .epAddPlace {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: white;
     float: left;
     padding: 7px;
@@ -216,7 +216,7 @@
     height: 48px; /* Matches top of .uploaderDlg */
     width: 100%;
     line-height: 48px;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 
 .epHeaderBar h3 {
@@ -290,7 +290,7 @@
 }
 
 .ui_close_x:before {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     left: 0;
 }
 
@@ -633,7 +633,7 @@
     height: 48px; /* Matches top of .uploaderDlg */
     width: 100%;
     line-height: 48px;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 .photoUploader .headerBar h3 {
     float: right;

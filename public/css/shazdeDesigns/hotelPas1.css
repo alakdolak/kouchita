@@ -38,7 +38,7 @@
 }
 
 /*input[type="checkbox"] {*/
-/*background-color: #4DC7BC;*/
+/*background-color: var(--koochita-light-green);*/
 /*}*/
 
 /*2nd box of styles*/
@@ -118,7 +118,7 @@
 
 /*inline styles*/
 .applyDiscountBtn {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     line-height: 22px;
     margin: 0 !important;
 }
@@ -139,7 +139,7 @@
 
 .payPointsText {
     display: inline-block;
-    color: #4DC7BC !important;
+    color: var(--koochita-light-green) !important;
 }
 
 .crossOneThousand {
@@ -151,13 +151,13 @@
 
 .discountVerifiedAmountMainBox {
     width: 10%;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     color: white;
     border: none
 }
 
 .payBtnFinalVerification {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     line-height: 22px;
 }
 

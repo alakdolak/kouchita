@@ -25,14 +25,14 @@
 }
 .rightArrowIcone:before {
     content: '\E047';
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 2.5em;
     position: absolute;
     top:-10px;
 }
 .leftArrowIcone:before {
     content: '\E04D ';
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 2.5em;
     position: absolute;
     top:-10px;
@@ -165,11 +165,11 @@
 }
 
 .tableDiv:hover {
-    border: 2px solid #4dc7bc;
+    border: 2px solid var(--koochita-light-green);
 }
 
 .current-day {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: white !important;
 }
 
@@ -231,7 +231,7 @@ table {
 }
 
 .between {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 
@@ -245,7 +245,7 @@ table {
 .differentCalendarBtn {
     float: left;
     margin-left: 5%;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     background-color: white;
     border: none;
     font-size: 120%;
@@ -280,7 +280,7 @@ table {
     width: 49%;
     margin-right: 3px;
     padding-right: 7px;
-    border-right: 2px solid #4DC7BC;
+    border-right: 2px solid var(--koochita-light-green);
 }
 
 #calendarGregorian {
@@ -303,7 +303,7 @@ table {
     width: 49%;
     margin-left: 3px;
     padding-left: 7px;
-    border-left: 2px solid #4DC7BC;
+    border-left: 2px solid var(--koochita-light-green);
 }
 
 #GregorianButton {

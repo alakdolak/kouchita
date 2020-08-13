@@ -193,7 +193,7 @@
                                         </div>
                                         <div class="memberBadging g10n">
                                             <div class="no_cpu">{{$log->city}} در {{$log->state}}</div>
-                                            <div id="UID_E2004EF79435C45F98CB1113EDD6B0DE-HV" class="helpfulVotesBadge badge no_cpu" style="text-align: center; margin: 12px 0 3px;background: #4dc7bc;height: 30px;line-height: 30px;border-radius: 4px;
+                                            <div id="UID_E2004EF79435C45F98CB1113EDD6B0DE-HV" class="helpfulVotesBadge badge no_cpu" style="text-align: center; margin: 12px 0 3px;background: var(--koochita-light-green);height: 30px;line-height: 30px;border-radius: 4px;
 box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
 
                                           <span class="badgeText">{{$log->commentsCount}} نقد</span>
@@ -238,14 +238,14 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
                                             <div class="reportProblem">
                                              <span style="cursor: pointer;float: right;margin-left: 10px;padding: 0px;" class="thankButton hsx_thank_button">
                                                   <span class="helpful_text" style="line-height: 15px;">
-                                                      <span style="color: #3e3e3e;font-size: 15px;color: #4dc7bc" class="ui_icon thumbs-up-fill emphasizeWithColor"></span>
+                                                      <span style="color: #3e3e3e;font-size: 15px;color: var(--koochita-light-green)" class="ui_icon thumbs-up-fill emphasizeWithColor"></span>
                                                       <span id='commentLikes_{{$log->id}}' data-val="{{$likes}}" class="numHelp emphasizeWithColor">{{$likes}}</span>
                                                       <span class="thankUser"> {{$log->visitorId}} </span>
                                                   </span>
                                                </span>
                                                <span style="cursor: pointer; float: right;margin-left: 10px;padding: 0px;" onclick="dislikeComment('{{$log->id}}')" class="thankButton hsx_thank_button">
                                                    <span class="helpful_text" style="line-height: 15px;">
-                                                       <span style="color: #3e3e3e;font-size: 15px;color: #4dc7bc;" class="ui_icon thumbs-down-fill emphasizeWithColor"></span>
+                                                       <span style="color: #3e3e3e;font-size: 15px;color: var(--koochita-light-green);" class="ui_icon thumbs-down-fill emphasizeWithColor"></span>
                                                        <span id='commentDislikes_{{$log->id}}' data-val="{{$dislikes}}" class="numHelp emphasizeWithColor">{{$dislikes}}</span>
                                                        <span class="thankUser"> {{$log->visitorId}} </span>
                                                    </span>

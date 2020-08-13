@@ -79,7 +79,7 @@ body {
 }
 
 .postsMainFiltrationBar > span:hover {
-    border-bottom: 5px solid #0076a3;
+    border-bottom: 5px solid var(--koochita-blue);
 }
 
 .userProfilePostsFiltration > span:nth-child(2),
@@ -108,7 +108,7 @@ body {
 .userArticles .showUsersArticlesLink,
 .userQuestions .showUsersQAndAsLink,
 .userPhotosAndVideos .showUsersPhotosAndVideosLink {
-    border-bottom: 5px solid #0076a3;
+    border-bottom: 5px solid var(--koochita-blue);
 }
 
 .postsMainFiltrationBar > span , .userProfilePostsFiltration > span {
@@ -140,7 +140,7 @@ body {
 }
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
@@ -153,7 +153,7 @@ body {
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
     font-weight: 700;
     font-size: 14px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     padding: 8px 0;
 }
 
@@ -181,7 +181,7 @@ body {
 }
 
 .userProfilePostsSearchContainer > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .userProfilePostsSearchContainer .inputBox {
@@ -238,7 +238,7 @@ body {
     right: -5px;
     background: white;
     padding: 0 10px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     margin: 0;
 }
 
@@ -270,7 +270,7 @@ body {
 }
 
 .upperBox {
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     width: 40px;
     height: 33px;
     border-width: 3px 3px 0 3px;
@@ -288,7 +288,7 @@ body {
 
 .userProfileLevelDetails .inner {
     transform: rotate(45deg);
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     border: 3px solid black;
     width: 30px;
     height: 30px;
@@ -327,7 +327,7 @@ body {
 }
 
 .userProfileLevelDetails .w3-blue {
-    background-color: #0076a3 !important;
+    background-color: var(--koochita-blue) !important;
     float: right;
     height: 8px;
 }
@@ -391,7 +391,7 @@ body {
 .activityNumbers {
     position: absolute;
     /*font-size: 14px;*/
-    color: #0076a3;
+    color: var(--koochita-blue);
     top: 10px;
     left: 0;
     cursor: pointer;
@@ -441,7 +441,7 @@ body {
 }
 
 .quantityOfLikes > span, .feedbackStatistic > span {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .numberOfPhotosMainDiv {
@@ -477,14 +477,14 @@ body {
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     position: absolute;
     bottom: -23px;
     left: 0;
 }
 
 .showLessText {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 
@@ -554,7 +554,7 @@ body {
 }
 
 .commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
 }
 
@@ -652,7 +652,7 @@ body {
 }
 
 .questionsActionsMoreDetails > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .questionsActionsMoreDetails > span:not(:last-child) {
@@ -701,7 +701,7 @@ body {
 }
 
 .userProfileNameAnswers {
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
     font-size: 19px;
     line-height: 1.7;
@@ -743,7 +743,7 @@ body {
 }
 
 .numberOfAnswers > span {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .showAnswersToggle {
@@ -764,7 +764,7 @@ body {
 }
 
 .replyBtn {
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     border-radius: 5px;
     padding: 2px;
     cursor: pointer;
@@ -826,7 +826,7 @@ body {
 }
 
 .replyWriterUsername {
-    color: #0076a3;
+    color: var(--koochita-blue);
     position: absolute;
     top: 2px;
     right: 10px;
@@ -989,7 +989,7 @@ body {
 }
 
 .replyAnswerTitle {
-    color: #0076a3;
+    color: var(--koochita-blue);
     position: absolute;
     top: 2px;
     right: 10px;

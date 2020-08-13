@@ -77,7 +77,7 @@
 }
 .modules-membercenter-member-tag .header {
     font-size: 18px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-weight: bold;
 }
 .modules-membercenter-member-tag .tagBlock {
@@ -216,7 +216,7 @@
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 .modules-membercenter-member-tag .memberTags .editTags {
     float: none;
@@ -279,7 +279,7 @@
     word-break: keep-all;
 }
 .modules-membercenter-member-profile .profileBlock .nameContent .contributor span {
-    background: url("../../images/Level_shape_36px.png") no-repeat #4dc7bc;
+    background: url("../../images/Level_shape_36px.png") no-repeat var(--koochita-light-green);
     height: 36px;
     width: 35px;
     display: inline-block;
@@ -512,7 +512,7 @@
     display: inline-block;
     line-height: 37px;
     text-align: center;
-    background: url("../../images/Level_shape_36px.png") no-repeat #4dc7bc;
+    background: url("../../images/Level_shape_36px.png") no-repeat var(--koochita-light-green);
     color: #fff;
     font-size: 18px;
     font-weight: bold;
@@ -632,7 +632,7 @@
 .modules-membercenter-badge-teaser .badgeList .badgeSubtext {
     padding-top: 5px;
     font-size: 12px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .modules-membercenter-badge-teaser .badgeList .noCurrent {
@@ -771,7 +771,7 @@
 
 .ui_popover.badgeDesc .descLineTwo {
     margin-top: 10px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font: 13px Arial, 'Sans-Serif';
     text-align: initial;
 }
@@ -1039,7 +1039,7 @@
     display: block;
 }
 #tagPrompt .title {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     padding: 13px;
     color: #FFF;
     font-weight: normal;
@@ -1108,7 +1108,7 @@
     padding-right: 12px;
 }
 #memberTags .tagBubble:hover {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     border: 1px solid #8F8F8F;
 }
 #memberTags .tagContainer.tagged .tagBubble {
@@ -1338,7 +1338,7 @@
     color: #16174f;
 }
 .modules-membercenter-content-stream .cs-contribution-bar li.active {
-    border-bottom: 4px solid #4dc7bc;
+    border-bottom: 4px solid var(--koochita-light-green);
     color: #000;
     cursor: auto;
 }
@@ -1387,7 +1387,7 @@
     border-radius: 5px;
 }
 .modules-membercenter-content-stream .cs-pagination-bar button.active {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     color: #fff;
     cursor: auto;
 }
@@ -1396,7 +1396,7 @@
     margin: 0;
     color: #fff;
     font-weight: bold;
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
 
 }
 .modules-membercenter-content-stream #cs-paginate-next.disabled,
@@ -1962,7 +1962,7 @@
     position: relative;
 }
 .ui_modal_card .modal-card-title {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     -webkit-box-flex: 1;
     flex-grow: 1;
     flex-shrink: 0;
@@ -2043,7 +2043,7 @@
 .ui_close_x:before {
     font-size: 28px;
     line-height: 36px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     content: "\00d7";
 }
 .ui_close_x:hover {
@@ -2221,13 +2221,13 @@
     pointer-events: none;
 }
 .ui_button.primary {
-    border-color: #4dc7bc !important;
-    background-color: #4dc7bc !important;
+    border-color: var(--koochita-light-green) !important;
+    background-color: var(--koochita-light-green) !important;
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.25);
     color: #fff;
 }
 .rtl .ui_button.primary {
-    border-color: #4dc7bc !important;
+    border-color: var(--koochita-light-green) !important;
     box-shadow: -1px 1px 0 0 rgba(0, 0, 0, 0.25);
 }
 

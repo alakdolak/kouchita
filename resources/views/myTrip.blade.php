@@ -228,7 +228,7 @@
             }
 
             tripStyles[tripStyles.length] = id;
-            $("#tripStyle_" + id).css("background-color", '#4dc7bc').css("color", 'white');
+            $("#tripStyle_" + id).css("background-color", 'var(--koochita-light-green)').css("color", 'white');
             $("#tripStylePic_" + id).css("visibility", 'visible');
             if(tripStyles.length >= 3) {
                 $("#submitBtnTripStyle").attr("disabled", false);
@@ -452,7 +452,7 @@
                     'position': 'relative',
                     'border': '5px solid #333',
                     'padding': '10px',
-                    'background-color': '#4dc7bc',
+                    'background-color': 'var(--koochita-light-green)',
                     'z-index': 1000001,
                     'cursor': 'auto'
                 });

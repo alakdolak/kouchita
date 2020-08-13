@@ -84,7 +84,7 @@ textarea:focus, input:focus, textarea, input {
 }
 
 .bg-color-greenImp {
-    background-color: #4dc7bc !important
+    background-color: var(--koochita-light-green) !important
 }
 
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions {
@@ -180,12 +180,12 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
 }
 
 #MAINWRAP > div:nth-child(1) {
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     position: relative;
 }
 
 .modules-membercenter-persistent-header-achievements {
-    background-color: #fcc156 !important;
+    background-color: var(--koochita-yellow) !important;
     /*margin-top: 20px;*/
 }
 
@@ -222,7 +222,7 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
 
 .tripStyleBodyProfile {
     color: white;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
 }
 
 .tagTextBodyPlace {

@@ -12,7 +12,7 @@
 }
 
 .postsMainFiltrationBar > span:hover, .questionsMainFiltrationBar > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
@@ -28,7 +28,7 @@
 
 .postsMainFiltrationBar > span:last-child, .postsMainFiltrationBar > span:first-child ,
 .questionsMainFiltrationBar > span:last-child, .questionsMainFiltrationBar > span:first-child{
-    color: #0076a3;
+    color: var(--koochita-blue);
     font-weight: 700;
     cursor: default !important;
 }
@@ -95,14 +95,14 @@
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     position: absolute;
     bottom: -23px;
     left: 0;
 }
 
 .showLessText {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 
@@ -165,7 +165,7 @@
 }
 
 .commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
 }
 

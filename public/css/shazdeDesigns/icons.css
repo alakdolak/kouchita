@@ -282,7 +282,7 @@
     content: '\E00B';
     cursor: pointer;
     font-family: Shazde_Regular2 !important;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 25px;
 }
 
@@ -298,7 +298,7 @@
     content: '\E00B';
     cursor: pointer;
     font-family: Shazde_Regular2 !important;
-    color: #fcc156;
+    color: var(--koochita-yellow);
     font-size: 25px;
 }
 
@@ -337,7 +337,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 .ui_bubble_rating.bubble_0:after,
 .ui_bubble_rating.bubble_00:after {

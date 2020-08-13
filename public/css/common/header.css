@@ -54,11 +54,11 @@
     padding: 5px;
     font-size: 11px;
     margin-bottom: 7px;
-    border-bottom: 1px solid #4DC7BC;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 #trips-tiles > div:nth-child(3) > div > p {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     display: inline;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .subItemHeaderNavBar:hover > a{
-    color: #4dc7bc !important;
+    color: var(--koochita-light-green) !important;
 }
 
 .global-nav-profile-menu{

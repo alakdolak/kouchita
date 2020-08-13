@@ -56,7 +56,7 @@ DIV.ppr_rup.ppr_priv_global_nav_menus .subLink, DIV.ppr_rup.ppr_priv_global_nav_
     height: 100%;
     overflow: hidden;
     margin-right: 10px;
-    border: 1px solid #4dc7bc;
+    border: 1px solid var(--koochita-light-green);
     float: left;
 }
 
@@ -67,10 +67,10 @@ DIV.ppr_rup.ppr_priv_global_nav_menus .subLink, DIV.ppr_rup.ppr_priv_global_nav_
     overflow: visible;
     margin: 0;
     border: none;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     font: bold 1em/14px Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     color: #fff;
-    text-shadow: #4dc7bc 0 0 0;
+    text-shadow: var(--koochita-light-green) 0 0 0;
     white-space: nowrap;
     cursor: pointer;
     float: left;
@@ -1200,7 +1200,7 @@ span.fbcBtnlarge {
 }
 
 .overlay.dg {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
 }
 
 .overlay.vdg {
@@ -1253,7 +1253,7 @@ span.fbcBtnlarge {
 }
 
 .overlay.dg h1.title {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
 }
 
 .overlay.withClose .close {
@@ -1330,7 +1330,7 @@ span.fbcBtnlarge {
     -webkit-border-radius: 1px;
     border-radius: 1px;
     border-width: 3px;
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
 }
 
 .overlay.fatNotice_2011 .inner {
@@ -1551,7 +1551,7 @@ span.fbcBtnlarge {
 .overlay.micro_meta_flyout .inner {
     padding: 8px 12px;
     background-color: #fff;
-    border: 3px solid #4dc7bc;
+    border: 3px solid var(--koochita-light-green);
 }
 
 .overlay.micro_meta_flyout .close {
@@ -1572,7 +1572,7 @@ span.fbcBtnlarge {
 }
 
 .overlay.help_center .heading {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 1.50em;
     padding-bottom: 10px;
 }
@@ -2087,7 +2087,7 @@ span.fbcBtnlarge {
 .overlay.tooltip.ttWhite .close:before,
 .overlay.tooltip.ttWhite h1,
 .overlay.tooltip.ttWhite h3 {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .overlay.tooltip.ttWhite .arrow {
@@ -2114,12 +2114,12 @@ span.fbcBtnlarge {
 }
 
 .overlay.tooltip.ttGreen .inner {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     color: #CEFBBD;
 }
 
 .overlay.tooltip.ttGreen .arrow {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
 }
 
 .overlay.tooltip.orange {
@@ -2280,7 +2280,7 @@ i.eg {
     padding: 2px 0 0;
     font: normal 2.4165em/110% Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     color: #000;
-    border-bottom: 2px solid #4dc7bc;
+    border-bottom: 2px solid var(--koochita-light-green);
 }
 
 #BODYCON h1 span.altHead {
@@ -2689,7 +2689,7 @@ h1 {
     padding: 2px 0 0;
     font-size: 2.4165em;
     color: #000;
-    border-bottom: 2px solid #4dc7bc;
+    border-bottom: 2px solid var(--koochita-light-green);
 }
 
 #BODYCON h1 span.altHead {
@@ -3823,11 +3823,11 @@ div.first {
 }
 
 .airfare a:hover {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .airfare a:hover b {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .airfare .interior img {
@@ -3837,7 +3837,7 @@ div.first {
 
 .typeA2.miniHAC .cnrR5,
 .typeA2.miniHAC .interior {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
 }
 
 .typeA2.miniHAC .cnrR5 .lft {
@@ -3866,7 +3866,7 @@ div.first {
 
 .typeA2.alt02 .cnrR5,
 .typeA2.alt02 .interior {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
 }
 
 .typeA2.alt02 .cnrR5 .lft {
@@ -5097,7 +5097,7 @@ iframe.layerShield {
 
 #BODYCON .commerce .interior .sub a:hover {
     text-decoration: none;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 #BODYCON .commerce .interior .sub .special {
@@ -5128,7 +5128,7 @@ iframe.layerShield {
 }
 
 .commerce .interior h2 a:hover {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .commerce .interior dl {
@@ -5143,7 +5143,7 @@ iframe.layerShield {
 
 .commerce .interior dl a:hover,
 .commerce .interior dl a:hover span {
-    color: #4dc7bc !important;
+    color: var(--koochita-light-green) !important;
 }
 
 .commerce .interior dl dt {
@@ -5166,7 +5166,7 @@ iframe.layerShield {
 }
 
 .commerce .interior dl dd ul li span b {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .commerce .interior dl dd.b {
@@ -5244,7 +5244,7 @@ iframe.layerShield {
 
 .commerce .interior .asdfSpan span:hover,
 .commerce .interior .asdfSpan span:hover span {
-    color: #4dc7bc !important;
+    color: var(--koochita-light-green) !important;
 }
 
 .commerce .interior .lnkSpan var {
@@ -5603,7 +5603,7 @@ iframe.layerShield {
 }
 
 .typeA2.crBody .cnrR5 {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     background-color: #F5F8F1;
 }
 
@@ -5616,7 +5616,7 @@ iframe.layerShield {
 }
 
 .typeA2.crBody .interior {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     background-color: #F5F8F1;
     padding: 9px 0 8px 15px;
 }
@@ -6939,7 +6939,7 @@ iframe.layerShield {
 .RuleBasedPopup .inner .awHdrImgV2 {
     overflow: hidden;
     border: 10px solid #09532D;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     padding: 18px 0;
 }
 
@@ -8147,7 +8147,7 @@ div.overlayCallout {
     border: 1px solid #D9E4C4;
     margin: 0 0 8px;
     font-weight: bold;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-family: Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     background: #F2F6EB;
     padding: 3px 8px;
@@ -8331,7 +8331,7 @@ div.overlayCallout {
 
 .writeAnotherReviewCta .content .title {
     font-size: 1.25em;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     margin-bottom: 5px;
 }
 
@@ -8350,7 +8350,7 @@ div.overlayCallout {
 }
 
 .writeAnotherReviewCta .content .war .btn {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff;
     font-weight: bold;
     white-space: nowrap;
@@ -8427,7 +8427,7 @@ div.overlayCallout {
 .tabBody {
     margin: 0 0 15px;
     padding: 8px 8px 0 14px;
-    border: 2px solid #4dc7bc;
+    border: 2px solid var(--koochita-light-green);
 }
 
 #PAGE.lv5 .tabBody,
@@ -8709,7 +8709,7 @@ div.overlayCallout {
 .ratingSystem .popularity var,
 .ratingSystem .popularity var b {
     line-height: 77.5%;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .ratingSystem .popularity var,
@@ -8764,7 +8764,7 @@ div.overlayCallout {
 
 .ratingSystem .popularity span {
     padding-bottom: .2em;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .ratingSystem .popularity span i {
@@ -9139,7 +9139,7 @@ div.overlayCallout {
     padding: 5px;
     font-weight: bold;
     color: #fff;
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
 }
 
 .showRating {
@@ -9498,8 +9498,8 @@ div.saveShadow {
 div.saveShell {
     background-color: #d9e4c4;
     border: 1px solid #91b155;
-    border-right-color: #4dc7bc;
-    border-bottom-color: #4dc7bc;
+    border-right-color: var(--koochita-light-green);
+    border-bottom-color: var(--koochita-light-green);
     padding: 0 4px;
 }
 
@@ -9532,7 +9532,7 @@ div.subFolderIndent {
 }
 
 div.saveTopBorder {
-    border-top: 1px solid #4dc7bc;
+    border-top: 1px solid var(--koochita-light-green);
 }
 
 div.saveFolder {
@@ -9571,7 +9571,7 @@ div.saveFolder a:hover {
 
 div.createFolder {
     position: relative;
-    border-top: 1px solid #4dc7bc;
+    border-top: 1px solid var(--koochita-light-green);
     margin: 2px;
     padding: 2px 0;
 }
@@ -9741,7 +9741,7 @@ div.MyTripAdvBoxMenu {
     height: 100%;
     overflow: hidden;
     margin: 0 0 6px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 #FRIENDS_REVIEWS .fndhlp {
@@ -9897,7 +9897,7 @@ div.MyTripAdvBoxMenu {
 
 .bx.cmsPoll .cnrR3 {
     height: 5px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
 }
 
 .bx.cmsPoll .cnrR3 .lft,
@@ -9953,7 +9953,7 @@ div.MyTripAdvBoxMenu {
 
 .bx.cmsPoll .bx-cell dl dt {
     padding: 7px 14px 11px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     background-image: none;
     font-size: 122.5%;
     line-height: 130%;
@@ -10338,7 +10338,7 @@ div.MyTripAdvBoxMenu {
 .whatsNearby .balance {
     width: 550px;
     overflow: hidden;
-    border-left: 2px solid #4dc7bc;
+    border-left: 2px solid var(--koochita-light-green);
     float: right;
 }
 
@@ -10355,7 +10355,7 @@ div.MyTripAdvBoxMenu {
 .whatsNearby .sidebar .pName {
     display: block;
     padding: 10px 35px 9px 8px;
-    border-bottom: 1px solid #4dc7bc;
+    border-bottom: 1px solid var(--koochita-light-green);
     font: bold .9165em Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     color: #09532d;
 }
@@ -10506,7 +10506,7 @@ div.MyTripAdvBoxMenu {
 }
 
 .whatsNearby .sidebar .sponsorActivate {
-    border-top: 1px solid #4dc7bc;
+    border-top: 1px solid var(--koochita-light-green);
 }
 
 .whatsNearby .sidebar .nfo {
@@ -10861,10 +10861,10 @@ div.MyTripAdvBoxMenu {
 .reportOptions .option {
     font: bold .9em/14px Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     text-decoration: none;
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     padding: 3px;
     text-align: center;
-    text-shadow: 1px 1px 0 #4dc7bc;
+    text-shadow: 1px 1px 0 var(--koochita-light-green);
     color: #FFF;
     left: 22px;
     cursor: pointer;
@@ -10887,7 +10887,7 @@ div.MyTripAdvBoxMenu {
 
 .ollie {
     padding: 0 10px 6px 8px;
-    border-bottom: 2px solid #4dc7bc;
+    border-bottom: 2px solid var(--koochita-light-green);
     font-weight: normal;
     font-size: 1.8335em;
     color: #09532d;
@@ -11760,7 +11760,7 @@ div.MyTripAdvBoxMenu {
 }
 
 #HEADING_GROUP {
-    border-bottom: 2px solid #4dc7bc;
+    border-bottom: 2px solid var(--koochita-light-green);
 }
 
 #HEADING_GROUP .fbContainer {
@@ -12143,7 +12143,7 @@ div.MyTripAdvBoxMenu {
 
 #LEFTNAV .geoHeader {
     padding: 7px 12px 3px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     font: bold 1em/14px Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     color: #fff;
 }
@@ -12152,7 +12152,7 @@ div.MyTripAdvBoxMenu {
     width: 160px;
     overflow: hidden;
     margin: 0 0 14px;
-    border-top: 4px solid #4dc7bc;
+    border-top: 4px solid var(--koochita-light-green);
     background-color: #fff;
     font-family: Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
 }
@@ -12799,7 +12799,7 @@ div.MyTripAdvBoxMenu {
 }
 
 .traveler {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
 }
 
 .traveler h3 {
@@ -13476,7 +13476,7 @@ div.MyTripAdvBoxMenu {
 
 .listing.rrBar .ratingSystem .rating span.more {
     padding-left: 1px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     vertical-align: -3px;
 }
 
@@ -14175,12 +14175,12 @@ div#PINSTRIP strong {
     top: 8px;
     right: 18px;
     font-size: 30px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 
 #HEAD .tabsBar {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     border-bottom: 0;
     height: 33px;
     margin-left: -8px;
@@ -14339,7 +14339,7 @@ div#PINSTRIP strong {
 }
 
 .secondaryNavBar {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
     min-height: 70px;
     min-width: 983px;
@@ -14467,7 +14467,7 @@ div#PINSTRIP strong {
 
 .hotelsDD .allHotels {
     font-weight: normal;
-    border-bottom: 1px solid #4dc7bc;
+    border-bottom: 1px solid var(--koochita-light-green);
     padding: 12px;
 }
 
@@ -14485,7 +14485,7 @@ div#PINSTRIP strong {
 }
 
 .hotelsDD .popDestsTitle {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 1.333em;
     padding: 12px;
     border-bottom: 1px solid #EBEBEB;
@@ -14501,7 +14501,7 @@ div#PINSTRIP strong {
 }
 
 .hotelsDD .popDestsLink a:hover {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff;
     text-decoration: none;
 }
@@ -14652,7 +14652,7 @@ div#PINSTRIP strong {
 .subItemNoLink .subNoLink:hover,
 .expandSubItem .expandSubLink:hover {
 
-    color: #4dc7bc !important;
+    color: var(--koochita-light-green) !important;
 
 }
 
@@ -14817,7 +14817,7 @@ div#PINSTRIP strong {
 
 .warOverlay.overlay {
     background-color: #FFF;
-    border-color: #68B04D #4dc7bc #4dc7bc;
+    border-color: #68B04D var(--koochita-light-green) var(--koochita-light-green);
     border-style: solid;
     border-width: 1px 2px 2px 2px;
     margin-top: 0;
@@ -14848,7 +14848,7 @@ div#PINSTRIP strong {
 }
 
 #WAR_TO_DO_LIST .warHeader .ui_icon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 #WAR_TO_DO_LIST .warLocImg {
@@ -15281,7 +15281,7 @@ body.has-modal-open {
 }
 
 .ui_modal_card .modal-card-title {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     -webkit-box-flex: 1;
     flex-grow: 1;
     flex-shrink: 0;
@@ -15422,7 +15422,7 @@ body.has-modal-open {
 .ui_close_x:before {
     font-size: 28px;
     line-height: 36px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     content: "\00d7";
 }
 
@@ -15879,7 +15879,7 @@ body.has-modal-open {
 }
 
 .ui_dropdown .option:hover {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff;
 }
 
@@ -15899,7 +15899,7 @@ body.has-modal-open {
 .ui_dropdown .option.checkmark:before {
     font-size: 24px;
     line-height: 12px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .ui_dropdown .option.checkmark:hover:before {
@@ -16195,7 +16195,7 @@ body.has-modal-open {
 }
 
 .ui_alert.primary {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     background-color: #f9fcf8;
 }
 
@@ -16558,14 +16558,14 @@ body.has-modal-open {
     top: 0;
     left: -10px;
     right: 0;
-    border-top: 4px solid #4dc7bc;
+    border-top: 4px solid var(--koochita-light-green);
 }
 
 .masthead_notification_enabled .masthead_notifctr_sprite {
     position: absolute;
     left: 9px;
     font-size: 21px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .masthead_notification {
@@ -16823,7 +16823,7 @@ body.has-modal-open {
     top: -9px;
     left: -10px;
     right: 0;
-    border-top: 4px solid #4dc7bc;
+    border-top: 4px solid var(--koochita-light-green);
 }
 
 .masthead_war_dropdown .arwLink:hover,
@@ -16832,7 +16832,7 @@ body.has-modal-open {
 }
 
 .masthead_war_dropdown .reviewIcon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 24px;
     position: relative;
     top: -6px;
@@ -16909,7 +16909,7 @@ body.has-modal-open {
 }
 
 .masthead_shopping_cart .emptyCartIcon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 24px;
     position: relative;
     top: -6px;
@@ -16989,7 +16989,7 @@ body.has-modal-open {
     content: "";
     -webkit-animation: spinAround 500ms infinite linear;
     animation: spinAround 500ms infinite linear;
-    border: 4px solid #4dc7bc;
+    border: 4px solid var(--koochita-light-green);
     border-right-color: #f5f5f5;
     border-radius: 50%;
     display: inline-block;
@@ -18058,7 +18058,7 @@ select {
 
 .checking_sites .heading {
     font: bold 1.25em Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .checking_sites .instructions {
@@ -18146,7 +18146,7 @@ select {
 }
 
 #ALSO_VIEWED_LB {
-    border-top: 3px solid #4dc7bc;
+    border-top: 3px solid var(--koochita-light-green);
 }
 
 #ALSO_VIEWED_LB .heading {
@@ -18189,7 +18189,7 @@ select {
 }
 
 .overlay.check_more_sites {
-    background-color: #4dc7bc !important;
+    background-color: var(--koochita-light-green) !important;
     padding: 3px;
 }
 
@@ -19377,7 +19377,7 @@ body.withFtr {
     display: inline-block;
     width: 420px;
     padding: 0;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font: 2.5em Arial, Tahoma, "Bitream Vera Sans", sans-serif;
 }
 
@@ -19391,7 +19391,7 @@ body.withFtr {
     color: #FFF;
     font-size: 1.667em;
     font-weight: bold;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     text-shadow: 1px 1px 0 #548725;
 }
 
@@ -19659,7 +19659,7 @@ body.withFtr {
 #HSCS .rank {
     font-size: 1.167em;
     margin-bottom: 4px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 #HSCS.hr_tabs .rtngCnt {
@@ -20608,7 +20608,7 @@ span.classicText.dualFieldOn {
 
 #PPT .date_picker_calendar_wrap.dual_date.classicText.dateSelected.dualFieldOn,
 span.classicText.dateSelected.dualFieldOn {
-    border: 1px solid #4dc7bc;
+    border: 1px solid var(--koochita-light-green);
     background-color: #eee;
     font-weight: bold;
 }
@@ -20641,7 +20641,7 @@ span.classicText.dualFieldOn.classicStyling {
 
 #PPT .date_picker_calendar_wrap.dual_date.classicText.dateSelected.dualFieldOn:focus,
 span.classicText.dateSelected.dualFieldOn:focus {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
 }
 
 #META_UI_AVAIL_SECTIONS #CHANGE_DATES.hidden {
@@ -21117,7 +21117,7 @@ span.adults_selected {
 }
 
 #CHECK_RATES_CONT .focusInput:focus {
-    border: 1px solid #4dc7bc;
+    border: 1px solid var(--koochita-light-green);
 }
 
 .date_picker_calendar #CLOSE_CALENDAR {

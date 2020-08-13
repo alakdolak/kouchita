@@ -331,7 +331,7 @@
                                                                                 {{--</div>--}}
                                                                             {{--</div>--}}
                                                                             {{--<div>--}}
-                                                                                {{--<span style="color: #4dc7bc">درجه هتل: </span>--}}
+                                                                                {{--<span style="color: var(--koochita-light-green)">درجه هتل: </span>--}}
                                                                                 {{--<span>پنج ستاره</span>--}}
                                                                             {{--</div>--}}
                                                                             {{--<div>--}}
@@ -340,7 +340,7 @@
                                                                                 {{--<a>[[place.address]]</a>--}}
                                                                             {{--</div>--}}
                                                                             {{--<div>--}}
-                                                                                {{--<span style="color: #4dc7bc; margin-left: 5px">فاصله</span>--}}
+                                                                                {{--<span style="color: var(--koochita-light-green); margin-left: 5px">فاصله</span>--}}
                                                                                 {{--[[place.distance]]--}}
                                                                             {{--</div>--}}
                                                                         {{--</div>--}}
@@ -431,12 +431,12 @@
                                                         پاک کردن فیلتر ها
                                                     </div>
                                                     <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;">
-                                                        <div id="closeMoneyFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelMoneyFilter()"> قیمت</div>
-                                                        <div id="closeRateFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelRateFilter()"> امتیاز کاربران </div>
-                                                        <div id="closeKindFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelKindFilter()"> نوع</div>
-                                                        <div id="closeRangeFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelRangeFilter()"> محدوده</div>
-                                                        <div id="closeFoodFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelFoodFilter()"> غذا</div>
-                                                        <div id="closeFacilitiesFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelFacilitiesFilter()"> امکانات</div>
+                                                        <div id="closeMoneyFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: var(--koochita-light-green); color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelMoneyFilter()"> قیمت</div>
+                                                        <div id="closeRateFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: var(--koochita-light-green); color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelRateFilter()"> امتیاز کاربران </div>
+                                                        <div id="closeKindFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: var(--koochita-light-green); color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelKindFilter()"> نوع</div>
+                                                        <div id="closeRangeFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: var(--koochita-light-green); color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelRangeFilter()"> محدوده</div>
+                                                        <div id="closeFoodFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: var(--koochita-light-green); color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelFoodFilter()"> غذا</div>
+                                                        <div id="closeFacilitiesFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: var(--koochita-light-green); color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelFacilitiesFilter()"> امکانات</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1640,7 +1640,7 @@
             '</div>\n' +
             '</div>\n' +
             '<div>\n' +
-            '<span style="color: #4dc7bc">درجه هتل: </span>\n' +
+            '<span style="color: var(--koochita-light-green)">درجه هتل: </span>\n' +
             '<span>پنج ستاره</span>\n' +
             '</div>\n' +
             '<div>\n' +
@@ -1649,7 +1649,7 @@
             '<a>' + pLs.address + '</a>\n' +
             '</div>\n' +
             '<div>\n' +
-            '<span style="color: #4dc7bc; margin-left: 5px">فاصله</span>\n' + pLs.distance  +
+            '<span style="color: var(--koochita-light-green); margin-left: 5px">فاصله</span>\n' + pLs.distance  +
             '</div>\n' +
             '</div>\n' +
             '<div class="Boxes"\n' +

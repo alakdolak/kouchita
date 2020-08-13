@@ -18,7 +18,7 @@
 }
 
 .greenAlert{
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
 }
 
 .redAlert{
@@ -85,7 +85,7 @@
     border-radius: 10px 10px 0 0;
 }
 .offerTitle {
-    background-color: #eab836;
+    background-color: var(--koochita-yellow);
 }
 .warningTitle {
     background-color: #761c19;
@@ -119,7 +119,7 @@
 }
 .leftBtn {
     float: left;
-    background-color: #0d6650;
+    background-color: var(--koochita-green);
     margin-right: 15px;
 }
 

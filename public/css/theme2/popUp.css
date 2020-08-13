@@ -181,8 +181,8 @@
 	color: #333;
 }
 .memberOverlayRedesign .memberTagReviewEnhancements:hover {
-	border: 1px solid #4dc7bc;
-	color: #4dc7bc;
+	border: 1px solid var(--koochita-light-green);
+	color: var(--koochita-light-green);
 	text-decoration: none;
 }
 .memberOverlayRedesign .viewAllTagsReviewEnhancements {
@@ -229,7 +229,7 @@
 	width: 100%;
 }
 .memberOverlayRedesign .fillReviewEnhancements {
-	background: #4dc7bc none repeat scroll 0 0;
+	background: var(--koochita-light-green) none repeat scroll 0 0;
 	display: inline-block;
 	height: 12px;
 	position: absolute;
@@ -248,7 +248,7 @@
 	overflow: hidden;
 }
 .memberOverlayRedesign .iconReviewEnhancements {
-	color: #4dc7bc;
+	color: var(--koochita-light-green);
 	font-size: 14px;
 	padding-left: 5px;
 }
@@ -306,7 +306,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 	margin-top: 0;
 }
 .memberOverlay.simple .g10n .memberreviewbadge .badgeinfo span {
-	background-color: #4dc7bc;
+	background-color: var(--koochita-light-green);
 	background-image: url("Level_shape_28px.png");
 	color: #fff;
 	display: inline-block;

@@ -115,7 +115,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .taGrn {
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .pointer {
@@ -296,14 +296,14 @@ input[type=checkbox], input[type=radio] {
     height: 33px;
     margin-left: -8px;
     border-bottom: 0;
-    background: #4dc7bc;
-    background: -moz-linear-gradient(top, #68b14e 0, #4dc7bc 100%);
-    background: -webkit-linear-gradient(top, #68b14e 0, #4dc7bc 100%);
-    background: -webkit-gradient(linear, top, bottom, color-stop(0%, #68b14e), color-stop(100%, #4dc7bc));
-    background: -o-linear-gradient(top, #68b14e 0, #4dc7bc 100%);
-    background: -ms-linear-gradient(top, #68b14e 0, #4dc7bc 100%);
-    background: linear-gradient(to bottom, #68b14e 0, #4dc7bc 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68b14e', endColorstr='#4dc7bc', GradientType=0);
+    background: var(--koochita-light-green);
+    background: -moz-linear-gradient(top, #68b14e 0, var(--koochita-light-green) 100%);
+    background: -webkit-linear-gradient(top, #68b14e 0, var(--koochita-light-green) 100%);
+    background: -webkit-gradient(linear, top, bottom, color-stop(0%, #68b14e), color-stop(100%, var(--koochita-light-green)));
+    background: -o-linear-gradient(top, #68b14e 0, var(--koochita-light-green) 100%);
+    background: -ms-linear-gradient(top, #68b14e 0, var(--koochita-light-green) 100%);
+    background: linear-gradient(to bottom, #68b14e 0, var(--koochita-light-green) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68b14e', endColorstr='var(--koochita-light-green)', GradientType=0);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -520,7 +520,7 @@ input[type=checkbox], input[type=radio] {
     width: 100%;
     min-height: 70px;
     min-width: 983px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     clear: none
@@ -702,7 +702,7 @@ input[type=checkbox], input[type=radio] {
 
 .warOverlay.overlay {
     background-color: #fff;
-    border-color: #68b04d #4dc7bc #4dc7bc;
+    border-color: #68b04d var(--koochita-light-green) var(--koochita-light-green);
     border-style: solid;
     border-width: 1px 2px 2px;
     margin-top: 0
@@ -1007,7 +1007,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .ui_modal_card .modal-card-title {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     -webkit-box-flex: 1;
     flex-grow: 1;
     flex-shrink: 0;
@@ -1144,7 +1144,7 @@ input[type=checkbox], input[type=radio] {
 .ui_close_x:before {
     font-size: 28px;
     line-height: 36px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     content: "\00d7"
 }
 
@@ -1395,7 +1395,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .ui_dropdown .option:hover {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff
 }
 
@@ -1415,7 +1415,7 @@ input[type=checkbox], input[type=radio] {
 .ui_dropdown .option.checkmark:before {
     font-size: 24px;
     line-height: 12px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .ui_dropdown .option.checkmark:hover:before {
@@ -1680,7 +1680,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .ui_alert.primary {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     background-color: #f9fcf8
 }
 
@@ -2803,7 +2803,7 @@ input[type=checkbox], input[type=radio] {
     content: "";
     -webkit-animation: spinAround 500ms infinite linear;
     animation: spinAround 500ms infinite linear;
-    border: 4px solid #4dc7bc;
+    border: 4px solid var(--koochita-light-green);
     border-right-color: #f5f5f5;
     border-radius: 50%;
     display: inline-block;
@@ -2955,14 +2955,14 @@ input[type=checkbox], input[type=radio] {
     top: 0;
     left: -10px;
     right: 0;
-    border-top: 4px solid #4dc7bc
+    border-top: 4px solid var(--koochita-light-green)
 }
 
 .masthead_notification_enabled .masthead_notifctr_sprite {
     position: absolute;
     left: 9px;
     font-size: 21px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .masthead_notification {
@@ -3177,7 +3177,7 @@ input[type=checkbox], input[type=radio] {
     top: -9px;
     left: -10px;
     right: 0;
-    border-top: 4px solid #4dc7bc
+    border-top: 4px solid var(--koochita-light-green)
 }
 
 .masthead_war_dropdown .arwLink:focus, .masthead_war_dropdown .arwLink:hover {
@@ -3185,7 +3185,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .masthead_war_dropdown .reviewIcon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 24px;
     position: relative;
     top: -6px
@@ -3251,7 +3251,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .masthead_shopping_cart .emptyCartIcon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 24px;
     position: relative;
     top: -6px
@@ -3326,25 +3326,25 @@ div.avatar img.avatar {
 }
 
 DIV.ppr_rup.ppr_priv_dual_search_dust .green-checkmark {
-    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='15px' height='12px' viewBox='-1 -1 15 12' overflow='visible' enable-background='new -1 -1 15 12' xml:space='preserve'><polygon fill='#4dc7bc' points='11.5,0 4.25,7.068 1.5,4.382 0,5.848 4.25,10 13,1.466 '/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='15px' height='12px' viewBox='-1 -1 15 12' overflow='visible' enable-background='new -1 -1 15 12' xml:space='preserve'><polygon fill='var(--koochita-light-green)' points='11.5,0 4.25,7.068 1.5,4.382 0,5.848 4.25,10 13,1.466 '/></svg>");
     height: 12px;
     width: 15px
 }
 
 DIV.ppr_rup.ppr_priv_dual_search_dust .moonIcon {
-    background-image: url("data:image/svg+xml;utf8,<svg width='80px' height='80px' viewBox='0 0 80 80' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' sketch:type='MSPage'><path d='M42.5,80 C19.0,80 0,61.5 0,38.7 C0,20.9 11.6,5.7 27.8,0 C24.6,5.8 22.7,12.4 22.7,19.5 C22.7,42.3 41.8,60.8 65.3,60.8 C70.4,60.8 75.4,59.9 80,58.3 C72.8,71.2 58.7,80 42.5,80 Z' id='Oval-9' fill='#4dc7bc' sketch:type='MSShapeGroup'></path></g></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg width='80px' height='80px' viewBox='0 0 80 80' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' sketch:type='MSPage'><path d='M42.5,80 C19.0,80 0,61.5 0,38.7 C0,20.9 11.6,5.7 27.8,0 C24.6,5.8 22.7,12.4 22.7,19.5 C22.7,42.3 41.8,60.8 65.3,60.8 C70.4,60.8 75.4,59.9 80,58.3 C72.8,71.2 58.7,80 42.5,80 Z' id='Oval-9' fill='var(--koochita-light-green)' sketch:type='MSShapeGroup'></path></g></svg>");
     height: 14px;
     width: 14px
 }
 
 DIV.ppr_rup.ppr_priv_dual_search_dust .personIcon {
-    background-image: url("data:image/svg+xml;utf8,<svg width='74px' height='116px' viewBox='0 0 74 116' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' sketch:type='MSPage'><g id='Rectangle-34-+-Oval-9' sketch:type='MSLayerGroup' transform='translate(-3.0,0.0)' fill='#4dc7bc'><path d='M3.6,115.7 L3.6,88.6 C3.6,71.6 17.4,57.8 34.4,57.8 L45.5,57.8 C62.5,57.8 76.3,71.6 76.3,88.6 L76.3,115.7 L3.6,115.7 Z' id='Rectangle-34' sketch:type='MSShapeGroup'></path><ellipse id='Oval-9' sketch:type='MSShapeGroup' cx='40' cy='23.8' rx='25.4' ry='23.8'></ellipse></g></g></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg width='74px' height='116px' viewBox='0 0 74 116' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' sketch:type='MSPage'><g id='Rectangle-34-+-Oval-9' sketch:type='MSLayerGroup' transform='translate(-3.0,0.0)' fill='var(--koochita-light-green)'><path d='M3.6,115.7 L3.6,88.6 C3.6,71.6 17.4,57.8 34.4,57.8 L45.5,57.8 C62.5,57.8 76.3,71.6 76.3,88.6 L76.3,115.7 L3.6,115.7 Z' id='Rectangle-34' sketch:type='MSShapeGroup'></path><ellipse id='Oval-9' sketch:type='MSShapeGroup' cx='40' cy='23.8' rx='25.4' ry='23.8'></ellipse></g></g></svg>");
     height: 14px;
     width: 14px
 }
 
 DIV.ppr_rup.ppr_priv_dual_search_dust .bedIcon {
-    background-image: url("data:image/svg+xml;utf8,<svg width='82px' height='63px' viewBox='0 0 82 63' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' sketch:type='MSPage'><g sketch:type='MSLayerGroup' fill='#4dc7bc'><path d='M73.0,49.1 L73.0,62.7 L81.3,62.7 L81.3,40.8 L8.2,40.8 L8.2,4.4 C8.2,1.9 6.4,0.0 4.1,0.0 C1.8,0.0 0,1.9 0,4.4 L0,62.7 L8.2,62.7 L8.2,49.2 L73.0,49.1 L73.0,49.1 Z' sketch:type='MSShapeGroup'></path><path d='M20.2,27.5 C24.3,27.5 27.7,24.0 27.7,19.5 C27.7,15.1 24.3,11.6 20.2,11.6 C16.0,11.6 12.7,15.1 12.7,19.5 C12.7,24.0 16.0,27.5 20.2,27.5 L20.2,27.5 Z' sketch:type='MSShapeGroup'></path><path d='M81.4,37.1 L81.4,26.1 C81.4,22.6 78.6,20.2 75.5,19.8 L30.9,19.8 L30.9,29.3 L14.2,29.3 C12.2,29.3 10.5,31.0 10.5,33.2 C10.5,35.4 12.2,37.1 14.2,37.1 L81.4,37.1 L81.4,37.1 Z' sketch:type='MSShapeGroup'></path></g></g></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg width='82px' height='63px' viewBox='0 0 82 63' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' sketch:type='MSPage'><g sketch:type='MSLayerGroup' fill='var(--koochita-light-green)'><path d='M73.0,49.1 L73.0,62.7 L81.3,62.7 L81.3,40.8 L8.2,40.8 L8.2,4.4 C8.2,1.9 6.4,0.0 4.1,0.0 C1.8,0.0 0,1.9 0,4.4 L0,62.7 L8.2,62.7 L8.2,49.2 L73.0,49.1 L73.0,49.1 Z' sketch:type='MSShapeGroup'></path><path d='M20.2,27.5 C24.3,27.5 27.7,24.0 27.7,19.5 C27.7,15.1 24.3,11.6 20.2,11.6 C16.0,11.6 12.7,15.1 12.7,19.5 C12.7,24.0 16.0,27.5 20.2,27.5 L20.2,27.5 Z' sketch:type='MSShapeGroup'></path><path d='M81.4,37.1 L81.4,26.1 C81.4,22.6 78.6,20.2 75.5,19.8 L30.9,19.8 L30.9,29.3 L14.2,29.3 C12.2,29.3 10.5,31.0 10.5,33.2 C10.5,35.4 12.2,37.1 14.2,37.1 L81.4,37.1 L81.4,37.1 Z' sketch:type='MSShapeGroup'></path></g></g></svg>");
     height: 14px;
     width: 14px
 }
@@ -3364,11 +3364,11 @@ DIV.ppr_rup.ppr_priv_dual_search_dust .swipe_menu .swipe_menu_list {
 DIV.ppr_rup.ppr_priv_dual_search_dust .swipe_menu .swipe_menu_list .swipe_menu_item {
     display: inline-block;
     padding: 0 8px 8px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_dual_search_dust .swipe_menu .swipe_menu_list .swipe_menu_item.selected {
-    border-bottom: 2px solid #4dc7bc
+    border-bottom: 2px solid var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_dual_search_dust .prepareAnimation {
@@ -4662,7 +4662,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 
 .numberPickerOverlay .item:hover {
     color: #fff;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     cursor: pointer
 }
 
@@ -4893,7 +4893,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 .predatesBookOnTAMetaFooterBrand .bookOnNew {
     margin-right: 2px;
     vertical-align: middle;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 14px;
     line-height: 25px
 }
@@ -4926,7 +4926,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 }
 
 .streamline_v1_header {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     color: #fff;
     font-weight: 700;
     display: table;
@@ -5003,7 +5003,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 }
 
 .children_search_wrap .ui_button.primary.update_results_button {
-    box-shadow: 0 0 8px #4dc7bc;
+    box-shadow: 0 0 8px var(--koochita-light-green);
     margin-bottom: 10px
 }
 
@@ -5013,7 +5013,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 }
 
 #BRAND_META_TEST, #BRAND_REMESSAGING {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 15px;
     line-height: 20px;
     margin: 30px auto 0
@@ -5037,7 +5037,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
     border-bottom: 1px solid #e3e3e3;
     font-weight: 400;
     font-size: 2.5em;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .review_collection .button_war {
@@ -5279,7 +5279,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 .review .post_vote_message.stylized {
     background-color: #fffae5;
     padding: 5px 8px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-weight: 700;
     font-size: 12px;
     float: left;
@@ -5368,15 +5368,15 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
     background-color: #fff;
     border-radius: 4px;
     border: 1px solid #e6e6e6;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-weight: 700;
     font-size: 12px
 }
 
 .review .helpful .rnd_white_thank_btn:hover {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     color: #fff;
-    border-color: #4dc7bc
+    border-color: var(--koochita-light-green)
 }
 
 .review .helpful .rnd_white_thank_btn:hover .helpful_thumbs_up.white {
@@ -5410,7 +5410,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 }
 
 .review .helpful .rnd_white_thank_btn:hover .numHlp {
-    border: 1px solid #4dc7bc
+    border: 1px solid var(--koochita-light-green)
 }
 
 .review .helpful .rnd_white_thank_btn .numHlp:before, .review .post_vote_message .numHlp:before {
@@ -5419,7 +5419,7 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
 
 .review .helpful .rnd_white_thank_btn:hover .numHlp:before {
     border: none;
-    border-right-color: #4dc7bc
+    border-right-color: var(--koochita-light-green)
 }
 
 .review .helpful .rnd_white_thank_btn .numHlp .numHlpIn, .review .post_vote_message .numHlp .numHlpIn {
@@ -5946,14 +5946,14 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .ui_button.primary {
-    border-color: #4dc7bc !important;
-    background-color: #4dc7bc !important;
+    border-color: var(--koochita-light-green) !important;
+    background-color: var(--koochita-light-green) !important;
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, .25);
     color: #fff
 }
 
 .rtl .ui_button.primary {
-    border-color: #4dc7bc !important;
+    border-color: var(--koochita-light-green) !important;
     box-shadow: -1px 1px 0 0 rgba(0, 0, 0, .25)
 }
 
@@ -5985,41 +5985,41 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .ui_button.secondary {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     background-color: #fff;
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, .05);
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .rtl .ui_button.secondary {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     box-shadow: -1px 1px 0 0 rgba(0, 0, 0, .05)
 }
 
 .ui_button.secondary.chevron:after {
-    border-color: #4dc7bc
+    border-color: var(--koochita-light-green)
 }
 
 .ui_button.secondary.disabled {
     opacity: .35;
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     box-shadow: none;
     cursor: auto
 }
 
 .offer:hover .ui_button.secondary:not(.disabled), .ui_button.secondary:not(.disabled):hover, .ui_button_activator:hover .ui_button.secondary:not(.disabled) {
     text-decoration: none;
-    border-color: #4dc7bc
+    border-color: var(--koochita-light-green)
 }
 
 .offer:active .ui_button.secondary:not(.disabled), .ui_button.secondary:not(.disabled):active, .ui_button_activator:active .ui_button.secondary:not(.disabled) {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     box-shadow: none;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .offer:active .ui_button.secondary:not(.disabled).chevron:after, .ui_button.secondary:not(.disabled):active.chevron:after, .ui_button_activator:active .ui_button.secondary:not(.disabled).chevron:after {
-    border-color: #4dc7bc
+    border-color: var(--koochita-light-green)
 }
 
 .ui_button.standard {
@@ -6061,7 +6061,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
         background-color: #fff
     }
     to {
-        background-color: #4dc7bc
+        background-color: var(--koochita-light-green)
     }
 }
 
@@ -6070,7 +6070,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
         background-color: #fff
     }
     to {
-        background-color: #4dc7bc
+        background-color: var(--koochita-light-green)
     }
 }
 
@@ -6223,14 +6223,14 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 
 .ui_tag:hover, .ui_tagcloud:hover {
     text-decoration: none;
-    border-color: #4dc7bc;
-    color: #4dc7bc;
+    border-color: var(--koochita-light-green);
+    color: var(--koochita-light-green);
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, .1)
 }
 
 .ui_tag.selected, .ui_tagcloud.selected {
-    border-color: #4dc7bc;
-    background-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
+    background-color: var(--koochita-light-green);
     color: #fff;
     box-shadow: none
 }
@@ -6244,7 +6244,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .ui_tag.disabled, .ui_tagcloud.disabled {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     border-color: #e5e5e5;
     box-shadow: none;
     cursor: default
@@ -6292,7 +6292,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     position: absolute;
     top: 0;
     left: 0;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .ui_bubble_rating.bubble_00:after, .ui_bubble_rating.bubble_0:after {
@@ -6665,7 +6665,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 
 .mtRatingOverlay li:hover {
     color: #fff;
-    background-color: #4dc7bc
+    background-color: var(--koochita-light-green)
 }
 
 .answersOverlay .answerTranslation {
@@ -6705,7 +6705,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 .review .col2of2 .humanTransReview_icon_chinese {
     margin-right: 2px;
     padding: 2px 2px 1px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     border-radius: 2px;
     color: #fff
 }
@@ -7103,7 +7103,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .ui_popover .body_text {
@@ -7388,7 +7388,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 
 .dsdc-next, .dsdc-next.ui_icon, .dsdc-prev, .dsdc-prev.ui_icon {
     margin-top: 13px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .dsdc-inactive.ui_icon {
@@ -7446,7 +7446,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .desktop .dsdc-day:hover {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff
 }
 
@@ -7456,12 +7456,12 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 
 .dsdc-endrange, .dsdc-startrange {
     position: relative;
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff
 }
 
 .dsdc-inrange {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     background: rgba(0, 175, 135, .1)
 }
 
@@ -7537,7 +7537,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .declutter-control .dsdc-active-calendar .dsdc-endrange, .declutter-control .dsdc-active-calendar .dsdc-startrange {
-    background: #4dc7bc
+    background: var(--koochita-light-green)
 }
 
 .declutter-control .dsdc-active-calendar .dsdc-endrange:after, .declutter-control .dsdc-active-calendar .dsdc-startrange:after {
@@ -7557,7 +7557,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .declutter-control .dsdc-day:hover {
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     color: #fff
 }
 
@@ -7603,8 +7603,8 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .pagination .nav.previous {
-    border: 1px solid #4dc7bc;
-    color: #4dc7bc;
+    border: 1px solid var(--koochita-light-green);
+    color: var(--koochita-light-green);
     float: left
 }
 
@@ -7644,7 +7644,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 .pagination .pageNum.current {
     background-color: #efefef;
     font-size: 1.0835em;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     text-align: center;
     cursor: default
 }
@@ -7657,7 +7657,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 
 .pagination .pageNum.current:hover {
     background-color: #efefef;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .pagination .pageNum, .pagination .separator {
@@ -7968,7 +7968,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .inlineWarCta-typeaheadResults .selected {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     color: #fff
 }
 
@@ -8001,7 +8001,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     position: absolute;
     top: 3px;
     right: 10px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 12px
 }
 
@@ -8047,7 +8047,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     font-family: Helvetica, Arial, sans-serif;
     font-size: 24px;
     line-height: 1.4;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 .inlineWarCta-badge .iwc-link {
@@ -8111,7 +8111,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     padding: 30px 0;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 20px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     text-align: center
 }
 
@@ -8194,7 +8194,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     padding-top: 100px;
     font-size: 12px;
     color: #fff;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     background-image: url(../../images/magnifying_glass_white_36.png);
     background-position: center 40px;
     background-repeat: no-repeat
@@ -9032,7 +9032,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .ui_ribbon.original, .ui_ribbon.primary {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     border-color: #311104
 }
 
@@ -9085,7 +9085,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
         background-color: #ccc
     }
     10% {
-        background-color: #4dc7bc
+        background-color: var(--koochita-light-green)
     }
 }
 
@@ -9094,7 +9094,7 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
         background-color: #ccc
     }
     10% {
-        background-color: #4dc7bc
+        background-color: var(--koochita-light-green)
     }
 }
 
@@ -9316,7 +9316,7 @@ body.hr_cards .hr_btf_wrap .block_header {
     padding: 24px 0;
     border-width: 0 0 1px;
     border-style: solid;
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     text-align: right;
     direction: rtl
 }
@@ -9613,7 +9613,7 @@ DIV.prw_rup.prw_common_atf_header_bl .blEntry .ui_icon {
     /*margin-right: 5px;*/
     font-size: 22px;
     line-height: 26px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_common_atf_header_bl .blEntry div:not(.hidden), DIV.prw_rup.prw_common_atf_header_bl .blEntry span:not(.hidden) {
@@ -9837,7 +9837,7 @@ DIV.prw_rup.prw_datepickers_hr_north_star_dates .datepicker_container {
 }
 
 DIV.prw_rup.prw_datepickers_hr_north_star_dates .ui_icon.calendar, DIV.prw_rup.prw_ibex_hr_north_star_rooms_guests .traveler_info_container .ui_icon.friends {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 18px;
     margin-right: 8px
 }
@@ -9858,7 +9858,7 @@ DIV.prw_rup.prw_datepickers_hr_north_star_dates .unified-picker {
 }
 
 DIV.prw_rup.prw_datepickers_hr_north_star_dates .unified-picker.focused, DIV.prw_rup.prw_ibex_hr_north_star_rooms_guests .traveler_info_container.highlight .traveler_info_text {
-    border-bottom: 1px solid #4dc7bc
+    border-bottom: 1px solid var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_datepickers_hr_north_star_dates, DIV.prw_rup.prw_ibex_hr_north_star_rooms_guests {
@@ -10054,7 +10054,7 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_traveler_info_nostalgic .datepickers {
 }
 
 DIV.ppr_rup.ppr_priv_hr_atf_north_star_traveler_info_nostalgic .datepickers.highlight .unified-picker {
-    border: 1px solid #4dc7bc
+    border: 1px solid var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_hr_atf_north_star_traveler_info_nostalgic .update_results_button {
@@ -10128,7 +10128,7 @@ DIV.prw_rup.prw_datepickers_hr_north_star_dates_nostalgic .ui_icon.calendar {
 }
 
 DIV.prw_rup.prw_datepickers_hr_north_star_dates_nostalgic .ui_icon.calendar:before {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 23px
 }
 
@@ -10219,7 +10219,7 @@ DIV.prw_rup.prw_ibex_hr_north_star_rooms_guests_nostalgic .icon {
 }
 
 DIV.prw_rup.prw_ibex_hr_north_star_rooms_guests_nostalgic .open-close {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     position: absolute;
     right: 5px;
     font-size: 16px
@@ -10398,7 +10398,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_north_star_about .award {
 }
 
 DIV.ppr_rup.ppr_priv_hr_btf_north_star_about .award .ui_icon:before {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     margin-right: 3px;
     font-size: 24px
 }
@@ -11076,7 +11076,7 @@ DIV.prw_rup.prw_common_mercury_photo_carousel .badge-container {
     align-items: center;
     background: #fff;
     border-radius: 0 0 2px 2px;
-    border-top: solid #4dc7bc 1px;
+    border-top: solid var(--koochita-light-green) 1px;
     left: 20px;
     position: absolute;
     top: 0
@@ -11163,7 +11163,7 @@ DIV.prw_rup.prw_common_mercury_photo_carousel .coe-badge .badgeText:hover {
 }
 
 DIV.prw_rup.prw_common_mercury_photo_carousel .coe-badge .certificate-of-excellence {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 24px
 }
 
@@ -12048,7 +12048,7 @@ DIV.prw_rup.prw_ibex_room_grid_hsx .mismatchMessage {
 }
 
 DIV.prw_rup.prw_ibex_room_grid_hsx .mismatchMessage.DECREASE_PRICE {
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_ibex_room_grid_hsx .mismatchMessage.INCREASE_PRICE {
@@ -12238,7 +12238,7 @@ DIV.prw_rup.prw_ibex_room_grid_row_hsx .amenities .amenityDescription {
 
 DIV.prw_rup.prw_ibex_room_grid_row_hsx .amenities .amenityIcon {
     display: inline-block;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px
@@ -12326,11 +12326,11 @@ DIV.prw_rup.prw_ibex_room_grid_row_hsx .conditions {
 
 DIV.prw_rup.prw_ibex_room_grid_row_hsx .conditions .ui_icon.checkmark {
     font-size: 22px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_ibex_room_grid_row_hsx .conditions .freeCancellation, DIV.prw_rup.prw_ibex_room_grid_row_hsx .conditions .payAtStayText {
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_ibex_room_grid_row_hsx .conditions .cancellation {
@@ -12954,7 +12954,7 @@ DIV.ppr_rup.ppr_priv_hr_north_star_v1 .amenityRow {
 
 DIV.ppr_rup.ppr_priv_hr_north_star_v1 .amenityRow .ui_icon {
     font-size: 19px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_hr_north_star_v1 .amenityRow .amenity_label, DIV.ppr_rup.ppr_priv_hr_north_star_v1 .amenityRow .distance_label {
@@ -13743,7 +13743,7 @@ DIV.prw_rup.prw_meta_hr_mini_meta_north_star_pricing_based .featured_chevron_tex
     text-align: center;
     padding: 16px 26px 12px;
     font-size: 18px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 #HR_HACKATHON_CONTENT DIV.prw_rup.prw_meta_hr_mini_meta_north_star_pricing_based .viewDealChevrons .offer.premium .providerLogo span.offerClient {
@@ -13951,7 +13951,7 @@ DIV.prw_rup.prw_meta_hr_mini_meta_north_star_pricing_based .showFreeCancellation
 }
 
 DIV.prw_rup.prw_meta_hr_mini_meta_north_star_pricing_based .freeCancellation {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-weight: 700;
     margin-bottom: 10px
 }
@@ -13980,7 +13980,7 @@ DIV.prw_rup.prw_meta_hr_mini_meta_north_star_pricing_based .offer.showFreeCancel
 }
 
 DIV.prw_rup.prw_meta_hr_mini_meta_north_star_pricing_based .green_icons {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 2em
 }
 
@@ -14957,7 +14957,7 @@ DIV.ppr_rup.ppr_priv_hsx_satisfaction_survey .close-target {
     font-size: 20px;
     top: 6px;
     right: 6px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer
 }
 
@@ -14989,7 +14989,7 @@ DIV.ppr_rup.ppr_priv_hsx_satisfaction_survey .rating-select.oneline .rating-grou
 
 DIV.ppr_rup.ppr_priv_hsx_satisfaction_survey .rating-target:not(.ui_button) {
     display: inline-block;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     border-radius: 50%;
     border: 2px solid;
     width: 18px;
@@ -15003,7 +15003,7 @@ DIV.ppr_rup.ppr_priv_hsx_satisfaction_survey .active .rating-target {
 }
 
 DIV.ppr_rup.ppr_priv_hsx_satisfaction_survey .rating-target:hover {
-    background: #4dc7bc
+    background: var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_hsx_satisfaction_survey .rating-group {
@@ -15181,7 +15181,7 @@ DIV.prw_rup.prw_ibex_photo_carousel .pic_bubble:hover {
 }
 
 DIV.prw_rup.prw_ibex_photo_carousel .active_bubble {
-    border-color: #4dc7bc
+    border-color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_ibex_photo_carousel .nav_bubbles {
@@ -15394,7 +15394,7 @@ DIV.ppr_rup.ppr_priv_location_detail_overview .rating {
     font-size: 28px;
     line-height: 32px;
     font-weight: 700;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     margin-bottom: 14px;
     height: auto;
     direction: rtl
@@ -15591,7 +15591,7 @@ DIV.prw_rup.prw_common_hotel_icon_only_list .hotel_icon {
     padding: 0;
     margin: 0 17px 0 0;
     font-size: 36px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .ratings_chart {
@@ -15626,7 +15626,7 @@ DIV.prw_rup.prw_common_ratings_histogram_overview .row_label {
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .highlighted .row_label {
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .row_bar {
@@ -15646,7 +15646,7 @@ DIV.prw_rup.prw_common_ratings_histogram_overview .bar {
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .fill {
     display: inline-block;
-    background: #4dc7bc;
+    background: var(--koochita-light-green);
     height: 12px;
     position: absolute
 }
@@ -15715,7 +15715,7 @@ DIV.ppr_rup.ppr_priv_location_detail_two_column .adPosLifted {
 
 DIV.ppr_rup.ppr_priv_location_nearby .poiGrid {
     padding: 24px 0;
-    border-top: 1px solid #4dc7bc
+    border-top: 1px solid var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_location_nearby .prv_map {
@@ -15996,7 +15996,7 @@ DIV.ppr_rup.ppr_priv_location_persistent_tabs_header .persistent_tabs_header .ta
 }
 
 DIV.ppr_rup.ppr_priv_location_persistent_tabs_header .persistent_tabs_header .tabs_pers_item:hover {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer
 }
 
@@ -16038,7 +16038,7 @@ DIV.ppr_rup.ppr_priv_location_persistent_tabs_header .persistent_tabs_header.fix
 
 DIV.ppr_rup.ppr_priv_location_persistent_tabs_header .persistent_tabs_header.fixed .tabs_pers_item.current {
     height: 50px;
-    border-bottom: 4px solid #4dc7bc;
+    border-bottom: 4px solid var(--koochita-light-green);
     color: #333;
     cursor: default;
     font-weight: 700
@@ -16286,7 +16286,7 @@ DIV.prw_rup.prw_common_north_star_pagination .pagination.north_star .separator {
 DIV.prw_rup.prw_common_location_topic {
     border-width: 0 0 1px;
     border-style: solid;
-    border-color: #4dc7bc
+    border-color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_common_location_topic .question {
@@ -16407,7 +16407,7 @@ DIV.prw_rup.prw_common_location_posting .confirmDelete, DIV.prw_rup.prw_common_l
 }
 
 DIV.prw_rup.prw_common_location_posting .response {
-    border-color: #4dc7bc;
+    border-color: var(--koochita-light-green);
     border-style: solid;
     border-width: 0 1px;
     padding-left: 17px;
@@ -16427,7 +16427,7 @@ DIV.prw_rup.prw_common_location_posting .voteCount {
 }
 
 DIV.prw_rup.prw_common_location_posting .voteIcon {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer;
     font-size: 24px;
     display: inline-block
@@ -16582,7 +16582,7 @@ DIV.ppr_rup.ppr_priv_location_review_filter_controls .row_bar {
 }
 
 DIV.ppr_rup.ppr_priv_location_review_filter_controls .row_fill {
-    background: #4dc7bc 0 0;
+    background: var(--koochita-light-green) 0 0;
     display: inline-block;
     height: 12px
 }
@@ -16657,7 +16657,7 @@ DIV.ppr_rup.ppr_priv_location_review_keyword_search .search .submit {
 
 DIV.ppr_rup.ppr_priv_location_review_keyword_search .search-icon {
     font-size: 22px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     margin-left: 12px
 }
 
@@ -16738,8 +16738,8 @@ DIV.ppr_rup.ppr_priv_location_review_keyword_search .ui_tagcloud.all_reviews.sel
 }
 
 DIV.ppr_rup.ppr_priv_location_review_keyword_search .ui_tagcloud:not(.selected):hover {
-    color: #4dc7bc;
-    border-color: #4dc7bc
+    color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green)
 }
 
 DIV.ppr_rup.ppr_priv_location_review_keyword_search.supportedLangSwitchOverlay {
@@ -16945,7 +16945,7 @@ DIV.prw_rup.prw_reviews_member_info_hsx .memberBadging {
 DIV.prw_rup.prw_reviews_member_info_hsx .memberBadgingNoText {
     margin: 5px 0 0;
     text-align: center;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_reviews_member_info_hsx .memberBadgingNoText .badgetext {
@@ -17143,7 +17143,7 @@ DIV.prw_rup.prw_reviews_vote_line_hsx .hsx_thank_button {
 }
 
 DIV.prw_rup.prw_reviews_vote_line_hsx .hsx_thank_button .emphasizeWithColor {
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_reviews_vote_line_hsx .hsx_thank_button .thankUser {
@@ -17156,8 +17156,8 @@ DIV.prw_rup.prw_reviews_vote_line_hsx .hsx_thank_button .ui_icon {
 }
 
 DIV.prw_rup.prw_reviews_vote_line_hsx .hsx_thank_button:hover {
-    border-color: #4dc7bc;
-    color: #4dc7bc;
+    border-color: var(--koochita-light-green);
+    color: var(--koochita-light-green);
     cursor: pointer
 }
 
@@ -17284,9 +17284,9 @@ DIV.prw_rup.prw_reviews_basic_review_hsx .ownerFavHeader {
     right: 16px;
     padding: 4px 10px;
     border: 1px solid #e5e5e5;
-    border-top: 1px solid #4dc7bc;
+    border-top: 1px solid var(--koochita-light-green);
     border-radius: 2px;
-    color: #4dc7bc
+    color: var(--koochita-light-green)
 }
 
 DIV.prw_rup.prw_reviews_basic_review_hsx .ownerFavHeader span {
@@ -17592,7 +17592,7 @@ DIV.ppr_rup.ppr_priv_new_hotel_promo_header .openingSoonPromo {
 
 DIV.ppr_rup.ppr_priv_new_hotel_promo_header .openingSoonPromo .header {
     margin-top: 16px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-weight: 700
 }
 

@@ -44,8 +44,8 @@
 
 /*#reportPane .body_text .submitOptions button {*/
 /*    color: #FFF;*/
-/*    background-color: #4dc7bc;*/
-/*    border-color: #4dc7bc;*/
+/*    background-color: var(--koochita-light-green);*/
+/*    border-color: var(--koochita-light-green);*/
 /*}*/
 
 #errMsgReport {
@@ -53,7 +53,7 @@
 }
 
 #rules > div:nth-child(1) {
-    color: #4DC7BC
+    color: var(--koochita-light-green)
 }
 
 #rules .body_text ul {
@@ -92,7 +92,7 @@
 }
 
 .details-pop-up .ui_close_x::before {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 @media (min-width: 992px) {

@@ -85,32 +85,32 @@
 
             function postsChangeMode() {
                 $('.userActivitiesPosts').css('display' , 'block');
-                $('.showUsersPostsLink').css('border-color' , '#0076a3');
+                $('.showUsersPostsLink').css('border-color' , 'var(--koochita-blue)');
             }
 
             function photosChangeMode() {
                 $('.userActivitiesPhotos').css('display' , 'block');
-                $('.showUsersPhotosAndVideosLink').css('border-color' , '#0076a3');
+                $('.showUsersPhotosAndVideosLink').css('border-color' , 'var(--koochita-blue)');
             }
 
             function questionsChangeMode() {
                 $('.userActivitiesQuestions').css('display' , 'block');
-                $('.showUsersQAndAsLink').css('border-color' , '#0076a3');
+                $('.showUsersQAndAsLink').css('border-color' , 'var(--koochita-blue)');
             }
 
             function articleChangeMode() {
                 $('.userActivitiesArticles').css('display' , 'block');
-                $('.showUsersArticlesLink').css('border-color' , '#0076a3');
+                $('.showUsersArticlesLink').css('border-color' , 'var(--koochita-blue)');
             }
 
             function scoresChangeMode() {
                 // $('.userActivitiesScores').css('display' , 'block');
-                $('.showUsersScores').css('border-color' , '#0076a3');
+                $('.showUsersScores').css('border-color' , 'var(--koochita-blue)');
             }
 
             function othersChangeMode() {
                 // $('.userActivitiesOthers').css('display' , 'block');
-                $('.otherActivitiesChoices').css('border-color' , '#0076a3');
+                $('.otherActivitiesChoices').css('border-color' , 'var(--koochita-blue)');
             }
 
         </script>
@@ -343,7 +343,7 @@
                     'position': 'relative',
                     'border': '5px solid #333',
                     'padding': '10px',
-                    'background-color': '#4dc7bc',
+                    'background-color': 'var(--koochita-light-green)',
                     'z-index': 1000001,
                     'cursor': 'auto'
                 });

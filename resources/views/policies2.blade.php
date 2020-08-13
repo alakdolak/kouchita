@@ -28,7 +28,7 @@
             line-height: 2;
         }
         h2{
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             margin-top: 35px;
         }
         #text-menu{
@@ -39,10 +39,10 @@
             cursor: pointer;
         }
         #text-menu div:hover{
-            color:#4DC7BC;
+            color:var(--koochita-light-green);
         }
         .green-click{
-            color:#4DC7BC !important;
+            color:var(--koochita-light-green) !important;
         }
         .sideHelper{
             float: right;

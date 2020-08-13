@@ -26,7 +26,8 @@
 @include('general.reportModal')
 
 @if(!Auth::check())
-    @include('layouts.loginPopUp')
+{{--    @include('layouts.loginPopUp')--}}
+    @include('general.nLoginPopUp')
 @else
     @include('general.uploadPhoto')
 @endif

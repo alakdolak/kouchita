@@ -27,8 +27,8 @@
 
     .tripModalBase > div:nth-child(2) > button {
         color: #FFF;
-        background-color: #4dc7bc;
-        border-color: #4dc7bc;
+        background-color: var(--koochita-light-green);
+        border-color: var(--koochita-light-green);
     }
 
     #tripsForPlace {
@@ -68,7 +68,7 @@
         top: 5px;
         left: 10px;
         font-size: 30px;
-        color: #4DC7BC;
+        color: var(--koochita-light-green);
         cursor: pointer;
     }
     .tripHeader{
@@ -135,8 +135,8 @@
         border-color: rgb(77, 199, 188);
     }
     .saves-create-trip-button{
-        border-color: #4dc7bc;
-        background-color: #4dc7bc;
+        border-color: var(--koochita-light-green);
+        background-color: var(--koochita-light-green);
         color: #fff;
         float: left;
         margin-top: 15px;
@@ -345,7 +345,7 @@
             }
         }
         if (allow) {
-            $("#trip_" + id).css('border', '2px solid #4DC7BC');
+            $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
             selectedTrips[selectedTrips.length] = id;
         }
     }
@@ -373,7 +373,7 @@
                 success: function (response) {
                     if (response == "ok"){
                         refreshThisAddTrip();
-                        showSuccessNotifi('تغییرات شما با موفقیت اعمال شد.', 'left', '#0076a3');
+                        showSuccessNotifi('تغییرات شما با موفقیت اعمال شد.', 'left', 'var(--koochita-blue)');
                     }
                     else {
                         err = "<p>به جز سفر های زیر که اجازه ی افزودن مکان به آنها را نداشتید بقیه به درستی اضافه شدند</p>";
@@ -455,7 +455,7 @@
             success: function (response) {
                 if(response == "ok") {
                     refreshThisAddTrip();
-                    showSuccessNotifi('لیست سفر شما با موفقیت ایجاد شد', 'left', '#0076a3');
+                    showSuccessNotifi('لیست سفر شما با موفقیت ایجاد شد', 'left', 'var(--koochita-blue)');
                 }
                 else {
                     $("#error").empty().append("تاریخ پایان از تاریخ شروع باید بزرگ تر باشد");

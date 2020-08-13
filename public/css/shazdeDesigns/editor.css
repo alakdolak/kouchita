@@ -156,8 +156,8 @@
 }
 
 .epAddPlace {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: white;
     float: left;
     padding: 7px;
@@ -190,7 +190,7 @@
     height: 48px; /* Matches top of .uploaderDlg */
     width: 100%;
     line-height: 48px;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 
 .epHeaderBar h3 {
@@ -263,7 +263,7 @@
 }
 
 .ui_close_x:before {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     left: 0;
 }
 

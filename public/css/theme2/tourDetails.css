@@ -59,7 +59,7 @@ td {
 }
 
 .titleInTable {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 .progress-container {
     width: 100%;
@@ -241,7 +241,7 @@ p {
 
 .passengerIcon:before {
     content: '\E0DF';
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .minusPlusIcons {
@@ -286,7 +286,7 @@ p {
     top: 10px;
     left: 10px;
     cursor: pointer;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 1.5em;
 }
 
@@ -379,7 +379,7 @@ p {
 }
 
 .srchBtn {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     border: none;
     color: white;
     font-size: 1.3em;
@@ -471,7 +471,7 @@ p {
 
 .personIcon:before {
     content: '\E06E';
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 14px !important;
 }
 
@@ -485,7 +485,7 @@ p {
 }
 
 .roomOptionTitle {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     padding-top: 5px;
 }
 
@@ -524,12 +524,12 @@ p {
 .lable_IS_2 {
     font-size: 1.2em;
     font-weight: 700;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     display: inline-block;
 }
 .viewOffersBtn {
-    background: #fcc156;
-    border-color: #fcc156;
+    background: var(--koochita-yellow);
+    border-color: var(--koochita-yellow);
     line-height: 25px;
     width: 75px;
     border-radius: 5px;
@@ -547,8 +547,8 @@ p {
 }
 
 .specOfferBtn {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 .reservBtn {
@@ -557,8 +557,8 @@ p {
 }
 
 .rezervedBtn {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     line-height: 14px;
     border-radius: 7px;
     width: 110px;
@@ -605,12 +605,12 @@ p {
 
 .alarmInputCityName:focus {
     border: none !important;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .alarmPopUpBotton {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: #fff;
     line-height: 24px;
     font-size: 1em;
@@ -631,7 +631,7 @@ p {
 }
 
 .tourHeaderDetailsRow > div > span:nth-child(1) {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .tourHeaderDetailsRow > div > span:nth-child(2) {
@@ -791,7 +791,7 @@ p {
     font-size: 17px;
     line-height: 25px;
     /*font-weight: 700;*/
-    /*color: #4dc7bc;*/
+    /*color: var(--koochita-light-green);*/
     margin-bottom: 14px;
     height: auto;
     direction: rtl;
@@ -814,7 +814,7 @@ p {
 }
 
 .tourDetailsTitles > span:nth-child(1) {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .tourExpDetails {
@@ -839,7 +839,7 @@ p {
 
 .tourAgencyPhoneNum {
     direction: ltr;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 25px;
     width: 80%;
     line-height: 1;
@@ -902,13 +902,13 @@ p {
 
 .tourGuiderPageAccess {
     color: white;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     left: 0;
     top: 40px;
 }
 
 .tourGuiderSendMsg {
-    background: #fcc156;
+    background: var(--koochita-yellow);
     left: 0;
     top: 75px;
 }
@@ -970,7 +970,7 @@ p {
 
 #tourSchedulePeriodDetails > span:nth-child(1) , #tourSchedulePeriodDetails > span:nth-child(3) , #tourSchedulePeriodDetails > span:nth-child(4) ,
 #tourScheduleDayCounterDiv > span:nth-child(even) {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 #tourSchedulePeriodDetails > div > span {
@@ -1006,7 +1006,7 @@ p {
 }
 
 .tourTransportationDetails th , .tourMoreOptionsDetails th {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     text-align: right;
     font-weight: 400;
 }
@@ -1024,8 +1024,8 @@ p {
 }
 
 .tourTransportationDetails tr:nth-child(2)  button {
-    background: #4DC7BC;
-    border: 1px solid #4DC7BC;
+    background: var(--koochita-light-green);
+    border: 1px solid var(--koochita-light-green);
 }
 
 .tourTransportationDetails tr:nth-child(3) button {
@@ -1046,7 +1046,7 @@ p {
 
 .tourResidenceDetails td:nth-child(2)  span:nth-child(2), .tourResidenceDetails td:nth-child(4)  span:nth-child(1) , #tourStartEndPoint span:nth-child(odd) ,
 #tourStartEndTime span:nth-child(odd){
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .tourResidenceDetails td:nth-child(5) {
@@ -1054,8 +1054,8 @@ p {
 }
 
 .tourResidenceDetails td:nth-child(6) button {
-    background: #fcc156;
-    border: 1px solid #fcc156;
+    background: var(--koochita-yellow);
+    border: 1px solid var(--koochita-yellow);
     border-radius: 5px;
 }
 
@@ -1214,7 +1214,7 @@ p {
 }
 
 .tourListPurchaseBtn {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     border: none;
     color: white;
     width: 50%;
@@ -1243,7 +1243,7 @@ p {
 }
 
 #reserveByPhoneBtn{
-    background: #fcc156;
+    background: var(--koochita-yellow);
     border: 0;
     top: 15px;
     width: 50px;
@@ -1298,7 +1298,7 @@ p {
 }
 
 .suggestedEquipments {
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     color: white;
     margin: 0 0 7px 10px;
     padding: 2px 5px;
@@ -1562,7 +1562,7 @@ p {
 }
 
 .similarTourName  > div:not(:last-child) > span:nth-child(1){
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .tourQualityFeedbackInstructions > p {

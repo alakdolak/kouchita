@@ -296,6 +296,8 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 
     Route::post('checkPhoneNum', array('as' => 'checkPhoneNum', 'uses' => 'UserLoginController@checkPhoneNum'));
 
+    Route::post('checkRegisterData', 'UserLoginController@checkRegisterData')->name('checkRegisterData');
+
     Route::post('checkActivationCode', array('as' => 'checkActivationCode', 'uses' => 'UserLoginController@checkActivationCode'));
 
     Route::post('resendActivationCode', array('as' => 'resendActivationCode', 'uses' => 'UserLoginController@resendActivationCode'));

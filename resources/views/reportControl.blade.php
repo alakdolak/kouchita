@@ -121,7 +121,7 @@
                     ?>
 
                     @if($currPage != $limit)
-                        <button value="{{$currPage + 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk" style="float: right !important; background-color: #4DC7BC !important; border-color: #4DC7BC !important;">بعدی</button>
+                        <button value="{{$currPage + 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk" style="float: right !important; background-color: var(--koochita-light-green) !important; border-color: var(--koochita-light-green) !important;">بعدی</button>
                     @endif
                     @if($currPage != 1)
                         <button value="{{$currPage - 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk prePage" style="float: left !important;">قبلی</button>
@@ -131,7 +131,7 @@
                         @for($i = 1; $i <= $limit; $i++)
                             @if(abs($currPage - $i) < 4 || $i == 1 || $i == $limit)
                                 @if($i == $currPage)
-                                    <span class="pageNum current" style="background-color: #4DC7BC !important; float: left;">{{$i}}</span>
+                                    <span class="pageNum current" style="background-color: var(--koochita-light-green) !important; float: left;">{{$i}}</span>
                                 @else
                                     <button value="{{$i}}" name="pageNum" onclick="document.location.href = '{{route('getReports2', ['page' => $i])}}'" class="pageNum taLnk" style="float: left; background-color: transparent; border: none">{{$i}}</button>
                                 @endif

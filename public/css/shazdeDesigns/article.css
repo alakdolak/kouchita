@@ -1557,7 +1557,7 @@ textarea:hover{
 /*just gardeshname style*/
 
 .gnReturnBackBtn {
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -1599,7 +1599,7 @@ textarea:hover{
 }
 
 .gnLabels {
-    color: #0076a3;
+    color: var(--koochita-blue);
     font-size: 1.2em;
     font-weight: 500;
     line-height: 50px;

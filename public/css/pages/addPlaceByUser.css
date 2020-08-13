@@ -23,7 +23,7 @@
     align-items: center;
 }
 .topSection{
-    border: 3px solid #eab836;
+    border: 3px solid var(--koochita-yellow);
     border-radius: 20px;
     background: white;
 }
@@ -34,10 +34,10 @@
 .lineBetweenDot{
     width: 3px;
     height: 5px;
-    background-color: #053a3e;
+    background-color: var(--koochita-dark-green);
 }
 .headerOfBox {
-    background-color: #053a3e;
+    background-color: var(--koochita-dark-green);
     color: white;
     padding: 15px;
     font-size: 2em;
@@ -82,9 +82,9 @@
     padding-top: 0px;
 }
 .footerBox1{
-    background-color: #053a3e;
+    background-color: var(--koochita-dark-green);
     padding: 5px;
-    border: 3px solid #eab836;
+    border: 3px solid var(--koochita-yellow);
     display: inline-block;
     justify-content: space-between;
     width: calc(100% - 115px);
@@ -106,8 +106,8 @@
 }
 
 .boxNextBtn {
-    background: #0d6650;
-    border-color: #0d6650;
+    background: var(--koochita-green);
+    border-color: var(--koochita-green);
     float: left;
     color: white;
     font-size: 30px;
@@ -120,8 +120,8 @@
 }
 
 .boxPreviousBtn {
-    background: #720d19;
-    border-color: #720d19;
+    background: var(--koochita-red);
+    border-color: var(--koochita-red);
     float: right;
     color: white;
     font-size: 30px;
@@ -135,7 +135,7 @@
 
 .steps {
     border-radius: 50%;
-    background-color: #053a3e;
+    background-color: var(--koochita-dark-green);
 }
 
 .bigCircle {
@@ -164,10 +164,10 @@
 }
 
 .completeStep {
-    background-color: #720d19;
+    background-color: var(--koochita-red);
 }
 .completeStepCenter{
-    background: #eab836;
+    background: var(--koochita-yellow);
 }
 #selectCategoryDiv{
     display: flex;
@@ -179,13 +179,13 @@
     padding: 10px 0;
     width: 15%;
     /*display: inline-block;*/
-    border: 3px solid #eab836;
+    border: 3px solid var(--koochita-yellow);
     border-radius: 6px;
     cursor: pointer;
     font-size: 25px;
     transition: .2s;
-    color: #eab836;
-    background-color: #053a3e;
+    color: var(--koochita-yellow);
+    background-color: var(--koochita-dark-green);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -199,13 +199,13 @@
 .selectCategoryDiv {
     width: 25%;
     display: flex;
-    background-color: #053a3e;
+    background-color: var(--koochita-dark-green);
     border-radius: 0px 0px 0px 17px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 5px 0px;
-    border: solid 3px #4dc7bc;
+    border: solid 3px var(--koochita-light-green);
 }
 .stepHeader{
     display: flex;
@@ -226,7 +226,7 @@
     margin: 4% 1%;
     line-height: 40px;
     cursor: pointer;
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 .categories > div{
     text-align: center;
@@ -237,13 +237,13 @@
     margin: 0;
     line-height: 40px;
     cursor: default;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .stepInputBox {
     display: flex !important;
     padding: 10px 7px;
-    border: 2px solid #eab836;
+    border: 2px solid var(--koochita-yellow);
     border-radius: 5px;
     background-color: #ebebeb;
     margin: 10px 0;
@@ -252,7 +252,7 @@
 
 .stepInputBoxText {
     padding-left: 10px;
-    border-left: 2px solid #eab836;
+    border-left: 2px solid var(--koochita-yellow);
     display: inline-block;
 }
 .overMapButton{
@@ -263,12 +263,12 @@
 }
 .mapButton{
     font-size: 25px;
-    background: #0d6650;
+    background: var(--koochita-green);
     border-radius: 15px;
 }
 .mapButton:hover{
     font-size: 25px;
-    background: #0d6650;
+    background: var(--koochita-green);
     border-radius: 15px;
 }
 .stepInputBoxInput {
@@ -299,7 +299,7 @@
     background-color: #EEEEEE;
     padding: 8px;
     margin: 12px 0 0;
-    border: 2px solid #eab836;
+    border: 2px solid var(--koochita-yellow);
 }
 .dotDiv{
     display: flex;
@@ -308,26 +308,26 @@
     border-radius: 13px 0px 0px 0px;
     border: solid 1px;
     padding: 0px 10px;
-    background-color: #0d6650;
+    background-color: var(--koochita-green);
 }
 #stepName {
     font-size: 1em;
     position: relative;
     margin: 6px;
     font-weight: bold;
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 
 #map {
     height: 150px;
-    border: 1px solid #4DC7BC;
+    border: 1px solid var(--koochita-light-green);
     border-radius: 5px;
     padding: 10px;
 }
 
 .mapBtn {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: white;
     width: 100%;
     margin: 10px 0;
@@ -335,7 +335,7 @@
 
 .listItem {
     padding: 10px 0px;
-    border-bottom: 1px solid #eab836;
+    border-bottom: 1px solid var(--koochita-yellow);
 }
 
 .subListItem {
@@ -349,7 +349,7 @@
     min-width: 30%;
 }
 .selectInput{
-    border: 3px solid #eab836;
+    border: 3px solid var(--koochita-yellow);
     padding: 0px 15px;
     font-size: 20px;
     border-radius: 9px;
@@ -400,8 +400,8 @@
 }
 
 .step5AddPlace {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: white;
     margin: 0 5px;
 }
@@ -422,7 +422,7 @@
 .step6pic {
     height: 130px;
     position: relative;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     background-color: #e5e5e5;
     border: 1px solid #cccccc;
     border-radius: 5px;
@@ -522,7 +522,7 @@
     border-color: #30b4a6;
     color :#30b4a6;
     border-radius: 50px;
-    background-color: #053a3e;
+    background-color: var(--koochita-dark-green);
 }
 .choosedCategory > div{
     color :#30b4a6 !important;
@@ -533,7 +533,7 @@
     transition: .2s;
 }
 .resultSearch:hover{
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     border-radius: 10px;
 }
 .addressSection{
@@ -583,7 +583,7 @@ body{
     min-height: 300px;
 }
 .sampleDescription{
-    border: solid 1px #eab836;
+    border: solid 1px var(--koochita-yellow);
     border-radius: 8px;
     color: gray;
     padding: 15px;

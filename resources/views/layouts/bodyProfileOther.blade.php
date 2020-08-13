@@ -73,7 +73,7 @@
 
             <div class="global-nav global-nav-single-line has-links ">
                 <div class="global-nav-top">
-                    <div class="global-nav-bar global-nav-green" style="background-color: #4dc7bc !important;">
+                    <div class="global-nav-bar global-nav-green" style="background-color: var(--koochita-light-green) !important;">
                         <div class="ui_container global-nav-bar-container">
                             <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
                             <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.svg')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/></a>
@@ -181,7 +181,7 @@
 
     <div id="MAINWRAP" class=" ">
 
-        <div class="modules-membercenter-persistent-header-achievements " style="background-color: #fcc156 !important;">
+        <div class="modules-membercenter-persistent-header-achievements " style="background-color: var(--koochita-yellow) !important;">
             <ul class="persistent-header">
                 @if($mode == "profile")
                     <li id="Profile" class="profile"><a style="color: #963019 !important" href="{{route('profile', ['username' => $user->username])}}">صفحه کاربری</a> </li>
@@ -404,7 +404,7 @@
             function sendAjaxRequestToGiveActivity(activityId, uId, kindPlaceId, menuId, contentId, page, limit) {
 
                 $(".headerActivity").css('color', '#16174f');
-                $("#headerActivity_" + activityId).css('color', '#4dc7bc');
+                $("#headerActivity_" + activityId).css('color', 'var(--koochita-light-green)');
 
                 $("#" + menuId).empty();
 
@@ -492,7 +492,7 @@
                 $("#" + menuId).append(element);
                 $(".subHeaderActivity").css('color', '#16174f');
 
-                $("#subHeaderActivity_" + kindPlaceId).css('color', '#4dc7bc');
+                $("#subHeaderActivity_" + kindPlaceId).css('color', 'var(--koochita-light-green)');
             }
 
             function createContentOfFilters(idx, activityId, uId, kindPlaceId, menuId, contentId, page, limit, filterId) {

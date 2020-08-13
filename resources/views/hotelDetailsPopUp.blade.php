@@ -130,7 +130,7 @@
             }
         }
         if (allow) {
-            $("#trip_" + id).css('border', '2px solid #4DC7BC');
+            $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
             selectedTrips[selectedTrips.length] = id;
         }
     }

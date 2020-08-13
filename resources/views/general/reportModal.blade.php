@@ -91,7 +91,7 @@
             </div>
             <br>
             <div class="submitReportOptions">
-                <button onclick="sendReport()" class="btn btn-success" style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
+                <button onclick="sendReport()" class="btn btn-success" style="color: #FFF;background-color: var(--koochita-light-green);border-color:var(--koochita-light-green);">تایید</button>
                 <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
             </div>
             <div id="errMsgReport" style="color: red"></div>

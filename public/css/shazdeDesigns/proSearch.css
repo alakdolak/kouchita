@@ -3,7 +3,7 @@
     border-radius: 6px;
     width: 100px;
     height: 30px;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     color: white;
     display: none;
 }
@@ -17,7 +17,7 @@
     float: right;
     color: white;
     top: 40px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     border-radius: 6px;
     width: 100px;
     height: 30px
@@ -47,7 +47,7 @@
 
 #greenBtnProSearch {
     margin-left: 10px;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     color: white;
     padding: 4px 8px !important;
     font-size: 10px !important;
@@ -107,7 +107,7 @@
     width: max-content;
     padding: 10px;
     border-radius: 6px;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     color: white
 }
 
@@ -124,7 +124,7 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .whereMainDiv {
@@ -161,7 +161,7 @@
 
 #currentCity {
     margin: 0;
-    color: #0076a3;
+    color: var(--koochita-blue);
     display: flex;
 }
 
@@ -239,7 +239,7 @@
 
 #resultPlace {
     max-height: 200px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     overflow: auto;
     margin-top: 25%;
 }
@@ -294,7 +294,7 @@
 
 #compare {
     border: none;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     margin-bottom: 10px;
 }
 
@@ -372,13 +372,13 @@
 #searchspan .ui_close_x:before {
     font-size: 60px;
     line-height: 70px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 #close_span_search {
     width: 70px !important;
     height: 70px !important;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     display: flex;
     align-items: center;
     justify-content: center;

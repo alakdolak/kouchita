@@ -66,7 +66,7 @@
 
 #tourSearchPopsCloseBtn, #tourErrorPopsCloseBtn {
     float: left;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     border: 0;
 }
 
@@ -141,7 +141,7 @@
     border: 0;
     width: 75px;
     color: white;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     padding: 10px;
     margin-top: 10px;
 }
@@ -168,7 +168,7 @@
 }
 
 .icon-mainpage span {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 26px;
     line-height: 50px
 }

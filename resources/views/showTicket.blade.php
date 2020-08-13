@@ -146,11 +146,11 @@ $state = "تهران"; ?>
         }
 
         .tableDiv:hover {
-            border: 2px solid #4dc7bc;
+            border: 2px solid var(--koochita-light-green);
         }
 
         .current-day {
-            background: #4dc7bc;
+            background: var(--koochita-light-green);
             color: white !important;
         }
 
@@ -205,7 +205,7 @@ $state = "تهران"; ?>
         }
 
         .between {
-            color: #4dc7bc;
+            color: var(--koochita-light-green);
         }
     </style>
 
@@ -353,11 +353,11 @@ $state = "تهران"; ?>
         }
 
         .tableDiv:hover {
-            border: 2px solid #4dc7bc;
+            border: 2px solid var(--koochita-light-green);
         }
 
         .current-day {
-            background: #4dc7bc;
+            background: var(--koochita-light-green);
             color: white !important;
         }
 
@@ -412,7 +412,7 @@ $state = "تهران"; ?>
         }
 
         .between {
-            color: #4dc7bc;
+            color: var(--koochita-light-green);
         }
     </style>
 
@@ -509,13 +509,13 @@ $state = "تهران"; ?>
         .search-fields-date-icon {
             margin-left: 5px;
             margin-right: 5px;
-            color: #4DC7BC !important;
+            color: var(--koochita-light-green) !important;
             font-size: 15px;
         }
 
         .search-fields-but {
             margin-right: 40px;
-            background-color: #4DC7BC;
+            background-color: var(--koochita-light-green);
             border: none;
             color: white;
             height: 25px;
@@ -523,22 +523,22 @@ $state = "تهران"; ?>
         }
 
         .selected-filter:hover {
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             cursor: pointer;
         }
 
         .selected-filter:selection {
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 13px;
             cursor: pointer;
         }
 
         .select-sort {
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
 
         .filter-selected-byclick {
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             cursor: pointer;
         }
 
@@ -552,7 +552,7 @@ $state = "تهران"; ?>
             position: absolute;
             top: 136%;
             margin: auto;
-            background-color: #4DC7BC;
+            background-color: var(--koochita-light-green);
             height: 3px;
             border-radius: 2px;
         }
@@ -563,7 +563,7 @@ $state = "تهران"; ?>
             position: absolute;
             top: 136%;
             margin: auto;
-            background-color: #4DC7BC;
+            background-color: var(--koochita-light-green);
             height: 3px;
             border-radius: 2px;
         }
@@ -574,7 +574,7 @@ $state = "تهران"; ?>
             position: absolute;
             top: 136%;
             margin: auto;
-            background-color: #4DC7BC;
+            background-color: var(--koochita-light-green);
             height: 3px;
             border-radius: 2px;
         }
@@ -621,7 +621,7 @@ $state = "تهران"; ?>
         .ticket-type {
             width: 120px;
             float: right;
-            background-color: #4DC7BC;
+            background-color: var(--koochita-light-green);
             margin: 5px 10px;
             font-size: 15px;
             color: white;
@@ -733,7 +733,7 @@ $state = "تهران"; ?>
             border: none;
             box-shadow: none;
             border-radius: 50%;
-            background: #4DC7BC;
+            background: var(--koochita-light-green);
             width: 14px;
             height: 14px;
             left: -7px;
@@ -760,7 +760,7 @@ $state = "تهران"; ?>
             display: block;
             width: 100%;
             height: 100%;
-            background: #4DC7BC;
+            background: var(--koochita-light-green);
             position: absolute;
             left: 0;
             top: 0;
@@ -768,7 +768,7 @@ $state = "تهران"; ?>
         }
 
         .pmd-range-slider .noUi-connect {
-            background: #4DC7BC;
+            background: var(--koochita-light-green);
         }
     </style>
 
@@ -830,13 +830,13 @@ $state = "تهران"; ?>
 
         .calendarIcon:before {
             content: '\E015';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             display: inline-block;
         }
 
         .passengerIcon:before {
             content: '\E0DF';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
 
         .clsIcon:before {
@@ -882,7 +882,7 @@ $state = "تهران"; ?>
 
         .fillArrowBottomIcon:before {
             content: '\E040';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 1.7em;
             height: 50px;
             line-height: 50px;
@@ -891,7 +891,7 @@ $state = "تهران"; ?>
 
         .fillArrowUpIcon:before {
             content: '\E03A';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 1.7em;
             cursor: pointer;
             height: 50px;
@@ -908,7 +908,7 @@ $state = "تهران"; ?>
 
         .locationIcon:before {
             content: '\E019';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
 
         .leftArrowIcon:before {
@@ -930,7 +930,7 @@ $state = "تهران"; ?>
         }
 
         .filterBox {
-            background-color: #4dc7bc;
+            background-color: var(--koochita-light-green);
             border-radius: 3px;
             color: white;
             padding: 2px 5px;
@@ -1039,7 +1039,7 @@ $state = "تهران"; ?>
 
         .fillArrowBottomIcon:before {
             content: '\E040';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 1.7em;
             height: 50px;
             line-height: 50px;
@@ -1055,7 +1055,7 @@ $state = "تهران"; ?>
         }
 
         .fillArrowUpIcon3:before {
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
 
         .class_changeTime {
@@ -1076,7 +1076,7 @@ $state = "تهران"; ?>
         }
 
         .changeTypeTime:hover {
-            border-bottom: 1px solid #4DC7BC;
+            border-bottom: 1px solid var(--koochita-light-green);
         }
     </style>
 
@@ -1107,8 +1107,8 @@ $state = "تهران"; ?>
         }
 
         .alarm {
-            background: #4DC7BC;
-            border-color: #4DC7BC;
+            background: var(--koochita-light-green);
+            border-color: var(--koochita-light-green);
             color: #fff;
             line-height: 32px;
             font-size: 1.5em;
@@ -1274,12 +1274,12 @@ $state = "تهران"; ?>
 
         .alarmInputCityName:focus {
             border: none !important;
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
 
         .alarmPopUpBotton {
-            background: #4DC7BC;
-            border-color: #4DC7BC;
+            background: var(--koochita-light-green);
+            border-color: var(--koochita-light-green);
             color: #fff;
             line-height: 24px;
             font-size: 1em;
@@ -1322,7 +1322,7 @@ $state = "تهران"; ?>
     <style>
         .editSearchButtton {
             margin-right: 40px;
-            background-color: #4DC7BC;
+            background-color: var(--koochita-light-green);
             border: none;
             color: white;
             height: 49px;
@@ -1380,7 +1380,7 @@ $state = "تهران"; ?>
             font-weight: 700;
         }
         .cityName:hover {
-            background-color: #4DC7BC !important;
+            background-color: var(--koochita-light-green) !important;
             color: white !important;
         }
         .inputCityName {
@@ -1396,7 +1396,7 @@ $state = "تهران"; ?>
         }
         .inputCityName:focus {
             border: none !important;
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
         .searchBottomArrowIcone:before {
             content: '\E04A';
@@ -1601,11 +1601,11 @@ $state = "تهران"; ?>
         }
 
         .tableDiv:hover {
-            border: 2px solid #4dc7bc;
+            border: 2px solid var(--koochita-light-green);
         }
 
         .current-day {
-            background: #4dc7bc;
+            background: var(--koochita-light-green);
             color: white !important;
         }
 
@@ -1659,7 +1659,7 @@ $state = "تهران"; ?>
             right: 6em;
         }
         .between {
-            color: #4dc7bc;
+            color: var(--koochita-light-green);
         }
 
         /*bottom button*/
@@ -1672,7 +1672,7 @@ $state = "تهران"; ?>
         .diffrentCalenBtn {
             float: left;
             margin-left: 5%;
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             background-color: white; border: none; font-size: 140%;
             border: none;
             font-size: 120%;
@@ -1692,14 +1692,14 @@ $state = "تهران"; ?>
         }
         .rightArrowIcone:before {
             content: '\E047';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 2.5em;
             position: absolute;
             top: 4px;
         }
         .leftArrowIcone:before {
             content: '\E04D ';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 2.5em;
             position: absolute;
             top: 4px;
@@ -1722,7 +1722,7 @@ $state = "تهران"; ?>
         }
 
         .classTypePane:hover {
-            border-bottom: 1px solid #4DC7BC;
+            border-bottom: 1px solid var(--koochita-light-green);
         }
     </style>
 
@@ -2026,7 +2026,7 @@ $state = "تهران"; ?>
 
                                 <div id="filters_tab" style="width: 100%;">
                                     <div style="width: 100%; height: 25px; margin-top: 10px;">
-                                        <div style="font-size: 1.4em; float: right; color: #4DC7BC;"> فیلتر اعمال شده
+                                        <div style="font-size: 1.4em; float: right; color: var(--koochita-light-green);"> فیلتر اعمال شده
                                         </div>
                                         <div style="font-size: 1.4em; float: left; direction: rtl;"><span id="filterTicket"> 0</span> <span>مورد از </span> <span id="totalTicket">  </span>
                                         </div>
@@ -2196,7 +2196,7 @@ $state = "تهران"; ?>
 
                                 {{--<!-- Slider -->--}}
                                 {{--<div id="pmd-slider-value-range5" class="pmd-range-slider"--}}
-                                {{--style="color: #4DC7BC!important;"></div>--}}
+                                {{--style="color: var(--koochita-light-green)!important;"></div>--}}
 
                                 {{--<!-- Values -->--}}
                                 {{--<div class="row">--}}
@@ -2298,7 +2298,7 @@ $state = "تهران"; ?>
 
                                 {{--<!-- Slider -->--}}
                                 {{--<div id="pmd-slider-value-range6" class="pmd-range-slider"--}}
-                                {{--style="margin-top: 25px !important; color: #4DC7BC!important;"></div>--}}
+                                {{--style="margin-top: 25px !important; color: var(--koochita-light-green)!important;"></div>--}}
 
                                 {{--<!-- Values -->--}}
                                 {{--<div class="row">--}}
@@ -2719,7 +2719,7 @@ $state = "تهران"; ?>
 <div id="idGetAlarm" class="hidden"
      style="position: fixed; width: 100%; height: 100%; left: 0; top: 0; background-color: rgba(0,0,0,0.6); z-index: 200;">
 <span class="ui_overlay ui_modal editTags getAlarm" style="padding: 10px 10px 1px !important; z-index: 201;">
-    <div class="shTIcon clsIcon" style="float: left; color: #4DC7BC; font-size: 2em" onclick="getAlarm(0)"></div>
+    <div class="shTIcon clsIcon" style="float: left; color: var(--koochita-light-green); font-size: 2em" onclick="getAlarm(0)"></div>
     <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
     <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
     <div class="ui_column ui_picker alarmBoxCityName">
@@ -2760,7 +2760,7 @@ $state = "تهران"; ?>
      style="position: fixed; width: 100%; height: 100%; left: 0; top: 0; background-color: rgba(0,0,0,0.6); z-index: 200;">
 <span class="ui_overlay ui_modal editTags visitOffers"
       style="background-color: #ebebeb; padding: 10px 10px 1px !important;">
-    <div class="shTIcon clsIcon" style="float: left; color: #4DC7BC; font-size: 2em"
+    <div class="shTIcon clsIcon" style="float: left; color: var(--koochita-light-green); font-size: 2em"
          onclick="document.getElementById('visitOffers').classList.add('hidden')"></div>
     <div class="row set-center" style="margin: 0 5%">
         <div class="col-md-6 set-center">
@@ -4058,19 +4058,19 @@ $state = "تهران"; ?>
         document.getElementById('morningBase').style.color = '#555555';
         switch (kind) {
             case 1:
-                document.getElementById('nightBase').style.color = '#4DC7BC';
+                document.getElementById('nightBase').style.color = 'var(--koochita-light-green)';
                 dayFilterNumber = [21, 3];
                 break;
             case 2:
-                document.getElementById('afternoonBase').style.color = '#4DC7BC';
+                document.getElementById('afternoonBase').style.color = 'var(--koochita-light-green)';
                 dayFilterNumber = [15, 21];
                 break;
             case 3:
-                document.getElementById('noonBase').style.color = '#4DC7BC';
+                document.getElementById('noonBase').style.color = 'var(--koochita-light-green)';
                 dayFilterNumber = [10, 15];
                 break;
             case 4:
-                document.getElementById('morningBase').style.color = '#4DC7BC';
+                document.getElementById('morningBase').style.color = 'var(--koochita-light-green)';
                 dayFilterNumber = [3, 9];
                 break;
             case 5:
@@ -4464,7 +4464,7 @@ $state = "تهران"; ?>
             else
                 currIdx = 0;
             if (currIdx >= 0 && currIdx < suggestions.length)
-                $("#suggest_" + currIdx).css("background-color", "#4DC7BC").css("color", "white");
+                $("#suggest_" + currIdx).css("background-color", "var(--koochita-light-green)").css("color", "white");
             return;
         }
         if (38 == e.keyCode) {
@@ -4473,7 +4473,7 @@ $state = "تهران"; ?>
             else
                 currIdx = suggestions.length - 1;
             if (currIdx >= 0 && currIdx < suggestions.length)
-                $("#suggest_" + currIdx).css("background-color", "#4DC7BC").css("color", "white");
+                $("#suggest_" + currIdx).css("background-color", "var(--koochita-light-green)").css("color", "white");
             return;
         }
         $.ajax({

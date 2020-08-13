@@ -75,7 +75,7 @@
     top: -21px;
     left: 0px;
     font-size: 75px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 .imgMapMoreDiv{
@@ -261,7 +261,7 @@
 .topPlacesDivInCity{
     margin: 40px 10px;
     padding: 20px 20px;
-    background: #053a3e;
+    background: var(--koochita-dark-green);
     margin-top: 0px;
 }
 
@@ -274,7 +274,7 @@
 
 .topPlacesDivInCityHeader a {
     margin: 0 5px;
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 
 .topPlacesDivInCityHeader div{
@@ -327,7 +327,7 @@
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     position: absolute;
     bottom: -15px;
     left: 0;
@@ -338,7 +338,7 @@
     font-size: 9px;
     font-weight: normal;
     cursor: default;
-    background: #0076a3;
+    background: var(--koochita-blue);
 }
 
 .smallReviewShowMore{
@@ -393,7 +393,7 @@
 }
 
 .showLessText{
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 
@@ -449,7 +449,7 @@
     left: 5px;
     top: 0px;
     font-size: 22px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 
@@ -467,7 +467,7 @@
     position: absolute;
     top: 20px;
     left: 0px;
-    background: #720d19;
+    background: var(--koochita-red);
     color: white;
     font-size: 40px;
     border-radius: 0px 10px 10px 0px;
@@ -509,7 +509,7 @@
 }
 
 .moreOptionFullReviewDetails > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .moreOptionFullReviewDetails > span:not(:last-child) {
@@ -525,7 +525,7 @@
 }
 
 .moreOptionFullReviewDetails > a:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .moreOptionFullReviewDetails > a:not(:last-child) {
@@ -621,7 +621,7 @@
 }
 
 .quantityOfLikes > span, .feedbackStatistic > span {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .fullReveiwPhotosCol{
@@ -680,7 +680,7 @@
 }
 
 .commentRatingHeader > span {
-    color: #720d19;
+    color: var(--koochita-red);
     /*cursor: pointer;*/
 }
 
@@ -751,7 +751,7 @@
 }
 
 .postCommentChoice:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .commentsLikeIconFeedback::before {
@@ -872,7 +872,7 @@
 }
 
 .replayReview.replayBtn{
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
 }
 
@@ -948,7 +948,7 @@
 }
 
 .replyBtn {
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     border-radius: 5px;
     padding: 2px 6px;
     cursor: pointer;
@@ -1009,7 +1009,7 @@
     z-index: 9;
 }
 .replayReview.replayBtn{
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
 }
 
@@ -1179,7 +1179,7 @@
 }
 
 .replyCommentTitle, .replyWriterUsername, .replyAnswerTitle {
-    color: #0076a3;
+    color: var(--koochita-blue);
     position: absolute;
     top: 2px;
     right: 10px;
@@ -1240,7 +1240,7 @@
     font-family: Shazde_Regular2 !important;
 }
 .LikeIconEmpty.likedislikeAnsReviews.coloredFullIcon{
-    color: #0d6650;
+    color: var(--koochita-green);
 }
 .LikeIconEmpty.likedislikeAnsReviews.coloredFullIcon:after{
     content: '\E057' !important;
@@ -1295,7 +1295,7 @@
 
 .submitAnsInReview{
     background-color: #ebebeb;
-    color: #0076a3;
+    color: var(--koochita-blue);
     padding: 2px;
     border: none;
 }

@@ -1301,8 +1301,8 @@ li.error {
 #savePass1Info, #savePass2Info, #changePasswordAccountInfo {
     padding: 5px;
     margin: 0 7px;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 #HEADER_DEFAULT2, #HEADER_DEFAULT3 {
@@ -1337,8 +1337,8 @@ li.error {
 }
 
 #ensureBtnDeleteAccountAccountInfo {
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 /*edit photo*/
@@ -1364,8 +1364,8 @@ li.error {
 #uploadBtn > center > input:nth-child(1) , #defaultPhotoBtn > center > input:nth-child(1) {
     padding: 5px;
     margin-left: 10px;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 #uploadBtn > center > input:nth-child(2) , #defaultPhotoBtn > center > input:nth-child(2) {

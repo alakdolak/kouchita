@@ -230,12 +230,12 @@
                                         <script>
                                             $(document).ready(function(){
                                                 $(".tourKindIcons").mouseenter(function(){
-                                                    $(this).css("background-color", "#4DC7BC");
+                                                    $(this).css("background-color", "var(--koochita-light-green)");
                                                 });
                                                 $(".tourKindIcons").mouseleave(function(){
                                                     var $this = $(this);
                                                     if($this.data('clicked')) {
-                                                        $(this).css("background-color", "#4DC7BC");
+                                                        $(this).css("background-color", "var(--koochita-light-green)");
                                                     }
                                                     else {
                                                         $(this).css("background-color", "#e5e5e5");
@@ -367,7 +367,7 @@
                                                         <script>
                                                             $(document).ready(function(){
                                                                 $(".tourLevelIcons").mouseenter(function(){
-                                                                    $(this).css("background-color", "#4DC7BC"),
+                                                                    $(this).css("background-color", "var(--koochita-light-green)"),
                                                                     $(this).css("color" , "white");
                                                                 });
                                                                 $(".tourLevelIcons").mouseleave(function(){

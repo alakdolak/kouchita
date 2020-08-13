@@ -12,7 +12,7 @@
             display: none;
         }
         .mainHeader{
-            background: #4DC7BC;
+            background: var(--koochita-light-green);
         }
         .headerIconCommon:before{
             color: white;
@@ -59,7 +59,7 @@
                     <div id="languageMenu" class="arrowTopDiv headerSubMenu">
                         <div class="headerBookMarkBody" style="padding-top: 0;">
                             <div id="authLanguageMenu" class="headerBookMarkContentDiv authLanguageMenu">
-                                <a href="{{url('language/fa')}}" class="authLang" style="color: #4DC7BC;">
+                                <a href="{{url('language/fa')}}" class="authLang" style="color: var(--koochita-light-green);">
                                     فارسی
                                 </a>
                                 <a href="{{url('language/en')}}" class="authLang">
@@ -179,7 +179,7 @@
                 </div>
 
                 <div class="mainLoginButton languageButton">
-                    <a style="color: #0e3a46;" href="{{url('language/fa')}}">
+                    <a style="color: var(--koochita-dark-green);" href="{{url('language/fa')}}">
                         فارسی
                     </a>
                     <div class="languagePopUp">

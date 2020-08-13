@@ -11,7 +11,7 @@
     height: 48px; /* Matches top of .uploaderDlg */
     width: 100%;
     line-height: 48px;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 .photoUploader .headerBar h3 {
     float: right;

@@ -47,7 +47,7 @@ function closeTripStyles(element) {
 function sendAjaxRequestToGiveActivity(activityId, uId, kindPlaceId, menuId, contentId, page, limit) {
 
     $(".headerActivity").css('color', '#16174f');
-    $("#headerActivity_" + activityId).css('color', '#4dc7bc');
+    $("#headerActivity_" + activityId).css('color', 'var(--koochita-light-green)');
 
     $("#" + menuId).empty();
     $("#" + contentId).empty();
@@ -77,7 +77,7 @@ function sendAjaxRequestToGiveActivity(activityId, uId, kindPlaceId, menuId, con
             $("#" + menuId).append(element);
             $(".subHeaderActivity").css('color', '#16174f');
 
-            $("#subHeaderActivity_" + kindPlaceId).css('color', '#4dc7bc');
+            $("#subHeaderActivity_" + kindPlaceId).css('color', 'var(--koochita-light-green)');
 
         }
     });

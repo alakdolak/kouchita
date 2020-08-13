@@ -17,7 +17,7 @@
 }
 
 #estelah .estelahatrow {
-    border-bottom: 1px solid #4DC7BC;
+    border-bottom: 1px solid var(--koochita-light-green);
     padding: 10px;
 
 
@@ -96,7 +96,7 @@
 }
 
 #tagMainBox {
-    border: 1px solid #4DC7BC;
+    border: 1px solid var(--koochita-light-green);
     padding: 0;
     text-align: center;
     max-height: 400px;
@@ -104,7 +104,7 @@
 }
 
 #tagNameDiv {
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     padding: 10px;
 }
 

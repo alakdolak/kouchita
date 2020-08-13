@@ -89,7 +89,7 @@
                 </div>
                 <div>
                     <button class="backSafarnameh" onclick="backToSafarnamehList()">بازگشت</button>
-                    <button class="btn btn-success submitSafarnameh" style="background: #0d6650" onclick="storeSafarnameh()">ثبت</button>
+                    <button class="btn btn-success submitSafarnameh" style="background: var(--koochita-green)" onclick="storeSafarnameh()">ثبت</button>
                 </div>
             </div>
 

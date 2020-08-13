@@ -81,6 +81,7 @@
         $('#alertBodyDiv').html(_text);
         $('#alertBoxDiv').css('display', 'flex');
     }
+
     function closeErrorAlert(){
         $('#alertBoxDiv').css('display', 'none');
     }

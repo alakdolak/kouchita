@@ -1,5 +1,5 @@
 #masthead-recent {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
 }
 
 .global-nav-bar-container .ui_icon {
@@ -27,7 +27,7 @@
 }
 
 .masthead > div > div > div > div {
-    background-color: #4DC7BC !important;
+    background-color: var(--koochita-light-green) !important;
     position: relative;
 }
 
@@ -158,6 +158,6 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions > div {
     padding: 7px 10px;
     border-radius: 30px;
     font-weight: 600;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }

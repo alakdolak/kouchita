@@ -129,8 +129,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .specOfferBtn {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 .reservBtn {
@@ -139,8 +139,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .viewOfferBtn {
-    background: #fcc156;
-    border-color: #fcc156;
+    background: var(--koochita-yellow);
+    border-color: var(--koochita-yellow);
     color: black;
     line-height: 20px;
     width: 130px;
@@ -150,8 +150,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .editSearchBtn {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: #fff;
     line-height: 16px;
     width: 135px;
@@ -193,8 +193,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .selectOrder {
-    border-bottom: 2px solid #4DC7BC;
-    color: #4DC7BC;
+    border-bottom: 2px solid var(--koochita-light-green);
+    color: var(--koochita-light-green);
 }
 
 /*4th box styles*/
@@ -252,8 +252,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .viewOffersBtn {
-    background: #fcc156;
-    border-color: #fcc156;
+    background: var(--koochita-yellow);
+    border-color: var(--koochita-yellow);
     line-height: 22px;
     width: 125px;
     border-radius: 5px;
@@ -264,8 +264,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .alarm {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: #fff;
     line-height: 32px;
     font-size: 1.4em;
@@ -320,7 +320,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     content: '\E02C';
     position: relative;
     cursor: pointer;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 1.5em;
     float: left;
 }
@@ -341,7 +341,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border: none;
     box-shadow: none;
     border-radius: 50%;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     width: 14px;
     height: 14px;
     left: -7px;
@@ -358,19 +358,19 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .noUi-horizontal .noUi-handle-lower .noUi-tooltip {
     /*display: none;*/
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
 }
 
 .noUi-horizontal .noUi-handle-upper .noUi-tooltip {
     /*display: none;*/
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
 }
 
 .pmd-range-slider .noUi-handle:before {
     display: block;
     width: 100%;
     height: 100%;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     position: absolute;
     left: 0;
     top: 0;
@@ -378,7 +378,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .pmd-range-slider .noUi-connect {
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 
 /*8th box styles*/
@@ -390,7 +390,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .passengerIcon:before {
     content: '\E0DF';
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .minusPlusIcons {
@@ -522,7 +522,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .srchBtn {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     border: none;
     color: white;
     width: 100%;
@@ -589,7 +589,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .alarmPopUpBotton {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     color: white;
 }
 

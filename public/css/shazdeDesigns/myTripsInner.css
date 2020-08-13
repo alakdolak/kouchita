@@ -61,7 +61,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 #result div:hover {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .ui_tabs {
@@ -209,7 +209,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin-bottom: 29px;
     font-size: 24px;
     font-weight: bold;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 .darkModeOption {
@@ -218,8 +218,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .successBtn {
     color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 #errorAssignPlace {
@@ -266,7 +266,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .editTripPromptTitle {
-    color: #4DC7BC !important;
+    color: var(--koochita-light-green) !important;
 }
 
 #date_btn_start_edit_label, #date_btn_end_edit_label {
@@ -349,7 +349,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 #visitTimeLabel {
     float: left;
     padding: 5px 0;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 #map {
@@ -359,8 +359,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 #sendCommentBtn {
     color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     border-radius: 5%;
     width: 100%;
     margin-top: 17px;
