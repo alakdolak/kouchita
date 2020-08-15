@@ -64,7 +64,8 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetailAllReviewsAndQuestions.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css?v=1')}}">
+{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css?v=1')}}">--}}
+{{--    <link rel="stylesheet" href="{{URL::asset('css/component/editor.css?v=1')}}">--}}
 
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css?v=1')}}">

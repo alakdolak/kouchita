@@ -29,7 +29,12 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
 <style>
-
+    .comButLogin {
+        color: white;
+    }
+    .comButLogin:hover{
+        color: white;
+    }
 </style>
 
 {{--loginPopUp--}}
@@ -122,6 +127,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 <div class="col-sm-2 loginInputDiv" style="margin-top: 0px">
                     <button class="loginRegisterButton" style="background: var(--koochita-blue); width: 90px;" onclick="login($('#username_main').val(), $('#password_main').val())">ورود</button>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-12 loginErr" style="color: red"></div>
             </div>
         </div>
@@ -168,7 +175,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                 <span>{{__('زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :')}}</span>
                                 <span id="reminderTime" class="reminderTime"></span>
                             </div>
-                            <button onclick="resendActivationCode('register', this)" id="resendActivationCode" class="btn btn-success resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
+                            <button onclick="resendActivationCode('register', this)" id="resendActivationCode" class="btn comButLogin resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
                         </div>
                         <hr>
                         <div>
@@ -179,8 +186,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             </div>
                         </div>
                         <div style="display: flex; margin: 10px 0px;">
-                            <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1' style="margin-left: 5px;">
-                            <label class='labelForCheckBox' for='checked'>
+                            <input id='checked2' onchange='checkedCheckBox(this)' type='checkbox' value='-1' style="margin-left: 5px;">
+                            <label class='labelForCheckBox' for='checked2'>
                                 <span></span>&nbsp;
                             </label>
                             <div style="margin-right: 5px"> {{__('شرایط استفاده و')}}
@@ -208,8 +215,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                 </div>
                             </div>
                             <div style="display: flex; margin: 10px 0px;">
-                                <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1' style="margin-left: 5px;">
-                                <label class='labelForCheckBox' for='checked'>
+                                <input id='checked1' onchange='checkedCheckBox(this)' type='checkbox' value='-1' style="margin-left: 5px;">
+                                <label class='labelForCheckBox' for='checked1'>
                                     <span></span>&nbsp;
                                 </label>
                                 <div style="margin-right: 5px"> {{__('شرایط استفاده و')}}
@@ -258,7 +265,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             <span>{{__('زمان باقی مانده برای ارسال مجدد لینک بازیابی رمز عبور :')}}</span>
                             <span id="reminderTimeEmailForgetPass" class="reminderTime"></span>
                         </div>
-                        <button onclick="retrievePasByEmail()" id="resendForgetPassEmailButton" class="btn btn-success resendActivationCode" style="margin-top: 15px;"> {{__('ارسال لینک بازیابی')}} </button>
+                        <button onclick="retrievePasByEmail()" id="resendForgetPassEmailButton" class="btn comButLogin resendActivationCode" style="margin-top: 15px;"> {{__('ارسال لینک بازیابی')}} </button>
                         <div class="pd-tp-8">
                             <button type="button" onclick="Return('Email_ForgetPass')" class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                             <p id="loginErrResetPasByEmail"></p>
@@ -295,7 +302,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                 <span>  {{__('زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :')}}</span>
                                 <span id="reminderTimeForgetPass" class="reminderTime"></span>
                             </div>
-                            <button onclick="resendActivationCode('forget', this)" id="resendActivationCodeForgetPass" class="btn btn-success resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
+                            <button onclick="resendActivationCode('forget', this)" id="resendActivationCodeForgetPass" class="btn comButLogin resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
                         </div>
                         <div class="pd-tp-8">
                             <button type="button" onclick="checkValidateForgetPass()" class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
@@ -664,7 +671,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 error: function(err){
                     closeLoading();
                     console.log(err);
-                    alert(' {{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                    showSuccessNotifi(' {{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             });
         }
@@ -740,7 +747,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 error: function (err) {
                     console.log(err);
                     closeLoading();
-                    alert('{{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                    showSuccessNotifi('{{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             });
     }
@@ -750,9 +757,9 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         return re.test(email);
     }
 
-    function checkedCheckBox() {
+    function checkedCheckBox(_element) {
 
-        if ($("#checked").is(":checked")) {
+        if ($(_element).is(":checked")) {
             $(".submitAndFinishBtn").removeAttr('disabled');
         } else {
             $(".submitAndFinishBtn").attr('disabled', 'disabled');
@@ -760,10 +767,6 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
     }
 
     function openUserRegisterationPage(){
-
-        // $('#sendVerifiedPhoneCodeSection').addClass('hidden');
-        // $('#EnterEmail-loginPopUp').addClass('hidden');
-
         $('#loginPopUp').addClass('hidden');
         $('#registerDiv').removeClass('hidden');
         $('#EnterUsername-loginPopUp').removeClass('hidden');
@@ -855,7 +858,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 error: function(err){
                     closeLoading();
                     console.log(err);
-                    alert('{{__('در قرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                    showSuccessNotifi('{{__('در قرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             });
         }
@@ -889,21 +892,22 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 success: function(response){
                     closeLoading();
                     if(response == 'ok'){
-                        alert('{{__('رمز شما با موفقیت تغییر یافت')}}');
+                        showSuccessNotifi('{{__('رمز شما با موفقیت تغییر یافت')}}', 'left');
+
                         $("#setNewPassword").addClass('hidden');
                         closeRegister();
                     }
                     else if(response == 'nok5'){
                         $('#setNewPassword').addClass('hidden');
                         $('#Phone_ForgetPass').removeClass('hidden');
-                        alert('{{__('طفا دوباره شماره تماس خود را تایید کنید')}}');
+                        showSuccessNotifi('{{__('لطفا دوباره شماره تماس خود را تایید کنید')}}', 'left', 'red');
                         closeLoading();
                     }
                 },
                 error: function(err){
                     closeLoading();
                     console.log(err);
-                    alert('{{__('در هنگام تغییر رمز مشکلی پیش امده لظفا دوباره تلاش نمایید')}}');
+                    showSuccessNotifi('{{__('در هنگام تغییر رمز مشکلی پیش امده لظفا دوباره تلاش نمایید')}}', 'left', 'red');
                 }
             })
         }
@@ -932,18 +936,18 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     try{
                         response = JSON.parse(response);
                         if(response.status == 'ok'){
-                            alert('لینک بازیابی به لینک شما ارسال شد');
+                            showSuccessNotifi('{{__('لینک بازیابی به لینک شما ارسال شد')}}', 'left', 'red');
                             $('#reminderTimeEmailForgetPassDiv').removeClass('hidden');
                             $('#resendForgetPassEmailButton').addClass('hidden');
                             reminderTime = response.remainder;
                             phoneCodeRegister = setInterval("decreaseTime()", 1000);
                         }
                         else if(response.status == 'nok')
-                            openErrorAlert('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}');
+                            showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
                         else if(response.status == 'nok1')
                             $('#loginErrResetPasByEmail').text('{{__('کاربری با این ایمیل در سامانه ثبت نشده است')}}');
                         else if(response.status == 'nok2')
-                            openErrorAlert('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}');
+                            showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
                         else if(response.status == 'nok3') {
                             reminderTime = response.remainder;
                             phoneCodeRegister = setInterval("decreaseTime()", 1000);
@@ -954,13 +958,13 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     }
                     catch (e) {
                         console.log(e)
-                        openErrorAlert('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}');
+                        showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
                     }
                 },
                 error: function(err){
                     console.log(err);
                     closeLoading();
-                    openErrorAlert('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}');
+                    showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
                 }
             })
         }

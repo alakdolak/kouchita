@@ -969,6 +969,7 @@ if ($total == 0)
                                                 <div class="topMainMapDiv">
                                                     <div id="mainMap" class="mainMap placeHolderAnime"></div>
                                                 </div>
+
                                                 @include('layouts.extendedMap')
 
                                             @endif
