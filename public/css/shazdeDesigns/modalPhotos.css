@@ -385,11 +385,11 @@
     }
 
     .showingPhotosModal .leftColPhotosModalMainDiv {
-        padding: 25px 5% 25px;
+        padding: 0px 5% 0px;
     }
 
     .showingPhotosModal .selectedPhotoShowingModal {
-        height: 400px;
+        height: 55vh;
     }
 }
 
@@ -408,15 +408,15 @@
         right: 7px;
     }
 
-    .showingPhotosModal .selectedPhotoShowingModal {
-        height: 320px;
-    }
+    /*.showingPhotosModal .selectedPhotoShowingModal {*/
+    /*    height: 320px;*/
+    /*}*/
 }
 
 @media (max-width:480px)  {
-    .showingPhotosModal .selectedPhotoShowingModal {
-        height: 250px;
-    }
+    /*.showingPhotosModal .selectedPhotoShowingModal {*/
+    /*    height: 250px;*/
+    /*}*/
 
     .showingPhotosModal .rightColPhotosShowingModal {
         width: 100px;

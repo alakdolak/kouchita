@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=1')}}">
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=2')}}">
 
 <style>
     .deletePicIconsPhotoAlbum{
@@ -21,6 +21,33 @@
         font-size: 9px;
         display: block;
         color: #9aa0a6;
+    }
+    .albumContent{
+        max-height: 75vh;
+        overflow: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .leftColPhotosModalMainDiv{
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+
+    @media (max-width: 768px) {
+        .leftColPhotosModalMainDiv{
+            margin-bottom: 30px;
+        }
+        .albumContent{
+            max-height: 55vh;
+        }
+        .showingPhotosModal .rightColPhotosShowingModal{
+            height: 55px;
+            width: 60px;
+            border-radius: 5px;
+        }
     }
 </style>
 
@@ -51,12 +78,12 @@
             </div>
             <div class="clear-both"></div>
             <div class="display-flex">
-                <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv" style="display: flex; margin-bottom: 20px;">
+                <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                     <div id="leftColPhotosModalMainDiv" class="selectedPhotoShowingModal" style="position: relative;">
                         <div style="position: relative; width: 100%;">
-                            <div style="max-height: 80vh; overflow: auto; width: 100%;">
-                                <img id="mainPhotoAlbum" src="" alt="" style="width: 100%;">
-                                <video id="mainVideoPhotoAlbum" src="" controls style="width: 100%; height: 100%;"></video>
+                            <div class="albumContent">
+                                <img id="mainPhotoAlbum" src="" style="max-width: 100%; max-height: 100%;">
+                                <video id="mainVideoPhotoAlbum" src="" controls style="max-width: 100%; max-height: 100%;"></video>
                             </div>
                             <div style="position: absolute; bottom: -25px; right: 0px; margin-top: 7px; display: flex; justify-content: center;">
                                 <div id="photoAlbumLikeSection" class="photoAlbumLikeSection" style="display:none;">
