@@ -913,7 +913,7 @@ if ($total == 0)
                                                         </div>
                                                         <div class="prw_rup prw_common_atf_header_bl"
                                                              id="clientConnectionsLines">
-                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
+                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap('{{$place->C}}', '{{$place->D}}')">
                                                                 <span class="ui_icon map-pin"></span>
                                                                 @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
                                                                     <span class="street-address">آدرس : </span>

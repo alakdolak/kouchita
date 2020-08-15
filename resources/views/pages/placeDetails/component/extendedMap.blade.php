@@ -108,8 +108,13 @@
         moreInfo: []
     };
 
-    function showExtendedMap(){
-        $('#mapState').modal('show');
+    function showExtendedMap(_x, _y){
+        if(window.mobileAndTabletCheck())
+            location.href = 'geo:' + _x + ',' + _y;
+        else {
+            getStatePlaces();
+            $('#mapState').modal('show');
+        }
     }
 
     function initExtendedMap(_data, _center, _centerPlace = '') {
@@ -223,6 +228,4 @@
             }
         })
     }
-
-    getStatePlaces();
 </script>
