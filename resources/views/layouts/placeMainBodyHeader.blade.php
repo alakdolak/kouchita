@@ -102,21 +102,21 @@
                 </span>
                 <div class="prw_rup prw_common_atf_header_bl headerBL">
                     <div class="blRow">
-                        <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap()" style="min-height: 20px">
                             @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
+                                <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap({{$place->C}}, {{$place->D}})" style="min-height: 20px">
                                 <span class="ui_icon map-pin"></span>
-                                <span class="street-address">{{__('آدرس')}} : </span>
-                                @if($placeMode == 'majara')
-                                    <span>
-                                        {{$place->dastresi}}
-                                    </span>
-                                @else
-                                    <span>
-                                        {{$place->address}}
-                                    </span>
-                                @endif
+                                    <span class="street-address">{{__('آدرس')}} : </span>
+                                    @if($placeMode == 'majara')
+                                        <span>
+                                            {{$place->dastresi}}
+                                        </span>
+                                    @else
+                                        <span>
+                                            {{$place->address}}
+                                        </span>
+                                    @endif
+                                </div>
                             @endif
-                        </div>
                         @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
                             <div class="blEntry blEn phone truePhone">
                                 <span class="ui_icon phone"></span>

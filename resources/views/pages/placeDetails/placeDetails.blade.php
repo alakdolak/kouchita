@@ -857,55 +857,51 @@ if ($total == 0)
                                                                 <li class="chart_row highlighted clickable">
                                                                     <span class="row_label row_cell">عالی</span>
                                                                     <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
+                                                                        <span class="bar">
+                                                                            <span class="fill" style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
+                                                                        </span>
+                                                                    </span>
                                                                     <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
                                                                 %</span>
                                                                 </li>
                                                                 <li class="chart_row clickable">
                                                                     <span class="row_label row_cell">خوب</span>
                                                                     <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
+                                                                        <span class="bar">
+                                                                            <span class="fill"  style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
+                                                                        </span>
+                                                                    </span>
                                                                     <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
                                                                 %</span>
                                                                 </li>
                                                                 <li class="chart_row clickable">
                                                                     <span class="row_label row_cell">معمولی</span>
                                                                     <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
+                                                                        <span class="bar">
+                                                                            <span class="fill" style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
+                                                                        </span>
+                                                                    </span>
                                                                     <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
                                                                 %</span>
                                                                 </li>
                                                                 <li class="chart_row clickable">
                                                                     <span class="row_label row_cell">ضعیف</span>
                                                                     <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
+                                                                        <span class="bar">
+                                                                            <span class="fill" style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
+                                                                        </span>
+                                                                    </span>
                                                                     <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
                                                                 %</span>
                                                                 </li>
                                                                 <li class="chart_row">
                                                                     <span class="row_label row_cell">خیلی بد </span>
                                                                     <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
+                                                                        <span class="bar">
+                                                                            <span class="fill"
+                                                                                  style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
+                                                                        </span>
+                                                                    </span>
                                                                     <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
                                                                 %</span>
                                                                 </li>
@@ -913,7 +909,7 @@ if ($total == 0)
                                                         </div>
                                                         <div class="prw_rup prw_common_atf_header_bl"
                                                              id="clientConnectionsLines">
-                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap('{{$place->C}}', '{{$place->D}}')">
+                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
                                                                 <span class="ui_icon map-pin"></span>
                                                                 @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
                                                                     <span class="street-address">آدرس : </span>

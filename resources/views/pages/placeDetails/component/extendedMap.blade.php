@@ -109,6 +109,7 @@
     };
 
     function showExtendedMap(_x, _y){
+        console.log(_x, _y);
         if(window.mobileAndTabletCheck())
             location.href = 'geo:' + _x + ',' + _y;
         else {
