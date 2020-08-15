@@ -210,7 +210,6 @@ if ($total == 0)
 
     @include('component.smallShowReview')
 
-
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
         <div class="shTIcon clsIcon"></div>
@@ -970,7 +969,7 @@ if ($total == 0)
                                                     <div id="mainMap" class="mainMap placeHolderAnime"></div>
                                                 </div>
 
-                                                @include('layouts.extendedMap')
+                                                @include('pages.placeDetails.component.extendedMap')
 
                                             @endif
                                         @endif
@@ -1086,7 +1085,7 @@ if ($total == 0)
                 },
             ];
 
-            initPlaceRowSection(topPlacesSections);
+            initPlaceRowSection(topPlacesSections); // component.rowSuggestion
 
             function initNearbySwiper() {
                 var swiper = new Swiper('.mainSuggestion', {
@@ -1173,7 +1172,7 @@ if ($total == 0)
 
             function createArticleRowWithData(_articles){
 
-                createSuggestionPack('articleSuggestionContent', _articles, function () { // in suggestionPack.blade.php
+                createSuggestionPack('articleSuggestionContent', _articles, function () { // in component.suggestionPack.blade.php
                     $('#articleSuggestionContent').find('.suggestionPackDiv').addClass('swiper-slide');
                     initNearbySwiper();
                 });

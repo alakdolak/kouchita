@@ -446,7 +446,7 @@ class PlaceController extends Controller {
                     }
                 }
 
-                $allPosts = array();
+                $articles = array();
 
                 if(count($postsId) != 0) {
                     $allPost = Post::join('users', 'users.id', 'post.creator')
@@ -457,10 +457,10 @@ class PlaceController extends Controller {
                         ->orderBy('post.date', 'DESC')->get();
 
                     foreach ($allPost as $i)
-                        array_push($allPosts, $i);
+                        array_push($articles, $i);
                 }
 
-                if(count($allPosts) < 5){
+                if(count($articles) < 5){
                     $alP = [];
                     $alP = Post::join('users', 'users.id', 'post.creator')
                         ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
@@ -469,15 +469,15 @@ class PlaceController extends Controller {
                         ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
                         ->orderBy('post.date', 'DESC')->get();
 
-                    if(count($allPosts) == 0)
-                        $allPosts = $alP;
+                    if(count($articles) == 0)
+                        $articles = $alP;
                     else{
                         foreach ($alP as $i)
-                            array_push($allPosts, $i);
+                            array_push($articles, $i);
                     }
                 }
 
-                foreach ($allPosts as $item) {
+                foreach ($articles as $item) {
                     $item->review = PostComment::wherePostId($item->id)->whereStatus(true)->count();
                     $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
                     if ($item->date == null)
@@ -492,7 +492,26 @@ class PlaceController extends Controller {
 
                 $places = $this->getNearbies($place->C, $place->D, $count);
 
-                echo json_encode([$places, $allPosts]);
+                $selectedPlace = \DB::table($kindPlace->tableName)->select(['id', 'name', 'reviewCount', 'fullRate', 'slug', 'alt', 'cityId', 'C', 'D'])->find($place->id);
+                $selectedPlace->pic = getPlacePic($selectedPlace->id, $kindPlace->id);
+                $selectedPlace->distance = 0;
+                $selectedPlace->review = $selectedPlace->reviewCount;
+                $selectedPlace->rate = floor($selectedPlace->fullRate);
+                $selectedPlace->url =  createUrl($kindPlace->id, $selectedPlace->id, 0, 0, 0);
+                if($selectedPlace->cityId != 0) {
+                    $selectedPlace->city = Cities::find($selectedPlace->cityId);
+                    $selectedPlace->state = State::find($selectedPlace->city->stateId);
+
+                    $selectedPlace->cityName = $selectedPlace->city->name;
+                    $selectedPlace->stateName = $selectedPlace->state->name;
+
+                    $selectedPlace->city = $selectedPlace->city->name;
+                    $selectedPlace->state = $selectedPlace->state->name;
+                }
+
+                $places['selected'] = [$selectedPlace];
+
+                echo json_encode([$places, $articles]);
                 return;
             }
         }

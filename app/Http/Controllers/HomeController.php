@@ -622,7 +622,9 @@ class HomeController extends Controller
 
         $map = ['C' => $C, 'D' => $D];
 
-        echo json_encode(['map' => $map, 'allPlaces' => $allPlaces]);
+        $centerPlace = null;
+
+        echo json_encode(['map' => $map, 'allPlaces' => $allPlaces, 'centerPlace' => $centerPlace]);
         return;
     }
 

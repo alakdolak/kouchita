@@ -44,7 +44,8 @@
     .notifAlert {
         position: fixed;
         bottom: -30%;
-        z-index: 9;
+        z-index: 9999;
+        border-radius: 10px;
     }
 
     .topAlert{

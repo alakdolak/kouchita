@@ -288,7 +288,7 @@
                     contentType: false,
                     success: function (response) {
                         if (response == 'ok') {
-                            showSuccessNotifi('سفرنامه شما با موفقیت ثبت شد.', 'left');
+                            showSuccessNotifi('سفرنامه شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
                             $('#newSafarnamehTitle').val('');
                             $('#safarnamehSummery').val('');
                             $('#safarnamehTag1').val('');

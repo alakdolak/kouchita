@@ -892,7 +892,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 success: function(response){
                     closeLoading();
                     if(response == 'ok'){
-                        showSuccessNotifi('{{__('رمز شما با موفقیت تغییر یافت')}}', 'left');
+                        showSuccessNotifi('{{__('رمز شما با موفقیت تغییر یافت')}}', 'left', 'var(--koochita-blue)');
 
                         $("#setNewPassword").addClass('hidden');
                         closeRegister();

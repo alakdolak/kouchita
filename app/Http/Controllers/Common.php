@@ -677,6 +677,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         $item->pic = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
         $item->userPic = getUserPic($item->userId);
         $item->time = getDifferenceTimeString($item->created_at);
+        $item->id = 'review_' . $item->id;
     }
     $userPhotosJSON = json_encode($userPhotos);
 
@@ -695,6 +696,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         $item->userPic = getUserPic($item->userId);
 
         $item->time = getDifferenceTimeString($item->created_at);
+        $item->id = 'review_' . $item->id;
     }
     $userVideoJSON = json_encode($userVideo);
 

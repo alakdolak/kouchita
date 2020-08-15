@@ -168,7 +168,7 @@
                 success: function (response) {
                     if(response == 'ok'){
                         closeReportPrompt();
-                        showSuccessNotifi('{{__("گزارش شما با موفقیت ثبت شد.")}}', 'left');
+                        showSuccessNotifi('{{__("گزارش شما با موفقیت ثبت شد.")}}', 'left', 'var(--koochita-blue)');
                     }
                     else if(response == 'nok2')
                         showSuccessNotifi('{{__("شما برای مطلب خود نمی توانید گزارش دهید.")}}', 'left', 'red');
