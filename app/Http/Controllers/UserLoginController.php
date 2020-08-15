@@ -701,7 +701,6 @@ class UserLoginController extends Controller
             Auth::attempt(['username' => $userCheckEmail->username, 'password' => $user->id], true);
         }
 
-
         return redirect(url($url));
     }
 

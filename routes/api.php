@@ -42,7 +42,7 @@ Route::group(['namespace' => 'api', 'middleware' => ['throttle:30', 'cors']], fu
 
     Route::post('getAuthURL', array('as' => 'getAuthURL', 'uses' => 'APIController@getAuthURL'));
 
-    Route::post('loginWithGoogle', array('as' => 'loginWithGoogle', 'uses' => 'APIController@loginWithGoogle'));
+    //Route::post('loginWithGoogle', array('as' => 'loginWithGoogle', 'uses' => 'APIController@loginWithGoogle'));
 });
 
 Route::group(['namespace' => 'api', 'middleware' => ['auth:api', 'cors']], function () {
