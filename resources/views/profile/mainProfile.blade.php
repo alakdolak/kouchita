@@ -13,17 +13,11 @@
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
 
     <style>
-        .rightColBoxes{
-            display: block;
-        }
         .whoAmI{
             display: none;
         }
-        .whoAmI .mainDivHeaderText{
-            margin: 5px 0;
-        }
         @media (max-width: 768px) {
-            .rightColBoxes{
+            .userProfileDetailsMainDiv{
                 display: none;
             }
             .whoAmI{
@@ -72,6 +66,7 @@
                         </div>
                     </div>
                     <div class="postsMainFiltrationBar">
+                        <a id="whoAmITab" href="#whoAmI" class="profileHeaderLinksTab whoAmI" onclick="changePages('whoAmI')">من کی هستم</a>
                         <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
                         <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
                         <a href="#" class="profileHeaderLinksTab">سؤال‌ و جواب</a>
@@ -82,13 +77,6 @@
                 </div>
 
                 <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
-                    <div class="whoAmI rightColBoxes" onclick="openWhoAmI()">
-                        <div class="mainDivHeaderText">
-                            <h3>من کی هستم</h3>
-                            <div class="downArrow iconFamily"></div>
-                        </div>
-                    </div>
-
                     @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0)
                         <div class="userProfileLevelMainDiv rightColBoxes">
                             <div class="mainDivHeaderText">
@@ -256,8 +244,6 @@
                         @include('profile.innerParts.userSafarnameh')
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -381,10 +367,16 @@
             $('.postsMainFiltrationBar').find('.active').removeClass('active');
             $('.prodileSections').addClass('hidden');
 
+            if($(window).width() < 768)
+                $('#userProfileSideInfos').hide();
+
             if(_kind === 'review'){
                 $('#reviewTab').addClass('active');
                 $('#reviewMainBody').removeClass('hidden');
                 getReviewsUserReview(); // in profile.innerParts.userPostsInner
+            }
+            else if(_kind == 'whoAmI'){
+                $('#userProfileSideInfos').show();
             }
             else if(_kind === 'picture') {
                 $('#pictureTab').addClass('active');
@@ -413,6 +405,8 @@
             changePages('review');
         else if(url.hash === '#picture')
             changePages('picture');
+        else if(url.hash === '#whoAmI')
+            changePages('whoAmI');
         else if(url.hash === '#safarnameh')
             changePages('safarnameh');
 
