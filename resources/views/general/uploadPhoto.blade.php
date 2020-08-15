@@ -126,7 +126,7 @@
         <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
     </span>
 
-    <input id="uploadPhotoInputPic" type="file" accept="image/*" style="display: none;">
+    <input id="uploadPhotoInputPic" type="file" accept="image/*" style="display: none;" onchange="submitPhoto(this.files[0])">
     <span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay">
          <div class="body_text">
              <div class="photoUploader">
@@ -140,13 +140,11 @@
                      <div id="dropArea" class="startScreen infoScreen">
                          <div class="inner">
                              <div class="innerPic"></div>
-{{--                             <div  style="height: 185px; position: relative;">--}}
-                                 <label for="uploadPhotoInputPic" class="uploadPicChoosePic">
-                                     <div class="ui_button primary addPhotoBtn">
-                                         <span>{{__('عکس خود را انتخاب کنید')}}</span>
-                                     </div>
-                                 </label>
-{{--                             </div>--}}
+                             <label for="uploadPhotoInputPic" class="uploadPicChoosePic">
+                                 <div class="ui_button primary addPhotoBtn">
+                                     <span>{{__('عکس خود را انتخاب کنید')}}</span>
+                                 </div>
+                             </label>
 
                              <div class="separator">
                                  <span class="text">{{__('یا')}}</span>
@@ -401,13 +399,6 @@
         return false;
     });
 
-    // input file
-    $(document).ready(function() {
-        $("#uploadPhotoInputPic").change(function() {
-            submitPhoto(this.files[0]);
-        });
-    });
-
     function openUploadPhotoModal(_title, _uploadUrl, _placeId = 0, _kindPlaceId = 0, _additionalData){
 
         $('#placeIdUploadPhoto').val(_placeId);
@@ -433,6 +424,7 @@
     }
 
     function submitPhoto(input) {
+        openLoading();
         mainImage = input;
 
         $('#uploadPhotoPicName').val('');
@@ -446,6 +438,7 @@
             $('#squarePicUploadPhoto').attr('src', e.target.result);
             $('#mainPicUploadPhotoImg').attr('src', e.target.result);
             mainPicUploadPhoto = e.target.result;
+            closeLoading();
         };
         $(".itemRow").css('display', 'block');
         $(".startScreen").addClass('hidden');

@@ -11,6 +11,27 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
+
+    <style>
+        .rightColBoxes{
+            display: block;
+        }
+        .whoAmI{
+            display: none;
+        }
+        .whoAmI .mainDivHeaderText{
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .rightColBoxes{
+                display: none;
+            }
+            .whoAmI{
+                display: block !important;
+            }
+
+        }
+    </style>
 @stop
 
 @section('main')
@@ -61,6 +82,13 @@
                 </div>
 
                 <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
+                    <div class="whoAmI rightColBoxes" onclick="openWhoAmI()">
+                        <div class="mainDivHeaderText">
+                            <h3>من کی هستم</h3>
+                            <div class="downArrow iconFamily"></div>
+                        </div>
+                    </div>
+
                     @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0)
                         <div class="userProfileLevelMainDiv rightColBoxes">
                             <div class="mainDivHeaderText">
@@ -271,6 +299,10 @@
 
         function showAllPicUser(){
             createPhotoModal('عکس های شما', allUserPics);// in general.photoAlbumModal.blade.php
+        }
+
+        function openWhoAmI(){
+            $('.rightColBoxes').slideToggle();
         }
 
         function showUserActivity(_element){

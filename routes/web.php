@@ -467,7 +467,7 @@ Route::group(array('middleware' => 'nothing'), function(){
 
 // profile common
 Route::group(['middleware' => ['throttle:30']], function(){
-    Route::get('profile/index/{username?}', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
+    Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile');
 
     Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
 
