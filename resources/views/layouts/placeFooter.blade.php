@@ -734,7 +734,7 @@
                             <select class="chooseLanguagePhone" onchange="goToLanguage(this.value)">
                                 <option value="0">انتخاب زبان</option>
                                 <option value="fa">فارسی</option>
-                                <option value="en">Englisg</option>
+                                <option value="en">English</option>
                             </select>
                         </div>
                     </div>
