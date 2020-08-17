@@ -33,6 +33,7 @@
 <div class="mainHeader hideOnPhone">
     <div class="container headerContainer">
         <a href="{{route('main')}}" class="headerPcLogoDiv" >
+            <img src="{{URL::asset('images/camping/undp.svg')}}" alt="{{__('کوچیتا')}}" class="headerPcLogo"/>
             <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="{{__('کوچیتا')}}" class="headerPcLogo"/>
         </a>
         @if(Request::is('main') || Request::is('main/*') || Request::is('profile') || Request::is('profile/*') || Request::is('/'))
@@ -219,6 +220,7 @@
     <div class="headerCampaignModalBody">
         <span class="iconClose closeLanding" onclick="$('#campingHeader').hide();"></span>
         <div class="headerCampingTop" onclick="goToLanding()">
+            <img src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 60px; top: 10px; right: 2%;">
             <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
         <div class="headerCampingBottom">

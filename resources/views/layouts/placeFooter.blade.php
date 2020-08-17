@@ -8,7 +8,8 @@
 <footer>
     <div class="hideOnPhone screenFooterStyle">
         <div class="footerLogoSocialBox">
-            <a href="{{route('main')}}" class="footerLogo">
+            <a href="{{route('main')}}" class="footerLogo" style="display: flex; align-items: center;">
+                <img src="{{URL::asset('images/camping/undp.svg')}}" style="height: 60px">
                 <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
