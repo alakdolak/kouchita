@@ -149,7 +149,7 @@
         @if(Auth::check())
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
                 <div class="profileBtnText">
-                    <span>سلام</span>
+                    <span>{{__('سلام')}}</span>
                     <span>{{$userNamename}}</span>
                 </div>
                 <div class="profilePicFooter circleBase type2">
@@ -159,7 +159,7 @@
         @else
             <div class="login-button">
                 <span class="footerMenuBarLinks" style="display: flex; align-items: center">
-                    ورود
+                    {{__('ورود')}}
                     <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
                 </span>
             </div>
@@ -517,11 +517,11 @@
                     {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
-                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px; margin-bottom: 5px;"> {{__('بازدید‌های اخیر')}} </div>
+                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px; margin-bottom: 5px;"> {{__('بازدیدهای اخیر')}} </div>
                             <div class="headerSearchBar" style="width: 100%; margin-bottom: 10px">
                                 <span class="headerSearchIcon iconFamily footerSearchBar searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php">
                                     <span style="font-size: 15px; text-align: center; width: 100%;">
-                                        به کجا می روید؟
+                                        {{__('به کجا می روید؟')}}
                                     </span>
                                 </span>
                             </div>
@@ -538,7 +538,7 @@
                         </div>
 
                         <div class="lp_others_content hidden" id="lp_others_mark">
-                            <div class="lp_others_titles"> {{__('نشون کرده')}} </div>
+                            <div class="lp_others_titles"> {{__('نشون‌کرده')}} </div>
                             <div class="mainContainerBookmarked" style="height: calc(100vh - 170px);">
                                 <div id="phoneBookMarks">
                                     <div class="masthead-recent-class">
@@ -591,7 +591,7 @@
                     </div>
                     <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_mark', this)">
                         <div class="ui_icon casino lp_icons"></div>
-                        <div>{{__('نشون کرده')}}</div>
+                        <div>{{__('نشون‌کرده')}}</div>
                     </div>
                     <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this)">
                         <div class="lp_icons iconFamily MsgIcon"></div>
@@ -662,10 +662,10 @@
                         <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
                         <div>
                             <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
-                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('اقامتگاه ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('اقامتگاه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('رستوران ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('رستوران‌ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}" class="pSC_cityDetails"  style="width: 100%">{{__('صنایع دستی')}} </a>
