@@ -63,6 +63,7 @@
                         <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/www.koochita.com.png')}}" style="height: 100%">
                     </div>
                     <div class="bottomSidePic1">
+                        <img src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 60px; top: 10px; right: 0px;">
                         <img class="travelUsImg" src="{{URL::asset('images/camping/' . app()->getLocale() . '/Layer 14.png')}}">
                         <button class="btn btn-primary topStartButton" onclick="startFunc()">
                             {{__('freeTranslate.همین حالا')}}
