@@ -41,6 +41,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
+
+
 <style>
     .registerLeftSection{
         width: 40%;

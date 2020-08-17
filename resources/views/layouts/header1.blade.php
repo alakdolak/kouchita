@@ -219,14 +219,14 @@
     <div class="headerCampaignModalBody">
         <span class="iconClose closeLanding" onclick="$('#campingHeader').hide();"></span>
         <div class="headerCampingTop" onclick="goToLanding()">
-            <img src="{{URL::asset('images/camping/landing.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+            <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
         <div class="headerCampingBottom">
             <div onclick="goToSafarnameh()">
-                <img src="{{URL::asset('images/camping/nSafarnameh.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div onclick="$('#campingHeader').hide(); openUploadPost()">
-                <img src="{{URL::asset('images/camping/nAxasi.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nAxasi.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
         </div>
     </div>

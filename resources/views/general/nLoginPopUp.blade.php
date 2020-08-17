@@ -28,6 +28,10 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
 
+@if(\App::getLocale() == 'en')
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/loginPopUpLtr.css?v=2')}}">
+@endif
+
 <style>
     .comButLogin {
         color: white;
@@ -54,7 +58,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         </div>
 
         <div class="loginTextHeader row">
-            <div class="text">در کوچیتا ثبت نام کنید</div>
+            <div class="text">{{__('در کوچیتا ثبت نام کنید')}}</div>
             <a href="{{$authUrl}}" class="googleA">
                 <div class="g-signin2">
                     <div style="height:36px;" class="abcRioButton abcRioButtonLightBlue">
@@ -80,7 +84,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                 </div>
                             </div>
                             <span class="abcRioButtonContents">
-                                <span id="not_signed_inyx5syaq6qblq">با گوگل وارد شوید</span>
+                                <span id="not_signed_inyx5syaq6qblq">{{__('با گوگل وارد شوید')}}</span>
                             </span>
                         </div>
                     </div>
@@ -101,18 +105,18 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 <div class="col-sm-6 loginInputDiv nameRegisterDiv">
                     <input type="text" id="username_register" class="loginInput" placeholder="{{__('نام')}}">
                     <div class="bottomLoginText">
-                        دوستانتان در سایت شما را با این نام خواهند شناخت.
+                        {{__('دوستانتان در سایت شما را با این نام خواهند شناخت.')}}
                     </div>
                 </div>
                 <div class="col-sm-6 loginInputDiv buttonRegisterDiv">
-                    <button class="loginRegisterButton" onclick="firstRegisterStep()">ثبت نام</button>
+                    <button class="loginRegisterButton" onclick="firstRegisterStep()">{{__('ثبت نام')}}</button>
                     <div class="registerErr" style="color: red;"></div>
                 </div>
             </div>
         </div>
 
         <div class="loginFSection">
-            <div class="headerTextF">اگر در کوچیتا عضو هستید؛
+            <div class="headerTextF">{{__('اگر در کوچیتا عضو هستید؛')}}
             </div>
             <div class="row">
                 <div class="col-sm-5 loginInputDiv">
@@ -121,11 +125,11 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 <div class="col-sm-5 loginInputDiv">
                     <input type="password" id="password_main" class="loginInput" placeholder="{{__('رمز عبور')}}">
                     <div class="bottomLoginText forgetPassBut" onclick="openRegisterSection('ForgetPassword')">
-                        رمز عبور خود را فراموش کردید؟
+                        {{__('رمز عبور خود را فراموش کردید؟')}}
                     </div>
                 </div>
                 <div class="col-sm-2 loginInputDiv" style="margin-top: 0px">
-                    <button class="loginRegisterButton" style="background: var(--koochita-blue); width: 90px;" onclick="login($('#username_main').val(), $('#password_main').val())">ورود</button>
+                    <button class="loginRegisterButton" style="background: var(--koochita-blue); width: 90px;" onclick="login($('#username_main').val(), $('#password_main').val())">{{__('ورود')}}</button>
                 </div>
             </div>
             <div class="row">
@@ -258,7 +262,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 <span id="Email_ForgetPass" class="hidden">
                     <div class="col-xs-12 rtl mainContentInfos">
                         <div>
-                            <span class="pd-tp-8"> آدرس ایمیل </span>
+                            <span class="pd-tp-8"> {{__('ایمیل')}} </span>
                             <input class="loginInputTemp" type="email" id="forget_email" maxlength="40" required autofocus>
                         </div>
                         <div id="reminderTimeEmailForgetPassDiv" class="reminderTimeDiv hidden" style="font-size: 13px; margin-bottom: 0px">
