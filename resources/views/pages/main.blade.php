@@ -65,11 +65,11 @@
                     <div class="bottomSidePic1">
                         <img class="travelUsImg" src="{{URL::asset('images/camping/' . app()->getLocale() . '/Layer 14.png')}}">
                         <button class="btn btn-primary topStartButton" onclick="startFunc()">
-                            همین حالا
+                            {{__('freeTranslate.همین حالا')}}
                             <span class="startChar">
-                                شروع
+                                 {{__('freeTranslate.شروع')}}
                             </span>
-                            کنید
+                            {{__('freeTranslate.کنید')}}
                         </button>
                     </div>
                 </div>
