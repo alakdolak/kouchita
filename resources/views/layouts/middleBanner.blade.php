@@ -41,7 +41,7 @@
                     </div>
                     <div class="squareDiv" onclick="openMainSearch(10)" style="width: 40%">
                         <div class="phoneIcon restaurant"></div>
-                        <div class="textIcon">{{__('سوغات و صنایع دستی')}}</div>
+                        <div class="textIcon">{{__('سوغات و صنایع‌دستی')}}</div>
                     </div>
                 </div>
             </div>
