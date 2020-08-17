@@ -79,7 +79,7 @@
 
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm"style="padding: 10px 10px 1px !important; z-index: 201; display: none">
-        <div class="shTIcon clsIcon" style="float: left; color: #4DC7BC; font-size: 2em"></div>
+        <div class="shTIcon clsIcon" style="float: left; color: var(--koochita-light-green); font-size: 2em"></div>
         <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
         <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
         <div class="ui_column ui_picker alarmBoxCityName">
@@ -861,7 +861,7 @@
 
                             <div style="margin: 15px 0 !important;">
                                 <div id="showMore" onclick="showMore()"
-                                     style="float: left; cursor: pointer;color:#4dc7bc; font-size: 13px;"
+                                     style="float: left; cursor: pointer;color:var(--koochita-light-green); font-size: 13px;"
                                      class="hidden">بیشتر
                                 </div>
                                 <div class="overviewContent" id="introductionText"
@@ -1078,7 +1078,7 @@
 
                                                     <div class="full-width inline-block">
                                                         <span>هتل آناهیتا </span>
-                                                        <span style="float: initial; color: #4DC7BC">درجه هتل: </span>
+                                                        <span style="float: initial; color: var(--koochita-light-green)">درجه هتل: </span>
                                                         <span>پنج ستاره</span>
                                                     </div>
                                                 </div>
@@ -1734,7 +1734,7 @@
                                                     {{--</div>--}}
                                                     {{--<div class="roomRow" style="float: left">--}}
                                                         {{--<div class="roomNumber">--}}
-                                                            {{--<div style="color: #4dc7bc; display: inline-block; line-height: 24px">--}}
+                                                            {{--<div style="color: var(--koochita-light-green); display: inline-block; line-height: 24px">--}}
                                                                 {{--تعداد اتاق--}}
                                                             {{--</div>--}}
                                                             {{--<select name="room_Number" id="roomNumber--}}
@@ -1791,7 +1791,7 @@
                                                 {{--</div>--}}
                                             {{--</div>--}}
                                             {{--<div class="roomPrices">--}}
-                                                {{--<div style="color: #4dc7bc">قیمت</div>--}}
+                                                {{--<div style="color: var(--koochita-light-green)">قیمت</div>--}}
                                                 {{--<div style="text-align: center">--}}
                                                     {{--<div style="font-size: 1.4em">--}}
                                                         {{--{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
@@ -2460,7 +2460,7 @@
                             </center>
                             <div id="test" infinite-scroll="myPagingFunction()" class="outerShell block_wrap"
                                  ng-show="show">
-                                <div class="block_header" style="border-bottom: 1px solid #4DC7BC !important;">
+                                <div class="block_header" style="border-bottom: 1px solid var(--koochita-light-green) !important;">
                                     <h3 class="block_title">
 {{--                                        [[similar.title]]--}}
                                     </h3>
@@ -3999,7 +3999,7 @@
                         for (i = 0; i < response.length; i++) {
                             newElement += "<div class='col-xs-3' style='cursor: pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
                             if (response[i].select == "1") {
-                                newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid #4DC7BC;cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
+                                newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid var(--koochita-light-green);cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
                                 selectedTrips[selectedTrips.length] = response[i].id;
                             }
                             else
@@ -4084,7 +4084,7 @@
                     }
                 }
                 if (allow) {
-                    $("#trip_" + id).css('border', '2px solid #4DC7BC');
+                    $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
                     selectedTrips[selectedTrips.length] = id;
                 }
             }
@@ -5276,7 +5276,7 @@
                         'position': 'relative',
                         'border': '5px solid #333',
                         'padding': '10px',
-                        'background-color': '#4dc7bc',
+                        'background-color': 'var(--koochita-light-green)',
                         'z-index': 1000001,
                         'cursor': 'auto'
                     });

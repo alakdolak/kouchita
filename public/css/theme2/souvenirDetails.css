@@ -34,7 +34,7 @@
 }
 
 .souvenirGeneralDetail > div  span:nth-child(1) , .souvenirGeneralDetail > b{
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .souvenirGeneralDetail:nth-child(2) , .souvenirGeneralDetailTexts {
@@ -187,11 +187,11 @@
 
 .souvenirProviderPageAccess {
     color: white;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
 }
 
 .souvenirProviderSendMsg {
-    background: #fcc156;
+    background: var(--koochita-yellow);
     color: black;
 }
 

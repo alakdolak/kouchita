@@ -5,7 +5,7 @@
     transition: 0.2s;
 }
 .showingPhotosModal .showingPhotosTitle {
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     color: white;
     font-weight: 700;
     padding: 10px;
@@ -64,7 +64,7 @@
 }
 
 .showingPhotosModal .chooseSidePhotoAlbum{
-    border: #0076a3 solid 3px;
+    border: var(--koochita-blue) solid 3px;
     border-radius: 0px !important;
 }
 
@@ -249,7 +249,7 @@
     align-items: center;
 }
 
-.photoAlbumTopLike{
+.photoAlbumTopLikeButton{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -385,11 +385,11 @@
     }
 
     .showingPhotosModal .leftColPhotosModalMainDiv {
-        padding: 25px 5% 25px;
+        padding: 0px 5% 0px;
     }
 
     .showingPhotosModal .selectedPhotoShowingModal {
-        height: 400px;
+        height: 55vh;
     }
 }
 
@@ -408,15 +408,15 @@
         right: 7px;
     }
 
-    .showingPhotosModal .selectedPhotoShowingModal {
-        height: 320px;
-    }
+    /*.showingPhotosModal .selectedPhotoShowingModal {*/
+    /*    height: 320px;*/
+    /*}*/
 }
 
 @media (max-width:480px)  {
-    .showingPhotosModal .selectedPhotoShowingModal {
-        height: 250px;
-    }
+    /*.showingPhotosModal .selectedPhotoShowingModal {*/
+    /*    height: 250px;*/
+    /*}*/
 
     .showingPhotosModal .rightColPhotosShowingModal {
         width: 100px;

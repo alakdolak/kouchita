@@ -104,7 +104,7 @@ input[type="checkbox"]:checked + label span {
 }
 
 #manageTripsBtn > span {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .tripsRowExpandableDiv {
@@ -133,8 +133,8 @@ input[type="checkbox"]:checked + label span {
 
 #manageTripVerifyBtn {
     color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 #managePlaceTextDiv {
@@ -147,7 +147,7 @@ input[type="checkbox"]:checked + label span {
 #expandableTripDate {
     float: left;
     padding: 5px 0;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 #expandableTripTitleText {
@@ -242,8 +242,8 @@ input[type="checkbox"]:checked + label span {
 
 #sendBtnBookMarkPlace {
     color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     border-radius: 5%;
     width: 100%;
     margin-top: 17px;

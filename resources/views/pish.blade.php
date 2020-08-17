@@ -37,7 +37,7 @@ $kindPlaceId = 10; ?>
             margin: 0 18px;
             display: inline-block;
             height: 200px;
-            border: 1px solid #4DC7BC;
+            border: 1px solid var(--koochita-light-green);
             text-align: center;
             position: relative;
         }
@@ -98,7 +98,7 @@ $kindPlaceId = 10; ?>
                 <div class="textFourBox"> آیا می دانید با عضویت در شازده با هم بهترین لحظات را خلق می کنیم </div>
                 <div></div>
             </div>
-            <div class="fourBox" style="background: url('{{URL::asset('images/preTicket2.png')}}') 100% 100% no-repeat no-repeat; background-size: contain; background-color: #4DC7BC">
+            <div class="fourBox" style="background: url('{{URL::asset('images/preTicket2.png')}}') 100% 100% no-repeat no-repeat; background-size: contain; background-color: var(--koochita-light-green)">
                 <div class="textFourBox"> آیا می دانید با عضویت در سایت هیشه بهترین قیمت ها و پیشنهادات برای شماست </div>
                 <div></div>
             </div>
@@ -106,7 +106,7 @@ $kindPlaceId = 10; ?>
                 <div class="textFourBox"> آیا می دانید هر کار شما در شازده برای ما ارزشمند است و ما قدر آن را می دانیم </div>
                 <div></div>
             </div>
-            <div class="fourBox" style="background: url('{{URL::asset('images/preTicket4.png')}}') 100% 100% no-repeat no-repeat; background-size: contain; background-color: #4DC7BC">
+            <div class="fourBox" style="background: url('{{URL::asset('images/preTicket4.png')}}') 100% 100% no-repeat no-repeat; background-size: contain; background-color: var(--koochita-light-green)">
                 <div class="textFourBox"> آیا می دانید با عضویت در سایت دیگر نیاز به وارد کردن اطلاعات برای هر بار خرید نمی باشید </div>
                 <div></div>
             </div>
@@ -124,12 +124,12 @@ $kindPlaceId = 10; ?>
             </div>
             <div class="threeHiddenBox" style="float: right">
                 <div> من عضو شازده هستم </div>
-                <button onclick="showHalfLogin()" class="btn loginRegister" type="button" style="background-color: #4DC7BC"> وارد شوید </button>
+                <button onclick="showHalfLogin()" class="btn loginRegister" type="button" style="background-color: var(--koochita-light-green)"> وارد شوید </button>
             </div>
         @else
             <center>
                 <div class="threeHiddenBox" style="line-height: 45px">
-                    <button onclick="document.location.href = '{{route('buyInnerFlight', ['mode' => 3, 'ticketId' => $ticketId, 'adult' => $adult, 'child' => $child, 'infant' => $infant, 'ticketId2' => $ticketId2])}}'" class="btn loginRegister" type="button" style="background-color: #4DC7BC"> مرحله بعد </button>
+                    <button onclick="document.location.href = '{{route('buyInnerFlight', ['mode' => 3, 'ticketId' => $ticketId, 'adult' => $adult, 'child' => $child, 'infant' => $infant, 'ticketId2' => $ticketId2])}}'" class="btn loginRegister" type="button" style="background-color: var(--koochita-light-green)"> مرحله بعد </button>
                 </div>
             </center>
         @endif

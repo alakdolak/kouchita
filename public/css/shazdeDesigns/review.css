@@ -9,11 +9,11 @@
 }
 
 h2.pageTitle {
-    color: #4DC7BC !important;
+    color: var(--koochita-light-green) !important;
 }
 
 .ratingTextWritingReview {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     float: right;
     margin-right: 40px;
 }

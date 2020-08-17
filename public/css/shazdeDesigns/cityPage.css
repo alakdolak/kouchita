@@ -114,7 +114,7 @@
     float: left;
     text-align: center;
     padding: 4% 0;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     height: 120px;
     font-size: 1.1em;
     color: white;
@@ -558,12 +558,12 @@ h3{
     align-items: center;
 }
 .navigatorLinks{
-    color: #053a3e;
+    color: var(--koochita-dark-green);
     transition: .2s !important;
     font-size: 15px;
 }
 .navigatorLinks:hover{
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 
 .cpLittleMenu{

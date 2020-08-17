@@ -45,7 +45,7 @@ $kindPlaceId = 10; ?>
                 <input class="inputBoxInput" style="width: 60%" type="text" placeholder="xxxxxxxxx">
             </div>
             <div style="display: inline-block; margin: 10px 15px; float: left">
-                <button class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC; line-height: 22px; margin: 0 !important;"> اعمال کد تخفیف </button>
+                <button class="btn afterBuyBtn" type="button" style="background-color: var(--koochita-light-green); line-height: 22px; margin: 0 !important;"> اعمال کد تخفیف </button>
                 <div style="font-size: 0.8em; color: red; float: left; margin-right: 10px"> متأسفانه کد تخفیف معتبر نمی باشد <br>  کد تخفیف وارد شده قبلا استفاده شده است </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ $kindPlaceId = 10; ?>
     <div class="inlineBorder"></div>
 
     <div style="background-color: #d2fefa; padding: 10px; border-radius: 4px; box-shadow: 0px 0px 14px #c5c5c5">
-        <div class="textTitle" style="display: inline-block; color: #4DC7BC !important;"> خرج کردن امتیاز </div>
+        <div class="textTitle" style="display: inline-block; color: var(--koochita-light-green) !important;"> خرج کردن امتیاز </div>
         <div> امتیاز خود را به تخفیف تبدیل کنید. توجه داشته باشید در صورت خرج کردن امتیاز رتبه و نشان های افتخار شما از بین نخواهد رفت </div>
         <div style="font-size: 0.8em"> برای اطلاعات بیشتر به صفحه  <a href="" style="color: #050c93"> راهنمای امتیازات  </a> مراجعه کنید </div>
         <div class="inputBox" style="width: 18%;">
@@ -77,14 +77,14 @@ $kindPlaceId = 10; ?>
                 <input class="inputBoxInput" style="width: 40%" type="text" placeholder="xxxxxxxxx">
             </div>
             <div class="btn" style="background-color: #92321b; color: white; margin-top: 2px; cursor: text;"> ضرب در 1000 تومان </div>
-            <div class="inputBox" style="width: 10%; background-color: #4DC7BC; color: white; border: none">
+            <div class="inputBox" style="width: 10%; background-color: var(--koochita-light-green); color: white; border: none">
                 <div class="inputBoxText" style="width: 60%"> مبلغ تخفیف </div>
                 <div class="inputBoxInput" style="width: 40%"> 50000 </div>
             </div>
         </div>
         <div> در صورت انصراف از خرید در آخرین مرحله یا ایجاد هرگونه مشکل امتیاز خرج شده شما به حساب کاربری شما باز می گردد </div>
         <div>
-            <button class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC; line-height: 22px;"> خرجش کن </button>
+            <button class="btn afterBuyBtn" type="button" style="background-color: var(--koochita-light-green); line-height: 22px;"> خرجش کن </button>
             <div style="font-size: 0.8em; color: red; display: inline-block; margin-right: 10px"> لطفا امتیاز موردنظر برای خرج کردن را وارد نمایید </div>
         </div>
         <div> در صورت خرج امتیاز برای این خرید دیگر امکان استفاده از کد تخفیف نمی باشد </div>
@@ -94,7 +94,7 @@ $kindPlaceId = 10; ?>
         <div style="display: inline-block"> با انتخاب دکمه تأیید و پرداخت شما به صفحه پرداخت فروشنده خدمت متصل می شوید و تنها کافی است مبلغ بلیط را تأیید و پرداخت نمایید </div>
         <div style="color: #92321b" id="msgErr"></div>
         <div style="text-align: left">
-            <button onclick="doPayment(1)" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> تأیید و پرداخت </button>
+            <button onclick="doPayment(1)" class="btn afterBuyBtn" type="button" style="background-color: var(--koochita-light-green)"> تأیید و پرداخت </button>
         </div>
         <div style="text-align: left">
             <button class="btn afterBuyBtn" type="button" style="background-color: #92321b"> انصراف </button>

@@ -67,18 +67,18 @@
     padding: 5px;
     font-size: 11px;
     margin-bottom: 7px;
-    border-bottom: 1px solid #4DC7BC;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 #createTripTextRecentlyViewBodyProfile > p {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     display: inline;
 }
 
 #createTripTextRecentlyViewBodyProfileElse {
     padding: 5px;
     margin-bottom: 7px;
-    border-bottom: 1px solid #4DC7BC;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 #bookmarkmenu {

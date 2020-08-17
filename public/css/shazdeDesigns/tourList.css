@@ -64,7 +64,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .passengerIcon:before {
     content: '\E0DF';
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .minusPlusIcons {
@@ -175,7 +175,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .srchBtn {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     border: none;
     color: white;
     width: 100%;
@@ -257,7 +257,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .greenFontColor {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .redFontColor {
@@ -295,7 +295,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 #tourListHeading > span {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 #searchDiv {
@@ -722,7 +722,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .fastReserveTour {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     position: absolute;
     transform: rotate(90deg);
     width: 44px;
@@ -760,7 +760,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .mustSeeTour {
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     position: absolute;
     width: 45px;
     padding: 3px;

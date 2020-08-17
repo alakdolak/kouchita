@@ -64,7 +64,8 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetailAllReviewsAndQuestions.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css?v=1')}}">
+{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css?v=1')}}">--}}
+{{--    <link rel="stylesheet" href="{{URL::asset('css/component/editor.css?v=1')}}">--}}
 
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css?v=1')}}">
@@ -3740,7 +3741,7 @@ if ($total == 0)
                     'position': 'relative',
                     'border': '5px solid #333',
                     'padding': '10px',
-                    'background-color': '#4dc7bc',
+                    'background-color': 'var(--koochita-light-green)',
                     'z-index': 1000001,
                     'cursor': 'auto'
                 });

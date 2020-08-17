@@ -600,7 +600,7 @@ DIV.prw_rup.prw_homepage_messaging_brand .yellow {
 }
 
 DIV.prw_rup.prw_homepage_messaging_brand .green {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 DIV.prw_rup.prw_homepage_messaging_brand .pink {
@@ -665,7 +665,7 @@ DIV.prw_rup.prw_homepage_messaging_brand .right-col .inner {
     flex: 1;
     position: relative;
     padding: 0 12px;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     border-radius: 2px;
     overflow: auto;
     text-align: center;
@@ -915,7 +915,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container .shelf_header .shelf_title
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container .shelf_header .shelf_title .shelf_header_icon {
     margin: 0 6px 0 0;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 18px;
 }
 
@@ -966,7 +966,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .ui_icon {
     position: relative;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     margin-right: 4px;
 }
 
@@ -1525,7 +1525,7 @@ DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .ui_picker .target:
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .ui_picker .target:hover:after {
-    border-bottom: 1px solid #4dc7bc;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .ui_picker.error:focus .target {
@@ -1544,7 +1544,7 @@ DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .focused .target {
 
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup :focus .target:after,
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .focused .target:after {
-    border-bottom: 1px solid #4dc7bc;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup.highlight .target {
@@ -1553,7 +1553,7 @@ DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup.highlight .target {
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup.highlight .target:after {
-    border-bottom: 1px solid #4dc7bc;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .submit_wrap {
@@ -1572,9 +1572,9 @@ DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup .form_submit {
     height: 100%;
     padding: 14px;
     box-sizing: border-box;
-    border: 1px solid #4DC7BC;
+    border: 1px solid var(--koochita-light-green);
     border-radius: inherit;
-    background-color: #4DC7BC;
+    background-color: var(--koochita-light-green);
     font-weight: bold;
     font-size: 100%;
     line-height: 24px;
@@ -1770,7 +1770,7 @@ DIV.ppr_rup.ppr_priv_trip_search .metaProgressBarSlider {
     display: block;
     width: 0;
     height: 100%;
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     -moz-transition: background-color 300ms ease-in-out;
     -webkit-transition: background-color 300ms ease-in-out;
     transition: background-color 300ms ease-in-out;
@@ -1796,7 +1796,7 @@ DIV.ppr_rup.ppr_priv_trip_search .fixed .metaProgressBarSliderWrapper {
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .fixed .metaProgressBarSlider {
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
 }
 
 DIV.ppr_rup.ppr_priv_trip_search .search_typeahead.error input::-webkit-input-placeholder {
@@ -1923,7 +1923,7 @@ DIV.prw_rup.prw_ibex_trip_search_rooms_guests .picker .ui_selector {
 
 DIV.prw_rup.prw_ibex_trip_search_rooms_guests .picker .ui_selector .ui_icon {
     font-size: 30px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     vertical-align: middle;
     cursor: pointer;
     float: left;
@@ -2233,7 +2233,7 @@ DIV.prw_rup.prw_search_typeahead .ui_typeahead .ui_typeahead_results li.add.ui_i
 }
 
 DIV.prw_rup.prw_search_typeahead .ui_typeahead .ui_typeahead_results li.add.ui_icon.plus-circle::before {
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 22px;
     top: 2px;
 }
@@ -2292,7 +2292,7 @@ DIV.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 DIV.prw_rup.prw_search_typeahead .ui_typeahead_results.result-height-default .ui_icon {
     font-size: 22px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 DIV.prw_rup.prw_search_typeahead .ui_typeahead_results.result-height-default .ui_icon:before {
@@ -2402,7 +2402,7 @@ DIV.prw_rup.prw_search_typeahead .ui_typeahead_results.result-height-default .it
 
 DIV.prw_rup.prw_search_typeahead .ui_typeahead_results.result-height-short .ui_icon {
     font-size: 22px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
 }
 
 DIV.prw_rup.prw_search_typeahead .ui_typeahead_results.result-height-short .ui_icon:before {
@@ -2545,7 +2545,7 @@ DIV.prw_rup.prw_search_typeahead .mw_overlay .mw_input_container .mw_input {
     width: 100%;
     box-sizing: border-box;
     border: none;
-    border-bottom: 2px solid #4dc7bc;
+    border-bottom: 2px solid var(--koochita-light-green);
     border-radius: 0;
     padding: 0 0 4px 0;
     margin: 0;

@@ -37,7 +37,7 @@ $kindPlaceId = 10; ?>
         <div style="display: inline-block"> با انتخاب دکمه تأیید و پرداخت شما به صفحه پرداخت فروشنده خدمت متصل می شوید و تنها کافی است مبلغ بلیط را تأیید و پرداخت نمایید </div>
         <div style="color: #92321b" id="msgErr"></div>
         <div style="text-align: left">
-            <button class="btn afterBuyBtn" onclick="doPayment(3)" type="button" style="background-color: #4DC7BC"> تأیید و پرداخت </button>
+            <button class="btn afterBuyBtn" onclick="doPayment(3)" type="button" style="background-color: var(--koochita-light-green)"> تأیید و پرداخت </button>
         </div>
         <div style="text-align: left">
             <button class="btn afterBuyBtn" type="button" style="background-color: #92321b"> انصراف </button>

@@ -189,7 +189,7 @@ html {
     direction: rtl;
     text-align: center;
     font-size: 13px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     margin-bottom: 20px;
 }
 
@@ -211,11 +211,11 @@ html {
 
 .tripleBoxMiddleBannerWhite > div {
     background: #FFF !important;
-    border: 1px solid #4DC7BC;
+    border: 1px solid var(--koochita-light-green);
 }
 
 .tripleBoxMiddleBannerWhite > div > div:nth-child(1) {
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 
 .tripleBoxMiddleBannerWhite > div > div:nth-child(1) > span {
@@ -224,7 +224,7 @@ html {
 
 .tripleBoxMiddleBannerWhite > div > div:nth-child(2), .tripleBoxMiddleBannerWhite > div > div:nth-child(2) > h2,
 .tripleBoxMiddleBannerWhite > div > div:nth-child(2) > div {
-    color: #4dc7bc !important;
+    color: var(--koochita-light-green) !important;
 }
 
 .otherServicesBoxes, .youMayLikeItBoxes {
@@ -295,7 +295,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .ui_icon.travelers-choice-badge {
     margin-top: 0;
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 
 DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail {
@@ -315,7 +315,7 @@ DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail {
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .shelf_title_container {
     margin: 0 5px;
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 
 .shelf_item_container.ui_columns.is-mobile.is-multiline {
@@ -326,7 +326,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion {
     margin: 40px 0;
     padding: 20px 20px;
-    background: #053a3e;
+    background: var(--koochita-dark-green);
 }
 
 .poi_by_tag .ui_columns.is-multiline {
@@ -384,7 +384,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     position: relative;
     margin: 0px;
     color: #fff;
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     text-align: center;
     font-size: 36px;
     font-weight: 100;
@@ -406,7 +406,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     width: 46%;
     height: 220px;
     margin: 0 2%;
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     display: inline-block;
 }
 
@@ -437,7 +437,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .eachPartStatistic > div:first-child,
 .eachPartStatistic > div:last-child {
-    color: #0076a3;
+    color: var(--koochita-blue);
     text-align: center;
 }
 
@@ -517,7 +517,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .eachPartStatisticTitle {
     font-size: 12px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: default;
 }
 
@@ -532,16 +532,16 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     background-image: linear-gradient(
             45deg,
             #ffffff 12.50%,
-            #0076a3 12.50%,
-            #0076a3 25%,
+            var(--koochita-blue) 12.50%,
+            var(--koochita-blue) 25%,
             #ffffff 25%,
             #ffffff 37.50%,
             #93331f 37.50%,
             #93331f 50%,
             #ffffff 50%,
             #ffffff 62.50%,
-            #0076a3 62.50%,
-            #0076a3 75%,
+            var(--koochita-blue) 62.50%,
+            var(--koochita-blue) 75%,
             #ffffff 75%,
             #ffffff 87.50%,
             #93331f 87.50%,
@@ -1215,7 +1215,7 @@ figure.snip1091.hover figcaption:after {
     display: flex;
     align-items: center;
     margin: 0 5px;
-    color: #eab836;
+    color: var(--koochita-yellow);
 }
 .shelf_title_container h3{
     margin: 0px;
@@ -1407,7 +1407,7 @@ figure.snip1091.hover figcaption:after {
 
 @keyframes bg {
     0% {
-        background: #0d6650;
+        background: var(--koochita-green);
     }
     3% {
         background: #cf4413;
@@ -1416,27 +1416,27 @@ figure.snip1091.hover figcaption:after {
         background: #cf4413;
     }
     23% {
-        background: #eab836;
+        background: var(--koochita-yellow);
     }
     40% {
-        background: #eab836;
+        background: var(--koochita-yellow);
     }
     43% {
-        background: #720d19;
+        background: var(--koochita-red);
     }
     60% {
-        background: #720d19;
+        background: var(--koochita-red);
     }
     63% {
-        background: #0d6650;
+        background: var(--koochita-green);
     }
     80% {
-        background: #0d6650;
+        background: var(--koochita-green);
     }
     83% {
-        background: #0d6650;
+        background: var(--koochita-green);
     }
     100% {
-        background: #0d6650;
+        background: var(--koochita-green);
     }
 }

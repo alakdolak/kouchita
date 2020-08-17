@@ -167,7 +167,7 @@
 
             if(typeof post !== 'undefined') {
                 for (var i = 0; i < post['category'].length; i++)
-                    $('.CategoryName_' + post['category'][i]['categoryId']).css('color', '#4DC7BC');
+                    $('.CategoryName_' + post['category'][i]['categoryId']).css('color', 'var(--koochita-light-green)');
             }
         });
     </script>

@@ -92,11 +92,11 @@ body {
 }
 
 .postsMainFiltrationBar > a:hover {
-    border-bottom: 5px solid #0076a3;
+    border-bottom: 5px solid var(--koochita-blue);
 }
 
 .profileHeaderLinksTab.active {
-    border-bottom: 5px solid #0076a3;
+    border-bottom: 5px solid var(--koochita-blue);
 }
 
 .postsMainFiltrationBar > a , .userProfilePostsFiltration > span {
@@ -137,7 +137,7 @@ body {
 }
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
@@ -172,7 +172,7 @@ body {
 }
 
 .userProfilePostsSearchContainer > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .userProfilePostsSearchContainer .inputBox {
@@ -233,7 +233,7 @@ body {
     right: -5px;
     background: white;
     padding: 0 10px;
-    color: #0076a3;
+    color: var(--koochita-blue);
     margin: 0;
 }
 
@@ -266,7 +266,7 @@ body {
 }
 
 .upperBox {
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     width: 40px;
     height: 33px;
     border-width: 3px 3px 0 3px;
@@ -284,7 +284,7 @@ body {
 
 .userProfileLevelDetails .inner {
     transform: rotate(45deg);
-    background-color: #0076a3;
+    background-color: var(--koochita-blue);
     border: 3px solid black;
     width: 30px;
     height: 30px;
@@ -331,7 +331,7 @@ body {
 }
 
 .userProfileLevelDetails .w3-blue {
-    background-color: #0076a3 !important;
+    background-color: var(--koochita-blue) !important;
     float: right;
     height: 8px;
 }
@@ -405,7 +405,7 @@ body {
 .activityNumbers {
     position: absolute;
     /*font-size: 14px;*/
-    color: #0076a3;
+    color: var(--koochita-blue);
     top: 10px;
     left: 0;
     cursor: pointer;
@@ -455,7 +455,7 @@ body {
 }
 
 .quantityOfLikes > span, .feedbackStatistic > span {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .numberOfPhotosMainDiv {
@@ -491,14 +491,14 @@ body {
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     position: absolute;
     bottom: -23px;
     left: 0;
 }
 
 .showLessText {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 
@@ -568,7 +568,7 @@ body {
 }
 
 .commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
 }
 
@@ -666,7 +666,7 @@ body {
 }
 
 .questionsActionsMoreDetails > span:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .questionsActionsMoreDetails > span:not(:last-child) {
@@ -715,7 +715,7 @@ body {
 }
 
 .userProfileNameAnswers {
-    color: #0076a3;
+    color: var(--koochita-blue);
     cursor: pointer;
     font-size: 19px;
     line-height: 1.7;
@@ -757,7 +757,7 @@ body {
 }
 
 .numberOfAnswers > span {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .showAnswersToggle {
@@ -778,7 +778,7 @@ body {
 }
 
 .replyBtn {
-    background-color: #fcc156;
+    background-color: var(--koochita-yellow);
     border-radius: 5px;
     padding: 2px;
     cursor: pointer;
@@ -840,7 +840,7 @@ body {
 }
 
 .replyWriterUsername {
-    color: #0076a3;
+    color: var(--koochita-blue);
     position: absolute;
     top: 2px;
     right: 10px;
@@ -1003,7 +1003,7 @@ body {
 }
 
 .replyAnswerTitle {
-    color: #0076a3;
+    color: var(--koochita-blue);
     position: absolute;
     top: 2px;
     right: 10px;
@@ -1159,8 +1159,8 @@ body {
 }
 
 .userProfilePostsFiltration > span.active{
-    border-bottom: 5px solid #0076a3;
-    color: #0076a3;
+    border-bottom: 5px solid var(--koochita-blue);
+    color: var(--koochita-blue);
     text-align: center;
     font-weight: 700;
 }
@@ -1181,7 +1181,7 @@ body {
 
 .userProfileTags{
     font-size: 11px;
-    background: #0d6650;
+    background: var(--koochita-green);
     color: white;
     padding: 2px 7px;
     border-radius: 5px;
@@ -1224,13 +1224,13 @@ body {
     resize: none;
     border-radius: 10px;
     padding: 10px;
-    border: solid 2px #4DC7BC;
+    border: solid 2px var(--koochita-light-green);
     background: #e4e4e4;
     font-size: 13px;
 }
 
 .myTripHeaders{
-    color: #053a3e;
+    color: var(--koochita-dark-green);
     font-size: 21px;
 }
 
@@ -1242,7 +1242,7 @@ body {
 
 .tripButton{
     padding: 4px 10px;
-    border: solid 2px #4DC7BC;
+    border: solid 2px var(--koochita-light-green);
     border-radius: 16px;
     cursor: pointer;
     color: #656565;
@@ -1250,12 +1250,12 @@ body {
 }
 
 .tripButton.active{
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
     color: white;
 }
 
 .saveBioButton{
-    background: #0076a3;
+    background: var(--koochita-blue);
     color: white;
     border: none;
     padding: 4px 10px;
@@ -1265,7 +1265,7 @@ body {
 
 .cancelBioButton{
     background: none;
-    color: #0076a3;
+    color: var(--koochita-blue);
     border: none;
     padding: 4px 10px;
 }
@@ -1492,12 +1492,12 @@ body {
     border: none;
     background: white;
     margin: 0px 12px;
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 .submitSafarnameh{
-    background: #0d6650;
-    border-color: #0d6650;
+    background: var(--koochita-green);
+    border-color: var(--koochita-green);
     border-radius: 11px;
 }
 .newSafarnamehImgSection{
@@ -1515,7 +1515,7 @@ body {
 }
 .addPlaceButton{
     border: none;
-    background: #0d6650;
+    background: var(--koochita-green);
     font-size: 10px;
     cursor: pointer;
     color: white;

@@ -57,7 +57,7 @@
 }
 
 #share_box_mobile > a > div:hover {
-    color: #0076a3;
+    color: var(--koochita-blue);
 }
 
 #share_box > a:hover, #share_box_mobile > a:hover {

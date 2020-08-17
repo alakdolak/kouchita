@@ -122,7 +122,7 @@
 
                     if(response == 'ok') {
                         getQuestion();
-                        showSuccessNotifi('{{__('سئوال شما با موفقیت ثبت شد')}}', 'left', '#0076a3');
+                        showSuccessNotifi('{{__('سئوال شما با موفقیت ثبت شد')}}', 'left', 'var(--koochita-blue)');
                         $('#questionInput').val('');
                     }
                     else
@@ -277,7 +277,7 @@
                     '       <div style="display: flex; width: auto">' +
                     '           <span class="LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeQuestion(' + comment[k]["id"] + ', 1, this)">' + comment[k]["like"] + '</span>\n' +
                     '           <span class="DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeQuestion(' + comment[k]["id"] + ', 0, this)">' + comment[k]["disLike"] + '</span>\n' +
-                    '           <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: #0076a3">پاسخ دهید</span>\n' +
+                    '           <span class="replayBtn" onclick="replayAnsToAns(' + comment[k]["id"] + ')" style="color: var(--koochita-blue)">پاسخ دهید</span>\n' +
                     '       </div>';
             if(comment[k]["answersCount"] > 0){
                 text += '<div style="width: auto; display: flex; margin: 0;">' +
@@ -337,7 +337,7 @@
 
                     if(response == 'ok') {
                         getQuestion();
-                        showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد')}}', 'left', '#0076a3');
+                        showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد')}}', 'left', 'var(--koochita-blue)');
                         document.getElementById('questionAns' + _id).value = '';
                     }
                     else

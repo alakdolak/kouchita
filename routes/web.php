@@ -296,6 +296,8 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 
     Route::post('checkPhoneNum', array('as' => 'checkPhoneNum', 'uses' => 'UserLoginController@checkPhoneNum'));
 
+    Route::post('checkRegisterData', 'UserLoginController@checkRegisterData')->name('checkRegisterData');
+
     Route::post('checkActivationCode', array('as' => 'checkActivationCode', 'uses' => 'UserLoginController@checkActivationCode'));
 
     Route::post('resendActivationCode', array('as' => 'resendActivationCode', 'uses' => 'UserLoginController@resendActivationCode'));
@@ -465,7 +467,7 @@ Route::group(array('middleware' => 'nothing'), function(){
 
 // profile common
 Route::group(['middleware' => ['throttle:30']], function(){
-    Route::get('profile/index/{username?}', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
+    Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile');
 
     Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
 
@@ -674,7 +676,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), func
     Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
 
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-
 });
 
 //tour

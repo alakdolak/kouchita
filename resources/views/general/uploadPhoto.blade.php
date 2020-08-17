@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css?v=1')}}">
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/component/editor.css?v=1')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/component/editor.css?v=2')}}'/>
 
 @if(\App::getLocale() == 'en')
     <style>
@@ -43,90 +43,90 @@
 
 <div id="addPhotographerModal" class="addPhotographerModal hidden">
     <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
-    <div class="body_text photoUploader">
-         <div class="headerBar">
-             <h3 id="photoUploadHeader" class="photoUploadHeader">
-                 <span>{{__('افزودن تصویر به')}} </span>
-                 <span class="titleOfUploadPhoto"></span>
-             </h3>
-         </div>
-        <div class="bodyEditFrame">
-           <div class="row">
-              <div class="col-md-12" style="padding: 0px">
-                 <div class="img-container img-container-photogrpher" style="position: relative">
-                    <img class="imgInEditor" id="editUploadPhoto" alt="Picture" style="width: 100%;">
-                 </div>
-              </div>
-           </div>
-           <div class="row" id="actions" style="">
-                    <div class="col-md-12 docs-buttons">
-
-                        <div class="uploadPicCropLeftSection">
-                            <div class="editBtnsGroup">
-                            <div class="editBtns">
-                               <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="rotateUploadPhoto('Y')"></div>
-                            </div>
-                            <div class="editBtns">
-                               <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="rotateUploadPhoto('X')"></div>
-                            </div>
-                        </div>
-
-                            <div class="editBtnsGroup">
-                                <div class="editBtns">
-                                   <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت چپ')}}" onclick="cropper.rotate(-45)"></div>
-                                </div>
-                                <div class="editBtns">
-                                   <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت راست')}}" onclick="cropper.rotate(45)"></div>
-                                </div>
-                            </div>
-
-                            <div class="editBtnsGroup">
-                            <div class="editBtns">
-                               <div class="cropping" data-toggle="tooltip" data-placement="top" title="{{__('برش')}}" onclick="cropper.crop()"></div>
-                            </div>
-                            <div class="editBtns">
-                                <div class="clearing" data-toggle="tooltip" data-placement="top" title="{{__('بازگشت به اول')}}" onclick="cropper.clear()"></div>
-                            </div>
-                        </div>
-                        </div>
-
-                        <div class="btnActionEditFrame">
-                            <div class="upload" style="margin-left: 10px">
-                                <div onclick=" cropImg();" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
-                            </div>
-
-                            <div class="return">
-                                <div onclick="cancelCrop()" class="returnBtnEditPhoto">{{__('بازگشت')}}</div>
-                            </div>
-                        </div>
-
-                    <!-- Show the cropped image in modal -->
-                        <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
-                       <div class="modal-dialog modal-dialog-scrollable">
-                          <div class="modal-content">
-                             <div class="modal-header">
-                                <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                   <span aria-hidden="true">&times;</span>
-                                </button>
-                             </div>
-                             <div class="modal-body"></div>
-                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-
-                 </div>
+        <div class="body_text photoUploader">
+             <div class="headerBar">
+                 <h3 id="photoUploadHeader" class="photoUploadHeader">
+                     <span>{{__('افزودن تصویر به')}} </span>
+                     <span class="titleOfUploadPhoto"></span>
+                 </h3>
+             </div>
+            <div class="bodyEditFrame">
+               <div class="row">
+                  <div class="col-md-12" style="padding: 0px">
+                     <div class="img-container img-container-photogrpher" style="position: relative">
+                        <img class="imgInEditor" id="editUploadPhoto" alt="Picture" style="width: 100%;">
+                     </div>
+                  </div>
                </div>
-       </div>
-    </div>
-    <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
-</span>
+               <div class="row" id="actions" style="">
+                        <div class="col-md-12 docs-buttons">
 
-    <input id="uploadPhotoInputPic" type="file" style="display: none;">
+                            <div class="uploadPicCropLeftSection">
+                                <div class="editBtnsGroup">
+                                <div class="editBtns">
+                                   <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="rotateUploadPhoto('Y')"></div>
+                                </div>
+                                <div class="editBtns">
+                                   <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="rotateUploadPhoto('X')"></div>
+                                </div>
+                            </div>
+
+                                <div class="editBtnsGroup">
+                                    <div class="editBtns">
+                                       <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت چپ')}}" onclick="cropper.rotate(-45)"></div>
+                                    </div>
+                                    <div class="editBtns">
+                                       <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت راست')}}" onclick="cropper.rotate(45)"></div>
+                                    </div>
+                                </div>
+
+                                <div class="editBtnsGroup">
+                                <div class="editBtns">
+                                   <div class="cropping" data-toggle="tooltip" data-placement="top" title="{{__('برش')}}" onclick="cropper.crop()"></div>
+                                </div>
+                                <div class="editBtns">
+                                    <div class="clearing" data-toggle="tooltip" data-placement="top" title="{{__('بازگشت به اول')}}" onclick="cropper.clear()"></div>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="btnActionEditFrame">
+                                <div class="upload" style="margin-left: 10px">
+                                    <div onclick=" cropImg();" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
+                                </div>
+
+                                <div class="return">
+                                    <div onclick="cancelCrop()" class="returnBtnEditPhoto">{{__('بازگشت')}}</div>
+                                </div>
+                            </div>
+
+                        <!-- Show the cropped image in modal -->
+                            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                           <div class="modal-dialog modal-dialog-scrollable">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body"></div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                   </div>
+           </div>
+        </div>
+        <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
+    </span>
+
+    <input id="uploadPhotoInputPic" type="file" accept="image/*" style="display: none;" onchange="submitPhoto(this.files[0])">
     <span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay">
          <div class="body_text">
              <div class="photoUploader">
@@ -140,13 +140,11 @@
                      <div id="dropArea" class="startScreen infoScreen">
                          <div class="inner">
                              <div class="innerPic"></div>
-{{--                             <div  style="height: 185px; position: relative;">--}}
-                                 <label for="uploadPhotoInputPic" class="uploadPicChoosePic">
-                                     <div class="ui_button primary addPhotoBtn">
-                                         <span>{{__('عکس خود را انتخاب کنید')}}</span>
-                                     </div>
-                                 </label>
-{{--                             </div>--}}
+                             <label for="uploadPhotoInputPic" class="uploadPicChoosePic">
+                                 <div class="ui_button primary addPhotoBtn">
+                                     <span>{{__('عکس خود را انتخاب کنید')}}</span>
+                                 </div>
+                             </label>
 
                              <div class="separator">
                                  <span class="text">{{__('یا')}}</span>
@@ -317,8 +315,43 @@
          <div class="iconFamily iconClose closeAddPhotographer" onclick="$('#addPhotographerModal').addClass('hidden');"></div>
         <img src="" id="mainPicUploadPhotoImg" style="display: none">
     </span>
+
 </div>
-{{--</div>--}}
+
+<style>
+    .mainPicUploadPercentDiv{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 99999;
+    }
+    .mainUploadProgressBar{
+        position: absolute;
+        bottom: 25%;
+        background: #ffffffd1;
+        width: 90%;
+        right: 5%;
+        border-radius: 10px;
+        height: 25px;
+        display: flex;
+        overflow: hidden;
+    }
+    .progressPercent{
+        width: 0%;
+        background: var(--koochita-yellow);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="mainPicUploadPercentDiv" style="display: none;">
+    <div class="mainUploadProgressBar">
+        <div class="progressPercent">0%</div>
+    </div>
+</div>
 
 <script src="{{URL::asset('js/cropper.js')}}"></script>
 
@@ -366,13 +399,6 @@
         return false;
     });
 
-    // input file
-    $(document).ready(function() {
-        $("#uploadPhotoInputPic").change(function() {
-            submitPhoto(this.files[0]);
-        });
-    });
-
     function openUploadPhotoModal(_title, _uploadUrl, _placeId = 0, _kindPlaceId = 0, _additionalData){
 
         $('#placeIdUploadPhoto').val(_placeId);
@@ -398,6 +424,7 @@
     }
 
     function submitPhoto(input) {
+        openLoading();
         mainImage = input;
 
         $('#uploadPhotoPicName').val('');
@@ -411,6 +438,7 @@
             $('#squarePicUploadPhoto').attr('src', e.target.result);
             $('#mainPicUploadPhotoImg').attr('src', e.target.result);
             mainPicUploadPhoto = e.target.result;
+            closeLoading();
         };
         $(".itemRow").css('display', 'block');
         $(".startScreen").addClass('hidden');
@@ -450,11 +478,13 @@
         placeIdUploadPhoto = $('#placeIdUploadPhoto').val();
         kindPlaceIdUploadPhoto = $('#kindPlaceIdUploadPhoto').val();
 
-        $('.photographerErrors').text('')
+        $('.photographerErrors').text('');
 
-        if($('#uploadPhotoRole').is(":checked") && name.trim().length > 0 && description.trim().length <= 100 && kindPlaceIdUploadPhoto != 0 && placeIdUploadPhoto != 0) {
+        if($('#uploadPhotoRole').is(":checked") && name.trim().length > 0 &&
+            description.trim().length <= 100 && kindPlaceIdUploadPhoto != 0 &&
+            placeIdUploadPhoto != 0) {
 
-            $("#fullPageLoader").css('display', 'flex');
+            openLoading();
 
             uploadPhotoFormData = new FormData();
 
@@ -507,6 +537,7 @@
 
         if(im == undefined)
             im = mainImage;
+        $('.mainPicUploadPercentDiv').show();
 
         uploadPhotoFormData.set('pic', im);
         uploadPhotoFormData.set('fileName', mainFileName);
@@ -520,6 +551,27 @@
             data: uploadPhotoFormData,
             processData: false,
             contentType: false,
+            xhr: function () {
+                var xhr = new XMLHttpRequest();
+                xhr.upload.onprogress = function (e) {
+                    var percent = '0';
+                    var percentage = '0%';
+
+                    if (e.lengthComputable) {
+                        percent = Math.round((e.loaded / e.total) * 100);
+
+                        if(type === 'squ')
+                            percent = percent/2;
+                        else if(type === 'req')
+                            percent = 50 + percent/2;
+
+                        percentage = percent + '%';
+                        $('.progressPercent').css('width', percentage);
+                        $('.progressPercent').text(percentage);
+                    }
+                };
+                return xhr;
+            },
             success: function (response) {
                 response = JSON.parse(response);
                 if(response[0] == 'ok'){
@@ -540,8 +592,9 @@
                 }
                 else if(response[0] == 'nok1'){
                     if(repeatTime != 0){
-                        $("#fullPageLoader").css('display', 'none');
-                        alert('{{__('در بارگذاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                        closeLoading();
+                        $('.mainPicUploadPercentDiv').hide();
+                        showSuccessNotifi('{{__("در بارگذاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.")}}', 'left', 'red');
                     }
                     else{
                         repeatTime--;
@@ -549,17 +602,20 @@
                     }
                 }
                 else if(response[0] == 'nok2'){
-                    $("#fullPageLoader").css('display', 'none');
-                    alert('{{__('فرمت عکس باید jpg و یا png باشد')}}')
+                    closeLoading();
+                    $('.mainPicUploadPercentDiv').hide();
+                    showSuccessNotifi('{{__("فرمت عکس باید jpg و یا png باشد")}}', 'left', 'red');
                 }
                 else if(response[0] == 'sizeError'){
-                    $("#fullPageLoader").css('display', 'none');
-                    alert('{{__('حجم عکس باید از 2 مگابایت کمتر باشد.')}}')
+                    closeLoading();
+                    $('.mainPicUploadPercentDiv').hide();
+                    showSuccessNotifi('{{__("حجم عکس باید از 2 مگابایت کمتر باشد.")}}', 'left', 'red');
                 }
             },
             error: function(err){
-                $("#fullPageLoader").css('display', 'none');
-                alert('{{__('در بارگذاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                closeLoading();
+                $('.mainPicUploadPercentDiv').hide();
+                showSuccessNotifi('{{__("در بارگذاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.")}}', 'left', 'red');
             }
         })
     }
@@ -612,7 +668,8 @@
     }
 
     function goToPage3() {
-        $("#fullPageLoader").css('display', 'none');
+        closeLoading();
+        $('.mainPicUploadPercentDiv').hide();
 
         var text = '';
         var picWidth = Math.floor(100/mainFilesUploaded.length);
@@ -625,29 +682,6 @@
         $('#uploadedImgDiv').html(text);
         $(".itemRow").css('display', 'none');
         $(".successScreen").removeClass('hidden');
-
-        // var withOfDiv = $("#uploadedImgDiv").width();
-        // var heightOfDiv = $("#uploadedImgDiv").height();
-        //
-        // if(withOfDiv > 767){
-        //     if(mainFilesUploaded.length <= 2)
-        //         withOfDiv /= 2;
-        //     else if(mainFilesUploaded.length == 3)
-        //         withOfDiv /= 3;
-        //     else
-        //         withOfDiv /= 4;
-        //
-        //     if(heightOfDiv < withOfDiv)
-        //         withOfDiv = heightOfDiv;
-        // }
-        // else{
-        //     if(mainFilesUploaded.length > 1)
-        //         withOfDiv /= 2;
-        // }
-        // withOfDiv -= 10;
-        //
-        // $('.uploadedImgShowDiv').css('width', withOfDiv);
-        // $('.uploadedImgShowDiv').css('height', withOfDiv);
     }
 
     function b64toBlob(dataURI) {

@@ -133,7 +133,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 #showMore {
     float: left;
     cursor: pointer;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     font-size: 13px;
 }
 

@@ -106,6 +106,37 @@ class UserLoginController extends Controller
         return;
     }
 
+    public function checkRegisterData(Request $request)
+    {
+        if(isset($request->name) && isset($request->emailPhone)){
+            $nameErr = false;
+            $emailErr = false;
+            $phoneErr = false;
+
+            if(strpos($request->emailPhone, '@') > -1) {
+                $checkEmail = User::where('email', $request->emailPhone)->first();
+                if($checkEmail != null)
+                    $emailErr = true;
+            }
+            else{
+                $phone = convertNumber('en', $request->emailPhone);
+                $checkPhone = User::where('phone', $phone)->first();
+                if($checkPhone != null)
+                    $phoneErr = true;
+            }
+
+            $checkName = User::where('username', $request->name)->first();
+            if($checkName != null)
+                $nameErr = true;
+
+            echo json_encode(['status' => 'ok', 'nameErr' => $nameErr, 'phoneErr' => $phoneErr, 'emailErr' => $emailErr]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
     public function checkUserName()
     {
         if (isset($_POST["username"])) {
@@ -133,6 +164,62 @@ class UserLoginController extends Controller
             return;
         }
         echo "nok";
+    }
+
+    public function checkPhoneNum()
+    {
+        if (isset($_POST["phoneNum"])) {
+
+            $phoneNum = makeValidInput($_POST["phoneNum"]);
+            $phoneNum = convertNumber('en', $phoneNum);
+
+            if(\auth()->check()){
+                if (User::wherePhone($phoneNum)->where('id', '!=', \auth()->user()->id)->count() > 0)
+                    echo 'nok';
+                else
+                    echo 'ok';
+            }
+            else {
+                if (User::wherePhone($phoneNum)->count() > 0)
+                    echo json_encode(['status' => 'nok']);
+                else {
+                    $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
+                    if ($activation != null) {
+                        if((90 - time() + $activation->sendTime) < 0)
+                            $this->resendActivationCode();
+                        else
+                            echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
+
+                        return;
+                    }
+
+                    $code = createCode();
+                    while (ActivationCode::whereCode($code)->count() > 0)
+                        $code = createCode();
+
+                    if ($activation == null) {
+                        $activation = new ActivationCode();
+                        $activation->phoneNum = $phoneNum;
+                    }
+
+                    $msgId = sendSMS($phoneNum, $code, 'sms');
+                    if ($msgId == -1) {
+                        echo json_encode(['status' => 'nok3']);
+                        return;
+                    }
+
+                    $activation->sendTime = time();
+                    $activation->code = $code;
+                    try {
+                        $activation->save();
+                        echo json_encode(['status' => 'ok', 'reminder' => 90]);
+                    } catch (Exception $x) {
+                    }
+                }
+            }
+            return;
+        }
+        echo json_encode(['status' => 'nok']);
     }
 
     public function checkReCaptcha()
@@ -256,66 +343,10 @@ class UserLoginController extends Controller
         echo json_encode(['status' => 'nok3', 'reminder' => 90]);
     }
 
-    public function checkPhoneNum()
-    {
-        if (isset($_POST["phoneNum"])) {
-
-            $phoneNum = makeValidInput($_POST["phoneNum"]);
-            $phoneNum = convertNumber('en', $phoneNum);
-
-            if(\auth()->check()){
-                if (User::wherePhone($phoneNum)->where('id', '!=', \auth()->user()->id)->count() > 0)
-                    echo 'nok';
-                else
-                    echo 'ok';
-            }
-            else {
-                if (User::wherePhone($phoneNum)->count() > 0)
-                    echo json_encode(['status' => 'nok']);
-                else {
-
-                    $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
-                    if ($activation != null) {
-                        if((90 - time() + $activation->sendTime) < 0)
-                            $this->resendActivationCode();
-                        else
-                            echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
-
-                        return;
-                    }
-
-                    $code = createCode();
-                    while (ActivationCode::whereCode($code)->count() > 0)
-                        $code = createCode();
-
-                    if ($activation == null) {
-                        $activation = new ActivationCode();
-                        $activation->phoneNum = $phoneNum;
-                    }
-
-                    $msgId = sendSMS($phoneNum, $code, 'sms');
-                    if ($msgId == -1) {
-                        echo json_encode(['status' => 'nok3']);
-                        return;
-                    }
-
-                    $activation->sendTime = time();
-                    $activation->code = $code;
-                    try {
-                        $activation->save();
-                        echo json_encode(['status' => 'ok', 'reminder' => 90]);
-                    } catch (Exception $x) {
-                    }
-                }
-            }
-            return;
-        }
-        echo json_encode(['status' => 'nok']);
-    }
-
     public function registerAndLogin(Request $request)
     {
-        if (isset($_POST["username"]) && isset($_POST["password"]) && (isset($_POST["email"]) || isset($_POST["phone"]))) {
+        if (isset($_POST["username"]) && isset($_POST["password"]) &&
+            (isset($_POST["email"]) || isset($_POST["phone"]))) {
 
             $uInvitationCode = createCode();
             while (User::whereInvitationCode($uInvitationCode)->count() > 0)
@@ -327,15 +358,28 @@ class UserLoginController extends Controller
                 return;
             }
 
-            if(isset($request->phone) && isset($request->actCode) && $request->phone != ''){
-                $phone = convertNumber('en', $request->phone);
-                $actCode = convertNumber('en', $request->actCode);
-                $check = ActivationCode::where('phoneNum', $phone)->where('code', $actCode)->first();
-                if($check == null){
+            if(isset($request->phone) && $request->phone != ''){
+                if(isset($request->actCode)) {
+                    $phone = convertNumber('en', $request->phone);
+                    $actCode = convertNumber('en', $request->actCode);
+                    $check = ActivationCode::where('phoneNum', $phone)->where('code', $actCode)->first();
+                    if ($check == null) {
+                        echo 'nok5';
+                        return;
+                    }
+                    $check->delete();
+                }
+                else{
                     echo 'nok5';
                     return;
                 }
-                $check->delete();
+            }
+            else if(isset($_POST["email"]) && $_POST["email"] != ''){
+
+            }
+            else{
+                echo 'nok10';
+                return;
             }
 
             $invitationCode = "";

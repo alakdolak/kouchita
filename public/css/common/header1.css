@@ -208,7 +208,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 
 .languageButton{
     border-radius: 0px 10px 10px 0px !important;
-    background: #eab836 !important;
+    background: var(--koochita-yellow) !important;
     margin-left: -16px !important;
     padding-right: 8px !important;
     padding-left: 24px !important;
@@ -231,7 +231,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     padding: 4px 20px;
     font-size: 20px;
     color: #eafbff !important;
-    background-color: #0E3A46;
+    background-color: var(--koochita-dark-green);
     border-radius: 10px;
     border: none;
     font-weight: 600;
@@ -242,7 +242,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 
 .languagePopUp{
     position: absolute;
-    background: #eab836 !important;
+    background: var(--koochita-yellow) !important;
     width: 100%;
     padding: 0px 10px;
     left: 0px;
@@ -266,7 +266,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 }
 
 .languageSelect:hover{
-    color: #0e3a46;
+    color: var(--koochita-dark-green);
 }
 
 .headerContainer{
@@ -309,7 +309,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 }
 
 .headerSearchIcon:hover{
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .headerButtonsSection{
@@ -387,11 +387,11 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 }
 
 .headerAuthButton:hover .nameOfIconHeaders{
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .headerAuthButton:hover .headerIconCommon:before{
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
 }
 
 .headerAlertNumber{
@@ -436,7 +436,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     padding: 7px 10px;
     border-radius: 30px;
     font-weight: 600;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     cursor: pointer;
 }
 

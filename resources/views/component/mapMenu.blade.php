@@ -330,7 +330,8 @@
         restaurant: [],
         majara: [],
         boomgardy: [],
-        moreInfo: []
+        moreInfo: [],
+        selected: []
     };
     let mapIcon = {
         amaken: '{{URL::asset('images/mapIcon/att.png')}}',
@@ -364,12 +365,16 @@
         let fk = Object.keys(mapData);
         for (let x of fk) {
             mapData[x].forEach(item => {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(item['C'], item['D']),
-                    icon: {
+                let iconMap = null;
+                if(mapIcon[x])
+                    iconMap = {
                         url: mapIcon[x],
                         scaledSize: new google.maps.Size(30, 35), // scaled size
-                    },
+                    };
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(item['C'], item['D']),
+                    icon: iconMap,
                     map: mainMap,
                     title: item['name'],
                     url: item['url'],

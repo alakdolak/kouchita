@@ -283,7 +283,7 @@ function show(curr, inc) {
             'position': 'relative',
             'border': '5px solid #333',
             'padding': '10px',
-            'background-color': '#4dc7bc',
+            'background-color': 'var(--koochita-light-green)',
             'z-index': 1000001,
             'cursor': 'auto'
         });
@@ -393,7 +393,7 @@ function bookMark() {
             }
             else if(response == 'ok-add'){
                 changeBookmarkIcon();
-                showSuccessNotifi('این صفحه ذخیره شد', 'left', '#0076a3');
+                showSuccessNotifi('این صفحه ذخیره شد', 'left', 'var(--koochita-blue)');
             }
         }
     })
@@ -416,7 +416,7 @@ function addToSelectedTrips(id) {
         }
     }
     if (allow) {
-        $("#trip_" + id).css('border', '2px solid #4DC7BC');
+        $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
         selectedTrips[selectedTrips.length] = id;
     }
 }

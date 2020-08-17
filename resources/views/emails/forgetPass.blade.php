@@ -15,7 +15,7 @@
         }
         .redirectButton{
             padding: 15px 40px;
-            background: #053a3e;
+            background: var(--koochita-dark-green);
             color: white !important;
             text-decoration: none;
             border-radius: 24px;

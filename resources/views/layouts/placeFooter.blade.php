@@ -61,9 +61,9 @@
                         <a href="{{route('policies')}}"> {{__('درباره ما')}} </a>
                         {{__('بیشتر بدانید.')}}
                         {{__('کوچیتا محصولی از')}}
-                        <a href="http://www.sisootech.com/" style="color: #053a3e !important;">{{__('شتاب دهنده سی سو تک')}} </a>
+                        <a href="http://www.sisootech.com/" style="color: var(--koochita-dark-green) !important;">{{__('شتاب دهنده سی سو تک')}} </a>
                         {{__('و')}}
-                        <a href="http://www.bogenstudio.com/" style="color: #053a3e !important;"> {{__('بوگن دیزاین')}} </a>
+                        <a href="http://www.bogenstudio.com/" style="color: var(--koochita-dark-green) !important;"> {{__('بوگن دیزاین')}} </a>
                         {{__('می باشد؛ ما را بیشتر بشناسید.')}}
                     </div>
                 </div>
@@ -645,7 +645,7 @@
                                 @endif
                             </div>
                             <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
-                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: #0d6650">{{__('جستجو کنید')}}</button>
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: var(--koochita-green)">{{__('جستجو کنید')}}</button>
                                 <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>
@@ -676,7 +676,7 @@
                                 </a>
                             </div>
                             <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
-                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: #0d6650">{{__('جستجو کنید')}}</button>
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: var(--koochita-green)">{{__('جستجو کنید')}}</button>
                                 <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>

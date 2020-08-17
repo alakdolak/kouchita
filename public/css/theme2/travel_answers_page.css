@@ -315,7 +315,7 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     width: 30px;
 }
 .QA_vote .ui_icon.inactive {
@@ -327,7 +327,7 @@
     font-size: .9165em;
     font-family: Arial Regular, Arial, Verdana, "Bitstream Vera Sans", Helvetica, sans-serif;
     text-align: center;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     width: 30px;
 }
 .QA_vote .voteCount div {

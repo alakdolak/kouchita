@@ -47,8 +47,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .unified.pagination.js_pageLinks .nav.next.rndBtn.ui_button.primary.taLnk.float-rightImp {
     float: right !important;
-    background-color: #4DC7BC !important;
-    border-color: #4DC7BC !important;
+    background-color: var(--koochita-light-green) !important;
+    border-color: var(--koochita-light-green) !important;
 }
 
 .pageNumbers button.pageNum.taLnk {

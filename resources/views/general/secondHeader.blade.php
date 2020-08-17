@@ -4,7 +4,7 @@
         text-align: right;
         position: relative;
         padding: 0px 20px;
-        background-color: #fcc156;
+        background-color: var(--koochita-yellow);
     }
 
     .secHeadTabs:not(:first-child) {
@@ -35,7 +35,7 @@
         display: none;
         flex-direction: column;
         min-width: 130px;
-        background-color: #fcc156;
+        background-color: var(--koochita-yellow);
         border-radius: 0px 0px 10px 10px;
     }
 
@@ -83,7 +83,7 @@
     }
 
     .yelCol{
-        color: #eab836;
+        color: var(--koochita-yellow);
     }
     .listSecHeadContainer{
         font-size: 20px;

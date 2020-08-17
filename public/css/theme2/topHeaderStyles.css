@@ -116,7 +116,7 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     display: flex;
     justify-content: center;
     align-items: center;
-    /*background-color: #fcc15690;*/
+    /*background-color: var(--koochita-yellow)90;*/
 }
 
 
@@ -136,7 +136,7 @@ input[type="checkbox"] + label, input[type="radio"] + label{
 }
 
 .confirmButton{
-    background-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
     color: white;
     border-radius: 5px;
     text-align: center;
@@ -261,3 +261,11 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     }
 }
 
+:root {
+    --koochita-blue: #0076a3;
+    --koochita-light-green: #4dc7bc;
+    --koochita-dark-green: #053a3e;
+    --koochita-green: #0d6650;
+    --koochita-red: #720d19;
+    --koochita-yellow: #fcc156;
+}

@@ -44,18 +44,18 @@
     padding: 5px;
     font-size: 11px;
     margin-bottom: 7px;
-    border-bottom: 1px solid #4DC7BC;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 #trips-tiles > div > div:nth-child(4) > p {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     display: inline;
 }
 
 #trips-tiles > div > div:nth-child(5) {
     padding: 5px;
     margin-bottom: 7px;
-    border-bottom: 1px solid #4DC7BC;
+    border-bottom: 1px solid var(--koochita-light-green);
 }
 
 #bookmarkmenu {

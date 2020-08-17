@@ -52,7 +52,7 @@
 
         <style>
             .activeTripStyle{
-                background-color: #4dc7bc;
+                background-color: var(--koochita-light-green);
                 color: white;
                 visibility: visible;
             }

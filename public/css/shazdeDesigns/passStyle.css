@@ -31,7 +31,7 @@
     background-color: transparent;
 }
 /*input[type="checkbox"] {*/
-/*background-color: #4DC7BC;*/
+/*background-color: var(--koochita-light-green);*/
 /*}*/
 
 .afterBuyBtn {

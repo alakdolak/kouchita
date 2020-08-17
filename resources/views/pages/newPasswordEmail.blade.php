@@ -19,7 +19,7 @@
     <style>
         .registerLeftSection{
             width: 40%;
-            background: #053a3e;
+            background: var(--koochita-dark-green);
         }
 
         @media (max-width: 800px){

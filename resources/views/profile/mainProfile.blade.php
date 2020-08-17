@@ -11,6 +11,21 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
+
+    <style>
+        .whoAmI{
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .userProfileDetailsMainDiv{
+                display: none;
+            }
+            .whoAmI{
+                display: block !important;
+            }
+
+        }
+    </style>
 @stop
 
 @section('main')
@@ -51,6 +66,7 @@
                         </div>
                     </div>
                     <div class="postsMainFiltrationBar">
+                        <a id="whoAmITab" href="#whoAmI" class="profileHeaderLinksTab whoAmI" onclick="changePages('whoAmI')">من کی هستم</a>
                         <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
                         <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
                         <a href="#" class="profileHeaderLinksTab">سؤال‌ و جواب</a>
@@ -73,12 +89,12 @@
                                 @if($sideInfos['introduction'] != null)
                                     {{$sideInfos['introduction']}}
                                 @elseif(isset($myPage) && $myPage)
-                                    <div style="font-size: 14px; color: #0076a3; text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">خودتان را به دیگران معرفی کنید.</div>
+                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">خودتان را به دیگران معرفی کنید.</div>
                                 @endif
                             </div>
                             <div id="myTripStyles" class="userProfileTagsSection">
                                 @if(count($sideInfos['tripStyle']) == 0 && $sideInfos['introduction'] != null && isset($myPage) && $myPage)
-                                    <div style="font-size: 14px; color: #0076a3; text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>
+                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>
                                 @else
                                     @foreach($sideInfos['tripStyle'] as $item)
                                         <div class="userProfileTags">{{$item->name}}</div>
@@ -228,8 +244,6 @@
                         @include('profile.innerParts.userSafarnameh')
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -271,6 +285,10 @@
 
         function showAllPicUser(){
             createPhotoModal('عکس های شما', allUserPics);// in general.photoAlbumModal.blade.php
+        }
+
+        function openWhoAmI(){
+            $('.rightColBoxes').slideToggle();
         }
 
         function showUserActivity(_element){
@@ -349,10 +367,16 @@
             $('.postsMainFiltrationBar').find('.active').removeClass('active');
             $('.prodileSections').addClass('hidden');
 
+            if($(window).width() < 768)
+                $('#userProfileSideInfos').hide();
+
             if(_kind === 'review'){
                 $('#reviewTab').addClass('active');
                 $('#reviewMainBody').removeClass('hidden');
                 getReviewsUserReview(); // in profile.innerParts.userPostsInner
+            }
+            else if(_kind == 'whoAmI'){
+                $('#userProfileSideInfos').show();
             }
             else if(_kind === 'picture') {
                 $('#pictureTab').addClass('active');
@@ -381,6 +405,8 @@
             changePages('review');
         else if(url.hash === '#picture')
             changePages('picture');
+        else if(url.hash === '#whoAmI')
+            changePages('whoAmI');
         else if(url.hash === '#safarnameh')
             changePages('safarnameh');
 

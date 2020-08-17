@@ -40,7 +40,7 @@ body {
 }
 
 .icon-mainpage span {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     font-size: 26px;
     line-height: 50px
 }
@@ -329,8 +329,8 @@ body {
 
 .searchPanes > div:nth-child(3) > div > button {
     color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 .spSearchDivForScroll {
@@ -348,7 +348,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align {
 }
 
 .spGoWhere {
-    color: #0076a3;
+    color: var(--koochita-blue);
     font-size: 20px;
     font-weight: 500;
     float: right;
@@ -363,7 +363,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 }
 
 .spBorderBottom {
-    border-bottom: 2px solid #4DC7BC;
+    border-bottom: 2px solid var(--koochita-light-green);
     margin: 10px 0 0;
 }
 
@@ -420,8 +420,8 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 .pop-up-Panes > div:nth-child(3) > div > button {
     color: #FFF;
-    background-color: #4dc7bc;
-    border-color: #4dc7bc;
+    background-color: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
 }
 
 #searchDivForScroll {
@@ -449,7 +449,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 #result {
     overflow-y: auto;
-    border: 2px solid #4DC7BC;
+    border: 2px solid var(--koochita-light-green);
     border-top: 0;
     width: 45%;
     padding: 10px 5px 6px;
@@ -466,7 +466,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 .visitSuggestionDiv {
     overflow-y: auto;
     max-height: 390px;
-    border: 2px solid #4DC7BC;
+    border: 2px solid var(--koochita-light-green);
     border-top: 0;
     width: 50%;
     padding: 10px 5px 5px;
@@ -815,7 +815,7 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
 
     .visitSuggestionDiv {
         width: auto;
-        border-top: 2px solid #4dc7bc;
+        border-top: 2px solid var(--koochita-light-green);
         margin-top: 40px;
     }
 

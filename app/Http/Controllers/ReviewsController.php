@@ -155,6 +155,8 @@ class ReviewsController extends Controller
 
             echo 'ok';
         }
+        else
+            echo 'nok';
 
         return;
     }

@@ -73,7 +73,7 @@ $kindPlaceId = 10; ?>
         }
 
         .icon-mainpage span {
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 26px;
             line-height: 50px;
         }
@@ -154,13 +154,13 @@ $kindPlaceId = 10; ?>
         }
 
         .classTypePane:hover {
-            border-bottom: 1px solid #4DC7BC;
+            border-bottom: 1px solid var(--koochita-light-green);
         }
 
         .classTypePane_phone {
             height: 90px;
             line-height: 90px;
-            border-bottom: 1px solid #4DC7BC;
+            border-bottom: 1px solid var(--koochita-light-green);
         }
 
         .arrowPane {
@@ -258,7 +258,7 @@ $kindPlaceId = 10; ?>
         }
 
         .cityName:hover {
-            background-color: #4DC7BC !important;
+            background-color: var(--koochita-light-green) !important;
             color: white !important;
         }
 
@@ -272,7 +272,7 @@ $kindPlaceId = 10; ?>
 
         .inputCityName:focus {
             border: none !important;
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
         }
 
         .locationIcon {
@@ -423,14 +423,14 @@ $kindPlaceId = 10; ?>
         }
         .rightArrowIcone:before {
             content: '\E047';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 2.5em;
             position: absolute;
             top:-10px;
         }
         .leftArrowIcone:before {
             content: '\E04D ';
-            color: #4DC7BC;
+            color: var(--koochita-light-green);
             font-size: 2.5em;
             position: absolute;
             top:-10px;
@@ -616,7 +616,7 @@ $kindPlaceId = 10; ?>
                                             </div>
 
                                         </div>
-                                        <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="float: right; width: 10%; border-radius:  10px; border: 0px solid #4DC7BC; margin-right: 9px;">
+                                        <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="float: right; width: 10%; border-radius:  10px; border: 0px solid var(--koochita-light-green); margin-right: 9px;">
                                             <button onclick="redirect()" class="autoResize form_submit" style="padding: 13px !important;">
                                                 <span class="ui_icon search submit_icon"></span>
                                                 <span class="submit_text">جستجو</span>
@@ -766,7 +766,7 @@ $kindPlaceId = 10; ?>
                                         <div style="clear:both;"></div>
 
                                         <div class="prw_rup prw_common_form_submit ui_column submit_wrap"
-                                             style="border: 0px solid #4DC7BC; border-radius: 0 0 10px 10px; margin: 0 !important;">
+                                             style="border: 0px solid var(--koochita-light-green); border-radius: 0 0 10px 10px; margin: 0 !important;">
                                             <button onclick="redirect()" class="autoResize form_submit"
                                                     style="padding: 17px !important; font-size: 30px; line-height: 30px">
                                                 <span class="ui_icon search submit_icon"></span>
@@ -1108,9 +1108,9 @@ $kindPlaceId = 10; ?>
 
             $(".blitButton").css('background-color', 'white')
                 .css('background-image', 'url("' + '{{URL::asset('images') . '/tbuttonoff.png'}}' + '")');
-            elem.css('background-color', '#4DC7BC')
+            elem.css('background-color', 'var(--koochita-light-green)')
                 .css('background-image', 'url("' + '{{URL::asset('images') . '/tbuttonon.png'}}' + '")');
-            elemPhone.css('background-color', '#4DC7BC')
+            elemPhone.css('background-color', 'var(--koochita-light-green)')
                 .css('background-image', 'url("' + '{{URL::asset('images') . '/tbuttonon.png'}}' + '")');
 
             $(".tripClass").addClass('hidden');
@@ -1226,8 +1226,8 @@ $kindPlaceId = 10; ?>
             directionMode = element;
 
             $(".directional").css('background-color', 'white').css('color', 'black');
-            $("#" + element).css('background-color', '#4DC7BC').css('color', 'white');
-            $("#unidirectional_phone").css('background-color', '#4DC7BC').css('color', 'white');
+            $("#" + element).css('background-color', 'var(--koochita-light-green)').css('color', 'white');
+            $("#unidirectional_phone").css('background-color', 'var(--koochita-light-green)').css('color', 'white');
 
             if(element === 'bidirectional')
                 $("#calendar-container-edit-2placeDate").removeClass('hidden');
@@ -1242,7 +1242,7 @@ $kindPlaceId = 10; ?>
 
         function coupeExclusiveClicked(element) {
             if ($("#" + element).attr('data-status') == 'OFF') {
-                $("#" + element).css('background-color', '#4DC7BC').css('color', 'white')
+                $("#" + element).css('background-color', 'var(--koochita-light-green)').css('color', 'white')
                     .attr('data-status', 'ON');
             } else {
                 $("#" + element).css('background-color', 'white').css('color', 'black')
@@ -1286,7 +1286,7 @@ $kindPlaceId = 10; ?>
                     currIdx = 0;
 
                 if (currIdx >= 0 && currIdx < suggestions.length)
-                    $("#suggest_" + currIdx).css("background-color", "#4DC7BC").css("color", "white");
+                    $("#suggest_" + currIdx).css("background-color", "var(--koochita-light-green)").css("color", "white");
                 return;
             }
             if (38 == e.keyCode) {
@@ -1296,7 +1296,7 @@ $kindPlaceId = 10; ?>
                     currIdx = suggestions.length - 1;
 
                 if (currIdx >= 0 && currIdx < suggestions.length)
-                    $("#suggest_" + currIdx).css("background-color", "#4DC7BC").css("color", "white");
+                    $("#suggest_" + currIdx).css("background-color", "var(--koochita-light-green)").css("color", "white");
                 return;
             }
 
@@ -1358,7 +1358,7 @@ $kindPlaceId = 10; ?>
 
             <div style="margin-top: 25px;" class="submitOptions">
                 <button onclick="document.location.href = $('#states').val()"
-                        style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
+                        style="color: #FFF;background-color: var(--koochita-light-green);border-color:var(--koochita-light-green);"
                         class="btn btn-success">تایید</button>
                 <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر"
                        class="btn btn-default">
@@ -1378,7 +1378,7 @@ $kindPlaceId = 10; ?>
 
             <div style="margin-top: 25px;" class="submitOptions">
                 <button onclick="document.location.href = $('#goyesh').val()"
-                        style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
+                        style="color: #FFF;background-color: var(--koochita-light-green);border-color:var(--koochita-light-green);"
                         class="btn btn-success">تایید</button>
                 <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
                        class="btn btn-default">

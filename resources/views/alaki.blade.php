@@ -105,7 +105,7 @@ else
         .line {
             width: 70%;
             height: 2px;
-            border-bottom: 2px solid #4DC7BC;
+            border-bottom: 2px solid var(--koochita-light-green);
             margin-right: auto;
             margin-left: auto;
         }

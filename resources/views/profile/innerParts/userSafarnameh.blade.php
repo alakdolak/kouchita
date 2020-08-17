@@ -89,7 +89,7 @@
                 </div>
                 <div>
                     <button class="backSafarnameh" onclick="backToSafarnamehList()">بازگشت</button>
-                    <button class="btn btn-success submitSafarnameh" style="background: #0d6650" onclick="storeSafarnameh()">ثبت</button>
+                    <button class="btn btn-success submitSafarnameh" style="background: var(--koochita-green)" onclick="storeSafarnameh()">ثبت</button>
                 </div>
             </div>
 
@@ -288,7 +288,7 @@
                     contentType: false,
                     success: function (response) {
                         if (response == 'ok') {
-                            showSuccessNotifi('سفرنامه شما با موفقیت ثبت شد.', 'left');
+                            showSuccessNotifi('سفرنامه شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
                             $('#newSafarnamehTitle').val('');
                             $('#safarnamehSummery').val('');
                             $('#safarnamehTag1').val('');

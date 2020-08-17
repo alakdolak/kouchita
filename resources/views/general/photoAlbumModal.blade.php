@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=1')}}">
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=2')}}">
 
 <style>
     .deletePicIconsPhotoAlbum{
@@ -17,10 +17,39 @@
         top: -10px;
         left: -5px;
     }
+
     .photoAlbumWhere{
         font-size: 9px;
         display: block;
         color: #9aa0a6;
+    }
+
+    .albumContent{
+        max-height: 75vh;
+        overflow: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .leftColPhotosModalMainDiv{
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .leftColPhotosModalMainDiv{
+            margin-bottom: 30px;
+        }
+        .albumContent{
+            max-height: 55vh;
+        }
+        .showingPhotosModal .rightColPhotosShowingModal{
+            height: 55px;
+            width: 60px;
+            border-radius: 5px;
+        }
     }
 </style>
 
@@ -51,43 +80,27 @@
             </div>
             <div class="clear-both"></div>
             <div class="display-flex">
-                <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv" style="display: flex; margin-bottom: 20px;">
+                <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                     <div id="leftColPhotosModalMainDiv" class="selectedPhotoShowingModal" style="position: relative;">
                         <div style="position: relative; width: 100%;">
-                            <div style="max-height: 80vh; overflow: auto; width: 100%;">
-                                <img id="mainPhotoAlbum" src="" alt="" style="width: 100%;">
-                                <video id="mainVideoPhotoAlbum" src="" controls style="width: 100%; height: 100%;"></video>
+                            <div class="albumContent">
+                                <img id="mainPhotoAlbum" src="" style="max-width: 100%; max-height: 100%;">
+                                <video id="mainVideoPhotoAlbum" src="" controls style="max-width: 100%; max-height: 100%;"></video>
                             </div>
                             <div style="position: absolute; bottom: -25px; right: 0px; margin-top: 7px; display: flex; justify-content: center;">
                                 <div id="photoAlbumLikeSection" class="photoAlbumLikeSection" style="display:none;">
-                                    <div>
-                                        <div class="feedBackBtn" style="margin: 0px;">
-                                            <div id="photoAlbumTopDisLike" class="dislikeBox photoAlbumTopLike disLikePhotoAlbum" onclick="likeAlbumPic(this,-1)">
-                                                <div id="photoAlbumDisLikeCount" style="font-size: 25px"></div>
-                                            </div>
-                                            <div id="photoAlbumTopLike" class="likeBox photoAlbumTopLike likePhotoAlbum" onclick="likeAlbumPic(this,1)">
-                                                <div id="photoAlbumLikeCount" style="font-size: 25px"></div>
-                                            </div>
+                                    <div class="feedBackBtn" style="margin: 0px;">
+                                        <div class="dislikeBox photoAlbumTopLikeButton photoAlbumTopDisLike disLikePhotoAlbum" onclick="likeAlbumPic(this,-1)">
+                                            <div class="photoAlbumDisLikeCount" style="font-size: 25px"></div>
+                                        </div>
+                                        <div class="likeBox photoAlbumTopLikeButton photoAlbumTopLike likePhotoAlbum" onclick="likeAlbumPic(this,1)">
+                                            <div class="photoAlbumLikeCount" style="font-size: 25px"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div id="deletePicIconsPhotoAlbum" class="deletePicIconsPhotoAlbum" dataValue="0" onclick="openDeletePhotoModal()">
                                 <img src="{{URL::asset('images/icons/recycle-bin3.png')}}" style="width: 35px; height: 35px">
-                            </div>
-                        </div>
-                        <div style="position: absolute; bottom: 0px; right: 0px; margin-top: 7px; display: flex; justify-content: center;">
-                            <div id="photoAlbumLikeSection" class="photoAlbumLikeSection" style="display:none;">
-                                <div>
-                                    <div class="feedBackBtn" style="margin: 0px;">
-                                        <div id="photoAlbumTopDisLike" class="dislikeBox photoAlbumTopLike disLikePhotoAlbum" onclick="likeAlbumPic(this,-1)">
-                                            <div id="photoAlbumDisLikeCount" style="font-size: 25px"></div>
-                                        </div>
-                                        <div id="photoAlbumTopLike" class="likeBox photoAlbumTopLike likePhotoAlbum" onclick="likeAlbumPic(this,1)">
-                                            <div id="photoAlbumLikeCount" style="font-size: 25px"></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -237,15 +250,15 @@
         }
 
         if(sidePics[_index]['showInfo']) {
-            $('#photoAlbumTopLike').removeClass('fullLikePhotoAlbum');
-            $('#photoAlbumTopDisLike').removeClass('fullDisLikePhotoAlbum');
+            $('.photoAlbumTopLike').removeClass('fullLikePhotoAlbum');
+            $('.photoAlbumTopDisLike').removeClass('fullDisLikePhotoAlbum');
 
             $('#photoAlbumLikeSection').css('display', 'block');
-            $('#photoAlbumDisLikeCount').text(sidePics[_index]['dislike']);
-            $('#photoAlbumLikeCount').text(sidePics[_index]['like']);
+            $('.photoAlbumDisLikeCount').text(sidePics[_index]['dislike']);
+            $('.photoAlbumLikeCount').text(sidePics[_index]['like']);
 
-            $('#photoAlbumTopLike').attr('picId', sidePics[_index]['id']);
-            $('#photoAlbumTopDisLike').attr('picId', sidePics[_index]['id']);
+            $('.photoAlbumTopLike').attr('picId', sidePics[_index]['id']);
+            $('.photoAlbumTopDisLike').attr('picId', sidePics[_index]['id']);
 
             if(sidePics[_index]['userLike'] == 1)
                 likePhotoAlbum(1);
@@ -268,23 +281,23 @@
     }
 
     function likePhotoAlbum(_like){
-        $('#photoAlbumTopLike').removeClass('fullLikePhotoAlbum');
-        $('#photoAlbumTopDisLike').removeClass('fullDisLikePhotoAlbum');
+        $('.photoAlbumTopLike').removeClass('fullLikePhotoAlbum');
+        $('.photoAlbumTopDisLike').removeClass('fullDisLikePhotoAlbum');
         sidePics[choosenIndex]['userLike'] = _like;
 
         if(_like == 1)
-            $('#photoAlbumTopLike').addClass('fullLikePhotoAlbum');
+            $('.photoAlbumTopLike').addClass('fullLikePhotoAlbum');
         else if(_like == -1)
-            $('#photoAlbumTopDisLike').addClass('fullDisLikePhotoAlbum');
+            $('.photoAlbumTopDisLike').addClass('fullDisLikePhotoAlbum');
     }
 
     function setLikeNumberInPhotoAlbum(_count, _kind){
         if(_kind == 'like') {
-            $('#photoAlbumLikeCount').text(_count);
+            $('.photoAlbumLikeCount').text(_count);
             sidePics[choosenIndex]['like'] = _count;
         }
         else if(_kind == 'dislike'){
-            $('#photoAlbumDisLikeCount').text(_count);
+            $('.photoAlbumDisLikeCount').text(_count);
             sidePics[choosenIndex]['dislike'] = _count;
         }
     }
@@ -328,7 +341,7 @@
         if(!checkLogin())
             return;
 
-        let id = $('#photoAlbumTopLike').attr('picId');
+        let id = $('.photoAlbumTopLike').attr('picId');
 
         $.ajax({
             type: 'post',

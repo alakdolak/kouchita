@@ -108,11 +108,17 @@
         moreInfo: []
     };
 
-    function showExtendedMap(){
-        $('#mapState').modal('show');
+    function showExtendedMap(_x, _y){
+        console.log(_x, _y);
+        if(window.mobileAndTabletCheck())
+            location.href = 'geo:' + _x + ',' + _y;
+        else {
+            getStatePlaces();
+            $('#mapState').modal('show');
+        }
     }
 
-    function initExtendedMap(_data, _center) {
+    function initExtendedMap(_data, _center, _centerPlace = '') {
         extendedMapData = _data;
         var mapOptions = {
             center: new google.maps.LatLng(_center['x'],  _center['y']),
@@ -122,6 +128,19 @@
 
         var mapElementExtend = document.getElementById('mapState1');
         extendedMainMap = new google.maps.Map(mapElementExtend, mapOptions);
+
+        if(_centerPlace != ''){
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(_centerPlace['C'], _centerPlace['D']),
+                map: extendedMainMap,
+                title: _centerPlace['name'],
+                url: _centerPlace['url'],
+                id: _centerPlace['id']
+            }).addListener('click', function () {
+                openExtendedMapMarkerDescription(x, this.id);
+            });
+            mapMarker['center'].push(marker);
+        }
 
         let fk = Object.keys(extendedMapData);
         for (let x of fk) {
@@ -197,7 +216,8 @@
             },
             success: function(response){
                 response = JSON.parse(response);
-                let map = response.map;
+                console.log(response);
+                // let map = response.map;
                 let allPlaces = response.allPlaces;
 
                 let center = {
@@ -209,6 +229,4 @@
             }
         })
     }
-
-    getStatePlaces();
 </script>

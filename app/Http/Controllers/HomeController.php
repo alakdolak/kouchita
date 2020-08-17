@@ -622,7 +622,9 @@ class HomeController extends Controller
 
         $map = ['C' => $C, 'D' => $D];
 
-        echo json_encode(['map' => $map, 'allPlaces' => $allPlaces]);
+        $centerPlace = null;
+
+        echo json_encode(['map' => $map, 'allPlaces' => $allPlaces, 'centerPlace' => $centerPlace]);
         return;
     }
 
@@ -1165,7 +1167,7 @@ class HomeController extends Controller
 
     public function getAlerts()
     {
-        $greenColor = '#4dc7bc26';
+        $greenColor = 'var(--koochita-light-green)26';
         $redColor = '#ffe1e1';
         $result = [];
         $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->get();

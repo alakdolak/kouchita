@@ -143,7 +143,7 @@ body {
     width: 400px;
     background: white;
     border-radius: 10px;
-    border: solid 5px #0d6650;
+    border: solid 5px var(--koochita-green);
     max-height: 100vh;
     overflow: auto;
 }
@@ -162,7 +162,7 @@ body {
     padding-top: 10px;
 }
 .closeButton{
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     position: absolute;
     right: 10px;
     top: 10px;
@@ -171,18 +171,18 @@ body {
 .closeButton:before{
     font-size: 32px;
     line-height: 48px;
-    color: #4dc7bc;
+    color: var(--koochita-light-green);
     content: "\00d7";
 }
 .loginText{
     font-size: 25px;
-    color: #053a3e;
+    color: var(--koochita-dark-green);
     font-weight: bold;
     text-align: center;
     margin: 10px 0px;
 }
 .loginButtonsMainDiv{
-    background: #053a3e;
+    background: var(--koochita-dark-green);
     color: white;
     font-weight: bold;
     font-size: 20px;

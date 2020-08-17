@@ -38,7 +38,7 @@
     padding-right: 10px;
     padding-left: 0px;
     border-left: none;
-    border-right: 2px solid #eab836;
+    border-right: 2px solid var(--koochita-yellow);
 }
 .marginRight{
     margin-right: 0px;

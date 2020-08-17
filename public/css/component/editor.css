@@ -2,8 +2,8 @@
     font-size: 15px;
     padding: 10px;
     border-radius: 5px;
-    border-color: #4dc7bc !important;
-    background-color: #4dc7bc !important;
+    border-color: var(--koochita-light-green) !important;
+    background-color: var(--koochita-light-green) !important;
     box-shadow: 1px 1px 0 0 rgba(0, 0, 0, .25);
     color: #fff;
     cursor: pointer;
@@ -14,16 +14,6 @@
     width: 100%;
     justify-content: flex-start;
     margin-top: 10px;
-}
-
-.addPhotographerModal{
-    z-index: 999;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: black;
-    top: 0px;
-    right: 0px;
 }
 
 .errorField {
@@ -182,8 +172,8 @@
 }
 
 .epAddPlace {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: var(--koochita-light-green);
+    border-color: var(--koochita-light-green);
     color: white;
     float: left;
     padding: 7px;
@@ -216,7 +206,7 @@
     height: 48px; /* Matches top of .uploaderDlg */
     width: 100%;
     line-height: 48px;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 
 .epHeaderBar h3 {
@@ -290,7 +280,7 @@
 }
 
 .ui_close_x:before {
-    color: #4DC7BC;
+    color: var(--koochita-light-green);
     left: 0;
 }
 
@@ -602,7 +592,7 @@
     color: white;
 }
 .addPhotographerModal{
-    z-index: 999;
+    z-index: 9991;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -633,7 +623,7 @@
     height: 48px; /* Matches top of .uploaderDlg */
     width: 100%;
     line-height: 48px;
-    background: #4DC7BC;
+    background: var(--koochita-light-green);
 }
 .photoUploader .headerBar h3 {
     float: right;
@@ -1314,7 +1304,7 @@
         flex-direction: column;
     }
     #photoEditor .body_text{
-        height: 80vh !important;
+        height: 100vh !important;
     }
 
     .uploaderDlg .infoScreen{
@@ -1339,10 +1329,11 @@
     }
 
     #photoEditor, #editPane {
-        left: 10%;
-        right: 10%;
-        top: 3%;
-        max-height: 80vh;
+        left: 0%;
+        right: 0%;
+        top: 0% !important;
+        width: 100%;
+        height: 100vh;
         overflow-y: hidden;
     }
 
@@ -1379,7 +1370,7 @@
     }
 
     .uploaderDlg .startScreen {
-        height: 70vh;
+        height: 90vh;
     }
     .secondFooterVerification{
         width: 100%;
@@ -1410,11 +1401,6 @@
         margin: 10px 0 0;
     }
 
-    #photoEditor, #editPane {
-        left: 5%;
-        right: 5%;
-    }
-
     .bodyEditFrame .row {
         margin: 0;
     }
@@ -1426,10 +1412,6 @@
     }
     #actions{
         margin-top: 0px;
-    }
-    #photoEditor, #editPane {
-        left: 1%;
-        right: 1%;
     }
     .docs-buttons{
         flex-wrap: wrap;
