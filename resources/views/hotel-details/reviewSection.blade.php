@@ -11,7 +11,7 @@
                 پست در هر صفحه
             </div>
             <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
-                <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
+{{--                <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>--}}
             </a>
             <div class="col-xs-4 font-size-13 line-height-2 text-align-right" style="display: flex; direction: rtl;">
                 صفحه
@@ -45,10 +45,10 @@
     var reviewPerPage = 0;
     var loadShowReview = false;
     var firstTimeFilterShow = 1;
-    // var reviewPerPageNum = [20, 30, 40];
     var reviewPerPageNum = [3, 5, 10];
 
     function loadReviews(){
+        $('#showReviewsMain').html(getReviewPlaceHolder()); //in smallShowReview.blade.php
         $.ajax({
             type: 'post',
             url: '{{route('getReviews')}}',
@@ -60,13 +60,14 @@
                 'filters' : reviewFilters
             },
             success: function(response){
+                document.getElementById('showReviewsMain').innerHTML = '';
+
                 if(response == 'nok1') {
                     if(firstTimeFilterShow == 1){
                         document.getElementById('postFilters').style.display = 'none';
                         document.getElementById('reviewsPagination').style.display = 'none';
                         document.getElementById('advertiseDiv').style.display = 'none';
                     }
-                    document.getElementById('showReviewsMain').innerHTML = '';
 
                     $('#pcPostButton').attr('href', '#editReviewPictures');
                     $('#pcPostButton').attr('onclick', 'newPostModal()');
@@ -81,6 +82,8 @@
                         document.getElementById('postFilters').style.display = 'none';
                         document.getElementById('phoneReviewFilterHeader').style.display = 'none';
                     }
+                    else
+                        document.getElementById('postFilters').style.display = 'block';
 
                     firstTimeFilterShow = 0;
 
@@ -112,6 +115,9 @@
     }
 
     function changeReviewPage(_page){
+        $('html, body').animate({
+            scrollTop: $("#showReviewsMain").offset().top
+        }, 2000);
         reviewPage = _page;
         loadReviews();
     }

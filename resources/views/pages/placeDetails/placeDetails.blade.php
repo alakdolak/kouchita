@@ -990,7 +990,7 @@ if ($total == 0)
 
                             @include('hotel-details.filterSection')
 
-                            <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
+                            <center id="advertiseDiv" class="col-xs-12 adsMainDiv" style="display: none;">
                                 {{--@include('features.advertise3D')--}}
                             </center>
                         </div>
