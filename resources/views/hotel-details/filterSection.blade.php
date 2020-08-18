@@ -1,4 +1,4 @@
-<div id="postFilters" class="col-xs-12 postsFiltersMainDiv">
+<div id="postFilters" class="col-xs-12 postsFiltersMainDiv" style="display: none">
     <div class="block_header">
         <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
     </div>

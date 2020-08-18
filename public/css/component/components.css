@@ -296,6 +296,31 @@
     background: white;
 }
 
+.sendQuestionBtn {
+    background-color: #f2f2f2;
+    color: var(--koochita-blue);
+    padding: 13px 10px;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    width: fit-content;
+    padding-bottom: 5px;
+}
+
+.sendingQuestionLoading{
+    background: var(--koochita-blue);
+    color: #cccccc;
+    justify-content: center;
+    font-size: 12px;
+    display: flex;
+    min-width: 145px;
+    align-items: center;
+    padding: 0;
+    margin-right: auto;
+}
+
 .quantityOfLikesSmallReview{
     width: 100%;
     font-size: 23px;

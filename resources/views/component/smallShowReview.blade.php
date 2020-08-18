@@ -60,7 +60,7 @@
 
 <div id="reviewSmallPlaceHolder">
     <div class="smallReviewMainDivShown float-right position-relative">
-        <div class="commentWriterDetailsShow">
+        <div class="commentWriterDetailsShow" style="display: flex;">
             <div class="placeHolderAnime" style="width: 55px; height: 55px; float: right; border-radius: 50%"></div>
             <div class="commentWriterExperienceDetails" style="display: flex; flex-direction: column; padding-right: 10px">
                 <div class="userProfileName placeHolderAnime resultLineAnim" style="width: 100px"></div>
@@ -83,12 +83,26 @@
     </div>
 </div>
 
+<style>
+    .rbphSection{
+
+    }
+</style>
+
+{{--<div class="reviewBigPlaceHolder">--}}
+{{--    <div class="rbphSection">--}}
+{{--        <div style="display: flex; align-items: center">--}}
+{{--            --}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+
 <div id="fullReviewModal" class="modalBlackBack hidden">
     <div id="fullReview" class="fullReviewBody"></div>
 </div>
 
-
 <script>
+
     var userPic = '{{getUserPic(auth()->check() ? auth()->user()->id : 0)}}';
 
     let allReviewsCreated = [];
@@ -97,6 +111,13 @@
 
     let reviewSmallSample = $('#reviewSmallSection').html();
     $('#reviewSmallSection').remove();
+
+    let reviewBigPlaceHolder = $('#reviewBigPlaceHolder').html();
+    $('#reviewBigPlaceHolder').remove();
+
+    function getReviewPlaceHolder(){
+        return smallReviewPlaceHolder;
+    }
 
     function createSmallReviewHtml(item){
         allReviewsCreated.push(item);
@@ -247,10 +268,9 @@
             },
             success: function(response){
                 response = JSON.parse(response);
-                if(response.status == 'ok'){
-                    showFullReview = response.result;
+                if(response.status == 'ok') {
                     showFullReviews({
-                        review: showFullReview,
+                        review: response.result,
                         kind: 'modal'
                     });
                 }
@@ -258,53 +278,81 @@
         })
     }
 
+    function updateFullReview(_id){
+        $.ajax({
+            type: 'post',
+            url: '{{route("getSingleReview")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                reviewId: _id
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                if(response.status == 'ok')
+                    setFullReviewContent(response.result);
+            }
+        })
+    }
+
     function showFullReviews(_input){
         let _reviews = _input.review;
         let _kind = _input.kind;
-        let _sectionId = _input.sectionId;
-        let _sendAnsCallBack = _input.sendAnsCallBack;
 
         // _kind = 'modal' open in modal
-        // _kind = 'export' return the ui generated
         // _kind = 'append' append to _sectionId
 
         _reviews['showKind'] = _kind;
-        _reviews['showSectionId'] = _sectionId;
-        _reviews['sendAnsCallBack'] = _sendAnsCallBack  ;
+        _reviews['showSectionId'] = _input.sectionId;
 
         var text = '';
+        text += '<div id="showReview_' + _reviews["id"] + '" class="mainFullReviewDiv"></div>';
+
+        if(_kind == 'modal') {
+            $('#fullReviewModal').removeClass('hidden');
+            $('#fullReview').html(text);
+            $('#fullReview').append('<div class="closeFullReview iconClose" onclick="closeFullReview()"></div>');
+        }
+        else if(_kind == 'append') {
+            $('#' + _input.sectionId).append(text);
+            allReviewsCreated.push(_reviews);
+        }
+
+        setFullReviewContent(_reviews);
+    }
+
+    function setFullReviewContent(_reviews){
         var kindPlaceId = _reviews['kindPlaceId'];
         var hasConfirmed = '';
         if(_reviews['confirm'] == 0)
             hasConfirmed = globalConfirmText;
 
-        text += '<div id="showReview_' + _reviews["id"] + '" class="mainFullReviewDiv">\n'+
-                '   <div class="moreOptionFullReview" onclick="showFullReviewOptions(this)">\n' +
-                '       <span class="threeDotIconVertical"></span>\n' +
-                '   </div>\n' +
-                '   <div class="moreOptionFullReviewDetails hidden">\n' +
-                '       <span onclick="showReportPrompt(' + _reviews["id"] + ', ' + kindPlaceId + ')">{{__("گزارش پست")}}</span>\n' +
-                '       <a target="_blank" href="' + _reviews["userPageUrl"] + '"  >{{__("مشاهده صفحه")}} ' + _reviews["userName"] + '</a>\n' +
-                '       <a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
+        text = '';
+        text += '<div class="moreOptionFullReview" onclick="showFullReviewOptions(this)">\n' +
+            '       <span class="threeDotIconVertical"></span>\n' +
+            '   </div>\n' +
+            '   <div class="moreOptionFullReviewDetails hidden">\n' +
+            '       <span onclick="showReportPrompt(' + _reviews["id"] + ', ' + kindPlaceId + ')">{{__("گزارش پست")}}</span>\n' +
+            '       <a target="_blank" href="' + _reviews["userPageUrl"] + '"  >{{__("مشاهده صفحه")}} ' + _reviews["userName"] + '</a>\n' +
+            '       <a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
         @if(auth()->check())
         if(_reviews.yourReview) {
             text += '<span>آرشیو پست</span>\n' +
-                    '<span onclick="deleteReviewByUserInReviews(' + _reviews["id"] + ')" style="color: red"> {{__('حذف پست')}}</span>\n';
+                '<span onclick="deleteReviewByUserInReviews(' + _reviews["id"] + ')" style="color: red"> {{__('حذف پست')}}</span>\n';
         }
         @endif
 
-        text += '</div>\n'+
-                '<div class="commentWriterDetailsShow">\n' +
-                '   <div class="circleBase commentWriterPicShow">' +
-                '       <img src="' + _reviews["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
-                '   </div>\n' +
-                '   <div class="commentWriterExperienceDetails">\n' +
-                '       <a href="{{url('profile/index')}}/' + _reviews["userName"] + '" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">' + _reviews["userName"] + '</a>\n' +
-                '       <div class="fullReviewPlaceAndTime"> \n' +
-                '           <div class="display-inline-block">در\n' +
-                '               <a href="' + _reviews["placeUrl"] + '" class="commentWriterExperiencePlace">' + _reviews["where"] + '</a>\n'+
-                                hasConfirmed +
-                '            </div>\n';
+            text += '</div>\n'+
+            '<div class="commentWriterDetailsShow">\n' +
+            '   <div class="circleBase commentWriterPicShow">' +
+            '       <img src="' + _reviews["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
+            '   </div>\n' +
+            '   <div class="commentWriterExperienceDetails">\n' +
+            '       <a href="{{url('profile/index')}}/' + _reviews["userName"] + '" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">' + _reviews["userName"] + '</a>\n' +
+            '       <div class="fullReviewPlaceAndTime"> \n' +
+            '           <div class="display-inline-block">در\n' +
+            '               <a href="' + _reviews["placeUrl"] + '" class="commentWriterExperiencePlace">' + _reviews["where"] + '</a>\n'+
+            hasConfirmed +
+            '            </div>\n';
 
         if(_reviews["assigned"].length != 0) {
             text += '<div>با\n';
@@ -316,13 +364,13 @@
         }
 
         text += '<div>' + _reviews["timeAgo"] + '</div>\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '<div class="commentContentsShow">' +
-                '   <div class="fullReviewText">' + _reviews["text"] + '</div>\n' +
-                '</div>\n' +
-                '<div class="fullReviewCommentPhotosShow">\n';
+            '</div>\n' +
+            '</div>\n' +
+            '</div>\n' +
+            '<div class="commentContentsShow">' +
+            '   <div class="fullReviewText">' + _reviews["text"] + '</div>\n' +
+            '</div>\n' +
+            '<div class="fullReviewCommentPhotosShow">\n';
 
         let reviewPicsCount = _reviews["pics"].length;
         let picDivClassName = '';
@@ -344,7 +392,7 @@
 
         for(let k = 0; k < reviewPicsCount && k < 5; k++) {
             let ttt =  '   <div class="topMainReviewPic" onclick="showSmallReviewPics(' + _reviews["id"] + ')">' +
-                       '       <img src="' + _reviews["pics"][k]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n';
+                '       <img src="' + _reviews["pics"][k]["picUrl"] + '" class="mainReviewPic resizeImgClass" onload="fitThisImg(this)">\n';
             if(reviewPicsCount > 5 && k == 4) {
                 ttt += '<div class="morePhotoLinkPosts">\n' +
                     'به علاوه\n' +
@@ -359,25 +407,32 @@
                 secCol += ttt;
         }
 
-        if (reviewPicsCount > 0) {
+        if(reviewPicsCount == 1){
             text += '<div class="commentPhotosMainDiv ' + picDivClassName + '">\n' +
-                    '   <div class="fullReveiwPhotosCol secondCol col-xs-6">\n' +
-                    secCol +
-                    '   </div>\n' +
-                    '   <div class="fullReveiwPhotosCol firstCol col-xs-6">\n' +
-                    firstCol +
-                    '   </div>\n' +
-                    '</div>\n';
+                '   <div class="fullReveiwPhotosCol firstCol col-xs-12">\n' +
+                        firstCol +
+                '   </div>\n' +
+                '</div>\n';
+        }
+        else if (reviewPicsCount > 1) {
+            text += '<div class="commentPhotosMainDiv ' + picDivClassName + '">\n' +
+                '   <div class="fullReveiwPhotosCol secondCol col-xs-6">\n' +
+                        secCol +
+                '   </div>\n' +
+                '   <div class="fullReveiwPhotosCol firstCol col-xs-6">\n' +
+                        firstCol +
+                '   </div>\n' +
+                '</div>\n';
         }
 
         text += '<div class="quantityOfLikes">\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '<div class="fullReviewRatingsDetailsShow">\n' +
-                '   <div class="fullReviewMiddle">\n' +
-                '       <div style="width: 100%;">' +
-                '           <div class="commentRatingHeader">\n' +
-                'بازدید ';
+            '</div>\n' +
+            '</div>\n' +
+            '<div class="fullReviewRatingsDetailsShow">\n' +
+            '   <div class="fullReviewMiddle">\n' +
+            '       <div style="width: 100%;">' +
+            '           <div class="commentRatingHeader">\n' +
+            'بازدید ';
 
         if(_reviews["assigned"].length != 0)
             text +='<span> با دوستان</span>\n';
@@ -443,9 +498,9 @@
                     }
 
                     rateAnsHtml +=  '       </div>\n' +
-                                    '   </div>\n' +
-                                    '   <b class="col-xs-2 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n' +
-                                    '</div>\n';
+                        '   </div>\n' +
+                        '   <b class="col-xs-2 font-size-13 line-height-203 float-right pd-lt-0">' + ansTexttt + '</b>\n' +
+                        '</div>\n';
                 }
             }
 
@@ -466,34 +521,34 @@
 
 
         text += '<div class="commentFeedbackChoices">\n' +
-                '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-start;">\n' +
-                '       <div class="reviewLikeIcon_' + _reviews["id"] + ' cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 1, this);" style="font-size: 15px; direction: rtl; margin-left: 15px;">' +
-                '           <span class="reviewLikeNumber_' + _reviews["id"] + '">' +
-                                _reviews["like"] +
-                '           </span>' +
-                '       </div>\n' +
-                '       <div class="reviewDisLikeIcon_' + _reviews["id"] + ' cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 0, this);" style="font-size: 15px; direction: rtl; margin-left: 15px;">' +
-                '           <span class="reviewDisLikeNumber_' + _reviews["id"] + '">' +
-                                _reviews["disLike"] +
-                '           </span>' +
-                '       </div>\n' +
-                '       <div class="postCommentChoice" onclick="showCommentToReviewFullReview(this)" style="margin-left: 15px;">\n' +
-                '           <span>' + _reviews["answersCount"] + '</span>' +
-                '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
-                '           <span class="showCommentsClickedIconFeedback secondIcon" style="display: none"></span>\n' +
-                '       </div>\n' +
-                '   </div>\n' +
-                '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-end;">\n' +
-                '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)" style="direction: ltr">\n' +
-                '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
-                '           <span class="commentsShareClickedIconFeedback secondIcon" style="display: none"></span>\n' +
-                '       </div>\n' +
-                '       <div style="margin-right: 20px; font-size: 20px;">' +
-                '           <span class="BookMarkIconEmpty"></span>' +
-                '       </div>' +
-                '   </div>\n' +
-                '</div>\n' +
-                '<div id="sectionOfAnsToReview_' + _reviews["id"] + '" class="commentsMainBox hidden">\n';
+            '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-start;">\n' +
+            '       <div class="reviewLikeIcon_' + _reviews["id"] + ' cursor-pointer LikeIconEmpty likedislikeAnsReviews ' + likeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 1, this);" style="font-size: 15px; direction: rtl; margin-left: 15px;">' +
+            '           <span class="reviewLikeNumber_' + _reviews["id"] + '">' +
+            _reviews["like"] +
+            '           </span>' +
+            '       </div>\n' +
+            '       <div class="reviewDisLikeIcon_' + _reviews["id"] + ' cursor-pointer DisLikeIconEmpty likedislikeAnsReviews ' + disLikeClass + '" onclick="likeReviewInFullReview(' + _reviews["id"] + ', 0, this);" style="font-size: 15px; direction: rtl; margin-left: 15px;">' +
+            '           <span class="reviewDisLikeNumber_' + _reviews["id"] + '">' +
+            _reviews["disLike"] +
+            '           </span>' +
+            '       </div>\n' +
+            '       <div class="postCommentChoice" onclick="showCommentToReviewFullReview(this)" style="margin-left: 15px;">\n' +
+            '           <span>' + _reviews["answersCount"] + '</span>' +
+            '           <span class="showCommentsIconFeedback firstIcon"></span>\n' +
+            '           <span class="showCommentsClickedIconFeedback secondIcon" style="display: none"></span>\n' +
+            '       </div>\n' +
+            '   </div>\n' +
+            '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-end;">\n' +
+            '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)" style="direction: ltr">\n' +
+            '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
+            '           <span class="commentsShareClickedIconFeedback secondIcon" style="display: none"></span>\n' +
+            '       </div>\n' +
+            '       <div style="margin-right: 20px; font-size: 20px;">' +
+            '           <span class="BookMarkIconEmpty"></span>' +
+            '       </div>' +
+            '   </div>\n' +
+            '</div>\n' +
+            '<div id="sectionOfAnsToReview_' + _reviews["id"] + '" class="commentsMainBox hidden">\n';
 
         var checkAllReviews = true;
 
@@ -520,53 +575,53 @@
             }
             if(answers["answersCount"] > 0) {
                 seeAnses += '<div class="fullReviewSeeAnses" onclick="showAnsToCommentsFullReview(' + answers["id"] + ', this)">' +
-                            '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">' + answers["answersCount"] + '</span>' +
-                            '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
-                            '</div>\n';
+                    '   <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">' + answers["answersCount"] + '</span>' +
+                    '   <span class="seeAllText">مشاهده پاسخ‌ها</span>' +
+                    '</div>\n';
             }
 
             text += '<div  id="ansOfReview_' + answers["id"] + '" style="margin-bottom: 15px"> ' +
-                    '<div class="eachCommentMainBox" style="margin-bottom: 0px">\n' +
-                    '   <div class="circleBase type2 commentsWriterProfilePic">' +
-                    '       <img src="' + answers["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                    '   </div>\n' +
-                    '   <div class="commentsContentMainBox">\n' +
-                    '       <b class="userProfileName userProfileNameFullReview">' +
-                    '           <a href="{{url("profile/index")}}/ ' + _reviews["userName"] +'" target="_blank" style="font-weight:bold">' +
-                                    answers["userName"] +
-                    '           </a>' +
-                                textInConfirm +
-                    '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
-                    '       </b>\n' +
-                    '       <p class="fullReviewAnsText">' + answers["text"] + '</p>\n'+
-                    '    </div>\n' +
-                    '</div>\n' +
-                    '<div class="fullReviewLikeAnsSeeAllSection">\n' +
-                    '   <div style="display: inline-flex">\n' +
-                    '       <span class="reviewLikeNumber_' + answers["id"] + ' reviewLikeIcon_' + answers["id"] + ' LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReviewInFullReview(' + answers["id"] + ', 1, this)">' + answers["like"] + '</span>\n' +
-                    '       <span class="reviewDisLikeNumber_' + answers["id"] + ' reviewDisLikeIcon_' + answers["id"] + ' DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReviewInFullReview(' + answers["id"] + ', 0, this)">' + answers["disLike"] + '</span>\n' +
-                    '       <span class="replayBtn replayReview" onclick="openReplayToReviewCommentFullReview(' + answers["id"] + ')">{{__("پاسخ دهید")}}</span>\n' +
-                    '   </div>\n'+
-                        seeAnses +
-                    '</div>' +
-                    '<div class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">\n' +
-                    '   <div class="circleBase newCommentWriterProfilePic">' +
-                    '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                    '   </div>\n' +
-                    '   <div class="inputBox setButtonToBot">\n' +
-                    '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
-                    '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                    '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1, this)" style="height: fit-content"> {{__("ارسال")}} </button>\n' +
-                    '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
-                    '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
-                    '           {{__("در حال ثبت سوال")}}\n' +
-                    '       </div>'+
-                    '   </div>\n' +
-                    '</div>\n'+
-                    '</div>\n';
+                '<div class="eachCommentMainBox" style="margin-bottom: 0px">\n' +
+                '   <div class="circleBase type2 commentsWriterProfilePic">' +
+                '       <img src="' + answers["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                '   </div>\n' +
+                '   <div class="commentsContentMainBox">\n' +
+                '       <b class="userProfileName userProfileNameFullReview">' +
+                '           <a href="{{url("profile/index")}}/ ' + _reviews["userName"] +'" target="_blank" style="font-weight:bold">' +
+                answers["userName"] +
+                '           </a>' +
+                textInConfirm +
+                '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
+                '       </b>\n' +
+                '       <p class="fullReviewAnsText">' + answers["text"] + '</p>\n'+
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="fullReviewLikeAnsSeeAllSection">\n' +
+                '   <div style="display: inline-flex">\n' +
+                '       <span class="reviewLikeNumber_' + answers["id"] + ' reviewLikeIcon_' + answers["id"] + ' LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReviewInFullReview(' + answers["id"] + ', 1, this)">' + answers["like"] + '</span>\n' +
+                '       <span class="reviewDisLikeNumber_' + answers["id"] + ' reviewDisLikeIcon_' + answers["id"] + ' DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReviewInFullReview(' + answers["id"] + ', 0, this)">' + answers["disLike"] + '</span>\n' +
+                '       <span class="replayBtn replayReview" onclick="openReplayToReviewCommentFullReview(' + answers["id"] + ')">{{__("پاسخ دهید")}}</span>\n' +
+                '   </div>\n'+
+                seeAnses +
+                '</div>' +
+                '<div class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">\n' +
+                '   <div class="circleBase newCommentWriterProfilePic">' +
+                '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                '   </div>\n' +
+                '   <div class="inputBox setButtonToBot">\n' +
+                '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
+                '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
+                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1, this, ' + _reviews["id"] + ')" style="height: fit-content"> {{__("ارسال")}} </button>\n' +
+                '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
+                '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
+                '           {{__("در حال ثبت سوال")}}\n' +
+                '       </div>'+
+                '   </div>\n' +
+                '</div>\n'+
+                '</div>\n';
 
             text += '<div class="borderInMobile hidden ansComment_' + answers["id"] + '" style="margin-top: 0px">';
-            text += createAnsHtmlToCommentFullReview(answers["answers"], answers["userName"]);
+            text += createAnsHtmlToCommentFullReview(answers["answers"], answers["userName"], _reviews["id"]);
             text += '</div>';
 
             if(j == _reviews["answers"].length && !checkAllReviews)
@@ -578,8 +633,8 @@
         if(showReviewAnsInOneSee < _reviews["answers"].length) {
             let remainnn = _reviews["answers"].length - showReviewAnsInOneSee;
             text += '<div class="dark-blue mg-bt-10">\n' +
-                    '   <span class="cursor-pointer" onclick="showAllReviewCommentsFullReview(' + _reviews["id"] + ', ' + remainnn + ', this)" style="font-size: 13px;">{{__("مشاهده")}} ' + remainnn + ' {{__("نظر باقیمانده")}}</span>\n' +
-                    '</div>\n';
+                '   <span class="cursor-pointer" onclick="showAllReviewCommentsFullReview(' + _reviews["id"] + ', ' + remainnn + ', this)" style="font-size: 13px;">{{__("مشاهده")}} ' + remainnn + ' {{__("نظر باقیمانده")}}</span>\n' +
+                '</div>\n';
         }
         text += '</div>';
 
@@ -590,7 +645,7 @@
             '   </div>\n' +
             '   <div class="inputBox setButtonToBot">\n' +
             '       <textarea id="ansForReviews_' + _reviews["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)" style="padding-bottom: 10px"></textarea>\n' +
-            '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + _reviews["id"] + ', 0, this)" > {{__("ارسال")}}</button>\n' +
+            '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + _reviews["id"] + ', 0, this, ' + _reviews["id"] + ')" > {{__("ارسال")}}</button>\n' +
             '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
             '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
             '           {{__("در حال ثبت سوال")}}\n' +
@@ -600,22 +655,9 @@
             '</div>\n' +
             '</div>\n' +
             '</div>' +
-            '</div>' +
-            '</div>\n';
+            '</div>';
 
-        if(_kind == 'modal') {
-            $('#fullReviewModal').removeClass('hidden');
-            $('#fullReview').html(text);
-            $('#fullReview').append('<div class="closeFullReview iconClose" onclick="closeFullReview()"></div>');
-        }
-        else if(_kind == 'append') {
-            $('#' + _sectionId).append(text);
-            allReviewsCreated.push(_reviews);
-        }
-        else if(_kind == 'export') {
-            allReviewsCreated.push(_reviews);
-            return text;
-        }
+        $('#showReview_' + _reviews["id"]).html(text);
 
         setTimeout(function(){
             resizeFitImg('resizeImgClass');
@@ -678,7 +720,7 @@
         })
     }
 
-    function sendAnsOfReviewsFullReview(_logId, _ans, _elems){
+    function sendAnsOfReviewsFullReview(_logId, _ans, _elems, _reviewId){
 
         if(!checkLogin())
             return;
@@ -701,7 +743,7 @@
 
                     if(response == 'ok') {
                         showSuccessNotifi('{{__('پاسخ شما با موفقیت ثبت شد.')}}', 'left', 'var(--koochita-blue)');
-                        getSingleFullReview(showFullReview.id);
+                        updateFullReview(_reviewId);
                     }
                     else
                         showSuccessNotifi('{{__('در ثبت پاسخ مشکلی پیش آمده لطفا دوباره تلاش نمایید.')}}', 'left', 'red');
@@ -727,7 +769,7 @@
         $(_element).text(ter);
     }
 
-    function createAnsHtmlToCommentFullReview(comment, repTo){
+    function createAnsHtmlToCommentFullReview(comment, repTo, reviewId){
         var text = '';
         for(var k = 0; k < comment.length; k++) {
             let hasLiked = '';
@@ -778,7 +820,7 @@
                 '   <div class="inputBox setButtonToBot">\n' +
                 '       <b class="replyCommentTitle">{{__("در پاسخ به نظر")}} ' + comment[k]["username"] + '</b>\n' +
                 '       <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + comment[k]["id"] + ', 1, this)" > {{__("ارسال")}} </button>\n' +
+                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + comment[k]["id"] + ', 1, this, ' + reviewId + ')" > {{__("ارسال")}} </button>\n' +
                 '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
                 '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
                 '           {{__("در حال ثبت سوال")}}\n' +
@@ -789,7 +831,7 @@
 
             text += '<div class=" hidden ansComment_' +  comment[k]["id"] + '" style="width: 100%">';
             if(comment[k]["answersCount"] > 0)
-                text += createAnsHtmlToCommentFullReview(comment[k]["answers"], comment[k]["userName"]);
+                text += createAnsHtmlToCommentFullReview(comment[k]["answers"], comment[k]["userName"], reviewId);
             text += '</div>';
         }
 
