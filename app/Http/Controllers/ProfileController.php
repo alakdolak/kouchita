@@ -386,20 +386,46 @@ class ProfileController extends Controller {
         $activityId = Activity::whereName('سوال')->first()->id;
         $ansActivityId = Activity::whereName('پاسخ')->first()->id;
 
-        if(\auth()->check() && ($request->userId == \auth()->user()->id || !isset($request->userId) ) ){
-            $uId = \auth()->user()->id;
-            $sqlQuery = 'activityId = ' . $activityId . ' AND relatedTo = 0 AND visitorId = ' . $uId ;
-        }
-        else if(isset($request->userId)){
-            $uId = $request->userId;
-            $sqlQuery = 'activityId = ' . $activityId . ' AND confirm = 1 AND relatedTo = 0 AND visitorId = ' . $uId ;
+        if($request->kind == 'question' || !isset($request->kind)) {
+            if (\auth()->check() && ($request->userId == \auth()->user()->id || !isset($request->userId))) {
+                $uId = \auth()->user()->id;
+                $sqlQuery = 'activityId = ' . $activityId . ' AND relatedTo = 0 AND visitorId = ' . $uId;
+            } else if (isset($request->userId)) {
+                $uId = $request->userId;
+                $sqlQuery = 'activityId = ' . $activityId . ' AND confirm = 1 AND relatedTo = 0 AND visitorId = ' . $uId;
+            } else {
+                echo json_encode(['status' => 'nok']);
+                return;
+            }
+            $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
         }
         else{
-            echo json_encode(['status' => 'nok']);
-            return;
-        }
+            $logId = [];
+            if (\auth()->check() && ($request->userId == \auth()->user()->id || !isset($request->userId))) {
+                $uId = \auth()->user()->id;
+                $sqlQuery = 'activityId = ' . $ansActivityId . ' AND relatedTo != 0 AND visitorId = ' . $uId;
+            } else if (isset($request->userId)) {
+                $uId = $request->userId;
+                $sqlQuery = 'activityId = ' . $ansActivityId . ' AND confirm = 1 AND relatedTo != 0 AND visitorId = ' . $uId;
+            }
+            else {
+                echo json_encode(['status' => 'nok']);
+                return;
+            }
+            $anses = LogModel::whereRaw($sqlQuery)->get();
+            
+            foreach ($anses as $item){
+                $top = LogModel::find($item->relatedTo);
+                while($top != null && $top->activityId == $ansActivityId && $top->relatedTo != 0) {
+                    $top = LogModel::find($top->relatedTo);
+                }
 
-        $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
+                if($top != null && $top->activityId == $activityId)
+                    array_push($logId, $top->id);
+            }
+            if($logId != [])
+                $logs = LogModel::whereIn('id', $logId)->orderByDesc('date')->orderByDesc('time')->get();
+        }
 
         foreach ($logs as $log)
             $log = questionTrueType($log);

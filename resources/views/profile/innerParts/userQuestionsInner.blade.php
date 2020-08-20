@@ -13,15 +13,15 @@
     </div>
 
     <div class="userProfileQAndA">
-{{--        <div class="userProfilePostsSearchContainer">--}}
-{{--            <div class="inputBox">--}}
-{{--                <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>--}}
-{{--            </div>--}}
-{{--            <span>نمایش پاسخ‌ها</span>--}}
-{{--            <span>نمایش سؤال‌ها</span>--}}
-{{--            <div class="clear-both display-none"></div>--}}
-{{--            <span>نمایش همه</span>--}}
-{{--        </div>--}}
+        <div class="userProfilePostsSearchContainer" style="display: flex; align-items: center; direction: rtl; padding: 0px 15px;">
+            <div class="inputBox">
+                <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید" onkeyup="searchInQuestion(this.value)"></textarea>
+            </div>
+            <div class="userProfilePostsFiltration" style="margin-bottom: 0px">
+                <span class="active" onclick="changeQuestionKind('question', this)">نمایش سؤال‌ها</span>
+                <span onclick="changeQuestionKind('answer', this)">نمایش پاسخ‌ها</span>
+            </div>
+        </div>
 
         <div id="questions" ></div>
     </div>
@@ -30,6 +30,8 @@
 
 <script>
     let questionSort = 'top';
+    let questionKind = 'question';
+    let allQuestions = [];
 
     function getAllUserQuestions(){
         let placeHoldQ = getQuestionPlaceHolder(); // in questionPack.blade.php
@@ -42,11 +44,13 @@
             data = {
                 _token: '{{csrf_token()}}',
                 sort: questionSort,
+                kind: questionKind,
             };
         else
             data = {
                 _token: '{{csrf_token()}}',
                 sort: questionSort,
+                kind: questionKind,
                 userId: userPageId,
             };
 
@@ -58,7 +62,8 @@
                 response = JSON.parse(response);
                 if(response.status == 'ok'){
                     $('#questions').html('');
-                    response.result.map(item => {
+                    allQuestions = response.result;
+                    allQuestions.map(item => {
                         createQuestionPack(item, 'questions'); // in questionPack.blade.php
                     })
                 }
@@ -75,5 +80,30 @@
         $(_element).addClass('active');
         questionSort = _kind;
         getAllUserQuestions()
+    }
+
+    function changeQuestionKind(_kind, _element){
+        $(_element).parent().find('.active').removeClass('active');
+        $(_element).addClass('active');
+        questionKind = _kind;
+        getAllUserQuestions()
+    }
+
+    function searchInQuestion(_value){
+        let showQues = [];
+        if(_value.trim().length > 1){
+            allQuestions.map(item => {
+               if(item.text.search(_value.trim()) != -1)
+                   showQues.push(item);
+            });
+        }
+        else
+            showQues = allQuestions;
+
+        $('#questions').html('');
+        console.log(showQues);
+        showQues.map(item => {
+            createQuestionPack(item, 'questions'); // in questionPack.blade.php
+        })
     }
 </script>
