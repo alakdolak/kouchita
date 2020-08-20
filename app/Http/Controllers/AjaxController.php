@@ -42,6 +42,19 @@ use Illuminate\Http\Request;
 
 class AjaxController extends Controller {
 
+    public function getSingleQuestion(Request $request)
+    {
+        if(isset($request->id)){
+            $quest = LogModel::find($request->id);
+            $quest = questionTrueType($quest);
+            echo json_encode(['status' => 'ok', 'result' => $quest]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
     public function getPlacePic() {
 
         if(isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {

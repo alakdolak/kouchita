@@ -69,7 +69,7 @@
                         <a id="whoAmITab" href="#whoAmI" class="profileHeaderLinksTab whoAmI" onclick="changePages('whoAmI')">من کی هستم</a>
                         <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
                         <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
-                        <a href="#" class="profileHeaderLinksTab">سؤال‌ و جواب</a>
+                        <a id="questionTab" href="#question" class="profileHeaderLinksTab" onclick="changePages('question')">سؤال‌ و جواب</a>
                         <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">سفرنامه ها</a>
                         <a href="#" class="profileHeaderLinksTab">جایزه و امتیاز</a>
                         <a href="#" class="profileHeaderLinksTab">سایر موارد</a>
@@ -240,6 +240,10 @@
                         @include('profile.innerParts.userPhotosAndVideosInner')
                     </div>
 
+                    <div id="questionMainBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userQuestionsInner')
+                    </div>
+
                     <div id="safarnamehBody" class="prodileSections hidden">
                         @include('profile.innerParts.userSafarnameh')
                     </div>
@@ -383,6 +387,11 @@
                 $('#picMainBody').removeClass('hidden');
                 getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
             }
+            else if(_kind === 'question') {
+                $('#questionTab').addClass('active');
+                $('#questionMainBody').removeClass('hidden');
+                getAllUserQuestions();// in profile.innerParts.userQuestionsInner
+            }
             else if(_kind === 'safarnameh') {
                 $('#safarnamehTab').addClass('active');
                 $('#safarnamehBody').removeClass('hidden');
@@ -407,6 +416,8 @@
             changePages('picture');
         else if(url.hash === '#whoAmI')
             changePages('whoAmI');
+        else if(url.hash === '#question')
+            changePages('question');
         else if(url.hash === '#safarnameh')
             changePages('safarnameh');
 

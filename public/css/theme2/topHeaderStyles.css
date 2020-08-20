@@ -191,6 +191,14 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     user-select: none;
 }
 
+.inConfirmLabel{
+    margin-right: 12px;
+    font-size: 9px;
+    font-weight: normal;
+    cursor: default;
+    background: var(--koochita-blue);
+}
+
 
 @media (max-width: 991px) {
     .hideOnTablet{

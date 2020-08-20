@@ -862,7 +862,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 error: function(err){
                     closeLoading();
                     console.log(err);
-                    showSuccessNotifi('{{__('در قرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
+                    showSuccessNotifi('{{__('در فرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             });
         }

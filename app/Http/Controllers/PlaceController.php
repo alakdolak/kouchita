@@ -2887,7 +2887,7 @@ class PlaceController extends Controller {
                 $uId = 0;
 
             $sqlQuery = ' placeId = ' . $placeId . ' AND kindPlaceId = ' . $kindPlaceId . ' AND activityId = ' . $activityId . ' AND relatedTo = 0 AND (( visitorId = ' . $uId . ' AND confirm = 0) OR (confirm = 1))';
-            $logs = LogModel::whereRaw($sqlQuery)->skip(($page - 1) * $count)->take($count)->get();
+            $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($page - 1) * $count)->take($count)->get();
 
             $allCount = 0;
             $allAnswerCount = 0;
@@ -2896,48 +2896,9 @@ class PlaceController extends Controller {
                 $allCount = LogModel::whereRaw($sqlQuery)->count();
 
             foreach ($logs as $log) {
+                $log = questionTrueType($log);
                 if($_POST['isQuestionCount'])
                     $allAnswerCount += getAnsToComments($log->id)[1];
-
-                $user = User::whereId($log->visitorId);
-                $log->userName = $user->username;
-                $log->userPic = getUserPic($user->id);
-
-                $anss = getAnsToComments($log->id);
-
-                $log->answers = $anss[0];
-                $log->answersCount = $anss[1];
-
-                $kindPlace = Place::find($log->kindPlaceId);
-                $log->mainFile = $kindPlace->fileName;
-                $log->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                $log->kindPlace = $kindPlace->name;
-
-                $log->city = Cities::find($log->place->cityId);
-                $log->state = State::find($log->city->stateId);
-
-                $time = $log->date . '';
-                if(strlen($log->time) == 1)
-                    $log->time = '000' . $log->time;
-                else if(strlen($log->time) == 2)
-                    $log->time = '00' . $log->time;
-                else if(strlen($log->time) == 3)
-                    $log->time = '0' . $log->time;
-
-                if(strlen($log->time) == 4) {
-                    $time .= ' ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
-                    $log->timeAgo = getDifferenceTimeString($time);
-                }
-                else
-                    $log->timeAgo = '';
-
-                $log->date = convertDate($log->date);
-
-                $log->yourReview = false;
-                if(\auth()->check()){
-                    if($log->visitorId == \auth()->user()->id)
-                        $log->yourReview = true;
-                }
             }
 
             echo json_encode([$logs, $allCount, $allAnswerCount]);
@@ -2948,14 +2909,11 @@ class PlaceController extends Controller {
         return;
     }
 
-    public function sendAns()
+    public function sendAns(Request $request)
     {
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
-            isset($_POST["text"]) && isset($_POST["relatedTo"])) {
+        if(isset($request->text) && isset($request->relatedTo)){
 
             $text = makeValidInput($_POST["text"]);
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
             $relatedTo = makeValidInput($_POST["relatedTo"]);
             $activityId = Activity::whereName('پاسخ')->first()->id;
             $uId = Auth::user()->id;
@@ -2970,8 +2928,8 @@ class PlaceController extends Controller {
             $log->visitorId = $uId;
             $log->time = getToday()["time"];
             $log->activityId = $activityId;
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
+            $log->placeId = $tmp->placeId;
+            $log->kindPlaceId = $tmp->kindPlaceId;
             $log->text = $text;
             $log->relatedTo = $relatedTo;
             $log->date = date("Y-m-d");

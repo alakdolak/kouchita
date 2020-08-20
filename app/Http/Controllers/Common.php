@@ -907,6 +907,52 @@ function reviewTrueType($_log){
     return $_log;
 }
 
+function questionTrueType($_ques){
+    $user = User::whereId($_ques->visitorId);
+    $_ques->userName = $user->username;
+    $_ques->userPic = getUserPic($user->id);
+
+    $anss = getAnsToComments($_ques->id);
+
+    $_ques->answers = $anss[0];
+    $_ques->answersCount = $anss[1];
+
+    $kindPlace = Place::find($_ques->kindPlaceId);
+    $_ques->mainFile = $kindPlace->fileName;
+    $_ques->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($_ques->placeId);
+    $_ques->placeName = $_ques->place->name;
+    $_ques->kindPlace = $kindPlace->name;
+    $_ques->placeUrl = createUrl($kindPlace->id, $_ques->place->id, 0, 0, 0);
+
+    $_ques->city = Cities::find($_ques->place->cityId);
+    $_ques->cityName = $_ques->city->name;
+    $_ques->state = State::find($_ques->city->stateId);
+    $_ques->stateName = $_ques->state->name;
+
+    $time = $_ques->date . '';
+    if(strlen($_ques->time) == 1)
+        $_ques->time = '000' . $_ques->time;
+    else if(strlen($_ques->time) == 2)
+        $_ques->time = '00' . $_ques->time;
+    else if(strlen($_ques->time) == 3)
+        $_ques->time = '0' . $_ques->time;
+
+    if(strlen($_ques->time) == 4) {
+        $time .= ' ' . substr($_ques->time, 0, 2) . ':' . substr($_ques->time, 2, 2);
+        $_ques->timeAgo = getDifferenceTimeString($time);
+    }
+    else
+        $_ques->timeAgo = '';
+
+    $_ques->date = convertDate($_ques->date);
+
+    $_ques->yourReview = false;
+    if(\auth()->check() && $_ques->visitorId == \auth()->user()->id)
+        $_ques->yourReview = true;
+
+    return $_ques;
+}
+
 function deleteReviewPic(){
     $pics = ReviewPic::where('logId', null)->get();
     foreach ($pics as $item){
@@ -962,7 +1008,7 @@ function getAnsToComments($logId){
 
     $a = Activity::where('name', 'پاسخ')->first();
 
-    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id, log.confirm, log.date, log.time FROM log WHERE (log.confirm = 1 || log.visitorId = ' . $uId . ') AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
+    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id, log.confirm, log.date, log.time FROM log WHERE (log.confirm = 1 || log.visitorId = ' . $uId . ') AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id . ' ORDER BY `date` DESC, `time` DESC; ');
 
     $countAns = 0;
     if(count($ansToReview) > 0) {

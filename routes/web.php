@@ -337,6 +337,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
 
+    Route::post('getSingleQuestion', 'AjaxController@getSingleQuestion')->name('getSingleQuestion');
+
     Route::post('getSingleReview', 'AjaxController@getSingleReview')->name('getSingleReview');
 
     Route::post('getTags', 'AjaxController@getTags')->name('getTags');
@@ -476,6 +478,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
 
     Route::post('/profile/getSafarnameh', 'ProfileController@getSafarnameh')->name('profile.getSafarnameh');
+
+    Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
 });

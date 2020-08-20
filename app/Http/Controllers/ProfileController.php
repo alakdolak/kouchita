@@ -381,6 +381,43 @@ class ProfileController extends Controller {
     }
 
 
+    public function getQuestions(Request $request)
+    {
+        $activityId = Activity::whereName('سوال')->first()->id;
+        $ansActivityId = Activity::whereName('پاسخ')->first()->id;
+
+        if(\auth()->check() && ($request->userId == \auth()->user()->id || !isset($request->userId) ) ){
+            $uId = \auth()->user()->id;
+            $sqlQuery = 'activityId = ' . $activityId . ' AND relatedTo = 0 AND visitorId = ' . $uId ;
+        }
+        else if(isset($request->userId)){
+            $uId = $request->userId;
+            $sqlQuery = 'activityId = ' . $activityId . ' AND confirm = 1 AND relatedTo = 0 AND visitorId = ' . $uId ;
+        }
+        else{
+            echo json_encode(['status' => 'nok']);
+            return;
+        }
+
+        $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
+
+        foreach ($logs as $log)
+            $log = questionTrueType($log);
+
+        if(isset($request->sort) && $request->sort == 'hot'){
+            for ($i = 0; $i < count($logs)-1; $i++){
+                for($j = $i+1; $j < count($logs); $j++) {
+                    if ($logs[$j]->answersCount > $logs[$i]->answersCount){
+                        $arr = $logs[$i];
+                        $logs[$i] = $logs[$j];
+                        $logs[$j] = $arr;
+                    }
+                }
+            }
+        }
+
+        echo json_encode(['status' => 'ok', 'result' => $logs]);
+    }
 
     public function getUserReviews(Request $request)
     {
