@@ -358,14 +358,6 @@
     left: 0;
 }
 
-.smallReviewIsConfirm{
-    margin-right: 12px;
-    font-size: 9px;
-    font-weight: normal;
-    cursor: default;
-    background: var(--koochita-blue);
-}
-
 .smallReviewShowMore{
     font-size: 12px;
     margin-left: auto;
@@ -436,7 +428,6 @@
     margin-bottom: 10px;
     direction: rtl;
     text-align: right;
-    padding-right: 65px;
     width: calc(100% - 35px);
 }
 
@@ -859,26 +850,23 @@
     cursor: pointer;
 }
 
+.wholeAnsSection{
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+
 .commentsMainBox {
     border-bottom: 1px solid #e5e5e5;
     width: 100%;
 }
 
 .eachCommentMainBox {
-    display: inline-block;
+    display: flex;
     width: 100%;
-    margin-bottom: 30px;
-}
-
-.commentsContentMainBox {
-    display: inline-block;
-    width: calc(100% - 50px);
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    padding: 2px 10px 7px;
-    text-align: justify;
-    float: right;
-    position: relative;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-bottom: 0px;
 }
 
 .ansCommentTimeAgo{
@@ -906,13 +894,7 @@
     width: 100%;
 }
 
-.eachCommentMainBox {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.ansOfQuestion .eachCommentMainBox{
+.ansOfQuestion{
     border-top: 1px solid #E5E5E5;
     padding-top: 10px;
     margin-bottom: 0px;
@@ -935,6 +917,7 @@
     text-align: justify;
     float: right;
     position: relative;
+    direction: rtl;
 }
 .ansCommentTimeAgo{
     font-size: 11px;
@@ -953,10 +936,6 @@
     margin-bottom: 10px;
 }
 
-.lessWidthForAns{
-    margin-right: 45px;
-    width: calc(100% - 45px);
-}
 
 .commentsActionsBtns > div:not(:nth-child(3)) {
     width: 20px;
@@ -1081,6 +1060,14 @@
     display: inline-block;
     width: 100%;
 }
+
+.newAnswerPlaceMainDiv{
+    display: flex;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+}
+
 .ansTextAreaReview{
     width: calc(100% - 55px) !important;
     margin-right: 50px !important;
@@ -1290,12 +1277,6 @@
     align-items: center
 }
 
-.eachCommentMainBox {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 30px;
-}
-
 .borderInMobile{
     width: calc(100% - 50px);
     margin-right: 50px;
@@ -1319,7 +1300,7 @@
 }
 
 .submitAnsInReview{
-    background-color: #ebebeb;
+    background-color: #f2f2f2;
     color: var(--koochita-blue);
     padding: 2px;
     border: none;
@@ -1336,6 +1317,10 @@
 .fullReviewLikeAnsSeeAllSection{
     display: flex;
     justify-content: space-between;
+    width: calc(100% - 45px);
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .fullReviewSeeAnses{
@@ -1350,7 +1335,113 @@
     white-space: pre-line
 }
 
+.commentActions, .answersActions{
+
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    height: 32px;
+    width: 45px;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    direction: rtl;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+.answersActions {
+    top: 15px !important;
+}
+
+.answersActionsIcon, .commentActionsIcon {
+    position: relative;
+}
+
+.answersActionsIcon::before, .commentActionsIcon::before {
+    content: '\E091';
+    font-family: shazdemosafer-tour !important;
+    font-size: 35px;
+    display: flex;
+    color: #666;
+}
+
+
+.questionsActionsMoreDetails {
+    background-color: #E5E5E5;
+    color: #7f7f7f;
+    padding: 10px;
+    position: absolute;
+    top: 45px;
+    left: 5px;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.questionsActionsMoreDetails > span {
+    padding: 5px 0;
+    display: block;
+    text-align: right;
+    cursor: pointer;
+}
+.questionsActionsMoreDetails > span:hover {
+    color: var(--koochita-blue);
+}
+.questionsActionsMoreDetails > span:not(:last-child) {
+    border-bottom: 1px solid #999999;
+}
+
+.questionsActionsMoreDetails > a {
+    padding: 5px 0;
+    display: block;
+    text-align: right;
+    cursor: pointer;
+    color: #7f7f7f;
+}
+.questionsActionsMoreDetails > a:hover {
+    color: var(--koochita-blue);
+}
+.questionsActionsMoreDetails > a:not(:last-child) {
+    border-bottom: 1px solid #999999;
+}
+.answersWriterExperiencePlace{
+    color: #16174f;
+    cursor: pointer;
+}
+
+.questionPack{
+    position: relative;
+    background: white;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.questionSubMenuBar{
+    padding: 8px 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.questionSubMenuBar .replyBtn {
+    padding: 2px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    float: left;
+}
+
+
 @media only screen and (max-width: 767px) {
+    .fullReviewLikeAnsSeeAllSection{
+        width: 100%;
+    }
 
     .replyToCommentMainDiv{
         background-color: #ebebeb;
@@ -1562,6 +1653,11 @@
     .ansTextAreaReview{
         width: calc(100% - 20px) !important;
         margin-right: 15px !important;
+    }
+
+    .answersActionsQp{
+        left: 5px;
+        top: 5px !important;
     }
 }
 

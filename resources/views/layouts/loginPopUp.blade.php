@@ -803,7 +803,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 error: function(err){
                     closeLoading();
                     console.log(err);
-                    alert('{{__('در قرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
+                    alert('{{__('در فرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}')
                 }
             });
         }

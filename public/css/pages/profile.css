@@ -186,9 +186,8 @@ body {
     display: inline-block;
     border: 1px solid #cccccc;
     border-radius: 5px;
-    background-color: #ebebeb;
+    background-color: #f2f2f2;
     line-height: 1.42857143;
-    /*margin: 10px 0;*/
     width: auto;
 }
 
@@ -516,14 +515,6 @@ body {
     margin-left: 10px;
 }
 
-.commentWriterExperienceDetails {
-    color: #666666;
-    margin-bottom: 10px;
-    direction: rtl;
-    text-align: right;
-    padding-right: 65px;
-}
-
 .userProfileName {
     display: inline-block;
     font-size: 15px;
@@ -735,18 +726,6 @@ body {
     line-height: 1.6;
 }
 
-.questionSubMenuBar {
-    padding: 8px 0;
-    display: inline-block;
-    width: 100%;
-}
-
-.questionSubMenuBar .replyBtn {
-    padding: 2px 20px;
-    margin-left: 10px;
-    cursor: pointer;
-    float: left;
-}
 
 .numberOfAnswers {
     float: right;
@@ -1398,6 +1377,7 @@ body {
     height: 80px;
     overflow: hidden;
     transition: .5s;
+    padding-bottom: 10px;
 }
 
 .showFullSuggestion{
@@ -1414,6 +1394,8 @@ body {
     padding-left: 20px;
     width: 230px;
     position: relative;
+    border-radius: 60px;
+    background-color: #fcc15642;
 }
 
 .suggEach:hover{

@@ -21,6 +21,8 @@
 
 @include('component.suggestionPack')
 
+@include('component.questionPack')
+
 @include('general.addToTripModal')
 
 @include('general.reportModal')

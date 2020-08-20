@@ -8,7 +8,7 @@
             <div class="commentWriterExperienceDetails" style="width: 100%">
                 <div style="display: flex; align-items: center">
                     <a href="##userPageUrl##" target="_blank" class="userProfileName" style="font-weight: bold">##userName##</a>
-                    <span class="label label-success smallReviewIsConfirm" style="display: ##isConfrim##">{{__('در انتظار تایید')}}</span>
+                    <span class="label label-success inConfirmLabel" style="display: ##isConfrim##">{{__('در انتظار تایید')}}</span>
                 </div>
                 <div style="font-size: 10px">{{__('در')}}
                     <a href="##placeUrl##" target="_blank">
@@ -254,7 +254,7 @@
 
     var showReviewAnsInOneSee = 4; // this number mean show ans in first time and not click on "showAllReviewCommentsFullReview"
     var deletedReview = 0;
-    var globalConfirmText = '<span class="label label-success smallReviewIsConfirm">{{__('در انتظار تایید')}}</span>';
+    var globalConfirmText = '<span class="label label-success inConfirmLabel">{{__('در انتظار تایید')}}</span>';
     var showFullReview = null;
     var showFullReviewKind = null;
 
@@ -333,12 +333,10 @@
             '   <div class="moreOptionFullReviewDetails hidden">\n' +
             '       <span onclick="showReportPrompt(' + _reviews["id"] + ', ' + kindPlaceId + ')">{{__("گزارش پست")}}</span>\n' +
             '       <a target="_blank" href="' + _reviews["userPageUrl"] + '"  >{{__("مشاهده صفحه")}} ' + _reviews["userName"] + '</a>\n' +
-            '       <a href="{{route('policies')}}" target="_blank">صفحه قوانین و مقررات</a>\n';
+            '       <a href="{{route('policies')}}" target="_blank">{{__('صفحه قوانین و مقررات')}}</a>\n';
         @if(auth()->check())
-        if(_reviews.yourReview) {
-            text += '<span>آرشیو پست</span>\n' +
-                '<span onclick="deleteReviewByUserInReviews(' + _reviews["id"] + ')" style="color: red"> {{__('حذف پست')}}</span>\n';
-        }
+            if(_reviews.yourReview)
+                text += '<span onclick="deleteReviewByUserInReviews(' + _reviews["id"] + ')" style="color: red"> {{__('حذف پست')}}</span>\n';
         @endif
 
             text += '</div>\n'+
@@ -581,44 +579,44 @@
             }
 
             text += '<div  id="ansOfReview_' + answers["id"] + '" style="margin-bottom: 15px"> ' +
-                '<div class="eachCommentMainBox" style="margin-bottom: 0px">\n' +
-                '   <div class="circleBase type2 commentsWriterProfilePic">' +
-                '       <img src="' + answers["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '   </div>\n' +
-                '   <div class="commentsContentMainBox">\n' +
-                '       <b class="userProfileName userProfileNameFullReview">' +
-                '           <a href="{{url("profile/index")}}/ ' + _reviews["userName"] +'" target="_blank" style="font-weight:bold">' +
-                answers["userName"] +
-                '           </a>' +
-                textInConfirm +
-                '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
-                '       </b>\n' +
-                '       <p class="fullReviewAnsText">' + answers["text"] + '</p>\n'+
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="fullReviewLikeAnsSeeAllSection">\n' +
-                '   <div style="display: inline-flex">\n' +
-                '       <span class="reviewLikeNumber_' + answers["id"] + ' reviewLikeIcon_' + answers["id"] + ' LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReviewInFullReview(' + answers["id"] + ', 1, this)">' + answers["like"] + '</span>\n' +
-                '       <span class="reviewDisLikeNumber_' + answers["id"] + ' reviewDisLikeIcon_' + answers["id"] + ' DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReviewInFullReview(' + answers["id"] + ', 0, this)">' + answers["disLike"] + '</span>\n' +
-                '       <span class="replayBtn replayReview" onclick="openReplayToReviewCommentFullReview(' + answers["id"] + ')">{{__("پاسخ دهید")}}</span>\n' +
-                '   </div>\n'+
-                seeAnses +
-                '</div>' +
-                '<div class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">\n' +
-                '   <div class="circleBase newCommentWriterProfilePic">' +
-                '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
-                '   </div>\n' +
-                '   <div class="inputBox setButtonToBot">\n' +
-                '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
-                '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
-                '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1, this, ' + _reviews["id"] + ')" style="height: fit-content"> {{__("ارسال")}} </button>\n' +
-                '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
-                '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
-                '           {{__("در حال ثبت سوال")}}\n' +
-                '       </div>'+
-                '   </div>\n' +
-                '</div>\n'+
-                '</div>\n';
+                    '<div class="eachCommentMainBox" style="margin-bottom: 0px">\n' +
+                    '   <div class="circleBase type2 commentsWriterProfilePic">' +
+                    '       <img src="' + answers["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                    '   </div>\n' +
+                    '   <div class="commentsContentMainBox">\n' +
+                    '       <b class="userProfileName userProfileNameFullReview">' +
+                    '           <a href="{{url("profile/index")}}/ ' + _reviews["userName"] +'" target="_blank" style="font-weight:bold">' +
+                    answers["userName"] +
+                    '           </a>' +
+                    textInConfirm +
+                    '          <span class="ansCommentTimeAgo">' + answers["timeAgo"] + '</span>\n' +
+                    '       </b>\n' +
+                    '       <p class="fullReviewAnsText">' + answers["text"] + '</p>\n'+
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '<div class="fullReviewLikeAnsSeeAllSection">\n' +
+                    '   <div style="display: inline-flex">\n' +
+                    '       <span class="reviewLikeNumber_' + answers["id"] + ' reviewLikeIcon_' + answers["id"] + ' LikeIconEmpty likedislikeAnsReviews ' + hasLiked + '" onclick="likeReviewInFullReview(' + answers["id"] + ', 1, this)">' + answers["like"] + '</span>\n' +
+                    '       <span class="reviewDisLikeNumber_' + answers["id"] + ' reviewDisLikeIcon_' + answers["id"] + ' DisLikeIconEmpty likedislikeAnsReviews ' + hasDisLiked + ' " onclick="likeReviewInFullReview(' + answers["id"] + ', 0, this)">' + answers["disLike"] + '</span>\n' +
+                    '       <span class="replayBtn replayReview" onclick="openReplayToReviewCommentFullReview(' + answers["id"] + ')">{{__("پاسخ دهید")}}</span>\n' +
+                    '   </div>\n'+
+                    seeAnses +
+                    '</div>' +
+                    '<div class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">\n' +
+                    '   <div class="circleBase newCommentWriterProfilePic">' +
+                    '       <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                    '   </div>\n' +
+                    '   <div class="inputBox setButtonToBot">\n' +
+                    '       <b class="replyCommentTitle">در پاسخ به نظر ' + answers["userName"] + '</b>\n' +
+                    '       <textarea id="ansForReviews_' + answers["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji"  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)"></textarea>\n' +
+                    '       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(' + answers["id"] + ',1, this, ' + _reviews["id"] + ')" style="height: fit-content"> {{__("ارسال")}} </button>\n' +
+                    '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
+                    '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
+                    '           {{__("در حال ثبت سوال")}}\n' +
+                    '       </div>'+
+                    '   </div>\n' +
+                    '</div>\n'+
+                    '</div>\n';
 
             text += '<div class="borderInMobile hidden ansComment_' + answers["id"] + '" style="margin-top: 0px">';
             text += createAnsHtmlToCommentFullReview(answers["answers"], answers["userName"], _reviews["id"]);
