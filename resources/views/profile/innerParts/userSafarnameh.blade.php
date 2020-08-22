@@ -1,9 +1,9 @@
 <style>
     .readSafarnamehButton{
-        background: var(--koochita-green);
+        /*background: var(--koochita-green);*/
         width: fit-content;
         padding: 5px 10px;
-        color: white;
+        color: var(--koochita-blue);
         border-radius: 10px;
         position: absolute;
         bottom: 10px;
@@ -12,7 +12,17 @@
         transition: .3s;
     }
     .readSafarnamehButton:hover{
-        background: var(--koochita-dark-green);
+        border: solid;
+        color: var(--koochita-blue);
+    }
+    .submitSarnamehButton{
+        background: var(--koochita-blue);
+        border: none;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
     }
 </style>
 
@@ -80,7 +90,13 @@
                     </label>
                     <input type="file" id="safarnamehPicInput" style="display: none" onchange="changeNewPicSafarnameh(this)">
                     <label for="safarnamehPicInput" class="newSafarnamehImgSection">
-                        <img id="newSafarnamehPic" src="{{URL::asset('images/mainPics/default/Placeholder.png')}}" style=" height: 120px">
+                        <div class="notPicSafarnameh">
+                            <span class="plus2" style="font-size: 40px; line-height: 20px;"></span>
+                                <span>
+                                افزودن عکس
+                            </span>
+                        </div>
+                        <img id="newSafarnamehPic" src="#" style=" height: 120px; display: none">
                     </label>
                 </div>
             </div>
@@ -94,7 +110,7 @@
                         </button>
                     </label>
                 </div>
-                <div class="pickPlaces ourSuggestion showFullSuggestion"></div>
+                <div class="pickPlaces ourSuggestionMainPage" style="max-height: 1000vh"></div>
             </div>
 
             <div class="row newSafarnamehFooter">
@@ -139,14 +155,18 @@
 
                 <div class="row" style="padding: 10px">
                     <div id="pickPlacesTitle" style="font-size: 20px; font-weight: bold">انتخاب شده ها</div>
-                    <div class="pickPlaces ourSuggestion showFullSuggestion"></div>
+                    <div class="pickPlaces ourSuggestion"></div>
                 </div>
 
                 <div class="row" style="margin: 10px; border-top: solid 1px #cccccc; padding-top: 5px;">
-                    <div id="ourSuggestionTitle" style="font-size: 20px; font-weight: bold">پیشنهادهای ما</div>
-                    <div id="ourSuggestion" class="ourSuggestion showFullSuggestion"></div>
+                    <div class="ourSuggestionShow" style="font-size: 20px; font-weight: bold">پیشنهادهای ما</div>
+                    <div id="ourSuggestion" class="ourSuggestion ourSuggestionShow" style="max-height: 20vh">
 
-                    <div class="showAllSuggestion" onclick="showAllSuggestionFunc()">مشاهده تمام پیشنهادها</div>
+                    </div>
+{{--                    <div class="showAllSuggestion ourSuggestionShow" onclick="showAllSuggestionFunc()">مشاهده تمام پیشنهادها</div>--}}
+                </div>
+                <div class="row" style="text-align: center">
+                    <button class="submitSarnamehButton" onclick="closeSuggestion()">{{__('ثبت')}}</button>
                 </div>
             </div>
         </div>
@@ -257,6 +277,8 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     safarnamehNewMainPic = input.files[0];
+                    $('.notPicSafarnameh').hide();
+                    $('#newSafarnamehPic').show();
                     $('#newSafarnamehPic').attr('src',  e.target.result);
                 };
                 reader.readAsDataURL(input.files[0]);
@@ -313,7 +335,9 @@
                             $('#safarnamehTag3').val('');
                             $('.ck-editor__editable').html('');
                             window.editor.setData('');
-                            $('#newSafarnamehPic').attr('src', "{{URL::asset('images/mainPics/default/Placeholder.png')}}");
+                            $('.notPicSafarnameh').css('display', 'flex');
+                            $('#newSafarnamehPic').hide();
+                            $('#newSafarnamehPic').attr('src', "#");
                             safarnamehNewMainPic = null;
                             pickedPlaces = [];
                             suggestionPlaces = [];
@@ -365,11 +389,6 @@
         }
 
         function createSuggestion(_result){
-            if(_result.length == 0)
-                $('#ourSuggestionTitle').hide();
-            else
-                $('#ourSuggestionTitle').show();
-
             text = '';
             _result.forEach((item, index) => {
                text += '<div id="place_' + item.id + '" class="suggEach" onclick="chooseThisSuggestion(' + index + ')">\n' +
@@ -385,12 +404,17 @@
             });
             $('#ourSuggestion').html(text);
 
-            if($('#ourSuggestion').height() < 90)
-                $('.showAllSuggestion').hide();
-            else {
-                $('.showAllSuggestion').show();
-                $('#ourSuggestion').removeClass('showFullSuggestion');
-            }
+            // if($('#ourSuggestion').height() < 90)
+            //     $('.showAllSuggestion').hide();
+            // else {
+            //     $('.showAllSuggestion').show();
+            //     $('#ourSuggestion').removeClass('showFullSuggestion');
+            // }
+
+            if(_result.length == 0)
+                $('.ourSuggestionShow').hide();
+            else
+                $('.ourSuggestionShow').show();
         }
 
         function createPickPlace(){

@@ -680,6 +680,7 @@
         function openCropProfile(){
             $('#cropModal').removeClass('hidden');
             $('#imgEditReviewPics').attr('src', mainUploadedPic);
+            openLoading();
             startProfileCropper('circle', 1);
         }
 
@@ -756,6 +757,7 @@
         function openCropBanner(){
             $('#cropModal').removeClass('hidden');
             $('#imgEditReviewPics').attr('src', mainUploadedBanner);
+            openLoading();
             startProfileCropper('req', 6);
         }
 
@@ -1021,6 +1023,7 @@
                     $('.cropper-view-box').css('border-radius', '0');
                     cropKind = 'userBanner';
                 }
+                closeLoading();
             },1000);
         }
 
