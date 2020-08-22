@@ -737,6 +737,7 @@
                     mainUploadedBanner = e.target.result;
                     uploadedBanner = _input.files[0];
                     $('#cropBannerButton').show();
+                    uploadedBanner = true;
                 };
                 reader.readAsDataURL(_input.files[0]);
             }
