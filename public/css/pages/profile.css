@@ -134,6 +134,7 @@ body {
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration , .userProfilePostsSearchContainer{
     background-color: white;
     color: #777777;
+    padding: 0px;
 }
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:hover {
@@ -1407,7 +1408,7 @@ body {
     cursor: pointer;
     transition: .4s;
     padding-left: 20px;
-    width: 200px;
+    width: 185px;
     position: relative;
     border-radius: 60px;
     background-color: #fcc15642;
@@ -1838,7 +1839,7 @@ body {
         display: flex;
         position: absolute;
         width: 20px;
-        left: 10px;
+        left: 20px;
         font-size: 29px;
         z-index: 99;
         top: 0px;
@@ -1923,6 +1924,53 @@ body {
         width: 78%;
     }
 
+    .profileHeaderLinksTab.active{
+        border-bottom: 5px solid var(--koochita-blue);
+        background: var(--koochita-blue);
+        color: white;
+        padding: 7px 4px;
+        border-radius: 15px 15px 0px 0px;
+    }
+    .postsMainFiltrationBar{
+        padding-top: 5px;
+    }
+    .userProfileActivitiesDetailsMainDiv{
+        margin-top: 0px;
+    }
+
+    .userProfilePostsFiltration{
+        background-color: var(--koochita-blue) !important;
+        border-radius: 0px;
+        color: white;
+    }
+    .userProfilePostsFiltration > span{
+        color: white;
+    }
+    .userProfilePostsFiltration .active{
+        background-color: #f8f8f8;
+        border-bottom: none !important;
+        margin-top: 5px !important;
+        border-radius: 15px 15px 0px 0px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .postsMainFiltrationBar > a, .userProfilePostsFiltration > span{
+        border-bottom: none !important;
+    }
+
+    .userProfilePostsFiltration.photoAndVideo > span{
+        width: 25% !important;
+    }
+
+    .userProfilePostsFiltration.questionSecTab > span{
+        width: 50% !important;
+    }
+    .userProfilePostsFiltration.pcType{
+        background-color: white !important;
+    }
+    .userProfilePostsFiltration.pcType > span{
+        color: var(--koochita-blue) !important;
+    }
 }
 
 @media (max-width: 630px) {
@@ -1972,6 +2020,10 @@ body {
 
     .answerBoxText {
         width: 72%;
+    }
+
+    .postsMainFiltrationBar > a , .userProfilePostsFiltration > span{
+        font-size: 12px;
     }
 }
 

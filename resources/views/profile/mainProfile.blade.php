@@ -10,7 +10,7 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=3')}}">
     <style>
         .showBannerPic{
             display: flex;
@@ -91,7 +91,7 @@
                 </div>
 
                 <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
-                    @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0)
+                    @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0 || $myPage)
                         <div class="userProfileLevelMainDiv rightColBoxes">
                             <div class="mainDivHeaderText">
                                 <h3>بیو</h3>

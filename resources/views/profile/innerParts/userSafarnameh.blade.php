@@ -32,10 +32,8 @@
 <div id="safarnamehList" class="userProfileArticles">
     <div class="userProfilePostsFiltrationContainer">
         <div class="userProfilePostsFiltration">
-            <span>نمایش بر اساس</span>
-            <span>جدیدترین‌ها</span>
+            <span class="active">جدیدترین‌ها</span>
             <span>بهترین‌ها</span>
-            <span>داغ‌ترین‌ها</span>
         </div>
     </div>
 
@@ -84,11 +82,11 @@
                 </div>
                 <div class="col-md-6 form-group" style="display: flex; flex-direction: column;">
                     <label>خب یه عکس خوب هم از سفرنامت
-                        <button class="addPlaceButton" onclick="$('#safarnamehPicInput').click()">
-                            انتخاب عکس
-                        </button>
+{{--                        <button class="addPlaceButton" onclick="$('#safarnamehPicInput').click()">--}}
+{{--                            انتخاب عکس--}}
+{{--                        </button>--}}
                     </label>
-                    <input type="file" id="safarnamehPicInput" style="display: none" onchange="changeNewPicSafarnameh(this)">
+                    <input type="file" id="safarnamehPicInput" accept="image/*" style="display: none" onchange="changeNewPicSafarnameh(this)">
                     <label for="safarnamehPicInput" class="newSafarnamehImgSection">
                         <div class="notPicSafarnameh">
                             <span class="plus2" style="font-size: 40px; line-height: 20px;"></span>
