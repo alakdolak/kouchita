@@ -1971,6 +1971,10 @@ body {
     .userProfilePostsFiltration.pcType > span{
         color: var(--koochita-blue) !important;
     }
+
+    .newSafarnamehSection label{
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 630px) {
