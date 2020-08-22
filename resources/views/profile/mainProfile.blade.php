@@ -337,7 +337,7 @@
                         <input id="newBannerImage" type="file" accept="image/*" style="display: none" onchange="changeUploadBannerPic(this)">
 
                         <div class="showBannerPic">
-                            <img id="changeBannerPic" src="{{$user->banner}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            <img id="changeBannerPic" src="{{$user->banner}}" style="width: 100%">
                         </div>
                         <button id="cropBannerButton" class="cropProfileImg" onclick="openCropBanner()">برش عکس</button>
                     </div>
@@ -735,7 +735,7 @@
                 reader.onload = function(e){
                     $('#changeBannerPic').attr('src', e.target.result);
                     mainUploadedBanner = e.target.result;
-                    uploadedBanner = _input.files[0];
+                    chosenBannerPic = _input.files[0];
                     $('#cropBannerButton').show();
                     uploadedBanner = true;
                 };

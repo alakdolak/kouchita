@@ -729,6 +729,7 @@ class ProfileController extends Controller {
 
     public function updateBannerPic(Request $request)
     {
+
         if(isset($request->uploaded) && isset($request->pic)){
             $user = \auth()->user();
             if($request->uploaded == 'false'){
