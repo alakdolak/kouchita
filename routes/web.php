@@ -402,17 +402,19 @@ Route::group(array('middleware' => 'nothing'), function () {
 //posts
 Route::group(array('middleware' => 'nothing'), function () {
 
-    Route::get('mainArticle', 'PostController@mainArticle')->name('mainArticle');
+    Route::get('/article/home', 'PostController@mainArticle')->name('mainArticle');
 
     Route::get('/article/id/{id}', 'PostController@postWithId')->name('postWithId');
 
-    Route::post('/paginationArticle', 'PostController@paginationArticle')->name('article.pagination');
+    Route::get('/article/user/{id}', 'PostController@showUserArticle')->name('article.user.show');
+
+    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
 
     Route::get('/article/list/{type?}/{search?}', 'PostController@articleList')->name('article.list');
 
-    Route::post('/paginationInArticleList', 'PostController@paginationInArticleList')->name('article.list.pagination');
+    Route::post('/paginationArticle', 'PostController@paginationArticle')->name('article.pagination');
 
-    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
+    Route::post('/paginationInArticleList', 'PostController@paginationInArticleList')->name('article.list.pagination');
 
     Route::post('/article/like', 'PostController@LikeArticle')->name('article.like');
 
@@ -471,8 +473,6 @@ Route::group(array('middleware' => 'nothing'), function(){
 Route::group(['middleware' => ['throttle:30']], function(){
     Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile');
 
-    Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
-
     Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
 
     Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
@@ -495,10 +495,17 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('profile/safarnameh/searchSuggestion', 'ProfileController@searchSuggestion')->name('profile.safarnameh.searchSuggestion');
 
+    Route::post('profile/updateUserPhoto', 'ProfileController@updateUserPhoto')->name('profile.updateUserPhoto');
+
+    Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
+
+    Route::post('profile/updateBannerPic', 'ProfileController@updateBannerPic')->name('profile.updateBannerPic');
 
     Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
 
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
+
+    Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
 
     Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
 
@@ -542,7 +549,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
 
-    Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
+    Route::post('getBannerPics', array('as' => 'getBannerPics', 'uses' => 'ProfileController@getBannerPics'));
 
     Route::post('updateProfile1', array('as' => 'updateProfile1', 'uses' => 'ProfileController@updateProfile1'));
 

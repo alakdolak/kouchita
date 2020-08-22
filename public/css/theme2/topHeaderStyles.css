@@ -257,6 +257,12 @@ input[type="checkbox"] + label, input[type="radio"] + label{
 @media only screen and (max-width: 700px) {
     .modalBlackBack {
         align-items: unset;
+        z-index: 9999;
+    }
+    .userTripMainBody{
+        max-height: 100vh !important;
+        height: 100vh;
+        z-index: 9;
     }
 }
 

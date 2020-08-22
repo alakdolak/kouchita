@@ -21,8 +21,11 @@ use App\models\PostPlaceRelation;
 use App\models\PostTag;
 use App\models\PostTagsRelation;
 use App\models\Restaurant;
+use App\models\Safarnameh;
+use App\models\SafarnamehTagRelation;
 use App\models\SogatSanaie;
 use App\models\State;
+use App\models\Tag;
 use App\models\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
@@ -230,6 +233,38 @@ class PostController extends Controller {
             return \redirect(\url('/'));
     }
 
+    public function showUserArticle($id)
+    {
+        $post = Safarnameh::find($id);
+        if($post == null)
+            return \redirect()->back();
+
+        $post->description = $post->text;
+        $post->user = User::find($post->userId);
+        $tags = SafarnamehTagRelation::where('safarnamehId', $post->id)->pluck('tagId')->toArray();
+        $post->tag = Tag::whereIn('id', $tags)->pluck('name')->toArray();
+        $post->pic = URL::asset('userPhoto/'.$post->user->id.'/'.$post->pic);
+        $post->msg = 0;
+        $post->seen = 0;
+        $post->mainCategory = 'سفرنامه';
+        $post->date = verta($post->created_at)->format('Y/m/%d');
+        $post->user->pic = getUserPic($post->user->id);
+
+
+        $stateCome = null;
+        $relatedPost = null;
+        $stateCome = null;
+        $cityCome = null;
+        $placeCome = null;
+        $similarPost = [];
+        $comments = null;
+        $postLike = 2;
+        $uPic = getUserPic(\auth()->check() ? \auth()->user()->id : 0);
+        $category = $this->getAllCategory();
+
+        return view('Article.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments', 'localStorageData']));
+    }
+
     public function showArticle($slug, Request $request)
     {
         $post = Post::where('slug', $slug)->first();
@@ -262,22 +297,11 @@ class PostController extends Controller {
                 else
                     $postLike = -1;
 
-                $user = \auth()->user();
-                if($user->uploadPhoto == 0){
-                    $deffPic = DefaultPic::find($user->picture);
-
-                    if($deffPic != null)
-                        $uPic = URL::asset('defaultPic/' . $deffPic->name);
-                    else
-                        $uPic = URL::asset('_images/nopic/blank.jpg');
-                }
-                else{
-                    $uPic = URL::asset('userProfile/' . $user->picture);
-                }
+                $uPic = getUserPic($uId);
             }
             else {
                 $postLike = -1;
-                $uPic = URL::asset('_images/nopic/blank.jpg');
+                $uPic = getUserPic(0);
             }
 
             $post->category = PostCategoryRelation::where('postId', $post->id)->get();
@@ -319,20 +343,9 @@ class PostController extends Controller {
             $cityCome = $res[2];
             $placeCome = $res[3];
 
-            $creator = User::select(['id', 'first_name', 'last_name', 'username', 'picture'])->find($post->creator);
-            if($creator != null){
-                if($creator->uploadPhoto == 0){
-                    $deffPic = DefaultPic::find($creator->picture);
-
-                    if($deffPic != null)
-                        $creator->pic = URL::asset('defaultPic/' . $deffPic->name);
-                    else
-                        $creator->pic = URL::asset('_images/nopic/blank.jpg');
-                }
-                else{
-                    $creator->pic = URL::asset('userProfile/' . $creator->picture);
-                }
-            }
+            $creator = User::select(['id', 'first_name', 'last_name', 'username', 'picture', 'introduction'])->find($post->creator);
+            if($creator != null)
+                $creator->pic = getUserPic($creator->id);
             $post->user = $creator;
 
             $tags = DB::select('SELECT pt.tag FROM postTags AS pt, postTagsRelations AS ptr WHERE ptr.postId = ' . $post->id . ' AND pt.id = ptr.tagId GROUP BY pt.tag');
@@ -345,7 +358,6 @@ class PostController extends Controller {
             return view('Article.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments', 'localStorageData']));
         }
         return \redirect(\url('/'));
-
     }
 
     public function articleList($type = '',$search = '')
@@ -415,7 +427,7 @@ class PostController extends Controller {
             return \view('Article.searchArticle', compact(['stateCome', 'cityCome', 'placeCome', 'category', 'pageLimit', 'type', 'search']));
         }
 
-        return \redirect(\url('mainArticle'));
+        return \redirect(\route('mainArticle'));
     }
 
     public function paginationInArticleList(Request $request){
