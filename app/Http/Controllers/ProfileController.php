@@ -187,6 +187,14 @@ class ProfileController extends Controller {
         }
         $medals = getMedals($user->id);
 
+        if($user->uploadBanner == 0) {
+            $user->banner = $user->banner == null ? '1.jpg' : $user->banner;
+            $user->banner = URL::asset('images/mainPics/background/' . $user->banner);
+        }
+        else{
+            $user->banner = URL::asset('userProfile/'.$user->banner);
+        }
+
         return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage']));
 
 //        return view('profile.profile', array('activities' => $activities, 'userActivityCount' => $userActivityCount,
@@ -215,9 +223,7 @@ class ProfileController extends Controller {
                 'destination' => $location
             ],
         ];
-
         $image = $request->file('pic');
-
         $fileName = resizeImage($image, $size);
 
         $newSafarnameh->pic = $fileName;
@@ -632,6 +638,26 @@ class ProfileController extends Controller {
         return;
     }
 
+    public function getBannerPics()
+    {
+        $banners = [];
+        $location = __DIR__ .'/../../../public/images/mainPics/background';
+        if(is_dir($location)){
+            $ban = scandir($location);
+            foreach ($ban as $item){
+                if(is_file($location.'/'.$item))
+                    array_push($banners, [
+                        'url'  => URL::asset('images/mainPics/background/'.$item),
+                        'name' => $item
+                    ]);
+            }
+        }
+
+        echo json_encode($banners);
+        return;
+    }
+
+
     public function updateMyBio(Request $request)
     {
         $user = Auth::user();
@@ -655,6 +681,92 @@ class ProfileController extends Controller {
             ->where('uId', $user->id)->get();
 
         echo json_encode(['status' => 'ok', 'tripStyles' => $tripStyles, 'introduction' => $user->introduction]);
+        return;
+    }
+
+    public function updateUserPhoto(Request $request)
+    {
+
+        if(isset($request->id)){
+            $user = \auth()->user();
+            if($request->id != 0){
+                if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->picture))
+                    unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
+                $user->picture = $request->id;
+                $user->uploadPhoto = 0;
+                $user->save();
+                echo 'ok';
+            }
+            else if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
+                $targetFile = __DIR__ . "/../../../../assets/userProfile";
+                $size = [
+                    [
+                        'width' => 150,
+                        'height' => null,
+                        'name' => '',
+                        'destination' => $targetFile
+                    ],
+                ];
+
+                $image = $request->file('pic');
+                $fileName = resizeImage($image, $size);
+                if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->picture))
+                    unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
+                $user->picture = $fileName;
+                $user->uploadPhoto = 1;
+                $user->save();
+
+                echo 'ok';
+            }
+            else
+                echo 'nok1';
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
+    public function updateBannerPic(Request $request)
+    {
+        if(isset($request->uploaded) && isset($request->pic)){
+            $user = \auth()->user();
+            if($request->uploaded == 'false'){
+                if($user->uploadBanner == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->banner))
+                    unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->banner);
+                $user->banner = $request->pic;
+                $user->uploadBanner = 0;
+                $user->save();
+
+                $url = URL::asset('images/mainPics/background/'.$user->banner);
+            }
+            else if($request->uploaded == 'true'){
+                $targetFile = __DIR__ . "/../../../../assets/userProfile";
+                $size = [
+                    [
+                        'width' => null,
+                        'height' => 300,
+                        'name' => '',
+                        'destination' => $targetFile
+                    ],
+                ];
+
+                $image = $request->file('pic');
+                $fileName = resizeImage($image, $size);
+                if($user->uploadBanner == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->banner))
+                    unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->banner);
+                $user->banner = $fileName;
+                $user->uploadBanner = 1;
+                $user->save();
+
+                $url = URL::asset('userProfile/'.$user->banner);
+            }
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+
+        echo json_encode(['status' => 'ok', 'url' => $url]);
         return;
     }
 
@@ -904,15 +1016,11 @@ class ProfileController extends Controller {
     }
 
     public function getDefaultPics() {
-
         $defaultPics = DefaultPic::all();
-
-        foreach($defaultPics as $defaultPic) {
+        foreach($defaultPics as $defaultPic)
             $defaultPic->name = URL::asset("defaultPic/" . $defaultPic->name);
-        }
 
         echo json_encode($defaultPics);
-
     }
 
     public function deleteAccount() {

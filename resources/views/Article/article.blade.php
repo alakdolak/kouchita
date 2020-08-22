@@ -156,7 +156,7 @@
         </div>
         <div class="col-lg-9 col-sm-9 gnWhiteBox">
             <div class="gnMainPicOfArticle">
-                <img class="gnAdvertiseImage" src="{{URL::asset($post->pic)}}" alt="{{$post->keyword}}">
+                <img class="gnAdvertiseImage" src="{{$post->pic}}" alt="{{$post->keyword}}">
                 <div class="gnMainPicOfArticleText">
                     <div>
                         <div class="im-entry-category" style="margin: 0 0 0 20px;">
@@ -169,7 +169,7 @@
                                 <span class="entry-date published updated">{{$post->date}}</span>
                             </div>
                             <div class="comments-link im-meta-item">
-                                    <i class="fa fa-comment-o"></i>{{$post->msg}}
+                                <i class="fa fa-comment-o"></i>{{$post->msg}}
                             </div>
                             <div class="author vcard im-meta-item">
                                 <i class="fa fa-user"></i>
@@ -239,9 +239,7 @@
                             </div>
                             <div class="gnLabels">{{$post->user->username}}</div>
                         </div>
-                        <div>
-                            لورم ایپسون
-                        </div>
+                        <div>{{$post->user->introduction}}</div>
                     </div>
                 </div>
                 <div>

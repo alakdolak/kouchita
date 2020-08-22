@@ -1395,7 +1395,10 @@ function resizeImage($pic, $size, $fileName = ''){
         $image = $pic;
         if($fileName == '') {
             $randNum = random_int(100, 999);
-            $fileName = time() . $randNum . '.' . $image->getClientOriginalExtension();
+            if($image->getClientOriginalExtension() == '')
+                $fileName = time() . $randNum . '.jpg';
+            else
+                $fileName = time() . $randNum . '.' . $image->getClientOriginalExtension();
         }
 
         foreach ($size as $item){

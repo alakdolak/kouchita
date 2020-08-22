@@ -2,10 +2,7 @@
 <html>
 <head>
     @include('layouts.topHeader')
-    {{--<meta name="description" content="متن توضیحات متا"/>--}}
-    {{--<meta name="keywords" content="کیورد 1, کیورد دو, کی ورد سه">--}}
     <meta property="og:locale" content="fa_IR" />
-    {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
@@ -46,13 +43,7 @@
 
     <div class="header">
 
-        <div class="hideOnPhone">
-            @include('layouts.placeHeader')
-        </div>
-
-        <div class="hideOnScreen">
-            @include('layouts.header1Phone')
-        </div>
+        @include('layouts.header1')
 
         @yield('body')
 

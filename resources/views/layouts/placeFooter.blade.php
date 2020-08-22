@@ -172,7 +172,7 @@
         <!-- The Modals -->
 
         <div class="modal fade" id="profilePossibilities">
-            @if(Request::is('article/*') || Request::is('mainArticle'))
+            @if(Request::is('article/*'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>

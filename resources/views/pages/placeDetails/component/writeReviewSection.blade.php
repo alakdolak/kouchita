@@ -955,8 +955,6 @@
             };
             first = false;
         }
-
-
         // Import image
         inputImage = document.getElementById('showPic' + _number);
 
@@ -1015,8 +1013,6 @@
                 processData: false,
                 contentType: false,
                 success: function (response){
-                    console.log(response);
-
                     if(response == 'ok')
                         $('#showPic' + imgCropNumber).attr('src', canvas1.toDataURL());
                     else

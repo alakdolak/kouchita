@@ -1025,6 +1025,7 @@ body {
     display: inline-block;
     width: 100%;
     border-radius: 10px;
+    position: relative;
 }
 
 .articleImgMainDiv {
@@ -1058,7 +1059,7 @@ body {
 }
 
 .articleTags {
-    background-color: rgba(0,0,0,0.5);
+    background-color: var(--koochita-yellow);
     color: white;
     float: right;
     padding: 1px 8px;
@@ -1117,10 +1118,15 @@ body {
     right: 0;
     top: -5px;
 }
-
+.articleWriterMainDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .articleWriterMainDiv::before {
     content: '\E06E';
     font-family: Shazde_Regular2 !important;
+    margin-left: 5px;
 }
 
 .articleWatchListMainDiv {
@@ -1194,8 +1200,7 @@ body {
     /*height: fit-content;*/
     padding: 10px;
     direction: rtl;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .myBioInput{
@@ -1541,6 +1546,100 @@ body {
 }
 /*responsive for tablets*/
 
+.cropper-face{
+    background-color: unset !important;
+}
+.cropper-view-box{
+    border: solid white 2px;
+    outline: none !important;
+}
+.cropProfileImg{
+    background: var(--koochita-blue);
+    color: white;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 8px;
+    display: none;
+}
+.uploadSection{
+    text-align: center;
+}
+.newImageButton{
+    cursor: pointer;
+    background: var(--koochita-green);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin: 10px 0px;
+    transition:  .3s;
+}
+.newImageButton:hover{
+    background: var(--koochita-dark-green);
+}
+.nowImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.nowImg .profilePicUserProfile{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border: solid 4px var(--koochita-blue);
+    margin-bottom: 5px;
+}
+.oldBrowser{
+    color: gray;
+    font-size: 11px;
+}
+.orSec{
+    height: 1px;
+    background: gray;
+    width: 100%;
+    position: relative;
+    margin: 25px 0px;
+}
+.orSec span{
+    position: absolute;
+    right: calc(50% - 15px);
+    font-size: 20px;
+    color: var(--koochita-dark-green);
+    top: -15px;
+    background: white;
+    padding: 0px 15px;
+}
+.ourPic{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+.oPs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 10px;
+    transition: .4s;
+}
+.oPs.active{
+    border: solid 5px var(--koochita-light-green);
+    box-shadow: 0 0 20px 5px var(--koochita-light-green);
+}
+.oPs img{
+    width: 100%;
+}
+.whoAmI{
+    display: none;
+}
+
 @media (max-width: 1188px) {
 
     .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
@@ -1721,6 +1820,30 @@ body {
 }
 
 @media (max-width: 768px) {
+    .userProfileDetailsMainDiv{
+        display: none;
+    }
+    .whoAmI{
+        display: block !important;
+    }
+    .bioClassSection{
+        position: fixed;
+        bottom: 0px;
+        background: #ffffffe6;
+        padding: 15px 0px;
+    }
+    .ourPic{
+        max-height: 1000px;
+        overflow-y: hidden;
+    }
+    .userTripMainBody{
+        overflow-y: auto;
+        padding-bottom: 50px;
+    }
+    .tripModalBody{
+        min-height: 50vh;
+    }
+
     .mainDivContainerProfilePage {
         padding: 0;
     }

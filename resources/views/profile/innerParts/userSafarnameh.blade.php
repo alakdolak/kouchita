@@ -1,3 +1,20 @@
+<style>
+    .readSafarnamehButton{
+        background: var(--koochita-green);
+        width: fit-content;
+        padding: 5px 10px;
+        color: white;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        cursor: pointer;
+        transition: .3s;
+    }
+    .readSafarnamehButton:hover{
+        background: var(--koochita-dark-green);
+    }
+</style>
 
 <script src="{{asset('js/ckeditor5/ckeditor5.js')}}"></script>
 <script src="{{asset('js/ckeditor5/ckeditorUpload.js')}}"></script>
@@ -7,11 +24,8 @@
         <div class="userProfilePostsFiltration">
             <span>نمایش بر اساس</span>
             <span>جدیدترین‌ها</span>
-            <span>قدمی‌ترین‌ها</span>
             <span>بهترین‌ها</span>
             <span>داغ‌ترین‌ها</span>
-            <span>بدترین‌ها</span>
-            <span>بیشترین همراهان</span>
         </div>
     </div>
 
@@ -181,20 +195,23 @@
                 '                    <div class="articleTags">سفرنامه</div>\n' +
                 '                </div>\n' +
                 '                <div class="articleTitleMainDiv">\n' +
-                '                    <a>' + item.title + '</a>\n' +
-                '                </div>\n' +
-                '                <div class="articleSummarizedContentMainDiv">\n' +
-                '                                <span>' + item.summery + '</span>\n' +
-                '                    <span>...</span>\n' +
-                '                </div>\n' +
-                '                <div class="articleSpecificationsMainDiv">\n' +
-                '                    <div class="articleDateMainDiv">' + item.time + '</div>\n' +
-                '                    <div class="articleCommentsMainDiv">0</div>\n' +
-                '                    <div class="articleWriterMainDiv">'+ item.username +'</div>\n' +
-                '                    <div class="articleWatchListMainDiv">0</div>\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '        </div>'
+                '                    <a href="{{url("/article/user")}}/' + item.id + '">' + item.title + '</a>\n' +
+                '                </div>\n';
+            if(item.summery != null) {
+                text += '                <div class="articleSummarizedContentMainDiv">\n' +
+                        '                    <span>' + item.summery + '</span>\n' +
+                        '                    <span>...</span>\n' +
+                        '                </div>\n';
+            }
+            text +=  '                <div class="articleSpecificationsMainDiv">\n' +
+                    '                    <div class="articleDateMainDiv">' + item.time + '</div>\n' +
+                    '                    <div class="articleCommentsMainDiv">0</div>\n' +
+                    '                    <div class="articleWriterMainDiv">'+ item.username +'</div>\n' +
+                    '                    <div class="articleWatchListMainDiv">0</div>\n' +
+                    '                </div>\n' +
+                    '                <a href="{{url('/article/user')}}/' + item.id + '" class="readSafarnamehButton"> مطالعه سفرنامه</a>' +
+                    '            </div>\n' +
+                    '        </div>'
         });
 
         $('#safarnamehShowList').html(text);

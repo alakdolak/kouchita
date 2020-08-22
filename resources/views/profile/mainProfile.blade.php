@@ -11,28 +11,42 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=2')}}">
-
     <style>
-        .whoAmI{
-            display: none;
+        .showBannerPic{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            overflow: hidden;
+            margin: 5px 0px;
+            width: 100%;
         }
-        @media (max-width: 768px) {
-            .userProfileDetailsMainDiv{
-                display: none;
-            }
-            .whoAmI{
-                display: block !important;
-            }
-
+        .bannerPicItem{
+            margin: 5px;
+            cursor: pointer;
+        }
+        .bannerPicItem.active{
+            border: solid 5px var(--koochita-light-green);
+        }
+        .bannerPicItem > img{
+            width: 100%;
+        }
+        .editReviewPicturesSection{
+            background-color: #0000009e;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 99;
+            top: 0;
         }
     </style>
 @stop
 
 @section('main')
     <div class="userPostsPage">
-        <div class="userProfilePageCoverImg" style="background-image: url('{{URL::asset('images/mainPics/background/4.jpg')}}'); background-size: cover">
+        <div class="userProfilePageCoverImg" style="background-image: url('{{$user->banner}}'); background-size: cover; background-position: center">
             @if(isset($myPage) && $myPage)
-                <div class="addPicForUser" style=" top: 10px; left: 15px;">
+                <div class="addPicForUser" style=" top: 10px; left: 15px;" onclick="openBannerModal()">
                     <span class="emptyCameraIcon addPicByUser"></span>
                 </div>
             @endif
@@ -46,9 +60,9 @@
                             <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                         </div>
                         @if(isset($myPage) && $myPage)
-                            <a href="{{route('profile.editPhoto')}}" class="addPicForUser" style=" top: 10px; right: 15px;">
+                            <div class="addPicForUser" style="top: 10px; right: 15px;" onclick="openEditPhotoModal()">
                                 <span class="emptyCameraIcon addPicByUser"></span>
-                            </a>
+                            </div>
                         @endif
                     </div>
                     <div class="userProfileInfo">
@@ -275,10 +289,168 @@
                 </div>
             </div>
         </div>
+
+        <div id="userImages" class="modalBlackBack hidden">
+            <div class="userTripMainBody">
+                <div class="closeFullReview iconClose" onclick="closeUserImg()"></div>
+                <div>
+                    <div class="myTripHeaders">تغییر عکس کاربری</div>
+                    <div class="nowImg">
+                        <input id="newImage" name="newPic" type="file" accept="image/*" style="display: none" onchange="changeUploadPic(this)">
+                        <input type="text" id="uploadImgMode" name="id" style="display: none">
+
+                        <div class="circleBase profilePicUserProfile">
+                            <img id="changePic" src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                        <button id="cropButton" class="cropProfileImg" onclick="openCropProfile()">برش عکس</button>
+                    </div>
+
+                    <div class="uploadSection">
+                        <label for="newImage" class="newImageButton">
+                            بارگزاری عکس
+                        </label>
+                        <div class="oldBrowser">
+                            عکس شما می‌بایست در فرمت‌های jpg یا png یا gif بوده و از 3MB بیشتر نباشید. حتما دقت کنید اندازه عکس 80*80 پیکسل باشد تا زیبا به نظر برسد. در غیر اینصورت ممکن است نتیجه نهایی باب میل شما نباشد.
+                        </div>
+                    </div>
+                    <div class="orSec">
+                        <span>یا</span>
+                    </div>
+
+                    <div id="ourPic" class="ourPic"></div>
+
+                    <div class="bioClassSection">
+                        <button class="saveBioButton" onclick="updateUserPic()" >ذخیره تغییرات</button>
+                        <button class="cancelBioButton" onclick="closeUserImg()">لغو</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="userBannerModal" class="modalBlackBack hidden">
+            <div class="userTripMainBody">
+                <div class="closeFullReview iconClose" onclick="$('#userBannerModal').addClass('hidden');"></div>
+                <div>
+                    <div class="myTripHeaders">تغییر عکس بنر</div>
+                    <div class="nowImg">
+                        <input id="newBannerImage" type="file" accept="image/*" style="display: none" onchange="changeUploadBannerPic(this)">
+
+                        <div class="showBannerPic">
+                            <img id="changeBannerPic" src="{{$user->banner}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                        </div>
+                        <button id="cropBannerButton" class="cropProfileImg" onclick="openCropBanner()">برش عکس</button>
+                    </div>
+
+                    <div class="uploadSection">
+                        <label for="newBannerImage" class="newImageButton">
+                            بارگزاری عکس
+                        </label>
+                    </div>
+                    <div class="orSec">
+                        <span>یا</span>
+                    </div>
+
+                    <div id="bannerPics" class="ourPic"></div>
+
+                    <div class="bioClassSection">
+                        <button class="saveBioButton" onclick="doUpdateBannerPic()" >ذخیره تغییرات</button>
+                        <button class="cancelBioButton" onclick="$('#userBannerModal').addClass('hidden');">لغو</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="cropModal" class="editReviewPicturesSection backDark hidden">
+            <span class="ui_modal photoUploadOverlay editSection">
+                <div class="body_text" style="padding-top: 12px">
+                   <div class="headerBar epHeaderBar"></div>
+                   <div class="row">
+                      <div class="col-md-12">
+                         <div class="img-container" style="position: relative">
+                            <img class="imgInEditor" id="imgEditReviewPics" alt="Picture" style="width: 100%;">
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row" id="actions" >
+                      <div class="col-md-12 docs-buttons">
+                        <div class="editBtnsGroup">
+                            <div class="editBtns">
+                               <div class="flipHorizontal" data-toggle="tooltip"
+                                    data-placement="top" title="Flip Horizontal"
+                                    onclick="cropper.scaleY(-1)"></div>
+                            </div>
+
+                            <div class="editBtns">
+                               <div class="flipVertical" data-toggle="tooltip" data-placement="top"
+                                    title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                            </div>
+                        </div>
+                        <div class="editBtnsGroup">
+                            <div class="editBtns">
+                               <div class="rotateLeft" data-toggle="tooltip" data-placement="top"
+                                    title="چرخش 45 درجه ای به سمت چپ"
+                                    onclick="cropper.rotate(-45)"></div>
+                            </div>
+
+                            <div class="editBtns">
+                               <div class="rotateRight" data-toggle="tooltip" data-placement="top"
+                                    title="چرخش 45 درجه ای به سمت راست"
+                                    onclick="cropper.rotate(45)"></div>
+                            </div>
+                        </div>
+                        <div class="editBtnsGroup">
+                            <div class="editBtns">
+                               <div class="cropping" data-toggle="tooltip" data-placement="top"
+                                    title="برش" onclick="cropper.crop()"></div>
+                            </div>
+
+                            <div class="editBtns">
+                               <div class="clearing" data-toggle="tooltip" data-placement="top"
+                                    title="بازگشت به اول" onclick="cropper.clear()"></div>
+                            </div>
+                        </div>
+
+                        <div class="upload" style="margin-right: auto; display: flex; align-items: center; margin-top: 10px;">
+                            <div onclick="$('#cropModal').addClass('hidden')" class="uploadBtn backEditReviewPic" style="cursor: pointer">{{__('بازگشت')}}</div>
+                            <div onclick="cropProfileImg()" class="uploadBtn ui_button primary" style="cursor: pointer">{{__('تایید')}}</div>
+                        </div>
+
+                        <div class="modal fade docs-cropped" id="getCroppedCanvasModal"
+                             role="dialog" aria-hidden="true"
+                             aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                           <div class="modal-dialog modal-dialog-scrollable">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body"></div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                    <a class="btn btn-primary" id="download"
+                                       href="javascript:void(0);"
+                                       download="cropped.jpg">Download</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div><!-- /.modal -->
+
+                     </div>
+                   </div>
+               </div>
+                <div class="ui_close_x" onclick="$('#cropModal').addClass('hidden');"></div>
+            </span>
+        </div>
+
     @endif
 
     <script>
-
         autosize(document.getElementsByClassName("inputBoxInputSearch"));
         autosize(document.getElementsByClassName("inputBoxInputAnswer"));
         autosize(document.getElementsByClassName("inputBoxInputComment"));
@@ -381,6 +553,7 @@
             }
             else if(_kind == 'whoAmI'){
                 $('#userProfileSideInfos').show();
+                $('#whoAmITab').addClass('active');
             }
             else if(_kind === 'picture') {
                 $('#pictureTab').addClass('active');
@@ -409,6 +582,107 @@
             $('#userProfileMainContentSection').removeClass('fullWidthBoot');
         }
 
+        let defaultPics = null;
+        let choosenPic = 0;
+        let uploadedPic = null;
+        let mainUploadedPic = null;
+        function openEditPhotoModal(){
+            if(defaultPics == null)
+                getOurPic();
+            $('#userImages').removeClass('hidden');
+        }
+
+        function closeUserImg(){
+            $('#userImages').addClass('hidden');
+        }
+
+        function getOurPic(){
+            $.ajax({
+                type: 'post',
+                url: '{{route("getDefaultPics")}}',
+                data: {
+                    _token: '{{csrf_token()}}'
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    defaultPics = response;
+                    defaultPics.map((pic, index) => {
+                        text =  '<div id="ourPic_' + index + '" class="oPs" onclick="chooseThisImg(' + index + ', this)"> \n' +
+                                '   <img src="' + pic.name + '">\n' +
+                                '</div>';
+                        $('#ourPic').append(text);
+                    })
+                }
+            })
+        }
+
+        function changeUploadPic(_input){
+            if(_input.files && _input.files[0]){
+
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#changePic').attr('src', e.target.result);
+                    mainUploadedPic = e.target.result;
+                    uploadedPic = _input.files[0];
+                    choosenPic = 'uploaded';
+                    $('#uploadImgMode').val(0);
+                    $('#cropButton').show();
+                };
+                reader.readAsDataURL(_input.files[0]);
+            }
+        }
+
+        function chooseThisImg(_index, _element){
+            $(_element).parent().find('.active').removeClass('active');
+            $(_element).addClass('active');
+
+            $('#changePic').attr('src', defaultPics[_index].name);
+            choosenPic = defaultPics[_index].id;
+            $("#uploadImgMode").val(defaultPics[_index].id);
+            $('#newImage').val('');
+            uploadedPic = null;
+            mainUploadedPic = null;
+            $('#cropButton').hide();
+        }
+
+        function updateUserPic(){
+            openLoading();
+
+            let formDa = new FormData();
+            formDa.append('_token', '{{csrf_token()}}');
+            formDa.append('id', $('#uploadImgMode').val());
+
+            if(choosenPic == 'uploaded'){
+                console.log(uploadedPic);
+                formDa.append('pic', uploadedPic);
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("profile.updateUserPhoto")}}',
+                data: formDa,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    if(response == 'ok')
+                        location.reload();
+                    else{
+                        closeLoading();
+                    }
+                },
+                error: function(err){
+                    closeLoading();
+                }
+
+            })
+        }
+
+        function openCropProfile(){
+            $('#cropModal').removeClass('hidden');
+            $('#imgEditReviewPics').attr('src', mainUploadedPic);
+            startProfileCropper('circle', 1);
+        }
+
         var url = new URL(location.href);
         if(url.hash === '' || url.hash === '#review')
             changePages('review');
@@ -423,4 +697,363 @@
 
     </script>
 
+    <script>
+        let bannerPics = null;
+        let chosenBannerPic = null;
+        let mainUploadedBanner = false;
+        let uploadedBanner = false;
+        function openBannerModal() {
+            getBannerPic();
+            $('#userBannerModal').removeClass('hidden');
+        }
+
+        function getBannerPic(){
+            if(bannerPics == null) {
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("getBannerPics")}}',
+                    data: {
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (response) {
+                        $('#bannerPics').empty();
+                        bannerPics = JSON.parse(response);
+                        bannerPics.map((item, index) => {
+                            text = '<div onclick="choseBannerPic(\'' + index + '\', this)" class="bannerPicItem"><img src="' + item.url + '"></div>';
+                            $('#bannerPics').append(text);
+                        });
+                    },
+                    error: function (err) {
+                    }
+                });
+            }
+        }
+
+        function changeUploadBannerPic(_input){
+            if(_input.files && _input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#changeBannerPic').attr('src', e.target.result);
+                    mainUploadedBanner = e.target.result;
+                    uploadedBanner = _input.files[0];
+                    $('#cropBannerButton').show();
+                };
+                reader.readAsDataURL(_input.files[0]);
+            }
+        }
+
+        function choseBannerPic(_index, _element){
+            $(_element).parent().find('.active').removeClass('active');
+            $(_element).addClass('active');
+
+            chosenBannerPic = bannerPics[_index].name;
+            uploadedBanner = false;
+
+            $('#changeBannerPic').attr('src', bannerPics[_index].url);
+        }
+
+        function openCropBanner(){
+            $('#cropModal').removeClass('hidden');
+            $('#imgEditReviewPics').attr('src', mainUploadedBanner);
+            startProfileCropper('req', 6);
+        }
+
+        function doUpdateBannerPic(){
+            openLoading();
+
+            let formDa = new FormData();
+            formDa.append('_token', '{{csrf_token()}}');
+            formDa.append('uploaded', uploadedBanner);
+            formDa.append('pic', chosenBannerPic);
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('profile.updateBannerPic')}}',
+                data: formDa,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    closeLoading();
+                    response = JSON.parse(response);
+                    if(response.status == 'ok') {
+                        $('#userBannerModal').addClass('hidden');
+                        $('.userProfilePageCoverImg').css('background-image', 'url(' + response.url + ')');
+                    }
+                },
+                error: function(err){
+                    closeLoading();
+                }
+            })
+        }
+
+        let cropKind = null;
+        function startProfileCropper(_kind, _ratio){
+
+            if(first) {
+                'use strict';
+                Cropper = window.Cropper;
+                URL = window.URL || window.webkitURL;
+
+                // container = document.querySelector('.img-container');
+                download = document.getElementById('download');
+                actions = document.getElementById('actions');
+                dataX = document.getElementById('dataX');
+                dataY = document.getElementById('dataY');
+                dataHeight = document.getElementById('dataHeight');
+                dataWidth = document.getElementById('dataWidth');
+                dataRotate = document.getElementById('dataRotate');
+                dataScaleX = document.getElementById('dataScaleX');
+                dataScaleY = document.getElementById('dataScaleY');
+            }
+            else {
+                cropper.destroy();
+                inputImage.value = null;
+            }
+
+            image = document.getElementById('imgEditReviewPics');
+            cropper = new Cropper(image, {
+                aspectRatio: _ratio,
+                preview: '.img-preview',
+            });
+
+            if(first) {
+                originalImageURL = image.src;
+                uploadedImageType = 'image/jpeg';
+                uploadedImageName = 'cropped.jpg';
+            }
+
+            if(first) {
+
+                // Tooltip
+                $('[data-toggle="tooltip"]').tooltip();
+
+                // Buttons
+                if (!document.createElement('canvas').getContext) {
+                    $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+                }
+
+                if (typeof document.createElement('cropper').style.transition === 'undefined') {
+                    $('button[data-method="rotate"]').prop('disabled', true);
+                    $('button[data-method="scale"]').prop('disabled', true);
+                }
+
+                // Download
+                if (typeof download.download === 'undefined') {
+                    download.className += ' disabled';
+                }
+
+                // Methods
+                actions.querySelector('.docs-buttons').onclick = function (event) {
+                    e = event || window.event;
+                    target = e.target || e.srcElement;
+
+                    if (!cropper) {
+                        return;
+                    }
+
+                    while (target !== this) {
+                        if (target.getAttribute('data-method')) {
+                            break;
+                        }
+
+                        target = target.parentNode;
+                    }
+
+                    if (target === this || target.disabled || target.className.indexOf('disabled') > -1) {
+                        return;
+                    }
+
+                    data = {
+                        method: target.getAttribute('data-method'),
+                        target: target.getAttribute('data-target'),
+                        option: target.getAttribute('data-option') || undefined,
+                        secondOption: target.getAttribute('data-second-option') || undefined
+                    };
+
+                    cropped = cropper.cropped;
+
+                    if (data.method) {
+                        if (typeof data.target !== 'undefined') {
+                            input = document.querySelector(data.target);
+
+                            if (!target.hasAttribute('data-option') && data.target && input) {
+                                try {
+                                    data.option = JSON.parse(input.value);
+                                } catch (e) {
+                                    console.log(e.message);
+                                }
+                            }
+                        }
+
+                        switch (data.method) {
+                            case 'rotate':
+                                if (cropped && options.viewMode > 0) {
+                                    cropper.clear();
+                                }
+
+                                break;
+
+                            case 'getCroppedCanvas':
+                                try {
+                                    data.option = JSON.parse(data.option);
+                                } catch (e) {
+                                    console.log(e.message);
+                                }
+
+                                if (uploadedImageType === 'image/jpeg') {
+                                    if (!data.option) {
+                                        data.option = {};
+                                    }
+
+                                    data.option.fillColor = '#fff';
+                                }
+
+                                break;
+                        }
+
+                        result = cropper[data.method](data.option, data.secondOption);
+
+                        switch (data.method) {
+                            case 'rotate':
+                                if (cropped && options.viewMode > 0) {
+                                    cropper.crop();
+                                }
+
+                                break;
+
+                            case 'scaleX':
+                            case 'scaleY':
+                                target.setAttribute('data-option', -data.option);
+                                break;
+
+                            case 'getCroppedCanvas':
+                                if (result) {
+
+                                    // $("#editPane").addClass('hidden');
+                                    // $("#photoEditor").removeClass('hidden');
+                                }
+
+                                break;
+                        }
+
+                        if (typeof result === 'object' && result !== cropper && input) {
+                            try {
+                                input.value = JSON.stringify(result);
+                            } catch (e) {
+                                console.log(e.message);
+                            }
+                        }
+                    }
+                };
+
+                document.body.onkeydown = function (event) {
+                    var e = event || window.event;
+
+                    if (!cropper || this.scrollTop > 300) {
+                        return;
+                    }
+
+                    switch (e.keyCode) {
+                        case 37:
+                            e.preventDefault();
+                            cropper.move(-1, 0);
+                            break;
+
+                        case 38:
+                            e.preventDefault();
+                            cropper.move(0, -1);
+                            break;
+
+                        case 39:
+                            e.preventDefault();
+                            cropper.move(1, 0);
+                            break;
+
+                        case 40:
+                            e.preventDefault();
+                            cropper.move(0, 1);
+                            break;
+                    }
+                };
+                first = false;
+            }
+            // Import image
+            inputImage = document.getElementById('changePic');
+
+            if (URL) {
+                inputImage.onchange = function () {
+                    var files = this.files;
+                    var file;
+
+                    if (cropper && files && files.length) {
+                        file = files[0];
+
+                        if (/^image\/\w+/.test(file.type)) {
+                            uploadedImageType = file.type;
+                            uploadedImageName = file.name;
+
+                            if (uploadedImageURL) {
+                                URL.revokeObjectURL(uploadedImageURL);
+                            }
+
+                            image.src = uploadedImageURL = URL.createObjectURL(file);
+                            cropper.destroy();
+                            cropper = new Cropper(image, options);
+                            inputImage.value = null;
+                        } else {
+                            window.alert('Please choose an image file.');
+                        }
+                    }
+                };
+            } else {
+                inputImage.disabled = true;
+                inputImage.parentNode.className += ' disabled';
+            }
+
+
+            setTimeout(() => {
+                if(_kind == 'circle') {
+                    $('.cropper-view-box').css('border-radius', '50%');
+                    cropKind = 'userPic';
+                }
+                else {
+                    $('.cropper-view-box').css('border-radius', '0');
+                    cropKind = 'userBanner';
+                }
+            },1000);
+        }
+
+        function cropProfileImg(){
+            openLoading();
+            $('#cropModal').addClass('hidden');
+
+            if(cropKind == 'userPic') {
+                var canvas1;
+                canvas1 = cropper.getCroppedCanvas({
+                    minWidth: 200,
+                    minHeight: 200,
+                });
+
+                canvas1.toBlob(function (blob) {
+                    uploadedPic = blob;
+                    choosenPic = 'uploaded';
+                    $('#uploadImgMode').val(0);
+                    $('#changePic').attr('src', canvas1.toDataURL());
+                    closeLoading();
+                });
+            }
+            else{
+                var canvas1;
+                canvas1 = cropper.getCroppedCanvas();
+
+                canvas1.toBlob(function (blob) {
+                    $('#changeBannerPic').attr('src', canvas1.toDataURL());
+
+                    chosenBannerPic = blob;
+                    uploadedBanner = true;
+                    closeLoading();
+                });
+            }
+        }
+    </script>
 @stop
