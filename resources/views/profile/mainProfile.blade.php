@@ -578,7 +578,9 @@
         }
 
         function cancelFullMainContent(){
-            $('#userProfileSideInfos').show();
+            if($(window).width() > 768)
+                $('#userProfileSideInfos').show();
+
             $('#userProfileMainContentSection').removeClass('fullWidthBoot');
         }
 
