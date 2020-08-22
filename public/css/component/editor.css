@@ -269,6 +269,7 @@
     left: 25%;
 }
 
+
 .editSection > div:nth-child(1) > div:nth-child(1) {
     max-height: 600px;
     overflow: auto
@@ -1381,6 +1382,18 @@
     }
     .photographerErrors{
         position: relative;
+    }
+
+
+    .editSection{
+        right: 1%;
+        left: 1%;
+        width: 98%;
+        top: 0px;
+    }
+
+    .editReviewPicturesSection{
+        z-index: 9999;
     }
 }
 
