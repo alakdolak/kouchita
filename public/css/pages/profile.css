@@ -1365,6 +1365,7 @@ body {
     overflow-y: auto;
     max-height: 90vh;
     position: relative;
+    overflow: inherit;
 }
 
 .closeSuggestionModal{
@@ -1374,33 +1375,43 @@ body {
     top: 0px;
     z-index: 99;
     cursor: pointer;
+    color: var(--koochita-light-green);
 }
 
 .ourSuggestion{
     display: flex;
     flex-wrap: wrap;
-    height: 80px;
-    overflow: hidden;
     transition: .5s;
     padding-bottom: 10px;
+    overflow: auto;
+    max-height:30vh;
+}
+.ourSuggestionMainPage{
+    display: flex;
+    flex-wrap: wrap;
+    transition: .5s;
+    padding-bottom: 10px;
+    overflow: auto;
 }
 
 .showFullSuggestion{
-    height: auto !important;
+    height: 30vh !important;
+    overflow: auto;
 }
 
 .suggEach{
     display: flex;
     align-items: center;
     padding: 5px;
-    margin: 0px 10px;
+    margin: 10px;
     cursor: pointer;
     transition: .4s;
     padding-left: 20px;
-    width: 230px;
+    width: 200px;
     position: relative;
     border-radius: 60px;
     background-color: #fcc15642;
+    height: 70px;
 }
 
 .suggEach:hover{
@@ -1426,8 +1437,8 @@ body {
 }
 
 .suggPic{
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1441,15 +1452,17 @@ body {
     display: flex;
     flex-direction: column;
     width: calc(100% - 80px);
+    font-size: 12px;
 }
 
 .suggInfoState{
-    font-size: 12px;
+    font-size: 9px;
     color: #666666;
     vertical-align: middle;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
 }
 
 .showAllSuggestion{
@@ -1488,10 +1501,24 @@ body {
     border-radius: 11px;
 }
 .newSafarnamehImgSection{
+    display: flex;
     margin-top: 10px;
     margin-right: 15px;
     cursor: pointer;
-    width: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.notPicSafarnameh{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid gray;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    color: gray;
 }
 
 .textEditor{
@@ -1529,7 +1556,7 @@ body {
     border-radius: 10px;
     max-height: 50vh;
     overflow: auto;
-    z-index: 9;
+    z-index: 999;
 }
 .searchResultPlacess > div{
     margin-bottom: 10px;
@@ -1674,6 +1701,9 @@ body {
 
 @media (max-width: 992px) {
     /*top bar*/
+    .ourSuggestion{
+        max-height: 25vh;
+    }
     .placeSuggKind{
         float: none;
     }
@@ -1820,6 +1850,17 @@ body {
 }
 
 @media (max-width: 768px) {
+    .placeSuggestionBody{
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        margin-top: 0;
+        max-height: 100vh;
+    }
+    .ourSuggestion{
+        max-height: 25vh !important;
+        height: 25vh !important;
+    }
     .userProfileDetailsMainDiv{
         display: none;
     }
