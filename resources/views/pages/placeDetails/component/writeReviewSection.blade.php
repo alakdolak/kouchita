@@ -8,12 +8,6 @@
         top: 0;
         left: 0;
     }
-
-    .editReviewPicturesSection .editSection{
-        right: 1%;
-        left: 1%;
-        width: 98%;
-    }
     .backEditReviewPic{
         color: var(--koochita-light-green);
         background-color: white !important;
