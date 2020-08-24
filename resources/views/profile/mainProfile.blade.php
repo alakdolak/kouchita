@@ -296,7 +296,7 @@
                 <div>
                     <div class="myTripHeaders">تغییر عکس کاربری</div>
                     <div class="nowImg">
-                        <input id="newImage" name="newPic" type="file" accept="image/*" style="display: none" onchange="openLoading(); changeUploadPic(this)">
+                        <input id="newImage" name="newPic" type="file" accept="image/*" style="display: none" onchange="changeUploadPic(this)">
                         <input type="text" id="uploadImgMode" name="id" style="display: none">
 
                         <div class="circleBase profilePicUserProfile">
@@ -334,7 +334,7 @@
                 <div>
                     <div class="myTripHeaders">تغییر عکس بنر</div>
                     <div class="nowImg">
-                        <input id="newBannerImage" type="file" accept="image/*" style="display: none" onchange="openLoading(); changeUploadBannerPic(this)">
+                        <input id="newBannerImage" type="file" accept="image/*" style="display: none" onchange="changeUploadBannerPic(this)">
 
                         <div class="showBannerPic">
                             <img id="changeBannerPic" src="{{$user->banner}}" style="width: 100%">
@@ -621,31 +621,32 @@
         }
 
         function changeUploadPic(_input){
-            openLoading();
-            if(_input.files && _input.files[0]){
-                choosenPic = 'uploaded';
-                $('#uploadImgMode').val(0);
-                $('#cropButton').show();
+            openLoading(function(){
+                if(_input.files && _input.files[0]){
+                    choosenPic = 'uploaded';
+                    $('#uploadImgMode').val(0);
+                    $('#cropButton').show();
 
-                options = { canvas: true };
-                loadImage.parseMetaData(_input.files[0], function(data) {
-                    if (data.exif)
-                        options.orientation = data.exif.get('Orientation');
+                    options = { canvas: true };
+                    loadImage.parseMetaData(_input.files[0], function(data) {
+                        if (data.exif)
+                            options.orientation = data.exif.get('Orientation');
 
-                    loadImage(
-                        _input.files[0],
-                        function(canvas) {
-                            var imgDataURL = canvas.toDataURL();
-                            $('#changePic').attr('src', imgDataURL);
-                            mainUploadedPic = imgDataURL;
-                            closeLoading();
-                        },
-                        options
-                    );
-                });
-            }
-            else
-                closeLoading();
+                        loadImage(
+                            _input.files[0],
+                            function(canvas) {
+                                var imgDataURL = canvas.toDataURL();
+                                $('#changePic').attr('src', imgDataURL);
+                                mainUploadedPic = imgDataURL;
+                                closeLoading();
+                            },
+                            options
+                        );
+                    });
+                }
+                else
+                    closeLoading();
+            });
         }
 
         function chooseThisImg(_index, _element){
@@ -745,29 +746,33 @@
         }
 
         function changeUploadBannerPic(_input){
-            if(_input.files && _input.files[0]){
-                openLoading();
-                $('#cropBannerButton').show();
-                uploadedBanner = true;
+            openLoading(function(){
+                if(_input.files && _input.files[0]){
+                    $('#cropBannerButton').show();
+                    uploadedBanner = true;
 
-                options = { canvas: true };
-                loadImage.parseMetaData(_input.files[0], function(data) {
-                    if (data.exif)
-                        options.orientation = data.exif.get('Orientation');
+                    options = { canvas: true };
+                    loadImage.parseMetaData(_input.files[0], function(data) {
+                        if (data.exif)
+                            options.orientation = data.exif.get('Orientation');
 
-                    loadImage(
-                        _input.files[0],
-                        function(canvas) {
-                            var imgDataURL = canvas.toDataURL();
-                            $('#changeBannerPic').attr('src', imgDataURL);
-                            mainUploadedBanner = imgDataURL;
-                            chosenBannerPic = _input.files[0];
-                            closeLoading();
-                        },
-                        options
-                    );
-                });
-            }
+                        loadImage(
+                            _input.files[0],
+                            function(canvas) {
+                                var imgDataURL = canvas.toDataURL();
+                                $('#changeBannerPic').attr('src', imgDataURL);
+                                mainUploadedBanner = imgDataURL;
+                                chosenBannerPic = _input.files[0];
+                                closeLoading();
+                            },
+                            options
+                        );
+                    });
+                }
+                else
+                    closeLoading();
+            });
+
         }
 
         function choseBannerPic(_index, _element){
@@ -844,7 +849,6 @@
                 aspectRatio: _ratio,
                 preview: '.img-preview',
             });
-            console.log(cropper, image);
 
             if(first) {
                 originalImageURL = image.src;
