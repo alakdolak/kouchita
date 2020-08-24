@@ -296,7 +296,7 @@
                 <div>
                     <div class="myTripHeaders">تغییر عکس کاربری</div>
                     <div class="nowImg">
-                        <input id="newImage" name="newPic" type="file" accept="image/*" style="display: none" onchange="changeUploadPic(this)">
+                        <input id="newImage" name="newPic" type="file" accept="image/*" style="display: none" onchange="openLoading(); changeUploadPic(this)">
                         <input type="text" id="uploadImgMode" name="id" style="display: none">
 
                         <div class="circleBase profilePicUserProfile">
@@ -334,7 +334,7 @@
                 <div>
                     <div class="myTripHeaders">تغییر عکس بنر</div>
                     <div class="nowImg">
-                        <input id="newBannerImage" type="file" accept="image/*" style="display: none" onchange="changeUploadBannerPic(this)">
+                        <input id="newBannerImage" type="file" accept="image/*" style="display: none" onchange="openLoading(); changeUploadBannerPic(this)">
 
                         <div class="showBannerPic">
                             <img id="changeBannerPic" src="{{$user->banner}}" style="width: 100%">
@@ -621,8 +621,8 @@
         }
 
         function changeUploadPic(_input){
+            openLoading();
             if(_input.files && _input.files[0]){
-                openLoading();
                 choosenPic = 'uploaded';
                 $('#uploadImgMode').val(0);
                 $('#cropButton').show();
@@ -644,6 +644,8 @@
                     );
                 });
             }
+            else
+                closeLoading();
         }
 
         function chooseThisImg(_index, _element){
