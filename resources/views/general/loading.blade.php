@@ -5,8 +5,10 @@
 </div>
 
 <script>
-    function openLoading(){
+    function openLoading(_callBack = ''){
         $('#fullPageLoader').css('display', 'flex');
+        if(typeof _callBack === 'function')
+            _callBack();
     }
     function closeLoading(){
         $('#fullPageLoader').css('display', 'none');
