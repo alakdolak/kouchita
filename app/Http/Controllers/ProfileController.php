@@ -686,7 +686,6 @@ class ProfileController extends Controller {
 
     public function updateUserPhoto(Request $request)
     {
-
         if(isset($request->id)){
             $user = \auth()->user();
             if($request->id != 0){
@@ -701,7 +700,7 @@ class ProfileController extends Controller {
                 $targetFile = __DIR__ . "/../../../../assets/userProfile";
                 $size = [
                     [
-                        'width' => 150,
+                        'width' => 450,
                         'height' => null,
                         'name' => '',
                         'destination' => $targetFile
