@@ -7,6 +7,7 @@
 <script>
     function openLoading(_callBack = ''){
         $('#fullPageLoader').css('display', 'flex');
+        alert('in');
         if(typeof _callBack === 'function')
             _callBack();
     }
