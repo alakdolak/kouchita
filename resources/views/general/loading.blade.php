@@ -7,9 +7,11 @@
 <script>
     function openLoading(_callBack = ''){
         $('#fullPageLoader').css('display', 'flex');
-        alert('in');
-        if(typeof _callBack === 'function')
-            _callBack();
+
+        setTimeout(function(){
+            if(typeof _callBack === 'function')
+                _callBack();
+        }, 200);
     }
     function closeLoading(){
         $('#fullPageLoader').css('display', 'none');
