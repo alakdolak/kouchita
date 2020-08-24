@@ -101,7 +101,7 @@
     font-weight: bold;
 }
 .alertBtn {
-    width: 100px;
+    width: fit-content;
     line-height: 20px;
     padding: 6px 12px;
     font-weight: 600;

@@ -489,6 +489,8 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('profile/safarnameh/new', 'ProfileController@storeNewSafarnameh')->name('profile.safarnameh.new');
 
+    Route::post('profile/safarnameh/deleteSafarnameh', 'ProfileController@deleteSafarnameh')->name('profile.safarnameh.delete');
+
     Route::post('profile/safarnameh/storePic', 'ProfileController@storeSafarnamehPics')->name('profile.safarnameh.storePic');
 
     Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');

@@ -15,19 +15,40 @@
         border: solid;
         color: var(--koochita-blue);
     }
-    .submitSarnamehButton{
-        background: var(--koochita-blue);
-        border: none;
-        color: white;
-        padding: 2px 10px;
-        border-radius: 5px;
+    .commonSafarnamehIcon{
+        position: absolute;
+        top: 10px;
+        font-size: 25px;
         cursor: pointer;
-        font-size: 20px;
+        width: 30px;
+        height: 30px;
+        border: solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        transition: .3s;
+    }
+    .commonSafarnamehIcon.delete{
+        color: red;
+        left: 10px;
+    }
+    .commonSafarnamehIcon.delete:hover{
+        background: red;
+        color: white;
+        border-color: red;
+    }
+
+    .commonSafarnamehIcon.edit{
+        color: var(--koochita-blue);
+        left: 50px;
+    }
+    .commonSafarnamehIcon.edit:hover{
+        background: var(--koochita-blue);
+        color: white;
+        border-color: var(--koochita-blue);
     }
 </style>
-
-<script src="{{asset('js/ckeditor5/ckeditor5.js')}}"></script>
-<script src="{{asset('js/ckeditor5/ckeditorUpload.js')}}"></script>
 
 <div id="safarnamehList" class="userProfileArticles">
     <div class="userProfilePostsFiltrationContainer">
@@ -48,11 +69,10 @@
     <div id="safarnamehShowList"></div>
 </div>
 
-@if(isset($myPage) && $myPage)
-    @include('general.addSafarnameh')
-@endif
+
 
 <script>
+    let myPageAccess = {{isset($myPage) && $myPage ? 1 : 0}}
     function getSafarnamehs(){
         let data;
         if(userPageId == 0)
@@ -86,11 +106,16 @@
 
         _result.forEach(item => {
             text += '<div class="usersArticlesMainDiv">\n' +
-                '            <div class="articleImgMainDiv" data-toggle="modal" data-target=".showingPhotosModal">\n' +
+                '            <div class="articleImgMainDiv">\n' +
                 '                <img src="' + item.pic + '">\n' +
                 '            </div>\n' +
-                '            <div class="articleDetailsMainDiv">\n' +
-                '                <div class="articleTagsMainDiv">\n' +
+                '            <div class="articleDetailsMainDiv">\n';
+
+            if(myPageAccess) {
+                text += '<div class="trashIcon commonSafarnamehIcon delete" onclick="deleteThisSafarnameh(' + item.id + ')"></div>';
+                text += '<div class="editIcon commonSafarnamehIcon edit" onclick="editThisSafarnameh(' + item.id + ')"></div>';
+            }
+            text += '                <div class="articleTagsMainDiv">\n' +
                 '                    <div class="articleTags">سفرنامه</div>\n' +
                 '                </div>\n' +
                 '                <div class="articleTitleMainDiv">\n' +
@@ -115,4 +140,49 @@
 
         $('#safarnamehShowList').html(text);
     }
+
+    @if(isset($myPage) && $myPage)
+        let deletedSafarnamehId = null;
+        function deleteThisSafarnameh(_id){
+            if(checkLogin()) {
+                deletedSafarnamehId = _id;
+                openWarning('آیا می خواهید سفرنامه ی خود را پاک کنید؟', doDeleteSafarnameh, 'بله پاک شود');
+            }
+        }
+
+        function doDeleteSafarnameh(){
+            if(deletedSafarnamehId != null){
+                openLoading(function(){
+                    $.ajax({
+                        type: 'post',
+                        url: '{{route("profile.safarnameh.delete")}}',
+                        data: {
+                            _token: '{{csrf_token()}}',
+                            id: deletedSafarnamehId
+                        },
+                        success: function(response){
+
+                            if(response == 'ok'){
+                                location.reload();
+                                showSuccessNotifi('سفرنامه شما با موفقیت حذف شد.', 'left', 'var(--koochita-blue)');
+                            }
+                            else {
+                                closeLoading();
+                                showSuccessNotifi('در حذف سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
+                            }
+                        },
+                        error: function(err){
+                            closeLoading();
+                            showSuccessNotifi('در حذف سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
+                        }
+                    })
+                })
+            }
+        }
+
+
+        function editThisSafarnameh(_id){
+
+        }
+    @endif
 </script>

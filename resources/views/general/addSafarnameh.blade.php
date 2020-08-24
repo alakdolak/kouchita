@@ -1,4 +1,263 @@
-<div id="newSafarnameh" class="modalBlackBack" style="display: none;">
+
+
+<script src="{{asset('js/ckeditor5/ckeditor5.js')}}"></script>
+<script src="{{asset('js/ckeditor5/ckeditorUpload.js')}}"></script>
+
+<style>
+    .newSafarnamehSection{
+        width: 100%;
+        background: white;
+        padding: 10px;
+        direction: rtl;
+        text-align: right;
+        border-radius: 10px;
+        max-width: 991px;
+        height: 97vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .newSafarnamehSection .row{
+        width: 100%;
+        margin: 0px;
+    }
+
+    .backSafarnameh{
+        border: none;
+        background: white;
+        margin: 0px 12px;
+        color: var(--koochita-blue);
+    }
+
+    .submitSafarnameh{
+        background: var(--koochita-green);
+        border-color: var(--koochita-green);
+        border-radius: 11px;
+    }
+    .newSafarnamehImgSection{
+        display: flex;
+        margin-top: 10px;
+        margin-right: 15px;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .notPicSafarnameh{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid gray;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        color: gray;
+    }
+    .submitSarnamehButton{
+        background: var(--koochita-blue);
+        border: none;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    .textEditor{
+        height: 60vh;
+        border: solid 1px var(--ck-color-toolbar-border) !important;
+        border-top: none !important;
+        border-radius: 5px !important;
+    }
+    .addPlaceButton{
+        border: none;
+        background: var(--koochita-green);
+        font-size: 10px;
+        cursor: pointer;
+        color: white;
+        font-weight: 100;
+        padding: 3px 5px;
+        border-radius: 10px;
+    }
+    .newSafarnamehFooter{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border-top: solid 1px #cccccc;
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .searchResultPlacess{
+        display: none;
+        position: absolute;
+        width: 90%;
+        background: white;
+        border: solid 1px gray;
+        border-radius: 10px;
+        max-height: 50vh;
+        overflow: auto;
+        z-index: 999;
+    }
+    .searchResultPlacess > div{
+        margin-bottom: 10px;
+        margin: 10px;
+        padding: 5px;
+        cursor: pointer;
+    }
+    .searchResultPlacess > div:hover{
+        background: #6666;
+        border-radius: 10px;
+    }
+    .placeSuggKind{
+        float: right;
+    }
+
+    .placeSuggestionBody{
+        background: white;
+        width: 80%;
+        direction: rtl;
+        text-align: right;
+        padding: 15px 0px;
+        border-radius: 10px;
+        overflow-y: auto;
+        max-height: 90vh;
+        position: relative;
+        overflow: inherit;
+    }
+
+    .closeSuggestionModal{
+        position: absolute;
+        font-size: 30px;
+        left: 10px;
+        top: 0px;
+        z-index: 99;
+        cursor: pointer;
+        color: var(--koochita-light-green);
+    }
+
+    .ourSuggestion{
+        display: flex;
+        flex-wrap: wrap;
+        transition: .5s;
+        padding-bottom: 10px;
+        overflow: auto;
+        max-height:30vh;
+    }
+
+    .ourSuggestionMainPage{
+        display: flex;
+        flex-wrap: wrap;
+        transition: .5s;
+        padding-bottom: 10px;
+        overflow: auto;
+    }
+
+    .showFullSuggestion{
+        height: 30vh !important;
+        overflow: auto;
+    }
+
+    .suggEach{
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        margin: 10px;
+        cursor: pointer;
+        transition: .4s;
+        padding-left: 20px;
+        width: 185px;
+        position: relative;
+        border-radius: 60px;
+        background-color: #fcc15642;
+        height: 70px;
+    }
+
+    .suggEach:hover{
+        background-color: #e4e4e4;
+        border-radius: 60px;
+    }
+
+    .deletePickPlace{
+        display: none;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        font-size: 80px;
+        color: red;
+    }
+
+    .suggEach:hover .deletePickPlace{
+        display: flex;
+    }
+
+    .suggPic{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .suggInfo{
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 80px);
+        font-size: 12px;
+    }
+
+    .suggInfoState{
+        font-size: 9px;
+        color: #666666;
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .showAllSuggestion{
+        text-align: center;
+        color: blue;
+        font-size: 13px;
+        cursor: pointer;
+        margin-top: 12px;
+
+    }
+
+    @media (max-width: 991px) {
+        .ourSuggestion{
+            max-height: 25vh;
+        }
+        .placeSuggKind{
+            float: none;
+        }
+
+        .deletePickPlace{
+            display: flex;
+            position: absolute;
+            width: 20px;
+            left: 20px;
+            font-size: 29px;
+            z-index: 99;
+            top: 0px;
+            height: fit-content;
+            justify-content: normal;
+            align-items: unset;
+            right: auto;
+        }
+    }
+</style>
+
+<div id="newSafarnameh" class="modalBlackBack" style="display: none; z-index: 9999;">
     <div class="newSafarnamehSection">
         <div class="row">
             <div class="form-group">
@@ -39,9 +298,7 @@
                 <label for="safarnamehPicInput" class="newSafarnamehImgSection">
                     <div class="notPicSafarnameh">
                         <span class="plus2" style="font-size: 40px; line-height: 20px;"></span>
-                        <span>
-                                افزودن عکس
-                            </span>
+                        <span>افزودن عکس </span>
                     </div>
                     <img id="newSafarnamehPic" src="#" style=" height: 120px; display: none">
                 </label>
@@ -65,7 +322,7 @@
                 <ul id="newSafarnamehError" style="color: red"></ul>
             </div>
             <div>
-                <button class="backSafarnameh" onclick="backToSafarnamehList()">بازگشت</button>
+                <button class="backSafarnameh" onclick="closeNewSafarnameh()">{{__('بستن')}}</button>
                 <button class="btn btn-success submitSafarnameh" style="background: var(--koochita-green)" onclick="storeSafarnameh()">ثبت</button>
             </div>
         </div>
@@ -73,7 +330,7 @@
     </div>
 </div>
 
-<div id="placeSuggestionModal" class="modalBlackBack hidden">
+<div id="placeSuggestionModal" class="modalBlackBack hidden" style="z-index: 10000;">
     <div class="placeSuggestionBody">
         <div class="iconClose closeSuggestionModal" onclick="closeSuggestion()"></div>
         <div class="container-fluid">
@@ -107,9 +364,7 @@
 
             <div class="row" style="margin: 10px; border-top: solid 1px #cccccc; padding-top: 5px;">
                 <div class="ourSuggestionShow" style="font-size: 20px; font-weight: bold">پیشنهادهای ما</div>
-                <div id="ourSuggestion" class="ourSuggestion ourSuggestionShow" style="max-height: 20vh">
-
-                </div>
+                <div id="ourSuggestion" class="ourSuggestion ourSuggestionShow" style="max-height: 20vh"></div>
                 {{--                    <div class="showAllSuggestion ourSuggestionShow" onclick="showAllSuggestionFunc()">مشاهده تمام پیشنهادها</div>--}}
             </div>
             <div class="row" style="text-align: center">
@@ -149,24 +404,19 @@
     let suggestionPlaces;
 
     function openNewSafarnameh(){
-        fullMainContent();
-        $('#safarnamehList').hide();
-        $('#newSafarnameh').css('display', 'flex');
+        if(checkLogin())
+            $('#newSafarnameh').css('display', 'flex');
     }
 
     function changeNewPicSafarnameh(input){
-        if(input.files && input.files[0]){
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                safarnamehNewMainPic = input.files[0];
+        if(input.files && input.files[0])
+            cleanImgMetaData(input, function(imgDataURL, _file){
+                safarnamehNewMainPic = _file;
                 $('.notPicSafarnameh').hide();
                 $('#newSafarnamehPic').show();
-                $('#newSafarnamehPic').attr('src',  e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
+                $('#newSafarnamehPic').attr('src', imgDataURL);
+            });
     }
-
     function storeSafarnameh(){
         var formDa = new FormData();
         var title = $('#newSafarnamehTitle').val();
@@ -190,6 +440,7 @@
         }
 
         if(!error) {
+            openLoading();
             tags.push($('#safarnamehTag1').val());
             tags.push($('#safarnamehTag2').val());
             tags.push($('#safarnamehTag3').val());
@@ -210,36 +461,42 @@
                 success: function (response) {
                     if (response == 'ok') {
                         showSuccessNotifi('سفرنامه شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
-                        $('#newSafarnamehTitle').val('');
-                        $('#safarnamehSummery').val('');
-                        $('#safarnamehTag1').val('');
-                        $('#safarnamehTag2').val('');
-                        $('#safarnamehTag3').val('');
-                        $('.ck-editor__editable').html('');
-                        window.editor.setData('');
-                        $('.notPicSafarnameh').css('display', 'flex');
-                        $('#newSafarnamehPic').hide();
-                        $('#newSafarnamehPic').attr('src', "#");
-                        safarnamehNewMainPic = null;
-                        pickedPlaces = [];
-                        suggestionPlaces = [];
-                        backToSafarnamehList();
-                        createPickPlace();
-                    } else
+
+                        if(location.pathname == '{{route('profile')}}')
+                            location.reload();
+                        else
+                            location.href = '{{route('profile')}}#safarnameh';
+                        closeLoading();
+                        // $('#newSafarnamehTitle').val('');
+                        // $('#safarnamehSummery').val('');
+                        // $('#safarnamehTag1').val('');
+                        // $('#safarnamehTag2').val('');
+                        // $('#safarnamehTag3').val('');
+                        // $('.ck-editor__editable').html('');
+                        // window.editor.setData('');
+                        // $('.notPicSafarnameh').css('display', 'flex');
+                        // $('#newSafarnamehPic').hide();
+                        // $('#newSafarnamehPic').attr('src', "#");
+                        // safarnamehNewMainPic = null;
+                        // pickedPlaces = [];
+                        // suggestionPlaces = [];
+                        // closeNewSafarnameh();
+                        // createPickPlace();
+                    } else {
                         showSuccessNotifi('در ثبت سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
+                        closeLoading();
+                    }
                 },
                 error: function (err) {
                     showSuccessNotifi('در ثبت سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
+                    closeLoading();
                 }
             })
         }
     }
 
-    function backToSafarnamehList(){
-        cancelFullMainContent();
-        $('#safarnamehList').show();
+    function closeNewSafarnameh(){
         $('#newSafarnameh').hide();
-        getSafarnamehs();
     }
 
     function openSuggestion(){
@@ -304,7 +561,6 @@
             $('#pickPlacesTitle').hide();
         else
             $('#pickPlacesTitle').show();
-
 
         text = '';
         pickedPlaces.forEach((item, index) => {

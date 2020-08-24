@@ -258,10 +258,12 @@
             openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
     }
     function goToSafarnameh(){
-        if(!checkLogin('{{route("addPlaceByUser.index")}}'))
-            return;
-        else
-            location.href = '{{url('profile/index')}}#safarnameh';
+        if(checkLogin('{{route("addPlaceByUser.index")}}')) {
+            $('#campingHeader').hide();
+            openNewSafarnameh();
+        }
+
+        return;
     }
 
 

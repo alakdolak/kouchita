@@ -83,6 +83,14 @@
 .minus:before {
     content: '\E034';
 }
+.trashIcon:before{
+    content: '\E073';
+    font-family: 'Shazde_Regular' !important
+}
+.editIcon:before{
+    content: '\E00E';
+    font-family: 'Shazde_Regular' !important
+}
 .close:before {
     content: '\E02C';
     font-family: 'Shazde_Regular' !important;
