@@ -368,8 +368,8 @@
                    <div class="headerBar epHeaderBar"></div>
                    <div class="row">
                       <div class="col-md-12">
-                         <div class="img-container" style="position: relative">
-                            <img class="imgInEditor" id="imgEditReviewPics" alt="Picture" style="width: 100%;">
+                         <div class="img-container" style="position: relative; max-height: 75vh;">
+                            <img class="imgInEditor" id="imgEditReviewPics" alt="Picture" style="max-width: 100%; max-height: 100%">
                          </div>
                       </div>
                    </div>
@@ -629,6 +629,7 @@
                     choosenPic = 'uploaded';
                     $('#uploadImgMode').val(0);
                     $('#cropButton').show();
+                    console.log(_input.files[0]);
                 };
                 reader.readAsDataURL(_input.files[0]);
             }
@@ -825,9 +826,6 @@
                 originalImageURL = image.src;
                 uploadedImageType = 'image/jpeg';
                 uploadedImageName = 'cropped.jpg';
-            }
-
-            if(first) {
 
                 // Tooltip
                 $('[data-toggle="tooltip"]').tooltip();
@@ -843,9 +841,8 @@
                 }
 
                 // Download
-                if (typeof download.download === 'undefined') {
+                if (typeof download.download === 'undefined')
                     download.className += ' disabled';
-                }
 
                 // Methods
                 actions.querySelector('.docs-buttons').onclick = function (event) {
@@ -892,12 +889,9 @@
 
                         switch (data.method) {
                             case 'rotate':
-                                if (cropped && options.viewMode > 0) {
+                                if (cropped && options.viewMode > 0)
                                     cropper.clear();
-                                }
-
                                 break;
-
                             case 'getCroppedCanvas':
                                 try {
                                     data.option = JSON.parse(data.option);
@@ -906,10 +900,8 @@
                                 }
 
                                 if (uploadedImageType === 'image/jpeg') {
-                                    if (!data.option) {
+                                    if (!data.option)
                                         data.option = {};
-                                    }
-
                                     data.option.fillColor = '#fff';
                                 }
 
@@ -920,24 +912,12 @@
 
                         switch (data.method) {
                             case 'rotate':
-                                if (cropped && options.viewMode > 0) {
+                                if (cropped && options.viewMode > 0)
                                     cropper.crop();
-                                }
-
                                 break;
-
                             case 'scaleX':
                             case 'scaleY':
                                 target.setAttribute('data-option', -data.option);
-                                break;
-
-                            case 'getCroppedCanvas':
-                                if (result) {
-
-                                    // $("#editPane").addClass('hidden');
-                                    // $("#photoEditor").removeClass('hidden');
-                                }
-
                                 break;
                         }
 
@@ -953,11 +933,8 @@
 
                 document.body.onkeydown = function (event) {
                     var e = event || window.event;
-
-                    if (!cropper || this.scrollTop > 300) {
+                    if (!cropper || this.scrollTop > 300)
                         return;
-                    }
-
                     switch (e.keyCode) {
                         case 37:
                             e.preventDefault();
@@ -982,9 +959,11 @@
                 };
                 first = false;
             }
-            // Import image
-            inputImage = document.getElementById('changePic');
 
+
+            // Import image
+
+            inputImage = document.getElementById('changePic');
             if (URL) {
                 inputImage.onchange = function () {
                     var files = this.files;
