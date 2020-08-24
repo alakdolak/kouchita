@@ -365,7 +365,7 @@
         <div id="cropModal" class="editReviewPicturesSection backDark hidden">
             <span class="ui_modal photoUploadOverlay editSection">
                 <div class="body_text" style="padding-top: 12px">
-                   <div class="headerBar epHeaderBar"></div>
+                   <div class="headerBar epHeaderBar hideOnPhone"></div>
                    <div class="row">
                       <div class="col-md-12">
                          <div class="img-container" style="position: relative; max-height: 75vh;">
@@ -444,11 +444,13 @@
                      </div>
                    </div>
                </div>
-                <div class="ui_close_x" onclick="$('#cropModal').addClass('hidden');"></div>
+{{--                <div class="ui_close_x" onclick="$('#cropModal').addClass('hidden');"></div>--}}
             </span>
         </div>
 
     @endif
+
+    <script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
 
     <script>
         autosize(document.getElementsByClassName("inputBoxInputSearch"));
@@ -620,18 +622,27 @@
 
         function changeUploadPic(_input){
             if(_input.files && _input.files[0]){
+                openLoading();
+                choosenPic = 'uploaded';
+                $('#uploadImgMode').val(0);
+                $('#cropButton').show();
 
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#changePic').attr('src', e.target.result);
-                    mainUploadedPic = e.target.result;
-                    uploadedPic = _input.files[0];
-                    choosenPic = 'uploaded';
-                    $('#uploadImgMode').val(0);
-                    $('#cropButton').show();
-                    console.log(_input.files[0]);
-                };
-                reader.readAsDataURL(_input.files[0]);
+                options = { canvas: true };
+                loadImage.parseMetaData(_input.files[0], function(data) {
+                    if (data.exif)
+                        options.orientation = data.exif.get('Orientation');
+
+                    loadImage(
+                        _input.files[0],
+                        function(canvas) {
+                            var imgDataURL = canvas.toDataURL();
+                            $('#changePic').attr('src', imgDataURL);
+                            mainUploadedPic = imgDataURL;
+                            closeLoading();
+                        },
+                        options
+                    );
+                });
             }
         }
 
@@ -655,10 +666,8 @@
             formDa.append('_token', '{{csrf_token()}}');
             formDa.append('id', $('#uploadImgMode').val());
 
-            if(choosenPic == 'uploaded'){
-                console.log(uploadedPic);
+            if(choosenPic == 'uploaded')
                 formDa.append('pic', uploadedPic);
-            }
 
             $.ajax({
                 type: 'post',
@@ -735,15 +744,27 @@
 
         function changeUploadBannerPic(_input){
             if(_input.files && _input.files[0]){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#changeBannerPic').attr('src', e.target.result);
-                    mainUploadedBanner = e.target.result;
-                    chosenBannerPic = _input.files[0];
-                    $('#cropBannerButton').show();
-                    uploadedBanner = true;
-                };
-                reader.readAsDataURL(_input.files[0]);
+                openLoading();
+                $('#cropBannerButton').show();
+                uploadedBanner = true;
+
+                options = { canvas: true };
+                loadImage.parseMetaData(_input.files[0], function(data) {
+                    if (data.exif)
+                        options.orientation = data.exif.get('Orientation');
+
+                    loadImage(
+                        _input.files[0],
+                        function(canvas) {
+                            var imgDataURL = canvas.toDataURL();
+                            $('#changeBannerPic').attr('src', imgDataURL);
+                            mainUploadedBanner = imgDataURL;
+                            chosenBannerPic = _input.files[0];
+                            closeLoading();
+                        },
+                        options
+                    );
+                });
             }
         }
 
@@ -821,6 +842,7 @@
                 aspectRatio: _ratio,
                 preview: '.img-preview',
             });
+            console.log(cropper, image);
 
             if(first) {
                 originalImageURL = image.src;
@@ -831,9 +853,8 @@
                 $('[data-toggle="tooltip"]').tooltip();
 
                 // Buttons
-                if (!document.createElement('canvas').getContext) {
+                if (!document.createElement('canvas').getContext)
                     $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
-                }
 
                 if (typeof document.createElement('cropper').style.transition === 'undefined') {
                     $('button[data-method="rotate"]').prop('disabled', true);
@@ -962,7 +983,6 @@
 
 
             // Import image
-
             inputImage = document.getElementById('changePic');
             if (URL) {
                 inputImage.onchange = function () {
