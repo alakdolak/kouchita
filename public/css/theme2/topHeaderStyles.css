@@ -244,6 +244,10 @@ input[type="checkbox"] + label, input[type="radio"] + label{
         width: 0;
         height: 0;
     }
+    .modalBlackBack {
+        align-items: unset;
+        z-index: 9999;
+    }
 }
 /*in Screen*/
 @media only screen and (min-width:768px) {
@@ -254,17 +258,6 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     }
 }
 
-@media only screen and (max-width: 700px) {
-    .modalBlackBack {
-        align-items: unset;
-        z-index: 9999;
-    }
-    .userTripMainBody{
-        max-height: 100vh !important;
-        height: 100vh;
-        z-index: 9;
-    }
-}
 
 @keyframes gradient {
     0% {
