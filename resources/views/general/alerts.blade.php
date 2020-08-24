@@ -23,7 +23,7 @@
             <div id="warningBody" class="alertDescription"></div>
             <div style="display: flex; justify-content: flex-end; align-items: center">
                 <button id="warningModalCallBackShow" class="alertBtn rightBtn" onclick="cancelWarning()" style="display: none; color: #761c19; background: white;">فعلا، نه</button>
-                <button class="alertBtn leftBtn" onclick="closeWarning()">{{__('بسیار خب')}}</button>
+                <button id="warningOkText" class="alertBtn leftBtn" onclick="closeWarning()"></button>
             </div>
         </div>
     </div>
@@ -55,8 +55,9 @@
 
     }
 
-    function openWarning(_text, _callBack = false){
+    function openWarning(_text, _callBack = false, _okText = 'بسیار خب'){
         alertWarningCallBack = _callBack;
+        $('#warningOkText').text(_okText);
 
         if(typeof _callBack === 'function')
             $('#warningModalCallBackShow').show();

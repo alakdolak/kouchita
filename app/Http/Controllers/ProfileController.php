@@ -623,9 +623,9 @@ class ProfileController extends Controller {
         $username = User::find($userId)->username;
 
         if(\auth()->check() && \auth()->user()->id == $userId)
-            $safarnameh = Safarnameh::where('userId', $userId)->get();
+            $safarnameh = Safarnameh::where('userId', $userId)->orderByDesc('created_at')->get();
         else
-            $safarnameh = Safarnameh::where('userId', $userId)->where('confirm', 1)->get();
+            $safarnameh = Safarnameh::where('userId', $userId)->where('confirm', 1)->orderByDesc('created_at')->get();
 
         foreach ($safarnameh as $item) {
             $item->pic = \URL::asset('userPhoto/' . $userId . '/' . $item->pic);
@@ -767,6 +767,31 @@ class ProfileController extends Controller {
 
 
         echo json_encode(['status' => 'ok', 'url' => $url]);
+        return;
+    }
+
+    public function deleteSafarnameh(Request $request)
+    {
+        if(isset($request->id)){
+            $user = Auth::user();
+            $safar = Safarnameh::find($request->id);
+            if($safar->userId == $user->id){
+                SafarnamehPlaceRelation::where('safarnamehId', $request->id)->delete();
+                SafarnamehTagRelation::where('safarnamehId', $request->id)->delete();
+
+                $location = __DIR__ .'/../../../../assets/userPhoto/' . $user->id . '/' . $safar->pic;
+                if(is_file($location))
+                    unlink($location);
+
+                $safar->delete();
+                echo 'ok';
+            }
+            else
+                echo 'notForYou';
+        }
+        else
+            echo 'nok';
+
         return;
     }
 

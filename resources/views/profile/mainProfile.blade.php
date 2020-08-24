@@ -450,7 +450,6 @@
 
     @endif
 
-    <script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
 
     <script>
         autosize(document.getElementsByClassName("inputBoxInputSearch"));
@@ -621,32 +620,17 @@
         }
 
         function changeUploadPic(_input){
-            openLoading(function(){
-                if(_input.files && _input.files[0]){
+            if(_input.files && _input.files[0]){
+                cleanImgMetaData(_input, function(imgDataURL, _files){ // in forAllPages.blade.php
+                    $('#changePic').attr('src', imgDataURL);
+                    mainUploadedPic = imgDataURL;
+                    uploadedPic = _files;
+
                     choosenPic = 'uploaded';
                     $('#uploadImgMode').val(0);
                     $('#cropButton').show();
-
-                    options = { canvas: true };
-                    loadImage.parseMetaData(_input.files[0], function(data) {
-                        if (data.exif)
-                            options.orientation = data.exif.get('Orientation');
-
-                        loadImage(
-                            _input.files[0],
-                            function(canvas) {
-                                var imgDataURL = canvas.toDataURL();
-                                $('#changePic').attr('src', imgDataURL);
-                                mainUploadedPic = imgDataURL;
-                                closeLoading();
-                            },
-                            options
-                        );
-                    });
-                }
-                else
-                    closeLoading();
-            });
+                });
+            }
         }
 
         function chooseThisImg(_index, _element){
@@ -746,33 +730,15 @@
         }
 
         function changeUploadBannerPic(_input){
-            openLoading(function(){
-                if(_input.files && _input.files[0]){
+            if(_input.files && _input.files[0]){
+                cleanImgMetaData(_input, function(imgDataURL, _file){
                     $('#cropBannerButton').show();
                     uploadedBanner = true;
-
-                    options = { canvas: true };
-                    loadImage.parseMetaData(_input.files[0], function(data) {
-                        if (data.exif)
-                            options.orientation = data.exif.get('Orientation');
-
-                        loadImage(
-                            _input.files[0],
-                            function(canvas) {
-                                var imgDataURL = canvas.toDataURL();
-                                $('#changeBannerPic').attr('src', imgDataURL);
-                                mainUploadedBanner = imgDataURL;
-                                chosenBannerPic = _input.files[0];
-                                closeLoading();
-                            },
-                            options
-                        );
-                    });
-                }
-                else
-                    closeLoading();
-            });
-
+                    $('#changeBannerPic').attr('src', imgDataURL);
+                    mainUploadedBanner = imgDataURL;
+                    chosenBannerPic = _file;
+                })
+            }
         }
 
         function choseBannerPic(_index, _element){

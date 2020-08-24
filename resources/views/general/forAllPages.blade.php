@@ -28,11 +28,16 @@
 @include('general.reportModal')
 
 @if(!Auth::check())
-{{--    @include('layouts.loginPopUp')--}}
     @include('general.nLoginPopUp')
 @else
+
     @include('general.uploadPhoto')
+
+    @include('general.addSafarnameh')
+
 @endif
+
+<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
 
 <script>
     var hasLogin = {{auth()->check() ? 1 : 0}};
@@ -44,6 +49,41 @@
         }
         else
             return true;
+    }
+
+    function cleanImgMetaData(_input, _callBack){
+        openLoading(function(){
+            options = { canvas: true };
+            loadImage.parseMetaData(_input.files[0], function(data) {
+                if (data.exif)
+                    options.orientation = data.exif.get('Orientation');
+
+                loadImage(
+                    _input.files[0],
+                    function(canvas) {
+                        closeLoading();
+                        var imgDataURL = canvas.toDataURL();
+                        if(typeof _callBack === 'function') {
+                            blob = dataURItoBlob(imgDataURL);
+                            _callBack(imgDataURL, blob);
+                        }
+                    },
+                    options
+                );
+            });
+        });
+    }
+
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++)
+            ia[i] = byteString.charCodeAt(i);
+
+        var blob = new Blob([ab], {type: mimeString});
+        return blob;
     }
 
     function resizeFitImg(_class) {
