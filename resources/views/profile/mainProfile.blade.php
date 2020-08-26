@@ -73,7 +73,7 @@
                                     <span>ویرایش</span>
                                     <span class="settingIcon"></span>
                                 </a>
-                                <div class="msgHeaderButton">صندوق پیام</div>
+                                <a href="{{route("profile.message.page")}}" class="msgHeaderButton">صندوق پیام</a>
                             @else
                                 <div class="msgHeaderButton">ارسال پیام</div>
                             @endif

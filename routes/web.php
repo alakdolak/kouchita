@@ -505,6 +505,8 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
 
+    Route::get('profile/message', 'ProfileController@messagingPage')->name('profile.message.page');
+
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
     Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));

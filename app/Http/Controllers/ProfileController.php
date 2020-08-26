@@ -203,6 +203,11 @@ class ProfileController extends Controller {
 //            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
     }
 
+    public function messagingPage()
+    {
+        return \view('profile.messagePage');
+    }
+
     public function storeNewSafarnameh(Request $request)
     {
         $user = Auth::user();
