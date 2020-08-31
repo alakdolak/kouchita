@@ -158,7 +158,7 @@
                                     <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('جوایز و مدال ها')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar rule">
-                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">{{__('پیام‌ها')}}</a>
+                                    <a href="{{route('profile.message.page')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">{{__('پیام‌ها')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
                                     <a href="{{route('profile.accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">{{__('اطلاعات کاربر')}}</a>

@@ -39,6 +39,19 @@
             z-index: 99;
             top: 0;
         }
+        .newMsgCount{
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            background: var(--koochita-red);
+            color: white;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
     </style>
 @stop
 
@@ -73,9 +86,15 @@
                                     <span>ویرایش</span>
                                     <span class="settingIcon"></span>
                                 </a>
-                                <a href="{{route("profile.message.page")}}" class="msgHeaderButton">صندوق پیام</a>
+                                <a href="{{route("profile.message.page")}}" class="msgHeaderButton">
+                                    صندوق پیام
+
+                                    @if(isset($newMsgCount) && $newMsgCount > 0)
+                                        <span class="newMsgCount">{{$newMsgCount}}</span>
+                                    @endif
+                                </a>
                             @else
-                                <div class="msgHeaderButton">ارسال پیام</div>
+                                <a href="{{route("profile.message.page")}}?user={{$user->username}}" class="msgHeaderButton">ارسال پیام</a>
                             @endif
                         </div>
                     </div>

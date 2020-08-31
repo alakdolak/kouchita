@@ -1,4 +1,14 @@
-
+<style>
+    @media (max-width: 700px) {
+        .fullReviewModal{
+            align-items: center !important;
+        }
+        .fullReviewBody{
+            width: 100%;
+            max-height: 100%;
+        }
+    }
+</style>
 <div id="reviewSmallSection">
     <div id="smallReviewHtml_##id##" class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow">
@@ -97,7 +107,7 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-<div id="fullReviewModal" class="modalBlackBack hidden">
+<div id="fullReviewModal" class="fullReviewModal modalBlackBack hidden">
     <div id="fullReview" class="fullReviewBody"></div>
 </div>
 

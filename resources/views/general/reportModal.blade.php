@@ -7,7 +7,7 @@
         display: none;
         justify-content: center;
         align-items: center;
-        z-index: 9999;
+        z-index: 99991;
         top: 0px;
         right: 0px;
     }
