@@ -99,6 +99,10 @@
     font-family: 'Shazde_Regular' !important;
     content: '\E02C';
 }
+.sendIcon:before{
+    content: "\E01B";
+    font-family: 'Shazde_Regular' !important;
+}
 .redStar:before {
     content: '\E00B';
 }
@@ -253,6 +257,10 @@
 }
 .UserIcon:before{
     content: "\e0aa" !important;
+}
+.leftBigArrowIcon:before{
+    content: '\E080';
+    font-family: Shazde_Regular2 !important;
 }
 .downArrowIcon:before{
     content: '\E04A';

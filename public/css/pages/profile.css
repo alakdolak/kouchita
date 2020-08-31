@@ -1269,6 +1269,7 @@ body {
     color: black;
     padding: 2px 5px;
     border-radius: 6px;
+    position: relative;
 }
 
 .settingHeaderButton{

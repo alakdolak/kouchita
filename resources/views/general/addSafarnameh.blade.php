@@ -7,19 +7,38 @@
     .newSafarnamehSection{
         width: 100%;
         background: white;
-        padding: 10px;
         direction: rtl;
         text-align: right;
-        border-radius: 10px;
         max-width: 991px;
         height: 97vh;
-        overflow-y: scroll;
-        overflow-x: hidden;
+        overflow: hidden;
     }
 
     .newSafarnamehSection .row{
         width: 100%;
         margin: 0px;
+    }
+
+    .nsHeader{
+        height: 50px;
+        background-color: var(--koochita-light-green);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 27px;
+        padding: 0px 15px;
+    }
+
+    .nsHeader .iconClose{
+        cursor: pointer;
+        font-size: 35px;
+    }
+
+    .nsContenet{
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 10px;
     }
 
     .backSafarnameh{
@@ -34,6 +53,7 @@
         border-color: var(--koochita-green);
         border-radius: 11px;
     }
+
     .newSafarnamehImgSection{
         display: flex;
         margin-top: 10px;
@@ -43,6 +63,7 @@
         justify-content: center;
         align-items: center;
     }
+
     .notPicSafarnameh{
         display: flex;
         flex-direction: column;
@@ -54,6 +75,7 @@
         border-radius: 50%;
         color: gray;
     }
+
     .submitSarnamehButton{
         background: var(--koochita-blue);
         border: none;
@@ -63,12 +85,14 @@
         cursor: pointer;
         font-size: 20px;
     }
+
     .textEditor{
         height: 60vh;
         border: solid 1px var(--ck-color-toolbar-border) !important;
         border-top: none !important;
         border-radius: 5px !important;
     }
+
     .addPlaceButton{
         border: none;
         background: var(--koochita-green);
@@ -79,6 +103,7 @@
         padding: 3px 5px;
         border-radius: 10px;
     }
+
     .newSafarnamehFooter{
         display: flex;
         justify-content: center;
@@ -255,78 +280,102 @@
             right: auto;
         }
     }
+
+    @media (max-width: 768px) {
+        /*.nsHeader{*/
+        /*    display: none;*/
+        /*}*/
+        .nsContenet{
+            /*max-height: 100vh;*/
+            padding-bottom: 55px;
+        }
+        .newSafarnamehSection{
+            height: 100vh;
+        }
+        .newSafarnamehFooter{
+            position: fixed;
+            bottom: 0px;
+            background: #ffffffd1;
+            padding: 10px;
+        }
+    }
 </style>
 
 <div id="newSafarnameh" class="modalBlackBack" style="display: none; z-index: 9999;">
     <div class="newSafarnamehSection">
-        <div class="row">
-            <div class="form-group">
-                <label for="safarnamehTitle">برای سفرنامت یک عنوان بنویسید</label>
-                <input id="newSafarnamehTitle" type="text" class="form-control" placeholder="عنوان سفرنامه">
+        <div class="nsHeader">
+            <h3 class="text">نوشتن سفرنامه</h3>
+            <div class="iconClose" onclick="closeNewSafarnameh()"></div>
+        </div>
+        <div class="nsContenet">
+            <div class="row">
+                <div class="form-group">
+                    <label for="safarnamehTitle">برای سفرنامت یک عنوان بنویسید</label>
+                    <input id="newSafarnamehTitle" type="text" class="form-control" placeholder="عنوان سفرنامه">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="safarnamehSummery">می تونی یه خلاصه از سفرنامت تو 100 کاراکتر بنویسی (اختیاری)</label>
+                    <textarea id="safarnamehSummery" class="form-control" rows="1" placeholder="خلاصه سفرنامه"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="safarnamehText" class="inputLabel">متن سفرنامت رو اینجا بنویس</label>
+                    <div class="toolbar-container"></div>
+                    <div id="safarnamehText" class="textEditor"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="safarnamehTags">برای سفرنامه خود برچسپ بگذارید</label>
+                    <input type="text" id="safarnamehTag1" class="form-control" placeholder="برچسپ اول" style="margin-bottom: 10px">
+                    <input type="text" id="safarnamehTag2" class="form-control" placeholder="برچسپ دوم" style="margin-bottom: 10px">
+                    <input type="text" id="safarnamehTag3" class="form-control" placeholder="برچسپ سوم">
+                </div>
+                <div class="col-md-6 form-group" style="display: flex; flex-direction: column;">
+                    <label>خب یه عکس خوب هم از سفرنامت
+                        {{--                        <button class="addPlaceButton" onclick="$('#safarnamehPicInput').click()">--}}
+                        {{--                            انتخاب عکس--}}
+                        {{--                        </button>--}}
+                    </label>
+                    <input type="file" id="safarnamehPicInput" accept="image/*" style="display: none" onchange="changeNewPicSafarnameh(this)">
+                    <label for="safarnamehPicInput" class="newSafarnamehImgSection">
+                        <div class="notPicSafarnameh">
+                            <span class="plus2" style="font-size: 40px; line-height: 20px;"></span>
+                            <span>افزودن عکس </span>
+                        </div>
+                        <img id="newSafarnamehPic" src="#" style=" height: 120px; display: none">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group" style="display: flex; flex-direction: column;">
+                    <label>
+                        محل های مرتبط به سفرنامه خود را انتخاب کنید.
+                        <button class="addPlaceButton" onclick="openSuggestion()">
+                            افزودن محل جدید
+                        </button>
+                    </label>
+                </div>
+                <div class="pickPlaces ourSuggestionMainPage" style="max-height: 1000vh"></div>
+            </div>
+
+            <div class="row newSafarnamehFooter">
+                <div style="width: 100%; padding: 0px 30px;">
+                    <ul id="newSafarnamehError" style="color: red"></ul>
+                </div>
+                <div>
+                    <button class="backSafarnameh" onclick="closeNewSafarnameh()">{{__('بستن')}}</button>
+                    <button class="btn btn-success submitSafarnameh" style="background: var(--koochita-green)" onclick="storeSafarnameh()">ثبت</button>
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="form-group">
-                <label for="safarnamehSummery">می تونی یه خلاصه از سفرنامت تو 100 کاراکتر بنویسی (اختیاری)</label>
-                <textarea id="safarnamehSummery" class="form-control" rows="1" placeholder="خلاصه سفرنامه"></textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group">
-                <label for="safarnamehText" class="inputLabel">متن سفرنامت رو اینجا بنویس</label>
-                <div class="toolbar-container"></div>
-                <div id="safarnamehText" class="textEditor"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 form-group">
-                <label for="safarnamehTags">برای سفرنامه خود برچسپ بگذارید</label>
-                <input type="text" id="safarnamehTag1" class="form-control" placeholder="برچسپ اول" style="margin-bottom: 10px">
-                <input type="text" id="safarnamehTag2" class="form-control" placeholder="برچسپ دوم" style="margin-bottom: 10px">
-                <input type="text" id="safarnamehTag3" class="form-control" placeholder="برچسپ سوم">
-            </div>
-            <div class="col-md-6 form-group" style="display: flex; flex-direction: column;">
-                <label>خب یه عکس خوب هم از سفرنامت
-                    {{--                        <button class="addPlaceButton" onclick="$('#safarnamehPicInput').click()">--}}
-                    {{--                            انتخاب عکس--}}
-                    {{--                        </button>--}}
-                </label>
-                <input type="file" id="safarnamehPicInput" accept="image/*" style="display: none" onchange="changeNewPicSafarnameh(this)">
-                <label for="safarnamehPicInput" class="newSafarnamehImgSection">
-                    <div class="notPicSafarnameh">
-                        <span class="plus2" style="font-size: 40px; line-height: 20px;"></span>
-                        <span>افزودن عکس </span>
-                    </div>
-                    <img id="newSafarnamehPic" src="#" style=" height: 120px; display: none">
-                </label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group" style="display: flex; flex-direction: column;">
-                <label>
-                    محل های مرتبط به سفرنامه خود را انتخاب کنید.
-                    <button class="addPlaceButton" onclick="openSuggestion()">
-                        افزودن محل جدید
-                    </button>
-                </label>
-            </div>
-            <div class="pickPlaces ourSuggestionMainPage" style="max-height: 1000vh"></div>
-        </div>
-
-        <div class="row newSafarnamehFooter">
-            <div style="width: 100%; padding: 0px 30px;">
-                <ul id="newSafarnamehError" style="color: red"></ul>
-            </div>
-            <div>
-                <button class="backSafarnameh" onclick="closeNewSafarnameh()">{{__('بستن')}}</button>
-                <button class="btn btn-success submitSafarnameh" style="background: var(--koochita-green)" onclick="storeSafarnameh()">ثبت</button>
-            </div>
-        </div>
-
     </div>
 </div>
 

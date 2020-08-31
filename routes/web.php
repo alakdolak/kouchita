@@ -485,7 +485,7 @@ Route::group(['middleware' => ['throttle:30']], function(){
 });
 
 // profile
-Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
+Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('profile/safarnameh/new', 'ProfileController@storeNewSafarnameh')->name('profile.safarnameh.new');
 
@@ -504,6 +504,14 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
     Route::post('profile/updateBannerPic', 'ProfileController@updateBannerPic')->name('profile.updateBannerPic');
 
     Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
+
+    Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page');
+
+    Route::post('profile/message/get', 'MessageController@getMessages')->name('profile.message.get');
+
+    Route::post('profile/message/update', 'MessageController@updateMessages')->name('profile.message.update');
+
+    Route::post('profile/message/send', 'MessageController@sendMessages')->name('profile.message.send');
 
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 

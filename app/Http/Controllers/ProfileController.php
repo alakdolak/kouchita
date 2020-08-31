@@ -12,6 +12,7 @@ use App\models\InvitationCode;
 use App\models\Level;
 use App\models\LogModel;
 use App\models\Medal;
+use App\models\Message;
 use App\models\PhotographersLog;
 use App\models\PhotographersPic;
 use App\models\Place;
@@ -191,11 +192,12 @@ class ProfileController extends Controller {
             $user->banner = $user->banner == null ? '1.jpg' : $user->banner;
             $user->banner = URL::asset('images/mainPics/background/' . $user->banner);
         }
-        else{
+        else
             $user->banner = URL::asset('userProfile/'.$user->banner);
-        }
 
-        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage']));
+        $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
+
+        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount']));
 
 //        return view('profile.profile', array('activities' => $activities, 'userActivityCount' => $userActivityCount,
 //            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
