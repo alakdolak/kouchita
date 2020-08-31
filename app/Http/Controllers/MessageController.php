@@ -75,6 +75,11 @@ class MessageController extends Controller {
             if(array_search($cont->id, $contactsId) === false){
                 $cont->pic = getUserPic($cont->id);
                 $cont->newMsg = Message::where('receiverId', $uId)->where('senderId', $cont->id)->where('seen', 0)->count();
+
+                $cont->lastMsg = '';
+                $cont->lastTime = '';
+                if(count($contacts) == 0)
+                    $contacts = [];
                 array_unshift($contacts, $cont);
             }
 
