@@ -121,7 +121,7 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid;
+    border: solid .1px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -133,15 +133,15 @@ footer{
     padding: 5px 10px;
 }
 .userInfoMSg .leftBigArrowIcon{
-    color: var(--koochita-yellow);
-    font-size: 45px;
-    line-height: 35px;
-    width: 35px;
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+    width: 30px;
     display: none;
     align-items: center;
     justify-content: center;
     margin-right: 5px;
-    border: solid;
+    border: solid .1px;
     border-radius: 50%;
 }
 .msgHeader{
@@ -380,6 +380,9 @@ footer{
 }
 
 @media (max-width: 768px) {
+    .mobileHeader{
+        display: none !important;
+    }
     .showThis{
         display: block !important;
     }
