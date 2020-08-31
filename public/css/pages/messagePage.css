@@ -133,7 +133,7 @@ footer{
     padding: 5px 10px;
 }
 .userInfoMSg .leftBigArrowIcon{
-    color: var(--koochita-blue);
+    color: var(--koochita-yellow);
     font-size: 45px;
     line-height: 35px;
     width: 35px;
@@ -149,9 +149,10 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--koochita-yellow);
+    background: var(--koochita-blue);
     position: relative;
     width: 100%;
+    color: white;
 }
 .userSetting{
     margin-right: 20px;
@@ -254,7 +255,7 @@ footer{
 .msgContent .Date{
     color: white;
     margin: 0px auto;
-    background: var(--koochita-blue);
+    background: var(--koochita-yellow);
     padding: 10px 20px;
     border-radius: 35px;
     margin-top: 20px;
@@ -422,8 +423,5 @@ footer{
     }
     .userRow.active{
         background-color: inherit;
-    }
-    .msgHeader{
-        background: var(--koochita-yellow);
     }
 }
