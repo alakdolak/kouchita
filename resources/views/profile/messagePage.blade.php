@@ -126,7 +126,7 @@
     </script>
 
     <script>
-        let contacts = {!! $contacts !!};
+        let contacts = {!! json_encode($contacts) !!};
         let uId = {{auth()->user()->id}};
         let showMsgUserId = 0;
         let specUser = null;
