@@ -23,6 +23,7 @@ class MessageController extends Controller {
 
         $contactsId = [];
         $specUser = null;
+        $contacts = [];
 
         $allMsg = Message::where('senderId', $uId)
                             ->orWhere('receiverId', $uId)
@@ -100,7 +101,7 @@ class MessageController extends Controller {
 
                 $msg->newMsg = 1;
             }
-            
+
             if($msg->date == verta()->format('Y-m-d'))
                 $msg->date = 'امروز' ;
         }
