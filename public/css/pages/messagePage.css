@@ -412,6 +412,9 @@ footer{
     .userSideSection{
         height: calc(100vh - 130px);
     }
+    .msgFooter{
+        position: fixed;
+    }
     footer{
         display: flex;
     }
