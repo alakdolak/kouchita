@@ -11,7 +11,7 @@
 @section('header')
     @parent
 
-    <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css?v=2')}}">
 
     <style>
         body{
@@ -126,6 +126,10 @@
             height += 70;
             if(height < 110)
                 height = 110;
+
+            if($(window).width() < 768 && height < 190)
+                height = 190;
+
             $('.msgContent').css('height', 'calc(100% - ' + height + 'px)');
         }
 
