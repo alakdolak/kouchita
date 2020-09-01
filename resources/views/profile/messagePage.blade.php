@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css')}}">
 
     <style>
+        body{
+            overflow: hidden;
+        }
         .msgBody{
             background-image: url("{{URL::asset('images/mainPics/msgBack.jpg')}}");
             background-image: url("{{URL::asset('images/mainPics/msgBack2.jpg')}}");
@@ -26,6 +29,7 @@
         .msgContent .myText.corner:before{
             background-image: url("{{URL::asset('images/icons/greenCorner2.png')}}");
         }
+
     </style>
 @stop
 
@@ -35,7 +39,7 @@
             <div class="userSearchSec">
                 <a href="{{route('profile')}}" class="leftBigArrowIcon" title="بازگشت"></a>
                 <div class="searchInp">
-                    <input id="searchInUser" type="text" onkeydown="searchInUsers(this.value)">
+                    <input id="searchInUser" type="text" onkeyup="searchInUsers(this.value)">
                     <div class="searchIcon"></div>
                     <div class="iconClose" style="display: none" onclick="clearSearchBox()"></div>
                 </div>
@@ -73,6 +77,19 @@
     </div>
 
     <script>
+        let contacts = {!! json_encode($contacts) !!};
+        let uId = {{auth()->user()->id}};
+        let showMsgUserId = 0;
+        let specUser = null;
+        let lastDate = '';
+        let lastSendMsg = '';
+        let lastId = 0;
+        let updateInterval = null;
+        let loadingMsg ='<div class="loading">\n' +
+            '<img src="{{URL::asset("images/loading.gif")}}" style="width: 200px;">\n' +
+            '</div>';
+
+
         autosize($('textarea'));
         $('.searchInp').on('click', function(){
             $('#searchInUser').focus();
@@ -82,10 +99,18 @@
             if(_value.trim().length == 0){
                 $('.searchInp').find('.searchIcon').show();
                 $('.searchInp').find('.iconClose').hide();
+                createContacts(contacts);
             }
             else{
                 $('.searchInp').find('.searchIcon').hide();
                 $('.searchInp').find('.iconClose').show();
+
+                showContacts = [];
+                contacts.map(item =>{
+                    if(item.username.search(_value) > -1)
+                        showContacts.push(item);
+                });
+                createContacts(showContacts);
             }
         }
 
@@ -93,6 +118,7 @@
             $('#searchInUser').val('');
             $('.searchInp').find('.searchIcon').show();
             $('.searchInp').find('.iconClose').hide();
+            createContacts(contacts);
         }
 
         function changeHeight(){
@@ -126,19 +152,6 @@
     </script>
 
     <script>
-        let contacts = {!! json_encode($contacts) !!};
-        let uId = {{auth()->user()->id}};
-        let showMsgUserId = 0;
-        let specUser = null;
-        let loadingMsg ='<div class="loading">\n' +
-                        '<img src="{{URL::asset("images/loading.gif")}}" style="width: 200px;">\n' +
-                        '</div>';
-
-        let lastDate = '';
-        let lastSendMsg = '';
-        let lastId = 0;
-        let updateInterval = null;
-
         function showThisMsgs(_id){
             $('#msgBody').addClass('showThis');
             $('#sideListUser').addClass('hideThis');
@@ -277,7 +290,9 @@
             }
         }
 
-        function createContacts(){
+        function createContacts(_contacts){
+            $('#contacts').empty();
+
             let text = '';
             text +=  '<div id="user_0" class="userRow" onclick="showThisMsgs(0)">\n' +
                 '                        <div class="userPic">\n' +
@@ -296,7 +311,7 @@
                 '                        </div>\n' +
                 '                    </div>';
 
-            contacts.map(item => {
+            _contacts.map(item => {
                 text +=  '<div id="user_' + item.id + '" class="userRow" onclick="showThisMsgs(' + item.id + ')">\n' +
                     '                        <div class="userPic">\n' +
                     '                            <img src="' + item.pic + '" style="height: 100%">\n' +
@@ -318,7 +333,7 @@
 
             $('#contacts').append(text);
         }
-        createContacts();
+        createContacts(contacts);
 
         function updateMsg(){
             updateInterval = $.ajax({

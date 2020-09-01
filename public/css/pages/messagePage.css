@@ -380,6 +380,17 @@ footer{
 }
 
 @media (max-width: 768px) {
+    .msgContent{
+        height: calc(100vh - 190px);
+    }
+
+    .msgBody{
+        display: none;
+        width: 100%;
+        margin: 0;
+        border-radius: 0px;
+        height: calc(100vh - 70px);
+    }
     .mobileHeader{
         display: none !important;
     }
@@ -398,15 +409,8 @@ footer{
         margin: 0px;
         border-radius: 0px;
     }
-    .msgBody{
-        display: none;
-        width: 100%;
-        margin: 0;
-        border-radius: 0px;
-        height: calc(100vh - 130px);
-    }
     .userSideSection{
-        height: calc(100% - 65px);
+        height: calc(100vh - 130px);
     }
     footer{
         display: flex;
