@@ -11,7 +11,7 @@
 @section('header')
     @parent
 
-    <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css?v=1')}}">
 
     <style>
         body{
