@@ -80,12 +80,24 @@
     content: "\e015";
     font-family: 'Shazde_Regular' !important
 }
+.calendarIconA:after{
+    content: "\e015";
+    font-family: 'Shazde_Regular' !important
+}
 .minus:before {
     content: '\E034';
 }
 .trashIcon:before{
     content: '\E073';
     font-family: 'Shazde_Regular' !important
+}
+.userIcon:before{
+    content: '\E06E';
+    font-family: 'Shazde_Regular2' !important
+}
+.userIconA:after{
+    content: '\E06E';
+    font-family: 'Shazde_Regular2' !important
 }
 .editIcon:before{
     content: '\E00E';

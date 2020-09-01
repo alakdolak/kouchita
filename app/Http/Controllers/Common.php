@@ -1217,7 +1217,9 @@ function getReviewPicsURL($review, $placeFile){
 function getUserPic($id = 0){
 
     $user = User::find($id);
-    if($user != null){
+    if($id == 0 || $user == null)
+        $uPic = URL::asset('_images/nopic/blank.jpg');
+    else{
         if(strpos($user->picture, 'http') !== false)
             return $user->picture;
         else{
@@ -1233,8 +1235,6 @@ function getUserPic($id = 0){
                 $uPic = URL::asset('userProfile/' . $user->picture);
         }
     }
-    else
-        $uPic = URL::asset('_images/nopic/blank.jpg');
 
     return $uPic;
 }

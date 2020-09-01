@@ -513,6 +513,12 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('profile/message/send', 'MessageController@sendMessages')->name('profile.message.send');
 
+    Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips');
+
+    Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
+
+    Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
+
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
     Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
@@ -571,8 +577,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
 
-    Route::get('myTrips', array('as' => 'myTrips', 'uses' => 'MyTripsController@myTrips'));
-
     Route::get('tripPlaces/{tripId}/{sortMode?}', array('as' => 'tripPlaces', 'uses' => 'MyTripsController@myTripsInner'));
 
     Route::post('addTripPlace', array('as' => 'addTripPlace', 'uses' => 'MyTripsController@addTripPlace'));
@@ -598,10 +602,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
     Route::post('assignDateToPlace', array('as' => 'assignDateToPlace', 'uses' => 'MyTripsController@assignDateToPlace'));
 
     Route::post('inviteFriend', array('as' => 'inviteFriend', 'uses' => 'MyTripsController@inviteFriend'));
-
-    Route::get('recentlyView', array('as' => 'recentlyViewTotal', 'uses' => 'MyTripsController@recentlyViewTotal'));
-
-    Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
 
     Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
 

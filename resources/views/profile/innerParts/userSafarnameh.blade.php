@@ -22,11 +22,11 @@
         cursor: pointer;
         width: 30px;
         height: 30px;
-        border: solid;
+        border: solid 2px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 50%;
+        border-radius: 8px;
         transition: .3s;
     }
     .commonSafarnamehIcon.delete{
