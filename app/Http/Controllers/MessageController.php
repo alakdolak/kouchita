@@ -81,9 +81,9 @@ class MessageController extends Controller {
                 if(count($contacts) == 0)
                     $contacts = [];
                 else
-                   $contacts = $contacts->toArray();
+                    $contacts = $contacts->toArray();
 
-		array_unshift($contacts, $cont);
+                array_unshift($contacts, $cont);
             }
 
             $specUser = $cont->id;

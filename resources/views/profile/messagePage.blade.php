@@ -201,11 +201,11 @@
                     $("#bodyMsg").empty();
                     response = JSON.parse(response);
                     if(response.length == 0){
-                        let text = '<div id="notMsg" class="notMsg">\n' +
-                            '<div class="content">\n' +
-                            'هنوز هیچ پیامی برای کاربر ارسال نشده است.' +
-                            '</div>\n' +
-                            '</div>';
+                        let text =  '<div id="notMsg" class="notMsg">\n' +
+                                    '<div class="content">\n' +
+                                    'هنوز هیچ پیامی برای کاربر ارسال نشده است.' +
+                                    '</div>\n' +
+                                    '</div>';
                         $("#bodyMsg").html(text);
                     }
                     else {
@@ -224,6 +224,7 @@
         function createMsgs(msg){
             let classType;
             let corner = '';
+            $('#notMsg').remove();
             if(msg.date != lastDate){
                 $("#bodyMsg").append('<div class="Date">' + msg.date + '</div>');
                 lastDate = msg.date;
