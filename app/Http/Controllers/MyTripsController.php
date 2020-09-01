@@ -38,69 +38,34 @@ class MyTripsController extends Controller {
         $condition = ['uId' => $uId, 'status' => 1];
         $invitedTrips = TripMember::where($condition)->select('tripId')->get();
 
-        foreach ($invitedTrips as $invitedTrip) {
+        foreach ($invitedTrips as $invitedTrip)
             $trips[count($trips)] = Trip::whereId($invitedTrip->tripId);
-        }
 
         if($trips != null && count($trips) != 0) {
             foreach ($trips as $trip) {
                 $trip->placeCount = TripPlace::whereTripId($trip->id)->count();
                 $limit = ($trip->placeCount > 4) ? 4 : $trip->placeCount;
                 $tripPlaces = TripPlace::whereTripId($trip->id)->take($limit)->get();
-
-                if($trip->placeCount > 0) {
-                    $kindPlaceId = $tripPlaces[0]->kindPlaceId;
-
-                    $kindPlace = Place::find($kindPlaceId);
-                    $file = $kindPlace->fileName;
-                    $table = $kindPlace->tableName;
-                    $place = DB::table($table)->find($tripPlaces[0]->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
-                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-                    else
-                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                }
-                if($trip->placeCount > 1) {
-                    $kindPlaceId = $tripPlaces[1]->kindPlaceId;
+                $tripPics = [];
+                foreach ($tripPlaces as $item){
+                    $kindPlaceId = $item->kindPlaceId;
 
                     $kindPlace = Place::find($kindPlaceId);
                     $file = $kindPlace->fileName;
                     $table = $kindPlace->tableName;
-                    $place = DB::table($table)->find($tripPlaces[1]->placeId);
+                    $place = DB::table($table)->find($item->placeId);
                     if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
-                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                        $pic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
                     else
-                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                }
-                if($trip->placeCount > 2) {
-                    $kindPlaceId = $tripPlaces[2]->kindPlaceId;
+                        $pic = URL::asset('_images/nopic/blank.jpg');
 
-                    $kindPlace = Place::find($kindPlaceId);
-                    $file = $kindPlace->fileName;
-                    $table = $kindPlace->tableName;
-                    $place = DB::table($table)->find($tripPlaces[2]->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
-                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-                    else
-                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+                    array_push($tripPics, $pic);
                 }
-                if($trip->placeCount > 3) {
-                    $kindPlaceId = $tripPlaces[3]->kindPlaceId;
-
-                    $kindPlace = Place::find($kindPlaceId);
-                    $file = $kindPlace->fileName;
-                    $table = $kindPlace->tableName;
-                    $place = DB::table($table)->find($tripPlaces[3]->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
-                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-                    else
-                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                }
-
+                $trip->placePic = $tripPics;
             }
         }
 
-        return view('myTrip', array('trips' => $trips));
+        return view('myTrip', compact(['trips']));
     }
 
     public function myTripsInner($tripId, $sortMode = "DESC") {

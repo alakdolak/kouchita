@@ -1,44 +1,142 @@
-<?php  $mode = 'profile'; $user = Auth::user(); ?>
+<?php
+    $mode = 'profile'; $user = Auth::user();
+    function getLastSeen($lastSeen) {
+    $day = floor((time() - $lastSeen) / (3600 * 24));
+    $hour = floor(((time() - $lastSeen) -  $day * 3600 * 24) / 3600);
+    $min = floor(((time() - $lastSeen) -  $day * 3600 * 24 - $hour * 3600) / 60);
+    $out = "";
+    if($day != 0)
+        $out .= $day . " روز ";
+    if($hour != 0)
+        $out .= $hour . " ساعت ";
+    if($min != 0)
+        $out .= $min . " دقیقه ";
+    if($day != 0 || $hour != 0 || $min != 0)
+        $out .= "قبل";
+    return $out;
+}
+?>
+
 @extends('layouts.bodyProfile')
 
 @section('header')
     @parent
+
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTrips.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}' data-rup='saves-rest-client'/>
+
+    <style>
+        #saves-all-trips .trip-tile-container .trip-tile.new-trip{
+            padding: 120px 0;
+        }
+        .ui_column{
+            float: right;
+        }
+        .cardFooter{
+            display: flex;
+            flex-direction: column;
+        }
+        .cardFooter > div{
+            padding: 5px !important;
+        }
+        .cardPics{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: solid white 1px;
+        }
+        .cardPics > img{
+            width: 100%;
+            max-width: none !important;
+        }
+        .trip-name{
+            display: flex;
+            justify-content: space-between;
+        }
+        .trip-name .iconSec{
+            display: flex;
+            font-weight: 100;
+        }
+        .trip-header{
+            padding: 5px 10px !important;
+        }
+        .trip-header .icons{
+            display: flex;
+            position: relative;
+            top: auto;
+            right: auto;
+            justify-content: center;
+            align-items: center;
+            border: solid 1px;
+            width: 25px;
+            margin-right: 3px;
+            transition: .3s;
+        }
+        .trip-header .delete{
+            color: red;
+        }
+        .trip-header .settingIcon{
+            color: gray;
+        }
+        .trip-header .delete:hover{
+            color: white;
+            background: red;
+            border-color: red;
+        }
+        .trip-header .edit{
+            color: var(--koochita-blue);
+        }
+        .trip-header .edit:hover{
+            color: white;
+            background: var(--koochita-blue);
+            border-color:  var(--koochita-blue);
+        }
+        .tripDate{
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            direction: rtl;
+            width: 100%;
+            text-align: right;
+            position: relative;
+            font-size: 12px;
+        }
+
+        .tripDate .date{
+            direction: ltr;
+            color: black;
+            font-style: normal;
+        }
+        .tripDate .date > span{
+            display: inline-flex;
+        }
+        .cardPics-1{
+            width: 100%;
+        }
+        .cardPics-2{
+            width: 50%;
+        }
+        .picSec.row{
+            display: flex !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
+            margin: 0 !important;
+        }
+        @media (max-width: 768px) {
+            .ui_column{
+                float: none;
+            }
+
+        }
+    </style>
 @stop
 
-<?php
-    function getLastSeen($lastSeen) {
-
-        $day = floor((time() - $lastSeen) / (3600 * 24));
-
-        $hour = floor(((time() - $lastSeen) -  $day * 3600 * 24) / 3600);
-
-        $min = floor(((time() - $lastSeen) -  $day * 3600 * 24 - $hour * 3600) / 60);
-
-        $out = "";
-
-        if($day != 0)
-            $out .= $day . " روز ";
-
-        if($hour != 0)
-            $out .= $hour . " ساعت ";
-
-        if($min != 0)
-            $out .= $min . " دقیقه ";
-
-        if($day != 0 || $hour != 0 || $min != 0)
-            $out .= "قبل";
-
-        return $out;
-    }
-?>
 
 @section('main')
 
     @include('layouts.pop-up-create-trip')
-
-
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTrips.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
     <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible position-relative">
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2 position-relative">
@@ -47,79 +145,7 @@
                 <div id="saves-root-view"  class="position-relative">
                     <div id="saves-all-trips"  class="position-relative">
                         <div class="saves-title title position-relative">سفرهای من</div>
-                        <div id="saves-view-tabs-placeholder" class="position-relative"></div>
-                        <div id="saves-view-tabs-container" class="position-relative">
-                            <div class="ui_container position-relative">
-                                <div class="ui_columns position-relative">
-                                    <div class="trips-header ui_column position-relative">
-                                        <div  class="position-relative">
-                                            <div class="all-trips-header position-relative">
-                                                <div class="header-sort-container position-relative">
-                                                    <ul class="sort-options mg-tp-12Imp">
-                                                        <li id="sort-option-name" data-sort="name">نام</li>
-                                                        <li id="sort-option-recent" data-sort="recent" class="selected">بازدید اخیر</li>
-                                                    </ul>
-                                                    <div id="targetHelp_9" class="targets float-left">
-                                                        <span class="sort-text"> مرتب شده بر اساس :</span>
-                                                        <div id="helpSpan_9" class="helpSpans hidden row">
-                                                            <span class="introjs-arrow"></span>
-                                                            <p>در این قسمت می توانید اطلاعات را با فیلتر های موجود مرتب کنید.</p>
-                                                            <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>
-                                                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>
-                                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div id="saves-view-tabs" class="ui_column is-6 ui_tabs">
-                                        <div id="targetHelp_6" class="targets">
-                                            <div onclick="document.location.href = '{{route('myTrips')}}'" class="ui_tab active">سفرهای من</div>
-                                            <div id="helpSpan_6" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>از این قسمت می توانید به سفر های خود دسترسی داشته باشید و با دوستانتان سفر های خود را برنامه ریزی کنید.</p>
-                                                <button data-val="6" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_6">بعدی</button>
-                                                <button data-val="6" class="btn btn-primary backBtnsHelp" id="backBtnHelp_6">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-                                        <div id="targetHelp_7" class="targets">
-                                            <a data-tab-link="recent" href="{{route('recentlyViewTotal')}}" class="ui_tab">بازدید های اخیر</a>
-                                            <div id="helpSpan_7" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید به بازدید ای اخیر خود دسترسی داشته باشید.</p>
-                                                <button data-val="7" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_7">بعدی</button>
-                                                <button data-val="7" class="btn btn-primary backBtnsHelp" id="backBtnHelp_7">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-                                        <div id="targetHelp_8" class="targets">
-                                            <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab">نشانه گذاری شده ها</a>
-                                            <div id="helpSpan_8" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید صفحاتی را که رجوع بعدی نشانه گذاری کرده اید مشاهده نمایید.</p>
-                                                <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
-                                                <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ui_column" id="myTripPageHelpBtn">
-                                        {{--@if($sumTmp == 0)--}}
-                                            <a class="link cursor-pointer float-left" onclick="initHelp(10, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
-                                                <div></div>
-                                            </a>
-                                        {{--@else--}}
-                                            {{--<a class="cursor-pointer link" onclick="initHelp(16, [], 'MAIN', 100, 400)">--}}
-                                                    {{--<div></div>--}}
-                                                {{--</a>--}}
-                                        {{--@endif--}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         @if($trips == null || count($trips) == 0)
                             <div class="trips-container ui_container">
@@ -138,57 +164,113 @@
                             </div>
                         @else
                             <div class="trips-container ui_container">
-                            <div class="trips-container-inner ui_columns is-multiline">
-                                <div onclick="showPopUp()" class="trip-tile-container ui_column is-4 is-hidden-mobile">
-                                    <div class="trip-tile ui_card is-fullwidth new-trip">
-                                        <span class="ui_icon plus"></span>
-                                        <p>ایجاد سفر</p>
+                                <div class="container">
+                                    <div class="row">
+                                        <div onclick="showPopUp()" class="trip-tile-container ui_column col-lg-3 col-md-4 col-sm-6 is-hidden-mobile">
+                                            <div class="trip-tile ui_card is-fullwidth new-trip">
+                                                <span class="ui_icon plus"></span>
+                                                <p>ایجاد سفر</p>
+                                            </div>
+                                        </div>
+                                        @foreach($trips as $trip)
+                                            <div class="trip-tile-container ui_column col-lg-3 col-md-4 col-sm-6">
+                                                <a href="{{route('tripPlaces', ['tripId' => $trip->id])}}" class="trip-tile ui_card is-fullwidth">
+                                                    <div class="trip-header">
+                                                        <div class="trip-name">
+                                                            <div>{{$trip->name}}</div>
+                                                            <div class="iconSec">
+                                                                {{--                                                            <div class="editIcon icons edit"></div>--}}
+                                                                {{--                                                            <div class="trashIcon icons delete"></div>--}}
+                                                                {{--                                                            <div class="settingIcon"></div>--}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="tripDate">
+                                                            <div class="date calendarIconA">
+                                                                <span>1399-05-30</span>
+                                                                <span>تا</span>
+                                                                <span>1399-05-12</span>
+                                                            </div>
+                                                            <div class="userIconA user">12</div>
+                                                        </div>
+                                                    </div>
+{{--                                                    <div class="cursor-pointer trip-images ui_columns is-gapless is-multiline is-mobile">--}}
+                                                    <div class="row picSec">
+                                                        @if(count($trip->placePic) == 0)
+                                                            <div class="cardPics cardPics-1" style="height: 200px; background: gainsboro;">
+                                                                <img src="{{URL::asset('images/icons/mainIcon.svg')}}">
+                                                            </div>
+                                                        @elseif(count($trip->placePic) == 1)
+                                                            <div class="cardPics cardPics-1" style="height: 200px;">
+                                                                <img src="{{$trip->placePic[0]}}" class="resizeImgClass">
+                                                            </div>
+                                                        @elseif(count($trip->placePic) == 2)
+                                                            <div class=" cardPics-1 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[0]}}" class="resizeImgClass">
+                                                            </div>
+                                                            <div class=" cardPics-1 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[1]}}" class="resizeImgClass">
+                                                            </div>
+                                                        @elseif(count($trip->placePic) == 3)
+                                                            <div class=" cardPics-2 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[0]}}" class="resizeImgClass">
+                                                            </div>
+                                                            <div class="cardPics-2 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[1]}}" class="resizeImgClass">
+                                                            </div>
+                                                            <div class="cardPics-1 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[2]}}" class="resizeImgClass">
+                                                            </div>
+                                                        @elseif(count($trip->placePic) == 4)
+                                                            <div class="cardPics-2 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[0]}}" class="resizeImgClass">
+                                                            </div>
+                                                            <div class="cardPics-2 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[1]}}" class="resizeImgClass">
+                                                            </div>
+                                                            <div class="cardPics-2 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[2]}}" class="resizeImgClass">
+                                                            </div>
+                                                            <div class="cardPics-2 cardPics" style="height: 100px;">
+                                                                <img src="{{$trip->placePic[3]}}" class="resizeImgClass">
+                                                            </div>
+                                                        @endif
+
+                                                        {{--                                                    @if(count($trip->placePic) > 0)--}}
+                                                        {{--                                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->placePic[0]}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                        {{--                                                    @else--}}
+                                                        {{--                                                        <div class="trip-image trip-image-empty ui_column is-12" style="background: url('{{URL::asset('images/icons/mainIcon.svg')}}') repeat 0 0; background-size: cover"></div>--}}
+                                                        {{--                                                    @endif--}}
+                                                        {{--                                                    @if(count($trip->placePic) > 1)--}}
+                                                        {{--                                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->placePic[1]}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                        {{--                                                    @else--}}
+                                                        {{--                                                        <div class="trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                        {{--                                                    @endif--}}
+                                                        {{--                                                    @if(count($trip->placePic) > 2)--}}
+                                                        {{--                                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->placePic[2]}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                        {{--                                                    @else--}}
+                                                        {{--                                                        <div class="trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                        {{--                                                    @endif--}}
+                                                        {{--                                                    @if(count($trip->placePic) > 3)--}}
+                                                        {{--                                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->placePic[3]}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                        {{--                                                    @else--}}
+                                                        {{--                                                        <div class="trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                        {{--                                                    @endif--}}
+                                                    </div>
+                                                    <div class="trip-details ui_columns is-mobile is-fullwidth cardFooter">
+                                                        <div class="trip-itemcount ui_column">تعداد اماکن موجود : {{$trip->placeCount}}</div>
+                                                        <div class="trip-last-modified ui_column">آخرین بازید : {{getLastSeen($trip->lastSeen)}} </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                @foreach($trips as $trip)
-                                    <div class="trip-tile-container ui_column is-4">
-                                        <a href="{{route('tripPlaces', ['tripId' => $trip->id])}}" class="trip-tile ui_card is-fullwidth">
-                                            <div class="trip-header">
-                                                <div class="trip-name">{{$trip->name}}</div>
-                                                <div class="trip-date">&nbsp;</div>
-                                            </div>
-                                            <div class="cursor-pointer trip-images ui_columns is-gapless is-multiline is-mobile">
-                                                @if($trip->placeCount > 0)
-                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>
-                                                @else
-                                                    <div class="trip-image trip-image-empty ui_column is-6"></div>
-                                                @endif
-                                                @if($trip->placeCount > 1)
-                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>
-                                                @else
-                                                    <div class="trip-image trip-image-empty ui_column is-6"></div>
-                                                @endif
-                                                @if($trip->placeCount > 2)
-                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>
-                                                @else
-                                                    <div class="trip-image trip-image-empty ui_column is-6"></div>
-                                                @endif
-                                                @if($trip->placeCount > 3)
-                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>
-                                                @else
-                                                    <div class="trip-image trip-image-empty ui_column is-6"></div>
-                                                @endif
-                                            </div>
-                                            <div class="trip-details ui_columns is-mobile is-fullwidth">
-                                                <div class="trip-itemcount ui_column">تعداد اماکن موجود : {{$trip->placeCount}}</div>
-                                                <div class="trip-last-modified ui_column">آخرین بازید : {{getLastSeen($trip->lastSeen)}} </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
                             </div>
-                        </div>
                         @endif
                     </div>
                     <div class="notification-container"></div>
                 </div>
             </div>
-            <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}' data-rup='saves-rest-client'/>
             <div class="ui_backdrop dark display-none" ></div>
         </div>
     </div>
