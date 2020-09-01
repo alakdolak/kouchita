@@ -156,6 +156,8 @@
     </script>
 
     <script>
+        let koochitaNew = {{$newKoochitaMsg}};
+
         function showThisMsgs(_id){
             $('#msgBody').addClass('showThis');
             $('#sideListUser').addClass('hideThis');
@@ -299,22 +301,23 @@
             $('#contacts').empty();
 
             let text = '';
-            text +=  '<div id="user_0" class="userRow" onclick="showThisMsgs(0)">\n' +
-                '                        <div class="userPic">\n' +
-                '                            <img src="{{URL::asset('images/icons/mainIcon.svg')}}" style="width: 100%">\n' +
-                '                        </div>\n' +
-                '                        <div class="userInfo">\n' +
-                '                            <div class="userName">\n' +
-                '                                <div>کوچیتا</div>\n' +
-                '                                <div class="time"></div>\n' +
-                '                            </div>\n' +
-                '                            <div class="userLastMsg">\n' +
-                '                                <div class="lastMsgCotacts"></div>\n';
-            // if(item.newMsg != 0)
-            //     text +=  '<div class="newMsg"></div>\n';
-        text += '                            </div>\n' +
-                '                        </div>\n' +
-                '                    </div>';
+            text += '<div id="user_0" class="userRow" onclick="showThisMsgs(0)">\n' +
+                    '                        <div class="userPic">\n' +
+                    '                            <img src="{{URL::asset('images/icons/mainIcon.svg')}}" style="width: 100%">\n' +
+                    '                        </div>\n' +
+                    '                        <div class="userInfo">\n' +
+                    '                            <div class="userName">\n' +
+                    '                                <div>کوچیتا</div>\n' +
+                    '                                <div class="time"></div>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="userLastMsg">\n' +
+                    '                                <div class="lastMsgCotacts"></div>\n';
+            if(koochitaNew != 0)
+                text +=  '<div class="newMsg">' + koochitaNew + '</div>\n';
+            text += '                            </div>\n' +
+                    '                        </div>\n' +
+                    '                    </div>';
+            koochitaNew = 0;
 
             _contacts.map(item => {
                 text +=  '<div id="user_' + item.id + '" class="userRow" onclick="showThisMsgs(' + item.id + ')">\n' +
@@ -369,7 +372,7 @@
             specUser = {!! $specUser !!};
             showThisMsgs(specUser);
         @else
-            showThisMsgs(contacts[0].id);
+            showThisMsgs(0);
         @endif
     </script>
 @stop
