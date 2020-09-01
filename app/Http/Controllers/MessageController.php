@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Activity;
+use App\models\Alert;
 use App\models\Block;
 use App\models\LogModel;
 use App\models\Message;
@@ -32,9 +33,9 @@ class MessageController extends Controller {
                             ->get();
 
         foreach ($allMsg as $msg){
-            if($msg->senderId != $uId && array_search($msg->senderId, $contactsId) === false)
+            if($msg->senderId != $uId && $msg->senderId != 0 && array_search($msg->senderId, $contactsId) === false)
                 array_push($contactsId, $msg->senderId);
-            else if($msg->receiverId != $uId && array_search($msg->receiverId, $contactsId) === false)
+            else if($msg->receiverId != $uId && $msg->receiverId != 0 && array_search($msg->receiverId, $contactsId) === false)
                 array_push($contactsId, $msg->receiverId);
         }
 
@@ -89,7 +90,12 @@ class MessageController extends Controller {
             $specUser = $cont->id;
         }
 
-        return \view('profile.messagePage', compact(['contacts', 'specUser']));
+        $newKoochitaMsg = Message::where('senderId', 0)
+                                    ->where('receiverId', $uId)
+                                    ->where('seen', 0)
+                                    ->count();
+
+        return \view('profile.messagePage', compact(['contacts', 'specUser', 'newKoochitaMsg']));
     }
 
     public function getMessages(Request $request)
@@ -130,6 +136,14 @@ class MessageController extends Controller {
                 $newMsg->time = verta()->format('H:i');
                 $newMsg->seen = 0;
                 $newMsg->save();
+
+
+                $alert = new Alert();
+                $alert->userId = $request->userId;
+                $alert->subject = 'newMessage';
+                $alert->referenceTable = 'messages';
+                $alert->referenceId = $newMsg->id;
+                $alert->save();
 
                 if($newMsg->date == verta()->format('Y-m-d'))
                     $newMsg->date = 'امروز' ;

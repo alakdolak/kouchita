@@ -145,7 +145,7 @@ footer{
     border-radius: 50%;
 }
 .msgHeader{
-    z-index: 9;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -345,7 +345,7 @@ footer{
     padding: 10px 20px;
     border-radius: 35px;
     direction: rtl;
-
+    text-align: center;
 }
 .msgContent .loading{
     width: 100%;

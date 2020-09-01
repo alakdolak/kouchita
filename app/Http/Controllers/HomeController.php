@@ -1167,13 +1167,14 @@ class HomeController extends Controller
 
     public function getAlerts()
     {
-        $greenColor = 'var(--koochita-light-green)26';
+        $greenColor = '#4dc7bc47';
         $redColor = '#ffe1e1';
         $result = [];
         $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->get();
 
         foreach ($alerts as $item) {
             $item->time = getDifferenceTimeString($item->created_at);
+
             if($item->subject == 'deleteReview' || $item->subject == 'deleteAns' || $item->subject == 'deleteQues'){
                 $reference = \DB::table($item->referenceTable)->find($item->referenceId);
                 if($reference != null) {
@@ -1378,6 +1379,36 @@ class HomeController extends Controller
                     }
                     else
                         $item->delete();
+                }
+                else
+                    $item->delete();
+            }
+            else if($item->referenceTable == 'messages'){
+                $reference = Message::find($item->referenceId);
+                if($reference != null){
+                    if($reference->senderId == 0){
+                        $url = route('profile.message.page');
+                        $alertText = '<a href="' . $url . '">';
+                        $alertText .= 'شما یک پیام از کوچیتا دارید.';
+                        $alertText .= '</a>';
+
+                        $item->color = $greenColor;
+                        $item->msg = $alertText;
+                        $item->pic = getUserPic(0);
+                        array_push($result, $item);
+                    }
+                    else {
+                        $uRef = User::find($reference->senderId);
+                        $url = route('profile.message.page') . '?user=' . $uRef->username;
+                        $alertText = '<a href="' . $url . '">';
+                        $alertText .= 'شما یک پیام از ' . $uRef->username . ' دارید.';
+                        $alertText .= '</a>';
+
+                        $item->color = $greenColor;
+                        $item->msg = $alertText;
+                        $item->pic = getUserPic($reference->senderId);
+                        array_push($result, $item);
+                    }
                 }
                 else
                     $item->delete();
