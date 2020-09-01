@@ -72,7 +72,7 @@ class MessageController extends Controller {
 
         if(isset(\Request::all()['user'])){
             $cont = User::where('username', \Request::all()['user'])->first();
-            if(array_search($cont->id, $contactsId) === false){
+            if(array_search($cont->id, $contactsId) === false && $cont != null){
                 $cont->pic = getUserPic($cont->id);
                 $cont->newMsg = Message::where('receiverId', $uId)->where('senderId', $cont->id)->where('seen', 0)->count();
 
@@ -80,7 +80,10 @@ class MessageController extends Controller {
                 $cont->lastTime = '';
                 if(count($contacts) == 0)
                     $contacts = [];
-                array_unshift($contacts, $cont);
+                else
+                   $contacts = $contacts->toArray();
+
+		array_unshift($contacts, $cont);
             }
 
             $specUser = $cont->id;
