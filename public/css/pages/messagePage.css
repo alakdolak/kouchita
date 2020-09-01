@@ -381,7 +381,11 @@ footer{
 
 @media (max-width: 768px) {
     .msgContent{
-        height: calc(100vh - 190px);
+        height: calc(100% - 190px);
+        position: fixed;
+        top: 60px;
+        right: 0px;
+        width: 100%;
     }
 
     .msgBody{
@@ -414,6 +418,7 @@ footer{
     }
     .msgFooter{
         position: fixed;
+        bottom: 70px;
     }
     footer{
         display: flex;
@@ -433,5 +438,9 @@ footer{
     }
     .userRow.active{
         background-color: inherit;
+    }
+    .msgHeader{
+        position: fixed;
+        top: 0px;
     }
 }
