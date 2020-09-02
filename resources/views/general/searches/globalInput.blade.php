@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/globalSearch.css?v=1')}}">
+{{--<link rel="stylesheet" href="{{URL::asset('css/globalSearch.css?v=1')}}">--}}
 
 <div id="globalSearch" class="globalSearchBlackBackGround">
     <div class="row" style="width: 100%; display: flex; align-items: center; flex-direction: column">

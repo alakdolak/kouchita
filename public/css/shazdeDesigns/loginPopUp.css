@@ -33,12 +33,12 @@ textarea, input, select, button, a {
     justify-content: center;
     align-items: center;
 }
+
 .labelForCheckBox:before {
     background-color: transparent !important;
     border: none !important;
     content: "" !important;
 }
-
 
 .loginDividerBorder {
     border-right: 1px solid #cccccc;
@@ -54,6 +54,7 @@ textarea, input, select, button, a {
     background: var(--koochita-blue);
     border-color: var(--koochita-blue);
 }
+
 .resendActivationCode:hover{
     background: var(--koochita-blue);
     border-color: var(--koochita-blue);
@@ -69,7 +70,6 @@ textarea, input, select, button, a {
     padding-top: 8px;
     font-size: 10px;
 }
-
 
 .loginInputTemp {
     width: 100%;
@@ -246,6 +246,7 @@ textarea, input, select, button, a {
     justify-content: center;
     z-index: 9999;
 }
+
 .loginCloseIcon{
     position: absolute;
     top: 0px;
@@ -254,11 +255,13 @@ textarea, input, select, button, a {
     color: var(--koochita-light-green);
     cursor: pointer;
 }
+
 .mainDivLoginMainLogo{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .loginPopUpContent {
     display: flex;
     background: white;
@@ -275,10 +278,12 @@ textarea, input, select, button, a {
     align-items: center;
     width: 100%;
 }
+
 .loginMainLogo {
     margin-bottom: 20px;
     height: 50px;
 }
+
 .closeLoginPopup{
     position: absolute;
     top: 5px;
@@ -287,35 +292,40 @@ textarea, input, select, button, a {
     color: var(--koochita-light-green);
     cursor: pointer;
 }
+
 .registerRightSection{
     width: 60%;
     padding: 35px 0px;
     padding-right: 15px
 }
+
 .loginPopUpLable{
     font-weight: bold;
     font-size: 17px;
     margin-top: 15px;
 }
+
 .loginRowsPopup{
     font-weight: 700 !important;
     font-size: 16px;
     display: flex;
     flex-direction: column;
 }
+
 .loginRowsPopupInline{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
+
 .loginInputLabel{
     min-width: 75px;
 }
+
 .mainContentInfos{
     padding-right: 0px;
     padding-left: 15px;
 }
-
 
 .registerLeftSection{
     width: 40%;
@@ -326,36 +336,44 @@ textarea, input, select, button, a {
     overflow: hidden;
     max-height: 70vh;
 }
+
 .loginPopUpContent{
     padding-top: 0px;
 }
+
 .loginHeader img{
     margin-right: 10px;
 }
+
 .loginTextHeader{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 .loginTextHeader .text{
     font-size: 27px;
     font-weight: bold;
     margin-bottom: 5px;
 }
+
 .googleA{
     /*background: #4c83ff;*/
     /*background: #fbc155;*/
     background: #4285f4;
 }
+
 .not_signed_inyx5syaq6qblq{
     color: #545454;
 }
+
 .loginTextHeader .abcRioButtonIcon{
     padding: 8px;
     background: white;
     margin: 1px;
 }
+
 .loginTextHeader .abcRioButtonContents{
     font-size: 20px;
     display: flex;
@@ -381,11 +399,13 @@ textarea, input, select, button, a {
     padding: 15px;
     background: #fafafa;
 }
+
 .loginFSection .headerTextF{
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
 }
+
 .loginFSection .forgetPassBut{
     color: darkred;
     font-size: 12px;
@@ -400,7 +420,6 @@ textarea, input, select, button, a {
     width: 100%;
 }
 
-
 .bottomLoginText{
     color: white;
     font-size: 11px;
@@ -408,6 +427,7 @@ textarea, input, select, button, a {
     padding-top: 5px;
     opacity: .9;
 }
+
 .loginRegisterButton{
     color: white;
     background: var(--koochita-red);
@@ -426,42 +446,51 @@ textarea, input, select, button, a {
     .loginPopUpContent{
         top: 0;
     }
+
     .loginInputDiv{
         width: 100%;
         margin-top: 10px;
     }
+
     .pcMarginTop10{
         margin: 0px;
     }
+
     .loginPopUpContent{
         width: 100%;
     }
+
     .registerRightSection{
         width: 100%;
     }
+
     .registerLeftSection{
         display: none;
     }
+
     .registerFSection{
         padding: 5px;
         margin-top: 10px;
     }
+
     .loginHeader img{
         margin-bottom: 0px;
     }
+
     .nameRegisterDiv{
         /*width: 70%;*/
         padding: 0px;
     }
+
     .loginFSection .headerTextF{
         margin-bottom: 5px;
     }
+
     .buttonRegisterDiv{
         /*width: 27%;*/
         padding: 0;
     }
 }
-
 
 @media (max-width:630px) {
 
@@ -493,7 +522,4 @@ textarea, input, select, button, a {
         border-right: none;
         margin-bottom: 10px;
     }
-}
-
-@media (max-width:400px) {
 }

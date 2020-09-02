@@ -26,7 +26,7 @@ $authUrl = $client->createAuthUrl();
 $url = $_SERVER['REQUEST_URI'];
 $authUrl = str_replace('state', 'state='.$url, $authUrl);
 ?>
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>
+{{--<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>--}}
 
 @if(\App::getLocale() == 'en')
     <link rel="stylesheet" href="{{URL::asset('css/ltr/loginPopUpLtr.css?v=2')}}">

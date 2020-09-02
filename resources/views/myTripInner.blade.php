@@ -3,9 +3,195 @@
 @extends('layouts.bodyProfile')
 
 @section('header')
-
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}">
+
+    <style>
+        #editTripPrompt{
+            padding: 20px;
+        }
+        .modalBody{
+            background: white;
+            padding: 25px;
+            direction: rtl;
+            position: relative;
+        }
+        .memberList{
+            max-height: 55vh;
+            overflow: auto;
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .closeModal{
+            position: absolute;
+            left: 5px;
+            top: 0px;
+            font-size: 30px;
+            color: var(--koochita-light-green);
+            cursor: pointer;
+        }
+        .memberCard{
+            padding: 10px;
+            border-radius: 20px;
+            width: 150px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+            background: #fcc15633;
+            box-shadow: 5px 4px 10px #80808080;
+            transition: 1s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memberCard .cont{
+            width: 100%;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .memberCard .loading{
+            /*position: absolute;*/
+            /*top: 0px;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*background: #ffebc6e0;*/
+            /*display: flex;*/
+            /*justify-content: center;*/
+            /*align-items: center;*/
+
+            background: red;
+            color: white;
+            font-size: 9px;
+            border-radius: 5px;
+            padding: 2px 5px;
+            margin-bottom: 8px;
+            position: absolute;
+            top: 35px;
+        }
+
+        /*.memberCard .loading img{*/
+        /*    width: 100px;*/
+        /*}*/
+
+        .memberCard .access{
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            transform: rotateY(180deg);
+        }
+
+        .memberCard .access .header{
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: solid lightgray 1px;
+            padding-bottom: 5px;
+        }
+
+        .memberCard .access .back{
+            color: var(--koochita-green);
+            cursor: pointer;
+            font-size: 16px;
+            border: solid 1px;
+            width: 100%;
+            text-align: center;
+            border-radius: 5px;
+            transition: .3s;
+        }
+        .memberCard .access .back:hover{
+            color: white;
+            background: var(--koochita-green);
+            border-color: var(--koochita-green);
+        }
+
+        .memberCard.rotate180{
+            transform: rotateY(180deg);
+        }
+        .memberCard.accessType .cont{
+            display: none !important;
+        }
+        .memberCard.accessType .access{
+            display: flex !important;
+        }
+
+        .memberCard .img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        .memberCard .name{
+            font-weight: bold;
+            margin: 10px 0px;
+            font-size: 15px;
+        }
+        .memberCard .btn{
+            text-align: center;
+            border: solid 1px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: .3s;
+            padding: 3px 0px;
+            font-size: 11px;
+        }
+        .memberCard .accessBut{
+            color: var(--koochita-blue);
+            width: 100%;
+        }
+        .memberCard .accessBut:hover{
+            color: white;
+            border-color: var(--koochita-blue);
+            background: var(--koochita-blue);
+        }
+        .memberCard .msgBut{
+            color: var(--koochita-green);
+            width: 45%;
+        }
+        .memberCard .msgBut:hover{
+            color: white;
+            border-color: var(--koochita-green);
+            background: var(--koochita-green);
+        }
+        .memberCard .deleteBut {
+            color: red;
+            width: 45%;
+        }
+        .memberCard .deleteBut:hover{
+            color: white;
+            border-color: red;
+            background: red;
+        }
+        .memberCard .row{
+            display: flex;
+            width: 100%;
+            margin: 0;
+            justify-content: space-between;
+            margin-top: 4px;
+            align-items: center;
+            padding: 0;
+        }
+
+        @media (max-width: 600px) {
+            .memberList{
+                max-height: 80vh;
+            }
+        }
+        @media (max-width: 450px) {
+            .userAccessRow{
+                flex-direction: column;
+            }
+        }
+    </style>
+
 @stop
 
 @section('main')
@@ -27,24 +213,26 @@
                                     <div class="position-relative">
                                         <a  class="text-decoration-none saves-back-button is-hidden-mobile ui_button secondary" href="{{route('myTrips')}}">← بازگشت به سفرهای من</a>
                                         <span class="trip-title">{{$trip->name}}</span>
-                                        <div id="targetHelp_6" class="targets">
-                                            @if($changeTripDate == 1)
+                                        @if($trip->editTrip)
+                                            <div id="targetHelp_6" class="targets">
                                                 <span onclick="showEditTrip('{{$trip->from_}}', '{{$trip->to_}}')" class="ui_icon settings-fill mg-lt-0Imp"></span>
-                                            @endif
-                                            <div id="helpSpan_6" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید تاریخ شروع و پایان سفرو نام سفر را ویرایش کنید. همچنین می توانید اقدام به حذف سفر اقدام کنید.</p>
-                                                <button data-val="6" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_6">بعدی</button>
-                                                <button data-val="6" class="btn btn-primary backBtnsHelp" id="backBtnHelp_6">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
+
+                                                <div id="helpSpan_6" class="helpSpans hidden row">
+                                                    <span class="introjs-arrow"></span>
+                                                    <p>در این قسمت می توانید تاریخ شروع و پایان سفرو نام سفر را ویرایش کنید. همچنین می توانید اقدام به حذف سفر اقدام کنید.</p>
+                                                    <button data-val="6" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_6">بعدی</button>
+                                                    <button data-val="6" class="btn btn-primary backBtnsHelp" id="backBtnHelp_6">قبلی</button>
+                                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @if(count($tripPlaces) == 0)
+                                        @endif
+
+                                    @if(count($tripPlaces) == 0)
                                             <a class="cursor-pointer float-right link" onclick="initHelp(18, [1, 2, 3, 4, 5, 14, 15, 16, 17], 'MAIN', 100, 400)">
                                                 <div class="helpBtnTimeChange"></div>
                                             </a>
                                         @else
-                                            @if($owner || $addPlace)
+                                            @if($trip->editPlace)
                                                 <a class="cursor-pointer float-right link" onclick="initHelp(18, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
                                                     <div class="helpBtnTimeChange"></div>
                                                 </a>
@@ -58,7 +246,7 @@
                                 </div>
                                 <div class="saves-header-buttons">
                                     <div id="targetHelp_11" class="targets">
-                                        <div onclick="showMembers('{{$owner}}')" class="saves-invite-friends  saves-header-button">
+                                        <div onclick="showMembers()" class="saves-invite-friends  saves-header-button">
                                             <div class="ui_icon friend-fill"></div>
                                             اعضا
                                         </div>
@@ -70,9 +258,9 @@
                                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                                         </div>
                                     </div>
-                                    @if($addFriend == 1)
+                                    @if($trip->editMember)
                                         <div id="targetHelp_12" class="targets">
-                                            <div  onclick="showElement('invitePane')" class="saves-print saves-header-button">
+                                            <div  onclick="openModal('inviteMember')" class="saves-print saves-header-button">
                                                 <div class="ui_icon add-friend-fill"></div>
                                                 دعوت از دوستان
                                             </div>
@@ -100,9 +288,9 @@
                                     </div>
                                 </div>
                                 <div class="trip-action is-hidden-mobile width-autoImp">
-                                    @if($addPlace == 1)
+                                    @if($trip->editPlace)
                                         <div id="targetHelp_7" class="targets">
-                                            <div onclick="searchPlace('addPlacePrompt')" class="z-index-1 ui_button primary add_more">
+                                            <div onclick="searchPlace('addPlaceModal')" class="z-index-1 ui_button primary add_more">
                                                 <div class="ui_icon plus"></div>
                                             </div>
                                             <div id="helpSpan_7" class="helpSpans hidden row">
@@ -114,7 +302,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if($changeTripDate == 1)
+                                    @if($trip->editTrip)
                                         <div id="targetHelp_8" class="targets">
                                             <div onclick="editDateTrip('{{$trip->from_}}', '{{$trip->to_}}')" class="z-index-1 ui_button secondary trip-add-dates">
                                                 <div class="ui_icon calendar"></div>
@@ -129,7 +317,7 @@
                                         </div>
                                     @endif
                                     <div id="targetHelp_9" class="targets">
-                                        <div onclick="addNote()" class="z-index-1 ui_button secondary trip-add-dates">
+                                        <div onclick="openModal('noteModal')" class="z-index-1 ui_button secondary trip-add-dates">
                                             <div class="ui_icon custom-note"></div>
                                         </div>
                                         <div id="helpSpan_9" class="helpSpans hidden row">
@@ -156,9 +344,7 @@
                             </div>
                             <div id="saves-body" class="styleguide position-relative">
                                 <div id="saves-root-view" class="position-relative">
-                                    @if($tripNote != "")
-                                        <p id="tripNotePElement">{{$tripNote}}</p>
-                                    @endif
+                                    <p id="tripNotePElement">{{$trip->note}}</p>
                                     @if($tripPlaces == null || count($tripPlaces) == 0)
                                         <div id="saves-itinerary-container">
                                             <div id="trip-dates-region" style="display: none;"></div>
@@ -171,7 +357,7 @@
                                                                     <div class="ui_icon heart"></div>
                                                                     <div class="cta-header">هنوز چیزی ذخیره نشده است</div>
                                                                     <div class="cta-text"></div>
-                                                                    <a onclick="searchPlace('addPlacePrompt')" class="ui_button primary browse_ta">جستجو در کوچیتا</a>
+                                                                    <a onclick="searchPlace('addPlaceModal')" class="ui_button primary browse_ta">جستجو در کوچیتا</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -223,7 +409,7 @@
                                                                                     <span class="color-green ui_icon calendar"></span>
                                                                                 </button>
                                                                             @endif
-                                                                            @if($owner == 1 || $addPlace)
+                                                                            @if($trip->editPlace)
                                                                                 @if($i == 0)
                                                                                     <div id="targetHelp_16" class="targets">
                                                                                         <button data-toggle="tooltip" title="حذف مکان" onclick="deletePlace('{{$tripPlace->id}}')" class="ui_button removeBtnTargetHelp_16"></button>
@@ -289,55 +475,6 @@
         </div>
     </div>
 
-    <span id="addPlacePrompt" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden">
-        <div class="body_text">
-            <div>
-                <div class="find_location_modal">
-                    <div class="header_text addPlacePromptTitle">به سفر {{$trip->name}} اضافه کن</div>
-                    <div class="ui_typeahead" id="parameters">
-                    </div>
-
-                    <p id="placePromptError"></p>
-                </div>
-            </div>
-        </div>
-        <div class="ui_close_x" onclick="myHideElement()"></div>
-    </span>
-
-    <span id="membersPane" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden">
-        <div class="body_text">
-            <div>
-                <div class="find_location_modal">
-                    <div class="header_text membersPaneTitle">اعضای سفر</div>
-                    <div class="ui_typeahead" id="members">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui_close_x" onclick="myHideElement()"></div>
-    </span>
-
-    <div class="ui_backdrop dark darkModeOption"></div>
-
-    <span id="note" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden">
-        <div class="body_text">
-            <div>
-                <div class="find_location_modal">
-                    <div class="header_text addNoteTitle">یادداشت سفر</div>
-                    <div class="ui_typeahead" id="notePrompt">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="submitOptions direction-rtl">
-            <button onclick="doAddNote()" class="btn btn-success successBtn">تایید</button>
-            <input type="submit" onclick="myHideElement()" value="خیر" class="btn btn-default">
-        </div>
-
-        <div class="ui_close_x" onclick="myHideElement()"></div>
-    </span>
-
     <span id="addPlaceToTripPrompt" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden">
         <div class="body_text">
             <div>
@@ -352,28 +489,6 @@
             <button onclick="assignPlaceToTrip('{{$trip->from_}}', '{{$trip->to_}}')" class="btn btn-success successBtn">تایید</button>
             <input type="submit" onclick="myHideElement()" value="خیر" class="btn btn-default">
             <p id="errorAssignPlace"></p>
-        </div>
-        <div class="ui_close_x" onclick="myHideElement()"></div>
-    </span>
-
-    <span id="invitePane" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden">
-        <div class="body_text">
-            <div>
-                <div class="find_location_modal">
-                    <div class="header_text invitePaneTitle">دعوت از دوستان</div>
-                    <div class="ui_typeahead direction-rtl">
-                        <p>از کی دعوت می کنید</p>
-                        <input type="text" id="friendId" placeholder="نام کاربری">
-                        <p class="mg-tp-10">نام شما</p>
-                        <input type="text" id="nickName" value="{{$user->username}}">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="submitOptions direction-rtl mg-tp-20">
-            <button onclick="inviteFriend()" class="btn btn-success successBtn">ارسال</button>
-            <input type="submit" onclick="myHideElement()" value="بازگشت" class="btn btn-default">
-            <p id="errorInvite"></p>
         </div>
         <div class="ui_close_x" onclick="myHideElement()"></div>
     </span>
@@ -397,104 +512,6 @@
         <div class="ui_close_x" onclick="myHideElement()"></div>
     </span>
 
-    <span id="editDateTripPrompt" class="ui_overlay ui_modal editTags item hidden">
-        <div class="modal-card">
-            <div class="ui_close_x" onclick="myHideElement()"></div>
-            <div class="modal-card-head">
-                <p class="modal-card-title editTripDateLabel">ویرایش تاریخ سفر</p>
-            </div>
-            <div class="trip-dates ui_columns">
-             <div class="ui_column">
-                 <div id="date_btn_start_edit">تاریخ شروع</div>
-                 <label id="date_btn_start_edit_label">
-                     <span class="ui_icon calendar" id="date_btn_start_edit_span"></span>
-                     <input id="date_input_start_edit_2" placeholder="روز/ماه/سال" value="{{$trip->from_}}" required readonly type="text">
-                 </label>
-              </div>
-             <div class="ui_column">
-                 <div id="date_btn_end_edit">تاریخ اتمام</div>
-                 <label id="date_btn_end_edit_label">
-                     <span class="ui_icon calendar" id="date_btn_end_edit_span"></span>
-                     <input id="date_input_end_edit_2" placeholder="روز/ماه/سال" value="{{$trip->to_}}" required readonly type="text">
-                 </label>
-             </div>
-         </div>
-            <div class="modal-card-foot">
-                <button onclick="changeDate()" id="editBtn" class="saves-settings-save ui_button first-button primary">ذخیره</button>
-            </div>
-            <br>
-            <p class="color-red mg-10">توجه داشته باشید که با تغییر تاریخ سفر چنانچه مکانی از سفر شما تاریخی داشته باشد که در بازه ی جدید قرار نگیرد آن تاریخ پاک می شود</p>
-            <p id="error2"></p>
-        </div>
-    </span>
-
-    <span id="editTripPrompt" class="ui_overlay ui_modal editTags item hidden">
-        <div class="header_text editTripPromptTitle">ویرایش سفر</div>
-        <div class="body_text">
-            <div id="trip-title-input-region">
-                <div>
-                    <label class="label">نام سفر</label>
-                    <div class="control trip-title-control">
-                        <input onkeyup="checkBtnDisable()" id="tripNameEdit" class="trip-title ui_input_text" type="text" maxlength="40" placeholder="حداکثر 40 کاراکتر" value="{{$trip->name}}">
-                    </div>
-                </div>
-        </div>
-            <div class="trip-dates ui_columns">
-             <div class="ui_column">
-                 <div id="date_btn_start_edit">تاریخ شروع</div>
-                 <label id="date_btn_start_label">
-                     <span class="ui_icon calendar" id="date_btn_start"></span>
-                     <input type="text" id="date_input_start_edit" placeholder="روز/ماه/سال" value="{{$trip->from_}}" required readonly type="text">
-                 </label>
-              </div>
-             <div class="ui_column">
-                 <div id="date_btn_end_edit">تاریخ اتمام</div>
-                 <label id="date_btn_end_label">
-                     <span class="ui_icon calendar" id="date_btn_start"></span>
-                     <input type="text" id="date_input_end_edit" placeholder="روز/ماه/سال" value="{{$trip->to_}}" required readonly type="text">
-                 </label>
-             </div>
-         </div>
-
-            @if($trip->to_ != "" && $trip->from_ != "")
-                <div class="control clear-dates">
-                    <div class='ui_input_checkbox'>
-                        <input id="clearDateId" onclick="changeClearCheckBox('{{$trip->from_}}', '{{$trip->to_}}')" type="checkbox">
-                        <label for="clearDateId" class="labelForCheckBox"><span></span>  حذف تاریخ  </label>
-                    </div>
-                </div>
-            @endif
-
-            <p class="color-red mg-10">توجه داشته باشید که با تغییر تاریخ سفر چنانچه مکانی از سفر شما تاریخی داشته باشد که در بازه ی جدید قرار نگیرد آن تاریخ پاک می شود</p>
-
-            <div class="mg-tp-10">
-                <div id="error"></div>
-            </div>
-
-        </div>
-
-        <div class="submitOptions direction-rtl mg-tp-20">
-            <button onclick="editTrip()" id="editBtn" class="saves-settings-save ui_button first-button primary">ذخیره</button>
-            <button onclick="deleteTrip()" class="saves-settings-delete ui_button last-button danger">حذف سفر</button>
-        </div>
-
-        <div onclick="hideElement2('deleteTrip')" class="ui_close_x"></div>
-    </span>
-
-    <span class="ui_overlay ui_modal editTags item hidden" id="deleteTrip">
-        <p>آیا از پاک کردن سفر اطمینان دارید ؟</p>
-        <br><br>
-        <div class="body_text">
-            <div class="submitOptions">
-                <button onclick="doDeleteTrip()" class="btn btn-success successBtn">بله </button>
-                <input type="submit" onclick="myHideElement()" value="خیر" class="btn btn-default">
-            </div>
-        </div>
-
-        <div onclick="hideElement2('deleteTrip')" class="ui_close_x"></div>
-
-    </span>
-
     <span class="ui_overlay ui_modal editTags item hidden" id="deleteTripPlace">
         <p>آیا از پاک کردن مکان مورد نظر از سفر اطمینان دارید ؟</p>
         <br><br>
@@ -509,19 +526,225 @@
 
     </span>
 
-    <span class="ui_overlay ui_modal editTags item hidden" id="deleteMember">
-        <p>آیا از حذف عضو مورد نظر از سفر اطمینان دارید ؟</p>
-        <br><br>
-        <div class="body_text">
-            <div class="submitOptions">
-                <button onclick="doDeleteMember()" class="btn btn-success successBtn">بله </button>
-                <input type="submit" onclick="myHideElement()" value="خیر" class="btn btn-default">
+
+    @if($trip->editMember)
+
+        <div id="inviteMember" class="modalBlackBack hidden" style="z-index: 9999;">
+            <div class="modalBody" style="width: 400px;">
+                <div onclick="closeModal('inviteMember')" class="iconClose closeModal"></div>
+                <div class="find_location_modal">
+                    <div class="header_text invitePaneTitle">دعوت از دوستان</div>
+                    <div class="ui_typeahead direction-rtl">
+                        <p>از کی دعوت می کنید</p>
+                        <input type="text" id="friendId" placeholder="نام کاربری">
+                    </div>
+                </div>
+                <div class="submitOptions direction-rtl mg-tp-20">
+                    <button onclick="inviteFriend()" class="btn btn-success successBtn">ارسال</button>
+                    <input type="submit" onclick="closeModal('inviteMember')" value="بازگشت" class="btn btn-default">
+                    <p id="errorInvite"></p>
+                </div>
             </div>
         </div>
 
-        <div onclick="hideElement2('deleteTrip')" class="ui_close_x"></div>
+        <div id="memberModal" class="modalBlackBack hidden" style="z-index: 9999;">
+            <div class="modalBody" style="width: 600px;">
+                <div onclick="closeModal('memberModal')" class="iconClose closeModal"></div>
 
-    </span>
+                <div class="find_location_modal">
+                    <div class="header_text membersPaneTitle">اعضای سفر</div>
+                    <div class="ui_typeahead memberList" id="members">
+
+                        <div id="member_##id##" class="memberCard">
+                            <div class="cont">
+                                <div class="img">
+                                    <img src="##pic##" style="height: 100%;">
+                                    <div class="loading">در انتظار تایید</div>
+                                </div>
+                                <div class="name">##username##</div>
+                                @if($trip->editMember)
+                                    <div class="accessBut btn" onclick="showThisUserAccess(this)">
+                                        دسترسی ها
+                                    </div>
+                                @endif
+                                <div class="row">
+                                    <a href="{{route('profile.message.page')}}?user=##username##" class="msgBut btn">
+                                        ارسال پیام
+                                    </a>
+                                    @if($trip->editMember)
+                                        <div class="deleteBut btn" onclick="deleteMember(##id##, '##username##')">
+                                            حذف کاربر
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            @if($trip->editMember)
+                                <div class="access hidden">
+                                    <div class="header">
+                                        دسترسی های کاربر
+                                    </div>
+                                    <div class="input">
+                                        <div class='ui_input_checkbox'>
+                                            <input id="canEditTrip_##id##" type="checkbox">
+                                            <label for="canEditTrip_##id##" class="labelForCheckBox">
+                                                <span style="margin-left: 5px !important;"></span>
+                                                ویرایش سفر
+                                            </label>
+                                        </div>
+                                        <div class='ui_input_checkbox'>
+                                            <input id="canEditMember_##id##" type="checkbox">
+                                            <label for="canEditMember_##id##" class="labelForCheckBox">
+                                                <span style="margin-left: 5px !important;"></span>
+                                                ویرایش اعضا
+                                            </label>
+                                        </div>
+                                        <div class='ui_input_checkbox'>
+                                            <input id="canEditPlace_##id##" type="checkbox">
+                                            <label for="canEditPlace_##id##" class="labelForCheckBox">
+                                                <span style="margin-left: 5px !important;"></span>
+                                                ویرایش اماکن
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="back" onclick="submitMemberAccess(this, ##id##)">
+                                        ثبت
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($trip->editPlace)
+        <div id="addPlaceModal" class="modalBlackBack hidden" style="z-index: 9999;">
+            <div class="modalBody">
+                <div onclick="closeModal('addPlaceModal')" class="iconClose closeModal"></div>
+                <div class="find_location_modal">
+                    <div class="header_text addPlacePromptTitle">به سفر {{$trip->name}} اضافه کن</div>
+                    <div class="ui_typeahead" id="parameters"></div>
+                    <p id="placePromptError"></p>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($trip->editTrip)
+        <div id="noteModal" class="modalBlackBack fullCenter hidden" style="z-index: 9999;">
+            <div class="modalBody" style="width: 400px;">
+                <div onclick="closeModal('noteModal')" class="iconClose closeModal"></div>
+                <div class="find_location_modal">
+                    <div class="header_text addNoteTitle">یادداشت سفر</div>
+                    <div class="ui_typeahead">
+                        <textarea id='tripNote' placeholder="شما می توانید برای سفر خود یادداشت بگذارید">{!! $trip->note !!}</textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="submitOptions direction-rtl">
+                    <button onclick="doAddNote()" class="btn btn-success successBtn">تایید</button>
+                    <button onclick="closeModal('noteModal')" class="btn btn-default">خیر</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="editDateTripModal" class="modalBlackBack fullCenter hidden" style="z-index: 9999;">
+            <div class="modalBody">
+                <div onclick="closeModal('editDateTripModal')" class="iconClose closeModal"></div>
+                <div class="modal-card-head">
+                    <p class="header_text editTripPromptTitle">ویرایش تاریخ سفر</p>
+                </div>
+                <div class="trip-dates ui_columns">
+                    <div class="ui_column">
+                        <div id="date_btn_start_edit">تاریخ شروع</div>
+                        <label id="date_btn_start_edit_label">
+                            <span class="ui_icon calendar" id="date_btn_start_edit_span"></span>
+                            <input id="date_input_start_edit_2" placeholder="روز/ماه/سال" value="{{$trip->from_}}" required readonly type="text">
+                        </label>
+                    </div>
+                    <div class="ui_column">
+                        <div id="date_btn_end_edit">تاریخ اتمام</div>
+                        <label id="date_btn_end_edit_label">
+                            <span class="ui_icon calendar" id="date_btn_end_edit_span"></span>
+                            <input id="date_input_end_edit_2" placeholder="روز/ماه/سال" value="{{$trip->to_}}" required readonly type="text">
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-card-foot">
+                    <button onclick="changeDate()" id="editBtn" class="saves-settings-save ui_button first-button primary">ذخیره</button>
+                </div>
+                <br>
+                <p class="color-red mg-10" style="font-size: 10px !important; line-height: 15px;">
+                    توجه داشته باشید که با تغییر تاریخ سفر چنانچه مکانی از سفر شما تاریخی داشته باشد که در بازه ی جدید قرار نگیرد آن تاریخ پاک می شود
+                </p>
+                <p id="error2"></p>
+            </div>
+        </div>
+
+        <div id="editTripModal" class="modalBlackBack fullCenter hidden" style="z-index: 9999;">
+            <div class="modalBody">
+                <div onclick="closeModal('editTripModal')" class="iconClose closeModal"></div>
+                <div class="header_text editTripPromptTitle">ویرایش سفر</div>
+                <div class="body_text">
+                    <div id="trip-title-input-region">
+                        <div>
+                            <label class="label">نام سفر</label>
+                            <div class="control trip-title-control">
+                                <input onkeyup="checkBtnDisable()" id="tripNameEdit" class="trip-title ui_input_text" type="text" maxlength="40" placeholder="حداکثر 40 کاراکتر" value="{{$trip->name}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trip-dates ui_columns">
+                        <div class="ui_column">
+                            <div id="date_btn_start_edit">تاریخ شروع</div>
+                            <label id="date_btn_start_label">
+                                <span class="ui_icon calendar" id="date_btn_start"></span>
+                                <input type="text" id="date_input_start_edit" placeholder="روز/ماه/سال" value="{{$trip->from_}}" required readonly type="text">
+                            </label>
+                        </div>
+                        <div class="ui_column">
+                            <div id="date_btn_end_edit">تاریخ اتمام</div>
+                            <label id="date_btn_end_label">
+                                <span class="ui_icon calendar" id="date_btn_start"></span>
+                                <input type="text" id="date_input_end_edit" placeholder="روز/ماه/سال" value="{{$trip->to_}}" required readonly type="text">
+                            </label>
+                        </div>
+                    </div>
+
+                    @if($trip->to_ != "" && $trip->from_ != "")
+                        <div class="control clear-dates">
+                            <div class='ui_input_checkbox'>
+                                <input id="clearDateId" onclick="changeClearCheckBox('{{$trip->from_}}', '{{$trip->to_}}')" type="checkbox">
+                                <label for="clearDateId" class="labelForCheckBox">
+                                    <span style="margin-left: 5px !important;"></span>
+                                    حذف تاریخ
+                                </label>
+                            </div>
+                        </div>
+                    @endif
+
+                    <p class="color-red mg-10" style="font-size: 10px !important; line-height: 15px;">
+                        توجه داشته باشید که با تغییر تاریخ سفر چنانچه مکانی از سفر شما تاریخی داشته باشد که در بازه ی جدید قرار نگیرد آن تاریخ پاک می شود
+                    </p>
+
+                    <div class="mg-tp-10">
+                        <div id="error"></div>
+                    </div>
+
+                </div>
+                <div class="submitOptions direction-rtl mg-tp-20">
+                    <button onclick="editTrip()" id="editBtn" class="saves-settings-save ui_button first-button primary">ذخیره</button>
+                    @if($trip->owner)
+                        <button onclick="deleteTrip()" class="saves-settings-delete ui_button last-button danger">حذف سفر</button>
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
+
 
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
@@ -530,23 +753,15 @@
         var getStates = '{{route('getStates')}}';
         var getCitiesDir = '{{route('getCitiesDir')}}';
         var getPlaceKindsDir = '{{route('getPlaceKinds')}}';
-        var searchPlaceDir = '{{route('searchPlace')}}';
         var tripId = '{{$trip->id}}';
         var addTripPlace = '{{route('addTripPlace')}}';
         var tripPlaces = '{{route('tripPlaces', ['tripId' => $trip->id])}}';
         var editTripDir = '{{route('editTrip')}}';
         var getPlaceTrips = '{{route('placeTrips')}}';
         var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
-        var myTrips = '{{route('myTrips')}}';
         var placeInfo = '{{route('placeInfo')}}';
         var changeDateTripDir = '{{route('changeDateTrip')}}';
-        var deleteTripDir = '{{route('deleteTrip')}}';
-        var getNotes = '{{route('getNotes')}}';
-        var addNoteDir = '{{route('addNote')}}';
         var assignDateToPlaceDir = '{{route('assignDateToPlace')}}';
-        var inviteFriendDir = '{{route('inviteFriend')}}';
-        var getMembers = '{{route('getTripMembers')}}';
-        var deleteMemberDir = '{{route('deleteMember')}}';
         var getMemberAccessLevel = '{{route('getMemberAccessLevel')}}';
         var changeAddPlaceDir = '{{route('changeAddPlace')}}';
         var changeTripDateDir = '{{route('changeTripDate')}}';
@@ -554,9 +769,7 @@
         var changeAddFriendDir = '{{route('changeAddFriend')}}';
         var deletePlaceDir = '{{route('deletePlace')}}';
         var addCommentDir = '{{route('addComment')}}';
-    </script>
 
-    <script>
         var selectedPlaceId = -1;
         var selectedKindPlaceId = -1;
         var selectedX;
@@ -567,9 +780,16 @@
         var currButtomInfoKindPlace;
         var oldButtonId = -1;
 
+        function openModal(_id){
+            $('#'+_id).removeClass('hidden');
+        }
+        function closeModal(_id){
+            $('#'+_id).addClass('hidden');
+        }
+
         function showElement(element) {
-            $(".pop-up").addClass('hidden');
-            $(".item").addClass("hidden");
+            // $(".pop-up").addClass('hidden');
+            // $(".item").addClass("hidden");
             $("#" + element).removeClass('hidden');
             $('.dark').show();
         }
@@ -623,8 +843,7 @@
 
                     $("#parameters").append(newElement);
 
-                    showElement(element);
-
+                    openModal(element);
                 }
             });
         }
@@ -648,7 +867,7 @@
 
             $.ajax({
                 type: 'post',
-                url: searchPlaceDir,
+                url: '{{route('searchPlace')}}',
                 data: {
                     "stateId": $("#stateId").val(),
                     "cityId": cityId,
@@ -792,13 +1011,13 @@
         function showEditTrip(from, to) {
 
             $("#date_input_start_edit").datepicker({
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 showButtonPanel: true,
                 minDate: 0,
                 dateFormat: "yy/mm/dd"
             });
             $("#date_input_end_edit").datepicker({
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 showButtonPanel: true,
                 minDate: 0,
                 dateFormat: "yy/mm/dd"
@@ -807,7 +1026,7 @@
             $("#date_input_start_edit").val(from);
             $("#date_input_end_edit").val(to);
             $("#error").empty();
-            showElement('editTripPrompt');
+            openModal('editTripModal');
         }
 
         function editTrip() {
@@ -1177,88 +1396,17 @@
             });
         }
 
-        function deleteTrip() {
-
-            $(".dark").show();
-            $("#deleteTrip").removeClass('hidden');
-        }
-
-        function doDeleteTrip() {
-
-            $.ajax({
-                type: 'post',
-                url: deleteTripDir,
-                data: {
-                    'tripId': tripId
-                },
-                success: function (response) {
-                    if(response == "ok")
-                        document.location.href = myTrips;
-                }
-            });
-        }
-
-        function addNote() {
-
-            $.ajax({
-                type: 'post',
-                url: getNotes,
-                data: {
-                    'tripId': tripId
-                },
-                success: function (response) {
-
-                    if(response != "empty") {
-                        newElement = "<textarea id='tripNote'>";
-                        newElement += response;
-                    }
-                    else {
-                        newElement = "<textarea id='tripNote' placeholder='یادداشتی موجود نیست'>";
-                    }
-
-                    newElement += "</textarea>";
-
-
-
-                    $("#notePrompt").empty().append(newElement);
-
-                    showElement('note');
-                }
-            });
-
-        }
-
-        // XMaUcwm2WjjV9WpT
-
-        function doAddNote() {
-
-            $.ajax({
-                type: 'post',
-                url: addNoteDir,
-                data: {
-                    'tripId': tripId,
-                    'note': $("#tripNote").val()
-                },
-                success: function (response) {
-                    if(response == "ok") {
-                        hideElement2('note');
-                        $("#tripNotePElement").empty().append(($("#tripNote").val()));
-                    }
-                }
-            });
-
-        }
 
         function editDateTrip(from, to) {
 
             $("#date_input_start_edit_2").datepicker({
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 showButtonPanel: true,
                 minDate: 0,
                 dateFormat: "yy/mm/dd"
             });
             $("#date_input_end_edit_2").datepicker({
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 showButtonPanel: true,
                 minDate: 0,
                 dateFormat: "yy/mm/dd"
@@ -1268,14 +1416,14 @@
             $("#date_input_end_edit_2").val(to);
             $("#error2").empty();
 
-            showElement('editDateTripPrompt');
+            openModal('editDateTripModal');
         }
 
         function assignDateToPlace(tripPlaceId, from, to) {
             selectedPlaceId = tripPlaceId;
             $("#calendar-container-edit-placeDate").css("visibility", "visible");
             $("#date_input").datepicker({
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 showButtonPanel: true,
                 minDate: from,
                 maxDate: to,
@@ -1314,23 +1462,18 @@
 
         function inviteFriend() {
 
-            if($("#nickName").val() == "" || $("#friendId").val() == "")
-                return;
-
             $.ajax({
                 type: 'post',
-                url: inviteFriendDir,
+                url: '{{route('inviteFriend')}}',
                 data: {
-                    'nickName' : $("#nickName").val(),
                     'friendId' : $("#friendId").val(),
                     'tripId' : tripId
                 },
                 success: function(response) {
                     if(response == "ok") {
-                        $("#nickName").empty();
                         $("#friendId").empty();
                         $("#errorInvite").empty();
-                        hideElement2('invitePane');
+                        closeModal('inviteMember')
                     }
                     else if(response == "nok") {
                         $("#errorInvite").empty().append('نام کاربری وارد شده نامعتبر است');
@@ -1338,61 +1481,6 @@
                     else if(response == "err4") {
                         $("#errorInvite").empty().append('شما هم اکنون عضو این سفر هستید');
                     }
-                }
-            });
-        }
-
-        function showMembers(owner) {
-
-            $.ajax({
-                type: 'post',
-                url: getMembers,
-                data: {
-                    'tripId': tripId
-                },
-                success: function (response) {
-
-                    response = JSON.parse(response);
-                    newElement = "";
-
-                    for(i = 0; i < response.length; i++) {
-                        newElement += "<div class='col-xs-12'>";
-                        newElement += "<span>" + response[i]['username'] + "</span>";
-                        if(response[i]["delete"] == 1) {
-                            newElement += "<button class='mg-rt-10 pd-0-9 ui_button secondary' onclick='deleteMember(\"" + response[i]['username'] + "\")' data-toggle='tooltip' title='حذف عضو'><span class=''><img src='" + homeURL + "/images/deleteIcon.gif'/> </span></button>";
-                            if (owner == 1) {
-                                newElement += "<br><a onclick='memberDetails(\"" + response[i]['username'] + "\")' class='cursor-pointer text-align-center dark-blue'>جزئیات<img src='" + homeURL + "/images/blackNavArrowDown.gif' width='7' height='4' hspace='10' border='0' align='absmiddle'/></a>";
-                                newElement += "<div class='hidden' id='details_" + response[i]['username'] + "'></div>"
-                            }
-                        }
-                        newElement += "</div>";
-                    }
-
-                    $("#members").empty().append(newElement);
-
-                    showElement('membersPane');
-                }
-            });
-        }
-
-        function deleteMember(username) {
-
-            selectedUsername = username;
-            $(".dark").show();
-            $("#deleteMember").removeClass('hidden');
-        }
-
-        function doDeleteMember() {
-            $.ajax({
-                type: 'post',
-                url: deleteMemberDir,
-                data: {
-                    'username': selectedUsername,
-                    'tripId': tripId
-                },
-                success: function (response) {
-                    if(response == "ok")
-                        document.location.href = tripPlaces;
                 }
             });
         }
@@ -1814,11 +1902,189 @@
             document.onkeydown = null;
         }
 
-    </script>
-    <script>
         $(document).ready(function () {
             checkBtnDisable();
         });
+    </script>
+    <script>
+        let tripMember = {!! json_encode($trip->member) !!};
+        let deletedUserId = null;
+
+        let memberSample = $('#members').html();
+        $('#members').html('');
+
+        function deleteTrip() {
+            openWarning('آیا از پاک کردن سفر اطمینان دارید ؟', doDeleteTrip, 'بله پاک شود');
+        }
+
+        function doDeleteTrip() {
+            $.ajax({
+                type: 'post',
+                url: '{{route('deleteTrip')}}',
+                data: {
+                    'tripId': tripId
+                },
+                success: function (response) {
+                    if(response == "ok")
+                        document.location.href = '{{route('myTrips')}}';
+                }
+            });
+        }
+
+        function doAddNote() {
+            openLoading();
+            $.ajax({
+                type: 'post',
+                url: '{{route('trip.addNote')}}',
+                data: {
+                    'tripId': tripId,
+                    'note': $("#tripNote").val()
+                },
+                success: function (response) {
+                    closeLoading();
+                    if(response == "ok") {
+                        closeModal('noteModal');
+                        showSuccessNotifi('{{__('یادداشت شما برای سفر با موفقیت ثبت شد')}}', 'left', 'var(--koochita-blue)');
+                        $("#tripNotePElement").empty().append(($("#tripNote").val()));
+                    }
+                    else
+                        showSuccessNotifi('{{__('در ثبت یادداشت مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
+                },
+                error: function(err){
+                    closeLoading();
+                    showSuccessNotifi('{{__('در ثبت یادداشت مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
+                }
+            });
+        }
+
+        function showMembers() {
+            openModal('memberModal');
+            if(tripMember.length == 0){
+                $('#members').html('<span>دعوت از دوستان</span>');
+            }
+            else{
+                $('#members').empty();
+                tripMember.map(item => {
+                    var text = memberSample;
+                    let obj = Object.keys(item);
+
+                    for (var x of obj) {
+                        var t = '##' + x + '##';
+                        var re = new RegExp(t, "g");
+                        text = text.replace(re, item[x]);
+                    }
+                    $('#members').append(text);
+
+                    if(item.status == 1)
+                        $('#member_' + item.id).find('.loading').remove();
+
+                    if(item.editTrip == 1)
+                        $('#canEditTrip_' + item.id).prop('checked', 'true');
+                    if(item.editPlace == 1)
+                        $('#canEditPlace_' + item.id).prop('checked', 'true');
+                    if(item.editMember == 1)
+                        $('#canEditMember_' + item.id).prop('checked', 'true');
+
+                })
+            }
+        }
+
+        function showThisUserAccess(_element){
+            let hasRot = $('.rotate180');
+            let card = $(_element).parent().parent();
+            card.addClass('rotate180');
+            setTimeout(function(){
+                card.addClass('accessType');
+            }, 200);
+
+            hasRot.removeClass('rotate180');
+            setTimeout(function(){
+                hasRot.removeClass('accessType');
+            }, 200);
+        }
+
+        function submitMemberAccess(_element, _id){
+            openLoading();
+
+            let canEditPlace = $('#canEditPlace_' + _id).prop('checked');
+            let canEditMember = $('#canEditMember_' + _id).prop('checked');
+            let canEditTrip = $('#canEditTrip_' + _id).prop('checked');
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("trip.editUserAccess")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    uId: _id,
+                    tripId: {{$trip->id}},
+                    editMember: canEditMember,
+                    editTrip: canEditTrip,
+                    editPlace: canEditPlace
+                },
+                success: function(response){
+                    closeLoading();
+                    response = JSON.parse(response);
+                    if(response.status == 'ok'){
+                        let hasRot = $('.rotate180');
+                        hasRot.removeClass('rotate180');
+                        setTimeout(function(){
+                            hasRot.removeClass('accessType');
+                        }, 200);
+
+                        tripMember.map(item => {
+                            if(item.id == _id){
+                                item.editMember = response.result.editMember;
+                                item.editTrip = response.result.editTrip;
+                                item.editPlace = response.result.editPlace;
+                            }
+                        });
+                        showSuccessNotifi('{{__('تغییر دسترسی با موفقیت اعمال شد')}}', 'left', 'var(--koochita-blue)');
+                    }
+                    else{
+                        showSuccessNotifi('{{__('تغییر دسترسی با مشکل مواجه شد')}}', 'left', 'red');
+                    }
+                },
+                error: function(err){
+                    closeLoading();
+                    showSuccessNotifi('{{__('تغییر دسترسی با مشکل مواجه شد')}}', 'left', 'red');
+                }
+            });
+
+        }
+
+
+        function deleteMember(_id, _username) {
+            deletedUserId = _id;
+            openWarning('آیا می خواهید ' + _username + ' را از سفر خود حذف کنید؟', doDeleteMember, 'بله حذف شود');
+        }
+
+        function doDeleteMember() {
+            openLoading();
+            $.ajax({
+                type: 'post',
+                url: '{{route('deleteMember')}}',
+                data: {
+                    'uId': deletedUserId,
+                    'tripId': tripId
+                },
+                success: function (response) {
+                    if(response == "ok") {
+                        showSuccessNotifi('{{__('کاربر مورد نظر حذف شد')}}', 'left', 'var(--koochita-blue)');
+                        document.location.href = tripPlaces;
+                    }
+                    else {
+                        closeLoading();
+                        showSuccessNotifi('{{__('در حذف کاربر مشکلی پیش امده')}}', 'left', 'red');
+                    }
+                },
+                error: function(err){
+                    closeLoading();
+                    showSuccessNotifi('{{__('در حذف کاربر مشکلی پیش امده')}}', 'left', 'red');
+                }
+
+            });
+        }
+
     </script>
 
 @stop

@@ -1024,36 +1024,6 @@
             });
         }
 
-        function addNote() {
-
-            $.ajax({
-                type: 'post',
-                url: getNotes,
-                data: {
-                    'tripId': tripId
-                },
-                success: function (response) {
-
-                    if(response != "empty") {
-                        newElement = "<textarea id='tripNote' style='border-radius: 5px;border:1px solid #CCC;padding: 5px;max-width: 100%; width: 100%; height: auto;min-height: 110px;'>";
-                        newElement += response;
-                    }
-                    else {
-                        newElement = "<textarea id='tripNote' style='border-radius: 5px;border:1px solid #CCC;padding: 5px;max-width: 100%;width: 100%; height: auto;min-height: 110px;' placeholder='یادداشتی موجود نیست'>";
-                    }
-
-                    newElement += "</textarea>";
-
-
-
-                    $("#notePrompt").empty().append(newElement);
-
-                    showElement('note');
-                }
-            });
-
-        }
-
         // XMaUcwm2WjjV9WpT
 
         function doAddNote() {
