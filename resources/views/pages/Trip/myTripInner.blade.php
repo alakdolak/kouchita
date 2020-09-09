@@ -5,6 +5,11 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}">
+    <style>
+        .modalBody{
+            border-radius: 10px;
+        }
+    </style>
 @stop
 
 @section('main')
@@ -495,11 +500,11 @@
                     <div class="header_text addDateToPlaceTitle" style="margin: 0px !important;">اختصاص زمان به مکان</div>
                     <div class="ui_typeahead direction-rtl">
                         <label for="date_input"></label>
-                        <input type="text" name="date" id="date_input" style="width: 100%;">
+                        <input type="text" name="date" id="date_input" style="width: 100%;" readonly>
                     </div>
                 </div>
                 <div class="submitOptions direction-rtl mg-tp-20">
-                    <button id="submitInvite" class="btn btn-success successBtn" onclick="doAssignDateToPlace()">ارسال</button>
+                    <button id="submitInvite" class="btn btn-success successBtn" onclick="doAssignDateToPlace()">ثبت</button>
                     <button class="btn btn-default" onclick="closeMyModal('addDateToPlaceModal')">بستن</button>
                 </div>
             </div>
@@ -585,7 +590,6 @@
         </div>
     @endif
 
-
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
@@ -615,15 +619,6 @@
             }
 
             val = $("#clearDateId_2").is(":checked");
-
-            if(val == true) {
-                $("#date_input_start_edit_2").val("");
-                $("#date_input_end_edit_2").val("");
-            }
-            else {
-                $("#date_input_start_edit_2").val(from);
-                $("#date_input_end_edit_2").val(to);
-            }
         }
 
         function checkBtnDisable() {

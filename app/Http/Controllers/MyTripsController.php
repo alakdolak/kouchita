@@ -443,13 +443,18 @@ class MyTripsController extends Controller {
 
                 $target = \DB::table($kindPlace->tableName)->find($tripPlace->placeId);
                 $tripPlace->pic = getPlacePic($target->id, $kindPlaceId);
-                $tripPlace->x = $target->C;
-                $tripPlace->y = $target->D;
-
+                if(isset($target->C) && isset($target->D)) {
+                    $tripPlace->x = $target->C;
+                    $tripPlace->y = $target->D;
+                }
             }
 
             $tripPlace->name = $target->name;
-            $tripPlace->address = $target->address;
+            if(isset($target->address))
+                $tripPlace->address = $target->address;
+            else if(isset($target->dastresi))
+                $tripPlace->address = $target->dastresi;
+
 //        $tripPlace->point = getPlacePoint();
             $city = Cities::whereId($target->cityId);
             $tripPlace->city = $city->name;

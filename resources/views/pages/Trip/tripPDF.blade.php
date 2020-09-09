@@ -165,11 +165,11 @@
             <div style="clear: both"></div>
 
 
-            <center style="margin-top: 20px">
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center={{$tripPlace->x}},{{$tripPlace->y}}&scale=2&zoom=15&size=600x300&maptype=roadmap
-&markers=color:red%7Clabel:C%7C{{$tripPlace->x}},{{$tripPlace->y}}
-                        &key=AIzaSyDpeBLW4SWeWuDKKAT0uF7bATx8T2rEiXE" style=" width: 600px; height: 300px">
-            </center>
+            @if(isset($tripPlace->x) && isset($tripPlace->y))
+                <center style="margin-top: 20px">
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{$tripPlace->x}},{{$tripPlace->y}}&scale=2&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7Clabel:C%7C{{$tripPlace->x}},{{$tripPlace->y}}&key=AIzaSyDpeBLW4SWeWuDKKAT0uF7bATx8T2rEiXE" style=" width: 600px; height: 300px">
+                </center>
+            @endif
             <div style="width: 100%; clear: both; margin-top: 10px; border-bottom: 2px solid #636363">
 
                 @if(count($tripPlace->comments) == 0)

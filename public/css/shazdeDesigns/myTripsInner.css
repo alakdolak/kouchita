@@ -1,4 +1,7 @@
 /*1st box of styles*/
+#targetHelp_7, #targetHelp_8, #targetHelp_9, #targetHelp_10{
+    margin-right: 0px !important;
+}
 
 .calendar2 {
     top: 113% !important;
@@ -1032,9 +1035,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     }
     .saves-header-buttons > div:nth-of-type(1){
         margin-right: 0px;
-    }
-    #targetHelp_7, #targetHelp_8, #targetHelp_9, #targetHelp_10{
-        margin-right: 0px !important;
     }
     #saves-single-trip-container .trip-header .saves-header-button{
         min-width: 50px !important;
