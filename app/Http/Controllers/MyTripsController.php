@@ -155,15 +155,23 @@ class MyTripsController extends Controller {
             $tripPlace->comments = $tripComments;
         }
 
-        $trip->member = TripMember::where('tripId', $tripId)->get();
-        foreach ($trip->member as $item) {
+        $trueMember = [];
+        $members = TripMember::where('tripId', $tripId)->get();
+        foreach ($members as $item) {
             $member = User::find($item->uId);
             if ($member != null) {
                 $item->username = $member->username;
                 $item->pic = getUserPic($member->id);
+                $item->owner = false;
+                array_push($trueMember, $item->toArray());
             } else
                 $item->delete();
         }
+        $master = User::find($trip->uId);
+        $master->pic = getUserPic($master->id);
+        $master->owner = true;
+        array_push($trueMember, $master->toArray());
+        $trip->member = $trueMember;
 
         return view('pages.Trip.myTripInner', compact(['trip', 'tripPlaces', 'sortMode']));
     }

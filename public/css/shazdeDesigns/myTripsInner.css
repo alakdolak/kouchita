@@ -435,7 +435,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 .memberCard{
     padding: 10px;
     border-radius: 20px;
-    width: 150px;
+    width: 180px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -531,9 +531,9 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border-radius: 50%;
 }
 .memberCard .name{
-    font-weight: bold;
+    font-weight: normal;
     margin: 10px 0px;
-    font-size: 15px;
+    font-size: 18px;
 }
 .memberCard .btn{
     text-align: center;
@@ -542,7 +542,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     cursor: pointer;
     transition: .3s;
     padding: 3px 0px;
-    font-size: 11px;
+    font-size: 15px;
 }
 .memberCard .accessBut{
     color: var(--koochita-blue);
@@ -579,6 +579,15 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin-top: 4px;
     align-items: center;
     padding: 0;
+}
+.memberCard .input{
+    font-size: 15px;
+}
+.memberCard .input .ui_input_checkbox{
+    margin-bottom: 5px;
+}
+.memberCard .input .ui_input_checkbox .labelForCheckBox{
+    margin-bottom: 0px;
 }
 .inviteFBut{
     background: var(--koochita-green);
@@ -690,6 +699,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin: 0px auto;
     border-radius: 10px;
     overflow: hidden;
+    height: 200px;
 }
 
 .placeCard .footerCard{
@@ -719,6 +729,11 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border-radius: 15px;
     padding: 2px 8px;
     box-shadow: 0px 0px 3px 0px #b1b1b1;
+}
+.placeCard .trip-add-dates{
+    padding: 0;
+    border: none;
+    margin-right: 5px;
 }
 
 .placeCard .date{

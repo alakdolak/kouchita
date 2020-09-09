@@ -6,10 +6,68 @@
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}">
 
+    <style>
+        .modalBlackBack{
+            display: none;
+        }
+        .modalBlackBack.show{
+            display: flex !important;
+        }
+        .saves-header-buttons{
+            width: 100%;
+            display: flex;
+            position: relative;
+            /*justify-content: center;*/
+        }
+        .saves-header-buttons > div:nth-of-type(1){
+            margin-right: auto;
+        }
+
+        @media (max-width: 767px) {
+            #targetHelp_10{
+                margin: 0;
+                border-right: none;
+            }
+            .saves-header-buttons{
+                justify-content: center;
+            }
+            .saves-header-buttons > div:nth-of-type(1){
+                margin-right: 0px;
+            }
+            .modalBlackBack.fullCenter{
+                transition: .3s;
+                height: 0;
+                top: unset;
+                bottom: 0px;
+                display: flex !important;
+                overflow: hidden;
+            }
+            .modalBlackBack.fullCenter.show{
+                height: 100vh;
+            }
+            .modalBlackBack.fullCenter .modalBody{
+                position: absolute;
+                bottom: 0;
+                width: 100% !important;
+                padding: 25px 10px;
+                border-radius: 20px 20px 0px 0px;
+            }
+            #targetHelp_7, #targetHelp_8, #targetHelp_9, #targetHelp_10{
+                margin-right: 0px !important;
+            }
+            #saves-single-trip-container .trip-header .saves-header-button{
+                min-width: 50px !important;
+                font-size: 9px !important;
+            }
+            #saves-single-trip-container .trip-header .saves-header-button .ui_icon{
+                font-size: 22px !important;
+            }
+        }
+    </style>
 @stop
 
 @section('main')
-    
+
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
@@ -64,106 +122,102 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="saves-header-buttons">
-                                    <div id="targetHelp_11" class="targets">
-                                        <div onclick="showMembers()" class="saves-invite-friends  saves-header-button">
-                                            <div class="ui_icon friend-fill"></div>
-                                            اعضا
-                                        </div>
-                                        <div id="helpSpan_11" class="helpSpans hidden row">
-                                            <span class="introjs-arrow"></span>
-                                            <p>در این قسمت می توانید دوستانتان را که در این لیست عضو هستند مشاهده کنید. همچنین اگر ادمین سفرباشید (کسی که لیست را ایجاد کرده است.) می توانید به مدیریت دسترسی اعضا با فشردن دکمه جزئیات در زیر نام آن ها بپردازید. همچنین می توانید اعضا را حذف کنید.</p>
-                                            <button data-val="11" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_11">بعدی</button>
-                                            <button data-val="11" class="btn btn-primary backBtnsHelp" id="backBtnHelp_11">قبلی</button>
-                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                        </div>
-                                    </div>
-                                    @if($trip->editMember)
-                                        <div id="targetHelp_12" class="targets">
-                                            <div  onclick="openModal('inviteMember')" class="saves-print saves-header-button">
-                                                <div class="ui_icon add-friend-fill"></div>
-                                                دعوت از دوستان
+
+                                <div class="saves-header-buttons" style="width: 100%; display: flex; position: relative;">
+
+                                   <div>
+                                       @if($trip->editPlace)
+                                           <div id="targetHelp_7" class="targets">
+                                               <div onclick="openModal('addPlaceModal')" class="saves-invite-friends  saves-header-button">
+                                                   <div class="ui_icon buildingIcon"></div>
+                                                   افزودن محل
+                                               </div>
+                                               <div id="helpSpan_7" class="helpSpans hidden row">
+                                                   <span class="introjs-arrow"></span>
+                                                   <p>در این قسمت می توانید به صورت سریع اقدام به اضافه کردن مکان های جدید به لیست خود کنید.</p>
+                                                   <button data-val="7" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_7">بعدی</button>
+                                                   <button data-val="7" class="btn btn-primary backBtnsHelp" id="backBtnHelp_7">قبلی</button>
+                                                   <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                               </div>
+                                           </div>
+                                       @endif
+
+                                       @if($trip->editTrip)
+                                           <div id="targetHelp_9" class="targets">
+                                               <div onclick="openModal('noteModal')" class="saves-invite-friends  saves-header-button">
+                                                   <div class="ui_icon custom-note"></div>
+                                                   یادداشت سفر
+                                               </div>
+                                               <div id="helpSpan_9" class="helpSpans hidden row">
+                                                   <span class="introjs-arrow"></span>
+                                                   <p>در این قسمت می توانید به کل سفر یادداشت اضافه کنید. این یادداشت با نام کاربری شما در بالای لیست نمایش داده می شود.</p>
+                                                   <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>
+                                                   <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>
+                                                   <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                               </div>
+                                           </div>
+                                       @endif
+
+                                       <div id="targetHelp_10" class="targets" style="border-right: solid 1px #d8d8d8;">
+                                           <div onclick="sortBaseOnPlaceDate('{{$sortMode}}')" class="saves-invite-friends  saves-header-button">
+                                               <div class="ui_icon seat-regular"></div>
+                                               مرتب سازی
+                                           </div>
+                                           <div id="helpSpan_10" class="helpSpans hidden row">
+                                               <span class="introjs-arrow"></span>
+                                               <p>شما می توانید به هر مکان موجود در لیست سفر تاریخی به عنوان تاریخ بازدید اضافه کید. این دکمه برای مدیریت نمایش مکان ها بر اساس تاریخ بازدید است.</p>
+                                               <button data-val="10" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_10">بعدی</button>
+                                               <button data-val="10" class="btn btn-primary backBtnsHelp" id="backBtnHelp_10">قبلی</button>
+                                               <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                           </div>
+                                       </div>
+                                   </div>
+
+                                    <div>
+                                        <div id="targetHelp_11" class="targets">
+                                            <div onclick="showMembers()" class="saves-invite-friends  saves-header-button">
+                                                <div class="ui_icon friend-fill"></div>
+                                                اعضا
                                             </div>
-                                            <div id="helpSpan_12" class="helpSpans hidden row">
+                                            <div id="helpSpan_11" class="helpSpans hidden row">
+                                                <span class="introjs-arrow"></span>
+                                                <p>در این قسمت می توانید دوستانتان را که در این لیست عضو هستند مشاهده کنید. همچنین اگر ادمین سفرباشید (کسی که لیست را ایجاد کرده است.) می توانید به مدیریت دسترسی اعضا با فشردن دکمه جزئیات در زیر نام آن ها بپردازید. همچنین می توانید اعضا را حذف کنید.</p>
+                                                <button data-val="11" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_11">بعدی</button>
+                                                <button data-val="11" class="btn btn-primary backBtnsHelp" id="backBtnHelp_11">قبلی</button>
+                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                            </div>
+                                        </div>
+                                        @if($trip->editMember)
+                                            <div id="targetHelp_12" class="targets">
+                                                <div  onclick="openModal('inviteMember')" class="saves-print saves-header-button">
+                                                    <div class="ui_icon add-friend-fill"></div>
+                                                    دعوت از دوستان
+                                                </div>
+                                                <div id="helpSpan_12" class="helpSpans hidden row">
+                                                    <span class="introjs-arrow"></span>
+                                                    <p>در این قسمت می توانید به سفر دوست جدیدی اضافه کنید. درخواست شما برای دوستتان فرستاده می شود تا در صورت تمایل عضو شود. توجه کنید این امکان برای ادمین و یا کسانی که ادمین به آن ها اجازه داده است میسر می شود.</p>
+                                                    <button data-val="12" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_12">بعدی</button>
+                                                    <button data-val="12" class="btn btn-primary backBtnsHelp" id="backBtnHelp_12">قبلی</button>
+                                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div id="targetHelp_13" class="targets">
+                                            <a target="_blank" href="{{route('trip.print', ['tripId' => $trip->id])}}" class="color-black saves-print saves-header-button">
+                                                <div class="ui_icon printer"></div>
+                                                <span>چاپ</span>
+                                            </a>
+                                            <div id="helpSpan_13" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
                                                 <p>در این قسمت می توانید به سفر دوست جدیدی اضافه کنید. درخواست شما برای دوستتان فرستاده می شود تا در صورت تمایل عضو شود. توجه کنید این امکان برای ادمین و یا کسانی که ادمین به آن ها اجازه داده است میسر می شود.</p>
-                                                <button data-val="12" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_12">بعدی</button>
-                                                <button data-val="12" class="btn btn-primary backBtnsHelp" id="backBtnHelp_12">قبلی</button>
+                                                <button data-val="13" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_13">بعدی</button>
+                                                <button data-val="13" class="btn btn-primary backBtnsHelp" id="backBtnHelp_13">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
-                                        </div>
-                                    @endif
-                                    <div id="targetHelp_13" class="targets">
-                                        <a target="_blank" href="{{route('trip.print', ['tripId' => $trip->id])}}" class="color-black saves-print saves-header-button">
-                                            <div class="ui_icon printer"></div>
-                                            <span>چاپ</span>
-                                        </a>
-                                        <div id="helpSpan_13" class="helpSpans hidden row">
-                                            <span class="introjs-arrow"></span>
-                                            <p>در این قسمت می توانید به سفر دوست جدیدی اضافه کنید. درخواست شما برای دوستتان فرستاده می شود تا در صورت تمایل عضو شود. توجه کنید این امکان برای ادمین و یا کسانی که ادمین به آن ها اجازه داده است میسر می شود.</p>
-                                            <button data-val="13" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_13">بعدی</button>
-                                            <button data-val="13" class="btn btn-primary backBtnsHelp" id="backBtnHelp_13">قبلی</button>
-                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="trip-action is-hidden-mobile width-autoImp">
-                                    @if($trip->editPlace)
-                                        <div id="targetHelp_7" class="targets">
-                                            <div onclick="openModal('addPlaceModal')" class="z-index-1 ui_button primary add_more">
-                                                <div class="ui_icon plus"></div>
-                                            </div>
-                                            <div id="helpSpan_7" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید به صورت سریع اقدام به اضافه کردن مکان های جدید به لیست خود کنید.</p>
-                                                <button data-val="7" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_7">بعدی</button>
-                                                <button data-val="7" class="btn btn-primary backBtnsHelp" id="backBtnHelp_7">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-                                    @endif
 
-                                    @if($trip->editTrip)
-                                        <div id="targetHelp_8" class="targets">
-                                            <div onclick="editDateTrip('{{$trip->from_}}', '{{$trip->to_}}')" class="z-index-1 ui_button secondary trip-add-dates">
-                                                <div class="ui_icon calendar"></div>
-                                            </div>
-                                            <div id="helpSpan_8" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید تاریخ شروع و پایان سفر را ویرایش کنید.</p>
-                                                <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
-                                                <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-
-                                        <div id="targetHelp_9" class="targets">
-                                            <div onclick="openModal('noteModal')" class="z-index-1 ui_button secondary trip-add-dates">
-                                                <div class="ui_icon custom-note"></div>
-                                            </div>
-                                            <div id="helpSpan_9" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید به کل سفر یادداشت اضافه کنید. این یادداشت با نام کاربری شما در بالای لیست نمایش داده می شود.</p>
-                                                <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>
-                                                <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    <div id="targetHelp_10" class="targets">
-                                        <div onclick="sortBaseOnPlaceDate('{{$sortMode}}')" class="z-index-1 ui_button secondary trip-add-dates">
-                                            <div class="ui_icon seat-regular"></div>
-                                        </div>
-                                        <div id="helpSpan_10" class="helpSpans hidden row">
-                                            <span class="introjs-arrow"></span>
-                                            <p>شما می توانید به هر مکان موجود در لیست سفر تاریخی به عنوان تاریخ بازدید اضافه کید. این دکمه برای مدیریت نمایش مکان ها بر اساس تاریخ بازدید است.</p>
-                                            <button data-val="10" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_10">بعدی</button>
-                                            <button data-val="10" class="btn btn-primary backBtnsHelp" id="backBtnHelp_10">قبلی</button>
-                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div id="saves-body" class="styleguide position-relative">
                                 <div id="saves-root-view" class="position-relative">
@@ -220,9 +274,31 @@
                                                                     <div class="date">
                                                                         @if($tripPlace->date != "")
                                                                             <p onclick="assignDateToPlace('{{$tripPlace->id}}', '{{$trip->from_}}', '{{$trip->to_}}')">{{$tripPlace->date}}</p>
+                                                                            @if($trip->editPlace)
+                                                                                @if($i == 0)
+                                                                                    <div id="targetHelp_15" class="targets">
+                                                                                            <button data-toggle="tooltip" title="افزودن تاریخ به سفر" onclick="assignDateToPlace('{{$tripPlace->id}}')" class="pd-3-13 ui_button secondary trip-add-dates">
+                                                                                                <span class="color-green ui_icon calendar"></span>
+                                                                                            </button>
+                                                                                            <div id="helpSpan_15" class="helpSpans hidden row">
+                                                                                                <span class="introjs-arrow"></span>
+                                                                                                <p>برای برنامه ریزی دقیق تر می توانید به مکان ها تاریخی برای بازدید اختصاص دهید.</p>
+                                                                                                <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
+                                                                                                <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
+                                                                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                @else
+                                                                                    <button data-toggle="tooltip" title="افزودن تاریخ به سفر" onclick="assignDateToPlace('{{$tripPlace->id}}')" class="pd-3-13 ui_button secondary trip-add-dates">
+                                                                                        <span class="color-green ui_icon calendar"></span>
+                                                                                    </button>
+                                                                                @endif
+                                                                            @endif
+
                                                                         @else
                                                                             <button class="chooseDate" onclick="assignDateToPlace('{{$tripPlace->id}}', '{{$trip->from_}}', '{{$trip->to_}}')">انتخاب تاریخ</button>
                                                                         @endif
+
                                                                     </div>
                                                                     <div class="images">
                                                                         <img class="resizeImgClass"
@@ -230,45 +306,6 @@
                                                                             onload="fitThisImg(this)">
                                                                     </div>
                                                                     <div class="footerCard">
-                                                                        <div class="buttonsSec">
-                                                                            @if($i == 0)
-                                                                                <div id="targetHelp_14" class="targets">
-                                                                                    <button data-toggle="tooltip" title="افزودن به سفر دیگر" onclick="addToTrip('{{$tripPlace->id}}')" class="pd-3-13 ui_button secondary trip-add-dates">
-                                                                                        <span class="color-green ui_icon my-trips"></span>
-                                                                                    </button>
-                                                                                    <div id="helpSpan_14" class="helpSpans hidden row">
-                                                                                        <span class="introjs-arrow"></span>
-                                                                                        <p>با این امکان می توانید مکان های موجود در این لیست را به صورت سریع به سایر لیست های خود منتقل کنید.</p>
-                                                                                        <button data-val="14" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_14">بعدی</button>
-                                                                                        <button data-val="14" class="btn btn-primary backBtnsHelp" id="backBtnHelp_14">قبلی</button>
-                                                                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                @if($trip->editPlace)
-                                                                                    <div id="targetHelp_15" class="targets">
-                                                                                    <button data-toggle="tooltip" title="افزودن تاریخ به سفر" onclick="assignDateToPlace('{{$tripPlace->id}}')" class="pd-3-13 ui_button secondary trip-add-dates">
-                                                                                        <span class="color-green ui_icon calendar"></span>
-                                                                                    </button>
-                                                                                    <div id="helpSpan_15" class="helpSpans hidden row">
-                                                                                        <span class="introjs-arrow"></span>
-                                                                                        <p>برای برنامه ریزی دقیق تر می توانید به مکان ها تاریخی برای بازدید اختصاص دهید.</p>
-                                                                                        <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
-                                                                                        <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
-                                                                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                @endif
-                                                                            @else
-                                                                                <button data-toggle="tooltip" title="افزودن به سفر دیگر" onclick="addToTrip('{{$tripPlace->placeInfo->id}}')" class="pd-3-13 ui_button secondary trip-add-dates">
-                                                                                    <span class="color-green ui_icon my-trips"></span>
-                                                                                </button>
-                                                                                @if($trip->editPlace)
-                                                                                    <button data-toggle="tooltip" title="افزودن تاریخ به سفر" onclick="assignDateToPlace('{{$tripPlace->id}}')" class="pd-3-13 ui_button secondary trip-add-dates">
-                                                                                        <span class="color-green ui_icon calendar"></span>
-                                                                                    </button>
-                                                                                @endif
-                                                                            @endif
-                                                                        </div>
 
                                                                         @if($i == 0)
                                                                             <div id="targetHelp_17" class="showMoreInfoPlace targets trip-details ui_columns is-mobile is-fullwidth">
@@ -355,26 +392,8 @@
         </div>
     </div>
 
-    <div id="addPlaceToAnotherTripPrompt" class="modalBlackBack hidden" style="z-index: 9999;">
-        <div class="modalBody" style="width: 600px;">
-            <div onclick="closeModal('addPlaceToAnotherTripPrompt')" class="iconClose closeModal"></div>
-
-            <div class="find_location_modal">
-                <div class="header_text addPlaceToTripPromptTitle">مدیریت مکان</div>
-                <div class="ui_typeahead direction-rtl" id="tripsForPlace">
-                </div>
-            </div>
-            <div class="submitOptions direction-rtl">
-                <button onclick="assignPlaceToTrip('{{$trip->from_}}', '{{$trip->to_}}')" class="btn btn-success successBtn">تایید</button>
-                <input type="submit" onclick="closeModal('addPlaceToAnotherTripPrompt')" value="خیر" class="btn btn-default">
-                <p id="errorAssignPlace"></p>
-            </div>
-        </div>
-    </div>
-
-
     @if($trip->editMember)
-        <div id="inviteMember" class="modalBlackBack hidden" style="z-index: 9999;">
+        <div id="inviteMember" class="modalBlackBack" style="z-index: 9999;">
             <div class="modalBody" style="width: 400px;">
                 <div onclick="closeModal('inviteMember')" class="iconClose closeModal"></div>
                 <div class="find_location_modal">
@@ -420,7 +439,7 @@
             </div>
         </div>
 
-        <div id="memberModal" class="modalBlackBack hidden" style="z-index: 9999;">
+        <div id="memberModal" class="modalBlackBack" style="z-index: 9999;">
             <div class="modalBody" style="width: 600px;">
                 <div onclick="closeModal('memberModal')" class="iconClose closeModal"></div>
 
@@ -493,7 +512,7 @@
     @endif
 
     @if($trip->editPlace)
-        <div id="addPlaceModal" class="modalBlackBack hidden" style="z-index: 9999;">
+        <div id="addPlaceModal" class="modalBlackBack" style="z-index: 9999;">
             <div class="modalBody">
                 <div onclick="closeModal('addPlaceModal')" class="iconClose closeModal"></div>
                 <div class="find_location_modal">
@@ -528,7 +547,7 @@
             </div>
         </div>
 
-        <div id="addDateToPlaceModal" class="modalBlackBack hidden" style="z-index: 9999;">
+        <div id="addDateToPlaceModal" class="modalBlackBack fullCenter" style="z-index: 9999;">
             <div class="modalBody" style="width: 600px;">
                 <div onclick="closeModal('addDateToPlaceModal')" class="iconClose closeModal"></div>
                 <div class="find_location_modal">
@@ -547,7 +566,7 @@
     @endif
 
     @if($trip->editTrip)
-        <div id="noteModal" class="modalBlackBack fullCenter hidden" style="z-index: 9999;">
+        <div id="noteModal" class="modalBlackBack fullCenter" style="z-index: 9999;">
             <div class="modalBody" style="width: 400px;">
                 <div onclick="closeModal('noteModal')" class="iconClose closeModal"></div>
                 <div class="find_location_modal">
@@ -564,40 +583,7 @@
             </div>
         </div>
 
-        <div id="editDateTripModal" class="modalBlackBack fullCenter hidden" style="z-index: 9999;">
-            <div class="modalBody">
-                <div onclick="closeModal('editDateTripModal')" class="iconClose closeModal"></div>
-                <div class="modal-card-head">
-                    <p class="header_text editTripPromptTitle">ویرایش تاریخ سفر</p>
-                </div>
-                <div class="trip-dates ui_columns">
-                    <div class="ui_column">
-                        <div id="date_btn_start_edit">تاریخ شروع</div>
-                        <label id="date_btn_start_edit_label">
-                            <span class="ui_icon calendar" id="date_btn_start_edit_span"></span>
-                            <input id="date_input_start_edit_2" placeholder="روز/ماه/سال" value="{{$trip->from_}}" required readonly type="text">
-                        </label>
-                    </div>
-                    <div class="ui_column">
-                        <div id="date_btn_end_edit">تاریخ اتمام</div>
-                        <label id="date_btn_end_edit_label">
-                            <span class="ui_icon calendar" id="date_btn_end_edit_span"></span>
-                            <input id="date_input_end_edit_2" placeholder="روز/ماه/سال" value="{{$trip->to_}}" required readonly type="text">
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-card-foot">
-                    <button onclick="changeDate()" id="editBtn" class="saves-settings-save ui_button first-button primary">ذخیره</button>
-                </div>
-                <br>
-                <p class="color-red mg-10" style="font-size: 10px !important; line-height: 15px;">
-                    توجه داشته باشید که با تغییر تاریخ سفر چنانچه مکانی از سفر شما تاریخی داشته باشد که در بازه ی جدید قرار نگیرد آن تاریخ پاک می شود
-                </p>
-                <p id="error2"></p>
-            </div>
-        </div>
-
-        <div id="editTripModal" class="modalBlackBack fullCenter hidden" style="z-index: 9999;">
+        <div id="editTripModal" class="modalBlackBack fullCenter" style="z-index: 9999;">
             <div class="modalBody">
                 <div onclick="closeModal('editTripModal')" class="iconClose closeModal"></div>
                 <div class="header_text editTripPromptTitle">ویرایش سفر</div>
@@ -668,48 +654,17 @@
         var editTripDir = '{{route('trip.editTrip')}}';
         var changeDateTripDir = '{{route('trip.changeDateTrip')}}';
         var addCommentDir = '{{route('trip.addComment')}}';
-
-        var getPlaceTrips = '{{route('placeTrips')}}';
-        var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
         var assignDateToPlaceDir = '{{route('trip.assignDateToPlace')}}';
-        var getMemberAccessLevel = '{{route('getMemberAccessLevel')}}';
-        var changeAddPlaceDir = '{{route('changeAddPlace')}}';
-        var changeTripDateDir = '{{route('changeTripDate')}}';
-        var changePlaceDateDir = '{{route('changePlaceDate')}}';
-        var changeAddFriendDir = '{{route('changeAddFriend')}}';
+        var getPlaceTrips = '{{route('placeTrips')}}';
+
 
         var selectedPlaceId = -1;
-        var selectedKindPlaceId = -1;
-        var selectedX;
-        var selectedY;
-        var selectedTripPlace;
-        var selectedUsername;
-        var currButtomInfoPlace;
-        var currButtomInfoKindPlace;
-        var oldButtonId = -1;
 
         function openModal(_id){
-            $('#'+_id).removeClass('hidden');
+            $('#'+_id).addClass('show');
         }
         function closeModal(_id){
-            $('#'+_id).addClass('hidden');
-        }
-
-        function showElement(element) {
-            // $(".pop-up").addClass('hidden');
-            // $(".item").addClass("hidden");
-            $("#" + element).removeClass('hidden');
-            $('.dark').show();
-        }
-
-        function myHideElement() {
-            $(".item").addClass('hidden');
-            $('.dark').hide();
-        }
-
-        function hideElement2(id) {
-            $("#" + id).addClass('hidden');
-            $('.dark').hide();
+            $('#'+_id).removeClass('show');
         }
 
         function changeClearCheckBox(from, to) {
@@ -745,158 +700,11 @@
                 $("#editBtn").removeClass("disabled");
         }
 
-        function assignPlaceToTrip() {
-
-            if(selectedPlaceId != -1) {
-                var checkedValuesTrips = $("input:checkbox[name='selectedTrips[]']:checked").map(function () {
-                    return this.value;
-                }).get();
-
-                if(checkedValuesTrips == null || checkedValuesTrips.length == 0)
-                    checkedValuesTrips = "empty";
-
-                $.ajax({
-                    type: 'post',
-                    url: assignPlaceToTripDir,
-                    data: {
-                        'checkedValuesTrips': checkedValuesTrips,
-                        'placeId': selectedPlaceId,
-                        'kindPlaceId': selectedKindPlaceId
-                    },
-                    success: function (response) {
-                        if (response == "ok")
-                            document.location.href = tripPlaces;
-                        else {
-                            err = "<p>به جز سفر های زیر که اجازه ی افزودن مکان به آنها را نداشتید بقیه به درستی اضافه شدند</p>";
-
-                            response = JSON.parse(response);
-
-                            for(i = 0; i < response.length; i++)
-                                err += "<p>" + response[i] + "</p>";
-
-                            $("#errorAssignPlace").append(err);
-
-                        }
-                    }
-
-                });
-            }
-        }
-
         function sortBaseOnPlaceDate(sortMode) {
             if(sortMode == "DESC")
                 document.location.href = tripPlaces + "/ASC";
             else
                 document.location.href = tripPlaces + "/DESC";
-        }
-
-        function memberDetails(username) {
-
-            if(!$("#details_" + username).hasClass('hidden')) {
-                $("#details_" + username).addClass('hidden');
-                return;
-            }
-
-
-            $.ajax({
-                type: 'post',
-                url: getMemberAccessLevel,
-                data: {
-                    'username': username,
-                    'tripId': tripId
-                },
-                success: function (response) {
-
-                    response = JSON.parse(response);
-
-                    newElement = "<div class='row'>";
-                    newElement += "<div class='col-xs-12 mg-tp-10'>";
-                    newElement += "<div class='ui_input_checkbox'>";
-                    if(response.addPlace == 1)
-                        newElement += "<input id='addPlaceLevel' onclick='changeAddPlace(\"" + username + "\")' checked type='checkbox'>";
-                    else
-                        newElement += "<input id='addPlaceLevel' onclick='changeAddPlace(\"" + username + "\")' type='checkbox'>";
-
-                    newElement += "<label for='addPlaceLevel' class='labelForCheckBox'><span></span>&nbsp;&nbsp;افزودن مکان</label>";
-                    newElement += "</div></div>";
-
-                    newElement += "<div class='col-xs-12 mg-tp-10'>";
-                    newElement += "<div class='ui_input_checkbox'>";
-                    if(response.addFriend == 1)
-                        newElement += "<input id='addFriendLevel' onclick='changeAddFriend(\"" + username + "\")' checked type='checkbox'>";
-                    else
-                        newElement += "<input id='addFriendLevel' onclick='changeAddFriend(\"" + username + "\")' type='checkbox'>";
-
-                    newElement += "<label class='labelForCheckBox' for='addFriendLevel'><span></span>&nbsp;&nbsp;دعوت دوستان</label></div></div>";
-
-                    newElement += "<div class='col-xs-12 mg-tp-10'>";
-                    newElement += "<div class='ui_input_checkbox'>";
-                    if(response.changePlaceDate == 1)
-                        newElement += "<input id='changePlaceDateLevel' onclick='changePlaceDate(\"" + username + "\")' checked type='checkbox'>";
-                    else
-                        newElement += "<input id='changePlaceDateLevel' onclick='changePlaceDate(\"" + username + "\")' type='checkbox'>";
-                    newElement += "<label class='labelForCheckBox' for='changePlaceDateLevel'><span></span>&nbsp;&nbsp;تغییر زمان مکان های سفر</label></div></div>";
-
-                    newElement += "<div class='col-xs-12 mg-tp-10'>";
-                    newElement += "<div class='ui_input_checkbox'>";
-                    if(response.changeTripDate == 1)
-                        newElement += "<input id='changeDate' onclick='changeTripDate(\"" + username + "\")' checked type='checkbox'>";
-                    else
-                        newElement += "<input id='changeDate' onclick='changeTripDate(\"" + username + "\")' type='checkbox'>";
-                    newElement += "<label class='labelForCheckBox' for='changeDate'><span></span>&nbsp;&nbsp;تغییر زمان سفر</label></div></div>";
-
-                    newElement += "</div>";
-                    $("#details_" + username).empty().append(newElement).removeClass('hidden');
-                }
-            });
-        }
-
-        function changeAddPlace(username) {
-
-            $.ajax({
-                type: 'post',
-                url: changeAddPlaceDir,
-                data: {
-                    'username': username,
-                    'tripId': tripId
-                }
-            });
-        }
-
-        function changeAddFriend(username) {
-
-            $.ajax({
-                type: 'post',
-                url: changeAddFriendDir,
-                data: {
-                    'username': username,
-                    'tripId': tripId
-                }
-            });
-        }
-
-        function changePlaceDate(username) {
-
-            $.ajax({
-                type: 'post',
-                url: changePlaceDateDir,
-                data: {
-                    'username': username,
-                    'tripId': tripId
-                }
-            });
-        }
-
-        function changeTripDate(username) {
-
-            $.ajax({
-                type: 'post',
-                url: changeTripDateDir,
-                data: {
-                    'username': username,
-                    'tripId': tripId
-                }
-            });
         }
     </script>
 
@@ -990,6 +798,11 @@
                     if(item.editMember == 1)
                         $('#canEditMember_' + item.id).prop('checked', 'true');
 
+                    if(item.owner == true){
+                        $('#member_' + item.id).find('.accessBut').remove();
+                        $('#member_' + item.id).find('.deleteBut').remove();
+                    }
+
                 })
             }
         }
@@ -1074,7 +887,7 @@
                 success: function (response) {
                     if(response == "ok") {
                         showSuccessNotifi('{{__('کاربر مورد نظر حذف شد')}}', 'left', 'var(--koochita-blue)');
-                        document.location.href = tripPlaces;
+                        document.location.reload();
                     }
                     else {
                         closeLoading();
@@ -1214,10 +1027,13 @@
                 success: function(response){
                     if(response == 'ok')
                         location.reload();
-                    else
+                    else {
+                        closeLoading();
                         showSuccessNotifi('{{__('در ثبت درخواست مشکلی پیش امده')}}', 'left', 'red');
+                    }
                 },
                 error: function(err){
+                    closeLoading();
                     showSuccessNotifi('{{__('در ثبت درخواست مشکلی پیش امده')}}', 'left', 'red');
                 }
             })
@@ -1280,17 +1096,17 @@
                     placeId: sug.placeId,
                 },
                 success: function(response){
-                    closeLoading();
-                    closeModal('addPlaceModal');
-
                     if(response == 'ok') {
                         showSuccessNotifi('{{__('محل مورد نظر به لیست سفر اضافه شد')}}', 'left', 'var(--koochita-blue)');
                         location.reload();
                     }
-                    else if(response == 'notAccess')
-                        showSuccessNotifi('{{__('شما دسترسی به تغییر محل های سفر ندارید.')}}', 'left', 'red');
-                    else
-                        showSuccessNotifi('{{__('مشکلی در ثبت به وجود امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
+                    else{
+                        closeLoading();
+                        if(response == 'notAccess')
+                            showSuccessNotifi('{{__('شما دسترسی به تغییر محل های سفر ندارید.')}}', 'left', 'red');
+                        else
+                            showSuccessNotifi('{{__('مشکلی در ثبت به وجود امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
+                    }
                 },
                 error: function(err){
                     closeLoading();
@@ -1353,12 +1169,12 @@
                         'date': $("#date_input").val()
                     },
                     success: function (response) {
-                        closeLoading();
                         if(response == "ok") {
                             showSuccessNotifi('{{__('تاریخ به محل مورد نظر از اضافه شد')}}', 'left', 'var(--koochita-blue)');
                             document.location.reload();
                         }
                         else{
+                            closeLoading();
                             showSuccessNotifi('{{__('مشکلی در درخواست شما به وجود امده')}}', 'left', 'red');
                             $("#errorText").empty().append("تاریخ مورد نظر در بازه ی سفر قرار ندارد");
                         }
@@ -1370,67 +1186,6 @@
                     }
                 });
             }
-        }
-
-        function editDateTrip(from, to) {
-            $("#date_input_start_edit_2").datepicker({
-                numberOfMonths: 1,
-                showButtonPanel: true,
-                minDate: 0,
-                dateFormat: "yy/mm/dd"
-            });
-            $("#date_input_end_edit_2").datepicker({
-                numberOfMonths: 1,
-                showButtonPanel: true,
-                minDate: 0,
-                dateFormat: "yy/mm/dd"
-            });
-
-            $("#date_input_start_edit_2").val(from);
-            $("#date_input_end_edit_2").val(to);
-            $("#error2").empty();
-
-            openModal('editDateTripModal');
-        }
-
-        function changeDate() {
-
-            date_input_start = $("#date_input_start_edit_2").val();
-            date_input_end = $("#date_input_end_edit_2").val();
-
-            if(date_input_start != "" && date_input_end != "") {
-                if(date_input_start > date_input_end) {
-                    newElement = "<p class='color-red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
-                    $("#error2").empty().append(newElement);
-                    return;
-                }
-            }
-
-            openLoading();
-            $.ajax({
-                type: 'post',
-                url: editTripDir,
-                data: {
-                    'dateInputStart' : date_input_start,
-                    'dateInputEnd' : date_input_end,
-                    'tripId' : tripId,
-                    'tripName': tripInfo.name,
-                },
-                success: function (response) {
-                    if(response == "ok") {
-                        showSuccessNotifi('{{__('تاریخ سفر شما با موفقیت تغییر یافت')}}', 'left', 'var(--koochita-blue)');
-                        document.location.reload();
-                    }
-                    else if(response == "nok3") {
-                        showSuccessNotifi('{{__('مشکلی در تغییر تاریخ پیش امده.')}}', 'left', 'red');
-                        newElement = "<p class='color-red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
-                        $("#error2").empty().append(newElement);
-                    }
-                },
-                error: function(err){
-                    showSuccessNotifi('{{__('مشکلی در تغییر تاریخ پیش امده.')}}', 'left', 'red');
-                }
-            });
         }
 
         function showEditTrip(from, to) {
@@ -1481,13 +1236,14 @@
                         'tripId' : tripId
                     },
                     success: function (response) {
-                        closeLoading();
                         if(response == "ok") {
                             showSuccessNotifi('{{__('اطلاعات سفر شما با موفقیت تغییر یافت')}}', 'left', 'var(--koochita-blue)');
-                            document.location.href = tripPlaces;
+                            document.location.reload();
                         }
-                        else
+                        else {
+                            closeLoading();
                             showSuccessNotifi('{{__('در ویرایش اطلاعات سفر مشکلی پیش امده')}}', 'left', 'red');
+                        }
                     },
                     error: function(err){
                         closeLoading();
@@ -1734,45 +1490,45 @@
                 $('.placeDetailsToggleBar').find('.leftSec').addClass('show');
         }
 
-        let selectPlaceTripId = 0;
-        function addToTrip(placeId) {
-
-            selectPlaceTripId = placeId;
-
-            $.ajax({
-                type: 'post',
-                url: getPlaceTrips,
-                data: {
-                    placeId: selectPlaceTripId,
-                },
-                success: function (response) {
-
-                    $("#tripsForPlace").empty();
-
-                    response = JSON.parse(response);
-                    newElement = "<div class='row'>";
-
-                    for(i = 0; i < response.length; i++) {
-
-                        newElement += "<div class='col-xs-12'>";
-                        newElement += "<div class='ui_input_checkbox'>";
-
-                        if(response[i].select == "0")
-                            newElement += "<input type='checkbox' name='selectedTrips[]' id='trip_" + response[i].id + "' value='" + response[i].id + "'>";
-                        else
-                            newElement += "<input type='checkbox' name='selectedTrips[]' checked id='trip_" + response[i].id + "' value='" + response[i].id + "'>";
-
-                        newElement += "<label class='labelForCheckBox' for='trip_" + response[i].id + "'><span></span>&nbsp;&nbsp;" + response[i].name;
-                        newElement += "</label></div></div>";
-                    }
-
-                    newElement += "</div>";
-
-                    $("#tripsForPlace").append(newElement);
-                    openModal('addPlaceToAnotherTripPrompt');
-                }
-            });
-        }
+        // let selectPlaceTripId = 0;
+        // function addToTrip(placeId) {
+        //
+        //     selectPlaceTripId = placeId;
+        //
+        //     $.ajax({
+        //         type: 'post',
+        //         url: getPlaceTrips,
+        //         data: {
+        //             placeId: selectPlaceTripId,
+        //         },
+        //         success: function (response) {
+        //
+        //             $("#tripsForPlace").empty();
+        //
+        //             response = JSON.parse(response);
+        //             newElement = "<div class='row'>";
+        //
+        //             for(i = 0; i < response.length; i++) {
+        //
+        //                 newElement += "<div class='col-xs-12'>";
+        //                 newElement += "<div class='ui_input_checkbox'>";
+        //
+        //                 if(response[i].select == "0")
+        //                     newElement += "<input type='checkbox' name='selectedTrips[]' id='trip_" + response[i].id + "' value='" + response[i].id + "'>";
+        //                 else
+        //                     newElement += "<input type='checkbox' name='selectedTrips[]' checked id='trip_" + response[i].id + "' value='" + response[i].id + "'>";
+        //
+        //                 newElement += "<label class='labelForCheckBox' for='trip_" + response[i].id + "'><span></span>&nbsp;&nbsp;" + response[i].name;
+        //                 newElement += "</label></div></div>";
+        //             }
+        //
+        //             newElement += "</div>";
+        //
+        //             $("#tripsForPlace").append(newElement);
+        //             openModal('addPlaceToAnotherTripPrompt');
+        //         }
+        //     });
+        // }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpeBLW4SWeWuDKKAT0uF7bATx8T2rEiXE&callback=initMap"></script>
