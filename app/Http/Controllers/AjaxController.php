@@ -493,9 +493,13 @@ class AjaxController extends Controller {
     {
         if(Auth::check()) {
             if (isset($request->value)) {
+//                $userName = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE username LIKE "' . $value . '%"');
+//                $userEmail = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE email LIKE "' . $value . '%" ');
+
                 $value = $request->value;
-                $userName = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE username LIKE "' . $value . '%"');
-                $userEmail = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE email LIKE "' . $value . '%" ');
+                $userName = User::where('username', 'LIKE', '%' . $value . '%')->select(['id', 'username', 'email', 'first_name', 'last_name'])->get();
+                $userEmail = User::where('email', 'LIKE', '%' . $value . '%')->whereNotIn('id', $userName->pluck('id')->toArray())->select(['id', 'username', 'email', 'first_name', 'last_name'])->get();
+
                 if($userName == null && $userEmail == null)
                     echo 'nok3';
                 else
@@ -875,5 +879,48 @@ class AjaxController extends Controller {
             echo json_encode(['status' => 'nok']);
 
         return;
+    }
+
+    public function searchSuggestion(Request $request)
+    {
+        $inPlace = [];
+        $kindPlace = $request->kindPlace;
+        if($kindPlace == 'state' || $kindPlace == 'village' || $kindPlace == 'city'){
+            if($kindPlace == 'state'){
+                $result = State::where('name', 'LIKE', '%'.$request->text.'%')->get();
+                foreach ($result as $item)
+                    array_push($inPlace, ['kindPlaceId' => 'state', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'استان ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => '']);
+            }
+            else if($kindPlace == 'city'){
+                $result = Cities::where('name', 'LIKE','%'.$request->text.'%')->where('isVillage', 0)->get();
+
+                foreach ($result as $item) {
+                    $state = State::find($item->stateId);
+                    array_push($inPlace, ['kindPlaceId' => 'city', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'شهر ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => 'در استان ' . $state->name]);
+                }
+            }
+            else{
+                $result = Cities::where('name', 'LIKE', '%'.$request->text.'%')->where('isVillage','!=', 0)->get();
+                foreach ($result as $item) {
+                    $state = State::find($item->stateId);
+                    $city = Cities::find($item->isVillage);
+                    array_push($inPlace, ['kindPlaceId' => 'city', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'شهر ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => 'در استان ' . $state->name . ' ، در شهر ' . $city->name]);
+                }
+            }
+        }
+        else{
+            $kindPlace = Place::where('tableName', $kindPlace)->first();
+            $places = \DB::table($kindPlace->tableName)->where('name', 'LIKE','%'.$request->text.'%')->get();
+            foreach ($places as $pl){
+                $pic = getPlacePic($pl->id, $kindPlace->id, 'f');
+                $cit = Cities::find($pl->cityId);
+                $sta = State::find($cit->stateId);
+                $stasent = 'استان ' . $sta->name . ' ، شهر' . $cit->name;
+                array_push($inPlace, ['kindPlaceId' => $kindPlace->id, 'kindPlaceName' => $kindPlace->name, 'placeId' => $pl->id, 'name' => $pl->name, 'pic' => $pic, 'state' => $stasent]);
+            }
+        }
+
+        echo json_encode(['status' => 'ok', 'result' => $inPlace]);
+        return ;
     }
 }

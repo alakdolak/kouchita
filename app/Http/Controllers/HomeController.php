@@ -1428,6 +1428,22 @@ class HomeController extends Controller
                 else
                     $item->delete();
             }
+            else if($item->subject == 'inviteToTrip'){
+                $reference = Trip::find($item->referenceId);
+                if($reference != null){
+                    $alertText = '<a href="' . route("tripPlaces", ['tripId' => $reference->id]) . '">';
+                    $alertText .= 'شما به برنامه سفر ' . $reference->name . ' دعوت شدید.';
+                    $alertText .= '</a>';
+
+                    $item->color = $greenColor;
+                    $item->msg = $alertText;
+                    $item->pic = getUserPic(0);
+                    array_push($result, $item);
+                }
+                else
+                    $item->delete();
+            }
+
 
             if(count($result) == 5)
                 break;

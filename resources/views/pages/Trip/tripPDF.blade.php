@@ -43,25 +43,18 @@
 
     </style>
 
-    {{--<script src="{{URL::asset('js/jquery-1.9.1.min.js')}}"></script>--}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script>
 
         var tripPlaces = {!! json_encode($tripPlaces) !!};
 
         function init() {
-            // Basic options for a simple Google Map
-            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
             var mapOptions = {
-                // How zoomed in you want the map to start at (always required)
                 zoom: 14,
-
-                // The latitude and longitude to center the map (always required)
                 center: new google.maps.LatLng(40.6700, -73.9400), // New York
-
-                // How you would like to style the map.
-                // This is where you would paste any style found on Snazzy Maps.
-                styles: [{
+                styles: [
+                    {
                     "featureType":"landscape",
                     "stylers":[
                         {"hue":"#FFA800"},
@@ -106,15 +99,8 @@
                     ]}
                 ]
             };
-
-            // Get the HTML DOM element that will contain your map
-            // We are using a div with id="map" seen below in the <body>
             var mapElement = document.getElementById('map');
-
-            // Create the Google Map using our element and options defined above
             var map = new google.maps.Map(mapElement, mapOptions);
-
-            // Let's also add a marker while we're at it
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(40.6700, -73.9400),
                 map: map,
@@ -126,9 +112,9 @@
 
 <body onload="window.print()" class="main">
 
-<div>
+    <div>
     <div class="text">
-        <img style="width: 200px; margin-top: 20px" src="{{URL::asset('images/logo.svg')}}">
+        <img style="width: 200px; margin-top: 20px" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <h2 style="text-align: center">{{$trip->name}}</h2>
 
@@ -137,16 +123,16 @@
         <h4 style="text-align: center">تاریخ پایان : {{formatDate($trip->to_)}}</h4>
     @endif
 
-    <h4 style="text-align: center">{{User::whereId($trip->uId)->username}}</h4>
-    @foreach($tripMembers as $tripMember)
-        <h4 style="text-align: center">{{User::whereId($tripMember->uId)->username}}</h4>
+    <h4 style="text-align: center">{{$trip->owner->username}}</h4>
+    @foreach($trip->members as $tripMember)
+        <h4 style="text-align: center">{{$tripMember->username}}</h4>
     @endforeach
 
     <div class="line"></div>
 
-    @if($tripNote != "")
+    @if($trip->note != "")
         <div style="margin-top: 10px">
-            <p style="text-align: center">{{$tripNote}}</p>
+            <p style="text-align: center">{{$trip->note}}</p>
         </div>
 
         <div class="line"></div>
@@ -154,58 +140,62 @@
 
     <?php $i = 0; ?>
 
-        @foreach($tripPlaces as $tripPlace)
+    @foreach($tripPlaces as $tripPlace)
 
-            <div style="margin-top: 20px; width: 100%">
+        <div style="margin-top: 20px; width: 100%">
 
-                @if($tripPlace->date == "")
-                    <p style="text-align: center">بدون تاریخ</p>
-                @else
-                    <p style="text-align: center">{{convertStringToDate($tripPlace->date)}}</p>
-                @endif
+            @if($tripPlace->date == "")
+                <p style="text-align: center">بدون تاریخ</p>
+            @else
+                <p style="text-align: center">{{convertStringToDate($tripPlace->date)}}</p>
+            @endif
 
-                <div style="width: 100%">
-                    <img style="width: 200px; float: right; height: 200px; margin-right: 50px" src="{{$tripPlace->pic}}">
-                    {{--<div style="float: right; margin-right: 50px">--}}
-                    <div style="max-width: 450px; margin-right: 30px; margin-left: 0; float: right">
-                        <span>{{$tripPlace->name}}</span><br/>
-                        <span>{{$tripPlace->address}}</span><br/>
-                        {{--<span>{{$tripPlace->point}}</span><br/>--}}
-                        <span>{{$tripPlace->city}}</span><br/>
-                        <span>{{$tripPlace->state}}</span><br/>
-                    </div>
+            <div style="width: 100%">
+                <img style="width: 200px; float: right; height: 200px; margin-right: 50px" src="{{$tripPlace->pic}}">
+                {{--<div style="float: right; margin-right: 50px">--}}
+                <div style="max-width: 450px; margin-right: 30px; margin-left: 0; float: right">
+                    <span>{{$tripPlace->name}}</span><br/>
+                    <span>{{$tripPlace->address}}</span><br/>
+                    {{--<span>{{$tripPlace->point}}</span><br/>--}}
+                    <span>{{$tripPlace->city}}</span><br/>
+                    <span>{{$tripPlace->state}}</span><br/>
                 </div>
-
-                    <div style="clear: both"></div>
-
-
-                    <center style="margin-top: 20px">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{$tripPlace->x}},{{$tripPlace->y}}&scale=2&zoom=15&size=600x300&maptype=roadmap
-&markers=color:red%7Clabel:C%7C{{$tripPlace->x}},{{$tripPlace->y}}
-&key=AIzaSyDpeBLW4SWeWuDKKAT0uF7bATx8T2rEiXE" style=" width: 600px; height: 300px">
-                    </center>
-                <div style="width: 100%; clear: both; margin-top: 10px; border-bottom: 2px solid #636363">
-
-                    @if(count($tripPlace->comments) == 0)
-                        <p style="text-align: center">یادداشتی موجود نیست</p>
-                    @endif
-
-                    @foreach($tripPlace->comments as $comment)
-                        <p style="text-align: center"><span>{{$comment->uId}}</span> <span>میگه: </span><span>{{$comment->description}}</span></p>
-                    @endforeach
-                </div>
-
             </div>
 
-            <?php $i++; ?>
+            <div style="clear: both"></div>
 
-        @endforeach
+
+            <center style="margin-top: 20px">
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center={{$tripPlace->x}},{{$tripPlace->y}}&scale=2&zoom=15&size=600x300&maptype=roadmap
+&markers=color:red%7Clabel:C%7C{{$tripPlace->x}},{{$tripPlace->y}}
+                        &key=AIzaSyDpeBLW4SWeWuDKKAT0uF7bATx8T2rEiXE" style=" width: 600px; height: 300px">
+            </center>
+            <div style="width: 100%; clear: both; margin-top: 10px; border-bottom: 2px solid #636363">
+
+                @if(count($tripPlace->comments) == 0)
+                    <p style="text-align: center">یادداشتی موجود نیست</p>
+                @endif
+
+                @foreach($tripPlace->comments as $comment)
+                    <p style="text-align: center"><span>{{$comment->uId}}</span> <span>میگه: </span><span>{{$comment->description}}</span></p>
+                @endforeach
+            </div>
+
+        </div>
+
+        <?php $i++; ?>
+
+    @endforeach
 </div>
 
-<footer style="width: 100%; margin-top: 10px; padding: 20px; position: relative">
-    <img src="{{URL::asset('images/yellowBack.png')}}" style="position: absolute; width: 100%; height: 200px">
-    <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 80px">شما از قابلیت سفرهای من سایت کوچیتا استفاده کرده اید.</p>
-    <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 130px">در صورت نیاز به اطلاعات بیشتر به سایت <a href="{{route('home')}}">www.shazdemosafer.com</a> مراجعه نمایید.</p>
-</footer>
+    <footer style="width: 100%; margin-top: 10px; padding: 20px; position: relative">
+        <img src="{{URL::asset('images/yellowBack.png')}}" style="position: absolute; width: 100%; height: 200px">
+        <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 80px">شما از قابلیت سفرهای من سایت کوچیتا استفاده کرده اید.</p>
+        <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 130px">
+            در صورت نیاز به اطلاعات بیشتر به سایت
+            <a href="{{route('home')}}">koochita.com</a>
+            مراجعه نمایید.
+        </p>
+    </footer>
 </body>
 </html>

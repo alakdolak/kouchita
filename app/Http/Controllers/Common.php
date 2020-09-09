@@ -1447,14 +1447,18 @@ function createSuggestionPack($_kindPlaceId, $_placeId){
     $kindPlace = Place::find($_kindPlaceId);
     $place = DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($_placeId);
     if($place != null) {
-        $file = $kindPlace->fileName;
-        $url = createUrl($kindPlace->id, $place->id, 0, 0);
         $city = Cities::whereId($place->cityId);
 
         $place->pic = getPlacePic($place->id, $kindPlace->id);
-        $place->url = $url;
-        $place->city = $city->name;
-        $place->state = State::whereId($city->stateId)->name;
+        $place->url = createUrl($kindPlace->id, $place->id, 0, 0);
+        if($city != null) {
+            $place->city = $city->name;
+            $place->state = State::whereId($city->stateId)->name;
+        }
+        else{
+            $place->city = '';
+            $place->state = '';
+        }
         $place->rate = getRate($place->id, $_kindPlaceId)[1];
         $condition = ['placeId' => $place->id, 'kindPlaceId' => $_kindPlaceId,
             'activityId' => $activityId, 'confirm' => 1];
