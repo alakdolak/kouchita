@@ -286,6 +286,10 @@
     content: '\E041';
     font-family: Shazde_Regular2 !important;
 }
+.buildingIcon:before{
+    content: '\E020';
+    font-family: Shazde_Regular2 !important;
+}
 .upArrowIcon{
     display: inline-block;
     transform: rotate(180deg);
