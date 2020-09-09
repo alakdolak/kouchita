@@ -15,8 +15,8 @@
 
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css?v=1')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css?v=1')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css?v=1')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v1=1')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css?v=2')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v1=2')}}'/>
 <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css?v=1')}}">
 <link rel="stylesheet" href="{{URL::asset('css/component/components.css?v1=2')}}">
 
