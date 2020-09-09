@@ -1,178 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-<link rel="stylesheet" href="{{URL::asset('css/theme2/pop-up-create-trip.css?v=1')}}">
-<style>
-    .tripModalBack{
-        position: fixed;
-        top: 0px;
-        right: 0px;
-        background: #0000009c;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        display: none;
-        z-index: 99;
-        direction: rtl;
-    }
-
-    .tripModalBase {
-        width: 60%;
-        overflow: hidden;
-        background: white;
-        height: auto;
-        padding: 40px;
-        position: relative;
-        padding-bottom: 10px;
-    }
-
-    .tripModalBase > div:nth-child(2) > button {
-        color: #FFF;
-        background-color: var(--koochita-light-green);
-        border-color: var(--koochita-light-green);
-    }
-
-    #tripsForPlace {
-        display: inline-block;
-        width: 100%;
-        margin: 10px 0;
-        border: 1px solid #e5e5e5;
-        border-radius: 5px;
-    }
-
-    #tripsForPlace .row {
-        display: inline-block;
-        width: 100%;
-        max-height: 300px;
-        overflow: auto;
-        margin: 0;
-    }
-
-    #tripsForPlace .row:after, #tripsForPlace .row::before {
-        display: none;
-    }
-
-    #tripsForPlace .row .addPlaceBoxes {
-        width: auto;
-        margin: 10px;
-        display: inline-block;
-        float: none;
-        overflow-y: hidden;
-    }
-
-    #tripsForPlace .row .addPlaceBoxes a {
-        margin: 0 0 21px 0;
-    }
-
-    .tripCloseIcon{
-        position: absolute;
-        top: 5px;
-        left: 10px;
-        font-size: 30px;
-        color: var(--koochita-light-green);
-        cursor: pointer;
-    }
-    .tripHeader{
-        display: block;
-        margin: -5px 0 8px;
-        font-size: 26px;
-        line-height: 30px;
-        color: #4a4a4a;
-        direction: rtl;
-    }
-    .is-create-trip {
-        color: #00AF87 !important;
-        background-blend-mode: overlay;
-        width: 150px;
-        height: 150px;
-        cursor: pointer;
-        margin: 0 0 10px 0;
-        border-radius: 2px;
-        display: -webkit-box;
-        display: flex;
-        line-height: initial;
-        transition: background-color .2s ease, corder-color .2s ease;
-        border: 1px solid #f5f5f5;
-        justify-content: space-around;
-        background-color: #e5e5e5;
-    }
-
-    .is-create-trip .tile-content {
-        align-self: center;
-        margin: 10px;
-        padding: 0;
-        box-sizing: inherit;
-        cursor: pointer;
-    }
-
-    .addedTrip{
-        width: 150px;
-        height: 150px;
-        background-color: #e5e5e5;
-        margin-bottom: 0;
-        border: 2px solid rgb(160, 160, 160);
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .tripImage{
-        width: 50%;
-        height: 50%;
-    }
-    .selectedTrip{
-        border: 2px solid rgb(77, 199, 188);
-    }
-    .tripNameInput{
-        width: 100%;
-        padding: 6px 12px;
-        border: 1px solid #f5f5f5;
-        border-radius: 2px;
-        background-color: #fff;
-        box-sizing: border-box;
-        box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.1);
-        font-size: 14px;
-        font-family: inherit;
-    }
-    .tripNameInput:focus{
-        border-color: rgb(77, 199, 188);
-    }
-    .saves-create-trip-button{
-        border-color: var(--koochita-light-green);
-        background-color: var(--koochita-light-green);
-        color: #fff;
-        float: left;
-        margin-top: 15px;
-    }
-    .saves-create-trip-button.disabled{
-        opacity: .35;
-        border-color: transparent;
-        box-shadow: none;
-        cursor: auto;
-    }
-    .tripDates{
-        display: flex;
-        justify-content: space-between;
-    }
-    .tripDateInput{
-        border: solid 1px #cccccc;
-        border-radius: 5px;
-        padding: 2px 5px;
-    }
-    .tripDateFooter{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-    }
-    .tripImageEmpty{
-
-    }
-
-    @media (max-width: 991px) {
-        .tripModalBase{
-            width: 95%;
-            padding: 25px;
-        }
-    }
-
-</style>
+{{--<link rel="stylesheet" href="{{URL::asset('css/theme2/pop-up-create-trip.css?v=1')}}">--}}
 
 <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
@@ -262,13 +89,12 @@
 
 <script>
     var getPlaceTrips = '{{route('placeTrips')}}';
-    var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
-    var addTrip = '{{route('addTrip')}}';
     var myTrips = '{{route('myTrips')}}';
 
     var tripName;
     var selectedPlaceId;
     var selectedKindPlaceId;
+    var callBackCreateTrip = null;
 
     function saveToTripPopUp(placeId, kindPlaceId) {
         if (checkLogin) {
@@ -364,7 +190,7 @@
                 checkedValuesTrips = "empty";
             $.ajax({
                 type: 'post',
-                url: assignPlaceToTripDir,
+                url: '{{route('assignPlaceToTrip')}}',
                 data: {
                     'checkedValuesTrips': checkedValuesTrips,
                     'placeId': selectedPlaceId,
@@ -399,10 +225,13 @@
         $('#selectNewTripDate').css('display', 'none');
     }
 
-    function createNewTrip() {
+    function createNewTrip(_callBack = '') {
+        callBackCreateTrip = null;
         checkEmpty();
         $("#my-trips-not").hide();
         $("#newTripModal").css("display", "flex");
+        if(typeof _callBack === 'function')
+            callBackCreateTrip = _callBack;
     }
 
     function checkEmpty() {
@@ -422,13 +251,13 @@
         $("#selectNewTripDate").css("display", "flex");
 
         $("#date_input_start").datepicker({
-            numberOfMonths: 2,
+            numberOfMonths: 1,
             showButtonPanel: true,
             dateFormat: "yy/mm/dd"
         });
 
         $("#date_input_end").datepicker({
-            numberOfMonths: 2,
+            numberOfMonths: 1,
             showButtonPanel: true,
             dateFormat: "yy/mm/dd"
         });
@@ -446,7 +275,7 @@
 
         $.ajax({
             type: 'post',
-            url: addTrip,
+            url: '{{route('addTrip')}}',
             data: {
                 'tripName': tripName,
                 'dateInputStart' : date_input_start,
@@ -454,6 +283,10 @@
             },
             success: function (response) {
                 if(response == "ok") {
+                    if(callBackCreateTrip != null){
+                        callBackCreateTrip();
+                        callBackCreateTrip = null;
+                    }
                     refreshThisAddTrip();
                     showSuccessNotifi('لیست سفر شما با موفقیت ایجاد شد', 'left', 'var(--koochita-blue)');
                 }

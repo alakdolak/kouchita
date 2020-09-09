@@ -166,8 +166,9 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     justify-content: center;
     align-items: center;
 }
-.modalHeader{
 
+.modalBlackBack.fullCenter{
+    align-items: center !important;
 }
 
 .topLightBorder{

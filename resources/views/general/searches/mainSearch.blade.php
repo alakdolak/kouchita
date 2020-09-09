@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/mainSearch.css?v=1')}}">
+{{--<link rel="stylesheet" href="{{URL::asset('css/mainSearch.css?v=1')}}">--}}
 @if(\App::getLocale() == 'en')
     <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css?v=1')}}">
 @endif

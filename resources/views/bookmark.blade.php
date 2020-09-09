@@ -1014,40 +1014,6 @@
             });
         }
 
-        function addNote() {
-
-            $.ajax({
-                type: 'post',
-                url: getNotes,
-                data: {
-                    'tripId': tripId
-                },
-                success: function (response) {
-
-
-
-                    $("#notePrompt").empty();
-
-                    if(response != "empty") {
-                        newElement = "<textarea id='tripNote'>";
-                        newElement += response;
-                    }
-                    else {
-                        newElement = "<textarea id='tripNote' placeholder='یادداشتی موجود نیست'>";
-                    }
-
-                    newElement += "</textarea>";
-
-
-
-                    $("#notePrompt").append(newElement);
-
-                    showElement('note');
-                }
-            });
-
-        }
-
         // XMaUcwm2WjjV9WpT
 
         function doAddNote() {

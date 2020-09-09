@@ -136,7 +136,7 @@
 
 @section('main')
 
-    @include('layouts.pop-up-create-trip')
+    @include('general.addToTripModal')
 
     <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible position-relative">
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2 position-relative">
@@ -146,7 +146,6 @@
                     <div id="saves-all-trips"  class="position-relative">
                         <div class="saves-title title position-relative">سفرهای من</div>
 
-
                         @if($trips == null || count($trips) == 0)
                             <div class="trips-container ui_container">
                                 <div class="trips-container-inner ui_columns is-multiline">
@@ -154,7 +153,7 @@
                                         <div class="no-saves-content content">
                                             <div class="ui_icon heart"></div>
                                             <div class="cta-header">هنوز چیزی ذخیره نشده است </div>
-                                            <div onclick="showPopUp()" class="header-create-trip ui_button primary is-hidden-mobile">+ ایجاد سفر </div>
+                                            <div onclick="createNewTrip(refreshThisPage)" class="header-create-trip ui_button primary is-hidden-mobile">+ ایجاد سفر </div>
                                         </div>
                                         <div class="mapAside is-hidden-mobile">
                                             <div class="mapHolder"></div>
@@ -166,7 +165,7 @@
                             <div class="trips-container ui_container">
                                 <div class="container">
                                     <div class="row">
-                                        <div onclick="showPopUp()" class="trip-tile-container ui_column col-lg-3 col-md-4 col-sm-6 is-hidden-mobile">
+                                        <div onclick="createNewTrip(refreshThisPage)" class="trip-tile-container ui_column col-lg-3 col-md-4 col-sm-6">
                                             <div class="trip-tile ui_card is-fullwidth new-trip">
                                                 <span class="ui_icon plus"></span>
                                                 <p>ایجاد سفر</p>
@@ -179,18 +178,24 @@
                                                         <div class="trip-name">
                                                             <div>{{$trip->name}}</div>
                                                             <div class="iconSec">
-                                                                {{--                                                            <div class="editIcon icons edit"></div>--}}
-                                                                {{--                                                            <div class="trashIcon icons delete"></div>--}}
-                                                                {{--                                                            <div class="settingIcon"></div>--}}
+                                                                {{--<div class="editIcon icons edit"></div>--}}
+                                                                {{--<div class="trashIcon icons delete"></div>--}}
+                                                                {{--<div class="settingIcon"></div>--}}
                                                             </div>
                                                         </div>
                                                         <div class="tripDate">
                                                             <div class="date calendarIconA">
-                                                                <span>1399-05-30</span>
-                                                                <span>تا</span>
-                                                                <span>1399-05-12</span>
+                                                                @if(isset($trip->to_) && $trip->to_ != null)
+                                                                    <span>{{$trip->to_}}</span>
+                                                                @endif
+                                                                @if(isset($trip->from_) && isset($trip->to_) && $trip->from_ != null && $trip->to_ != null)
+                                                                    <span>تا</span>
+                                                                @endif
+                                                                @if( isset($trip->from_) && $trip->from_ != null)
+                                                                    <span>{{$trip->from_}}</span>
+                                                                @endif
                                                             </div>
-                                                            <div class="userIconA user">12</div>
+                                                            <div class="userIconA user">{{$trip->member}}</div>
                                                         </div>
                                                     </div>
 {{--                                                    <div class="cursor-pointer trip-images ui_columns is-gapless is-multiline is-mobile">--}}
@@ -275,6 +280,10 @@
         </div>
     </div>
     <script>
+        function refreshThisPage(){
+            location.reload();
+        }
+
         function showElement(id) {
             $(".item").addClass('hidden');
             $("#" + id).removeClass('hidden');

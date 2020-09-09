@@ -1067,7 +1067,7 @@
 #saves-body .no-saves-content {
     margin: 1em;
     text-align: center;
-    height: 600px;
+    /*height: 600px;*/
 }
 #saves-body .no-saves-content .heart {
     font-size: 45px;

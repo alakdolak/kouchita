@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Adab;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
@@ -17,12 +18,12 @@ use App\models\Trip;
 use App\models\TripComments;
 use App\models\TripMember;
 use App\models\TripMembersLevelController;
-use App\models\TripNote;
 use App\models\TripPlace;
 use App\models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 
@@ -62,9 +63,16 @@ class MyTripsController extends Controller {
                     array_push($tripPics, $pic);
                 }
                 $trip->placePic = $tripPics;
+
+                $trip->member = TripMember::where('tripId', $trip->id)->where('uId', '!=', $trip->uId)->count() + 1;
+
+                if($trip->from_ != null)
+                    $trip->from_ = substr($trip->from_, 0, 4) . '-' . substr($trip->from_, 4, 2) . '-' . substr($trip->from_, 6, 2);
+
+                if($trip->to_ != null)
+                    $trip->to_ = substr($trip->to_, 0, 4) . '-' . substr($trip->to_, 4, 2) . '-' . substr($trip->to_, 6, 2);
             }
         }
-
         return view('myTrip', compact(['trips']));
     }
 
@@ -75,25 +83,23 @@ class MyTripsController extends Controller {
 
         $trip = Trip::whereId($tripId);
 
-        $changePlaceDate = 1;
-        $changeTripDate = 1;
-        $addPlace = 1;
-        $addFriend = 1;
-        $owner = 1;
+        $trip->owner = 0;
 
-        if($trip->uId != $uId) {
-            $condition = ["tripId" => $tripId, 'uId' => $uId];
-            if(TripMember::where($condition)->count() == 0)
+        if($user->id == $trip->uId){
+            $trip->editTrip = 1;
+            $trip->editPlace = 1;
+            $trip->editMember = 1;
+            $trip->owner = 1;
+        }
+        else{
+            $uInTrip = TripMember::where('tripId', $trip->id)->where('uId', $user->id)->get();
+            if($uInTrip != null){
+                $trip->editTrip = $uInTrip->editTrip;
+                $trip->editPlace = $uInTrip->editPlace;
+                $trip->editMember = $uInTrip->editMember;
+            }
+            else
                 return Redirect::to('myTrips');
-
-            $condition = ["tripId" => $tripId, 'uId' => $uId];
-            $config = TripMembersLevelController::where($condition)->first();
-
-            $changePlaceDate = $config->changePlaceDate;
-            $changeTripDate = $config->changeTripDate;
-            $addPlace = $config->addPlace;
-            $addFriend = $config->addFriend;
-            $owner = 0;
         }
 
         if($trip->from_ != "")
@@ -113,24 +119,213 @@ class MyTripsController extends Controller {
             else
                 $tripPlace->pic = \URL::asset('_images/nopic/blank.jpg');
 
-            $tripPlace->x = $plc->C;
-            $tripPlace->y = $plc->D;
+            if(isset($plc->C) && isset($plc->D)) {
+                $tripPlace->x = $plc->C;
+                $tripPlace->y = $plc->D;
+            }
+
             $tripPlace->url = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $plc->slug]);
 
             if($tripPlace->date != "")
                 $tripPlace->date = formatDate($tripPlace->date);
         }
 
-        $tripNote = TripNote::whereTripId($trip->id)->first();
-        if($tripNote == null)
-            $tripNote = "";
-        else
-            $tripNote = $tripNote->note;
+        $trip->member = TripMember::where('tripId', $tripId)->get();
 
-        return view('myTripInner', array('changePlaceDate' => $changePlaceDate, 'changeTripDate' => $changeTripDate,
-                            'addPlace' => $addPlace, 'addFriend' => $addFriend, 'owner' => $owner,
-                            'trip' => $trip, 'tripPlaces' => $tripPlaces, 'sortMode' => $sortMode, 'tripNote' => $tripNote));
+        foreach ($trip->member as $item) {
+            $member = User::find($item->uId);
+            if ($member != null) {
+                $item->username = $member->username;
+                $item->pic = getUserPic($member->id);
+            } else
+                $item->delete();
+        }
+
+
+        return view('myTripInner', compact(['trip', 'tripPlaces', 'sortMode']));
     }
+
+    public function addTrip() {
+
+        if(isset($_POST["tripName"])) {
+
+            $tripName = makeValidInput($_POST["tripName"]);
+            $trip = new Trip();
+
+            if(isset($_POST["dateInputStart"]) && $_POST["dateInputStart"] != ''){
+                $dateInputStart = makeValidInput($_POST["dateInputStart"]);
+                $dateInputStart = explode('/', $dateInputStart);
+                if(count($dateInputStart) == 3)
+                    $dateInputStart = $dateInputStart[0] . $dateInputStart[1] . $dateInputStart[2];
+                $trip->from_ = $dateInputStart;
+            }
+
+            if(isset($_POST["dateInputEnd"]) && $_POST["dateInputEnd"] != ''){
+                $dateInputEnd = makeValidInput($_POST["dateInputEnd"]);
+                $dateInputEnd = explode('/', $dateInputEnd);
+                if(count($dateInputEnd) == 3)
+                    $dateInputEnd = $dateInputEnd[0] . $dateInputEnd[1] . $dateInputEnd[2];
+                $trip->to_ = $dateInputEnd;
+            }
+
+            $trip->name = $tripName;
+            $trip->lastSeen = time();
+            $trip->uId = Auth::user()->id;
+            $trip->save();
+
+            echo "ok";
+        }
+    }
+
+    public function deleteTrip() {
+
+        if(isset($_POST["tripId"])) {
+            $tripId = makeValidInput($_POST["tripId"]);
+            Trip::destroy($tripId);
+
+            echo "ok";
+        }
+    }
+
+    public function addNote() {
+        if(isset($_POST["tripId"]) && isset($_POST["note"])) {
+            $tripId = makeValidInput($_POST["tripId"]);
+            $note = makeValidInput($_POST["note"]);
+            $trip = Trip::find($tripId);
+            if($trip == null){
+                echo 'nok1';
+                return;
+            }
+            else{
+                $trip->note = $note;
+                $trip->save();
+                echo 'ok';
+            }
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
+    public function editUserAccess(Request $request)
+    {
+        if(isset($request->uId) && isset($request->tripId)){
+            $trip = Trip::find($request->tripId);
+            $access = TripMember::where('tripId', $request->tripId)
+                                  ->where('uId', \auth()->user()->id)
+                                  ->where('editMember', 1)->first();
+
+            if($access != null || $trip->uId == \auth()->user()->id){
+                $uInT = TripMember::find($request->uId);
+                if($uInT != null){
+                    $uInT->editMember = isset($request->editMember) && $request->editMember == 'true' ? 1 : 0;
+                    $uInT->editTrip = isset($request->editTrip) && $request->editTrip == 'true' ? 1 : 0;
+                    $uInT->editPlace = isset($request->editPlace) && $request->editPlace == 'true' ? 1 : 0;
+
+                    $uInT->save();
+                    echo json_encode(['status' => 'ok', 'result' => $uInT]);
+                }
+                else
+                    echo json_encode(['status' => 'notInTrip']);
+            }
+            else
+                echo json_encode(['status' => 'cantAccess']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function inviteFriend() {
+
+        if(isset($_POST["friendId"]) && isset($_POST["tripId"])) {
+
+            $friendId = makeValidInput($_POST["friendId"]);
+            $uId = Auth::user()->id;
+
+            if($friendId == $uId) {
+                echo "err4";
+                return;
+            }
+
+            $tripId = makeValidInput($_POST["tripId"]);
+
+            if($uId != -1) {
+                $user = User::whereUserName($friendId)->first();
+
+                if ($user != null && !empty($user)) {
+
+                    $tripMember = new TripMember();
+                    $tripMember->uId = $user->id;
+                    $tripMember->tripId = $tripId;
+                    $tripMember->status = false;
+                    $tripMember->save();
+
+                    $tripLevel = new TripMembersLevelController();
+                    $tripLevel->uId = $user->id;
+                    $tripLevel->tripId = $tripId;
+                    $tripLevel->save();
+
+                    echo "ok";
+                }
+                else
+                    echo "nok";
+            }
+
+            else
+                echo "err2";
+            return;
+        }
+
+        echo "err3";
+
+    }
+
+    public function deleteMember() {
+        if(isset($_POST["uId"]) && isset($_POST["tripId"])) {
+
+            $uId = makeValidInput($_POST["uId"]);
+            $tripId = makeValidInput($_POST["tripId"]);
+
+            $currentUser = Auth::user();
+            $trip = Trip::find($tripId);
+
+            if($trip == null) {
+                echo "nok";
+                return;
+            }
+
+            $access = TripMember::where('uId', $currentUser->id)
+                                    ->where('tripId', $trip->id)
+                                    ->where('editMember', 1)
+                                    ->first();
+
+            if($trip->uId == $currentUser->id || $access != null) {
+                TripMember::where('tripId', $trip->id)
+                            ->where('uId', $uId)->delete();
+
+                $alert = new Alert();
+                $alert->userId = $uId;
+                $alert->subject = 'deleteFromTrip';
+                $alert->referenceTable = 'trip';
+                $alert->referenceId = $trip->id;
+                $alert->save();
+
+                echo "ok";
+            }
+            else
+                echo 'notAccess';
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
+
+
 
     public function addTripPlace() {
 
@@ -158,52 +353,6 @@ class MyTripsController extends Controller {
             } else {
                 echo "nok";
             }
-        }
-    }
-
-    public function addTrip() {
-
-        if(isset($_POST["tripName"])) {
-
-            $tripName = makeValidInput($_POST["tripName"]);
-
-            if (isset($_POST["dateInputEnd"]) && isset($_POST["dateInputStart"]) && $_POST["dateInputEnd"] != '' && $_POST["dateInputStart"] != '' ) {
-                $dateInputStart = makeValidInput($_POST["dateInputStart"]);
-                $dateInputEnd = makeValidInput($_POST["dateInputEnd"]);
-
-                $dateInputStart = explode('/', $dateInputStart);
-                if(count($dateInputStart) == 3)
-                    $dateInputStart = $dateInputStart[0] . $dateInputStart[1] . $dateInputStart[2];
-
-                $dateInputEnd = explode('/', $dateInputEnd);
-                if(count($dateInputEnd) == 3)
-                    $dateInputEnd = $dateInputEnd[0] . $dateInputEnd[1] . $dateInputEnd[2];
-
-                if($dateInputStart >= $dateInputEnd) {
-                    echo "nok3";
-                    return;
-                }
-
-                $trip = new Trip();
-                $trip->name = $tripName;
-                $trip->from_ = $dateInputStart;
-                $trip->lastSeen = time();
-                $trip->uId = Auth::user()->id;
-                $trip->to_ = $dateInputEnd;
-
-                $trip->save();
-
-                echo "ok";
-                return;
-            }
-
-            $trip = new Trip();
-            $trip->name = $tripName;
-            $trip->lastSeen = time();
-            $trip->uId = Auth::user()->id;
-            $trip->save();
-
-            echo "ok";
         }
     }
 
@@ -621,58 +770,6 @@ class MyTripsController extends Controller {
         }
     }
 
-    public function deleteTrip() {
-
-        if(isset($_POST["tripId"])) {
-            $tripId = makeValidInput($_POST["tripId"]);
-            Trip::destroy($tripId);
-
-            echo "ok";
-        }
-    }
-
-    public function getNotes() {
-
-        if(isset($_POST["tripId"])) {
-
-            $tripId = makeValidInput($_POST["tripId"]);
-
-            if(TripNote::whereTripId($tripId)->count() > 0) {
-                echo TripNote::whereTripId($tripId)->first()->note;
-                return;
-            }
-        }
-        echo 'empty';
-    }
-    
-    public function addNote() {
-
-        if(isset($_POST["tripId"]) && isset($_POST["note"])) {
-
-            $tripId = makeValidInput($_POST["tripId"]);
-            $note = makeValidInput($_POST["note"]);
-
-            if(TripNote::whereTripId($tripId)->count() > 0) {
-                if($note == "")
-                    TripNote::whereTripId($tripId)->delete();
-                else {
-                    $tripNote = TripNote::whereTripId($tripId)->first();
-                    $tripNote->note = $note;
-                    $tripNote->save();
-                }
-            }
-            else {
-                if($note != "") {
-                    $tripNote = new TripNote();
-                    $tripNote->tripId = $tripId;
-                    $tripNote->note = $note;
-                    $tripNote->save();
-                }
-            }
-            echo 'ok';
-        }
-    }
-
     public function assignDateToPlace() {
 
         if(isset($_POST["tripPlaceId"]) && isset($_POST["date"])) {
@@ -699,63 +796,6 @@ class MyTripsController extends Controller {
                 }
             }
         }
-
-    }
-
-    public function inviteFriend() {
-
-        if(isset($_POST["friendId"]) && isset($_POST["nickName"]) && isset($_POST["tripId"])) {
-
-            $friendId = makeValidInput($_POST["friendId"]);
-            $uId = Auth::user()->id;
-
-            if($friendId == $uId) {
-                echo "err4";
-                return;
-            }
-
-            $nickName = makeValidInput($_POST["nickName"]);
-            $tripId = makeValidInput($_POST["tripId"]);
-
-            if($uId != -1) {
-                $user = User::whereUserName($friendId)->first();
-
-                if ($user != null && !empty($user)) {
-
-                    $tripMember = new TripMember();
-                    $tripMember->uId = $user->id;
-                    $tripMember->tripId = $tripId;
-                    $tripMember->status = false;
-                    $tripMember->save();
-
-                    $tripLevel = new TripMembersLevelController();
-                    $tripLevel->uId = $user->id;
-                    $tripLevel->tripId = $tripId;
-                    $tripLevel->save();
-
-                    $msg = new Message();
-                    $msg->senderId = $uId;
-                    $msg->receiverId = $user->id;
-                    $message = $nickName . " از شما برای سفر  " . Trip::whereId($tripId)->name . " دعوت کرده است ";
-                    $message .= "<br/><a href='" . route('seeTrip', ['tripId' => $tripId]) . "'>لینک مشاهده</a>";
-                    $message .= "<br/><a href='" . route('acceptTrip', ['tripId' => $tripId]) . "'>لینک تایید دعوت</a>";
-                    $message .= "<br/><a href='" . route('rejectInvitation', ['tripId' => $tripId]) . "'>لینک رد دعوت</a>";
-                    $msg->message = $message;
-                    $msg->subject = "دعوت برای سفر";
-                    $msg->date = getToday()["date"];
-                    $msg->save();
-                    echo "ok";
-                }
-                else
-                    echo "nok";
-            }
-
-            else
-                echo "err2";
-            return;
-        }
-
-        echo "err3";
 
     }
 
@@ -842,61 +882,6 @@ class MyTripsController extends Controller {
             }
 
             echo json_encode($out);
-        }
-    }
-
-    public function deleteMember() {
-        if(isset($_POST["username"]) && isset($_POST["tripId"])) {
-
-            $username = makeValidInput($_POST["username"]);
-
-            $currUser = Auth::user();
-            $tripId = makeValidInput($_POST["tripId"]);
-            $uId = User::whereUserName($username)->first()->id;
-
-            $trip = Trip::whereId($tripId);
-
-            if($trip == null) {
-                echo "nok";
-                return;
-            }
-
-            if($trip->uId != $currUser->id && $username != $currUser->username) {
-                echo "nok";
-                return;
-            }
-
-            $condition = ['tripId' => $tripId, 'uId' => $uId];
-            $tripMember = TripMember::where($condition)->first();
-
-            if($tripMember != null) {
-                $tripMember->delete();
-                $tripLevel = TripMembersLevelController::where($condition)->first();
-                $tripLevel->delete();
-
-                $trip = Trip::whereId($tripId);
-                $ownerId = $trip->uId;
-                $tripName = $trip->name;
-
-                $msg = new Message();
-                $msg->senderId = $uId;
-                $msg->receiverId = $ownerId;
-                $msg->message =  $username . " از سفر " . $tripName . " حذف شد ";
-                $msg->subject = "حذف از سفر";
-                $msg->date = getToday()["date"];
-                $msg->save();
-
-
-                $msg = new Message();
-                $msg->senderId = $ownerId;
-                $msg->receiverId = $uId;
-                $msg->message =  "شما از سفر " . $tripName . " حذف شدید ";
-                $msg->subject = "حذف از سفر";
-                $msg->date = getToday()["date"];
-                $msg->save();
-
-                echo "ok";
-            }
         }
     }
 

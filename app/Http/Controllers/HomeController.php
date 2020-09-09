@@ -43,6 +43,8 @@ use App\models\ReviewUserAssigned;
 use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Train;
+use App\models\Trip;
+use App\models\TripMember;
 use App\models\User;
 use App\models\saveApiInfo;
 use Carbon\Carbon;
@@ -1409,6 +1411,19 @@ class HomeController extends Controller
                         $item->pic = getUserPic($reference->senderId);
                         array_push($result, $item);
                     }
+                }
+                else
+                    $item->delete();
+            }
+            else if($item->subject == 'deleteFromTrip'){
+                $reference = Trip::find($item->referenceId);
+                if($reference != null){
+                    $alertText = 'شما از برنامه سفر ' . $reference->name . ' حذف شدید.';
+
+                    $item->color = $redColor;
+                    $item->msg = $alertText;
+                    $item->pic = getUserPic(0);
+                    array_push($result, $item);
                 }
                 else
                     $item->delete();

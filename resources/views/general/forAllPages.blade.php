@@ -1,4 +1,5 @@
 {{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css?v=1')}}">--}}
+<link rel="stylesheet" href="{{URL::asset('css/component/generalFolder.css')}}">
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 
@@ -23,18 +24,16 @@
 
 @include('component.questionPack')
 
-@include('general.addToTripModal')
-
 @include('general.reportModal')
 
 @if(!Auth::check())
     @include('general.nLoginPopUp')
 @else
+    @include('general.addToTripModal')
 
     @include('general.uploadPhoto')
 
     @include('general.addSafarnameh')
-
 @endif
 
 <script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>

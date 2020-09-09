@@ -515,6 +515,9 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips');
 
+    Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces');
+
+
     Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
 
     Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
@@ -577,11 +580,7 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
 
-    Route::get('tripPlaces/{tripId}/{sortMode?}', array('as' => 'tripPlaces', 'uses' => 'MyTripsController@myTripsInner'));
-
     Route::post('addTripPlace', array('as' => 'addTripPlace', 'uses' => 'MyTripsController@addTripPlace'));
-
-    Route::post('addTrip', array('as' => 'addTrip', 'uses' => 'MyTripsController@addTrip'));
 
     Route::post('editTrip', array('as' => 'editTrip', 'uses' => 'MyTripsController@editTrip'));
 
@@ -591,17 +590,9 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('changeDateTrip', array('as' => 'changeDateTrip', 'uses' => 'MyTripsController@changeDateTrip'));
 
-    Route::post('deleteTrip', array('as' => 'deleteTrip', 'uses' => 'MyTripsController@deleteTrip'));
-
     Route::post('placeInfo', array('as' => 'placeInfo', 'uses' => 'MyTripsController@placeInfo'));
 
-    Route::post('getNotes', array('as' => 'getNotes', 'uses' => 'MyTripsController@getNotes'));
-
-    Route::post('addNote', array('as' => 'addNote', 'uses' => 'MyTripsController@addNote'));
-
     Route::post('assignDateToPlace', array('as' => 'assignDateToPlace', 'uses' => 'MyTripsController@assignDateToPlace'));
-
-    Route::post('inviteFriend', array('as' => 'inviteFriend', 'uses' => 'MyTripsController@inviteFriend'));
 
     Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
 
@@ -614,8 +605,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
     Route::get('rejectInvitation/{tripId}', array('as' => 'rejectInvitation', 'uses' => 'MyTripsController@rejectInvitation'));
 
     Route::post('getTripMembers', array('as' => 'getTripMembers', 'uses' => 'MyTripsController@getTripMembers'));
-
-    Route::post('deleteMember', array('as' => 'deleteMember', 'uses' => 'MyTripsController@deleteMember'));
 
     Route::post('getMemberAccessLevel', array('as' => 'getMemberAccessLevel', 'uses' => 'MyTripsController@getMemberAccessLevel'));
 
@@ -658,6 +647,25 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
     Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
 
     Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
+
+});
+
+//trip
+Route::group(array('middleware' => ['auth']), function(){
+
+    Route::post('trip/addNote', 'MyTripsController@addNote')->name('trip.addNote');
+
+    Route::post('trip/editUserAccess', 'MyTripsController@editUserAccess')->name('trip.editUserAccess');
+
+    Route::post('trip/add', 'MyTripsController@addTrip')->name('addTrip');
+
+    Route::post('trip/invite', 'MyTripsController@inviteFriend')->name('inviteFriend');
+
+    Route::post('trip/editUserAccess', 'MyTripsController@editUserAccess')->name('trip.editUserAccess');
+
+    Route::post('trip/deleteMember', 'MyTripsController@deleteMember')->name('deleteMember');
+
+    Route::post('trip/delete', 'MyTripsController@deleteTrip')->name('deleteTrip');
 
 });
 

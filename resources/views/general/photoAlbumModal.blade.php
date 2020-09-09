@@ -1,58 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=2')}}">
 
-<style>
-    .deletePicIconsPhotoAlbum{
-        position: absolute;
-        color: red;
-        background-color: #303134;
-        font-size: 33px;
-        z-index: 9;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        top: -10px;
-        left: -5px;
-    }
-
-    .photoAlbumWhere{
-        font-size: 9px;
-        display: block;
-        color: #9aa0a6;
-    }
-
-    .albumContent{
-        max-height: 75vh;
-        overflow: auto;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .leftColPhotosModalMainDiv{
-        display: flex;
-        margin-bottom: 20px;
-    }
-
-    @media (max-width: 768px) {
-        .leftColPhotosModalMainDiv{
-            margin-bottom: 30px;
-        }
-        .albumContent{
-            max-height: 55vh;
-        }
-        .showingPhotosModal .rightColPhotosShowingModal{
-            height: 55px;
-            width: 60px;
-            border-radius: 5px;
-        }
-    }
-</style>
-
 <div class="modal showingPhotosModal" id="photoAlbumModal" role="dialog" style="display: none">
     <div class="modal-dialog" style="margin-top: 2%">
         <div class="modal-content" style="background-color: #141518; border: none;">
