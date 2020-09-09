@@ -2,7 +2,7 @@
 <script src="{{asset('js/ckeditor5/ckeditor5.js')}}"></script>
 <script src="{{asset('js/ckeditor5/ckeditorUpload.js')}}"></script>
 
-<div id="newSafarnameh" class="modalBlackBack" style="display: none; z-index: 9999;">
+<div id="newSafarnameh" class="modalBlackBack" style="z-index: 9999;">
     <div class="newSafarnamehSection">
         <div class="nsHeader">
             <h3 class="text">نوشتن سفرنامه</h3>
@@ -80,7 +80,7 @@
     </div>
 </div>
 
-<div id="placeSuggestionModal" class="modalBlackBack hidden" style="z-index: 10000;">
+<div id="placeSuggestionModal" class="modalBlackBack" style="z-index: 10000;">
     <div class="placeSuggestionBody">
         <div class="iconClose closeSuggestionModal" onclick="closeSuggestion()"></div>
         <div class="container-fluid">
@@ -155,7 +155,7 @@
 
     function openNewSafarnameh(){
         if(checkLogin())
-            $('#newSafarnameh').css('display', 'flex');
+            openMyModal('newSafarnameh') // forAllPages.blade.php
     }
 
     function changeNewPicSafarnameh(input){
@@ -246,17 +246,17 @@
     }
 
     function closeNewSafarnameh(){
-        $('#newSafarnameh').hide();
+        closeMyModal('newSafarnameh'); // forAllPages.blade.php
     }
 
     function openSuggestion(){
-        $('#placeSuggestionModal').removeClass('hidden');
+        openMyModal('placeSuggestionModal'); // forAllPages.blade.php
         getSuggestionPlace();
         createPickPlace();
     }
 
     function closeSuggestion(){
-        $('#placeSuggestionModal').addClass('hidden');
+        closeMyModal('placeSuggestionModal'); // forAllPages.blade.php
     }
 
     function getSuggestionPlace(){

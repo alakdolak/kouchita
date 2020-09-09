@@ -834,16 +834,21 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 .placeDetailsToggleBar .leftSec .userComments{
     overflow-y: auto;
-    height: 275px;
+    height: 300px;
 }
-.placeDetailsToggleBar .leftSec .sendButton{
-    background: var(--koochita-blue);
+.placeDetailsToggleBar .leftSec .sendIcon{
     border: none;
-    color: white;
-    padding: 3px 10px;
     border-radius: 5px;
     margin-right: auto;
-    margin-top: 5px;
+    margin-top: 2px;
+    position: absolute;
+    left: 6px;
+    color: var(--koochita-blue);
+    background: unset;
+    padding: 0;
+    font-size: 30px;
+    line-height: 25px;
+    transform: rotate(225deg);
 }
 .placeDetailsToggleBar .leftSec input{
     width: 100%;
@@ -854,6 +859,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 .placeDetailsToggleBar .leftSec .yourComments{
     display: flex;
     flex-direction: column;
+    position: relative;
+    padding: 5px 0px;
 }
 .placeDetailsToggleBar .leftSec .header{
     font-size: 20px;
@@ -940,6 +947,28 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border-radius: 10px;
 }
 
+#saves-all-trips .trip-tile-container .trip-tile{
+    border-radius: 10px;
+}
+#saves-single-trip-container .trip-header .saves-back-button{
+    left: 0px;
+}
+.modalBlackBack{
+    display: none;
+}
+.modalBlackBack.show{
+    display: flex !important;
+}
+.saves-header-buttons{
+    width: 100%;
+    display: flex;
+    position: relative;
+    /*justify-content: center;*/
+}
+.saves-header-buttons > div:nth-of-type(1){
+    margin-right: auto;
+}
+
 @media (max-width: 1187px) {
     .placeDetailsToggleBar .rightSec .placeInfo .info .name{
         flex-direction: column;
@@ -992,6 +1021,27 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     }
     .placeDetailsToggleBar .leftSec .notRow{
         font-size: 11px;
+    }
+
+    #targetHelp_10{
+        margin: 0;
+        border-right: none;
+    }
+    .saves-header-buttons{
+        justify-content: center;
+    }
+    .saves-header-buttons > div:nth-of-type(1){
+        margin-right: 0px;
+    }
+    #targetHelp_7, #targetHelp_8, #targetHelp_9, #targetHelp_10{
+        margin-right: 0px !important;
+    }
+    #saves-single-trip-container .trip-header .saves-header-button{
+        min-width: 50px !important;
+        font-size: 9px !important;
+    }
+    #saves-single-trip-container .trip-header .saves-header-button .ui_icon{
+        font-size: 22px !important;
     }
 }
 @media (max-width: 600px) {
