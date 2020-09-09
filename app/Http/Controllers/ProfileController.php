@@ -344,51 +344,6 @@ class ProfileController extends Controller {
         return ;
     }
 
-    public function searchSuggestion(Request $request)
-    {
-        $inPlace = [];
-        $kindPlace = $request->kindPlace;
-        if($kindPlace == 'state' || $kindPlace == 'village' || $kindPlace == 'city'){
-            if($kindPlace == 'state'){
-                $result = State::where('name', 'LIKE', '%'.$request->text.'%')->get();
-                foreach ($result as $item)
-                    array_push($inPlace, ['kindPlaceId' => 'state', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'استان ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => '']);
-            }
-            else if($kindPlace == 'city'){
-                $result = Cities::where('name', 'LIKE','%'.$request->text.'%')->where('isVillage', 0)->get();
-
-                foreach ($result as $item) {
-                    $state = State::find($item->stateId);
-                    array_push($inPlace, ['kindPlaceId' => 'city', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'شهر ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => 'در استان ' . $state->name]);
-                }
-            }
-            else{
-                $result = Cities::where('name', 'LIKE', '%'.$request->text.'%')->where('isVillage','!=', 0)->get();
-                foreach ($result as $item) {
-                    $state = State::find($item->stateId);
-                    $city = Cities::find($item->isVillage);
-                    array_push($inPlace, ['kindPlaceId' => 'city', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'شهر ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => 'در استان ' . $state->name . ' ، در شهر ' . $city->name]);
-                }
-            }
-        }
-        else{
-            $kindPlace = Place::where('tableName', $kindPlace)->first();
-            $places = \DB::table($kindPlace->tableName)->where('name', 'LIKE','%'.$request->text.'%')->get();
-            foreach ($places as $pl){
-                $pic = getPlacePic($pl->id, $kindPlace->id, 'f');
-                $cit = Cities::find($pl->cityId);
-                $sta = State::find($cit->stateId);
-                $stasent = 'استان ' . $sta->name . ' ، شهر' . $cit->name;
-                array_push($inPlace, ['kindPlaceId' => $kindPlace->id, 'kindPlaceName' => $kindPlace->name, 'placeId' => $pl->id, 'name' => $pl->name, 'pic' => $pic, 'state' => $stasent]);
-            }
-        }
-
-
-        echo json_encode(['status' => 'ok', 'result' => $inPlace]);
-        return ;
-    }
-
-
     public function getQuestions(Request $request)
     {
         $activityId = Activity::whereName('سوال')->first()->id;

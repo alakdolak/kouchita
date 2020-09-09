@@ -43,14 +43,14 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 //    Route::get('/', 'MainController@landingPage')->name('home');
     Route::get('/landingPage', 'MainController@landingPage')->name('landingPage');
 
-    Route::get('main/{mode}', function(){
-        return redirect(url('/'));
-    })->name('mainMode');
-
     //PDF creator
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
 
-    Route::get('printPage/{tripId}', array('as' => 'printPage', 'uses' => 'HomeController@printPage'));
+    Route::get('printPage/{tripId}', 'HomeController@printPage')->name('printPage');
+
+    Route::get('main/{mode}', function(){
+        return redirect(url('/'));
+    })->name('mainMode');
 
     Route::get('soon', array('as' => 'soon', 'uses' => 'HomeController@soon'));
 
@@ -337,6 +337,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
 
+    Route::post('searchSuggestion', 'AjaxController@searchSuggestion')->name('searchSuggestion');
+
     Route::post('getSingleQuestion', 'AjaxController@getSingleQuestion')->name('getSingleQuestion');
 
     Route::post('getSingleReview', 'AjaxController@getSingleReview')->name('getSingleReview');
@@ -495,8 +497,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
 
-    Route::post('profile/safarnameh/searchSuggestion', 'ProfileController@searchSuggestion')->name('profile.safarnameh.searchSuggestion');
-
     Route::post('profile/updateUserPhoto', 'ProfileController@updateUserPhoto')->name('profile.updateUserPhoto');
 
     Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
@@ -516,7 +516,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
     Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips');
 
     Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces');
-
 
     Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
 
@@ -580,19 +579,9 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
 
-    Route::post('addTripPlace', array('as' => 'addTripPlace', 'uses' => 'MyTripsController@addTripPlace'));
-
-    Route::post('editTrip', array('as' => 'editTrip', 'uses' => 'MyTripsController@editTrip'));
-
     Route::post('placeTrips', array('as' => 'placeTrips', 'uses' => 'MyTripsController@placeTrips'));
 
     Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
-
-    Route::post('changeDateTrip', array('as' => 'changeDateTrip', 'uses' => 'MyTripsController@changeDateTrip'));
-
-    Route::post('placeInfo', array('as' => 'placeInfo', 'uses' => 'MyTripsController@placeInfo'));
-
-    Route::post('assignDateToPlace', array('as' => 'assignDateToPlace', 'uses' => 'MyTripsController@assignDateToPlace'));
 
     Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
 
@@ -615,10 +604,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
     Route::post('changePlaceDate', array('as' => 'changePlaceDate', 'uses' => 'MyTripsController@changePlaceDate'));
 
     Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
-
-    Route::post('deletePlace', array('as' => 'deletePlace', 'uses' => 'MyTripsController@deletePlace'));
-
-    Route::post('addComment', array('as' => 'addComment', 'uses' => 'MyTripsController@addComment'));
 
     Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'));
 
@@ -653,6 +638,10 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 //trip
 Route::group(array('middleware' => ['auth']), function(){
 
+    Route::get('trip/print/{tripId}', 'MyTripsController@printTrips')->name('trip.print');
+
+    Route::post('trip/editTrip', 'MyTripsController@editTrip')->name('trip.editTrip');
+
     Route::post('trip/addNote', 'MyTripsController@addNote')->name('trip.addNote');
 
     Route::post('trip/editUserAccess', 'MyTripsController@editUserAccess')->name('trip.editUserAccess');
@@ -661,11 +650,27 @@ Route::group(array('middleware' => ['auth']), function(){
 
     Route::post('trip/invite', 'MyTripsController@inviteFriend')->name('inviteFriend');
 
+    Route::post('trip/invite/result', 'MyTripsController@inviteResult')->name('trip.invite.result');
+
     Route::post('trip/editUserAccess', 'MyTripsController@editUserAccess')->name('trip.editUserAccess');
 
     Route::post('trip/deleteMember', 'MyTripsController@deleteMember')->name('deleteMember');
 
     Route::post('trip/delete', 'MyTripsController@deleteTrip')->name('deleteTrip');
+
+    Route::post('trip/addTripPlace', 'MyTripsController@addTripPlace')->name('trip.addPlace');
+
+    Route::post('trip/deletePlace', 'MyTripsController@deletePlace')->name('trip.deletePlace');
+
+    Route::post('trip/placeInfo', 'MyTripsController@placeInfo')->name('trip.placeInfo');
+
+    Route::post('trip/assignDateToPlace','MyTripsController@assignDateToPlace')->name('trip.assignDateToPlace');
+
+    Route::post('trip/changeDateTrip', 'MyTripsController@changeDateTrip')->name('trip.changeDateTrip');
+
+    Route::post('trip/addComment', 'MyTripsController@addComment')->name('trip.addComment');
+
+    Route::post('trip/comment/delete', 'MyTripsController@deleteComment')->name('trip.comment.delete');
 
 });
 
