@@ -414,12 +414,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 #editTripPrompt{
     padding: 20px;
 }
-.modalBody{
-    background: white;
-    padding: 25px;
-    direction: rtl;
-    position: relative;
-}
 .memberList{
     max-height: 55vh;
     overflow: auto;
@@ -679,7 +673,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 .placeCard.fullShow{
     padding-bottom: 20px;
-    background: #fcc1563b;
+    background: var(--koochita-blue);
     border-bottom: none;
     border-radius: 10px 10px 0px 0px;
 }
@@ -755,7 +749,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     max-height: 0px;
     overflow: hidden;
     padding: 0px;
-    background: #fcc1563b !important;
+    background: var(--koochita-blue) !important;
     border-radius: 5px;
     width: 0px;
     display: flex;
@@ -817,6 +811,9 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 .placeDetailsToggleBar .rightSec .placeInfo .city{
     font-size: 9px;
     color: gray;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
 }
 .placeDetailsToggleBar .rightSec .placeInfo .address{
     font-size: 11px;
@@ -933,7 +930,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     align-items: center;
 }
 .placeDetailsToggleBar .tabSection .active{
-    background: #ede1ca !important;
+    background: #006b95 !important;
     margin-top: 5px;
     border-radius: 10px 10px 0px 0px;
     color: white;
@@ -955,12 +952,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 #saves-single-trip-container .trip-header .saves-back-button{
     left: 0px;
-}
-.modalBlackBack{
-    display: none;
-}
-.modalBlackBack.show{
-    display: flex !important;
 }
 .saves-header-buttons{
     width: 100%;

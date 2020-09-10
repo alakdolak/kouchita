@@ -5,17 +5,28 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}">
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
     <style>
         .modalBody{
             border-radius: 10px;
+        }
+        .backToMyTrip{
+
+        }
+        @media (max-width: 767px) {
+            .backToMyTrip{
+                position: fixed !important;
+                bottom: 85px;
+                z-index: 99;
+                opacity: .85;
+                border-radius: 50px;
+            }
         }
     </style>
 @stop
 
 @section('main')
-
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
     <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible position-relative">
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2 position-relative">
@@ -27,7 +38,7 @@
                             <div id="trip-header-region" class="trip-header">
                                 <div class="saves-title title has-text-centered position-relative">
                                     <div class="position-relative">
-                                        <a  class="text-decoration-none saves-back-button is-hidden-mobile ui_button secondary" href="{{route('myTrips')}}">← بازگشت به سفرهای من</a>
+                                        <a  class="text-decoration-none saves-back-button ui_button secondary backToMyTrip" href="{{route('myTrips')}}">← بازگشت</a>
                                         <span class="trip-title">{{$trip->name}}</span>
                                         @if($trip->editTrip)
                                             <div id="targetHelp_6" class="targets">
@@ -277,48 +288,46 @@
                                                             </div>
                                                             <?php $i++; ?>
                                                         @endforeach
-
-
-                                                            <div id="placeFullInfo">
-                                                                <div class="trip-tile-container ui_column is-12 placeDetailsToggleBar showPlaceInfo">
-                                                                    <div class="tabSection hideOnPhone">
-                                                                        <div class="active" onclick="choosePlaceInfoTab('info', this)">اطلاعات محل</div>
-                                                                        <div onclick="choosePlaceInfoTab('comment', this)">یادداشت ها</div>
-                                                                    </div>
-                                                                    <div class="rightSec show">
-                                                                        <div id="map_" class="mapSec"></div>
-                                                                        <div class="placeInfo">
-                                                                            <div class="img">
-                                                                                <img src="#" class="moreInfoPic" style="width: 100%">
-                                                                            </div>
-                                                                            <div class="info">
-                                                                                <div class="name">
-                                                                                    <a href="#" target="_blank" class="placeName lessShowText"></a>
-                                                                                    <span class="city"></span>
-                                                                                </div>
-                                                                                <div class="rating">
-                                                                                    <span class="ui_bubble_rating bubble_00"></span>
-                                                                                    <span class="reviewCount"></span>
-                                                                                </div>
-                                                                                <div class="address"></div>
-                                                                            </div>
+                                                        <div id="placeFullInfo">
+                                                            <div class="trip-tile-container ui_column is-12 placeDetailsToggleBar showPlaceInfo">
+                                                                <div class="tabSection hideOnPhone">
+                                                                    <div class="active" onclick="choosePlaceInfoTab('info', this)">اطلاعات محل</div>
+                                                                    <div onclick="choosePlaceInfoTab('comment', this)">یادداشت ها</div>
+                                                                </div>
+                                                                <div class="rightSec show">
+                                                                    <div id="map_" class="mapSec"></div>
+                                                                    <div class="placeInfo">
+                                                                        <div class="img">
+                                                                            <img src="#" class="moreInfoPic" style="width: 100%">
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="leftSec">
-                                                                        <div class="header lessShowText">
-                                                                            یادداشت های
-                                                                            <span class="placeName"></span>
-                                                                        </div>
-                                                                        <div class="userComments"></div>
-
-                                                                        <div class="yourComments">
-                                                                            <input type="text" class="addCommentInput" placeholder="یادداشت خود را بنویسید...">
-                                                                            <input type="hidden" class="placeSelectedId">
-                                                                            <button class="sendButton sendIcon" onclick="addComment()"></button>
+                                                                        <div class="info">
+                                                                            <div class="name">
+                                                                                <a href="#" target="_blank" class="placeName lessShowText"></a>
+                                                                                <span class="city"></span>
+                                                                            </div>
+                                                                            <div class="rating">
+                                                                                <span class="ui_bubble_rating bubble_00"></span>
+                                                                                <span class="reviewCount"></span>
+                                                                            </div>
+                                                                            <div class="address"></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="leftSec">
+                                                                    <div class="header lessShowText">
+                                                                        یادداشت های
+                                                                        <span class="placeName"></span>
+                                                                    </div>
+                                                                    <div class="userComments"></div>
+
+                                                                    <div class="yourComments">
+                                                                        <input type="text" class="addCommentInput" placeholder="یادداشت خود را بنویسید...">
+                                                                        <input type="hidden" class="placeSelectedId">
+                                                                        <button class="sendButton sendIcon" onclick="addComment()"></button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -651,7 +660,6 @@
 
         let memberSample = $('#memberSample').html();
         $('#memberSample').html('');
-        console.log(memberSample);
 
         fullPlaceInfoHtml = $('#placeFullInfo').html();
         $('#placeFullInfo').remove('');
@@ -1422,45 +1430,6 @@
                 $('.placeDetailsToggleBar').find('.leftSec').addClass('show');
         }
 
-        // let selectPlaceTripId = 0;
-        // function addToTrip(placeId) {
-        //
-        //     selectPlaceTripId = placeId;
-        //
-        //     $.ajax({
-        //         type: 'post',
-        //         url: getPlaceTrips,
-        //         data: {
-        //             placeId: selectPlaceTripId,
-        //         },
-        //         success: function (response) {
-        //
-        //             $("#tripsForPlace").empty();
-        //
-        //             response = JSON.parse(response);
-        //             newElement = "<div class='row'>";
-        //
-        //             for(i = 0; i < response.length; i++) {
-        //
-        //                 newElement += "<div class='col-xs-12'>";
-        //                 newElement += "<div class='ui_input_checkbox'>";
-        //
-        //                 if(response[i].select == "0")
-        //                     newElement += "<input type='checkbox' name='selectedTrips[]' id='trip_" + response[i].id + "' value='" + response[i].id + "'>";
-        //                 else
-        //                     newElement += "<input type='checkbox' name='selectedTrips[]' checked id='trip_" + response[i].id + "' value='" + response[i].id + "'>";
-        //
-        //                 newElement += "<label class='labelForCheckBox' for='trip_" + response[i].id + "'><span></span>&nbsp;&nbsp;" + response[i].name;
-        //                 newElement += "</label></div></div>";
-        //             }
-        //
-        //             newElement += "</div>";
-        //
-        //             $("#tripsForPlace").append(newElement);
-        //             openMyModal('addPlaceToAnotherTripPrompt');
-        //         }
-        //     });
-        // }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpeBLW4SWeWuDKKAT0uF7bATx8T2rEiXE&callback=initMap"></script>

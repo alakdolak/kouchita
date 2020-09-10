@@ -1460,8 +1460,7 @@ function createSuggestionPack($_kindPlaceId, $_placeId){
             $place->state = '';
         }
         $place->rate = getRate($place->id, $_kindPlaceId)[1];
-        $condition = ['placeId' => $place->id, 'kindPlaceId' => $_kindPlaceId,
-            'activityId' => $activityId, 'confirm' => 1];
+        $condition = ['placeId' => $place->id, 'kindPlaceId' => $_kindPlaceId, 'activityId' => $activityId, 'confirm' => 1];
         $place->review = LogModel::where($condition)->count();
         return $place;
     }

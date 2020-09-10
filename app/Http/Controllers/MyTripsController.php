@@ -941,24 +941,6 @@ class MyTripsController extends Controller {
         }
     }
 
-    public function bookmark() {
-
-
-        $user = Auth::user();
-        $uId = $user->id;
-
-        $activityId  = Activity::whereName('نشانه گذاری')->first();
-
-        if($activityId != null) {
-
-            $activityId = $activityId->id;
-            $condition = ['visitorId' => $uId, 'activityId' => $activityId];
-            return view('bookmark', ['placesCount' => LogModel::where($condition)->count()]);
-        }
-
-        return Redirect::to(route('profile'));
-    }
-
     public function changeDateTrip() {
         if(isset($_POST["tripId"]) && isset($_POST["dateInputStart"]) && isset($_POST["dateInputEnd"])) {
 

@@ -1281,4 +1281,44 @@ class ProfileController extends Controller {
 
         return;
     }
+
+    public function bookmark() {
+        $user = Auth::user();
+        $uId = $user->id;
+
+        $activityId  = Activity::whereName('نشانه گذاری')->first();
+
+        if($activityId != null) {
+            $activityId = $activityId->id;
+            $condition = ['visitorId' => $uId, 'activityId' => $activityId];
+            $bookmarked = LogModel::where($condition)->get();
+
+            $places = [];
+            foreach ($bookmarked as $item) {
+                $kindPlace = Place::find($item->kindPlaceId);
+                $plc = \DB::table($kindPlace->tableName)->find($item->placeId);
+                if($plc != null){
+                    $plcSug = createSuggestionPack($kindPlace->id, $plc->id);
+
+                    if(isset($plc->dastresi))
+                        $plcSug->address = $plc->dastresi;
+                    else if(isset($plc->address))
+                        $plcSug->address = $plc->address;
+
+                    if(isset($plc->D) && isset($plc->C)){
+                        $plcSug->D = $plc->D;
+                        $plcSug->C = $plc->C;
+                    }
+                    $plcSug->logId = $item->id;
+                    $plcSug->kindPlaceId = $kindPlace->id;
+                    array_push($places, $plcSug);
+                }
+            }
+
+            $placesCount = LogModel::where($condition)->count();
+            return view('bookmark', compact(['placesCount', 'places']));
+        }
+
+        return Redirect::to(route('profile'));
+    }
 }

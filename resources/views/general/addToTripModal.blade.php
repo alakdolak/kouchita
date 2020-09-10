@@ -3,8 +3,8 @@
 
 <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
-<div id="addPlaceToTripPrompt" class="tripModalBack">
-    <span class="tripModalBase">
+<div id="addPlaceToTripPrompt" class="modalBlackBack">
+    <span class="modalBody" style="width: 700px;">
         <div class="body_text">
             <div>
                 <div class="find_location_modal">
@@ -16,37 +16,38 @@
         </div>
         <div class="submitOptions rtl">
             <button onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
-            <input type="submit" onclick="$('#addPlaceToTripPrompt').hide()" value="خیر" class="btn btn-default">
+            <input type="submit" onclick="closeMyModal('addPlaceToTripPrompt')" value="بستن" class="btn btn-default">
             <p id="errorAssignPlace"></p>
         </div>
-        <div class="iconClose tripCloseIcon" onclick="$('#addPlaceToTripPrompt').hide()"></div>
+        <div class="iconClose tripCloseIcon" onclick="closeMyModal('addPlaceToTripPrompt')"></div>
     </span>
 </div>
 
-<div id="newTripModal" class="tripModalBack">
-    <div id="selectNewTripName" class="tripModalBase">
-        <div class="modal-background"></div>
-        <div style="width: 100%">
-            <div class="iconClose tripCloseIcon" onclick="closeNewTrip()"></div>
-            <div class="modal-card-head">
-                <div class="tripHeader">ایجاد سفر </div>
-            </div>
-            <div class="modal-card-body">
-                <div id="trip-title-input-region">
-                    <div>
-                        <label class="label">نام سفر</label>
-                        <div class="control trip-title-control">
-                            <input class="tripNameInput" id="tripName" onkeyup="checkEmpty()" type="text" maxlength="50" placeholder="حداکثر 50 کاراکتر" value="">
+<div id="newTripModal" class="modalBlackBack fullCenter" style="z-index: 9999;">
+    <div class="modalBody" style="width: 700px;">
+        <div id="selectNewTripName" class="tripModalBase">
+            <div class="modal-background"></div>
+            <div style="width: 100%">
+                <div class="iconClose tripCloseIcon" onclick="closeNewTrip()"></div>
+                <div class="modal-card-head">
+                    <div class="tripHeader">ایجاد سفر </div>
+                </div>
+                <div class="modal-card-body">
+                    <div id="trip-title-input-region">
+                        <div>
+                            <label class="label">نام سفر</label>
+                            <div class="control trip-title-control">
+                                <input class="tripNameInput" id="tripName" onkeyup="checkEmpty()" type="text" maxlength="50" placeholder="حداکثر 50 کاراکتر" value="">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-card-foot">
-                <button id="saves-create-trip-button" onclick="nextStep()" class="btn btn-success saves-create-trip-button disabled">ایجاد سفر</button>
+                <div class="modal-card-foot">
+                    <button id="saves-create-trip-button" onclick="nextStep()" class="btn btn-success saves-create-trip-button disabled">ایجاد سفر</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="selectNewTripDate" class="tripModalBase" style="display: none;">
+        <div id="selectNewTripDate" class="tripModalBase" style="display: none;">
         <div style="width: 100%">
             <div class="iconClose tripCloseIcon" onclick="closeNewTrip()"></div>
             <div class="modal-card-head">
@@ -80,9 +81,10 @@
             </div>
 
             <div >
-                <h5 id="error"></h5>
+                <h5 id="error" style="display: none;"></h5>
             </div>
         </div>
+    </div>
     </div>
 </div>
 
@@ -154,7 +156,7 @@
                     newElement += "</div></a></div>";
                     newElement += "</div>";
                     $("#tripsForPlace").empty().append(newElement);
-                    $('#addPlaceToTripPrompt').css('display', 'flex');
+                    openMyModal('addPlaceToTripPrompt')
                 }
             });
         }
@@ -178,7 +180,7 @@
 
     function refreshThisAddTrip(){
         closeNewTrip();
-        $('#addPlaceToTripPrompt').hide();
+        openMyModal('addPlaceToTripPrompt');
         saveToTripPopUp(selectedPlaceId, selectedKindPlaceId);
     }
 
@@ -216,7 +218,8 @@
     function closeNewTrip() {
         $('#selectNewTripName').css('display', 'flex');
         $('#selectNewTripDate').css('display', 'none');
-        $('#newTripModal').css('display', 'none');
+        closeMyModal('newTripModal');
+        // $('#newTripModal').css('display', 'none');
         $("#tripName").val("");
     }
 
@@ -229,7 +232,8 @@
         callBackCreateTrip = null;
         checkEmpty();
         $("#my-trips-not").hide();
-        $("#newTripModal").css("display", "flex");
+        openMyModal('newTripModal');
+        // $("#newTripModal").css("display", "flex");
         if(typeof _callBack === 'function')
             callBackCreateTrip = _callBack;
     }
@@ -267,8 +271,9 @@
 
         date_input_start = $("#date_input_start").val();
         date_input_end = $("#date_input_end").val();
-
+        $("#error").hide();
         if(date_input_start > date_input_end && date_input_start != '' && date_input_end != '') {
+            $("#error").show();
             $("#error").empty().append("تاریخ پایان از تاریخ شروع باید بزرگ تر باشد");
             return;
         }
@@ -282,6 +287,7 @@
                 'dateInputEnd' : date_input_end
             },
             success: function (response) {
+                $("#error").hide();
                 if(response == "ok") {
                     if(callBackCreateTrip != null){
                         callBackCreateTrip();
@@ -291,6 +297,7 @@
                     showSuccessNotifi('لیست سفر شما با موفقیت ایجاد شد', 'left', 'var(--koochita-blue)');
                 }
                 else {
+                    $("#error").show();
                     $("#error").empty().append("تاریخ پایان از تاریخ شروع باید بزرگ تر باشد");
                 }
             }
