@@ -505,6 +505,8 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
 
+    Route::get('profile/bookmark', 'ProfileController@bookmark')->name('profile.bookmark');
+
     Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page');
 
     Route::post('profile/message/get', 'MessageController@getMessages')->name('profile.message.get');
@@ -519,13 +521,14 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
 
+    Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
+
     Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
 
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
     Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
 
-    Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
 
     Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
 
@@ -584,8 +587,6 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
     Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
 
     Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
-
-    Route::get('bookmark', array('as' => 'bookmark', 'uses' => 'MyTripsController@bookmark'));
 
     Route::get('seeTrip/{tripId}', array('as' => 'seeTrip', 'uses' => 'MyTripsController@tripHistory'));
 

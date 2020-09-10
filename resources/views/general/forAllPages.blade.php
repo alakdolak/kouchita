@@ -128,9 +128,9 @@
     };
 
     function openMyModal(_id){
-        $('#'+_id).addClass('show');
+        $('#'+_id).addClass('showModal');
     }
     function closeMyModal(_id){
-        $('#'+_id).removeClass('show');
+        $('#'+_id).removeClass('showModal');
     }
 </script>
