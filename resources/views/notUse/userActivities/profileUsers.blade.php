@@ -100,10 +100,10 @@
                     </div>
                 </div>
 
-                @include('userActivities.userPosts')
-                @include('userActivities.userPhotosAndVideos')
-                @include('userActivities.userQuestions')
-                @include('userActivities.userArticles')
+                @include('notUse.userActivities.userPosts')
+                @include('notUse.userActivities.userPhotosAndVideos')
+                @include('notUse.userActivities.userQuestions')
+                @include('notUse.userActivities.userArticles')
 
             </div>
             <div class="userProfileDetailsMainDiv col-xs-4">

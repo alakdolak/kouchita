@@ -2,6 +2,7 @@
 
 use App\models\ActivationCode;
 use App\models\Activity;
+use App\models\ActivityLogs;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\CityPic;
@@ -188,6 +189,59 @@ function _custom_check_national_code($code) {
     if(($ret<2 && $ret==$parity) || ($ret>=2 && $ret==11-$parity))
         return true;
     return false;
+}
+
+function getTakenMedal($userId){
+    $takenMedal = [];
+    $countsTaken = [];
+
+    $groupMedal = Medal::orderBy('floor')
+        ->groupBy('activityId')
+        ->groupBy('kindPlaceId')
+        ->select(['activityId', 'kindPlaceId'])
+        ->get();
+    foreach ($groupMedal as $gm){
+        $countss = ActivityLogs::where('kindPlaceId', $gm->kindPlaceId)
+            ->where('activityId', $gm->activityId)
+            ->where('userId', $userId)
+            ->count();
+        $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
+
+        $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
+            ->where('activityId', $gm->activityId)
+            ->where('floor', '<=', $countss)->get();
+
+        foreach ($med as $item)
+            array_push($takenMedal, $item);
+    }
+
+    foreach ($takenMedal as $item) {
+        $act = Activity::find($item->activityId);
+        $kindPlace = Place::find($item->kindPlaceId);
+        $kindPlaceName = '';
+        if($kindPlace != null) {
+            $item->sumText = $item->floor . ' ' . $act->name . ' در ' . $kindPlace->name;
+            $kindPlaceName =  ' در ' . $kindPlace->name;
+        }
+        else
+            $item->sumText = $item->floor . ' ' . $act->name;
+
+        $item->take = $countsTaken[$item->kindPlaceId.'_'.$item->activityId];
+        if($item->take >= $item->floor){
+            $item->take = $item->floor;
+            $item->offPic = \URL::asset('_images/badges/' . $item->pic_2);
+            $item->percent = 0;
+        }
+        else {
+            $item->offPic = \URL::asset('_images/badges/' . $item->pic_1);
+            $item->percent = floor(($item->take/$item->floor)*100);
+        }
+
+        $item->text = 'این مدال بعد از ' . $item->floor . ' تا ' . $act->name . ' ' . $kindPlaceName . ' بدست می آید';
+        $item->onPic = \URL::asset('_images/badges/' . $item->pic_2);
+    }
+
+    return $takenMedal;
 }
 
 function getBadgeDate($activityId, $floor, $uId, $kindPlaceId) {

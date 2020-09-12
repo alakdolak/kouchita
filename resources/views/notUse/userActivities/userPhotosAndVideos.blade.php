@@ -71,8 +71,8 @@
         <div class="userProfilePageCoverImg"></div>
         <center class="mainBodyUserProfile userPhotosAndVideos">
         <div class="mainDivContainerProfilePage">
-            @include('userActivities.sameParts')
-            @include('userActivities.innerParts.userPhotosAndVideosInner')
+            @include('notUse.userActivities.sameParts')
+            @include('notUse.userActivities.innerParts.userPhotosAndVideosInner')
         </div>
     </center>
     </div>

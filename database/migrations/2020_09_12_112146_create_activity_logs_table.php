@@ -15,9 +15,10 @@ class CreateActivityLogsTable extends Migration
     {
         Schema::create('activityLogs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('referenceId');
-            $table->unsignedBigInteger('activityId');
+            $table->unsignedInteger('userId');
+            $table->unsignedInteger('referenceId')->nullable();
+            $table->unsignedInteger('activityId');
+            $table->integer('kindPlaceId')->default(-1);
             $table->timestamps();
         });
 

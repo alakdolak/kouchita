@@ -424,21 +424,22 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('/article/comment/like', 'PostController@likeArticleComment')->name('article.comment.like');
 
-    Route::get('userArticles/{page}', function($page){
-        if($page == 'article')
-            return view('userActivities.userArticles');
-        elseif($page == 'post')
-            return view('userActivities.userPosts');
-        elseif($page == 'profile')
-            return view('userActivities.profileUsers');
-        elseif($page == 'save')
-            return view('userActivities.sameParts');
-        elseif($page == 'photo')
-            return view('userActivities.userPhotosAndVideos');
-        elseif($page == 'question')
-            return view('userActivities.userQuestions');
-
-    });
+//    Route::get('userArticles/{page}', function($page){
+//        if($page == 'article')
+//            return view('userActivities.userArticles');
+//        elseif($page == 'post')
+//            return view('userActivities.userPosts');
+//        elseif($page == 'profile')
+//            return view('userActivities.profileUsers');
+//        elseif($page == 'save')
+//            return view('userActivities.sameParts');
+//        elseif($page == 'photo')
+//            return view('userActivities.userPhotosAndVideos');
+//        elseif($page == 'question')
+//            return view('userActivities.userQuestions');
+//        elseif($page == 'activity')
+//            return view('userActivities.bodyUserActivities');
+//    });
 });
 
 // Lists
@@ -476,6 +477,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile');
 
     Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
+
+    Route::post('/profile/getUserMedals', 'ProfileController@getUserMedals')->name('profile.getUserMedals');
 
     Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
 

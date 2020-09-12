@@ -88,7 +88,6 @@
                                 </a>
                                 <a href="{{route("profile.message.page")}}" class="msgHeaderButton">
                                     صندوق پیام
-
                                     @if(isset($newMsgCount) && $newMsgCount > 0)
                                         <span class="newMsgCount">{{$newMsgCount}}</span>
                                     @endif
@@ -104,7 +103,7 @@
                         <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
                         <a id="questionTab" href="#question" class="profileHeaderLinksTab" onclick="changePages('question')">سؤال‌ و جواب</a>
                         <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">سفرنامه ها</a>
-                        <a href="#" class="profileHeaderLinksTab">جایزه و امتیاز</a>
+                        <a id="medalsTab" href="#medal" class="profileHeaderLinksTab" onclick="changePages('medal')">جایزه و امتیاز</a>
                         <a href="#" class="profileHeaderLinksTab">سایر موارد</a>
                     </div>
                 </div>
@@ -183,13 +182,15 @@
                     <div class="userProfileMedalsMainDiv rightColBoxes">
                         <div class="mainDivHeaderText">
                             <h3>مدال‌های افتخار</h3>
-                            <div onclick="showAllItems(this)">مشاهده همه</div>
+                            <div href="#medal" onclick="changePages('medal')">مشاهده همه</div>
                         </div>
-                        <div class="medalsMainBox">
-                            @foreach($sideInfos['nearestMedals'] as $nearestMedal)
-                                <div class="medalsDiv">
-                                    <img src='{{URL::asset('_images/badges' . '/' . $nearestMedal["medal"]->pic_1)}}' class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
-                                </div>
+                        <div class="medalsMainBox" style="direction: rtl; display: {{count($userMedals) == 0 ? 'none' : 'flex'}}">
+                            @foreach($userMedals as $key => $medal)
+                                @if($key < 3)
+                                    <div class="medalsDiv">
+                                        <img src='{{$medal->onPic}}' class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -279,6 +280,10 @@
 
                     <div id="safarnamehBody" class="prodileSections hidden">
                         @include('profile.innerParts.userSafarnameh')
+                    </div>
+
+                    <div id="medalBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userMedals')
                     </div>
                 </div>
             </div>
@@ -590,6 +595,11 @@
                 $('#safarnamehBody').removeClass('hidden');
                 getSafarnamehs(); // in profile.innerParts.userSafarnameh
             }
+            else if(_kind === 'medal') {
+                $('#medalsTab').addClass('active');
+                $('#medalBody').removeClass('hidden');
+                getMedals(); // in profile.innerParts.userMedals
+            }
         }
 
         function fullMainContent(){
@@ -713,6 +723,8 @@
             changePages('question');
         else if(url.hash === '#safarnameh')
             changePages('safarnameh');
+        else if(url.hash === '#medal')
+            changePages('medal');
 
     </script>
 

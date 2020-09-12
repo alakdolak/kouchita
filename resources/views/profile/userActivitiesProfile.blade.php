@@ -70,10 +70,10 @@
         </div>
 
         <div>
-            @include('userActivities.innerParts.userPostsInner')
-            @include('userActivities.innerParts.userPhotosAndVideosInner')
-            @include('userActivities.innerParts.userQuestionsInner')
-            @include('userActivities.innerParts.userArticlesInner')
+            @include('notUse.userActivities.innerParts.userPostsInner')
+            @include('notUse.userActivities.innerParts.userPhotosAndVideosInner')
+            @include('notUse.userActivities.innerParts.userQuestionsInner')
+            @include('notUse.userActivities.innerParts.userArticlesInner')
         </div>
 
         <script>
