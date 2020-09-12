@@ -1402,11 +1402,6 @@ if ($total == 0)
             $(element).parent().siblings("div.replyToCommentMainDiv").toggleClass("display-inline-blockImp")
             $(element).parent().parent().toggleClass('mg-bt-0')
         }
-
-        function showPostsFilterBar() {
-            $('.filterBarDivs').toggle();
-            $('.visitKindTypeFilter').toggleClass('border-none')
-        }
     </script>
 
     <script>

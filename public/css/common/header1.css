@@ -698,6 +698,14 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     cursor: pointer;
 }
 
+.searchPangResultSection .stateName{
+    font-size: 12px !important;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    color: gray;
+}
+
 @media (max-width: 1000px){
     .headerCampaignModalBody{
         width: 92%;

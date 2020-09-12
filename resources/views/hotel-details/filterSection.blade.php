@@ -1,3 +1,7 @@
+<style>
+
+</style>
+
 <div id="postFilters" class="col-xs-12 postsFiltersMainDiv" style="display: none">
     <div class="block_header">
         <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
@@ -13,8 +17,8 @@
     </div>
     <div class="filterHelpText">
         با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را پیدا کنید
-        <div class="showFiltersMenus display-none" onclick="showPostsFilterBar()">
-            <span class="float-right">بستن منو</span>
+        <div class="showFiltersMenus display-none" onclick="showPostsFilterBar(this)">
+            <span class="buttonName float-right">نمایش فیلترها</span>
             <span class="float-left position-relative width-50"></span>
         </div>
     </div>
@@ -296,5 +300,17 @@
             }
         }
         doReviewFilter();
+    }
+
+    function showPostsFilterBar(_element) {
+        $('.filterBarDivs').toggle();
+        $('.visitKindTypeFilter').toggleClass('border-none');
+
+        if($(_element).find('.buttonName').text() == 'بستن منو'){
+            $(_element).find('.buttonName').text('نمایش فیلترها');
+        }
+        else{
+            $(_element).find('.buttonName').text('بستن منو');
+        }
     }
 </script>

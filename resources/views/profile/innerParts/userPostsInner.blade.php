@@ -1,4 +1,3 @@
-
 @include('component.smallShowReview')
 
 <div class="userProfilePostsFiltrationContainer">
@@ -10,6 +9,28 @@
 </div>
 
 <div class="postsMainDivInSpecificMode col-xs-12">
+
+    <div id="notData" class="col-xs-12 notData hidden">
+        <div class="pic">
+            <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
+        </div>
+        <div class="info">
+            @if($myPage)
+                <div class="firstLine">
+                    اینجا خالی است.هنوز نظری ننوشتید...
+                </div>
+                <div class="sai">
+                    جایی رو که دوست داری رو پیدا کن و
+                    <button class="butt" onclick="openMainSearch(0) // in mainSearch.blade.php">نظرتو بگو</button>
+                </div>
+            @else
+                <div class="firstLine">
+                    اینجا خالی است. {{$user->username}} هنوز نظرشو نگفته...
+                </div>
+            @endif
+        </div>
+    </div>
+
     <div id="leftPostSection" class="postsLeftDivInSpecificMode col-xs-6"></div>
     <div id="rightPostSection" class="postsRightDivInSpecificMode col-xs-6"></div>
 </div>
@@ -38,6 +59,7 @@
                 sort: reviewSort
             };
 
+        $('#notData').addClass('hidden');
         $.ajax({
             type: 'post',
             url: '{{route("profile.getUserReviews")}}',
@@ -62,6 +84,10 @@
     function createReviews(){
         let odd = true;
 
+        if(allReviews.length == 0){
+            $('#notData').removeClass('hidden');
+            return;
+        }
         allReviews.forEach(item => {
             text = createSmallReviewHtml(item); // in component.smallShowReview.blade.php;
 

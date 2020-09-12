@@ -768,6 +768,8 @@
     display: flex;
 }
 
+
+
 @media (max-width: 992px) {
 
     .points_to_go > span {
@@ -864,6 +866,7 @@
         right: 145px;
     }
 }
+
 
 @media (max-width: 480px) {
 

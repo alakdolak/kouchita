@@ -839,7 +839,14 @@
     cursor: pointer;
     line-height: 0;
 }
-
+.commentsShareClickedIconFeedback{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
 .commentsShareClickedIconFeedback::before {
     content: '\E1F6';
     font-family: Shazde_Regular2 !important;
