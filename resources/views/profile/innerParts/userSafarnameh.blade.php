@@ -76,7 +76,7 @@
                     اینجا خالی است.هنوز سفرنامه ای ننوشتید...
                 </div>
                 <div class="sai">
-                    جایی رو که دوست داری رو پیدا کن و
+                    خاطراتت رو مرور کن و
                     <button class="butt" onclick="goToSafarnameh()">سفرنامه بنویس</button>
                 </div>
             @else

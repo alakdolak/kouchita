@@ -17,7 +17,7 @@
         <div class="info">
             @if($myPage)
                 <div class="firstLine">
-                    اینجا خالی است.هنوز نظری ننوشتید...
+                    اینجا خالی است.هنوز پستی نگذاشتید...
                 </div>
                 <div class="sai">
                     جایی رو که دوست داری رو پیدا کن و
@@ -25,7 +25,7 @@
                 </div>
             @else
                 <div class="firstLine">
-                    اینجا خالی است. {{$user->username}} هنوز نظرشو نگفته...
+                    اینجا خالی است. {{$user->username}} هنوز پستی نگذاشته...
                 </div>
             @endif
         </div>
