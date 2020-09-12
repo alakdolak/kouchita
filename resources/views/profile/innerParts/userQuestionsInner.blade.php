@@ -23,6 +23,27 @@
             </div>
         </div>
 
+        <div class="col-xs-12 notData hidden">
+            <div class="pic">
+                <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
+            </div>
+            <div class="info">
+                @if($myPage)
+                    <div class="firstLine">
+                        اینجا خالی است.هنوز سوالی نپرسیده اید...
+                    </div>
+                    <div class="sai">
+                        جایی رو که دوست داری رو پیدا کن و
+                        <button class="butt" onclick="openMainSearch(0) // in mainSearch.blade.php">سئوالت رو بپرس</button>
+                    </div>
+                @else
+                    <div class="firstLine">
+                        اینجا خالی است. {{$user->username}} هنوز سئوالی نپرسیده...
+                    </div>
+                @endif
+            </div>
+        </div>
+
         <div id="questions" ></div>
     </div>
 
@@ -54,6 +75,7 @@
                 userId: userPageId,
             };
 
+        $('.userProfileQAndA').find('.notData').addClass('hidden');
         $.ajax({
             type: 'post',
             url: '{{route("profile.getQuestions")}}',
@@ -63,9 +85,12 @@
                 if(response.status == 'ok'){
                     $('#questions').html('');
                     allQuestions = response.result;
+                    if(allQuestions.length == 0)
+                        $('.userProfileQAndA').find('.notData').removeClass('hidden');
+
                     allQuestions.map(item => {
                         createQuestionPack(item, 'questions'); // in questionPack.blade.php
-                    })
+                    });
                 }
             },
             error: function(err){
@@ -101,7 +126,6 @@
             showQues = allQuestions;
 
         $('#questions').html('');
-        console.log(showQues);
         showQues.map(item => {
             createQuestionPack(item, 'questions'); // in questionPack.blade.php
         })

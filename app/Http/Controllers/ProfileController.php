@@ -198,11 +198,6 @@ class ProfileController extends Controller {
         $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
 
         return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount']));
-
-//        return view('profile.profile', array('activities' => $activities, 'userActivityCount' => $userActivityCount,
-//            'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
-//            'userLevels' => nearestLevel($user->id), 'medals' => $medals,
-//            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
     }
 
     public function storeNewSafarnameh(Request $request)
@@ -348,7 +343,7 @@ class ProfileController extends Controller {
     {
         $activityId = Activity::whereName('سوال')->first()->id;
         $ansActivityId = Activity::whereName('پاسخ')->first()->id;
-
+        $logs = [];
         if($request->kind == 'question' || !isset($request->kind)) {
             if (\auth()->check() && ($request->userId == \auth()->user()->id || !isset($request->userId))) {
                 $uId = \auth()->user()->id;

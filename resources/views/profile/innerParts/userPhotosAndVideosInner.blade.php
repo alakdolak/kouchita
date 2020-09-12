@@ -6,6 +6,28 @@
         <span id="userPhotoVideoTab" onclick="changeShowPic('video')">فیلم</span>
         <span id="userPhoto360Tab" onclick="changeShowPic('video360')">فیلم 360</span>
     </div>
+
+    <div class="col-xs-12 notData hidden">
+        <div class="pic">
+            <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
+        </div>
+        <div class="info">
+            @if($myPage)
+                <div class="firstLine">
+                    اینجا خالی است.هنوز عکس یا فیلمی بارگذاری نکرده اید...
+                </div>
+                <div class="sai">
+                    جایی رو که دوست داری رو پیدا کن و
+                    <button class="butt" onclick="openUploadPost()">عکستو بزار</button>
+                </div>
+            @else
+                <div class="firstLine">
+                    اینجا خالی است. {{$user->username}} هنوز عکسی نگذاشته...
+                </div>
+            @endif
+        </div>
+    </div>
+
     <div id="pictureSection" class="photosAndVideosMainDiv"></div>
 </div>
 
@@ -30,6 +52,10 @@
         let text = '';
         let nowWidths;
         let rand = [];
+
+        if (nowShow.length == 0)
+            $('.userProfilePhotosAndVideos').find('.notData').removeClass('hidden');
+
         for(let i = 0; i < nowShow.length; i++){
             if(addedPic == 0) {
                 randThree = [0, 1, 2];
@@ -88,6 +114,7 @@
                 userId: userPageId, // in mainProfile.blade.php
             };
 
+        $('.userProfilePhotosAndVideos').find('.notData').addClass('hidden');
         $.ajax({
             type: 'post',
             url: '{{route("profile.getUserPicsAndVideo")}}',

@@ -107,7 +107,7 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-<div id="fullReviewModal" class="fullReviewModal modalBlackBack hidden">
+<div id="fullReviewModal" class="fullReviewModal modalBlackBack">
     <div id="fullReview" class="fullReviewBody"></div>
 </div>
 
@@ -259,7 +259,7 @@
     }
 
     function closeFullReview(){
-        $('#fullReviewModal').addClass('hidden');
+        closeMyModal('fullReviewModal');
     }
 
     var showReviewAnsInOneSee = 4; // this number mean show ans in first time and not click on "showAllReviewCommentsFullReview"
@@ -307,7 +307,6 @@
     function showFullReviews(_input){
         let _reviews = _input.review;
         let _kind = _input.kind;
-
         // _kind = 'modal' open in modal
         // _kind = 'append' append to _sectionId
 
@@ -318,7 +317,7 @@
         text += '<div id="showReview_' + _reviews["id"] + '" class="mainFullReviewDiv"></div>';
 
         if(_kind == 'modal') {
-            $('#fullReviewModal').removeClass('hidden');
+            openMyModal('fullReviewModal');
             $('#fullReview').html(text);
             $('#fullReview').append('<div class="closeFullReview iconClose" onclick="closeFullReview()"></div>');
         }
@@ -547,9 +546,8 @@
             '       </div>\n' +
             '   </div>\n' +
             '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-end;">\n' +
-            '       <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)" style="direction: ltr">\n' +
-            '           <span class="commentsShareIconFeedback firstIcon"></span>\n' +
-            '           <span class="commentsShareClickedIconFeedback secondIcon" style="display: none"></span>\n' +
+            '       <div class="postShareChoice display-inline-block" onclick="openReviewShareBox(this)" style="direction: ltr;font-size: 25px; line-height: 0;">\n' +
+            '           <span class="commentsShareIconFeedback ShareIcon firstIcon"></span>\n' +
             '       </div>\n' +
             '       <div style="margin-right: 20px; font-size: 20px;">' +
             '           <span class="BookMarkIconEmpty"></span>' +
@@ -912,6 +910,10 @@
     function showFullReviewOptions(element) {
         $(element).next().toggleClass('hidden');
         $(element).toggleClass("bg-color-darkgrey");
+    }
+
+    function openReviewShareBox(_element){
+        $(_element).find('.firstIcon').toggleClass('commentsShareIconFeedback');
     }
 
 </script>

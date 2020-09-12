@@ -4550,10 +4550,8 @@ td > div {
         padding: 0;
     }
 
-    /*filter bar*/
     .filterBarDivs {
         display: none;
-        padding: 0 10%;
     }
 
     .leftColMainWrap .showFiltersMenus {

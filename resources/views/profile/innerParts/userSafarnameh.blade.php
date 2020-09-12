@@ -66,6 +66,27 @@
             <button class="btn btn-primary" onclick="openNewSafarnameh()">نوشتن سفرنامه</button>
         @endif
     </div>
+    <div class="col-xs-12 notData hidden">
+        <div class="pic">
+            <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
+        </div>
+        <div class="info">
+            @if($myPage)
+                <div class="firstLine">
+                    اینجا خالی است.هنوز سفرنامه ای ننوشتید...
+                </div>
+                <div class="sai">
+                    خاطراتت رو مرور کن و
+                    <button class="butt" onclick="goToSafarnameh()">سفرنامه بنویس</button>
+                </div>
+            @else
+                <div class="firstLine">
+                    اینجا خالی است. {{$user->username}} هنوز سفرنامه ای ننوشته...
+                </div>
+            @endif
+        </div>
+    </div>
+
     <div id="safarnamehShowList"></div>
 </div>
 
@@ -76,24 +97,22 @@
     function getSafarnamehs(){
         let data;
         if(userPageId == 0)
-            data = {
-                _token: '{{csrf_token()}}',
-            };
+            data = { _token: '{{csrf_token()}}' };
         else
             data = {
                 _token: '{{csrf_token()}}',
                 userId: userPageId, // in mainProfile.blade.php
             };
 
+        $('#safarnamehList').find('.notData').addClass('hidden');
         $.ajax({
             type: 'post',
             url: '{{route("profile.getSafarnameh")}}',
             data: data,
             success: function(response){
                 response = JSON.parse(response);
-                if(response.status == 'ok'){
+                if(response.status == 'ok')
                     showSafarnameh(response.result);
-                }
             },
             error: function(err){
                 console.log(err);
@@ -103,6 +122,9 @@
 
     function showSafarnameh(_result){
         let text = '';
+
+        if(_result.length == 0)
+            $('#safarnamehList').find('.notData').removeClass('hidden');
 
         _result.forEach(item => {
             text += '<div class="usersArticlesMainDiv">\n' +
