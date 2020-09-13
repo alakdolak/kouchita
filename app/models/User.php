@@ -144,27 +144,35 @@ class User extends Authenticatable{
     public static function nearestLevelInModel($uId)
     {
         $points = User::getUserPointInModel($uId);
-        $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
 
-        if($currLevel == null)
+        $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
+        if($currLevel == null) {
             $currLevel = Level::orderBy('floor', 'ASC')->first();
+            $currLevel->name = 0;
+            $currLevel->floor = 0;
+        }
 
         $nextLevel = Level::where('floor', '>', $points)->orderBy('floor', 'ASC')->first();
-
         if($nextLevel == null)
-            $nextLevel = Level::orderBy('floor', 'ASC')->first();
+            $nextLevel = Level::orderByDesc('floor')->first();
+
+        $nextLevel->point = $points;
+        $nextLevel->percent = floor($points / ($nextLevel->floor - $currLevel->floor) * 100);
 
         return [$currLevel, $nextLevel];
     }
 
     public static function getUserPointInModel($uId)
     {
-        $points = \DB::select("SELECT SUM(activity.rate) as total FROM log, activity WHERE confirm = 1 and log.visitorId = " . $uId . " and log.activityId = activity.id");
+        $points = ActivityLogs::join('activity', 'activity.id', 'activityLogs.activityId')
+            ->where('userId', $uId)
+            ->sum('activity.rate');
 
-        if($points == null || count($points) == 0 || $points[0]->total == "")
-            return 0;
-
-        return $points[0]->total;
+        return $points;
+//        $points = \DB::select("SELECT SUM(activity.rate) as total FROM log, activity WHERE confirm = 1 and log.visitorId = " . $uId . " and log.activityId = activity.id");
+//        if($points == null || count($points) == 0 || $points[0]->total == "")
+//            return 0;
+//        return $points[0]->total;
     }
 
     public function getUserPicInModel($id = 0)
