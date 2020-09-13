@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\ActivationCode;
 use App\models\Activity;
+use App\models\ActivityLogs;
 use App\models\Age;
 use App\models\Amaken;
 use App\models\Cities;
@@ -149,44 +150,6 @@ class ProfileController extends Controller {
             $condition = ["visitorId" => $user->id, "activityId" => $activity->id, 'confirm' => 1];
             $counts[$counter++] = LogModel::where($condition)->count();
         }
-        $recentlyBadges = [['badgeId' => -1, 'badgeDate' => -1],
-                            ['badgeId' => -1, 'badgeDate' => -1],
-                            ['badgeId' => -1, 'badgeDate' => -1]];
-        $badges = Medal::all();
-        foreach ($badges as $badge) {
-            $date = getBadgeDate($badge->activityId, $badge->floor, $uId, $badge->kindPlaceId);
-            if($date != -1) {
-                if($date > $recentlyBadges[0]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
-                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
-                    $recentlyBadges[1]['badgeDate'] = $recentlyBadges[0]['badgeDate'];
-                    $recentlyBadges[1]['badgeId'] = $recentlyBadges[0]['badgeId'];
-                    $recentlyBadges[0]['badgeDate'] = $date;
-                    $recentlyBadges[0]['badgeId'] = $badge->id;
-                }
-                else if($date > $recentlyBadges[1]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $recentlyBadges[1]['badgeDate'];
-                    $recentlyBadges[2]['badgeId'] = $recentlyBadges[1]['badgeId'];
-                    $recentlyBadges[1]['badgeDate'] = $date;
-                    $recentlyBadges[1]['badgeId'] = $badge->id;
-                }
-                else if($date > $recentlyBadges[2]['badgeDate']) {
-                    $recentlyBadges[2]['badgeDate'] = $date;
-                    $recentlyBadges[2]['badgeId'] = $badge->id;
-                }
-            }
-        }
-        $limit = (count($recentlyBadges) >= 3) ? 3 : count($recentlyBadges);
-        array_splice($recentlyBadges, $limit);
-        $outMedals = [];
-        foreach ($recentlyBadges as $badge) {
-            if($badge['badgeId'] != -1) {
-                $badgeTmp = Medal::whereId($badge['badgeId']);
-                $badgeTmp->activityId = Activity::whereId($badgeTmp->activityId)->name;
-                $outMedals[count($outMedals)] = $badgeTmp;
-            }
-        }
-        $medals = getMedals($user->id);
 
         if($user->uploadBanner == 0) {
             $user->banner = $user->banner == null ? '1.jpg' : $user->banner;
@@ -196,8 +159,9 @@ class ProfileController extends Controller {
             $user->banner = URL::asset('userProfile/'.$user->banner);
 
         $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
+        $userMedals = getTakenMedal($uId);
 
-        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount']));
+        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount', 'userMedals']));
     }
 
     public function storeNewSafarnameh(Request $request)
@@ -436,6 +400,80 @@ class ProfileController extends Controller {
         }
 
         echo json_encode(['status' => $status, 'result' => $reviews]);
+        return;
+    }
+
+    public function getUserMedals(Request $request)
+    {
+        if(\auth()->check() && (\auth()->user()->id == $request->userId || $request->userId == 0))
+            $owner = true;
+        else
+            $owner = false;
+
+        $takenMedal = [];
+        $takenMedalId = [];
+        $countsTaken = [];
+
+        $groupMedal = Medal::orderBy('floor')
+                            ->groupBy('activityId')
+                            ->groupBy('kindPlaceId')
+                            ->select(['activityId', 'kindPlaceId'])
+                            ->get();
+        foreach ($groupMedal as $gm){
+            $countss = ActivityLogs::where('kindPlaceId', $gm->kindPlaceId)
+                                    ->where('activityId', $gm->activityId)
+                                    ->where('userId', $request->userId)
+                                    ->count();
+            $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
+
+            $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
+                          ->where('activityId', $gm->activityId)
+                          ->where('floor', '<=', $countss)->get();
+
+            foreach ($med as $item) {
+                array_push($takenMedal, $item);
+                array_push($takenMedalId, $item->id);
+            }
+        }
+        if($owner) {
+            $inProgressMedal = Medal::whereNotIn('id', $takenMedalId)->orderBy('floor')
+                ->groupBy('activityId')->groupBy('kindPlaceId')->get();
+            $allMedals = Medal::orderBy('floor')->get();
+        }
+        else{
+            $allMedals = [];
+            $inProgressMedal = [];
+        }
+
+        foreach ([$allMedals, $inProgressMedal, $takenMedal] as $medals){
+            foreach ($medals as $item) {
+                $act = Activity::find($item->activityId);
+                $kindPlace = Place::find($item->kindPlaceId);
+                $kindPlaceName = '';
+                if($kindPlace != null) {
+                    $item->sumText = $item->floor . ' ' . $act->name . ' در ' . $kindPlace->name;
+                    $kindPlaceName =  ' در ' . $kindPlace->name;
+                }
+                else
+                    $item->sumText = $item->floor . ' ' . $act->name;
+
+                $item->take = $countsTaken[$item->kindPlaceId.'_'.$item->activityId];
+                if($item->take >= $item->floor){
+                    $item->take = $item->floor;
+                    $item->offPic = \URL::asset('_images/badges/' . $item->pic_2);
+                    $item->percent = 0;
+                }
+                else {
+                    $item->offPic = \URL::asset('_images/badges/' . $item->pic_1);
+                    $item->percent = floor(($item->take/$item->floor)*100);
+                }
+
+                $item->text = 'این مدال بعد از ' . $item->floor . ' تا ' . $act->name . ' ' . $kindPlaceName . ' بدست می آید';
+                $item->onPic = \URL::asset('_images/badges/' . $item->pic_2);
+            }
+        }
+
+        echo json_encode(['status' => 'ok', 'allMedals' => $allMedals, 'takenMedal' => $takenMedal, 'inProgressMedal' => $inProgressMedal]);
         return;
     }
 

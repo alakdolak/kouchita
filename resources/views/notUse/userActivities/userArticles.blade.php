@@ -39,8 +39,8 @@
         <div class="userProfilePageCoverImg"></div>
         <center class="mainBodyUserProfile userArticles">
         <div class="mainDivContainerProfilePage">
-            @include('userActivities.sameParts')
-            @include('userActivities.innerParts.userArticlesInner')
+            @include('notUse.userActivities.sameParts')
+            @include('notUse.userActivities.innerParts.userArticlesInner')
         </div>
     </center>
     </div>
