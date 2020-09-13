@@ -90,7 +90,7 @@
                 <a href="{{route('profile')}}">صفحه کاربری</a>
                 <a href="{{route('myTrips')}}">سفرهای من</a>
                 <a href="{{route('profile.bookmark')}}">نشون کرده</a>
-                <a href="{{route('profile')}}">اعلانات</a>
+{{--                <a href="{{route('profile')}}">اعلانات</a>--}}
                 <a href="{{route('profile.accountInfo')}}">تنظیمات</a>
             </div>
         </div>

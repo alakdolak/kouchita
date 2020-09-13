@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActivityLogEvent;
 use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\LogModel;
@@ -343,115 +344,6 @@ class UserLoginController extends Controller
         echo json_encode(['status' => 'nok3', 'reminder' => 90]);
     }
 
-    public function registerAndLogin(Request $request)
-    {
-        if (isset($_POST["username"]) && isset($_POST["password"]) &&
-            (isset($_POST["email"]) || isset($_POST["phone"]))) {
-
-            $uInvitationCode = createCode();
-            while (User::whereInvitationCode($uInvitationCode)->count() > 0)
-                $uInvitationCode = createCode();
-
-            $checkUserName = User::where('username', $request->username)->count();
-            if($checkUserName > 0){
-                echo 'nok1';
-                return;
-            }
-
-            if(isset($request->phone) && $request->phone != ''){
-                if(isset($request->actCode)) {
-                    $phone = convertNumber('en', $request->phone);
-                    $actCode = convertNumber('en', $request->actCode);
-                    $check = ActivationCode::where('phoneNum', $phone)->where('code', $actCode)->first();
-                    if ($check == null) {
-                        echo 'nok5';
-                        return;
-                    }
-                    $check->delete();
-                }
-                else{
-                    echo 'nok5';
-                    return;
-                }
-            }
-            else if(isset($_POST["email"]) && $_POST["email"] != ''){
-
-            }
-            else{
-                echo 'nok10';
-                return;
-            }
-
-            $invitationCode = "";
-            if (isset($request->invitationCode) && $request->invitationCode != '') {
-                $invitationCode = makeValidInput($request->invitationCode);
-                if (!empty($invitationCode)) {
-                    $dest = User::whereInvitationCode($invitationCode)->first();
-                    if ($dest == null) {
-                        echo 'nok3';
-                        return;
-                    }
-                }
-            }
-
-            $user = new User();
-            $user->username = makeValidInput($request->username);
-            $user->password = \Hash::make(makeValidInput($request->password));
-            $user->email = makeValidInput($request->email);
-            $user->phone = convertNumber('en', makeValidInput($request->phone));
-            $user->invitationCode = $uInvitationCode;
-            $user->level = 0;
-
-            try {
-                $user->save();
-            } catch (Exception $x) {
-                echo "nok1 " . $x->getMessage();
-                return;
-            }
-
-            try {
-                if (isset($request->email))
-                    welcomeEmail($user->username, $user->email);
-            } catch (Exception $x) {
-                echo "nok2";
-                return;
-            }
-
-            if (isset($dest) && $dest != null && isset($request->invitationCode) && $request->invitationCode != null ) {
-                $log = new LogModel();
-                $log->visitorId = $user->id;
-                $log->date = date('Y-m-d');
-                $log->time = getToday()["time"];
-                $log->activityId = Activity::whereName('دعوت')->first()->id;
-                $log->kindPlaceId = -1;
-                $log->confirm = 1;
-                $log->placeId = -1;
-                try {
-                    $log->save();
-                } catch (Exception $x) {}
-
-                $log = new LogModel();
-                $log->visitorId = $dest->id;
-                $log->date = date('Y-m-d');
-                $log->time = getToday()["time"];
-                $log->activityId = Activity::whereName('دعوت')->first()->id;
-                $log->kindPlaceId = -1;
-                $log->confirm = 1;
-                $log->placeId = -1;
-                try {
-                    $log->save();
-                } catch (Exception $x) {}
-            }
-
-            Auth::loginUsingId($user->id);
-            echo "ok";
-        }
-        else
-            echo "nok";
-
-        return;
-    }
-
     public function retrievePasByEmail()
     {
         if (isset($_POST["email"])) {
@@ -582,76 +474,114 @@ class UserLoginController extends Controller
         return;
     }
 
-    public function registerAndLogin2()
+    public function registerAndLogin(Request $request)
     {
-        if (isset($_POST["username"]) && isset($_POST["password"])) {
+        if (isset($_POST["username"]) && isset($_POST["password"]) &&
+            (isset($_POST["email"]) || isset($_POST["phone"]))) {
 
-            $invitationCode = createCode();
-            while (User::whereInvitationCode($invitationCode)->count() > 0)
-                $invitationCode = createCode();
+            $uInvitationCode = createCode();
+            while (User::whereInvitationCode($uInvitationCode)->count() > 0)
+                $uInvitationCode = createCode();
+
+            $checkUserName = User::where('username', $request->username)->count();
+            if($checkUserName > 0){
+                echo 'nok1';
+                return;
+            }
+
+            if(isset($request->phone) && $request->phone != ''){
+                if(isset($request->actCode)) {
+                    $phone = convertNumber('en', $request->phone);
+                    $actCode = convertNumber('en', $request->actCode);
+                    $check = ActivationCode::where('phoneNum', $phone)->where('code', $actCode)->first();
+                    if ($check == null) {
+                        echo 'nok5';
+                        return;
+                    }
+                    $check->delete();
+                }
+                else{
+                    echo 'nok5';
+                    return;
+                }
+            }
+            else if(isset($_POST["email"]) && $_POST["email"] != ''){
+
+            }
+            else{
+                echo 'nok10';
+                return;
+            }
+
+            $invitationCode = "";
+            if (isset($request->invitationCode) && $request->invitationCode != '') {
+                $invitationCode = makeValidInput($request->invitationCode);
+                if (!empty($invitationCode)) {
+                    $dest = User::whereInvitationCode($invitationCode)->first();
+                    if ($dest == null) {
+                        echo 'nok3';
+                        return;
+                    }
+                }
+            }
 
             $user = new User();
-            $user->username = makeValidInput($_POST["username"]);
-            $user->password = \Hash::make(makeValidInput($_POST["password"]));
-            $user->email = makeValidInput($_POST["email"]);
+            $user->username = makeValidInput($request->username);
+            $user->password = \Hash::make(makeValidInput($request->password));
+            $user->email = makeValidInput($request->email);
+            $user->phone = convertNumber('en', makeValidInput($request->phone));
+            $user->invitationCode = $uInvitationCode;
             $user->level = 0;
-            $user->created_at = date('Y-m-d h:m:s');
-            $user->updated_at = date('Y-m-d h:m:s');
-            $user->invitationCode = $invitationCode;
 
             try {
                 $user->save();
-
-                Auth::attempt(array('username' => makeValidInput($_POST["username"]), 'password' => makeValidInput($_POST["password"])), true);
-
-                $invitationCode = makeValidInput($_POST["invitationCode"]);
-
-                if (!empty($invitationCode)) {
-                    $dest = User::whereInvitationCode($invitationCode)->first();
-
-                    if ($dest != null) {
-                        $log = new LogModel();
-                        $log->visitorId = $user->id;
-                        $log->date = date('Y-m-d');
-                        $log->activityId = Activity::whereName('دعوت')->first()->id;
-                        $log->kindPlaceId = -1;
-                        $log->time = getToday()["time"];
-                        $log->confirm = 1;
-                        $log->placeId = -1;
-                        try {
-                            $log->save();
-                        } catch (Exception $x) {
-                            echo $x->getMessage();
-                            return;
-                        }
-
-                        $log = new LogModel();
-                        $log->visitorId = $dest->id;
-                        $log->date = date('Y-m-d');
-                        $log->time = getToday()["time"];
-                        $log->activityId = Activity::whereName('دعوت')->first()->id;
-                        $log->kindPlaceId = -1;
-                        $log->confirm = 1;
-                        $log->placeId = -1;
-                        try {
-                            $log->save();
-                        } catch (Exception $x) {
-                            echo $x->getMessage();
-                            return;
-                        }
-                    }
-                }
-
-                echo "ok";
-                return;
+                event(new ActivityLogEvent($user->id, $user->id, 'register'));
             } catch (Exception $x) {
-                dd($x);
-                echo "nok";
+                echo "nok1 " . $x->getMessage();
                 return;
             }
-        }
 
-        echo "nok";
+            try {
+                if (isset($request->email))
+                    welcomeEmail($user->username, $user->email);
+            } catch (Exception $x) {
+                echo "nok2";
+                return;
+            }
+
+            if (isset($dest) && $dest != null && isset($request->invitationCode) && $request->invitationCode != null ) {
+                $log = new LogModel();
+                $log->visitorId = $user->id;
+                $log->date = date('Y-m-d');
+                $log->time = getToday()["time"];
+                $log->activityId = Activity::whereName('دعوت')->first()->id;
+                $log->kindPlaceId = -1;
+                $log->confirm = 1;
+                $log->placeId = -1;
+                try {
+                    $log->save();
+                } catch (Exception $x) {}
+
+                $log = new LogModel();
+                $log->visitorId = $dest->id;
+                $log->date = date('Y-m-d');
+                $log->time = getToday()["time"];
+                $log->activityId = Activity::whereName('دعوت')->first()->id;
+                $log->kindPlaceId = -1;
+                $log->confirm = 1;
+                $log->placeId = -1;
+                try {
+                    $log->save();
+                } catch (Exception $x) {}
+            }
+
+            Auth::loginUsingId($user->id);
+            echo "ok";
+        }
+        else
+            echo "nok";
+
+        return;
     }
 
     public function loginWithGoogle()
@@ -748,80 +678,6 @@ class UserLoginController extends Controller
         return redirect(url($url));
     }
 
-    public function registerWithPhone(Request $request)
-    {
-        if (isset($request->username) && isset($request->password) && isset($request->phone)) {
-
-            $invitationCode = createCode();
-            while (User::whereInvitationCode($invitationCode)->count() > 0)
-                $invitationCode = createCode();
-
-            $user = new User();
-            $user->username = $request->username;
-            $user->password = \Hash::make(makeValidInput($request->password));
-            $user->phone = makeValidInput($request->phone);
-            $user->first_name = $request->firsName;
-            $user->last_name = $request->lastName;
-            $user->level = 0;
-            $user->invitationCode = $invitationCode;
-
-            try {
-                $user->save();
-                auth()->loginUsingId($user->id);
-
-                if(isset($_POST["invitationCode"])) {
-                    $invitationCode = makeValidInput($_POST["invitationCode"]);
-
-                    if (!empty($invitationCode)) {
-                        $dest = User::whereInvitationCode($invitationCode)->first();
-
-                        if ($dest != null) {
-                            $log = new LogModel();
-                            $log->visitorId = $user->id;
-                            $log->date = date('Y-m-d');
-                            $log->activityId = Activity::whereName('دعوت')->first()->id;
-                            $log->kindPlaceId = -1;
-                            $log->time = getToday()["time"];
-                            $log->confirm = 1;
-                            $log->placeId = -1;
-                            try {
-                                $log->save();
-                            } catch (Exception $x) {
-                                echo $x->getMessage();
-                                return;
-                            }
-
-                            $log = new LogModel();
-                            $log->visitorId = $dest->id;
-                            $log->date = date('Y-m-d');
-                            $log->time = getToday()["time"];
-                            $log->activityId = Activity::whereName('دعوت')->first()->id;
-                            $log->kindPlaceId = -1;
-                            $log->confirm = 1;
-                            $log->placeId = -1;
-                            try {
-                                $log->save();
-                            } catch (Exception $x) {
-                                echo $x->getMessage();
-                                return;
-                            }
-                        }
-                    }
-                }
-
-                echo "ok";
-            }
-            catch (Exception $x) {
-                dd($x);
-                echo "nok";
-            }
-        }
-        else
-            echo 'nok';
-
-        return;
-    }
-
     public function setNewPassword(Request $request)
     {
         if(isset($request->pass) && isset($request->phone) && isset($request->code)){
@@ -863,4 +719,151 @@ class UserLoginController extends Controller
         return $code;
     }
 
+
+
+//    public function registerAndLogin2()
+//    {
+//        if (isset($_POST["username"]) && isset($_POST["password"])) {
+//
+//            $invitationCode = createCode();
+//            while (User::whereInvitationCode($invitationCode)->count() > 0)
+//                $invitationCode = createCode();
+//
+//            $user = new User();
+//            $user->username = makeValidInput($_POST["username"]);
+//            $user->password = \Hash::make(makeValidInput($_POST["password"]));
+//            $user->email = makeValidInput($_POST["email"]);
+//            $user->level = 0;
+//            $user->created_at = date('Y-m-d h:m:s');
+//            $user->updated_at = date('Y-m-d h:m:s');
+//            $user->invitationCode = $invitationCode;
+//
+//            try {
+//                $user->save();
+//
+//                Auth::attempt(array('username' => makeValidInput($_POST["username"]), 'password' => makeValidInput($_POST["password"])), true);
+//
+//                $invitationCode = makeValidInput($_POST["invitationCode"]);
+//
+//                if (!empty($invitationCode)) {
+//                    $dest = User::whereInvitationCode($invitationCode)->first();
+//
+//                    if ($dest != null) {
+//                        $log = new LogModel();
+//                        $log->visitorId = $user->id;
+//                        $log->date = date('Y-m-d');
+//                        $log->activityId = Activity::whereName('دعوت')->first()->id;
+//                        $log->kindPlaceId = -1;
+//                        $log->time = getToday()["time"];
+//                        $log->confirm = 1;
+//                        $log->placeId = -1;
+//                        try {
+//                            $log->save();
+//                        } catch (Exception $x) {
+//                            echo $x->getMessage();
+//                            return;
+//                        }
+//
+//                        $log = new LogModel();
+//                        $log->visitorId = $dest->id;
+//                        $log->date = date('Y-m-d');
+//                        $log->time = getToday()["time"];
+//                        $log->activityId = Activity::whereName('دعوت')->first()->id;
+//                        $log->kindPlaceId = -1;
+//                        $log->confirm = 1;
+//                        $log->placeId = -1;
+//                        try {
+//                            $log->save();
+//                        } catch (Exception $x) {
+//                            echo $x->getMessage();
+//                            return;
+//                        }
+//                    }
+//                }
+//
+//                echo "ok";
+//                return;
+//            } catch (Exception $x) {
+//                dd($x);
+//                echo "nok";
+//                return;
+//            }
+//        }
+//
+//        echo "nok";
+//    }
+//
+//    public function registerWithPhone(Request $request)
+//    {
+//        if (isset($request->username) && isset($request->password) && isset($request->phone)) {
+//
+//            $invitationCode = createCode();
+//            while (User::whereInvitationCode($invitationCode)->count() > 0)
+//                $invitationCode = createCode();
+//
+//            $user = new User();
+//            $user->username = $request->username;
+//            $user->password = \Hash::make(makeValidInput($request->password));
+//            $user->phone = makeValidInput($request->phone);
+//            $user->first_name = $request->firsName;
+//            $user->last_name = $request->lastName;
+//            $user->level = 0;
+//            $user->invitationCode = $invitationCode;
+//
+//            try {
+//                $user->save();
+//                auth()->loginUsingId($user->id);
+//
+//                if(isset($_POST["invitationCode"])) {
+//                    $invitationCode = makeValidInput($_POST["invitationCode"]);
+//
+//                    if (!empty($invitationCode)) {
+//                        $dest = User::whereInvitationCode($invitationCode)->first();
+//
+//                        if ($dest != null) {
+//                            $log = new LogModel();
+//                            $log->visitorId = $user->id;
+//                            $log->date = date('Y-m-d');
+//                            $log->activityId = Activity::whereName('دعوت')->first()->id;
+//                            $log->kindPlaceId = -1;
+//                            $log->time = getToday()["time"];
+//                            $log->confirm = 1;
+//                            $log->placeId = -1;
+//                            try {
+//                                $log->save();
+//                            } catch (Exception $x) {
+//                                echo $x->getMessage();
+//                                return;
+//                            }
+//
+//                            $log = new LogModel();
+//                            $log->visitorId = $dest->id;
+//                            $log->date = date('Y-m-d');
+//                            $log->time = getToday()["time"];
+//                            $log->activityId = Activity::whereName('دعوت')->first()->id;
+//                            $log->kindPlaceId = -1;
+//                            $log->confirm = 1;
+//                            $log->placeId = -1;
+//                            try {
+//                                $log->save();
+//                            } catch (Exception $x) {
+//                                echo $x->getMessage();
+//                                return;
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                echo "ok";
+//            }
+//            catch (Exception $x) {
+//                dd($x);
+//                echo "nok";
+//            }
+//        }
+//        else
+//            echo 'nok';
+//
+//        return;
+//    }
 }

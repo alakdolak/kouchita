@@ -473,7 +473,6 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
     function checkInputPhoneRegister() {
         let phone = $('#phoneRegister').val();
-        console.log(phone)
         phone = fixNumbers(phone);
 
         if(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9){
@@ -657,7 +656,6 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         let inviteCode = $("#invitationCode").val();
 
         phone = fixNumbers(phone);
-
 
         $.ajax({
             type: 'post',

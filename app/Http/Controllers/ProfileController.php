@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActivityLogEvent;
 use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\ActivityLogs;
@@ -656,6 +657,7 @@ class ProfileController extends Controller {
         if($tripStyles != null){
             foreach ($tripStyles as $trip){
                 if($trip != 0){
+                    event(new ActivityLogEvent($user->id, $user->id, 'completeUserTripStyle'));
                     $userTripStyle = new UserTripStyles();
                     $userTripStyle->uId = $user->id;
                     $userTripStyle->tripStyleId = $trip;
@@ -664,11 +666,14 @@ class ProfileController extends Controller {
             }
         }
 
+        if($request->myBio != null && $request->myBio != '')
+            event(new ActivityLogEvent($user->id, $user->id, 'completeUserBio'));
+
         $user->introduction = $request->myBio;
         $user->save();
 
         $tripStyles = UserTripStyles::join('tripStyle', 'tripStyle.id', 'userTripStyles.tripStyleId')
-            ->where('uId', $user->id)->get();
+                                        ->where('uId', $user->id)->get();
 
         echo json_encode(['status' => 'ok', 'tripStyles' => $tripStyles, 'introduction' => $user->introduction]);
         return;
@@ -924,12 +929,14 @@ class ProfileController extends Controller {
         if(isset($_POST['cityId']) && $_POST['cityId'] != 0)
             $user->cityId = makeValidInput($_POST['cityId']);
         $user->save();
+        if($user->first_name != null && $user->last_name != null &&
+           $user->email != null && $user->picture != null && $user->phone != null &&
+           $user->cityId != null && $user->ageId != null && $user->sex != null && $user->birthday != null)
+            event($user->id, $user->id, 'completeUserInfo');
 
         if (isset($_POST["phone"]) && makeValidInput($_POST["phone"]) != $user->phone && User::wherePhone($_POST['phone'])->count() == 0) {
-
             $phoneNum = makeValidInput($_POST["phone"]);
             $activation = ActivationCode::where('userId', $user->id)->first();
-
             if ($activation == null) {
                 $activation = new ActivationCode();
                 $activation->phoneNum = $phoneNum;
@@ -942,7 +949,6 @@ class ProfileController extends Controller {
                 echo json_encode(['status' => 'ok', 'time' => 90 , 'phoneNum' => $phoneNum]);
                 return;
             }
-
             if (time() - $activation->sendTime > 90) {
                 $activation->phoneNum = $phoneNum;
                 $activation->code = createCode();
