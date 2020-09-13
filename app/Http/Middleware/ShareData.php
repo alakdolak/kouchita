@@ -21,17 +21,11 @@ class ShareData
         if(auth()->check()){
             $userFooter = \Auth::user();
             $userLevelFooter = auth()->user()->nearestLevelInModel($userFooter->id);
-
             $userTotalPointFooter = auth()->user()->getUserPointInModel($userFooter->id);
-
             $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
-
             $registerUser = verta($userFooter->created_at)->format('Y/m/d');
-
             $userInfo = User::getUserActivityCount($userFooter->id);
-
             $buPic = auth()->user()->getUserPicInModel($userFooter->id);
-
             $userNamename = $userFooter->username;
 
             View::share(['userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,

@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="w3-black">
-                                <div class="w3-blue" style="width:75%"></div>
+                                <div class="w3-blue" style="width: {{$sideInfos['nearLvl'][1]['percent']}}%"></div>
                             </div>
                             <div style="text-align: center; font-size: 12px; margin-top: 30px;">
                                 مشاهده سیستم سطح بندی
@@ -314,9 +314,9 @@
             </div>
         </div>
 
-        <div id="userImages" class="modalBlackBack hidden">
+        <div id="userImages" class="modalBlackBack">
             <div class="userTripMainBody">
-                <div class="closeFullReview iconClose" onclick="closeUserImg()"></div>
+                <div class="closeFullReview iconClose" onclick="closeMyModal('userImages')"></div>
                 <div>
                     <div class="myTripHeaders">تغییر عکس کاربری</div>
                     <div class="nowImg">
@@ -345,7 +345,7 @@
 
                     <div class="bioClassSection">
                         <button class="saveBioButton" onclick="updateUserPic()" >ذخیره تغییرات</button>
-                        <button class="cancelBioButton" onclick="closeUserImg()">لغو</button>
+                        <button class="cancelBioButton" onclick=" closeMyModal('userImages')">لغو</button>
                     </div>
 
                 </div>
@@ -354,7 +354,7 @@
 
         <div id="userBannerModal" class="modalBlackBack hidden">
             <div class="userTripMainBody">
-                <div class="closeFullReview iconClose" onclick="$('#userBannerModal').addClass('hidden');"></div>
+                <div class="closeFullReview iconClose" onclick="closeMyModal('userBannerModal')"></div>
                 <div>
                     <div class="myTripHeaders">تغییر عکس بنر</div>
                     <div class="nowImg">
@@ -379,7 +379,7 @@
 
                     <div class="bioClassSection">
                         <button class="saveBioButton" onclick="doUpdateBannerPic()" >ذخیره تغییرات</button>
-                        <button class="cancelBioButton" onclick="$('#userBannerModal').addClass('hidden');">لغو</button>
+                        <button class="cancelBioButton" onclick="closeMyModal('userBannerModal')">لغو</button>
                     </div>
 
                 </div>
@@ -621,11 +621,7 @@
         function openEditPhotoModal(){
             if(defaultPics == null)
                 getOurPic();
-            $('#userImages').removeClass('hidden');
-        }
-
-        function closeUserImg(){
-            $('#userImages').addClass('hidden');
+            openMyModal('userImages');
         }
 
         function getOurPic(){
@@ -735,7 +731,7 @@
         let uploadedBanner = false;
         function openBannerModal() {
             getBannerPic();
-            $('#userBannerModal').removeClass('hidden');
+            openMyModal('userBannerModal');
         }
 
         function getBannerPic(){

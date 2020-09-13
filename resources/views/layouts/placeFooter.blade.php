@@ -847,10 +847,10 @@
                                         <div class="glyphicon glyphicon-chevron-down"></div>
                                         <div class="glyphicon glyphicon-chevron-up display-none"></div>
                                     </div>
-                                    <div class="editProfileMenu item display-none">
+                                    <div class="editProfileMenu item display-none" style="text-align: center">
                                         <a name="edit-profile" class="menu-link " href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
-                                        <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
-                                        <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{route('profile')}}#medal">{{__('جوایز و مدال ها')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{route('profile.message.page')}}">{{__('پیام‌ها')}}</a>
                                         <a name="edit-photo" class="menu-link " href="{{route('profile.accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
                                         <a name="edit-photo" class="menu-link " href="{{route('profile.editPhoto')}}">{{__('ویرایش عکس')}}</a>
                                     </div>
@@ -944,7 +944,8 @@
                                     </div>
                                     <div class="modules-membercenter-level-progress">
                                         <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                            <div onclick="showElement('levelDiv')">
+                                            <div>
+{{--                                                onclick="showElement('levelDiv')"--}}
                                                 <div class="labels">
                                                     <div class="right label">{{__('مرحله فعلی')}}</div>
                                                     <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>

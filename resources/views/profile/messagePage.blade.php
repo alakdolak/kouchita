@@ -368,11 +368,11 @@
 
         setTimeout(updateMsg, 5000);
 
-        @if(isset($specUser) && $specUser != null)
-            specUser = {!! $specUser !!};
-            showThisMsgs(specUser);
-        @else
-            showThisMsgs(0);
-        @endif
+{{--        @if(isset($specUser) && $specUser != null)--}}
+{{--            specUser = {!! $specUser !!};--}}
+{{--            showThisMsgs(specUser);--}}
+{{--        @else--}}
+{{--            showThisMsgs(0);--}}
+{{--        @endif--}}
     </script>
 @stop

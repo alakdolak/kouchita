@@ -3,6 +3,8 @@
         background: white;
         direction: rtl;
         text-align: right;
+        border-radius: 10px;
+        margin-bottom: 10px;
     }
     .medalsSection .rowTitle{
         font-size: 20px;
@@ -36,6 +38,7 @@
         margin: 5px;
         border-radius: 10px;
         transition: transform 1s, box-shadow .1s;
+        font-size: 20px;
     }
     .medalsSection .medals .medalCard.showBack{
         transform: rotateY(180deg);
@@ -57,10 +60,13 @@
         display: flex;
         position: relative;
     }
-    .medalsSection .medals .medalCard .frontCard .onPic{
+    .medalsSection .medals .medalCard .frontCard .pic > div{
         background-size: 150px 150px;
         height: 100%;
         background-repeat: no-repeat;
+    }
+    .medalsSection .medals .medalCard .frontCard .onPic{
+        height: 100%;
         background-position: right;
         z-index: 2;
         position: absolute;
@@ -69,10 +75,7 @@
         animation: blinking 2s infinite;
     }
     .medalsSection .medals .medalCard .frontCard .offPic{
-        background-size: 150px 150px;
         width: 100%;
-        height: 100%;
-        background-repeat: no-repeat;
         background-position: left;
     }
     .medalsSection .medals .medalCard .name{
@@ -82,10 +85,10 @@
         margin-bottom: 10px;
         padding-bottom: 5px;
         padding-top: 10px;
-        font-size: 18px;
+        font-size: .9em;
     }
     .medalsSection .medals .medalCard .summery{
-        font-size: 13px;
+        font-size: .6em;
         color: var(--koochita-blue);
         text-align: center;
     }
@@ -102,7 +105,7 @@
     .medalsSection .medals .medalCard .backCard .name{
         border: none;
         color: var(--koochita-red);
-        font-size: 20px;
+        font-size: 1em;
         font-weight: bold;
     }
     .medalsSection .medals .medalCard .backCard .pic{
@@ -111,19 +114,37 @@
         margin: 0px auto;
     }
     .medalsSection .medals .medalCard .backCard .text{
-        font-size: 13px;
+        font-size: .6em;
         margin-bottom: 32px;
     }
     .medalsSection .medals .medalCard .backCard .rate{
         border-top: solid 1px gray;
         padding-top: 5px;
-        font-size: 18px;
+        font-size: .9em;
         color: var(--koochita-blue);
         position: absolute;
         bottom: 0;
         width: 100%;
     }
 
+    @media (max-width: 500px){
+        .medalsSection .medals .medalCard{
+            width: 110px;
+            height: 180px;
+            font-size: 15px;
+        }
+        .medalsSection .medals .medalCard .frontCard .pic > div{
+            background-size: 100px 100px;
+        }
+        .medalsSection .medals .medalCard .pic{
+            width: 100px;
+            height: 100px;
+        }
+        .medalsSection .medals .medalCard .backCard .pic{
+            width: 50px;
+            height: 50px;
+        }
+    }
 
     @keyframes blinking {
         0% {
@@ -148,12 +169,12 @@
             <div class="info">
                 @if($myPage)
                     <div class="firstLine">
-                        اینجا خالی است.هنوز پستی نگذاشتید...
+                        اینجا خالی است.هنوز مدالی کسب نکرده اید...
                     </div>
-                    <div class="sai">
-                        جایی رو که دوست داری رو پیدا کن و
-                        <button class="butt" onclick="openMainSearch(0) // in mainSearch.blade.php">نظرتو بگو</button>
-                    </div>
+{{--                    <div class="sai">--}}
+{{--                        جایی رو که دوست داری رو پیدا کن و--}}
+{{--                        <button class="butt" onclick="openMainSearch(0) // in mainSearch.blade.php">نظرتو بگو</button>--}}
+{{--                    </div>--}}
                 @else
                     <div class="firstLine">
                         اینجا خالی است. {{$user->username}} هنوز مدالی کسب نکرده...
