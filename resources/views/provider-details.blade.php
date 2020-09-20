@@ -1214,7 +1214,7 @@
                                                 </div>
 
 @include('hotelDetailsPopUp')
-                                                @include('editor')
+{{--                                                @include('editor')--}}
 
                                                         <script>
                                                                     var hotelMap = [];
@@ -2372,7 +2372,7 @@
         <script async src="{{URL::asset('js/album.js')}}"></script>
 
         <script>
-            var bookMarkDir = '{{route('bookMark')}}';
+            var bookMarkDir = '{{route('profile.bookmark')}}';
             var getPlaceTrips = '{{route('placeTrips')}}';
             var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
             var soon = '{{route('soon')}}';
@@ -2384,7 +2384,7 @@
             var showAllAnsDir = '{{route('showAllAns')}}';
             var filterComments = '{{route('filterComments')}}';
             var getReportsDir = '{{route('getReports')}}';
-            var sendReportDir = '{{route('sendReport2')}}';
+{{--            var sendReportDir = '{{route('sendReport2')}}';--}}
             var getPhotoFilter = '{{route('getPhotoFilter')}}';
             var getPhotosDir = '{{route('getPhotos')}}';
             var showUserBriefDetail = '{{route('showUserBriefDetail')}}';

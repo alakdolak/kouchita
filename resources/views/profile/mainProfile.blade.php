@@ -253,7 +253,7 @@
                     <div class="userProfilePicturesMainDiv rightColBoxes">
                         <div class="mainDivHeaderText">
                             <h3>عکس و تصاویر</h3>
-                            <div>مشاهده همه</div>
+                            <div href="#picture" onclick="window.showAllPic = 1; changePages('picture');">مشاهده همه</div>
                         </div>
                         <div class="picturesMainBox height-auto">
                             @foreach($sideInfos['allUserPics'] as $pic)
@@ -293,7 +293,7 @@
     @if(isset($myPage) && $myPage)
         <div id="userTripStyle" class="modalBlackBack hidden">
             <div class="userTripMainBody">
-                <div class="closeFullReview iconClose" onclick="closeBioSetting()"></div>
+                <div class="closeFullReview iconClose" onclick="closeMyModal('userTripStyle');"></div>
                 <div>
                     <div class="myTripHeaders">منو بشناس</div>
                     <div class="tripModalBody">
@@ -307,7 +307,7 @@
 
                         <div class="bioClassSection">
                             <button class="saveBioButton" onclick="updateMyTripStyle()" >ذخیره تغییرات</button>
-                            <button class="cancelBioButton" onclick="closeBioSetting()">لغو</button>
+                            <button class="cancelBioButton" onclick="closeMyModal('userTripStyle');">لغو</button>
                         </div>
                     </div>
                 </div>
@@ -471,7 +471,6 @@
 {{--                <div class="ui_close_x" onclick="$('#cropModal').addClass('hidden');"></div>--}}
             </span>
         </div>
-
     @endif
 
 
@@ -501,7 +500,7 @@
         }
 
         function sendAjaxRequestToGiveTripStyles() {
-            $('#userTripStyle').removeClass('hidden');
+            openMyModal('userTripStyle');
             $.ajax({
                 type: 'post',
                 url: '{{route("getTripStyles")}}',
@@ -553,13 +552,9 @@
                     $('#myIntroduction').text(response.introduction);
                     $('#myTripStyles').html(text);
 
-                    closeBioSetting();
+                    closeMyModal('userTripStyle');
                 }
             });
-        }
-
-        function closeBioSetting(){
-            $('#userTripStyle').addClass('hidden');
         }
 
         function changePages(_kind){

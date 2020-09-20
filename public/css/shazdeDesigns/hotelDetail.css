@@ -844,7 +844,7 @@ DIV.prw_rup.prw_common_mercury_photo_carousel .bignav .left-nav {
     text-align: justify;
     line-height: 25px;
     color: #666666;
-    cursor: pointer;
+    /*cursor: pointer;*/
     transition: 0.5s;
 }
 
