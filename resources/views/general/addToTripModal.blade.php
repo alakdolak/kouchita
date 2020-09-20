@@ -1,7 +1,35 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-{{--<link rel="stylesheet" href="{{URL::asset('css/theme2/pop-up-create-trip.css?v=1')}}">--}}
-
 <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
+
+<style>
+
+    .icon-circle-arrow-right {
+        opacity: 1;
+        color: black;
+        font-size: 22px;
+        font-style: normal;
+        transform: rotate(180deg);
+        display: flex;
+    }
+
+    .icon-circle-arrow-right:before{
+        content: '\E041';
+        font-family: Shazde_Regular2 !important;
+    }
+
+
+    .icon-circle-arrow-left {
+        opacity: 1;
+        color: black;
+        font-size: 22px;
+        font-style: normal;
+        display: flex;
+    }
+    .icon-circle-arrow-left:before{
+        content: '\E041';
+        font-family: Shazde_Regular2 !important;
+    }
+</style>
 
 <div id="addPlaceToTripPrompt" class="modalBlackBack">
     <span class="modalBody" style="width: 700px;">

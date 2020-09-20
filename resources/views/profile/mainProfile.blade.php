@@ -253,7 +253,7 @@
                     <div class="userProfilePicturesMainDiv rightColBoxes">
                         <div class="mainDivHeaderText">
                             <h3>عکس و تصاویر</h3>
-                            <div>مشاهده همه</div>
+                            <div href="#picture" onclick="window.showAllPic = 1; changePages('picture');">مشاهده همه</div>
                         </div>
                         <div class="picturesMainBox height-auto">
                             @foreach($sideInfos['allUserPics'] as $pic)

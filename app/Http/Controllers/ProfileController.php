@@ -501,7 +501,7 @@ class ProfileController extends Controller {
             $location1 = $location.'/'.$kindPlace->fileName.'/'.$pl->file.'/s-'.$photographer[$i]->pic;
             if(is_file($location1)) {
                 $p = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/s-' . $photographer[$i]->pic);
-                $side = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/l-' . $photographer[$i]->pic);
+                $side = \URL::asset('userPhoto/' . $kindPlace->fileName . '/' . $pl->file . '/f-' . $photographer[$i]->pic);
                 $userLike = 0;
                 if(\auth()->check()){
                     $mUId = \auth()->user()->id;

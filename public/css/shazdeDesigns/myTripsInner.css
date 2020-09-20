@@ -30,7 +30,6 @@
     font-style: normal;
     display: flex;
 }
-
 .icon-circle-arrow-left:before{
     content: '\E041';
     font-family: Shazde_Regular2 !important;

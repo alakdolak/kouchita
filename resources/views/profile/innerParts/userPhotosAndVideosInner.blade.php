@@ -99,6 +99,11 @@
         }
 
         $('#pictureSection').html(text);
+
+        if(window.showAllPic == 1){
+            window.showAllPic = 0; // this variable in show all picture in profile side
+            showThisPictures(0);
+        }
     }
 
     function getAllUserPicsAndVideo(){

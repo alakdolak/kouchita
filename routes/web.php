@@ -265,6 +265,13 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
+Route::get('provider', function (){
+    return view('provider-details');
+});
+Route::get('provider2', function (){
+    return view('provider-details2');
+});
+
 //authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 //    Route::get('login', 'UserLoginController@login');

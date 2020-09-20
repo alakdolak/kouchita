@@ -2324,7 +2324,7 @@
         </div>
 
         @include('hotelDetailsPopUp')
-        @include('editor')
+{{--        @include('editor')--}}
 
         <script>
             var hotelMap = [];
@@ -3482,63 +3482,27 @@
         <script async src="{{URL::asset('js/album.js')}}"></script>
 
         <script>
-                    {{--var hasLogin = '{{$hasLogin}}';--}}
-            var bookMarkDir = '{{route('bookMark')}}';
+            var bookMarkDir = '{{route('profile.bookmark')}}';
             var getPlaceTrips = '{{route('placeTrips')}}';
             var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
             var soon = '{{route('soon')}}';
-                    {{--var placeMode = '{{$placeMode}}';--}}
             var hotelDetails;
             var hotelDetailsInBookMarkMode;
             var hotelDetailsInAskQuestionMode;
             var hotelDetailsInAnsMode;
             var hotelDetailsInSaveToTripMode;
-                    {{--if (placeMode == "hotel") {--}}
-                    {{--hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
-                    {{--else if (placeMode == "restaurant") {--}}
-                    {{--hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
-                    {{--else if (placeMode == "amaken") {--}}
-                    {{--hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
-                    {{--else {--}}
-                    {{--hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
             var getQuestions = '{{route('getQuestions')}}';
-                    {{--var placeId = '{{$place->id}}';--}}
-                    {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
             var getCommentsCount = '{{route('getCommentsCount')}}';
-                    {{--var totalPhotos = '{{$sitePhotos + $userPhotos}}';--}}
-                    {{--var sitePhotosCount = '{{$sitePhotos}}';--}}
             var opOnComment = '{{route('opOnComment')}}';
             var askQuestionDir = '{{route('askQuestion')}}';
             var sendAnsDir = '{{route('sendAns')}}';
             var showAllAnsDir = '{{route('showAllAns')}}';
             var filterComments = '{{route('filterComments')}}';
             var getReportsDir = '{{route('getReports')}}';
-            var sendReportDir = '{{route('sendReport2')}}';
             var getPhotoFilter = '{{route('getPhotoFilter')}}';
             var getPhotosDir = '{{route('getPhotos')}}';
             var showUserBriefDetail = '{{route('showUserBriefDetail')}}';
             var homePath = '{{route('home')}}';
-            {{--var hotelDetailsInAddPhotoMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'addPhoto'])}}';--}}
         </script>
 
         <script>
