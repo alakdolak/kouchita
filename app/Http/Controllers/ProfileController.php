@@ -420,21 +420,42 @@ class ProfileController extends Controller {
                             ->groupBy('kindPlaceId')
                             ->select(['activityId', 'kindPlaceId'])
                             ->get();
+
         foreach ($groupMedal as $gm){
-            $countss = ActivityLogs::where('kindPlaceId', $gm->kindPlaceId)
-                                    ->where('activityId', $gm->activityId)
-                                    ->where('userId', $request->userId)
-                                    ->count();
-            $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
+            $activity = Activity::find($gm->activityId);
+            if($activity->tableName != null) {
+                if($activity->tableName == 'log')
+                    $sqlQuery = 'visitorId = '.$request->userId .' ';
+                else
+                    $sqlQuery = 'userId = '.$request->userId .' ';
 
-            $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
-                          ->where('activityId', $gm->activityId)
-                          ->where('floor', '<=', $countss)->get();
+                if($activity->controllerNeed == 1){
+                    if($activity->tableName == 'photographersPics')
+                        $sqlQuery .= '&& status = 1 ';
+                    else if($activity->tableName == 'userAddPlaces')
+                        $sqlQuery .= '&& archive = 1 ';
+                    else
+                        $sqlQuery .= '&& confirm = 1 ';
+                }
 
-            foreach ($med as $item) {
-                array_push($takenMedal, $item);
-                array_push($takenMedalId, $item->id);
+                if($gm->kindPlaceId != -1)
+                    $sqlQuery .= '&& kindPlaceId = '.$gm->kindPlaceId.' ';
+
+                $countss = \DB::table($activity->tableName)->whereRaw($sqlQuery)->count();
+
+                $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
+
+                $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
+                    ->where('activityId', $gm->activityId)
+                    ->where('floor', '<=', $countss)->get();
+
+                foreach ($med as $item) {
+                    array_push($takenMedal, $item);
+                    array_push($takenMedalId, $item->id);
+                }
             }
+            else
+                $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = 0;
         }
         if($owner) {
             $inProgressMedal = Medal::whereNotIn('id', $takenMedalId)->orderBy('floor')
@@ -449,24 +470,24 @@ class ProfileController extends Controller {
         foreach ([$allMedals, $inProgressMedal, $takenMedal] as $medals){
             foreach ($medals as $item) {
                 $act = Activity::find($item->activityId);
-                $kindPlace = Place::find($item->kindPlaceId);
                 $kindPlaceName = '';
-                if($kindPlace != null) {
+                $kindPlace = Place::find($item->kindPlaceId);
+                if ($kindPlace != null) {
                     $item->sumText = $item->floor . ' ' . $act->name . ' در ' . $kindPlace->name;
-                    $kindPlaceName =  ' در ' . $kindPlace->name;
+                    $kindPlaceName = ' در ' . $kindPlace->name;
                 }
                 else
                     $item->sumText = $item->floor . ' ' . $act->name;
 
-                $item->take = $countsTaken[$item->kindPlaceId.'_'.$item->activityId];
-                if($item->take >= $item->floor){
+                $item->take = $countsTaken[$item->kindPlaceId . '_' . $item->activityId];
+                if ($item->take >= $item->floor) {
                     $item->take = $item->floor;
                     $item->offPic = \URL::asset('_images/badges/' . $item->pic_2);
                     $item->percent = 0;
                 }
                 else {
                     $item->offPic = \URL::asset('_images/badges/' . $item->pic_1);
-                    $item->percent = floor(($item->take/$item->floor)*100);
+                    $item->percent = floor(($item->take / $item->floor) * 100);
                 }
 
                 $item->text = 'این مدال بعد از ' . $item->floor . ' تا ' . $act->name . ' ' . $kindPlaceName . ' بدست می آید';
@@ -657,7 +678,7 @@ class ProfileController extends Controller {
         if($tripStyles != null){
             foreach ($tripStyles as $trip){
                 if($trip != 0){
-                    event(new ActivityLogEvent($user->id, $user->id, 'completeUserTripStyle'));
+//                    event(new ActivityLogEvent($user->id, $user->id, 'completeUserTripStyle'));
                     $userTripStyle = new UserTripStyles();
                     $userTripStyle->uId = $user->id;
                     $userTripStyle->tripStyleId = $trip;
@@ -666,8 +687,8 @@ class ProfileController extends Controller {
             }
         }
 
-        if($request->myBio != null && $request->myBio != '')
-            event(new ActivityLogEvent($user->id, $user->id, 'completeUserBio'));
+//        if($request->myBio != null && $request->myBio != '')
+//            event(new ActivityLogEvent($user->id, $user->id, 'completeUserBio'));
 
         $user->introduction = $request->myBio;
         $user->save();

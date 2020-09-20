@@ -157,11 +157,23 @@
             opacity: 1;
         }
     }
+    .animLine{
+        height: 10px;
+        border-radius: 10px;
+        width: 150px !important;
+        margin: 0px auto;
+        padding: 0 !important;
+        border-bottom: none !important;
+        margin-top: 10px;
+    }
+    .medalLoading{
+
+    }
 </style>
 
 <div class="postsMainDivInSpecificMode medalsSection col-xs-12">
 
-    <div id="notDataMedal"  style="display: none">
+    <div id="notDataMedal" style="display: none">
         <div class="col-xs-12 notData">
             <div class="pic">
                 <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
@@ -171,10 +183,6 @@
                     <div class="firstLine">
                         اینجا خالی است.هنوز مدالی کسب نکرده اید...
                     </div>
-{{--                    <div class="sai">--}}
-{{--                        جایی رو که دوست داری رو پیدا کن و--}}
-{{--                        <button class="butt" onclick="openMainSearch(0) // in mainSearch.blade.php">نظرتو بگو</button>--}}
-{{--                    </div>--}}
                 @else
                     <div class="firstLine">
                         اینجا خالی است. {{$user->username}} هنوز مدالی کسب نکرده...
@@ -183,28 +191,44 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="rowTitle">
-            مدال های کسب شده
-            <a href="#" class="link">چگونه کسب درآمد کنیم؟</a>
+    <div id="medalContent">
+        <div class="col-md-12">
+            <div class="rowTitle">
+                مدال های کسب شده
+                <a href="#" class="link">چگونه کسب درآمد کنیم؟</a>
+            </div>
+            <div id="takenMedal" class="medals"></div>
         </div>
-        <div id="takenMedal" class="medals"></div>
+        @if($myPage)
+            <div class="col-md-12">
+                <div class="rowTitle">با کمی تلاش کسب می شود</div>
+                <div id="inProgressMedal" class="medals"></div>
+            </div>
+            <div class="col-md-12">
+                <div class="rowTitle">همه مدال ها</div>
+                <div id="allMedals" class="medals"></div>
+            </div>
+        @endif
     </div>
-    @if($myPage)
-        <div class="col-md-12">
-            <div class="rowTitle">با کمی تلاش کسب می شود</div>
-            <div id="inProgressMedal" class="medals"></div>
-        </div>
-        <div class="col-md-12">
-            <div class="rowTitle">همه مدال ها</div>
-            <div id="allMedals" class="medals"></div>
-        </div>
-    @endif
 </div>
 
 <script>
     let notDataMedal = $('#notDataMedal').html();
     $('#notDataMedal').removeClass();
+
+    let animLoad = '';
+    for(let i = 0; i < 4; i++)
+        animLoad += '<div class="medalCard">\n' +
+                    '<div class="frontCard">\n' +
+                    '<div class="pic placeHolderAnime"  style="border-radius: 50%"></div>\n' +
+                    '<div class="name animLine placeHolderAnime"></div>\n' +
+                    '<div class="summery animLine placeHolderAnime"></div>\n' +
+                    '</div>\n' +
+                    '</div>';
+
+    $('#allMedals').html(animLoad);
+    $('#inProgressMedal').html(animLoad);
+    $('#takenMedal').html(animLoad);
 
     function getMedals(){
         $.ajax({

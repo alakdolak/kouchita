@@ -390,6 +390,8 @@ function getMedals($uId) {
     $counter = 0;
 
     foreach ($medals as $medal) {
+//        if($medal->controllerNeed == 1)
+//            $count = \DB::table($medal->tableName)->
 
         if(getActivitiesCount($uId, $medal->activityId, $medal->kindPlaceId) >= $medal->floor)
             $counter++;
