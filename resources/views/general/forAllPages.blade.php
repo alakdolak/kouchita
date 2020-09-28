@@ -24,6 +24,8 @@
 
 @include('component.questionPack')
 
+@include('component.answerPack')
+
 @include('general.reportModal')
 
 @if(!Auth::check())
@@ -40,6 +42,7 @@
 
 <script>
     var hasLogin = {{auth()->check() ? 1 : 0}};
+    window.userPic = '{{getUserPic(auth()->check() ? auth()->user()->id : 0)}}';
 
     function checkLogin(redirect = '{{Request::url()}}'){
         if (!hasLogin) {

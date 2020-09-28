@@ -4,8 +4,9 @@
 
 <div id="newSafarnameh" class="modalBlackBack" style="z-index: 9999;">
     <div class="newSafarnamehSection">
+        <input type="hidden" id="newSafarnamehId" value="0">
         <div class="nsHeader">
-            <h3 class="text">نوشتن سفرنامه</h3>
+            <h3 id="newSafarnamehModalHeader" class="text">نوشتن سفرنامه</h3>
             <div class="iconClose" onclick="closeNewSafarnameh()"></div>
         </div>
         <div class="nsContenet">
@@ -125,6 +126,12 @@
 </div>
 
 <script>
+    let safarnamehNewMainPic = null;
+    let getSuggestionPlaceAjax = null;
+    let searchResultPlacess = [];
+    let pickedPlaces = [];
+    let suggestionPlaces;
+
     DecoupledEditor.create( document.querySelector('#safarnamehText'), {
         language: '{{app()->getLocale()}}',
         removePlugins: [ 'FontSize', 'MediaEmbed' ],
@@ -139,7 +146,7 @@
                     id: '{{auth()->user()->id}}',
                 };
                 data = JSON.stringify(data);
-                return new MyUploadAdapter( loader, '{{route("profile.safarnameh.storePic")}}', '{{csrf_token()}}', data);
+                return new MyUploadAdapter( loader, '{{route("safarnameh.storePic")}}', '{{csrf_token()}}', data);
             };
 
         } )
@@ -147,15 +154,35 @@
             console.error( err.stack );
         });
 
-    let safarnamehNewMainPic = null;
-    let getSuggestionPlaceAjax = null;
-    let pickedPlaces = [];
-    let searchResultPlacess = [];
-    let suggestionPlaces;
-
     function openNewSafarnameh(){
-        if(checkLogin())
+        if(checkLogin()) {
+            if($('#newSafarnamehId').val() != 0)
+                emptySafarnamehModal();
+
             openMyModal('newSafarnameh') // forAllPages.blade.php
+        }
+    }
+
+    function emptySafarnamehModal(){
+        $('#newSafarnamehModalHeader').text('نوشتن سفرنامه');
+        window.editor.setData('');
+        $('#newSafarnamehId').val(0);
+        $('#newSafarnamehTitle').val('');
+        $('#safarnamehSummery').val('');
+
+        $('.notPicSafarnameh').show();
+        $('#newSafarnamehPic').hide();
+        $('#newSafarnamehPic').attr('src', '#');
+
+        $('#safarnamehTag1').val('');
+        $('#safarnamehTag2').val('');
+        $('#safarnamehTag3').val('');
+
+        safarnamehNewMainPic = null;
+        getSuggestionPlaceAjax = null;
+        searchResultPlacess = [];
+        pickedPlaces = [];
+        createPickPlace();
     }
 
     function changeNewPicSafarnameh(input){
@@ -167,10 +194,12 @@
                 $('#newSafarnamehPic').attr('src', imgDataURL);
             });
     }
+
     function storeSafarnameh(){
         var formDa = new FormData();
         var title = $('#newSafarnamehTitle').val();
         var summery = $('#safarnamehSummery').val();
+        var newSafarnamehId = $('#newSafarnamehId').val();
         var text = window.editor.getData();
         var tags = [];
         var error = false;
@@ -180,7 +209,7 @@
             $('#newSafarnamehError').append('<li>انتخاب عنوان برای سفرنامه الزامی است.</li>');
             error = true;
         }
-        if(safarnamehNewMainPic == null){
+        if(safarnamehNewMainPic == null && newSafarnamehId == 0){
             $('#newSafarnamehError').append('<li>انتخاب عکس برای سفرنامه الزامی است.</li>');
             error = true;
         }
@@ -195,44 +224,27 @@
             tags.push($('#safarnamehTag2').val());
             tags.push($('#safarnamehTag3').val());
 
-            formDa.append('pic', safarnamehNewMainPic);
+
+            formDa.append('id', newSafarnamehId);
             formDa.append('title', title);
             formDa.append('summery', summery);
             formDa.append('text', text);
             formDa.append('tags', tags);
+            formDa.append('pic', safarnamehNewMainPic);
             formDa.append('placePick', JSON.stringify(pickedPlaces));
 
             $.ajax({
                 type: 'post',
-                url: '{{route('profile.safarnameh.new')}}',
+                url: '{{route('safarnameh.store')}}',
                 data: formDa,
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response == 'ok') {
                         showSuccessNotifi('سفرنامه شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
-
-                        if(location.pathname == '{{route('profile')}}')
-                            location.reload();
-                        else
-                            location.href = '{{route('profile')}}#safarnameh';
-                        closeLoading();
-                        // $('#newSafarnamehTitle').val('');
-                        // $('#safarnamehSummery').val('');
-                        // $('#safarnamehTag1').val('');
-                        // $('#safarnamehTag2').val('');
-                        // $('#safarnamehTag3').val('');
-                        // $('.ck-editor__editable').html('');
-                        // window.editor.setData('');
-                        // $('.notPicSafarnameh').css('display', 'flex');
-                        // $('#newSafarnamehPic').hide();
-                        // $('#newSafarnamehPic').attr('src', "#");
-                        // safarnamehNewMainPic = null;
-                        // pickedPlaces = [];
-                        // suggestionPlaces = [];
-                        // closeNewSafarnameh();
-                        // createPickPlace();
-                    } else {
+                        location.reload();
+                    }
+                    else {
                         showSuccessNotifi('در ثبت سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
                         closeLoading();
                     }
@@ -243,6 +255,55 @@
                 }
             })
         }
+    }
+
+    function editSafarnameh(_id){
+        openLoading();
+        $.ajax({
+            type: 'post',
+            url: '{{route("safarnameh.get")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id: _id
+            },
+            success: function(response){
+                closeLoading();
+                response = JSON.parse(response);
+                if(response.status == 'ok'){
+                    $('#newSafarnamehModalHeader').text('ویرایش سفرنامه');
+                    openMyModal('newSafarnameh'); // forAllPages.blade.php
+                    createEditSafarnameh(response.result);
+                }
+                else
+                    showSuccessNotifi('در ویرایش سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
+            },
+            error: function(err){
+                closeLoading();
+                showSuccessNotifi('در ویرایش سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
+            }
+        });
+    }
+
+    function createEditSafarnameh(_result){
+        window.editor.setData(_result.description);
+
+        $('#newSafarnamehId').val(_result.id);
+        $('#newSafarnamehTitle').val(_result.title);
+        $('#safarnamehSummery').val(_result.summery);
+
+        $('.notPicSafarnameh').hide();
+        $('#newSafarnamehPic').show();
+        $('#newSafarnamehPic').attr('src', _result.pic);
+
+        if(_result.tags[0])
+            $('#safarnamehTag1').val(_result.tags[0]);
+        if(_result.tags[1])
+            $('#safarnamehTag2').val(_result.tags[1]);
+        if(_result.tags[2])
+            $('#safarnamehTag3').val(_result.tags[2]);
+
+        pickedPlaces = _result.places;
+        createPickPlace();
     }
 
     function closeNewSafarnameh(){
@@ -292,13 +353,6 @@
                 '</div>';
         });
         $('#ourSuggestion').html(text);
-
-        // if($('#ourSuggestion').height() < 90)
-        //     $('.showAllSuggestion').hide();
-        // else {
-        //     $('.showAllSuggestion').show();
-        //     $('#ourSuggestion').removeClass('showFullSuggestion');
-        // }
 
         if(_result.length == 0)
             $('.ourSuggestionShow').hide();

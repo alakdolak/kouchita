@@ -17,9 +17,6 @@ use App\models\Majara;
 use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
-use App\models\Post;
-use App\models\PostCityRelation;
-use App\models\PostComment;
 use App\models\Question;
 use App\models\QuestionAns;
 use App\models\QuestionUserAns;
@@ -29,6 +26,8 @@ use App\models\Restaurant;
 use App\models\LogFeedBack;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
+use App\models\Safarnameh;
+use App\models\SafarnamehCityRelations;
 use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Tag;
@@ -575,6 +574,7 @@ class AjaxController extends Controller {
         return;
     }
 
+
     public function getMainPageSuggestion(Request $request)
     {
         $lastPages = $request->lastPage;
@@ -606,7 +606,7 @@ class AjaxController extends Controller {
         $topRestuarantId = [];
         $topAmakenId = [];
         $topBazarId = [];
-        $posts = [];
+        $safarnamehId = [];
         $today = getToday()['date'];
 
         if($lastPages != null){
@@ -630,7 +630,7 @@ class AjaxController extends Controller {
                 $topRestuarantId = array_merge($topRestuarantId, $resultWithCityId[2]);
                 $topAmakenId = array_merge($topAmakenId, $resultWithCityId[3]);
                 $topBazarId = array_merge($topBazarId, $resultWithCityId[4]);
-                $posts = array_merge($posts, $resultWithCityId[5]);
+                $safarnamehId = array_merge($safarnamehId, $resultWithCityId[5]);
             }
         }
         else{
@@ -643,7 +643,7 @@ class AjaxController extends Controller {
             $topRestuarantId = array_merge($topRestuarantId, $resultWithCityId[2]);
             $topAmakenId = array_merge($topAmakenId, $resultWithCityId[3]);
             $topBazarId = array_merge($topBazarId, $resultWithCityId[4]);
-            $posts = array_merge($posts, $resultWithCityId[5]);
+            $safarnamehId = array_merge($safarnamehId, $resultWithCityId[5]);
         }
 
         $topFood = [];
@@ -677,16 +677,18 @@ class AjaxController extends Controller {
                 array_push($topBazar, $true);
         }
 
-        $posts = Post::whereIn('id', $posts)->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->get();
-        foreach ($posts as $item){
-            $item->url = route('article.show', ['slug' => $item->slug]);
+        $safarnameh = Safarnameh::whereIn('id', $safarnamehId)
+                                ->select(['id', 'title', 'slug', 'meta', 'pic', 'date',
+                                            'userId', 'keyword', 'seen'])
+                                ->get();
+        foreach ($safarnameh as $item){
+            $item = SafarnamehMinimalData($item);
             $item->name = $item->title;
-            $item->pic = URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-            $item->review = PostComment::where('status', 1)->where('postId', $item->id)->count();
+            $item->review = $item->msgs;
             $item->section = 'مقالات';
         }
 
-        echo json_encode(['result' => $result, 'post' => $posts, 'topFood' => $topFood, 'majara' => $topMajara, 'restaurant' => $topRestuarant, 'amaken' => $topAmaken, 'bazar' => $topBazar]);
+        echo json_encode(['result' => $result, 'safarnameh' => $safarnameh, 'topFood' => $topFood, 'majara' => $topMajara, 'restaurant' => $topRestuarant, 'amaken' => $topAmaken, 'bazar' => $topBazar]);
 
         return;
     }
@@ -739,31 +741,33 @@ class AjaxController extends Controller {
         }
 
         if(count($cityIds) > 0)
-            $postIds = PostCityRelation::whereIn('cityId', $cityIds)->pluck('postId')->toArray();
+            $safarnamehIds = SafarnamehCityRelations::whereIn('cityId', $cityIds)->pluck('safarnamehId')->toArray();
         else
-            $postIds = PostCityRelation::pluck('postId')->toArray();
+            $safarnamehIds = SafarnamehCityRelations::pluck('safarnamehId')->toArray();
 
         $today = getToday()['date'];
-        $post = Post::where('date', '<=', $today)
+        $safarnameh = Safarnameh::where('date', '<=', $today)
             ->where('release', '!=', 'draft')
-            ->whereIn('id', $postIds)
+            ->where('confirm', 1)
+            ->whereIn('id', $safarnamehIds)
             ->orderBy('date', 'DESC')
             ->take('8')
             ->pluck('id')
             ->toArray();
 
-        if(count($post) < 8){
-            $remind = 8 - count($post);
-            $post = Post::where('date', '<=', $today)
+        if(count($safarnameh) < 8){
+            $remind = 8 - count($safarnameh);
+            $safarnameh = Safarnameh::where('date', '<=', $today)
                 ->where('release', '!=', 'draft')
-                ->whereNotIn('id', $postIds)
+                ->where('confirm', 1)
+                ->whereNotIn('id', $safarnamehIds)
                 ->orderBy('date', 'DESC')
                 ->take($remind)
                 ->pluck('id')
                 ->toArray();
         }
 
-        return [$foodId, $majaraId, $restId, $regionalId, $bazarId, $post];
+        return [$foodId, $majaraId, $restId, $regionalId, $bazarId, $safarnameh];
     }
 
     private function getPlaceInKindPlaceId($placeId, $allPlace, $kindPlaceId, $getCount){
@@ -774,7 +778,6 @@ class AjaxController extends Controller {
         $seeActivityId = Activity::where('name', 'مشاهده')->first()->id;
 
         if (count($placeId) > $getCount) {
-
             $topInCity = $this->getTopInIds($kindPlaceId, $placeId, $getCount, $questionRate, $reviewId, $ansId, $quesActivityId);
             $placeId = [];
             if (count($topInCity) > 0)

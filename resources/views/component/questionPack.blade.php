@@ -13,6 +13,7 @@
             @endif
         </div>
     </div>
+    
     <div class="commentWriterDetailsShow">
         <div class="circleBase commentWriterPicShow">
             <img src="##userPic##" style="height: 100%; width: 100%; border-radius: 50%;">

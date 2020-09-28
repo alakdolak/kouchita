@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostTagsRelationsTable extends Migration
+class CreateSafarnamehsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePostTagsRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('postTagsRelations', function (Blueprint $table) {
+        Schema::create('safarnamehs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('postId');
-            $table->unsignedInteger('tagId');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ class CreatePostTagsRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postTagsRelations');
+        Schema::dropIfExists('safarnamehs');
     }
 }

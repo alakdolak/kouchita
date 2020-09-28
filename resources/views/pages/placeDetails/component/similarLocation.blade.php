@@ -17,7 +17,7 @@
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
-                    <a href="{{route('mainArticle')}}">
+                    <a href="{{route('safarnameh.index')}}">
                         <h3>مقالات برتر</h3>
                     </a>
                 </div>

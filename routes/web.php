@@ -14,12 +14,6 @@ Route::get('seeLanguage', function(){
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
-Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
-
-Route::post('getPostComments', ['as' => 'getPostComments', 'uses' => 'PostController@getPostComments']);
-
-Route::post('sendPostComment', ['as' => 'sendPostComment', 'uses' => 'PostController@sendPostComment']);
-
 //sitemap
 Route::group(array(), function(){
     Route::get('/sitemap.xml', 'SitemapController@index');
@@ -409,44 +403,19 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 //posts
-Route::group(array('middleware' => 'nothing'), function () {
+Route::group(['middleware' => ['SafarnamehShareData']], function () {
+    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
+    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
+    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
+    Route::post('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
+    Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
+    Route::post('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
 
-    Route::get('/article/home', 'PostController@mainArticle')->name('mainArticle');
-
-    Route::get('/article/id/{id}', 'PostController@postWithId')->name('postWithId');
-
-    Route::get('/article/user/{id}', 'PostController@showUserArticle')->name('article.user.show');
-
-    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
-
-    Route::get('/article/list/{type?}/{search?}', 'PostController@articleList')->name('article.list');
-
-    Route::post('/paginationArticle', 'PostController@paginationArticle')->name('article.pagination');
-
-    Route::post('/paginationInArticleList', 'PostController@paginationInArticleList')->name('article.list.pagination');
-
-    Route::post('/article/like', 'PostController@LikeArticle')->name('article.like');
-
-    Route::post('/article/comment/store', 'PostController@StoreArticleComment')->name('article.comment.store');
-
-    Route::post('/article/comment/like', 'PostController@likeArticleComment')->name('article.comment.like');
-
-//    Route::get('userArticles/{page}', function($page){
-//        if($page == 'article')
-//            return view('userActivities.userArticles');
-//        elseif($page == 'post')
-//            return view('userActivities.userPosts');
-//        elseif($page == 'profile')
-//            return view('userActivities.profileUsers');
-//        elseif($page == 'save')
-//            return view('userActivities.sameParts');
-//        elseif($page == 'photo')
-//            return view('userActivities.userPhotosAndVideos');
-//        elseif($page == 'question')
-//            return view('userActivities.userQuestions');
-//        elseif($page == 'activity')
-//            return view('userActivities.bodyUserActivities');
-//    });
+    Route::group(['middleware' => ['auth']], function (){
+        Route::post('/safarnameh/like', 'SafarnamehController@LikeSafarnameh')->name('safarnameh.like');
+        Route::post('/safarnameh/comment/store', 'SafarnamehController@StoreSafarnamehComment')->name('safarnameh.comment.store');
+        Route::post('/safarnameh/comment/like', 'SafarnamehController@likeSafarnamehComment')->name('safarnameh.comment.like');
+    });
 });
 
 // Lists
@@ -498,12 +467,6 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
 // profile
 Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
-
-    Route::post('profile/safarnameh/new', 'ProfileController@storeNewSafarnameh')->name('profile.safarnameh.new');
-
-    Route::post('profile/safarnameh/deleteSafarnameh', 'ProfileController@deleteSafarnameh')->name('profile.safarnameh.delete');
-
-    Route::post('profile/safarnameh/storePic', 'ProfileController@storeSafarnamehPics')->name('profile.safarnameh.storePic');
 
     Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
 
@@ -644,6 +607,17 @@ Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
     Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
 
+});
+
+//safarnameh
+Route::group(array('middleware' => ['auth']), function(){
+    Route::post('safarnameh/store', 'SafarnamehController@storeSafarnameh')->name('safarnameh.store');
+
+    Route::post('safarnameh/getForEdit', 'SafarnamehController@getSafarnameh')->name('safarnameh.get');
+
+    Route::post('safarnameh/delete', 'SafarnamehController@deleteSafarnameh')->name('safarnameh.delete');
+
+    Route::post('safarnameh/storePic', 'SafarnamehController@storeSafarnamehPics')->name('safarnameh.storePic');
 });
 
 //trip

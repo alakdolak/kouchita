@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSafarnamehTagRelationsTable extends Migration
+class CreateSafarnamehCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSafarnamehTagRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('safarnamehTagRelations', function (Blueprint $table) {
+        Schema::create('safarnameh_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('safarnamehId');
-            $table->unsignedInteger('tagId');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateSafarnamehTagRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('safarnamehTagRelations');
+        Schema::dropIfExists('safarnameh_categories');
     }
 }

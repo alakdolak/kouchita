@@ -12,9 +12,8 @@ use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\MainSliderPic;
 use App\models\Place;
-use App\models\Post;
-use App\models\PostComment;
 use App\models\Restaurant;
+use App\models\Safarnameh;
 use App\models\SectionPage;
 use App\models\SogatSanaie;
 use App\models\State;
@@ -42,7 +41,7 @@ class MainController extends Controller
         $amakenCount = Amaken::all()->count();
         $sogatSanaie = SogatSanaie::all()->count();
         $mahaliFoodCount = MahaliFood::all()->count();
-        $postCount = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
+        $postCount = Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
 
         $activityId1 = Activity::where('name', 'نظر')->first()->id;
         $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
@@ -50,7 +49,8 @@ class MainController extends Controller
         $commentCount = 0;
         $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
         $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
-        $commentCount += PostComment::where('status', 1)->count();
+        $commentCount += 0;
+//        $commentCount += PostComment::where('status', 1)->count();
         $userCount = User::all()->count();
 
         $counts = [ 'hotel' => $hotelCount,
@@ -65,7 +65,7 @@ class MainController extends Controller
         ];
 
         $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
-        $articleBanner = Post::whereIn('id', $articleBannerId)->get();
+        $articleBanner = Safarnameh::whereIn('id', $articleBannerId)->get();
         foreach ($articleBanner as $item){
             $item->url = createUrl(0, 0, 0, 0, $item->id);
             $item->pic = createPicUrl($item->id);

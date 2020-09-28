@@ -912,12 +912,12 @@
     width: 40px;
     height: 40px;
     float: right;
-    margin: 5px 0 0 0px;
+    margin: 5px 0 0 5px;
 }
 
 .commentsContentMainBox {
     display: inline-block;
-    width: calc(100% - 50px);
+    width: calc(100% - 30px);
     background-color: #f2f2f2;
     border-radius: 10px;
     padding: 2px 10px 7px;
@@ -1327,7 +1327,7 @@
     width: calc(100% - 45px);
     margin-right: auto;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .fullReviewSeeAnses{
@@ -1446,12 +1446,15 @@
 
 
 @media only screen and (max-width: 767px) {
+    .commentWriterExperienceParticipation, .userProfileName, .userProfileNameAnswers{
+        margin-top: 10px;
+    }
     .fullReviewLikeAnsSeeAllSection{
         width: 100%;
     }
 
     .replyToCommentMainDiv{
-        background-color: #ebebeb;
+        background-color: #f2f2f2;
         border-radius: 10px;
         padding: 5px 5px 0px 0px;
         width: 99%;

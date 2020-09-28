@@ -22,8 +22,10 @@ use App\models\PlaceFeatures;
 use App\models\Restaurant;
 use App\models\ReviewPic;
 use App\models\Safarnameh;
+use App\models\SafarnamehCityRelations;
 use App\models\SafarnamehPlaceRelation;
 use App\models\SafarnamehTagRelation;
+use App\models\SafarnamehTags;
 use App\models\State;
 use App\models\Tag;
 use App\models\User;
@@ -160,126 +162,22 @@ class ProfileController extends Controller {
             $user->banner = URL::asset('userProfile/'.$user->banner);
 
         $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
-        $userMedals = getTakenMedal($uId);
+        $userMedals = getTakenMedal($uId)['takenMedal'];
 
         return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount', 'userMedals']));
     }
 
-    public function storeNewSafarnameh(Request $request)
-    {
-        $user = Auth::user();
-        $newSafarnameh = new Safarnameh();
-        $newSafarnameh->userId = Auth::user()->id;
-        $newSafarnameh->title = $request->title;
-        $newSafarnameh->text = $request->text;
-        $newSafarnameh->summery = $request->summery;
-
-        $location = __DIR__ . '/../../../../assets/userPhoto/' . $user->id;
-        if(!file_exists($location))
-            mkdir($location);
-        $size = [
-            [
-                'width' => 600,
-                'height' => null,
-                'name' => '',
-                'destination' => $location
-            ],
-        ];
-        $image = $request->file('pic');
-        $fileName = resizeImage($image, $size);
-
-        $newSafarnameh->pic = $fileName;
-
-        $newSafarnameh->save();
-
-        $places = \GuzzleHttp\json_decode($request->placePick);
-        foreach ($places as $place){
-            $pRel = new SafarnamehPlaceRelation();
-            $pRel->safarnamehId = $newSafarnameh->id;
-            if($place->kindPlaceId == 'state' || $place->kindPlaceId == 'city') {
-                $pRel->kindPlaceId = 0;
-                $pRel->kind = $place->kindPlaceId;
-            }
-            else
-                $pRel->kindPlaceId = $place->kindPlaceId;
-
-            $pRel->placeId = $place->placeId;
-            $pRel->save();
-        }
-
-        $tags = explode(',', $request->tags);
-        foreach ($tags as $tag){
-            if($tag != ''){
-                $checkTag = Tag::where('name', $tag)->first();
-                if($checkTag == null){
-                    $checkTag = new Tag();
-                    $checkTag->name = $tag;
-                    $checkTag->save();
-                }
-                $safarTag = new SafarnamehTagRelation();
-                $safarTag->safarnamehId = $newSafarnameh->id;
-                $safarTag->tagId = $checkTag->id;
-                $safarTag->save();
-            }
-        }
-
-        echo 'ok';
-    }
-
-    public function storeSafarnamehPics(Request $request)
-    {
-        $user = Auth::user();
-        if( $_FILES['file'] && $_FILES['file']['error'] == 0){
-            $fileName = time() . $_FILES['file']['name'];
-            $location = __DIR__ . '/../../../../assets/userPhoto/'.$user->id;
-            if (!file_exists($location))
-                mkdir($location);
-
-            $size = [
-                [
-                    'width' => 900,
-                    'height' => null,
-                    'name' => '',
-                    'destination' => $location
-                ],
-            ];
-
-            $image = $request->file('file');
-            $fileName = resizeImage($image, $size);
-
-            echo json_encode(['url' => \URL::asset('userPhoto/' . $user->id . '/' . $fileName)]);
-        }
-        else
-            echo false;
-
-        return;
-    }
-
     public function placeSuggestion(Request $request)
     {
-        $startTime = microtime(true);
         $inPlace = [];
         $deletedWord = ['هتل','اقامتگاه','مهمانسرا','رستوران','فست فود'];
         $text = strip_tags($request->text);
 
         $states = State::all();
         foreach ($states as $item){
-            if(strpos($text, $item->name) !== false || strpos($text, 'استان ' . $item->name) !== false) {
+            if(strpos($text, $item->name) !== false || strpos($text, 'استان ' . $item->name) !== false)
                 array_push($inPlace, ['kindPlaceId' => 'state', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'استان ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => '']);
-            }
         }
-
-//        $cities = Cities::where('isVillage', 0)->get();
-//        foreach ($cities as $item){
-//            if(strpos($text, $item->name) !== false || strpos($text, 'شهر ' . $item->name) !== false)
-//                array_push($inPlace, ['kindPlaceId' => 'city', 'placeId' => $item->id, 'name' => $item->name]);
-//        }
-
-//        $village = Cities::where('isVillage', '!=',0)->get();
-//        foreach ($village as $item){
-//            if(strpos($text, $item->name) !== false || strpos($text, 'روستا ' . $item->name) !== false)
-//                array_push($inPlace, ['kindPlaceId' => 'village', 'placeId' => $item->id, 'name' => $item->name]);
-//        }
 
         $kindPlace = Place::whereNotNull('tableName')->get();
         foreach ($kindPlace as $kind) {
@@ -289,7 +187,7 @@ class ProfileController extends Controller {
                     str_replace($word, '', $item->name);
 
                 if(strpos($text, $item->name) !== false) {
-                    $pic = getPlacePic($item->id, $kind ->id, 'f');
+                    $pic = getPlacePic($item->id, $kind->id, 'f');
                     $cit = Cities::find($item->cityId);
                     $sta = State::find($cit->stateId);
                     $stasent = 'استان ' . $sta->name . ' ، شهر' . $cit->name;
@@ -298,9 +196,7 @@ class ProfileController extends Controller {
             }
         }
 
-        $endTime = microtime(true);
-
-        echo json_encode(['result' => $inPlace, 'time' => ($endTime-$startTime)]);
+        echo json_encode(['result' => $inPlace]);
         return ;
     }
 
@@ -411,67 +307,14 @@ class ProfileController extends Controller {
         else
             $owner = false;
 
-        $takenMedal = [];
-        $takenMedalId = [];
-        $countsTaken = [];
+        $allMedals = [];
+        $inProgressMedal = [];
 
-        $groupMedal = Medal::orderBy('floor')
-                            ->groupBy('activityId')
-                            ->groupBy('kindPlaceId')
-                            ->select(['activityId', 'kindPlaceId'])
-                            ->get();
-        foreach ($groupMedal as $gm){
-            $countss = ActivityLogs::where('kindPlaceId', $gm->kindPlaceId)
-                                    ->where('activityId', $gm->activityId)
-                                    ->where('userId', $request->userId)
-                                    ->count();
-            $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
-
-            $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
-                          ->where('activityId', $gm->activityId)
-                          ->where('floor', '<=', $countss)->get();
-
-            foreach ($med as $item) {
-                array_push($takenMedal, $item);
-                array_push($takenMedalId, $item->id);
-            }
-        }
-        if($owner) {
-            $inProgressMedal = Medal::whereNotIn('id', $takenMedalId)->orderBy('floor')
-                ->groupBy('activityId')->groupBy('kindPlaceId')->get();
-            $allMedals = Medal::orderBy('floor')->get();
-        }
-        else{
-            $allMedals = [];
-            $inProgressMedal = [];
-        }
-
-        foreach ([$allMedals, $inProgressMedal, $takenMedal] as $medals){
-            foreach ($medals as $item) {
-                $act = Activity::find($item->activityId);
-                $kindPlace = Place::find($item->kindPlaceId);
-                $kindPlaceName = '';
-                if($kindPlace != null) {
-                    $item->sumText = $item->floor . ' ' . $act->name . ' در ' . $kindPlace->name;
-                    $kindPlaceName =  ' در ' . $kindPlace->name;
-                }
-                else
-                    $item->sumText = $item->floor . ' ' . $act->name;
-
-                $item->take = $countsTaken[$item->kindPlaceId.'_'.$item->activityId];
-                if($item->take >= $item->floor){
-                    $item->take = $item->floor;
-                    $item->offPic = \URL::asset('_images/badges/' . $item->pic_2);
-                    $item->percent = 0;
-                }
-                else {
-                    $item->offPic = \URL::asset('_images/badges/' . $item->pic_1);
-                    $item->percent = floor(($item->take/$item->floor)*100);
-                }
-
-                $item->text = 'این مدال بعد از ' . $item->floor . ' تا ' . $act->name . ' ' . $kindPlaceName . ' بدست می آید';
-                $item->onPic = \URL::asset('_images/badges/' . $item->pic_2);
-            }
+        $medals = getTakenMedal($request->userId);
+        $takenMedal = $medals['takenMedal'];
+        if($owner){
+            $allMedals = $medals['allMedal'];
+            $inProgressMedal = $medals['inProgressMedal'];
         }
 
         echo json_encode(['status' => 'ok', 'allMedals' => $allMedals, 'takenMedal' => $takenMedal, 'inProgressMedal' => $inProgressMedal]);
@@ -619,7 +462,7 @@ class ProfileController extends Controller {
             $safarnameh = Safarnameh::where('userId', $userId)->where('confirm', 1)->orderByDesc('created_at')->get();
 
         foreach ($safarnameh as $item) {
-            $item->pic = \URL::asset('userPhoto/' . $userId . '/' . $item->pic);
+            $item->pic = \URL::asset('_images/posts/'.$item->id.'/'.$item->pic);
             $item->time = verta($item->created_at)->format('Y/m/d');
             $item->username = $username;
         }
@@ -657,7 +500,7 @@ class ProfileController extends Controller {
         if($tripStyles != null){
             foreach ($tripStyles as $trip){
                 if($trip != 0){
-                    event(new ActivityLogEvent($user->id, $user->id, 'completeUserTripStyle'));
+//                    event(new ActivityLogEvent($user->id, $user->id, 'completeUserTripStyle'));
                     $userTripStyle = new UserTripStyles();
                     $userTripStyle->uId = $user->id;
                     $userTripStyle->tripStyleId = $trip;
@@ -666,8 +509,8 @@ class ProfileController extends Controller {
             }
         }
 
-        if($request->myBio != null && $request->myBio != '')
-            event(new ActivityLogEvent($user->id, $user->id, 'completeUserBio'));
+//        if($request->myBio != null && $request->myBio != '')
+//            event(new ActivityLogEvent($user->id, $user->id, 'completeUserBio'));
 
         $user->introduction = $request->myBio;
         $user->save();
@@ -764,32 +607,6 @@ class ProfileController extends Controller {
         echo json_encode(['status' => 'ok', 'url' => $url]);
         return;
     }
-
-    public function deleteSafarnameh(Request $request)
-    {
-        if(isset($request->id)){
-            $user = Auth::user();
-            $safar = Safarnameh::find($request->id);
-            if($safar->userId == $user->id){
-                SafarnamehPlaceRelation::where('safarnamehId', $request->id)->delete();
-                SafarnamehTagRelation::where('safarnamehId', $request->id)->delete();
-
-                $location = __DIR__ .'/../../../../assets/userPhoto/' . $user->id . '/' . $safar->pic;
-                if(is_file($location))
-                    unlink($location);
-
-                $safar->delete();
-                echo 'ok';
-            }
-            else
-                echo 'notForYou';
-        }
-        else
-            echo 'nok';
-
-        return;
-    }
-
 
     public function sendMyInvitationCode() {
 

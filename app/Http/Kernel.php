@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'cors' => \App\Http\Middleware\Cors::class,
         'operatorAccess' => \App\Http\Middleware\OperatorAccess::class,
         'setSession' => \App\Http\Middleware\setSession::class,
-        'vodShareData' => \App\Http\Middleware\vodShareData::class
+        'vodShareData' => \App\Http\Middleware\vodShareData::class,
+        'SafarnamehShareData' => \App\Http\Middleware\SafarnamehShareData::class,
     ];
 }

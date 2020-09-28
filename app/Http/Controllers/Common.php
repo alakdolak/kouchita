@@ -28,6 +28,166 @@ use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+//medals
+function getTakenMedal($userId){
+    $takenMedal = [];
+    $takenMedalId = [];
+    $countsTaken = [];
+
+    $groupMedal = Medal::orderBy('floor')
+        ->groupBy('activityId')
+        ->groupBy('kindPlaceId')
+        ->select(['activityId', 'kindPlaceId'])
+        ->get();
+
+    foreach ($groupMedal as $gm){
+        $activity = Activity::find($gm->activityId);
+        if($activity->tableName != null) {
+            if($activity->tableName == 'log')
+                $sqlQuery = 'visitorId = '.$userId.' ';
+            else
+                $sqlQuery = 'userId = '.$userId.' ';
+
+            if($activity->controllerNeed == 1){
+                if($activity->tableName == 'photographersPics')
+                    $sqlQuery .= '&& status = 1 ';
+                else if($activity->tableName == 'userAddPlaces')
+                    $sqlQuery .= '&& archive = 1 ';
+                else
+                    $sqlQuery .= '&& confirm = 1 ';
+            }
+
+            if($gm->kindPlaceId != -1)
+                $sqlQuery .= '&& kindPlaceId = '.$gm->kindPlaceId.' ';
+
+            $countss = \DB::table($activity->tableName)->whereRaw($sqlQuery)->count();
+
+            $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
+
+            $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
+                ->where('activityId', $gm->activityId)
+                ->where('floor', '<=', $countss)->get();
+
+            foreach ($med as $item) {
+                array_push($takenMedal, $item);
+                array_push($takenMedalId, $item->id);
+            }
+        }
+        else
+            $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = 0;
+    }
+
+    $inProgressMedal = Medal::whereNotIn('id', $takenMedalId)->orderBy('floor')
+        ->groupBy('activityId')->groupBy('kindPlaceId')->get();
+    $allMedals = Medal::orderBy('floor')->get();
+
+    foreach ([$allMedals, $inProgressMedal, $takenMedal] as $medals){
+        foreach ($medals as $item) {
+            $act = Activity::find($item->activityId);
+            $kindPlaceName = '';
+            $kindPlace = Place::find($item->kindPlaceId);
+            if ($kindPlace != null) {
+                $item->sumText = $item->floor . ' ' . $act->name . ' در ' . $kindPlace->name;
+                $kindPlaceName = ' در ' . $kindPlace->name;
+            }
+            else
+                $item->sumText = $item->floor . ' ' . $act->name;
+
+            $item->take = $countsTaken[$item->kindPlaceId . '_' . $item->activityId];
+            if ($item->take >= $item->floor) {
+                $item->take = $item->floor;
+                $item->offPic = \URL::asset('_images/badges/' . $item->pic_2);
+                $item->percent = 0;
+            }
+            else {
+                $item->offPic = \URL::asset('_images/badges/' . $item->pic_1);
+                $item->percent = floor(($item->take / $item->floor) * 100);
+            }
+
+            $item->text = 'این مدال بعد از ' . $item->floor . ' تا ' . $act->name . ' ' . $kindPlaceName . ' بدست می آید';
+            $item->onPic = \URL::asset('_images/badges/' . $item->pic_2);
+        }
+    }
+
+    return ['allMedal' => $allMedals, 'inProgressMedal' => $inProgressMedal, 'takenMedal' => $medals];
+}
+function getUserPoints($uId) {
+    $points = DB::select("SELECT SUM(activity.rate) as total FROM log, activity WHERE confirm = 1 and log.visitorId = " . $uId . " and log.activityId = activity.id");
+
+    if($points == null || count($points) == 0 || $points[0]->total == "")
+        return 0;
+
+    return $points[0]->total;
+}
+function nearestLevel($uId) {
+
+    $points = getUserPoints($uId);
+    $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
+
+    if($currLevel == null)
+        $currLevel = Level::orderBy('floor', 'ASC')->first();
+
+    $nextLevel = Level::where('floor', '>', $points)->orderBy('floor', 'ASC')->first();
+
+    if($nextLevel == null)
+        $nextLevel = Level::orderBy('floor', 'ASC')->first();
+
+    return [$currLevel, $nextLevel];
+}
+function getMedals($uId) {
+
+    $medals = Medal::all();
+
+    $counter = 0;
+
+    foreach ($medals as $medal) {
+//        if($medal->controllerNeed == 1)
+//            $count = \DB::table($medal->tableName)->
+
+        if(getActivitiesCount($uId, $medal->activityId, $medal->kindPlaceId) >= $medal->floor)
+            $counter++;
+    }
+
+    return $counter;
+}
+function getNearestMedals($uId) {
+
+    $activities = Activity::all();
+
+    $arr = array();
+    $counter = 0;
+
+    foreach ($activities as $activity) {
+        $count = LogModel::whereVisitorId($uId)->whereActivityId($activity->id)->count();
+        $medals = Medal::whereActivityId($activity->id)->get();
+
+        foreach ($medals as $medal) {
+            if($medal->floor > $count) {
+                $alaki = Place::whereId($medal->kindPlaceId);
+                if($alaki == null)
+                    $arr[$counter++] = ["medal" => $medal, "needed" => $medal->floor - $count, "kindPlaceId" => -1];
+                else
+                    $arr[$counter++] = ["medal" => $medal, "needed" => $medal->floor - $count, "kindPlaceId" => $alaki->name];
+            }
+        }
+    }
+
+    usort($arr, 'sortByNeeded');
+
+    $limit = (count($arr) >= 3) ? 3 : count($arr);
+
+    array_splice($arr, $limit);
+    $counter = 0;
+
+    while ($counter < $limit) {
+        $arr[$counter]["medal"]->activityId = Activity::whereId($arr[$counter]["medal"]->activityId)->name;
+        $counter++;
+    }
+
+    return $arr;
+}
+
+
 
 function getPostCategories() {
 
@@ -191,100 +351,6 @@ function _custom_check_national_code($code) {
     return false;
 }
 
-function getTakenMedal($userId){
-    $takenMedal = [];
-    $countsTaken = [];
-
-    $groupMedal = Medal::orderBy('floor')
-        ->groupBy('activityId')
-        ->groupBy('kindPlaceId')
-        ->select(['activityId', 'kindPlaceId'])
-        ->get();
-    foreach ($groupMedal as $gm){
-        $countss = ActivityLogs::where('kindPlaceId', $gm->kindPlaceId)
-            ->where('activityId', $gm->activityId)
-            ->where('userId', $userId)
-            ->count();
-        $countsTaken[$gm->kindPlaceId.'_'.$gm->activityId] = $countss;
-
-        $med = Medal::where('kindPlaceId', $gm->kindPlaceId)
-            ->where('activityId', $gm->activityId)
-            ->where('floor', '<=', $countss)->get();
-
-        foreach ($med as $item)
-            array_push($takenMedal, $item);
-    }
-
-    foreach ($takenMedal as $item) {
-        $act = Activity::find($item->activityId);
-        $kindPlace = Place::find($item->kindPlaceId);
-        $kindPlaceName = '';
-        if($kindPlace != null) {
-            $item->sumText = $item->floor . ' ' . $act->name . ' در ' . $kindPlace->name;
-            $kindPlaceName =  ' در ' . $kindPlace->name;
-        }
-        else
-            $item->sumText = $item->floor . ' ' . $act->name;
-
-        $item->take = $countsTaken[$item->kindPlaceId.'_'.$item->activityId];
-        if($item->take >= $item->floor){
-            $item->take = $item->floor;
-            $item->offPic = \URL::asset('_images/badges/' . $item->pic_2);
-            $item->percent = 0;
-        }
-        else {
-            $item->offPic = \URL::asset('_images/badges/' . $item->pic_1);
-            $item->percent = floor(($item->take/$item->floor)*100);
-        }
-
-        $item->text = 'این مدال بعد از ' . $item->floor . ' تا ' . $act->name . ' ' . $kindPlaceName . ' بدست می آید';
-        $item->onPic = \URL::asset('_images/badges/' . $item->pic_2);
-    }
-
-    return $takenMedal;
-}
-
-function getBadgeDate($activityId, $floor, $uId, $kindPlaceId) {
-
-    if($kindPlaceId == -1)
-        $condition = ['visitorId' => $uId, 'activityId' => $activityId];
-    else
-        $condition = ['visitorId' => $uId, 'activityId' => $activityId, 'kindPlaceId' => $kindPlaceId];
-
-    $tmp = LogModel::where($condition)->count();
-    if($tmp >= $floor) {
-        return LogModel::where($condition)->orderBy('date', 'ASC')->skip($tmp - 1)->first()->date;
-    }
-    return -1;
-}
-
-function checkBadge($uId, $badge) {
-
-    if($badge->activityId == 99) { // opOnActivity
-        return (\App\models\OpOnActivity::whereUId($uId)->count() >= $badge->floor);
-    }
-
-    $act = Activity::whereId($badge->activityId);
-    if($act == null)
-        return false;
-
-    if($badge->kindPlaceId == -1) {
-        if($act->controllerNeed)
-            $condition = ['visitorId' => $uId, 'activityId' => $badge->activityId, 'confirm' => 1];
-        else
-            $condition = ['visitorId' => $uId, 'activityId' => $badge->activityId];
-    }
-    else {
-        if($act->controllerNeed)
-            $condition = ['visitorId' => $uId, 'activityId' => $badge->activityId,
-                'kindPlaceId' => $badge->kindPlaceId, 'confirm' => 1];
-        else
-            $condition = ['visitorId' => $uId, 'activityId' => $badge->activityId, 'kindPlaceId' => $badge->kindPlaceId];
-    }
-
-    return (LogModel::where($condition)->count() >= $badge->floor);
-}
-
 function makeValidInput($input) {
     $input = addslashes($input);
     $input = trim($input);
@@ -343,32 +409,6 @@ function sendMail($text, $recipient, $subject) {
     }
 }
 
-function getUserPoints($uId) {
-
-    $points = DB::select("SELECT SUM(activity.rate) as total FROM log, activity WHERE confirm = 1 and log.visitorId = " . $uId . " and log.activityId = activity.id");
-
-    if($points == null || count($points) == 0 || $points[0]->total == "")
-        return 0;
-
-    return $points[0]->total;
-}
-
-function nearestLevel($uId) {
-
-    $points = getUserPoints($uId);
-    $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
-
-    if($currLevel == null)
-        $currLevel = Level::orderBy('floor', 'ASC')->first();
-
-    $nextLevel = Level::where('floor', '>', $points)->orderBy('floor', 'ASC')->first();
-
-    if($nextLevel == null)
-        $nextLevel = Level::orderBy('floor', 'ASC')->first();
-
-    return [$currLevel, $nextLevel];
-}
-
 function getActivitiesCount($uId, $activityId, $kindPlaceId) {
 
     if($kindPlaceId != -1) {
@@ -383,60 +423,8 @@ function getActivitiesCount($uId, $activityId, $kindPlaceId) {
 
 }
 
-function getMedals($uId) {
-
-    $medals = Medal::all();
-
-    $counter = 0;
-
-    foreach ($medals as $medal) {
-
-        if(getActivitiesCount($uId, $medal->activityId, $medal->kindPlaceId) >= $medal->floor)
-            $counter++;
-    }
-
-    return $counter;
-}
-
 function sortByNeeded($a, $b) {
     return $a['needed'] - $b['needed'];
-}
-
-function getNearestMedals($uId) {
-
-    $activities = Activity::all();
-
-    $arr = array();
-    $counter = 0;
-
-    foreach ($activities as $activity) {
-        $count = LogModel::whereVisitorId($uId)->whereActivityId($activity->id)->count();
-        $medals = Medal::whereActivityId($activity->id)->get();
-
-        foreach ($medals as $medal) {
-            if($medal->floor > $count) {
-                $alaki = Place::whereId($medal->kindPlaceId);
-                if($alaki == null)
-                    $arr[$counter++] = ["medal" => $medal, "needed" => $medal->floor - $count, "kindPlaceId" => -1];
-                else
-                    $arr[$counter++] = ["medal" => $medal, "needed" => $medal->floor - $count, "kindPlaceId" => $alaki->name];
-            }
-        }
-    }
-
-    usort($arr, 'sortByNeeded');
-
-    $limit = (count($arr) >= 3) ? 3 : count($arr);
-
-    array_splice($arr, $limit);
-    $counter = 0;
-
-    while ($counter < $limit) {
-        $arr[$counter]["medal"]->activityId = Activity::whereId($arr[$counter]["medal"]->activityId)->name;
-        $counter++;
-    }
-
-    return $arr;
 }
 
 function getRate($placeId, $kindPlaceId) {
@@ -1343,7 +1331,7 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
         return route('placeDetails', ['kindPlaceId' => $kindPlaceId, 'placeId' => $placeId]);
     }
     else if($articleId != 0){
-        $post = \App\models\Post::find($articleId);
+        $post = \App\models\Safarnameh::find($articleId);
         if($post != null)
             return url('article/'. $post->slug);
         else
@@ -1354,9 +1342,9 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
 function createPicUrl($articleId){
 
     if($articleId != 0){
-        $post = \App\models\Post::find($articleId);
+        $post = \App\models\Safarnameh::find($articleId);
         if($post != null)
-            return URL::asset('_images/posts/' . $post->id . '/' . $post->pic);
+            return URL::asset('_images/userPhoto/' . $post->userId . '/' . $post->pic);
     }
 }
 
@@ -1494,33 +1482,6 @@ function resizeImage($pic, $size, $fileName = ''){
         return 'error';
     }
 }
-
-function createSuggestionPack($_kindPlaceId, $_placeId){
-    $activityId = Activity::whereName('نظر')->first()->id;
-
-    $kindPlace = Place::find($_kindPlaceId);
-    $place = DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($_placeId);
-    if($place != null) {
-        $city = Cities::whereId($place->cityId);
-
-        $place->pic = getPlacePic($place->id, $kindPlace->id);
-        $place->url = createUrl($kindPlace->id, $place->id, 0, 0);
-        if($city != null) {
-            $place->city = $city->name;
-            $place->state = State::whereId($city->stateId)->name;
-        }
-        else{
-            $place->city = '';
-            $place->state = '';
-        }
-        $place->rate = getRate($place->id, $_kindPlaceId)[1];
-        $condition = ['placeId' => $place->id, 'kindPlaceId' => $_kindPlaceId, 'activityId' => $activityId, 'confirm' => 1];
-        $place->review = LogModel::where($condition)->count();
-        return $place;
-    }
-    return null;
-}
-
 
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     $output = NULL;

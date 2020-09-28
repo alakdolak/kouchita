@@ -935,13 +935,14 @@ a:hover {
     top: 0px;
     right: 0px;
     background-color: #000000d1;
-    backdrop-filter: blur(2px);
+    /*backdrop-filter: blur(2px);*/
     z-index: 9999999;
     display: none;
     justify-content: center;
 }
 
 .globalSearchWithBox{
+    border-radius: 5px;
     width: 100%;
     max-width: 800px;
     background-color: white;
@@ -1271,7 +1272,7 @@ a:hover {
     background: white;
     direction: rtl;
     text-align: right;
-    max-width: 991px;
+    max-width: 100%;
     height: 97vh;
     overflow: hidden;
 }

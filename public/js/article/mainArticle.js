@@ -4,7 +4,7 @@ var take = 5;
 function getAllPost(page){
     $.ajax({
         type: 'post',
-        url: getAllPostUrl,
+        url: getAllSafarnamehUrl,
         data: {
             page: page,
             take: take,
@@ -19,10 +19,7 @@ function getAllPost(page){
 
 function createPostRow(post){
     var post = JSON.parse(post);
-    if(allPostSample == 0)
-        allPostSample = $('#samplePost').html();
-
-    $('#samplePost').html('');
+    $('#samplePost').empty();
     for(var i = 0; i < post.length; i++){
         var text = allPostSample;
         var fk = Object.keys(post[i]);
