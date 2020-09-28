@@ -654,6 +654,10 @@ class SafarnamehController extends Controller
 
         $uPic = getUserPic(\auth()->check() ? \auth()->user()->id : 0);
 
+        $localStorageData = ['kind' => 'place', 'name' => $safarnameh->title,
+                            'city' => '', 'state' => '',
+                            'mainPic' => $safarnameh->pic, 'redirect' => $safarnameh->url];
+
         return view('Safarnameh.safarnamehShow', compact(['safarnameh', 'uPic', 'localStorageData', 'similarSafarnameh']));
     }
 
