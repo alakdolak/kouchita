@@ -109,11 +109,10 @@
                         <div id="safarnamehContentSearch" style="display: none; background-color: #f2f2f2; position: relative; margin-top: 10px;">
                             <input type="text"
                                    id="searchInputSafarnameh"
-                                   class="searchInputElems"
+                                   class="searchInputElems searchInputElemsText"
                                    placeholder="عبارت مورد نظر را وارد نمایید"
-                                    style="margin: 0px;">
+                                   style="margin: 0px;">
                             <button class="iconFamily searchIcon" onclick="searchInArticle('searchInputSafarnameh')"></button>
-
                         </div>
                     </div>
                 </div>
@@ -246,9 +245,16 @@
 
         function searchInArticle(id){
             var text = $(`#${id}`).val();
-            if(text.trim().length != 0)
+            if(text.trim().length != 0) {
+                openLoading();
                 window.location.href = '{{url("/safarnameh/list")}}' + '/content/' + text;
+            }
         }
+
+        $('.searchInputElemsText').keyup(function(event) {
+            if (event.keyCode === 13)
+                $(event.target).next().click();
+        });
     </script>
 
 </body>

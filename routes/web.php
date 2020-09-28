@@ -404,6 +404,8 @@ Route::group(array('middleware' => 'nothing'), function () {
 
 //posts
 Route::group(['middleware' => ['SafarnamehShareData']], function () {
+    Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
+
     Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
     Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
     Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
@@ -420,6 +422,8 @@ Route::group(['middleware' => ['SafarnamehShareData']], function () {
 
 // Lists
 Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
 
     Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 

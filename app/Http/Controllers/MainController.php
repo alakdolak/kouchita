@@ -25,6 +25,11 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    public function myLocation()
+    {
+        return view('pages.myLocation');
+    }
+
     public function landingPage()
     {
 //        createSeeLog(0, 0, 'landing', '');
@@ -68,7 +73,7 @@ class MainController extends Controller
         $articleBanner = Safarnameh::whereIn('id', $articleBannerId)->get();
         foreach ($articleBanner as $item){
             $item->url = createUrl(0, 0, 0, 0, $item->id);
-            $item->pic = createPicUrl($item->id);
+            $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
         }
 
         $sliderPic = MainSliderPic::all();
@@ -130,10 +135,11 @@ class MainController extends Controller
         }
         $middleBan['6']  = $middleBan6;
 
-        return view('pages.main',
-                ['placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic, 'count' => $counts,
-                'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),  'articleBanner' => $articleBanner,
-                'middleBan' => $middleBan ]);
+        return view('pages.main', ['placeMode' => $mode, 'kindPlaceId' => $kindPlaceId,
+                                    'sliderPic' => $sliderPic, 'count' => $counts,
+                                    'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),
+                                    'articleBanner' => $articleBanner,
+                                    'middleBan' => $middleBan ]);
     }
 
     public function getTrip()

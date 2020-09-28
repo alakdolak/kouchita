@@ -257,6 +257,15 @@ class SafarnamehController extends Controller
     }
 
 
+    public function safarnamehRedirect($slug)
+    {
+        $safarnmeh = Safarnameh::where('slug', $slug)->first();
+        if($safarnmeh == null)
+            return redirect(route('safarnameh.index'));
+        else
+            return redirect(route('safarnameh.show', ['id' => $safarnmeh->id]));
+    }
+
     public function safarnamehMainPage($page = 1) {
 
         $today = getToday()["date"];

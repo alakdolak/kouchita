@@ -3,6 +3,21 @@
     <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css?v=1')}}">
 @endif
 
+<style>
+    .mainSearchResultRow{
+        color: black;
+        display: block;
+        padding: 1px 5px;
+        cursor: pointer;
+        transition: .3s;
+    }
+    .mainSearchResultRow:hover{
+        color: black;
+        background-color: #F2F2F2;
+        border-radius: 5px;
+    }
+</style>
+
 <div id="searchPane" class="searchPaneDiv hidden">
     <span class="statePane ui_overlay ui_modal editTags searchPanes">
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
@@ -80,6 +95,8 @@
 
         var fpst;
         var pn;
+        var countryIcon = '';
+
         switch (_kindPlaceId){
             case 0:
                 fpst = '{{__('به کجا')}}';
@@ -88,26 +105,37 @@
             case 1:
                 fpst = '{{__('کدام جاذبه')}}';
                 pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
+                countryIcon = 'touristAttractions';
                 break;
             case 3:
                 fpst = '{{__('در کدام رستوران')}}';
                 pn = '{{__('دوست دارید غذا بخورید؟')}}';
+                countryIcon = 'restaurantIcon';
                 break;
             case 4:
                 fpst = '{{__('در کدام هتل')}}';
                 pn = '{{__('دوست دارید اقامت کنید؟')}}';
+                countryIcon = 'hotelIcon';
+                break;
+            case 6:
+                fpst = '{{__(' کدام ماجرا')}}';
+                pn = '{{__('دوست دارید تجربه کنید؟')}}';
+                countryIcon = 'adventureIcon';
                 break;
             case 10:
                 fpst = '{{__('کدام صنایع‌دستی یا سوغات')}}';
                 pn = '{{__('را دوست دارید بشناسید؟')}}';
+                countryIcon = 'souvenirIcon';
                 break;
             case 11:
                 fpst = '{{__('کدام غذای محلی')}}';
                 pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
+                countryIcon = 'traditionalFood';
                 break;
             case 12:
                 fpst = '{{__('کدام بوم گردی')}}';
                 pn = '{{__('دوست دارید اقامت کنید؟')}}';
+                countryIcon = 'boomIcon';
                 break;
         }
 
@@ -119,7 +147,23 @@
         $('#mainSearchInput').val('');
         $('#mainSearchInput').focus();
 
-        $("#mainSearchResult").empty();
+        myLocation = '<a href="{{route('myLocation')}}" class="mainSearchResultRow"><div class="icons location spIcons"></div>\n';
+        myLocation += "<p class='suggest cursor-pointer'>اطراف من</p></a>";
+
+        if(_kindPlaceId == 0) {
+            $('#result').removeClass('hidden');
+            $('#mainSearchResult').show();
+            $("#mainSearchResult").html(myLocation);
+        }
+        else{
+            newElement = '<a href="{{url('placeList/')}}/' + _kindPlaceId + '/country" class="mainSearchResultRow"><div class="icons ' + countryIcon + ' spIcons"></div>\n';
+            newElement += "<p class='suggest cursor-pointer' style='margin: 0px'>همه جای ایران</p></a>";
+            newElement += myLocation;
+
+            $('#result').removeClass('hidden');
+            $('#mainSearchResult').show();
+            $("#mainSearchResult").html(newElement);
+        }
     }
 
     function redirect() {
@@ -256,16 +300,15 @@
             var icon;
             for (i = 0; i < response.length; i++) {
                 if (response[i].mode == "state") {
-                    newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons location spIcons"></div>\n';
+                    newElement += '<a href="' + response[i].url + '" class="mainSearchResultRow"><div class="icons location spIcons"></div>\n';
                     newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "'>استان " + response[i].targetName + "</p></a>";
                 }
                 else if (response[i].mode == "city") {
-                    newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons location spIcons"></div>\n';
+                    newElement += '<a href="' + response[i].url + '" class="mainSearchResultRow"><div class="icons location spIcons"></div>\n';
                     newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
                     newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].stateName + "</p></a>";
                 }
                 else {
-                    console.log(response[i]);
                     if (response[i].mode == 'amaken')
                         icon = 'touristAttractions';
                     else if (response[i].mode == 'restaurant')
@@ -281,7 +324,7 @@
                     else if (response[i].mode == 'boomgardies')
                         icon = 'boomIcon';
 
-                    newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons ' + icon + ' spIcons"></div>\n';
+                    newElement += '<a href="' + response[i].url + '" class="mainSearchResultRow"><div class="icons ' + icon + ' spIcons"></div>\n';
                     newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' style='margin: 0px'>" + response[i].targetName + "</p>";
                     newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].cityName + " در " + response[i].stateName + "</p></a>";
                 }
