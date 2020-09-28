@@ -2,6 +2,9 @@ var allPostSample = 0;
 var take = 5;
 
 function getPost(page){
+    $('#placeHolderList').show();
+    $('#samplePost').hide();
+
     $.ajax({
         type: 'post',
         url: getPostUrl,
@@ -21,22 +24,26 @@ function getPost(page){
 
 function createPostRow(post){
     var post = JSON.parse(post);
-    if(allPostSample == 0)
-        allPostSample = $('#samplePost').html();
-
-    $('#samplePost').html('');
-    for(var i = 0; i < post.length; i++){
-        var text = allPostSample;
-        var fk = Object.keys(post[i]);
-        for (var x of fk) {
-            var t = '##' + x + '##';
-            var re = new RegExp(t, "g");
-            text = text.replace(re, post[i][x]);
-        }
-
-        $('#samplePost').append(text);
+    if(post.length == 0){
+        $('#emptyList').show();
+        $('#placeHolderList').hide();
+        $('#allPostPagination').hide();
     }
+    else {
+        for (var i = 0; i < post.length; i++) {
+            var text = allPostSample;
+            var fk = Object.keys(post[i]);
+            for (var x of fk) {
+                var t = '##' + x + '##';
+                var re = new RegExp(t, "g");
+                text = text.replace(re, post[i][x]);
+            }
 
+            $('#samplePost').append(text);
+            $('#placeHolderList').hide();
+            $('#samplePost').show();
+        }
+    }
 }
 
 function createPagination(page){

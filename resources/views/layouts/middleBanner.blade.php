@@ -35,7 +35,7 @@
                         <div class="phoneIcon adventureIcon"></div>
                         <div class="textIcon">{{__('طبیعت گردی')}}</div>
                     </div>
-                    <div class="squareDiv" onclick="location.href = '{{route('mainArticle')}}'">
+                    <div class="squareDiv" onclick="location.href = '{{route('safarnameh.index')}}'">
                         <div class="phoneIcon safarnameIcon"></div>
                         <div class="textIcon">{{__('سفرنامه')}}</div>
                     </div>
@@ -765,7 +765,7 @@
             @endif
 
             <div id="articleSuggestion">
-                <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
+                <a class="shelf_title" href="{{route('safarnameh.index')}}" target="_blank">
                     <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('محبوب‌ترین سفرنامه‌ها')}}</h3>
@@ -773,7 +773,7 @@
                 </a>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
-                        <div id="topArticle" class="swiper-wrapper suggestionBody">
+                        <div id="topSafarnameh" class="swiper-wrapper suggestionBody">
                             {{--fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
@@ -790,7 +790,7 @@
 <script>
     let loadSuggestion = false;
     let lastPageForSuggestion = null;
-    let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topArticle'];
+    let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topSafarnameh'];
     divNames.forEach(item => {
         createSuggestionPackPlaceHolder(item);
     });
@@ -824,7 +824,7 @@
         let tabiat = _result.majara;
         let restaurant = _result.restaurant;
         let kharid = _result.bazar;
-        let article = _result.post;
+        let safarnameh = _result.safarnameh;
 
         // createSuggestionPack in suggestionPack.blade.php
         createSuggestionPack('newInKoochita', _result.result, function() {
@@ -857,9 +857,9 @@
             $('#topKharid').css('direction', 'ltr');
         });
 
-        createSuggestionPack('topArticle', article, function() {
-            $('#topArticle').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topArticle').css('direction', 'ltr');
+        createSuggestionPack('topSafarnameh', safarnameh, function() {
+            $('#topSafarnameh').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#topSafarnameh').css('direction', 'ltr');
             runMainSwiper('mainSuggestion')
         });
     }

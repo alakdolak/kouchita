@@ -137,27 +137,27 @@
                 text += '<div class="trashIcon commonSafarnamehIcon delete" onclick="deleteThisSafarnameh(' + item.id + ')"></div>';
                 text += '<div class="editIcon commonSafarnamehIcon edit" onclick="editThisSafarnameh(' + item.id + ')"></div>';
             }
-            text += '                <div class="articleTagsMainDiv">\n' +
-                '                    <div class="articleTags">سفرنامه</div>\n' +
-                '                </div>\n' +
-                '                <div class="articleTitleMainDiv">\n' +
-                '                    <a href="{{url("/article/user")}}/' + item.id + '">' + item.title + '</a>\n' +
-                '                </div>\n';
+            text += '<div class="articleTagsMainDiv" style="cursor: default;">\n' +
+                    '   <div class="articleTags">سفرنامه</div>\n' +
+                    '</div>\n' +
+                    '<div class="articleTitleMainDiv">\n' +
+                    '   <a href="{{url("/safarnameh/show")}}/' + item.id + '">' + item.title + '</a>\n' +
+                    '</div>\n';
             if(item.summery != null) {
-                text += '                <div class="articleSummarizedContentMainDiv">\n' +
-                        '                    <span>' + item.summery + '</span>\n' +
-                        '                    <span>...</span>\n' +
-                        '                </div>\n';
+                text += '<div class="articleSummarizedContentMainDiv">\n' +
+                        '   <span>' + item.summery + '</span>\n' +
+                        '   <span>...</span>\n' +
+                        '</div>\n';
             }
-            text +=  '                <div class="articleSpecificationsMainDiv">\n' +
-                    '                    <div class="articleDateMainDiv">' + item.time + '</div>\n' +
-                    '                    <div class="articleCommentsMainDiv">0</div>\n' +
-                    '                    <div class="articleWriterMainDiv">'+ item.username +'</div>\n' +
-                    '                    <div class="articleWatchListMainDiv">0</div>\n' +
-                    '                </div>\n' +
-                    '                <a href="{{url('/article/user')}}/' + item.id + '" class="readSafarnamehButton"> مطالعه سفرنامه</a>' +
-                    '            </div>\n' +
-                    '        </div>'
+            text += '<div class="articleSpecificationsMainDiv">\n' +
+                    '   <div class="articleDateMainDiv">' + item.time + '</div>\n' +
+                    '   <div class="articleCommentsMainDiv">0</div>\n' +
+                    '   <div class="articleWriterMainDiv">'+ item.username +'</div>\n' +
+                    '   <div class="articleWatchListMainDiv">0</div>\n' +
+                    '</div>\n' +
+                    '<a href="{{url('/article/user')}}/' + item.id + '" class="readSafarnamehButton"> مطالعه سفرنامه</a>' +
+                    '</div>\n' +
+                    '</div>'
         });
 
         $('#safarnamehShowList').html(text);
@@ -177,7 +177,7 @@
                 openLoading(function(){
                     $.ajax({
                         type: 'post',
-                        url: '{{route("profile.safarnameh.delete")}}',
+                        url: '{{route("safarnameh.delete")}}',
                         data: {
                             _token: '{{csrf_token()}}',
                             id: deletedSafarnamehId
@@ -204,7 +204,7 @@
 
 
         function editThisSafarnameh(_id){
-
+            editSafarnameh(_id); //in addSafarnameh.blade.php
         }
     @endif
 </script>

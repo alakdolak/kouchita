@@ -59,9 +59,6 @@
             <span id="showQuestionPerPage"></span>
             پست در هر صفحه
         </div>
-{{--        <a class="col-xs-3 showQuestionsNumsFilterLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">--}}
-{{--            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>--}}
-{{--        </a>--}}
         <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
             <span class="float-right">صفحه</span>
             <span id="questionPagination"></span>
@@ -120,7 +117,6 @@
     }
 
     function getQuestion(){
-
         $.ajax({
             type: 'post',
             url: '{{route("getQuestions")}}',

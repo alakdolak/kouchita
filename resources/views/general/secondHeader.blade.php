@@ -258,7 +258,7 @@
             </div>
         </div>
         <div class="secHeadTabs ">
-            <a href="{{route('mainArticle')}}" style="color: #16174f">{{__('سفرنامه‌ها')}}</a>
+            <a href="{{route('safarnameh.index')}}" style="color: #16174f">{{__('سفرنامه‌ها')}}</a>
         </div>
     </div>
 </div>

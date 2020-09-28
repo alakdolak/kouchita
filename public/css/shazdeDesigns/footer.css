@@ -283,6 +283,7 @@ footer li > img, .small-ico {
     align-items: center;
     font-weight: 700;
     font-size: initial;
+    direction: ltr;
 }
 
 .footerPhoneMenuBar > div {
@@ -1272,6 +1273,106 @@ footer .profileMenuLinks {
     align-items: center;
 }
 
+.footerSafarnmaehCategoryRow{
+
+}
+.footerSafarnmaehCategoryRow .subSafarnamehCategory{
+    display: none;
+    width: 100%;
+}
+.footerSafarnmaehCategoryRow .subSafarnamehCategory .subSec{
+    display: none;
+    width: 100%;
+    transition: .3s;
+    margin-right: -600px;
+}
+.footerSafarnmaehCategoryRow .subSafarnamehCategory .subSec.show{
+    margin-right: 0;
+}
+
+
+.footerSafarnmaehCategoryRow .mainSafarnamehCategory{
+    width: 100%;
+}
+.footerSafarnmaehCategoryRow .safarnamehRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: solid 1px #dcdcdc75;
+}
+.footerSafarnmaehCategoryRow .safarnamehRow.back{
+    background: var(--koochita-light-green);
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin-right: auto;
+}
+.footerSafarnmaehCategoryRow .safarnamehRow.back .name{
+    font-weight: bold;
+    background: var(--koochita-light-green);
+    color: white;
+    margin: 0px;
+}
+.footerSafarnmaehCategoryRow .safarnamehRow .name{
+    margin-right: auto;
+    color: black;
+}
+.footerSafarnmaehCategoryRow .safarnamehRow .next{
+    transform: rotate(180deg);
+    font-size: 20px;
+}
+
+footer .safarnamehSearchRowFooter{
+    margin-top: 25px;
+    border-top: solid #80808052;
+}
+footer .safarnamehSearchRowFooter .inputs{
+
+}
+footer .safarnamehSearchRowFooter .header{
+    display: flex;
+    width: 100%;
+}
+footer .safarnamehSearchRowFooter .header > div{
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer .safarnamehSearchRowFooter .title{
+    width: 50%;
+    font-size: 12px;
+}
+footer .safarnamehSearchRowFooter .tab{
+    width: 25%;
+    font-weight: bold;
+}
+footer .safarnamehSearchRowFooter .tab.selected{
+    border-bottom: solid 3px var(--koochita-blue);
+    background: white;
+    color: var(--koochita-blue);
+}
+footer .safarnamehSearchRowFooter .safarnamehInput{
+    width: 100%;
+    background: #f2f2f2;
+    padding: 5px;
+    border: none;
+    margin-top: 10px;
+    font-size: 20px;
+}
+footer .safarnamehSearchRowFooter  .searchIcon{
+    position: absolute;
+    left: 4px;
+    cursor: pointer;
+    border: none;
+    background: var(--koochita-blue);
+    color: white;
+    height: 30px;
+    width: 30px;
+    top: 2px;
+    border-radius: 7px;
+}
 @media (max-width: 1300px) {
     .footerRside {
         font-size: 13px !important;

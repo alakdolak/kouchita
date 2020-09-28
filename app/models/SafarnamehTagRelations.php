@@ -4,9 +4,9 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SafarnamehTagRelation extends Model
+class SafarnamehTagRelations extends Model
 {
-
     protected $table = 'safarnamehTagRelations';
+    protected $guarded = [];
     public $timestamps = false;
 }

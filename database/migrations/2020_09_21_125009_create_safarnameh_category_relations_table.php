@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSafarnamehsTable extends Migration
+class CreateSafarnamehCategoryRelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class CreateSafarnamehsTable extends Migration
      */
     public function up()
     {
-        Schema::create('safarnamehs', function (Blueprint $table) {
+        Schema::create('safarnameh_category_relations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('userId');
-            $table->string('title');
-            $table->string('summery', 500)->nullable();
-            $table->longText('text');
-            $table->string('pic')->nullable();
-            $table->tinyInteger('confirm')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ class CreateSafarnamehsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('safarnamehs');
+        Schema::dropIfExists('safarnameh_category_relations');
     }
 }

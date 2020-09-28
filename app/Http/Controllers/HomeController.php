@@ -28,10 +28,6 @@ use App\models\OpOnActivity;
 use App\models\Place;
 use App\models\PlacePic;
 use App\models\PlaceTag;
-use App\models\Post;
-use App\models\PostCategory;
-use App\models\PostCategoryRelation;
-use App\models\PostCityRelation;
 use App\models\PostComment;
 use App\models\Question;
 use App\models\Report;
@@ -40,6 +36,10 @@ use App\models\Restaurant;
 use App\models\RetrievePas;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
+use App\models\Safarnameh;
+use App\models\SafarnamehCategories;
+use App\models\SafarnamehCategoryRelations;
+use App\models\SafarnamehCityRelations;
 use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Train;
@@ -417,47 +417,37 @@ class HomeController extends Controller
             'boomgardy' => $allBoomgardy,
         ];
 
-        $post = [];
-        $postId = [];
+        $safarnameh = [];
+        $safarnamehId = [];
         $postTake = 7;
         if($kind == 'state')
-            $postId = PostCityRelation::where('stateId', $place->id)->pluck('postId')->toArray();
+            $safarnamehId = SafarnamehCityRelations::where('stateId', $place->id)->pluck('safarnamehId')->toArray();
         else{
-            $postId = PostCityRelation::where('cityId', $place->id)->pluck('postId')->toArray();
-            if(count($postId) < $postTake){
-                $less = $postTake - count($postId);
-                $pId = PostCityRelation::where('stateId', $place->stateId)->take($less)->pluck('postId')->toArray();
-                $postId = array_merge($postId, $pId);
+            $safarnamehId = SafarnamehCityRelations::where('cityId', $place->id)->pluck('safarnamehId')->toArray();
+            if(count($safarnamehId) < $postTake){
+                $less = $postTake - count($safarnamehId);
+                $pId = SafarnamehCityRelations::where('stateId', $place->stateId)->take($less)->pluck('safarnamehId')->toArray();
+                $safarnamehId = array_merge($safarnamehId, $pId);
             }
         }
-        if(count($postId) != 0){
-            $pt = Post::whereIn('id', $postId)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
+        if(count($safarnamehId) != 0){
+            $pt = Safarnameh::whereIn('id', $safarnamehId)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
             foreach ($pt as $item)
-                array_push($post, $item);
+                array_push($safarnameh, $item);
 
             if(count($pt) < $postTake){
+
                 $less = $postTake - count($pt);
-                $postInRel = PostCityRelation::all()->pluck('postId')->toArray();
-                $p = Post::whereNotIn('id', $postId)->whereNotIn('id', $postInRel)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($less)->orderBy('date', 'DESC')->get();
+                $postInRel = SafarnamehCityRelations::all()->pluck('safarnamehId')->toArray();
+                $p = Safarnameh::whereNotIn('id', $safarnamehId)->whereNotIn('id', $postInRel)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($less)->orderBy('date', 'DESC')->get();
                 foreach ($p as $item)
-                    array_push($post, $item);
+                    array_push($safarnameh, $item);
             }
         }
         else
-            $post = Post::where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
-        foreach ($post as $item){
-            $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-            if($item->date == null)
-                $item->date = \verta($item->created_at)->format('Y/m/%d');
-
-            $item->date = convertJalaliToText($item->date);
-            $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
-            $item->username = User::whereId($item->creator)->username;
-            $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
-            $item->category = PostCategory::find($mainCategory->categoryId)->name;
-            $item->url = route('article.show', ['slug' => $item->slug]);
-            $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
-        }
+            $safarnameh = Safarnameh::where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
+        foreach ($safarnameh as $item)
+            $item = SafarnamehMinimalData($item);
 
         $mainWebSiteUrl = \url('/');
         $mainWebSiteUrl .= '/' . $request->path();
@@ -466,7 +456,7 @@ class HomeController extends Controller
         else
             $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => $place->listName, 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
 
-        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'placeCounts']));
+        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'safarnameh', 'placeCounts']));
     }
 
     public function getCityPageReview(Request $request)

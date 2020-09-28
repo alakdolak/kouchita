@@ -28,17 +28,14 @@ use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
 use App\models\PlaceTag;
-use App\models\Post;
-use App\models\PostCategory;
-use App\models\PostCategoryRelation;
-use App\models\PostCityRelation;
-use App\models\PostComment;
 use App\models\Question;
 use App\models\QuestionUserAns;
 use App\models\Report;
 use App\models\Restaurant;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
+use App\models\Safarnameh;
+use App\models\SafarnamehCityRelations;
 use App\models\SectionPage;
 use App\models\SogatSanaie;
 use App\models\SpecialAdvice;
@@ -437,57 +434,54 @@ class PlaceController extends Controller {
                 $nowTime = getToday()["time"];
 
                 $cityId = $place->cityId;
-                $postsId = PostCityRelation::where('cityId', $cityId)->pluck('postId')->toArray();
-                if(count($postsId) < 5){
+                $safarnamehId = SafarnamehCityRelations::where('cityId', $cityId)->pluck('safarnamehId')->toArray();
+                if(count($safarnamehId) < 5){
                     $state = Cities::find($cityId);
                     if($state != null){
-                        $psId = PostCityRelation::where('stateId', $state->id)->where('cityId', 0)->pluck('postId')->toArray();
-                        $postsId = array_merge($postsId, $psId);
+                        $psId = SafarnamehCityRelations::where('stateId', $state->id)->where('cityId', 0)->pluck('safarnamehId')->toArray();
+                        $safarnamehId = array_merge($safarnamehId, $psId);
                     }
                 }
 
-                $articles = array();
+                $safarnameh = array();
 
-                if(count($postsId) != 0) {
-                    $allPost = Post::join('users', 'users.id', 'post.creator')
-                        ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
-                        ->whereRaw('post.release <> "draft"')
-                        ->whereIn('post.id', $postsId)
-                        ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
-                        ->orderBy('post.date', 'DESC')->get();
+                if(count($safarnamehId) != 0) {
+                    $allSafarnameh = Safarnameh::whereRaw('(date <= ' . $today . ' OR (date = ' . $today . ' AND (time < ' . $nowTime . ' || time IS NULL)))')
+                                    ->where('release', '!=','draft')
+                                    ->whereIn('id', $safarnamehId)
+                                    ->where('confirm', 1)
+                                    ->select(['userId', 'id', 'title', 'meta',
+                                            'slug', 'seen', 'date', 'created_at',
+                                            'pic', 'keyword'])
+                                    ->orderBy('date', 'DESC')->get();
 
-                    foreach ($allPost as $i)
-                        array_push($articles, $i);
+                    foreach ($allSafarnameh as $i)
+                        array_push($safarnameh, $i);
                 }
 
-                if(count($articles) < 5){
-                    $alP = [];
-                    $alP = Post::join('users', 'users.id', 'post.creator')
-                        ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
-                        ->whereRaw('post.release <> "draft"')
-                        ->whereNotIn('post.id', $postsId)
-                        ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
-                        ->orderBy('post.date', 'DESC')->get();
+                if(count($safarnameh) < 5){
+                    $alP = Safarnameh::whereRaw('(date <= ' . $today . ' OR (date = ' . $today . ' AND (time < ' . $nowTime . ' || time IS NULL)))')
+                                    ->where('release', '!=','draft')
+                                    ->whereNotIn('id', $safarnamehId)
+                                    ->where('confirm', 1)
+                                    ->select(['userId', 'id', 'title',
+                                              'meta', 'slug', 'seen',
+                                              'date', 'created_at',
+                                               'pic', 'keyword'])
+                                    ->orderBy('date', 'DESC')->get();
 
-                    if(count($articles) == 0)
-                        $articles = $alP;
+                    if(count($safarnameh) == 0)
+                        $safarnameh = $alP;
                     else{
                         foreach ($alP as $i)
-                            array_push($articles, $i);
+                            array_push($safarnameh, $i);
                     }
                 }
 
-                foreach ($articles as $item) {
-                    $item->review = PostComment::wherePostId($item->id)->whereStatus(true)->count();
-                    $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-                    if ($item->date == null)
-                        $item->date = \verta($item->created_at)->format('Ym%d');
-                    $item->date = convertJalaliToText($item->date);
-                    $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
-                    $item->category = PostCategory::find($mainCategory->categoryId)->name;
-                    $item->url = route('article.show', ['slug' => $item->slug]);
-
+                foreach ($safarnameh as $item) {
+                    $item = SafarnamehMinimalData($item);
                     $item->name = $item->title;
+                    $item->review = $item->msgs;
                 }
 
                 $places = $this->getNearbies($place->C, $place->D, $count);
@@ -511,7 +505,7 @@ class PlaceController extends Controller {
 
                 $places['selected'] = [$selectedPlace];
 
-                echo json_encode([$places, $articles]);
+                echo json_encode([$places, $safarnameh]);
                 return;
             }
         }
@@ -3031,7 +3025,7 @@ class PlaceController extends Controller {
             if($mode == 'country'){
                 $state = '';
                 $city = '';
-                $articleUrl = \route('mainArticle');
+                $articleUrl = \route('safarnameh.index');
                 $n = 'لیست ' . $kindPlace->title . ' ایران';
                 $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
                 $contentCount = \DB::table($kindPlace->tableName)->count();

@@ -267,38 +267,38 @@
                 <div class="row">
                     <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="{{$post[0]->url}}" title="{{$post[0]->slug}}">
-                                <img class="lazy-img" src="{{$post[0]->pic}}" alt="{{$post[0]->keyword}}" style="opacity: 1;">
+                            <a class="im-entry-thumb-link" href="{{$safarnameh[0]->url}}" title="{{$safarnameh[0]->slug}}">
+                                <img class="lazy-img" src="{{$safarnameh[0]->pic}}" alt="{{$safarnameh[0]->keyword}}" style="opacity: 1;">
                             </a>
                             <header class="im-entry-header">
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
-                                            <a style="background-color: #666; color: #fff !important;" href="{{$post[0]->catURL}}"title="{{$post[0]->category}}">{{$post[0]->category}}</a>
+                                            <a style="background-color: #666; color: #fff !important;" href="{{$safarnameh[0]->catURL}}"title="{{$safarnameh[0]->category}}">{{$safarnameh[0]->category}}</a>
                                         </div>
                                     </div>
                                 </div>
                                 <h3 class="im-entry-title">
-                                    <a href="{{$post[0]->url}}" style="font-size: 20px">{{$post[0]->title}}</a>
+                                    <a href="{{$safarnameh[0]->url}}" style="font-size: 20px">{{$safarnameh[0]->title}}</a>
                                 </h3>
                             </header>
                         </div>
                         <div class="im-entry mainArticleDiv">
                             <div class="iranomag-meta clearfix">
                                 <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated withColor">{{$post[0]->date}}</span>
+                                    <span class="entry-date published updated withColor">{{$safarnameh[0]->date}}</span>
                                 </div>
 
                                 <div class="comments-link im-meta-item withColor">
-                                    <i class="fa fa-comment-o"></i>{{$post[0]->msgs}}
+                                    <i class="fa fa-comment-o"></i>{{$safarnameh[0]->msgs}}
                                 </div>
 
                                 <div class="author vcard im-meta-item withColor">
-                                    <i class="fa fa-user"></i>{{$post[0]->username}}
+                                    <i class="fa fa-user"></i>{{$safarnameh[0]->username}}
                                 </div>
 
                                 <div class="post-views im-meta-item withColor">
-                                    <i class="fa fa-eye"></i>{{$post[0]->seen}}
+                                    <i class="fa fa-eye"></i>{{$safarnameh[0]->seen}}
                                 </div>
                             </div>
                         </div>
@@ -306,31 +306,31 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="widget">
                             <ul>
-                                @for($i = 1; $i <= 4 && $i < count($post); $i++)
+                                @for($i = 1; $i <= 4 && $i < count($safarnameh); $i++)
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
-                                        <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}" style="height: 100%;">
-                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="resizeFitImg(this)">
+                                        <a href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}" style="height: 100%;">
+                                            <img src="{{$safarnameh[$i]->pic}}" alt="{{$safarnameh[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="resizeFitImg(this)">
                                         </a>
                                     </figure>
                                     <div class="im-widget-entry">
                                         <header class="im-widget-entry-header">
-                                            <a class="im-widget-entry-title lessShowText" href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
-                                                {{$post[$i]->title}}
+                                            <a class="im-widget-entry-title lessShowText" href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}">
+                                                {{$safarnameh[$i]->title}}
                                             </a>
                                         </header>
                                         <div class="iranomag-meta clearfix marg5">
                                             <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">{{$post[$i]->date}}</span>
+                                                <span class="entry-date published updated">{{$safarnameh[$i]->date}}</span>
                                             </div>
                                             <div class="comments-link im-meta-item">
-                                                <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
+                                                <i class="fa fa-comment-o"></i>{{$safarnameh[$i]->msgs}}
                                             </div>
                                             <div class="author vcard im-meta-item">
-                                                <i class="fa fa-user"></i>{{$post[$i]->username}}
+                                                <i class="fa fa-user"></i>{{$safarnameh[$i]->username}}
                                             </div>
                                             <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>{{$post[$i]->seen}}
+                                                <i class="fa fa-eye"></i>{{$safarnameh[$i]->seen}}
                                             </div>
                                         </div>
                                     </div>
