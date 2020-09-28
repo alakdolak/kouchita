@@ -58,6 +58,7 @@ use Illuminate\Http\Request;
 
 class PlaceController extends Controller {
 
+
     public function showPlaceDetails($kindPlaceName, $slug, Request $request){
         deleteReviewPic();  // common.php
 

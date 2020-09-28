@@ -700,7 +700,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 
 .searchPangResultSection .stateName{
     font-size: 12px !important;
-    height: 10px;
+    height: 15px;
     display: flex;
     align-items: center;
     color: gray;

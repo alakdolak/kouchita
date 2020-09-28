@@ -33,7 +33,6 @@
                 </a>
             </div>
         </div>
-{{--        aboutShazdeMoreLess--}}
         <div>
             <div class="footerRside">
                 <div id="aboutShazde" class="aboutShazdeMoreLess">
@@ -170,7 +169,7 @@
     <div class="container">
 
         <div class="modal fade" id="profilePossibilities">
-            @if(Request::is('safarnameh/*'))
+            @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
@@ -232,11 +231,10 @@
                                 <div id="safarnamehContentSearchFooter" style="display: none; background-color: #f2f2f2; position: relative; margin-top: 10px;">
                                     <input type="text"
                                            id="safarnamehContentSF"
-                                           class="safarnamehInput"
+                                           class="safarnamehInput searchInputElemsText"
                                            placeholder="عبارت مورد نظر را وارد نمایید"
                                            style="margin: 0;">
-                                    <button class="iconFamily searchIcon"
-                                            onclick="searchInArticle('safarnamehContentSF')// open in safarnamehLayout.blade.php"></button>
+                                    <button class="iconFamily searchIcon" onclick="searchInArticle('safarnamehContentSF')// open in safarnamehLayout.blade.php"></button>
                                 </div>
                             </div>
                         </div>

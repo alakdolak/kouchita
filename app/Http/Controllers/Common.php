@@ -1326,14 +1326,12 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
         return url('cityPage/city/' . $city->name);
     }
     else if($kindPlaceId != 0){
-//        $kindPlace = Place::find($kindPlaceId);
-//        $place = DB::table($kindPlace->tableName)->find($placeId);
         return route('placeDetails', ['kindPlaceId' => $kindPlaceId, 'placeId' => $placeId]);
     }
     else if($articleId != 0){
         $post = \App\models\Safarnameh::find($articleId);
         if($post != null)
-            return url('article/'. $post->slug);
+            return url('/safarnameh/show/'. $post->id);
         else
             return false;
     }

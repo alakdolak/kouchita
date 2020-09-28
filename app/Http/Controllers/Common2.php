@@ -15,11 +15,11 @@ function SafarnamehMinimalData($safarnameh){
 
     $safarnameh->msgs = SafarnamehComments::where('safarnamehId', $safarnameh->id)
                                             ->where(function($query){
-                if(auth()->check())
-                    $query->where('confirm', 1)->orWhere('userId', auth()->user()->id);
-                else
-                    $query->where('confirm', 1);
-            })
+                                                if(auth()->check())
+                                                    $query->where('confirm', 1)->orWhere('userId', auth()->user()->id);
+                                                else
+                                                    $query->where('confirm', 1);
+                                            })
                                             ->count();
     $safarnameh->like = SafarnamehLike::where('safarnamehId', $safarnameh->id)
                                         ->where('like',1)

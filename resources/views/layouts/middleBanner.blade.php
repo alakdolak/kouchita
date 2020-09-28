@@ -321,8 +321,7 @@
                             @foreach($articleBanner as $item)
                                 <div class="swiper-slide position-relative">
                                     <div class="card transition">
-                                        <h2 class="h2MidBanerArticle transition"
-                                            onmouseenter="showAlt(this)" onmouseleave="hideAlt(this)" title="{{$item->title}}">{{$item->title}}</h2>
+                                        <h2 class="h2MidBanerArticle transition" onmouseenter="showAlt(this)" onmouseleave="hideAlt(this)" title="{{$item->title}}">{{$item->title}}</h2>
                                         <p class="pMidBanerArticle">
                                             {{$item->meta}}
                                         </p>
