@@ -2,6 +2,25 @@
 
 @section('head')
     <title>صفحه سفرنامه</title>
+
+    <style>
+        .safarnamehMinRows{
+            margin: 0px;
+            min-height: 0px;
+            height: 70px;
+        }
+        .safarnamehMinRows .im-widget-thumb > a{
+            height: 100%;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .im-widget-thumb{
+            height: 100% !important;
+        }
+    </style>
 @endsection
 
 @section('beforeBody')
@@ -131,17 +150,17 @@
                                 <div class="widget">
                                     <ul>
                                         @endif
-                                        <li class="widget-10104im-widgetclearfix">
+                                        <li class="widget-10104im-widget clearfix">
                                             <figure class="im-widget-thumb">
                                                 <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
-                                                    <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}"/>
+                                                    <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
                                                 </a>
                                             </figure>
                                             <div class="im-widget-entry">
                                                 <header class="im-widget-entry-header">
-                                                    <h4 class='im-widget-entry-title'>
+                                                    <h6 class='im-widget-entry-title'>
                                                         <a style="color: #fff !important;" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
-                                                    </h4>
+                                                    </h6>
                                                 </header>
                                                 <div class="iranomag-meta clearfix">
                                                     <div class="posted-on im-meta-item">
@@ -227,17 +246,17 @@
                             <div class="widget">
                                 <ul>
                                     @endif
-                                    <li class="widget-10104im-widgetclearfix">
+                                    <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                         <figure class="im-widget-thumb">
                                             <a href="" title="{{$safarnameh->title}}">
-                                                <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}"/>
+                                                <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
                                             </a>
                                         </figure>
                                         <div class="im-widget-entry">
                                             <header class="im-widget-entry-header">
-                                                <h4 class='im-widget-entry-title'>
+                                                <h6 class='im-widget-entry-title'>
                                                     <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" rel="bookmark">{{$safarnameh->title}}</a>
-                                                </h4>
+                                                </h6>
                                             </header>
                                             <div class="iranomag-meta clearfix">
                                                 <div class="posted-on im-meta-item">
@@ -333,23 +352,19 @@
                                 <div class="col-md-12">
                                     <div class="widget">
                                         <ul>
-                                            @endif
-
-                                            <li class="widget-10104 im-widget clearfix">
+                            @endif
+                                            <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                                 <figure class="im-widget-thumb">
-                                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
-                                                       title="{{$safarnameh->title}}">
-                                                        <img src="{{$safarnameh->pic}}"
-                                                             alt="{{$safarnameh->keyword}}"/>
+                                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                                        <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
                                                     </a>
                                                 </figure>
                                                 <div class="im-widget-entry">
                                                     <header class="im-widget-entry-header">
-                                                        <h4 class='im-widget-entry-title'>
-                                                            <a
-                                                                    href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
+                                                        <h6 class='im-widget-entry-title'>
+                                                            <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
                                                                     title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
-                                                        </h4>
+                                                        </h6>
                                                     </header>
                                                     <div class="im-widget-entry-footer">
                                                         <div class="iranomag-meta clearfix">
@@ -372,8 +387,7 @@
                                                         </p>
                                                     </div>
                                             </li>
-
-                                            @if($i == count($recentlySafarnameh) - 1)
+                            @if($i == count($recentlySafarnameh) - 1)
                                         </ul>
                                     </div>
                                 </div>
@@ -454,7 +468,7 @@
                                     <div class="widget">
                                         <ul>
                                             @endif
-                                            <li class="widget-10104 im-widget clearfix">
+                                            <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                                 <figure class="im-widget-thumb">
                                                     <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
                                                         <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
@@ -462,9 +476,9 @@
                                                 </figure>
                                                 <div class="im-widget-entry">
                                                     <header class="im-widget-entry-header">
-                                                        <h4 class='im-widget-entry-title'>
+                                                        <h6 class='im-widget-entry-title'>
                                                             <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
-                                                        </h4>
+                                                        </h6>
                                                     </header>
                                                     <div class="im-widget-entry-footer">
                                                         <div class="iranomag-meta clearfix">
@@ -511,7 +525,7 @@
                 <div class="small-12 columns">
                     <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
                         <div class="im-entry-thumb col-md-5 col-sm-12">
-                            <a class="im-entry-thumb-link" href="##url##" title="##title##">
+                            <a class="im-entry-thumb-link" href="##url##" title="##title##" style="max-height: 200px;">
                                 <img data-src="##pic##" src="##pic##" alt="##keyword##"/>
                             </a>
                         </div>
