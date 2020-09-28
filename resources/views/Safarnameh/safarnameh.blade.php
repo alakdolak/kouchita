@@ -2,6 +2,14 @@
 
 @section('head')
     <title>صفحه سفرنامه</title>
+
+    <style>
+        .safarnamehMinRows{
+            margin: 0px;
+            min-height: 0px;
+            height: 70px;
+        }
+    </style>
 @endsection
 
 @section('beforeBody')
@@ -333,9 +341,8 @@
                                 <div class="col-md-12">
                                     <div class="widget">
                                         <ul>
-                                            @endif
-
-                                            <li class="widget-10104 im-widget clearfix">
+                            @endif
+                                            <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                                 <figure class="im-widget-thumb">
                                                     <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
                                                        title="{{$safarnameh->title}}">
@@ -372,8 +379,7 @@
                                                         </p>
                                                     </div>
                                             </li>
-
-                                            @if($i == count($recentlySafarnameh) - 1)
+                            @if($i == count($recentlySafarnameh) - 1)
                                         </ul>
                                     </div>
                                 </div>
@@ -454,7 +460,7 @@
                                     <div class="widget">
                                         <ul>
                                             @endif
-                                            <li class="widget-10104 im-widget clearfix">
+                                            <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                                 <figure class="im-widget-thumb">
                                                     <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
                                                         <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
@@ -511,7 +517,7 @@
                 <div class="small-12 columns">
                     <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
                         <div class="im-entry-thumb col-md-5 col-sm-12">
-                            <a class="im-entry-thumb-link" href="##url##" title="##title##">
+                            <a class="im-entry-thumb-link" href="##url##" title="##title##" style="max-height: 200px;">
                                 <img data-src="##pic##" src="##pic##" alt="##keyword##"/>
                             </a>
                         </div>
