@@ -1116,8 +1116,12 @@
                                 if (response[i]['placeName']) {
                                     let text = bookMarkSample;
                                     let fk = Object.keys(response[i]);
-                                    for (let x of fk)
-                                        text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
+console.log(response[i]);
+                                    for (let x of fk){
+console.log(response[i][x]);
+console.log(text);
+text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
+}
                                     $('#phoneBookMarks').append(text);
                                 }
                             }
