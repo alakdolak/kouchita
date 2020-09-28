@@ -5,21 +5,21 @@
     @section('header')
         @include('layouts.topHeader')
 {{--        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/long_lived_global_legacy_1.css?v=1')}}'/>--}}
-        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}'/>
-        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/short_lived_global_legacy.css?v=1')}}'/>
-        <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/universal_new.css?v=1')}}' data-rup='universal_new'/>
-        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v='.$fileVersions)}}'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/short_lived_global_legacy.css?v='.$fileVersions)}}'/>
+        <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/universal_new.css?v='.$fileVersions)}}' data-rup='universal_new'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v='.$fileVersions)}}' data-rup='long_lived_global_legacy'/>
         <title>کوچیتا | صفحه کاربری</title>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v='.$fileVersions)}}"/>
         <!--[if IE 6]>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css?v=1')}}" />
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css?v='.$fileVersions)}}" />
         <![endif]-->
         <!--[if IE 7]>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE7.css?v=1')}}" />
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE7.css?v='.$fileVersions)}}" />
         <![endif]-->
 
-        <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/modules_member_center.css?v=4')}}'/>
-        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/persistent_header_achievements.css?v=3')}}' data-rup='persistent_header_achievements'/>
+        <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/modules_member_center.css?v='.$fileVersions)}}'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/persistent_header_achievements.css?v='.$fileVersions)}}' data-rup='persistent_header_achievements'/>
 
         <script>
             var getRecentlyPath = '{{route('recentlyViewed')}}';

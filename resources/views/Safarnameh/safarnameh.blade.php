@@ -8,6 +8,8 @@
             margin: 0px;
             min-height: 0px;
             height: 70px;
+            display: flex;
+            align-items: center;
         }
         .safarnamehMinRows .im-widget-thumb > a{
             height: 100%;
@@ -204,7 +206,7 @@
                 @if($i == 0)
                     <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
                         <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                            <a class="im-entry-thumb-link" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}" style="max-height: 300px">
                                 <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}"/>
                             </a>
                             <header class="im-entry-header">
