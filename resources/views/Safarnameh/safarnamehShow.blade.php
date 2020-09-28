@@ -1,7 +1,7 @@
 @extends('Safarnameh.safarnamehLayout')
 
 @section('head')
-    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css?v='.$fileVersions)}}">
 
     <title> {{$safarnameh->seoTitle == null ? $safarnameh->title : $safarnameh->seoTitle}} </title>
     <meta content="article" property="og:type"/>

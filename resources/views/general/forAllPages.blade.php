@@ -1,5 +1,5 @@
 {{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css?v=1')}}">--}}
-<link rel="stylesheet" href="{{URL::asset('css/component/generalFolder.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/component/generalFolder.css?v='.$fileVersions)}}">
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 

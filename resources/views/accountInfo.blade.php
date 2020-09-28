@@ -4,8 +4,8 @@
 @section('header')
 
     @parent
-    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/shazdeDesigns/account_info.css?v=1')}}"/>
-    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}"/>
+    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/shazdeDesigns/account_info.css?v='.$fileVersions)}}"/>
+    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}"/>
 @stop
 
 @section('main')

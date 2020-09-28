@@ -1,7 +1,7 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v=1')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v='.$fileVersions)}}' />
 
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v='.$fileVersions)}}">
 @endif
 
 {{--footer html--}}
@@ -135,6 +135,8 @@
             <span class="footerMenuBarLinks">
                 @if(Request::is('placeList/*'))
                     {{__('اعمال فیلتر')}}
+                @elseif(Request::is('safarnameh/*') || Request::is('safarnameh'))
+                    {{__('دسته بندی')}}
                 @else
                     {{__('امکانات ویژه')}}
                 @endif

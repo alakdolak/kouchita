@@ -1,3 +1,4 @@
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -13,12 +14,12 @@
 <link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 <link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css?v=1')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css?v=1')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css?v=2')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v1=2')}}'/>
-<link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css?v=1')}}">
-<link rel="stylesheet" href="{{URL::asset('css/component/components.css?v1=2')}}">
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css?v='.$fileVersions)}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css?v='.$fileVersions)}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css?v='.$fileVersions)}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v1='.$fileVersions)}}'/>
+<link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css?v='.$fileVersions)}}">
+<link rel="stylesheet" href="{{URL::asset('css/component/components.css?v='.$fileVersions)}}">
 
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

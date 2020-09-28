@@ -17,6 +17,7 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
+        $fileVersions = 3;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();
@@ -30,11 +31,11 @@ class ShareData
 
             View::share(['userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
                         'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
-                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter ]);
+                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions ]);
         }
         else {
             $buPic = \URL::asset('_images/nopic/blank.jpg');
-            View::share(['buPic' => $buPic, 'config' => $config]);
+            View::share(['buPic' => $buPic, 'config' => $config, 'fileVersions' => $fileVersions]);
         }
 
 
