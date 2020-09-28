@@ -127,9 +127,9 @@
         <div class="gnMainPicOfArticle">
             <img class="gnAdvertiseImage" src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}">
             <div class="gnMainPicOfArticleText">
-                <div class="mainUserPicSafarnameh">
+                <a href="{{route('profile', ['username' => $safarnameh->user->username])}}" target="_blank" class="mainUserPicSafarnameh">
                     <img src="{{$safarnameh->user->pic}}"  style="height: 100%;">
-                </div>
+                </a>
                 <div>
                     <div class="im-entry-category" style="margin: 0 0 0 20px;">
                         <div class="iranomag-meta">
@@ -201,7 +201,7 @@
                         <div class="circleBase type2 newCommentWriterProfilePic">
                             <img src="{{$safarnameh->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
                         </div>
-                        <div class="gnLabels">{{$safarnameh->user->username}}</div>
+                        <a href="{{route('profile', ['username' => $safarnameh->user->username])}}" target="_blank" class="gnLabels">{{$safarnameh->user->username}}</a>
                     </div>
                     <div>{{$safarnameh->user->introduction}}</div>
                 </div>
