@@ -1114,13 +1114,10 @@
                             response = JSON.parse(response);
                             for (i = 0; i < response.length; i++) {
                                 if (response[i]['placeName']) {
-                                    var text = bookMarkSample;
-                                    var fk = Object.keys(response[i]);
-                                    for (var x of fk) {
-                                        var t = '##' + x + '##';
-                                        var re = new RegExp(t, "g");
-                                        text = text.replace(re, response[i][x]);
-                                    }
+                                    let text = bookMarkSample;
+                                    let fk = Object.keys(response[i]);
+                                    for (let x of fk)
+                                        text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
                                     $('#phoneBookMarks').append(text);
                                 }
                             }
