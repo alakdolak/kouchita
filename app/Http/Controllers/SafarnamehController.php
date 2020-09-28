@@ -392,7 +392,7 @@ class SafarnamehController extends Controller
 
         $pageLimit = ceil(Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->where('confirm', 1)->count() / 5);
 
-        return view('Safarnameh.safarnameh',compact(['bannerPosts', 'mostLike', 'relatedSafarnameh', 'recentlySafarnameh', 'mostCommentSafarnameh', 'mostSeenSafarnameh', 'page', 'pageLimit']) );
+        return view('Safarnameh.safarnameh',compact(['bannerPosts', 'mostLike', 'recentlySafarnameh', 'mostCommentSafarnameh', 'mostSeenSafarnameh', 'page', 'pageLimit']) );
     }
 
     public function paginationSafarnameh(Request $request)
