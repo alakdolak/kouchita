@@ -1761,7 +1761,8 @@ textarea:hover{
 
 .safarnamehTags{
     display: flex;
-    /*justify-content: flex-end;*/
+    flex-wrap: wrap;
+    width: 100%;
 }
 .safarnamehTags .tag{
     color: var(--koochita-blue);
