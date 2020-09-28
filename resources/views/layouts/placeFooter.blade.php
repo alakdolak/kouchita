@@ -1095,18 +1095,17 @@
     @if(Auth::check())
         <script>
             let recentlySample = 0;
-            let bookMarkSample = 0;
+            let bookMarkSample;
             let getPhoneBookMarks = false;
-            function showBookMarksPhone() {
 
-                if(!getPhoneBookMarks) {
+            bookMarkSample = $('#phoneBookMarks').html();
+            $('#phoneBookMarks').empty();
+
+            function showBookMarksPhone() {
+                if(!getPhoneBookMarks && bookMarkSample != undefined && bookMarkSample != null) {
                     getPhoneBookMarks = true;
 
-                    if (bookMarkSample == 0)
-                        bookMarkSample = $('#phoneBookMarks').html();
-
                     $('#phoneBookMarks').html('');
-
                     $.ajax({
                         type: 'post',
                         url: '{{route('getBookMarks')}}',
@@ -1129,7 +1128,6 @@ text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
                     });
                 }
             }
-
             showBookMarksPhone();
 
             function initialProgressFooter() {
