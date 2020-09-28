@@ -17,7 +17,7 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 3;
+        $fileVersions = 4;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();

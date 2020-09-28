@@ -40,7 +40,7 @@
             padding: 15px;
         }
         .safarnamehDescription{
-            margin-top: 50px;
+            margin-top: 65px;
         }
         .safarnamehDescription span, .safarnamehDescription p {
             font-size: 14px !important;
@@ -88,6 +88,36 @@
                 line-height: 23px !important;
             }
         }
+
+        .mainUserPicSafarnameh{
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: solid 3px #ffffffd9;
+            left: calc(50% - 45px);
+            top: -70px;
+        }
+        .gnMainPicOfArticleText .im-meta-item{
+            font-size: 18px !important;
+        }
+        .gnMainPicOfArticleText .iranomag-meta .fa{
+            font-size: 18px !important;
+        }
+
+        @media (max-width: 767px) {
+
+            .gnMainPicOfArticleText .im-meta-item{
+                font-size: 13px !important;
+            }
+            .gnMainPicOfArticleText .iranomag-meta .fa{
+                font-size: 13px !important;
+            }
+        }
     </style>
 
 @endsection
@@ -97,6 +127,9 @@
         <div class="gnMainPicOfArticle">
             <img class="gnAdvertiseImage" src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}">
             <div class="gnMainPicOfArticleText">
+                <div class="mainUserPicSafarnameh">
+                    <img src="{{$safarnameh->user->pic}}"  style="height: 100%;">
+                </div>
                 <div>
                     <div class="im-entry-category" style="margin: 0 0 0 20px;">
                         <div class="iranomag-meta">
