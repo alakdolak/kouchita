@@ -51,21 +51,23 @@
 </style>
 
 <div id="safarnamehList" class="userProfileArticles">
-    <div class="userProfilePostsFiltrationContainer">
-        <div class="userProfilePostsFiltration">
-            <span class="active">جدیدترین‌ها</span>
-            <span>بهترین‌ها</span>
-        </div>
-    </div>
+{{--    <div class="userProfilePostsFiltrationContainer">--}}
+{{--        <div class="userProfilePostsFiltration">--}}
+{{--            <span class="active">جدیدترین‌ها</span>--}}
+{{--            <span>بهترین‌ها</span>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    <div class="userProfilePostsSearchContainer">
-        <div class="inputBox">
-            <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>
-        </div>
-        @if(isset($myPage) && $myPage)
+    @if(isset($myPage) && $myPage)
+
+        <div class="userProfilePostsSearchContainer">
+    {{--        <div class="inputBox">--}}
+    {{--            <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>--}}
+    {{--        </div>--}}
             <button class="btn btn-primary" onclick="openNewSafarnameh()">نوشتن سفرنامه</button>
-        @endif
-    </div>
+        </div>
+    @endif
+
     <div class="col-xs-12 notData hidden">
         <div class="pic">
             <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">

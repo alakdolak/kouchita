@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\BookMark;
 use App\models\Cities;
 use App\models\Place;
 use App\models\Safarnameh;
@@ -256,6 +257,32 @@ class SafarnamehController extends Controller
         return;
     }
 
+    public function addSafarnamehBookMark(Request $request)
+    {
+        if(isset($request->id)){
+            $bookMark = BookMark::where('userId', auth()->user()->id)
+                                  ->where('referenceId', $request->id)
+                                  ->where('tableName', 'safarnameh')
+                                  ->first();
+            if($bookMark == null){
+                $bookMark = new BookMark();
+                $bookMark->userId = auth()->user()->id;
+                $bookMark->referenceId = $request->id;
+                $bookMark->tableName = 'safarnameh';
+                $bookMark->save();
+                echo 'store';
+            }
+            else{
+                $bookMark->delete();
+                echo 'delete';
+            }
+
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
 
     public function safarnamehRedirect($slug)
     {
@@ -636,11 +663,17 @@ class SafarnamehController extends Controller
         }
         $safarnameh = SafarnamehMinimalData($safarnameh);
         $safarnameh->youLike = 0;
+        $safarnameh->bookMark = false;
         if(auth()->check()){
             $youLike = SafarnamehLike::where('safarnamehId', $safarnameh->id)
                                         ->where('userId', auth()->user()->id)
                                         ->first();
             $safarnameh->youLike = $youLike == null ? 0 : $youLike->like;
+            $bookMark = BookMark::where('userId', auth()->user()->id)
+                                ->where('referenceId', $safarnameh->id)
+                                ->where('tableName', 'safarnameh')->first();
+            if($bookMark != null)
+                $safarnameh->bookMark = true;
         }
 
         $safarnameh->user = User::select(['id', 'username', 'introduction'])->find($safarnameh->userId);

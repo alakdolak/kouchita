@@ -1,11 +1,11 @@
 
 <div class="userProfilePhotosAndVideos">
-    <div class="userProfilePostsFiltration photoAndVideo">
-        <span id="userPhotoAllTab" class="active" onclick="changeShowPic('all')">همه</span>
-        <span id="userPhotoPicTab" onclick="changeShowPic('pic')">عکس</span>
-        <span id="userPhotoVideoTab" onclick="changeShowPic('video')">فیلم</span>
-        <span id="userPhoto360Tab" onclick="changeShowPic('video360')">فیلم 360</span>
-    </div>
+{{--    <div class="userProfilePostsFiltration photoAndVideo">--}}
+{{--        <span id="userPhotoAllTab" class="active" onclick="changeShowPic('all')">همه</span>--}}
+{{--        <span id="userPhotoPicTab" onclick="changeShowPic('pic')">عکس</span>--}}
+{{--        <span id="userPhotoVideoTab" onclick="changeShowPic('video')">فیلم</span>--}}
+{{--        <span id="userPhoto360Tab" onclick="changeShowPic('video360')">فیلم 360</span>--}}
+{{--    </div>--}}
 
     <div class="col-xs-12 notData hidden">
         <div class="pic">

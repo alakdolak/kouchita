@@ -52,6 +52,79 @@
             align-items: center;
             border-radius: 50%;
         }
+        .profileMobileSection{
+            display: none;
+        }
+        .fallowButton{
+            border: none;
+            margin-right: 10px;
+            direction: rtl;
+        }
+        .fallowButton.fallowed{
+            background: var(--koochita-green);
+            color: white;
+        }
+        .fallowButton.fallowed:after{
+            content: "\E02B" !important;
+            font-family: Shazde_Regular2 !important;
+        }
+        @media (max-width: 768px) {
+            .commentWriterExperienceParticipation, .userProfileName, .userProfileNameAnswers{
+                margin-top: 0px;
+            }
+            .profileMobileSection{
+                display: block;
+            }
+            .profileMobileSection .bioSec{
+                background: white;
+                max-height: 135px;
+                overflow: hidden;
+                padding: 0px 15px;
+            }
+            .profileMobileSection .bioSec .bioText{
+                font-size: 11px;
+                text-align: justify;
+                direction: rtl;
+            }
+            .profileMobileSection .mobileTabs{
+                background: white;
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 10px;
+                border-bottom: solid 1px #dedede;
+                padding-top: 20px;
+            }
+            .profileMobileSection .mobileTabs .tab{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 25%;
+                color: #9e9e9e;
+            }
+            .profileMobileSection .mobileTabs .tab .bottomLine{
+                transition: .3s;
+                width: 0px;
+                height: 3px;
+                background-color: var(--koochita-blue);
+            }
+            .profileMobileSection .mobileTabs .tab.selected{
+                color: var(--koochita-blue);
+            }
+            .profileMobileSection .mobileTabs .tab.selected .bottomLine{
+                width: 100% !important;
+                color: var(--koochita-blue);
+            }
+            .profileMobileSection .mobileTabs .tab .icon{
+                font-size: 30px;
+                line-height: 25px;
+            }
+            .profileMobileSection .mobileTabs .tab .name{
+                font-size: 9px;
+                margin-bottom: 3px;
+            }
+
+        }
     </style>
 @stop
 
@@ -78,6 +151,7 @@
                             </div>
                         @endif
                     </div>
+
                     <div class="userProfileInfo">
                         <div>{{$user->username}}</div>
                         <div style="display: flex; font-size: 12px;">
@@ -93,11 +167,16 @@
                                     @endif
                                 </a>
                             @else
+                                <button class="msgHeaderButton fallowButton ">
+                                    <span class="addMemberIcon"></span>
+                                    دنبال کردن
+                                </button>
                                 <a href="{{route("profile.message.page")}}?user={{$user->username}}" class="msgHeaderButton">ارسال پیام</a>
                             @endif
                         </div>
                     </div>
-                    <div class="postsMainFiltrationBar">
+
+                    <div class="postsMainFiltrationBar hideOnPhone">
                         <a id="whoAmITab" href="#whoAmI" class="profileHeaderLinksTab whoAmI" onclick="changePages('whoAmI')">من کی هستم</a>
                         <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
                         <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
@@ -105,6 +184,45 @@
                         <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">سفرنامه ها</a>
                         <a id="medalsTab" href="#medal" class="profileHeaderLinksTab" onclick="changePages('medal')">جایزه و امتیاز</a>
                         <a href="#" class="profileHeaderLinksTab">سایر موارد</a>
+                    </div>
+                </div>
+
+                <div class="profileMobileSection">
+                    <div class="bioSec">
+                        <div class="mainDivHeaderText">
+                            <h3>{{$user->username}}</h3>
+                            <div class="downArrowIcon"></div>
+                        </div>
+                        <div class="bioContent">
+                            <div class="bioText">
+                                @if(isset($sideInfos['introduction']))
+                                    {{$sideInfos['introduction']}}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobileTabs">
+                        <div class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
+                            <div class="icon safarnameIcon"></div>
+                            <div class="name">سفرنامه</div>
+                            <div class="bottomLine"></div>
+                        </div>
+                        <div class="tab" onclick="mobileChangeProfileTab(this, 'medal')">
+                            <div class="icon medalsIcon"></div>
+                            <div class="name">مدال ها</div>
+                            <div class="bottomLine"></div>
+                        </div>
+                        <div class="tab" onclick="mobileChangeProfileTab(this, 'photo')">
+                            <div class="icon emptyCameraIcon"></div>
+                            <div class="name">عکس و فیلم</div>
+                            <div class="bottomLine"></div>
+                        </div>
+                        <div class="tab selected" onclick="mobileChangeProfileTab(this, 'review')">
+                            <div class="icon EmptyCommentIcon"></div>
+                            <div class="name">پست</div>
+                            <div class="bottomLine"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -592,6 +710,29 @@
             }
             else if(_kind === 'medal') {
                 $('#medalsTab').addClass('active');
+                $('#medalBody').removeClass('hidden');
+                getMedals(); // in profile.innerParts.userMedals
+            }
+        }
+
+        function mobileChangeProfileTab(_element, _kind){
+            $(_element).parent().find('.selected').removeClass('selected');
+            $(_element).addClass('selected');
+
+            $('.prodileSections').addClass('hidden');
+            if(_kind == 'review'){
+                $('#reviewMainBody').removeClass('hidden');
+                getReviewsUserReview(); // in profile.innerParts.userPostsInner
+            }
+            else if(_kind == 'photo'){
+                $('#picMainBody').removeClass('hidden');
+                getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
+            }
+            else if(_kind == 'safarnameh'){
+                $('#safarnamehBody').removeClass('hidden');
+                getSafarnamehs(); // in profile.innerParts.userSafarnameh
+            }
+            else if(_kind == 'medal'){
                 $('#medalBody').removeClass('hidden');
                 getMedals(); // in profile.innerParts.userMedals
             }

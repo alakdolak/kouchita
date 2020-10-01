@@ -1490,6 +1490,148 @@ body {
     box-shadow: -1px 1px 3px 1px #868686;
 }
 
+.medalsSection{
+    background: white;
+    direction: rtl;
+    text-align: right;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.medalsSection .rowTitle{
+    font-size: 20px;
+    border-bottom: solid 2px var(--koochita-blue);
+    padding-bottom: 5px;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.medalsSection .rowTitle .link{
+    font-size: 10px;
+    cursor: pointer;
+}
+.medalsSection .medals{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.medalsSection .medals .medalCard{
+    width: 170px;
+    height: 240px;
+    background: white;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #d4d4d4;
+    margin: 5px;
+    border-radius: 10px;
+    transition: transform 1s, box-shadow .1s;
+    font-size: 20px;
+}
+.medalsSection .medals .medalCard.showBack{
+    transform: rotateY(180deg);
+    box-shadow: 0px 0px 5px 2px #d2d2d2;
+}
+.medalsSection .medals .medalCard:hover{
+    box-shadow: 0px 0px 5px 2px #d2d2d2;
+}
+.medalsSection .medals .notTacken{
+    text-align: center;
+    padding: 10px 15px;
+    background: var(--koochita-blue);
+    color: white;
+    border-radius: 30px;
+}
+.medalsSection .medals .medalCard .pic{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    position: relative;
+}
+.medalsSection .medals .medalCard .frontCard{
+    width: 100%;
+}
+.medalsSection .medals .medalCard .frontCard .pic > div{
+    background-size: 150px 150px;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.medalsSection .medals .medalCard .frontCard .onPic{
+    height: 100%;
+    background-position: right;
+    z-index: 2;
+    position: absolute;
+}
+.medalsSection .medals .medalCard .frontCard .onPic.blinking{
+    animation: blinking 2s infinite;
+}
+.medalsSection .medals .medalCard .frontCard .offPic{
+    width: 100%;
+    background-position: left;
+}
+.medalsSection .medals .medalCard .name{
+    border-bottom: solid 1px gray;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    font-size: .9em;
+}
+.medalsSection .medals .medalCard .summery{
+    font-size: .6em;
+    color: var(--koochita-blue);
+    text-align: center;
+}
+
+.medalsSection .medals .medalCard .backCard{
+    transform: rotateY(180deg);
+    text-align: center;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.medalsSection .medals .medalCard .backCard .name{
+    border: none;
+    color: var(--koochita-red);
+    font-size: 1em;
+    font-weight: bold;
+}
+.medalsSection .medals .medalCard .backCard .pic{
+    width: 65px;
+    height: 65px;
+    margin: 0px auto;
+}
+.medalsSection .medals .medalCard .backCard .text{
+    font-size: .6em;
+    margin-bottom: 32px;
+}
+.medalsSection .medals .medalCard .backCard .rate{
+    border-top: solid 1px gray;
+    padding-top: 5px;
+    font-size: .9em;
+    color: var(--koochita-blue);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.medalsSection .medals .medalCard .animLine{
+    height: 10px;
+    border-radius: 10px;
+    width: 150px !important;
+    margin: 0px auto;
+    padding: 0 !important;
+    border-bottom: none !important;
+    margin-top: 10px;
+    max-width: 100%;
+}
+
 
 @media (max-width: 1188px) {
 
@@ -1655,6 +1797,63 @@ body {
 
 @media (max-width: 768px) {
 
+    .userProfilePageCoverImg{
+        height: 220px;
+    }
+        /*top bar*/
+    .userPagePicSection {
+        right: auto;
+        bottom: 65px;
+        width: 140px;
+        height: 140px;
+    }
+
+    .userPageBodyTopBar {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profilePicUserProfile {
+        width: 150px;
+        height: 150px;
+    }
+
+    .userProfileInfo {
+        text-align: center;
+        right: inherit;
+        top: -70px;
+        padding: 5px 25px;
+    }
+
+    .userPageBodyTopBar {
+        padding: 0;
+    }
+
+    .postsMainFiltrationBar {
+        margin: 0 5px;
+        padding-right: 0;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        margin: 0 0.8%;
+    }
+
+    .userQuestionsPage .userProfilePostsSearchContainer > span {
+        font-size: 11px;
+    }
+
+    .newAnswerPlaceMainDiv .inputBox {
+        width: 88%;
+    }
+
+    .answerBoxText {
+        width: 72%;
+    }
+
+    .postsMainFiltrationBar > a , .userProfilePostsFiltration > span{
+        font-size: 12px;
+    }
+
     .userTripMainBody{
         max-height: 100vh !important;
         height: 100vh;
@@ -1697,17 +1896,11 @@ body {
     .mainDivContainerProfilePage {
         padding: 0;
     }
-
-    /*top bar*/
-    .userPageBodyTopBar {
-        padding: 0 85px 0 5px;
-    }
-
     .profilePicUserProfile {
-        width: 160px;
-        height: 160px;
+        width: 120px;
+        height: 120px;
+        border: 4px solid white;
     }
-
     .postsMainFiltrationBar > a {
         font-size: 12px;
     }
@@ -1785,62 +1978,28 @@ body {
     }
 }
 
-@media (max-width: 630px) {
-    /*top bar*/
-    .userPagePicSection {
-        right: auto;
-        bottom: 130px;
-    }
-
-    .userPageBodyTopBar {
-        display: flex;
-        justify-content: center;
-    }
-
-    .profilePicUserProfile {
-        width: 150px;
-        height: 150px;
-    }
-
-    .userProfileInfo {
-        text-align: center;
-        right: inherit;
-        top: -95px;
-        padding: 5px 25px;
-    }
-
-    .userPageBodyTopBar {
-        padding: 0;
-    }
-
-    .postsMainFiltrationBar {
-        margin: 0 5px;
-        padding-right: 0;
-    }
-
-    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
-        margin: 0 0.8%;
-    }
-
-    .userQuestionsPage .userProfilePostsSearchContainer > span {
-        font-size: 11px;
-    }
-
-    .newAnswerPlaceMainDiv .inputBox {
-        width: 88%;
-    }
-
-    .answerBoxText {
-        width: 72%;
-    }
-
-    .postsMainFiltrationBar > a , .userProfilePostsFiltration > span{
-        font-size: 12px;
-    }
-}
-
 
 @media (max-width: 500px) {
+    .medalsSection .medals .medalCard .animLine{
+        height: 6px;
+    }
+    .medalsSection .medals .medalCard{
+        width: 110px;
+        height: 180px;
+        font-size: 15px;
+    }
+    .medalsSection .medals .medalCard .frontCard .pic > div{
+        background-size: 80px 80px;
+    }
+    .medalsSection .medals .medalCard .pic{
+        width: 85px;
+        height: 85px;
+    }
+    .medalsSection .medals .medalCard .backCard .pic{
+        width: 50px;
+        height: 50px;
+    }
+
     .notData .pic {
         display: none;
     }
@@ -1960,5 +2119,18 @@ body {
         border-bottom: 1px solid #e5e5e5;
     }
 }
+
+@keyframes blinking {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 

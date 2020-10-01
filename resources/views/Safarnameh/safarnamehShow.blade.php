@@ -189,8 +189,8 @@
                             <span class="icon commentsShareIconFeedback"></span>
                             @include('layouts.shareBox')
                         </div>
-                        <div class="postsActionsChoices col-xs-6 col-md-3">
-                            <span class="icon BookMarkIconEmpty" style="font-size: 1.3em;"></span>
+                        <div class="postsActionsChoices col-xs-6 col-md-3" onclick="bookMarkSafarnameh(this)" style="cursor: pointer;">
+                            <span class="icon {{$safarnameh->bookMark ? 'BookMarkIcon' : 'BookMarkIconEmpty'}}" style="font-size: 1.3em;"></span>
                         </div>
                     </div>
                 </div>
@@ -245,6 +245,39 @@
         var safarnameh = {!! $safarnameh !!};
         var _token= '{{csrf_token()}}';
         var userPic = '{{$uPic}}';
+
+        function bookMarkSafarnameh(_element){
+            if(!checkLogin())
+                return;
+
+            let child = $($(_element).children()[0]);
+            $.ajax({
+                type: 'post',
+                url: '{{route("safarnameh.bookMark")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: safarnameh.id
+                },
+                success: function(response){
+                    if(response == 'delete'){
+                        child.addClass('BookMarkIconEmpty');
+                        child.removeClass('BookMarkIcon');
+                        showSuccessNotifi('سفرنامه از نشون کرده حذف شد.', 'left', 'red');
+                    }
+                    else if(response == 'store'){
+                        child.removeClass('BookMarkIconEmpty');
+                        child.addClass('BookMarkIcon');
+                        showSuccessNotifi('سفرنامه به نشون کرده اضافه شد', 'left', 'var(--koochita-blue)');
+                    }
+                    else
+                        showSuccessNotifi('مشکلی در ثبت فرایند پیش امده', 'left', 'red');
+                },
+                error: function(err){
+                    console.log(err);
+                    showSuccessNotifi('مشکلی در ثبت فرایند پیش امده', 'left', 'red');
+                }
+            });
+        }
 
         function likePost(_like, _id, _element){
             if(!checkLogin())

@@ -253,6 +253,18 @@
     content: "\e0dd" !important;
     font-family: Shazde_Regular2 !important;
 }
+.addMemberIcon:before{
+    content: "\E087" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.medalsIcon:before{
+    content: "\E059" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.tickIcon:before{
+    content: "\E02B" !important;
+    font-family: Shazde_Regular2 !important;
+}
 .safarnameIcon:before{
     content: '\E0D9' !important;
     font-family: Shazde_Regular2 !important;

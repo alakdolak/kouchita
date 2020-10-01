@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSafarnamehCityRelationsTable extends Migration
+class CreateBookMarksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateSafarnamehCityRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('safarnameh_city_relations', function (Blueprint $table) {
+        Schema::create('bookMarks', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->unsignedInteger('userId');
+            $table->unsignedInteger('referenceId');
+            $table->string('tableName');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateSafarnamehCityRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('safarnameh_city_relations');
+        Schema::dropIfExists('bookMarks');
     }
 }
