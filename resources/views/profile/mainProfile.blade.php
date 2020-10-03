@@ -10,7 +10,7 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=3')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1='.$fileVersions)}}">
     <style>
 
         .followerHeaderSection{
