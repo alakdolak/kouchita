@@ -35,12 +35,12 @@
     let nowShow;
     let allPics ;
     let lastPicRow = 0;
-    let typesOfWidth = [
-        [ 30, 20, 50 ],
-        [ 20, 40, 40 ],
-        [ 34, 33, 33 ],
-        [ 25, 25, 50 ],
-    ];
+    // let typesOfWidth = [
+    //     [ 30, 20, 50 ],
+    //     [ 20, 40, 40 ],
+    //     [ 34, 33, 33 ],
+    //     [ 25, 25, 50 ],
+    // ];
     let showKind = {
         'pic' : true,
         'video' : true,
@@ -61,8 +61,9 @@
                 randThree = [0, 1, 2];
                 rand = [];
                 random = Math.floor(Math.random()*4);
-                nowWidths = typesOfWidth[random];
-                text += `<div class="profilePicturesRow kind${lastPicRow}">`;
+                // nowWidths = typesOfWidth[random];
+                // text += `<div class="profilePicturesRow kind${lastPicRow}">`;
+                text += `<div class="profilePicturesRow kind2">`;
 
                 if(nowShow.length > 2) {
                     while (true) {
@@ -83,9 +84,9 @@
                 }
             }
             if(showKind[nowShow[i]["fileKind"]]) {
-                text += '<div class="profilePictureDiv" style="width: ' + nowWidths[rand[addedPic]] + '%;" onclick="showThisPictures(' + i + ')"> \n' +
-                    '   <img src="' + nowShow[i]["sidePic"] + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
-                    '</div>';
+                text += '<div class="profilePictureDiv" style="width: 33%;" onclick="showThisPictures(' + i + ')"> \n' +
+                        '   <img src="' + nowShow[i]["sidePic"] + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
+                        '</div>';
                 addedPic++;
             }
 

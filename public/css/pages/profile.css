@@ -217,7 +217,7 @@ body {
 
 
 .mainDivHeaderText {
-    padding: 10px 0;
+    padding: 8px 0;
     border-bottom: 1px solid #e5e5e5;
     margin: 20px 0;
     position: relative;
@@ -239,10 +239,10 @@ body {
 
 .mainDivHeaderText > div {
     right: inherit;
-    color: darkblue;
-    font-size: 13px;
+    color: var(--koochita-blue);;
+    font-size: 20px;
     font-weight: 500;
-    top: 4px;
+    top: 0px;
     left: -10px;
     cursor: pointer;
 }
@@ -1632,6 +1632,63 @@ body {
     max-width: 100%;
 }
 
+.showBannerPic{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    overflow: hidden;
+    margin: 5px 0px;
+    width: 100%;
+}
+.bannerPicItem{
+    margin: 5px;
+    cursor: pointer;
+}
+.bannerPicItem.active{
+    border: solid 5px var(--koochita-light-green);
+}
+.bannerPicItem > img{
+    width: 100%;
+}
+.editReviewPicturesSection{
+    background-color: #0000009e;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99;
+    top: 0;
+}
+.newMsgCount{
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    background: var(--koochita-red);
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.profileMobileSection{
+    display: none;
+}
+.fallowButton{
+    border: none;
+    margin-right: 10px;
+    direction: rtl;
+}
+.fallowButton.fallowed{
+    background: var(--koochita-green);
+    color: white;
+}
+.fallowButton.fallowed:after{
+    content: "\E02B" !important;
+    font-family: Shazde_Regular2 !important;
+}
+
 
 @media (max-width: 1188px) {
 
@@ -1975,6 +2032,91 @@ body {
 
     .newSafarnamehSection label{
         font-size: 12px;
+    }
+
+    .commentWriterExperienceParticipation, .userProfileName, .userProfileNameAnswers{
+        margin-top: 0px;
+    }
+    .profileMobileSection{
+        display: block;
+    }
+    .profileMobileSection .bioSec{
+        background: white;
+        max-height: 115px;
+        overflow: hidden;
+        padding: 0px 15px;
+        height: auto;
+        /*transition: max-height .4s;*/
+    }
+    .profileMobileSection .bioSec.show{
+        max-height: 1000px;
+    }
+    .profileMobileSection .bioSec.show .bioText{
+        display: block;
+    }
+    .profileMobileSection .bioSec .bioText{
+        font-size: 11px;
+        text-align: justify;
+        direction: rtl;
+        line-height: 18px;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .profileMobileSection .bioSec .styleSec{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    .profileMobileSection .mobileTabs{
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        border-bottom: solid 1px #dedede;
+        padding-top: 15px;
+    }
+    .profileMobileSection .mobileTabs.stickToTop{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9;
+        box-shadow: 0px 0px 9px 1px #0000006b;
+    }
+    .profileMobileSection .profileMobileStickHeader{
+        height: 60px;
+        margin-bottom: 10px;
+        background-color: white;
+    }
+    .profileMobileSection .mobileTabs .tab{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 25%;
+        color: #9e9e9e;
+    }
+    .profileMobileSection .mobileTabs .tab .bottomLine{
+        transition: .3s;
+        width: 0px;
+        height: 3px;
+        background-color: var(--koochita-blue);
+    }
+    .profileMobileSection .mobileTabs .tab.selected{
+        color: var(--koochita-blue);
+    }
+    .profileMobileSection .mobileTabs .tab.selected .bottomLine{
+        width: 100% !important;
+        color: var(--koochita-blue);
+    }
+    .profileMobileSection .mobileTabs .tab .icon{
+        font-size: 30px;
+        line-height: 25px;
+    }
+    .profileMobileSection .mobileTabs .tab .name{
+        font-size: 9px;
+        margin-bottom: 3px;
     }
 }
 
