@@ -21,8 +21,89 @@
             font-size: 14px;
             padding: 0px 5px;
             border-radius: 5px 0px 0px 5px;
-            left: -55px;
+            right: 125px;
             bottom: 60px;
+            width: fit-content;
+        }
+        .followerModal .header{
+            padding: 4px 0px;
+            border-bottom: solid 1px #e2e2e2;
+        }
+        .followerModal .body{
+            max-height: calc(100vh - 110px);
+            min-height: 50vh;
+            overflow-y: auto;
+        }
+        .followerModal .body .peopleRow{
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+        .followerModal .body .peopleRow .pic{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .followerModal .body .peopleRow .name{
+            margin-right: 12px;
+            color: black;
+        }
+        .followerModal .body .peopleRow .button{
+            margin-right: auto;
+            border: solid gray 1px;
+            padding: 2px 10px;
+            font-size: 11px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+        }
+        .followerModal .body .peopleRow .button:before{
+            content: 'دنبال کردن';
+        }
+        .followerModal .body .peopleRow .button.followed:before{
+            content: 'دنبال شده';
+        }
+        .followerModal .body .peopleRow .button.followed{
+            background: var(--koochita-green);
+            color: white;
+            padding: 3px 10px;
+            border: var(--koochita-green);
+        }
+        .followerModal .body .peopleRow .button.followed:after{
+            content: "\E02B" !important;
+            font-family: Shazde_Regular2 !important;
+        }
+
+        .followerModal .body .emptyPeople{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25%;
+            opacity: .5;
+            filter: grayscale(1);
+        }
+        .followerModal .body .emptyPeople > img{
+            width: 100px;
+        }
+        .followerModal .body .emptyPeople .text{
+            margin-top: 10px;
+        }
+        .followerModal .peopleRow.placeHolder {
+            opacity: .4;
+        }
+        .followerModal .peopleRow.placeHolder .resultLineAnim{
+            width: 33%;
+            margin-bottom: 0px;
+        }
+        .followerModal .peopleRow.placeHolder .buttonP.resultLineAnim{
+            margin-right: auto;
+            width: 70px;
+            height: 30px;
         }
         @media (max-width: 768px) {
 
@@ -48,8 +129,8 @@
                         <div class="circleBase profilePicUserProfile">
                             <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                         </div>
-                        <div class="followerHeaderSection">
-                            <span style="font-weight: bold">20</span>
+                        <div class="followerHeaderSection hideOnScreen" onclick="openFollowerModal()">
+                            <span class="followerNumber" style="font-weight: bold">{{$followersCount}}</span>
                             <span style="font-size: 9px;">دنبال کننده</span>
                         </div>
                         @if(isset($myPage) && $myPage)
@@ -74,9 +155,9 @@
                                     @endif
                                 </a>
                             @else
-                                <button class="msgHeaderButton fallowButton ">
+                                <button class="msgHeaderButton followButton {{$youFollowed != 0 ? 'followed' : ''}}" onclick="followUser(this)">
                                     <span class="addMemberIcon"></span>
-                                    دنبال کردن
+                                    <span class="text"></span>
                                 </button>
                                 <a href="{{route("profile.message.page")}}?user={{$user->username}}" class="msgHeaderButton">ارسال پیام</a>
                             @endif
@@ -329,6 +410,35 @@
         </div>
     </div>
 
+    <div id="followerModal" class="modalBlackBack fullCenter followerModal" style="z-index: 9999;">
+        <div class="modalBody" style="width: 400px;">
+            <div onclick="closeMyModal('followerModal')" class="iconClose closeModal"></div>
+            <div class="header">
+                <span class="followerNumber" style="font-weight: bold;">{{$followersCount}}</span>
+                <span>دنبال کننده</span>
+            </div>
+            <div id="followerModalBody" class="body">
+                <div class="peopleRow placeHolder">
+                    <div class="pic placeHolderAnime"></div>
+                    <div class="name placeHolderAnime resultLineAnim"></div>
+                    <div class="buttonP placeHolderAnime resultLineAnim"></div>
+                </div>
+                <div class="peopleRow placeHolder">
+                    <div class="pic placeHolderAnime"></div>
+                    <div class="name placeHolderAnime resultLineAnim"></div>
+                    <div class="buttonP placeHolderAnime resultLineAnim"></div>
+                </div>
+
+                <div class="emptyPeople hidden">
+                    <img src="{{URL::asset('images/mainPics/noData.png')}}" >
+                    <span class="text">هیچ دنبال کننده ای ندارید</span>
+                </div>
+                <div id="resultFollowers"></div>
+            </div>
+        </div>
+    </div>
+
+
     @if(isset($myPage) && $myPage)
         <div id="userTripStyle" class="modalBlackBack hidden">
             <div class="userTripMainBody">
@@ -522,7 +632,6 @@
         let selectedTrip = [];
         let userPageId = {{$user->id}};
 
-
         $(window).on('scroll', () =>{
             let top = document.getElementById('stickyProfileHeader').getBoundingClientRect().top;
             let elem = $('.mobileTabs')[0];
@@ -531,6 +640,85 @@
             else if(top <= 0 && !$(elem).hasClass('stickToTop'))
                 $(elem).addClass('stickToTop');
         });
+
+        function followUser(_elem){
+            if(!checkLogin())
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("profile.setFollower")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: userPageId
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    if(response.status == 'store') {
+                        $(_elem).addClass('followed');
+                        showSuccessNotifi('شما به لیست دنبال کنندگان افزوده شدید', 'left', 'var(--koochita-blue)');
+                        $('.followerNumber').text(response.number);
+                    }
+                    else if(response.status == 'delete'){
+                        $(_elem).removeClass('followed');
+                        showSuccessNotifi('شما از لیست دنبال کنندگان خارج شدید', 'left', 'red');
+                        $('.followerNumber').text(response.number);
+                    }
+                },
+                error: err => console.log(err),
+            })
+        }
+
+        function openFollowerModal(){
+
+            $('#followerModalBody').find('.peopleRow').removeClass('hidden');
+            $('#followerModalBody').find('.emptyPeople').addClass('hidden');
+            $('#resultFollowers').empty();
+
+            openMyModal('followerModal');
+            $.ajax({
+                type: 'post',
+                url: '{{route("profile.getFollower")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: userPageId
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    if(response.status == 'ok'){
+                        if(response.result.length == 0){
+                            $('#followerModalBody').find('.peopleRow').addClass('hidden');
+                            $('#followerModalBody').find('.emptyPeople').removeClass('hidden');
+                        }
+                        else
+                            createFollower(response.result);
+                    }
+                },
+                error: err => console.log(err)
+            })
+        }
+
+        function createFollower(_follower){
+            let text = '';
+            _follower.map(item => {
+                let followed = '';
+                if(item.notMe == 1)
+                    followed = 'followed';
+
+                text += '<div class="peopleRow">\n' +
+                        '   <div class="pic">\n' +
+                        '       <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
+                        '   </div>\n' +
+                        '   <a href="' + item.url + '" class="name">' + item.username + '</a>\n';
+                if(item.notMe == 1)
+                    text += '   <div class="button ' + followed + '"></div>\n';
+                text += '</div>';
+            });
+
+            $('#followerModalBody').find('.peopleRow').addClass('hidden');
+            $('#followerModalBody').find('.emptyPeople').addClass('hidden');
+            $('#resultFollowers').html(text);
+        }
 
         function showAllPicUser(){
             createPhotoModal('عکس های شما', allUserPics);// in general.photoAlbumModal.blade.php

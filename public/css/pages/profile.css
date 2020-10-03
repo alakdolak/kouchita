@@ -1675,16 +1675,27 @@ body {
 .profileMobileSection{
     display: none;
 }
-.fallowButton{
+.followButton{
     border: none;
     margin-right: 10px;
     direction: rtl;
 }
-.fallowButton.fallowed{
+.followButton.followed{
     background: var(--koochita-green);
     color: white;
+    display: flex;
+    align-items: center;
 }
-.fallowButton.fallowed:after{
+.followButton .text:after{
+    content: 'دنبال کردن';
+}
+.followButton.followed .text:after{
+    content: 'دنبال شده';
+}
+.followButton.followed .addMemberIcon{
+    display: none;
+}
+.followButton.followed:after{
     content: "\E02B" !important;
     font-family: Shazde_Regular2 !important;
 }

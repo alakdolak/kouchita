@@ -414,14 +414,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.closeModal{
-    position: absolute;
-    left: 5px;
-    top: 0px;
-    font-size: 30px;
-    color: var(--koochita-light-green);
-    cursor: pointer;
-}
 .memberCard{
     padding: 10px;
     border-radius: 20px;

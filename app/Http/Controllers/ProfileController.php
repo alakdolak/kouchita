@@ -10,6 +10,7 @@ use App\models\Age;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\DefaultPic;
+use App\models\Followers;
 use App\models\InvitationCode;
 use App\models\Level;
 use App\models\LogModel;
@@ -43,6 +44,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 
 class ProfileController extends Controller {
@@ -164,7 +166,13 @@ class ProfileController extends Controller {
         $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
         $userMedals = getTakenMedal($uId)['takenMedal'];
 
-        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount', 'userMedals']));
+        $followersCount = Followers::where('followedId', $user->id)->count();
+
+        $youFollowed = 0;
+        if(!$myPage && \auth()->check())
+            $youFollowed = Followers::where('userId', \auth()->user()->id)->where('followedId', $user->id)->count();
+
+        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount', 'userMedals', 'followersCount', 'youFollowed']));
     }
 
     public function placeSuggestion(Request $request)

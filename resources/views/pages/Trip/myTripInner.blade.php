@@ -4,9 +4,9 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}">
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v='.$fileVersions)}}">
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v='.$fileVersions)}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}'/>
     <style>
         .modalBody{
             border-radius: 10px;

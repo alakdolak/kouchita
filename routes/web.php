@@ -457,6 +457,8 @@ Route::group(array('middleware' => 'nothing'), function(){
 Route::group(['middleware' => ['throttle:30']], function(){
     Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile');
 
+    Route::post('/profile/getFollower', 'FollowerController@getFollower')->name('profile.getFollower');
+
     Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
 
     Route::post('/profile/getUserMedals', 'ProfileController@getUserMedals')->name('profile.getUserMedals');
@@ -468,150 +470,151 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
-});
 
-// profile
-Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
+    Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
-    Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
+        Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
 
-    Route::post('profile/updateUserPhoto', 'ProfileController@updateUserPhoto')->name('profile.updateUserPhoto');
+        Route::post('profile/updateUserPhoto', 'ProfileController@updateUserPhoto')->name('profile.updateUserPhoto');
 
-    Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
+        Route::post('profile/updateMyBio', 'ProfileController@updateMyBio')->name('profile.updateMyBio');
 
-    Route::post('profile/updateBannerPic', 'ProfileController@updateBannerPic')->name('profile.updateBannerPic');
+        Route::post('profile/updateBannerPic', 'ProfileController@updateBannerPic')->name('profile.updateBannerPic');
 
-    Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
+        Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
 
-    Route::get('profile/bookmark', 'ProfileController@bookmark')->name('profile.bookmark');
+        Route::get('profile/bookmark', 'ProfileController@bookmark')->name('profile.bookmark');
 
-    Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page');
+        Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page');
 
-    Route::post('profile/message/get', 'MessageController@getMessages')->name('profile.message.get');
+        Route::post('profile/message/get', 'MessageController@getMessages')->name('profile.message.get');
 
-    Route::post('profile/message/update', 'MessageController@updateMessages')->name('profile.message.update');
+        Route::post('profile/message/update', 'MessageController@updateMessages')->name('profile.message.update');
 
-    Route::post('profile/message/send', 'MessageController@sendMessages')->name('profile.message.send');
+        Route::post('profile/message/send', 'MessageController@sendMessages')->name('profile.message.send');
 
-    Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips');
+        Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips');
 
-    Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces');
+        Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces');
 
-    Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
+        Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
 
-    Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
+        Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
 
-    Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
+        Route::post('profile/setFollower', 'FollowerController@setFollower')->name('profile.setFollower');
 
-    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
+        Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
 
-    Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
+        Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
+        Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
 
-    Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
 
-    Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
+        Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
 
-    Route::post('addPlace/storeImg', 'ProfileController@storeImgAddPlaceByUser')->name('addPlaceByUser.storeImg');
+        Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
 
-    Route::post('addPlace/deleteImg', 'ProfileController@deleteImgAddPlaceByUser')->name('addPlaceByUser.deleteImg');
+        Route::post('addPlace/storeImg', 'ProfileController@storeImgAddPlaceByUser')->name('addPlaceByUser.storeImg');
 
-    Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
+        Route::post('addPlace/deleteImg', 'ProfileController@deleteImgAddPlaceByUser')->name('addPlaceByUser.deleteImg');
 
-    Route::post('updateTripStyles', array('as' => 'updateTripStyles', 'uses' => 'TripStyleController@updateTripStyles'));
+        Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
 
-    Route::post('sendMyInvitationCode', array('as' => 'sendMyInvitationCode', 'uses' => 'ProfileController@sendMyInvitationCode'));
+        Route::post('updateTripStyles', array('as' => 'updateTripStyles', 'uses' => 'TripStyleController@updateTripStyles'));
 
-    Route::get('messages', array('as' => 'msgs', 'uses' => 'MessageController@showMessages'));
+        Route::post('sendMyInvitationCode', array('as' => 'sendMyInvitationCode', 'uses' => 'ProfileController@sendMyInvitationCode'));
 
-    Route::get('messagesErr/{err}', array('as' => 'msgsErr', 'uses' => 'MessageController@showMessages'));
+        Route::get('messages', array('as' => 'msgs', 'uses' => 'MessageController@showMessages'));
 
-    Route::post('opOnMsgs', array('as' => 'opOnMsgs', 'uses' => 'MessageController@opOnMsgs'));
+        Route::get('messagesErr/{err}', array('as' => 'msgsErr', 'uses' => 'MessageController@showMessages'));
 
-    Route::post('sendMsg/{srcName?}', array('as' => 'sendMsg', 'uses' => 'MessageController@sendMsg'));
+        Route::post('opOnMsgs', array('as' => 'opOnMsgs', 'uses' => 'MessageController@opOnMsgs'));
 
-    Route::post('sendMsgAjax', array('as' => 'sendMsgAjax', 'uses' => 'MessageController@sendMsgAjax'));
+        Route::post('sendMsg/{srcName?}', array('as' => 'sendMsg', 'uses' => 'MessageController@sendMsg'));
 
-    Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
+        Route::post('sendMsgAjax', array('as' => 'sendMsgAjax', 'uses' => 'MessageController@sendMsgAjax'));
 
-    Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
+        Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
 
-    Route::post('blockUser', array('as' => 'block', 'uses' => 'MessageController@blockUser'));
+        Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
 
-    Route::post('blockList', array('as' => 'getBlockListDir', 'uses' => 'MessageController@blockList'));
+        Route::post('blockUser', array('as' => 'block', 'uses' => 'MessageController@blockUser'));
 
-    Route::get('badge', array('as' => 'badge', 'uses' => 'BadgeController@showBadges'));
+        Route::post('blockList', array('as' => 'getBlockListDir', 'uses' => 'MessageController@blockList'));
 
-    Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
+        Route::get('badge', array('as' => 'badge', 'uses' => 'BadgeController@showBadges'));
 
-    Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
+        Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
 
-    Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
+        Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
 
-    Route::post('getBannerPics', array('as' => 'getBannerPics', 'uses' => 'ProfileController@getBannerPics'));
+        Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
 
-    Route::post('updateProfile1', array('as' => 'updateProfile1', 'uses' => 'ProfileController@updateProfile1'));
+        Route::post('getBannerPics', array('as' => 'getBannerPics', 'uses' => 'ProfileController@getBannerPics'));
 
-    Route::post('checkAuthCode', array('as' => 'checkAuthCode', 'uses' => 'ProfileController@checkAuthCode'));
+        Route::post('updateProfile1', array('as' => 'updateProfile1', 'uses' => 'ProfileController@updateProfile1'));
 
-    Route::post('resendAuthCode', array('as' => 'resendAuthCode', 'uses' => 'ProfileController@resendAuthCode'));
+        Route::post('checkAuthCode', array('as' => 'checkAuthCode', 'uses' => 'ProfileController@checkAuthCode'));
 
-    Route::post('updateProfile2', array('as' => 'updateProfile2', 'uses' => 'ProfileController@updateProfile2'));
+        Route::post('resendAuthCode', array('as' => 'resendAuthCode', 'uses' => 'ProfileController@resendAuthCode'));
 
-    Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
+        Route::post('updateProfile2', array('as' => 'updateProfile2', 'uses' => 'ProfileController@updateProfile2'));
 
-    Route::post('placeTrips', array('as' => 'placeTrips', 'uses' => 'MyTripsController@placeTrips'));
+        Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
 
-    Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
+        Route::post('placeTrips', array('as' => 'placeTrips', 'uses' => 'MyTripsController@placeTrips'));
 
-    Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
+        Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
 
-    Route::get('seeTrip/{tripId}', array('as' => 'seeTrip', 'uses' => 'MyTripsController@tripHistory'));
+        Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
 
-    Route::get('acceptTrip/{tripId}', array('as' => 'acceptTrip', 'uses' => 'MyTripsController@acceptTrip'));
+        Route::get('seeTrip/{tripId}', array('as' => 'seeTrip', 'uses' => 'MyTripsController@tripHistory'));
 
-    Route::get('rejectInvitation/{tripId}', array('as' => 'rejectInvitation', 'uses' => 'MyTripsController@rejectInvitation'));
+        Route::get('acceptTrip/{tripId}', array('as' => 'acceptTrip', 'uses' => 'MyTripsController@acceptTrip'));
 
-    Route::post('getTripMembers', array('as' => 'getTripMembers', 'uses' => 'MyTripsController@getTripMembers'));
+        Route::get('rejectInvitation/{tripId}', array('as' => 'rejectInvitation', 'uses' => 'MyTripsController@rejectInvitation'));
 
-    Route::post('getMemberAccessLevel', array('as' => 'getMemberAccessLevel', 'uses' => 'MyTripsController@getMemberAccessLevel'));
+        Route::post('getTripMembers', array('as' => 'getTripMembers', 'uses' => 'MyTripsController@getTripMembers'));
 
-    Route::post('changeAddPlace', array('as' => 'changeAddPlace', 'uses' => 'MyTripsController@changeAddPlace'));
+        Route::post('getMemberAccessLevel', array('as' => 'getMemberAccessLevel', 'uses' => 'MyTripsController@getMemberAccessLevel'));
 
-    Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'MyTripsController@changeAddFriend'));
+        Route::post('changeAddPlace', array('as' => 'changeAddPlace', 'uses' => 'MyTripsController@changeAddPlace'));
 
-    Route::post('changePlaceDate', array('as' => 'changePlaceDate', 'uses' => 'MyTripsController@changePlaceDate'));
+        Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'MyTripsController@changeAddFriend'));
 
-    Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
+        Route::post('changePlaceDate', array('as' => 'changePlaceDate', 'uses' => 'MyTripsController@changePlaceDate'));
 
-    Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'));
+        Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
 
-    Route::post('sendAns', array('as' => 'sendAns', 'uses' => 'PlaceController@sendAns'));
+        Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'));
 
-    Route::post('sendAns2', array('as' => 'sendAns2', 'uses' => 'PlaceController@sendAns2'));
+        Route::post('sendAns', array('as' => 'sendAns', 'uses' => 'PlaceController@sendAns'));
 
-    Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
+        Route::post('sendAns2', array('as' => 'sendAns2', 'uses' => 'PlaceController@sendAns2'));
 
-    Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
+        Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
 
-    Route::post('addPhotoToComment/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToComment', 'uses' => 'PlaceController@addPhotoToComment'));
+        Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
 
-    Route::post('sendComment', array('as' => 'sendComment', 'uses' => 'PlaceController@sendComment'));
+        Route::post('addPhotoToComment/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToComment', 'uses' => 'PlaceController@addPhotoToComment'));
 
-    Route::post('setPlaceRate', array('as' => 'setPlaceRate', 'uses' => 'PlaceController@setPlaceRate'));
+        Route::post('sendComment', array('as' => 'sendComment', 'uses' => 'PlaceController@sendComment'));
 
-    Route::post('setBookMark', array('as' => 'setBookMark', 'uses' => 'PlaceController@setBookMark'));
+        Route::post('setPlaceRate', array('as' => 'setPlaceRate', 'uses' => 'PlaceController@setPlaceRate'));
 
-    Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
+        Route::post('setBookMark', array('as' => 'setBookMark', 'uses' => 'PlaceController@setBookMark'));
 
-    Route::post('/alert/seen', 'HomeController@seenAlerts')->name('alert.seen');
+        Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
 
-    Route::post('getAlertsNum', array('as' => 'getAlertsNum', 'uses' => 'HomeController@getAlertsCount'));
+        Route::post('/alert/seen', 'HomeController@seenAlerts')->name('alert.seen');
 
-    Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
+        Route::post('getAlertsNum', array('as' => 'getAlertsNum', 'uses' => 'HomeController@getAlertsCount'));
 
-    Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
+        Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
 
+        Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
+
+    });
 });
 
 //safarnameh

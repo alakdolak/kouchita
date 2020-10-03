@@ -166,6 +166,15 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     justify-content: center;
     align-items: center;
 }
+
+.modalBlackBack .closeModal{
+    position: absolute;
+    left: 5px;
+    top: 0px;
+    font-size: 30px;
+    color: var(--koochita-light-green);
+    cursor: pointer;
+}
 .modalBlackBack.showModal{
     display: flex !important;
 }
