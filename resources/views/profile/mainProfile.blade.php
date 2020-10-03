@@ -346,12 +346,12 @@
             <div class="header">
                 <div class="resultFollowersTab selected" onclick="openFollowerModal('resultFollowers')">
                     <span class="followerNumber" style="font-weight: bold;">{{$followersCount}}</span>
-                    <span>دنبال کننده</span>
+                    <span>follower</span>
                 </div>
                 @if(isset($myPage) && $myPage)
                     <div class="resultFollowingTab" onclick="openFollowerModal('resultFollowing')">
                         <span class="followingNumber" style="font-weight: bold;">{{$followingCount}}</span>
-                        <span>دنبال شونده</span>
+                        <span>following</span>
                     </div>
                 @endif
             </div>
