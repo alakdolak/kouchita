@@ -13,102 +13,6 @@
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1='.$fileVersions)}}">
     <style>
 
-        .followerHeaderSection{
-            position: absolute;
-            z-index: 1;
-            background: white;
-            direction: rtl;
-            font-size: 14px;
-            padding: 0px 5px;
-            border-radius: 5px 0px 0px 5px;
-            right: 125px;
-            bottom: 60px;
-            width: fit-content;
-        }
-        .followerModal .header{
-            padding: 4px 0px;
-            border-bottom: solid 1px #e2e2e2;
-        }
-        .followerModal .body{
-            max-height: calc(100vh - 110px);
-            min-height: 50vh;
-            overflow-y: auto;
-        }
-        .followerModal .body .peopleRow{
-            display: flex;
-            align-items: center;
-            padding: 5px;
-        }
-        .followerModal .body .peopleRow .pic{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .followerModal .body .peopleRow .name{
-            margin-right: 12px;
-            color: black;
-        }
-        .followerModal .body .peopleRow .button{
-            margin-right: auto;
-            border: solid gray 1px;
-            padding: 2px 10px;
-            font-size: 11px;
-            border-radius: 7px;
-            display: flex;
-            align-items: center;
-        }
-        .followerModal .body .peopleRow .button:before{
-            content: 'دنبال کردن';
-        }
-        .followerModal .body .peopleRow .button.followed:before{
-            content: 'دنبال شده';
-        }
-        .followerModal .body .peopleRow .button.followed{
-            background: var(--koochita-green);
-            color: white;
-            padding: 3px 10px;
-            border: var(--koochita-green);
-        }
-        .followerModal .body .peopleRow .button.followed:after{
-            content: "\E02B" !important;
-            font-family: Shazde_Regular2 !important;
-        }
-
-        .followerModal .body .emptyPeople{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 25%;
-            opacity: .5;
-            filter: grayscale(1);
-        }
-        .followerModal .body .emptyPeople > img{
-            width: 100px;
-        }
-        .followerModal .body .emptyPeople .text{
-            margin-top: 10px;
-        }
-        .followerModal .peopleRow.placeHolder {
-            opacity: .4;
-        }
-        .followerModal .peopleRow.placeHolder .resultLineAnim{
-            width: 33%;
-            margin-bottom: 0px;
-        }
-        .followerModal .peopleRow.placeHolder .buttonP.resultLineAnim{
-            margin-right: auto;
-            width: 70px;
-            height: 30px;
-        }
-        @media (max-width: 768px) {
-
-
-        }
     </style>
 @stop
 
@@ -129,7 +33,7 @@
                         <div class="circleBase profilePicUserProfile">
                             <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                         </div>
-                        <div class="followerHeaderSection hideOnScreen" onclick="openFollowerModal()">
+                        <div class="followerHeaderSection hideOnScreen" onclick="openFollowerModal('resultFollowers')">
                             <span class="followerNumber" style="font-weight: bold">{{$followersCount}}</span>
                             <span style="font-size: 9px;">دنبال کننده</span>
                         </div>
@@ -155,7 +59,7 @@
                                     @endif
                                 </a>
                             @else
-                                <button class="msgHeaderButton followButton {{$youFollowed != 0 ? 'followed' : ''}}" onclick="followUser(this)">
+                                <button class="msgHeaderButton followButton {{$youFollowed != 0 ? 'followed' : ''}}" onclick="followUser(this, {{$user->id}})">
                                     <span class="addMemberIcon"></span>
                                     <span class="text"></span>
                                 </button>
@@ -165,13 +69,39 @@
                     </div>
 
                     <div class="postsMainFiltrationBar hideOnPhone">
-                        <a id="whoAmITab" href="#whoAmI" class="profileHeaderLinksTab whoAmI" onclick="changePages('whoAmI')">من کی هستم</a>
-                        <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
-                        <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
-                        <a id="questionTab" href="#question" class="profileHeaderLinksTab" onclick="changePages('question')">سؤال‌ و جواب</a>
-                        <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">سفرنامه ها</a>
-                        <a id="medalsTab" href="#medal" class="profileHeaderLinksTab" onclick="changePages('medal')">جایزه و امتیاز</a>
-                        <a href="#" class="profileHeaderLinksTab">سایر موارد</a>
+                        <div class="" style="display: flex; justify-content: space-around; align-items: center; padding: 5px 0px;">
+                            <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">
+                                <span class="icon EmptyCommentIcon"></span>
+                                <span class="text">پست‌ها</span>
+                            </a>
+                            <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">
+                                <span class="icon emptyCameraIcon"></span>
+                                <span class="text">عکس و فیلم</span>
+                            </a>
+                            <a id="questionTab" href="#question" class="profileHeaderLinksTab" onclick="changePages('question')">
+                                <span class="icon questionIcon"></span>
+                                <span class="text">سؤال‌ و جواب</span>
+                            </a>
+                            <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">
+                                <span class="icon safarnameIcon"></span>
+                                <span class="text">سفرنامه ها</span>
+                            </a>
+                            <a id="medalsTab" href="#medal" class="profileHeaderLinksTab" onclick="changePages('medal')">
+                                <span class="icon medalsIcon"></span>
+                                <span class="text">جایزه و امتیاز</span>
+                            </a>
+                            <a id="followerTab" href="#" class="profileHeaderLinksTab" onclick="openFollowerModal('resultFollowers')">
+                                <span class="icon twoManIcon"></span>
+                                <span class="text">دنبال کنندگان</span>
+                            </a>
+                            @if(isset($myPage) && $myPage)
+                                <a id="bookMarkTab" href="#bookMark" class="profileHeaderLinksTab" onclick="changePages('bookMark')">
+                                    <span class="icon BookMarkIconEmpty"></span>
+                                    <span class="text">نشان کرده</span>
+                                </a>
+                            @endif
+                        </div>
+{{--                        <a href="#" class="profileHeaderLinksTab threeDotIcon"></a>--}}
                     </div>
                 </div>
 
@@ -188,22 +118,18 @@
                                     {{$sideInfos['introduction']}}
                                 @endif
                             </div>
-                            <div class="styleSec">
-                                @foreach($sideInfos['tripStyle'] as $item)
-                                    <div class="userProfileTags">{{$item->name}}</div>
-                                @endforeach
-                            </div>
                         </div>
                     </div>
 
-                    <script>
-                        function showFullUserInfoInMobile(_elems) {
-                            $(_elems).parent().toggleClass('show');
-                        }
-                    </script>
-
                     <div id="stickyProfileHeader" class="profileMobileStickHeader">
                         <div class="mobileTabs">
+                            @if(isset($myPage) && $myPage)
+                                <div class="tab" onclick="openMoreTabProfileMobile(this)">
+                                    <div class="icon threeDotIconVertical"></div>
+                                    <div class="name"></div>
+                                    <div class="bottomLine"></div>
+                                </div>
+                            @endif
                             <div class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
                                 <div class="icon safarnameIcon"></div>
                                 <div class="name">سفرنامه</div>
@@ -228,7 +154,7 @@
                     </div>
                 </div>
 
-                <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
+                <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right hideOnPhone">
                     @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0 || $myPage)
                         <div class="userProfileLevelMainDiv rightColBoxes">
                             <div class="mainDivHeaderText">
@@ -244,15 +170,15 @@
                                     <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">خودتان را به دیگران معرفی کنید.</div>
                                 @endif
                             </div>
-                            <div id="myTripStyles" class="userProfileTagsSection">
-                                @if(count($sideInfos['tripStyle']) == 0 && $sideInfos['introduction'] != null && isset($myPage) && $myPage)
-                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>
-                                @else
-                                    @foreach($sideInfos['tripStyle'] as $item)
-                                        <div class="userProfileTags">{{$item->name}}</div>
-                                    @endforeach
-                                @endif
-                            </div>
+{{--                            <div id="myTripStyles" class="userProfileTagsSection">--}}
+{{--                                @if(count($sideInfos['tripStyle']) == 0 && $sideInfos['introduction'] != null && isset($myPage) && $myPage)--}}
+{{--                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>--}}
+{{--                                @else--}}
+{{--                                    @foreach($sideInfos['tripStyle'] as $item)--}}
+{{--                                        <div class="userProfileTags">{{$item->name}}</div>--}}
+{{--                                    @endforeach--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
                         </div>
                     @endif
                     <div class="userProfileLevelMainDiv rightColBoxes">
@@ -285,10 +211,10 @@
                         </div>
                     </div>
                     <div class="userProfileLevelMainDiv rightColBoxes" style="padding: 0px">
-                        {{--        <div class="mainDivHeaderText">--}}
-                        {{--            <h3>امتیاز کاربر</h3>--}}
-                        {{--            <div>سیستم امتیاز دهی</div>--}}
-                        {{--        </div>--}}
+                                <div class="mainDivHeaderText">
+                                    <h3>امتیاز کاربر</h3>
+                                    <div>سیستم امتیاز دهی</div>
+                                </div>
                         <div class="userProfileLevelDetails userProfileScoreSection">
                             <div  style="width: 49%; border-left: solid 1px gray;">
                                 <div style="font-size: 17px; color: #656565; font-weight: bold"> {{__('امتیاز کل کاربر')}} </div>
@@ -405,35 +331,33 @@
                     <div id="medalBody" class="prodileSections hidden">
                         @include('profile.innerParts.userMedals')
                     </div>
+
+                    <div id="bookMarkBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userMedals')
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="followerModal" class="modalBlackBack fullCenter followerModal" style="z-index: 9999;">
-        <div class="modalBody" style="width: 400px;">
+        <div class="modalBody" style="width: 400px; border-radius: 10px;">
             <div onclick="closeMyModal('followerModal')" class="iconClose closeModal"></div>
             <div class="header">
-                <span class="followerNumber" style="font-weight: bold;">{{$followersCount}}</span>
-                <span>دنبال کننده</span>
+                <div class="resultFollowersTab selected" onclick="openFollowerModal('resultFollowers')">
+                    <span class="followerNumber" style="font-weight: bold;">{{$followersCount}}</span>
+                    <span>دنبال کننده</span>
+                </div>
+                @if(isset($myPage) && $myPage)
+                    <div class="resultFollowingTab" onclick="openFollowerModal('resultFollowing')">
+                        <span class="followingNumber" style="font-weight: bold;">{{$followingCount}}</span>
+                        <span>دنبال شونده</span>
+                    </div>
+                @endif
             </div>
             <div id="followerModalBody" class="body">
-                <div class="peopleRow placeHolder">
-                    <div class="pic placeHolderAnime"></div>
-                    <div class="name placeHolderAnime resultLineAnim"></div>
-                    <div class="buttonP placeHolderAnime resultLineAnim"></div>
-                </div>
-                <div class="peopleRow placeHolder">
-                    <div class="pic placeHolderAnime"></div>
-                    <div class="name placeHolderAnime resultLineAnim"></div>
-                    <div class="buttonP placeHolderAnime resultLineAnim"></div>
-                </div>
-
-                <div class="emptyPeople hidden">
-                    <img src="{{URL::asset('images/mainPics/noData.png')}}" >
-                    <span class="text">هیچ دنبال کننده ای ندارید</span>
-                </div>
                 <div id="resultFollowers"></div>
+                <div id="resultFollowing"></div>
             </div>
         </div>
     </div>
@@ -631,6 +555,11 @@
         let allUserPics = {!! json_encode($sideInfos['allUserPics']) !!};
         let selectedTrip = [];
         let userPageId = {{$user->id}};
+        let followerPlaceHolder =   '<div class="peopleRow placeHolder">\n' +
+                                    '   <div class="pic placeHolderAnime"></div>\n' +
+                                    '   <div class="name placeHolderAnime resultLineAnim"></div>\n' +
+                                    '   <div class="buttonP placeHolderAnime resultLineAnim"></div>\n' +
+                                    '</div>';
 
         $(window).on('scroll', () =>{
             let top = document.getElementById('stickyProfileHeader').getBoundingClientRect().top;
@@ -641,7 +570,12 @@
                 $(elem).addClass('stickToTop');
         });
 
-        function followUser(_elem){
+
+        function showFullUserInfoInMobile(_elems) {
+            $(_elems).parent().toggleClass('show');
+        }
+
+        function followUser(_elem, _id){
             if(!checkLogin())
                 return;
 
@@ -650,30 +584,41 @@
                 url: '{{route("profile.setFollower")}}',
                 data: {
                     _token: '{{csrf_token()}}',
-                    id: userPageId
+                    id: _id,
+                    userPageId: userPageId
                 },
                 success: function(response){
                     response = JSON.parse(response);
                     if(response.status == 'store') {
                         $(_elem).addClass('followed');
                         showSuccessNotifi('شما به لیست دنبال کنندگان افزوده شدید', 'left', 'var(--koochita-blue)');
-                        $('.followerNumber').text(response.number);
+                        $('.followerNumber').text(response.followerNumber);
+                        $('.followingNumber').text(response.followingNumber);
                     }
                     else if(response.status == 'delete'){
                         $(_elem).removeClass('followed');
                         showSuccessNotifi('شما از لیست دنبال کنندگان خارج شدید', 'left', 'red');
-                        $('.followerNumber').text(response.number);
+                        $('.followerNumber').text(response.followerNumber);
+                        $('.followingNumber').text(response.followingNumber);
                     }
                 },
                 error: err => console.log(err),
             })
         }
 
-        function openFollowerModal(){
+        function openFollowerModal(_kind){
+            $('#followerModalBody').children().addClass('hidden');
+            $(`#${_kind}`).removeClass('hidden');
 
-            $('#followerModalBody').find('.peopleRow').removeClass('hidden');
-            $('#followerModalBody').find('.emptyPeople').addClass('hidden');
-            $('#resultFollowers').empty();
+            $(`.${_kind}Tab`).parent().find('.selected').removeClass('selected');
+            $(`.${_kind}Tab`).addClass('selected');
+            $('#'+_kind).html(followerPlaceHolder+followerPlaceHolder);
+
+            let sendKind = '';
+            if(_kind == 'resultFollowing')
+                sendKind = 'following';
+            else
+                sendKind = 'follower';
 
             openMyModal('followerModal');
             $.ajax({
@@ -681,43 +626,43 @@
                 url: '{{route("profile.getFollower")}}',
                 data: {
                     _token: '{{csrf_token()}}',
-                    id: userPageId
+                    id: userPageId,
+                    kind: sendKind
                 },
                 success: function(response){
                     response = JSON.parse(response);
-                    if(response.status == 'ok'){
-                        if(response.result.length == 0){
-                            $('#followerModalBody').find('.peopleRow').addClass('hidden');
-                            $('#followerModalBody').find('.emptyPeople').removeClass('hidden');
-                        }
-                        else
-                            createFollower(response.result);
-                    }
+                    if(response.status == 'ok')
+                        createFollower(_kind, response.result);
                 },
                 error: err => console.log(err)
             })
         }
 
-        function createFollower(_follower){
+        function createFollower(_Id, _follower){
             let text = '';
-            _follower.map(item => {
-                let followed = '';
-                if(item.notMe == 1)
-                    followed = 'followed';
+            if(_follower.length == 0) {
+                text =  '<div class="emptyPeople">\n' +
+                        '   <img src="{{URL::asset('images/mainPics/noData.png')}}" >\n' +
+                        '   <span class="text">هیچ کاربری ثبت نشده است</span>\n' +
+                        '</div>';
+            }
+            else {
+                _follower.map(item => {
+                    let followed = '';
+                    if (item.followed == 1)
+                        followed = 'followed';
 
-                text += '<div class="peopleRow">\n' +
-                        '   <div class="pic">\n' +
+                    text += '<div class="peopleRow">\n' +
+                        '   <a href="' + item.url + '" class="pic">\n' +
                         '       <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
-                        '   </div>\n' +
+                        '   </a>\n' +
                         '   <a href="' + item.url + '" class="name">' + item.username + '</a>\n';
-                if(item.notMe == 1)
-                    text += '   <div class="button ' + followed + '"></div>\n';
-                text += '</div>';
-            });
-
-            $('#followerModalBody').find('.peopleRow').addClass('hidden');
-            $('#followerModalBody').find('.emptyPeople').addClass('hidden');
-            $('#resultFollowers').html(text);
+                    if (item.notMe == 1)
+                        text += '   <div class="button ' + followed + '"  onclick="followUser(this, ' + item.userId + ')"></div>\n';
+                    text += '</div>';
+                });
+            }
+            $('#'+_Id).html(text);
         }
 
         function showAllPicUser(){
@@ -795,22 +740,13 @@
         }
 
         function changePages(_kind){
-            cancelFullMainContent();
-
             $('.postsMainFiltrationBar').find('.active').removeClass('active');
             $('.prodileSections').addClass('hidden');
-
-            if($(window).width() < 768)
-                $('#userProfileSideInfos').hide();
 
             if(_kind === 'review'){
                 $('#reviewTab').addClass('active');
                 $('#reviewMainBody').removeClass('hidden');
                 getReviewsUserReview(); // in profile.innerParts.userPostsInner
-            }
-            else if(_kind == 'whoAmI'){
-                $('#userProfileSideInfos').show();
-                $('#whoAmITab').addClass('active');
             }
             else if(_kind === 'picture') {
                 $('#pictureTab').addClass('active');
@@ -832,6 +768,16 @@
                 $('#medalBody').removeClass('hidden');
                 getMedals(); // in profile.innerParts.userMedals
             }
+            else if(_kind === 'bookMark') {
+                $('#bookMarkTab').addClass('active');
+                $('#bookMarkBody').removeClass('hidden');
+                // getMedals(); // in profile.innerParts.userMedals
+            }
+        }
+
+        function openMoreTabProfileMobile(_element){
+            $(_element).parent().find('.selected').removeClass('selected');
+            $(_element).addClass('selected');
         }
 
         function mobileChangeProfileTab(_element, _kind){
@@ -855,18 +801,10 @@
                 $('#medalBody').removeClass('hidden');
                 getMedals(); // in profile.innerParts.userMedals
             }
-        }
-
-        function fullMainContent(){
-            $('#userProfileSideInfos').hide();
-            $('#userProfileMainContentSection').addClass('fullWidthBoot');
-        }
-
-        function cancelFullMainContent(){
-            if($(window).width() > 768)
-                $('#userProfileSideInfos').show();
-
-            $('#userProfileMainContentSection').removeClass('fullWidthBoot');
+            else if(_kind == 'question'){
+                $('#questionMainBody').removeClass('hidden');
+                getAllUserQuestions();// in profile.innerParts.userQuestionsInner
+            }
         }
 
         let defaultPics = null;

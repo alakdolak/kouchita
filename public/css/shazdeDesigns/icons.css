@@ -257,6 +257,18 @@
     content: "\E087" !important;
     font-family: Shazde_Regular2 !important;
 }
+.twoManIcon:before{
+    content: "\E014" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.bookIcon:before{
+    content: "\E09D" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.questionIcon:before{
+    content: "\E054" !important;
+    font-family: Shazde_Regular2 !important;
+}
 .medalsIcon:before{
     content: "\E059" !important;
     font-family: Shazde_Regular2 !important;

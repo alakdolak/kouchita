@@ -27,8 +27,9 @@ class FollowerController extends Controller
                     $status = 'store';
                 }
 
-                $number = Followers::where('followedId', $followed->id)->count();
-                echo json_encode(['status' => $status, 'number' => $number]);
+                $followerNumber = Followers::where('followedId', $request->userPageId)->count();
+                $followingNumber = Followers::where('userId', $u->id)->count();
+                echo json_encode(['status' => $status, 'followerNumber' => $followerNumber, 'followingNumber' => $followingNumber]);
             }
             else
                 echo json_encode(['status' => 'notFound']);
@@ -42,26 +43,38 @@ class FollowerController extends Controller
     public function getFollower(Request $request)
     {
         if(isset($request->id)){
-            $followeds = Followers::where('followedId', $request->id)->get();
             $you = 0;
+            $follow = [];
             if(auth()->check())
                 $you = auth()->user()->id;
-            foreach ($followeds as $item){
-                $user = User::select(['id', 'username'])->find($item->userId);
+
+            if($request->kind == 'follower')
+                $follow = Followers::where('followedId', $request->id)->get();
+            else if($you != 0 && $you == $request->id && $request->kind == 'following')
+                $follow = Followers::where('userId', $you)->get();
+
+            foreach ($follow as $item){
+                if($request->kind == 'follower')
+                    $user = User::select(['id', 'username'])->find($item->userId);
+                else if($you != 0 && $you == $request->id)
+                    $user = User::select(['id', 'username'])->find($item->followedId);
+
                 $item->pic = getUserPic($user->id);
                 $item->url = route('profile', ['username' => $user->username]);
                 $item->username = $user->username;
+                $item->userId = $user->id;
                 $item->followed = 0;
                 if($you != 0) {
                     $item->followed = Followers::where('userId', $you)
-                        ->where('followedId', $item->id)
-                        ->count();
+                                        ->where('followedId', $user->id)
+                                        ->count();
                     $item->notMe = 1;
                     if($user->id == $you)
                         $item->notMe = 0;
                 }
             }
-            echo json_encode(['status' => 'ok', 'result' => $followeds]);
+
+            echo json_encode(['status' => 'ok', 'result' => $follow]);
         }
         else
             echo json_encode(['status' => 'nok']);
