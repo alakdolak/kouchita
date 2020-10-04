@@ -270,6 +270,14 @@
     font-family: Shazde_Regular2 !important;
 }
 .medalsIcon:before{
+    content: "\E070" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.plusCircleIcon:before{
+    content: "\E030" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.festivalIcon:before{
     content: "\E059" !important;
     font-family: Shazde_Regular2 !important;
 }
@@ -287,6 +295,11 @@
 }
 .MyTripsIcon:before{
     content: "\e0c5" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.messageIcon:before{
+    content: "\E0CA" !important;
+    font-family: Shazde_Regular2 !important;
 }
 .MsgIcon:before{
     content: "\e05f" !important;

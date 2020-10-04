@@ -153,26 +153,26 @@
                                 </div>
 
                                 <div id="myMenuMoreTab" class="moreTabMenu hidden">
-                                    <div class="tabMenu" onclick="chooseFromMobileMenuTab('question', this)">سوال و جواب</div>
-                                    <div class="tabMenu" onclick="chooseFromMobileMenuTab('bookMark', this)">نشان کرده</div>
+                                    <div id="myMenuMoreTabQuestion" class="tabMenu" onclick="chooseFromMobileMenuTab('question', this)">سوال و جواب</div>
+                                    <div id="myMenuMoreTabBookMark" class="tabMenu" onclick="chooseFromMobileMenuTab('bookMark', this)">نشان کرده</div>
                                 </div>
                             @endif
-                            <div class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
+                            <div id="safarnamehProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
                                 <div class="icon safarnameIcon"></div>
                                 <div class="name">سفرنامه</div>
                                 <div class="bottomLine"></div>
                             </div>
-                            <div class="tab" onclick="mobileChangeProfileTab(this, 'medal')">
+                            <div id="medalProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'medal')">
                                 <div class="icon medalsIcon"></div>
-                                <div class="name">مدال ها</div>
+                                <div class="name">جوایز و مدال ها</div>
                                 <div class="bottomLine"></div>
                             </div>
-                            <div class="tab" onclick="mobileChangeProfileTab(this, 'photo')">
+                            <div id="photoProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'photo')">
                                 <div class="icon emptyCameraIcon"></div>
                                 <div class="name">عکس و فیلم</div>
                                 <div class="bottomLine"></div>
                             </div>
-                            <div class="tab selected" onclick="mobileChangeProfileTab(this, 'review')">
+                            <div id="reviewProfileMoblieTab" class="tab selected" onclick="mobileChangeProfileTab(this, 'review')">
                                 <div class="icon EmptyCommentIcon"></div>
                                 <div class="name">پست</div>
                                 <div class="bottomLine"></div>

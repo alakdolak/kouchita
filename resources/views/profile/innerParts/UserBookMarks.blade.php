@@ -6,6 +6,12 @@
     }
     .placeBookMarkProfile > div{
         margin-bottom: 10px;
+        width: 300px;
+    }
+    @media (max-width: 767px) {
+        .notPadding .pd-rt-0, .notPadding .pd-lt-0{
+            padding: 0px;
+        }
     }
 </style>
 <div class="userActivitiesQuestions">
@@ -106,7 +112,7 @@
                         left += createSmallReviewHtml(item);
                 });
 
-                text = '<div class="row">';
+                text = '<div class="row notPadding">';
                 text += '<div class="col-md-6 pd-rt-0">';
                 text += right;
                 text += '</div>';

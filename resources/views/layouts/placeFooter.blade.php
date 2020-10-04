@@ -809,61 +809,93 @@
 
         @if(auth()->check())
             <div class="modal fade" id="profile">
-                <div class="mainPopUp rightPopUp">
-                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profile').modal('hide')" style="top: -10px"></div>
+                <div class="mainPopUp rightPopUp profileFooterPopUp">
+                    <div class="closeFooterPopupIcon iconFamily iconClose"
+                         onclick="$('#profile').modal('hide')"
+                         style="top: -10px"></div>
                     <div id="lp_register">
                         <div>
-                            <div class="modules-membercenter-member-profile position-relative">
-
-                                <div class="profileBlock">
-                                    <div id="" class="targets profileInfosDetails col-xs-8">
-
-                                        <p class="since">
-                                            <b>
-                                                {{isset($userFooter->first_name) ? $userFooter->first_name : $userFooter->username}}
-                                            </b>
-                                        </p>
-                                        <div class="ageSince" style="flex-direction: column;">
-                                            <div class="since">{{__('عضو شده از')}}</div>
-                                            <div class="since">
-                                                {{$registerUser}}
-                                            </div>
+                            <div class="row" style="width: 100%; margin: 0px">
+                                <div class="firsLine">
+                                    <div class="pic">
+                                        <img src="{{isset($buPic) ? $buPic : ''}}" height="60" width="60"/>
+                                    </div>
+                                    <div class="infos">
+                                        <div class="inf">
+                                            <div class="number">21</div>
+                                            <div class="name">سطح کاربر</div>
+                                        </div>
+                                        <div class="inf">
+                                            <div class="number">1023</div>
+                                            <div class="name">امتیاز</div>
+                                        </div>
+                                        <div class="inf">
+                                            <div class="number">12</div>
+                                            <div class="name">دنبال کننده</div>
                                         </div>
                                     </div>
-
-
-                                    <div class="col-xs-4">
-        {{--                                @if(!$user->uploadPhoto)--}}
-                                            <img class="avatarUrl"
-                                                 src="{{isset($buPic) ? $buPic : ''}}"
-                                                 height="60" width="60"/>
-        {{--                                @else--}}
-        {{--                                    <img class="avatarUrl"--}}
-        {{--                                         src="{{URL::asset('userProfile') . "/" . $user->picture}}"--}}
-        {{--                                         height="60" width="60"/>--}}
-        {{--                                @endif--}}
+                                </div>
+                                <div class="secondLine">
+                                    <div class="name">{{$userFooter->username}}</div>
+                                </div>
+                                <div class="buttonsLine">
+                                    <div class="mBLine bLine">
+                                        <div onclick="window.location.href='{{route("profile")}}'">
+{{--                                            <div class="icon"></div>--}}
+                                            <div class="name">صفحه من</div>
+                                        </div>
+                                        <div onclick="window.location.href='{{route("profile.message.page")}}'">
+{{--                                            <div class="icon messageIcon"></div>--}}
+                                            <div class="name">صندوق پیام</div>
+                                        </div>
+                                    </div>
+                                    <div class="mBLine bLine">
+                                        <div onclick="mobileFooterProfileButton('review')">
+                                            <div class="icon EmptyCommentIcon"></div>
+                                            <div class="name">پست ها</div>
+                                        </div>
+                                        <div onclick="mobileFooterProfileButton('photo')">
+                                            <div class="icon emptyCameraIcon"></div>
+                                            <div class="name">عکس و فیم</div>
+                                        </div>
+                                        <div onclick="mobileFooterProfileButton('question')">
+                                            <div class="icon questionIcon"></div>
+                                            <div class="name">سوال و جواب</div>
+                                        </div>
+                                        <div onclick="mobileFooterProfileButton('safarnameh')">
+                                            <div class="icon safarnameIcon"></div>
+                                            <div class="name">سفرنامه ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="mBLine bLine">
+                                        <div onclick="mobileFooterProfileButton('medal')">
+                                            <div class="icon medalsIcon"></div>
+                                            <div class="name">جایزه و امتیاز</div>
+                                        </div>
+                                        <div onclick="mobileFooterProfileButton('follower')">
+                                            <div class="icon twoManIcon"></div>
+                                            <div class="name">دنبال کنندگان</div>
+                                        </div>
+                                        <div onclick="mobileFooterProfileButton('bookMark')">
+                                            <div class="icon BookMarkIconEmpty" style="font-size: 26px;"></div>
+                                            <div class="name">نشان کرده</div>
+                                        </div>
+                                        <div onclick="mobileFooterProfileButton('setting')">
+                                            <div class="icon settingIcon"></div>
+                                            <div class="name">تنظیمات</div>
+                                        </div>
+                                    </div>
+                                    <div class="mBLine bLine">
+                                        <div>
+                                            <div class="icon festivalIcon"></div>
+                                            <div class="name">فستیوال</div>
+                                        </div>
+                                        <div onclick="window.location.href = '{{route("myTrips")}}'">
+                                            <div class="icon MyTripsIcon"></div>
+                                            <div class="name">سفرهای من</div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="aboutMeDesc">
-                                    <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
-                                        {{__('اطلاعات کاربری')}}
-                                        <div class="glyphicon glyphicon-chevron-down"></div>
-                                        <div class="glyphicon glyphicon-chevron-up display-none"></div>
-                                    </div>
-                                    <div class="editProfileMenu item display-none" style="text-align: center">
-                                        <a name="edit-profile" class="menu-link " href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
-                                        <a name="edit-profile" class="menu-link " href="{{route('profile')}}#medal">{{__('جوایز و مدال ها')}}</a>
-                                        <a name="edit-profile" class="menu-link " href="{{route('profile.message.page')}}">{{__('پیام‌ها')}}</a>
-                                        <a name="edit-photo" class="menu-link " href="{{route('profile.accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
-                                        <a name="edit-photo" class="menu-link " href="{{route('profile.editPhoto')}}">{{__('ویرایش عکس')}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profileBtnActionMobile">
-                                <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); showCampingModal() // in header1.blade.php">{{__('کمپین')}}</div>
-                                <a href="{{route('profile')}}" type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
-                                <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
                             </div>
                         </div>
                         @if(isset($profilePage) && $profilePage == 1)
@@ -910,8 +942,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                {{--                <li id="Saves" class="saves"></li>--}}
                                 @if($mode == "message")
                                     <div id="Messages" class="messages col-xs-6 profileMenuLinks">
                                         <a id="messageLinkColor1" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
@@ -949,7 +979,7 @@
                                     <div class="modules-membercenter-level-progress">
                                         <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
                                             <div>
-{{--                                                onclick="showElement('levelDiv')"--}}
+
                                                 <div class="labels">
                                                     <div class="right label">{{__('مرحله فعلی')}}</div>
                                                     <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
@@ -972,62 +1002,69 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="userProfileActivitiesMainDiv rightColBoxes">
-                            <div class="mainDivHeaderText">
-                                <h3>{{__('شرح فعالیت‌ها')}}</h3>
-                            </div>
-                            <div class="activitiesMainDiv">
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('گذاشتن پست')}}</div>
-                                    <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('آپلود عکس')}}</div>
-                                    <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('آپلود فیلم')}}</div>
-                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>
-                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>
-                                    <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>
-                                    <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('امتیازدهی')}}</div>
-                                    <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>
-                                    <div class="activityNumbers">{{__('پاسخ')}} 0</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('ویرایش مکان')}}</div>
-                                    <div class="activityNumbers">{{__('مکان')}} 0</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('پیشنهاد مکان جدید')}}</div>
-                                    <div class="activityNumbers">{{__('مکان')}} 0</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('نوشتن مقاله')}}</div>
-                                    <div class="activityNumbers">{{__('مقاله')}} 0</div>
-                                </div>
-                                <div class="activitiesLinesDiv">
-                                    <div class="activityTitle">{{__('معرفی دوستان')}}</div>
-                                    <div class="activityNumbers">{{__('معرفی')}} 7</div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="userProfileActivitiesMainDiv rightColBoxes">--}}
+{{--                            <div class="mainDivHeaderText">--}}
+{{--                                <h3>{{__('شرح فعالیت‌ها')}}</h3>--}}
+{{--                            </div>--}}
+{{--                            <div class="activitiesMainDiv">--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('گذاشتن پست')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('آپلود عکس')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('آپلود فیلم')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('امتیازدهی')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('پاسخ')}} 0</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('ویرایش مکان')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('مکان')}} 0</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('پیشنهاد مکان جدید')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('مکان')}} 0</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('نوشتن مقاله')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('مقاله')}} 0</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="activitiesLinesDiv">--}}
+{{--                                    <div class="activityTitle">{{__('معرفی دوستان')}}</div>--}}
+{{--                                    <div class="activityNumbers">{{__('معرفی')}} 7</div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+
+                        <a href="{{route('logout')}}" class="logoutButton">
+                            <div class="icon"></div>
+                            <div class="name">خروsج</div>
+                        </a>
                     </div>
+
                 </div>
             </div>
         @endif
@@ -1097,6 +1134,8 @@
             let recentlySample = 0;
             let bookMarkSample;
             let getPhoneBookMarks = false;
+            let profileUrl = '{{route("profile")}}';
+            let usrnme = '{{$userFooter->username}}';
 
             bookMarkSample = $('#phoneBookMarks').html();
             $('#phoneBookMarks').empty();
@@ -1131,6 +1170,29 @@
                 $("#progressIdPhone").css("width", b + "%");
             }
             initialProgressFooter();
+
+
+            function mobileFooterProfileButton(_kind){
+                if(window.location == profileUrl || window.location == profileUrl+'/'+usrnme) {
+                    if (_kind == 'review')
+                        mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review'); // in mainProfile.blade.php
+                    else if (_kind == 'photo')
+                        mobileChangeProfileTab($('#photoProfileMoblieTab'), 'photo'); // in mainProfile.blade.php
+                    else if (_kind == 'safarnameh')
+                        mobileChangeProfileTab($('#safarnamehProfileMoblieTab'), 'safarnameh'); // in mainProfile.blade.php
+                    else if (_kind == 'medal')
+                        mobileChangeProfileTab($('#medalProfileMoblieTab'), 'medal'); // in mainProfile.blade.php
+                    else if (_kind == 'question')
+                        chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion')); // in mainProfile.blade.php
+                    else if (_kind == 'bookMark')
+                        chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
+                    else if(_kind == 'setting')
+                        window.location.href = "{{route('profile.accountInfo')}}";
+                    $('#profile').modal('hide');
+                }
+                else
+                    window.location.href = profileUrl;
+            }
         </script>
     @endif
 

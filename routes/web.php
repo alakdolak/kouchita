@@ -386,41 +386,6 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 //review section
-Route::get('convertBookMarkToDB', function(){
-   $activity = \App\models\Activity::whereName('نشانه گذاری')->first();
-   $kindPlace = \App\models\Place::all();
-   $count = 0;
-   if($activity != null){
-       $activityId = $activity->id;
-       foreach ($kindPlace as $kind){
-          if($kind->tableName != null){
-              $bookMakrKind = \App\models\BookMarkReference::where('tableName', $kind->tableName)
-                                            ->where('group', 'place')
-                                            ->first();
-              if ($bookMakrKind == null) {
-                  $bookMakrKind = new \App\models\BookMarkReference();
-                  $bookMakrKind->tableName = $kind->tableName;
-                  $bookMakrKind->group = 'place';
-                  $bookMakrKind->save();
-              }
-              $condition = ['activityId' => $activityId, 'kindPlaceId' => $kind->id];
-              $bookmarked = \App\models\LogModel::where($condition)->get();
-              foreach ($bookmarked as $item) {
-                  App\models\BookMark::firstOrCreate([
-                      'userId' => $item->visitorId,
-                      'referenceId' => $item->placeId,
-                      'bookMarkReferenceId' => $bookMakrKind->id,
-                  ]);
-                  $count++;
-                  $item->delete();
-              }
-          }
-       }
-        dd($count);
-   }
-
-});
-
 Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
 
