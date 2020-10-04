@@ -386,6 +386,41 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 //review section
+Route::get('convertBookMarkToDB', function(){
+   $activity = \App\models\Activity::whereName('نشانه گذاری')->first();
+   $kindPlace = \App\models\Place::all();
+   $count = 0;
+   if($activity != null){
+       $activityId = $activity->id;
+       foreach ($kindPlace as $kind){
+          if($kind->tableName != null){
+              $bookMakrKind = \App\models\BookMarkReference::where('tableName', $kind->tableName)
+                                            ->where('group', 'place')
+                                            ->first();
+              if ($bookMakrKind == null) {
+                  $bookMakrKind = new \App\models\BookMarkReference();
+                  $bookMakrKind->tableName = $kind->tableName;
+                  $bookMakrKind->group = 'place';
+                  $bookMakrKind->save();
+              }
+              $condition = ['activityId' => $activityId, 'kindPlaceId' => $kind->id];
+              $bookmarked = \App\models\LogModel::where($condition)->get();
+              foreach ($bookmarked as $item) {
+                  App\models\BookMark::firstOrCreate([
+                      'userId' => $item->visitorId,
+                      'referenceId' => $item->placeId,
+                      'bookMarkReferenceId' => $bookMakrKind->id,
+                  ]);
+                  $count++;
+                  $item->delete();
+              }
+          }
+       }
+        dd($count);
+   }
+
+});
+
 Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
 
@@ -398,6 +433,8 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('review/store', 'ReviewsController@storeReview')->name('storeReview');
 
     Route::post('review/ans', 'ReviewsController@ansReview')->name('ansReview');
+
+    Route::post('review/bookMark', 'ReviewsController@addReviewToBookMark')->name('review.bookMark');
 
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
@@ -473,6 +510,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
+        Route::post('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
+
         Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
 
         Route::post('profile/updateUserPhoto', 'ProfileController@updateUserPhoto')->name('profile.updateUserPhoto');
@@ -482,8 +521,6 @@ Route::group(['middleware' => ['throttle:30']], function(){
         Route::post('profile/updateBannerPic', 'ProfileController@updateBannerPic')->name('profile.updateBannerPic');
 
         Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
-
-        Route::get('profile/bookmark', 'ProfileController@bookmark')->name('profile.bookmark');
 
         Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page');
 

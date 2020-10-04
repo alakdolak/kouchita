@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookMarksTable extends Migration
+class CreateBookMarkReferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBookMarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookMarks', function (Blueprint $table) {
+        Schema::create('bookMarkReferences', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('userId');
-            $table->unsignedInteger('referenceId');
-            $table->unsignedInteger('bookMarkReferenceId');
+            $table->string('tableName');
+            $table->string('group', 100);
         });
     }
 
@@ -28,6 +27,6 @@ class CreateBookMarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookMarks');
+        Schema::dropIfExists('bookMarkReferences');
     }
 }

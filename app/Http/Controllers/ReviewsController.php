@@ -6,6 +6,8 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\Alert;
 use App\models\Amaken;
+use App\models\BookMark;
+use App\models\BookMarkReference;
 use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\ConfigModel;
@@ -28,6 +30,7 @@ use App\models\SogatSanaie;
 use App\models\State;
 use App\models\UserOpinion;
 use App\User;
+use Beta\B;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -510,6 +513,38 @@ class ReviewsController extends Controller
                 }
             }
         }
+    }
+
+    public function addReviewToBookMark(Request $request)
+    {
+        if(\auth()->check()){
+            if($request->id){
+                $bookmarkKind = BookMarkReference::where('group', 'review')->first();
+                $bookmark = BookMark::where('userId', \auth()->user()->id)
+                                    ->where('referenceId', $request->id)
+                                    ->where('bookMarkReferenceId', $bookmarkKind->id)
+                                    ->first();
+                if($bookmark == null){
+                    $bookmark = new BookMark();
+                    $bookmark->userId = \auth()->user()->id;
+                    $bookmark->referenceId = $request->id;
+                    $bookmark->bookMarkReferenceId = $bookmarkKind->id;
+                    $bookmark->save();
+
+                    echo 'store';
+                }
+                else{
+                    $bookmark->delete();
+                    echo 'delete';
+                }
+            }
+            else
+                echo 'nok';
+        }
+        else
+            echo 'notAuth';
+
+        return;
     }
 }
 

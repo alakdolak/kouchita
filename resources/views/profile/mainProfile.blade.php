@@ -17,6 +17,9 @@
 @stop
 
 @section('main')
+    @include('component.smallShowReview')
+    @include('component.safarnamehRow')
+
     <div class="userPostsPage">
         <div class="userProfilePageCoverImg" style="background-image: url('{{$user->banner}}'); background-size: cover; background-position: center">
             @if(isset($myPage) && $myPage)
@@ -69,7 +72,7 @@
                     </div>
 
                     <div class="postsMainFiltrationBar hideOnPhone">
-                        <div class="" style="display: flex; justify-content: space-around; align-items: center; padding: 5px 0px;">
+                        <div class="" style="display: flex; justify-content: space-around; align-items: center; padding: 0px 5px 0px 0px; ">
                             <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">
                                 <span class="icon EmptyCommentIcon"></span>
                                 <span class="text">پست‌ها</span>
@@ -95,7 +98,7 @@
                                 <span class="text">دنبال کنندگان</span>
                             </a>
                             @if(isset($myPage) && $myPage)
-                                <a id="bookMarkTab" href="#bookMark" class="profileHeaderLinksTab" onclick="changePages('bookMark')">
+                                <a id="bookMarkTab" href="#bookMark" class="profileHeaderLinksTab" onclick="changePages('bookMark')" style="margin-left: 20px;">
                                     <span class="icon BookMarkIconEmpty"></span>
                                     <span class="text">نشان کرده</span>
                                 </a>
@@ -121,13 +124,37 @@
                         </div>
                     </div>
 
+                    <style>
+                        .mobileTabs .moreTabMenu{
+                            position: absolute;
+                            left: 13px;
+                            top: 55px;
+                            z-index: 9;
+                            background: #f2f2f2;
+                            text-align: center;
+                            font-size: 16px;
+                            padding: 2px 9px;
+                            border: solid 2px #f2f2f2;
+                            border-radius: 10px;
+                        }
+                        .mobileTabs .moreTabMenu .tabMenu{
+                            margin: 10px 0px;
+                            cursor: pointer;
+                        }
+                    </style>
+
                     <div id="stickyProfileHeader" class="profileMobileStickHeader">
                         <div class="mobileTabs">
                             @if(isset($myPage) && $myPage)
-                                <div class="tab" onclick="openMoreTabProfileMobile(this)">
+                                <div id="moreMobileProfileTab" class="tab" onclick="openMoreTabProfileMobile()">
                                     <div class="icon threeDotIconVertical"></div>
                                     <div class="name"></div>
                                     <div class="bottomLine"></div>
+                                </div>
+
+                                <div id="myMenuMoreTab" class="moreTabMenu hidden">
+                                    <div class="tabMenu" onclick="chooseFromMobileMenuTab('question', this)">سوال و جواب</div>
+                                    <div class="tabMenu" onclick="chooseFromMobileMenuTab('bookMark', this)">نشان کرده</div>
                                 </div>
                             @endif
                             <div class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
@@ -211,10 +238,10 @@
                         </div>
                     </div>
                     <div class="userProfileLevelMainDiv rightColBoxes" style="padding: 0px">
-                                <div class="mainDivHeaderText">
-                                    <h3>امتیاز کاربر</h3>
-                                    <div>سیستم امتیاز دهی</div>
-                                </div>
+                        <div class="mainDivHeaderText">
+                            <h3>امتیاز کاربر</h3>
+                            <div>سیستم امتیاز دهی</div>
+                        </div>
                         <div class="userProfileLevelDetails userProfileScoreSection">
                             <div  style="width: 49%; border-left: solid 1px gray;">
                                 <div style="font-size: 17px; color: #656565; font-weight: bold"> {{__('امتیاز کل کاربر')}} </div>
@@ -333,7 +360,7 @@
                     </div>
 
                     <div id="bookMarkBody" class="prodileSections hidden">
-                        @include('profile.innerParts.userMedals')
+                        @include('profile.innerParts.UserBookMarks')
                     </div>
                 </div>
             </div>
@@ -555,6 +582,11 @@
         let allUserPics = {!! json_encode($sideInfos['allUserPics']) !!};
         let selectedTrip = [];
         let userPageId = {{$user->id}};
+        let openMobileMoreMenu = false;
+        let defaultPics = null;
+        let choosenPic = 0;
+        let uploadedPic = null;
+        let mainUploadedPic = null;
         let followerPlaceHolder =   '<div class="peopleRow placeHolder">\n' +
                                     '   <div class="pic placeHolderAnime"></div>\n' +
                                     '   <div class="name placeHolderAnime resultLineAnim"></div>\n' +
@@ -568,6 +600,11 @@
                 $(elem).removeClass('stickToTop');
             else if(top <= 0 && !$(elem).hasClass('stickToTop'))
                 $(elem).addClass('stickToTop');
+        });
+
+        $(window).on('click', () => {
+            if(openMobileMoreMenu && !$('#myMenuMoreTab').hasClass('hidden'))
+                $('#myMenuMoreTab').addClass('hidden');
         });
 
 
@@ -669,10 +706,6 @@
             createPhotoModal('عکس های شما', allUserPics);// in general.photoAlbumModal.blade.php
         }
 
-        function openWhoAmI(){
-            $('.rightColBoxes').slideToggle();
-        }
-
         function showUserActivity(_element){
             $(_element).parent().next().toggleClass('hideOnPhone');
             if($(_element).text() == 'مشاهده')
@@ -771,18 +804,28 @@
             else if(_kind === 'bookMark') {
                 $('#bookMarkTab').addClass('active');
                 $('#bookMarkBody').removeClass('hidden');
-                // getMedals(); // in profile.innerParts.userMedals
+                getProfileBookMarks(); // in profile.innerParts.UserBookMarks
             }
         }
 
-        function openMoreTabProfileMobile(_element){
-            $(_element).parent().find('.selected').removeClass('selected');
-            $(_element).addClass('selected');
+        function openMoreTabProfileMobile(){
+            if($('#myMenuMoreTab').hasClass('hidden'))
+                setTimeout(() => $('#myMenuMoreTab').removeClass('hidden'), 100);
+
+            openMobileMoreMenu = true;
+        }
+
+        function chooseFromMobileMenuTab(_kind, _elem){
+            $('#moreMobileProfileTab').find('.name').text($(_elem).text());
+            mobileChangeProfileTab($('#moreMobileProfileTab'), _kind);
         }
 
         function mobileChangeProfileTab(_element, _kind){
             $(_element).parent().find('.selected').removeClass('selected');
             $(_element).addClass('selected');
+
+            if(_kind != 'question' && _kind != 'bookMark')
+                $('#moreMobileProfileTab').find('.name').text('');
 
             $('.prodileSections').addClass('hidden');
             if(_kind == 'review'){
@@ -805,12 +848,12 @@
                 $('#questionMainBody').removeClass('hidden');
                 getAllUserQuestions();// in profile.innerParts.userQuestionsInner
             }
+            else if(_kind == 'bookMark'){
+                $('#bookMarkBody').removeClass('hidden');
+                getProfileBookMarks(); // in profile.innerParts.UserBookMarks
+            }
         }
 
-        let defaultPics = null;
-        let choosenPic = 0;
-        let uploadedPic = null;
-        let mainUploadedPic = null;
         function openEditPhotoModal(){
             if(defaultPics == null)
                 getOurPic();
@@ -902,18 +945,10 @@
         }
 
         var url = new URL(location.href);
-        if(url.hash === '' || url.hash === '#review')
+        if(url.hash === '')
             changePages('review');
-        else if(url.hash === '#picture')
-            changePages('picture');
-        else if(url.hash === '#whoAmI')
-            changePages('whoAmI');
-        else if(url.hash === '#question')
-            changePages('question');
-        else if(url.hash === '#safarnameh')
-            changePages('safarnameh');
-        else if(url.hash === '#medal')
-            changePages('medal');
+        else if(url.hash != '')
+            changePages(url.hash.replace("#", ""));
 
     </script>
 
@@ -922,6 +957,8 @@
         let chosenBannerPic = null;
         let mainUploadedBanner = false;
         let uploadedBanner = false;
+        let cropKind = null;
+
         function openBannerModal() {
             getBannerPic();
             openMyModal('userBannerModal');
@@ -1006,7 +1043,6 @@
             })
         }
 
-        let cropKind = null;
         function startProfileCropper(_kind, _ratio){
 
             if(first) {

@@ -1,5 +1,3 @@
-@include('component.smallShowReview')
-
 {{--<div class="userProfilePostsFiltrationContainer">--}}
 {{--    <div class="userProfilePostsFiltration">--}}
 {{--        <span class="active" onclick="changeSortPost('new', this)">جدیدترین‌ها</span>--}}

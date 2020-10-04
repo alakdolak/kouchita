@@ -87,7 +87,7 @@
                     <div id="bookmarkmenu" class="arrowTopDiv headerSubMenu">
                         <div class="headerBookMarkBody">
                             <div class="headerBookMarkHeader">
-                                <a class="headerBookMarkHeaderName" href="{{route('profile.bookmark')}}" target="_self"> {{__('نشون کرده ها')}} </a>
+                                <a class="headerBookMarkHeaderName" href="{{route('profile')}}#bookMark" target="_self"> {{__('نشون کرده ها')}} </a>
                             </div>
                             <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
                             <div id="headerBookMarkPlaceHolder">

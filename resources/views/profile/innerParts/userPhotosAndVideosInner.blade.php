@@ -27,20 +27,24 @@
             @endif
         </div>
     </div>
+    <div id="picPlaceHolder" style="display: none">
+        <div class="profilePicturesRow kind2">
+            <div class="profilePictureDiv placeHolderAnime" style="width: 33%; height: 150px"></div>
+            <div class="profilePictureDiv placeHolderAnime" style="width: 33%; height: 150px"></div>
+            <div class="profilePictureDiv placeHolderAnime" style="width: 33%; height: 150px"></div>
+        </div>
+    </div>
 
     <div id="pictureSection" class="photosAndVideosMainDiv"></div>
 </div>
 
 <script>
+    let picAndVideoPlaceHolder = $('#picPlaceHolder').html();
+    $('#picPlaceHolder').remove();
+
     let nowShow;
     let allPics ;
     let lastPicRow = 0;
-    // let typesOfWidth = [
-    //     [ 30, 20, 50 ],
-    //     [ 20, 40, 40 ],
-    //     [ 34, 33, 33 ],
-    //     [ 25, 25, 50 ],
-    // ];
     let showKind = {
         'pic' : true,
         'video' : true,
@@ -61,9 +65,7 @@
                 randThree = [0, 1, 2];
                 rand = [];
                 random = Math.floor(Math.random()*4);
-                // nowWidths = typesOfWidth[random];
-                // text += `<div class="profilePicturesRow kind${lastPicRow}">`;
-                text += `<div class="profilePicturesRow kind2">`;
+                text += '<div class="profilePicturesRow kind2">';
 
                 if(nowShow.length > 2) {
                     while (true) {
@@ -121,6 +123,7 @@
             };
 
         $('.userProfilePhotosAndVideos').find('.notData').addClass('hidden');
+        $('#pictureSection').html(picAndVideoPlaceHolder+picAndVideoPlaceHolder+picAndVideoPlaceHolder);
         $.ajax({
             type: 'post',
             url: '{{route("profile.getUserPicsAndVideo")}}',

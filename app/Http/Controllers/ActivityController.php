@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\models\Activity;
 use App\models\Adab;
 use App\models\Amaken;
+use App\models\BookMark;
+use App\models\BookMarkReference;
 use App\models\Cities;
 use App\models\Hotel;
 use App\models\LogModel;
@@ -128,24 +130,19 @@ class ActivityController extends Controller {
     }
 
     public function getBookMarks() {
-
         $uId = Auth::user()->id;
+        $book = BookMark::join('bookMarkReferences', 'bookMarkReferences.id', 'bookMarks.bookMarkReferenceId')
+                            ->join('place', 'place.tableName', 'bookMarkReferences.tableName')
+                            ->where('bookMarks.userId', $uId)
+                            ->where('bookMarkReferences.group', 'place')
+                            ->select(['bookMarks.referenceId', 'bookMarkReferences.tableName', 'place.id'])
+                            ->get();
 
-        $activityId = Activity::whereName('نشانه گذاری')->first()->id;
-
-        $activities = DB::select("SELECT * FROM log WHERE log.activityId = " . $activityId . " and log.visitorId = " . $uId . " order by log.date DESC");
-
-        $activityId = Activity::whereName('نظر')->first()->id;
-
-        foreach($activities as $itr) {
-
-            if($itr->placeId == -1)
-                continue;
-
-            $kindPlaceItr = Place::find($itr->kindPlaceId);
-            $tmp = DB::table($kindPlaceItr->tableName)->find($itr->placeId);
-            if($tmp != null){
-                $pack = createSuggestionPack($kindPlaceItr->id, $itr->placeId);
+        $bookMarks = [];
+        foreach ($book as $item){
+            $itr = \DB::table($item->tableName)->find($item->referenceId);
+            if($itr != null) {
+                $pack = createSuggestionPack($item->id, $item->referenceId);
                 $itr->placePic = $pack->pic;
                 $itr->placeRedirect = $pack->url;
                 $itr->placeCity = $pack->city;
@@ -153,9 +150,11 @@ class ActivityController extends Controller {
                 $itr->placeName = $pack->name;
                 $itr->placeRate = $pack->rate;
                 $itr->placeReviews = $pack->review;
+
+                array_push($bookMarks, $itr);
             }
         }
 
-        echo json_encode($activities);
+        echo json_encode($bookMarks);
     }
 }

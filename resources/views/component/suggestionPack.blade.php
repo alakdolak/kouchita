@@ -87,8 +87,7 @@
         //     'state': '',
         // }];
 
-        $('#'+_id).html('');
-
+        let res = '';
         _data.forEach(item => {
             let text = suggestionPackSample;
             let fk = Object.keys(item);
@@ -116,14 +115,15 @@
                 re = new RegExp(t, "g");
                 text = text.replace(re, 'none');
             }
-
-
-            $('#'+_id).append(text);
+            res += text;
         });
+
+        $('#'+_id).html(res);
 
         if(typeof _callback === 'function')
             _callback();
     }
+
     function loadSuggestionPack(_element){
         $(_element).parent().parent().parent().show();
         $(_element).parent().parent().parent().next().remove();
@@ -136,10 +136,15 @@
         if(typeof _callback == 'function')
             _callback();
     }
+
     function createSuggestionPackPlaceHolderClassName(_class, _callback = ''){
         $('.' + _class).append(suggestionPlaceHolderSample);
         if(typeof _callback == 'function')
             _callback();
+    }
+
+    function getSuggestionPackPlaceHolder(){
+        return suggestionPlaceHolderSample;
     }
 
 </script>

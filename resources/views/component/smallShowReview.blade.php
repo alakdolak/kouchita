@@ -9,7 +9,7 @@
         }
     }
 </style>
-<div id="reviewSmallSection">
+<div id="reviewSmallSection" style="display: none">
     <div id="smallReviewHtml_##id##" class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow">
             <div class="circleBase type2 commentWriterPicShow">
@@ -44,7 +44,7 @@
         </div>
         <div class="smallReviewcommentPhotosShow">
             <div class="photosCol col-xs-12" onclick="showSmallReviewPics(##id##)" style="display: ##havePic##; margin-bottom: 10px">
-                <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                <div class="smallReviewMainPic">
                     <img src="##mainPic##" class="resizeImgClass" style="position: absolute; width: 100%;" onload="fitThisImg(this)">
                 </div>
                 <div class="numberOfPhotosMainDiv" style="display: ##hasMorePic##">
@@ -68,7 +68,7 @@
     </div>
 </div>
 
-<div id="reviewSmallPlaceHolder">
+<div id="reviewSmallPlaceHolder" style="display: none">
     <div class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow" style="display: flex;">
             <div class="placeHolderAnime" style="width: 55px; height: 55px; float: right; border-radius: 50%"></div>
@@ -252,6 +252,7 @@
     var showFullReviewKind = null;
 
     function getSingleFullReview(_id){
+
         $.ajax({
             type: 'post',
             url: '{{route("getSingleReview")}}',
@@ -509,6 +510,11 @@
         else if(_reviews['userLike'] != null && _reviews['userLike']['like'] == -1)
             disLikeClass = 'coloredFullIcon';
 
+        if(_reviews["bookmark"])
+            _reviews["bookmark"] = 'BookMarkIcon';
+        else
+            _reviews["bookmark"] = 'BookMarkIconEmpty';
+
 
         text += '<div class="commentFeedbackChoices">\n' +
             '   <div class="postsActionsChoices col-xs-6" style="display: flex; justify-content: flex-start;">\n' +
@@ -533,7 +539,7 @@
             '           <span class="commentsShareIconFeedback ShareIcon firstIcon"></span>\n' +
             '       </div>\n' +
             '       <div style="margin-right: 20px; font-size: 20px;">' +
-            '           <span class="BookMarkIconEmpty"></span>' +
+            '           <span class="' + _reviews["bookmark"] + '" onclick="addReviewToBookMark(this, ' + _reviews["id"] + ')" style="cursor: pointer;"></span>' +
             '       </div>' +
             '   </div>\n' +
             '</div>\n' +
@@ -899,4 +905,38 @@
         $(_element).find('.firstIcon').toggleClass('commentsShareIconFeedback');
     }
 
+
+    function addReviewToBookMark(_elem, _id){
+        $.ajax({
+            type: 'post',
+            url: '{{route('review.bookMark')}}',
+            data:{
+                _token: '{{csrf_token()}}',
+                id: _id
+            },
+            success: response => {
+                if(response == 'store'){
+                    $(_elem).removeClass('BookMarkIconEmpty');
+                    $(_elem).addClass('BookMarkIcon');
+                    showSuccessNotifi('پست به نشان کرده ها اضافه شد.', 'left', 'var(--koochita-blue)');
+                }
+                else if(response == 'delete'){
+                    $(_elem).addClass('BookMarkIconEmpty');
+                    $(_elem).removeClass('BookMarkIcon');
+                    showSuccessNotifi('پست از نشان کرده ها حذف شد.', 'left', 'red');
+                }
+                else if(response == 'notAuth'){
+                    showSuccessNotifi('ابتدا وارد شوید', 'left', 'red');
+                }
+                else{
+                    showSuccessNotifi('مشکلی پیش امده دوباره تلاش کنید', 'left', 'red');
+                }
+
+            },
+            error: err => {
+                showSuccessNotifi('مشکلی پیش امده دوباره تلاش کنید', 'left', 'red');
+            }
+        });
+
+    }
 </script>
