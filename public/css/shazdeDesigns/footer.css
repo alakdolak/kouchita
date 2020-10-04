@@ -1443,6 +1443,7 @@ footer .profileFooterPopUp .buttonsLine .sBLine > div{
 footer .profileFooterPopUp .buttonsLine .mBLine > div{
     width: 100%;
     border-top: none;
+    position: relative;
 }
 footer .profileFooterPopUp .buttonsLine .mBLine > div .name{
     font-size: 9px;
@@ -1469,6 +1470,18 @@ footer .logoutButton .icon{
 }
 footer .logoutButton .name{
 
+}
+footer .footerMsgCountNumber{
+    position: absolute;
+    color: white;
+    background: var(--koochita-red);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 1300px) {

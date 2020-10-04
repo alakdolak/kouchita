@@ -1525,11 +1525,104 @@ a:hover {
     z-index: 99999 !important;
 }
 
+
+.followerModal .header{
+    padding-top: 4px;
+    border-bottom: solid 1px #e2e2e2;
+    display: flex;
+}
+.followerModal .header > div{
+    width: 50%;
+    text-align: center;
+    color: gray;
+    padding-top: 5px;
+    transition: .3s;
+}
+.followerModal .header > div.selected{
+    color: var(--koochita-blue);
+    font-weight: bold;
+    border-bottom: solid 2px;
+}
+.followerModal .body{
+    max-height: calc(100vh - 110px);
+    min-height: 50vh;
+    overflow-y: auto;
+}
+.followerModal .body .peopleRow{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.followerModal .body .peopleRow .pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.followerModal .body .peopleRow .name{
+    margin-right: 12px;
+    color: black;
+}
+.followerModal .body .peopleRow .button{
+    margin-right: auto;
+    border: solid gray 1px;
+    padding: 2px 10px;
+    font-size: 11px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+}
+.followerModal .body .peopleRow .button:before{
+    content: 'دنبال کردن';
+}
+.followerModal .body .peopleRow .button.followed:before{
+    content: 'دنبال شده';
+}
+.followerModal .body .peopleRow .button.followed{
+    background: var(--koochita-blue);
+    color: white;
+    padding: 3px 10px;
+    border: var(--koochita-blue);
+}
+.followerModal .body .peopleRow .button.followed:after{
+    content: "\E02B" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.followerModal .body .emptyPeople{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25%;
+    opacity: .5;
+    filter: grayscale(1);
+}
+.followerModal .body .emptyPeople > img{
+    width: 100px;
+}
+.followerModal .body .emptyPeople .text{
+    margin-top: 10px;
+}
+.followerModal .peopleRow.placeHolder {
+    opacity: .4;
+}
+.followerModal .peopleRow.placeHolder .resultLineAnim{
+    width: 33%;
+    margin-bottom: 0px;
+}
+.followerModal .peopleRow.placeHolder .buttonP.resultLineAnim{
+    margin-right: auto;
+    width: 70px;
+    height: 30px;
+}
+
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
 
 @media (max-width: 991px){
     .ourSuggestion{

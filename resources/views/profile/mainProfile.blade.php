@@ -36,8 +36,8 @@
                         <div class="circleBase profilePicUserProfile">
                             <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                         </div>
-                        <div class="followerHeaderSection hideOnScreen" onclick="openFollowerModal('resultFollowers')">
-                            <span class="followerNumber" style="font-weight: bold">{{$followersCount}}</span>
+                        <div class="followerHeaderSection hideOnScreen" onclick="openFollowerModal('resultFollowers', {{$user->id}}) // in general.followerPopUp.blade.php">
+                            <span class="followerNumber" style="font-weight: bold">{{$followersUserCount}}</span>
                             <span style="font-size: 9px;">دنبال کننده</span>
                         </div>
                         @if(isset($myPage) && $myPage)
@@ -77,7 +77,7 @@
                                 <span class="icon EmptyCommentIcon"></span>
                                 <span class="text">پست‌ها</span>
                             </a>
-                            <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">
+                            <a id="photoTab" href="#photo" class="profileHeaderLinksTab" onclick="changePages('photo')">
                                 <span class="icon emptyCameraIcon"></span>
                                 <span class="text">عکس و فیلم</span>
                             </a>
@@ -93,7 +93,7 @@
                                 <span class="icon medalsIcon"></span>
                                 <span class="text">جایزه و امتیاز</span>
                             </a>
-                            <a id="followerTab" href="#" class="profileHeaderLinksTab" onclick="openFollowerModal('resultFollowers')">
+                            <a id="followerTab" href="#" class="profileHeaderLinksTab" onclick="openFollowerModal('resultFollowers', {{$user->id}}) // in general.followerPopUp.blade.php">
                                 <span class="icon twoManIcon"></span>
                                 <span class="text">دنبال کنندگان</span>
                             </a>
@@ -367,29 +367,6 @@
         </div>
     </div>
 
-    <div id="followerModal" class="modalBlackBack fullCenter followerModal" style="z-index: 9999;">
-        <div class="modalBody" style="width: 400px; border-radius: 10px;">
-            <div onclick="closeMyModal('followerModal')" class="iconClose closeModal"></div>
-            <div class="header">
-                <div class="resultFollowersTab selected" onclick="openFollowerModal('resultFollowers')">
-                    <span class="followerNumber" style="font-weight: bold;">{{$followersCount}}</span>
-                    <span>follower</span>
-                </div>
-                @if(isset($myPage) && $myPage)
-                    <div class="resultFollowingTab" onclick="openFollowerModal('resultFollowing')">
-                        <span class="followingNumber" style="font-weight: bold;">{{$followingCount}}</span>
-                        <span>following</span>
-                    </div>
-                @endif
-            </div>
-            <div id="followerModalBody" class="body">
-                <div id="resultFollowers"></div>
-                <div id="resultFollowing"></div>
-            </div>
-        </div>
-    </div>
-
-
     @if(isset($myPage) && $myPage)
         <div id="userTripStyle" class="modalBlackBack hidden">
             <div class="userTripMainBody">
@@ -587,11 +564,6 @@
         let choosenPic = 0;
         let uploadedPic = null;
         let mainUploadedPic = null;
-        let followerPlaceHolder =   '<div class="peopleRow placeHolder">\n' +
-                                    '   <div class="pic placeHolderAnime"></div>\n' +
-                                    '   <div class="name placeHolderAnime resultLineAnim"></div>\n' +
-                                    '   <div class="buttonP placeHolderAnime resultLineAnim"></div>\n' +
-                                    '</div>';
 
         $(window).on('scroll', () =>{
             let top = document.getElementById('stickyProfileHeader').getBoundingClientRect().top;
@@ -641,65 +613,6 @@
                 },
                 error: err => console.log(err),
             })
-        }
-
-        function openFollowerModal(_kind){
-            $('#followerModalBody').children().addClass('hidden');
-            $(`#${_kind}`).removeClass('hidden');
-
-            $(`.${_kind}Tab`).parent().find('.selected').removeClass('selected');
-            $(`.${_kind}Tab`).addClass('selected');
-            $('#'+_kind).html(followerPlaceHolder+followerPlaceHolder);
-
-            let sendKind = '';
-            if(_kind == 'resultFollowing')
-                sendKind = 'following';
-            else
-                sendKind = 'follower';
-
-            openMyModal('followerModal');
-            $.ajax({
-                type: 'post',
-                url: '{{route("profile.getFollower")}}',
-                data: {
-                    _token: '{{csrf_token()}}',
-                    id: userPageId,
-                    kind: sendKind
-                },
-                success: function(response){
-                    response = JSON.parse(response);
-                    if(response.status == 'ok')
-                        createFollower(_kind, response.result);
-                },
-                error: err => console.log(err)
-            })
-        }
-
-        function createFollower(_Id, _follower){
-            let text = '';
-            if(_follower.length == 0) {
-                text =  '<div class="emptyPeople">\n' +
-                        '   <img src="{{URL::asset('images/mainPics/noData.png')}}" >\n' +
-                        '   <span class="text">هیچ کاربری ثبت نشده است</span>\n' +
-                        '</div>';
-            }
-            else {
-                _follower.map(item => {
-                    let followed = '';
-                    if (item.followed == 1)
-                        followed = 'followed';
-
-                    text += '<div class="peopleRow">\n' +
-                        '   <a href="' + item.url + '" class="pic">\n' +
-                        '       <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
-                        '   </a>\n' +
-                        '   <a href="' + item.url + '" class="name">' + item.username + '</a>\n';
-                    if (item.notMe == 1)
-                        text += '   <div class="button ' + followed + '"  onclick="followUser(this, ' + item.userId + ')"></div>\n';
-                    text += '</div>';
-                });
-            }
-            $('#'+_Id).html(text);
         }
 
         function showAllPicUser(){
@@ -779,31 +692,37 @@
             if(_kind === 'review'){
                 $('#reviewTab').addClass('active');
                 $('#reviewMainBody').removeClass('hidden');
+                mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review');
                 getReviewsUserReview(); // in profile.innerParts.userPostsInner
             }
-            else if(_kind === 'picture') {
-                $('#pictureTab').addClass('active');
+            else if(_kind === 'photo') {
+                $('#photoTab').addClass('active');
                 $('#picMainBody').removeClass('hidden');
+                mobileChangeProfileTab($('#photoProfileMoblieTab'), 'photo');
                 getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
             }
             else if(_kind === 'question') {
                 $('#questionTab').addClass('active');
                 $('#questionMainBody').removeClass('hidden');
+                chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion'));
                 getAllUserQuestions();// in profile.innerParts.userQuestionsInner
             }
             else if(_kind === 'safarnameh') {
                 $('#safarnamehTab').addClass('active');
                 $('#safarnamehBody').removeClass('hidden');
+                mobileChangeProfileTab($('#safarnamehProfileMoblieTab'), 'safarnameh');
                 getSafarnamehs(); // in profile.innerParts.userSafarnameh
             }
             else if(_kind === 'medal') {
                 $('#medalsTab').addClass('active');
                 $('#medalBody').removeClass('hidden');
+                mobileChangeProfileTab($('#medalProfileMoblieTab'), 'medal');
                 getMedals(); // in profile.innerParts.userMedals
             }
             else if(_kind === 'bookMark') {
                 $('#bookMarkTab').addClass('active');
                 $('#bookMarkBody').removeClass('hidden');
+                chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark'));
                 getProfileBookMarks(); // in profile.innerParts.UserBookMarks
             }
         }
@@ -823,6 +742,7 @@
         function mobileChangeProfileTab(_element, _kind){
             $(_element).parent().find('.selected').removeClass('selected');
             $(_element).addClass('selected');
+            window.location.hash = '#'+_kind;
 
             if(_kind != 'question' && _kind != 'bookMark')
                 $('#moreMobileProfileTab').find('.name').text('');

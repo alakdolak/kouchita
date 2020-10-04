@@ -822,15 +822,15 @@
                                     </div>
                                     <div class="infos">
                                         <div class="inf">
-                                            <div class="number">21</div>
+                                            <div class="number">1</div>
                                             <div class="name">سطح کاربر</div>
                                         </div>
                                         <div class="inf">
-                                            <div class="number">1023</div>
+                                            <div class="number">0</div>
                                             <div class="name">امتیاز</div>
                                         </div>
-                                        <div class="inf">
-                                            <div class="number">12</div>
+                                        <div class="inf" onclick="mobileFooterProfileButton('follower')">
+                                            <div class="number">{{$followersCount}}</div>
                                             <div class="name">دنبال کننده</div>
                                         </div>
                                     </div>
@@ -847,6 +847,7 @@
                                         <div onclick="window.location.href='{{route("profile.message.page")}}'">
 {{--                                            <div class="icon messageIcon"></div>--}}
                                             <div class="name">صندوق پیام</div>
+                                            <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
                                         </div>
                                     </div>
                                     <div class="mBLine bLine">
@@ -874,7 +875,7 @@
                                         </div>
                                         <div onclick="mobileFooterProfileButton('follower')">
                                             <div class="icon twoManIcon"></div>
-                                            <div class="name">دنبال کنندگان</div>
+                                            <div class="name" >دنبال کنندگان</div>
                                         </div>
                                         <div onclick="mobileFooterProfileButton('bookMark')">
                                             <div class="icon BookMarkIconEmpty" style="font-size: 26px;"></div>
@@ -1173,7 +1174,10 @@
 
 
             function mobileFooterProfileButton(_kind){
-                if(window.location == profileUrl || window.location == profileUrl+'/'+usrnme) {
+                let windowUrl = window.location;
+                let url = windowUrl.origin + windowUrl.pathname;
+
+                if(url == profileUrl || url == profileUrl+'/'+usrnme) {
                     if (_kind == 'review')
                         mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review'); // in mainProfile.blade.php
                     else if (_kind == 'photo')
@@ -1190,8 +1194,10 @@
                         window.location.href = "{{route('profile.accountInfo')}}";
                     $('#profile').modal('hide');
                 }
+                else if(_kind == 'follower')
+                    openFollowerModal('resultFollowers', {{$userFooter->id}}); // in general.followerPopUp.blade.php
                 else
-                    window.location.href = profileUrl;
+                    window.location.href = profileUrl+'#'+_kind;
             }
         </script>
     @endif

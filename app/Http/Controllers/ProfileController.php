@@ -165,19 +165,15 @@ class ProfileController extends Controller {
         else
             $user->banner = URL::asset('userProfile/'.$user->banner);
 
-        $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
         $userMedals = getTakenMedal($uId)['takenMedal'];
 
-        $followersCount = Followers::where('followedId', $user->id)->count();
-        $followingCount = 0;
-        if($myPage)
-            $followingCount = Followers::where('userId', $user->id)->count();
+        $followersUserCount = Followers::where('followedId', $user->id)->count();
 
         $youFollowed = 0;
         if(!$myPage && \auth()->check())
             $youFollowed = Followers::where('userId', \auth()->user()->id)->where('followedId', $user->id)->count();
 
-        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount', 'userMedals', 'followersCount', 'youFollowed', 'followingCount']));
+        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'userMedals', 'followersUserCount', 'youFollowed']));
     }
 
     public function placeSuggestion(Request $request)
