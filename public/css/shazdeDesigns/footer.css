@@ -1813,6 +1813,7 @@ footer .logoutButton .name{
 
     #lp_register {
         padding: 20px 10px;
+        padding-bottom: 0px;
     }
 
     footer #myHonorsText > h3 {

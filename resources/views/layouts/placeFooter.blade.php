@@ -1061,7 +1061,7 @@
 
                         <a href="{{route('logout')}}" class="logoutButton">
                             <div class="icon"></div>
-                            <div class="name">خروsج</div>
+                            <div class="name">خروج</div>
                         </a>
                     </div>
 
