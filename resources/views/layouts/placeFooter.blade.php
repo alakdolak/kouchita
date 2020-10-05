@@ -822,92 +822,91 @@
                     <div class="closeFooterPopupIcon iconFamily iconClose"
                          onclick="$('#profile').modal('hide')"
                          style="top: -10px"></div>
-                    <div id="lp_register">
-                        <div>
-                            <div class="row" style="width: 100%; margin: 0px">
-                                <div class="firsLine">
-                                    <div class="pic">
-                                        <img src="{{isset($buPic) ? $buPic : ''}}" height="60" width="60"/>
+                    <div id="lp_register" style="-webkit-overflow-scrolling: auto">
+                        <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
+                            <div class="firsLine">
+                                <div class="pic">
+                                    <img src="{{isset($buPic) ? $buPic : ''}}"/>
+                                </div>
+                                <div class="infos">
+                                    <div class="inf">
+                                        <div class="number">1</div>
+                                        <div class="name">سطح کاربر</div>
                                     </div>
-                                    <div class="infos">
-                                        <div class="inf">
-                                            <div class="number">1</div>
-                                            <div class="name">سطح کاربر</div>
-                                        </div>
-                                        <div class="inf">
-                                            <div class="number">0</div>
-                                            <div class="name">امتیاز</div>
-                                        </div>
-                                        <div class="inf" onclick="mobileFooterProfileButton('follower')">
-                                            <div class="number">{{$followersCount}}</div>
-                                            <div class="name">دنبال کننده</div>
-                                        </div>
+                                    <div class="inf">
+                                        <div class="number">0</div>
+                                        <div class="name">امتیاز</div>
+                                    </div>
+                                    <div class="inf" onclick="mobileFooterProfileButton('follower')">
+                                        <div class="number">{{$followersCount}}</div>
+                                        <div class="name">دنبال کننده</div>
                                     </div>
                                 </div>
-                                <div class="secondLine">
-                                    <div class="name">{{$userFooter->username}}</div>
+                            </div>
+                            <div class="secondLine">
+                                {{$userFooter->username}}
+                            </div>
+                            <div class="buttonsLine">
+                                <div class="mBLine bLine">
+                                    <div onclick="window.location.href='{{route("profile")}}'">
+                                        {{--                                            <div class="icon"></div>--}}
+                                        <div class="name">صفحه من</div>
+                                    </div>
+                                    <div onclick="window.location.href='{{route("profile.message.page")}}'">
+                                        {{--                                            <div class="icon messageIcon"></div>--}}
+                                        <div class="name">صندوق پیام</div>
+                                        <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
+                                    </div>
                                 </div>
-                                <div class="buttonsLine">
-                                    <div class="mBLine bLine">
-                                        <div onclick="window.location.href='{{route("profile")}}'">
-{{--                                            <div class="icon"></div>--}}
-                                            <div class="name">صفحه من</div>
-                                        </div>
-                                        <div onclick="window.location.href='{{route("profile.message.page")}}'">
-{{--                                            <div class="icon messageIcon"></div>--}}
-                                            <div class="name">صندوق پیام</div>
-                                            <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
-                                        </div>
+                                <div class="mBLine bLine">
+                                    <div onclick="mobileFooterProfileButton('review')">
+                                        <div class="icon EmptyCommentIcon"></div>
+                                        <div class="name">پست ها</div>
                                     </div>
-                                    <div class="mBLine bLine">
-                                        <div onclick="mobileFooterProfileButton('review')">
-                                            <div class="icon EmptyCommentIcon"></div>
-                                            <div class="name">پست ها</div>
-                                        </div>
-                                        <div onclick="mobileFooterProfileButton('photo')">
-                                            <div class="icon emptyCameraIcon"></div>
-                                            <div class="name">عکس و فیم</div>
-                                        </div>
-                                        <div onclick="mobileFooterProfileButton('question')">
-                                            <div class="icon questionIcon"></div>
-                                            <div class="name">سوال و جواب</div>
-                                        </div>
-                                        <div onclick="mobileFooterProfileButton('safarnameh')">
-                                            <div class="icon safarnameIcon"></div>
-                                            <div class="name">سفرنامه ها</div>
-                                        </div>
+                                    <div onclick="mobileFooterProfileButton('photo')">
+                                        <div class="icon emptyCameraIcon"></div>
+                                        <div class="name">عکس و فیم</div>
                                     </div>
-                                    <div class="mBLine bLine">
-                                        <div onclick="mobileFooterProfileButton('medal')">
-                                            <div class="icon medalsIcon"></div>
-                                            <div class="name">جایزه و امتیاز</div>
-                                        </div>
-                                        <div onclick="mobileFooterProfileButton('follower')">
-                                            <div class="icon twoManIcon"></div>
-                                            <div class="name" >دنبال کنندگان</div>
-                                        </div>
-                                        <div onclick="mobileFooterProfileButton('bookMark')">
-                                            <div class="icon BookMarkIconEmpty" style="font-size: 26px;"></div>
-                                            <div class="name">نشان کرده</div>
-                                        </div>
-                                        <div onclick="mobileFooterProfileButton('setting')">
-                                            <div class="icon settingIcon"></div>
-                                            <div class="name">تنظیمات</div>
-                                        </div>
+                                    <div onclick="mobileFooterProfileButton('question')">
+                                        <div class="icon questionIcon"></div>
+                                        <div class="name">سوال و جواب</div>
                                     </div>
-                                    <div class="mBLine bLine">
-                                        <div>
-                                            <div class="icon festivalIcon"></div>
-                                            <div class="name">فستیوال</div>
-                                        </div>
-                                        <div onclick="window.location.href = '{{route("myTrips")}}'">
-                                            <div class="icon MyTripsIcon"></div>
-                                            <div class="name">سفرهای من</div>
-                                        </div>
+                                    <div onclick="mobileFooterProfileButton('safarnameh')">
+                                        <div class="icon safarnameIcon"></div>
+                                        <div class="name">سفرنامه ها</div>
+                                    </div>
+                                </div>
+                                <div class="mBLine bLine">
+                                    <div onclick="mobileFooterProfileButton('medal')">
+                                        <div class="icon medalsIcon"></div>
+                                        <div class="name">جایزه و امتیاز</div>
+                                    </div>
+                                    <div onclick="mobileFooterProfileButton('follower')">
+                                        <div class="icon twoManIcon"></div>
+                                        <div class="name" >دنبال کنندگان</div>
+                                    </div>
+                                    <div onclick="mobileFooterProfileButton('bookMark')">
+                                        <div class="icon BookMarkIconEmpty" style="font-size: 26px;"></div>
+                                        <div class="name">نشان کرده</div>
+                                    </div>
+                                    <div onclick="mobileFooterProfileButton('setting')">
+                                        <div class="icon settingIcon"></div>
+                                        <div class="name">تنظیمات</div>
+                                    </div>
+                                </div>
+                                <div class="mBLine bLine">
+                                    <div>
+                                        <div class="icon festivalIcon"></div>
+                                        <div class="name">فستیوال</div>
+                                    </div>
+                                    <div onclick="window.location.href = '{{route("myTrips")}}'">
+                                        <div class="icon MyTripsIcon"></div>
+                                        <div class="name">سفرهای من</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="profileScoreMainDiv">
                             <div class="memberPointInfo">
                                 <div class="head">

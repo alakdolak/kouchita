@@ -506,9 +506,9 @@ footer li > img, .small-ico {
     display: flex;
     padding: 20px;
     flex-direction: column;
-    overflow: auto;
-    height: inherit;
     padding-bottom: 0px;
+    overflow: auto;
+    ming-height: 100vh;
 }
 
 #lp_register > div:first-child {
@@ -1410,8 +1410,6 @@ footer .profileFooterPopUp .firsLine .pic > img{
 }
 footer .profileFooterPopUp .secondLine {
     padding: 5px 25px;
-}
-footer .profileFooterPopUp .secondLine .name{
     font-weight: bold;
     font-size: 20px;
 }
