@@ -1635,6 +1635,13 @@ footer .footerMsgCountNumber{
         height: 35px;
         background-size: 35px;
     }
+    footer .logoutSectionMobile{
+        display: flex;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        margin-top: auto;
+    }
 }
 
 @media (max-height: 700px) {

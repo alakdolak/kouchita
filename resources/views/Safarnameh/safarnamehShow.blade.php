@@ -214,7 +214,7 @@
                         <img src="{{$uPic}}" style="">
                     </div>
                     <div class="inputBox">
-                        <b class="replyCommentTitle">نظر خود را در مورد سفرنامه با ما در میان بگذارید</b>
+                        <div class="replyCommentTitle" style="font-weight: bold">نظر خود را در مورد سفرنامه با ما در میان بگذارید</div>
                         <textarea id="textareaForAns"
                                   class="inputBoxInput inputBoxInputComment"
                                   rows="1" placeholder="شما چه نظری دارید؟"

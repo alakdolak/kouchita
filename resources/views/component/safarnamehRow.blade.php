@@ -71,7 +71,7 @@
             '   <div class="articleWriterMainDiv">'+ _safarnameh.username +'</div>\n' +
             '   <div class="articleWatchListMainDiv">0</div>\n' +
             '</div>\n' +
-            '<a href="{{url('/article/user')}}/' + _safarnameh.id + '" class="readSafarnamehButton"> مطالعه سفرنامه</a>' +
+            '<a href="{{url('/safarnameh/show')}}/' + _safarnameh.id + '" class="readSafarnamehButton"> مطالعه سفرنامه</a>' +
             '</div>\n' +
             '</div>';
 

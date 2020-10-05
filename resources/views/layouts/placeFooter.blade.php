@@ -3,7 +3,16 @@
 @if(\App::getLocale() == 'en')
     <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v='.$fileVersions)}}">
 @endif
-
+<style>
+    footer .memberPointInfo .head{
+        color: #0076ac;
+        font-size: 20px;
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center
+    }
+</style>
 {{--footer html--}}
 <footer>
     <div class="hideOnPhone screenFooterStyle">
@@ -899,110 +908,54 @@
                                 </div>
                             </div>
                         </div>
-                        @if(isset($profilePage) && $profilePage == 1)
-                            <div class="profileMenuResponsive">
-                                @if($mode == "profile")
-                                    <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor1" href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
+                        <div class="profileScoreMainDiv">
+                            <div class="memberPointInfo">
+                                <div class="head">
+                                    <div>
+                                        {{__('امتیازات من')}}
                                     </div>
-                                @else
-                                    <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor2" href="{{route('profile')}}">{{__('صفحه کاربری')}}</a>
-                                    </div>
-                                @endif
-                                @if($mode == "profileActivities")
-                                    <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor1" href="{{route('profile')}}">{{__('فعالیت‌های من')}}</a>
-                                    </div>
-                                @else
-                                    <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
-                                        <a id="profileLinkColor2" href="{{route('profile')}}">{{__('فعالیت‌های من')}}</a>
-                                    </div>
-                                @endif
-                                @if($mode == "badge")
-                                    <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
-                                        <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
-                                    </div>
-                                @else
-                                    <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
-                                        <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
-                                    </div>
-                                @endif
-
-                                <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
-                                    <a href="{{route('soon')}}">سفرنامه من</a>
-                                    <div id="helpSpan_5" class="helpSpans hidden row">
-                                        <span class="introjs-arrow"></span>
-                                        <div class="col-xs-12">
-                                            <p>{{__('با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.')}}</p>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">{{__('بعدی')}}</button>
-                                            <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">{{__('قبلی')}}</button>
-                                            <button class="btn btn-danger exitBtnHelp">{{__('خروج')}}</button>
-                                        </div>
+                                    <div style="font-size: 10px">
+                                        <a href="">{{__('سیستم امتیازدهی')}}</a>
                                     </div>
                                 </div>
-                                @if($mode == "message")
-                                    <div id="Messages" class="messages col-xs-6 profileMenuLinks">
-                                        <a id="messageLinkColor1" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                    </div>
-                                @else
-                                    <div id="Messages" class="messages col-xs-6 profileMenuLinks">
-                                        <a id="messageLinkColor2" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                    </div>
-                                @endif
-                            </div>
-                        @else
-                            <div class="profileScoreMainDiv">
-                                <div class="memberPointInfo">
-                                    <div style=" color: #0076ac; font-size: 20px; margin-top: 5px; display: flex; justify-content: space-between; align-items: center">
-                                        <div>
-                                            {{__('امتیازات من')}}
-                                        </div>
-                                        <div style="font-size: 10px">
-                                            <a href="">{{__('سیستم امتیازدهی')}}</a>
-                                        </div>
-                                    </div>
 
-                                    <div class="modules-membercenter-total-points" style="padding-top: 2px;">
-                                        <div class="mainDivTotalPoint">
-                                            <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
-                                            <div class="points">{{$userTotalPointFooter}}</div>
-                                        </div>
-                                        <div class="points_to_go">
+                                <div class="modules-membercenter-total-points" style="padding-top: 2px;">
+                                    <div class="mainDivTotalPoint">
+                                        <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
+                                        <div class="points">{{$userTotalPointFooter}}</div>
+                                    </div>
+                                    <div class="points_to_go">
                                             <span style="justify-content: space-between;">
                                                 <b class="points"> {{$nextLevelFooter}} </b>
                                                 <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
                                             </span>
-                                        </div>
                                     </div>
-                                    <div class="modules-membercenter-level-progress">
-                                        <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                            <div>
+                                </div>
+                                <div class="modules-membercenter-level-progress">
+                                    <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
+                                        <div>
 
-                                                <div class="labels">
-                                                    <div class="right label">{{__('مرحله فعلی')}}</div>
-                                                    <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
-                                                </div>
-                                                <div class="progress_indicator">
-
-                                                    <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
-                                                    <div class="meter">
-                                                        <span id="progressIdPhone" class="progress"></span>
-                                                    </div>
-                                                    <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
-                                                </div>
-                                                <div class="text-align-center">
-                                                    <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
-                                                </div>
-                                                <div class="clear fix"></div>
+                                            <div class="labels">
+                                                <div class="right label">{{__('مرحله فعلی')}}</div>
+                                                <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
                                             </div>
+                                            <div class="progress_indicator">
+
+                                                <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
+                                                <div class="meter">
+                                                    <span id="progressIdPhone" class="progress"></span>
+                                                </div>
+                                                <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+                                            </div>
+                                            <div class="text-align-center">
+                                                <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
+                                            </div>
+                                            <div class="clear fix"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        </div>
 {{--                        <div class="userProfileActivitiesMainDiv rightColBoxes">--}}
 {{--                            <div class="mainDivHeaderText">--}}
 {{--                                <h3>{{__('شرح فعالیت‌ها')}}</h3>--}}
@@ -1060,10 +1013,12 @@
 {{--                        </div>--}}
 
 
-                        <a href="{{route('logout')}}" class="logoutButton">
-                            <div class="icon"></div>
-                            <div class="name">خروج</div>
-                        </a>
+                        <div class="logoutSectionMobile">
+                            <a href="{{route('logout')}}" class="logoutButton">
+                                <div class="icon"></div>
+                                <div class="name">خروج</div>
+                            </a>
+                        </div>
                     </div>
 
                 </div>
@@ -1190,10 +1145,10 @@
                         chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion')); // in mainProfile.blade.php
                     else if (_kind == 'bookMark')
                         chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
-                    else if(_kind == 'setting')
-                        window.location.href = "{{route('profile.accountInfo')}}";
                     $('#profile').modal('hide');
                 }
+                else if(_kind == 'setting')
+                    window.location.href = "{{route('profile.accountInfo')}}";
                 else if(_kind == 'follower')
                     openFollowerModal('resultFollowers', {{$userFooter->id}}); // in general.followerPopUp.blade.php
                 else

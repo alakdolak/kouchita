@@ -248,6 +248,7 @@
 .BookMarkIcon:before{
     content: "\E0DE" !important;
     font-family: Shazde_Regular2 !important;
+    color: var(--koochita-yellow);
 }
 .BookMarkIconEmpty:before{
     content: "\e0dd" !important;
