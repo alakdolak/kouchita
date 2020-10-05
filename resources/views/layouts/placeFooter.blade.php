@@ -895,7 +895,7 @@
                                     </div>
                                 </div>
                                 <div class="mBLine bLine">
-                                    <div>
+                                    <div onclick="mobileFooterProfileButton('festival')">
                                         <div class="icon festivalIcon"></div>
                                         <div class="name">فستیوال</div>
                                     </div>
@@ -1145,6 +1145,8 @@
                 }
                 else if(_kind == 'setting')
                     window.location.href = "{{route('profile.accountInfo')}}";
+                else if(_kind == 'festival')
+                    window.location.href = "{{route('festival')}}";
                 else if(_kind == 'follower')
                     openFollowerModal('resultFollowers', {{$userFooter->id}}); // in general.followerPopUp.blade.php
                 else

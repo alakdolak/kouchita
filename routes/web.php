@@ -630,6 +630,13 @@ Route::group(array('middleware' => ['auth']), function(){
     Route::post('safarnameh/storePic', 'SafarnamehController@storeSafarnamehPics')->name('safarnameh.storePic');
 });
 
+//festival
+Route::group(['middleware' => 'web'], function(){
+
+    Route::get('/festival', 'FestivalController@mainFestival')->name('festival');
+
+});
+
 //trip
 Route::group(array('middleware' => ['auth']), function(){
 
