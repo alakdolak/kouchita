@@ -508,7 +508,7 @@ footer li > img, .small-ico {
     flex-direction: column;
     padding-bottom: 0px;
     overflow: auto;
-    ming-height: 100vh;
+    min-height: 100vh;
 }
 
 #lp_register > div:first-child {
@@ -1374,7 +1374,10 @@ footer .safarnamehSearchRowFooter  .searchIcon{
     top: 2px;
     border-radius: 7px;
 }
-
+footer .profileFooterPopUp{
+    height: 100vh;
+    overflow: auto;
+}
 footer .profileFooterPopUp .firsLine{
     display: flex;
     width: 100%;
@@ -1411,7 +1414,7 @@ footer .profileFooterPopUp .firsLine .pic > img{
 footer .profileFooterPopUp .secondLine {
     padding: 5px 25px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
 }
 footer .profileFooterPopUp .buttonsLine {
 

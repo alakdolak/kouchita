@@ -822,7 +822,7 @@
                     <div class="closeFooterPopupIcon iconFamily iconClose"
                          onclick="$('#profile').modal('hide')"
                          style="top: -10px"></div>
-                    <div id="lp_register" style="-webkit-overflow-scrolling: auto">
+                    <div id="lp_register">
                         <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
                             <div class="firsLine">
                                 <div class="pic">
@@ -906,7 +906,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="profileScoreMainDiv">
                             <div class="memberPointInfo">
                                 <div class="head">
@@ -1010,8 +1009,6 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
-
-
                         <div class="logoutSectionMobile">
                             <a href="{{route('logout')}}" class="logoutButton">
                                 <div class="icon"></div>
