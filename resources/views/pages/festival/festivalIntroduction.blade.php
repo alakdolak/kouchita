@@ -5,314 +5,17 @@
     <title>
         فستیوال
     </title>
-    <style>
 
-        .centerContent{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .bigFont{
-            font-size: 30px;
-        }
-        .smallFont{
-            font-size: 20px;
-        }
-        :root{
-            --white: #E5E5E5;
-            --yellow: #FBC155;
-            --dark: #273039;
-        }
-
-        header{
-            position: fixed;
-            background-color: #E5E5E5;
-            width: 100%;
-            height: 50px;
-            z-index: 99;
-        }
-        header .container{
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        header .logos{
-            display: flex;
-            height: 100%;
-            align-items: center;
-        }
-        header .logos > img{
-            height: 70%;
-            width: auto;
-        }
-        header .buttons{
-            margin-right: auto;
-        }
-        header .buttons > div{
-            padding: 5px 20px;
-            border-radius: 20px;
-            margin: 0px 10px;
-            cursor: pointer;
-            box-shadow: 0px 3px 6px 0px #0000001a;
-        }
-        header .buttons .votedButton{
-            background: var(--yellow);
-        }
-        header .buttons .registerButton{
-            background: #273039;
-            color: white;
-        }
-
-
-
-        section{
-            background-color: #273039;
-            padding: 25px 0px;
-            padding-top: 75px;
-        }
-
-        section .headerWhite{
-            color: var(--white);
-        }
-        section .headerWhite .smallFont{
-            margin-right: 20px;
-        }
-        section .mainPic{
-            border: solid 20px var(--white) ;
-            height: 500px;
-            box-shadow: 9px 3px 6px black;
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            padding: 0px;
-            z-index: 9;
-        }
-        section .mainPic:after{
-            content: '';
-            background-image: url("{{URL::asset('images/festival/DOT100.png')}}");
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-
-        section .flowColor{
-            background-color: #445565;
-            position: relative;
-            margin-top: 5%;
-            display: flex;
-        }
-        section .flowColor .bakPic{
-            width: 100%;
-            position: absolute;
-        }
-        section .flowColor .topPic{
-            bottom: 99.5%;
-        }
-        section .flowColor .botPic{
-            bottom: -1%;
-            z-index: 9;
-        }
-
-        section .flowColor .rightText{
-            width: 45%;
-        }
-        section .flowColor .rightText ul{
-            color: var(--white);
-            list-style: none;
-        }
-        section .flowColor .rightText ul > li::before{
-            content: "\2022";
-            color: var(--yellow);
-            font-weight: bold;
-            display: inline-block;
-            width: 2em;
-            margin-left: -1em;
-            font-size: 23px;
-        }
-        section .flowColor .leftPics{
-            width: 55%;
-            display: flex;
-            align-items: center;
-            padding-bottom: 50px;
-            justify-content: flex-end;
-        }
-        section .flowColor .leftPics .commonPic{
-            width: 27%;
-        }
-        section .flowColor .leftPics .commonPic.pic1{
-            transform: rotate(24deg);
-        }
-        section .flowColor .leftPics .commonPic.pic3{
-            transform: rotate(25deg);
-            z-index: 0;
-        }
-        section .conditionFestival{
-            color: var(--white);
-            display: flex;
-            position: relative;
-        }
-        section .conditionFestival .rightSec{
-            width: 60%;
-            padding-bottom: 60px;
-        }
-        .buttonss{
-            display: flex;
-            margin-top: 10px;
-        }
-        .buttonss > div{
-            margin-left: 25px;
-            cursor: pointer;
-            transition: .3s;
-        }
-        .buttonss > div:hover{
-            color: var(--yellow);
-        }
-        .buttonss > div.selected{
-            color: var(--yellow);
-        }
-        .rowss{
-            margin-top: 15px;
-        }
-        .rowss > div{
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .rowss > div:before{
-            content: "\2022";
-            color: var(--yellow);
-            font-weight: bold;
-            font-size: 23px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 10px;
-        }
-        section .conditionFestival .leftSec{
-            position: absolute;
-            left: 0;
-            bottom: -20px;
-        }
-        section .conditionFestival .leftSec > img{
-            width: 90%;
-        }
-        .judgesSec{
-            display: flex;
-            align-items: center;
-            margin-left: 10px;
-        }
-        .judgesSec .jug{
-            display: flex;
-            align-items: center;
-            margin: 15px;
-        }
-        .judgesSec .jug .pic{
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: solid white 6px;
-        }
-        .judgesSec .jug .pic > img{
-            width: 100%;
-        }
-        .judgesSec .jug .info{
-            margin-right: 12px;
-        }
-        .judgesSec .jug .name{
-            font-size: 20px;
-        }
-        .judgesSec .jug .role{
-            font-size: 15px;
-        }
-
-        .yellowSecBack{
-            background: var(--yellow);
-            width: 100%;
-            padding-bottom: 80px;
-            position: relative;
-            color: var(--dark);
-        }
-        .blackSecBack{
-            position: relative;
-            padding-bottom: 80px;
-            color: var(--white);
-        }
-        .topGear{
-            position: absolute;
-            width: 100%;
-            bottom: 100%;
-        }
-        .footerRow > div{
-            color: var(--yellow);
-            margin-top: 7px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .calendar{
-            width: 50%;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-        .calendar .line{
-            width: 100%;
-            height: 1px;
-            background: var(--dark);
-            margin: 9px 0px;
-            position: relative;
-        }
-        .calendar.right .line:after{
-            content: '';
-            width: 40px;
-            height: 40px;
-            background: var(--dark);
-            position: absolute;
-            left: 0;
-            bottom: -20px;
-            border-radius: 50%;
-        }
-        .calendar.left .line:before{
-            content: '';
-            width: 40px;
-            height: 40px;
-            background: var(--dark);
-            position: absolute;
-            right: 0;
-            bottom: -20px;
-            border-radius: 50%;
-        }
-        .calendar.right{
-
-        }
-        .calendar.right .topText{
-        }
-        .calendar.right .botText{
-            text-align: left;
-            padding-left: 50px;
-        }
-        .calendar.left{
-            margin-right: auto;
-        }
-        .calendar.left .topText{
-            text-align: left;
-        }
-        .calendar.left .botText{
-            padding-right: 50px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css?v='.$fileVersions)}}">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logos">
-                <img src="{{URL::asset('images/camping/undp.svg')}}">
-                <img src="{{URL::asset('images/icons/mainLogo.png')}}">
+                <a href="{{route('main')}}">
+                    <img src="{{URL::asset('images/camping/undp.svg')}}" style="height: 100%">
+                    <img src="{{URL::asset('images/icons/mainLogo.png')}}" style="height: 100%">
+                </a>
             </div>
             <div class="buttons">
                 <div class="votedButton">رای می دهم</div>
@@ -352,32 +55,52 @@
         </div>
 
         <div class="container conditionFestival">
-            <div class="rightSec">
+            <div class="row">
                 <div class="bigFont">
                     شرایط مسابقه
                 </div>
                 <div class="smallFont buttonss">
-                    <div>#عکس</div>
-                    <div class="selected">#عکس موبایلی</div>
-                    <div>#فیلم</div>
-                </div>
-                <div class="smallFont rowss">
-                    <div>تعداد آثار ارسالی برای هر شخص محدودیتی ندارد.</div>
-                    <div>ارایه آثار این بخش نیز می‌بایست همراه با ثبت‌نام متقاضی، به‌صورت آپلود در
-                        سایت حجمی معادل حداکثر 100 کیلوبایت و نیز ارسال سی‌دی در
-                        اندازه 30 در 45 سانتی‌متر با 300 دی پی آی صورت گیرد.</div>
-                    <div>تمام آثار ارسالی بایستی دارای زمان و مکان عکاسی باشند.</div>
-                    <div>ارسال عکس در ابعاد اعلام شده روی سی دی الزامی است.</div>
-                    <div>شرکت در این بخش برای عموم آزاد است و شرط سنی ندارد.</div>
+                    <div class="selected" onclick="changeConditionMatch('pic', this)">#عکس</div>
+                    <div onclick="changeConditionMatch('mobile', this)">#عکس موبایلی</div>
+                    <div onclick="changeConditionMatch('video', this)">#فیلم</div>
                 </div>
             </div>
-            <div class="leftSec">
-                <img src="{{URL::asset('images/festival/oneHandCamera.png')}}" >
+            <div class="row" style="margin-top: 25px">
+                <div id="conditionTexts" class="rightSec" style="position: relative;">
+                    <div class="smallFont rowss conditionRows pic show">
+                        <div>تعداد آثار ارسالی برای هر شخص محدودیتی ندارد.</div>
+                        <div>ارایه آثار این بخش نیز می‌بایست همراه با ثبت‌نام متقاضی، به‌صورت آپلود در
+                            سایت حجمی معادل حداکثر 100 کیلوبایت و نیز ارسال سی‌دی در
+                            اندازه 30 در 45 سانتی‌متر با 300 دی پی آی صورت گیرد.</div>
+                        <div>تمام آثار ارسالی بایستی دارای زمان و مکان عکاسی باشند.</div>
+                        <div>ارسال عکس در ابعاد اعلام شده روی سی دی الزامی است.</div>
+                        <div>شرکت در این بخش برای عموم آزاد است و شرط سنی ندارد.</div>
+                    </div>
+                    <div class="smallFont rowss conditionRows mobile down hidden">
+                        <div>تعداد آثار ارسالی برای هر شخص محدودیتی ندارد.2</div>
+                        <div>ارایه آثار این بخش نیز می‌بایست همراه با ثبت‌نام متقاضی، به‌صورت آپلود در
+                            سایت حجمی معادل حداکثر 100 کیلوبایت و نیز ارسال سی‌دی در
+                            اندازه 30 در 45 سانتی‌متر با 300 دی پی آی صورت گیرد.</div>
+                        <div>تمام آثار ارسالی بایستی دارای زمان و مکان عکاسی باشند.</div>
+                        <div>ارسال عکس در ابعاد اعلام شده روی سی دی الزامی است.</div>
+                        <div>شرکت در این بخش برای عموم آزاد است و شرط سنی ندارد.</div>
+                        <div>شرکت در این بخش برای عموم آزاد است و شرط سنی ندارد.</div>
+                        <div>شرکت در این بخش برای عموم آزاد است و شرط سنی ندارد.</div>
+                    </div>
+                    <div class="smallFont rowss conditionRows video down hidden">
+                        <div>تعداد آثار ارسالی برای هر شخص محدودیتی ندارد.3</div>
+                        <div>ارایه آثار این بخش نیز می‌بایست همراه با ثبت‌نام متقاضی، به‌صورت آپلود در
+                            سایت حجمی معادل حداکثر 100 کیلوبایت و نیز ارسال سی‌دی در
+                            اندازه 30 در 45 سانتی‌متر با 300 دی پی آی صورت گیرد.</div>
+                    </div>
+                </div>
+                <div class="leftSec">
+                    <img id="matchConditionPic" src="{{URL::asset('images/festival/oneHandCamera.png')}}" >
+                </div>
             </div>
         </div>
 
-        <div class="yellowSecBack">
-            <img src="{{URL::asset('images/festival/yellowGear.svg')}}" class="topGear">
+        <div class="yellowSecBack withGear">
             <div class="container">
                 <div class="bigFont">جوایز</div>
                 <div class="smallFont">در هر بخش سه اثر برگزیده توسط رای مخاطبان و سه اثر برگزیده توسط هیات داوران انتخاب می‌گردد.</div>
@@ -395,8 +118,7 @@
             </div>
         </div>
 
-        <div class="blackSecBack">
-            <img src="{{URL::asset('images/festival/blackGear.svg')}}" class="topGear">
+        <div class="blackSecBack withGear">
             <div class="container">
                 <div class="bigFont">
                     هیئت داوران
@@ -451,8 +173,7 @@
             </div>
         </div>
 
-        <div class="yellowSecBack">
-            <img src="{{URL::asset('images/festival/yellowGear.svg')}}" class="topGear">
+        <div class="yellowSecBack withGear">
             <div class="container">
                 <div class="bigFont">تقویم جشنواره</div>
                 <div class="calendar right">
@@ -478,8 +199,7 @@
             </div>
         </div>
 
-        <div class="blackSecBack">
-            <img src="{{URL::asset('images/festival/blackGear.svg')}}" class="topGear">
+        <div class="blackSecBack withGear">
             <div class="container">
                 <div class="bigFont">روند برگزاری</div>
                 <div class="smallFont" style="margin-top: 20px">
@@ -498,8 +218,7 @@
             </div>
         </div>
 
-        <div class="yellowSecBack">
-            <img src="{{URL::asset('images/festival/yellowGear.svg')}}" class="topGear">
+        <div class="yellowSecBack withGear">
             <div class="container">
                 <div class="bigFont">اعلان نتایج</div>
                 <div class="smallFont" style="margin-top: 20px">
@@ -523,5 +242,31 @@
         </div>
 
     </section>
+
+
+    <script>
+        let matchConditionPics = {
+            'pic' : '{{URL::asset('images/festival/oneHandCamera.png')}}',
+            'mobile': '{{URL::asset('images/festival/handMobile.png')}}',
+            'video': '{{URL::asset('images/festival/twoHandCamera.png')}}'
+        }
+        function changeConditionMatch(_kind, _elem){
+            $(_elem).parent().find('.selected').removeClass('selected');
+            $(_elem).addClass('selected');
+            $('#matchConditionPic').attr('src', matchConditionPics[_kind]);
+
+            let showText = $('#conditionTexts').find('.show');
+            let needToShowText = $('#conditionTexts').find('.'+_kind);
+            if(showText[0] != needToShowText[0]) {
+                showText.removeClass('show').addClass('down');
+                needToShowText.removeClass('hidden');
+                needToShowText.removeClass('down');
+
+                setTimeout(() => needToShowText.addClass('show'), 10);
+                setTimeout(() => showText.addClass('hidden'), 500);
+            }
+        }
+
+    </script>
 </body>
 </html>

@@ -1,7 +1,50 @@
+<style>
+    .followerModal .searchSec{
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    .followerModal .searchSec .inputSec{
+        display: flex;
+        align-items: center;
+        background: #80808036;
+        justify-content: center;
+        border-radius: 13px;
+    }
+    .followerModal .searchSec .inputSec > input {
+        width: 100%;
+        border: none;
+        padding: 0px 10px;
+        background: none;
+    }
+    .followerModal .searchSec .inputSec > div {
+        border: none;
+        background: none;
+        font-size: 20px;
+        padding-left: 5px;
+    }
+</style>
+
 <div id="followerModal" class="modalBlackBack fullCenter followerModal" style="z-index: 9999;">
     <div class="modalBody" style="width: 400px; border-radius: 10px;">
         <div onclick="closeMyModal('followerModal')" class="iconClose closeModal"></div>
-        <div class="header">
+        @if(auth()->check())
+            <div class="searchSec">
+                <div class="inputSec">
+                    <input type="text"
+                           id="followerModalSearchInput"
+                           onfocus="openFollowerSearch(this.value)"
+                           onfocusout="closeFollowerSearch(this.value)"
+                           onkeydown="searchForFollowerUser(this.value)"
+                           placeholder="دوستان خود را پیدا کنید...">
+                    <div id="followerModalSearchButton" onclick="closeFollowerSearch(0)">
+                        <span class="searchIcon"></span>
+                        <span class="iconClose hidden"></span>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <div id="followerModalHeaderTabs" class="header">
             <div class="resultFollowersTab selected" onclick="openFromInPageFollower('resultFollowers')">
                 <span class="followerNumber" style="font-weight: bold;"></span>
                 <span>follower</span>
@@ -12,6 +55,7 @@
             </div>
         </div>
         <div id="followerModalBody" class="body">
+            <div id="searchResultFollower"></div>
             <div id="resultFollowers"></div>
             <div id="resultFollowing"></div>
         </div>
@@ -19,6 +63,9 @@
 </div>
 
 <script>
+    let ajaxForSearchFollowerUserModal = false;
+    let ajaxForSearchFollowerUserModalCheckNumber = 0;
+    let lastFollowerModalOpenPage = '';
     let getUserFollowerInPage = 0;
     let followerUserId = {{auth()->check() ? auth()->user()->id : 0}};
     let followerPlaceHolder =   '<div class="peopleRow placeHolder">\n' +
@@ -32,6 +79,7 @@
     }
 
     function openFollowerModal(_kind, _forWho = 0){
+        lastFollowerModalOpenPage = _kind;
         if(_forWho != 0)
             getUserFollowerInPage = _forWho;
 
@@ -78,9 +126,9 @@
         let text = '';
         if(_follower.length == 0) {
             text =  '<div class="emptyPeople">\n' +
-                '   <img src="{{URL::asset('images/mainPics/noData.png')}}" >\n' +
-                '   <span class="text">هیچ کاربری ثبت نشده است</span>\n' +
-                '</div>';
+                    '   <img src="{{URL::asset('images/mainPics/noData.png')}}" >\n' +
+                    '   <span class="text">هیچ کاربری ثبت نشده است</span>\n' +
+                    '</div>';
         }
         else {
             _follower.map(item => {
@@ -101,4 +149,57 @@
         $('#'+_Id).html(text);
     }
 
+    function openFollowerSearch(_value){
+        $('#followerModalBody').children().addClass('hidden');
+        $('#searchResultFollower').removeClass('hidden');
+        $('#followerModalHeaderTabs').addClass('hidden');
+
+        $('#followerModalBody').addClass('openSearch');
+        $('#followerModalSearchButton').children().addClass('hidden');
+        $('#followerModalSearchButton').find('.iconClose').removeClass('hidden');
+    }
+
+    function searchForFollowerUser(_value){
+        if (ajaxForSearchFollowerUserModal != false) {
+            ajaxForSearchFollowerUserModal.abort();
+            ajaxForSearchFollowerUserModal = false;
+        }
+
+        $("#searchResultFollower").html('');
+        if(_value.trim().length > 1) {
+            $("#searchResultFollower").html(followerPlaceHolder+followerPlaceHolder);
+
+            ajaxForSearchFollowerUserModal = $.ajax({
+                type: 'post',
+                url: '{{route("findUser")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    value: _value.trim()
+                },
+                success: function (response) {
+                    response = JSON.parse(response);
+                    createFollower('searchResultFollower', response.userName);
+                },
+                error: err => console.log(err),
+            })
+        }
+        else
+            $("#searchResultFollower").html('');
+    }
+
+    function closeFollowerSearch(_value){
+
+        if(_value == 0)
+            $('#followerModalSearchInput').val('');
+
+        if(_value == 0 || _value.length == 0) {
+            $('#followerModalBody').removeClass('openSearch');
+            $('#followerModalSearchButton').children().addClass('hidden');
+            $('#followerModalSearchButton').find('.searchIcon').removeClass('hidden');
+
+            $('#' + lastFollowerModalOpenPage).removeClass('hidden');
+            $('#followerModalHeaderTabs').removeClass('hidden');
+            $('#searchResultFollower').addClass('hidden');
+        }
+    }
 </script>

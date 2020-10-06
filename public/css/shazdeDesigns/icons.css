@@ -250,6 +250,10 @@
     font-family: Shazde_Regular2 !important;
     color: var(--koochita-yellow);
 }
+.spinnerIcon:before{
+    content: "\E036" !important;
+    font-family: Shazde_Regular2 !important;
+}
 .BookMarkIconEmpty:before{
     content: "\e0dd" !important;
     font-family: Shazde_Regular2 !important;

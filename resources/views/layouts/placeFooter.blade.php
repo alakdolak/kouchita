@@ -821,7 +821,7 @@
                 <div class="mainPopUp rightPopUp profileFooterPopUp">
                     <div class="closeFooterPopupIcon iconFamily iconClose"
                          onclick="$('#profile').modal('hide')"
-                         style="top: -10px"></div>
+                         style="top: -10px; z-index: 999"></div>
                     <div id="lp_register">
                         <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
                             <div class="firsLine">

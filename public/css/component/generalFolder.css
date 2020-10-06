@@ -1544,9 +1544,13 @@ a:hover {
     border-bottom: solid 2px;
 }
 .followerModal .body{
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 145px);
     min-height: 50vh;
     overflow-y: auto;
+    transition: .5s;
+}
+.followerModal .body.openSearch{
+    min-height: calc(100vh - 145px);
 }
 .followerModal .body .peopleRow{
     display: flex;
