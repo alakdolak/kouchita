@@ -14,6 +14,8 @@
     --white: #E5E5E5;
     --yellow: #FBC155;
     --dark: #273039;
+    --gray: #B4C0CC;
+    --light-gray: #B4C0CC;
 }
 
 header{
@@ -333,4 +335,157 @@ section .conditionFestival .leftSec > img{
 }
 .calendar.left .botText{
     padding-right: 50px;
+}
+
+
+.mainSectionSubmitWork{
+    width: 800px;
+}
+.IndicatorSec{
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.IndicatorSec .indicator{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.indicator .circle{
+    background: var(--gray);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.indicator .name{
+    font-size: 9px;
+    margin-top: 7px;
+}
+.indicator.line{
+    background: var(--gray);
+}
+
+.IndicatorSec .lines{
+    width: calc(100% - 100px);
+    position: absolute;
+    right: 50px;
+    left: 50px;
+    top: calc(50% - 10px);
+    display: flex;
+}
+.IndicatorSec .lines > div{
+    width: 50%;
+    background: var(--gray);
+    height: 10px;
+}
+.IndicatorSec.one .firstBackGround{
+    background: var(--yellow);
+}
+.IndicatorSec.two .twoBackGround{
+    background: var(--yellow);
+}
+.IndicatorSec.three .threeBackGround{
+    background: var(--yellow);
+}
+.IndicatorSec.one .oneLine{
+    color: var(--yellow);
+}
+.IndicatorSec.two .twoLine{
+    color: var(--yellow);
+}
+.IndicatorSec.three .threeLine{
+    color: var(--yellow);
+}
+
+.inputRows{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputRows > input, .inputRows > select{
+    width: 100%;
+    border: solid #273039 1px;
+    background: white;
+    border-radius: 30px;
+    font-size: 20px;
+    padding: 10px 25px;
+    margin: 10px 0px;
+}
+.inputRows > input[disabled], .inputRows > select[disabled]{
+    background: #E5E5E5 !important;
+}
+.inputRows.optional:after{
+    content: 'اختیاری';
+    color: var(--yellow);
+    position: absolute;
+    left: -35px;
+}
+
+.mainSectionSubmitWork .submitButton{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-right: auto;
+    margin: 40px 0px;
+}
+
+.mainSectionSubmitWork .submitButton.one .cancel{
+    display: none !important;
+}
+.mainSectionSubmitWork .submitButton.one .submit{
+    margin-right: auto !important;
+    border-radius: 30px !important;
+}
+.mainSectionSubmitWork .submitButton > button{
+    border: none;
+    padding: 10px 45px;
+}
+.mainSectionSubmitWork .submitButton .submit{
+    background: var(--yellow);
+    border-radius: 30px 0px 0px 30px;
+}
+.mainSectionSubmitWork .submitButton .cancel{
+    background: var(--gray);
+    border-radius: 0px 30px 30px 0px;
+    margin-left: 7px;
+    margin-right: auto;
+}
+
+.switchInputSec{
+    margin-top: 20px;
+}
+.switchInputSec .title{
+    text-align: center;
+    color: var(--light-gray);
+    font-size: 20px;
+}
+.switchInputSec .switchInput{
+    display: flex;
+    justify-content: center;
+    background: white;
+    border-radius: 30px;
+    font-size: 18px;
+    padding: 5px;
+    margin-top: 10px;
+}
+.switchInputSec .switchInput > div{
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 0px;
+    font-weight: bold;
+}
+.switchInputSec .switchInput > div:nth-of-type(1){
+    border-radius: 0px 30px 30px 0px;
+}
+.switchInputSec .switchInput > div:nth-of-type(2){
+    border-radius: 30px 0px 0px 30px;
+}
+.switchInputSec .switchInput > div.selected{
+    background: var(--yellow);
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css?v='.$fileVersions)}}">
 </head>
 <body>
+    @include('general.forAllPages')
     <header>
         <div class="container">
             <div class="logos">
@@ -19,7 +20,7 @@
             </div>
             <div class="buttons">
                 <div class="votedButton">رای می دهم</div>
-                <div class="registerButton">شرکت می کنم</div>
+                <div class="registerButton" onclick="iParticipate()">شرکت می کنم</div>
             </div>
         </div>
     </header>
@@ -265,6 +266,13 @@
                 setTimeout(() => needToShowText.addClass('show'), 10);
                 setTimeout(() => showText.addClass('hidden'), 500);
             }
+        }
+
+        function iParticipate(){
+            if(!checkLogin('{{route('festival.submitWorks')}}'))
+                return;
+
+            window.location.href = '{{route('festival.submitWorks')}}';
         }
 
     </script>
