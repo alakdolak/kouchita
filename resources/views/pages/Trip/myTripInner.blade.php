@@ -224,7 +224,10 @@
                                                                                     </div>
                                                                                 </div>
                                                                             @else
-                                                                                <button data-toggle="tooltip" title="حذف مکان" onclick="deletePlace('{{$tripPlace->id}}')" class="ui_button removeBtnTargetHelp_16"></button>
+                                                                                <button data-toggle="tooltip"
+                                                                                        title="حذف مکان"
+                                                                                        onclick="deletePlace('{{$tripPlace->id}}')"
+                                                                                        class="ui_button removeBtnTargetHelp_16"></button>
                                                                             @endif
                                                                         @endif
                                                                     </div>
@@ -254,7 +257,9 @@
                                                                         @elseif($trip->editPlace)
                                                                             <button class="chooseDate" onclick="assignDateToPlace('{{$tripPlace->id}}', '{{$trip->from_}}', '{{$trip->to_}}')">انتخاب تاریخ</button>
                                                                         @endif
-
+                                                                        <div id="tripCommentNumber{{$tripPlace->id}}" class="tripCommentCount" style="display: {{count($tripPlace->comments) > 0 ? 'block' : 'none'}}">
+                                                                            {{count($tripPlace->comments)}} یادداشت
+                                                                        </div>
                                                                     </div>
                                                                     <div class="images">
                                                                         <img class="resizeImgClass"
@@ -408,11 +413,13 @@
     <div id="memberSample" style="display: none">
         <div id="member_##id##" class="memberCard">
             <div class="cont">
-                <div class="img">
-                    <img src="##pic##" style="height: 100%;">
-                    <div class="loading">در انتظار تایید</div>
-                </div>
-                <div class="name">##username##</div>
+                <a href="{{url('profile/index/')}}/##username##">
+                    <div class="img">
+                        <img src="##pic##" style="height: 100%;">
+                        <div class="loading">در انتظار تایید</div>
+                    </div>
+                    <div class="name">##username##</div>
+                </a>
                 @if($trip->owner)
                     <div class="accessBut btn" onclick="showThisUserAccess(this)">
                         دسترسی ها
@@ -1316,6 +1323,8 @@
                                 if(item.id == tripPlaceId){
                                     item.comments.unshift(response.result);
                                     createCommentsHtml(item);
+                                    $('#tripCommentNumber'+tripPlaceId).show();
+                                    $('#tripCommentNumber'+tripPlaceId).text(item.comments.length + ' یادداشت ');
                                 }
                             });
                             showSuccessNotifi('{{__('یادداشت شما با موفقیت ثبت شد.')}}', 'left', 'var(--koochita-blue)');

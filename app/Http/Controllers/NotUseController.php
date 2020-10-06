@@ -20,6 +20,8 @@ use App\models\SectionPage;
 use App\models\State;
 use App\models\Survey;
 use App\models\Tag;
+use App\models\TripMembersLevelController;
+use App\models\User;
 use Illuminate\Http\Request;
 
 class NotUseController extends Controller
@@ -652,6 +654,22 @@ class NotUseController extends Controller
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
     }
 
+    public function changeAddFriend() {
+        dd('notUeses');
+        if(isset($_POST["username"]) && isset($_POST["tripId"])) {
+
+            $uId = User::whereUserName(makeValidInput($_POST["username"]))->first()->id;
+
+            $condition = ['uId' => $uId, 'tripId' => makeValidInput($_POST["tripId"])];
+            $tripLevel = TripMembersLevelController::where($condition)->first();
+            if($tripLevel->addFriend == 1)
+                $tripLevel->addFriend = 0;
+            else
+                $tripLevel->addFriend = 1;
+
+            $tripLevel->save();
+        }
+    }
 
     public function showHotelList($city, $mode) {
         return redirect(route('main'));

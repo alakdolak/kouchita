@@ -855,7 +855,9 @@
                                     <div onclick="window.location.href='{{route("profile.message.page")}}'">
                                         {{--                                            <div class="icon messageIcon"></div>--}}
                                         <div class="name">صندوق پیام</div>
-                                        <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
+                                        @if($newMsgCount > 0)
+                                            <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mBLine bLine">

@@ -50,10 +50,12 @@
             <div class="msgHeader">
                 <div class="userInfoMSg">
                     <div class="leftBigArrowIcon" onclick="backToList()"></div>
-                    <div class="userPic">
-                        <img id="msgBodyPic" style="width: 100%">
-                    </div>
-                    <div id="msgBodyUserName" style="margin-left: 10px"></div>
+                    <a class="headerUserLink" href="#">
+                        <div class="userPic">
+                            <img id="msgBodyPic" style="width: 100%">
+                        </div>
+                        <div id="msgBodyUserName" style="margin-left: 10px"></div>
+                    </a>
                 </div>
                 <div class="userSetting">
                     <span class="threeDotIconVertical" onclick="$(this).next().toggleClass('open')"></span>
@@ -177,6 +179,7 @@
                     if (item.id == _id) {
                         $('#msgBodyPic').attr('src', item.pic);
                         $('#msgBodyUserName').text(item.username);
+                        $('.headerUserLink').attr('href', '{{url('profile/index')}}/'+item.username);
                     }
                 });
             }
@@ -368,11 +371,9 @@
 
         setTimeout(updateMsg, 5000);
 
-{{--        @if(isset($specUser) && $specUser != null)--}}
-{{--            specUser = {!! $specUser !!};--}}
-{{--            showThisMsgs(specUser);--}}
-{{--        @else--}}
-{{--            showThisMsgs(0);--}}
-{{--        @endif--}}
+        @if(isset($specUser) && $specUser != null)
+            specUser = {!! $specUser !!};
+            showThisMsgs(specUser);
+        @endif
     </script>
 @stop

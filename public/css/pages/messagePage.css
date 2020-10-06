@@ -60,6 +60,11 @@ footer{
 .userRow.active{
     background-color: #fcc15675;
 }
+.headerUserLink{
+    display: flex;
+    align-items: center;
+    color: white;
+}
 .userPic{
     width: 50px;
     height: 50px;

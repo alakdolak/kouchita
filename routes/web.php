@@ -582,8 +582,6 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('changeAddPlace', array('as' => 'changeAddPlace', 'uses' => 'MyTripsController@changeAddPlace'));
 
-        Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'MyTripsController@changeAddFriend'));
-
         Route::post('changePlaceDate', array('as' => 'changePlaceDate', 'uses' => 'MyTripsController@changePlaceDate'));
 
         Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
@@ -775,6 +773,8 @@ Route::get('exportToExcelTT', 'HomeController@exportExcel');
 // not use
 Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 //    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
+    Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'NotUseController@changeAddFriend'));
+
     Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllReview');
 
     Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllQuestions');

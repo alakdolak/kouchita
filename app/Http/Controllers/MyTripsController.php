@@ -659,7 +659,22 @@ class MyTripsController extends Controller {
         return;
     }
 
+    public function deletePlace() {
+        if(isset($_POST["tripPlaceId"])) {
 
+            $tripPlaceId = makeValidInput($_POST["tripPlaceId"]);
+            $uId = Auth::user()->id;
+            $tripPlace = TripPlace::whereId($tripPlaceId);
+            $tripId = $tripPlace->tripId;
+            $condition = ['tripId' => $tripId, 'uId' => $uId, 'editPlace' => 1];
+            if(Trip::whereId($tripId)->uId == $uId || TripMember::where($condition)->count() > 0){
+                TripComments::where('tripPlaceId', $tripPlaceId)->delete();
+                $tripPlace->delete();
+                echo "ok";
+            }
+        }
+
+    }
 
 
     public function placeTrips() {
@@ -1135,39 +1150,4 @@ class MyTripsController extends Controller {
         }
     }
 
-    public function changeAddFriend() {
-
-        if(isset($_POST["username"]) && isset($_POST["tripId"])) {
-
-            $uId = User::whereUserName(makeValidInput($_POST["username"]))->first()->id;
-
-            $condition = ['uId' => $uId, 'tripId' => makeValidInput($_POST["tripId"])];
-            $tripLevel = TripMembersLevelController::where($condition)->first();
-            if($tripLevel->addFriend == 1)
-                $tripLevel->addFriend = 0;
-            else
-                $tripLevel->addFriend = 1;
-
-            $tripLevel->save();
-        }
-    }
-
-    public function deletePlace() {
-
-        if(isset($_POST["tripPlaceId"])) {
-
-            $tripPlaceId = makeValidInput($_POST["tripPlaceId"]);
-            $uId = Auth::user()->id;
-            $tripPlace = TripPlace::whereId($tripPlaceId);
-            $tripId = $tripPlace->tripId;
-            $condition = ['tripId' => $tripId, 'uId' => $uId];
-
-            if(Trip::whereId($tripId)->uId == $uId ||
-                (TripMember::where($condition)->count() > 0 && TripMembersLevelController::where($condition)->first()->addPlace)) {
-                $tripPlace->delete();
-                echo "ok";
-            }
-        }
-
-    }
 }

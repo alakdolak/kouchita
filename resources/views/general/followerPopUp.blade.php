@@ -141,8 +141,14 @@
                     '       <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
                     '   </a>\n' +
                     '   <a href="' + item.url + '" class="name">' + item.username + '</a>\n';
-                if (item.notMe == 1)
+
+                if (item.notMe == 1) {
+                    text += '<div style="display: flex; margin-right: auto;">';
+                    text += '   <a href="{{url('profile/message')}}?user='+item.username +'" class="sendMsgButton">ارسال پیام</a>\n';
                     text += '   <div class="button ' + followed + '"  onclick="followUser(this, ' + item.userId + ')"></div>\n';
+                    text += '</div>';
+                }
+
                 text += '</div>';
             });
         }
