@@ -34,7 +34,7 @@ footer{
     border-radius: 20px;
     height: calc(100vh - 65px);
     margin: 5px;
-    margin-right: 20px;
+    margin-left: 20px;
     position: relative;
 }
 .sideContacts{
@@ -56,6 +56,7 @@ footer{
     display: flex;
     padding: 10px;
     border-bottom: solid #e0e0e0 1px;
+    direction: rtl;
 }
 .userRow.active{
     background-color: #fcc15675;
@@ -81,7 +82,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 10px;
+    margin-right: 10px;
     width: calc(100% - 70px);
 }
 .userName{
@@ -117,6 +118,7 @@ footer{
     align-items: center;
     justify-content: space-between;
     padding: 0px 15px;
+    direction: rtl;
 }
 .userSearchSec .leftBigArrowIcon{
     color: white;
@@ -129,6 +131,7 @@ footer{
     border: solid .1px;
     border-radius: 50%;
     cursor: pointer;
+    transform: rotateZ(180deg);
 }
 .userInfoMSg{
     display: flex;
@@ -145,9 +148,10 @@ footer{
     display: none;
     align-items: center;
     justify-content: center;
-    margin-right: 5px;
+    margin-left: 5px;
     border: solid .1px;
     border-radius: 50%;
+    transform: rotateZ(180deg);
 }
 .msgHeader{
     z-index: 1;
@@ -158,9 +162,10 @@ footer{
     position: relative;
     width: 100%;
     color: white;
+    direction: rtl;
 }
 .userSetting{
-    margin-right: 20px;
+    margin-left: 20px;
     position: relative;
 }
 .userSetting .threeDotIconVertical{
@@ -172,12 +177,13 @@ footer{
     border-radius: 10px;
     position: absolute;
     width: 155px;
-    right: 0;
+    left: 0;
     text-align: right;
     direction: rtl;
     transition: .3s;
     max-height: 0px;
     overflow: hidden;
+    color: black;
 }
 .userSettingMenu.open{
     padding: 10px;
@@ -374,7 +380,7 @@ footer{
     white-space: nowrap;
     width: 90%;
     direction: rtl;
-    text-align: left;
+    text-align: right;
 }
 @media (max-width: 1200px) {
     .msgBody{

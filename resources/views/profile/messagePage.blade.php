@@ -35,17 +35,6 @@
 
 @section('main')
     <div class="mainMsgBody">
-        <div id="sideListUser" class="sideContacts">
-            <div class="userSearchSec">
-                <a href="{{route('profile')}}" class="leftBigArrowIcon" title="بازگشت"></a>
-                <div class="searchInp">
-                    <input id="searchInUser" type="text" onkeyup="searchInUsers(this.value)">
-                    <div class="searchIcon"></div>
-                    <div class="iconClose" style="display: none" onclick="clearSearchBox()"></div>
-                </div>
-            </div>
-            <div id="contacts" class="userSideSection Scroll"></div>
-        </div>
         <div id="msgBody" class="msgBody">
             <div class="msgHeader">
                 <div class="userInfoMSg">
@@ -54,7 +43,7 @@
                         <div class="userPic">
                             <img id="msgBodyPic" style="width: 100%">
                         </div>
-                        <div id="msgBodyUserName" style="margin-left: 10px"></div>
+                        <div id="msgBodyUserName" style="margin-right: 10px"></div>
                     </a>
                 </div>
                 <div class="userSetting">
@@ -75,6 +64,17 @@
                     <textarea id="msgText" rows="1" onkeyup="changeHeight()" placeholder="پیام خود را وارد کنید..."></textarea>
                 </div>
             </div>
+        </div>
+        <div id="sideListUser" class="sideContacts">
+            <div class="userSearchSec">
+                <a href="{{route('profile')}}" class="leftBigArrowIcon" title="بازگشت"></a>
+                <div class="searchInp">
+                    <input id="searchInUser" type="text" onkeyup="searchInUsers(this.value)">
+                    <div class="searchIcon"></div>
+                    <div class="iconClose" style="display: none" onclick="clearSearchBox()"></div>
+                </div>
+            </div>
+            <div id="contacts" class="userSideSection Scroll"></div>
         </div>
     </div>
 
