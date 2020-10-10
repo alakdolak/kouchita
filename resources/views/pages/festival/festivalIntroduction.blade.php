@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="buttons">
-                <div class="votedButton">رای می دهم</div>
+                <a href="{{route('festival.main')}}" class="votedButton" >رای می دهم</a>
                 <div class="registerButton" onclick="iParticipate()">شرکت می کنم</div>
             </div>
         </div>

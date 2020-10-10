@@ -13,125 +13,8 @@
             background: #445565;
             min-height: 100vh;
         }
-
-        .mainSectionSubmitWork .dropPictureSec{
-            display: flex;
-            border: dashed 6px var(--light-gray);
-            width: 100%;
-            height: 200px;
-            margin-top: 30px;
-            align-items: center;
-            cursor: pointer;
-        }
-        .mainSectionSubmitWork .dropPictureSec .icon{
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .mainSectionSubmitWork .dropPictureSec .icon > img{
-            height: 90%;
-            margin: 10px;
-        }
-        .mainSectionSubmitWork .dropPictureSec .text{
-            color: var(--yellow);
-            width: 100%;
-            text-align: end;
-            margin-top: auto;
-            margin-bottom: 10px;
-            margin-left: 20px;
-            font-size: 17px;
-        }
-
-        .mainSectionSubmitWork .fileUploaded{
-            margin-top: 30px;
-        }
-        .mainSectionSubmitWork .fileUploaded .fileRow{
-            border: solid #273039 3px;
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0px;
-        }
-        .mainSectionSubmitWork .fileUploaded .fileRow > img{
-            height: 100%;
-            margin-left: auto;
-        }
-        .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs{
-            padding: 20px;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            background: rgb(68,85,101);
-            background: linear-gradient(90deg, rgba(68,85,101,1) 0%, rgba(127,138,149,1) 50%, rgba(184,190,196,0.56) 80%, rgba(255,255,255,0) 100%);
-            /*background: linear-gradient(90deg, #445565, #44556554);*/
-        }
-        .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .row {
-            width: 60%;
-            margin-right: auto;
-        }
-        .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .cornerButton {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: red;
-            font-size: 35px;
-        }
-        .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .inputRows > input{
-            font-size: 15px;
-            padding: 10px 25px;
-            margin: 5px 0px;
-        }
-
-        .mainSectionSubmitWork .descriptionSec{
-            margin-top: 15px;
-        }
-        .mainSectionSubmitWork .descriptionSec > textarea{
-            background: white;
-            border-radius: 20px;
-            border: solid #273039 1px;
-            width: 100%;
-            font-size: 22px;
-            padding: 10px;
-        }
-
-        .mainSectionSubmitWork .mainTextRule{
-            color: var(--light-gray);
-            font-size: 18px;
-            margin-top: 25px;
-            text-align: right;
-        }
-        .mainSectionSubmitWork .acceptRuleButton{
-            display: flex;
-            margin-top: 20px;
-            color: var(--yellow);
-            align-items: center;
-        }
-        .mainSectionSubmitWork .acceptRuleButton > input{
-            display: block;
-            margin-left: 10px;
-            font-size: 15px;
-            width: 20px;
-            height: 20px;
-            margin-top: 0;
-        }
-        .mainSectionSubmitWork .acceptRuleButton > label{
-            color: var(--yellow);
-            cursor: pointer;
-            margin: 0;
-        }
     </style>
+
 </head>
 <body>
     <header>
@@ -144,8 +27,6 @@
             </div>
             <div class="buttons smallFont" style="margin-left: auto; margin-right: 10px;">
                 #جشنواره ایران ما
-                {{--            <div class="votedButton">رای می دهم</div>--}}
-    {{--            <div class="registerButton" onclick="iParticipate()">شرکت می کنم</div>--}}
             </div>
         </div>
     </header>

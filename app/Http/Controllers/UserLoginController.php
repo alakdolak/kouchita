@@ -661,8 +661,10 @@ class UserLoginController extends Controller
                 $userCheckEmail->username = $usernameCheck;
                 $userCheckEmail->password = \Hash::make($user->id);
                 $name = explode(' ', $user->name);
-                $userCheckEmail->first_name = $name[0];
-                $userCheckEmail->last_name = $name[1];
+                if(isset($name[0]))
+                    $userCheckEmail->first_name = $name[0];
+                if(isset($name[1]))
+                    $userCheckEmail->last_name = $name[1];
                 $userCheckEmail->email = $user->email;
                 $userCheckEmail->picture = $user->picture;
                 $userCheckEmail->googleId = $user->id;
