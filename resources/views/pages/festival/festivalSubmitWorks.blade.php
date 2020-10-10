@@ -109,10 +109,6 @@
                 <input id="picFile" type="file" style="display: none;" onchange="changePic(this)">
 
                 <div id="fileUploadSection" class="fileUploaded"></div>
-
-                <div class="descriptionSec">
-                    <textarea rows="5" placeholder="توضیحات مجموعه"></textarea>
-                </div>
             </div>
 
             <div id="section_3" style="display: none;">
@@ -163,13 +159,13 @@
                                 '               <input type="text" placeholder="نام عکس">\n' +
                                 '           </div>\n' +
                                 '           <div class="col-md-6 inputRows">\n' +
-                                '               <input type="text" placeholder="نام استان">\n' +
+                                '               <input type="text" placeholder="نام مکان (اختیاری)">\n' +
                                 '           </div>\n' +
-                                '           <div class="col-md-6 inputRows">\n' +
+                                '           <div class="col-md-6 inputRows pd-lt-0">\n' +
                                 '               <input type="text" placeholder="نام شهر">\n' +
                                 '           </div>\n' +
                                 '           <div class="col-md-12 inputRows">\n' +
-                                '               <input type="text" placeholder="نام مکان">\n' +
+                                '               <textarea type="text" placeholder="توضیح عکس (اختیاری)"></textarea>\n' +
                                 '           </div>\n' +
                                 '       </div>\n' +
                                 '       <div class="cornerButton iconClose" onclick="deleteThisImg('+uploadedPicFile.length+')"></div>\n' +
