@@ -26,8 +26,99 @@
             min-height: 100vh;
             color: var(--light-gray);
         }
+        .showFestivalPage .selectFestivalPc{
+            display: flex;
+        }
+        .showFestivalPage .selectFestivalMobile{
+            display: none;
+        }
 
+        @media (max-width: 991px) {
+            .smallFont{
+                font-size: 16px;
+            }
+            .showFestivalPage .tabSection .tab{
+                margin-left: 30px;
+                font-size: 12px;
+            }
+            .showFestivalPage .showFullPicModal .body .infoSec{
+                width: 35%;
+            }
+            .showFestivalPage .showFullPicModal .body .imgSec{
+                width: 65%;
+            }
+            .showFestivalPage .bodySection .userWorks{
+                width: 150px;
+                height: 150px;
+            }
+        }
 
+        @media (max-width: 767px) {
+            .showFestivalPage .showFullPicModal .body{
+                height: 100vh;
+                overflow-y: auto;
+                display: block;
+            }
+            .showFestivalPage .showFullPicModal .body .imgSec{
+                width: 100%;
+                height: calc(100vh - 130px);
+                padding: 15px;
+            }
+            .showFestivalPage .showFullPicModal .body .infoSec{
+                width: 100%;
+                border-radius: 30px 30px 0px 0px;
+                height: auto;
+            }
+            .showFestivalPage .showFullPicModal .showSLBInM > button{
+                background: none;
+                border: solid;
+                border-radius: 12px;
+            }
+            .showFestivalPage .showFullPicModal .showSLBInM .modalLike {
+                color: red;
+            }
+            .showFestivalPage .showFullPicModal .showSLBInM .codeButton {
+                color: var(--yellow);
+            }
+            .showFestivalPage .showFullPicModal .body .infoSec .liShButtons > div{
+                border-radius: 10px;
+            }
+            .showFestivalPage .bodySection .userWorks .onPicture{
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .showFestivalPage .bodySection .userWorks{
+                width: 100px;
+                height: 100px;
+            }
+            .showFestivalPage .selectFestivalPc{
+                display: none;
+            }
+            .showFestivalPage .selectFestivalMobile{
+                display: flex;
+                margin-right: auto;
+                position: relative;
+            }
+            .showFestivalPage .chooseFestivalModalMobile .tab{
+                text-align: center;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                color: var(--yellow);
+                border-bottom: solid 1px;
+            }
+            .showFestivalPage .chooseFestivalModalMobile .tab:last-of-type{
+                border-bottom: none;
+            }
+            .showFestivalPage .chooseFestivalModalMobile .tab.selected{
+                color: white !important;
+            }
+            .showFestivalPage .selectFestivalMobile .downArrowIconAfter{
+                color: var(--yellow);
+                margin: 0px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -62,10 +153,15 @@
         <div class="tabSection">
             <div class="topTab">
                 <div class="tab notTab">جشنواره</div>
-                <div class="tab selected">عکس بخش اصلی</div>
-                <div class="tab">عکس بخش فرعی</div>
-                <div class="tab">فیلم بخش اصلی</div>
-                <div class="tab">فیلم بخش فرعی</div>
+                <div class="selectFestivalPc">
+                    <div class="tab selected festival1" onclick="chooseFestival('1')">عکس بخش اصلی</div>
+                    <div class="tab festival2" onclick="chooseFestival('2')">عکس بخش فرعی</div>
+                    <div class="tab festival3" onclick="chooseFestival('3')">فیلم بخش اصلی</div>
+                    <div class="tab festival4" onclick="chooseFestival('4')">فیلم بخش فرعی</div>
+                </div>
+                <div class="selectFestivalMobile">
+                    <div class="downArrowIconAfter" onclick="openChooseFestivalTab()">عکس بخش اصلی</div>
+                </div>
             </div>
             <div class="botTab">
                 <div class="right">
@@ -90,13 +186,28 @@
 
     <div id="showImgModal" class="showFullPicModal hidden">
         <div class="iconClose" onclick="closeShowPictureModal()"></div>
-        <div class="body">
-            <div class="infoSec">
+        <div id="showImgModalBody" class="body">
+            <div id="modalImgSection" class="imgSec">
+                <img id="modalPicture" src="#">
+                <div class="nPButtons next leftArrowIcon" onclick="nextShowPicModal(-1)"></div>
+                <div class="nPButtons prev leftArrowIcon" onclick="nextShowPicModal(1)"></div>
+            </div>
+
+            <div id="modalInfoSection" class="infoSec">
                 <div class="userInfo">
-                    <div class="userPic">
-                        <img class="modalUserPic" src="#" style="height: 100%">
+                    <div style="display: flex; align-items: center;">
+                        <div class="userPic">
+                            <img class="modalUserPic" src="#" style="height: 100%">
+                        </div>
+                        <a href="#" target="_blank" class="username modalUserName"></a>
                     </div>
-                    <a href="#" target="_blank" class="username modalUserName"></a>
+                    <div class="hideOnScreen showSLBInM">
+                        <button class="modalLike empty-heart"></button>
+                        <button class="codeButton" onclick="copyUrl(this, window.location.href)">
+                            اشتراک گذاری:
+                            <span class="modalCode"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="picInfo">
                     <div class="inf">
@@ -121,12 +232,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="imgSec">
-                <img id="modalPicture" src="#">
-                <div class="nPButtons next leftArrowIcon" onclick="nextShowPicModal(-1)"></div>
-                <div class="nPButtons prev leftArrowIcon" onclick="nextShowPicModal(1)"></div>
-            </div>
+    <div id="chooseFestivalMobileTab" class="modalBlackBack fullCenter chooseFestivalModalMobile">
+        <div class="modalBody" style="background: #445565;">
+            <div class="tab selected festivalTab festival1" onclick="chooseFestival('1')">عکس بخش اصلی</div>
+            <div class="tab festivalTab festival2" onclick="chooseFestival('2')">عکس بخش فرعی</div>
+            <div class="tab festivalTab festival3" onclick="chooseFestival('3')">فیلم بخش اصلی</div>
+            <div class="tab festivalTab festival4" onclick="chooseFestival('4')">فیلم بخش فرعی</div>
         </div>
     </div>
 </section>
@@ -174,8 +288,20 @@
     }
 
     function closeShowPictureModal(){
-        window.location.hash = '';
+        let newUrl = window.location.origin + window.location.pathname;
+        window.history.pushState({"html":'',"pageTitle":''},"", newUrl);
         $('#showImgModal').addClass('hidden');
+    }
+
+    function chooseFestival(_kind){
+        $('.tab.selected').removeClass('selected');
+        $('.festival'+_kind).addClass('selected');
+        $('.selectFestivalMobile').find('.downArrowIconAfter').text($($('.tab.selected')[0]).text());
+        closeMyModal('chooseFestivalMobileTab');
+    }
+
+    function openChooseFestivalTab(){
+        openMyModal('chooseFestivalMobileTab');
     }
 
     function copyUrl(_elems, _link){

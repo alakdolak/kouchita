@@ -1257,7 +1257,8 @@ footer .profileMenuLinks {
     left: 5px;
     top: 0px;
     font-size: 40px;
-    color: var(--koochita-light-green);
+    /*color: var(--koochita-light-green);*/
+    color: var(--koochita-red);
 }
 
 .eatery_filters{
@@ -1404,9 +1405,11 @@ footer .profileFooterPopUp .firsLine .infos .inf{
 footer .profileFooterPopUp .firsLine .infos .inf .number{
     font-weight: bold;
     font-size: 18px;
+    color: var(--koochita-blue);
 }
 footer .profileFooterPopUp .firsLine .infos .inf .name{
-    font-size: 11px;
+    font-size: 14px;
+    color: black
 }
 footer .profileFooterPopUp .firsLine .pic > img{
     height: 100%;
@@ -1473,16 +1476,14 @@ footer .logoutButton .name{
 
 }
 footer .footerMsgCountNumber{
-    position: absolute;
-    color: white;
-    background: var(--koochita-red);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    color: var(--koochita-red);
     left: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: solid;
+    font-weight: bold;
+    padding: 0px 10px;
 }
 
 @media (max-width: 1300px) {

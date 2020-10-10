@@ -132,10 +132,18 @@
         return check;
     };
 
+
     function openMyModal(_id){
         $('#'+_id).addClass('showModal');
     }
     function closeMyModal(_id){
         $('#'+_id).removeClass('showModal');
     }
+
+    $(window).on('click', e => {
+        if($('.modalBlackBack.fullCenter.showModal').length > 0){
+            if($(e.target).is('.modalBlackBack, .showModal, .fullCenter'))
+                closeMyModal($(e.target).attr('id'));
+        }
+    })
 </script>
