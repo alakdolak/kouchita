@@ -2,19 +2,32 @@
 <html lang="fa" dir="rtl">
 <head>
     @include('layouts.topHeader')
-    <title>
-        فستیوال
-    </title>
 
+    <script>
+        let allPicsHeader = {!! json_encode($allPictures) !!};
+        let urlHashHeader = window.location.hash;
+        if(urlHashHeader.length != 0){
+            allPicsHeader.map(item => {
+                if('#'+item.code == urlHashHeader) {
+                    let metaContent = 'کوچیتا | جشنواره ایران ما | اثر : ' + item.username;
+                    $('meta[findMeta=title]').attr('content', metaContent);
+                    $('title').text(metaContent);
+                    $('meta[findMeta=pic]').attr('content', item.pic);
+                }
+            });
+        }
+    </script>
     <?php
         $metaDesc = 'در جشنواره ایران ما شرکت کنید';
+        $title = 'کوچیتا | فستیوال ایران ما'
     ?>
+    <title>{{$title}}</title>
 
     <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css?v='.$fileVersions)}}">
 
-    <meta findMeta="title" property="og:title" content=""/>
-    <meta findMeta="title" property="title" content=""/>
-    <meta findMeta="title" name="twitter:title" content=""/>
+    <meta findMeta="title" property="og:title" content="{{$title}}"/>
+    <meta findMeta="title" property="title" content="{{$title}}"/>
+    <meta findMeta="title" name="twitter:title" content="{{$title}}"/>
     <meta name="twitter:card" content="{{$metaDesc}}"/>
     <meta name="twitter:description" content="{{$metaDesc}}"/>
     <meta property="og:description" content="{{$metaDesc}}"/>
@@ -24,8 +37,8 @@
     <meta findMeta="pic" property="og:image" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
     <meta findMeta="pic" property="og:image:secure_url" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
     <meta findMeta="pic" name="twitter:image" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
-    <meta property="og:image:width" content="550"/>
-    <meta property="og:image:height" content="367"/>
+{{--    <meta property="og:image:width" content="550"/>--}}
+{{--    <meta property="og:image:height" content="367"/>--}}
 
     <style>
         section{
