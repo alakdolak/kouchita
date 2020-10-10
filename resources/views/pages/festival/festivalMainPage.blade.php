@@ -203,6 +203,7 @@
            if('#'+item.code == urlHash) {
                let metaContent = 'کوچیتا | جشنواره ایران ما | اثر : ' + item.username;
                $('meta[findMeta=title]').attr('content', metaContent);
+               $('title').text(metaContent);
                $('meta[findMeta=pic]').attr('content', item.pic);
                openShowPictureModal(index);
            }
