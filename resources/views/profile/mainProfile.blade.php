@@ -10,52 +10,16 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1=3')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1='.$fileVersions)}}">
     <style>
-        .showBannerPic{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px;
-            overflow: hidden;
-            margin: 5px 0px;
-            width: 100%;
-        }
-        .bannerPicItem{
-            margin: 5px;
-            cursor: pointer;
-        }
-        .bannerPicItem.active{
-            border: solid 5px var(--koochita-light-green);
-        }
-        .bannerPicItem > img{
-            width: 100%;
-        }
-        .editReviewPicturesSection{
-            background-color: #0000009e;
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            z-index: 99;
-            top: 0;
-        }
-        .newMsgCount{
-            position: absolute;
-            left: -10px;
-            top: -10px;
-            background: var(--koochita-red);
-            color: white;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-        }
+
     </style>
 @stop
 
 @section('main')
+    @include('component.smallShowReview')
+    @include('component.safarnamehRow')
+
     <div class="userPostsPage">
         <div class="userProfilePageCoverImg" style="background-image: url('{{$user->banner}}'); background-size: cover; background-position: center">
             @if(isset($myPage) && $myPage)
@@ -72,12 +36,17 @@
                         <div class="circleBase profilePicUserProfile">
                             <img src="{{$sideInfos['userPicture']}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                         </div>
+                        <div class="followerHeaderSection hideOnScreen" onclick="openFollowerModal('resultFollowers', {{$user->id}}) // in general.followerPopUp.blade.php">
+                            <span class="followerNumber" style="font-weight: bold">{{$followersUserCount}}</span>
+                            <span style="font-size: 9px;">دنبال کننده</span>
+                        </div>
                         @if(isset($myPage) && $myPage)
                             <div class="addPicForUser" style="top: 10px; right: 15px;" onclick="openEditPhotoModal()">
                                 <span class="emptyCameraIcon addPicByUser"></span>
                             </div>
                         @endif
                     </div>
+
                     <div class="userProfileInfo">
                         <div>{{$user->username}}</div>
                         <div style="display: flex; font-size: 12px;">
@@ -93,22 +62,126 @@
                                     @endif
                                 </a>
                             @else
+                                <button class="msgHeaderButton followButton {{$youFollowed != 0 ? 'followed' : ''}}" onclick="followUser(this, {{$user->id}})">
+                                    <span class="addMemberIcon"></span>
+                                    <span class="text"></span>
+                                </button>
                                 <a href="{{route("profile.message.page")}}?user={{$user->username}}" class="msgHeaderButton">ارسال پیام</a>
                             @endif
                         </div>
                     </div>
-                    <div class="postsMainFiltrationBar">
-                        <a id="whoAmITab" href="#whoAmI" class="profileHeaderLinksTab whoAmI" onclick="changePages('whoAmI')">من کی هستم</a>
-                        <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">پست‌ها</a>
-                        <a id="pictureTab" href="#picture" class="profileHeaderLinksTab" onclick="changePages('picture')">عکس و فیلم</a>
-                        <a id="questionTab" href="#question" class="profileHeaderLinksTab" onclick="changePages('question')">سؤال‌ و جواب</a>
-                        <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">سفرنامه ها</a>
-                        <a id="medalsTab" href="#medal" class="profileHeaderLinksTab" onclick="changePages('medal')">جایزه و امتیاز</a>
-                        <a href="#" class="profileHeaderLinksTab">سایر موارد</a>
+
+                    <div class="postsMainFiltrationBar hideOnPhone">
+                        <div class="" style="display: flex; justify-content: space-around; align-items: center; padding: 0px 5px 0px 0px; ">
+                            <a id="reviewTab" href="#review" class="profileHeaderLinksTab" onclick="changePages('review')">
+                                <span class="icon EmptyCommentIcon"></span>
+                                <span class="text">پست‌ها</span>
+                            </a>
+                            <a id="photoTab" href="#photo" class="profileHeaderLinksTab" onclick="changePages('photo')">
+                                <span class="icon emptyCameraIcon"></span>
+                                <span class="text">عکس و فیلم</span>
+                            </a>
+                            <a id="questionTab" href="#question" class="profileHeaderLinksTab" onclick="changePages('question')">
+                                <span class="icon questionIcon"></span>
+                                <span class="text">سؤال‌ و جواب</span>
+                            </a>
+                            <a id="safarnamehTab" href="#safarnameh" class="profileHeaderLinksTab" onclick="changePages('safarnameh')">
+                                <span class="icon safarnameIcon"></span>
+                                <span class="text">سفرنامه ها</span>
+                            </a>
+                            <a id="medalsTab" href="#medal" class="profileHeaderLinksTab" onclick="changePages('medal')">
+                                <span class="icon medalsIcon"></span>
+                                <span class="text">جایزه و امتیاز</span>
+                            </a>
+                            <a id="followerTab" href="#" class="profileHeaderLinksTab" onclick="openFollowerModal('resultFollowers', {{$user->id}}) // in general.followerPopUp.blade.php">
+                                <span class="icon twoManIcon"></span>
+                                <span class="text">دنبال کنندگان</span>
+                            </a>
+                            @if(isset($myPage) && $myPage)
+                                <a id="bookMarkTab" href="#bookMark" class="profileHeaderLinksTab" onclick="changePages('bookMark')" style="margin-left: 20px;">
+                                    <span class="icon BookMarkIconEmpty"></span>
+                                    <span class="text">نشان کرده</span>
+                                </a>
+                            @endif
+                        </div>
+{{--                        <a href="#" class="profileHeaderLinksTab threeDotIcon"></a>--}}
                     </div>
                 </div>
 
-                <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
+                <div class="profileMobileSection">
+                    <div class="bioSec">
+                        <div class="mainDivHeaderText" onclick="showFullUserInfoInMobile(this)">
+                            <h3>{{$user->username}}</h3>
+                            <div class="downArrowIcon"></div>
+                        </div>
+                        <div class="bioContent">
+                            <div class="bioText">
+                                @if(isset($sideInfos['introduction']))
+                                    {{$sideInfos['introduction']}}
+                                    {{$sideInfos['introduction']}}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        .mobileTabs .moreTabMenu{
+                            position: absolute;
+                            left: 13px;
+                            top: 55px;
+                            z-index: 9;
+                            background: #f2f2f2;
+                            text-align: center;
+                            font-size: 16px;
+                            padding: 2px 9px;
+                            border: solid 2px #f2f2f2;
+                            border-radius: 10px;
+                        }
+                        .mobileTabs .moreTabMenu .tabMenu{
+                            margin: 10px 0px;
+                            cursor: pointer;
+                        }
+                    </style>
+
+                    <div id="stickyProfileHeader" class="profileMobileStickHeader">
+                        <div class="mobileTabs">
+                            @if(isset($myPage) && $myPage)
+                                <div id="moreMobileProfileTab" class="tab" onclick="openMoreTabProfileMobile()">
+                                    <div class="icon threeDotIconVertical"></div>
+                                    <div class="name"></div>
+                                    <div class="bottomLine"></div>
+                                </div>
+
+                                <div id="myMenuMoreTab" class="moreTabMenu hidden">
+                                    <div id="myMenuMoreTabQuestion" class="tabMenu" onclick="chooseFromMobileMenuTab('question', this)">سوال و جواب</div>
+                                    <div id="myMenuMoreTabBookMark" class="tabMenu" onclick="chooseFromMobileMenuTab('bookMark', this)">نشان کرده</div>
+                                </div>
+                            @endif
+                            <div id="safarnamehProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
+                                <div class="icon safarnameIcon"></div>
+                                <div class="name">سفرنامه</div>
+                                <div class="bottomLine"></div>
+                            </div>
+                            <div id="medalProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'medal')">
+                                <div class="icon medalsIcon"></div>
+                                <div class="name">جوایز و مدال ها</div>
+                                <div class="bottomLine"></div>
+                            </div>
+                            <div id="photoProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'photo')">
+                                <div class="icon emptyCameraIcon"></div>
+                                <div class="name">عکس و فیلم</div>
+                                <div class="bottomLine"></div>
+                            </div>
+                            <div id="reviewProfileMoblieTab" class="tab selected" onclick="mobileChangeProfileTab(this, 'review')">
+                                <div class="icon EmptyCommentIcon"></div>
+                                <div class="name">پست</div>
+                                <div class="bottomLine"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="userProfileSideInfos" class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right hideOnPhone">
                     @if($sideInfos['introduction'] != null || count($sideInfos['tripStyle']) > 0 || $myPage)
                         <div class="userProfileLevelMainDiv rightColBoxes">
                             <div class="mainDivHeaderText">
@@ -124,15 +197,15 @@
                                     <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">خودتان را به دیگران معرفی کنید.</div>
                                 @endif
                             </div>
-                            <div id="myTripStyles" class="userProfileTagsSection">
-                                @if(count($sideInfos['tripStyle']) == 0 && $sideInfos['introduction'] != null && isset($myPage) && $myPage)
-                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>
-                                @else
-                                    @foreach($sideInfos['tripStyle'] as $item)
-                                        <div class="userProfileTags">{{$item->name}}</div>
-                                    @endforeach
-                                @endif
-                            </div>
+{{--                            <div id="myTripStyles" class="userProfileTagsSection">--}}
+{{--                                @if(count($sideInfos['tripStyle']) == 0 && $sideInfos['introduction'] != null && isset($myPage) && $myPage)--}}
+{{--                                    <div style="font-size: 14px; color: var(--koochita-blue); text-align: center; cursor: pointer" onclick="sendAjaxRequestToGiveTripStyles()">علایقتان را با ما در میان بگذارید و امتیاز بگیرید</div>--}}
+{{--                                @else--}}
+{{--                                    @foreach($sideInfos['tripStyle'] as $item)--}}
+{{--                                        <div class="userProfileTags">{{$item->name}}</div>--}}
+{{--                                    @endforeach--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
                         </div>
                     @endif
                     <div class="userProfileLevelMainDiv rightColBoxes">
@@ -165,10 +238,10 @@
                         </div>
                     </div>
                     <div class="userProfileLevelMainDiv rightColBoxes" style="padding: 0px">
-                        {{--        <div class="mainDivHeaderText">--}}
-                        {{--            <h3>امتیاز کاربر</h3>--}}
-                        {{--            <div>سیستم امتیاز دهی</div>--}}
-                        {{--        </div>--}}
+                        <div class="mainDivHeaderText">
+                            <h3>امتیاز کاربر</h3>
+                            <div>سیستم امتیاز دهی</div>
+                        </div>
                         <div class="userProfileLevelDetails userProfileScoreSection">
                             <div  style="width: 49%; border-left: solid 1px gray;">
                                 <div style="font-size: 17px; color: #656565; font-weight: bold"> {{__('امتیاز کل کاربر')}} </div>
@@ -284,6 +357,10 @@
 
                     <div id="medalBody" class="prodileSections hidden">
                         @include('profile.innerParts.userMedals')
+                    </div>
+
+                    <div id="bookMarkBody" class="prodileSections hidden">
+                        @include('profile.innerParts.UserBookMarks')
                     </div>
                 </div>
             </div>
@@ -482,13 +559,64 @@
         let allUserPics = {!! json_encode($sideInfos['allUserPics']) !!};
         let selectedTrip = [];
         let userPageId = {{$user->id}};
+        let openMobileMoreMenu = false;
+        let defaultPics = null;
+        let choosenPic = 0;
+        let uploadedPic = null;
+        let mainUploadedPic = null;
+
+        $(window).on('scroll', () =>{
+            let top = document.getElementById('stickyProfileHeader').getBoundingClientRect().top;
+            let elem = $('.mobileTabs')[0];
+            if(top > 0 && $(elem).hasClass('stickToTop'))
+                $(elem).removeClass('stickToTop');
+            else if(top <= 0 && !$(elem).hasClass('stickToTop'))
+                $(elem).addClass('stickToTop');
+        });
+
+        $(window).on('click', () => {
+            if(openMobileMoreMenu && !$('#myMenuMoreTab').hasClass('hidden'))
+                $('#myMenuMoreTab').addClass('hidden');
+        });
+
+
+        function showFullUserInfoInMobile(_elems) {
+            $(_elems).parent().toggleClass('show');
+        }
+
+        function followUser(_elem, _id){
+            if(!checkLogin())
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("profile.setFollower")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: _id,
+                    userPageId: userPageId
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    if(response.status == 'store') {
+                        $(_elem).addClass('followed');
+                        showSuccessNotifi('شما به لیست دنبال کنندگان افزوده شدید', 'left', 'var(--koochita-blue)');
+                        $('.followerNumber').text(response.followerNumber);
+                        $('.followingNumber').text(response.followingNumber);
+                    }
+                    else if(response.status == 'delete'){
+                        $(_elem).removeClass('followed');
+                        showSuccessNotifi('شما از لیست دنبال کنندگان خارج شدید', 'left', 'red');
+                        $('.followerNumber').text(response.followerNumber);
+                        $('.followingNumber').text(response.followingNumber);
+                    }
+                },
+                error: err => console.log(err),
+            })
+        }
 
         function showAllPicUser(){
             createPhotoModal('عکس های شما', allUserPics);// in general.photoAlbumModal.blade.php
-        }
-
-        function openWhoAmI(){
-            $('.rightColBoxes').slideToggle();
         }
 
         function showUserActivity(_element){
@@ -558,61 +686,94 @@
         }
 
         function changePages(_kind){
-            cancelFullMainContent();
-
             $('.postsMainFiltrationBar').find('.active').removeClass('active');
             $('.prodileSections').addClass('hidden');
-
-            if($(window).width() < 768)
-                $('#userProfileSideInfos').hide();
 
             if(_kind === 'review'){
                 $('#reviewTab').addClass('active');
                 $('#reviewMainBody').removeClass('hidden');
+                mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review');
                 getReviewsUserReview(); // in profile.innerParts.userPostsInner
             }
-            else if(_kind == 'whoAmI'){
-                $('#userProfileSideInfos').show();
-                $('#whoAmITab').addClass('active');
-            }
-            else if(_kind === 'picture') {
-                $('#pictureTab').addClass('active');
+            else if(_kind === 'photo') {
+                $('#photoTab').addClass('active');
                 $('#picMainBody').removeClass('hidden');
+                mobileChangeProfileTab($('#photoProfileMoblieTab'), 'photo');
                 getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
             }
             else if(_kind === 'question') {
                 $('#questionTab').addClass('active');
                 $('#questionMainBody').removeClass('hidden');
+                chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion'));
                 getAllUserQuestions();// in profile.innerParts.userQuestionsInner
             }
             else if(_kind === 'safarnameh') {
                 $('#safarnamehTab').addClass('active');
                 $('#safarnamehBody').removeClass('hidden');
+                mobileChangeProfileTab($('#safarnamehProfileMoblieTab'), 'safarnameh');
                 getSafarnamehs(); // in profile.innerParts.userSafarnameh
             }
             else if(_kind === 'medal') {
                 $('#medalsTab').addClass('active');
                 $('#medalBody').removeClass('hidden');
+                mobileChangeProfileTab($('#medalProfileMoblieTab'), 'medal');
                 getMedals(); // in profile.innerParts.userMedals
+            }
+            else if(_kind === 'bookMark') {
+                $('#bookMarkTab').addClass('active');
+                $('#bookMarkBody').removeClass('hidden');
+                chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark'));
+                getProfileBookMarks(); // in profile.innerParts.UserBookMarks
             }
         }
 
-        function fullMainContent(){
-            $('#userProfileSideInfos').hide();
-            $('#userProfileMainContentSection').addClass('fullWidthBoot');
+        function openMoreTabProfileMobile(){
+            if($('#myMenuMoreTab').hasClass('hidden'))
+                setTimeout(() => $('#myMenuMoreTab').removeClass('hidden'), 100);
+
+            openMobileMoreMenu = true;
         }
 
-        function cancelFullMainContent(){
-            if($(window).width() > 768)
-                $('#userProfileSideInfos').show();
-
-            $('#userProfileMainContentSection').removeClass('fullWidthBoot');
+        function chooseFromMobileMenuTab(_kind, _elem){
+            $('#moreMobileProfileTab').find('.name').text($(_elem).text());
+            mobileChangeProfileTab($('#moreMobileProfileTab'), _kind);
         }
 
-        let defaultPics = null;
-        let choosenPic = 0;
-        let uploadedPic = null;
-        let mainUploadedPic = null;
+        function mobileChangeProfileTab(_element, _kind){
+            $(_element).parent().find('.selected').removeClass('selected');
+            $(_element).addClass('selected');
+            window.location.hash = '#'+_kind;
+
+            if(_kind != 'question' && _kind != 'bookMark')
+                $('#moreMobileProfileTab').find('.name').text('');
+
+            $('.prodileSections').addClass('hidden');
+            if(_kind == 'review'){
+                $('#reviewMainBody').removeClass('hidden');
+                getReviewsUserReview(); // in profile.innerParts.userPostsInner
+            }
+            else if(_kind == 'photo'){
+                $('#picMainBody').removeClass('hidden');
+                getAllUserPicsAndVideo();// in profile.innerParts.userPhotosAndVideosInner
+            }
+            else if(_kind == 'safarnameh'){
+                $('#safarnamehBody').removeClass('hidden');
+                getSafarnamehs(); // in profile.innerParts.userSafarnameh
+            }
+            else if(_kind == 'medal'){
+                $('#medalBody').removeClass('hidden');
+                getMedals(); // in profile.innerParts.userMedals
+            }
+            else if(_kind == 'question'){
+                $('#questionMainBody').removeClass('hidden');
+                getAllUserQuestions();// in profile.innerParts.userQuestionsInner
+            }
+            else if(_kind == 'bookMark'){
+                $('#bookMarkBody').removeClass('hidden');
+                getProfileBookMarks(); // in profile.innerParts.UserBookMarks
+            }
+        }
+
         function openEditPhotoModal(){
             if(defaultPics == null)
                 getOurPic();
@@ -704,18 +865,10 @@
         }
 
         var url = new URL(location.href);
-        if(url.hash === '' || url.hash === '#review')
+        if(url.hash === '')
             changePages('review');
-        else if(url.hash === '#picture')
-            changePages('picture');
-        else if(url.hash === '#whoAmI')
-            changePages('whoAmI');
-        else if(url.hash === '#question')
-            changePages('question');
-        else if(url.hash === '#safarnameh')
-            changePages('safarnameh');
-        else if(url.hash === '#medal')
-            changePages('medal');
+        else if(url.hash != '')
+            changePages(url.hash.replace("#", ""));
 
     </script>
 
@@ -724,6 +877,8 @@
         let chosenBannerPic = null;
         let mainUploadedBanner = false;
         let uploadedBanner = false;
+        let cropKind = null;
+
         function openBannerModal() {
             getBannerPic();
             openMyModal('userBannerModal');
@@ -808,7 +963,6 @@
             })
         }
 
-        let cropKind = null;
         function startProfileCropper(_kind, _ratio){
 
             if(first) {

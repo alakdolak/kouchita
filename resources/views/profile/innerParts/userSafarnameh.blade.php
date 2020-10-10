@@ -51,21 +51,23 @@
 </style>
 
 <div id="safarnamehList" class="userProfileArticles">
-    <div class="userProfilePostsFiltrationContainer">
-        <div class="userProfilePostsFiltration">
-            <span class="active">جدیدترین‌ها</span>
-            <span>بهترین‌ها</span>
-        </div>
-    </div>
+{{--    <div class="userProfilePostsFiltrationContainer">--}}
+{{--        <div class="userProfilePostsFiltration">--}}
+{{--            <span class="active">جدیدترین‌ها</span>--}}
+{{--            <span>بهترین‌ها</span>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    <div class="userProfilePostsSearchContainer">
-        <div class="inputBox">
-            <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>
-        </div>
-        @if(isset($myPage) && $myPage)
+    @if(isset($myPage) && $myPage)
+
+        <div class="userProfilePostsSearchContainer">
+    {{--        <div class="inputBox">--}}
+    {{--            <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید"></textarea>--}}
+    {{--        </div>--}}
             <button class="btn btn-primary" onclick="openNewSafarnameh()">نوشتن سفرنامه</button>
-        @endif
-    </div>
+        </div>
+    @endif
+
     <div class="col-xs-12 notData hidden">
         <div class="pic">
             <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
@@ -90,11 +92,12 @@
     <div id="safarnamehShowList"></div>
 </div>
 
-
-
 <script>
+
+
     let myPageAccess = {{isset($myPage) && $myPage ? 1 : 0}}
     function getSafarnamehs(){
+        let sfpl = getSafaranmehPlaceHolderRow(); // component.safarnamehRow.blade.php
         let data;
         if(userPageId == 0)
             data = { _token: '{{csrf_token()}}' };
@@ -104,6 +107,7 @@
                 userId: userPageId, // in mainProfile.blade.php
             };
 
+        $('#safarnamehShowList').html(sfpl+sfpl);
         $('#safarnamehList').find('.notData').addClass('hidden');
         $.ajax({
             type: 'post',
@@ -111,14 +115,15 @@
             data: data,
             success: function(response){
                 response = JSON.parse(response);
-                if(response.status == 'ok')
-                    showSafarnameh(response.result);
+                if(response.status == 'ok') {
+                    response.result.map(item => item.editAble = true);
+                    let safranamehText = showSafarnameh(response.result);
+                    $('#safarnamehShowList').html(safranamehText);
+                }
             },
-            error: function(err){
-                console.log(err);
-            }
+            error: err => console.log(err)
         })
-    }
+    };
 
     function showSafarnameh(_result){
         let text = '';
@@ -127,84 +132,10 @@
             $('#safarnamehList').find('.notData').removeClass('hidden');
 
         _result.forEach(item => {
-            text += '<div class="usersArticlesMainDiv">\n' +
-                '            <div class="articleImgMainDiv">\n' +
-                '                <img src="' + item.pic + '">\n' +
-                '            </div>\n' +
-                '            <div class="articleDetailsMainDiv">\n';
-
-            if(myPageAccess) {
-                text += '<div class="trashIcon commonSafarnamehIcon delete" onclick="deleteThisSafarnameh(' + item.id + ')"></div>';
-                text += '<div class="editIcon commonSafarnamehIcon edit" onclick="editThisSafarnameh(' + item.id + ')"></div>';
-            }
-            text += '<div class="articleTagsMainDiv" style="cursor: default;">\n' +
-                    '   <div class="articleTags">سفرنامه</div>\n' +
-                    '</div>\n' +
-                    '<div class="articleTitleMainDiv">\n' +
-                    '   <a href="{{url("/safarnameh/show")}}/' + item.id + '">' + item.title + '</a>\n' +
-                    '</div>\n';
-            if(item.summery != null) {
-                text += '<div class="articleSummarizedContentMainDiv">\n' +
-                        '   <span>' + item.summery + '</span>\n' +
-                        '   <span>...</span>\n' +
-                        '</div>\n';
-            }
-            text += '<div class="articleSpecificationsMainDiv">\n' +
-                    '   <div class="articleDateMainDiv">' + item.time + '</div>\n' +
-                    '   <div class="articleCommentsMainDiv">0</div>\n' +
-                    '   <div class="articleWriterMainDiv">'+ item.username +'</div>\n' +
-                    '   <div class="articleWatchListMainDiv">0</div>\n' +
-                    '</div>\n' +
-                    '<a href="{{url('/article/user')}}/' + item.id + '" class="readSafarnamehButton"> مطالعه سفرنامه</a>' +
-                    '</div>\n' +
-                    '</div>'
+            item.editAble = myPageAccess && item.editAble;
+            text += getSafarnamehRow(item); // in component.safarnamehRow.blade.php
         });
 
-        $('#safarnamehShowList').html(text);
+        return text;
     }
-
-    @if(isset($myPage) && $myPage)
-        let deletedSafarnamehId = null;
-        function deleteThisSafarnameh(_id){
-            if(checkLogin()) {
-                deletedSafarnamehId = _id;
-                openWarning('آیا می خواهید سفرنامه ی خود را پاک کنید؟', doDeleteSafarnameh, 'بله پاک شود');
-            }
-        }
-
-        function doDeleteSafarnameh(){
-            if(deletedSafarnamehId != null){
-                openLoading(function(){
-                    $.ajax({
-                        type: 'post',
-                        url: '{{route("safarnameh.delete")}}',
-                        data: {
-                            _token: '{{csrf_token()}}',
-                            id: deletedSafarnamehId
-                        },
-                        success: function(response){
-
-                            if(response == 'ok'){
-                                location.reload();
-                                showSuccessNotifi('سفرنامه شما با موفقیت حذف شد.', 'left', 'var(--koochita-blue)');
-                            }
-                            else {
-                                closeLoading();
-                                showSuccessNotifi('در حذف سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
-                            }
-                        },
-                        error: function(err){
-                            closeLoading();
-                            showSuccessNotifi('در حذف سفرنامه مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
-                        }
-                    })
-                })
-            }
-        }
-
-
-        function editThisSafarnameh(_id){
-            editSafarnameh(_id); //in addSafarnameh.blade.php
-        }
-    @endif
 </script>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\models\Followers;
+use App\models\Message;
 use App\models\User;
 use Closure;
 use Illuminate\Support\Facades\View;
@@ -17,7 +19,7 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 4;
+        $fileVersions = 8;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();
@@ -29,13 +31,21 @@ class ShareData
             $buPic = auth()->user()->getUserPicInModel($userFooter->id);
             $userNamename = $userFooter->username;
 
-            View::share(['userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
+            $newMsgCount = Message::where('seen', 0)
+                                    ->where('receiverId', $userFooter->id)
+                                    ->count();
+
+            $followersCount = Followers::where('followedId', $userFooter->id)->count();
+            $followingCount = Followers::where('userId', $userFooter->id)->count();
+
+            View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount, 'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
                         'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
                         'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions ]);
         }
         else {
+            $followingCount = 0;
             $buPic = \URL::asset('_images/nopic/blank.jpg');
-            View::share(['buPic' => $buPic, 'config' => $config, 'fileVersions' => $fileVersions]);
+            View::share(['buPic' => $buPic, 'config' => $config, 'followingCount' => $followingCount, 'fileVersions' => $fileVersions]);
         }
 
 

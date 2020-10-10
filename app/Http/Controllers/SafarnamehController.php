@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\models\BookMark;
+use App\models\BookMarkReference;
 use App\models\Cities;
 use App\models\Place;
 use App\models\Safarnameh;
@@ -256,6 +258,33 @@ class SafarnamehController extends Controller
         return;
     }
 
+    public function addSafarnamehBookMark(Request $request)
+    {
+        if(isset($request->id)){
+            $kind = BookMarkReference::where('group', 'safarnameh')->first();
+            $bookMark = BookMark::where('userId', auth()->user()->id)
+                                  ->where('referenceId', $request->id)
+                                  ->where('bookMarkReferenceId', $kind->id)
+                                  ->first();
+            if($bookMark == null){
+                $bookMark = new BookMark();
+                $bookMark->userId = auth()->user()->id;
+                $bookMark->referenceId = $request->id;
+                $bookMark->bookMarkReferenceId = $kind->id;
+                $bookMark->save();
+                echo 'store';
+            }
+            else{
+                $bookMark->delete();
+                echo 'delete';
+            }
+
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
 
     public function safarnamehRedirect($slug)
     {
@@ -636,11 +665,19 @@ class SafarnamehController extends Controller
         }
         $safarnameh = SafarnamehMinimalData($safarnameh);
         $safarnameh->youLike = 0;
+        $safarnameh->bookMark = false;
         if(auth()->check()){
             $youLike = SafarnamehLike::where('safarnamehId', $safarnameh->id)
                                         ->where('userId', auth()->user()->id)
                                         ->first();
             $safarnameh->youLike = $youLike == null ? 0 : $youLike->like;
+            $bookMarkKind = BookMarkReference::where('group', 'safarnameh')->first();
+            $bookMark = BookMark::where('userId', auth()->user()->id)
+                                ->where('referenceId', $safarnameh->id)
+                                ->where('bookMarkReferenceId', $bookMarkKind->id)->first();
+
+            if($bookMark != null)
+                $safarnameh->bookMark = true;
         }
 
         $safarnameh->user = User::select(['id', 'username', 'introduction'])->find($safarnameh->userId);

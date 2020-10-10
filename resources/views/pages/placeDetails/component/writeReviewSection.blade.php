@@ -58,7 +58,7 @@
                     <div class="addParticipantName">
                         <span class="addParticipantSpan">با</span>
                         <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
-                            <textarea id="assignedSearch" class="inputBoxInput" placeholder="{{__('چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید')}}" onkeyup="searchUser(this.value)"></textarea>
+                            <textarea id="assignedSearch" class="inputBoxInput" placeholder="{{__('چه کسی بودید؟ نام کاربری را وارد کنید')}}" onkeyup="searchUser(this.value)"></textarea>
                             <div class="assignedResult" id="assignedResultReview"></div>
                             <div class="participantDivMainDiv" id="participantDivMainDiv"></div>
                         </div>
@@ -419,8 +419,8 @@
                     }
                     else if (response != 'nok1' && response != 'nok2') {
                         var user = JSON.parse(response);
-                        var userEmail = user[0];
-                        var userName = user[1];
+                        var userEmail = user['email'];
+                        var userName = user['userName'];
 
                         text = '<ul>';
                         for(i = 0; i < userName.length; i++)

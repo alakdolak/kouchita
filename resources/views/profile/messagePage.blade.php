@@ -11,7 +11,7 @@
 @section('header')
     @parent
 
-    <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css?v=2')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/messagePage.css?v='.$fileVersions)}}">
 
     <style>
         body{
@@ -35,25 +35,16 @@
 
 @section('main')
     <div class="mainMsgBody">
-        <div id="sideListUser" class="sideContacts">
-            <div class="userSearchSec">
-                <a href="{{route('profile')}}" class="leftBigArrowIcon" title="بازگشت"></a>
-                <div class="searchInp">
-                    <input id="searchInUser" type="text" onkeyup="searchInUsers(this.value)">
-                    <div class="searchIcon"></div>
-                    <div class="iconClose" style="display: none" onclick="clearSearchBox()"></div>
-                </div>
-            </div>
-            <div id="contacts" class="userSideSection Scroll"></div>
-        </div>
         <div id="msgBody" class="msgBody">
             <div class="msgHeader">
                 <div class="userInfoMSg">
                     <div class="leftBigArrowIcon" onclick="backToList()"></div>
-                    <div class="userPic">
-                        <img id="msgBodyPic" style="width: 100%">
-                    </div>
-                    <div id="msgBodyUserName" style="margin-left: 10px"></div>
+                    <a class="headerUserLink" href="#">
+                        <div class="userPic">
+                            <img id="msgBodyPic" style="width: 100%">
+                        </div>
+                        <div id="msgBodyUserName" style="margin-right: 10px"></div>
+                    </a>
                 </div>
                 <div class="userSetting">
                     <span class="threeDotIconVertical" onclick="$(this).next().toggleClass('open')"></span>
@@ -73,6 +64,17 @@
                     <textarea id="msgText" rows="1" onkeyup="changeHeight()" placeholder="پیام خود را وارد کنید..."></textarea>
                 </div>
             </div>
+        </div>
+        <div id="sideListUser" class="sideContacts">
+            <div class="userSearchSec">
+                <a href="{{route('profile')}}" class="leftBigArrowIcon" title="بازگشت"></a>
+                <div class="searchInp">
+                    <input id="searchInUser" type="text" onkeyup="searchInUsers(this.value)">
+                    <div class="searchIcon"></div>
+                    <div class="iconClose" style="display: none" onclick="clearSearchBox()"></div>
+                </div>
+            </div>
+            <div id="contacts" class="userSideSection Scroll"></div>
         </div>
     </div>
 
@@ -177,6 +179,7 @@
                     if (item.id == _id) {
                         $('#msgBodyPic').attr('src', item.pic);
                         $('#msgBodyUserName').text(item.username);
+                        $('.headerUserLink').attr('href', '{{url('profile/index')}}/'+item.username);
                     }
                 });
             }
@@ -368,11 +371,9 @@
 
         setTimeout(updateMsg, 5000);
 
-{{--        @if(isset($specUser) && $specUser != null)--}}
-{{--            specUser = {!! $specUser !!};--}}
-{{--            showThisMsgs(specUser);--}}
-{{--        @else--}}
-{{--            showThisMsgs(0);--}}
-{{--        @endif--}}
+        @if(isset($specUser) && $specUser != null)
+            specUser = {!! $specUser !!};
+            showThisMsgs(specUser);
+        @endif
     </script>
 @stop

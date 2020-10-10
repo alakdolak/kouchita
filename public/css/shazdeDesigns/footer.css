@@ -506,8 +506,9 @@ footer li > img, .small-ico {
     display: flex;
     padding: 20px;
     flex-direction: column;
+    padding-bottom: 0px;
     overflow: auto;
-    height: inherit;
+    min-height: 100vh;
 }
 
 #lp_register > div:first-child {
@@ -671,7 +672,7 @@ footer .memberPointInfo {
     display: flex;
     flex-direction: column;
     margin-top: 0px;
-    border-top: 1px solid #c4c4c4;
+    /*border-top: 1px solid #c4c4c4;*/
 }
 
 footer .memberPointInfo .modules-membercenter-total-points {
@@ -1373,6 +1374,117 @@ footer .safarnamehSearchRowFooter  .searchIcon{
     top: 2px;
     border-radius: 7px;
 }
+footer .profileFooterPopUp{
+    height: 100vh;
+    overflow: auto;
+}
+footer .profileFooterPopUp .firsLine{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+footer .profileFooterPopUp .firsLine .pic{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+footer .profileFooterPopUp .firsLine .infos{
+    display: flex;
+    justify-content: space-evenly;
+    width: calc(100% - 60px);
+    text-align: center;
+}
+footer .profileFooterPopUp .firsLine .infos .inf{
+
+}
+footer .profileFooterPopUp .firsLine .infos .inf .number{
+    font-weight: bold;
+    font-size: 18px;
+}
+footer .profileFooterPopUp .firsLine .infos .inf .name{
+    font-size: 11px;
+}
+footer .profileFooterPopUp .firsLine .pic > img{
+    height: 100%;
+}
+footer .profileFooterPopUp .secondLine {
+    padding: 5px 25px;
+    font-weight: bold;
+    font-size: 18px;
+}
+footer .profileFooterPopUp .buttonsLine {
+
+}
+footer .profileFooterPopUp .buttonsLine .bLine{
+    display: flex;
+    width: 100%;
+}
+footer .profileFooterPopUp .buttonsLine .bLine > div{
+    color: var(--koochita-blue);
+    border: solid 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+}
+footer .profileFooterPopUp .buttonsLine .bLine > div:nth-of-type(1){
+    border-right: none;
+}
+footer .profileFooterPopUp .buttonsLine .bLine > div:nth-of-type(n){
+    border-left: none;
+}
+footer .profileFooterPopUp .buttonsLine .sBLine > div{
+    width: 100%;
+}
+footer .profileFooterPopUp .buttonsLine .mBLine > div{
+    width: 100%;
+    border-top: none;
+    position: relative;
+}
+footer .profileFooterPopUp .buttonsLine .mBLine > div .name{
+    font-size: 9px;
+}
+footer .profileFooterPopUp .buttonsLine .mBLine > div .icon{
+    font-size: 32px;
+    line-height: 19px;
+    margin: 8px 0px;
+}
+footer .logoutButton{
+    /*position: absolute;*/
+    bottom: 0;
+    width: 100%;
+    background: var(--koochita-red);
+    right: 0;
+    text-align: center;
+    color: white;
+    padding: 10px 0px;
+    border-radius: 30px 30px 0px 0px;
+    margin-top: 35px;
+}
+footer .logoutButton .icon{
+
+}
+footer .logoutButton .name{
+
+}
+footer .footerMsgCountNumber{
+    position: absolute;
+    color: white;
+    background: var(--koochita-red);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (max-width: 1300px) {
     .footerRside {
         font-size: 13px !important;
@@ -1523,6 +1635,13 @@ footer .safarnamehSearchRowFooter  .searchIcon{
         width: 40px;
         height: 35px;
         background-size: 35px;
+    }
+    footer .logoutSectionMobile{
+        display: flex;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        margin-top: auto;
     }
 }
 
@@ -1715,6 +1834,7 @@ footer .safarnamehSearchRowFooter  .searchIcon{
 
     #lp_register {
         padding: 20px 10px;
+        padding-bottom: 0px;
     }
 
     footer #myHonorsText > h3 {

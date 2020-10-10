@@ -22,9 +22,9 @@
 @section('header')
     @parent
 
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTrips.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}' data-rup='saves-rest-client'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTrips.css?v='.$fileVersions)}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/saves-rest-client.css?v='.$fileVersions)}}' data-rup='saves-rest-client'/>
 
     <style>
         #saves-all-trips .trip-tile-container .trip-tile.new-trip{

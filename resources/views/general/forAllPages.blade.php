@@ -28,6 +28,8 @@
 
 @include('general.reportModal')
 
+@include('general.followerPopUp')
+
 @if(!Auth::check())
     @include('general.nLoginPopUp')
 @else

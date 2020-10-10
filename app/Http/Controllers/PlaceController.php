@@ -7,6 +7,8 @@ use App\models\Adab;
 use App\models\Alert;
 use App\models\Amaken;
 use App\models\BannerPics;
+use App\models\BookMark;
+use App\models\BookMarkReference;
 use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\Comment;
@@ -123,8 +125,12 @@ class PlaceController extends Controller {
         saveViewPerPage($kindPlaceId, $place->id); // common.php
 
         $bookMark = false;
-        $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id, 'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
-        if (LogModel::where($condition)->count() > 0)
+        $bmcheck = BookMark::join('bookMarkReferences', 'bookMarkReferences.id', 'bookMarks.bookMarkReferenceId')
+                            ->where('userId', $uId)
+                            ->where('bookMarks.referenceId', $place->id)
+                            ->where('bookMarkReferences.tableName', $kindPlace->tableName)
+                            ->count();
+        if ($bmcheck > 0)
             $bookMark = true;
 
         $rates = getRate($place->id, $kindPlaceId); // common.php
@@ -517,35 +523,30 @@ class PlaceController extends Controller {
     public function setBookMark()
     {
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {
-
             $uId = Auth::user()->id;
             $placeId = makeValidInput($_POST["placeId"]);
             $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+            $kindPlace = Place::find($kindPlaceId);
 
-            $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
-                'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId];
-
-            $log = LogModel::where($condition)->first();
-
-            if ($log != null) {
-                $log->delete();
-                echo "ok-del";
-                return;
+            $bookmarkKind = BookMarkReference::where('tableName', $kindPlace->tableName)->first();
+            $bookmark = BookMark::where('userId', $uId)
+                                ->where('referenceId', $placeId)
+                                ->where('bookMarkReferenceId', $bookmarkKind->id)
+                                ->first();
+            if($bookmark == null){
+                $bookmark = new BookMark();
+                $bookmark->userId = $uId;
+                $bookmark->referenceId = $placeId;
+                $bookmark->bookMarkReferenceId = $bookmarkKind->id;
+                $bookmark->save();
+                echo 'ok-add';
             }
-
-            $log = new LogModel();
-            $log->placeId = $placeId;
-            $log->time = getToday()["time"];
-            $log->kindPlaceId = $kindPlaceId;
-            $log->visitorId = $uId;
-            $log->date = date('Y-m-d');
-            $log->activityId = Activity::whereName('نشانه گذاری')->first()->id;
-            try {
-                $log->save();
-                echo "ok-add";
-            } catch (Exception $x) {
+            else{
+                $bookmark->delete();
+                echo 'ok-del';
             }
         }
+        return;
     }
 
     function getCommentsCount()

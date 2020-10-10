@@ -8,8 +8,11 @@ use App\models\Activity;
 use App\models\ActivityLogs;
 use App\models\Age;
 use App\models\Amaken;
+use App\models\BookMark;
+use App\models\BookMarkReference;
 use App\models\Cities;
 use App\models\DefaultPic;
+use App\models\Followers;
 use App\models\InvitationCode;
 use App\models\Level;
 use App\models\LogModel;
@@ -43,6 +46,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 
 class ProfileController extends Controller {
@@ -161,10 +165,15 @@ class ProfileController extends Controller {
         else
             $user->banner = URL::asset('userProfile/'.$user->banner);
 
-        $newMsgCount = Message::where('seen', 0)->where('receiverId', $user->id)->count();
         $userMedals = getTakenMedal($uId)['takenMedal'];
 
-        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'newMsgCount', 'userMedals']));
+        $followersUserCount = Followers::where('followedId', $user->id)->count();
+
+        $youFollowed = 0;
+        if(!$myPage && \auth()->check())
+            $youFollowed = Followers::where('userId', \auth()->user()->id)->where('followedId', $user->id)->count();
+
+        return view('profile.mainProfile', compact(['user', 'sideInfos', 'myPage', 'userMedals', 'followersUserCount', 'youFollowed']));
     }
 
     public function placeSuggestion(Request $request)
@@ -465,6 +474,8 @@ class ProfileController extends Controller {
             $item->pic = \URL::asset('_images/posts/'.$item->id.'/'.$item->pic);
             $item->time = verta($item->created_at)->format('Y/m/d');
             $item->username = $username;
+            $item->userPic = getUserPic($userId);
+            $item->url = url("/safarnameh/show/".$item->id);
         }
 
         echo json_encode(['status'  => 'ok', 'result' => $safarnameh]);
@@ -488,6 +499,79 @@ class ProfileController extends Controller {
         }
 
         echo json_encode($banners);
+        return;
+    }
+
+    public function getBookMarks(Request $request)
+    {
+        if(isset($request->kind)){
+            $bookmarks = [];
+            $kindIds = BookMarkReference::where('group', $request->kind)->pluck('id')->toArray();
+
+            if(count($kindIds) > 0){
+                $bookmarksKinds = BookMark::where('userId', \auth()->user()->id)
+                                        ->whereIn('bookMarkReferenceId', $kindIds)
+                                        ->get()
+                                        ->groupBy('bookMarkReferenceId');
+                foreach($bookmarksKinds as $kind){
+                    if(count($kind) > 0){
+                        $kk = BookMarkReference::find($kind[0]->bookMarkReferenceId);
+
+                        foreach ($kind as $item){
+                            if($kk->group == 'safarnameh'){
+                                $bm = \DB::table($kk->tableName)
+                                    ->select(['title', 'id', 'userId', 'summery', 'meta', 'pic', 'created_at'])
+                                    ->find($item->referenceId);
+
+                                if($bm != null) {
+                                    $us = User::find($bm->userId);
+                                    $bm->pic = \URL::asset('_images/posts/' . $bm->id . '/' . $bm->pic);
+                                    $bm->time = verta($bm->created_at)->format('Y/m/d');
+                                    $bm->username = $us->username;
+                                    $bm->userPic = getUserPic($us->id);
+                                    $bm->url = url("/safarnameh/show/" . $bm->id);
+
+                                    if ($bm->summery == null)
+                                        $bm->summery = $bm->meta;
+                                }
+                            }
+                            else if($kk->group == 'review'){
+                                $bm = \DB::table($kk->tableName)->find($item->referenceId);
+                                if($bm != null)
+                                    $bm = reviewTrueType($bm); // in common.php
+                            }
+                            else if($kk->group == 'place'){
+                                $bm = \DB::table($kk->tableName)->find($item->referenceId);
+                                if($bm != null) {
+                                    $kindPlace = Place::where('tableName', $kk->tableName)->first();
+                                    $plcSug = createSuggestionPack($kindPlace->id, $bm->id);
+                                    if (isset($bm->dastresi))
+                                        $plcSug->address = $bm->dastresi;
+                                    else if (isset($bm->address))
+                                        $plcSug->address = $bm->address;
+
+                                    if (isset($bm->D) && isset($bm->C)) {
+                                        $plcSug->D = $bm->D;
+                                        $plcSug->C = $bm->C;
+                                    }
+                                    $plcSug->logId = $item->id;
+                                    $plcSug->kindPlaceId = $kindPlace->id;
+
+                                    $bm = $plcSug;
+                                }
+                            }
+                            if($bm != null)
+                                array_push($bookmarks, $bm);
+                        }
+                    }
+                }
+            }
+
+            echo json_encode(['status' => 'ok', 'result' => $bookmarks]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
         return;
     }
 
@@ -1138,43 +1222,4 @@ class ProfileController extends Controller {
         return;
     }
 
-    public function bookmark() {
-        $user = Auth::user();
-        $uId = $user->id;
-
-        $activityId  = Activity::whereName('نشانه گذاری')->first();
-
-        if($activityId != null) {
-            $activityId = $activityId->id;
-            $condition = ['visitorId' => $uId, 'activityId' => $activityId];
-            $bookmarked = LogModel::where($condition)->get();
-
-            $places = [];
-            foreach ($bookmarked as $item) {
-                $kindPlace = Place::find($item->kindPlaceId);
-                $plc = \DB::table($kindPlace->tableName)->find($item->placeId);
-                if($plc != null){
-                    $plcSug = createSuggestionPack($kindPlace->id, $plc->id);
-
-                    if(isset($plc->dastresi))
-                        $plcSug->address = $plc->dastresi;
-                    else if(isset($plc->address))
-                        $plcSug->address = $plc->address;
-
-                    if(isset($plc->D) && isset($plc->C)){
-                        $plcSug->D = $plc->D;
-                        $plcSug->C = $plc->C;
-                    }
-                    $plcSug->logId = $item->id;
-                    $plcSug->kindPlaceId = $kindPlace->id;
-                    array_push($places, $plcSug);
-                }
-            }
-
-            $placesCount = LogModel::where($condition)->count();
-            return view('bookmark', compact(['placesCount', 'places']));
-        }
-
-        return Redirect::to(route('profile'));
-    }
 }

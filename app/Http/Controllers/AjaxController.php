@@ -8,6 +8,7 @@ use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
+use App\models\Followers;
 use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\LogModel;
@@ -492,17 +493,32 @@ class AjaxController extends Controller {
     {
         if(Auth::check()) {
             if (isset($request->value)) {
-//                $userName = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE username LIKE "' . $value . '%"');
-//                $userEmail = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE email LIKE "' . $value . '%" ');
-
+                $userEmail = [];
+                $iUserId = \auth()->user()->id;
                 $value = $request->value;
-                $userName = User::where('username', 'LIKE', '%' . $value . '%')->select(['id', 'username', 'email', 'first_name', 'last_name'])->get();
-                $userEmail = User::where('email', 'LIKE', '%' . $value . '%')->whereNotIn('id', $userName->pluck('id')->toArray())->select(['id', 'username', 'email', 'first_name', 'last_name'])->get();
+                $userName = User::where('username', 'LIKE', '%' . $value . '%')
+                                    ->select(['id', 'username'])
+                                    ->get();
+                foreach ($userName as $user){
+                    $user->userId = $user->id;
+                    $user->url = route('profile', ['username' => $user->username]);
+                    $user->pic = getUserPic($user->id);
+                    $user->followed = Followers::where('userId', $iUserId)
+                                                ->where('followedId', $user->id)
+                                                ->count();
+                    $user->notMe = 1;
+                    if($user->id == $iUserId)
+                        $user->notMe = 0;
+                }
+//                $userEmail = User::where('email', 'LIKE', '%' . $value . '%')
+//                                    ->whereNotIn('id', $userName->pluck('id')->toArray())
+//                                    ->select(['id', 'username', 'email', 'first_name', 'last_name'])
+//                                    ->get();
 
                 if($userName == null && $userEmail == null)
                     echo 'nok3';
                 else
-                    echo json_encode([$userEmail, $userName]);
+                    echo json_encode(['email' => $userEmail, 'userName' => $userName]);
             }
             else
                 echo 'nok2';

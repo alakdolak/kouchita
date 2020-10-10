@@ -414,14 +414,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.closeModal{
-    position: absolute;
-    left: 5px;
-    top: 0px;
-    font-size: 30px;
-    color: var(--koochita-light-green);
-    cursor: pointer;
-}
 .memberCard{
     padding: 10px;
     border-radius: 20px;
@@ -524,6 +516,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-weight: normal;
     margin: 10px 0px;
     font-size: 18px;
+    text-align: center;
+    color: black;
 }
 .memberCard .btn{
     text-align: center;
@@ -735,6 +729,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-style: normal;
     color: black;
     cursor: pointer;
+    padding: 0px 10px;
+}
+.placeCard .date .tripCommentCount{
+    display: block;
+    margin-right: auto;
+    background: var(--koochita-blue);
+    color: white;
+    border-radius: 10px;
+    font-size: 9px;
+    padding: 2px 5px;
 }
 
 .placeDetailsToggleBar{

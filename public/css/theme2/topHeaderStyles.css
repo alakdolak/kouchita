@@ -121,7 +121,7 @@ input[type="checkbox"] + label, input[type="radio"] + label{
 
 
 .placeHolderAnime{
-    background: radial-gradient(circle,white 0%, #d2d2d2 35%);
+    background: radial-gradient(circle,white 0%, #d2d2d242 35%);
     background-size: 400% 400%;
     animation: gradient 1.2s infinite;
     height: 100%;
@@ -165,6 +165,15 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     display: none;
     justify-content: center;
     align-items: center;
+}
+
+.modalBlackBack .closeModal{
+    position: absolute;
+    left: 5px;
+    top: 0px;
+    font-size: 30px;
+    color: var(--koochita-light-green);
+    cursor: pointer;
 }
 .modalBlackBack.showModal{
     display: flex !important;

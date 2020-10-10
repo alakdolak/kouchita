@@ -13,15 +13,15 @@
     </div>
 
     <div class="userProfileQAndA">
-        <div class="userProfilePostsSearchContainer" style="display: flex; align-items: center; direction: rtl; padding: 0px 15px;">
-            <div class="inputBox">
-                <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید" onkeyup="searchInQuestion(this.value)"></textarea>
-            </div>
-            <div class="userProfilePostsFiltration pcType" style="margin-bottom: 0px">
-                <span class="active" onclick="changeSortQuestion('top', this)">جدیدترین</span>
-                <span onclick="changeSortQuestion('hot', this)">داغ‌ترین‌ها</span>
-            </div>
-        </div>
+{{--        <div class="userProfilePostsSearchContainer" style="display: flex; align-items: center; direction: rtl; padding: 0px 15px;">--}}
+{{--            <div class="inputBox">--}}
+{{--                <textarea class="inputBoxInput inputBoxInputSearch" type="text" placeholder="جستجو کنید" onkeyup="searchInQuestion(this.value)"></textarea>--}}
+{{--            </div>--}}
+{{--            <div class="userProfilePostsFiltration pcType" style="margin-bottom: 0px">--}}
+{{--                <span class="active" onclick="changeSortQuestion('top', this)">جدیدترین</span>--}}
+{{--                <span onclick="changeSortQuestion('hot', this)">داغ‌ترین‌ها</span>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="col-xs-12 notData hidden">
             <div class="pic">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSafarnamehsTable extends Migration
+class CreateBookMarkReferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateSafarnamehsTable extends Migration
      */
     public function up()
     {
-        Schema::create('safarnamehs', function (Blueprint $table) {
+        Schema::create('bookMarkReferences', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('tableName');
+            $table->string('group', 100);
         });
     }
 
@@ -26,6 +27,6 @@ class CreateSafarnamehsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('safarnamehs');
+        Schema::dropIfExists('bookMarkReferences');
     }
 }

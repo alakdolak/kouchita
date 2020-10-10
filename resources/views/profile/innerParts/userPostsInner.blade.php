@@ -1,12 +1,10 @@
-@include('component.smallShowReview')
-
-<div class="userProfilePostsFiltrationContainer">
-    <div class="userProfilePostsFiltration">
-        <span class="active" onclick="changeSortPost('new', this)">جدیدترین‌ها</span>
-        <span onclick="changeSortPost('top', this)">بهترین‌ها</span>
-        <span onclick="changeSortPost('hot', this)">داغ‌ترین‌ها</span>
-    </div>
-</div>
+{{--<div class="userProfilePostsFiltrationContainer">--}}
+{{--    <div class="userProfilePostsFiltration">--}}
+{{--        <span class="active" onclick="changeSortPost('new', this)">جدیدترین‌ها</span>--}}
+{{--        <span onclick="changeSortPost('top', this)">بهترین‌ها</span>--}}
+{{--        <span onclick="changeSortPost('hot', this)">داغ‌ترین‌ها</span>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 <div class="postsMainDivInSpecificMode col-xs-12">
 
@@ -71,7 +69,6 @@
 
                     $('#leftPostSection').html('');
                     $('#rightPostSection').html('');
-
                     createReviews();
                 }
             },
