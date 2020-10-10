@@ -849,12 +849,10 @@
                             <div class="buttonsLine">
                                 <div class="mBLine bLine">
                                     <div onclick="window.location.href='{{route("profile")}}'">
-                                        {{--                                            <div class="icon"></div>--}}
-                                        <div class="name">صفحه من</div>
+                                        <div class="name" style="font-size: 16px; font-weight: bold;">صفحه من</div>
                                     </div>
                                     <div onclick="window.location.href='{{route("profile.message.page")}}'">
-                                        {{--                                            <div class="icon messageIcon"></div>--}}
-                                        <div class="name">صندوق پیام</div>
+                                        <div class="name" style="font-size: 16px; font-weight: bold; color: {{$newMsgCount > 0 ? 'var(--koochita-red)' : ''}};">صندوق پیام</div>
                                         @if($newMsgCount > 0)
                                             <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
                                         @endif
