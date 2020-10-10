@@ -41,7 +41,11 @@ class FestivalController extends Controller
 
     public function festivalSubmitPage()
     {
-        $user = auth()->user();
-        return view('pages.festival.festivalSubmitWorks', compact('user'));
+        if(auth()->check()) {
+            $user = auth()->user();
+            return view('pages.festival.festivalSubmitWorks', compact('user'));
+        }
+        else
+            return redirect(route('festival'));
     }
 }

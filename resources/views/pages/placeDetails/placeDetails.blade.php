@@ -9,21 +9,21 @@ if ($total == 0)
     <meta content="article" property="og:type"/>
     <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
     <meta property="title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
+    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
     <meta name="twitter:card" content="{{$place->meta}}"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
-    <meta property="article:section" content="{{$placeMode}}"/>
-    <meta property=" article:author " content="کوچیتا"/>
-    <meta name="keywords" content="{{$place->keyword}}">
     <meta property="og:description" content="{{$place->meta}}"/>
+    <meta property="article:section" content="{{$placeMode}}"/>
+    <meta property="article:author " content="کوچیتا"/>
+    <meta name="keywords" content="{{$place->keyword}}">
     <meta property="og:url" content="{{Request::url()}}"/>
 
     @if(count($photos) > 0)
         <meta property="og:image" content="{{$photos[0]}}"/>
         <meta property="og:image:secure_url" content="{{$photos[0]}}"/>
+        <meta name="twitter:image" content="{{$photos[0]}}"/>
         <meta property="og:image:width" content="550"/>
         <meta property="og:image:height" content="367"/>
-        <meta name="twitter:image" content="{{$photos[0]}}"/>
     @endif
 
     @if(isset($place->C) && isset($place->D))
