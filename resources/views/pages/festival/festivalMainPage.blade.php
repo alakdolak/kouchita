@@ -3,42 +3,22 @@
 <head>
     @include('layouts.topHeader')
 
-    <script>
-        let allPicsHeader = {!! json_encode($allPictures) !!};
-        let urlHashHeader = window.location.hash;
-        if(urlHashHeader.length != 0){
-            allPicsHeader.map(item => {
-                if('#'+item.code == urlHashHeader) {
-                    let metaContent = 'کوچیتا | جشنواره ایران ما | اثر : ' + item.username;
-                    $('meta[findMeta=title]').attr('content', metaContent);
-                    $('title').text(metaContent);
-                    $('meta[findMeta=pic]').attr('content', item.pic);
-                }
-            });
-        }
-    </script>
-    <?php
-        $metaDesc = 'در جشنواره ایران ما شرکت کنید';
-        $title = 'کوچیتا | فستیوال ایران ما'
-    ?>
-    <title>{{$title}}</title>
+    <title>{{$selectedPic->title}}</title>
 
-    <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css?v='.$fileVersions)}}">
-
-    <meta findMeta="title" property="og:title" content="{{$title}}"/>
-    <meta findMeta="title" property="title" content="{{$title}}"/>
-    <meta findMeta="title" name="twitter:title" content="{{$title}}"/>
-    <meta name="twitter:card" content="{{$metaDesc}}"/>
-    <meta name="twitter:description" content="{{$metaDesc}}"/>
-    <meta property="og:description" content="{{$metaDesc}}"/>
+    <meta property="og:title" content="{{$selectedPic->title}}"/>
+    <meta property="title" content="{{$selectedPic->title}}"/>
+    <meta name="twitter:title" content="{{$selectedPic->title}}"/>
+    <meta name="twitter:card" content="{{$selectedPic->description}}"/>
+    <meta name="twitter:description" content="{{$selectedPic->description}}"/>
+    <meta property="og:description" content="{{$selectedPic->description}}"/>
     <meta property="article:author " content="کوچیتا"/>
     <meta property="og:url" content="{{Request::url()}}"/>
 
-    <meta findMeta="pic" property="og:image" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
-    <meta findMeta="pic" property="og:image:secure_url" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
-    <meta findMeta="pic" name="twitter:image" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
-{{--    <meta property="og:image:width" content="550"/>--}}
-{{--    <meta property="og:image:height" content="367"/>--}}
+    <meta property="og:image" content="{{$selectedPic->pic}}"/>
+    <meta property="og:image:secure_url" content="{{$selectedPic->pic}}"/>
+    <meta name="twitter:image" content="{{$selectedPic->pic}}"/>
+
+    <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css?v='.$fileVersions)}}">
 
     <style>
         section{
@@ -169,7 +149,8 @@
         let picc = allPics[_index];
         nowShowPicIndex = _index;
 
-        window.location.hash = '#'+picc['code'];
+        let newUrl = window.location.origin + window.location.pathname + '?code='+picc['code'];
+        window.history.pushState({"html":'',"pageTitle":''},"", newUrl);
 
         $('.modalUserPic').attr('src', picc['userPic']);
         $('.modalUserName').text(picc['username']);
@@ -210,16 +191,11 @@
 
     }
 
-    let urlHash = window.location.hash;
-    if(urlHash.length != 0){
+    let urlSearch = window.location.search;
+    if(urlSearch.length != 0){
         allPics.map((item, index) => {
-           if('#'+item.code == urlHash) {
-               let metaContent = 'کوچیتا | جشنواره ایران ما | اثر : ' + item.username;
-               $('meta[findMeta=title]').attr('content', metaContent);
-               $('title').text(metaContent);
-               $('meta[findMeta=pic]').attr('content', item.pic);
+           if('?code='+item.code == urlSearch)
                openShowPictureModal(index);
-           }
         });
     }
 

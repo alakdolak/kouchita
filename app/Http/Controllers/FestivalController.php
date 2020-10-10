@@ -8,6 +8,11 @@ class FestivalController extends Controller
 {
     public function mainPageFestival()
     {
+        $selectedPic = (object)[
+            'title' => 'کوچیتا | فستیوال ایران ما',
+            'description' => 'در جشنواره ایران ما شرکت کنید',
+            'pic' => \URL::asset('images/icons/mainIcon.svg')
+        ];
         $allPictures = [];
         for ($i = 0; $i < 4; $i++){
             for ($j = 1; $j < 7; $j++){
@@ -31,7 +36,21 @@ class FestivalController extends Controller
             }
         }
 
-        return view('pages.festival.festivalMainPage', compact(['allPictures']));
+        if(isset($_GET['code'])) {
+            foreach ($allPictures as $item) {
+                if ($item->code == $_GET['code']) {
+                    $selectedPic = (object)[
+                        'title' => 'کوچیتا | فستیوال ایران ما | اثر: ' . $item->username,
+                        'description' => 'در جشنواره ایران ما شرکت کنید',
+                        'pic' => $item->pic
+                    ];
+
+                    break;
+                }
+            }
+        }
+
+        return view('pages.festival.festivalMainPage', compact(['allPictures', 'selectedPic']));
     }
 
     public function festivalIntroduction()
