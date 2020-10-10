@@ -6,7 +6,26 @@
         فستیوال
     </title>
 
+    <?php
+        $metaDesc = 'در جشنواره ایران ما شرکت کنید';
+    ?>
+
     <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css?v='.$fileVersions)}}">
+
+    <meta findMeta="title" property="og:title" content=""/>
+    <meta findMeta="title" property="title" content=""/>
+    <meta findMeta="title" name="twitter:title" content=""/>
+    <meta name="twitter:card" content="{{$metaDesc}}"/>
+    <meta name="twitter:description" content="{{$metaDesc}}"/>
+    <meta property="og:description" content="{{$metaDesc}}"/>
+    <meta property="article:author " content="کوچیتا"/>
+    <meta property="og:url" content="{{Request::url()}}"/>
+
+    <meta findMeta="pic" property="og:image" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
+    <meta findMeta="pic" property="og:image:secure_url" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
+    <meta findMeta="pic" name="twitter:image" content="{{URL::asset('images/icons/mainIcon.svg')}}"/>
+    <meta property="og:image:width" content="550"/>
+    <meta property="og:image:height" content="367"/>
 
     <style>
         section{
@@ -15,89 +34,7 @@
             color: var(--light-gray);
         }
 
-        .showFestivalPage .showFullPicModal .body .infoSec{
-            width: 25%;
-            background: #445565;
-            border-radius: 30px 0px 0px 30px;
-            padding: 15px;
-            position: relative;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .liShButtons{
-            position: absolute;
-            bottom: 0px;
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            width: calc(100% - 30px);
-            padding-bottom: 10px;
-            background: #445565;
-            border-radius: 0px 0px 0px 30px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .liShButtons > div{
-            width: 49%;
-            text-align: center;
-            padding: 10px 0px;
-            border: solid;
-            cursor: pointer;
-            transition: .3s;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .liShButtons .likeButton{
-            color: red;
-            font-size: 30px;
-            line-height: 19px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .liShButtons .likeButton:hover{
-            color: #445565;
-            background: red;
-            border-color: red;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .liShButtons .shareButton{
-            color: var(--yellow);
-            border-radius: 0px 0px 0px 30px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .liShButtons .shareButton:hover{
-            background: var(--yellow);
-            border-color: var(--yellow);
-            color: #445565;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .userInfo{
-            display: flex;
-            align-items: center;
-            padding-bottom: 10px;
-            border-bottom: solid white 1px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .userInfo .userPic{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .userInfo .username{
-            color: white;
-            font-size: 15px;
-            margin-right: 10px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .picInfo{
-            overflow: auto;
-            margin-bottom: 77px;
-            height: calc(100% - 100px);
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .picInfo .inf{
-            margin-top: 5px;
-            margin-bottom: 18px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .picInfo .inf .title{
-            font-size: 11px;
-        }
-        .showFestivalPage .showFullPicModal .body .infoSec .picInfo .inf .text{
-            color: white;
-            padding-right: 10px;
-            margin-top: 5px;
-            font-size: 15px;
-        }
+
     </style>
 </head>
 <body>
@@ -263,9 +200,12 @@
     let urlHash = window.location.hash;
     if(urlHash.length != 0){
         allPics.map((item, index) => {
-            console.log('#'+item.code, urlHash, index);
-           if('#'+item.code == urlHash)
+           if('#'+item.code == urlHash) {
+               let metaContent = 'کوچیتا | جشنواره ایران ما | اثر : ' + item.username;
+               $('meta[findMeta=title]').attr('content', metaContent);
+               $('meta[findMeta=pic]').attr('content', item.pic);
                openShowPictureModal(index);
+           }
         });
     }
 
