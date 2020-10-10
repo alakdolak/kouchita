@@ -26,99 +26,6 @@
             min-height: 100vh;
             color: var(--light-gray);
         }
-        .showFestivalPage .selectFestivalPc{
-            display: flex;
-        }
-        .showFestivalPage .selectFestivalMobile{
-            display: none;
-        }
-
-        @media (max-width: 991px) {
-            .smallFont{
-                font-size: 16px;
-            }
-            .showFestivalPage .tabSection .tab{
-                margin-left: 30px;
-                font-size: 12px;
-            }
-            .showFestivalPage .showFullPicModal .body .infoSec{
-                width: 35%;
-            }
-            .showFestivalPage .showFullPicModal .body .imgSec{
-                width: 65%;
-            }
-            .showFestivalPage .bodySection .userWorks{
-                width: 150px;
-                height: 150px;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .showFestivalPage .showFullPicModal .body{
-                height: 100vh;
-                overflow-y: auto;
-                display: block;
-            }
-            .showFestivalPage .showFullPicModal .body .imgSec{
-                width: 100%;
-                height: calc(100vh - 130px);
-                padding: 15px;
-            }
-            .showFestivalPage .showFullPicModal .body .infoSec{
-                width: 100%;
-                border-radius: 30px 30px 0px 0px;
-                height: auto;
-            }
-            .showFestivalPage .showFullPicModal .showSLBInM > button{
-                background: none;
-                border: solid;
-                border-radius: 12px;
-            }
-            .showFestivalPage .showFullPicModal .showSLBInM .modalLike {
-                color: red;
-            }
-            .showFestivalPage .showFullPicModal .showSLBInM .codeButton {
-                color: var(--yellow);
-            }
-            .showFestivalPage .showFullPicModal .body .infoSec .liShButtons > div{
-                border-radius: 10px;
-            }
-            .showFestivalPage .bodySection .userWorks .onPicture{
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .showFestivalPage .bodySection .userWorks{
-                width: 100px;
-                height: 100px;
-            }
-            .showFestivalPage .selectFestivalPc{
-                display: none;
-            }
-            .showFestivalPage .selectFestivalMobile{
-                display: flex;
-                margin-right: auto;
-                position: relative;
-            }
-            .showFestivalPage .chooseFestivalModalMobile .tab{
-                text-align: center;
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-                color: var(--yellow);
-                border-bottom: solid 1px;
-            }
-            .showFestivalPage .chooseFestivalModalMobile .tab:last-of-type{
-                border-bottom: none;
-            }
-            .showFestivalPage .chooseFestivalModalMobile .tab.selected{
-                color: white !important;
-            }
-            .showFestivalPage .selectFestivalMobile .downArrowIconAfter{
-                color: var(--yellow);
-                margin: 0px !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -164,11 +71,16 @@
                 </div>
             </div>
             <div class="botTab">
-                <div class="right">
-                    <div class="tab selected">تازه‌ترین‌ها</div>
-                    <div class="tab">پر طرفدارترین ها</div>
+{{--                <div class="right">--}}
+{{--                    <div class="tab selected">تازه‌ترین‌ها</div>--}}
+{{--                    <div class="tab">پر طرفدارترین ها</div>--}}
+{{--                </div>--}}
+                <div class="left">
+                    3 رای از 5 رای
+                    <span>
+                        نمایش رای های داده شده
+                    </span>
                 </div>
-                <div class="left"> 3 رای از 5 رای</div>
             </div>
         </div>
 

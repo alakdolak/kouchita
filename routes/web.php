@@ -636,7 +636,6 @@ Route::group(['middleware' => 'web'], function(){
     Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main');
 
     Route::get('/festival/submitWorks', 'FestivalController@festivalSubmitPage')->name('festival.submitWorks');
-
 });
 
 //trip
