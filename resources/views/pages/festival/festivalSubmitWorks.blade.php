@@ -573,7 +573,7 @@
         }
 
         function submitHandle(_step){
-            if(lastStage == 1 && firstStage){
+            if(lastStage == 1){
                 let festKind = $('#matchMainSection').attr('value');
                 $('.section2KindText').text(festivalText[festKind].text);
                 $('#picFile').attr('accept', festivalText[festKind].accepted);
