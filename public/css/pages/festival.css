@@ -340,7 +340,7 @@ section .conditionFestival .leftSec > img{
 
 
 .mainSectionSubmitWork{
-    width: 800px;
+    max-width: 800px;
 }
 .IndicatorSec{
     color: var(--gray);
@@ -407,6 +407,7 @@ section .conditionFestival .leftSec > img{
     display: flex;
     justify-content: center;
     align-items: center;
+    direction: rtl;
 }
 .inputRows > input, .inputRows > select{
     width: 100%;
@@ -471,6 +472,8 @@ section .conditionFestival .leftSec > img{
 
 .switchInputSec{
     margin-top: 20px;
+    direction: rtl;
+    float: right;
 }
 .switchInputSec .title{
     text-align: center;
@@ -551,6 +554,7 @@ section .conditionFestival .leftSec > img{
     margin-left: auto;
 }
 .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs{
+    display: flex;
     padding: 10px;
     position: absolute;
     width: 100%;

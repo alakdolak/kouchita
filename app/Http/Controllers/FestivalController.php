@@ -84,4 +84,18 @@ class FestivalController extends Controller
         else
             return redirect(route('festival'));
     }
+
+    public function uploadFile(Request $request)
+    {
+        $direction = __DIR__.'/../../../../assets/_images/posts/'.$_POST['file'];
+        $result = uploadLargeFile($direction, $request->file_data);
+        if($result)
+            echo json_encode(['status' => 'ok']);
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+
 }

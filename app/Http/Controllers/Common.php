@@ -188,7 +188,25 @@ function getNearestMedals($uId) {
     return $arr;
 }
 
+function uploadLargeFile($_direction, $_file_data){
+    $file_data = decode_chunk($_file_data);
+    if ($file_data === false)
+        return false;
+    else
+        file_put_contents($_direction, $file_data, FILE_APPEND);
 
+    return true;
+}
+
+function decode_chunk( $data ) {
+    $data = explode( ';base64,', $data );
+    if ( !is_array($data) || !isset($data[1]))
+        return false;
+    $data = base64_decode( $data[1] );
+    if (!$data)
+        return false;
+    return $data;
+}
 
 function getPostCategories() {
 
