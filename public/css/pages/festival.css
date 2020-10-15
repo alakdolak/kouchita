@@ -42,6 +42,7 @@ header .logos > a{
 }
 header .buttons{
     margin-right: auto;
+    display: flex;
 }
 header .buttons > div, header .buttons > a{
     padding: 5px 20px;
@@ -50,6 +51,7 @@ header .buttons > div, header .buttons > a{
     cursor: pointer;
     box-shadow: 0px 3px 6px 0px #0000001a;
     color: white;
+    font-size: 13px;
 }
 header .buttons .votedButton{
     background: var(--yellow);
@@ -57,9 +59,12 @@ header .buttons .votedButton{
 header .buttons .registerButton{
     background: #273039;
     color: white;
+    font-size: 14px;
 }
 
-
+.modalBody{
+    border-radius: 10px;
+}
 
 section{
     background-color: #273039;
@@ -663,13 +668,14 @@ section .conditionFestival .leftSec > img{
 .showFestivalPage .tabSection .botTab .left{
     /*color: var(--yellow);*/
 }
-.showFestivalPage .tabSection .botTab .left > span{
+.showFestivalPage .tabSection .botTab .left > button{
     border: solid;
     cursor: pointer;
     color: var(--yellow);
     margin-right: 13px;
     padding: 1px 10px;
     border-radius: 10px;
+    background: none;
 }
 
 
@@ -679,7 +685,7 @@ section .conditionFestival .leftSec > img{
     flex-wrap: wrap;
     margin: 30px;
 }
-.showFestivalPage .bodySection .userWorks{
+.userWorks{
     position: relative;
     display: flex;
     justify-content: center;
@@ -690,13 +696,13 @@ section .conditionFestival .leftSec > img{
     margin: 10px auto;
     cursor: pointer;
 }
-.showFestivalPage .bodySection .userWorks:hover .onPicture{
+.userWorks:hover .onPicture{
     display: flex;
 }
-.showFestivalPage .bodySection .userWorks > img{
+.userWorks > img{
     width: 100%;
 }
-.showFestivalPage .bodySection .userWorks .onPicture{
+.userWorks .onPicture{
     display: none;
     position: absolute;
     background: #445565c9;
@@ -705,21 +711,30 @@ section .conditionFestival .leftSec > img{
     padding: 5px 16px;
     font-size: 18px;
 }
-.showFestivalPage .bodySection .userWorks .onPicture.code{
+.userWorks .onPicture .likeCount{
+    font-size: 23px;
+    margin-right: 10px;
+}
+.userWorks .onPicture.code{
     top: 10px;
     left: 10px;
 }
-.showFestivalPage .bodySection .userWorks .onPicture.like{
-    color: black;
+.userWorks .onPicture.like{
     bottom: 10px;
-    left: 85px;
-    font-size: 36px;
-    width: 36px;
+    left: 10px;
+    font-size: 25px;
+    /*width: 36px;*/
     height: 36px;
     align-items: center;
     justify-content: center;
 }
-.showFestivalPage .bodySection .userWorks .onPicture.likeCount{
+.userWorks .onPicture.like.HeartIcon{
+    color: red;
+}
+.userWorks .onPicture.like.HeartIconAfter{
+    color: red;
+}
+.userWorks .onPicture.likeCount{
     left: 10px;
     bottom: 10px;
 }
@@ -761,8 +776,6 @@ section .conditionFestival .leftSec > img{
 }
 .showFestivalPage .showFullPicModal .body .imgSec .nPButtons{
     position: absolute;
-    height: 100%;
-    top: 0px;
     width: 100px;
     transition: .3s;
     cursor: pointer;
@@ -770,18 +783,26 @@ section .conditionFestival .leftSec > img{
     align-items: center;
     justify-content: center;
     font-size: 50px;
-    color: #8080805c;
+    color: white;
+    height: 100px;
+    background: #8080805c;
+    border-radius: 50%;
+    top: 45%;
 }
 .showFestivalPage .showFullPicModal .body .imgSec .nPButtons:hover{
     background: #8080805c;
     color: white;
 }
 .showFestivalPage .showFullPicModal .body .imgSec .nPButtons.next{
-    right: 0px;
+    right: 25px;
     transform: rotate(180deg);
 }
 .showFestivalPage .showFullPicModal .body .imgSec .nPButtons.prev{
-    left: 0px;
+    left: 25px;
+}
+.showFestivalPage .showFullPicModal .body .imgSec > video{
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .showFestivalPage .showFullPicModal .body .infoSec{
@@ -877,6 +898,139 @@ section .conditionFestival .leftSec > img{
     display: none;
 }
 
+
+.resultSearch{
+    border-bottom: solid #efefef 1px;
+    margin: 2px 5px;
+    padding: 3px 5px;
+    border-radius: 10px 10px 0px 0px;
+    transition: .3s;
+}
+.resultSearch:hover{
+    background: whitesmoke;
+}
+.resultSearch .icon{
+    display: inline-block;
+}
+.resultSearch > p{
+    display: inline-block;
+}
+.emptyError{
+    background: #fb8181 !important;
+}
+.inputRows.optional{
+    width: 100%;
+}
+.col-6{
+    width: 49% !important;
+    display: inline-block;
+}
+
+.mainSectionSubmitWork .uploadPercent{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mainSectionSubmitWork .uploadPercent .text:before{
+    content: 'در حال بارگزاری';
+    color: var(--yellow);
+}
+.mainSectionSubmitWork .uploadPercent.done .text:before{
+    content: 'فایل با موفقیت بارگزاری شد';
+    color: var(--koochita-light-green);
+}
+.mainSectionSubmitWork .uploadPercent.error .text:before{
+    content: 'بارگزاری با مشکل مواجه شد';
+    color: var(--koochita-red);
+}
+.mainSectionSubmitWork .uploadPercent.inQueue .text:before{
+    content: 'در انتظار بارگزاری';
+    color: var(--koochita-blue);
+}
+.mainSectionSubmitWork .uploadPercent.cancel .text:before{
+    content: 'در حال حذف فایل';
+    color: var(--koochita-red);
+}
+.mainSectionSubmitWork .uploadPercent .processDiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    background: white;
+    border: solid gray 1px;
+    border-radius: 10px;
+    position: relative;
+}
+.mainSectionSubmitWork .uploadPercent .processDiv .percentNum{
+    z-index: 9;
+}
+.mainSectionSubmitWork .uploadPercent .processDiv .percentBack{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 0%;
+    background: var(--yellow);
+    border-radius: 8px;
+}
+.mainSectionSubmitWork .uploadPercent.done .percentNum{
+    color: white;
+}
+.mainSectionSubmitWork .uploadPercent.done .percentBack{
+    background: var(--koochita-light-green);
+    width: 100% !important;
+}
+.mainSectionSubmitWork .uploadPercent.error .percentBack{
+    background: var(--koochita-red);
+}
+
+.submitDeletePic .text{
+    text-align: center;
+    color: var(--yellow);
+    margin-bottom: 25px;
+}
+.submitDeletePic .buts{
+    display: flex;
+    justify-content: space-evenly;
+}
+.submitDeletePic .buts .btn{
+    border: none;
+    border-radius: 15px;
+    padding: 10px 30px;
+    color: white;
+}
+.submitDeletePic .buts .btn.submit{
+    background: var(--koochita-red);
+}
+.submitDeletePic .buts .btn.cancel{
+    background: var(--koochita-light-green);
+}
+
+.videoSnapShotModal .videoSec{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.videoSnapShotModal .videoSec > video{
+    width: 100%;
+    max-height: 65vh;
+}
+.videoSnapShotModal .buts{
+    margin-top: 15px;
+}
+.videoSnapShotModal .buts .submit{
+    background: var(--koochita-blue);
+    color: white;
+    border-radius: 20px;
+
+}
+
+
 @media (max-width: 991px) {
     .smallFont{
         font-size: 16px;
@@ -891,9 +1045,30 @@ section .conditionFestival .leftSec > img{
     .showFestivalPage .showFullPicModal .body .imgSec{
         width: 65%;
     }
-    .showFestivalPage .bodySection .userWorks{
+    .userWorks{
         width: 150px;
         height: 150px;
+    }
+
+
+    .showFestivalPage .showFullPicModal .body .imgSec .nPButtons{
+        width: 70px;
+        height: 70px;
+        font-size: 40px;
+        top: 45%;
+    }
+    .showFestivalPage .showFullPicModal .body .imgSec .nPButtons.next{
+        right: 25px;
+    }
+    .showFestivalPage .showFullPicModal .body .imgSec .nPButtons.prev{
+        left: 25px;
+    }
+}
+
+@media (max-width: 830px) {
+    .inputRows.optional{
+        width: 85%;
+        margin-left: auto;
     }
 }
 
@@ -936,13 +1111,111 @@ section .conditionFestival .leftSec > img{
     .showFestivalPage .showFullPicModal .body .infoSec .liShButtons > div{
         border-radius: 10px;
     }
-    .showFestivalPage .bodySection .userWorks .onPicture{
+    .userWorks .onPicture{
         display: none !important;
     }
+
+
+    .mainSectionSubmitWork .submitButton{
+        position: fixed;
+        bottom: 0;
+        margin: 0;
+        width: 100%;
+        right: 0;
+        background: #ffffffcc;
+        padding: 10px 5px;
+        box-shadow: 6px 0px 7px 0px #28323c;
+    }
+    .mainSectionSubmitWork .submitButton > button{
+        padding: 5px 20px;
+        font-size: 13px;
+    }
+    .mainSectionSubmitWork{
+        padding-bottom: 45px;
+    }
+    .indicator .circle{
+        width: 50px;
+        height: 50px;
+    }
+    .IndicatorSec .lines > div{
+        height: 5px;
+    }
+    .inputRows > input, .inputRows > select{
+        font-size: 13px;
+    }
+    .switchInputSec{
+        float: unset;
+    }
+    .switchInputSec .title{
+        font-size: 15px;
+    }
+    .switchInputSec .switchInput{
+        font-size: 12px;
+        width: 200px;
+        margin: 7px auto;
+    }
+    .mainSectionSubmitWork .dropPictureSec{
+        flex-direction: column;
+        height: auto;
+    }
+    .mainSectionSubmitWork .dropPictureSec .text{
+        text-align: center;
+        font-size: 3vw;
+        margin: 10px auto;
+    }
+    .inputRows.pd-lt-0{
+        padding: 0px 15px;
+    }
+    .mainSectionSubmitWork .fileUploaded .fileRow{
+        height: 510px;
+        align-items: flex-start;
+    }
+    .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs{
+        flex-direction: column;
+        background: linear-gradient(0deg, rgba(68,85,101,1) 0%, rgba(127,138,149,1) 50%, rgba(184,190,196,0.56) 80%, rgba(255,255,255,0) 100%);
+    }
+    .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .row{
+        width: 100%;
+        margin: 0;
+    }
+    .mainSectionSubmitWork .uploadPercent{
+        width: 80%;
+        margin: 35px auto;
+    }
+    .mainSectionSubmitWork .fileUploaded .fileRow > img{
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: auto;
+    }
+
+    .mainSectionSubmitWork .footerIndicator{
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+        position: relative;
+    }
+    .mainSectionSubmitWork .footerIndicator .indicator .circle{
+        width: 30px;
+        height: 30px;
+    }
+    .mainSectionSubmitWork .footerIndicator .lines{
+        position: absolute;
+        left: 50px;
+        top: calc(50% - 2px);
+        display: flex;
+        width: 100%;
+        right: 0;
+    }
+    .mainSectionSubmitWork .footerIndicator .lines > div{
+        width: 50%;
+        height: 5px;
+    }
+
 }
 
 @media (max-width: 600px) {
-    .showFestivalPage .bodySection .userWorks{
+    .userWorks{
         width: 100px;
         height: 100px;
     }

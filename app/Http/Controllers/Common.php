@@ -1353,6 +1353,57 @@ function resizeImage($pic, $size, $fileName = ''){
     }
 }
 
+function resizeUploadedImage($pic, $size, $fileName = ''){
+    try {
+        $image = $pic;
+        if($fileName == '') {
+            $randNum = random_int(100, 999);
+            if($image->getClientOriginalExtension() == '')
+                $fileName = time() . $randNum . '.jpg';
+            else
+                $fileName = time() . $randNum . '.' . $image->getClientOriginalExtension();
+        }
+
+        foreach ($size as $item){
+            $input['imagename'] = $item['name'] .  $fileName ;
+            $destinationPath = $item['destination'];
+            $img = \Image::make($image);
+            $width = $img->width();
+            $height = $img->height();
+
+            if($item['height'] != null && $item['width'] != null){
+                $ration = $width/$height;
+                $nWidth = $ration * $item['height'];
+                $nHeight = $item['width'] / $ration;
+                if($nWidth < $item['width']) {
+                    $height = $nHeight;
+                    $width = $item['width'];
+                }
+                else if($nHeight < $item['height']) {
+                    $width = $nWidth;
+                    $height = $item['height'];
+                }
+            }
+            else {
+                if ($item['width'] == null || $width > $item['width'])
+                    $width = $item['width'];
+
+                if ($item['height'] == null || $height > $item['height'])
+                    $height = $item['height'];
+            }
+
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$input['imagename']);
+        }
+
+        return $fileName;
+    }
+    catch (Exception $exception){
+        return 'error';
+    }
+}
+
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     $output = NULL;
     if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {

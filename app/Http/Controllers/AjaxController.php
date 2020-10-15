@@ -177,26 +177,21 @@ class AjaxController extends Controller {
             echo json_encode($places);
             return;
         }
-
         else if($placeKind == 1) {
             $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `amaken` target, cities ci, state s WHERE " . $subQuery ." ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
             echo json_encode($places);
             return;
         }
-
         else if($placeKind == 4) { // hotel
             $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `hotels` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
             echo json_encode($places);
             return;
         }
-
         else if($placeKind == 6) {
             $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `majara` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
             echo json_encode($places);
             return;
         }
-
-
         else if($placeKind == 8) {
             $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `adab` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
             echo json_encode($places);
@@ -213,13 +208,17 @@ class AjaxController extends Controller {
         foreach ($result as $item)
             $item->kind = 'state';
 
-        $cities = DB::select("SELECT cities.id, cities.name as cityName, state.name as stateName FROM cities, state WHERE cities.stateId = state.id and  cities.name LIKE '%$key%' ");
-
+        $cities = DB::select("SELECT cities.id, cities.name as cityName, state.name as stateName, cities.isVillage as isVillage FROM cities, state WHERE cities.stateId = state.id AND isVillage = 0 AND cities.name LIKE '%$key%' ");
         foreach ($cities as $item) {
             $item->kind = 'city';
             array_push($result, $item);
         }
 
+        $village = DB::select("SELECT cities.id, cities.name as cityName, state.name as stateName, cities.isVillage as isVillage FROM cities, state WHERE cities.stateId = state.id AND isVillage != 0 AND cities.name LIKE '%$key%' ");
+        foreach ($village as $item) {
+            $item->kind = 'village';
+            array_push($result, $item);
+        }
         echo json_encode($result);
     }
 

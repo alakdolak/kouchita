@@ -24,4 +24,9 @@ class Cities extends Model {
     public static function whereId($value) {
         return Cities::find($value);
     }
+
+    public function getState()
+    {
+        return $this->belongsTo(State::class, 'stateId', 'id');
+    }
 }

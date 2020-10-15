@@ -236,11 +236,23 @@
     content: '\e012' !important;
     font-family: Shazde_Regular2 !important;
 }
+.HeartIconAfter:after{
+    content: '\e012' !important;
+    font-family: Shazde_Regular2 !important;
+}
 .empty-heart:before{
     content: '\e011' !important;
     font-family: Shazde_Regular2 !important;
 }
+.empty-heartAfter:after{
+    content: '\e011' !important;
+    font-family: Shazde_Regular2 !important;
+}
 .fill-heart:before{
+    content: '\e012' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.fill-heartAfter:after{
     content: '\e012' !important;
     font-family: Shazde_Regular2 !important;
 }

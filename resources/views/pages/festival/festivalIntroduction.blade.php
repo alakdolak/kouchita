@@ -269,10 +269,10 @@
         }
 
         function iParticipate(){
-            if(!checkLogin('{{route('festival.submitWorks')}}'))
+            if(!checkLogin('{{route('festival.uploadWorks')}}'))
                 return;
 
-            window.location.href = '{{route('festival.submitWorks')}}';
+            window.location.href = '{{route('festival.uploadWorks')}}';
         }
 
     </script>

@@ -12,192 +12,15 @@
             background: #445565;
             min-height: 100vh;
         }
-        .inputRows.optional{
-            width: 100%;
+        header .buttons{
+            margin-left: auto;
+            margin-right: 10px;
+            width: calc(100% - 200px);
+            justify-content: space-between;
         }
-        .col-6{
-            width: 49% !important;
-            display: inline-block;
-        }
-
-        .mainSectionSubmitWork .uploadPercent{
-            width: 40%;
+        header .buttons > span{
             display: flex;
-            justify-content: center;
             align-items: center;
-            flex-direction: column;
-        }
-        .mainSectionSubmitWork .uploadPercent .text:before{
-            content: 'در حال بارگزاری';
-            color: var(--yellow);
-        }
-        .mainSectionSubmitWork .uploadPercent.done .text:before{
-            content: 'فایل با موفقیت بارگزاری شد';
-            color: var(--koochita-light-green);
-        }
-        .mainSectionSubmitWork .uploadPercent.error .text:before{
-            content: 'بارگزاری با مشکل مواجه شد';
-            color: var(--koochita-red);
-        }
-        .mainSectionSubmitWork .uploadPercent .processDiv{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-            background: white;
-            border: solid gray 1px;
-            border-radius: 10px;
-            position: relative;
-        }
-        .mainSectionSubmitWork .uploadPercent .processDiv .percentNum{
-            z-index: 9;
-        }
-        .mainSectionSubmitWork .uploadPercent .processDiv .percentBack{
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            height: 100%;
-            width: 0%;
-            background: var(--yellow);
-            border-radius: 8px;
-        }
-        .mainSectionSubmitWork .uploadPercent.done .percentNum{
-            color: white;
-        }
-        .mainSectionSubmitWork .uploadPercent.done .percentBack{
-            background: var(--koochita-light-green);
-            width: 100% !important;
-        }
-        .mainSectionSubmitWork .uploadPercent.error .percentBack{
-            background: var(--koochita-red);
-        }
-
-        .submitDeletePic .text{
-            text-align: center;
-            color: var(--yellow);
-            margin-bottom: 25px;
-        }
-        .submitDeletePic .buts{
-            display: flex;
-            justify-content: space-evenly;
-        }
-        .submitDeletePic .buts .btn{
-            border: none;
-            border-radius: 15px;
-            padding: 10px 30px;
-            color: white;
-        }
-        .submitDeletePic .buts .btn.submit{
-            background: var(--koochita-red);
-        }
-        .submitDeletePic .buts .btn.cancel{
-            background: var(--koochita-light-green);
-        }
-
-        @media (max-width: 830px) {
-            .inputRows.optional{
-                width: 85%;
-                margin-left: auto;
-            }
-        }
-        @media (max-width: 767px){
-            .mainSectionSubmitWork .submitButton{
-                position: fixed;
-                bottom: 0;
-                margin: 0;
-                width: 100%;
-                right: 0;
-                background: #ffffffcc;
-                padding: 10px 5px;
-                box-shadow: 6px 0px 7px 0px #28323c;
-            }
-            .mainSectionSubmitWork .submitButton > button{
-                padding: 5px 20px;
-                font-size: 13px;
-            }
-            .mainSectionSubmitWork{
-                padding-bottom: 45px;
-            }
-            .indicator .circle{
-                width: 50px;
-                height: 50px;
-            }
-            .IndicatorSec .lines > div{
-                height: 5px;
-            }
-            .inputRows > input, .inputRows > select{
-                font-size: 13px;
-            }
-            .switchInputSec{
-                float: unset;
-            }
-            .switchInputSec .title{
-                font-size: 15px;
-            }
-            .switchInputSec .switchInput{
-                font-size: 12px;
-                width: 200px;
-                margin: 7px auto;
-            }
-            .mainSectionSubmitWork .dropPictureSec{
-                flex-direction: column;
-                height: auto;
-            }
-            .mainSectionSubmitWork .dropPictureSec .text{
-                text-align: center;
-                font-size: 3vw;
-                margin: 10px auto;
-            }
-            .inputRows.pd-lt-0{
-                padding: 0px 15px;
-            }
-            .mainSectionSubmitWork .fileUploaded .fileRow{
-                height: 510px;
-                align-items: flex-start;
-            }
-            .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs{
-                flex-direction: column;
-                background: linear-gradient(0deg, rgba(68,85,101,1) 0%, rgba(127,138,149,1) 50%, rgba(184,190,196,0.56) 80%, rgba(255,255,255,0) 100%);
-            }
-            .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .row{
-                width: 100%;
-                margin: 0;
-            }
-            .mainSectionSubmitWork .uploadPercent{
-                width: 80%;
-                margin: 35px auto;
-            }
-            .mainSectionSubmitWork .fileUploaded .fileRow > img{
-                position: absolute;
-                top: 0px;
-                width: 100%;
-                height: auto;
-            }
-
-            .mainSectionSubmitWork .footerIndicator{
-                display: flex;
-                width: 50%;
-                justify-content: space-between;
-                position: relative;
-            }
-            .mainSectionSubmitWork .footerIndicator .indicator .circle{
-                width: 30px;
-                height: 30px;
-            }
-            .mainSectionSubmitWork .footerIndicator .lines{
-                position: absolute;
-                left: 50px;
-                top: calc(50% - 2px);
-                display: flex;
-                width: 100%;
-                right: 0;
-            }
-            .mainSectionSubmitWork .footerIndicator .lines > div{
-                width: 50%;
-                height: 5px;
-            }
-
         }
     </style>
 
@@ -211,8 +34,9 @@
                     <img src="{{URL::asset('images/icons/mainLogo.png')}}" style="height: 100%">
                 </a>
             </div>
-            <div class="buttons smallFont" style="margin-left: auto; margin-right: 10px;">
-                #جشنواره ایران ما
+            <div class="buttons smallFont">
+                <span>#جشنواره ایران ما</span>
+                <a href="{{route('festival.main')}}" class="votedButton" >رای می دهم</a>
             </div>
         </div>
     </header>
@@ -240,75 +64,73 @@
 
             <div id="section_1" class="row" style="direction: ltr">
                 <div class="col-md-12 inputRows">
-                    <input type="text" placeholder="نام" {{$user->first_name == null ? '' : 'disabled'}} value="{{$user->first_name}}">
+                    <input type="text" id="firstNameIn" class="mustFull" placeholder="نام" {{$user->first_name == null ? '' : 'disabled'}} value="{{$user->first_name}}">
                 </div>
                 <div class="col-md-12 inputRows">
-                    <input type="text" placeholder="نام خانوادگی" {{$user->last_name == null ? '' : 'disabled'}} value="{{$user->last_name}}">
+                    <input type="text" id="lastNameIn" class="mustFull" placeholder="نام خانوادگی" {{$user->last_name == null ? '' : 'disabled'}} value="{{$user->last_name}}">
                 </div>
                 <div class="col-md-12 inputRows">
-                    <input type="text" placeholder="ایمیل" {{$user->email == null ? '' : 'disabled'}} value="{{$user->email}}">
+                    <input type="text" id="emailIn" class="mustFull" placeholder="ایمیل" {{$user->email == null ? '' : 'disabled'}} value="{{$user->email}}">
                 </div>
                 <div class="col-md-12 inputRows">
-                    <input type="text" placeholder="شماره همراه" {{$user->phone == null ? '' : 'disabled'}} value="{{$user->phone}}">
+                    <input type="text" id="phoneIn" class="mustFull" placeholder="شماره همراه" {{$user->phone == null ? '' : 'disabled'}} value="{{$user->phone}}">
                 </div>
                 <div class="col-sm-6 col-6 inputRows">
-                    <select {{$user->sex == null ? '' : 'disabled'}} value="{{$user->sex}}">
-                        <option value="1">آقا</option>
-                        <option value="0">خانم</option>
+                    <select id="sexIn" {{ $user->sex !== null ? 'disabled' : ''}}>
+                        <option value="1" {{ $user->sex == 1 ? 'selected' : ''}}>آقا</option>
+                        <option value="0" {{ $user->sex == 0 ? 'selected' : ''}}>خانم</option>
                     </select>
                 </div>
                 <div class="col-sm-6 col-6 inputRows">
-                    <input type="number" placeholder="سن" {{$user->age == null ? '' : 'disabled'}} value="{{$user->age}}">
+                    <input type="number" id="ageIn" class="mustFull" placeholder="سن" {{$user->age == null ? '' : 'disabled'}} value="{{$user->age}}">
                 </div>
                 <div class="col-md-12 inputRows optional">
-                    <input type="text" placeholder="لینک وب سایت">
+                    <input type="text" id="websiteIn" placeholder="لینک وب سایت" {{$user->link == null ? '' : 'disabled'}} value="{{$user->link}}">
                 </div>
                 <div class="col-md-12 inputRows optional">
-                    <input type="text" placeholder="صفحه اینستاگرام">
-                </div>
-                <div class="col-sm-6 switchInputSec">
-                    <div class="title">بخش اصلی جشنواره</div>
-                    <div id="matchMainSection" class="switchInput" value="photo">
-                        <div data-value="video" onclick="changeSwitchInputButton(this, 'festKind')">فیلم</div>
-                        <div class="selected" data-value="photo" onclick="changeSwitchInputButton(this, 'festKind')">عکس</div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 switchInputSec">
-                    <div class="title">بخش فرعی جشنواره</div>
-                    <div id="matchSideSection" class="switchInput" value="main">
-                        <div class="selected" data-value="main" onclick="changeSwitchInputButton(this)">اصلی</div>
-                        <div data-value="mobile" onclick="changeSwitchInputButton(this)">موبایل</div>
-                    </div>
+                    <input type="text" id="instagramIn" placeholder="صفحه اینستاگرام" {{$user->instagram == null ? '' : 'disabled'}} value="{{$user->instagram}}">
                 </div>
             </div>
 
             <div id="section_2" style="display: none;">
+
+                <div class="row">
+
+                    <div class="col-sm-6 switchInputSec">
+                        <div class="title">بخش اصلی جشنواره</div>
+                        <div id="matchMainSection" class="switchInput" value="photo">
+                            <div data-value="video" onclick="changeSwitchInputButton(this, 'festKind')">فیلم</div>
+                            <div class="selected" data-value="photo" onclick="changeSwitchInputButton(this, 'festKind')">عکس</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 switchInputSec">
+                        <div class="title">بخش فرعی جشنواره</div>
+                        <div id="matchSideSection" class="switchInput" value="main">
+                            <div class="selected" data-value="main" onclick="changeSwitchInputButton(this)">اصلی</div>
+                            <div data-value="mobile" onclick="changeSwitchInputButton(this)">موبایل</div>
+                        </div>
+                    </div>
+                </div>
+
                 <label for="picFile" class="dropPictureSec">
                     <div class="icon">
                         <img src="{{URL::asset('images/festival/plus.png')}}">
                     </div>
                     <div class="text">
-                        <span class="section2KindText"></span>
+                        <span class="section2KindText">عکس</span>
                         خود را با دکمه کناری انتخاب نموده و یا داخل این باکس بیاندازید
                     </div>
                 </label>
-                <input id="picFile" type="file" style="display: none;" onchange="changePic(this)">
+                <input id="picFile" accept="image/*" type="file" style="display: none;" onchange="changePic(this)">
 
                 <div id="fileUploadSection" class="fileUploaded"></div>
             </div>
 
             <div id="section_3" style="display: none;">
-                <div class="mainTextRule">
-                    شرکت در جشنواره به منزله پذیرش شرایط جشنواره است.
-                    ‌عکس‌ها باید دارای عنوان بوده و اطلاعات مربوط به مکان و زمان عکس‌برداری در هنگام بارگذاری در سایت جشنواره درج شوند.
-                    از نظر برگزار کننده، ارسال کننده‌ی عکس مالک اثر شناخته می‌شود. هرگونه مسئولیت ناشی از آن و پاسخگویی به پیامدهای حقوقی ناشی از آن با ارسال کننده‌ی اثر خواهد بود.
-                    برگزار‌کننده حق استفاده از عکس‌های پذیرفته شده را برای چاپ در کتاب، بروشور، انتشارات و موارد تبلیغاتی مربوط به جشنواره، استفاده در سایت کوچیتا ، با ذکر نام عکاس برای خود محفوظ می‌دارد.
-                    ارسال آثار به معنای پذیرش تمامی مقررات این جشنواره و تصمیم‌گیری در مورد مسائل پیش‌بینی نشده با برگزارکننده است.
-                    شما همواره می توانید از طریق پروفایل کاربری خود در سایت کوچیتا، به قسمت فستیوال رفته و محتوای خود را مدیریت نمایید. همچنین هر لحظه از روند داوری ها و آرای مردمی باخبر شوید.
-                </div>
+                <div class="mainTextRule"></div>
                 <div class="acceptRuleButton">
-                    <input id="acceptRuleInput" type="checkbox" />
+                    <input id="acceptRuleInput" type="checkbox"/>
                     <label for="acceptRuleInput">
                         با فشردن دکمه تایید نهای موافقت خود را با قوانین بالا اعلام می دارم.
                     </label>
@@ -361,13 +183,30 @@
                 </div>
             </div>
         </div>
+
+        <div id="videoSnapShotModal" class="modalBlackBack fullCenter videoSnapShotModal notCloseOnClick">
+            <div class="modalBody" style="background: #445565;">
+                <div class="text" style="color: var(--yellow); text-align: center">
+                    شما برای بارگذاری ویدیو خود یک عکس باید از ویدیوی خود انتخاب کنید.
+                </div>
+                <div class="videoSec">
+                    <video id="snapShotVideo" src="" controls muted ></video>
+                    <div class="buts">
+                        <button class="btn submit" onclick="takeSnapShot(this)" disabled>گرفتن عکس</button>
+                    </div>
+                </div>
+                <canvas id="resultThumbnail" style="display: none;"></canvas>
+            </div>
+        </div>
     </section>
 
     <script>
-
         let lastStage = 1;
         let uploadedPicFile = [];
         let deleteImgIndex = 0;
+        let cityFileIndex = 0;
+        let placeFileIndex = 0;
+        let searchPlaceNumber = 0;
         let changeFestivalKind = null;
         let festivalText = {
             'photo': {
@@ -378,6 +217,16 @@
                 text: 'فیلم',
                 accepted: 'video/*'
             },
+        };
+        let hasQueue = false;
+        let placeIcons = {
+            'amaken': 'touristAttractions',
+            'restaurant': 'restaurantIcon',
+            'hotels': 'hotelIcon',
+            'sogatSanaies': 'souvenirIcon',
+            'mahaliFood': 'traditionalFood',
+            'majara': 'adventureIcon',
+            'boomgardies': 'boomIcon',
         };
 
         function changeSwitchInputButton(_elems, _kind = ''){
@@ -394,6 +243,12 @@
             $(_elems).parent().find('.selected').removeClass('selected');
             $(_elems).addClass('selected');
             $(_elems).parent().attr('value', $(_elems).attr('data-value'));
+
+            if(_kind == 'festKind'){
+                let festKind = $('#matchMainSection').attr('value');
+                $('.section2KindText').text(festivalText[festKind].text);
+                $('#picFile').attr('accept', festivalText[festKind].accepted);
+            }
         }
 
         function doChangeMyFestivalKind(){
@@ -402,36 +257,53 @@
             $(changeFestivalKind).parent().attr('value', $(changeFestivalKind).attr('data-value'));
             changeFestivalKind = null;
 
+            for(let i = 0; i < uploadedPicFile.length; i++){
+                if(uploadedPicFile[i] !== false)
+                    deleteUploadedFile(i);
+            }
             $('#fileUploadSection').html('');
-            uploadedPicFile = [];
 
             closeMyModal('changeFestivalKindModal');
+
+            let festKind = $('#matchMainSection').attr('value');
+            $('.section2KindText').text(festivalText[festKind].text);
+            $('#picFile').attr('accept', festivalText[festKind].accepted);
         }
 
         function changePic(_input){
             if(_input.files && _input.files[0]) {
+                uploadedPicFile.push({
+                    file: _input.files[0],
+                    uploadedFileName: '',
+                    type: $("#matchMainSection").attr('value'),
+                    process: 'inQueue',
+                    thumbnail: null,
+                    title: '',
+                    cityId: 0,
+                    cityName: '',
+                    description: '',
+                    placeId: 0,
+                    kindPlaceId: 0,
+                });
+
                 let nowUploaded = _input.files[0];
-                uploadedPicFile.push(_input.files[0]);
                 let nowUploadIndex = uploadedPicFile.length-1;
+                let reader = new FileReader();
                 _input.value = '';
-                if(nowUploaded.type.includes('video')){
+
+                if($("#matchMainSection").attr('value') == 'video'){
                     createUploadedFileRow('#', 'فیلم', nowUploadIndex);
-                    uploadLargeFile('{{route("festival.uploadFile")}}', nowUploaded, (_percent) =>{
-                        if(_percent == 'done') {
-                            $('#fileInputRowPercent_' + nowUploadIndex).addClass('done');
-                            $('#fileInputRowPercent_' + nowUploadIndex).find('.percentNum').text('100%');
-                        }
-                        else if(_percent == 'error')
-                            $('#fileInputRowPercent_' + nowUploadIndex).addClass('error');
-                        else{
-                            $('#fileInputRowPercent_' + nowUploadIndex).find('.percentNum').text(_percent+'%');
-                            $('#fileInputRowPercent_' + nowUploadIndex).find('.percentBack').css('width', _percent+'%');
-                        }
-                    });
+                    reader.onload = e => $('#snapShotVideo').attr('src', e.target.result);
+                    reader.readAsDataURL(nowUploaded);
+                    openMyModal('videoSnapShotModal');
+
+                    $("#snapShotVideo").on("loadstart", () => $("#snapShotVideo").parent().find('button').prop('disabled', false));
                 }
                 else {
-                    var reader = new FileReader();
-                    reader.onload = e => createUploadedFileRow(e.target.result, 'عکس', nowUploadIndex);
+                    reader.onload = e => {
+                        createUploadedFileRow(e.target.result, 'عکس', nowUploadIndex);
+                        uploadContentFile(nowUploadIndex);
+                    };
                     reader.readAsDataURL(nowUploaded);
                 }
             }
@@ -450,16 +322,19 @@
                         '       </div>' +
                         '       <div class="row">\n' +
                         '           <div class="col-sm-12 inputRows">\n' +
-                        '               <input type="text" placeholder="نام ' + kind + '">\n' +
+                        '               <input id="titleForFile_'+_index+'" type="text" class="mustFull" placeholder="عنوان ' + kind + '">\n' +
                         '           </div>\n' +
                         '           <div class="col-sm-6 inputRows">\n' +
-                        '               <input type="text" placeholder="نام مکان (اختیاری)">\n' +
+                        '               <input id="placeNameForFile_'+_index+'" type="text" placeholder="نام مکان (اختیاری)" onclick="openPlaceSearch(' + _index + ')" readonly>\n' +
+                        '               <input id="placeIdForFile_'+_index+'" type="hidden" value="0">\n' +
+                        '               <input id="kindPlaceIdForFile_'+_index+'" type="hidden" value="0">\n' +
                         '           </div>\n' +
                         '           <div class="col-sm-6 inputRows pd-lt-0">\n' +
-                        '               <input type="text" placeholder="نام شهر">\n' +
+                        '               <input id="cityNameForFile_'+_index+'" type="text" class="mustFull" placeholder="نام شهر" onclick="openCitySearch(' + _index + ')" readonly>\n' +
+                        '               <input id="cityIdForFile_'+_index+'" type="hidden" value="0" readonly>\n' +
                         '           </div>\n' +
                         '           <div class="col-sm-12 inputRows">\n' +
-                        '               <textarea type="text" placeholder="توضیح ' + kind + ' (اختیاری)"></textarea>\n' +
+                        '               <textarea id="descriptionForFile_'+_index+'" type="text" placeholder="توضیح ' + kind + ' (اختیاری)"></textarea>\n' +
                         '           </div>\n' +
                         '       </div>\n' +
                         '       <div class="cornerButton iconClose" onclick="deleteImg('+_index+')"></div>\n' +
@@ -468,54 +343,141 @@
 
             $('#fileUploadSection').append(text);
 
-            resizeUploadedPictures();
+            setTimeout(() => {
+                resizeUploadedPictures();
+                $('.mustFull').on('change', function(e){
+                    if(e.target.value.trim().length == 0)
+                        e.target.classList.add('emptyError');
+                    else
+                        e.target.classList.remove('emptyError');
+                });
+            }, 500);
         }
 
-        function createVideoPic(_file, _callBack){
-            var video = document.createElement('video');
-            video.preload = 'metadata';
-            video.onloadedmetadata = () => window.URL.revokeObjectURL(video.src);
-            video.src = URL.createObjectURL(_file[0]);
+        function openCitySearch(_index){
+            cityFileIndex = _index;
+            createSearchInput('searchInCities', 'نام شهر را وارد کنید.');// in globalInput.blade.php
+        }
+        function searchInCities(_element){
+            let result = '';
+            let value = _element.value;
 
-            var fileReader = new FileReader();
-            fileReader.onload = function() {
-                var blob = new Blob([fileReader.result], {type: _file[0].type});
-                var url = URL.createObjectURL(blob);
-                var timeupdate = function() {
-                    if (snapImage()) {
-                        video.removeEventListener('timeupdate', timeupdate);
-                        video.pause();
-                    }
-                };
-                video.addEventListener('loadeddata', function() {
-                    if (snapImage()) {
-                        video.removeEventListener('timeupdate', timeupdate);
-                        video.pause();
+            value = value.trim();
+            if(value.length > 1){
+                $.ajax({
+                    type: 'post',
+                    url:  "{{route('searchForCity')}}",
+                    data: {
+                        'key':  value,
+                        'state': 1
+                    },
+                    success: function (response) {
+                        let result = '';
+                        response = JSON.parse(response);
+                        response.forEach(item => {
+                            if(item.isVillage == 0)
+                                cityKind = 'شهر' ;
+                            else
+                                cityKind = 'روستا' ;
+
+                            result += '<div onclick="setCityNameInFileInfo(this)" class="resultSearch" cityId="' + item.id + '">' +
+                                    '   <p class="suggest cursor-pointer font-weight-700" style="margin: 0px">' + cityKind + ' ' + item.cityName + '</p>' +
+                                    '   <div style="margin: 0px; color: gray; font-size: 10px !important; margin-right: 7px;">استان ' + item.stateName + '</div>' +
+                                    '</div>';
+                        });
+
+                        if(result == ''){
+                            result ='<div onclick="setCityNameInFileInfo(this)" class="resultSearch" cityId="-1">' +
+                                    '   <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; color: blue; font-size: 20px !important;">' +
+                                    '       <span id="newCityName">' + value + '</span> را اضافه کن' +
+                                    '   </p>' +
+                                    '</div>';
+                        }
+
+                        setResultToGlobalSearch(result);
                     }
                 });
+            }
+            else
+                setResultToGlobalSearch('');
+        }
+        function setCityNameInFileInfo(_element){
 
-                var snapImage = function() {
-                    let canvas = document.createElement('canvas');
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                    let image = canvas.toDataURL();
-                    let success = image.length > 100;
-                    if (success) {
-                        URL.revokeObjectURL(url);
-                        _callBack(image);
+            let id = $(_element).attr('cityId');
+            let name;
+            if(id == -1) {
+                name = $("#newCityName").text();
+                id = name;
+            }
+            else
+                name = $(_element).children().first().text();
+
+            $("#cityNameForFile_"+cityFileIndex).val(name);
+            $("#cityIdForFile_"+cityFileIndex).val(id);
+            cityFileIndex = 0;
+            closeSearchInput();
+        }
+
+        function openPlaceSearch(_index){
+            placeFileIndex = _index;
+            createSearchInput('searchInPlacesInUploadPageFile', 'نام مکان را وارد کنید.');// in globalInput.blade.php
+        }
+        function searchInPlacesInUploadPageFile(_element){
+            let result = '';
+            let value = _element.value;
+
+            value = value.trim();
+            if(value.length > 1){
+                searchPlaceNumber++;
+                $.ajax({
+                    type: 'post',
+                    url:  "{{route('totalSearch')}}",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        key:  value,
+                        kindPlaceId: 0,
+                        num: searchPlaceNumber
+                    },
+                    success: function (response) {
+                        let result = '';
+                        response = JSON.parse(response);
+                        if(response[2] == searchPlaceNumber) {
+                            response[1].forEach(item => {
+                                let plIcon = placeIcons[item.mode];
+
+                                if (item.kindPlaceId != 0) {
+                                    result += '<div onclick="setPlaceNameInFileInfo(this)" class="resultSearch" kindPlaceId="'+item.kindPlaceId+'" placeName="' + item.targetName + '" placeId="' + item.id + '" cityId="'+item.cityId+'" cityName="'+item.cityName+'">' +
+                                                '   <div class="icon ' + plIcon + '"></div>' +
+                                                '   <p class="suggest cursor-pointer font-weight-700" style="margin: 0px">' + item.targetName + '</p>' +
+                                                '   <div style="margin: 0px; color: gray; font-size: 10px !important; margin-right: 7px;">در استان '+ item.stateName +' ، شهر '+ item.cityName +'</div>' +
+                                                '</div>';
+                                }
+                            });
+                            setResultToGlobalSearch(result);
+                        }
+
                     }
-                    return success;
-                };
+                });
+            }
+            else
+                setResultToGlobalSearch('');
+        }
+        function setPlaceNameInFileInfo(_element){
 
-                video.addEventListener('timeupdate', timeupdate);
-                video.preload = 'metadata';
-                video.src = url;
-                video.muted = true;
-                video.playsInline = true;
-                video.play();
-            };
-            fileReader.readAsArrayBuffer(_file[0]);
+            let cityId   = $(_element).attr('cityId');
+            let cityName = $(_element).attr('cityName');
+            let placeId  = $(_element).attr('placeId');
+            let kindPlaceId = $(_element).attr('kindPlaceId');
+            let placeName = $(_element).attr('placeName');
+
+            $("#cityNameForFile_"+placeFileIndex).val(cityName);
+            $("#cityIdForFile_"+placeFileIndex).val(cityId);
+            $("#placeNameForFile_"+placeFileIndex).val(placeName);
+            $("#placeIdForFile_"+placeFileIndex).val(placeId);
+            $("#kindPlaceIdForFile_"+placeFileIndex).val(kindPlaceId);
+            placeFileIndex = 0;
+
+            closeSearchInput();
         }
 
         function deleteImg(_index){
@@ -524,10 +486,274 @@
         }
 
         function doDeleteThisImg(){
-            $('#fileRow_'+deleteImgIndex).remove();
-            uploadedPicFile[deleteImgIndex] = false;
-            deleteImgIndex = 0;
+            let processSection = uploadedPicFile[deleteImgIndex].process;
             closeMyModal('submitDeletePicModal');
+            if(processSection == 'inProcess'){
+                $('#fileInputRowPercent_'+deleteImgIndex).addClass('cancel');
+                cancelLargeUploadedFile(); // in uploadLargeFile.js
+            }
+            else if(processSection == 'inQueue') {
+                $('#fileRow_'+deleteImgIndex).remove();
+                uploadedPicFile[deleteImgIndex] = false;
+            }
+            else if(processSection == 'done' || processSection == 'error') {
+                $('#fileInputRowPercent_'+deleteImgIndex).addClass('cancel');
+                deleteUploadedFile(deleteImgIndex);
+            }
+
+            deleteImgIndex = 0;
+        }
+
+        function takeSnapShot(){
+            let videoThumbnailDiv = document.getElementById('snapShotVideo');
+            var canvasThumbnail = document.getElementById('resultThumbnail');
+            canvasThumbnail.width = videoThumbnailDiv.videoWidth;
+            canvasThumbnail.height = videoThumbnailDiv.videoHeight;
+            canvasThumbnail.getContext('2d').drawImage(videoThumbnailDiv, 0, 0, canvasThumbnail.width, canvasThumbnail.height);
+            $('#fileRow_'+(uploadedPicFile.length-1)).find('img').attr('src', canvasThumbnail.toDataURL());
+            closeMyModal('videoSnapShotModal');
+            $('#snapShotVideo').attr('src', '#');
+            setTimeout(resizeUploadedPictures, 500);
+            uploadedPicFile[uploadedPicFile.length-1].thumbnail = canvasThumbnail.toDataURL();
+            uploadContentFile(uploadedPicFile.length-1);
+        }
+
+        function uploadContentFile(_index){
+            let kind = $('#matchMainSection').attr('value');
+            uploadLargeFile('{{route("festival.uploadFile")}}', uploadedPicFile[_index].file, {kind: kind}, (_percent, _fileName = '') =>{
+                if(_percent == 'done') {
+                    uploadedPicFile[_index].uploadedFileName = _fileName;
+                    $('#fileInputRowPercent_'+_index).addClass('done');
+                    $('#fileInputRowPercent_'+_index).find('.percentNum').text('100%');
+
+                    if(uploadedPicFile[_index].thumbnail != null)
+                        storeThumbnail(_index);
+                    else
+                        uploadedPicFile[_index].process = 'done';
+                }
+                else if(_percent == 'error') {
+                    $('#fileInputRowPercent_'+_index).addClass('error');
+                    uploadedPicFile[_index].process = 'error';
+                }
+                else if(_percent == 'queue') {
+                    $('#fileInputRowPercent_'+_index).addClass('inQueue');
+                    uploadedPicFile[_index].process = 'inQueue';
+                    if(hasQueue === false)
+                        checkQueue();
+                }
+                else if(_percent == 'cancelUpload'){
+                    $('#fileRow_'+_index).remove();
+                    uploadedPicFile[_index] = false;
+                    deleteImgIndex = 0;
+                    if(hasQueue === false)
+                        checkQueue();
+                }
+                else{
+                    $('#fileInputRowPercent_'+_index).removeClass('inQueue');
+                    $('#fileInputRowPercent_'+_index).find('.percentNum').text(_percent+'%');
+                    $('#fileInputRowPercent_'+_index).find('.percentBack').css('width', _percent+'%');
+                    uploadedPicFile[_index].process = 'inProcess';
+                }
+
+            });
+        }
+
+        function storeThumbnail(_index){
+            let data = new FormData();
+            data.append('fileName', uploadedPicFile[_index].uploadedFileName);
+            data.append('thumbnail', uploadedPicFile[_index].thumbnail);
+            data.append('_token', '{{csrf_token()}}');
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("festival.uploadFile")}}',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    uploadedPicFile[_index].process = 'done';
+                    response = JSON.parse(response);
+                    if(response.status == 'ok')
+                        uploadedPicFile[_index].thumbnail = response.fileName;
+                },
+                error: err => {
+                    uploadedPicFile[_index].process = 'done';
+                    console.log(err)
+                }
+            });
+        }
+
+        function checkQueue(){
+            hasQueue = setInterval(() => {
+                let hasProcess = false;
+                let firstQueue = false;
+                uploadedPicFile.map((file, index) => {
+                    if(file !== false && file.process == 'inProcess')
+                        hasProcess = true;
+                    else if(file !== false && file.process == 'inQueue' && firstQueue === false)
+                        firstQueue = index;
+                });
+                if(!hasProcess){
+                    if(firstQueue !== false)
+                        uploadContentFile(firstQueue);
+                    else{
+                        clearInterval(hasQueue);
+                        hasQueue = false;
+                    }
+                }
+            }, 1000);
+        }
+
+        function checkFirstStep(){
+            let error = false;
+            let inputs = [ 'firstName', 'lastName', 'email', 'phone', 'age', 'sex' ];
+            inputs.map(item => {
+                if($(`#${item}In`).val().trim().length == 0){
+                    $(`#${item}In`).addClass('emptyError');
+                    error = true;
+                }
+                else
+                    $(`#${item}In`).removeClass('emptyError');
+            });
+
+            if(error)
+                return false;
+            else
+                return true;
+        }
+
+        function checkSecondStep(){
+            let uploadNum = 0;
+            let inProcess = false;
+            let lessData = false;
+
+            uploadedPicFile.map((pic, index) => {
+                pic !== false && uploadNum++;
+                if(pic.process == 'inProcess' || pic.process == 'inQueue')
+                    inProcess = true;
+
+                let title = $('#titleForFile_'+index).val();
+                let cityId = $('#cityIdForFile_'+index).val();
+                let cityName = $('#cityNameForFile_'+index).val();
+                let placeId = $('#placeIdForFile_'+index).val();
+                let kindPlaceId = $('#kindPlaceIdForFile_'+index).val();
+                let description = $('#descriptionForFile_'+index).val();
+
+                pic.title = title;
+                pic.cityId = cityId;
+                pic.cityName = cityName;
+                pic.description = description;
+                pic.placeId = placeId;
+                pic.kindPlaceId = kindPlaceId;
+
+                if(title.trim().length == 0 || cityName.trim().length == 0)
+                    lessData = true;
+            });
+            if (uploadNum > 0 && !inProcess && !lessData)
+                return true;
+            else if(lessData)
+                alert('برای تمامی فایل ها باید عنوان و شهر را مشخص کنید');
+            else if(inProcess)
+                alert('بعضی از فایل ها در حال بارگزاری می باشند تا زمان بارگزاری کامل باید صبر کنید');
+            else
+                return false;
+        }
+
+        function submitHandle(_step){
+            if(lastStage == 1 && !checkFirstStep())
+                return;
+            else if(lastStage == 2 && _step == 1 && !checkSecondStep())
+                return;
+            else if(lastStage == 3 && _step == 1){
+                if($('#acceptRuleInput').prop("checked")){
+                    storeDatas();
+                    return;
+                }
+                else
+                    return;
+            }
+
+            $('#section_'+lastStage).hide();
+            if((_step == -1 && lastStage > 1) || (_step == 1 && lastStage < 3))
+                lastStage += _step;
+            $('#section_'+lastStage).show();
+
+            if(lastStage == 1){
+                $('#submitPageButtons').addClass('one');
+                $('.IndicatorSec').addClass('one').removeClass('two').removeClass('three');
+            }
+            else if(lastStage == 2){
+                $('#submitPageButtons').removeClass('one');
+                $('.IndicatorSec').addClass('two').removeClass('three');
+            }
+            else if(lastStage == 3){
+                $('#submitPageButtons').removeClass('one');
+                $('.IndicatorSec').addClass('three');
+            }
+        }
+
+        function storeDatas(){
+            openLoading();
+            let uploadData = [];
+            let userData = {};
+            uploadedPicFile.map(item => {
+                if(item !== false){
+                    uploadData = item;
+                    uploadData.file = '';
+                }
+            });
+
+            userData = {
+                firstName: $('#firstNameIn').val(),
+                lastName: $('#lastNameIn').val(),
+                email: $('#emailIn').val(),
+                phone: $('#phoneIn').val(),
+                age: $('#ageIn').val(),
+                sex: $('#sexIn').val(),
+                website: $('#websiteIn').val(),
+                instagram: $('#instagramIn').val(),
+            };
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("festival.submitWorks")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    data: JSON.stringify(uploadedPicFile),
+                    userData: JSON.stringify(userData),
+                    matchSection: $('#matchMainSection').attr('value'),
+                    sideSection: $('#matchSideSection').attr('value'),
+                },
+                success: function(response){
+                    closeLoading();
+                    response = JSON.parse(response);
+                    if(response.status == 'ok')
+                        window.location.href = '{{route("festival.main")}}'
+                },
+                error: function(err){
+                    closeLoading();
+                    showSuccessNotifi('در ثبت اثار مشکلی پیش امده لطفا دوباره تلاش نمایید', 'left', 'red');
+                }
+            })
+        }
+
+        function deleteUploadedFile(_index){
+            $.ajax({
+                type: 'post',
+                url: '{{route("festival.uploadFile.delete")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    fileName: uploadedPicFile[_index].uploadedFileName,
+                    thumbnail: uploadedPicFile[_index].thumbnail
+                },
+                success: function(response){
+                    if(response == 'ok'){
+                        $('#fileRow_'+_index).remove();
+                        uploadedPicFile[_index] = false;
+                    }
+                },
+                error: err => console.log(err)
+            })
         }
 
         function resizeUploadedPictures(){
@@ -572,42 +798,29 @@
             }
         }
 
-        function submitHandle(_step){
-            if(lastStage == 1){
-                let festKind = $('#matchMainSection').attr('value');
-                $('.section2KindText').text(festivalText[festKind].text);
-                $('#picFile').attr('accept', festivalText[festKind].accepted);
-            }
-            else if(lastStage == 2 && _step == 1){
-                let uploadNum = true;
-                uploadedPicFile.map(pic => pic !== false ? uploadNum = false : '');
-                if(uploadNum)
-                    return;
-            }
-            else if(lastStage == 3){
+        function fullUserInfoHandler(){
+            let inputs = [ 'firstName', 'lastName', 'email', 'phone', 'age', 'sex', 'website', 'instagram'];
+            let error = false;
+            inputs.map(item => {
+                if($(`#${item}In`).val().trim().length == 0)
+                    error = true
+            });
 
-            }
-
-            $('#section_'+lastStage).hide();
-            if((_step == -1 && lastStage > 1) || (_step == 1 && lastStage < 3))
-                lastStage += _step;
-            $('#section_'+lastStage).show();
-
-            if(lastStage == 1) {
-                $('#submitPageButtons').addClass('one');
-                $('.IndicatorSec').addClass('one').removeClass('two').removeClass('three');
-            }
-            else if(lastStage == 2) {
-                $('#submitPageButtons').removeClass('one');
-                $('.IndicatorSec').addClass('two').removeClass('three');
-            }
-            else if(lastStage == 3) {
-                $('#submitPageButtons').removeClass('one');
-                $('.IndicatorSec').addClass('three');
-            }
+            if(!error)
+                submitHandle(1);
         }
+        fullUserInfoHandler();
 
         $(window).on('resize', resizeUploadedPictures);
+
+        $('.mustFull').on('change', function(e){
+            console.log(e.target.value);
+            if(e.target.value.trim().length == 0)
+                e.target.classList.add('emptyError');
+            else
+                e.target.classList.remove('emptyError');
+        });
+
     </script>
 
     @include('general.forAllPages')

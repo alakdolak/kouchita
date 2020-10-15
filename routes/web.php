@@ -635,9 +635,21 @@ Route::group(['middleware' => 'web'], function(){
 
     Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main');
 
-    Route::get('/festival/submitWorks', 'FestivalController@festivalSubmitPage')->name('festival.submitWorks');
+    Route::get('/festival/uploadWorks', 'FestivalController@festivalUploadWorksPage')->name('festival.uploadWorks');
 
-    Route::post('/festival/uploadFile', 'FestivalController@uploadFile')->name('festival.uploadFile');
+    Route::post('/festival/getContent', 'FestivalController@getFestivalContent')->name('festival.getContent');
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::post('/festival/uploadFile', 'FestivalController@uploadFile')->name('festival.uploadFile');
+
+        Route::post('/festival/uploadFile/delete', 'FestivalController@deleteUploadFile')->name('festival.uploadFile.delete');
+
+        Route::post('/festival/submitWorks', 'FestivalController@submitWorks')->name('festival.submitWorks');
+
+        Route::post('/festival/likeWork', 'FestivalController@likeWork')->name('festival.likeWork');
+
+        Route::post('/festival/getMySurvey', 'FestivalController@getMySurvey')->name('festival.getMySurvey');
+    });
 });
 
 //trip

@@ -988,12 +988,6 @@ class HomeController extends Controller
         return view('alaki', array('tripId' => $tripId));
     }
 
-
-    public function showSafarname($city)
-    {
-        return view('safarname', array('city' => $city));
-    }
-
     public function totalSearch(Request $request)
     {
 
@@ -1047,9 +1041,9 @@ class HomeController extends Controller
             foreach ($kinPlace as $kplace){
                 if($kindPlaceId == 0 || $kplace->id == $kindPlaceId) {
                     if (!empty($key2))
-                        $tmp = DB::select("SELECT tableName.id, tableName.name as targetName, cities.name as cityName, state.name as stateName from " . $kplace->tableName . " as tableName, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(tableName.name, ' ', '') LIKE '%$key%' or replace(tableName.name, ' ', '') LIKE '%$key2%')");
+                        $tmp = DB::select("SELECT tableName.id, tableName.name as targetName, cities.name as cityName, state.name as stateName, cities.id as cityId from " . $kplace->tableName . " as tableName, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(tableName.name, ' ', '') LIKE '%$key%' or replace(tableName.name, ' ', '') LIKE '%$key2%')");
                     else
-                        $tmp = DB::select("SELECT tableName.id, tableName.name as targetName, cities.name as cityName, state.name as stateName from " . $kplace->tableName . " as tableName, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(tableName.name, ' ', '') LIKE '%$key%'");
+                        $tmp = DB::select("SELECT tableName.id, tableName.name as targetName, cities.name as cityName, state.name as stateName, cities.id as cityId from " . $kplace->tableName . " as tableName, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(tableName.name, ' ', '') LIKE '%$key%'");
                     foreach ($tmp as $itr) {
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => $kplace->id];
                         $itr->see = LogModel::where($condition)->count();

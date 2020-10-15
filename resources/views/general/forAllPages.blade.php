@@ -141,7 +141,7 @@
     }
 
     $(window).on('click', e => {
-        if($('.modalBlackBack.fullCenter.showModal').length > 0){
+        if($('.modalBlackBack.fullCenter.showModal:not(.notCloseOnClick)').length > 0){
             if($(e.target).is('.modalBlackBack, .showModal, .fullCenter'))
                 closeMyModal($(e.target).attr('id'));
         }

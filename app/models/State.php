@@ -21,4 +21,9 @@ class State extends Model {
     public static function whereId($value) {
         return State::find($value);
     }
+
+    public function getCities()
+    {
+        return $this->hasMany(Cities::class, 'stateId', 'id');
+    }
 }
