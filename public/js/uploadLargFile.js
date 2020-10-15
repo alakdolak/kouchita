@@ -1,6 +1,6 @@
 var readerLargeFileUploadedInJsFile = {};
 var fileLargeFileUploadedInJsFile = {};
-var sliceSizeLargeFileUploadedInJsFile = 1000 * 1024;
+var sliceSizeLargeFileUploadedInJsFile = 500 * 1024;
 let ajaxUrlLargeFile = '';
 let callBackFunctionLargeFileUploadedInJsFile = null;
 let inProcessLargeFileUploadedInJsFile = false;
@@ -57,7 +57,6 @@ function upload_fileLargeFile(start, _fileName) {
                     upload_fileLargeFile(start, _fileName);
             },
             success: function (response) {
-                console.log(response);
                 response = JSON.parse(response);
                 if(cancelLargeFileUploadedInJsFile == 1 && response.status == 'canceled'){
                     callBackFunctionLargeFileUploadedInJsFile('cancelUpload');

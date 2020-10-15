@@ -20,7 +20,7 @@ $config = \App\models\ConfigModel::first();
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه واتس اپ</div>
     </a>
     <script>
-        let encodeurlShareBox = encodeURIComponent('{{Request::url()}}');
+        let encodeurlShareBox = encodeURIComponenshaet('{{Request::url()}}');
         let textShareBox = 'whatsapp://send?text=';
         textShareBox += 'در کوچیتا ببینید:' + ' %0a ' + encodeurlShareBox;
         $('.whatsappLink').attr('href', textShareBox);
