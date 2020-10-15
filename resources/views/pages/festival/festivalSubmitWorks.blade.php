@@ -628,26 +628,28 @@
             let lessData = false;
 
             uploadedPicFile.map((pic, index) => {
-                pic !== false && uploadNum++;
-                if(pic.process == 'inProcess' || pic.process == 'inQueue')
-                    inProcess = true;
+                if(pic !== false){
+                    pic !== false && uploadNum++;
+                    if(pic.process == 'inProcess' || pic.process == 'inQueue')
+                        inProcess = true;
 
-                let title = $('#titleForFile_'+index).val();
-                let cityId = $('#cityIdForFile_'+index).val();
-                let cityName = $('#cityNameForFile_'+index).val();
-                let placeId = $('#placeIdForFile_'+index).val();
-                let kindPlaceId = $('#kindPlaceIdForFile_'+index).val();
-                let description = $('#descriptionForFile_'+index).val();
+                    let title = $('#titleForFile_'+index).val();
+                    let cityId = $('#cityIdForFile_'+index).val();
+                    let cityName = $('#cityNameForFile_'+index).val();
+                    let placeId = $('#placeIdForFile_'+index).val();
+                    let kindPlaceId = $('#kindPlaceIdForFile_'+index).val();
+                    let description = $('#descriptionForFile_'+index).val();
 
-                pic.title = title;
-                pic.cityId = cityId;
-                pic.cityName = cityName;
-                pic.description = description;
-                pic.placeId = placeId;
-                pic.kindPlaceId = kindPlaceId;
+                    pic.title = title;
+                    pic.cityId = cityId;
+                    pic.cityName = cityName;
+                    pic.description = description;
+                    pic.placeId = placeId;
+                    pic.kindPlaceId = kindPlaceId;
 
-                if(title.trim().length == 0 || cityName.trim().length == 0)
-                    lessData = true;
+                    if(title.trim().length == 0 || cityName.trim().length == 0)
+                        lessData = true;
+                }
             });
             if (uploadNum > 0 && !inProcess && !lessData)
                 return true;
