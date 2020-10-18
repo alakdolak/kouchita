@@ -198,9 +198,52 @@
                 <canvas id="resultThumbnail" style="display: none;"></canvas>
             </div>
         </div>
+
+        <div id="showImgModal" class="showFullPicModal hidden">
+            <div class="iconClose" onclick="closeShowPictureModal()"></div>
+            <div id="showImgModalBody" class="body">
+                <div id="modalImgSection" class="imgSec">
+                    <img id="modalPicture" src="#">
+                    <video id="modalVideo" src="#" controls></video>
+                    <div class="nPButtons next leftArrowIcon" onclick="nextShowPicModal(-1)"></div>
+                    <div class="nPButtons prev leftArrowIcon" onclick="nextShowPicModal(1)"></div>
+                </div>
+
+                <div id="modalInfoSection" class="infoSec">
+                    <div class="userInfo">
+                        <div style="display: flex; align-items: center;">
+                            <div class="userPic">
+                                <img class="modalUserPic" src="{{$buPic}}" style="height: 100%;">
+                            </div>
+                            <a href="{{route('profile', ['username' => $userFooter->username])}}" target="_blank" class="username modalUserName">{{$userFooter->username}}</a>
+                        </div>
+                    </div>
+                    <div class="picInfo">
+                        <div class="inf">
+                            <div class="title">نام اثر: </div>
+                            <div class="text modalTitle"></div>
+                        </div>
+                        <div id="modalDescription" class="inf">
+                            <div class="title">توضیحات عکس: </div>
+                            <div class="text" style="font-size: 12px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="liShButtons">
+                        <div class="likeButton empty-heartAfter modalLike" onclick="likeWorks(this)" code="0"></div>
+                        <div class="shareButton" onclick="copyUrl(this, window.location.href)">
+                            اشتراک گذاری:
+                            <span class="modalCode"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <script>
+        let limboUrl = '{{URL::asset('_images/festival/limbo/')}}';
         let lastStage = 1;
         let uploadedPicFile = [];
         let deleteImgIndex = 0;
@@ -219,6 +262,7 @@
             },
         };
         let hasQueue = false;
+        var showFullPicIndex;
         let placeIcons = {
             'amaken': 'touristAttractions',
             'restaurant': 'restaurantIcon',
@@ -284,6 +328,7 @@
                     description: '',
                     placeId: 0,
                     kindPlaceId: 0,
+                    kind: '',
                 });
 
                 let nowUploaded = _input.files[0];
@@ -292,6 +337,7 @@
                 _input.value = '';
 
                 if($("#matchMainSection").attr('value') == 'video'){
+                    uploadedPicFile[nowUploadIndex].kind = 'video';
                     createUploadedFileRow('#', 'فیلم', nowUploadIndex);
                     reader.onload = e => $('#snapShotVideo').attr('src', e.target.result);
                     reader.readAsDataURL(nowUploaded);
@@ -301,6 +347,8 @@
                 }
                 else {
                     reader.onload = e => {
+                        uploadedPicFile[nowUploadIndex].thumbnail = e.target.result;
+                        uploadedPicFile[nowUploadIndex].kind = 'photo';
                         createUploadedFileRow(e.target.result, 'عکس', nowUploadIndex);
                         uploadContentFile(nowUploadIndex);
                     };
@@ -693,6 +741,7 @@
                 $('.IndicatorSec').addClass('two').removeClass('three');
             }
             else if(lastStage == 3){
+                createImageBody();
                 $('#submitPageButtons').removeClass('one');
                 $('.IndicatorSec').addClass('three');
             }
@@ -731,10 +780,14 @@
                     sideSection: $('#matchSideSection').attr('value'),
                 },
                 success: function(response){
-                    closeLoading();
+
                     response = JSON.parse(response);
                     if(response.status == 'ok')
-                        window.location.href = '{{route("festival.main")}}'
+                        window.location.href = '{{route("profile")}}#festival';
+                    else{
+                        closeLoading();
+                        showSuccessNotifi('در ثبت اثار مشکلی پیش امده لطفا دوباره تلاش نمایید', 'left', 'red');
+                    }
                 },
                 error: function(err){
                     closeLoading();
@@ -817,16 +870,85 @@
         }
         fullUserInfoHandler();
 
+        function createImageBody(){
+            let text = '';
+            $('.mainTextRule').empty();
+            uploadedPicFile.map((item, index) =>{
+                if(item !== false) {
+                    text += '<div class="userWorks">\n' +
+                        '   <img src="' + limboUrl + '/' + item.thumbnail + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
+                        '</div>';
+                }
+            });
+            $('.mainTextRule').html(text);
+        }
+
+        function nextShowPicModal(_kind){
+            if(uploadedPicFile.length < 2)
+                return;
+
+            var nowShowPicIndex = showFullPicIndex+_kind;
+            while(1){
+                if(nowShowPicIndex < 0)
+                    nowShowPicIndex = uploadedPicFile.length - 1;
+                else if(nowShowPicIndex >= uploadedPicFile.length)
+                    nowShowPicIndex = 0;
+                if(uploadedPicFile[nowShowPicIndex] !== false)
+                    break;
+                else
+                    nowShowPicIndex +=_kind;
+            }
+
+
+            openShowPictureModal(nowShowPicIndex);
+        }
+
+        function openShowPictureModal(_index){
+            var _picture = uploadedPicFile[_index];
+
+            $('#modalPicture').attr('src', '#');
+            $('#modalVideo').attr('src', '#');
+
+            if(_picture.kind == 'photo'){
+                $('#modalVideo').hide();
+                $('#modalPicture').show();
+                $('#modalPicture').attr('src', limboUrl+'/'+_picture.uploadedFileName);
+            }
+            else{
+                $('#modalVideo').show();
+                $('#modalPicture').hide();
+                $('#modalVideo').attr('src', limboUrl+'/'+_picture.uploadedFileName);
+            }
+
+            $('.modalUserPic').attr('src', _picture['userPic']);
+            $('.modalTitle').text(_picture.title);
+            if(_picture.description != null){
+                $('#modalDescription').show();
+                $('#modalDescription').find('.text').text(_picture.description);
+            }
+            else{
+                $('#modalDescription').hide();
+                $('#modalDescription').find('.text').text('');
+            }
+
+            showFullPicIndex = _index;
+            $('#showImgModal').removeClass('hidden');
+        }
+
+        function closeShowPictureModal(){
+            showFullPicIndex = 0;
+            $('#showImgModal').addClass('hidden');
+        }
+
+
         $(window).on('resize', resizeUploadedPictures);
 
         $('.mustFull').on('change', function(e){
-            console.log(e.target.value);
             if(e.target.value.trim().length == 0)
                 e.target.classList.add('emptyError');
             else
                 e.target.classList.remove('emptyError');
         });
-
     </script>
 
     @include('general.forAllPages')

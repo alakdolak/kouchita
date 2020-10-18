@@ -1500,10 +1500,12 @@ body {
     text-align: revert;
     align-items: center;
     padding: 10px;
-    background: var(--koochita-yellow);
+    /*background: var(--koochita-yellow);*/
     margin-top: 10px;
     border-radius: 10px;
     margin-bottom: 30px;
+    filter: grayscale(1);
+    opacity: .5;
 }
 .notData .pic{
     width: 100px;
@@ -1738,8 +1740,6 @@ body {
     content: "\E02B" !important;
     font-family: Shazde_Regular2 !important;
 }
-
-
 .followerHeaderSection{
     position: absolute;
     z-index: 1;
@@ -1751,6 +1751,17 @@ body {
     right: 125px;
     bottom: 60px;
     width: max-content;
+}
+
+.festivalContent .articleSummarizedContentMainDiv > span{
+    font-size: 11px;
+    text-align: justify;
+    direction: rtl;
+    line-height: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 @media (max-width: 1188px) {

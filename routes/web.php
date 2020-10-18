@@ -469,6 +469,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::post('/profile/getSafarnameh', 'ProfileController@getSafarnameh')->name('profile.getSafarnameh');
 
+    Route::post('/profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');
+
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
@@ -649,6 +651,8 @@ Route::group(['middleware' => 'web'], function(){
         Route::post('/festival/likeWork', 'FestivalController@likeWork')->name('festival.likeWork');
 
         Route::post('/festival/getMySurvey', 'FestivalController@getMySurvey')->name('festival.getMySurvey');
+
+        Route::post('/festival/getMyWorks', 'FestivalController@getMyWorks')->name('festival.getMyWorks');
     });
 });
 

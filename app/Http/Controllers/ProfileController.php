@@ -12,6 +12,7 @@ use App\models\BookMark;
 use App\models\BookMarkReference;
 use App\models\Cities;
 use App\models\DefaultPic;
+use App\models\Festival;
 use App\models\Followers;
 use App\models\InvitationCode;
 use App\models\Level;
@@ -481,6 +482,24 @@ class ProfileController extends Controller {
         echo json_encode(['status'  => 'ok', 'result' => $safarnameh]);
 
         return;
+    }
+
+    public function getMainFestival()
+    {
+        $festivals = Festival::where('parent', 0)->get();
+        foreach ($festivals as $item){
+            if($item->picture == null)
+                $item->pic = \URL::asset('images/mainPics/noData.png');
+            else
+                $item->pic = \URL::asset('_images/festival/'.$item->picture);
+        }
+        echo json_encode(['status' => 'ok', 'result' => $festivals]);
+        return;
+    }
+
+    public function getFestivalContent(Request $request)
+    {
+
     }
 
     public function getBannerPics()

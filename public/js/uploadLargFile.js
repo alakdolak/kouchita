@@ -1,12 +1,12 @@
 var readerLargeFileUploadedInJsFile = {};
 var fileLargeFileUploadedInJsFile = {};
-var sliceSizeLargeFileUploadedInJsFile = 500 * 1024;
-let ajaxUrlLargeFile = '';
-let callBackFunctionLargeFileUploadedInJsFile = null;
-let inProcessLargeFileUploadedInJsFile = false;
-let errorCountInLargeFileUploadedInJsFile = 5;
-let cancelLargeFileUploadedInJsFile = 0;
-let dataAddedLargeFileUploadedInJsFile = null;
+var sliceSizeLargeFileUploadedInJsFile = 1000 * 1024;
+var ajaxUrlLargeFile = '';
+var callBackFunctionLargeFileUploadedInJsFile = null;
+var inProcessLargeFileUploadedInJsFile = false;
+var errorCountInLargeFileUploadedInJsFile = 5;
+var cancelLargeFileUploadedInJsFile = 0;
+var dataAddedLargeFileUploadedInJsFile = null;
 
 function uploadLargeFile(_url, _files, _data, _callBackFunction) {
     if(!inProcessLargeFileUploadedInJsFile) {

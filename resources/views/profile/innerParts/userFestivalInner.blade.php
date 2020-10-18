@@ -1,0 +1,296 @@
+<link rel="stylesheet" href="{{URL::asset('css/pages/festival.css')}}">
+
+<div id="mainFestivalContent" class="userProfileArticles festivalContent">
+    <div id="mainFestivalContentList" style="display: none;"></div>
+
+    <div class="SpecfestivalContent">
+        <div class="userProfilePostsFiltrationContainer">
+            <div class="userProfilePostsFiltration questionSecTab">
+                <span class="active" onclick="changeBookMarkShowKind('main', 'photo', this)">عکس بخش اصلی</span>
+                <span onclick="changeBookMarkShowKind('mobile', 'photo', this)">عکس بخش فرعی</span>
+                <span onclick="changeBookMarkShowKind('main', 'video', this)">فیلم بخش اصلی</span>
+                <span onclick="changeBookMarkShowKind('mobile', 'video', this)">فیلم بخش فرعی</span>
+            </div>
+        </div>
+
+        <div class="col-xs-12 notData emptyFestival hidden">
+            <div class="pic">
+                <img src="{{URL::asset('images/mainPics/noData.png')}}" style="width: 100%">
+            </div>
+            <div class="info">
+                <div class="firstLine">
+                    اینجا خالی است.هنوز در این بخش فستیوال شرکت نکرده اید...
+                </div>
+                <div class="sai" style="display: flex">
+                    <a href="{{route('festival.uploadWorks')}}"
+                       target="_blank"
+                       class="butt"
+                       style="font-size: 10px; margin-right: auto;">شرکت در فستیوال</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="festivalContentPlaceHolder" class="hidden">
+            <div class="profilePicturesRow kind2">
+                <div class="profilePictureDiv placeHolderAnime" style="width: 33%; height: 150px"></div>
+                <div class="profilePictureDiv placeHolderAnime" style="width: 33%; height: 150px"></div>
+                <div class="profilePictureDiv placeHolderAnime" style="width: 33%; height: 150px"></div>
+            </div>
+        </div>
+
+        <div id="festivalContentId" class="photosAndVideosMainDiv"></div>
+    </div>
+</div>
+
+<div id="showFestivalImgModal" class="showFullPicModal hidden">
+    <div class="iconClose" onclick="closeShowPictureModal()"></div>
+    <div id="showImgModalBody" class="body">
+        <div id="modalImgSection" class="imgSec">
+            <img id="modalPicture" src="#">
+            <video id="modalVideo" src="#" controls></video>
+            <div class="nPButtons next leftArrowIcon" onclick="nextShowFestivalPicModal(-1)"></div>
+            <div class="nPButtons prev leftArrowIcon" onclick="nextShowFestivalPicModal(1)"></div>
+        </div>
+
+        <div id="modalInfoSection" class="infoSec">
+            <div class="userInfo">
+                <div style="display: flex; align-items: center;">
+                    <div class="userPic">
+                        <img class="modalUserPic" src="#" style="height: 100%;">
+                    </div>
+                    <a href="#" target="_blank" class="username modalUserName"></a>
+                </div>
+                <div class="hideOnScreen showSLBInM">
+                    <button class="modalLike empty-heartAfter" onclick="likeWorks(this)" code="0"></button>
+                    <button class="codeButton" onclick="copyUrl(this)">
+                        اشتراک گذاری:
+                        <span class="modalCode"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="picInfo">
+                <div class="inf">
+                    <div class="title">نام اثر: </div>
+                    <div class="text modalTitle"></div>
+                </div>
+                <div class="inf">
+                    <div class="title">محل: </div>
+                    <a href="#" target="_blank" class="text modalPlace"></a>
+                </div>
+                <div id="modalDescription" class="inf">
+                    <div class="title">توضیحات عکس: </div>
+                    <div class="text" style="font-size: 12px;"></div>
+                </div>
+            </div>
+
+            <div class="liShButtons">
+                <div class="likeButton empty-heartAfter modalLike" onclick="likeWorks(this)" code="0"></div>
+                <div class="shareButton" onclick="copyUrl(this)">
+                    اشتراک گذاری:
+                    <span class="modalCode"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var nowFestivalSection = 'main';
+    var nowFestivalKind = 'photo';
+
+    var nowShowFestivalCode = 0;
+    var thisFestivalContent = [];
+    var nowShowFestivalPicIndex = 0;
+    function getMainFestival(){
+        let selectedEleme = $('#mainFestivalContent').find('.questionSecTab .active');
+        changeBookMarkShowKind(nowFestivalSection, nowFestivalKind, selectedEleme);
+        return;
+
+        let sfpl = getSafaranmehPlaceHolderRow(); // component.safarnamehRow.blade.php
+        $('#mainFestivalContentList').html(sfpl+sfpl);
+        $.ajax({
+            type: 'post',
+            url: '{{route("profile.getMainFestival")}}',
+            data: {_token: '{{csrf_token()}}'},
+            success: response => {
+                response = JSON.parse(response);
+                if(response.status == 'ok')
+                    createMainFestivalContent(response.result);
+            },
+            error: err => console.log(err)
+        })
+    }
+
+    function createMainFestivalContent(_result){
+        let text = '';
+
+        _result.map(item => {
+            text +=  '<div class="usersArticlesMainDiv">\n' +
+                    '   <div class="articleImgMainDiv">\n' +
+                    '       <a href="#" onClick="getFestivalMyWorks('+item.id+')">' +
+                    '           <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">' +
+                    '       </a>\n' +
+                    '   </div>\n' +
+                    '       <div class="articleDetailsMainDiv">\n'+
+                    '           <div class="articleTitleMainDiv">\n' +
+                    '               <a href="#" onClick="getFestivalMyWorks('+item.id+')">' + item.name + '</a>\n' +
+                    '           </div>\n'+
+                    '           <div class="articleSummarizedContentMainDiv">\n' +
+                    '               <span>' + item.description + '</span>\n' +
+                    '           </div>\n'+
+                    // '           <div class="articleSpecificationsMainDiv">\n' +
+                    // '               <div class="articleDateMainDiv">' + _safarnameh.time + '</div>\n' +
+                    // '               <div class="articleCommentsMainDiv">0</div>\n' +
+                    // '               <div class="articleWriterMainDiv">'+ _safarnameh.username +'</div>\n' +
+                    // '               <div class="articleWatchListMainDiv">0</div>\n' +
+                    // '           </div>\n' +
+                    '       <a href="{{route("festival")}}" class="readSafarnamehButton"> صفحه ی فستیوال</a>' +
+                    '   </div>\n' +
+                    '</div>';
+        });
+
+        $('#mainFestivalContentList').html(text);
+    }
+
+    function getFestivalMyWorks(_id){
+        // alert(_id);
+    }
+
+
+    function changeBookMarkShowKind(_sec, _kind, _elem){
+        $(_elem).parent().find('.active').removeClass('active');
+        $(_elem).addClass('active');
+
+        $('#festivalContentPlaceHolder').removeClass('hidden');
+        $('#mainFestivalContent').find('.notData').addClass('hidden');
+        $('#festivalContentId').addClass('hidden');
+
+        $.ajax({
+            type: 'post',
+            url: '{{route("festival.getMyWorks")}}',
+            data:{
+                _token: '{{csrf_token()}}',
+                section: _sec,
+                kind: _kind
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                if(response.status == 'ok')
+                    createFestivalPictures(response.result);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+
+    function createFestivalPictures(_result){
+        let addedPic = 0;
+        let text = '';
+        thisFestivalContent = _result;
+
+        $('#festivalContentId').empty().removeClass('hidden');
+        $('#festivalContentPlaceHolder').addClass('hidden');
+
+        if (_result.length == 0)
+            $('#mainFestivalContent').find('.notData').removeClass('hidden');
+        else
+            $('#mainFestivalContent').find('.notData').addClass('hidden');
+
+        _result.map((item, index) => {
+            if(addedPic == 0)
+                text += '<div class="profilePicturesRow kind2">';
+
+            text += '<div class="profilePictureDiv" style="width: 33%;" onclick="openFestivalPictureWithIndex('+index+')"> \n' +
+                    '   <img src="' + item.thumbnail + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
+                    '</div>';
+            addedPic++;
+
+            if(addedPic == 3) {
+                text += '</div>';
+                addedPic = 0;
+            }
+        });
+
+        $('#festivalContentId').html(text);
+    }
+
+
+    function nextShowFestivalPicModal(_kind){
+        openFestivalPictureWithIndex(nowShowFestivalPicIndex+_kind);
+    }
+
+    function openFestivalPictureWithIndex(_index){
+        nowShowFestivalPicIndex = _index;
+        if(nowShowFestivalPicIndex < 0)
+            nowShowFestivalPicIndex = thisFestivalContent.length-1;
+        else if(nowShowFestivalPicIndex == thisFestivalContent.length)
+            nowShowFestivalPicIndex = 0;
+
+        openShowPictureModal(thisFestivalContent[nowShowFestivalPicIndex]);
+    }
+
+    function openShowPictureModal(_picture){
+        $('#modalPicture').attr('src', '#');
+        $('#modalVideo').attr('src', '#');
+
+        if(_picture['isPic'] == 1){
+            $('#modalVideo').hide();
+            $('#modalPicture').show();
+            $('#modalPicture').attr('src', _picture['pic']);
+        }
+        else{
+            $('#modalVideo').show();
+            $('#modalPicture').hide();
+            $('#modalVideo').attr('src', _picture['video']);
+        }
+
+        $('.modalUserPic').attr('src', _picture['userPic']);
+        $('.modalUserName').text(_picture['username']);
+        $('.modalUserName').attr('href', _picture['userUrl']);
+        $('.modalTitle').text(_picture['title']);
+        $('.modalPlace').attr('href', _picture['placeUrl']);
+        $('.modalPlace').text(_picture['place']);
+        $('.modalLike').text(_picture['like']);
+        $('.modalLike').attr('code', _picture['code']);
+        $('.modalCode').text(_picture['code']+'#');
+        if(_picture['description'] != null){
+            $('#modalDescription').show();
+            $('#modalDescription').find('.text').text(_picture['description']);
+        }
+        else{
+            $('#modalDescription').hide();
+            $('#modalDescription').find('.text').text('');
+        }
+
+        if(_picture['youLike'] == 1){
+            $('.modalLike').removeClass('empty-heartAfter');
+            $('.modalLike').addClass('HeartIconAfter');
+        }
+        else{
+            $('.modalLike').removeClass('HeartIconAfter');
+            $('.modalLike').addClass('empty-heartAfter');
+        }
+
+        nowShowFestivalCode = _picture.code;
+        $('#showFestivalImgModal').removeClass('hidden');
+    }
+
+    function closeShowPictureModal(){
+        $('#showFestivalImgModal').addClass('hidden');
+    }
+
+    function copyUrl(_elems){
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val("{{route('festival.main')}}?code="+nowShowFestivalCode).select();
+        document.execCommand("copy");
+        $temp.remove();
+
+        let inputText = $(_elems).text();
+        $(_elems).text('لینک کپی شد');
+        setTimeout(() => $(_elems).text(inputText), 2000)
+
+    }
+
+</script>

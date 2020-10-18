@@ -427,4 +427,78 @@ class FestivalController extends Controller
 
         return true;
     }
+
+    public function getMyWorks(Request $request)
+    {
+        $user = auth()->user();
+        $user->pic = getUserPic($user->id);
+
+        $festival = Festival::where('name', $request->section)->first();
+        if($request->kind == 'photo')
+            $condition = ['isPic' => 1, 'isVideo' => 0];
+        else
+            $condition = ['isPic' => 0, 'isVideo' => 1];
+
+        $myWorks = FestivalContent::where($condition)
+                                    ->where('festivalId', $festival->id)
+                                    ->where('userId', $user->id)
+                                    ->get();
+
+        foreach ($myWorks as $item){
+            if($item->isPic == 1){
+                $item->pic = \URL::asset('_images/festival/content/'.$item->content);
+                $item->thumbnail = \URL::asset('_images/festival/content/thumb_'.$item->content);
+            }
+            if($item->isVideo == 1) {
+                $item->video = \URL::asset('_images/festival/content/'.$item->content);
+                if(is_file(__DIR__.'/../../../../assets/_images/festival/content/thumb_'.$item->thumbnail))
+                    $item->thumbnail = \URL::asset('_images/festival/content/thumb_'.$item->thumbnail);
+                else
+                    $item->thumbnail = \URL::asset('images/mainPics/nopicv01.jpg');
+            }
+            $item->url = route('festival.main').'?code='.$item->code;
+            $item->like = $item->festivalSurveysCount();
+            $item->youLike = 0;
+
+            $item->username = $user->username;
+            $item->userUrl = '#';
+            $item->userPic = $user->pic;
+
+            $city = Cities::find($item->cityName);
+            if($city != null) {
+                $state = $city->getState;
+                $item->city = $city->name;
+                $item->state = $state->name;
+            }
+            else{
+                $item->city = $item->cityName;
+                $item->state = '';
+            }
+            if($item->placeId != null && $item->placeId != 0){
+                $kindPlace = Place::find($item->kindPlaceId);
+                $place = \DB::table($kindPlace->tableName)->find($item->placeId);
+                $item->placeName = $place->name;
+                $item->placePic = getPlacePic($place->id, $kindPlace->id);
+                $item->placeUrl = createUrl($kindPlace->id, $place->id, 0, 0);
+                $item->place = 'استان '.$item->state.' ، شهر '.$item->city.' ، ' . $item->placeName;
+            }
+            else{
+                $item->placeName = '';
+                if($city != null)
+                    $item->placeUrl = createUrl(0, 0, 0, $city->id);
+                else
+                    $item->placeUrl = '#';
+
+                $item->place = 'استان '.$item->state.' ، شهر '.$item->city;
+            }
+
+            if(auth()->check())
+                $item->youLike = FestivalSurvey::where('contentId', $item->id)
+                    ->where('userId', auth()->user()->id)
+                    ->count();
+        }
+
+        echo json_encode(['status' => 'ok', 'result' => $myWorks]);
+        return;
+    }
 }

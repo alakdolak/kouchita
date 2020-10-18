@@ -7,7 +7,7 @@
                 <div class="icons iconClose globalSearchCloseIcon" onclick="closeSearchInput()"></div>
             </div>
             <div class="row" style="width: 100%; text-align: center;">
-                <input id="globalSearchInput" type="text" class="globalSearchInputField" placeholder="" onkeyup="">
+                <input id="globalSearchInput" type="text" class="globalSearchInputField" placeholder="" onkeyup="" autocomplete="off">
             </div>
             <div class="row" style="width: 100%;">
                 <div id="globalSearchResult" class="data_holder globalSearchResult"></div>
