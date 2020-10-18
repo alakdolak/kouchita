@@ -1245,3 +1245,24 @@ section .conditionFestival .leftSec > img{
         margin: 0px !important;
     }
 }
+
+@media (max-width: 500px){
+    header{
+        height: 70px;
+    }
+    header .container{
+        flex-direction: column;
+    }
+    header .logos{
+        height: 50%;
+    }
+    header .buttons{
+        width: 100% !important;
+        font-size: 10px;
+    }
+    header .buttons > div, header .buttons > a{
+        font-size: 10px;
+        padding: 5px 20px;
+    }
+
+}

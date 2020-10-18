@@ -351,6 +351,10 @@
                     else
                         e.target.classList.remove('emptyError');
                 });
+
+                $('html, body').animate({
+                    scrollTop: $("#fileRow_"+_index).offset().top
+                }, 1000);
             }, 500);
         }
 
