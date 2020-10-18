@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css')}}">
 
 <div id="mainFestivalContent" class="userProfileArticles festivalContent">
-    <div id="mainFestivalContentList" style="display: none;"></div>
+    <div id="mainFestivalContentList"></div>
 
-    <div class="SpecfestivalContent">
+    <div class="SpecfestivalContent hidden">
         <div class="userProfilePostsFiltrationContainer">
             <div class="userProfilePostsFiltration questionSecTab">
                 <span class="active" onclick="changeBookMarkShowKind('main', 'photo', this)">عکس بخش اصلی</span>
@@ -102,9 +102,8 @@
     var thisFestivalContent = [];
     var nowShowFestivalPicIndex = 0;
     function getMainFestival(){
-        let selectedEleme = $('#mainFestivalContent').find('.questionSecTab .active');
-        changeBookMarkShowKind(nowFestivalSection, nowFestivalKind, selectedEleme);
-        return;
+        $("#mainFestivalContentList").removeClass('hidden');
+        $(".SpecfestivalContent").addClass('hidden');
 
         let sfpl = getSafaranmehPlaceHolderRow(); // component.safarnamehRow.blade.php
         $('#mainFestivalContentList').html(sfpl+sfpl);
@@ -127,13 +126,13 @@
         _result.map(item => {
             text +=  '<div class="usersArticlesMainDiv">\n' +
                     '   <div class="articleImgMainDiv">\n' +
-                    '       <a href="#" onClick="getFestivalMyWorks('+item.id+')">' +
+                    '       <div onClick="getFestivalMyWorks('+item.id+')">' +
                     '           <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">' +
-                    '       </a>\n' +
+                    '       </div>\n' +
                     '   </div>\n' +
                     '       <div class="articleDetailsMainDiv">\n'+
                     '           <div class="articleTitleMainDiv">\n' +
-                    '               <a href="#" onClick="getFestivalMyWorks('+item.id+')">' + item.name + '</a>\n' +
+                    '               <div onClick="getFestivalMyWorks('+item.id+')" style="cursor: pointer;">' + item.name + '</div>\n' +
                     '           </div>\n'+
                     '           <div class="articleSummarizedContentMainDiv">\n' +
                     '               <span>' + item.description + '</span>\n' +
@@ -153,13 +152,20 @@
     }
 
     function getFestivalMyWorks(_id){
-        // alert(_id);
+        $("#mainFestivalContentList").addClass('hidden');
+        $(".SpecfestivalContent").removeClass('hidden');
+
+        let selectedEleme = $('#mainFestivalContent').find('.questionSecTab .active')[0];
+        changeBookMarkShowKind(nowFestivalSection, nowFestivalKind, selectedEleme);
     }
 
 
     function changeBookMarkShowKind(_sec, _kind, _elem){
         $(_elem).parent().find('.active').removeClass('active');
         $(_elem).addClass('active');
+
+        nowFestivalSection = _sec;
+        nowFestivalKind = _kind;
 
         $('#festivalContentPlaceHolder').removeClass('hidden');
         $('#mainFestivalContent').find('.notData').addClass('hidden');
