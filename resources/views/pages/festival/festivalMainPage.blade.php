@@ -96,7 +96,7 @@
             <div>
                 شما وارد قسمت آرای مردمی چشنواره ایران ما شده اید. در این قسمت می توانید به محتواهای مورد علاقه خود رای دهید.
             </div>
-            <div style="color: var(--yellow)">
+            <div style="color: var(--yellow); margin-top: 10px;">
                 توجه کنید هر کاربر تنها پنج حق رای دارد.
             </div>
         </div>
@@ -119,7 +119,7 @@
                     <div class="left">
                         <span id="mySurveyCount"></span> رای از 5 رای
                         <button id="mySurveyButton" style="display: none" onclick="getMySurveys()">
-                            نمایش رای های داده شده
+                            رای های من
                         </button>
                     </div>
                 @endif
@@ -424,7 +424,7 @@
                 }
                 else if(response.status == 'moreThanFive'){
                     closeLoading();
-                    alert('moreThanFive');
+                    showSuccessNotifi('شما 5 رای خود را داده اید. می توانید در قسمت رای های من رای های خود را تغییر دهید.', 'left', 'red');
                 }
                 else{
                     closeLoading();

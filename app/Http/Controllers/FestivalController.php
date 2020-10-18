@@ -9,12 +9,15 @@ use App\models\FestivalContent;
 use App\models\FestivalLimboContent;
 use App\models\Place;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FestivalController extends Controller
 {
     public function mainPageFestival()
     {
+        $this->deleteLimboFiles();
+
         $selectedPic = (object)[
             'title' => 'کوچیتا | فستیوال ایران ما',
             'description' => 'در جشنواره ایران ما شرکت کنید',
@@ -215,7 +218,8 @@ class FestivalController extends Controller
     {
         if(isset($request->fileName) && $request->fileName != ''){
             $limbo = FestivalLimboContent::where('content', $request->fileName)
-                                        ->where('userId', auth()->user()->id)->first();
+                                        ->where('userId', auth()->user()->id)
+                                        ->first();
             if($limbo != null){
                 $direction = __DIR__.'/../../../../assets/_images/festival/limbo/';
                 if(is_file($direction.$limbo->content))
@@ -225,7 +229,8 @@ class FestivalController extends Controller
 
                 if(isset($request->thumbnail) && $request->thumbnail != null && $request->thumbnail != ''){
                     $thumb = FestivalLimboContent::where('content', $request->thumbnail)
-                                                ->where('userId', auth()->user()->id)->first();
+                                                ->where('userId', auth()->user()->id)
+                                                ->first();
                     if(is_file($direction.$thumb->content))
                         unlink($direction.$thumb->content);
                     if(is_file($direction.'thumb_'.$thumb->content))
@@ -281,11 +286,15 @@ class FestivalController extends Controller
             $item->userPic = getUserPic($us->id);
 
             $city = Cities::find($item->cityName);
-            $state = $city->getState;
-
-            $item->city = $city->name;
-            $item->state = $state->name;
-
+            if($city != null) {
+                $state = $city->getState;
+                $item->city = $city->name;
+                $item->state = $state->name;
+            }
+            else{
+                $item->city = $item->cityName;
+                $item->state = '';
+            }
             if($item->placeId != null && $item->placeId != 0){
                 $kindPlace = Place::find($item->kindPlaceId);
                 $place = \DB::table($kindPlace->tableName)->find($item->placeId);
@@ -296,7 +305,11 @@ class FestivalController extends Controller
             }
             else{
                 $item->placeName = '';
-                $item->placeUrl = createUrl(0, 0, 0, $city->id);
+                if($city != null)
+                    $item->placeUrl = createUrl(0, 0, 0, $city->id);
+                else
+                    $item->placeUrl = '#';
+
                 $item->place = 'استان '.$item->state.' ، شهر '.$item->city;
             }
 
@@ -398,5 +411,20 @@ class FestivalController extends Controller
                         ->toArray();
 
         echo json_encode(['status' => 'ok', 'result' => $mySurveys]);
+    }
+
+    private function deleteLimboFiles(){
+        $limbos = FestivalLimboContent::where('created_at', '<=', Carbon::now()->subDay(1))->get();
+        $destination = __DIR__.'/../../../../assets/_images/festival/limbo';
+
+        foreach ($limbos as $item){
+            if(is_file($destination.'/'.$item->content))
+                unlink($destination.'/'.$item->content);
+            if(is_file($destination.'/thumb_'.$item->content))
+                unlink($destination.'/thumb_'.$item->content);
+            $item->delete();
+        }
+
+        return true;
     }
 }

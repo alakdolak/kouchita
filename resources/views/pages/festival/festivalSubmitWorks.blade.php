@@ -324,14 +324,14 @@
                         '           <div class="col-sm-12 inputRows">\n' +
                         '               <input id="titleForFile_'+_index+'" type="text" class="mustFull" placeholder="عنوان ' + kind + '">\n' +
                         '           </div>\n' +
+                        '           <div class="col-sm-6 inputRows pd-lt-0">\n' +
+                        '               <input id="cityNameForFile_'+_index+'" type="text" class="mustFull" placeholder="نام شهر" onclick="openCitySearch(' + _index + ')" readonly>\n' +
+                        '               <input id="cityIdForFile_'+_index+'" type="hidden" value="0" readonly>\n' +
+                        '           </div>\n' +
                         '           <div class="col-sm-6 inputRows">\n' +
                         '               <input id="placeNameForFile_'+_index+'" type="text" placeholder="نام مکان (اختیاری)" onclick="openPlaceSearch(' + _index + ')" readonly>\n' +
                         '               <input id="placeIdForFile_'+_index+'" type="hidden" value="0">\n' +
                         '               <input id="kindPlaceIdForFile_'+_index+'" type="hidden" value="0">\n' +
-                        '           </div>\n' +
-                        '           <div class="col-sm-6 inputRows pd-lt-0">\n' +
-                        '               <input id="cityNameForFile_'+_index+'" type="text" class="mustFull" placeholder="نام شهر" onclick="openCitySearch(' + _index + ')" readonly>\n' +
-                        '               <input id="cityIdForFile_'+_index+'" type="hidden" value="0" readonly>\n' +
                         '           </div>\n' +
                         '           <div class="col-sm-12 inputRows">\n' +
                         '               <textarea id="descriptionForFile_'+_index+'" type="text" placeholder="توضیح ' + kind + ' (اختیاری)"></textarea>\n' +

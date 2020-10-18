@@ -588,6 +588,9 @@ section .conditionFestival .leftSec > img{
     color: red;
     font-size: 35px;
 }
+.mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .inputRows{
+    float: right;
+}
 .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .inputRows > *{
     font-size: 15px;
     padding: 10px 25px;
@@ -1174,6 +1177,9 @@ section .conditionFestival .leftSec > img{
         flex-direction: column;
         background: linear-gradient(0deg, rgba(68,85,101,1) 0%, rgba(127,138,149,1) 50%, rgba(184,190,196,0.56) 80%, rgba(255,255,255,0) 100%);
     }
+    .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .inputRows{
+        float: unset;
+    }
     .mainSectionSubmitWork .fileUploaded .fileRow .fileInputs .row{
         width: 100%;
         margin: 0;
@@ -1261,7 +1267,7 @@ section .conditionFestival .leftSec > img{
         font-size: 10px;
     }
     header .buttons > div, header .buttons > a{
-        font-size: 10px;
+        font-size: 10px !important;
         padding: 5px 20px;
     }
 
