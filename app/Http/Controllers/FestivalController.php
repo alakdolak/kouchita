@@ -152,6 +152,7 @@ class FestivalController extends Controller
 
     public function uploadFile(Request $request)
     {
+        $start = microtime(true);
         $user = auth()->user();
         $data = json_decode($request->data);
         $direction = __DIR__.'/../../../../assets/_images/festival';
@@ -223,7 +224,7 @@ class FestivalController extends Controller
         }
 
         if($result)
-            return response()->json(['status' => 'ok', 'fileName' => $fileName]);
+            return response()->json(['status' => 'ok', 'fileName' => $fileName, 'time' => microtime(true)-$start]);
         else
             return response()->json(['status' => 'nok']);
     }
