@@ -96,22 +96,36 @@ class FestivalController extends Controller
         if(!is_dir($destination.'/content'))
             mkdir($destination.'/content');
 
+        $limboDestination = $destination.'/limbo/';
+        $contentDestination = $destination.'/content/';
+
         foreach ($data as $item){
             if($item !== false) {
                 if (is_file($destination . '/limbo/' . $item->uploadedFileName)) {
                     do $code = random_int(1000, 9999); while (FestivalContent::where('code', $code)->count() > 0);
 
-                    rename($destination . '/limbo/' . $item->uploadedFileName, $destination . '/content/' . $item->uploadedFileName);
+                    rename( $limboDestination.$item->uploadedFileName, $contentDestination.$item->uploadedFileName);
+
                     if (is_file($destination . '/limbo/thumb_' . $item->uploadedFileName))
                         rename($destination . '/limbo/thumb_' . $item->uploadedFileName, $destination . '/content/thumb_' . $item->uploadedFileName);
-
                     FestivalLimboContent::where('userId', $user->id)->where('content', $item->uploadedFileName)->delete();
-                    if (isset($item->thumbnail) && $item->thumbnail != '' && is_file($destination . '/limbo/' . $item->thumbnail)) {
-                        rename($destination . '/limbo/' . $item->thumbnail, $destination . '/content/' . $item->thumbnail);
-                        if (is_file($destination . '/limbo/thumb_' . $item->thumbnail))
-                            rename($destination . '/limbo/thumb_' . $item->thumbnail, $destination . '/content/thumb_' . $item->thumbnail);
+                    FestivalLimboContent::where('userId', $user->id)->where('content', 'thumb_'.$item->uploadedFileName)->delete();
 
-                        FestivalLimboContent::where('userId', $user->id)->where('content', $item->thumbnail)->delete();
+                    if (isset($item->thumbnailFileName) && is_file($limboDestination . $item->thumbnailFileName)) {
+                        rename($limboDestination . $item->thumbnailFileName, $contentDestination . $item->thumbnailFileName);
+                        if (is_file($limboDestination . $item->thumbnailFileName))
+                            rename($limboDestination . $item->thumbnailFileName, $contentDestination . $item->thumbnailFileName);
+
+                        FestivalLimboContent::where('userId', $user->id)->where('content', $item->thumbnailFileName)->delete();
+                    }
+                    else if(!is_file($limboDestination. $item->thumbnailFileName) && $item->type == 'video'){
+                        try {
+                            $item->thumbnailFileName = explode('.', $item->uploadedFileName)[0].'.jpg';
+                            shell_exec('ffmpeg -i /var/www/asset/_images/festival/content/'.$item->uploadedFileName.' -ss 00:00:01 -vframes 1 /var/www/asset/_images/festival/content/'.$item->thumbnailFileName);
+                        }
+                        catch (\Exception $exception){
+                            continue;
+                        }
                     }
 
                     $newContent = new FestivalContent();
@@ -125,7 +139,7 @@ class FestivalController extends Controller
                     $newContent->kindPlaceId = $item->kindPlaceId;
                     $newContent->placeId = $item->placeId;
                     $newContent->content = $item->uploadedFileName;
-                    $newContent->thumbnail = $item->thumbnail;
+                    $newContent->thumbnail = $item->thumbnailFileName;
                     $newContent->code = $code;
                     $newContent->confirm = 1;
                     $newContent->save();
@@ -163,7 +177,6 @@ class FestivalController extends Controller
             $fileName = $request->storeFileName;
             $direction .= '/'.$fileName;
             $result = uploadLargeFile($direction, $request->file_data);
-
         }
         else if(isset($request->thumbnail) && $request->thumbnail != ''){
             $fileName = explode('.', $request->fileName);
@@ -172,15 +185,19 @@ class FestivalController extends Controller
             $direction .= '/'.$fileName;
             $result = uploadLargeFile($direction, $request->thumbnail);
 
-            $limbo = new FestivalLimboContent();
-            $limbo->userId = $user->id;
-            $limbo->content = $fileName;
-            $limbo->save();
-
             if($result) {
                 $location = __DIR__ . '/../../../../assets/_images/festival/limbo';
                 $size = [['width' => 250, 'height' => 250, 'name' => 'thumb_', 'destination' => $location]];
                 $result = resizeUploadedImage(file_get_contents($direction), $size, $fileName);
+                if(is_file($location.'/'.$fileName))
+                    unlink($location.'/'.$fileName);
+
+                $fileName = 'thumb_'.$fileName;
+
+                $limbo = new FestivalLimboContent();
+                $limbo->userId = $user->id;
+                $limbo->content = $fileName;
+                $limbo->save();
             }
         }
         else{
@@ -266,12 +283,12 @@ class FestivalController extends Controller
         foreach ($content as $item){
             if($item->isPic == 1){
                 $item->pic = \URL::asset('_images/festival/content/'.$item->content);
-                $item->thumbnail = \URL::asset('_images/festival/content/thumb_'.$item->content);
+                $item->thumbnail = \URL::asset('_images/festival/content/'.$item->thumbnail);
             }
             if($item->isVideo == 1) {
                 $item->video = \URL::asset('_images/festival/content/'.$item->content);
-                if(is_file(__DIR__.'/../../../../assets/_images/festival/content/thumb_'.$item->thumbnail))
-                    $item->thumbnail = \URL::asset('_images/festival/content/thumb_'.$item->thumbnail);
+                if(is_file(__DIR__.'/../../../../assets/_images/festival/content/'.$item->thumbnail))
+                    $item->thumbnail = \URL::asset('_images/festival/content/'.$item->thumbnail);
                 else
                     $item->thumbnail = \URL::asset('images/mainPics/nopicv01.jpg');
             }
@@ -446,12 +463,12 @@ class FestivalController extends Controller
         foreach ($myWorks as $item){
             if($item->isPic == 1){
                 $item->pic = \URL::asset('_images/festival/content/'.$item->content);
-                $item->thumbnail = \URL::asset('_images/festival/content/thumb_'.$item->content);
+                $item->thumbnail = \URL::asset('_images/festival/content/'.$item->thumbnail);
             }
             if($item->isVideo == 1) {
                 $item->video = \URL::asset('_images/festival/content/'.$item->content);
-                if(is_file(__DIR__.'/../../../../assets/_images/festival/content/thumb_'.$item->thumbnail))
-                    $item->thumbnail = \URL::asset('_images/festival/content/thumb_'.$item->thumbnail);
+                if(is_file(__DIR__.'/../../../../assets/_images/festival/content/'.$item->thumbnail))
+                    $item->thumbnail = \URL::asset('_images/festival/content/'.$item->thumbnail);
                 else
                     $item->thumbnail = \URL::asset('images/mainPics/nopicv01.jpg');
             }

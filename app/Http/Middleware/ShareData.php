@@ -20,7 +20,7 @@ class ShareData
     public function handle($request, Closure $next)
     {
         $startTime = microtime(true);
-        $fileVersions = 2;
+        $fileVersions = 3;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();

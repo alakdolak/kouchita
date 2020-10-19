@@ -331,6 +331,7 @@
                     type: uploadedKind,
                     process: 'inQueue',
                     thumbnail: null,
+                    thumbnailFileName: null,
                     title: '',
                     cityId: 0,
                     cityName: '',
@@ -591,8 +592,7 @@
                         storeThumbnail(_index);
                     else {
                         uploadedPicFile[_index].process = 'done';
-                        uploadedPicFile[_index].thumbnail = 'thumb_'+_fileName;
-                        console.log(uploadedPicFile[_index]);
+                        uploadedPicFile[_index].thumbnailFileName = 'thumb_'+_fileName;
                     }
                 }
                 else if(_percent == 'error') {
@@ -635,12 +635,12 @@
                 contentType: false,
                 success: function(response){
                     uploadedPicFile[_index].process = 'done';
-                    response = JSON.parse(response);
                     if(response.status == 'ok')
-                        uploadedPicFile[_index].thumbnail = response.fileName;
+                        uploadedPicFile[_index].thumbnailFileName = response.fileName;
                 },
                 error: err => {
                     uploadedPicFile[_index].process = 'done';
+                    uploadedPicFile[_index].thumbnailFileName = null;
                     console.log(err)
                 }
             });
@@ -656,7 +656,6 @@
                     else if(file !== false && file.process == 'inQueue' && firstQueue === false)
                         firstQueue = index;
                 });
-                console.log('queue: '+hasProcess);
                 if(!hasProcess){
                     if(firstQueue !== false)
                         uploadContentFile(firstQueue);
@@ -726,9 +725,6 @@
         }
 
         function submitHandle(_step){
-            $('#section_1').hide();
-            $('#section_2').hide();
-            $('#section_3').hide();
 
             if(lastStage == 1 && !checkFirstStep())
                 return;
@@ -743,6 +739,7 @@
                     return;
             }
 
+            $('#section_'+lastStage).hide();
             if((_step == -1 && lastStage > 1) || (_step == 1 && lastStage < 3))
                 lastStage += _step;
             $('#section_'+lastStage).show();
@@ -770,6 +767,7 @@
                 if(item !== false){
                     uploadData = item;
                     uploadData.file = '';
+                    uploadData.thumbnail = null;
                 }
             });
 
@@ -804,9 +802,8 @@
                         text += '</ul>';
                         openWarning(text);
                         showSuccessNotifi('در ثبت اثار مشکلی پیش امده لطفا دوباره تلاش نمایید', 'left', 'red');
-                        lastStage = 2;
                         submitHandle(-1);
-
+                        submitHandle(-1);
                     }
                     else{
                         closeLoading();
@@ -827,7 +824,7 @@
                 data: {
                     _token: '{{csrf_token()}}',
                     fileName: uploadedPicFile[_index].uploadedFileName,
-                    thumbnail: uploadedPicFile[_index].thumbnail
+                    thumbnail: uploadedPicFile[_index].thumbnailFileName
                 },
                 success: function(response){
                     if(response == 'ok'){
@@ -900,7 +897,7 @@
             uploadedPicFile.map((item, index) =>{
                 if(item !== false) {
                     text += '<div class="userWorks">\n' +
-                            '   <img src="' + limboUrl + item.thumbnail + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
+                            '   <img src="' + limboUrl + item.thumbnailFileName + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
                             '</div>';
                 }
             });

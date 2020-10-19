@@ -90,7 +90,6 @@ function upload_fileLargeFile(start, _fileName) {
                     else
                         upload_fileLargeFile(start, _fileName);
                 }
-                console.log(response);
             }
         });
     };
