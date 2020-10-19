@@ -187,7 +187,23 @@
                         <a class="languageSelect" style="margin: 10px 0px" href="{{url('language/en')}}">English</a>
                     </div>
                 </div>
+
+                <div class="headerLoginHelper loginHelperSection hidden">
+                    <div class="container" style="padding: 0px">
+                        <div class="goToLeft">
+                            <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
+                            <div class="helperDescriptionDiv leftTopArrow">
+                                <div class="iconClose" onclick="closeLoginHelperSection()"></div>
+                                <div class="text">
+                                    در کوچیتا ثبت نام کنید و سفر رایگان بروید
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
+
             @endif
         </div>
     </div>
@@ -208,6 +224,7 @@
         </div>
     </div>
 </div>
+
 
 {{--mobile header--}}
 <div class="hideOnScreen mobileHeader">

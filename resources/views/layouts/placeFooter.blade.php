@@ -166,6 +166,22 @@
                 </div>
             </div>
         @else
+
+            <div class="loginHelperSection footerLoginHelperSection hidden">
+                <div class="login-button">
+                    <span class="footerMenuBarLinks" style="display: flex; align-items: center">
+                        {{__('ورود')}}
+                        <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
+                    </span>
+                </div>
+                <div class="helperDescriptionDiv rightBottomArrow">
+                    <div class="iconClose" onclick="closeLoginHelperSection()"></div>
+                    <div class="text">
+                        در کوچیتا ثبت نام کنید و سفر رایگان بروید
+                    </div>
+                </div>
+            </div>
+
             <div class="login-button">
                 <span class="footerMenuBarLinks" style="display: flex; align-items: center">
                     {{__('ورود')}}
@@ -559,7 +575,7 @@
                                         @if(\auth()->check())
                                             <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
                                                 <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
-                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="resizeFitImg(this)">
+                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
                                                 </div>
                                                 <div class="col-xs-4 placeDetailsLeftBar">
                                                     <div class="">##placeName##</div>
@@ -1141,17 +1157,41 @@
                         chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion')); // in mainProfile.blade.php
                     else if (_kind == 'bookMark')
                         chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
+                    else if (_kind == 'festival')
+                        chooseFromMobileMenuTab('festival', $('#myMenuMoreTabFestivalMark')); // in mainProfile.blade.php
                     $('#profile').modal('hide');
                 }
                 else if(_kind == 'setting')
                     window.location.href = "{{route('profile.accountInfo')}}";
-                else if(_kind == 'festival')
-                    window.location.href = "{{route('festival')}}";
                 else if(_kind == 'follower')
                     openFollowerModal('resultFollowers', {{$userFooter->id}}); // in general.followerPopUp.blade.php
                 else
                     window.location.href = profileUrl+'#'+_kind;
             }
+        </script>
+    @elseif(Request::is('show-place-details/*'))
+        <script>
+            function openLoginHelperSection(){
+                $('.loginHelperSection').removeClass('hidden');
+                $('html, body').css('overflow', 'hidden');
+            }
+
+            function closeLoginHelperSection(){
+                $('.loginHelperSection').addClass('hidden');
+                $('html, body').css('overflow-y', 'auto');
+            }
+
+            if (typeof(Storage) !== "undefined") {
+                seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif');
+                if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
+                    localStorage.setItem('loginButtonHelperNotif', true);
+                    setTimeout(() => {
+                        $('html, body').animate({ scrollTop: 0, }, 1000);
+                        setTimeout( openLoginHelperSection, 1000);
+                    }, 3000);
+                }
+            } else
+                console.log('your browser not support localStorage');
         </script>
     @endif
 

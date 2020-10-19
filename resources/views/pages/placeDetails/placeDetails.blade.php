@@ -1156,7 +1156,6 @@ if ($total == 0)
                     if(_result[x].length > 4) {
                         createSuggestionPack('nearDiv' + x + 'Content', _result[x], function () { // in suggestionPack.blade.php
                             $('#nearDiv' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
-                            resizeFitImg('resizeImgClass')
                         });
                     }
                     else

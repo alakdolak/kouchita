@@ -86,7 +86,7 @@
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
                                 @for($i = 0; $i < count($place->pic) && $i < 5; $i++)
                                     <div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
-                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}" onload="resizeFitImg(this)">
+                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}" onload="fitThisImg(this)">
                                     </div>
                                 @endfor
                             </div>
@@ -107,8 +107,8 @@
                                 {{--<div class="textCityPageIcon" style="color: var(--koochita-blue)">1000</div>--}}
                             </a>
                             <a class="col-xs-2 cpLittleMenu" href="#">
-                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قتادی')}}">
-                                <div class="textCityPageIcon">{{__('قتادی')}}</div>
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قنادی')}}">
+                                <div class="textCityPageIcon">{{__('قنادی')}}</div>
                                 {{--<div class="textCityPageIcon" style="color: var(--koochita-blue)">1000</div>--}}
                             </a>
                             <a class="col-xs-2 cpLittleMenu" href="#">
@@ -310,7 +310,7 @@
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
                                         <a href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}" style="height: 100%;">
-                                            <img src="{{$safarnameh[$i]->pic}}" alt="{{$safarnameh[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="resizeFitImg(this)">
+                                            <img src="{{$safarnameh[$i]->pic}}" alt="{{$safarnameh[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                         </a>
                                     </figure>
                                     <div class="im-widget-entry">
@@ -402,7 +402,7 @@
                     let nuum = 0;
                     while (nuum < 5 && showCityPicNumber < cityPic.length) {
                         slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
-                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '" onload="resizeFitImg(this)">\n' +
+                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '" onload="fitThisImg(this)">\n' +
                             '                                    </div>';
                         picSwiper.addSlide(showCityPicNumber + 1, slide);
                         nuum++;
@@ -418,8 +418,6 @@
         });
 
     @endif
-
-    resizeFitImg('resizeImgClass');
 
     var reviews;
     var showCityPicNumber = 5;
@@ -558,7 +556,6 @@
             if(_result[x].length > 4){
                 createSuggestionPack(x + 'Content', _result[x], function() { // in suggestionPack.blade.php
                     $('#' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
-                    resizeFitImg('resizeImgClass')
                 });
             }
             else

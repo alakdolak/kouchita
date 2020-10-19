@@ -335,7 +335,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         </div>
 
         <div class="registerLeftSection">
-            <img src="{{URL::asset('images/mainPics/bck.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="resizeFitImg(this)">
+            <img src="{{URL::asset('images/mainPics/bck.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
 
     </div>
