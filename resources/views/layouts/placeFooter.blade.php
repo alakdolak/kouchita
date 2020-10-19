@@ -1188,7 +1188,7 @@
                     setTimeout(() => {
                         $('html, body').animate({ scrollTop: 0, }, 1000);
                         setTimeout( openLoginHelperSection, 1000);
-                    }, 3000);
+                    }, 10000);
                 }
             } else
                 console.log('your browser not support localStorage');

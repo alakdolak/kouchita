@@ -641,7 +641,7 @@ Route::group(['middleware' => 'web'], function(){
 
     Route::post('/festival/getContent', 'FestivalController@getFestivalContent')->name('festival.getContent');
 
-    Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => ['auth', 'web']], function(){
         Route::post('/festival/uploadFile', 'FestivalController@uploadFile')->name('festival.uploadFile');
 
         Route::post('/festival/uploadFile/delete', 'FestivalController@deleteUploadFile')->name('festival.uploadFile.delete');

@@ -69,6 +69,7 @@
 {{--<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>--}}
 
 <script>
+    var csrfTokenGlobal = '{{csrf_token()}}';
     var hasLogin = {{auth()->check() ? 1 : 0}};
     window.userPic = '{{getUserPic(auth()->check() ? auth()->user()->id : 0)}}';
 

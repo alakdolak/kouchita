@@ -1481,7 +1481,7 @@ if ($total == 0)
         }
 
         // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
+        // document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
 
         $(document).ready(function () {
             @if($mode == "bookMark")

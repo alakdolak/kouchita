@@ -1,6 +1,6 @@
 var readerLargeFileUploadedInJsFile = {};
 var fileLargeFileUploadedInJsFile = {};
-var sliceSizeLargeFileUploadedInJsFile = 1000 * 1024;
+var sliceSizeLargeFileUploadedInJsFile = 500 * 1024;
 var ajaxUrlLargeFile = '';
 var callBackFunctionLargeFileUploadedInJsFile = null;
 var inProcessLargeFileUploadedInJsFile = false;
@@ -39,7 +39,9 @@ function upload_fileLargeFile(start, _fileName) {
             url: ajaxUrlLargeFile,
             type: 'POST',
             cache: false,
+            dataType: "json",
             data: {
+                _token: csrfTokenGlobal,
                 data: dataAddedLargeFileUploadedInJsFile,
                 storeFileName: _fileName,
                 file_name: fileLargeFileUploadedInJsFile.name,

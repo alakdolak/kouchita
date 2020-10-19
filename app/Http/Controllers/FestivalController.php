@@ -207,11 +207,9 @@ class FestivalController extends Controller
         }
 
         if($result)
-            echo json_encode(['status' => 'ok', 'fileName' => $fileName]);
+            return response()->json(['status' => 'ok', 'fileName' => $fileName]);
         else
-            echo json_encode(['status' => 'nok']);
-
-        return;
+            return response()->json(['status' => 'nok']);
     }
 
     public function deleteUploadFile(Request $request)
