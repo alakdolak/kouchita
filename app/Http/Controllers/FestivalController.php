@@ -97,37 +97,39 @@ class FestivalController extends Controller
             mkdir($destination.'/content');
 
         foreach ($data as $item){
-            if(is_file($destination.'/limbo/'.$item->uploadedFileName)){
-                do $code = random_int(1000, 9999); while(FestivalContent::where('code', $code)->count() > 0);
+            if($item !== false) {
+                if (is_file($destination . '/limbo/' . $item->uploadedFileName)) {
+                    do $code = random_int(1000, 9999); while (FestivalContent::where('code', $code)->count() > 0);
 
-                rename($destination.'/limbo/'.$item->uploadedFileName, $destination.'/content/'.$item->uploadedFileName);
-                if(is_file($destination.'/limbo/thumb_'.$item->uploadedFileName))
-                    rename($destination.'/limbo/thumb_'.$item->uploadedFileName, $destination.'/content/thumb_'.$item->uploadedFileName);
+                    rename($destination . '/limbo/' . $item->uploadedFileName, $destination . '/content/' . $item->uploadedFileName);
+                    if (is_file($destination . '/limbo/thumb_' . $item->uploadedFileName))
+                        rename($destination . '/limbo/thumb_' . $item->uploadedFileName, $destination . '/content/thumb_' . $item->uploadedFileName);
 
-                FestivalLimboContent::where('userId', $user->id)->where('content', $item->uploadedFileName)->delete();
-                if(isset($item->thumbnail) && $item->thumbnail != '' && is_file($destination.'/limbo/'.$item->thumbnail)){
-                    rename($destination.'/limbo/'.$item->thumbnail, $destination.'/content/'.$item->thumbnail);
-                    if(is_file($destination.'/limbo/thumb_'.$item->thumbnail))
-                        rename($destination.'/limbo/thumb_'.$item->thumbnail, $destination.'/content/thumb_'.$item->thumbnail);
+                    FestivalLimboContent::where('userId', $user->id)->where('content', $item->uploadedFileName)->delete();
+                    if (isset($item->thumbnail) && $item->thumbnail != '' && is_file($destination . '/limbo/' . $item->thumbnail)) {
+                        rename($destination . '/limbo/' . $item->thumbnail, $destination . '/content/' . $item->thumbnail);
+                        if (is_file($destination . '/limbo/thumb_' . $item->thumbnail))
+                            rename($destination . '/limbo/thumb_' . $item->thumbnail, $destination . '/content/thumb_' . $item->thumbnail);
 
-                    FestivalLimboContent::where('userId', $user->id)->where('content', $item->thumbnail)->delete();
+                        FestivalLimboContent::where('userId', $user->id)->where('content', $item->thumbnail)->delete();
+                    }
+
+                    $newContent = new FestivalContent();
+                    $newContent->festivalId = Festival::where('name', $request->sideSection)->first()->id;
+                    $newContent->userId = $user->id;
+                    $newContent->title = $item->title;
+                    $newContent->isPic = $item->type == 'photo' ? 1 : 0;
+                    $newContent->isVideo = $item->type == 'video' ? 1 : 0;
+                    $newContent->description = $item->description;
+                    $newContent->cityName = $item->cityId;
+                    $newContent->kindPlaceId = $item->kindPlaceId;
+                    $newContent->placeId = $item->placeId;
+                    $newContent->content = $item->uploadedFileName;
+                    $newContent->thumbnail = $item->thumbnail;
+                    $newContent->code = $code;
+                    $newContent->confirm = 1;
+                    $newContent->save();
                 }
-
-                $newContent = new FestivalContent();
-                $newContent->festivalId = Festival::where('name', $request->sideSection)->first()->id;
-                $newContent->userId = $user->id;
-                $newContent->title = $item->title;
-                $newContent->isPic = $item->type == 'photo' ? 1 : 0;
-                $newContent->isVideo = $item->type == 'video' ? 1 : 0;
-                $newContent->description = $item->description;
-                $newContent->cityName = $item->cityId;
-                $newContent->kindPlaceId = $item->kindPlaceId;
-                $newContent->placeId = $item->placeId;
-                $newContent->content = $item->uploadedFileName;
-                $newContent->thumbnail = $item->thumbnail;
-                $newContent->code = $code;
-                $newContent->confirm = 1;
-                $newContent->save();
             }
         }
 
