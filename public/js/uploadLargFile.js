@@ -53,13 +53,14 @@ function upload_fileLargeFile(start, _fileName) {
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown);
                 errorCountInLargeFileUploadedInJsFile--;
-                if (errorCountInLargeFileUploadedInJsFile <= 0)
+                if (errorCountInLargeFileUploadedInJsFile <= 0){
+                    inProcessLargeFileUploadedInJsFile = false;
                     callBackFunctionLargeFileUploadedInJsFile('error');
+                }
                 else
                     upload_fileLargeFile(start, _fileName);
             },
             success: function (response) {
-                response = JSON.parse(response);
                 if(cancelLargeFileUploadedInJsFile == 1 && response.status == 'canceled'){
                     callBackFunctionLargeFileUploadedInJsFile('cancelUpload');
                     cancelLargeFileUploadedInJsFile = 0;
@@ -81,8 +82,10 @@ function upload_fileLargeFile(start, _fileName) {
                 }
                 else {
                     errorCountInLargeFileUploadedInJsFile--;
-                    if (errorCountInLargeFileUploadedInJsFile <= 0)
+                    if (errorCountInLargeFileUploadedInJsFile <= 0) {
+                        inProcessLargeFileUploadedInJsFile = false;
                         callBackFunctionLargeFileUploadedInJsFile('error');
+                    }
                     else
                         upload_fileLargeFile(start, _fileName);
                 }

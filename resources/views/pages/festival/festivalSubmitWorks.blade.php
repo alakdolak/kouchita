@@ -606,7 +606,6 @@
                     $('#fileInputRowPercent_'+_index).find('.percentBack').css('width', _percent+'%');
                     uploadedPicFile[_index].process = 'inProcess';
                 }
-
             });
         }
 
@@ -645,6 +644,7 @@
                     else if(file !== false && file.process == 'inQueue' && firstQueue === false)
                         firstQueue = index;
                 });
+                console.log('queue: '+hasProcess);
                 if(!hasProcess){
                     if(firstQueue !== false)
                         uploadContentFile(firstQueue);

@@ -229,12 +229,14 @@ class FestivalController extends Controller
                     $thumb = FestivalLimboContent::where('content', $request->thumbnail)
                                                 ->where('userId', auth()->user()->id)
                                                 ->first();
-                    if(is_file($direction.$thumb->content))
-                        unlink($direction.$thumb->content);
-                    if(is_file($direction.'thumb_'.$thumb->content))
-                        unlink($direction.'thumb_'.$thumb->content);
+                    if($thumb != null) {
+                        if (is_file($direction . $thumb->content))
+                            unlink($direction . $thumb->content);
+                        if (is_file($direction . 'thumb_' . $thumb->content))
+                            unlink($direction . 'thumb_' . $thumb->content);
 
-                    $thumb->delete();
+                        $thumb->delete();
+                    }
                 }
 
                 $limbo->delete();
