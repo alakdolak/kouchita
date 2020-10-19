@@ -70,10 +70,8 @@ class FestivalController extends Controller
         if(User::where('phone', $userData->phone)->where('id', '!=', $user->id)->count() > 0)
             array_push($errorText, 'شماره تماس وارد شده در سامانه موجود می باشد.');
 
-        if(count($errorText) > 0){
-            echo json_encode(['status' => 'nok', 'text' => $errorText]);
-            return;
-        }
+        if(count($errorText) > 0)
+            return response()->json(['status' => 'nok', 'error' => $errorText]);
 
         if($user->first_name == null || $user->first_name != '')
             $user->first_name = $userData->firstName;
@@ -107,7 +105,7 @@ class FestivalController extends Controller
                     rename($destination.'/limbo/thumb_'.$item->uploadedFileName, $destination.'/content/thumb_'.$item->uploadedFileName);
 
                 FestivalLimboContent::where('userId', $user->id)->where('content', $item->uploadedFileName)->delete();
-                if(isset($item->thumbnail) && $item->thumbnail != ''){
+                if(isset($item->thumbnail) && $item->thumbnail != '' && is_file($destination.'/limbo/'.$item->thumbnail)){
                     rename($destination.'/limbo/'.$item->thumbnail, $destination.'/content/'.$item->thumbnail);
                     if(is_file($destination.'/limbo/thumb_'.$item->thumbnail))
                         rename($destination.'/limbo/thumb_'.$item->thumbnail, $destination.'/content/thumb_'.$item->thumbnail);
@@ -133,8 +131,7 @@ class FestivalController extends Controller
             }
         }
 
-        echo json_encode(['status' => 'ok']);
-        return;
+        return response()->json(['status' => 'ok']);
     }
 
     public function uploadFile(Request $request)
