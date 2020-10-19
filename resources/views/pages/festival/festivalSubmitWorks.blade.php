@@ -316,10 +316,19 @@
 
         function changePic(_input){
             if(_input.files && _input.files[0]) {
+                var uploadedKind = $("#matchMainSection").attr('value');
+                if(uploadedKind == 'photo' && _input.files[0].size > 5120000){
+                    openWarning('حجم عکس شما باید از 5 مگابایت کمتر باشد');
+                    return;
+                }
+                else if(uploadedKind == 'video' && _input.files[0].size > 512000000){
+                    openWarning('حجم ویدیوی شما باید از 500 مگابایت کمتر باشد');
+                    return;
+                }
                 uploadedPicFile.push({
                     file: _input.files[0],
                     uploadedFileName: '',
-                    type: $("#matchMainSection").attr('value'),
+                    type: uploadedKind,
                     process: 'inQueue',
                     thumbnail: null,
                     title: '',
@@ -578,11 +587,12 @@
                     $('#fileInputRowPercent_'+_index).addClass('done');
                     $('#fileInputRowPercent_'+_index).find('.percentNum').text('100%');
 
-                    if(uploadedPicFile[_index].thumbnail != null)
+                    if(uploadedPicFile[_index].thumbnail != null && uploadedPicFile[_index].kind == 'video')
                         storeThumbnail(_index);
                     else {
                         uploadedPicFile[_index].process = 'done';
                         uploadedPicFile[_index].thumbnail = 'thumb_'+_fileName;
+                        console.log(uploadedPicFile[_index]);
                     }
                 }
                 else if(_percent == 'error') {
@@ -716,6 +726,10 @@
         }
 
         function submitHandle(_step){
+            $('#section_1').hide();
+            $('#section_2').hide();
+            $('#section_3').hide();
+
             if(lastStage == 1 && !checkFirstStep())
                 return;
             else if(lastStage == 2 && _step == 1 && !checkSecondStep())
@@ -729,7 +743,6 @@
                     return;
             }
 
-            $('#section_'+lastStage).hide();
             if((_step == -1 && lastStage > 1) || (_step == 1 && lastStage < 3))
                 lastStage += _step;
             $('#section_'+lastStage).show();
@@ -782,10 +795,19 @@
                     sideSection: $('#matchSideSection').attr('value'),
                 },
                 success: function(response){
-
-                    response = JSON.parse(response);
                     if(response.status == 'ok')
                         window.location.href = '{{route("profile")}}#festival';
+                    else if(response.status == 'nok'){
+                        closeLoading();
+                        var text = '<ul>';
+                        response.error.map(err => text += `<li>${err}</li>`);
+                        text += '</ul>';
+                        openWarning(text);
+                        showSuccessNotifi('در ثبت اثار مشکلی پیش امده لطفا دوباره تلاش نمایید', 'left', 'red');
+                        lastStage = 2;
+                        submitHandle(-1);
+
+                    }
                     else{
                         closeLoading();
                         showSuccessNotifi('در ثبت اثار مشکلی پیش امده لطفا دوباره تلاش نمایید', 'left', 'red');
@@ -878,7 +900,7 @@
             uploadedPicFile.map((item, index) =>{
                 if(item !== false) {
                     text += '<div class="userWorks">\n' +
-                            '   <img src="' + limboUrl + '/' + item.thumbnail + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
+                            '   <img src="' + limboUrl + item.thumbnail + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
                             '</div>';
                 }
             });
