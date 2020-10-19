@@ -254,7 +254,7 @@
         $('#photoAlbumModal').modal('hide');
     }
 
-    let deletedPhotoInAlbum = false;
+    var deletedPhotoInAlbum = false;
     function openDeletePhotoModal(){
         deletedPhotoInAlbum = $('#deletePicIconsPhotoAlbum').attr('dataValue');
         text = 'آیا از حذف عکس خود اطمینان دارید؟ در صورت حذف محتوای مورد نظر قابل بازیابی نمی باشد.';
@@ -282,13 +282,11 @@
         })
     }
 
-
-
     function likeAlbumPic(_element, _like){
         if(!checkLogin())
             return;
 
-        let id = $('.photoAlbumTopLike').attr('picId');
+        var id = $('.photoAlbumTopLike').attr('picId');
 
         $.ajax({
             type: 'post',

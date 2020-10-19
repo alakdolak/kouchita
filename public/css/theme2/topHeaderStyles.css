@@ -219,6 +219,62 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     background: var(--koochita-blue);
 }
 
+.loginHelperSection{
+    position: fixed;
+    background: #000000e3;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99;
+    right: 0;
+    top: 0;
+}
+.loginHelperSection .helperDescriptionDiv{
+    background: white;
+    width: 300px;
+    left: 100px;
+    position: absolute;
+    top: 65px;
+    border-radius: 5px;
+}
+
+.headerLoginHelper.loginHelperSection .goToLeft{
+    display: flex;
+    justify-content: flex-end;
+    height: 60px;
+    align-items: center;
+}
+.loginHelperSection .helperDescriptionDiv .iconClose{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--koochita-red)
+}
+.loginHelperSection .helperDescriptionDiv .text{
+    margin-bottom: 20px;
+    text-align: center;
+}
+.leftTopArrow:before{
+    content: '';
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 20px;
+    background: white;
+    top: -5px;
+}
+.rightBottomArrow:before{
+    content: '';
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 20px;
+    background: white;
+    bottom: -5px;
+}
+
 
 @media (max-width: 991px) {
     .hideOnTablet{
@@ -286,6 +342,10 @@ input[type="checkbox"] + label, input[type="radio"] + label{
         width: 100% !important;
         padding: 25px 10px;
         border-radius: 20px 20px 0px 0px;
+    }
+
+    .loginHelperSection .headerLoginHelper{
+        display: none !important;
     }
 }
 /*in Screen*/

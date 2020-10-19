@@ -6,6 +6,32 @@
 {{--this dark modal with blur--}}
 <div id="darkModeMainPage" class="ui_backdrop dark" ></div>
 
+<script>
+    function resizeFitImg(_class) {
+        let imgs = $('.' + _class);
+        for(let i = 0; i < imgs.length; i++)
+            fitThisImg(imgs[i]);
+    }
+
+    function fitThisImg(_element){
+        var img = $(_element);
+        var imgW = img.width();
+        var imgH = img.height();
+
+        var secW = img.parent().width();
+        var secH = img.parent().height();
+
+        if(imgH < secH){
+            img.css('height', '100%');
+            img.css('width', 'auto');
+        }
+        else if(imgW < secW){
+            img.css('width', '100%');
+            img.css('height', 'auto');
+        }
+    }
+</script>
+
 @include('general.loading')
 
 @include('general.adminInPage')
@@ -40,9 +66,10 @@
     @include('general.addSafarnameh')
 @endif
 
-<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
+{{--<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>--}}
 
 <script>
+    var csrfTokenGlobal = '{{csrf_token()}}';
     var hasLogin = {{auth()->check() ? 1 : 0}};
     window.userPic = '{{getUserPic(auth()->check() ? auth()->user()->id : 0)}}';
 
@@ -90,39 +117,12 @@
         return blob;
     }
 
-    function resizeFitImg(_class) {
-        let imgs = $('.' + _class);
-        for(let i = 0; i < imgs.length; i++)
-            fitThisImg(imgs[i]);
-    }
-
-    function fitThisImg(_element){
-        var img = $(_element);
-        var imgW = img.width();
-        var imgH = img.height();
-
-        var secW = img.parent().width();
-        var secH = img.parent().height();
-
-        if(imgH < secH){
-            img.css('height', '100%');
-            img.css('width', 'auto');
-        }
-        else if(imgW < secW){
-            img.css('width', '100%');
-            img.css('height', 'auto');
-        }
-    }
-
     function goToLanguage(_lang){
         if(_lang != 0)
             location.href = '{{url('language/')}}/' + _lang;
     }
 
-    $(document).ready(function(){
-        resizeFitImg('resizeImgClass');
-    });
-    $(window).resize(function(){
+    $(document, window).ready(function(){
         resizeFitImg('resizeImgClass');
     });
 
@@ -132,7 +132,6 @@
         return check;
     };
 
-
     function openMyModal(_id){
         $('#'+_id).addClass('showModal');
     }
@@ -141,7 +140,7 @@
     }
 
     $(window).on('click', e => {
-        if($('.modalBlackBack.fullCenter.showModal').length > 0){
+        if($('.modalBlackBack.fullCenter.showModal:not(.notCloseOnClick)').length > 0){
             if($(e.target).is('.modalBlackBack, .showModal, .fullCenter'))
                 closeMyModal($(e.target).attr('id'));
         }

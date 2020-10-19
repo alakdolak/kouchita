@@ -1156,7 +1156,6 @@ if ($total == 0)
                     if(_result[x].length > 4) {
                         createSuggestionPack('nearDiv' + x + 'Content', _result[x], function () { // in suggestionPack.blade.php
                             $('#nearDiv' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
-                            resizeFitImg('resizeImgClass')
                         });
                     }
                     else
@@ -1482,7 +1481,7 @@ if ($total == 0)
         }
 
         // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
+        // document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
 
         $(document).ready(function () {
             @if($mode == "bookMark")

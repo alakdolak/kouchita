@@ -19,7 +19,8 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 8;
+        $startTime = microtime(true);
+        $fileVersions = 1;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();
@@ -48,7 +49,7 @@ class ShareData
             View::share(['buPic' => $buPic, 'config' => $config, 'followingCount' => $followingCount, 'fileVersions' => $fileVersions]);
         }
 
-
+//        dd(microtime(true) - $startTime);
         return $next($request);
     }
 }

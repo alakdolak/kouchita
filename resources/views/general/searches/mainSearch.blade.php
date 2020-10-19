@@ -78,8 +78,6 @@
 </div>
 
 <script>
-    console.log('in');
-
     var numOfMainSearchResult = 0;
     var searchDir = '{{route('totalSearch')}}';
     var lastTimeMainSearch = 0;
@@ -158,7 +156,7 @@
         else{
             newElement = '<a href="{{url('placeList/')}}/' + _kindPlaceId + '/country" class="mainSearchResultRow"><div class="icons ' + countryIcon + ' spIcons"></div>\n';
             newElement += "<p class='suggest cursor-pointer' style='margin: 0px'>همه جای ایران</p></a>";
-            newElement += myLocation;
+            // newElement += myLocation;
 
             $('#result').removeClass('hidden');
             $('#mainSearchResult').show();

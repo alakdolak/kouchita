@@ -188,7 +188,25 @@ function getNearestMedals($uId) {
     return $arr;
 }
 
+function uploadLargeFile($_direction, $_file_data){
+    $file_data = decode_chunk($_file_data);
+    if ($file_data === false)
+        return false;
+    else
+        file_put_contents($_direction, $file_data, FILE_APPEND);
 
+    return true;
+}
+
+function decode_chunk( $data ) {
+    $data = explode( ';base64,', $data );
+    if ( !is_array($data) || !isset($data[1]))
+        return false;
+    $data = base64_decode( $data[1] );
+    if (!$data)
+        return false;
+    return $data;
+}
 
 function getPostCategories() {
 
@@ -1299,6 +1317,57 @@ function resizeImage($pic, $size, $fileName = ''){
             $input['imagename'] = $item['name'] .  $fileName ;
             $destinationPath = $item['destination'];
             $img = \Image::make($image->getRealPath());
+            $width = $img->width();
+            $height = $img->height();
+
+            if($item['height'] != null && $item['width'] != null){
+                $ration = $width/$height;
+                $nWidth = $ration * $item['height'];
+                $nHeight = $item['width'] / $ration;
+                if($nWidth < $item['width']) {
+                    $height = $nHeight;
+                    $width = $item['width'];
+                }
+                else if($nHeight < $item['height']) {
+                    $width = $nWidth;
+                    $height = $item['height'];
+                }
+            }
+            else {
+                if ($item['width'] == null || $width > $item['width'])
+                    $width = $item['width'];
+
+                if ($item['height'] == null || $height > $item['height'])
+                    $height = $item['height'];
+            }
+
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$input['imagename']);
+        }
+
+        return $fileName;
+    }
+    catch (Exception $exception){
+        return 'error';
+    }
+}
+
+function resizeUploadedImage($pic, $size, $fileName = ''){
+    try {
+        $image = $pic;
+        if($fileName == '') {
+            $randNum = random_int(100, 999);
+            if($image->getClientOriginalExtension() == '')
+                $fileName = time() . $randNum . '.jpg';
+            else
+                $fileName = time() . $randNum . '.' . $image->getClientOriginalExtension();
+        }
+
+        foreach ($size as $item){
+            $input['imagename'] = $item['name'] .  $fileName ;
+            $destinationPath = $item['destination'];
+            $img = \Image::make($image);
             $width = $img->width();
             $height = $img->height();
 

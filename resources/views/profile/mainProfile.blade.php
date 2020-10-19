@@ -11,9 +11,6 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1='.$fileVersions)}}">
-    <style>
-
-    </style>
 @stop
 
 @section('main')
@@ -102,6 +99,10 @@
                                     <span class="icon BookMarkIconEmpty"></span>
                                     <span class="text">نشان کرده</span>
                                 </a>
+                                <a id="festivalTab" href="#festival" class="profileHeaderLinksTab" onclick="changePages('festival')" style="margin-left: 20px;">
+                                    <span class="icon festivalIcon"></span>
+                                    <span class="text">فستیوال ها</span>
+                                </a>
                             @endif
                         </div>
 {{--                        <a href="#" class="profileHeaderLinksTab threeDotIcon"></a>--}}
@@ -155,6 +156,7 @@
                                 <div id="myMenuMoreTab" class="moreTabMenu hidden">
                                     <div id="myMenuMoreTabQuestion" class="tabMenu" onclick="chooseFromMobileMenuTab('question', this)">سوال و جواب</div>
                                     <div id="myMenuMoreTabBookMark" class="tabMenu" onclick="chooseFromMobileMenuTab('bookMark', this)">نشان کرده</div>
+                                    <div id="myMenuMoreFestivalMark" class="tabMenu" onclick="chooseFromMobileMenuTab('festival', this)">فستیوال</div>
                                 </div>
                             @endif
                             <div id="safarnamehProfileMoblieTab" class="tab" onclick="mobileChangeProfileTab(this, 'safarnameh')">
@@ -361,6 +363,10 @@
 
                     <div id="bookMarkBody" class="prodileSections hidden">
                         @include('profile.innerParts.UserBookMarks')
+                    </div>
+
+                    <div id="festivalBody" class="prodileSections hidden">
+                        @include('profile.innerParts.userFestivalInner')
                     </div>
                 </div>
             </div>
@@ -725,6 +731,12 @@
                 chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark'));
                 getProfileBookMarks(); // in profile.innerParts.UserBookMarks
             }
+            else if(_kind === 'festival') {
+                $('#festivalTab').addClass('active');
+                $('#festivalBody').removeClass('hidden');
+                chooseFromMobileMenuTab('festival', $('#myMenuMoreFestivalMark'));
+                getMainFestival(); // in profile.innerParts.userFestivalInner.blade.php
+            }
         }
 
         function openMoreTabProfileMobile(){
@@ -744,7 +756,7 @@
             $(_element).addClass('selected');
             window.location.hash = '#'+_kind;
 
-            if(_kind != 'question' && _kind != 'bookMark')
+            if(_kind != 'question' && _kind != 'bookMark' && _kind != 'festival')
                 $('#moreMobileProfileTab').find('.name').text('');
 
             $('.prodileSections').addClass('hidden');
@@ -771,6 +783,10 @@
             else if(_kind == 'bookMark'){
                 $('#bookMarkBody').removeClass('hidden');
                 getProfileBookMarks(); // in profile.innerParts.UserBookMarks
+            }
+            else if(_kind == 'festival'){
+                $('#festivalBody').removeClass('hidden');
+                getMainFestival(); // in profile.innerParts.userFestivalInner.blade.php
             }
         }
 
