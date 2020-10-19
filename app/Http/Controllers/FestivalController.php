@@ -82,7 +82,7 @@ class FestivalController extends Controller
         if($user->email == null || $user->email != '')
             $user->email = $userData->email;
         if($user->phone == null || $user->phone != '')
-            $user->phone = $userData->email;
+            $user->phone = $userData->phone;
         if($user->age == null || $user->age != '')
             $user->age = $userData->age;
         if($user->sex == null || $user->sex != '')

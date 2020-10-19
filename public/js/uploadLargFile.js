@@ -13,6 +13,7 @@ function uploadLargeFile(_url, _files, _data, _callBackFunction) {
         ajaxUrlLargeFile = _url;
         fileLargeFileUploadedInJsFile = _files;
         inProcessLargeFileUploadedInJsFile = true;
+        errorCountInLargeFileUploadedInJsFile = 5;
         callBackFunctionLargeFileUploadedInJsFile = _callBackFunction;
         readerLargeFileUploadedInJsFile = new FileReader();
         dataAddedLargeFileUploadedInJsFile = JSON.stringify(_data);

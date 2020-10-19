@@ -580,8 +580,10 @@
 
                     if(uploadedPicFile[_index].thumbnail != null)
                         storeThumbnail(_index);
-                    else
+                    else {
                         uploadedPicFile[_index].process = 'done';
+                        uploadedPicFile[_index].thumbnail = 'thumb_'+_fileName;
+                    }
                 }
                 else if(_percent == 'error') {
                     $('#fileInputRowPercent_'+_index).addClass('error');
@@ -876,8 +878,8 @@
             uploadedPicFile.map((item, index) =>{
                 if(item !== false) {
                     text += '<div class="userWorks">\n' +
-                        '   <img src="' + limboUrl + '/' + item.thumbnail + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
-                        '</div>';
+                            '   <img src="' + limboUrl + '/' + item.thumbnail + '" onclick="openShowPictureModal(' + index + ')" class="resizeImgClass" onload="fitThisImg(this)">\n' +
+                            '</div>';
                 }
             });
             $('.mainTextRule').html(text);

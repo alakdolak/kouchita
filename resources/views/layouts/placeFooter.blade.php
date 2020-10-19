@@ -177,7 +177,7 @@
                 <div class="helperDescriptionDiv rightBottomArrow">
                     <div class="iconClose" onclick="closeLoginHelperSection()"></div>
                     <div class="text">
-                        در کوچیتا ثبت نام کنید و سفر رایگان بروید
+                        در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی Note 10 شوید.
                     </div>
                 </div>
             </div>
@@ -1180,18 +1180,21 @@
                 $('.loginHelperSection').addClass('hidden');
                 $('html, body').css('overflow-y', 'auto');
             }
-
-            if (typeof(Storage) !== "undefined") {
-                seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif');
-                if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
-                    localStorage.setItem('loginButtonHelperNotif', true);
-                    setTimeout(() => {
-                        $('html, body').animate({ scrollTop: 0, }, 1000);
-                        setTimeout( openLoginHelperSection, 1000);
-                    }, 10000);
-                }
-            } else
-                console.log('your browser not support localStorage');
+            setTimeout(() => {
+                $('html, body').animate({ scrollTop: 0, }, 1000);
+                setTimeout( openLoginHelperSection, 1000);
+            }, 2000);
+            // if (typeof(Storage) !== "undefined") {
+            //     seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif');
+            //     if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
+            //         localStorage.setItem('loginButtonHelperNotif', true);
+            //         setTimeout(() => {
+            //             $('html, body').animate({ scrollTop: 0, }, 1000);
+            //             setTimeout( openLoginHelperSection, 1000);
+            //         }, 2000);
+            //     }
+            // } else
+            //     console.log('your browser not support localStorage');
         </script>
     @endif
 
