@@ -18,6 +18,7 @@
     --light-gray: #B4C0CC;
 }
 
+
 header{
     position: fixed;
     background-color: #E5E5E5;
@@ -71,7 +72,9 @@ section{
     padding: 25px 0px;
     padding-top: 75px;
 }
-
+.axesMatch{
+    display: flex;
+}
 section .headerWhite{
     color: var(--white);
 }
@@ -124,7 +127,7 @@ section .flowColor .rightText ul{
     color: var(--white);
     list-style: none;
 }
-section .flowColor .rightText ul > li::before{
+.yellowDotBefore::before{
     content: "\2022";
     color: var(--yellow);
     font-weight: bold;
@@ -139,6 +142,7 @@ section .flowColor .leftPics{
     align-items: center;
     padding-bottom: 50px;
     justify-content: flex-end;
+    overflow: hidden;
 }
 section .flowColor .leftPics .commonPic{
     width: 27%;
@@ -153,6 +157,7 @@ section .flowColor .leftPics .commonPic.pic3{
 section .conditionFestival{
     color: var(--white);
     position: relative;
+    overflow: hidden;
 }
 section .conditionFestival .rightSec{
     width: 60%;
@@ -177,7 +182,6 @@ section .conditionFestival .rightSec{
     opacity: 0;
     margin-right: 100%;
 }
-
 
 .buttonss{
     display: flex;
@@ -225,6 +229,7 @@ section .conditionFestival .leftSec > img{
     align-items: center;
     margin-left: 10px;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 .judgesSec .jug{
     display: flex;
@@ -1036,6 +1041,11 @@ section .conditionFestival .leftSec > img{
 
 }
 
+@media (max-width: 1200px) {
+    .smallFont{
+        font-size: 16px;
+    }
+}
 
 @media (max-width: 991px) {
     .smallFont{
@@ -1056,7 +1066,6 @@ section .conditionFestival .leftSec > img{
         height: 150px;
     }
 
-
     .showFullPicModal .body .imgSec .nPButtons{
         width: 70px;
         height: 70px;
@@ -1069,6 +1078,30 @@ section .conditionFestival .leftSec > img{
     .showFullPicModal .body .imgSec .nPButtons.prev{
         left: 25px;
     }
+
+    section .conditionFestival .leftSec > img{
+        height: 300px;
+    }
+
+    section .flowColor .container{
+        width: 100%;
+    }
+
+    section .flowColor .rightText{
+        width: 60%;
+        height: 250px;
+    }
+    section .flowColor .leftPics{
+        width: 40%;
+        padding-bottom: 0px;
+    }
+
+    section .flowColor .leftPics .commonPic.pic3{
+        display: none;
+    }
+    section .flowColor .leftPics .commonPic{
+        width: 40%;
+    }
 }
 
 @media (max-width: 830px) {
@@ -1079,6 +1112,26 @@ section .conditionFestival .leftSec > img{
 }
 
 @media (max-width: 767px) {
+    section .conditionFestival .row{
+        width: 100%;
+        margin: 0px;
+    }
+    .conditionFestival .conditionRows.show{
+        padding-right: 10px;
+    }
+    section .flowColor .leftPics{
+        width: 20%;
+    }
+    section .flowColor .rightText{
+        width: 80%;
+    }
+    section .flowColor .leftPics .commonPic{
+        width: 100%;
+    }
+    section .flowColor .leftPics .commonPic.pic2{
+        display: none;
+    }
+
     .showFullPicModal .body .infoSec .liShButtons .shareButton{
         border-radius: 10px;
     }
@@ -1224,6 +1277,62 @@ section .conditionFestival .leftSec > img{
 }
 
 @media (max-width: 600px) {
+    section .mainPic{
+        height: 300px;
+    }
+    .axesMatch{
+        flex-direction: column;
+    }
+    section .flowColor .rightText{
+        width: 100%;
+        height: auto;
+    }
+    section .flowColor .rightText ul{
+        padding: 0px;
+    }
+    section .flowColor .rightText ul > li{
+        line-height: 35px;
+    }
+    section .flowColor .leftPics{
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    section .flowColor .leftPics .commonPic{
+        width: 18%;
+    }
+    section .flowColor .leftPics .commonPic.pic2{
+        display: block;
+    }
+    section .flowColor .leftPics .commonPic.pic3{
+        display: block;
+    }
+    section .conditionFestival .rightSec{
+        width: 100%;
+        padding-bottom: 0;
+        min-height: 0;
+    }
+    .conditionFestival .bigFont{
+        text-align: center;
+        color: var(--yellow);
+    }
+    .conditionFestival .buttonss{
+        justify-content: center;
+    }
+    section .conditionFestival .leftSec > img{
+        height: 200px;
+    }
+    section .conditionFestival .leftSec{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: auto;
+    }
+    .calendar{
+        width: 100%;
+        margin-top: 35px;
+    }
     .userWorks{
         width: 100px;
         height: 100px;

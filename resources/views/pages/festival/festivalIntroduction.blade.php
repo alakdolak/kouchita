@@ -37,14 +37,14 @@
             <img src="{{URL::asset('images/festival/2Color.svg')}}" class="bakPic topPic">
             <img src="{{URL::asset('images/festival/2Color2.svg')}}" class="bakPic botPic">
 
-            <div class="container" style="display: flex;">
+            <div class="container axesMatch">
                 <div class="rightText">
                     <div class="bigFont" style="color: var(--yellow)">محورهای مسابقه</div>
                     <ul class="smallFont">
-                        <li>طبیعت، ویژگی‌های اقلیمی و جاذبه‌های گردشگری ایران</li>
-                        <li> مردم‌نگاری اقوام و خانواده‌ی ایرانی</li>
-                        <li>میراث فرهنگی و بناهای تاریخی و مذهبی ایران</li>
-                        <li> آیین‌های، مراسم و رویدادهای ملی و مذهبی ایران</li>
+                        <li class="yellowDotBefore">طبیعت، ویژگی‌های اقلیمی و جاذبه‌های گردشگری ایران</li>
+                        <li class="yellowDotBefore"> مردم‌نگاری اقوام و خانواده‌ی ایرانی</li>
+                        <li class="yellowDotBefore">میراث فرهنگی و بناهای تاریخی و مذهبی ایران</li>
+                        <li class="yellowDotBefore"> آیین‌های، مراسم و رویدادهای ملی و مذهبی ایران</li>
                     </ul>
                 </div>
                 <div class="leftPics">

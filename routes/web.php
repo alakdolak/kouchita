@@ -633,7 +633,7 @@ Route::group(array('middleware' => ['auth']), function(){
 //festival
 Route::group(['middleware' => 'web'], function(){
 
-    Route::get('/festival/introduction', 'FestivalController@festivalIntroduction')->name('festival');
+    Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival');
 
     Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main');
 
