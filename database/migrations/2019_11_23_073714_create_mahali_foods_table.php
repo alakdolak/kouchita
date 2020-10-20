@@ -13,7 +13,7 @@ class CreateMahaliFoodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mahalifood', function (Blueprint $table) {
+        Schema::create('mahaliFood', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->text('description');

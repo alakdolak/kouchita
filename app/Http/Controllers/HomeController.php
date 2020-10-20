@@ -15,6 +15,8 @@ use App\models\Cities;
 use App\models\CityPic;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
+use App\models\FoodMaterial;
+use App\models\FoodMaterialRelation;
 use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\HotelApi;
@@ -1814,7 +1816,6 @@ class HomeController extends Controller
         return $places;
     }
 
-
     public function exportExcel()
     {
 //        $serverName = "localhost";
@@ -1866,5 +1867,25 @@ class HomeController extends Controller
         $writer->save('exportAmaken.xlsx');
 
         dd('finniish');
+    }
+
+
+
+    public function convertMaterial()
+    {
+        $mahaliFoods = MahaliFood::whereNotNull('material')->select(['id', 'material'])->get();
+        foreach ($mahaliFoods as $food){
+            $materials = json_decode($food->material);
+            foreach ($materials as $item){
+                $mat = FoodMaterial::firstOrCreate(['name' => $item[0]]);
+                FoodMaterialRelation::firstOrCreate([
+                    'foodMaterialId' => $mat->id,
+                    'mahaliFoodId' => $food->id,
+                    'volume' => $item[1],
+                ]);
+            }
+        }
+
+        dd('done');
     }
 }
