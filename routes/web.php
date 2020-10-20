@@ -790,8 +790,6 @@ Route::get('emailtest/{email}', 'HomeController@emailtest');
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
 
-Route::get('convertMaterialToNewDB', 'HomeController@convertMaterial');
-
 // not use
 Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 //    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
