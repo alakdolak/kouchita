@@ -48,7 +48,7 @@ $config = \App\models\ConfigModel::first();
 </div>
 
 <script>
-    let openShareBox = false;
+    var openShareBox = false;
 
     function copyLinkAddress(_element){
         var copyText = _element;

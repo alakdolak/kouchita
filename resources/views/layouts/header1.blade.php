@@ -322,11 +322,6 @@
             getAlertItems();
         });
 
-        $(window).on('click', function(){
-            if(openHeadersTab)
-                hideAllTopNavs();
-        });
-
         function openHeaderTabsVariable(){
             setTimeout(() => openHeadersTab = true, 500);
         }

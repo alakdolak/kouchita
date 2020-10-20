@@ -1,3 +1,27 @@
+<style>
+    .questionOptionMenuBar{
+        display: none !important;
+        flex-direction: column;
+    }
+    .questionOptionMenuBar .modalBody > * {
+        color: gray;
+        border-bottom: solid 1px #cccccc;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+    .questionOptionMenuBar .modalBody > span:last-of-type{
+        border-bottom: none;
+    }
+
+    @media (max-width: 767px) {
+        .questionOptionMenuBar{
+            display: unset;
+        }
+    }
+</style>
+
 <div id="questionSample" style="display: none">
     <div class="isConfirmed">
         <div class="moreOptionFullReview" onclick="showAnswersActionBoxQ(this)">
@@ -74,6 +98,10 @@
             <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLineSmallReview" style="width: 60%"></div>
         </div>
     </div>
+</div>
+
+<div id="questionOptionMenuBar" class="modalBlackBack fullCenter questionOptionMenuBar">
+    <div class="modalBody"></div>
 </div>
 
 {{--<script src="{{URL::asset('js/component/AnswerComponent.js')}}"></script>--}}
@@ -175,11 +203,15 @@
     function showAnswersActionBoxQ(_element){
         if($(_element).next().hasClass('hidden')) {
             setTimeout(() => {
+                openMyModal('questionOptionMenuBar');
                 $(_element).next().removeClass('hidden');
                 $(_element).addClass("bg-color-darkgrey");
+                $('#questionOptionMenuBar').find('.modalBody').html($(_element).next().html());
             }, 100);
         }
     }
+
+    $(window).on('click', () => closeMyModal('questionOptionMenuBar'));
 
     function showAllQuestionAnswer(_id, _element){
         let textElement = $(_element).find('.seeAllText');
@@ -209,33 +241,6 @@
                 if(response[0] == 'ok'){
                     _elements.like.text(response[1]);
                     _elements.disLike.text(response[2]);
-
-                    // like = response[1];
-                    // dislike = response[2];
-                    //
-                    // $(_element).parent().find('.coloredFullIcon').removeClass('coloredFullIcon');
-                    // $(_element).parent().find('.LikeIconEmpty').text(like);
-                    // $(_element).parent().find('.DisLikeIconEmpty').text(dislike);
-                    //
-                    // if(_like == 1)
-                    //     $(_element).parent().find('.LikeIconEmpty').addClass('coloredFullIcon');
-                    // else
-                    //     $(_element).parent().find('.DisLikeIconEmpty').addClass('coloredFullIcon');
-                    //
-                    //
-                    // for(let i = 0; i < allReviewsCreated.length; i++){
-                    //     if(allReviewsCreated[i].id == _logId){
-                    //         if(allReviewsCreated[i]['userLike'] == null)
-                    //             allReviewsCreated[i]['userLike'] = [];
-                    //         allReviewsCreated[i]['userLike']['like'] = _like;
-                    //         allReviewsCreated[i]['like'] = like;
-                    //         allReviewsCreated[i]['disLike'] = dislike;
-                    //
-                    //         showFullReview = allReviewsCreated[i];
-                    //         break;
-                    //     }
-                    // }
-
                 }
             }
         })
