@@ -177,7 +177,7 @@
                 <div class="helperDescriptionDiv rightBottomArrow">
                     <div class="iconClose" onclick="closeLoginHelperSection()"></div>
                     <div class="text">
-                        در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی Note 10 شوید.
+                        در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی هوشمند شوید.
                     </div>
                 </div>
             </div>
@@ -1173,32 +1173,29 @@ text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
                     window.location.href = profileUrl+'#'+_kind;
             }
         </script>
-    @elseif(Request::is('show-place-details/*'))
+    @elseif(Request::is('show-place-details/*') || Request::is('placeList/*'))
         <script>
             function openLoginHelperSection(){
                 $('.loginHelperSection').removeClass('hidden');
                 $('html, body').css('overflow', 'hidden');
             }
 
-            function closeLoginHelperSection(){
+            function closeLoginHelperSection() {
                 $('.loginHelperSection').addClass('hidden');
                 $('html, body').css('overflow-y', 'auto');
             }
-            setTimeout(() => {
-                $('html, body').animate({ scrollTop: 0, }, 1000);
-                setTimeout( openLoginHelperSection, 1000);
-            }, 2000);
-            // if (typeof(Storage) !== "undefined") {
-            //     seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif');
-            //     if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
-            //         localStorage.setItem('loginButtonHelperNotif', true);
-            //         setTimeout(() => {
-            //             $('html, body').animate({ scrollTop: 0, }, 1000);
-            //             setTimeout( openLoginHelperSection, 1000);
-            //         }, 2000);
-            //     }
-            // } else
-            //     console.log('your browser not support localStorage');
+
+            if (typeof(Storage) !== "undefined") {
+                seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif');
+                if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
+                    localStorage.setItem('loginButtonHelperNotif', true);
+                    setTimeout(() => {
+                        $('html, body').animate({ scrollTop: 0, }, 1000);
+                        setTimeout( openLoginHelperSection, 1000);
+                    }, 2000);
+                }
+            } else
+                console.log('your browser not support localStorage');
         </script>
     @endif
 

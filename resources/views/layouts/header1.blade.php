@@ -195,7 +195,7 @@
                             <div class="helperDescriptionDiv leftTopArrow">
                                 <div class="iconClose" onclick="closeLoginHelperSection()"></div>
                                 <div class="text">
-                                    در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی Note 10 شوید.
+                                    در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی هوشمند شوید.
                                 </div>
                             </div>
                         </div>
