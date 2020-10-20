@@ -1869,23 +1869,4 @@ class HomeController extends Controller
         dd('finniish');
     }
 
-
-
-    public function convertMaterial()
-    {
-        $mahaliFoods = MahaliFood::whereNotNull('material')->select(['id', 'material'])->get();
-        foreach ($mahaliFoods as $food){
-            $materials = json_decode($food->material);
-            foreach ($materials as $item){
-                $mat = FoodMaterial::firstOrCreate(['name' => $item[0]]);
-                FoodMaterialRelation::firstOrCreate([
-                    'foodMaterialId' => $mat->id,
-                    'mahaliFoodId' => $food->id,
-                    'volume' => $item[1],
-                ]);
-            }
-        }
-
-        dd('done');
-    }
 }
