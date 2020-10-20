@@ -17,9 +17,9 @@
 <div class="userActivitiesQuestions">
     <div class="userProfilePostsFiltrationContainer">
         <div class="userProfilePostsFiltration questionSecTab">
-            <span class="active" onclick="changeBookMarkShowKind('place', this)">اماکن</span>
-            <span onclick="changeBookMarkShowKind('safarnameh', this)">سفرنامه</span>
-            <span onclick="changeBookMarkShowKind('review', this)">پست</span>
+            <span class="active" onclick="changeBookMarkShowKindInProfile('place', this)">اماکن</span>
+            <span onclick="changeBookMarkShowKindInProfile('safarnameh', this)">سفرنامه</span>
+            <span onclick="changeBookMarkShowKindInProfile('review', this)">پست</span>
         </div>
     </div>
 
@@ -137,7 +137,7 @@
         }
     }
 
-    function changeBookMarkShowKind(_kind, _elem){
+    function changeBookMarkShowKindInProfile(_kind, _elem){
         $(_elem).parent().find('.active').removeClass('active');
         $(_elem).addClass('active');
         bookMarkProfileKind = _kind;

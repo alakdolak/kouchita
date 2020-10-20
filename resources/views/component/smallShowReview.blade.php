@@ -1,11 +1,23 @@
 <style>
     .reviewOptionMenuBar{
         display: none !important;
+        flex-direction: column;
     }
-    @media (max-width: 700px) {
+    .reviewOptionMenuBar .modalBody div, .reviewOptionMenuBar .modalBody a {
+        color: gray;
+        border-bottom: solid 1px #cccccc;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+    @media (max-width: 767px){
         .reviewOptionMenuBar{
             display: unset;
         }
+    }
+    @media (max-width: 700px) {
+
         .fullReviewModal{
             align-items: center !important;
         }
@@ -105,16 +117,13 @@
 
 <div id="reviewOptionMenuBar" class="modalBlackBack fullCenter reviewOptionMenuBar">
     <div class="modalBody">
-        <div >گزارش پست</div>
-        <div class="">
-            مشاهده صفحه
-            <span class="profileName"></span>
-        </div>
+        <div class="reportReviwInOptionModal">گزارش پست</div>
+        <a class="profileNameInReviewOptionModal" href="#"></a>
         <a href="{{route("policies")}}" target="_blank">
             صفحه قوانین و مقررات
         </a>
         @if(auth()->check())
-            <div id="deleteReviewOptionInModal" style="color: red;">
+            <div id="deleteReviewOptionInModal" style="color: red; border-bottom: none">
                 حذف پست
             </div>
         @endif
@@ -122,6 +131,7 @@
 </div>
 
 <script>
+    let nowOpenReviewOption = null;
     let allReviewsCreated = [];
     let smallReviewPlaceHolder = $('#reviewSmallPlaceHolder').html();
     $('#reviewSmallPlaceHolder').remove();
@@ -792,6 +802,26 @@
                 openMyModal('reviewOptionMenuBar');
                 $(_element).next().removeClass('hidden');
                 $(_element).addClass("bg-color-darkgrey");
+
+                for(let i = 0; i < allReviewsCreated.length; i++){
+                    if(allReviewsCreated[i].id == _id) {
+                        nowOpenReviewOption = allReviewsCreated[i];
+                        $('.profileNameInReviewOptionModal').text('مشاهده صفحه ' + nowOpenReviewOption.userName);
+                        $('.profileNameInReviewOptionModal').attr('href', '{{url('profile/index/')}}/'+nowOpenReviewOption.userName);
+
+                        $('.reportReviwInOptionModal').attr('onClick', `showReportPrompt(${nowOpenReviewOption.id}, ${nowOpenReviewOption.kindPlaceId})`);
+
+                        @if(auth()->check())
+                            if(nowOpenReviewOption.yourReview){
+                                $('#deleteReviewOptionInModal').show();
+                                $('#deleteReviewOptionInModal').attr('onClick', `deleteReviewByUserInReviews(${nowOpenReviewOption.id})`);
+                            }
+                            else
+                                $('#deleteReviewOptionInModal').hide();
+                        @endif
+                        break;
+                    }
+                }
             }, 100);
         }
     }

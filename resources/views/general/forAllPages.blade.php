@@ -147,5 +147,8 @@
 
         $('.closeWithOneClick').addClass('hidden');
         $('.moreOptionFullReview').removeClass('bg-color-darkgrey');
+
+        if(openHeadersTab)
+            hideAllTopNavs();
     })
 </script>
