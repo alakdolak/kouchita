@@ -2897,12 +2897,11 @@ class PlaceController extends Controller {
                     $allAnswerCount += getAnsToComments($log->id)[1];
             }
 
-            echo json_encode([$logs, $allCount, $allAnswerCount]);
+            return response()->json(['status' => 'ok', 'questions' => $logs, 'allCount' => $allCount, 'answerCount' => $allAnswerCount]);
         }
         else
-            echo 'nok1';
+            return response()->json(['status' => 'nok']);
 
-        return;
     }
 
     public function sendAns(Request $request)
@@ -3322,6 +3321,8 @@ class PlaceController extends Controller {
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('reviewCount')->skip(($page - 1) * $take)->take($take)->get();
         else if($sort == 'seen')
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('seen')->skip(($page - 1) * $take)->take($take)->get();
+        else if($sort == 'lessSeen')
+            $places = \DB::table($table)->whereIn('id', $placeIds)->orderBy('seen')->skip(($page - 1) * $take)->take($take)->get();
         else
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('fullRate')->skip(($page - 1) * $take)->take($take)->get();
 

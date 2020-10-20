@@ -360,7 +360,7 @@
             $('#safarnamehCommentDiv').html(text);
         }
 
-        function likeComments(_id, _kind, _random){
+        function likeComments(_id, _kind, _elems){
             $.ajax({
                 type: 'post',
                 url: '{{route("safarnameh.comment.like")}}',
@@ -372,8 +372,8 @@
                 success: function(response){
                     response = JSON.parse(response);
                     if(response.status == 'ok'){
-                        $(`.likeNumberAnswer_${_random}`).text(response.result[0].likeCount);
-                        $(`.disLikeNumberAnswer_${_random}`).text(response.result[0].disLikeCount);
+                        _elems.like.text(response.result[0].likeCount);
+                        _elems.disLike.text(response.result[0].disLikeCount);
                     }
                 },
                 error: err => console.log(err)

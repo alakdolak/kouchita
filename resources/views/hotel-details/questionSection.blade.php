@@ -128,27 +128,24 @@
                 'isQuestionCount' : isQuestionCount
             },
             success: function(response){
-                response = JSON.parse(response);
-                questions = response[0];
+                if(response.status == 'ok') {
+                    questions = response.questions;
 
-                if(isQuestionCount) {
-                    questionCount = response[1];
-                    answerCount = response[2];
-                    document.getElementById('questionCount').innerText = questionCount;
-                    document.getElementById('answerCount').innerText = answerCount;
-                    isQuestionCount = false;
+                    if (isQuestionCount) {
+                        questionCount = response.allCount;
+                        answerCount = response.answerCount;
+                        $('#questionCount').text(questionCount);
+                        $('#answerCount').text(answerCount);
+                        isQuestionCount = false;
+                    }
 
-                }
-
-                if(questionCount == 0)
-                    document.getElementById('questionPaginationDiv').style.display = 'none';
-                else{
-                    $('#questionSectionDiv').empty();
-                    createQuestionPagination(questionCount);
-                    questions.map(ques => {
-                        createQuestionPack(ques, 'questionSectionDiv') // in questoinPack;
-                    })
-
+                    if (questionCount == 0)
+                        $('#questionPaginationDiv').hide();
+                    else {
+                        $('#questionSectionDiv').empty();
+                        createQuestionPagination(questionCount);
+                        questions.map(ques => createQuestionPack(ques, 'questionSectionDiv') /**in questoinPack**/  )
+                    }
                 }
 
             }

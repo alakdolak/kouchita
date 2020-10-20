@@ -248,3 +248,102 @@ function questionTrueType($_ques){
 
     return $_ques;
 }
+
+function getAnsToComments($logId){
+    $uId = 0;
+    if(auth()->check())
+        $uId = auth()->user()->id;
+
+    $a = Activity::where('name', 'پاسخ')->first();
+
+    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id, log.confirm, log.date, log.time FROM log WHERE (log.confirm = 1 || log.visitorId = ' . $uId . ') AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id . ' ORDER BY `created_at` DESC; ');
+
+    $countAns = 0;
+    if(count($ansToReview) > 0) {
+        $logIds = array();
+        $ansToReviewUserId = array();
+        $countAns += count($ansToReview);
+        for ($i = 0; $i < count($ansToReview); $i++) {
+            array_push($logIds, $ansToReview[$i]->id);
+            array_push($ansToReviewUserId, $ansToReview[$i]->visitorId);
+
+            $ansToReview[$i]->answers = array();
+
+            if($ansToReview[$i]->subject == 'ans') {
+                $anss = getAnsToComments($ansToReview[$i]->id);
+                $ansToReview[$i]->answers = $anss[0];
+                $ansToReview[$i]->answersCount = $anss[1];
+                $countAns += $ansToReview[$i]->answersCount;
+            }
+            else
+                $ansToReview[$i]->answersCount = 0;
+        }
+
+        $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM logFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
+        $dislikeLogIds = DB::select('SELECT COUNT(RFB.like) AS dislikeCount, RFB.logId FROM logFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = -1 GROUP BY RFB.logId');
+        $ansToReviewUser = DB::select('SELECT * FROM users WHERE id IN (' . implode(",", $ansToReviewUserId) . ')');
+
+        for ($i = 0; $i < count($ansToReview); $i++) {
+            $l = false;
+            $dl = false;
+
+            for ($j = 0; $j < count($likeLogIds); $j++) {
+                if ($ansToReview[$i]->id == $likeLogIds[$j]->logId) {
+                    $ansToReview[$i]->like = $likeLogIds[$j]->likeCount;
+                    $l = true;
+                    break;
+                }
+            }
+            if (!$l)
+                $ansToReview[$i]->like = 0;
+
+            for ($j = 0; $j < count($dislikeLogIds); $j++) {
+                if ($ansToReview[$i]->id == $dislikeLogIds[$j]->logId) {
+                    $ansToReview[$i]->disLike = $dislikeLogIds[$j]->dislikeCount;
+                    $dl = true;
+                    break;
+                }
+            }
+            if (!$dl)
+                $ansToReview[$i]->disLike = 0;
+
+            for ($j = 0; $j < count($ansToReviewUser); $j++) {
+                if ($ansToReview[$i]->visitorId == $ansToReviewUser[$j]->id) {
+                    $ansToReview[$i]->userName = $ansToReviewUser[$j]->username;
+                    $ansToReview[$i]->writerPic = getUserPic($ansToReviewUser[$j]->id);
+
+                    $ansToReview[$i]->youLike = 0;
+                    if($uId != 0){
+                        $youLike = LogFeedBack::where('logId', $ansToReview[$i]->id)
+                            ->where('userId', $uId)
+                            ->first();
+
+                        if($youLike != null)
+                            $ansToReview[$i]->youLike = $youLike->like;
+                    }
+
+                    $time = $ansToReview[$i]->date . '';
+                    if(strlen($ansToReview[$i]->time) == 1)
+                        $ansToReview[$i]->time = '000' . $ansToReview[$i]->time;
+                    else if(strlen($ansToReview[$i]->time) == 2)
+                        $ansToReview[$i]->time = '00' . $ansToReview[$i]->time;
+                    else if(strlen($ansToReview[$i]->time) == 3)
+                        $ansToReview[$i]->time = '0' . $ansToReview[$i]->time;
+
+                    if(strlen($ansToReview[$i]->time) == 4) {
+                        $time .= ' ' . substr($ansToReview[$i]->time, 0, 2) . ':' . substr($ansToReview[$i]->time, 2, 2);
+                        $ansToReview[$i]->timeAgo = getDifferenceTimeString($time);
+                    }
+                    else
+                        $ansToReview[$i]->timeAgo = '';
+
+                    break;
+                }
+            }
+        }
+    }
+    else
+        $ansToReview = array();
+
+    return [$ansToReview, $countAns];
+}

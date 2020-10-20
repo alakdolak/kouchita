@@ -50,7 +50,7 @@ $(window).ready(function () {
         photos2[i] = -1;
     currPage = 1;
     comments(-1);
-    questions();
+    // questions();
     roundRobinPhoto = -1;
     photoRoundRobin(1);
     if (totalPhotos - sitePhotosCount > 0) {
@@ -464,27 +464,27 @@ function showChildBox(val, childAge) {
     $("#ages-wrap").empty().append(newElement);
 }
 
-function changeCommentPage(element) {
-    $('.pageNumComment').removeClass('current').addClass('taLnk');
-    $(element).removeClass('taLnk');
-    $(element).addClass('current');
-    if ($(element).attr('data-page-number')) {
-        currPage = $(element).attr('data-page-number');
-        comments(selectedTag);
-        location.href = "#taplc_location_review_keyword_search_hotels_0_search";
-    }
-}
+// function changeCommentPage(element) {
+//     $('.pageNumComment').removeClass('current').addClass('taLnk');
+//     $(element).removeClass('taLnk');
+//     $(element).addClass('current');
+//     if ($(element).attr('data-page-number')) {
+//         currPage = $(element).attr('data-page-number');
+//         comments(selectedTag);
+//         location.href = "#taplc_location_review_keyword_search_hotels_0_search";
+//     }
+// }
 
-function changePageQuestion(element) {
-    $('.pageNumComment').removeClass('current').addClass('taLnk');
-    $(element).removeClass('taLnk');
-    $(element).addClass('current');
-    if ($(element).attr('data-page-number')) {
-        currPageQuestions = $(element).attr('data-page-number');
-        questions();
-        location.href = "#taplc_location_qa_hotels_0";
-    }
-}
+// function changePageQuestion(element) {
+//     $('.pageNumComment').removeClass('current').addClass('taLnk');
+//     $(element).removeClass('taLnk');
+//     $(element).addClass('current');
+//     if ($(element).attr('data-page-number')) {
+//         currPageQuestions = $(element).attr('data-page-number');
+//         // questions();
+//         location.href = "#taplc_location_qa_hotels_0";
+//     }
+// }
 
 function showAskQuestion() {
     if (!hasLogin) {
@@ -528,25 +528,25 @@ function comments(tag) {
     filter();
 }
 
-function questions() {
-    $.ajax({
-        type: 'post',
-        url: getQuestions,
-        data: {
-            'placeId': placeId,
-            'kindPlaceId': kindPlaceId,
-            'page': currPageQuestions
-        },
-        success: function (response) {
-            try{
-                showQuestions(JSON.parse(response));
-            }
-            catch{
-
-            }
-        }
-    });
-}
+// function questions() {
+//     $.ajax({
+//         type: 'post',
+//         url: getQuestions,
+//         data: {
+//             'placeId': placeId,
+//             'kindPlaceId': kindPlaceId,
+//             'page': currPageQuestions
+//         },
+//         success: function (response) {
+//             try{
+//                 showQuestions(JSON.parse(response));
+//             }
+//             catch{
+//
+//             }
+//         }
+//     });
+// }
 
 
 function photoRoundRobin(val) {

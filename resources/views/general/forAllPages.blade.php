@@ -66,12 +66,13 @@
     @include('general.addSafarnameh')
 @endif
 
-{{--<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>--}}
+<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
 
 <script>
     var csrfTokenGlobal = '{{csrf_token()}}';
     var hasLogin = {{auth()->check() ? 1 : 0}};
     window.userPic = '{{getUserPic(auth()->check() ? auth()->user()->id : 0)}}';
+    window.gearIcon = '{{URL::asset("images/icons/mGear.svg")}}';
 
     function checkLogin(redirect = '{{Request::url()}}'){
         if (!hasLogin) {
@@ -122,9 +123,7 @@
             location.href = '{{url('language/')}}/' + _lang;
     }
 
-    $(document, window).ready(function(){
-        resizeFitImg('resizeImgClass');
-    });
+    $(document, window).ready(() => resizeFitImg('resizeImgClass'));
 
     window.mobileAndTabletCheck = function() {
         let check = false;
@@ -135,6 +134,7 @@
     function openMyModal(_id){
         $('#'+_id).addClass('showModal');
     }
+
     function closeMyModal(_id){
         $('#'+_id).removeClass('showModal');
     }
@@ -144,5 +144,8 @@
             if($(e.target).is('.modalBlackBack, .showModal, .fullCenter'))
                 closeMyModal($(e.target).attr('id'));
         }
+
+        $('.closeWithOneClick').addClass('hidden');
+        $('.moreOptionFullReview').removeClass('bg-color-darkgrey');
     })
 </script>
