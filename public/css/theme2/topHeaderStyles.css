@@ -176,7 +176,7 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     cursor: pointer;
 }
 .modalBlackBack.showModal{
-    display: flex !important;
+    display: flex;
 }
 
 .modalBody{

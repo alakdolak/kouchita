@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="ordering">
-                            <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="z2">
+                            <div class="orders" onclick="selectingOrder($(this), 'rate')" id="z2">
                                 {{__('بهترین بازخورد')}}
                             </div>
                         </div>
@@ -400,7 +400,7 @@
     var placeMode = '{{$placeMode}}';
     var floor = 1;
     var rateFilter = 0;
-    var sort = "rate";
+    var sort = "lessSeen";
     var featureFilter = [];
     var nameFilter = '';
     var materialFilter = '';

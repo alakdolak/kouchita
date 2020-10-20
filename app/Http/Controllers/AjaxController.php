@@ -45,14 +45,18 @@ class AjaxController extends Controller {
     public function getSingleQuestion(Request $request)
     {
         if(isset($request->id)){
+            $act = Activity::where('name', 'سوال')->first();
             $quest = LogModel::find($request->id);
+            if($quest->activityId != $act->id){
+                while($quest->activityId != $act->id && $quest->relatedTo != 0)
+                    $quest = LogModel::find($quest->relatedTo);
+            }
             $quest = questionTrueType($quest);
-            echo json_encode(['status' => 'ok', 'result' => $quest]);
+
+            return response()->json(['status' => 'ok', 'result' => $quest]);
         }
         else
-            echo json_encode(['status' => 'nok']);
-
-        return;
+            return response()->json(['status' => 'nok']);
     }
 
     public function getPlacePic() {

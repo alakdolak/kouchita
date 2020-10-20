@@ -431,7 +431,6 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
-
 });
 
 //reports

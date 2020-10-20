@@ -503,16 +503,23 @@ class ReviewsController extends Controller
                         $newLog->relatedTo = $mainLog->id;
                         $newLog->save();
 
-                        if (isset($request->ansAns) && $request->ansAns == 1) {
+                        if ($mainLog->activityId == $a->id) {
                             $mainLog->subject = 'ans';
                             $mainLog->save();
-                        }
 
-                        echo 'ok';
+                            $mainLog = LogModel::find($mainLog->relatedTo);
+                            while($mainLog->activityId == $a->id && $mainLog != null)
+                                $mainLog = LogModel::find($mainLog->relatedTo);
+                        }
+                        $reviewId = $mainLog->id;
+
+                        return response()->json(['status' => 'ok', 'reviewId' => $reviewId]);
                     }
                 }
             }
         }
+
+        return response()->json(['status' => 'nok']);
     }
 
     public function addReviewToBookMark(Request $request)

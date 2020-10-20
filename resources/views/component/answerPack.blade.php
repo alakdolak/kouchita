@@ -1,6 +1,6 @@
 
 <div id="ansSample" style="display: none">
-    <div id="ansDiv_##random##" style="margin-bottom: 15px">
+    <div id="ansDiv_##random##" style="margin-bottom: 15px; direction: rtl">
         <div class="eachCommentMainBox" style="margin-bottom: 0px">
             <div class="circleBase commentsWriterProfilePic">
                 <img src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
@@ -17,11 +17,11 @@
         <div class="fullReviewLikeAnsSeeAllSection">
             <div id="likeSection_##random##" style="display: inline-flex">
                 <span class="likeNumberAnswer_##random## LikeIconEmpty likedislikeAnsReviews ##youLikeClass##"
-                      onclick="##likeFunction##(##id##, 1, ##random##); turnOnLike(##random##, 1)">
+                      onclick="##likeFunction##(##id##, 1, {'like': $('.likeNumberAnswer_'+##random##), disLike: $('.disLikeNumberAnswer_'+##random##)}); turnOnLike(##random##, 1)">
                     ##like##
                 </span>
                 <span class="disLikeNumberAnswer_##random## DisLikeIconEmpty likedislikeAnsReviews ##youDisLikeClass##"
-                      onclick="##likeFunction##(##id##, -1, ##random##); turnOnLike(##random##, -1)">
+                      onclick="##likeFunction##(##id##, -1, {'like': $('.likeNumberAnswer_'+##random##), disLike: $('.disLikeNumberAnswer_'+##random##)}); turnOnLike(##random##, -1)">
                     ##disLike##
                 </span>
                 <span class="replayBtn replayReview" onclick="showReplyToAnswerHandle(##random##)">
@@ -62,10 +62,8 @@
     <div class="borderInMobile hidden answerSectionAns_##random##" style="margin-top: 0px">##answersHtml##</div>
 </div>
 
-
-
 <div id="ansToAnswersSample" style="display: none;">
-    <div id="ansOfAns_##random##" style="margin-bottom: 15px">
+    <div id="ansOfAns_##random##" style="margin-bottom: 15px; direction: rtl;">
         <div class="eachCommentMainBox"  style="margin-bottom: 0px">
             <div class="circleBase commentsWriterProfilePic">
                 <img src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
@@ -85,11 +83,11 @@
         <div class="fullReviewLikeAnsSeeAllSection">
             <div id="likeSection_##random##" style="display: inline-flex">
                 <span class="likeNumberAnswer_##random## LikeIconEmpty likedislikeAnsReviews ##youLikeClass##"
-                      onclick="##likeFunction##(##id##, 1, ##random##); turnOnLike(##random##, 1)">
+                      onclick="##likeFunction##(##id##, 1, {'like': $('.likeNumberAnswer_'+##random##), disLike: $('.disLikeNumberAnswer_'+##random##)}); turnOnLike(##random##, 1)">
                     ##like##
                 </span>
                 <span class="disLikeNumberAnswer_##random## DisLikeIconEmpty likedislikeAnsReviews ##youDisLikeClass##"
-                      onclick="##likeFunction##(##id##, -1, ##random##); turnOnLike(##random##, -1)">
+                      onclick="##likeFunction##(##id##, -1, {'like': $('.likeNumberAnswer_'+##random##), disLike: $('.disLikeNumberAnswer_'+##random##)}); turnOnLike(##random##, -1)">
                     ##disLike##
                 </span>
                 <span class="replayBtn replayReview" onclick="showReplyToAnswerHandle(##random##)">
@@ -147,6 +145,7 @@
         //     text,
         //     like,
         //     disLike,
+        //     writerPic,
         //     youLike: 0 || 1 || -1,
         //     answersCount,
         //     answers: [
@@ -154,8 +153,8 @@
         //
         //         }
         //     ],
-        //     likeFunction: function(id, kind, element),
-        //     sendAnswerFunction: function(id, element),
+        //     likeFunction: function(id, kind, elements),
+        //     sendAnswerFunction: function(id, value),
         // };
         let randomNumber = Math.floor(Math.random() * 100000);
         let text = answerPackSample;
