@@ -149,7 +149,6 @@ class PlaceController extends Controller {
                 $place->phone = explode(',', $place->phone);
         }
 
-
         $city = Cities::whereId($place->cityId);
         $state = State::whereId($city->stateId);
 
@@ -319,7 +318,9 @@ class PlaceController extends Controller {
 
     private function mahaliFoodDet($place){
 
-        $place->material = json_decode($place->material);
+        $place->material = MahaliFood::find($place->id)->materials;
+        foreach($place->material as $mat)
+            $mat->volume = $mat->pivot->volume;
 
         switch ($place->kind){
             case 1:

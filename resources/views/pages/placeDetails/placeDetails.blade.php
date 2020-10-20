@@ -659,13 +659,13 @@ if ($total == 0)
                                                     </div>
                                                     <div>
                                                         <div class="row">
-                                                            @if(isset($place->material) && is_array($place->material))
+                                                            @if(isset($place->material))
                                                                 <div class="col-sm-6">
                                                                     @foreach($place->material as $key => $item)
                                                                         @if($key%2 == 0)
                                                                             <div class="row font-size-20">
-                                                                                <div class="col-sm-6 col-xs-12 float-right">{{$item[0]}}</div>
-                                                                                <div class="col-sm-6 col-xs-12 color-green">{{$item[1]}}</div>
+                                                                                <div class="col-sm-6 col-xs-12 float-right">{{$item->name}}</div>
+                                                                                <div class="col-sm-6 col-xs-12 color-green">{{$item->volume}}</div>
                                                                             </div>
                                                                             <hr>
                                                                         @endif
@@ -676,8 +676,8 @@ if ($total == 0)
                                                                     @foreach($place->material as $key => $item)
                                                                         @if($key%2 != 0)
                                                                             <div class="row font-size-20">
-                                                                                <div class="col-sm-6 col-xs-12 float-right">{{$item[0]}}</div>
-                                                                                <div class="col-sm-6 col-xs-12 color-green">{{$item[1]}}</div>
+                                                                                <div class="col-sm-6 col-xs-12 float-right">{{$item->name}}</div>
+                                                                                <div class="col-sm-6 col-xs-12 color-green">{{$item->volume}}</div>
                                                                             </div>
                                                                             <hr>
                                                                         @endif

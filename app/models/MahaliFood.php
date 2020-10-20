@@ -8,4 +8,9 @@ class MahaliFood extends Model
 {
     protected $table = 'mahaliFood';
     public $timestamps = false;
+
+    public function materials(){
+        return $this->belongsToMany(FoodMaterial::class, 'foodMaterialRelations', 'mahaliFoodId', 'foodMaterialId')
+                    ->withPivot('volume');
+    }
 }
