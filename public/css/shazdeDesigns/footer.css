@@ -1488,14 +1488,15 @@ footer .footerMsgCountNumber{
 
 .loginHelperSection.footerLoginHelperSection .login-button{
     background: white;
-    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 25%;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
 }
 .loginHelperSection.footerLoginHelperSection .helperDescriptionDiv{
     bottom: 85px;
@@ -1662,6 +1663,20 @@ footer .footerMsgCountNumber{
         right: 0;
         width: 100%;
         margin-top: auto;
+    }
+
+    .loginHelperSection.footerLoginHelperSection .login-button{
+        width: 25%;
+        background: unset;
+    }
+    .loginHelperSection.footerLoginHelperSection .footerMenuBarLinks{
+        width: 70px;
+        height: 70px;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
     }
 }
 

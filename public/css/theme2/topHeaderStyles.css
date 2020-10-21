@@ -254,6 +254,15 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     margin-bottom: 20px;
     text-align: center;
 }
+
+.loginHelperSection .pic{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .leftTopArrow:before{
     content: '';
     width: 15px;
@@ -315,6 +324,12 @@ input[type="checkbox"] + label, input[type="radio"] + label{
 
 /*in Phone*/
 @media only screen and (max-width: 767px) {
+
+    .loginHelperSection .pic{
+        width: 90%;
+        max-width: 400px;
+    }
+
     .hideOnPhone {
         display: none !important;
         width: 0;

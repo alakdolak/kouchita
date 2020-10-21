@@ -188,17 +188,23 @@
                     </div>
                 </div>
 
-                <div class="headerLoginHelper loginHelperSection hidden">
+                <div class="headerLoginHelper loginHelperSection hidden" onclick="closeLoginHelperSection()">
+
+                    <div class="pic">
+                        <img src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 500px;">
+                    </div>
+
                     <div class="container" style="padding: 0px">
                         <div class="goToLeft">
                             <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
-                            <div class="helperDescriptionDiv leftTopArrow">
-                                <div class="iconClose" onclick="closeLoginHelperSection()"></div>
-                                <div class="text">
-                                    در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی هوشمند شوید.
-                                </div>
-                            </div>
+{{--                            <div class="helperDescriptionDiv leftTopArrow">--}}
+{{--                                <div class="iconClose" onclick="closeLoginHelperSection()"></div>--}}
+{{--                                <div class="text">--}}
+{{--                                    در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی هوشمند شوید.--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
+
                     </div>
                 </div>
 
