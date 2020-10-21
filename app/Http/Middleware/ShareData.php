@@ -39,9 +39,13 @@ class ShareData
             $followersCount = Followers::where('followedId', $userFooter->id)->count();
             $followingCount = Followers::where('userId', $userFooter->id)->count();
 
+            $newRegisterOpen = false;
+            if(\Session::get('newRegister'))
+                $newRegisterOpen = true;
+
             View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount, 'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
                         'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
-                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions ]);
+                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions, 'newRegisterOpen' => $newRegisterOpen ]);
         }
         else {
             $followingCount = 0;

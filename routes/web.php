@@ -406,7 +406,7 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
 
-//posts
+//safarnameh
 Route::group(['middleware' => ['SafarnamehShareData']], function () {
     Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
 

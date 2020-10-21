@@ -156,7 +156,7 @@
             <span class="iconFamily iconFamily addPostIcon" style="font-size: 20px;"></span>
         </div>
         @if(Auth::check())
-            <div data-toggle="modal" data-target="#profile" class="profileBtn">
+            <div data-toggle="modal" data-target="#profileFooterModal" class="profileBtn">
                 <div class="profileBtnText">
                     <span>{{__('سلام')}}</span>
                     <span>{{$userNamename}}</span>
@@ -166,19 +166,18 @@
                 </div>
             </div>
         @else
-
-            <div class="loginHelperSection footerLoginHelperSection hidden">
+            <div class="loginHelperSection footerLoginHelperSection hidden" onclick="closeLoginHelperSection()">
                 <div class="login-button">
                     <span class="footerMenuBarLinks" style="display: flex; align-items: center">
                         {{__('ورود')}}
                         <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
                     </span>
                 </div>
-                <div class="helperDescriptionDiv rightBottomArrow">
-                    <div class="iconClose" onclick="closeLoginHelperSection()"></div>
-                    <div class="text">
-                        در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی هوشمند شوید.
-                    </div>
+{{--                <div class="helperDescriptionDiv rightBottomArrow">--}}
+{{--                    <div class="iconClose" onclick="closeLoginHelperSection()"></div>--}}
+{{--                </div>--}}
+                <div class="pic">
+                    <img src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 100%;">
                 </div>
             </div>
 
@@ -854,10 +853,10 @@
         </div>
 
         @if(auth()->check())
-            <div class="modal fade" id="profile">
+            <div class="modal fade" id="profileFooterModal">
                 <div class="mainPopUp rightPopUp profileFooterPopUp">
                     <div class="closeFooterPopupIcon iconFamily iconClose"
-                         onclick="$('#profile').modal('hide')"
+                         onclick="$('#profileFooterModal').modal('hide')"
                          style="top: -10px; z-index: 999"></div>
                     <div id="lp_register">
                         <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
@@ -1119,6 +1118,7 @@
     </script>
 
     @if(Auth::check())
+
         <script>
             let recentlySample = 0;
             let bookMarkSample;
@@ -1184,7 +1184,7 @@ text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
                         chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
                     else if (_kind == 'festival')
                         chooseFromMobileMenuTab('festival', $('#myMenuMoreTabFestivalMark')); // in mainProfile.blade.php
-                    $('#profile').modal('hide');
+                    $('#profileFooterModal').modal('hide');
                 }
                 else if(_kind == 'setting')
                     window.location.href = "{{route('profile.accountInfo')}}";
@@ -1193,6 +1193,12 @@ text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
                 else
                     window.location.href = profileUrl+'#'+_kind;
             }
+
+            @if($newRegisterOpen)
+                if($(window).width() <= 767)
+                    $('#profileFooterModal').modal('show');
+                {{\Session::forget('newRegister')}}
+            @endif
         </script>
     @elseif(Request::is('show-place-details/*') || Request::is('placeList/*'))
         <script>
