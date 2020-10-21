@@ -320,7 +320,8 @@
                             <input id="materialSearch" class="hl_inputBox materialSearchInput" placeholder="جستجو کنید" onchange="closeFoodMaterialSearch()">
                             <div id="materialSearchBox" class="searchBox hidden">
                                 <div class="loading hidden">
-                                    <?php echo file_get_contents(URL::asset('images/icons/gear.svg'), false, stream_context_create(['ssl' => ["verify_peer"=>false, "verify_peer_name"=>false]])) ?>
+                                    <img src="{{URL::asset('images/icons/gear.svg')}}" alt="" style="width: 30px">
+<!--                                    --><?php //echo file_get_contents(URL::asset('images/icons/gear.svg'), false, stream_context_create(['ssl' => ["verify_peer"=>false, "verify_peer_name"=>false]])) ?>
                                 </div>
                                 <div class="res"></div>
                             </div>
