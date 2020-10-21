@@ -1191,7 +1191,9 @@
             }
 
             @if($newRegisterOpen)
-                $('#profileFooterModal').modal('show');
+                if($(window).width() <= 767)
+                    $('#profileFooterModal').modal('show');
+                {{\Session::forget('newRegister')}}
             @endif
         </script>
     @elseif(Request::is('show-place-details/*') || Request::is('placeList/*'))

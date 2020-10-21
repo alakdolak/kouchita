@@ -40,10 +40,8 @@ class ShareData
             $followingCount = Followers::where('userId', $userFooter->id)->count();
 
             $newRegisterOpen = false;
-            if(\Session::get('newRegister')) {
+            if(\Session::get('newRegister'))
                 $newRegisterOpen = true;
-                \Session::forget('newRegister');
-            }
 
             View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount, 'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
                         'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,

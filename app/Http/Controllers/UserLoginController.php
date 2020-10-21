@@ -226,8 +226,8 @@ class UserLoginController extends Controller
 
     public function checkReCaptcha()
     {
-        echo 'ok';
-        return;
+//        echo 'ok';
+//        return;
 
         if (isset($_POST["captcha"])) {
             $response = $_POST["captcha"];
@@ -729,7 +729,7 @@ class UserLoginController extends Controller
         $newMsg->senderId = 0;
         $newMsg->receiverId = $userId;
         $newMsg->message = 'مرسی از ثبت نامت دوستم، خیلی خوب میشه نظرتو درباره کوچیتا بدونیم. سعی کردیم همه چیز خوب باشه و امکانات متفاوتی طراحی کردیم، نظرت برامون مهمه و از اینجا همیشه میتونیم با هم در تماس باشیم.';
-        $newMsg->date = verta()->format('Y-m-d');;
+        $newMsg->date = verta()->format('Y-m-d');
         $newMsg->time = verta()->format('H:i');
         $newMsg->seen = 0;
         $newMsg->save();
