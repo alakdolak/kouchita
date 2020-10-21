@@ -396,6 +396,27 @@
                                     <input id="p_nameSearch" class="hl_inputBox" placeholder="{{__('جستجو کنید')}}" onchange="nameFilterFunc(this.value)">
                                 </div>
                             </div>
+
+                            @if($kindPlace->id == 11)
+                                <div class="prw_rup prw_restaurants_restaurant_filters">
+                                    <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                        <div class="filterGroupTitle">{{__('جستجو براساس مواد اولیه')}}</div>
+                                        <input id="p_foodMaterialSearch" class="hl_inputBox" placeholder="{{__('جستجو کنید')}}" onclick="openGlobalMaterialSearch()">
+                                        <div class="youMaterialSearchResult materialSearchSelected"></div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function openGlobalMaterialSearch(){
+                                        createSearchInput('getGlobalInputMaterialSearchKeyUp', 'ماده اولبه مورد نظر خود را وارد کنید.');
+                                    }
+
+                                    function getGlobalInputMaterialSearchKeyUp(_element){
+                                        searchForMaterial($(_element).val())
+                                    }
+                                </script>
+                            @endif
+
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters"
                                      class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">

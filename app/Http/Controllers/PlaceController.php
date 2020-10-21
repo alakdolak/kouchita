@@ -14,6 +14,7 @@ use App\models\Cities;
 use App\models\Comment;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
+use App\models\FoodMaterial;
 use App\models\Hotel;
 use App\models\LogFeedBack;
 use App\models\LogModel;
@@ -3179,6 +3180,8 @@ class PlaceController extends Controller {
         $placeIds = array();
         $places = array();
 
+//        $materialFilter = null;
+
         $kindPlace = Place::find($request->kindPlaceId);
         $file = $kindPlace->fileName;
         $table = $kindPlace->tableName;
@@ -3210,18 +3213,16 @@ class PlaceController extends Controller {
         }
 
         //filter with material in mahalifood
-        if($kindPlace->id == 11 && $materialFilter != null && strlen($materialFilter) > 1) {
+        if($kindPlace->id == 11 && $materialFilter != null && count($materialFilter) > 0) {
+            $materialId = FoodMaterial::whereIn('name', $materialFilter)->pluck('id')->toArray();
+            if(count($materialId) == 0)
+                $materialId = [0];
 
-            $mat = json_encode($materialFilter);
-            $foods = MahaliFood::whereIn('id', $placeIds)->select(['id', 'material'])->get();
+            $pIds = DB::select('SELECT mahaliFoodId, COUNT(id) AS count FROM foodMaterialRelations WHERE foodMaterialId IN (' . implode(",", $materialId) . ') AND mahaliFoodId IN (' . implode(",", $placeIds) . ') GROUP BY mahaliFoodId');
             $placeIds = [];
-            foreach ($foods as $item){
-                if($item->material != null) {
-                    $pos = strpos($item->material, $mat);
-                    if($pos > 0)
-                        array_push($placeIds, $item->id);
-
-                }
+            foreach ($pIds as $item){
+                if($item->count == count($materialId))
+                    array_push($placeIds, $item->mahaliFoodId);
             }
 
             if(count($placeIds) == 0){
@@ -3246,9 +3247,12 @@ class PlaceController extends Controller {
                     }
                 }
 
-                foreach ($kindName as $index => $value){
-                    $placeIds = DB::table($kindPlace->tableName)->whereIn($value, $kindValues[$index])->whereIn('id', $placeIds)->pluck('id')->toArray();
-                }
+                foreach ($kindName as $index => $value)
+                    $placeIds = DB::table($kindPlace->tableName)
+                                    ->whereIn($value, $kindValues[$index])
+                                    ->whereIn('id', $placeIds)
+                                    ->pluck('id')
+                                    ->toArray();
             }
         }
         if(count($placeIds) == 0){

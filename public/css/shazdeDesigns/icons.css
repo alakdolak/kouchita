@@ -111,6 +111,10 @@
     font-family: 'Shazde_Regular' !important;
     content: '\E02C';
 }
+.iconCloseAfter:after {
+    font-family: 'Shazde_Regular' !important;
+    content: '\E02C';
+}
 .sendIcon:before{
     content: "\E01B";
     font-family: 'Shazde_Regular' !important;
