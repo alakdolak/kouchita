@@ -338,6 +338,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
 
+    Route::get('searchForFoodMaterial', 'AjaxController@searchForFoodMaterial')->name('search.foodMaterial');
+
     Route::post('searchSuggestion', 'AjaxController@searchSuggestion')->name('searchSuggestion');
 
     Route::post('getSingleQuestion', 'AjaxController@getSingleQuestion')->name('getSingleQuestion');

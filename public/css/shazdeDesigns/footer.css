@@ -1504,6 +1504,7 @@ footer .footerMsgCountNumber{
     top: auto;
 }
 
+
 @media (max-width: 1300px) {
     .footerRside {
         font-size: 13px !important;

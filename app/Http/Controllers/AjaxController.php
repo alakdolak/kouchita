@@ -9,6 +9,7 @@ use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\Followers;
+use App\models\FoodMaterial;
 use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\LogModel;
@@ -42,6 +43,12 @@ use Illuminate\Http\Request;
 
 class AjaxController extends Controller {
 
+    public function searchForFoodMaterial()
+    {
+        $result = FoodMaterial::where('name', 'LIKE', '%'.$_GET["value"].'%')->pluck('name')->toArray();
+        return response()->json(['searchNumber' => $_GET['searchNumber'], 'result' => $result]);
+    }
+    
     public function getSingleQuestion(Request $request)
     {
         if(isset($request->id)){

@@ -29,8 +29,8 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css?v=1')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v=1')}}'/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css?v='.$fileVersions)}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v='.$fileVersions)}}'/>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
@@ -49,6 +49,69 @@
             ایران من
         @endif
     </title>
+
+    <style>
+
+        .searchBox{
+            position: absolute;
+            top: 70px;
+            z-index: 9;
+            width: 100%;
+            background: #ebebeb;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 0px 0px 5px 5px;
+            box-shadow: 0px 6px 12px 0px #e0e0e08a;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .searchBox .result{
+            font-size: 13px;
+            margin: 3px 0px;
+            padding: 5px 10px;
+            border-bottom: solid 1px gainsboro;
+            cursor: pointer;
+            transition: .3s;
+        }
+        .searchBox .result:hover{
+            background: white;
+            border-radius: 14px;
+            color: var(--koochita-light-green);
+        }
+        .searchBox .loading{
+            width: 30px;
+            margin: 0px auto;
+        }
+        .searchBox .loading svg{
+            width: 100%;
+            height: auto;
+        }
+        .searchBox .loading path{
+            fill: var(--koochita-blue);
+        }
+
+        .globalSearchResult .result{
+            padding: 5px 10px;
+            margin: 5px 10px;
+            border-bottom: solid 1px #e4e4e4;
+        }
+
+        .materialSearchSelected{
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .materialSearchSelected .matSel{
+            color: white;
+            background: var(--koochita-light-green);
+            border-radius: 5px;
+            padding: 5px 7px;
+            margin: 5px 0px;
+            cursor: pointer;
+        }
+
+    </style>
 
 </head>
 
@@ -252,9 +315,16 @@
                         <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
                     </div>
                     @if($kindPlace->id == 11)
-                        <div class="bottomLightBorder headerFilter">
+                        <div class="bottomLightBorder headerFilter" style="position: relative">
                             <div class="filterGroupTitle">{{__('جستجو براساس مواد اولیه')}}</div>
-                            <input id="materialSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="materialFilterFunc(this.value)">
+                            <input id="materialSearch" class="hl_inputBox materialSearchInput" placeholder="جستجو کنید" onchange="closeFoodMaterialSearch()">
+                            <div id="materialSearchBox" class="searchBox hidden">
+                                <div class="loading hidden">
+                                    <?php echo file_get_contents(URL::asset('images/icons/gear.svg')) ?>
+                                </div>
+                                <div class="res"></div>
+                            </div>
+                            <div class="youMaterialSearchResult materialSearchSelected"></div>
                         </div>
                     @endif
 
@@ -403,7 +473,7 @@
     var sort = "lessSeen";
     var featureFilter = [];
     var nameFilter = '';
-    var materialFilter = '';
+    var materialFilter = [];
     var data;
     var init = true;
     var lock = false;
@@ -673,13 +743,68 @@
         newSearch();
     }
 
+    var searchNumber = 0;
+    $('#materialSearch').on('keyup', e => e.keyCode == 13 ? materialFilterFunc(e.target.value) : searchForMaterial(e.target.value));
+    function searchForMaterial(_value){
+        if(_value.trim().length > 1){
+            $("#materialSearchBox").removeClass('hidden');
+            $("#materialSearchBox").find('.loading').removeClass('hidden');
+            $("#materialSearchBox").find('.res').addClass('hidden');
+            searchNumber++;
+            $.ajax({
+                type: 'get',
+                url : `{{route("search.foodMaterial")}}?value=${_value.trim()}&searchNumber=${searchNumber}`,
+                success: response => {
+                    if(response.searchNumber == searchNumber){
+                        var html = '';
+                        response.result.map(item => html += `<div class="result" onclick="chooseThisFoodMaterial(this)">${item}</div>`);
+                        setResultToGlobalSearch(html); // forMobileSearch;
+                        $("#materialSearchBox").find('.res').html(html);
+                        $("#materialSearchBox").find('.loading').addClass('hidden');
+                        $("#materialSearchBox").find('.res').removeClass('hidden');
+                    }
+                },
+                error: err => console.log(err)
+            })
+        }
+    }
+    function closeFoodMaterialSearch(){
+        setTimeout(() => $("#materialSearchBox").addClass('hidden'), 100);
+    }
+    function createChoosenMaterialBox(_ref = 'refresh'){
+        var searchResult = '';
+        materialFilter.map(item =>  searchResult += `<div class="matSel iconCloseAfter" onclick="deleteMaterialSearch(this)">${item}</div>` );
+        $('.youMaterialSearchResult').html(searchResult);
+        $('.materialSearchInput').val('');
+        if(_ref == 'refresh')
+            newSearch();
+    }
+    function deleteMaterialSearch(_element){
+        var index = materialFilter.indexOf($(_element).text());
+        if(index > -1) {
+            materialFilter.splice(index, 1);
+            createChoosenMaterialBox();
+        }
+    }
+    function chooseThisFoodMaterial(_element){
+        var material = $(_element).text();
+        $('#materialSearch').val(material);
+        materialFilterFunc(material);
+        closeSearchInput(); // for mobile search
+    }
     function materialFilterFunc(_value){
-        if(_value.trim().length > 2)
-            materialFilter = _value;
-        else
-            materialFilter = '';
-
-        newSearch();
+        _value = _value.trim();
+        if(_value.length > 2){
+            if(materialFilter.indexOf(_value) == -1) {
+                materialFilter.push(_value);
+                createChoosenMaterialBox();
+            }
+        }
+        closeFoodMaterialSearch();
+    }
+    function cancelMaterialSearch(){
+        materialFilter = [];
+        createChoosenMaterialBox('dontRefresh');
     }
 
     function doKindFilter(_kind, _value){
@@ -770,9 +895,9 @@
             if(featureFilter[i] != 0) {
                 var name = document.getElementById('feat' + featureFilter[i]).value;
                 text += '<div class="filtersExist">\n' +
-                    '<div>' + name + '</div>\n' +
-                    '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
-                    '</div>';
+                        '<div>' + name + '</div>\n' +
+                        '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
+                        '</div>';
                 hasFilter = true;
             }
         }
@@ -781,11 +906,19 @@
             if(specialFilters[i] != 0) {
                 var name = document.getElementById(specialFilters[i]['kind'] + specialFilters[i]['value']).value;
                 text += '<div class="filtersExist">\n' +
-                    '<div>' + name + '</div>\n' +
-                    '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
-                    '</div>';
+                        '<div>' + name + '</div>\n' +
+                        '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
+                        '</div>';
                 hasFilter = true;
             }
+        }
+
+        if(materialFilter.length > 0){
+            text += '<div class="filtersExist">\n' +
+                    '<div>مواد اولیه</div>\n' +
+                    '<div onclick="cancelKindFilter(\'foodMaterial\', [])" class="icons iconClose filterCloseIcon"></div>\n' +
+                    '</div>';
+            hasFilter = true;
         }
 
         $('.filterShow').html(text);
@@ -803,6 +936,8 @@
             }
             specialFilters = [];
         }
+        else if(_kind == 'foodMaterial')
+            cancelMaterialSearch();
         else {
             for(var i = 0; i < specialFilters.length; i++){
                 if(specialFilters[i]['kind'] == _kind && specialFilters[i]['value'] == _value) {
@@ -853,8 +988,8 @@
     }
 
     function cancelNameFilter(){
-        document.getElementById('nameSearch').value = '';
-        document.getElementById('p_nameSearch').value = '';
+        $('#nameSearch').val('');
+        $('#p_nameSearch').val('');
         nameFilterFunc('');
     }
 
@@ -862,6 +997,7 @@
         cancelRateFilter('noRef');
         cancelFeatureFilter(0, 'noRef');
         cancelKindFilter(0, 0, 'noRef');
+        cancelMaterialSearch();
         cancelNameFilter();
     }
 
@@ -898,28 +1034,23 @@
                     newElement = "";
                     for(i = 0; i < response.length; i++) {
 
-                        if(response[i].kindPlace == 'هتل')
-                            icon = '<div class="icons hotelIcon spIcons"></div>';
-                        else if(response[i].kindPlace == 'رستوران')
-                            icon = '<div class="icons restaurantIcon spIcons"></div>';
-                        else if(response[i].kindPlace == 'اماکن')
-                            icon = '<div class="icons touristAttractions spIcons"></div>';
-                        else if(response[i].kindPlace == 'ماجرا')
-                            icon = '<div class="icons adventure spIcons"></div>';
-                        else if(response[i].kindPlace == 'غذای محلی')
-                            icon = '<div class="icons traditionalFood spIcons"></div>';
-                        else if(response[i].kindPlace == 'صنایع سوغات')
-                            icon = '<div class="icons souvenirIcon spIcons"></div>';
-                        else
-                            icon = '<div class="icons touristAttractions spIcons"></div>';
+                        var searchIcon = {
+                            'هتل': 'hotelIcon',
+                            'رستوران': 'restaurantIcon',
+                            'اماکن': 'touristAttractions',
+                            'ماجرا': 'adventure',
+                            'غذای محلی': 'traditionalFood',
+                            'صنایع سوغات': 'souvenirIcon',
+                            'بوم گردی': 'touristAttractions',
+                        };
 
                         newElement += '<div style="padding: 5px 20px; display: flex" onclick="selectSearchInPlace(\'' + response[i]['name'] + '\', ' + response[i]["id"] + ', ' + response[i]["kindPlaceId"] + ')">' +
-                            '       <div>' +
-                            icon +
-                            '       <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; display: inline-block;">' + response[i].name + '</p>' +
-                            '       <p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].cityName + ' در ' + response[i].stateName + '</p>' +
-                            '       </div>\n' +
-                            '</div>';
+                                    '       <div>' +
+                                    `          <div class="icons ${searchIcon[response[i].kindPlace]} spIcons"></div>` +
+                                    '           <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; display: inline-block;">' + response[i].name + '</p>' +
+                                    '           <p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].cityName + ' در ' + response[i].stateName + '</p>' +
+                                    '       </div>\n' +
+                                    '</div>';
                     }
 
                     setResultToGlobalSearch(newElement);
