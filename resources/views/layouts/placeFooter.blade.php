@@ -1228,8 +1228,8 @@ text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
                 if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
                     setTimeout(() => {
                         setTimeout( openLoginHelperSection, 1000);
-                        localStorage.setItem('loginButtonHelperNotif', true);
-                    }, 25000);
+                        localStorage.setItem('loginButtonHelperNotif1', true);
+                    }, 15000);
                 }
             } else
                 console.log('your browser not support localStorage');
