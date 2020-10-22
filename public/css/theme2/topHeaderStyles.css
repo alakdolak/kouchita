@@ -239,9 +239,13 @@ input[type="checkbox"] + label, input[type="radio"] + label{
 
 .headerLoginHelper.loginHelperSection .goToLeft{
     display: flex;
-    justify-content: flex-end;
     height: 60px;
     align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 17%;
+    width: 100%;
+    font-size: 17px;
 }
 .loginHelperSection .helperDescriptionDiv .iconClose{
     display: flex;
@@ -262,6 +266,7 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 .leftTopArrow:before{
     content: '';

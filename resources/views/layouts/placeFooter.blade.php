@@ -1199,8 +1199,10 @@
 
             @if($newRegisterOpen)
                 if($(window).width() <= 767) {
-                    $('#profileFooterModal').modal('show');
-                    setTimeout(() => $('.welcomeMsgModalFooter').removeClass('hidden'), 200);
+                    setTimeout(() => {
+                        $('#profileFooterModal').modal('show');
+                        setTimeout(() => $('.welcomeMsgModalFooter').removeClass('hidden'), 200);
+                    }, 1000);
                 }
                 {{\Session::forget('newRegister')}}
             @endif
@@ -1218,13 +1220,12 @@
             }
 
             if (typeof(Storage) !== "undefined") {
-                seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif');
+                seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif1');
                 if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
-                    localStorage.setItem('loginButtonHelperNotif', true);
                     setTimeout(() => {
-                        $('html, body').animate({ scrollTop: 0, }, 1000);
                         setTimeout( openLoginHelperSection, 1000);
-                    }, 2000);
+                        localStorage.setItem('loginButtonHelperNotif', true);
+                    }, 25000);
                 }
             } else
                 console.log('your browser not support localStorage');
