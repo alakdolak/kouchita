@@ -284,6 +284,42 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     bottom: -5px;
 }
 
+.welcomeMsgModalFooter{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: #000000cf;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.welcomeMsgModalFooter .showMsgButton{
+    position: absolute;
+    background: white;
+    top: 106px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 20%;
+    border-radius: 32px;
+    color: var(--koochita-red);
+    font-weight: bold;
+    padding: 2px 0px;
+}
+.welcomeMsgModalFooter .showMsgButton .num{
+    border-bottom: solid 2px;
+    width: 40px;
+    text-align: center;
+}
+.welcomeMsgModalFooter img{
+    margin-bottom: 35px;
+    height: calc(100vh - 235px);
+    max-width: 90%;
+}
+
 
 @media (max-width: 991px) {
     .hideOnTablet{
@@ -300,7 +336,6 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     }
 }
 
-/*in Phone size*/
 @media only screen and (max-width: 767px) {
     h1 {
         font-size: 20px !important;
@@ -320,10 +355,8 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     h6{
         font-size: 14px !important;
     }
-}
 
-/*in Phone*/
-@media only screen and (max-width: 767px) {
+
 
     .loginHelperSection .pic{
         width: 90%;
@@ -363,7 +396,13 @@ input[type="checkbox"] + label, input[type="radio"] + label{
         display: none !important;
     }
 }
-/*in Screen*/
+
+@media (max-width: 400px){
+    .welcomeMsgModalFooter .showMsgButton{
+        left: 16%;
+    }
+}
+
 @media only screen and (min-width:768px) {
     .hideOnScreen {
         display: none !important;
@@ -371,7 +410,6 @@ input[type="checkbox"] + label, input[type="radio"] + label{
         height: 0;
     }
 }
-
 
 @keyframes gradient {
     0% {

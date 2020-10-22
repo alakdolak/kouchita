@@ -854,6 +854,13 @@
 
         @if(auth()->check())
             <div class="modal fade" id="profileFooterModal">
+                <div class="welcomeMsgModalFooter hidden" onclick="$(this).remove()">
+                    <a href="{{route("profile.message.page")}}" class="showMsgButton">
+                        <div class="name">صندوق پیام</div>
+                        <div class="num">1</div>
+                    </a>
+                    <img src="{{URL::asset('images/icons/thankyou0.svg')}}" alt="">
+                </div>
                 <div class="mainPopUp rightPopUp profileFooterPopUp">
                     <div class="closeFooterPopupIcon iconFamily iconClose"
                          onclick="$('#profileFooterModal').modal('hide')"
@@ -1191,8 +1198,10 @@
             }
 
             @if($newRegisterOpen)
-                if($(window).width() <= 767)
+                if($(window).width() <= 767) {
                     $('#profileFooterModal').modal('show');
+                    setTimeout(() => $('.welcomeMsgModalFooter').removeClass('hidden'), 200);
+                }
                 {{\Session::forget('newRegister')}}
             @endif
         </script>

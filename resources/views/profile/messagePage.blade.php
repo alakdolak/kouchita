@@ -88,9 +88,8 @@
         let lastId = 0;
         let updateInterval = null;
         let loadingMsg ='<div class="loading">\n' +
-            '<img src="{{URL::asset("images/loading.gif")}}" style="width: 200px;">\n' +
-            '</div>';
-
+                        '<img src="{{URL::asset("images/loading.gif")}}" style="width: 200px;">\n' +
+                        '</div>';
 
         autosize($('textarea'));
         $('.searchInp').on('click', function(){
@@ -155,10 +154,9 @@
             $('#sideListUser').removeClass('hideThis');
         }
 
-    </script>
-
-    <script>
         let koochitaNew = {{$newKoochitaMsg}};
+{{--        let koochitaNewMsg = {{$lastKoochitaMsg}};--}}
+//         console.log(koochitaNewMsg)
 
         function showThisMsgs(_id){
             $('#msgBody').addClass('showThis');
@@ -299,7 +297,6 @@
                 })
             }
         }
-
         function createContacts(_contacts){
             $('#contacts').empty();
 
@@ -314,7 +311,7 @@
                     '                                <div class="time"></div>\n' +
                     '                            </div>\n' +
                     '                            <div class="userLastMsg">\n' +
-                    '                                <div class="lastMsgCotacts"></div>\n';
+                    '                                <div class="lastMsgCotacts">{{$lastKoochitaMsg}}</div>\n';
             if(koochitaNew != 0)
                 text +=  '<div class="newMsg">' + koochitaNew + '</div>\n';
             text += '                            </div>\n' +

@@ -103,7 +103,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
             </div>
             <div class="row pcMarginTop10">
                 <div class="col-sm-6 loginInputDiv nameRegisterDiv">
-                    <input type="text" id="username_register" class="loginInput" placeholder="{{__('نام')}}">
+                    <input type="text" id="username_register" class="loginInput" placeholder="{{__('نام کاربری')}}">
                     <div class="bottomLoginText">
                         {{__('دوستانتان در سایت شما را با این نام خواهند شناخت.')}}
                     </div>
