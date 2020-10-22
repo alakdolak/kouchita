@@ -191,21 +191,17 @@
                 <div class="headerLoginHelper loginHelperSection hidden" onclick="closeLoginHelperSection()">
 
                     <div class="pic">
+                        <div class="login-button mainLoginButton" style="font-size: 30px;margin-bottom: 20px;"> {{__('auth.ورود / ثبت نام')}}</div>
                         <img src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 500px;">
                     </div>
+{{--                    <div class="goToLeft">--}}
+{{--                    <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>--}}
+{{--                    </div>--}}
 
-                    <div class="container" style="padding: 0px">
-                        <div class="goToLeft">
-                            <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
-{{--                            <div class="helperDescriptionDiv leftTopArrow">--}}
-{{--                                <div class="iconClose" onclick="closeLoginHelperSection()"></div>--}}
-{{--                                <div class="text">--}}
-{{--                                    در کوچیتا ثبت نام کنید ، امتیاز بگیرید و برنده ی یک گوشی هوشمند شوید.--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                        </div>
+{{--                    <div class="container" style="padding: 0px">--}}
+{{--                        --}}
 
-                    </div>
+{{--                    </div>--}}
                 </div>
 
                 <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
