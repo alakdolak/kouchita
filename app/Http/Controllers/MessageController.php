@@ -39,7 +39,6 @@ class MessageController extends Controller {
                 array_push($contactsId, $msg->receiverId);
         }
 
-
         $contacts = User::whereIn('id', $contactsId)->select(['id', 'username'])->get();
         foreach ($contacts as $item){
             $item->pic = getUserPic($item->id);
@@ -95,7 +94,13 @@ class MessageController extends Controller {
                                     ->where('seen', 0)
                                     ->count();
 
-        return \view('profile.messagePage', compact(['contacts', 'specUser', 'newKoochitaMsg']));
+        $lastKoochitaMsg = Message::where('senderId', 0)
+                                    ->where('receiverId', $uId)
+                                    ->orderByDesc('id')
+                                    ->first()->message;
+        $lastKoochitaMsg = mb_substr(strip_tags($lastKoochitaMsg), 0, 103);
+
+        return \view('profile.messagePage', compact(['contacts', 'specUser', 'newKoochitaMsg', 'lastKoochitaMsg']));
     }
 
     public function getMessages(Request $request)

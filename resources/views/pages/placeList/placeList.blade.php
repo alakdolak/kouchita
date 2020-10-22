@@ -471,8 +471,13 @@
     var placeMode = '{{$placeMode}}';
     var floor = 1;
     var rateFilter = 0;
-    var sort = "alphabet";
-    // var sort = "lessSeen";
+    @if($kindPlaceId == 4 && $kindPlaceId == 1 && $kindPlaceId == 12 && $kindPlaceId == 3)
+        var sort = "seen";
+    @elseif($kindPlaceId == 11)
+        var sort = "lessSeen";
+    @else
+        var sort = "alphabet";
+    @endif
     var featureFilter = [];
     var nameFilter = '';
     var materialFilter = [];

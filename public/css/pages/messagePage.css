@@ -275,7 +275,7 @@ footer{
 .msgContent .Date.fixed{
     position: fixed;
     top: 130px;
-    left: 58%;
+    left: 37%;
     z-index: 9;
     margin-top: 0px;
 }
