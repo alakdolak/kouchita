@@ -97,8 +97,9 @@ class MessageController extends Controller {
         $lastKoochitaMsg = Message::where('senderId', 0)
                                     ->where('receiverId', $uId)
                                     ->orderByDesc('id')
-                                    ->first()->message;
-        $lastKoochitaMsg = mb_substr(strip_tags($lastKoochitaMsg), 0, 103);
+                                    ->first();
+        if($lastKoochitaMsg != null)
+            $lastKoochitaMsg = mb_substr(strip_tags($lastKoochitaMsg->message), 0, 103);
 
         return \view('profile.messagePage', compact(['contacts', 'specUser', 'newKoochitaMsg', 'lastKoochitaMsg']));
     }
