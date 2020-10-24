@@ -414,10 +414,15 @@ Route::group(['middleware' => ['SafarnamehShareData']], function () {
     Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
 
     Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index')->middleware('shareData');
+
     Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show')->middleware('shareData');
+
     Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list')->middleware('shareData');
+
     Route::post('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
+
     Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
+
     Route::post('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
 
     Route::group(['middleware' => ['auth']], function (){
