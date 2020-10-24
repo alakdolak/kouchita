@@ -493,11 +493,29 @@
     var nearKindPlaceIdFilter = 0;
     var kindPlaceId = '{{$kindPlace->id}}';
 
-            @if(isset($city->id))
-    var cityId = '{{$city->id}}';
-            @else
-    var cityId = 0;
+    @if(isset($city->id))
+        var cityId = '{{$city->id}}';
+    @else
+        var cityId = 0;
     @endif
+
+    let url = window.location;
+    if(url.search.split('?filter=')[1] != undefined){
+        var fil = url.search.split('?filter=')[1];
+        console.log(fil);
+        if(fil == 'vegetarian')
+            $('.vegetarian1').prop( "checked", true);
+        else if(fil == 'vegan')
+            $('.vegan1').prop( "checked", true);
+        else if(fil == 'diabet')
+            $('.diabet1').prop( "checked", true);
+
+        specialFilters[0] = {
+            'kind' : url.search.split('?filter=')[1],
+            'value' : 1
+        };
+    }
+
 
     if(placeMode == 'hotel'){
         specialFilters = [{
@@ -777,9 +795,11 @@
             })
         }
     }
+
     function closeFoodMaterialSearch(){
         setTimeout(() => $("#materialSearchBox").addClass('hidden'), 100);
     }
+
     function createChoosenMaterialBox(_ref = 'refresh'){
         var searchResult = '';
         materialFilter.map(item =>  searchResult += `<div class="matSel iconCloseAfter" onclick="deleteMaterialSearch(this)">${item}</div>` );
@@ -788,6 +808,7 @@
         if(_ref == 'refresh')
             newSearch();
     }
+
     function deleteMaterialSearch(_element){
         var index = materialFilter.indexOf($(_element).text());
         if(index > -1) {
@@ -795,12 +816,14 @@
             createChoosenMaterialBox();
         }
     }
+
     function chooseThisFoodMaterial(_element){
         var material = $(_element).text();
         $('#materialSearch').val(material);
         materialFilterFunc(material);
         closeSearchInput(); // for mobile search
     }
+
     function materialFilterFunc(_value){
         _value = _value.trim();
         if(_value.length > 2){
@@ -811,6 +834,7 @@
         }
         closeFoodMaterialSearch();
     }
+
     function cancelMaterialSearch(){
         materialFilter = [];
         createChoosenMaterialBox('dontRefresh');
@@ -822,7 +846,9 @@
 
         for(var i = 0; i < specialFilters.length; i++){
             //this if for radioboxes
-            if((_kind == 'eatable' && specialFilters[i]['kind'] == 'eatable') || (_kind == 'fragile' && specialFilters[i]['kind'] == 'fragile') || (_kind == 'hotOrCold' && specialFilters[i]['kind'] == 'hotOrCold')){
+            if((_kind == 'eatable' && specialFilters[i]['kind'] == 'eatable') ||
+                (_kind == 'fragile' && specialFilters[i]['kind'] == 'fragile') ||
+                (_kind == 'hotOrCold' && specialFilters[i]['kind'] == 'hotOrCold')){
                 specialFilters[i] = 0;
                 break;
             }
