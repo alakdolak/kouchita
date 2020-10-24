@@ -1,6 +1,7 @@
 <?php
 
 
+use App\models\logs\UserSeenLog;
 use App\models\SafarnamehCategoryRelations;
 use App\models\SafarnamehComments;
 use App\models\SafarnamehLike;

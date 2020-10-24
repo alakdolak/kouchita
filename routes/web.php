@@ -30,12 +30,11 @@ Route::group(array(), function(){
 
 Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
-    Route::get('/', 'MainController@showMainPage')->name('home');
+    Route::get('/', 'MainController@showMainPage')->name('home')->middleware('shareData');
 
-    Route::get('main', 'MainController@showMainPage')->name('main');
+    Route::get('main', 'MainController@showMainPage')->name('main')->middleware('shareData');
 
-//    Route::get('/', 'MainController@landingPage')->name('home');
-    Route::get('/landingPage', 'MainController@landingPage')->name('landingPage');
+    Route::get('/landingPage', 'MainController@landingPage')->name('landingPage')->middleware('shareData');
 
     //PDF creator
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
@@ -94,7 +93,7 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
 //    Route::post('getTags', array('as' => 'getTags', 'uses' => 'PlaceController@getTags'));
 
-    Route::get('policies', array('as' => 'policies', 'uses' => 'HomeController@showPoliciess'));
+    Route::get('policies', array('as' => 'policies', 'uses' => 'HomeController@showPoliciess'))->middleware('shareData');
 
     Route::get('estelahat/{goyesh}', array('as' => 'estelahat', 'uses' => 'HomeController@estelahat'));
 
@@ -317,9 +316,9 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 
     Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
 
-    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
+    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details')->middleware('shareData');
 
-    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage');
+    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage')->middleware('shareData');
 
     Route::post('getCityPageReview', 'HomeController@getCityPageReview')->name('getCityPageReview');
 
@@ -333,6 +332,10 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
     Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
     Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
     Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
+});
+
+Route::group(['middleware' => ['throttle:60']], function(){
+    Route::post('log/storeSeen', 'LogController@storeUserSeenLog')->name('log.storeSeen');
 });
 
 //ajaxController
@@ -410,9 +413,9 @@ Route::group(array('middleware' => 'nothing'), function () {
 Route::group(['middleware' => ['SafarnamehShareData']], function () {
     Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
 
-    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
-    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
-    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
+    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index')->middleware('shareData');
+    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show')->middleware('shareData');
+    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list')->middleware('shareData');
     Route::post('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
     Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
     Route::post('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
@@ -430,7 +433,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
 
-    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
+    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list')->middleware('shareData');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
 });
@@ -458,7 +461,7 @@ Route::group(array('middleware' => 'nothing'), function(){
 
 // profile common
 Route::group(['middleware' => ['throttle:30']], function(){
-    Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile');
+    Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile')->middleware('shareData');
 
     Route::post('/profile/getFollower', 'FollowerController@getFollower')->name('profile.getFollower');
 
@@ -474,7 +477,7 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
-    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
+    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index')->middleware('shareData');
 
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
@@ -488,9 +491,9 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('profile/updateBannerPic', 'ProfileController@updateBannerPic')->name('profile.updateBannerPic');
 
-        Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto');
+        Route::get('profile/editPhoto', 'ProfileController@editPhoto')->name('profile.editPhoto')->middleware('shareData');
 
-        Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page');
+        Route::get('profile/message', 'MessageController@messagingPage')->name('profile.message.page')->middleware('shareData');
 
         Route::post('profile/message/get', 'MessageController@getMessages')->name('profile.message.get');
 
@@ -498,13 +501,13 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('profile/message/send', 'MessageController@sendMessages')->name('profile.message.send');
 
-        Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips');
+        Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips')->middleware('shareData');
 
-        Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces');
+        Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces')->middleware('shareData');
 
-        Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal');
+        Route::get('profile/recentlyView', 'MyTripsController@recentlyViewTotal')->name('recentlyViewTotal')->middleware('shareData');
 
-        Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo');
+        Route::get('profile/accountInfo', 'ProfileController@accountInfo')->name('profile.accountInfo')->middleware('shareData');
 
         Route::post('profile/setFollower', 'FollowerController@setFollower')->name('profile.setFollower');
 
@@ -529,9 +532,9 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('sendMyInvitationCode', array('as' => 'sendMyInvitationCode', 'uses' => 'ProfileController@sendMyInvitationCode'));
 
-        Route::get('messages', array('as' => 'msgs', 'uses' => 'MessageController@showMessages'));
+        Route::get('messages', array('as' => 'msgs', 'uses' => 'MessageController@showMessages'))->middleware('shareData');
 
-        Route::get('messagesErr/{err}', array('as' => 'msgsErr', 'uses' => 'MessageController@showMessages'));
+        Route::get('messagesErr/{err}', array('as' => 'msgsErr', 'uses' => 'MessageController@showMessages'))->middleware('shareData');
 
         Route::post('opOnMsgs', array('as' => 'opOnMsgs', 'uses' => 'MessageController@opOnMsgs'));
 
@@ -589,7 +592,7 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
 
-        Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'));
+        Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'))->middleware('shareData');
 
         Route::post('sendAns', array('as' => 'sendAns', 'uses' => 'PlaceController@sendAns'));
 
@@ -634,11 +637,11 @@ Route::group(array('middleware' => ['auth']), function(){
 //festival
 Route::group(['middleware' => 'web'], function(){
 
-    Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival');
+    Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival')->middleware('shareData');
 
-    Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main');
+    Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main')->middleware('shareData');
 
-    Route::get('/festival/uploadWorks', 'FestivalController@festivalUploadWorksPage')->name('festival.uploadWorks');
+    Route::get('/festival/uploadWorks', 'FestivalController@festivalUploadWorksPage')->name('festival.uploadWorks')->middleware('shareData');
 
     Route::post('/festival/getContent', 'FestivalController@getFestivalContent')->name('festival.getContent');
 

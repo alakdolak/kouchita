@@ -6,6 +6,7 @@ use App\Events\ActivityLogEvent;
 use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\LogModel;
+use App\models\logs\UserSeenLog;
 use App\models\Message;
 use App\models\RetrievePas;
 use App\models\User;
@@ -740,4 +741,5 @@ class UserLoginController extends Controller
 
         return true;
     }
+
 }

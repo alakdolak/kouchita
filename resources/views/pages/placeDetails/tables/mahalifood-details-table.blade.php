@@ -29,16 +29,19 @@
             </span>
         </div>
         <div class="contentSection col-xs-12">افراد گیاه خوار
-            <span style="display: {{$place->vegetarian == 1 ? '' : 'none'}}; color: green;">هست</span>
-            <span style="display: {{$place->vegetarian == 0 ? '' : 'none'}}; color: red">نیست</span>
+            <span style=" color: {{$place->vegetarian == 1 ? 'green' : 'red'}};">
+                {{$place->vegetarian == 1 ? 'هست' : 'نیست'}}
+            </span>
         </div>
         <div class="contentSection col-xs-12">افراد وگان
-            <span style="display: {{$place->vegan == 1 ? '' : 'none'}}; color: green;">هست</span>
-            <span style="display: {{$place->vegan == 0 ? '' : 'none'}}; color: red">نیست</span>
+            <span style=" color: {{$place->vegan == 1 ? 'green' : 'red'}};">
+                {{$place->vegan == 1 ? 'هست' : 'نیست'}}
+            </span>
         </div>
         <div class="contentSection col-xs-12">افراد دیابتی
-            <span style="display: {{$place->diabet == 1 ? '' : 'none'}}; color: green;">هست</span>
-            <span style="display: {{$place->diabet == 0 ? '' : 'none'}}; color: red">نیست</span>
+            <span style=" color: {{$place->diabet == 1 ? 'green' : 'red'}};">
+                {{$place->diabet == 1 ? 'هست' : 'نیست'}}
+            </span>
         </div>
 
         <div class="titleSection">
@@ -47,21 +50,11 @@
             </span>
         </div>
         <div class="contentSection col-xs-12">
-            <span style="float: right">
-                : {{$place->name}}
-            </span>
-            <span style="float: right">
-                {{$place->energy}}
-            </span>
-            <span style="float: right">
-                 کالری در هر
-            </span>
-            <span style="float: right">
-                {{$place->volume}}
-            </span>
-            <span style="float: right">
-                {{$place->source}}
-            </span>
+            <span style="float: right"> : {{$place->name}} </span>
+            <span style="float: right"> {{$place->energy}} </span>
+            <span style="float: right"> کالری در هر</span>
+            <span style="float: right"> {{$place->volume}} </span>
+            <span style="float: right"> {{$place->source}} </span>
         </div>
 
         @if($place->rice == 1)

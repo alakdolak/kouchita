@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\models\Followers;
+use App\models\logs\UserSeenLog;
 use App\models\Message;
 use App\models\User;
 use Closure;
@@ -19,7 +20,6 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $startTime = microtime(true);
         $fileVersions = 2;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
@@ -43,9 +43,11 @@ class ShareData
             if(\Session::get('newRegister'))
                 $newRegisterOpen = true;
 
-            View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount, 'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
+            View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount,
+                        'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
                         'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
-                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions, 'newRegisterOpen' => $newRegisterOpen ]);
+                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions,
+                        'newRegisterOpen' => $newRegisterOpen]);
         }
         else {
             $followingCount = 0;
@@ -53,7 +55,6 @@ class ShareData
             View::share(['buPic' => $buPic, 'config' => $config, 'followingCount' => $followingCount, 'fileVersions' => $fileVersions]);
         }
 
-//        dd(microtime(true) - $startTime);
         return $next($request);
     }
 }

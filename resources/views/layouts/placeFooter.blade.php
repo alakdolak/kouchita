@@ -13,7 +13,6 @@
         align-items: center
     }
 </style>
-{{--footer html--}}
 <footer>
     <div class="hideOnPhone screenFooterStyle">
         <div class="footerLogoSocialBox">
@@ -134,6 +133,7 @@
     </div>
 
     <div class="hideOnScreen" style="width: 100%; height: 100px;"></div>
+
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
@@ -1066,99 +1066,72 @@
     </div>
 
     <script>
-        function showSafarnamehFooterSearch(_element, _kind){
-            $(_element).parent().find('.selected').removeClass('selected');
-            $(_element).addClass('selected');
-            if(_kind == 'place'){
-                $('#safarnamehPlaceSearchFooter').show();
-                $('#safarnamehContentSearchFooter').hide();
-            }
-            else{
-                $('#safarnamehPlaceSearchFooter').hide();
-                $('#safarnamehContentSearchFooter').show();
-            }
-        }
+        window.seenRelatedId = sessionStorage.getItem("lastPageLogId") == null ? 0 : sessionStorage.getItem("lastPageLogId");
+        window.seenPageLogId = 0;
+        window.userScrollPageLog = [];
+        window.isMobile = window.mobileAndTabletCheck();
+        var userWindowInScrolling = null;
+        var seenLogStartTime = new Date().getTime();
+        var lastSeenLogScroll = 0;
 
-        function showSafarnamehSubCategory(_id){
-            $('.mainSafarnamehCategory').hide();
-            $('.subSafarnamehCategory').show();
-            $(`#subSafarnamehCategory_${_id}`).show();
-            setTimeout(() => $(`#subSafarnamehCategory_${_id}`).addClass('show'), 10);
-        }
 
-        function backToSafarnamehCategoryFooter(_element){
-            $(_element).parent().removeClass('show');
+        $(window).on('scroll', () => {
+            var time = seenLogStartTime;
+            seenLogStartTime = new Date().getTime();
+            if(new Date().getTime() - time > 1000){
+                window.userScrollPageLog.push({
+                    scroll: (lastSeenLogScroll/($(document).height() - $(window).height())) * 100,
+                    time: new Date().getTime() - time
+                })
+            }
+            else if(window.userScrollPageLog[window.userScrollPageLog.length-1] != 'scrolling')
+                window.userScrollPageLog.push('scrolling');
+
+            if(userWindowInScrolling != null)
+                clearTimeout(userWindowInScrolling);
+
             setTimeout(() => {
-                $(_element).parent().hide();
-                $('.mainSafarnamehCategory').show();
-                $('.subSafarnamehCategory').hide();
-            }, 300);
-        }
+                seenLogStartTime = new Date().getTime();
+                lastSeenLogScroll = window.pageYOffset
+            }, 1000);
+        });
 
-        // phone functions
-        function lp_selectMenu(id , element) {
-            $('.lp_eachMenu').removeClass('lp_selectedMenu');
-            $(element).addClass('lp_selectedMenu');
-            $('.lp_others_content').addClass('hidden');
-            $('#' + id).removeClass('hidden');
+        function sendSeenPageLog(){
+            $.ajax({
+                type: 'post',
+                url: '{{route('log.storeSeen')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    relatedId: window.seenRelatedId,
+                    seenPageLogId: window.seenPageLogId,
+                    scrollData: window.userScrollPageLog,
+                    isMobile: window.isMobile,
+                    windowsSize: {width: $(window).width(), height: $(window).height()},
+                    url: document.location.pathname
+                },
+                success: response => {
+                    if(response.status == 'ok') {
+                        sessionStorage.setItem("lastPageLogId", response.seenPageLogId);
+                        window.seenPageLogId = response.seenPageLogId;
+                    }
+                    setTimeout(sendSeenPageLog, 5000);
+                },
+                error: err =>{
+                    setTimeout(sendSeenPageLog, 5000);
+                }
+            })
         }
-
-        function toggleEditInfoMenu(elm) {
-            $(elm).children('div.glyphicon-chevron-down').toggleClass('display-none');
-            $(elm).children('div.glyphicon-chevron-up').toggleClass('display-none');
-            $(elm).next().toggleClass('display-none');
-            $(elm).next().toggleClass('display-flex');
-        }
-
-        // phone Article func
-        function lp_selectArticleFilter(id , element) {
-            $('.lp_ar_eachFilters').removeClass('lp_ar_selectedMenu');
-            $(element).addClass('lp_ar_selectedMenu');
-            $('.lp_ar_contentOfFilters').addClass('hidden');
-            $('#' + id).removeClass('hidden');
-        }
-
-        function showMorefooter() {
-            $('.footMoreLessBtnText').toggleClass('hidden');
-            $('#aboutShazde').toggleClass('aboutShazdeMoreLess');
-        }
+        sendSeenPageLog();
     </script>
 
+    <script src="{{URL::asset('js/pages/placeFooter.js?v='.$fileVersions)}}"></script>
     @if(Auth::check())
-
         <script>
-            let recentlySample = 0;
-            let bookMarkSample;
-            let getPhoneBookMarks = false;
             let profileUrl = '{{route("profile")}}';
+            let getBookMarkFooterUrl = '{{route('getBookMarks')}}';
             let usrnme = '{{$userFooter->username}}';
+            window.user = '{!! $userFooter !!}';
 
-            bookMarkSample = $('#phoneBookMarks').html();
-            $('#phoneBookMarks').empty();
-
-            function showBookMarksPhone() {
-                if(!getPhoneBookMarks && bookMarkSample != undefined && bookMarkSample != null) {
-                    getPhoneBookMarks = true;
-
-                    $('#phoneBookMarks').html('');
-                    $.ajax({
-                        type: 'post',
-                        url: '{{route('getBookMarks')}}',
-                        success: function (response) {
-                            response = JSON.parse(response);
-                            for (i = 0; i < response.length; i++) {
-                                if (response[i]['placeName']) {
-                                    let text = bookMarkSample;
-                                    let fk = Object.keys(response[i]);
-                                    for (let x of fk)
-                                        text = text.replace(new RegExp('##' + x + '##', "g"), response[i][x]);
-                                    $('#phoneBookMarks').append(text);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
             showBookMarksPhone();
 
             function initialProgressFooter() {
@@ -1166,36 +1139,6 @@
                 $("#progressIdPhone").css("width", b + "%");
             }
             initialProgressFooter();
-
-
-            function mobileFooterProfileButton(_kind){
-                let windowUrl = window.location;
-                let url = windowUrl.origin + windowUrl.pathname;
-
-                if(url == profileUrl || url == profileUrl+'/'+usrnme) {
-                    if (_kind == 'review')
-                        mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review'); // in mainProfile.blade.php
-                    else if (_kind == 'photo')
-                        mobileChangeProfileTab($('#photoProfileMoblieTab'), 'photo'); // in mainProfile.blade.php
-                    else if (_kind == 'safarnameh')
-                        mobileChangeProfileTab($('#safarnamehProfileMoblieTab'), 'safarnameh'); // in mainProfile.blade.php
-                    else if (_kind == 'medal')
-                        mobileChangeProfileTab($('#medalProfileMoblieTab'), 'medal'); // in mainProfile.blade.php
-                    else if (_kind == 'question')
-                        chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion')); // in mainProfile.blade.php
-                    else if (_kind == 'bookMark')
-                        chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
-                    else if (_kind == 'festival')
-                        chooseFromMobileMenuTab('festival', $('#myMenuMoreTabFestivalMark')); // in mainProfile.blade.php
-                    $('#profileFooterModal').modal('hide');
-                }
-                else if(_kind == 'setting')
-                    window.location.href = "{{route('profile.accountInfo')}}";
-                else if(_kind == 'follower')
-                    openFollowerModal('resultFollowers', {{$userFooter->id}}); // in general.followerPopUp.blade.php
-                else
-                    window.location.href = profileUrl+'#'+_kind;
-            }
 
             @if($newRegisterOpen)
                 if($(window).width() <= 767) {
@@ -1209,16 +1152,6 @@
         </script>
     @elseif(Request::is('show-place-details/*') || Request::is('placeList/*'))
         <script>
-            function openLoginHelperSection(){
-                $('.loginHelperSection').removeClass('hidden');
-                $('html, body').css('overflow', 'hidden');
-            }
-
-            function closeLoginHelperSection() {
-                $('.loginHelperSection').addClass('hidden');
-                $('html, body').css('overflow-y', 'auto');
-            }
-
             if (typeof(Storage) !== "undefined") {
                 seeLoginHelperFunction = localStorage.getItem('loginButtonHelperNotif1');
                 if(seeLoginHelperFunction == null || seeLoginHelperFunction == false){
@@ -1227,7 +1160,8 @@
                         localStorage.setItem('loginButtonHelperNotif1', true);
                     }, 15000);
                 }
-            } else
+            }
+            else
                 console.log('your browser not support localStorage');
         </script>
     @endif

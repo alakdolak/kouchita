@@ -23,7 +23,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Barryvdh\Cors\HandleCors::class,
         \Illuminate\Session\Middleware\StartSession::class,
-        \App\Http\Middleware\ShareData::class
     ];
 
     /**
@@ -75,5 +74,6 @@ class Kernel extends HttpKernel
         'setSession' => \App\Http\Middleware\setSession::class,
         'vodShareData' => \App\Http\Middleware\vodShareData::class,
         'SafarnamehShareData' => \App\Http\Middleware\SafarnamehShareData::class,
+        'shareData' => \App\Http\Middleware\ShareData::class,
     ];
 }
