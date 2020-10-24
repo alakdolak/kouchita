@@ -3128,14 +3128,22 @@ class PlaceController extends Controller {
                 case 11:
 
                     if(isset($_GET['filter'])){
-                        if($_GET['filter'] == 'diabet')
+                        if($_GET['filter'] == 'diabet') {
                             $kindSearch = ' مناسب برای افراد دیابتی';
-                        elseif($_GET['filter'] == 'vegan')
-                            $kindSearch = ' مناسب برای افراد وگان';
-                        elseif($_GET['filter'] == 'vegetarian')
+                            $kindSearch2 = ' غذاهای دیابتی';
+                        }
+                        elseif($_GET['filter'] == 'vegan'){
+                            $kindSearch = ' مناسب برای افراد وگن';
+                            $kindSearch2 = ' غذاهای وگن';
+                        }
+                        elseif($_GET['filter'] == 'vegetarian'){
                             $kindSearch = ' مناسب برای افراد گیاه خوار';
-                        else
+                            $kindSearch2 = ' غذاهای گیاه خوار';
+                        }
+                        else{
                             $kindSearch = 'محلی';
+                            $kindSearch2 = '';
+                        }
                     }
                     else
                         $kindSearch = 'محلی';
@@ -3147,7 +3155,7 @@ class PlaceController extends Controller {
 
                     $placeMode = 'mahaliFood';
                     $kindPlace->title = 'غذاهای '.$kindSearch;
-                    $meta['title'] = 'عکس+دستور پخت+میزان کالری+ لیست تمامی غذاهای '.$kindSearch;
+                    $meta['title'] = 'عکس+دستور پخت '.$kindSearch2.' +میزان کالری+ لیست تمامی غذاهای '.$kindSearch;
                     $meta['keyword'] = 'غذاهای ' . $kindSearch . $locationName['name'] . ' ، غذاهای سنتی ' . $locationName['name'] . ' ، طرز تهیه غذای ' . $kindSearch . $locationName['name'] . ' ، دستور پخت غذای '.$kindSearch . $locationName['name'] . ' ، غذای '.$kindSearch . $locationName['name'] . ' چیست ، غذای سنتی ' . $locationName['name'] . ' چیست ، غذای مناسب برای افراد گیاه خوار، غذاهای مناسب برای افراد وگان ، غذاهای مناسب برای افراد دیابتی ، آش های محلی ' . $locationName['name'] . ' ، خورشت های ' . $locationName['name'] . ' ، خورش های ' . $locationName['name'] . ' ، خوراک های ' . $locationName['name'] ;
                     $meta['description'] = 'ما برای شما غذاهای محلی و سنتی ... همراه با دستور پخت و عکس و میزان کالری که شامل آش ها، سوپ ها، خورشت ها، خوراک ها ،شیرینی ها، نان ها، مربا ها و سالاد ها می باشد را جمع اوری کرده ایم.';
                     break;
