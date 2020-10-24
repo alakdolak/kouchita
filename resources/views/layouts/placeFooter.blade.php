@@ -1069,11 +1069,10 @@
         window.seenRelatedId = sessionStorage.getItem("lastPageLogId") == null ? 0 : sessionStorage.getItem("lastPageLogId");
         window.seenPageLogId = 0;
         window.userScrollPageLog = [];
-        window.isMobile = window.mobileAndTabletCheck();
+        window.isMobile = window.mobileAndTabletCheck() ? 1 : 0;
         var userWindowInScrolling = null;
         var seenLogStartTime = new Date().getTime();
         var lastSeenLogScroll = 0;
-
 
         $(window).on('scroll', () => {
             var time = seenLogStartTime;
