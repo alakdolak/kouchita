@@ -3126,15 +3126,29 @@ class PlaceController extends Controller {
                     $meta['description'] = 'لیست تمامی صنایع دستی و سوغات ' . $locationName['name'] . ' که به دست هنرمندان بومی این شهر درست شده است و ما برای شما اطلاعات کاملی به همراه عکس ، ویژگی ها و چگومگی ساخت صنایع دستی و طرز تهیه سوغات خوراکی همراه با توضیحات و عکس و معرفی بهترین فروشندگان توسط کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین خرید ها را در سفر داشته باشید. ';
                     break;
                 case 11:
+
+                    if(isset($_GET['filter'])){
+                        if($_GET['filter'] == 'diabet')
+                            $kindSearch = ' مناسب برای افراد دیابتی';
+                        elseif($_GET['filter'] == 'vegan')
+                            $kindSearch = ' مناسب برای افراد وگان';
+                        elseif($_GET['filter'] == 'vegetarian')
+                            $kindSearch = ' مناسب برای افراد گیاه خوار';
+                        else
+                            $kindSearch = 'محلی';
+                    }
+                    else
+                        $kindSearch = 'محلی';
+
                     $errorTxt = [];
                     $errorTxt[0] = 'غذای محلی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
                     $errorTxt[2] = 'اهل ' . $locationName['cityName'] . ' هستید؟ تا به حال به ' . $locationName['cityName'] . ' رفته اید؟ غذای محلی ' . $locationName['cityName'] . ' را در <span class="goToCampain" onclick="goToCampain()">در اینجا</span> معرفی کنید';
 
                     $placeMode = 'mahaliFood';
-                    $kindPlace->title = 'غذاهای محلی ';
-                    $meta['title'] = 'عکس+دستور پخت+میزان کالری+ لیست تمامی غذاهای محلی ';
-                    $meta['keyword'] = 'غذاهای محلی ' . $locationName['name'] . ' ، غذاهای سنتی ' . $locationName['name'] . ' ، طرز تهیه غذای محلی ' . $locationName['name'] . ' ، دستور پخت غذای محلی ' . $locationName['name'] . ' ، غذای محلی ' . $locationName['name'] . ' چیست ، غذای سنتی ' . $locationName['name'] . ' چیست ، غذای مناسب برای افراد گیاه خوار، غذاهای مناسب برای افراد وگان ، غذاهای مناسب برای افراد دیابتی ، آش های محلی ' . $locationName['name'] . ' ، خورشت های ' . $locationName['name'] . ' ، خورش های ' . $locationName['name'] . ' ، خوراک های ' . $locationName['name'] ;
+                    $kindPlace->title = 'غذاهای '.$kindSearch;
+                    $meta['title'] = 'عکس+دستور پخت+میزان کالری+ لیست تمامی غذاهای '.$kindSearch;
+                    $meta['keyword'] = 'غذاهای ' . $kindSearch . $locationName['name'] . ' ، غذاهای سنتی ' . $locationName['name'] . ' ، طرز تهیه غذای ' . $kindSearch . $locationName['name'] . ' ، دستور پخت غذای '.$kindSearch . $locationName['name'] . ' ، غذای '.$kindSearch . $locationName['name'] . ' چیست ، غذای سنتی ' . $locationName['name'] . ' چیست ، غذای مناسب برای افراد گیاه خوار، غذاهای مناسب برای افراد وگان ، غذاهای مناسب برای افراد دیابتی ، آش های محلی ' . $locationName['name'] . ' ، خورشت های ' . $locationName['name'] . ' ، خورش های ' . $locationName['name'] . ' ، خوراک های ' . $locationName['name'] ;
                     $meta['description'] = 'ما برای شما غذاهای محلی و سنتی ... همراه با دستور پخت و عکس و میزان کالری که شامل آش ها، سوپ ها، خورشت ها، خوراک ها ،شیرینی ها، نان ها، مربا ها و سالاد ها می باشد را جمع اوری کرده ایم.';
                     break;
                 case 12:
