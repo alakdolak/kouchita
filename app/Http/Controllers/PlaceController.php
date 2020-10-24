@@ -3130,15 +3130,15 @@ class PlaceController extends Controller {
                     if(isset($_GET['filter'])){
                         if($_GET['filter'] == 'diabet') {
                             $kindSearch = ' مناسب برای افراد دیابتی';
-                            $kindSearch2 = ' غذاهای افراد دیابتی';
+                            $kindSearch2 = ' غذاهای دیابتی';
                         }
                         elseif($_GET['filter'] == 'vegan'){
                             $kindSearch = ' مناسب برای افراد وگن';
-                            $kindSearch2 = ' غذاهای افراد وگن';
+                            $kindSearch2 = ' غذاهای وگن';
                         }
                         elseif($_GET['filter'] == 'vegetarian'){
                             $kindSearch = ' مناسب برای افراد گیاه خوار';
-                            $kindSearch2 = ' غذاهای افراد گیاه خوار';
+                            $kindSearch2 = ' غذاهای گیاه خوار';
                         }
                         else{
                             $kindSearch = 'محلی';
