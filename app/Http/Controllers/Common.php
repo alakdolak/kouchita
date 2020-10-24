@@ -995,7 +995,6 @@ function saveViewPerPage($kindPlaceId, $placeId){
 
     $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
     if(!(Cookie::has($value) == $value)) {
-
         try {
             $kindPlace = Place::find($kindPlaceId);
             if ($kindPlace != null)

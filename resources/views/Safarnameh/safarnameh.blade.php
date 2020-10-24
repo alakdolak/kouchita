@@ -250,7 +250,7 @@
                                     @endif
                                     <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                         <figure class="im-widget-thumb">
-                                            <a href="" title="{{$safarnameh->title}}">
+                                            <a href="{{route('safarnameh.show', ['id' => $safarnameh->id] )}}" title="{{$safarnameh->title}}">
                                                 <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
                                             </a>
                                         </figure>

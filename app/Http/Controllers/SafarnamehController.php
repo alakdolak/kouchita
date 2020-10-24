@@ -663,6 +663,14 @@ class SafarnamehController extends Controller
             if(!(auth()->check() && auth()->user()->id == $safarnameh->userId))
                 return \redirect()->back();
         }
+        $value = 'safarnamehId:'.$safarnameh->id;
+        if(!(\Cookie::has($value) == $value)) {
+            $safarnameh->seen++;
+            $safarnameh->save();
+            \Cookie::queue(\Cookie::make($value, $value, 5));
+        }
+
+
         $safarnameh = SafarnamehMinimalData($safarnameh);
         $safarnameh->youLike = 0;
         $safarnameh->bookMark = false;
@@ -700,9 +708,13 @@ class SafarnamehController extends Controller
 
         $uPic = getUserPic(\auth()->check() ? \auth()->user()->id : 0);
 
-        $localStorageData = ['kind' => 'place', 'name' => $safarnameh->title,
-                            'city' => '', 'state' => '',
-                            'mainPic' => $safarnameh->pic, 'redirect' => $safarnameh->url];
+        $localStorageData = [
+            'kind' => 'place', 'name' => $safarnameh->title,
+            'city' => '', 'state' => '',
+            'mainPic' => $safarnameh->pic,
+            'redirect' => $safarnameh->url
+        ];
+
 
         return view('Safarnameh.safarnamehShow', compact(['safarnameh', 'uPic', 'localStorageData', 'similarSafarnameh']));
     }
