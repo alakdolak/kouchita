@@ -2372,7 +2372,7 @@
         <script async src="{{URL::asset('js/album.js')}}"></script>
 
         <script>
-            var bookMarkDir = '{{route('profile.bookmark')}}';
+{{--            var bookMarkDir = '{{route('profile.bookmark')}}';--}}
             var getPlaceTrips = '{{route('placeTrips')}}';
             var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
             var soon = '{{route('soon')}}';

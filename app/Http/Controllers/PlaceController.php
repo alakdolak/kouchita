@@ -3145,8 +3145,10 @@ class PlaceController extends Controller {
                             $kindSearch2 = '';
                         }
                     }
-                    else
+                    else{
+                        $kindSearch2 = '';
                         $kindSearch = 'محلی';
+                    }
 
                     $errorTxt = [];
                     $errorTxt[0] = 'غذای محلی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
