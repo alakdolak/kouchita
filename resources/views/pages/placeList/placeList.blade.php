@@ -471,9 +471,9 @@
     var placeMode = '{{$placeMode}}';
     var floor = 1;
     var rateFilter = 0;
-    @if($kindPlaceId == 4 && $kindPlaceId == 12 && $kindPlaceId == 3)
+    @if($kindPlaceId == 4 || $kindPlaceId == 12 || $kindPlaceId == 3)
         var sort = "seen";
-    @elseif($kindPlaceId == 6 && $kindPlaceId == 1)
+    @elseif($kindPlaceId == 6 || $kindPlaceId == 1)
         var sort = "review";
     @elseif($kindPlaceId == 11)
         var sort = "lessSeen";
