@@ -480,6 +480,7 @@
     @else
         var sort = "alphabet";
     @endif
+
     var featureFilter = [];
     var nameFilter = '';
     var materialFilter = [];
