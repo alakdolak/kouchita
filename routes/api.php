@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'api'], function () {
 
+    Route::get('getPlacesForKoochitaTv', 'APIController@getPlacesForKoochitaTv')->name('api.getPlacesForKoochitaTv');
+
     Route::post('totalSearchAPI', array('as' => 'totalSearchAPI', 'uses' => 'APIController@totalSearchAPI'));
 
     Route::post('getCitiesOrStates', array('as' => 'getCitiesOrStates', 'uses' => 'APIController@getCitiesOrStates'));
