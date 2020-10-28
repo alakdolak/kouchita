@@ -52,8 +52,12 @@ class APIController extends Controller {
 
     public function getPlacesForKoochitaTv()
     {
+        $nowTime = Carbon::now()->getTimestamp();
         $ck = env("KOOCHITATV_NOUNC_CODE").'_'.$_GET['time'];
         $checkHash = Hash::check($ck, $_GET['code']);
+
+        if(($nowTime - $_GET['time']) > 1000)
+            return response('outTime');
 
         if($checkHash){
             $states = [];
