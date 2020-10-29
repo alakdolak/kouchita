@@ -435,7 +435,7 @@
             </div>
         </div>
 
-        <div id="userBannerModal" class="modalBlackBack hidden">
+        <div id="userBannerModal" class="modalBlackBack">
             <div class="userTripMainBody">
                 <div class="closeFullReview iconClose" onclick="closeMyModal('userBannerModal')"></div>
                 <div>
