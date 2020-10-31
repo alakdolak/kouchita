@@ -9,6 +9,7 @@ use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\Hotel;
 use App\models\LogModel;
+use App\models\logs\UserSeenLog;
 use App\models\MahaliFood;
 use App\models\MainSliderPic;
 use App\models\Place;
@@ -418,4 +419,12 @@ class MainController extends Controller
 //        }
     }
 
+    public function seenLogExport()
+    {
+        $log = UserSeenLog::where('url', '/placeList/1/country')
+                            ->where('relatedId', 0)
+                            ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
+                            ->get();
+        dd($log);
+    }
 }
