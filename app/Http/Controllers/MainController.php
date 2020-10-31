@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class MainController extends Controller
 {
@@ -419,17 +421,38 @@ class MainController extends Controller
 //        }
     }
 
-    public function seenLogExport()
+    public function seenLogExport($num)
     {
-        $log = UserSeenLog::where('url', '/placeList/1/country')
-                            ->where('relatedId', 0)
-                            ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
-                            ->get();
-        $zlog = UserSeenLog::where('url', '/placeList/1/country')
-                            ->where('seenTime', 0)
-                            ->where('relatedId', 0)
-                            ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
-                            ->get();
-        dd($zlog, $log);
+        if($num == 1)
+            $log = UserSeenLog::where('relatedId', 0)
+                                ->where('url', '/placeList/1/country')
+                                ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
+                                ->get();
+        else
+            $log = UserSeenLog::where('relatedId', 0)
+                                ->where('seenTime', 0)
+                                ->where('url', '/placeList/1/country')
+                                ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
+                                ->get();
+
+        $rowNum = 2;
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1','user_code');
+        $sheet->setCellValue('B1', 'in_page_time');
+        $sheet->setCellValue('C1', 'enter_time');
+
+        foreach ($log as $key => $item){
+            $sheet->setCellValue('A'.$rowNum, $item->userCode);
+            $sheet->setCellValue('B'.$rowNum, $item->seenTime);
+            $sheet->setCellValue('C'.$rowNum, $item->created_at);
+            $rowNum++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('seenLogExport.xlsx');
+
+        dd('finniish');
     }
 }
