@@ -849,3 +849,5 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 
     Route::post('getSurvey', array('as' => 'getSurvey', 'uses' => 'NotUseController@getSurvey'));
 });
+
+Route::get('seenLogExport', 'MainController@seenLogExport');
