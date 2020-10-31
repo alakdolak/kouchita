@@ -425,6 +425,11 @@ class MainController extends Controller
                             ->where('relatedId', 0)
                             ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
                             ->get();
-        dd($log);
+        $zlog = UserSeenLog::where('url', '/placeList/1/country')
+                            ->where('seenTime', 0)
+                            ->where('relatedId', 0)
+                            ->whereBetween('created_at', ['2020-10-29 00:00:00.000000', '2020-10-29 02:00:00.000000'])
+                            ->get();
+        dd($zlog, $log);
     }
 }
