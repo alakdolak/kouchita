@@ -14,6 +14,12 @@ Route::get('seeLanguage', function(){
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
+Route::domain('business.'.env('ROUTURL'))->group(function () {
+    Route::get('/', function () {
+        dd('hello to subdomain');
+    });
+});
+
 //sitemap
 Route::group(array(), function(){
     Route::get('/sitemap.xml', 'SitemapController@index');

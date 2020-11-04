@@ -11,8 +11,8 @@
 <meta property="og:site_name" content="سامانه جامع گردشگری کوچیتا" />
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
-<link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
-<link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
+<link rel="icon" href="{{URL::asset('images/icons/KOFAV0.svg')}}" sizes="any" type="image/svg+xml">
+<link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/KOFAV0.svg')}}" sizes="any" type="image/svg+xml">
 
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css?v='.$fileVersions)}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css?v='.$fileVersions)}}' />
