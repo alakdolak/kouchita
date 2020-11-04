@@ -14,6 +14,13 @@ Route::get('seeLanguage', function(){
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
+Route::domain('{account}.koochita.com')->group(function () {
+    Route::get('/', function ($account) {
+        dd($account, 'hello');
+    });
+});
+
+
 //sitemap
 Route::group(array(), function(){
     Route::get('/sitemap.xml', 'SitemapController@index');
