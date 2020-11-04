@@ -14,12 +14,11 @@ Route::get('seeLanguage', function(){
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
-Route::domain('{account}.koochita.com')->group(function () {
-    Route::get('/', function ($account) {
-        dd($account, 'hello');
+Route::domain('business.'.env('ROUTURL'))->group(function () {
+    Route::get('/', function () {
+        dd('hello to subdomain');
     });
 });
-
 
 //sitemap
 Route::group(array(), function(){
