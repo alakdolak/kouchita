@@ -50,7 +50,7 @@
                 <span>follower</span>
             </div>
             <div id="ifYouCanSeeFollowing" class="resultFollowingTab hidden" onclick="openFromInPageFollower('resultFollowing')">
-                <span class="followingNumber" style="font-weight: bold;">{{$followingCount}}</span>
+                <span class="followingNumber" style="font-weight: bold;">{{isset($followingCount) ? $followingCount : ''}}</span>
                 <span>following</span>
             </div>
         </div>
@@ -74,9 +74,7 @@
                                 '   <div class="buttonP placeHolderAnime resultLineAnim"></div>\n' +
                                 '</div>';
 
-    function openFromInPageFollower(_kind){
-        openFollowerModal(_kind, getUserFollowerInPage);
-    }
+    openFromInPageFollowe = _kind =>  openFollowerModal(_kind, getUserFollowerInPage);
 
     function openFollowerModal(_kind, _forWho = 0){
         lastFollowerModalOpenPage = _kind;

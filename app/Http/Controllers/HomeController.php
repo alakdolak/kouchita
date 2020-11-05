@@ -316,7 +316,7 @@ class HomeController extends Controller
             $place->state = State::whereId($place->stateId)->name;
             $place->listName = $place->name;
             $place->name = 'شهر ' . $place->name;
-            $articleUrl = \url('/article/list/city/' . $place->listName);
+            $articleUrl = route('safarnameh.list', ['type' => 'city', 'search' => $place->listName]);
             $locationName = ["name" => $place->name, 'state' => $place->state, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
@@ -370,7 +370,7 @@ class HomeController extends Controller
         else {
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
-            $articleUrl = \url('/article/list/state/' . $place->listName);
+            $articleUrl = route('safarnameh.list', ['type' => 'state', 'search' => $place->listName]);
             $locationName = ["name" => $place->name, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
 
             $allCities = Cities::where('stateId', $place->id)->where('isVillage',0)->pluck('id')->toArray();

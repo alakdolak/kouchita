@@ -6,6 +6,7 @@ use App\models\Amaken;
 use App\models\Cities;
 use App\models\Place;
 use App\models\Post;
+use App\models\Safarnameh;
 use App\models\State;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,6 +52,7 @@ class SitemapController extends Controller
             url('placeList/6/country'),
             url('placeList/10/country'),
             url('placeList/11/country'),
+            url('placeList/12/country'),
         ];
 
         foreach ($state as $item){
@@ -81,13 +83,12 @@ class SitemapController extends Controller
     {
         $today = getToday()["date"];
         $nowTime = getToday()["time"];
-        $post = Post::whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND  (post.time <= ' . $nowTime . ' OR post.time IS NULL)))')->select(['id', 'title', 'slug', 'created_at'])->get();
+        $post = Safarnameh::whereRaw('(Safarnameh.date < ' . $today . ' OR (Safarnameh.date = ' . $today . ' AND  (Safarnameh.time <= ' . $nowTime . ' OR Safarnameh.time IS NULL)))')->select(['id', 'title', 'slug', 'created_at'])->get();
 
         $lists = array();
         foreach ($post as $item) {
             if($item->slug != null && $item->slug != '') {
-                $slug = urlencode($item->slug);
-                $l = url('/article/' . $slug);
+                $l = url('/safarnameh/show/'.$item->id);
                 array_push($lists, [$l, $item->created_at]);
             }
         }

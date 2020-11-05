@@ -25,6 +25,10 @@ use Illuminate\Http\Request;
 
 class SafarnamehController extends Controller
 {
+    public function safarnamehListRedirect($type, $search)
+    {
+        return redirect(route('safarnameh.list', ['type' => $type, 'search' => $search]));
+    }
     public function storeSafarnameh(Request $request)
     {
         $user = \Auth::user();
