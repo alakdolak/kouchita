@@ -11,10 +11,29 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/pages/profile.css?v1='.$fileVersions)}}">
+
+    <script>
+        var allUserPics = {!! json_encode($sideInfos['allUserPics']) !!};
+        var selectedTrip = [];
+        var userPageId = {{$user->id}};
+        var openMobileMoreMenu = false;
+        var defaultPics = null;
+        var choosenPic = 0;
+        var uploadedPic = null;
+        var mainUploadedPic = null;
+
+        let bannerPics = null;
+        let chosenBannerPic = null;
+        let mainUploadedBanner = false;
+        let uploadedBanner = false;
+        let cropKind = null;
+    </script>
 @stop
 
 @section('main')
+
     @include('component.smallShowReview')
+
     @include('component.safarnamehRow')
 
     <div class="userPostsPage">
@@ -556,21 +575,7 @@
         </div>
     @endif
 
-
     <script>
-        autosize(document.getElementsByClassName("inputBoxInputSearch"));
-        autosize(document.getElementsByClassName("inputBoxInputAnswer"));
-        autosize(document.getElementsByClassName("inputBoxInputComment"));
-
-        let allUserPics = {!! json_encode($sideInfos['allUserPics']) !!};
-        let selectedTrip = [];
-        let userPageId = {{$user->id}};
-        let openMobileMoreMenu = false;
-        let defaultPics = null;
-        let choosenPic = 0;
-        let uploadedPic = null;
-        let mainUploadedPic = null;
-
         $(window).on('scroll', () =>{
             let top = document.getElementById('stickyProfileHeader').getBoundingClientRect().top;
             let elem = $('.mobileTabs')[0];
@@ -584,7 +589,6 @@
             if(openMobileMoreMenu && !$('#myMenuMoreTab').hasClass('hidden'))
                 $('#myMenuMoreTab').addClass('hidden');
         });
-
 
         function showFullUserInfoInMobile(_elems) {
             $(_elems).parent().toggleClass('show');
@@ -886,14 +890,11 @@
         else if(url.hash != '')
             changePages(url.hash.replace("#", ""));
 
-    </script>
-
-    <script>
-        let bannerPics = null;
-        let chosenBannerPic = null;
-        let mainUploadedBanner = false;
-        let uploadedBanner = false;
-        let cropKind = null;
+        $(window).on('ready', () => {
+            autosize(document.getElementsByClassName("inputBoxInputSearch"));
+            autosize(document.getElementsByClassName("inputBoxInputAnswer"));
+            autosize(document.getElementsByClassName("inputBoxInputComment"));
+        })
 
         function openBannerModal() {
             getBannerPic();
@@ -1224,5 +1225,6 @@
                 });
             }
         }
+
     </script>
 @stop

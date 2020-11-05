@@ -4,11 +4,8 @@
     <div class="ppr_rup ppr_priv_homepage_shelves">
 
         <div class="mainSuggestionMainDiv">
-
             <div class="hideOnScreen row">
                 <div class="boxOFSquareDiv">
-
-
                     <div class="squareDiv" onclick="openMainSearch(11)">
                         <div class="phoneIcon ghazamahali"></div>
                         <div class="textIcon">{{__('غذای محلی')}}</div>
@@ -110,7 +107,7 @@
                             </div>
                             <div class="slide__bg-dark"></div>
                             <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-                                <img src="{{URL::asset('images/icons/instagram.png')}}">
+                                <img src="{{URL::asset('images/icons/instagram.webp')}}">
                             </a>
                         </div>
                     @endfor
@@ -407,20 +404,19 @@
                         <button type="button" id='banner3_right' class='rightButton sliderButton' name="button">
                             <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
-                   <g>
-                       <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
-                      "/>
-                   </g>
+                               <g>
+                                   <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/>
+                               </g>
 
-                </svg>
+                            </svg>
                         </button>
                         <button type="button" id='banner3_left' class='leftButton sliderButton' name="button">
                             <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
-                   <g>
-                       <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/>
-                   </g>
-                </svg>
+                               <g>
+                                   <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/>
+                               </g>
+                            </svg>
                         </button>
 
                         <svg id='svg2' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -446,42 +442,42 @@
                             <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
                         </svg>
 
-                        <div id='slide1' class='mainBlubSlider up1' style="background-image: url('{{$middleBan['4'][0]['pic']}}'); ">{{$middleBan['4'][0]['text']}}</div>
-                        @for($i = 1; $i < count($middleBan['4']); $i++)
-                            <div id='slide{{$i+1}}' class='mainBlubSlider' style="background-image: url('{{$middleBan['4'][$i]['pic']}}'); ">{{$middleBan['4'][$i]['text']}}</div>
-                        @endfor
+                        <div id="middleBan4Body">
+{{--                            <div id='slide1' class='mainBlubSlider up1' style="background-image: url('{{$middleBan['4'][0]['pic']}}'); ">{{$middleBan['4'][0]['text']}}</div>--}}
+{{--                            @for($i = 1; $i < count($middleBan['4']); $i++)--}}
+{{--                                <div id='slide{{$i+1}}' class='mainBlubSlider' style="background-image: url('{{$middleBan['4'][$i]['pic']}}'); ">{{$middleBan['4'][$i]['text']}}</div>--}}
+{{--                            @endfor--}}
+                        </div>
                     </div>
                 </div>
                 <script>
-
+                    var Baner4isLoaded = false;
                     var curpage = 1;
-                    var totalPageSlide = {{count($middleBan['4'])}};
+                    var totalPageSlide = {{isset($middleBan['4']) ? count($middleBan['4']) : 0}};
                     var sliding = false;
                     var click = true;
                     var left = document.getElementById("banner3_left");
                     var right = document.getElementById("banner3_right");
-                    var pagePrefix = "slide";
+                    var pagePrefixBanner4 = "slide";
                     var pageShift = 500;
                     var transitionPrefix = "circle";
                     var svg = true;
 
                     function leftSlide() {
-                        if (click) {
+                        if (click && Baner4isLoaded) {
                             if (curpage == 1) curpage = totalPageSlide+1;
                             sliding = true;
                             curpage--;
                             svg = true;
                             click = false;
                             for (k = 1; k <= totalPageSlide; k++) {
-                                var a1 = document.getElementById(pagePrefix + k);
+                                var a1 = document.getElementById(pagePrefixBanner4 + k);
                                 a1.className += " tran";
                             }
-                            setTimeout(() => {
-                                move();
-                            }, 200);
+                            setTimeout(() => move(), 200);
                             setTimeout(() => {
                                 for (k = 1; k <= totalPageSlide; k++) {
-                                    var a1 = document.getElementById(pagePrefix + k);
+                                    var a1 = document.getElementById(pagePrefixBanner4 + k);
                                     a1.classList.remove("tran");
                                 }
                             }, 1400);
@@ -489,22 +485,20 @@
                     }
 
                     function rightSlide() {
-                        if (click) {
+                        if (click && Baner4isLoaded) {
                             if (curpage == totalPageSlide) curpage = 0;
                             sliding = true;
                             curpage++;
                             svg = false;
                             click = false;
                             for (k = 1; k <= totalPageSlide; k++) {
-                                var a1 = document.getElementById(pagePrefix + k);
+                                var a1 = document.getElementById(pagePrefixBanner4 + k);
                                 a1.className += " tran";
                             }
-                            setTimeout(() => {
-                                move();
-                            }, 200);
+                            setTimeout(() => move(), 200);
                             setTimeout(() => {
                                 for (k = 1; k <= totalPageSlide; k++) {
-                                    var a1 = document.getElementById(pagePrefix + k);
+                                    var a1 = document.getElementById(pagePrefixBanner4 + k);
                                     a1.classList.remove("tran");
                                 }
                             }, 1400);
@@ -512,7 +506,7 @@
                     }
 
                     function move() {
-                        if (sliding) {
+                        if (sliding && Baner4isLoaded) {
                             sliding = false;
                             if (svg) {
                                 for (j = 1; j <= 9; j++) {
@@ -530,10 +524,10 @@
                             setTimeout(() => {
                                 for (i = 1; i <= totalPageSlide; i++) {
                                     if (i == curpage) {
-                                        var a = document.getElementById(pagePrefix + i);
+                                        var a = document.getElementById(pagePrefixBanner4 + i);
                                         a.className += " up1";
                                     } else {
-                                        var b = document.getElementById(pagePrefix + i);
+                                        var b = document.getElementById(pagePrefixBanner4 + i);
                                         b.classList.remove("up1");
                                     }
                                 }
@@ -565,24 +559,17 @@
                         }
                     }
 
-                    left.onmousedown = () => {
-                        leftSlide();
-                    };
+                    left.onmousedown = () => leftSlide();
 
-                    right.onmousedown = () => {
-                        rightSlide();
-                    };
+                    right.onmousedown = () =>  rightSlide();
 
                     document.onkeydown = e => {
-                        if (e.keyCode == 37) {
+                        if (e.keyCode == 37)
                             leftSlide();
-                        } else if (e.keyCode == 39) {
+                        else if (e.keyCode == 39)
                             rightSlide();
-                        }
                     };
-                    setInterval(function (){
-                        rightSlide();
-                    }, 8000);
+                    setInterval(() => rightSlide(), 8000);
                 </script>
             @endif
 
@@ -605,32 +592,11 @@
             </div>
 
             {{--banner_5--}}
-            @if(isset($middleBan['5']) && count($middleBan['5']) > 0)
-                <div class="threeSlider swiper-container">
-                    <div class="swiper-wrapper position-relative">
-                        <?php
-                        $middleBanColor5 = ['red', 'green', 'navy'];
-                        ?>
-                        @for($i = 0; $i < count($middleBan['5']); $i++)
-                            <div class="swiper-slide position-relative">
-                                <figure class="snip1091 {{$middleBanColor5[$i%3]}}">
-                                    <img src="{{$middleBan['5'][$i]['pic']}}" class="resizeImgClass" style="width: 100%"/>
-                                    <figcaption>
-                                        <h2>
-                                            {{$middleBan['5'][$i]['text']}}
-                                        </h2>
-                                    </figcaption>
-                                    @if($middleBan['5'][$i]['link'] != '')
-                                        <a href="{{$middleBan['5'][$i]['link']}}"></a>
-                                    @endif
-                                </figure>
-                            </div>
-                        @endfor
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            @endif
+            <div class="threeSlider swiper-container hidden">
+                <div id="cityMainPageSlider" class="swiper-wrapper position-relative"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
 
             <div id="tarikhiSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
@@ -655,7 +621,7 @@
                     <div class="eachPartStatisticIcons articleStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['article']}}</span>
+                        <span class="safarnamehCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('مقاله')}}</div>
                 </div>{{--
@@ -663,7 +629,7 @@
                     <div class="eachPartStatisticIcons friendStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['userCount']}}</span>
+                        <span class="userCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('دوست')}}</div>
                 </div>{{--
@@ -671,7 +637,7 @@
                     <div class="eachPartStatisticIcons commentStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['comment']}}</span>
+                        <span class="commentCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('نظر')}}</div>
                 </div>{{--
@@ -679,7 +645,7 @@
                     <div class="eachPartStatisticIcons traditionalFoodStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['mahaliFood']}}</span>
+                        <span class="mahaliFoodCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('غذای محلی')}}</div>
                 </div>{{--
@@ -687,7 +653,7 @@
                     <div class="eachPartStatisticIcons souvenirStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['sogatSanaie']}}</span>
+                        <span class="sogatSanaieCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('سوغات')}}</div>
                 </div>{{--
@@ -695,7 +661,7 @@
                     <div class="eachPartStatisticIcons handcraftStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['sogatSanaie']}}</span>
+                        <span class="sogatSanaieCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('صنایع‌دستی')}}</div>
                 </div>{{--
@@ -703,7 +669,7 @@
                     <div class="eachPartStatisticIcons attractionStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['amaken']}}</span>
+                        <span class="amakenCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('جاذبه')}}</div>
                 </div>{{--
@@ -711,7 +677,7 @@
                     <div class="eachPartStatisticIcons restaurantStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['restaurant']}}</span>
+                        <span class="restaurantCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__("رستوران")}}</div>
                 </div>{{--
@@ -719,7 +685,7 @@
                     <div class="eachPartStatisticIcons residenceStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['hotel']}}</span>
+                        <span class="hotelCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('اقامتگاه')}}</div>
                 </div>{{--
@@ -727,7 +693,7 @@
                     <div class="eachPartStatisticIcons boom"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
-                        <span>{{$count['boomgardy']}}</span>
+                        <span class="boomgardyCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('بوم گردی')}}</div>
                 </div>
@@ -787,12 +753,14 @@
 </div>
 
 <script>
+    var middleBan5Color = ['red', 'green', 'navy'];
+    var middleBan5 = {!! isset($middleBan['5']) ? $middleBan['5'] : json_encode([]) !!};
+    var middleBan4 = {!! isset($middleBan['4']) ? $middleBan['4'] : json_encode([]) !!};
+
     let loadSuggestion = false;
     let lastPageForSuggestion = null;
     let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topSafarnameh'];
-    divNames.forEach(item => {
-        createSuggestionPackPlaceHolder(item);
-    });
+    divNames.forEach(item => createSuggestionPackPlaceHolder(item));
 
     if (typeof(Storage) !== "undefined") {
         let lastPages;
@@ -802,7 +770,7 @@
         console.log('your browser not support localStorage');
 
     function ajaxToFillMainPageSuggestion(){
-
+        loadMainPageSliders();
         $.ajax({
             type: 'post',
             url: '{{route("getMainPageSuggestion")}}',
@@ -813,8 +781,81 @@
             success: function(response){
                 response = JSON.parse(response);
                 createMainPageSuggestion(response);
+                fillCountNumber(response.count);
             }
         })
+    }
+
+    function loadMainPageSliders(){
+        var text = '';
+        if(middleBan5.length > 0){
+            $('#cityMainPageSlider').parent().removeClass('hidden');
+            middleBan5.map((item, index) => {
+                text += `<div class="swiper-slide position-relative">
+                                   <figure class="snip1091 ${middleBan5Color[index%3]}">
+                                       <img src="${item.pic}" class="resizeImgClass" style="width: 100%"/>
+                                       <figcaption>
+                                           <h2>${item.text}</h2>
+                                       </figcaption>
+                                       ${ item.link != '' ? `<a href="${item.link}"></a>` : '' }
+                                   </figure>
+                                </div>`
+            });
+            $('#cityMainPageSlider').html(text);
+
+            new Swiper('.threeSlider', {
+                slidesPerGroup: 1,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    450: {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                    },
+                    520: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    10000: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    }
+                }
+            });
+        }
+        else
+            $('#cityMainPageSlider').parent().remove();
+
+
+        if(middleBan4.length > 0){
+            Baner4isLoaded = true;
+            var Ban4Text = '';
+            middleBan4.map((item, index) => Ban4Text += `<div id='slide${index+1}' class='mainBlubSlider ${index == 0 ? 'up1' : ''}' style="background-image: url('${item.pic}'); ">${item.text}</div>`)
+            $('#middleBan4Body').html(Ban4Text);
+        }
+        else
+            $('#middleBan4Body').parent().parent().remove();
+    }
+
+    function fillCountNumber(_counts){
+        // CountMiddleBanner
+        $('.safarnamehCountMiddleBanner').text(_counts.safarnameh);
+        $('.userCountMiddleBanner').text(_counts.userCount);
+        $('.commentCountMiddleBanner').text(_counts.comment);
+        $('.mahaliFoodCountMiddleBanner').text(_counts.mahaliFood);
+        $('.sogatSanaieCountMiddleBanner').text(_counts.sogatSanaie);
+        $('.amakenCountMiddleBanner').text(_counts.amaken);
+        $('.restaurantCountMiddleBanner').text(_counts.restaurant);
+        $('.hotelCountMiddleBanner').text(_counts.hotel);
+        $('.boomgardyCountMiddleBanner').text(_counts.boomgardy);
     }
 
     function createMainPageSuggestion(_result){
@@ -907,34 +948,6 @@
 
     // this run function for mainArticlaSwiperMainPage
     runMainSwiper('mainArticlaSwiperMainPage');
-
-    new Swiper('.threeSlider', {
-        slidesPerGroup: 1,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            450: {
-                slidesPerView: 1,
-                spaceBetween: 0,
-            },
-            520: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            10000: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            }
-        }
-    });
 
     function showAlt(elm) {
         $(elm).parent().next().removeClass('display-none')

@@ -191,13 +191,13 @@
             <div class="footerSocialDiv">
                 <div class="footerSocial">
                     <a href="#" class="socialIcon">
-                        <img src="https://koochita.com/images/icons/linkedin.png" style="width: 100%; height: 100%">
+                        <img src="https://koochita.com/images/icons/linkedin.webp" style="width: 100%; height: 100%">
                     </a>
                     <div class="socialName"></div>
                 </div>
                 <div class="footerSocial">
                     <a href="#" class="socialIcon">
-                        <img src="https://koochita.com/images/icons/facebook.png" style="width: 100%; height: 100%">
+                        <img src="https://koochita.com/images/icons/facebook.webp" style="width: 100%; height: 100%">
                     </a>
                     <div class="socialName"></div>
                 </div>
@@ -209,7 +209,7 @@
                 </div>
                 <div class="footerSocial">
                     <a href="#" class="socialIcon">
-                        <img src="https://koochita.com/images/icons/instagram.png" style="width: 100%; height: 100%">
+                        <img src="https://koochita.com/images/icons/instagram.webp" style="width: 100%; height: 100%">
                     </a>
                     <div class="socialName"></div>
                 </div>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="footerSocial">
                     <a href="#" class="socialIcon">
-                        <img src="https://koochita.com/images/icons/aparat.png" style="width: 100%; height: 100%">
+                        <img src="https://koochita.com/images/icons/aparat.webp" style="width: 100%; height: 100%">
                     </a>
                     <div class="socialName"></div>
                 </div>
@@ -250,13 +250,13 @@
 {{--                <div class="footerSocialDiv">--}}
 {{--                    <div class="footerSocial">--}}
 {{--                        <a href="#" class="socialIcon">--}}
-{{--                            <img src="https://koochita.com/images/icons/linkedin.png" style="width: 100%; height: 100%">--}}
+{{--                            <img src="https://koochita.com/images/icons/linkedin.webp" style="width: 100%; height: 100%">--}}
 {{--                        </a>--}}
 {{--                        <div class="socialName"></div>--}}
 {{--                    </div>--}}
 {{--                    <div class="footerSocial">--}}
 {{--                        <a href="#" class="socialIcon">--}}
-{{--                            <img src="https://koochita.com/images/icons/facebook.png" style="width: 100%; height: 100%">--}}
+{{--                            <img src="https://koochita.com/images/icons/facebook.webp" style="width: 100%; height: 100%">--}}
 {{--                        </a>--}}
 {{--                        <div class="socialName"></div>--}}
 {{--                    </div>--}}
@@ -268,7 +268,7 @@
 {{--                    </div>--}}
 {{--                    <div class="footerSocial">--}}
 {{--                        <a href="#" class="socialIcon">--}}
-{{--                            <img src="https://koochita.com/images/icons/instagram.png" style="width: 100%; height: 100%">--}}
+{{--                            <img src="https://koochita.com/images/icons/instagram.webp" style="width: 100%; height: 100%">--}}
 {{--                        </a>--}}
 {{--                        <div class="socialName"></div>--}}
 {{--                    </div>--}}
@@ -280,7 +280,7 @@
 {{--                    </div>--}}
 {{--                    <div class="footerSocial">--}}
 {{--                        <a href="#" class="socialIcon">--}}
-{{--                            <img src="https://koochita.com/images/icons/aparat.png" style="width: 100%; height: 100%">--}}
+{{--                            <img src="https://koochita.com/images/icons/aparat.webp" style="width: 100%; height: 100%">--}}
 {{--                        </a>--}}
 {{--                        <div class="socialName"></div>--}}
 {{--                    </div>--}}

@@ -266,7 +266,7 @@ if ($total == 0)
                     <div id="targetHelp_9" class="targets  float-left">
                         <div id="bestPriceInnerDiv" class="tvSection">
                             <a href="https://koochitatv.com" class="tvLogoDiv" target="_blank">
-                                <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" style="max-height: 100%; max-width: 100%;">
+                                <img src="{{URL::asset('images/mainPics/vodLobo.webp')}}" style="max-height: 100%; max-width: 100%;">
                             </a>
                             <div class="tvContentDiv">
                                 <div class="tvContentText">
@@ -275,7 +275,7 @@ if ($total == 0)
                                 <div class="tvContentVideo">
                                     <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoPic" target="_blank">
                                         <div class="tvImgHover">
-                                            <img src="{{URL::asset('images/icons/play.png')}}" style="width: 50px">
+                                            <img src="{{URL::asset('images/icons/play.webp')}}" style="width: 50px">
                                         </div>
                                         <div class="tvOverPic tvSeenSection">
                                             <span>10</span>
@@ -293,7 +293,7 @@ if ($total == 0)
                                         </div>
                                         <img src="https://static.koochita.com/_images/video/68/1593441472836.jpg" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                     </a>
-                                    <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoName showLessText" target="_blank">
+                                    <a href="{{URL::asset('images/test/1593441472836.webp')}}" class="tvVideoName showLessText" target="_blank">
                                         گفت و گو با نوا جمشیدی
                                     </a>
                                     <div class="tvUserContentDiv">

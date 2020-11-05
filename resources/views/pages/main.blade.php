@@ -52,32 +52,6 @@
 
 <body style="background-color: #EAFBFF;">
 
-    <div id="landingModal" class="modalBlackBack" style="z-index: 9999;">
-        <div class="landingPicture">
-            <span class="iconClose closeLanding" onclick="$('#landingModal').hide();"></span>
-            <div class="landingClick" onclick="goToLanding()">
-                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/Layer 5.jpg')}}" class="resizeImgClass">
-
-                <div class="sidePics1">
-                    <div class="topSidePic1">
-                        <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/www.koochita.com.png')}}" style="height: 100%">
-                    </div>
-                    <div class="bottomSidePic1">
-                        <img src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 60px; top: 10px; right: 0px;">
-                        <img class="travelUsImg" src="{{URL::asset('images/camping/' . app()->getLocale() . '/Layer 14.png')}}">
-                        <button class="btn btn-primary topStartButton" onclick="startFunc()">
-                            {{__('freeTranslate.همین حالا')}}
-                            <span class="startChar">
-                                 {{__('freeTranslate.شروع')}}
-                            </span>
-                            {{__('freeTranslate.کنید')}}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     @include('general.forAllPages')
 
     @include('layouts.header1')

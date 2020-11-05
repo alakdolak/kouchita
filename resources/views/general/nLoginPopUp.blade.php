@@ -54,7 +54,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
     <div id="loginPopUp" class="loginPopUpContent">
         <div class="loginHeader row">
             <div class="iconFamily iconClose loginCloseIcon" onclick="closeLoginPopup()"></div>
-            <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
+            <img class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
         </div>
 
         <div class="loginTextHeader row">
@@ -144,7 +144,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         <div class="registerRightSection">
 
             <div id="registerMainLogo">
-                <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
+                <img class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
             </div>
 
             <div>
@@ -335,7 +335,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         </div>
 
         <div class="registerLeftSection">
-            <img src="{{URL::asset('images/mainPics/bck.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+            <img src="{{URL::asset('images/mainPics/bck.webp')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
 
     </div>

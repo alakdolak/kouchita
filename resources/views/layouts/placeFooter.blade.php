@@ -683,7 +683,7 @@
                                 <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('صنایع دستی')}} </a>
                                 <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
                                     {{__('تلویزیون گردشگری کوچیتا')}}
-                                    <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
+                                    <img src="{{URL::asset('images/mainPics/vodLoboMobile.webp')}}" alt="koochitatv" style="height: 25px">
                                 </a>
 
                                 @if($locationName['kindState'] == 'city')
@@ -722,7 +722,7 @@
 
                                 <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
                                     {{__('تلویزیون گردشگری کوچیتا')}}
-                                    <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
+                                    <img src="{{URL::asset('images/mainPics/vodLoboMobile.webp')}}" alt="koochitatv" style="height: 25px">
                                 </a>
                             </div>
                             <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">

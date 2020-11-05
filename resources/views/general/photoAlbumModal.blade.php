@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div id="deletePicIconsPhotoAlbum" class="deletePicIconsPhotoAlbum" dataValue="0" onclick="openDeletePhotoModal()">
-                                <img src="{{URL::asset('images/icons/recycle-bin3.png')}}" style="width: 35px; height: 35px">
+                                <img src="{{URL::asset('images/icons/recycle-bin3.webp')}}" style="width: 35px; height: 35px">
                             </div>
                         </div>
                     </div>
