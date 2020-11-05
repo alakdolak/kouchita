@@ -26,7 +26,8 @@
 <script async src="{{URL::asset('js/defualt/bootstrap.min.js')}}"></script>
 <script async src="{{URL::asset('js/angular.js')}}"></script>
 <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-<script async src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<script defer src="{{URL::asset('js/defualt/autosize.min.js')}}"></script>
+{{--<script defer src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>--}}
 
 <style>
 
