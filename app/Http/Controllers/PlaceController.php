@@ -1735,7 +1735,7 @@ class PlaceController extends Controller {
 
             $photoFilters = DB::select("select name, id, (SELECT count(*) FROM log WHERE placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and activityId = " . $activityId . " and pic = picItems.id) as countNum FROM picItems WHERE kindPlaceId = " . $kindPlaceId);
 
-            $userPic = URL::asset('images/icons/mainIcon.svg');
+            $userPic = URL::asset('images/icons/KOFAV0.svg');
 
             switch ($kindPlaceId) {
                 case 1:

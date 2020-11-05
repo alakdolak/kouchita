@@ -114,7 +114,7 @@
 
     <div>
     <div class="text">
-        <img style="width: 200px; margin-top: 20px" src="{{URL::asset('images/icons/mainIcon.svg')}}">
+        <img style="width: 200px; margin-top: 20px" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
     </div>
     <h2 style="text-align: center">{{$trip->name}}</h2>
 

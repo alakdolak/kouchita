@@ -21,7 +21,7 @@ class FestivalController extends Controller
         $selectedPic = (object)[
             'title' => 'کوچیتا | فستیوال ایران ما',
             'description' => 'در جشنواره ایران ما شرکت کنید',
-            'pic' => \URL::asset('images/icons/mainIcon.svg'),
+            'pic' => \URL::asset('images/icons/KOFAV0.svg'),
             'kind' => 'photo',
             'section' => 'main',
             'code' => 0,

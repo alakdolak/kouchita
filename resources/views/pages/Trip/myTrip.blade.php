@@ -202,7 +202,7 @@
                                                     <div class="row picSec">
                                                         @if(count($trip->placePic) == 0)
                                                             <div class="cardPics cardPics-1" style="height: 200px; background: gainsboro;">
-                                                                <img src="{{URL::asset('images/icons/mainIcon.svg')}}">
+                                                                <img src="{{URL::asset('images/icons/KOFAV0.svg')}}">
                                                             </div>
                                                         @elseif(count($trip->placePic) == 1)
                                                             <div class="cardPics cardPics-1" style="height: 200px;">
@@ -243,7 +243,7 @@
                                                         {{--                                                    @if(count($trip->placePic) > 0)--}}
                                                         {{--                                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->placePic[0]}}') repeat 0 0; background-size: 100% 100%"></div>--}}
                                                         {{--                                                    @else--}}
-                                                        {{--                                                        <div class="trip-image trip-image-empty ui_column is-12" style="background: url('{{URL::asset('images/icons/mainIcon.svg')}}') repeat 0 0; background-size: cover"></div>--}}
+                                                        {{--                                                        <div class="trip-image trip-image-empty ui_column is-12" style="background: url('{{URL::asset('images/icons/KOFAV0.svg')}}') repeat 0 0; background-size: cover"></div>--}}
                                                         {{--                                                    @endif--}}
                                                         {{--                                                    @if(count($trip->placePic) > 1)--}}
                                                         {{--                                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->placePic[1]}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
