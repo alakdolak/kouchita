@@ -291,9 +291,9 @@ if ($total == 0)
                                                 <i class="LikeIcon"></i>
                                             </div>
                                         </div>
-                                        <img src="https://static.koochita.com/_images/video/68/1593441472836.jpg" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                        <img src="{{URL::asset('images/test/1593441472836.webp')}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                     </a>
-                                    <a href="{{URL::asset('images/test/1593441472836.webp')}}" class="tvVideoName showLessText" target="_blank">
+                                    <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoName showLessText" target="_blank">
                                         گفت و گو با نوا جمشیدی
                                     </a>
                                     <div class="tvUserContentDiv">
