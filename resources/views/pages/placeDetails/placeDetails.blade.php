@@ -39,15 +39,15 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v=1')}}">
 
-    <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+    <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
     {{--vr--}}
     @if(isset($video) && $video != null)
         <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v=1')}}">
         <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v=1')}}">
-        <script src="{{URL::asset('vr2/video.js')}}"></script>
-        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
+        <script defer src="{{URL::asset('vr2/video.js')}}"></script>
+        <script defer src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
     @endif
 
     <script>
@@ -90,13 +90,13 @@ if ($total == 0)
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
     </script>
 
-    <script src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
-    <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
-    <script src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
+    <script defer src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
+    <script defer src= {{URL::asset("js/calendar.js") }}></script>
+    <script defer src= {{URL::asset("js/jalali.js") }}></script>
+    <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
+    <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
-    <script src="{{URL::asset('js/adv.js')}}"></script>
+    <script defer src="{{URL::asset('js/adv.js')}}"></script>
 
     <style>
         .albumInfo{
@@ -252,7 +252,7 @@ if ($total == 0)
                 @if(auth()->check())
                     @include('pages.placeDetails.component.writeReviewSection')
                 @else
-                    <script !src="">
+                    <script>
                         function newPostModal(kind = '') {
                             if (!hasLogin) {
                                 showLoginPrompt('{{Request::url()}}');
@@ -1770,7 +1770,7 @@ if ($total == 0)
             @endif
         </script>
         @if(session('backDate') != null)
-            <script src="{{URL::asset('js/hotelDetails/roomReservation.js')}}"></script>
+            <script defer src="{{URL::asset('js/hotelDetails/roomReservation.js')}}"></script>
             <script>
                 var updateSession = '{{route("updateSession")}}';
                 document.getElementById('backDate').value = '{{session("backDate")}}';

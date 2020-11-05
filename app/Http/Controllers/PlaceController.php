@@ -3049,6 +3049,7 @@ class PlaceController extends Controller {
                 $contentCount = \DB::table($kindPlace->tableName)->whereIn('cityId', $cityIds)->count();
             }
             else if ($mode == "city") {
+                $city = str_replace('+', ' ', $city);
                 $city = Cities::whereName($city)->first();
                 if ($city == null)
                     return "نتیجه ای یافت نشد";
@@ -3057,7 +3058,7 @@ class PlaceController extends Controller {
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
-                $articleUrl = \url('/article/list/city/' . $city->name);
+                $articleUrl = route('safarnameh.list', ['type' => 'city', 'search' => $city->name]);
                 $n = ' شهر ' . $city->name;
                 $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'list'];
 

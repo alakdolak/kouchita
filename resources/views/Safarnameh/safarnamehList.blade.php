@@ -122,7 +122,7 @@
 @endsection
 
 @section('script')
-    <script type='text/javascript' src='{{URL::asset('js/article/searchArticle.js')}}'></script>
+    <script async type='text/javascript' src='{{URL::asset('js/article/searchArticle.js')}}'></script>
 
     <script>
         var page = 1;

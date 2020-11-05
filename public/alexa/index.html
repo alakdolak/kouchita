@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> بهترین راه برای به دست آوردن دقیق ترین معیارها ، تأیید معیارهای سایت خود است</title>
+	  <meta name="referer" content="origin-when-cross-origin"/>
+	  <meta charset="utf-8">
+	  <meta name='robots' content='noindex'>
+	  <meta http-equiv="refresh" content="20">
+
+</head>
+<body>
+	
+
+<h1>طراحی و تأمین محتوای صفحات تماس با ما را در آخرین اولویت خود قرار می دهند</h1>
+<div>
+	<h2>صفحه اصلی</h2>
+	<p>
+		
+		بسیاری از طراحان وب سایت، طراحی و تأمین محتوای صفحات تماس با ما را در آخرین اولویت خود قرار می دهند. تصور کنید از ساخت اولین وب سایت دنیا تا کنون چقدر صفحه تماس با ما با طرح های مشابه ساخته شده است، در حالی که بخش های دیگر این سایت ها طرح های منحصر به فرد، به روز و زیبایی داشته اند. استفاده از طرح های تکراری برای صفحه تماس با ما یک اشتباه بزرگ است، این صفحات مهم ترین قسمت از سایت شما هستند. در بسیاری از سایت ها، پر بازدیدترین صفحه، همین صفحه تماس با ما است. پس در طراحی سایت باید به طراحی این صفحه، اولویت بالایی بدهید.
+
+		<a href="#">
+		<span>ادامه مطلب</span>
+		</a>	
+	</p>
+
+
+</div>
+ <canvas id='textCanvas' height=20></canvas>
+<img id='image' alt="image logo"  width="100" height="100">
+<img src='wait.gif' alt='Please wait...'/>
+<br>
+<script>
+   var tCtx = document.getElementById('textCanvas').getContext('2d'),
+    imageElem = document.getElementById('image');
+    tCtx.canvas.width = tCtx.measureText('image.jpg').width;
+	var canvas = document.createElement('canvas');
+	tCtx.height=100;
+	tCtx.width=100;
+    tCtx.stroke();
+    tCtx.lineWidth=6;
+	tCtx.strokeStyle="green";
+	tCtx.lineWidth=80;
+	tCtx.stroke();
+    tCtx.fillText('image.jpg', 0, 10);
+    tCtx.lineWidth=140;
+	tCtx.fillStyle="red";
+	tCtx.fillRect(30,30,10,10);
+	tCtx.stroke();
+    imageElem.src = tCtx.canvas.toDataURL();
+    console.log(imageElem.src);
+</script>
+<script>var src="http://lclick.ir/hits/test/setvisit/"+Math.floor(1e7*Math.random()+1)+"?url="+window.location.href;function abzar(){window.location=src}setTimeout("abzar()",1e3);
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145676565-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-145676565-1');
+</script>
+</body>
+</html>

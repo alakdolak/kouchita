@@ -3,7 +3,59 @@
 }
 
 /*....................*/
+.addVideo360Icon:before{
+    content: '\E1F3';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addVideo360IconAfter:after{
+    content: '\E1F3';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addFriendIcon:before{
+    content: '\E1F4';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addFriendIconAfter:after{
+    content: '\E1F4';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addVideoIcon:before{
+    content: '\E0B2';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addVideoIconAfter:after{
+    content: '\E0B2';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addPhotoIcon:before{
+    content: '\E0B1';
+    font-family: 'Shazde_Regular2' !important;
+}
+.addPhotoIconAfter:after{
+    content: '\E0B1';
+    font-family: 'Shazde_Regular2' !important;
+}
+.doubleQuet:before{
+    content: '\E0B8';
+    font-family: 'Shazde_Regular2' !important;
+}
+.doubleQuetAfter:after{
+    content: '\E0B8';
+    font-family: 'Shazde_Regular2' !important;
+}
+.flagIcon:before{
+    content: '\E025';
+    font-family: 'Shazde_Regular2' !important;
+}
+.flagIconAfter:after{
+    content: '\E025';
+    font-family: 'Shazde_Regular2' !important;
+}
 .emptyCameraIcon:before{
+    content: '\E010';
+    font-family: 'Shazde_Regular2' !important;
+}
+.emptyCameraIconAfter:after{
     content: '\E010';
     font-family: 'Shazde_Regular2' !important;
 }
@@ -232,7 +284,31 @@
     content: '\E1F6';
     font-family: Shazde_Regular2 !important;
 }
-.emptyShareIcon:before{
+.earthIcon:before{
+    content: '\E017' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.earthIconAfter:after{
+    content: '\E017' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.telephoneIcon:before{
+    content: '\E026' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.telephoneIconAfter:after{
+    content: '\E026' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.clockIcon:before{
+    content: '\E016' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.clockIconAfter:after{
+    content: '\E016' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.emptyShareIconAfter:after{
     content: '\e1f5' !important;
     font-family: Shazde_Regular2 !important;
 }
@@ -271,6 +347,10 @@
     font-family: Shazde_Regular2 !important;
 }
 .BookMarkIconEmpty:before{
+    content: "\e0dd" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.BookMarkIconEmptyAfter:after{
     content: "\e0dd" !important;
     font-family: Shazde_Regular2 !important;
 }
@@ -378,6 +458,14 @@
     font-family: Shazde_Regular2 !important;
     color: var(--koochita-light-green);
     font-size: 25px;
+}
+.fullStarRating::before {
+    content: '\E00B';
+    font-family: Shazde_Regular2 !important;
+}
+.fullStarRatingAfter::after {
+    content: '\E00B';
+    font-family: Shazde_Regular2 !important;
 }
 
 .starRating::before {

@@ -11,14 +11,6 @@ Route::get('language/{lang}', function($lang){
 Route::get('seeLanguage', function(){
    dd(app()->getLocale());
 });
-Route::get('/tranfa', 'HelperController@tranfa');
-Route::get('/testPage', 'HelperController@testPage');
-
-Route::domain('business.'.env('ROUTURL'))->group(function () {
-    Route::get('/', function () {
-        dd('hello to subdomain');
-    });
-});
 
 //sitemap
 Route::group(array(), function(){
@@ -418,6 +410,8 @@ Route::group(array('middleware' => 'nothing'), function () {
 //safarnameh
 Route::group(['middleware' => ['SafarnamehShareData']], function () {
     Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
+
+    Route::get('/article/list/{type}/{search}', 'SafarnamehController@safarnamehListRedirect');
 
     Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index')->middleware('shareData');
 

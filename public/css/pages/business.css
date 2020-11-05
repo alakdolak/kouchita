@@ -1,0 +1,421 @@
+body{
+    position: relative;
+}
+.headerSecondSection{
+    display: none !important;
+}
+/*.headerSearchBar{*/
+/*    display: none !important;*/
+/*}*/
+
+.fullyCenterContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainAllBody{
+    direction: rtl;
+    text-align: right;
+}
+
+.mainHeader{
+    background: white;
+}
+
+.headerSecondLi{
+    font-weight: normal !important;
+}
+.showHeader{
+    border-top: solid 1px lightgrey;
+    background: white;
+    padding-bottom: 10px;
+}
+
+.mainHeaderButts{
+    display: flex;
+    justify-content: flex-end;
+}
+.mainHeaderButts > div{
+    cursor: pointer;
+    font-size: 12px;
+}
+.mainHeaderButts > div .text{
+    font-size: 1em;
+}
+.mainHeaderButts > div:hover .text{
+    border-bottom: solid 1px;
+}
+.mainHeaderButts .BookMarkIconEmptyAfter{
+    margin: 0px 10px;
+    padding: 0px 10px;
+    border-left: solid 1px lightgray;
+    border-right: solid 1px lightgray;
+}
+.mainHeaderButts .emptyShareIconAfter{
+
+}
+.mainHeaderButts .emptyShareIconAfter:after{
+    font-size: 2.7em;
+    position: relative;
+    right: 1em;
+    width: 1em;
+    margin-right: 5px;
+    line-height: initial;
+}
+.mainHeaderButts .BookMarkIconEmptyAfter:after, .emptyCameraIconAfter:after{
+    font-size: 2em;
+    margin-right: 5px;
+}
+
+.showHeader .inff .address{
+    color: gray;
+    font-size: 12px;
+}
+.showBody{
+    background: #f2f2f2;
+    height: 400vh;
+    padding: 15px 0px;
+}
+.showBody .bodySec{
+    background: white;
+    border: solid 1px #dedede;
+    margin: 5px 0px;
+    position: relative;
+}
+.showBody .infoSec{
+    padding: 10px;
+}
+.showBody .infoSec .boldText{
+    font-size: 20px;
+    font-weight: bold;
+}
+.showBody .infoSec .normText{
+    font-weight: 100;
+    margin-top: 5px;
+    font-size: 12px;
+}
+.showBody .infoSec .groupSec{
+    margin-top: 10px;
+    border-top: solid 1px #f3f3f3;
+    padding-top: 10px;
+}
+.showBody .infoSec .groupSec .mr4bef:before{
+    margin-left: 5px;
+}
+.showBody .infoSec .weekTime{
+    padding: 0px 10px;
+    margin-top: 5px;
+}
+.showBody .infoSec .weekTime > div{
+    display: flex;
+}
+.showBody .infoSec .weekTime span{
+    width: 100px;
+}
+.showBody .infoSec .weekTime span.closse{
+    color: red;
+}
+.showBody .infoSec .phone{
+    color: var(--koochita-blue);
+    margin-right: auto;
+    display: flex;
+    margin-top: 5px;
+    justify-content: flex-end;
+}
+.showBody .infoSec .phone:after{
+    margin-right: 5px;
+}
+
+.showBody .infoSec .groupSec .ratingButtons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-size: 30px;
+}
+.showBody .infoSec .groupSec .ratingButtons > div{
+    width: 45%;
+    background: none;
+    border: solid 1px;
+    line-height: 30px;
+    cursor: pointer;
+    flex-direction: column;
+    transition: max-height .3s;
+}
+.showBody .infoSec .groupSec .ratingButtons .DisLikeIconEmpty:before ,.LikeIconEmpty:before{
+    direction: ltr;
+    width: 30px;
+    display: flex;
+}
+.showBody .infoSec .groupSec .ratingButtons .likeSec{
+    color: var(--koochita-blue);
+}
+.showBody .infoSec .groupSec .ratingButtons.youRate .likeSec.selected{
+    color: white;
+    background: var(--koochita-blue);
+}
+.showBody .infoSec .groupSec .ratingButtons.youRate .disLikeSec.selected{
+    color: white;
+    background: var(--koochita-red);
+}
+.showBody .infoSec .groupSec .ratingButtons .likeSec:hover{
+    color: white;
+    background: var(--koochita-blue);
+}
+.showBody .infoSec .groupSec .ratingButtons .disLikeSec{
+    color: var(--koochita-red);
+}
+.showBody .infoSec .groupSec .ratingButtons .disLikeSec:hover{
+    color: white;
+    background: var(--koochita-red);
+}
+.showBody .infoSec .groupSec .ratingButtons .result{
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .3s;
+}
+.showBody .infoSec .groupSec .ratingButtons .result > div{
+    display: flex;
+    font-size: 12px;
+}
+.showBody .infoSec .groupSec .ratingButtons .result > div .name{
+    width: 60px;
+}
+.showBody .infoSec .groupSec .ratingButtons .result > div .num{
+
+}
+.showBody .infoSec .groupSec .ratingButtons .icon{
+
+}
+.showBody .infoSec .groupSec .ratingButtons .icon .count{
+    font-size: 18px;
+    display: none;
+}
+.showBody .infoSec .groupSec .ratingButtons.youRate .icon .count{
+    display: block !important;
+}
+.showBody .infoSec .groupSec .ratingButtons.youRate .icon{
+    border-bottom: solid 1px;
+    margin: 0px 15px;
+}
+.showBody .infoSec .groupSec .ratingButtons.youRate .result{
+    max-height: 400px;
+}
+
+.showBody .imgSliderSec{
+    overflow: hidden;
+}
+.fastAccess{
+    display: flex;
+}
+.fastAccess .tab{
+    padding: 10px;
+    margin: 0px 10px;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: .3s;
+    font-size: 18px;
+    font-weight: 100;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0px;
+}
+.fastAccess .tab .text{
+    font-size: .6em;
+}
+.fastAccess .tab.selected{
+    color: var(--koochita-blue);
+    border-bottom: solid 2px;
+}
+.fastAccess .tab:before{
+    font-size: 1.4em;
+    margin-left: 5px;
+}
+.fastAccess .tab:hover{
+    color: var(--koochita-blue);
+}
+
+.infoSec .iWasHere{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border: solid 1px;
+    font-size: 8px;
+    padding: 2px 5px;
+    color: red;
+    transition: .3s;
+    cursor: pointer;
+}
+.infoSec .iWasHere:hover, .iWasHere.selected{
+    color: white;
+    background: red;
+}
+.infoSec .iWasHere:before{
+    font-size: 13px;
+}
+
+.showBody .map{
+    height: 500px;
+}
+.adver.sideMap{
+    height: 245px;
+}
+.adver.fullRow{
+    height: 100px;
+}
+
+.topInfoFixed{
+    position: fixed;
+    width: 100%;
+    height: 130px;
+    background: white;
+    z-index: 9;
+    border-bottom: solid 1px #afafaf;
+    box-shadow: 0px 0px 5px 2px #7d7d7d;
+    top: -130px;
+    transition: .5s;
+    overflow: hidden;
+}
+.topInfoFixed.open{
+    top: 0px;
+}
+
+.topInfoFixed .info .address{
+    color: gray;
+    font-size: 12px;
+}
+.topInfoFixed .pic {
+    width: 100px;
+    margin-right: auto;
+    overflow: hidden;
+    height: 70px;
+    margin-top: 15px;
+    box-shadow: 0px 0px 5px 2px #bfbfbf;
+}
+.topInfoFixed .pic > img{
+    width: 100%;
+}
+.topInfoFixed .tabRow {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+}
+.topInfoFixed .mainHeaderButts{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.pad-15{
+    padding: 15px;
+}
+.headerSec{
+    margin-top: 0;
+    border-bottom: solid 1px #f7f7f7;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.yourReviewHeader{
+    background: var(--koochita-blue);
+    color: white;
+    margin: 0;
+    padding: 10px;
+    position: relative;
+}
+.yourReviewHeader .iconClose{
+    cursor: pointer;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-size: 40px;
+    display: none;
+}
+.inputReviewSec .firsRow{
+    display: flex;
+    padding: 10px;
+}
+.inputReviewSec .firsRow .uPic{
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.inputReviewSec .firsRow .Inp{
+    width: calc(100% - 50px);
+    padding: 15px;
+    color: black;
+    height: 80px;
+    border: none;
+}
+.reviewButs{
+    display: flex;
+    padding: 5px;
+}
+.reviewButs .but{
+    background: #e5e5e5;
+    margin: 0px 10px;
+    padding: 7px 7px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.reviewButs .but:before{
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-left: 4px;
+}
+.reviewButs .but.addVideo360Icon:before, .but.addFriendIcon:before{
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 35px;
+    padding-bottom: 5px;
+}
+
+.showWhenNeed{
+    display: none;
+}
+.openReviewSec{
+    z-index: 99;
+}
+.openReviewSec .showWhenNeed{
+    display: block;
+}
+.openReviewSec .bodySec{
+    border: none;
+}
+.openReviewSec .yourReviewHeader .iconClose{
+    display: block;
+}
+.openReviewSec .bodySec .inputReviewSec .firsRow .Inp{
+    min-height: 170px;
+}
+.reviewQues{
+    background: #e5e5e5;
+    padding: 15px 9px;
+    width: 100%;
+    text-align: right;
+    height: 200px;
+}
+.reviewSubmit{
+    background-color: var(--koochita-blue);
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    font-size: 15px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}

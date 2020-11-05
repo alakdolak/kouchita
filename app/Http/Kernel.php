@@ -75,5 +75,6 @@ class Kernel extends HttpKernel
         'vodShareData' => \App\Http\Middleware\vodShareData::class,
         'SafarnamehShareData' => \App\Http\Middleware\SafarnamehShareData::class,
         'shareData' => \App\Http\Middleware\ShareData::class,
+        'BusinessShareData' => \App\Http\Middleware\BusinessShareData::class,
     ];
 }

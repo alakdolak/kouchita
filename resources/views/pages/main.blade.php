@@ -77,6 +77,7 @@
             </div>
         </div>
     </div>
+
     @include('general.forAllPages')
 
     @include('layouts.header1')

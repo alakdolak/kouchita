@@ -66,7 +66,7 @@
     @include('general.addSafarnameh')
 @endif
 
-<script src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
+<script defer src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
 
 <script>
     var csrfTokenGlobal = '{{csrf_token()}}';
