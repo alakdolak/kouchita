@@ -74,7 +74,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
     <span id="loginPopUp" class="loginPopUpContent" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())">
         <div class="mainDivLoginMainLogo">
-            <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
+            <img class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
         </div>
         <div class="col-xs-12 rtl mainContentInfos">
             <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
@@ -162,7 +162,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         <div class="registerRightSection">
 
             <div id="registerMainLogo">
-                <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
+                <img class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
             </div>
 
             <div>
