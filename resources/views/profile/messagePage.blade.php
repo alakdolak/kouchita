@@ -169,7 +169,7 @@
 
         function getUserMsgs(_id){
             if(_id == 0){
-                $('#msgBodyPic').attr('src', "{{URL::asset('images/icons/mainIcon.svg')}}");
+                $('#msgBodyPic').attr('src', "{{URL::asset('images/icons/KOFAV0.svg')}}");
                 $('#msgBodyUserName').text('کوچیتا');
             }
             else {
@@ -303,7 +303,7 @@
             let text = '';
             text += '<div id="user_0" class="userRow" onclick="showThisMsgs(0)">\n' +
                     '                        <div class="userPic">\n' +
-                    '                            <img src="{{URL::asset('images/icons/mainIcon.svg')}}" style="width: 100%">\n' +
+                    '                            <img src="{{URL::asset('images/icons/KOFAV0.svg')}}" style="width: 100%">\n' +
                     '                        </div>\n' +
                     '                        <div class="userInfo">\n' +
                     '                            <div class="userName">\n' +

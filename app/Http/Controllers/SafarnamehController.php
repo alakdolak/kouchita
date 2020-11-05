@@ -719,6 +719,7 @@ class SafarnamehController extends Controller
             'redirect' => $safarnameh->url
         ];
 
+        $safarnameh->description = str_replace('&nbsp;', ' ', $safarnameh->description);
 
         return view('Safarnameh.safarnamehShow', compact(['safarnameh', 'uPic', 'localStorageData', 'similarSafarnameh']));
     }
