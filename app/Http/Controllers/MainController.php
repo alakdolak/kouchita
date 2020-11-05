@@ -15,6 +15,7 @@ use App\models\MainSliderPic;
 use App\models\Place;
 use App\models\Restaurant;
 use App\models\Safarnameh;
+use App\models\SafarnamehComments;
 use App\models\SectionPage;
 use App\models\SogatSanaie;
 use App\models\State;
@@ -42,40 +43,10 @@ class MainController extends Controller
     public function showMainPage($mode = "mainPage") {
 
         $kindPlaceId= 0;
-
-        $today = getToday()['date'];
-        $hotelCount = Hotel::all()->count();
-        $retCount = Restaurant::all()->count();
-        $amakenCount = Amaken::all()->count();
-        $sogatSanaie = SogatSanaie::all()->count();
-        $mahaliFoodCount = MahaliFood::all()->count();
-        $postCount = Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
-
-        $activityId1 = Activity::where('name', 'نظر')->first()->id;
-        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
-
-        $commentCount = 0;
-        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
-        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
-        $commentCount += 0;
-//        $commentCount += PostComment::where('status', 1)->count();
-        $userCount = User::all()->count();
-
-        $counts = [ 'hotel' => $hotelCount,
-            'restaurant' => $retCount,
-            'amaken' => $amakenCount,
-            'sogatSanaie' => $sogatSanaie,
-            'mahaliFood' => $mahaliFoodCount,
-            'article' => $postCount,
-            'comment' => $commentCount,
-            'userCount' => $userCount,
-            'boomgardy' => Boomgardy::all()->count()
-        ];
-
         $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
         $articleBanner = Safarnameh::whereIn('id', $articleBannerId)->get();
         foreach ($articleBanner as $item){
-            $item->url = createUrl(0, 0, 0, 0, $item->id);
+            $item->url = route('safarnameh.show', ['id' => $item->id]);
             $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
         }
 
@@ -137,9 +108,9 @@ class MainController extends Controller
                 $middleBan6->link = '';
         }
         $middleBan['6']  = $middleBan6;
-
+//        $counts
         return view('pages.main', ['placeMode' => $mode, 'kindPlaceId' => $kindPlaceId,
-                                    'sliderPic' => $sliderPic, 'count' => $counts,
+                                    'sliderPic' => $sliderPic,
                                     'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),
                                     'articleBanner' => $articleBanner,
                                     'middleBan' => $middleBan ]);

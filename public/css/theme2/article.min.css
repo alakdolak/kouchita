@@ -16957,7 +16957,7 @@ input[type=submit]:hover {
 }
 
 .vc_pixel_icon-balloon_facebook {
-    background-image: url(../images/icons/balloon-facebook.png)
+    background-image: url(../images/icons/balloon-facebook.webp)
 }
 
 .vc_pixel_icon-balloon_twitter {
@@ -18903,7 +18903,7 @@ option.wpb_balloon_buzz {
 
 .wpb_balloon_facebook i.icon,
 option.wpb_balloon_facebook {
-    background: url(../images/icons/balloon-facebook.png) right center no-repeat
+    background: url(../images/icons/balloon-facebook.webp) right center no-repeat
 }
 
 .wpb_balloon_twitter i.icon,

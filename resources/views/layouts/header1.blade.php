@@ -1,9 +1,9 @@
 
-<link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=2')}}">
-<link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v=2')}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=.'.$fileVersions)}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v='.$fileVersions)}}">
 
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css?v='.$fileVersions)}}">
 @endif
 
 @if(!Request::is('main') && !Request::is('main/*') && !Request::is('/'))
@@ -189,19 +189,10 @@
                 </div>
 
                 <div class="headerLoginHelper loginHelperSection hidden" onclick="closeLoginHelperSection()">
-
                     <div class="pic">
                         <div class="login-button mainLoginButton" style="font-size: 30px;margin-bottom: 20px;"> {{__('auth.ورود / ثبت نام')}}</div>
                         <img src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 500px;">
                     </div>
-{{--                    <div class="goToLeft">--}}
-{{--                    <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="container" style="padding: 0px">--}}
-{{--                        --}}
-
-{{--                    </div>--}}
                 </div>
 
                 <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
@@ -241,14 +232,14 @@
         <span class="iconClose closeLanding" onclick="$('#campingHeader').hide();"></span>
         <div class="headerCampingTop" onclick="goToLanding()">
             <img src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 60px; top: 10px; right: 2%;">
-            <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.jpg')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+            <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.webp')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
         <div class="headerCampingBottom">
             <div onclick="goToSafarnameh()">
-                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div onclick="$('#campingHeader').hide(); openUploadPost()">
-                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nAxasi.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nAxasi.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
         </div>
     </div>
@@ -284,8 +275,6 @@
 
         return;
     }
-
-
     function hideAllTopNavs(){
         openHeadersTab = false;
 

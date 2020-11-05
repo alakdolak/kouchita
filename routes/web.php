@@ -30,7 +30,9 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
 
     Route::get('/', 'MainController@showMainPage')->name('home')->middleware('shareData');
 
-    Route::get('main', 'MainController@showMainPage')->name('main')->middleware('shareData');
+    Route::get('main', function (){
+        return redirect(\route('home'));
+    })->name('main');
 
     Route::get('/landingPage', 'MainController@landingPage')->name('landingPage')->middleware('shareData');
 

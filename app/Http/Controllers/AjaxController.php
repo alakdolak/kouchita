@@ -6,6 +6,7 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\Alert;
 use App\models\Amaken;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\Followers;
@@ -30,6 +31,7 @@ use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
 use App\models\Safarnameh;
 use App\models\SafarnamehCityRelations;
+use App\models\SafarnamehComments;
 use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Tag;
@@ -704,8 +706,7 @@ class AjaxController extends Controller {
         }
 
         $safarnameh = Safarnameh::whereIn('id', $safarnamehId)
-                                ->select(['id', 'title', 'slug', 'meta', 'pic', 'date',
-                                            'userId', 'keyword', 'seen'])
+                                ->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'userId', 'keyword', 'seen'])
                                 ->get();
         foreach ($safarnameh as $item){
             $item = SafarnamehMinimalData($item);
@@ -714,7 +715,31 @@ class AjaxController extends Controller {
             $item->section = 'مقالات';
         }
 
-        echo json_encode(['result' => $result, 'safarnameh' => $safarnameh, 'topFood' => $topFood, 'majara' => $topMajara, 'restaurant' => $topRestuarant, 'amaken' => $topAmaken, 'bazar' => $topBazar]);
+        $today = getToday()['date'];
+        $activityId1 = Activity::where('name', 'نظر')->first()->id;
+        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
+
+        $commentCount = 0;
+        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
+        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
+        $commentCount += SafarnamehComments::where('confirm', 1)->count();
+        $userCount = \App\models\User::all()->count();
+
+        $counts = [ 'hotel' => Hotel::all()->count(),
+                    'restaurant' => Restaurant::all()->count(),
+                    'amaken' => Amaken::all()->count(),
+                    'sogatSanaie' => SogatSanaie::all()->count(),
+                    'mahaliFood' => MahaliFood::all()->count(),
+                    'safarnameh' => Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->count(),
+                    'comment' => $commentCount,
+                    'userCount' => $userCount,
+                    'boomgardy' => Boomgardy::all()->count()
+                ];
+
+        echo json_encode(['result' => $result, 'safarnameh' => $safarnameh,
+                        'topFood' => $topFood, 'majara' => $topMajara,
+                        'restaurant' => $topRestuarant, 'amaken' => $topAmaken,
+                        'bazar' => $topBazar, 'count' => $counts]);
 
         return;
     }

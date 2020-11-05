@@ -67,7 +67,7 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        @if(Request::is('main/*') || Request::is('main'))
+        @if(Request::is('main/*') || Request::is('main') || Request::is('/'))
             @include('general.adminSetting.mainPageSetting')
         @endif
     </div>
