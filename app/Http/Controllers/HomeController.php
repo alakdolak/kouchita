@@ -137,7 +137,8 @@ class HomeController extends Controller
 
                     $fileName =  time() . $_FILES['pic']['name'];
                     $destinationPic = $location . '/' . $fileName;
-                    compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+                    move_uploaded_file($_FILES['pic']['tmp_name'], $destinationPic);
+//                    compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
                     $slider->pic = $fileName;
 
                     if (isset($_FILES['backPic']) && $_FILES['backPic']['error'] == 0){
@@ -214,8 +215,9 @@ class HomeController extends Controller
 
                         $fileName =  time() . $_FILES['pic']['name'];
                         $destinationPic = $location . '/' . $fileName;
+                        move_uploaded_file($_FILES['pic']['tmp_name'], $destinationPic);
 
-                        compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+//                        compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
                         $pic->pic = $fileName;
                     }
                     $pic->save();
@@ -235,8 +237,9 @@ class HomeController extends Controller
                     $pic->number = $request->number;
                     $fileName =  time() . $_FILES['pic']['name'];
                     $destinationPic = $location . '/' . $fileName;
+                    move_uploaded_file($_FILES['pic']['tmp_name'], $destinationPic);
 
-                    compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+//                    compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
                     $pic->pic = $fileName;
 
                     $link = $request->link;
