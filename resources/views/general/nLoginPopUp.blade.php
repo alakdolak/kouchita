@@ -229,7 +229,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                 </div>
                             </div>
                             <div>
-                                <script async src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
+                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
                                 <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
                             </div>
                             <button type="button" onclick="checkRecaptcha()" class="loginSubBtn btn btn-info active submitAndFinishBtn" disabled>{{__('ثبت')}}</button>
