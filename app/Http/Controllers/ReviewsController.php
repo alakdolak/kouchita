@@ -356,7 +356,8 @@ class ReviewsController extends Controller
                     if ($item != null && $item['kind'] != 'onlyPic' && $item['kind'] != 'textSearch') {
                         array_push($ques, $item['id']);
                         array_push($ans, $item['value']);
-                    } else if ($item != null && $item['kind'] == 'onlyPic') {
+                    }
+                    else if ($item != null && $item['kind'] == 'onlyPic') {
 
                         if ($item['value'] != 3) {
                             $onlyPic = $item['value'];

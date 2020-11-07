@@ -9,6 +9,8 @@
 
 @section('body')
     @include('component.mapMenu')
+    
+    @include('component.smallShowReview')
 
     <div id="topInfos" class="topInfoFixed">
         <div style="display: flex; padding: 0px 20px">
@@ -212,22 +214,23 @@
                     <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
                     <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
                 </div>
-                <div id="inputReviewSec" class="col-md-8">
-                    <div class="bodySec">
-                        <h2 class="yourReviewHeader EmptyCommentIcon">
-                            دیدگاه شما
-                            <span class="iconClose" onclick="closeWriteReview()"></span>
-                        </h2>
-                        <div class="inputReviewSec">
-                            <div class="firsRow">
-                                <div class="fullyCenterContent uPic">
-                                    <img src="{{$userPic}}" class="resizeImgClass" onload="fitThisImg(this)" style="width: 100%" >
+                <div class="col-md-8">
+                    <div id="inputReviewSec">
+                        <div class="bodySec">
+                            <h2 class="yourReviewHeader EmptyCommentIcon">
+                                دیدگاه شما
+                                <span class="iconClose" onclick="closeWriteReview()"></span>
+                            </h2>
+                            <div class="inputReviewSec">
+                                <div class="firsRow">
+                                    <div class="fullyCenterContent uPic">
+                                        <img src="{{$userPic}}" class="resizeImgClass" onload="fitThisImg(this)" style="width: 100%" >
+                                    </div>
+                                    <textarea class="Inp" placeholder="کاربر چه فکر یا احساسی داری..." onfocus="openWriteReview()"></textarea>
                                 </div>
-                                <textarea class="Inp" placeholder="کاربر چه فکر یا احساسی داری..." onfocus="openWriteReview()"></textarea>
                             </div>
                         </div>
-                    </div>
-                    <div class="bodySec">
+                        <div class="bodySec">
                         <div class="reviewButs">
                             <div class="but addPhotoIcon">
                                 عکس اضافه کنید.
@@ -247,17 +250,8 @@
                             ارسال دیدگاه
                         </div>
                     </div>
-
-                    <script>
-                        function openWriteReview(){
-                            $('#darkModal').show();
-                            $('#inputReviewSec').addClass('openReviewSec');
-                        }
-                        function closeWriteReview(){
-                            $('#darkModal').hide();
-                            $('#inputReviewSec').removeClass('openReviewSec');
-                        }
-                    </script>
+                    </div>
+                    <div id="showReviewsMain"></div>
                 </div>
             </div>
         </div>
@@ -268,6 +262,16 @@
 @section('script')
 
     <script>
+
+        function openWriteReview(){
+            $('#darkModal').show();
+            $('#inputReviewSec').addClass('openReviewSec');
+        }
+        function closeWriteReview(){
+            $('#darkModal').hide();
+            $('#inputReviewSec').removeClass('openReviewSec');
+        }
+
         function likeDisLikeShop(_element, _like){
             $(_element).parent().addClass('youRate');
             $(_element).parent().find('.selected').removeClass('selected');
@@ -282,6 +286,16 @@
                 $('#topInfos').addClass('open');
             else if(topOfSticky >= 0 && $('#topInfos').hasClass('open'))
                 $('#topInfos').removeClass('open');
-        })
+        });
+
+        var reviews = {!! $reviews !!};
+        reviews.map(item => {
+            showFullReviews({
+                review: item,
+                kind: 'append',
+                sectionId : 'showReviewsMain'
+            });
+        });
+
     </script>
 @endsection
