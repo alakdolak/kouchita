@@ -63,7 +63,7 @@
                 <div class="swiper-wrapper">
                     @foreach($sliderPic as $item)
                         <div class="swiper-slide mobileHeight imgOfSliderBox">
-                            <img src="{{$item->pic}}" class="imgOfSlider">
+                            <img data-src="{{$item->pic}}" class="lazyload imgOfSlider">
                         </div>
                     @endforeach
                 </div>

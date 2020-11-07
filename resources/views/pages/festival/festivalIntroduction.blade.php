@@ -234,16 +234,39 @@
             <div class="container">
                 <div class="bigFont">تماس با  دبیرخانه</div>
                 <div class="footerRow">
-                    <div>آدرس: چهارراه جهان کودک پ 14 واحد 3</div>
-                    <div>کدپستی: 2343545</div>
-                    <div>ایمیل: info@koochita.com</div>
-                    <div>تماس تلقن: 021-88124512</div>
+                    <div>
+                        <span>آدرس:</span>
+                        <span style="color: white">تهران، میدان ونک، بزرگراه حقانی، نرس یده به چهارراه جهان کودک، پلاک 40 ، مرکز رشد و نوآوری دانشگاه علامه، طبقه سوم، واحد سمت چپ</span>
+                    </div>
+                    <div>
+                        <span>تلقن:</span>
+                        <span style="color: white">021-88195360</span>
+                    </div>
+                    <div>
+                        <span>کدپستی:</span>
+                        <span style="color: white"></span>
+                    </div>
+                    <div>
+                        <span>پشتیبانی فنی:</span>
+                        <span style="color: white">09120239315</span>
+                    </div>
+                    <div>
+                        <span>ساعات تماس:</span>
+                        <span style="color: white">از شنبه تا چهارشنبه از ساعت 12 الی 17</span>
+                    </div>
+                    <div>
+                        <span>ایمیل:</span>
+                        <span style="color: white">festival@koochita.com</span>
+                    </div>
+                    <div>
+                        <span>نشانی وبسایت رسمی:</span>
+                        <span style="color: white">koochita.com/festival</span>
+                    </div>
                 </div>
             </div>
         </div>
 
     </section>
-
 
     <script>
         let matchConditionPics = {

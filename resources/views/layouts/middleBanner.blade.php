@@ -326,7 +326,7 @@
                                             <a href="{{$item->url}}" class="cta">{{__('مشاهده مقاله')}}</a>
                                         </div>
                                         <div class="card_circle transition">
-                                            <img src="{{$item->pic}}" class="resizeImgClass" style="width: 100%;">
+                                            <img data-src="{{$item->pic}}" class="lazyload resizeImgClass" style="width: 100%;">
                                         </div>
                                     </div>
                                 </div>
@@ -371,10 +371,10 @@
                 <div class="middleBannerPhotoBanner middleBannerPB">
                     @if($middleBan['2']['link'] != '')
                         <a href="{{$middleBan['2']['link']}}" target="_blank" >
-                            <img src="{{$middleBan['2']['pic']}}" style="width: 100%;">
+                            <img data-src="{{$middleBan['2']['pic']}}" class="lazyload" style="width: 100%;">
                         </a>
                     @else
-                        <img src="{{$middleBan['2']['pic']}}" style="width: 100%;">
+                        <img data-src="{{$middleBan['2']['pic']}}" class="lazyload" style="width: 100%;">
                     @endif
                 </div>
             @endif
@@ -721,10 +721,10 @@
                 <div class="middleBannerPhotoBanner middleBannerPB">
                     @if($middleBan['6']['link'] != '')
                         <a href="{{$middleBan['6']['link']}}" target="_blank" >
-                            <img src="{{$middleBan['6']['pic']}}" style="width: 100%;">
+                            <img data-src="{{$middleBan['6']['pic']}}" class="lazyload" style="width: 100%;">
                         </a>
                     @else
-                        <img src="{{$middleBan['6']['pic']}}" style="width: 100%;">
+                        <img data-src="{{$middleBan['6']['pic']}}" class="lazyload" style="width: 100%;">
                     @endif
                 </div>
             @endif

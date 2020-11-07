@@ -251,6 +251,7 @@ function questionTrueType($_ques){
 }
 
 function getAnsToComments($logId){
+
     $uId = 0;
     if(auth()->check())
         $uId = auth()->user()->id;
