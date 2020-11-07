@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="fullyCenterContent pic">
-                <img src="http://localhost/assets/_images/majara/jangalhaye_arasbaran/s-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2F%25D8%25A7%25D9%2588%25D8%25A7%25D9%2586-%25D9%2585%25D9%2587%25D8%25B1-403448319760521%2Fposts&psig=AOvVaw2O2UJMc7RXNLj_TiANfpjd&ust=1604821287488000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNjtiav37-wCFQAAAAAdAAAAABAJ" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
         </div>
         <div class="tabRow fastAccess">
@@ -149,7 +149,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="fullyCenterContent bodySec imgSliderSec" style="height: 420px">
-                        <img src="http://localhost/assets/_images/majara/jangalhaye_arasbaran/s-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                        <img src="{{URL::asset('_images/daryan.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
                     </div>
                 </div>
             </div>
