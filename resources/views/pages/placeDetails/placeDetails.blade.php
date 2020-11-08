@@ -707,7 +707,7 @@ if ($total == 0)
                                                              id="introductionText">
                                                             {!! $place->recipes !!}
                                                         </div>
-                                                            <span class="showMoreDescriptionInDetails"></span>
+{{--                                                            <span class="showMoreDescriptionInDetails"></span>--}}
                                                     </div>
                                                 </div>
 
@@ -808,11 +808,11 @@ if ($total == 0)
                                                         <div class="unselectedText overviewContent descriptionOfPlaceMiddleContent"
                                                              id="introductionText">
                                                             {!! $place->description !!}
-                                                            @if($kindPlaceId != 4)
-                                                                <span class="introductionShowMore">
-                                                                    بیشتر
-                                                                </span>
-                                                            @endif
+{{--                                                            @if($kindPlaceId != 4)--}}
+{{--                                                                <span class="introductionShowMore">--}}
+{{--                                                                    بیشتر--}}
+{{--                                                                </span>--}}
+{{--                                                            @endif--}}
                                                         </div>
                                                     </div>
                                                 </div>
