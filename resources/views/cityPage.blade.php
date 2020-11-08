@@ -4,8 +4,8 @@
 <head>
     @include('layouts.topHeader')
     <title>
-        {{__('کوچیتا |معرفی جاهای دیدنی+بوم گردی+رستوران+غذای')}}
-        {{$place->name}}
+        {{__('کوچیتا |معرفی جاهای دیدنی+بوم گردی+رستوران+غذای ')}}
+        {{isset($place->state) ? $place->listName : $place->name }}
     </title>
 
     <meta content="article" property="og:type"/>
