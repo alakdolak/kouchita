@@ -4,8 +4,9 @@
 <head>
     @include('layouts.topHeader')
     <title>
-        {{__('کوچیتا |صفحه')}}
-        {{$place->name}}</title>
+        {{__('کوچیتا |معرفی جاهای دیدنی+بوم گردی+رستوران+غذای')}}
+        {{$place->name}}
+    </title>
 
     <meta content="article" property="og:type"/>
     <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />

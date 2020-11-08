@@ -20,7 +20,7 @@
                         <span class="color-blue" id="answerCount"></span>
                         پاسخ موجود می‌باشد.
                     </div>
-                    <a class="seeAllQMainLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
+                    <a class="seeAllQMainLink" href="#">
                         <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">
                             مشاهده همه سؤالات و پاسخ‌ها
                         </div>
@@ -153,7 +153,6 @@
     }
     getQuestion();
 
-
     function changeQuestionPerPage(_count){
 
         document.getElementById('questionPerView' + questionPerPage).classList.remove('color-blue');
@@ -253,6 +252,4 @@
 
         document.getElementById('showQuestionPerPage').innerHTML = text;
     }
-
-
 </script>

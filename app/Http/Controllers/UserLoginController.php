@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ActivityLogEvent;
 use App\models\ActivationCode;
 use App\models\Activity;
+use App\models\DefaultPic;
 use App\models\LogModel;
 use App\models\logs\UserSeenLog;
 use App\models\Message;
@@ -527,6 +528,8 @@ class UserLoginController extends Controller
                 }
             }
 
+            $defualt = DefaultPic::inRandomOrder()->first();
+
             $user = new User();
             $user->username = makeValidInput($request->username);
             $user->password = \Hash::make(makeValidInput($request->password));
@@ -534,6 +537,7 @@ class UserLoginController extends Controller
             $user->phone = convertNumber('en', makeValidInput($request->phone));
             $user->invitationCode = $uInvitationCode;
             $user->level = 0;
+            $user->picture = $defualt->id;
 
             try {
                 $user->save();
@@ -726,7 +730,7 @@ class UserLoginController extends Controller
     }
 
     private function createWelcomeMsg($userId){
-        $msg = '<div>مرسی از ثبت نامت دوست من.</div><div>شما بخش مهمی از کوچیتا هستید. ما سعی کردیم تا همه چیزی برای شما خوب طراحی بشه. در کوچیتا شما می تونید شهر، روستا، غذای محلی،سوغات، بوم گردی ها، جاذبه ها، طبیعت گردی و هتل ها رو پیدا کنید و عکس و نظره خودتون و دوستاتون را ببینید و بهترین انتخاب رو داشته باشید.</div><a href="https://koochita.com/placeList/11/country" target="_blank" style="display: block; margin: 5px 0px;">لیست غذاهای محلی ایران</a><a href="https://koochita.com/placeList/1/country" target="_blank" style="display: block; margin: 5px 0px;">لیست جاذبه های ایران  </a><a href="https://koochita.com/placeList/12/country" target="_blank" style="display: block; margin: 5px 0px;">لیست بوم‌گردی های ایران</a><a href="https://koochita.com/placeList/6/country" target="_blank" style="display: block; margin: 5px 0px;">لیست طبیعت گردی (کمپینگ) های ایران</a><div>شما همیشه می تونید از صفحه اول سایت و یا دکمه منو، شهر و یا مکان مورد نظرتون سریع پیدا کنید. هر جایی که رفتید در قسمت ارسال دیدگاه می تونید نظرتونو به همراه عکس و یا فیلم برای دوستانتو به اشتراک بگذارید.اگر عکاس هستید می تونید در قسمت من عکاس هستم عکس هاتون رو آپلود کنید تا ما با اسم خودتون منتشر کنیم.  شما می تونید از لینک زیر صفحه پروفایلتون ببینید. به شما کمک  می‌کنه با دوستانتون در تماس باشید. برنامه ریزی سفر کنید. سفرنامه بنویسید و با دوستاتون به اشتراک بگذارید.  این امکان از منوی کناری در موبایل و منوی بالا در کامپیوتر هم در دسترسه.</div><a href="https://koochita.com/profile/index" target="_blank" style="display: block; margin: 5px 0px;">صفحه پروفایل من</a><div>هر وقت سوالی داشتید و یا نظرتون رو می خواستید به ما یگید به همین اکانت پیام بدید. ما مشتاق صحبت کردن با شما هستیم.</div>';
+        $msg = '<div>مرسی از ثبت نامت دوست من.</div><div>شما بخش مهمی از کوچیتا هستید. ما سعی کردیم تا همه چیزی برای شما خوب طراحی بشه. در کوچیتا شما می تونید شهر، روستا، غذای محلی،سوغات، بوم گردی ها، جاذبه ها، طبیعت گردی و هتل ها رو پیدا کنید و عکس و نظره خودتون و دوستاتون را ببینید و بهترین انتخاب رو داشته باشید.</div><a href="https://koochita.com/placeList/11/country" target="_blank" style="display: block; margin: 5px 0px;">لیست غذاهای محلی ایران</a><a href="https://koochita.com/placeList/1/country" target="_blank" style="display: block; margin: 5px 0px;">لیست جاذبه های ایران  </a><a href="https://koochita.com/placeList/12/country" target="_blank" style="display: block; margin: 5px 0px;">لیست بوم‌گردی های ایران</a><a href="https://koochita.com/placeList/6/country" target="_blank" style="display: block; margin: 5px 0px;">لیست طبیعت گردی (کمپینگ) های ایران</a><div>شما همیشه می تونید از صفحه اول سایت و یا دکمه منو، شهر یا مکان مورد نظرتون رو سریع پیدا کنید. هر جایی که رفتید در قسمت ارسال دیدگاه می تونید نظرتونو به همراه عکس و یا فیلم برای دوستاتون به اشتراک بگذارید.اگر عکاس هستید می تونید در قسمت من عکاس هستم عکس هاتون رو آپلود کنید تا ما با اسم خودتون منتشر کنیم.  شما می تونید از لینک زیر صفحه پروفایلتون ببینید. به شما کمک  می‌کنه با دوستاتون در تماس باشید. برنامه ریزی سفر کنید. سفرنامه بنویسید و با دوستاتون به اشتراک بگذارید.  این امکان از منوی کناری در موبایل و منوی بالا در کامپیوتر هم در دسترسه.</div><a href="https://koochita.com/profile/index" target="_blank" style="display: block; margin: 5px 0px;">صفحه پروفایل من</a><div>هر وقت سوالی داشتید و یا نظرتون رو می خواستید به ما بگید به همین اکانت پیام بدید. ما مشتاق صحبت کردن با شما هستیم.</div>';
 
         $newMsg = new Message();
         $newMsg->senderId = 0;
