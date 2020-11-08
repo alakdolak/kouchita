@@ -1240,58 +1240,58 @@ if ($total == 0)
             }
         });
 
-        var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();
-        var heightOfFeature = $('.featureOfPlaceMiddleContent').height();
-        var heightOfContent = $('.rateOfPlaceMiddleContent').height();
-        var minHeightOfConent = [heightOfFeature, heightOfContent];
-        var sortHeightOfContent = minHeightOfConent.sort(function (a, b) {
-            return a - b
-        });
-        var selectedHegihtForDescription = sortHeightOfContent[1] - 50;
+        {{--var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();--}}
+        {{--var heightOfFeature = $('.featureOfPlaceMiddleContent').height();--}}
+        {{--var heightOfContent = $('.rateOfPlaceMiddleContent').height();--}}
+        {{--var minHeightOfConent = [heightOfFeature, heightOfContent];--}}
+        {{--var sortHeightOfContent = minHeightOfConent.sort(function (a, b) {--}}
+        {{--    return a - b--}}
+        {{--});--}}
+        {{--var selectedHegihtForDescription = sortHeightOfContent[1] - 50;--}}
 
-        if(heightOfDescription < selectedHegihtForDescription)
-            $('.introductionShowMore').css('display', 'none');
+        {{--if(heightOfDescription < selectedHegihtForDescription)--}}
+        {{--    $('.introductionShowMore').css('display', 'none');--}}
 
-        lineHeight = Math.floor(selectedHegihtForDescription / 25); // 25 line-heigh description
-        selectedHegihtForDescription = lineHeight * 25;
+        {{--lineHeight = Math.floor(selectedHegihtForDescription / 25); // 25 line-heigh description--}}
+        {{--selectedHegihtForDescription = lineHeight * 25;--}}
 
-        @if($kindPlaceId == 4)
-            selectedHegihtForDescription = 305;
-        @endif
+        {{--@if($kindPlaceId == 4)--}}
+        {{--    selectedHegihtForDescription = 305;--}}
+        {{--@endif--}}
 
-        $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
+        {{--$('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');--}}
 
-        var showFullDescription = false;
+        {{--var showFullDescription = false;--}}
 
-        function toggleMainDescription() {
-            if (showFullDescription) {
-                $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
-                $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '0px');
-                @if($placeMode != 'mahaliFood')
-                    $('.generalDescription').css('width', '');
-                    $('.featureOfPlaceMiddle').css('width', '');
-                    $('.rateOfPlaceMiddle').css('width', '');
-                @endif
-                $('.introductionShowMore').text('بیشتر');
-                $('.introductionShowMore').removeClass('introductionShowMoreLess');
-                showFullDescription = false;
-            } else {
-                $('.descriptionOfPlaceMiddleContent').css('max-height', '20000px');
-                $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '30px');
-                @if($placeMode != 'mahaliFood')
-                    $('.generalDescription').css('width', '100%');
-                    $('.featureOfPlaceMiddle').css('width', '50%');
-                    $('.rateOfPlaceMiddle').css('width', '50%');
-                @endif
-                $('.introductionShowMore').text('کمتر');
-                $('.introductionShowMore').addClass('introductionShowMoreLess');
-                showFullDescription = true;
-            }
-        }
+        {{--function toggleMainDescription() {--}}
+        {{--    if (showFullDescription) {--}}
+        {{--        $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');--}}
+        {{--        $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '0px');--}}
+        {{--        @if($placeMode != 'mahaliFood')--}}
+        {{--            $('.generalDescription').css('width', '');--}}
+        {{--            $('.featureOfPlaceMiddle').css('width', '');--}}
+        {{--            $('.rateOfPlaceMiddle').css('width', '');--}}
+        {{--        @endif--}}
+        {{--        $('.introductionShowMore').text('بیشتر');--}}
+        {{--        $('.introductionShowMore').removeClass('introductionShowMoreLess');--}}
+        {{--        showFullDescription = false;--}}
+        {{--    } else {--}}
+        {{--        $('.descriptionOfPlaceMiddleContent').css('max-height', '20000px');--}}
+        {{--        $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '30px');--}}
+        {{--        @if($placeMode != 'mahaliFood')--}}
+        {{--            $('.generalDescription').css('width', '100%');--}}
+        {{--            $('.featureOfPlaceMiddle').css('width', '50%');--}}
+        {{--            $('.rateOfPlaceMiddle').css('width', '50%');--}}
+        {{--        @endif--}}
+        {{--        $('.introductionShowMore').text('کمتر');--}}
+        {{--        $('.introductionShowMore').addClass('introductionShowMoreLess');--}}
+        {{--        showFullDescription = true;--}}
+        {{--    }--}}
+        {{--}--}}
 
-        @if($kindPlaceId != 4 && $kindPlaceId != 12)
-            $('.descriptionOfPlaceMiddleContent').on('click', toggleMainDescription);
-        @endif
+        {{--@if($kindPlaceId != 4 && $kindPlaceId != 12)--}}
+        {{--    $('.descriptionOfPlaceMiddleContent').on('click', toggleMainDescription);--}}
+        {{--@endif--}}
 
 
         function isPhotographer() {
