@@ -1,6 +1,9 @@
 body{
     position: relative;
 }
+.grayBackGround{
+    background: #f2f2f2;
+}
 .headerSecondSection{
     display: none !important;
 }
@@ -73,11 +76,10 @@ body{
     font-size: 12px;
 }
 .showBody{
-    background: #f2f2f2;
-    height: 400vh;
     padding: 15px 0px;
+    padding-bottom: 50vh;
 }
-.showBody .bodySec{
+.bodySec{
     background: white;
     border: solid 1px #dedede;
     margin: 5px 0px;
@@ -322,6 +324,9 @@ body{
     margin-bottom: 10px;
     padding-bottom: 10px;
 }
+.headerSec:before{
+    margin-left: 10px;
+}
 .yourReviewHeader{
     background: var(--koochita-blue);
     color: white;
@@ -341,7 +346,7 @@ body{
     display: flex;
     padding: 10px;
 }
-.inputReviewSec .firsRow .uPic{
+.uPic50{
     overflow: hidden;
     width: 50px;
     height: 50px;

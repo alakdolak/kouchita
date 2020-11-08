@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class MainBusinessController extends Controller
 {
-    public function showBusiness()
+    public function showBusiness($id = 0)
     {
         $reviews = Restaurant::where('slug', 'رستوران_شیرین_نخل')->first()->getReviews();
 

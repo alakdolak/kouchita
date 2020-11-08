@@ -6,16 +6,6 @@
     <title>
         کوچیتا |
         {{$meta['title']}}
-        @if($mode != 'country')
-            @if($mode == 'state')
-                استان
-            @else
-                شهر
-            @endif
-            {{$city->name}}
-        @else
-            ایران من
-        @endif
     </title>
 
     <meta name="title" content="{{$meta['title']}}" />
