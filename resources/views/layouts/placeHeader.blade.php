@@ -332,7 +332,7 @@ if(Auth::check()) {
                                         </div>
                                     @endif
 
-                                    @if(Request::is('article/*'))
+                                    @if(Request::is('safarnameh/*'))
                                         <ul class="global-nav-links-menu">
                                             <li>
                                                 <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(4)// in mainSearch.blade.php">اقامتگاه</span>

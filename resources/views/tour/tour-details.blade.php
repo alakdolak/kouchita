@@ -2469,7 +2469,8 @@
                                     <div ng-repeat="place in places"
                                          ng-click="redirect(place.redirect)"
                                          style="cursor: pointer;" class="ui_column is-3 rec">
-                                        <a href="[[place.redirect]]">
+                                        <a href="#">
+{{--                                        <a href="[[place.redirect]]">--}}
                                             <div class="recommendedCard">
                                                 <div class="imageContainer">
                                                     <div class="prw_rup prw_common_centered_image">

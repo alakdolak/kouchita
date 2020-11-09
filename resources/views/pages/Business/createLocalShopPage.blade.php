@@ -225,6 +225,75 @@
             font-weight: normal;
             color: white;
         }
+        .uploadPicSection{
+            width: 100%;
+            border: solid 2px #f1f1f1;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        .uploadPicSection .uploadPic{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0px;
+            opacity: .3;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .uploadPicSection .uploadPic img{
+            width: 120px;
+            margin-bottom: 15px;
+        }
+        .uploadPicSection .uploadPic span{
+            font-size: 18px;
+        }
+
+        .uploadFileCard{
+            background: #f2f2f2;
+            padding: 10px;
+            margin: 10px;
+            position: relative;
+            border-radius: 15px
+        }
+        .uploadFileCard .img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        .uploadFileCard .img img{
+            width: 100%;
+        }
+        .uploadFileCard:hover .hoverInfos{
+            display: flex;
+        }
+        .uploadFileCard .hoverInfos{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: #0000002e;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .uploadFileCard .hoverInfos .cancelButton:before{
+            font-size: 50px;
+        }
+        .uploadFileCard .hoverInfos .cancelButton{
+            color: #ff3333;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         @media (max-width: 991px) {
             div[class^="col-md"]{
@@ -390,16 +459,75 @@
                             </div>
                             <div class="col-sm-12 form-group">
                                 <label for="shopDescription">توضیحات</label>
-                                <div class="descriptionText">شما در این قسمت می توانید در مورد مغازه ، شغل ، نوع فعالیت خود توضیحاتی بنویسید.</div>
-                                <textarea class="autoResizeTextArea form-control" id="shopDescription"></textarea>
+{{--                                <div class="descriptionText">شما در این قسمت می توانید در مورد مغازه ، شغل و یا نوع فعالیت خود توضیحاتی بنویسید.</div>--}}
+                                <textarea class="autoResizeTextArea form-control"
+                                          id="shopDescription"
+                                          placeholder="شما در این قسمت می توانید در مورد مغازه ، شغل و یا نوع فعالیت خود توضیحاتی بنویسید."></textarea>
                             </div>
 
                         </div>
                     </div>
-
                 </div>
                 <div class="sectionPages section3 hidden">
-                    <h2>section 3</h2>
+                    <div class="container" style="width: 100%;">
+                        <div class="row">
+                            <div class="col-sm-12 headerRowInput">
+                                بارگذاری عکس
+                            </div>
+                            <div class="col-md-12">
+                                <div class="descriptionText">در این بخش می توانید عکس هایی از مغازه و یا کسب کار خود قرار دهید تا مردم شما را بهتر بشناسند.</div>
+                                <label id="uploadedSection" for="localShopPics" class="uploadPicSection">
+                                    <div class="uploadPic">
+                                        <img src="{{URL::asset('images/icons/uploadPic.png')}}">
+                                        <span>
+                                            عکس های خود را در اینجا قرار دهید و یا کلیک کنید
+                                        </span>
+                                    </div>
+                                </label>
+                                <script>
+                                    var fileImages = [];
+                                    function uploadFileWithClick(_input) {
+                                        if(_input.files && _input.files[0]){
+                                            var reader = new FileReader();
+                                            reader.onload = e => {
+                                                fileImages.push({
+                                                    file: _input.files[0],
+                                                    image: e.target.result
+                                                });
+                                                createNewImgUploadCard(fileImages.length-1);
+                                            };
+                                            reader.readAsDataURL(_input.files[0]);
+                                        }
+                                        $(_input).val('');
+                                    }
+
+                                    function createNewImgUploadCard(_index){
+                                        if(_index == 0)
+                                            $('#uploadedSection').empty();
+
+                                        var file = fileImages[_index];
+
+                                        var text = `<div class="uploadFileCard">
+                                                        <div class="img">
+                                                            <img src="${file.image}" class="resizeImgClass" onload="fitThisImg(this)">
+                                                        </div>
+                                                        <div class="hoverInfos">
+                                                            <div class="cancelButton closeIconWithCircle" onclick="deleteThisUploadedImage(${_index})">
+                                                                 حذف عکس
+                                                            </div>
+                                                        </div>
+                                                    </div>`;
+                                        $('#uploadedSection').append(text);
+                                    }
+
+                                    function deleteThisUploadedImage(_index){
+
+                                    }
+                                </script>
+                                <input type="file" accept="image/*" id="localShopPics" style="display: none" onchange="uploadFileWithClick(this)">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="submitSection">
@@ -468,7 +596,6 @@
         }
 
         initMap();
-
 
         function findMyLocation() {
             if (navigator.geolocation)
@@ -550,6 +677,7 @@
                 $(_element).parent().prev().removeClass('hidden');
             }
         }
+
     </script>
 
 @endsection
