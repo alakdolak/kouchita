@@ -4,12 +4,14 @@
 $total = $rates[0] + $rates[1] + $rates[2] + $rates[3] + $rates[4];
 if ($total == 0)
     $total = 1;
+
+$seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $city->name . " | " . $place->name;
 ?>
 @section('head')
     <meta content="article" property="og:type"/>
-    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
-    <meta property="title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
-    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
+    <meta property="og:title" content="{{$seoTitle}}"/>
+    <meta property="title" content="{{$seoTitle}}"/>
+    <meta name="twitter:title" content="{{$seoTitle}}"/>
     <meta name="twitter:card" content="{{$place->meta}}"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
     <meta property="og:description" content="{{$place->meta}}"/>
@@ -33,7 +35,7 @@ if ($total == 0)
         <meta property="article:tag" content="{{$item}}"/>
     @endforeach
 
-    <title>{{isset($place->setTitle) ? $place->setTitle : $place->name}} </title>
+    <title>{{isset($place->seoTitle) ? $place->seoTitle : $place->name}} </title>
 
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
