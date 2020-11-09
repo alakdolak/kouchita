@@ -208,7 +208,7 @@ class PlaceController extends Controller {
         $rooms = '';
         $jsonRoom = '';
 
-        $articleUrl = \url('/article/list/place/' . $kindPlaceId . '_' . $place->id);
+        $articleUrl = \url('/safarnameh/list/place/' . $kindPlaceId . '_' . $place->id);
         $cityName = 'شهر ' . $city->name;
         $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
 
@@ -3034,7 +3034,7 @@ class PlaceController extends Controller {
                 $n = 'لیست ' . $kindPlace->title . ' ایران';
                 $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
                 $contentCount = \DB::table($kindPlace->tableName)->count();
-                $inHeaderName = 'ایران من';
+                $inHeaderName = 'ایران ';
             }
             else if ($mode == "state") {
                 $state = State::whereName($city)->first();
@@ -3044,7 +3044,7 @@ class PlaceController extends Controller {
 
                 $cityIds = Cities::where('stateId', $city->id)->pluck('id')->toArray();
 
-                $articleUrl = \url('/article/list/city/' . $state->name);
+                $articleUrl = \url('/safarnameh/list/city/' . $state->name);
                 $n = ' استان ' . $state->name;
                 $locationName = ['name' => $n, 'state' => $state->name,
                                 'cityName' => $n, 'cityNameUrl' => $state->name,
@@ -3085,9 +3085,10 @@ class PlaceController extends Controller {
 
                     $placeMode = 'amaken';
                     $kindPlace->title = ' جاذبه های';
-                    $meta['title'] = 'جاهای دیدنی '.$inHeaderName.' + عکس + آدرس';
-                    $meta['keyword'] = 'جاذبه های گردشگری ' . $inHeaderName . ' + جاهای دیدنی' . $inHeaderName . ' + اماکن گردشگری' . $inHeaderName . ' + اماکن تاریخی' . $inHeaderName;
-                    $meta['description'] = 'لیست تمامی جاذبه های گردشگری و تفریحی ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس اماکن، نقشه و آدرس و تاریخچه همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
+                    $meta['title'] = 'جاهای دیدنی '.$inHeaderName.' + عکس و آدرس';
+                    $meta['keyword'] = 'جاذبه های گردشگری ' . $inHeaderName . ' + جاهای دیدنی' . $inHeaderName . ' + جاهای گردشگری' . $inHeaderName . ' + جاهای تاریخی' . $inHeaderName;
+//                    $meta['description'] = 'معرفی جاهای دیدنی و گردشگری و تفریحی ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس اماکن، نقشه و آدرس و تاریخچه همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
+                    $meta['description'] = 'جاهای دیدنی '.$inHeaderName.' و جاذبه های دیدنی '.$inHeaderName.' و مکان های زیارتی '.$inHeaderName.'، آثار تاریخی '.$inHeaderName.' و مکان های تفریحی '.$inHeaderName.' و پاساژهای '.$inHeaderName.' را در کوچیتا ببینید. در این صفحه می توانید تمامی جاذبه های '.$inHeaderName.' را به همراه آدرس و عکس و نظرات کاربران در کوچیتا مشاهده کنید.';
                     break;
                 case 3:
                     $errorTxt = [];
@@ -3097,9 +3098,12 @@ class PlaceController extends Controller {
 
                     $placeMode = 'restaurant';
                     $kindPlace->title = ' رستوران های';
-                    $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی رستوران ها و فست فود های '.$inHeaderName;
-                    $meta['keyword'] = 'رستوران‌های ' . $inHeaderName . ', رستوران‌های ' . $inHeaderName . ' با عکس , لیست تمامی رستوران های ' . $inHeaderName . ' , بهترین رستوران‌های ' . $inHeaderName . ' , لیست رستوران ها و فست فود ها و رستوران های سنتی ' . $inHeaderName ;
-                    $meta['description'] = 'قبل از سفر رستوران های ' . $inHeaderName . ' رو بشناس و برای رستورانایی که رفتی  نقد بنویس و نظر بده. ما اطلاعات کاملی از رستوران ها و فست فود ها به همراه عکس ا، نقشه و آدرس و معرفی ، همراه با امتیاز بندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
+                    $meta['title'] = 'معرفی رستوران ها و فست فود های '.$inHeaderName.' + عکس و آدرس و تلفن';
+                    $meta['keyword'] = 'رستوران‌های ' . $inHeaderName . ',عکس رستوران‌های ' . $inHeaderName . ' , تلقن رستوران های ' . $inHeaderName . ' , بهترین رستوران‌های ' . $inHeaderName . ' , فست فود ها و رستوران های سنتی ' . $inHeaderName ;
+//                    $meta['description'] = 'قبل از سفر رستوران های ' . $inHeaderName . ' رو بشناس و برای رستورانایی که رفتی  نقد بنویس و نظر بده. ما اطلاعات کاملی از رستوران ها و فست فود ها به همراه عکس ا، نقشه و آدرس و معرفی ، همراه با امتیاز بندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
+                    $meta['description'] = 'رستوران های '.$inHeaderName.' :معرفی رستوران های معروف '.$inHeaderName.' بهمراه آدرس و تلفن را در وب سایت کوچیتا مشاهده کنید. رستوران های خوب '.$inHeaderName.' بهمراه آدرس و موقعیت نقشه  و تلفن رستوران های '.$inHeaderName.' به همراه نظرات مشتریان و منو رستوران های '.$inHeaderName;
+                    $meta['description'] .= 'فست فود های '.$inHeaderName.' :معرفی فست فود های معروف '.$inHeaderName.' بهمراه آدرس و تلفن را در وب سایت کوچیتا مشاهده کنید. فست فود های خوب '.$inHeaderName.' بهمراه آدرس و موقعیت نقشه  و تلفن فست فود های '.$inHeaderName.' به همراه نظرات مشتریان و منو فست فود های '.$inHeaderName;
+                    $meta['description'] .= 'رستوران های سنتی '.$inHeaderName.' :معرفی رستوران های سنتی معروف '.$inHeaderName.' بهمراه آدرس و تلفن را در وب سایت کوچیتا مشاهده کنید. رستوران های سنتی خوب '.$inHeaderName.' بهمراه آدرس و موقعیت نقشه  و تلفن رستوران های سنتی '.$inHeaderName.' به همراه نظرات مشتریان و منو رستوران های سنتی '.$inHeaderName;
                     break;
                 case 4:
                     $errorTxt = [];
@@ -3109,9 +3113,10 @@ class PlaceController extends Controller {
 
                     $placeMode = 'hotel';
                     $kindPlace->title = 'اقامتگاه های ';
-                    $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی اماکن اقامتی و هتل ها و مهمانسراهای '.$inHeaderName;
-                    $meta['keyword'] = 'هتل در ' . $inHeaderName . ' , هتل در ' . $inHeaderName . ' با قیمت مناسب , هتل ارزان در ' . $inHeaderName . '  , رزرو هتل در ' . $inHeaderName . ' ,لیست مراکزاقامتی ' . $inHeaderName . ' , لیست هتل های ' . $inHeaderName . ', لیست مهمانسرا های ' . $inHeaderName;
-                    $meta['description'] = 'لیست تمامی مراکز اقامتی و هتل ها و مهمانسراهای ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
+                    $meta['title'] = 'هتل ها و مهمانسراهای '.$inHeaderName.'+ عکس و آدرس و تلفن';
+                    $meta['keyword'] = 'هتل در ' . $inHeaderName . ' , هتل در ' . $inHeaderName . ' با قیمت مناسب , هتل ارزان در ' . $inHeaderName . '  , رزرو هتل در ' . $inHeaderName . ' ,مهمانسراهای '.$inHeaderName.' , هتل آپارتمان های '.$inHeaderName;
+//                    $meta['description'] = 'هتل ها و مهمانسراهای ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
+                    $meta['description'] = 'معرفی هتل های '.$inHeaderName.' با کوچیتا. تلفن هتل '.$inHeaderName.' با بررسی عکس ها، قیمت، نظرات میهمانان، مقایسه هتل های '.$inHeaderName.' و موقعیت نقشه هتل های '.$inHeaderName.'معرفی هتل آپارتمان و مهمان سراهای '.$inHeaderName.' با کوچیتا. تلفن هتل آپارتمان و مهمان سراهای '.$inHeaderName.' با بررسی عکس ها، قیمت، نظرات میهمانان، مقایسه هتل آپارتمان و مهمان سراهای '.$inHeaderName.' و موقعیت نقشه هتل آپارتمان و مهمان سراهای '.$inHeaderName.'';
                     break;
                 case 6:
                     $errorTxt = [];
@@ -3121,9 +3126,9 @@ class PlaceController extends Controller {
 
                     $placeMode = 'majara';
                     $kindPlace->title = ' طبیعت گردی های ';
-                    $meta['title'] = 'عکس+آدرس+تجهیزات لازم + لیست تمامی جاهای مناسب طبیعت گردی و سفرهای ماجراجویانه '.$inHeaderName;
-                    $meta['keyword'] = 'کوه نوردی در ' . $inHeaderName . ' ، پیاده‌روی در ' . $inHeaderName . ' ، غار‌نوردی در ' . $inHeaderName . ' ، صحرانوردی در ' . $inHeaderName . ' ، یخ‌نوردی در ' . $inHeaderName . ' ، پیک نیک در ' . $inHeaderName . ' ، محل های مناسب شنا در ' . $inHeaderName . ' ، آفرود در ' . $inHeaderName . ' ، رفتینگ در ' . $inHeaderName . ' ، صخره‌نوردی در ' . $inHeaderName . ' ، قایق‌سواری در ' . $inHeaderName . ' ، سنگ‌نوردی در ' . $inHeaderName . ' ، موج سواری در ' . $inHeaderName . ' ، دره‌نوردی در ' . $inHeaderName . ' ، کمپ (چادر زدن) در ' . $inHeaderName;
-                    $meta['description'] = 'لیست تمامی اماکن مناسب برای طبیعت گردی ، زیباترین روستاها، ییلاق ها و جاذبه های طبیعی ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و تجهیزات لازم و توضیحات همراه با عکس کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر خاطره انگیزی داشته باشید. ';
+                    $meta['title'] = 'طبیعت گردی در '.$inHeaderName.' و سفرهای ماجراجویانه + عکس و آدرس و تجهیزات لازم';
+                    $meta['keyword'] = 'کوه نوردی در ' . $inHeaderName . ' ، پیاده‌روی در ' . $inHeaderName . ' ، غار‌نوردی در ' . $inHeaderName . ' ، صحرانوردی در ' . $inHeaderName . ' ، یخ‌نوردی در ' . $inHeaderName . ' ، پیک نیک در ' . $inHeaderName . ' ، محل های مناسب شنا در ' . $inHeaderName . ' ، آفرود در ' . $inHeaderName . ' ، رفتینگ در ' . $inHeaderName . ' ، صخره‌نوردی در ' . $inHeaderName . ' ، قایق‌سواری در ' . $inHeaderName . ' ، سنگ‌نوردی در ' . $inHeaderName . ' ، موج سواری در ' . $inHeaderName . ' ، دره‌نوردی در ' . $inHeaderName . ' ، کمپ (چادر زدن) در ' . $inHeaderName . ' ، کوهستان های ' . $inHeaderName . ' ، جنگل های ' . $inHeaderName . ' ، کویر های ' . $inHeaderName;
+                    $meta['description'] = 'جاهای مناسب برای طبیعت گردی در '.$inHeaderName.' ، زیباترین روستاها '.$inHeaderName.'، ییلاق های '.$inHeaderName.' و جاذبه های طبیعی ' . $inHeaderName . ' در سایت کوچیتا می توانید تمامی جاهای بکر '.$inHeaderName.' و روستاهای '.$inHeaderName.' را به همراه آدرس و موقعیت نقشه و عکس و نظرات کاربران مشاهده کنید.';
                     break;
                 case 10:
                     $errorTxt = [];
@@ -3133,12 +3138,11 @@ class PlaceController extends Controller {
 
                     $placeMode = 'sogatSanaies';
                     $kindPlace->title = 'سوغات و صنایع دستی ';
-                    $meta['title'] = 'عکس+ویژگی+معرفی کامل+ فروشندگان لیست تمامی صنایع دستی و سوغات '.$inHeaderName;
-                    $meta['keyword'] = 'لیست صنایع دستی ... ، لیست سوغات ... ،  طرز تهیه سوغات ... ، ویژگی های سوغات ... ، ویژگی های صنایع دستی ... ، قیمت های سوغات ... ، قیمت های صنایع دستی ... ، سوغات ... چیست ، صنایع دستی ... چیست ، معرفی سوغات ... ، معرفی صنایع دستی ... ';
-                    $meta['description'] = 'لیست تمامی صنایع دستی و سوغات ' . $inHeaderName . ' که به دست هنرمندان بومی این شهر درست شده است و ما برای شما اطلاعات کاملی به همراه عکس ، ویژگی ها و چگومگی ساخت صنایع دستی و طرز تهیه سوغات خوراکی همراه با توضیحات و عکس و معرفی بهترین فروشندگان توسط کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین خرید ها را در سفر داشته باشید. ';
+                    $meta['title'] = 'صنایع دستی و سوغات '.$inHeaderName;
+                    $meta['keyword'] = 'صنایع دستی '.$inHeaderName.' ، سوغات '.$inHeaderName.' ،  طرز تهیه سوغات '.$inHeaderName.' ، ویژگی های سوغات '.$inHeaderName.' ، ویژگی های صنایع دستی '.$inHeaderName.' ، قیمت سوغات '.$inHeaderName.' ، قیمت صنایع دستی '.$inHeaderName.' ، سوغات '.$inHeaderName.' چیست ، صنایع دستی '.$inHeaderName.' چیست ، معرفی سوغات '.$inHeaderName.' ، معرفی صنایع دستی '.$inHeaderName;
+                    $meta['description'] = 'صنایع دستی و سوغات ' . $inHeaderName . ' و معرفی صنایع دستی '.$inHeaderName.' و معرفی سوغات '.$inHeaderName.' با کوچیتا. معرفی فروشندگان صنایع دستی و سوغات '.$inHeaderName.' همراه با عکس ، قیمت، نظرات کاربران، مقایسه سوغات و صنایع دستی '.$inHeaderName.' و موقعیت نقشه فروشندگان سوغات وصنایع دستی '.$inHeaderName;
                     break;
                 case 11:
-
                     if(isset($_GET['filter'])){
                         if($_GET['filter'] == 'diabet') {
                             $kindSearch = ' مناسب برای افراد دیابتی';
@@ -3169,9 +3173,10 @@ class PlaceController extends Controller {
 
                     $placeMode = 'mahaliFood';
                     $kindPlace->title = 'غذاهای '.$kindSearch;
-                    $meta['title'] = 'عکس+دستور پخت '.$kindSearch2.' +میزان کالری+ لیست تمامی غذاهای '.$kindSearch .' '.$inHeaderName;
+//                    $meta['title'] = 'عکس+دستور پخت '.$kindSearch2.' +میزان کالری+ غذاهای '.$kindSearch .' '.$inHeaderName;
+                    $meta['title'] = 'معرفی غذاهای '.$kindSearch.' '.$inHeaderName.'+ عکس و دستور پخت و کالری';
                     $meta['keyword'] = 'غذاهای ' . $kindSearch . $inHeaderName . ' ، غذاهای سنتی ' . $inHeaderName . ' ، طرز تهیه غذای ' . $kindSearch . $inHeaderName . ' ، دستور پخت غذای '.$kindSearch . $inHeaderName . ' ، غذای '.$kindSearch . $inHeaderName . ' چیست ، غذای سنتی ' . $inHeaderName . ' چیست ، غذای مناسب برای افراد گیاه خوار، غذاهای مناسب برای افراد وگان ، غذاهای مناسب برای افراد دیابتی ، آش های محلی ' . $inHeaderName . ' ، خورشت های ' . $inHeaderName . ' ، خورش های ' . $inHeaderName . ' ، خوراک های ' . $inHeaderName ;
-                    $meta['description'] = 'ما برای شما غذاهای محلی و سنتی ... همراه با دستور پخت و عکس و میزان کالری که شامل آش ها، سوپ ها، خورشت ها، خوراک ها ،شیرینی ها، نان ها، مربا ها و سالاد ها می باشد را جمع اوری کرده ایم.';
+                    $meta['description'] = 'ما برای شما غذاهای محلی '.$inHeaderName.' و غذاهای سنتی '.$inHeaderName.' همراه با دستور پخت و عکس و میزان کالری که شامل آش های '.$inHeaderName.'، سوپ های '.$inHeaderName.'، خورشت های '.$inHeaderName.' ، خوراک های '.$inHeaderName.' ،شیرینی ها '.$inHeaderName.'، نان ها '.$inHeaderName.'، مربا های '.$inHeaderName.' و سالاد های '.$inHeaderName.' را جمع اوری کرده ایم.';
                     break;
                 case 12:
                     $errorTxt = [];
@@ -3181,9 +3186,10 @@ class PlaceController extends Controller {
 
                     $placeMode = 'boomgardy';
                     $kindPlace->title = 'بوم گردی های ';
-                    $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی بوم گردی های '.$inHeaderName;
-                    $meta['keyword'] = 'لیست بوم گردی های ' . $inHeaderName;
-                    $meta['description'] = 'لیست تمامی بوم گردی های ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
+                    $meta['title'] = 'بوم گردی های '.$inHeaderName.'+ عکس و آدرس و تلفن و نقشه';
+                    $meta['keyword'] = 'بوم گردی های '.$inHeaderName.'اقامتگاه بوم گردی '.$inHeaderName.' ، خونه محلی '.$inHeaderName.'، خونه روستایی '.$inHeaderName.'، خونه شخصی در '.$inHeaderName.'';
+//                    $meta['description'] = 'بوم گردی های ' . $inHeaderName . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
+                    $meta['description'] = 'معرفی بوم گردی های '.$inHeaderName.' با کوچیتا. تلفن بوم گردی '.$inHeaderName.' با بررسی عکس ها، قیمت، نظرات میهمانان، مقایسه بوم گردی در '.$inHeaderName.' و موقعیت نقشه بوم گردی های '.$inHeaderName.'';
                     break;
             }
 

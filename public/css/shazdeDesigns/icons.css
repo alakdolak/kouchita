@@ -3,6 +3,14 @@
 }
 
 /*....................*/
+.closeIconWithCircle:before{
+    content: '\E02D';
+    font-family: 'Shazde_Regular2' !important;
+}
+.closeIconWithCircleAfter:after{
+    content: '\E02D';
+    font-family: 'Shazde_Regular2' !important;
+}
 .addVideo360Icon:before{
     content: '\E1F3';
     font-family: 'Shazde_Regular2' !important;

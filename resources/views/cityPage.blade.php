@@ -3,19 +3,21 @@
 
 <head>
     @include('layouts.topHeader')
+    <?php
+        $placeTitleName = isset($place->state) ? $place->listName : $place->name;
+    ?>
     <title>
-        {{__('کوچیتا |معرفی جاهای دیدنی+بوم گردی+رستوران+غذای ')}}
-        {{isset($place->state) ? $place->listName : $place->name }}
+         کوچیتا |معرفی اقامتگاه ها و جاهای دیدنی {{$placeTitleName}}
     </title>
 
     <meta content="article" property="og:type"/>
-    <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
-    <meta name="og:title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
-    <meta name="twitter:title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
-    <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
-    <meta name='og:description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
-    <meta name='twitter:description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
-    <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
+    <meta name="title" content="{{$placeTitleName}} | اطلاعات گردشگری {{$placeTitleName}} – جاهای دیدنی {{$placeTitleName}} – هتل های {{$placeTitleName}} – رستوران های {{$placeTitleName}}- صنایع‌دستی و سوغات  {{$placeTitleName}} | کوچیتا" />
+    <meta name="og:title" content="{{$placeTitleName}} | اطلاعات گردشگری {{$placeTitleName}} – جاهای دیدنی {{$placeTitleName}} – هتل های {{$placeTitleName}} – رستوران های {{$placeTitleName}}- صنایع‌دستی و سوغات  {{$placeTitleName}} | کوچیتا" />
+    <meta name="twitter:title" content="{{$placeTitleName}} | اطلاعات گردشگری {{$placeTitleName}} – جاهای دیدنی {{$placeTitleName}} – هتل های {{$placeTitleName}} – رستوران های {{$placeTitleName}}- صنایع‌دستی و سوغات  {{$placeTitleName}} | کوچیتا" />
+    <meta name='description' content='. هر چه یک گردشگر باید درباره ی {{$placeTitleName}}  و هتل های {{$placeTitleName}} و جاهای دیدنی {{$placeTitleName}} و غذاهای محلی {{$placeTitleName}} و رستوران های {{$placeTitleName}} و سوغات {{$placeTitleName}} و صنایع دستی {{$placeTitleName}} و روستاهای {{$placeTitleName}} و بوم گردی های {{$placeTitleName}} و اطلاعات جامع {{$placeTitleName}} در این صفحه می توانید ببینید  ' />
+    <meta name='og:description' content='. هر چه یک گردشگر باید درباره ی {{$placeTitleName}}  و هتل های {{$placeTitleName}} و جاهای دیدنی {{$placeTitleName}} و غذاهای محلی {{$placeTitleName}} و رستوران های {{$placeTitleName}} و سوغات {{$placeTitleName}} و صنایع دستی {{$placeTitleName}} و روستاهای {{$placeTitleName}} و بوم گردی های {{$placeTitleName}} و اطلاعات جامع {{$placeTitleName}} در این صفحه می توانید ببینید  ' />
+    <meta name='twitter:description' content='. هر چه یک گردشگر باید درباره ی {{$placeTitleName}}  و هتل های {{$placeTitleName}} و جاهای دیدنی {{$placeTitleName}} و غذاهای محلی {{$placeTitleName}} و رستوران های {{$placeTitleName}} و سوغات {{$placeTitleName}} و صنایع دستی {{$placeTitleName}} و روستاهای {{$placeTitleName}} و بوم گردی های {{$placeTitleName}} و اطلاعات جامع {{$placeTitleName}} در این صفحه می توانید ببینید  ' />
+    <meta name='keywords' content='جاذبه های  {{$placeTitleName}} – اطلاعات گردشگری {{$placeTitleName}} – نقد و بررسی {{$placeTitleName}} ' />
 
     @if(isset($place->image))
         <meta property="og:image" content="{{URL::asset($place->image)}}"/>
@@ -25,11 +27,17 @@
         <meta name="twitter:image" content="{{URL::asset($place->image)}}"/>
     @endif
 
-    <meta property="article:tag" content="{{$place->name}}"/>
-    <meta property="article:tag" content="جاذبه های {{$place->name}}"/>
-    <meta property="article:tag" content="{{$place->name}} گردی"/>
-    <meta property="article:tag" content="{{$place->name}} را بشناسیم"/>
-    <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
+    <meta property="article:tag" content="{{$placeTitleName}}"/>
+    <meta property="article:tag" content="جاهای دیدنی {{$placeTitleName}}"/>
+    <meta property="article:tag" content="بوم گردی های {{$placeTitleName}}"/>
+    <meta property="article:tag" content="{{$placeTitleName}} را بشناسیم"/>
+    <meta property="article:tag" content="اطلاعات {{$placeTitleName}}"/>
+    <meta property="article:tag" content="غذاهای محلی {{$placeTitleName}}"/>
+    <meta property="article:tag" content="هتل های {{$placeTitleName}}"/>
+    <meta property="article:tag" content="رستوران های {{$placeTitleName}}"/>
+    <meta property="article:tag" content="سوغات {{$placeTitleName}}"/>
+    <meta property="article:tag" content="صنایع دستی {{$placeTitleName}}"/>
+    <meta property="article:tag" content="روستاهای {{$placeTitleName}}"/>
 
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
