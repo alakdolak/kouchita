@@ -429,8 +429,11 @@ Route::group(['middleware' => ['SafarnamehShareData']], function () {
 
     Route::group(['middleware' => ['auth']], function (){
         Route::post('/safarnameh/like', 'SafarnamehController@LikeSafarnameh')->name('safarnameh.like');
+
         Route::post('/safarnameh/comment/store', 'SafarnamehController@StoreSafarnamehComment')->name('safarnameh.comment.store');
+
         Route::post('/safarnameh/comment/like', 'SafarnamehController@likeSafarnamehComment')->name('safarnameh.comment.like');
+
         Route::post('/safarnameh/bookMark', 'SafarnamehController@addSafarnamehBookMark')->name('safarnameh.bookMark');
     });
 });
