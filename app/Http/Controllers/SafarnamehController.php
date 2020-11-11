@@ -242,14 +242,12 @@ class SafarnamehController extends Controller
             if (!file_exists($location))
                 mkdir($location);
 
-            $size = [
-                [
-                    'width' => 900,
-                    'height' => null,
-                    'name' => $user->id.'_',
-                    'destination' => $location
-                ],
-            ];
+            $size = [[
+                        'width' => 900,
+                        'height' => null,
+                        'name' => $user->id.'_',
+                        'destination' => $location
+                    ]];
 
             $image = $request->file('file');
             $fileName = resizeImage($image, $size);

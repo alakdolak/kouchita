@@ -46,6 +46,10 @@
             font-size: 14px !important;
             line-height: 30px !important;
             font-weight: 400 !important;
+            text-align: justify;
+        }
+        .safarnamehDescription figure{
+            margin: 20px auto;
         }
         .safarnamehDescription h1 span, .safarnamehDescription h1{
             font-size: 28px !important;
