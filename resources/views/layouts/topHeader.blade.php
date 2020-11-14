@@ -1,4 +1,6 @@
 
+<meta content="43970F70216852DDFADD70BBB51A6A8D" name="jetseo-site-verification" rel="verify" />
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
