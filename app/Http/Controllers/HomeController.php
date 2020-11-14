@@ -1042,7 +1042,7 @@ class HomeController extends Controller
             $result = array_merge($result, $tmp);
 
             $acitivityId = Activity::where('name', 'مشاهده')->first();
-            $kinPlace = Place::whereNotNull('tableName')->get();
+            $kinPlace = Place::whereNotNull('tableName')->where('mainSearch', 1)->get();
             foreach ($kinPlace as $kplace){
                 if($kindPlaceId == 0 || $kplace->id == $kindPlaceId) {
                     if (!empty($key2))

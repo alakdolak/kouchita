@@ -189,7 +189,7 @@ class ProfileController extends Controller {
                 array_push($inPlace, ['kindPlaceId' => 'state', 'kindPlaceName' => '', 'placeId' => $item->id, 'name' => 'استان ' . $item->name, 'pic' => getStatePic($item->id, 0), 'state' => '']);
         }
 
-        $kindPlace = Place::whereNotNull('tableName')->get();
+        $kindPlace = Place::whereNotNull('tableName')->where('mainSearch', 1)->get();
         foreach ($kindPlace as $kind) {
             $allPlace = \DB::table($kind->tableName)->select(['id', 'name', 'cityId'])->get();
             foreach ($allPlace as $item){

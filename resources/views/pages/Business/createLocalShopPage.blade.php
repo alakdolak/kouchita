@@ -16,6 +16,10 @@
             border-bottom: solid 1px #cacaca;
             border-radius: 0;
         }
+        .form-control:focus{
+            box-shadow: none;
+            border-bottom: solid 2px var(--koochita-blue);
+        }
         textarea.form-control{
             border-radius: 4px;
             border: 1px solid #ccc;
@@ -23,278 +27,6 @@
         .sectionPages{
             padding-bottom: 60px;
         }
-
-
-        .createPageMainBody hr{
-            width: 100%;
-        }
-        .descriptionText{
-            margin-bottom: 10px;
-            color: #646464;
-            font-size: 12px;
-        }
-        .importantInput label{
-            display: flex;
-        }
-        .importantInput label:after{
-            content: '*';
-            color: red;
-            font-size: 18px;
-            margin-right: 5px;
-        }
-        .createPageMainBody{
-
-        }
-        .createPageMainBody .bodd{
-            padding: 10px;
-        }
-        .createPageMainBody .bodd .MainHeader{
-            margin: 0px 0px 20px 0px;
-            font-weight: bold;
-            border-bottom: solid 1px #f7f7f7;
-            padding: 10px 0px;
-            font-size: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .createPageMainBody .bodd .indicator{
-            position: relative;
-            display: flex;
-            width: 300px;
-            justify-content: space-between;
-        }
-        .createPageMainBody .bodd .indicator .squer{
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: solid 1px gray;
-            text-align: center;
-            font-size: 9px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            padding: 10px;
-        }
-        .createPageMainBody .bodd .indicator .squer.selected, .line.selected{
-            background: var(--koochita-blue) !important;
-            border-color: var(--koochita-blue) !important;
-            color: white !important;
-        }
-
-        .createPageMainBody .bodd .indicator .line{
-            width: calc(50% - 73px);
-            position: absolute;
-            height: 7px;
-            top: 22px;
-            background: white;
-            border-top: solid 1px gray;
-            border-bottom: solid 1px gray;
-        }
-        .createPageMainBody .bodd .descInputSec{
-            margin-bottom: 30px;
-            font-size: 15px;
-        }
-        .shopMapInput{
-            position: relative;
-            height: 400px;
-            width: 100%;
-        }
-        .myLocationButton{
-            background: #ffbaba;
-            border: none;
-            margin-right: 10px;
-            padding: 3px;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-        }
-        .myLocationButton > img{
-            width: 50px;
-        }
-
-        .submitSection{
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            right: 0;
-        }
-        .submitSection .row{
-            background: #ffffffa6;
-            padding: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 15px;
-            width: 100%;
-            margin: 0px;
-        }
-        .submitSection .row > button{
-            margin: 0px 10px;
-            border-radius: 0px;
-            border: none;
-            padding: 5px 15px;
-        }
-        .submitSection .nextButton{
-            color: white;
-            background: var(--koochita-green);
-        }
-        .submitSection .prevButton{
-            font-weight: bold;
-            background: white;
-            padding-bottom: 3px;
-        }
-        .headerRowInput{
-            font-size: 22px;
-            font-weight: bold;
-            display: flex;
-            margin-bottom: 0 !important;
-        }
-        .timeSection{
-
-        }
-        .timeSection .timeRow{
-            display: flex;
-            margin: 15px 0px;
-            align-items: center;
-        }
-        .timeSection .timeRow .text{
-            margin-left: 10px;
-            font-weight: bold;
-            width: 120px;
-        }
-        .timeSection .timeRow .smTex{
-            margin: 0px 5px;
-            margin-right: 20px;
-            font-size: 11px;
-        }
-        .checkboxDiv{
-            display: flex;
-            margin-right: 20px;
-            align-items: center;
-            font-size: 12px;
-        }
-        .checkboxDiv label{
-            cursor: pointer;
-            margin-left: 5px;
-        }
-        .checkboxDiv input{
-            display: block;
-            width: 20px;
-            height: 20px;
-        }
-
-        .openCloseInputShow{
-            margin: 0px 10px;
-            background: #fcc156;
-            padding: 5px;
-            font-size: 10px;
-            border: solid 1px gray;
-            cursor: pointer;
-        }
-        .openCloseInputDiv input{
-            display: none;
-        }
-        .openCloseInputDiv .openCloseInputShow:after{
-            content: 'تعطیل هستم';
-            padding: 5px;
-            display: inline-flex;
-            font-weight: normal;
-        }
-        .openCloseInputDiv .openCloseInputShow:before{
-            content: 'باز هستم';
-            padding: 5px;
-            background: white;
-            font-weight: bold;
-            display: inline-flex;
-        }
-
-        .openCloseInputDiv.checked .openCloseInputShow{
-            background: #ff6e6e;
-        }
-        .openCloseInputDiv.checked .openCloseInputShow:after{
-            background: white;
-            font-weight: bold;
-            color: black;
-        }
-        .openCloseInputDiv.checked .openCloseInputShow:before{
-            background: none;
-            font-weight: normal;
-            color: white;
-        }
-        .uploadPicSection{
-            width: 100%;
-            border: solid 2px #f1f1f1;
-            display: flex;
-            flex-wrap: wrap;
-            padding: 10px;
-        }
-        .uploadPicSection .uploadPic{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 30px 0px;
-            opacity: .3;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        .uploadPicSection .uploadPic img{
-            width: 120px;
-            margin-bottom: 15px;
-        }
-        .uploadPicSection .uploadPic span{
-            font-size: 18px;
-        }
-
-        .uploadFileCard{
-            background: #f2f2f2;
-            padding: 10px;
-            margin: 10px;
-            position: relative;
-            border-radius: 15px
-        }
-        .uploadFileCard .img{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            border-radius: 15px;
-        }
-        .uploadFileCard .img img{
-            width: 100%;
-        }
-        .uploadFileCard:hover .hoverInfos{
-            display: flex;
-        }
-        .uploadFileCard .hoverInfos{
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            background: #0000002e;
-            border-radius: 15px;
-            cursor: pointer;
-        }
-        .uploadFileCard .hoverInfos .cancelButton:before{
-            font-size: 50px;
-        }
-        .uploadFileCard .hoverInfos .cancelButton{
-            color: #ff3333;
-            flex-direction: column;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         @media (max-width: 991px) {
             div[class^="col-md"]{
                 /*float: unset;*/
@@ -302,15 +34,13 @@
             }
         }
         @media (max-width: 767px) {
-            .createPageMainBody .bodd .MainHeader{
-                flex-direction: column;
-            }
             div[class^="col-sm"]{
                 /*float: unset;*/
                 width: 100%;
             }
         }
     </style>
+
 
     <link rel="stylesheet" href="{{URL::asset('packages/clockPicker/bootstrap-clockpicker.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('packages/clockPicker/jquery-clockpicker.min.css')}}">
@@ -334,50 +64,57 @@
                         <div class="squer level1 selected"> اطلاعات اولیه </div>
                     </div>
                 </div>
+
                 <div class="sectionPages section1">
                     <div class="descInputSec col-sm-12">
                         <div class="descriptionText">شما در اینجا می توانید اطلاعات مغازه خود را وارد نمایید.</div>
                         <div class="descriptionText">توجه نمایید پر کردن تمامی اطلاعات این بخش ضروری می باشد.</div>
-                        <div style="color: red; margin-top: 5px;">موارد ستاره دار پر کردنشان اجباری است</div>
+                        <div style="color: red; margin-top: 5px;">کامل کردن موارد ستاره دار اجباری است</div>
                     </div>
                     <div class="container" style="width: 100%;">
+                        <input type="hidden" id="shopId" value="0">
                         <div class="row">
                             <div class="col-sm-6 form-group importantInput">
                                 <label for="shopName">نام مغازه</label>
-                                <input type="text" class="form-control" id="shopName" placeholder="نام مغازه خود را وارد نمایید...">
+                                <input type="text" class="form-control mustFull" id="shopName" placeholder="نام مغازه خود را وارد نمایید...">
                             </div>
                             <div class="col-sm-6 form-group importantInput">
                                 <label for="shopCategory">نوع مغازه</label>
-                                <select class="form-control" id="shopCategory">
-                                    <option value="1">مواد غذایی</option>
-                                    <option value="2">لباس فروشی</option>
+                                <select class="form-control mustFull" id="shopCategory">
+                                    <option disabled selected>نوع مغازه خود را مشخص کنید.</option>
+                                    @foreach($localShopCategories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
                                     <option value="-1">دسته بندی موجود نیست</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 form-group importantInput">
                                 <label for="shopPhone">شماره تماس</label>
-                                <input type="text" class="form-control" id="shopPhone" placeholder="021xxxxxxxx">
+                                <div class="descriptionText">کد شهر حتما وارد شود</div>
+                                <input type="text" class="form-control mustFull" id="shopPhone" placeholder="021xxxxxxxx - 021xxxxxxxx">
                             </div>
                             <div class="col-sm-6 form-group importantInput">
-                                <label for="shopCity">شهر</label>
-                                <input type="text" class="form-control" id="shopCity" placeholder="نام شهر خود را وارد نمایید...">
+                                <label for="shopCity" style="padding-top: 27px;">شهر</label>
+                                <input type="text" class="form-control mustFull" id="shopCity" placeholder="نام شهر خود را وارد نمایید..." onclick="openSearchFindCity()" readonly>
+                                <input type="hidden" id="shopCityId" value="0">
                             </div>
                             <div class="col-sm-12 form-group importantInput">
                                 <label for="shopAddress">آدرس مغازه</label>
-                                <input type="text" class="form-control" id="shopAddress" placeholder="آدرس مغازه خود را دقیق وارد نمایید...">
+                                <input type="text" class="form-control mustFull" id="shopAddress" placeholder="آدرس مغازه خود را دقیق وارد نمایید...">
                             </div>
                             <div class="col-sm-12 form-group">
-                                <label for="shopInPlace">نام مکان مغازه</label>
+                                <label for="shopInPlace">نام محل مغازه</label>
                                 <div class="descriptionText"> اگر مغازه شما داخل محل خاصی می باشد (مثلا پاساژ) ، نام محل را وارد نمایید.</div>
                                 <input type="text" class="form-control" id="shopInPlace" placeholder="نام محل خاص را وارد نمایید...">
+                                <input type="hidden" id="shopInPlaceId" value="0">
                             </div>
                             <div class="col-sm-12 form-group importantInput">
-                                <label for="shopMap">
-                                    محل روی نقشه
-                                </label>
+                                <label for="shopMap"> محل روی نقشه </label>
                                 <div class="descriptionText">شما می توانید با کلیک روی نقشه محل مورد نظر را ثبت نمایید .</div>
                                 <div class="shopMapInput">
                                     <div id="mapDiv" style="width: 100%; height: 100%"></div>
+                                    <input type="hidden" id="shopLat" value="0">
+                                    <input type="hidden" id="shopLng" value="0">
                                     <button class="myLocationButton" onclick="findMyLocation()">
                                         <img src="{{URL::asset('images/icons/myLocation.svg')}}">
                                     </button>
@@ -386,6 +123,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="sectionPages section2 hidden">
                     <div class="descriptionText">با پر کردن اطلاعات این بخش به مشتریان خود کمک کنید.</div>
                     <div class="container" style="width: 100%;">
@@ -403,11 +141,11 @@
                                         <div class="text">روز های هفته:</div>
                                         <div class="smTex">از ساعت </div>
                                         <div class="timePicker clockpicker">
-                                            <input class="form-control" type="text" placeholder="انتخاب کنید">
+                                            <input class="form-control" id="inWeekDayStart" type="text" placeholder="انتخاب کنید">
                                         </div>
                                         <div class="smTex">تا ساعت </div>
                                         <div class="timePicker clockpicker">
-                                            <input class="form-control" type="text" placeholder="انتخاب کنید">
+                                            <input class="form-control" id="inWeekDayEnd" type="text" placeholder="انتخاب کنید">
                                         </div>
                                     </div>
                                     <div id="closedBeforeDayDiv" class="timeRow">
@@ -415,16 +153,16 @@
                                         <div style="display: flex; align-items: center;">
                                             <div class="smTex">از ساعت </div>
                                             <div class="timePicker clockpicker">
-                                                <input class="form-control" type="text" placeholder="انتخاب کنید">
+                                                <input class="form-control" id="afterClosedDayStart" type="text" placeholder="انتخاب کنید">
                                             </div>
                                             <div class="smTex">تا ساعت </div>
                                             <div class="timePicker clockpicker">
-                                                <input class="form-control" type="text" placeholder="انتخاب کنید">
+                                                <input class="form-control" id="afterClosedDayEnd" type="text" placeholder="انتخاب کنید">
                                             </div>
                                         </div>
 
-                                        <label class="openCloseInputDiv" for="closedLastDay">
-                                            <input type="checkbox" id="closedLastDay" onchange="iAmClose(this)">
+                                        <label class="openCloseInputDiv" for="afterClosedDayButton">
+                                            <input type="checkbox" id="afterClosedDayButton" onchange="iAmClose(this)">
                                             <div class="openCloseInputShow"></div>
                                         </label>
                                     </div>
@@ -434,15 +172,15 @@
                                         <div style="display: flex; align-items: center;">
                                             <div class="smTex">از ساعت </div>
                                             <div class="timePicker clockpicker">
-                                                <input class="form-control" type="text" placeholder="انتخاب کنید">
+                                                <input class="form-control" id="closedDayStart" type="text" placeholder="انتخاب کنید">
                                             </div>
                                             <div class="smTex">تا ساعت </div>
                                             <div class="timePicker clockpicker">
-                                                <input class="form-control" type="text" placeholder="انتخاب کنید">
+                                                <input class="form-control" id="closedDayEnd" type="text" placeholder="انتخاب کنید">
                                             </div>
                                         </div>
-                                        <label class="openCloseInputDiv" for="closedDay">
-                                            <input type="checkbox" id="closedDay" onchange="iAmClose(this)">
+                                        <label class="openCloseInputDiv" for="closedDayButton">
+                                            <input type="checkbox" id="closedDayButton" onchange="iAmClose(this)">
                                             <div class="openCloseInputShow"></div>
                                         </label>
                                     </div>
@@ -468,6 +206,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="sectionPages section3 hidden">
                     <div class="container" style="width: 100%;">
                         <div class="row">
@@ -475,56 +214,18 @@
                                 بارگذاری عکس
                             </div>
                             <div class="col-md-12">
-                                <div class="descriptionText">در این بخش می توانید عکس هایی از مغازه و یا کسب کار خود قرار دهید تا مردم شما را بهتر بشناسند.</div>
-                                <label id="uploadedSection" for="localShopPics" class="uploadPicSection">
-                                    <div class="uploadPic">
+                                <div class="boldDescriptionText" style="color: var(--koochita-green);">اطلاعات مغازه شما با موفقیت ثبت شد</div>
+                                <div class="descriptionText">شما در این بخش می توانید عکس هایی از مغازه و یا کسب کار خود قرار دهید تا مردم شما را بهتر بشناسند.</div>
+                                <div id="uploadedSection" class="uploadPicSection">
+                                    <div id="showUploadPicsSection" class="showUploadedFiles"></div>
+                                    <div id="uploadPicInfoText" class="uploadPic">
                                         <img src="{{URL::asset('images/icons/uploadPic.png')}}">
-                                        <span>
-                                            عکس های خود را در اینجا قرار دهید و یا کلیک کنید
-                                        </span>
+                                        <div>عکس های خود را در اینجا قرار دهید </div>
+                                        <div style="margin-top: 10px; font-weight: bold;"> و یا </div>
                                     </div>
-                                </label>
-                                <script>
-                                    var fileImages = [];
-                                    function uploadFileWithClick(_input) {
-                                        if(_input.files && _input.files[0]){
-                                            var reader = new FileReader();
-                                            reader.onload = e => {
-                                                fileImages.push({
-                                                    file: _input.files[0],
-                                                    image: e.target.result
-                                                });
-                                                createNewImgUploadCard(fileImages.length-1);
-                                            };
-                                            reader.readAsDataURL(_input.files[0]);
-                                        }
-                                        $(_input).val('');
-                                    }
-
-                                    function createNewImgUploadCard(_index){
-                                        if(_index == 0)
-                                            $('#uploadedSection').empty();
-
-                                        var file = fileImages[_index];
-
-                                        var text = `<div class="uploadFileCard">
-                                                        <div class="img">
-                                                            <img src="${file.image}" class="resizeImgClass" onload="fitThisImg(this)">
-                                                        </div>
-                                                        <div class="hoverInfos">
-                                                            <div class="cancelButton closeIconWithCircle" onclick="deleteThisUploadedImage(${_index})">
-                                                                 حذف عکس
-                                                            </div>
-                                                        </div>
-                                                    </div>`;
-                                        $('#uploadedSection').append(text);
-                                    }
-
-                                    function deleteThisUploadedImage(_index){
-
-                                    }
-                                </script>
-                                <input type="file" accept="image/*" id="localShopPics" style="display: none" onchange="uploadFileWithClick(this)">
+                                    <label class="labelForClick" for="localShopPics">کلیک کنید</label>
+                                </div>
+                                <input type="file" accept="image/*" id="localShopPics" data-multiple-caption="{count} files selected" multiple style="display: none" onchange="uploadPicClickHandler(this)">
                             </div>
                         </div>
                     </div>
@@ -549,10 +250,69 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>
 
     <script>
-
+        var citySearchAjax = null;
         var currentPage = 1;
         var map;
         var marker = 0;
+        var fileImages = [];
+        var dropArea = document.getElementById('uploadedSection');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false)
+        });
+        dropArea.addEventListener('dragenter', () => $('#uploadedSection').addClass('highlight'), false);
+        dropArea.addEventListener('dragleave', () => $('#uploadedSection').removeClass('highlight'), false);
+        dropArea.addEventListener('dragover', () => $('#uploadedSection').addClass('highlight'), false);
+        dropArea.addEventListener('drop', (e) => {
+            let files = e.dataTransfer.files;
+            ([...files]).forEach(createAndUploadFilePic);
+        }, false);
+
+
+        function openSearchFindCity(){
+            createSearchInput('searchCity', 'نام شهر را وارد کنید.');
+        }
+
+        function searchCity(_element) {
+            activeCityFilter = false;
+            var value = _element.value;
+            if(value.trim().length > 1){
+                if(citySearchAjax != null)
+                    citySearchAjax.abort();
+
+                citySearchAjax = $.ajax({
+                    type: 'post',
+                    url: "{{route('searchForCity')}}",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        key: value
+                    },
+                    success: function (response) {
+                        if(response.length == 0)
+                            return;
+                        response = JSON.parse(response);
+                        var newElement = "";
+                        response.map(item => {
+                            newElement += `<div onclick="chooseThisCity('${item.cityName}', ${item.id})"><div class="icons location spIcons"></div>
+                                                                        <p class="suggest cursor-pointer font-weight-700" style="margin: 0px">شهر ${item.cityName}</p>
+                                                                        <p class="suggest cursor-pointer stateName">${item.stateName}</p>
+                                                                    </div>`;
+                        });
+                        setResultToGlobalSearch(newElement);
+                    }
+                });
+            }
+            else
+                clearGlobalResult();
+        }
+
+        function chooseThisCity(_val, _id) {
+            $('#shopCityId').val(_id);
+            $('#shopCity').val(_val);
+            $('#shopCity').addClass('correctInput');
+            $('#shopCity').removeClass('wrongInput');
+            closeSearchInput();
+        }
 
         function initMap(){
             var mapOptions = {
@@ -592,7 +352,8 @@
                 position: location,
                 map: map,
             });
-
+            $('#shopLat').val(location.lat());
+            $('#shopLng').val(location.lng());
         }
 
         initMap();
@@ -612,23 +373,32 @@
                         lng : coordination.longitude
                     });
                     map.setZoom(16);
+
+                    $('#shopLat').val(coordination.latitude);
+                    $('#shopLng').val(coordination.longitude);
                 });
             else
                 console.log("Geolocation is not supported by this browser.");
         }
 
-        function goToPage(_kind){
-            if(currentPage == 1 && _kind == -1)
+        function goToPage(_step, _isSubmitedLocalShop = false){
+            if(currentPage == 1 && _step == -1)
                 return;
 
-            if(currentPage == 3 && _kind == 1){
+            if(currentPage == 3 && _step == 1){
+                openLoading();
+                window.location.href = '{{url('/business/show')}}/'+$('#shopId').val();
+            }
+            else if(currentPage == 1 && _step == 1 && !checkStepOne())
+                return;
+            else if(currentPage == 2 && _step == 1 && checkStepOne() && !_isSubmitedLocalShop){
                 doStoreLocalShop();
                 return;
             }
 
             $('.indicator .level'+currentPage).removeClass('selected');
 
-            currentPage += _kind;
+            currentPage += _step;
 
             for(var i = 1; i <= currentPage; i++)
                 $('.indicator .level'+i).addClass('selected');
@@ -642,8 +412,120 @@
             $('.sectionPages.section'+currentPage).removeClass('hidden');
         }
 
+        function checkStepOne(){
+            var name = $('#shopName').val();
+            var phone = $('#shopPhone').val();
+            var category = $('#shopCategory').val();
+            var cityId = $('#shopCityId').val();
+            var address = $('#shopAddress').val();
+            var lat = $('#shopLat').val();
+            var lng = $('#shopLng').val();
+            var errorText = '';
+
+            if(name.trim().length < 2) {
+                errorText += '<li>پر کردن نام مغازه اجباری است</li>';
+                $('#shopName').addClass('wrongInput');
+            }
+            else{
+                $('#shopName').addClass('correctInput');
+                $('#shopName').removeClass('wrongInput');
+            }
+
+            if(category == null) {
+                errorText += '<li>نوع مغازه خود را مشخص کنید</li>';
+                $('#shopCategory').addClass('wrongInput');
+            }
+            else{
+                $('#shopCategory').addClass('correctInput');
+                $('#shopCategory').removeClass('wrongInput');
+            }
+
+            if(phone.trim().length < 2){
+                errorText += '<li>نوشتن شماره تماس برای مغازه اجباری است</li>';
+                $('#shopPhone').addClass('wrongInput');
+            }
+            else{
+                $('#shopPhone').addClass('correctInput');
+                $('#shopPhone').removeClass('wrongInput');
+            }
+
+            if(cityId == 0){
+                errorText += '<li>انتهاب شهر اجباری است</li>';
+                $('#shopCity').addClass('wrongInput');
+            }
+            else{
+                $('#shopCity').addClass('correctInput');
+                $('#shopCity').removeClass('wrongInput');
+            }
+
+            if(address == 0){
+                errorText += '<li>نوشتن آدرس مغازه اجباری است</li>';
+                $('#shopAddress').addClass('wrongInput');
+            }
+            else{
+                $('#shopAddress').addClass('correctInput');
+                $('#shopAddress').removeClass('wrongInput');
+            }
+
+            if(lat == 0 || lng == 0)
+                errorText += '<li>مشخص کردن محل مغازه روی نقشه اجباری است.</li>';
+
+            if(errorText == '')
+                return true;
+            else{
+                errorText = `<ul>${errorText}</ul>`;
+                openErrorAlert(errorText);
+                return false;
+            }
+
+        }
+
         function doStoreLocalShop(){
-            alert('store');
+            var dataToSend = {
+                _token: '{{csrf_token()}}',
+                id: $('#shopId').val(),
+                name: $('#shopName').val(),
+                phone: $('#shopPhone').val(),
+                category: $('#shopCategory').val(),
+                cityId: $('#shopCityId').val(),
+                address: $('#shopAddress').val(),
+                lat: $('#shopLat').val(),
+                lng: $('#shopLng').val(),
+                inPlaceId: $('#shopInPlaceId').val(),
+                inPlace: $('#shopInPlace').val(),
+                website: $('#shopWebSite').val(),
+                instagram: $('#shopInstagram').val(),
+                description: $('#shopDescription').val(),
+
+                closedDayStart: $('#closedDayStart').val(),
+                closedDayEnd: $('#closedDayEnd').val(),
+                afterClosedDayStart: $('#afterClosedDayStart').val(),
+                afterClosedDayEnd: $('#afterClosedDayEnd').val(),
+                inWeekDayStart: $('#inWeekDayStart').val(),
+                inWeekDayEnd: $('#inWeekDayEnd').val(),
+
+                fullOpen: $('#allDay24').prop('checked'),
+                afterClosedDayButton: $('#afterClosedDayButton').prop('checked'),
+                closedDayButton: $('#closedDayButton').prop('checked'),
+            };
+
+            openLoading();
+            $.ajax({
+                type: 'post',
+                url: '{{route('business.store')}}',
+                data: dataToSend,
+                success: response => {
+                    closeLoading();
+                    if(response.status == 'ok'){
+                        $('#shopId').val(response.result);
+                        showSuccessNotifi('مغازه شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
+                        goToPage(1, true)
+                    }
+                },
+                error: err => {
+                    closeLoading();
+                }
+            })
         }
 
         $(window).ready(() => {
@@ -677,6 +559,186 @@
                 $(_element).parent().prev().removeClass('hidden');
             }
         }
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function uploadPicClickHandler(_input){
+            if(_input.files && _input.files[0])
+                createAndUploadFilePic(_input.files[0]);
+            $(_input).val('');
+        }
+
+        function createAndUploadFilePic(_files) {
+            var reader = new FileReader();
+            reader.onload = e => {
+                var index = fileImages.push({
+                    file: _files,
+                    image: e.target.result,
+                    savedFile: '',
+                    uploaded: -1,
+                    code: Math.floor(Math.random()*1000)
+                });
+                createNewImgUploadCard(index-1);
+                uploadQueuePictures();
+            };
+            reader.readAsDataURL(_files);
+        }
+
+        function createNewImgUploadCard(_index){
+            if(_index == 0)
+                $('#uploadPicInfoText').addClass('hidden');
+
+            var file = fileImages[_index];
+            var text = `<div id="uplaodedImg_${file.code}" class="uploadFileCard">
+                            <div class="img">
+                                <img src="${file.image}" class="resizeImgClass" onload="fitThisImg(this)">
+                            </div>
+                            <div class="absoluteBackground tickIcon"></div>
+                            <div class="absoluteBackground warningIcon">
+                                اشکال در بارگذاری
+                            </div>
+                            <div class="absoluteBackground process">
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                <div class="processCounter">0%</div>
+                            </div>
+                            <div class="hoverInfos">
+                                <div class="cancelButton closeIconWithCircle" onclick="deleteThisUploadedImage(${file.code})">
+                                     حذف عکس
+                                </div>
+                            </div>
+                        </div>`;
+            $('#showUploadPicsSection').append(text);
+        }
+
+        var uploadPicAjax = null;
+        var uploadProcess = false;
+        var cancelThisImg = false;
+        function uploadQueuePictures(){
+            if(uploadProcess == false){
+                uploadProcess = true;
+                var uploadIndex = null;
+                fileImages.map((item, index) => {
+                    if(item.uploaded == -1 && uploadIndex == null)
+                        uploadIndex = index;
+                });
+
+                if(uploadIndex != null) {
+                    var uFile = fileImages[uploadIndex];
+                    uFile.uploaded = 0;
+                    $('#uplaodedImg_' + uFile.code).addClass('process');
+
+                    var formData = new FormData();
+                    formData.append('localShopId', $('#shopId').val());
+                    formData.append('pic', uFile.file);
+
+                    uploadPicAjax = $.ajax({
+                        type: 'post',
+                        url: '{{route("business.store.pics")}}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        xhr: function () {
+                            var xhr = new XMLHttpRequest();
+                            xhr.upload.onprogress = e => {
+                                if (e.lengthComputable) {
+                                    var percent = Math.round((e.loaded / e.total) * 100);
+                                    $('#uplaodedImg_' + uFile.code).find('.processCounter').text(percent + '%');
+                                }
+                            };
+                            return xhr;
+                        },
+                        success: response => {
+                            uploadProcess = false;
+                            if (response.status == 'ok') {
+                                $('#uplaodedImg_' + uFile.code).removeClass('process');
+                                $('#uplaodedImg_' + uFile.code).addClass('done');
+                                uFile.uploaded = 1;
+                                uFile.savedFile = response.result;
+                                uploadQueuePictures();
+                                if(cancelThisImg) {
+                                    doDeletePicServer(uploadIndex);
+                                    cancelThisImg = false;
+                                }
+                            }
+                            else{
+                                $('#uplaodedImg_' + uFile.code).removeClass('process');
+                                $('#uplaodedImg_' + uFile.code).addClass('error');
+                                uFile.uploaded = -2;
+                            }
+                        },
+                        error: err => {
+                            uploadProcess = false;
+                            $('#uplaodedImg_' + uFile.code).removeClass('process');
+                            $('#uplaodedImg_' + uFile.code).addClass('error');
+                            uFile.uploaded = -2;
+                        }
+                    })
+                }
+                else
+                    uploadProcess = false;
+            }
+        }
+
+        function deleteThisUploadedImage(_code){
+            var index = null;
+            for(var i = 0; i < fileImages.length; i++){
+                if(fileImages[i].code == _code){
+                    index = i;
+                    break;
+                }
+            }
+
+            if(index != null){
+                if(fileImages[index].uploaded == 0){
+                    cancelThisImg = true;
+                }
+                else if(fileImages[index].uploaded == -1 || fileImages[index].uploaded == -2){
+                    fileImages.splice(index, 1);
+                    $('#uplaodedImg_'+_code).remove();
+                }
+                else if(fileImages[index].uploaded == 1)
+                    doDeletePicServer(index);
+            }
+
+            if(fileImages.length == 0)
+                $('#uploadPicInfoText').removeClass('hidden');
+        }
+
+        function doDeletePicServer(_index){
+            var file = fileImages[_index];
+            $.ajax({
+                type: 'delete',
+                url: '{{route('business.store.delete')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    fileName: file.savedFile,
+                    localShopId: $('#shopId').val(),
+                },
+                success: response => {
+                    if(response.status == 'ok'){
+                        $('#uplaodedImg_'+file.code).remove();
+                        fileImages.splice(index, 1);
+                    }
+                },
+            })
+        }
+
+        $(window).ready(() => {
+            $('.mustFull').on('change', e => {
+                var target = e.target;
+                if(target.value.trim().length > 0){
+                    $(target).addClass('correctInput');
+                    $(target).removeClass('wrongInput');
+                }
+                else{
+                    $(target).removeClass('correctInput');
+                    $(target).addClass('wrongInput');
+                }
+            })
+        })
 
     </script>
 

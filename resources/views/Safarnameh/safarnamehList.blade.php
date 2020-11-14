@@ -132,11 +132,14 @@
         var getPostUrl = '{{route("safarnameh.list.pagination")}}';
         var getLisPostUrl = '{{route("safarnameh.list")}}';
         var totalPage = {{$pageLimit}};
+        var allPostSample = 0;
 
-        if(allPostSample == 0)
-            allPostSample = $('#samplePost').html();
+        $(window).ready(() => {
+            if(allPostSample == 0)
+                allPostSample = $('#samplePost').html();
 
-        $('#samplePost').empty();
-        getPost(1);
+            $('#samplePost').empty();
+            getPost(1);
+        })
     </script>
 @endsection
