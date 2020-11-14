@@ -3,69 +3,120 @@
 
 @section('head')
     <style>
-        .reviewShowSection{
-            display: flex;
+        .plPc-0{
+            padding-left: 0px;
         }
-        .reviewShowSection > div{
-            width: 50%;
+        .prPc-0{
+            padding-right: 0px;
+        }
+        div[class^="col-"]{
+            float: right;
+        }
+        @media (max-width: 991px) {
+            div[class^="col-md"]{
+                width: 100%;
+            }
+            .plPc-0{
+                padding-left: 15px;
+            }
+            .prPc-0{
+                padding-right: 15px;
+            }
+        }
+    </style>
+
+    <style>
+
+        .topInfoFixed .infosSec{
+            display: flex;
+            padding: 0px 20px;
         }
 
-        .questionBodies .inputQuestionSec{
-            display: flex;
-            align-items: flex-start;
-            margin-top: 20px;
+        @media (max-width: 1200px) {
+            .reviewButs .but{
+                font-size: 10px;
+            }
         }
-        .questionBodies .inpQ{
-            width: calc(100% - 60px);
-            background: #f2f2f2;
-            padding: 5px;
-            margin-right: 10px;
-            display: flex;
-            border-radius: 5px;
-            align-items: flex-end;
+        @media (max-width: 991px) {
+            .showBody .infoSec{
+                height: auto;
+            }
         }
-        .questionBodies .inpQ > textarea{
-            width: 100%;
-            border: none;
-            background: none;
-            resize: none;
-        }
-        .questionBodies .inpQ > button{
-            width: 65px;
-            padding: 5px 0px;
-            color: var(--koochita-blue);
-            background: #f2f2f2;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 16px;
-            height: 40px;
-        }
+        @media (max-width: 767px) {
+            .openReviewSec{
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                padding: 0;
+                height: 100vh;
+                z-index: 999999;
+                overflow-y: auto;
+            }
+            .openReviewSec .bodySec{
+                min-height: 50vh;
+            }
+            .topInfoFixed .infosSec{
+                padding: 0px 10px;
+            }
+            .topInfoFixed .pic{
+                width: 60px;
+                height: 45px;
+            }
+            .mainHeaderButts{
+                margin-top: 15px;
+            }
+            .mainHeaderButts > div{
+                flex-direction: column-reverse;
+            }
+            .mainHeaderButts > div .text{
+                font-size: .7em;
+            }
+            .fastAccess{
+                justify-content: space-evenly;
+            }
+            .fastAccess .tab{
+                margin: 0px;
+                flex-direction: column;
+                font-size: 18px;
+            }
+            .fastAccess .tab .text{
+                font-size: .5em;
+            }
+            .topInfoFixed .mainHeaderButts{
+                display: none;
+            }
+            .topInfoFixed .tabRow{
+                width: 100%;
+            }
+            .topInfoFixed{
+                height: 140px;
+                top: -140px;
+            }
 
+        }
     </style>
 @endsection
 
 @section('body')
-    @include('component.mapMenu')
     
     @include('component.smallShowReview')
 
     <div id="topInfos" class="topInfoFixed">
-        <div style="display: flex; padding: 0px 20px">
+        <div class="infosSec">
             <div class="info">
-                <h1 style="font-weight: bold;">مغازه دریانی</h1>
-                <div class="address">
-                    هفت تیر، خیابان مشاهیر تقاطع لطفی
-                </div>
+                <h1 style="font-weight: bold;">{{$localShop->name}}</h1>
+                <div class="address"> {{$localShop->address}} </div>
             </div>
-            <div class="fullyCenterContent pic">
-                <img src="http://localhost/assets/_images/majara/jangalhaye_arasbaran/s-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+            <div class="fullyCenterContent pic" onclick="openAlbum('mainPics')" style="cursor: pointer">
+                <img src="{{$localShop->mainPic->pic['f']}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
         </div>
         <div class="tabRow fastAccess">
-            <div class="tab doubleQuet selected" onclick="goToSection('description')">
-                <div class="text">توضیحات</div>
-            </div>
+            @if(isset($localShop->description))
+                <div class="tab doubleQuet selected" onclick="goToSection('description')">
+                    <div class="text">توضیحات</div>
+                </div>
+            @endif
             <div class="tab earthIcon" onclick="goToSection('map')">
                 <div class="text">نقشه</div>
             </div>
@@ -93,10 +144,8 @@
     <div class="showHeader">
         <div class="container">
             <div class="inff">
-                <h1 style="font-weight: bold;">مغازه دریانی</h1>
-                <div class="address">
-                    هفت تیر، خیابان مشاهیر تقاطع لطفی
-                </div>
+                <h1 style="font-weight: bold;">{{$localShop->name}}</h1>
+                <div class="address">{{$localShop->address}}</div>
             </div>
             <div class="mainHeaderButts">
                 <div class="fullyCenterContent emptyCameraIconAfter">
@@ -114,82 +163,123 @@
 
     <div class="grayBackGround showBody">
         <div class="container">
-
             <div class="row">
+                <div class="col-md-7 plPc-0">
+                    <div id="mainSlider" class="fullyCenterContent bodySec imgSliderSec swiper-container" style="height: 420px" onclick="openAlbum('mainPics')">
+                        <div class="swiper-wrapper">
+                            @foreach($localShop->pics as $pic)
+                                <div class="swiper-slide" style="overflow: hidden">
+                                    <img src="{{$pic->pic['s']}}" alt="{{$localShop->name}}" class="resizeImgClass" onload="fitThisImg(this)">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="left-nav left-nav-header swiper-button-next mainSliderNavBut"></div>
+                        <div class="right-nav right-nav-header swiper-button-prev mainSliderNavBut"></div>
+                    </div>
+                </div>
                 <div class="col-md-5">
-                    <div class="bodySec infoSec" style="height: 420px">
+                    <div class="bodySec infoSec">
                         <div class="iWasHere flagIcon">من اینجا بودم</div>
                         <div class="boldText">سوپر مارکت دریانی</div>
-                        <div class="normText">هفت تیر، خیابان مشاهیر تقاطع لطفی</div>
-                        <a href="tel:9122474393" class="phone telephoneIconAfter">021-88492744</a>
+                        <div class="normText">{{$localShop->address}}</div>
+                        <div class="phone telephoneIconAfter">
+                            @foreach($localShop->telephone as $telephone)
+                                <a href="tel:{{$telephone}}">{{$telephone}}</a>
+                            @endforeach
+                        </div>
                         <div class="groupSec">
                             <div class="boldText mr4bef clockIcon">ساعات کاری</div>
                             <div class="weekTime">
-                                <div>
-                                    <span>روزهای هفته:</span>
-                                    <span>10 تا 18</span>
-                                </div>
-                                <div>
-                                    <span>قبل تعطیلی:</span>
-                                    <span>10 تا 16</span>
-                                </div>
+                                @if($localShop->isBoarding == 0)
+                                    <div>
+                                        <span>روزهای هفته:</span>
+                                        <span>
+                                            {{$localShop->inWeekOpenTime == null ? '' : $localShop->inWeekOpenTime}}
+                                            تا
+                                            {{$localShop->inWeekCloseTime == null ? '' : $localShop->inWeekCloseTime}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>قبل تعطیلی:</span>
+                                        @if($localShop->afterClosedDayIsOpen == 1)
+                                        <span>
+                                            {{$localShop->afterClosedDayOpenTime == null ? '' : $localShop->afterClosedDayOpenTime}}
+                                            تا
+                                            {{$localShop->afterClosedDayCloseTime == null ? '' : $localShop->afterClosedDayCloseTime}}
+                                        </span>
+                                        @else
+                                            <span class="closse">تعطیل</span>
+                                        @endif
+                                    </div>
+                                @else
+                                    <div>
+                                        <span style="color: green;">شبانه روزی</span>
+                                    </div>
+                                @endif
                                 <div>
                                     <span>روزهای تعطیل:</span>
-                                    <span class="closse">تعطیل</span>
+                                    @if($localShop->closedDayIsOpen == 1)
+                                        <span>
+                                            {{$localShop->closedDayOpenTime == null ? '' : $localShop->closedDayOpenTime}}
+                                            تا
+                                            {{$localShop->closedDayCloseTime == null ? '' : $localShop->closedDayCloseTime}}
+                                        </span>
+                                    @else
+                                        <span class="closse">تعطیل</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                        <div class="groupSec">
-                            <div class="boldText mr4bef fullStarRating">انتخاب بهترین مغازه دار</div>
-                            <div class="normText" style="padding: 0px 20px;">
-                                آیا شما از مغازه و مغازه دار راضی بودید؟
-                            </div>
-                            <div class="ratingButtons">
-                                <div class="likeSec" onclick="likeDisLikeShop(this, 1)">
-                                    <div class="fullyCenterContent icon LikeIconEmpty">
-                                        <span class="count">102</span>
-                                    </div>
-                                    <div class="fullyCenterContent result">
-                                        <div>
-                                            <span class="name">محلی : </span>
-                                            <span class="num">100</span>
-                                        </div>
-                                        <div>
-                                            <span class="name">غیر محلی : </span>
-                                            <span class="num">32</span>
-                                        </div>
-                                        <div>
-                                            <span class="name">نامشخص : </span>
-                                            <span class="num">32</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="disLikeSec" onclick="likeDisLikeShop(this, -1)">
-                                    <div class="fullyCenterContent icon DisLikeIconEmpty">
-                                        <span class="count">243</span>
-                                    </div>
-                                    <div class="fullyCenterContent result">
-                                        <div>
-                                            <span class="name">محلی : </span>
-                                            <span class="num">100</span>
-                                        </div>
-                                        <div>
-                                            <span class="name">غیر محلی : </span>
-                                            <span class="num">32</span>
-                                        </div>
-                                        <div>
-                                            <span class="name">نامشخص : </span>
-                                            <span class="num">32</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="fullyCenterContent bodySec imgSliderSec" style="height: 420px">
-                        <img src="http://localhost/assets/_images/majara/jangalhaye_arasbaran/s-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+
+                        {{--the best localShop section--}}
+
+{{--                        <div class="groupSec">--}}
+{{--                            <div class="boldText mr4bef fullStarRating">انتخاب بهترین مغازه دار</div>--}}
+{{--                            <div class="normText" style="padding: 0px 20px;">--}}
+{{--                                آیا شما از مغازه و مغازه دار راضی بودید؟--}}
+{{--                            </div>--}}
+{{--                            <div class="ratingButtons">--}}
+{{--                                <div class="likeSec" onclick="likeDisLikeShop(this, 1)">--}}
+{{--                                    <div class="fullyCenterContent icon LikeIconEmpty">--}}
+{{--                                        <span class="count">102</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="fullyCenterContent result">--}}
+{{--                                        <div>--}}
+{{--                                            <span class="name">محلی : </span>--}}
+{{--                                            <span class="num">100</span>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <span class="name">غیر محلی : </span>--}}
+{{--                                            <span class="num">32</span>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <span class="name">نامشخص : </span>--}}
+{{--                                            <span class="num">32</span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="disLikeSec" onclick="likeDisLikeShop(this, -1)">--}}
+{{--                                    <div class="fullyCenterContent icon DisLikeIconEmpty">--}}
+{{--                                        <span class="count">243</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="fullyCenterContent result">--}}
+{{--                                        <div>--}}
+{{--                                            <span class="name">محلی : </span>--}}
+{{--                                            <span class="num">100</span>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <span class="name">غیر محلی : </span>--}}
+{{--                                            <span class="num">32</span>--}}
+{{--                                        </div>--}}
+{{--                                        <div>--}}
+{{--                                            <span class="name">نامشخص : </span>--}}
+{{--                                            <span class="num">32</span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
                     </div>
                 </div>
             </div>
@@ -203,9 +293,11 @@
             <div id="stickyIndicator" class="row">
                 <div class="col-md-12">
                     <div class="bodySec fastAccess">
-                        <div class="tab doubleQuet selected" onclick="goToSection('description')">
-                            <div class="text">توضیحات</div>
-                        </div>
+                        @if(isset($localShop->description))
+                            <div class="tab doubleQuet selected" onclick="goToSection('description')">
+                                <div class="text">توضیحات</div>
+                            </div>
+                        @endif
                         <div class="tab earthIcon" onclick="goToSection('map')">
                             <div class="text">نقشه</div>
                         </div>
@@ -219,39 +311,28 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="bodySec pad-15">
-                        <h2 class="headerSec doubleQuet">توضیحات</h2>
-                        <div class="descriptionBody" style="color: #636363;">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ،
-                            و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                            لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
-                            می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان
-                            را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و
-                            فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
-                            موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی
-                            دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+            @if(isset($localShop->description))
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="bodySec pad-15">
+                            <h2 class="headerSec doubleQuet">توضیحات</h2>
+                            <div class="descriptionBody" style="color: #636363;">{{$localShop->description}}</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             <div class="row">
-                <div class="col-md-9">
-                    <div id="mapDiv" class="bodySec map"></div>
-                </div>
                 <div class="col-md-3">
                     <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
                     <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
                 </div>
+                <div class="col-md-9 prPc-0">
+                    <div id="mapDiv" class="bodySec map"></div>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4">
-                    <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
-                    <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
-                </div>
                 <div id="inputReviewSec" class="col-md-8">
                     <div class="bodySec">
                         <h2 class="yourReviewHeader EmptyCommentIcon">
@@ -269,24 +350,18 @@
                     </div>
                     <div class="bodySec">
                         <div class="reviewButs">
-                            <div class="but addPhotoIcon">
-                                عکس اضافه کنید.
-                            </div>
-                            <div class="but addVideoIcon">
-                                ویدیو اضافه کنید.
-                            </div>
-                            <div class="but addVideo360Icon">
-                                ویدیو 360 اضافه کنید.
-                            </div>
-                            <div class="but addFriendIcon">
-                                دوستنتان را TAG کنید.
-                            </div>
+                            <div class="but addPhotoIcon"> عکس اضافه کنید.</div>
+                            <div class="but addVideoIcon">ویدیو اضافه کنید.</div>
+                            <div class="but addVideo360Icon">ویدیو 360 اضافه کنید.</div>
+                            <div class="but addFriendIcon">دوستنتان را TAG کنید.</div>
                         </div>
                         <div class="reviewQues showWhenNeed"></div>
-                        <div class="reviewSubmit showWhenNeed">
-                            ارسال دیدگاه
-                        </div>
+                        <div class="reviewSubmit showWhenNeed">ارسال دیدگاه</div>
                     </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
+                    <div class="fullyCenterContent bodySec adver sideMap">تبلیغ</div>
                 </div>
                 <div class="col-md-8 reviewShowSection">
                     <div id="showReviewsMain1"></div>
@@ -322,7 +397,61 @@
 @endsection
 
 @section('script')
+    <script async src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>
+
     <script>
+        var localShop = {!! $localShop !!};
+        var mainMap;
+
+        $(window).ready(() => {
+            initMap();
+            autosize($('.autoResizeTextArea'));
+            new Swiper('#mainSlider', {
+                spaceBetween: 0,
+                centeredSlides: true,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    prevEl: '.swiper-button-next',
+                    nextEl: '.swiper-button-prev',
+                },
+            });
+        });
+
+        function openAlbum(_kind){
+            if(_kind == 'mainPics'){
+                var showPics = [];
+                localShop.pics.map(item => {
+                    showPics.push({
+                        id: `main_${item.id}`,
+                        sidePic: item.pic.l,
+                        mainPic: item.pic.main,
+                        userPic: localShop.user.userPic,
+                        userName: localShop.user.username,
+                        showInfo: false,
+                    })
+                });
+                createPhotoModal('آلبوم عکس', showPics) ; //in photoAlbumModal.blade.php
+            }
+        }
+
+        function initMap(){
+            var mapOptions = {
+                center: new google.maps.LatLng(localShop.lat, localShop.lng),
+                zoom: 15,
+                styles: window.googleMapStyle
+            };
+            var mapElementSmall = document.getElementById('mapDiv');
+            mainMap = new google.maps.Map(mapElementSmall, mapOptions);
+
+            new google.maps.Marker({
+                position: new google.maps.LatLng(localShop.lat, localShop.lng)
+            }).setMap(mainMap);
+        }
+
         function openWriteReview(){
             $('#darkModal').show();
             $('#inputReviewSec').addClass('openReviewSec');
@@ -355,9 +484,6 @@
             $('html, body').animate({ scrollTop: topScroll }, 1000);
         }
 
-        createMap('mapDiv', {x: 27.1708978, y: 56.2583517}, [], true);
-
-        $(document).ready(() => autosize($('.autoResizeTextArea')));
 
         $(window).on('scroll', e => {
             var tabShow = '';
@@ -386,10 +512,9 @@
 
         });
 
-        var reviews = {!! $reviews !!};
         var text1 = '';
         var text2 = '';
-        reviews.map((item, index) => {
+        localShop.review.map((item, index) => {
             // showFullReviews({
             //     review: item,
             //     kind: 'append',
@@ -404,4 +529,5 @@
         $('#showReviewsMain2').html(text2);
 
     </script>
+
 @endsection

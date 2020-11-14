@@ -109,7 +109,6 @@
     };
 
     function showExtendedMap(_x, _y){
-        console.log(_x, _y);
         if(window.mobileAndTabletCheck())
             location.href = 'geo:' + _x + ',' + _y;
         else {
@@ -123,7 +122,7 @@
         var mapOptions = {
             center: new google.maps.LatLng(_center['x'],  _center['y']),
             zoom: 15,
-            styles: googleMapStyle
+            styles: window.googleMapStyle
         };
 
         var mapElementExtend = document.getElementById('mapState1');

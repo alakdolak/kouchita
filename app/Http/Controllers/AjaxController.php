@@ -233,6 +233,7 @@ class AjaxController extends Controller {
             array_push($result, $item);
         }
         echo json_encode($result);
+        return;
     }
 
     public function searchForLine() {

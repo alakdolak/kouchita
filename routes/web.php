@@ -841,8 +841,6 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 
     Route::get('myTripInner', 'NotUseController@myTripInner');
 
-//    Route::get('business', 'NotUseController@business');
-
     Route::get('userActivitiesProfile', 'NotUseController@userActivitiesProfile');
 
     Route::post('getLogPhotos', array('as' => 'getLogPhotos', 'uses' => 'NotUseController@getLogPhotos'));

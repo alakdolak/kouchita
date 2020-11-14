@@ -44,10 +44,6 @@
                                   placeholder="{{ auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
                                   style="overflow:hidden" data-emo onchange="checkReviewToSend()"></textarea>
                         <div id="emojiIcons" class="commentSmileyIcon " style="width: 300px; text-align: left"></div>
-
-                        <script>
-                            $("#postTextArea").emojioneArea();
-                        </script>
                     </div>
 
                     <div class="clear-both"></div>
@@ -284,6 +280,10 @@
     var reviewRateAnsId = [];
     var imgCropNumber;
     var fileUploadNum = 0;
+
+    $(window).ready(() => {
+        $("#postTextArea").emojioneArea();
+    })
 
     for (i = 0; i < rateQuestion.length; i++)
         rateQuestionAns[i] = 0;

@@ -87,6 +87,7 @@ body{
 }
 .showBody .infoSec{
     padding: 10px;
+    height: 420px
 }
 .showBody .infoSec .boldText{
     font-size: 20px;
@@ -287,7 +288,7 @@ body{
     overflow: hidden;
 }
 .topInfoFixed.open{
-    top: 0px;
+    top: 0px !important;
 }
 
 .topInfoFixed .info .address{
@@ -362,16 +363,21 @@ body{
 .reviewButs{
     display: flex;
     padding: 5px;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 .reviewButs .but{
     background: #e5e5e5;
-    margin: 0px 10px;
+    margin: 3px 0px;
     padding: 7px 7px;
-    border-radius: 10px;
+    border-radius: 0px;
     font-weight: bold;
     display: flex;
     align-items: center;
     cursor: pointer;
+    font-size: 12px;
+    width: 49%;
+    justify-content: center;
 }
 .reviewButs .but:before{
     font-size: 30px;
@@ -423,4 +429,395 @@ body{
     border: none;
     text-align: center;
     cursor: pointer;
+}
+
+
+.createPageMainBody hr{
+    width: 100%;
+}
+.descriptionText{
+    margin-bottom: 10px;
+    color: #646464;
+    font-size: 12px;
+}
+.importantInput label{
+    display: flex;
+}
+.importantInput label:after{
+    content: '*';
+    color: red;
+    font-size: 18px;
+    margin-right: 5px;
+}
+.createPageMainBody{
+
+}
+.createPageMainBody .bodd{
+    padding: 10px;
+}
+.createPageMainBody .bodd .MainHeader{
+    margin: 0px 0px 20px 0px;
+    font-weight: bold;
+    border-bottom: solid 1px #f7f7f7;
+    padding: 10px 0px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.createPageMainBody .bodd .indicator{
+    position: relative;
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+}
+.createPageMainBody .bodd .indicator .squer{
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: solid 1px gray;
+    text-align: center;
+    font-size: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 10px;
+}
+.createPageMainBody .bodd .indicator .squer.selected, .line.selected{
+    background: var(--koochita-blue) !important;
+    border-color: var(--koochita-blue) !important;
+    color: white !important;
+}
+
+.createPageMainBody .bodd .indicator .line{
+    width: calc(50% - 73px);
+    position: absolute;
+    height: 7px;
+    top: 22px;
+    background: white;
+    border-top: solid 1px gray;
+    border-bottom: solid 1px gray;
+}
+.createPageMainBody .bodd .descInputSec{
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+.shopMapInput{
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+.myLocationButton{
+    background: #ffbaba;
+    border: none;
+    margin-right: 10px;
+    padding: 3px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.myLocationButton > img{
+    width: 50px;
+}
+
+.submitSection{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+}
+.submitSection .row{
+    background: #ffffffa6;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    width: 100%;
+    margin: 0px;
+}
+.submitSection .row > button{
+    margin: 0px 10px;
+    border-radius: 0px;
+    border: none;
+    padding: 5px 15px;
+}
+.submitSection .nextButton{
+    color: white;
+    background: var(--koochita-green);
+}
+.submitSection .prevButton{
+    font-weight: bold;
+    background: white;
+    padding-bottom: 3px;
+}
+.headerRowInput{
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    margin-bottom: 0 !important;
+}
+.timeSection{
+
+}
+.timeSection .timeRow{
+    display: flex;
+    margin: 15px 0px;
+    align-items: center;
+}
+.timeSection .timeRow .text{
+    margin-left: 10px;
+    font-weight: bold;
+    width: 120px;
+}
+.timeSection .timeRow .smTex{
+    margin: 0px 5px;
+    margin-right: 20px;
+    font-size: 11px;
+}
+.checkboxDiv{
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+    font-size: 12px;
+}
+.checkboxDiv label{
+    cursor: pointer;
+    margin-left: 5px;
+}
+.checkboxDiv input{
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.openCloseInputShow{
+    margin: 0px 10px;
+    background: #fcc156;
+    padding: 5px;
+    font-size: 10px;
+    border: solid 1px gray;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.openCloseInputDiv input{
+    display: none;
+}
+.openCloseInputDiv .openCloseInputShow:after{
+    content: 'تعطیل هستم';
+    padding: 5px;
+    display: inline-flex;
+    font-weight: normal;
+    border-radius: 20px;
+}
+.openCloseInputDiv .openCloseInputShow:before{
+    content: 'باز هستم';
+    padding: 5px;
+    background: white;
+    font-weight: bold;
+    display: inline-flex;
+    border-radius: 20px;
+}
+
+.openCloseInputDiv.checked .openCloseInputShow{
+    background: #ff6e6e;
+}
+.openCloseInputDiv.checked .openCloseInputShow:after{
+    background: white;
+    font-weight: bold;
+    color: black;
+}
+.openCloseInputDiv.checked .openCloseInputShow:before{
+    background: none;
+    font-weight: normal;
+    color: white;
+}
+.uploadPicSection{
+    width: 100%;
+    border: solid 2px #f1f1f1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.uploadPicSection .uploadPic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    flex-direction: column;
+    opacity: .3;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.uploadPicSection .uploadPic img{
+    width: 120px;
+    margin-bottom: 15px;
+}
+.uploadPicSection .uploadPic span{
+    font-size: 18px;
+}
+.uploadPicSection .labelForClick{
+    cursor: pointer;
+    opacity: 1;
+    z-index: 99;
+    font-weight: bold;
+    color: var(--koochita-yellow);
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+}
+
+.uploadFileCard{
+    background: #f2f2f2;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+    border-radius: 15px
+}
+.uploadFileCard .img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.uploadFileCard .img img{
+    width: 100%;
+}
+.uploadFileCard:hover .hoverInfos{
+    display: flex;
+}
+.uploadFileCard .hoverInfos{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: #000000b3;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.uploadFileCard .hoverInfos .cancelButton:before{
+    font-size: 50px;
+}
+.uploadFileCard .hoverInfos .cancelButton{
+    color: #ff3333;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control:read-only{
+    background: white;
+}
+.uploadPicSection.highlight{
+    box-shadow: 0px 0px 5px 1px var(--koochita-blue);
+}
+.showUploadedFiles{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.form-control.correctInput{
+    border-bottom: solid 2px green !important;
+}
+.form-control.wrongInput{
+    border-bottom: solid 2px red !important;
+}
+.boldDescriptionText{
+    font-size: 20px;
+    font-weight: bold;
+}
+.uploadFileCard .tickIcon,.uploadFileCard .process,.uploadFileCard .warningIcon{
+    display: none;
+}
+.uploadFileCard .absoluteBackground{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #00000052;
+    border-radius: 15px;
+}
+.uploadFileCard.done .tickIcon{
+    color: var(--koochita-yellow);
+    display: flex !important;
+    font-size: 80px;
+}
+
+.uploadFileCard.process .process{
+    display: flex !important;
+}
+
+.uploadFileCard .processCounter{
+    position: absolute;
+    color: var(--koochita-blue);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.uploadFileCard.error .warningIcon{
+    display: flex !important;
+    flex-direction: column;
+    color: orange;
+}
+.uploadFileCard.error .warningIcon:before{
+    font-size: 40px;
+}
+
+.reviewShowSection{
+    display: flex;
+}
+.reviewShowSection > div{
+    width: 50%;
+}
+
+.questionBodies .inputQuestionSec{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+.questionBodies .inpQ{
+    width: calc(100% - 60px);
+    background: #f2f2f2;
+    padding: 5px;
+    margin-right: 10px;
+    display: flex;
+    border-radius: 5px;
+    align-items: flex-end;
+}
+.questionBodies .inpQ > textarea{
+    width: 100%;
+    border: none;
+    background: none;
+    resize: none;
+}
+.questionBodies .inpQ > button{
+    width: 65px;
+    padding: 5px 0px;
+    color: var(--koochita-blue);
+    background: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    height: 40px;
+}
+
+@media (max-width: 767px) {
+    .createPageMainBody .bodd .MainHeader{
+        flex-direction: column;
+    }
 }

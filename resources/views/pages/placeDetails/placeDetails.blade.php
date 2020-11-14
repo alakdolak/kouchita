@@ -376,7 +376,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                         @endfor
 
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <a id="photographersLink" onclick="isPhotographer()">

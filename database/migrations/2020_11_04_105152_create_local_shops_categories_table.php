@@ -18,6 +18,7 @@ class CreateLocalShopsCategoriesTable extends Migration
             $table->string('name');
             $table->string('icon')->nullable();
             $table->string('mapIcon')->nullable();
+            $table->unsignedInteger('parentId')->default(0);
         });
     }
 

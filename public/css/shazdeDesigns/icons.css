@@ -394,6 +394,10 @@
     content: "\E02B" !important;
     font-family: Shazde_Regular2 !important;
 }
+.warningIcon:before{
+    content: "\E052" !important;
+    font-family: Shazde_Regular2 !important;
+}
 .safarnameIcon:before{
     content: '\E0D9' !important;
     font-family: Shazde_Regular2 !important;

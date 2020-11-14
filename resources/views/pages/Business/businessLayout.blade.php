@@ -3,7 +3,6 @@
 <head>
     @include('layouts.topHeader')
 
-    @yield('head')
 
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:type" content="website" />
@@ -18,7 +17,7 @@
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
     <link rel="stylesheet" href="{{URL::asset('css/pages/business.css')}}">
-
+    @yield('head')
 </head>
 <body>
 
@@ -30,8 +29,7 @@
         @yield('body')
     </div>
 
-{{--    @include('layouts.placeFooter')--}}
-
+    @include('layouts.placeFooter')
 
     @yield('script')
 </body>

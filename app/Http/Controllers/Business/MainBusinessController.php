@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\models\localShops\LocalShops;
 use App\models\Restaurant;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,8 +12,21 @@ class MainBusinessController extends Controller
 {
     public function showBusiness($id = 0)
     {
-        $reviews = Restaurant::where('slug', 'رستوران_شیرین_نخل')->first()->getReviews();
 
-        return view('pages.Business.showBusiness', compact(['reviews']));
+        $localShop = LocalShops::find($id);
+        if($localShop == null)
+            dd('not found');
+        $localShop->user = User::select(['id', 'username'])->find($localShop->userId);
+        $localShop->user->userPic = getUserPic($localShop->user->id);
+
+        $localShop->review = $localShop->getReviews();
+        $localShop->pics = $localShop->getPictures();
+        $localShop->telephone = explode('-', $localShop->phone);
+        $localShop->mainPic = $localShop->getMainPicture();
+
+        if($localShop->description == '')
+            $localShop->description = null;
+
+        return view('pages.Business.showBusiness', compact(['localShop']));
     }
 }
