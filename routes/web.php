@@ -855,3 +855,5 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 });
 
 Route::get('seenLogExport/{num}', 'MainController@seenLogExport');
+
+Route::get('/getVideosFromKoochitaTv', 'AjaxController@getVideosFromKoochitaTv')->name('getVideosFromKoochitaTv');

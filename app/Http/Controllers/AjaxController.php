@@ -39,11 +39,55 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 
 
 class AjaxController extends Controller {
+
+    public function getVideosFromKoochitaTv()
+    {
+        $nouns = env('KOOCHITATV_NOUNC_CODE');
+        $time = Carbon::now()->getTimestamp();
+        $hash = Hash::make($nouns.'_'.$time);
+
+        $kindPlace = Place::find($_GET['kindPlaceId']);
+        $place = \DB::table($kindPlace->tableName)->find($_GET['id']);
+
+        if($place != null && $kindPlace != null){
+            $curl = curl_init();
+            $kindPlaceId = $kindPlace->id;
+            $placeId = $place->id;
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => env('KOOCHITATV_URL_API')."/getVideosForPlaces?time=$time&code=$hash&kind=$kindPlaceId&id=$placeId",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if($response){
+                $response = json_decode($response);
+                if($response->status == 'ok')
+                    return response()->json(['status' => 'ok', 'result' => $response->result]);
+                else
+                    return response()->json(['status' => 'errorInResult']);
+            }
+            else
+                return response()->json(['status' => 'errorInGet']);
+        }
+        else
+            return response()->json(['status' => 'error1']);
+    }
 
     public function searchForFoodMaterial()
     {
