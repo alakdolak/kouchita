@@ -1017,18 +1017,24 @@ function saveViewPerPage($kindPlaceId, $placeId){
 
 function getReviewPicsURL($review, $placeFile){
     foreach ($review->pics as $item2) {
-        if($item2->isVideo == 1){
-            $videoArray = explode('.', $item2->pic);
-            $videoName = '';
-            for($k = 0; $k < count($videoArray)-1; $k++)
-                $videoName .= $videoArray[$k] . '.';
-            $videoName .= 'png';
+        if($item2->isVideo == 1 || $item2->is360 == 1){
+            if($item2->thumbnail != null){
+                $item2->picUrl = URL::asset('userPhoto/'.$review->mainFile.'/'.$placeFile.'/'.$item2->thumbnail);
+            }
+            else {
+                $videoArray = explode('.', $item2->pic);
+                $videoName = '';
+                for ($k = 0; $k < count($videoArray) - 1; $k++)
+                    $videoName .= $videoArray[$k] . '.';
+                $videoName .= 'png';
 
-            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $videoName);
+                $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $videoName);
+            }
             $item2->videoUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $item2->pic);
         }
-        else
+        else{
             $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $placeFile . '/' . $item2->pic);
+        }
 
         $item2->picKind = 'review';
     }
@@ -1223,9 +1229,12 @@ function resizeImage($pic, $size, $fileName = ''){
         foreach ($size as $item){
             $input['imagename'] = $item['name'] .  $fileName ;
             $destinationPath = $item['destination'];
+
             $img = \Image::make($image->getRealPath());
+
             $width = $img->width();
             $height = $img->height();
+
 
             if($item['height'] != null && $item['width'] != null){
                 $ration = $width/$height;
@@ -1241,12 +1250,14 @@ function resizeImage($pic, $size, $fileName = ''){
                 }
             }
             else {
-                if ($item['width'] == null || $width > $item['width'])
+                if ($item['width'] != null && $width > $item['width'])
                     $width = $item['width'];
 
-                if ($item['height'] == null || $height > $item['height'])
+                if ($item['height'] != null && $height > $item['height'])
                     $height = $item['height'];
+
             }
+
 
             $img->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();

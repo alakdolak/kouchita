@@ -419,6 +419,7 @@
 }
 .UserIcon:before{
     content: "\e0aa" !important;
+    font-family: Shazde_Regular2 !important;
 }
 .leftBigArrowIcon:before{
     content: '\E080';

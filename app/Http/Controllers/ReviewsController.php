@@ -184,11 +184,7 @@ class ReviewsController extends Controller
             $log->date = Carbon::now()->format('Y-m-d');
             $log->time = getToday()['time'];
             $log->activityId = $activity->id;
-            if ($request->text != null)
-                $log->text = $request->text;
-            else
-                $log->text = '';
-
+            $log->text = $request->text != null ? $request->text : '';
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
