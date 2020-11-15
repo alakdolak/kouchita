@@ -101,6 +101,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     <script defer src="{{URL::asset('js/adv.js')}}"></script>
 
     <style>
+        .tvVideoPic.fullHeight{
+            height: 100%;
+        }
         .albumInfo{
             width: 100%;
             text-align: right !important;
@@ -212,37 +215,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
     @include('component.smallShowReview')
 
-    {{--alarm--}}
-    <span class="ui_overlay ui_modal editTags getAlarm">
-        <div class="shTIcon clsIcon"></div>
-        <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
-        <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
-        <div class="ui_column ui_picker alarmBoxCityName">
-            <div class="shTIcon locationIcon display-inline-block"></div>
-            <input id="fromWarning" class="alarmInputCityName" placeholder="شهر مبدأ">
-            <div id="resultSrc" class="data_holder"></div>
-        </div>
-        <div class="alarmSubHeaderText"> به </div>
-        <div class="ui_column ui_picker alarmBoxCityName">
-            <div class="shTIcon locationIcon display-inline-block"></div>
-            <input id="toWarning" class="alarmInputCityName" placeholder="شهر مقصد">
-            <div id="resultDest" class="data_holder"></div>
-        </div>
-        <div class="alarmSubHeaderText"> کاهش یابد به شما اطلاع دهیم </div>
-        <div class="check-box__item hint-system" id="notifyOtherSuggestionDiv">
-            <label class="labelEdit"> سایر پیشنهادات را نیز به من اطلاع دهید </label>
-            <input type="checkbox" id="otherOffers" name="otherOffer" value="سایر پیشنهادات">
-        </div>
-        @if(!Auth::check())
-            <div class="ui_column ui_picker alarmBoxCityName" id="addYourEmailDivFlightNotification">
-                <input id="emailWarning" class="alarmInputCityName" placeholder="آدرس ایمیل خود را وارد کنید">
-            </div>
-        @endif
-        <div class="float-left">
-            <button class="btn alarmPopUpBotton" type="button"> دریافت هشدار </button>
-        </div>
-    </span>
-
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative" style="margin-bottom: 10px">
 
         @include('layouts.placeMainBodyHeader')
@@ -264,7 +236,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     </script>
                 @endif
 
-                <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                <div id="koochitaTvSection" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
                         <div id="bestPriceInnerDiv" class="tvSection">
                             <a href="https://koochitatv.com" class="tvLogoDiv" target="_blank">
@@ -275,36 +247,34 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     کوچیتا تی وی برای تماشای آنلاین و زنده محتواهای بصری و صوتی در تمامی حوزه های گردشگری و سفر
                                 </div>
                                 <div class="tvContentVideo">
-                                    <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoPic" target="_blank">
+                                    <a href="#" class="tvVideoPic fullHeight" target="_blank">
                                         <div class="tvImgHover">
                                             <img src="{{URL::asset('images/icons/play.webp')}}" style="width: 50px">
                                         </div>
-                                        <div class="tvOverPic tvSeenSection">
-                                            <span>10</span>
+                                        <div class="tvOverPic hidden tvSeenSection">
+                                            <span class="koochitaTvSeen">0</span>
                                             <img src="{{URL::asset('images/icons/eye.png')}}" style="height: 15px; margin-right: 5px">
                                         </div>
-                                        <div class="tvOverPic tvLikeSection">
+                                        <div class="tvOverPic hidden tvLikeSection">
                                             <div class="tvLike">
-                                                <span>20</span>
+                                                <span class="koochitaTvDisLikeCount">0</span>
                                                 <i class="DisLikeIcon"></i>
                                             </div>
                                             <div class="tvLike" style="margin-right: 10px">
-                                                <span>20</span>
+                                                <span class="koochitaTvLikeCount">0</span>
                                                 <i class="LikeIcon"></i>
                                             </div>
                                         </div>
-                                        <img src="{{URL::asset('images/test/1593441472836.webp')}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                        <img src="{{URL::asset('images/mainPics/koochitatvdefault.webp')}}" class="koochitaTvImg resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                     </a>
-                                    <a href="https://www.koochitatv.com/video/show/9OBLNC06s3" class="tvVideoName showLessText" target="_blank">
-                                        گفت و گو با نوا جمشیدی
-                                    </a>
-                                    <div class="tvUserContentDiv">
+                                    <a href="#" class="tvVideoName showLessText" target="_blank"></a>
+                                    <div class="tvUserContentDiv hidden">
                                         <div class="tvUserPic">
-                                            <img src="https://static.koochita.com/_images/defaultPic/2.jpg" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                            <img src="#" class="koochitaTvUserImg resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                         </div>
                                         <div class="tvUserInfo">
-                                            <div class="tvUserName"> KoochitaTv </div>
-                                            <div class="tvUserTime"> دیروز </div>
+                                            <div class="tvUserName"></div>
+                                            <div class="tvUserTime"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -507,30 +477,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         </div>
                     </a>
                 </div>
-                <script>
-                    if (photographerPics.length > 0) {
-                        var mainSlideSwiper = new Swiper('#mainSlider', {
-                            spaceBetween: 0,
-                            centeredSlides: true,
-                            loop: true,
-                            autoplay: {
-                                delay: 5000,
-                                disableOnInteraction: false,
-                            },
-                            navigation: {
-                                prevEl: '.swiper-button-next',
-                                nextEl: '.swiper-button-prev',
-                            },
-                        });
-                    } else {
-                        $('.mainSliderNavBut').css('display', 'none');
-                        $('.see_all_count_wrap').css('display', 'none');
-                        text = '<div class="swiper-slide" style="overflow: hidden">\n' +
-                            '<img class="eachPicOfSlider resizeImgClass" src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" style="width: 100%;">\n' +
-                            '</div>';
-                        $('#mainSliderWrapper').append(text);
-                    }
-                </script>
             </div>
         </div>
 
@@ -1180,6 +1126,61 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     @endif
 
     <script>
+
+        function getVideoFromTv(){
+
+            $.ajax({
+                type: 'get',
+                url: `{{route('getVideosFromKoochitaTv')}}?id=${placeId}&kindPlaceId=${kindPlaceId}`,
+                success: response => {
+                    if(response.status == 'ok'){
+                        var result = response.result;
+                        $('#koochitaTvSection').find('.tvOverPic').removeClass('hidden');
+                        $('#koochitaTvSection').find('.tvUserContentDiv').removeClass('hidden');
+                        $('#koochitaTvSection').find('.tvVideoPic').removeClass('fullHeight');
+
+                        $('#koochitaTvSection').find('.tvVideoPic').attr('href', result.url);
+                        $('#koochitaTvSection').find('.tvUserName').text(result.username);
+                        $('#koochitaTvSection').find('.tvUserTime').text(result.time);
+                        $('.koochitaTvSeen').text(result.seen);
+                        $('.koochitaTvDisLikeCount').text(result.disLike);
+                        $('.koochitaTvLikeCount').text(result.like);
+                        $('.koochitaTvImg').attr('src', result.pic);
+                        $('.tvVideoName').attr('href', result.url);
+                        $('.tvVideoName').text(result.title);
+                        $('.koochitaTvUserImg').attr('src', result.userPic);
+                        $('.koochitaTvUserImg').attr('src', result.userPic);
+                    }
+                },
+            })
+        }
+        getVideoFromTv();
+
+
+        if (photographerPics.length > 0) {
+            var mainSlideSwiper = new Swiper('#mainSlider', {
+                spaceBetween: 0,
+                centeredSlides: true,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    prevEl: '.swiper-button-next',
+                    nextEl: '.swiper-button-prev',
+                },
+            });
+        }
+        else {
+            $('.mainSliderNavBut').css('display', 'none');
+            $('.see_all_count_wrap').css('display', 'none');
+            text = '<div class="swiper-slide" style="overflow: hidden">\n' +
+                '<img class="eachPicOfSlider resizeImgClass" src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" style="width: 100%;">\n' +
+                '</div>';
+            $('#mainSliderWrapper').append(text);
+        }
+
         $(window).on('scroll', function(e){
             let topOfSticky = document.getElementById('BODYCON').getBoundingClientRect().top;
             if(topOfSticky < 20 && !$('#sticky').hasClass('stickyFixTop'))
@@ -1231,70 +1232,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             }, 100)
         }
 
-
-        $(document).ready(function () {
-            autosize($(".inputBoxInputComment"));
-            autosize($(".inputBoxInputAnswer"));
-
-            if (window.matchMedia('(max-width: 373px)').matches) {
-                $('.eachCommentMainBox').removeClass('mg-rt-45')
-            }
-        });
-
-        {{--var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();--}}
-        {{--var heightOfFeature = $('.featureOfPlaceMiddleContent').height();--}}
-        {{--var heightOfContent = $('.rateOfPlaceMiddleContent').height();--}}
-        {{--var minHeightOfConent = [heightOfFeature, heightOfContent];--}}
-        {{--var sortHeightOfContent = minHeightOfConent.sort(function (a, b) {--}}
-        {{--    return a - b--}}
-        {{--});--}}
-        {{--var selectedHegihtForDescription = sortHeightOfContent[1] - 50;--}}
-
-        {{--if(heightOfDescription < selectedHegihtForDescription)--}}
-        {{--    $('.introductionShowMore').css('display', 'none');--}}
-
-        {{--lineHeight = Math.floor(selectedHegihtForDescription / 25); // 25 line-heigh description--}}
-        {{--selectedHegihtForDescription = lineHeight * 25;--}}
-
-        {{--@if($kindPlaceId == 4)--}}
-        {{--    selectedHegihtForDescription = 305;--}}
-        {{--@endif--}}
-
-        {{--$('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');--}}
-
-        {{--var showFullDescription = false;--}}
-
-        {{--function toggleMainDescription() {--}}
-        {{--    if (showFullDescription) {--}}
-        {{--        $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');--}}
-        {{--        $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '0px');--}}
-        {{--        @if($placeMode != 'mahaliFood')--}}
-        {{--            $('.generalDescription').css('width', '');--}}
-        {{--            $('.featureOfPlaceMiddle').css('width', '');--}}
-        {{--            $('.rateOfPlaceMiddle').css('width', '');--}}
-        {{--        @endif--}}
-        {{--        $('.introductionShowMore').text('بیشتر');--}}
-        {{--        $('.introductionShowMore').removeClass('introductionShowMoreLess');--}}
-        {{--        showFullDescription = false;--}}
-        {{--    } else {--}}
-        {{--        $('.descriptionOfPlaceMiddleContent').css('max-height', '20000px');--}}
-        {{--        $('.descriptionOfPlaceMiddleContent').css('margin-bottom', '30px');--}}
-        {{--        @if($placeMode != 'mahaliFood')--}}
-        {{--            $('.generalDescription').css('width', '100%');--}}
-        {{--            $('.featureOfPlaceMiddle').css('width', '50%');--}}
-        {{--            $('.rateOfPlaceMiddle').css('width', '50%');--}}
-        {{--        @endif--}}
-        {{--        $('.introductionShowMore').text('کمتر');--}}
-        {{--        $('.introductionShowMore').addClass('introductionShowMoreLess');--}}
-        {{--        showFullDescription = true;--}}
-        {{--    }--}}
-        {{--}--}}
-
-        {{--@if($kindPlaceId != 4 && $kindPlaceId != 12)--}}
-        {{--    $('.descriptionOfPlaceMiddleContent').on('click', toggleMainDescription);--}}
-        {{--@endif--}}
-
-
         function isPhotographer() {
             if (!checkLogin())
                 return;
@@ -1338,8 +1275,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             $(element).next().toggle() ,
                 $(element).toggleClass("bg-color-darkgrey")
         }
-
-
 
         function filterChoices(element) {
             $(element).toggleClass('bg-color-yellowImp')
@@ -1481,10 +1416,14 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
         }
 
-        // Get the element with id="defaultOpen" and click on it
-        // document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
-
         $(document).ready(function () {
+            autosize($(".inputBoxInputComment"));
+            autosize($(".inputBoxInputAnswer"));
+
+            if (window.matchMedia('(max-width: 373px)').matches) {
+                $('.eachCommentMainBox').removeClass('mg-rt-45')
+            }
+
             @if($mode == "bookMark")
             bookMark();
             @elseif($mode == "saveToTrip")
