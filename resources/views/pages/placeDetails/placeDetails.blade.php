@@ -1153,7 +1153,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 },
             })
         }
-        // getVideoFromTv();
+        getVideoFromTv();
 
 
         if (photographerPics.length > 0) {
