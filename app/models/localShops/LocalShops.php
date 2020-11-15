@@ -49,9 +49,14 @@ class LocalShops extends Model
     public function getReviews(){
         $reviewAct = Activity::where('name', 'نظر')->first();
         $reviews = $this->hasMany(LogModel::class, 'placeId', 'id')
-                        ->where('kindPlaceId', 3)
+                        ->where('kindPlaceId', 13)
                         ->where('activityId', $reviewAct->id)
-                        ->where('confirm', 1)
+                        ->where(function ($query){
+                            if(auth()->check())
+                                $query->where('confirm', 1)->orWhere('visitorId', auth()->user()->id);
+                            else
+                                $query->where('confirm', 1);
+                        })
                         ->orderByDesc('date')->get();
 
         foreach ($reviews as $item)

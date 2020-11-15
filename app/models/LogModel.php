@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LogModel extends Model {
 
+    protected $guarded = [];
     protected $table = 'log';
 
     public static function whereId($value) {

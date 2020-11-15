@@ -512,7 +512,7 @@
             openLoading();
             $.ajax({
                 type: 'post',
-                url: '{{route('business.store')}}',
+                url: '{{route('localShop.store')}}',
                 data: dataToSend,
                 success: response => {
                     closeLoading();
@@ -597,15 +597,13 @@
                                 <img src="${file.image}" class="resizeImgClass" onload="fitThisImg(this)">
                             </div>
                             <div class="absoluteBackground tickIcon"></div>
-                            <div class="absoluteBackground warningIcon">
-                                اشکال در بارگذاری
-                            </div>
+                            <div class="absoluteBackground warningIcon"> اشکال در بارگذاری</div>
                             <div class="absoluteBackground process">
                                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                 <div class="processCounter">0%</div>
                             </div>
                             <div class="hoverInfos">
-                                <div class="cancelButton closeIconWithCircle" onclick="deleteThisUploadedImage(${file.code})">
+                                <div class="cancelButton closeIconWithCircle" onclick="deleteThisUploadedImage(${file.code})" >
                                      حذف عکس
                                 </div>
                             </div>
@@ -636,7 +634,7 @@
 
                     uploadPicAjax = $.ajax({
                         type: 'post',
-                        url: '{{route("business.store.pics")}}',
+                        url: '{{route("localShop.store.pics")}}',
                         data: formData,
                         processData: false,
                         contentType: false,
@@ -711,7 +709,7 @@
             var file = fileImages[_index];
             $.ajax({
                 type: 'delete',
-                url: '{{route('business.store.delete')}}',
+                url: '{{route('localShop.store.delete')}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     fileName: file.savedFile,
