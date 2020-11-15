@@ -236,7 +236,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     </script>
                 @endif
 
-                <div id="koochitaTvSection" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                <div id="bestPrice" class="meta koochitaTvSection position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
                         <div id="bestPriceInnerDiv" class="tvSection">
                             <a href="https://koochitatv.com" class="tvLogoDiv" target="_blank">
@@ -1128,20 +1128,19 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     <script>
 
         function getVideoFromTv(){
-
             $.ajax({
                 type: 'get',
                 url: `{{route('getVideosFromKoochitaTv')}}?id=${placeId}&kindPlaceId=${kindPlaceId}`,
                 success: response => {
                     if(response.status == 'ok'){
                         var result = response.result;
-                        $('#koochitaTvSection').find('.tvOverPic').removeClass('hidden');
-                        $('#koochitaTvSection').find('.tvUserContentDiv').removeClass('hidden');
-                        $('#koochitaTvSection').find('.tvVideoPic').removeClass('fullHeight');
+                        $('.koochitaTvSection').find('.tvOverPic').removeClass('hidden');
+                        $('.koochitaTvSection').find('.tvUserContentDiv').removeClass('hidden');
+                        $('.koochitaTvSection').find('.tvVideoPic').removeClass('fullHeight');
 
-                        $('#koochitaTvSection').find('.tvVideoPic').attr('href', result.url);
-                        $('#koochitaTvSection').find('.tvUserName').text(result.username);
-                        $('#koochitaTvSection').find('.tvUserTime').text(result.time);
+                        $('.koochitaTvSection').find('.tvVideoPic').attr('href', result.url);
+                        $('.koochitaTvSection').find('.tvUserName').text(result.username);
+                        $('.koochitaTvSection').find('.tvUserTime').text(result.time);
                         $('.koochitaTvSeen').text(result.seen);
                         $('.koochitaTvDisLikeCount').text(result.disLike);
                         $('.koochitaTvLikeCount').text(result.like);
@@ -1154,7 +1153,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 },
             })
         }
-        getVideoFromTv();
+        // getVideoFromTv();
 
 
         if (photographerPics.length > 0) {
