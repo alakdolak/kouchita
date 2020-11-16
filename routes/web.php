@@ -334,9 +334,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
     Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
 });
 
-Route::group(['middleware' => ['throttle:60']], function(){
-    Route::post('log/storeSeen', 'LogController@storeUserSeenLog')->name('log.storeSeen');
-});
+Route::post('log/storeSeen', 'LogController@storeUserSeenLog')->name('log.storeSeen');
 
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
