@@ -1,5 +1,5 @@
-{{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css?v=1')}}">--}}
 <link rel="stylesheet" href="{{URL::asset('css/component/generalFolder.css?v='.$fileVersions)}}">
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 
@@ -34,11 +34,9 @@
 
 @include('general.loading')
 
-@include('general.adminInPage')
-
 @include('general.photoAlbumModal')
 
-@include('general.searches.proSearch')
+{{--@include('general.searches.proSearch')--}}
 
 @include('general.searches.mainSearch')
 
@@ -59,6 +57,8 @@
 @if(!Auth::check())
     @include('general.nLoginPopUp')
 @else
+    @include('general.adminInPage')
+
     @include('general.addToTripModal')
 
     @include('general.uploadPhoto')

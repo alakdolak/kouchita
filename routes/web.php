@@ -34,16 +34,16 @@ Route::group(array('middleware' => ['throttle:30', 'web']), function () {
         return redirect(\route('home'));
     })->name('main');
 
+    Route::get('main/{mode?}', function(){
+        return redirect(url('/'));
+    })->name('mainMode');
+
     Route::get('/landingPage', 'MainController@landingPage')->name('landingPage')->middleware('shareData');
 
     //PDF creator
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
 
     Route::get('printPage/{tripId}', 'HomeController@printPage')->name('printPage');
-
-    Route::get('main/{mode}', function(){
-        return redirect(url('/'));
-    })->name('mainMode');
 
     Route::get('soon', array('as' => 'soon', 'uses' => 'HomeController@soon'));
 
@@ -439,11 +439,11 @@ Route::group(['middleware' => ['SafarnamehShareData']], function () {
 });
 
 // Lists
-Route::group(array('middleware' => 'nothing'), function () {
+Route::group(array('middleware' => ['nothing', 'shareData']), function () {
 
     Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
 
-    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list')->middleware('shareData');
+    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
 });
@@ -817,19 +817,11 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
 
-    Route::post('getMajaraListElems/{city}/{mode}', array('as' => 'getMajaraListElems', 'uses' => 'NotUseController@getMajaraListElems'));
-
-    Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'NotUseController@getRestaurantListElems'));
-
     Route::any('restaurantList/{city}/{mode}/{chert?}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
 
     Route::any('hotelList/{city}/{mode}/{chert?}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
 
-    Route::post('getHotelListElems/{city}/{mode}/{kind?}', array('as' => 'getHotelListElems', 'uses' => 'NotUseController@getHotelListElems'));
-
     Route::any('amakenList/{city}/{mode}/{chert?}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
-
-    Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'NotUseController@getAmakenListElems'));
 
     Route::get('userQuestions', 'NotUseController@userQuestions');
 
@@ -842,16 +834,6 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
     Route::get('myTripInner', 'NotUseController@myTripInner');
 
     Route::get('userActivitiesProfile', 'NotUseController@userActivitiesProfile');
-
-    Route::post('getLogPhotos', array('as' => 'getLogPhotos', 'uses' => 'NotUseController@getLogPhotos'));
-
-    Route::post('getSlider1Photo', array('as' => 'getSlider1Photo', 'uses' => 'NotUseController@getSlider1Photo'));
-
-    Route::post('getSlider2Photo', array('as' => 'getSlider2Photo', 'uses' => 'NotUseController@getSlider2Photo'));
-
-    Route::post('survey', array('as' => 'survey', 'uses' => 'NotUseController@survey'));
-
-    Route::post('getSurvey', array('as' => 'getSurvey', 'uses' => 'NotUseController@getSurvey'));
 });
 
 Route::get('seenLogExport/{num}', 'MainController@seenLogExport');

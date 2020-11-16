@@ -935,17 +935,17 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                         <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
 
-                            @include('hotel-details.filterSection')
+                            @include('pages.placeDetails.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv" style="display: none;">
                                 {{--@include('features.advertise3D')--}}
                             </center>
                         </div>
 
-                        @include('hotel-details.reviewSection')
+                        @include('pages.placeDetails.reviewSection')
                     </div>
                     <div class="clear-both"></div>
-                    @include('hotel-details.questionSection')
+                    @include('pages.placeDetails.questionSection')
                 </div>
 
                 @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
