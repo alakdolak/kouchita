@@ -31,12 +31,11 @@ class MainController extends Controller
 {
     public function myLocation()
     {
-        return view('pages.myLocation');
+        return view('pages.placeList.myLocation');
     }
 
     public function landingPage()
     {
-//        createSeeLog(0, 0, 'landing', '');
         return view('landing.landingPage');
     }
 
