@@ -265,7 +265,7 @@
         if(!checkLogin('{{route("addPlaceByUser.index")}}'))
             return;
         else
-            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
+            openUploadPhotoModal('کوچیتا', '{{route('addPhotoToPlace')}}', 0, 0, '');
     }
     function goToSafarnameh(){
         if(checkLogin('{{route("addPlaceByUser.index")}}')) {

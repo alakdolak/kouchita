@@ -194,7 +194,7 @@ function storeVideo(_file){
             try{
                 response = JSON.parse(response);
                 if(response['status'] == 'ok') {
-                    $('#progressStatus').text('ویدیوی شما با موفقیت بارگزاری شد');
+                    $('#progressStatus').text('ویدیوی شما با موفقیت آپلود شد');
                     $('#duration').val(response['duration']);
                     uploadCompleted = true;
                 }
@@ -217,7 +217,7 @@ function errorUploadVideo(){
     $('#uploadVideoDiv').show();
     $('#videoSetting').hide();
 
-    openErrorAlert('بارگزاری ویدیو با مشکلی مواجه شد لطفا دوباره تلاش کنید');
+    openErrorAlert('آپلود ویدیو با مشکلی مواجه شد لطفا دوباره تلاش کنید');
 }
 
 function storeInfoVideos(_state){

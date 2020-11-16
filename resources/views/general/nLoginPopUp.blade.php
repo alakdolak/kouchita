@@ -252,7 +252,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                                     {{__('را مطالعه کرده و با آن موافقم.')}}
                                 </div>
                             </div>
-                            <div>
+                            <div>t
                                 <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
                                 <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
                             </div>

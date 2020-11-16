@@ -6,7 +6,7 @@ $config = \App\models\ConfigModel::first();
 <div id="share_box" style="width: 200px">
     <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
-        <img src="{{URL::asset("images/shareBoxImg/facebook.webp")}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه در فیسبوک</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
@@ -33,7 +33,7 @@ $config = \App\models\ConfigModel::first();
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->instagramFollow) ? 'rel="nofollow"' : ''}}
     href="https://instagram.com/share?url={{ str_replace('%20', '', Request::url())}}">
-        <img src="{{URL::asset("images/shareBoxImg/instagram.webp")}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/instagram.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه اینستاگرام</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->pinterestFollow) ? 'rel="nofollow"' : ''}}

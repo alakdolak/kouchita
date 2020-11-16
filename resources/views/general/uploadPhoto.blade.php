@@ -149,7 +149,7 @@
                              <div class="separator">
                                  <span class="text">{{__('یا')}}</span>
                              </div>
-                             <div class="dragDropText">{{__('به سادگی عکس خود را در این قاب بی اندازید')}}</div>
+                             <div class="dragDropText">{{__('به سادگی عکس خود را در این قاب قرار دهید')}}</div>
 
                              <div class="invalidDragScreen infoScreen hidden">
                                  <div class="inner">

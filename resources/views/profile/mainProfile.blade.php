@@ -296,58 +296,94 @@
                         <div class="activitiesMainDiv hideOnPhone">
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">گذاشتن پست</div>
-                                <div class="activityNumbers">پست {{$sideInfos['userActivityCount']['postCount']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['postCount']}}
+                                    پست
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">آپلود عکس</div>
-                                <div class="activityNumbers">عکس {{$sideInfos['userActivityCount']['picCount']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['picCount']}}
+                                    عکس
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">آپلود فیلم</div>
-                                <div class="activityNumbers">فیلم {{$sideInfos['userActivityCount']['videoCount']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['videoCount']}}
+                                    فیلم
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">آپلود فیلم 360</div>
-                                <div class="activityNumbers">فیلم {{$sideInfos['userActivityCount']['video360Count']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['video360Count']}}
+                                    فیلم
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پرسیدن سؤال</div>
-                                <div class="activityNumbers">سؤال {{$sideInfos['userActivityCount']['questionCount']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['questionCount']}}
+                                    سؤال
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پاسخ به سؤال دیگران</div>
-                                <div class="activityNumbers">پاسخ سؤال {{$sideInfos['userActivityCount']['ansCount']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['ansCount']}}
+                                    پاسخ سؤال
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">امتیازدهی</div>
-                                <div class="activityNumbers">مکان {{$sideInfos['userActivityCount']['scoreCount']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['scoreCount']}}
+                                    مکان
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پاسخ به سؤالات اختیاری</div>
-                                <div class="activityNumbers">پاسخ -</div>
+                                <div class="activityNumbers">
+                                    -
+                                    پاسخ
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">ویرایش مکان</div>
-                                <div class="activityNumbers">مکان -</div>
+                                <div class="activityNumbers">
+                                    -
+                                    مکان
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پیشنهاد مکان جدید</div>
-                                <div class="activityNumbers">مکان {{$sideInfos['userActivityCount']['addPlace']}}</div>
+                                <div class="activityNumbers">
+                                    {{$sideInfos['userActivityCount']['addPlace']}}
+                                    مکان
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">نوشتن مقاله</div>
-                                <div class="activityNumbers">مقاله -</div>
+                                <div class="activityNumbers">
+                                    -
+                                    مقاله
+                                </div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">معرفی دوستان</div>
-                                <div class="activityNumbers">معرفی -</div>
+                                <div class="activityNumbers">
+                                    -
+                                    معرفی
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="userProfilePicturesMainDiv rightColBoxes">
                         <div class="mainDivHeaderText">
                             <h3>عکس و تصاویر</h3>
-                            <div href="#picture" onclick="window.showAllPic = 1; changePages('picture');">مشاهده همه</div>
+                            <div href="#picture" onclick="changePages('photo'); window.showAllPic = 1; ">مشاهده همه</div>
                         </div>
                         <div class="picturesMainBox height-auto">
                             @foreach($sideInfos['allUserPics'] as $pic)
@@ -433,7 +469,7 @@
 
                     <div class="uploadSection">
                         <label for="newImage" class="newImageButton">
-                            بارگزاری عکس
+                            آپلود عکس
                         </label>
                         <div class="oldBrowser">
                             عکس شما می‌بایست در فرمت‌های jpg یا png یا gif بوده و از 3MB بیشتر نباشید. حتما دقت کنید اندازه عکس 80*80 پیکسل باشد تا زیبا به نظر برسد. در غیر اینصورت ممکن است نتیجه نهایی باب میل شما نباشد.
@@ -470,7 +506,7 @@
 
                     <div class="uploadSection">
                         <label for="newBannerImage" class="newImageButton">
-                            بارگزاری عکس
+                            آپلود عکس
                         </label>
                     </div>
                     <div class="orSec">

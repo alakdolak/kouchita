@@ -194,7 +194,7 @@
 
         <div class="modal fade" id="profilePossibilities">
             @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
-                <div class="mainPopUp leftPopUp" style="padding: 7px">
+                <div class="mainPopUp rightPopUp" style="padding: 7px">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
@@ -354,7 +354,7 @@
                     </div>
                 </div>
             @elseif(Request::is('placeList/*'))
-                <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" style="padding: 7px">
+                <div ng-app="mainApp" class="mainPopUp rightPopUp PlaceController" style="padding: 7px">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
                     <div style="min-height: 60px">
                         <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
@@ -561,7 +561,7 @@
                     </div>
                 </div>
             @else
-                <div class="mainPopUp leftPopUp recentViewLeftBar">
+                <div class="mainPopUp rightPopUp recentViewLeftBar">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
 
                     {{--each menu--}}
@@ -657,7 +657,7 @@
         </div>
 
         <div class="modal fade" id="otherPossibilities">
-            <div class="mainPopUp leftPopUp" style="overflow-y: auto">
+            <div class="mainPopUp rightPopUp" style="overflow-y: auto">
                 <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#otherPossibilities').modal('hide')"></div>
                 @if(isset($locationName))
                     <div class="pSC_tilte">
@@ -861,7 +861,7 @@
                     </a>
                     <img src="{{URL::asset('images/icons/thankyou0.svg')}}" alt="">
                 </div>
-                <div class="mainPopUp rightPopUp profileFooterPopUp">
+                <div class="mainPopUp leftPopUp profileFooterPopUp">
                     <div class="closeFooterPopupIcon iconFamily iconClose"
                          onclick="$('#profileFooterModal').modal('hide')"
                          style="top: -10px; z-index: 999"></div>

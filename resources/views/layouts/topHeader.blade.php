@@ -309,7 +309,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-158914626-1');
 
     var homeURL = "{{route('home')}}";

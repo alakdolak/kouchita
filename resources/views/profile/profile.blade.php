@@ -427,6 +427,7 @@
 
 {{--                                <div class="hometown"></div>--}}
 {{--                            </div>--}}
+                            <script !src="">alert('hello')</script>
                         </div>
 
 
@@ -437,11 +438,11 @@
                             <div class="activitiesMainDiv">
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">گذاشتن پست</div>
-                                    <div class="activityNumbers">پست {{$userCount['postCount']}}</div>
+                                    <div class="activityNumbers"> {{$userCount['postCount']}}پست</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">آپلود عکس</div>
-                                    <div class="activityNumbers">عکس {{$userCount['picCount']}}</div>
+                                    <div class="activityNumbers"> {{$userCount['picCount']}}عکس</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">آپلود فیلم</div>

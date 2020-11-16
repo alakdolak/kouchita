@@ -24,7 +24,7 @@ return [
     'نوع اقامتگاه خود را مشخص کنید.' => 'Specify your accommodation type.',
     'ابتدا استان خود را مشخص کنید.' => 'First determine your province.',
     'توضیحات خود با توجه به نمونه متن پایین وارد کنید.' => 'Enter your description according to the sample text below.',
-    'شما می توانید به هر تعداد عکس که در اختیار دارید بارگزاری نمایید. در این صورت علاوه بر امتیاز تعریف و یا ویرایش مکان، امتیاز عکس نیز به شما تعلق می گیرد' => 'You can upload as many photos as you have. In this case, in addition to the privilege of defining or editing the location, you will also be awarded the privilege of the photo',
+    'شما می توانید به هر تعداد عکس که در اختیار دارید آپلود نمایید. در این صورت علاوه بر امتیاز تعریف و یا ویرایش مکان، امتیاز عکس نیز به شما تعلق می گیرد' => 'You can upload as many photos as you have. In this case, in addition to the privilege of defining or editing the location, you will also be awarded the privilege of the photo',
     'تمام اطلاعات به طور کامل دریافت شد. این اطلاعات پس از بررسی اعمال خواهد شد و امتیاز شما در پروفایل افزایش خواهد یافت. به ویرایش و اضافه کردن مقصد های جدید ادامه دهید تا علاوه بر افزایش امتیاز، نشان های افتخار متفاوتی برنده شوید.' => 'All information was received in full. This information will be applied after the review and your score on the profile will increase. Continue editing and adding new destinations so that in addition to increasing points, you will win different honorary badges.',
     'نام عکس' => 'Photo name',
     'اضافه کنید' => 'Add',

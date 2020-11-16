@@ -112,7 +112,7 @@
                         </div>
                         <div class="step5 stepHeader hidden">
                             <div id="step5MainTitle" class="stepTitle">اگر عکسی از <span class="headerCategoryName"></span> دارید آن را بارگذاری نمایید</div>
-                            <div class="boxNotice">{{__('addPlaceByUser.شما می توانید به هر تعداد عکس که در اختیار دارید بارگزاری نمایید. در این صورت علاوه بر امتیاز تعریف و یا ویرایش مکان، امتیاز عکس نیز به شما تعلق می گیرد')}}</div>
+                            <div class="boxNotice">{{__('addPlaceByUser.شما می توانید به هر تعداد عکس که در اختیار دارید آپلود نمایید. در این صورت علاوه بر امتیاز تعریف و یا ویرایش مکان، امتیاز عکس نیز به شما تعلق می گیرد')}}</div>
                         </div>
                         <div class="step6 stepHeader hidden">
                             <div class="stepTitle">
@@ -923,7 +923,7 @@
                             <div id="dropzone" class="dropzone dragDropTextAddPlace"></div>
                         </div>
                         <div class="footerTextBoxAddPlace stFooter">
-                            <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
+                            <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از آپلود تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
                             <span class="footerPolicyLink">{{__('صفحه مقررات')}}</span>
                         </div>
                     </div>
