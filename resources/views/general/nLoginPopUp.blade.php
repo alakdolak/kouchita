@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
 if (Auth::check())
     return Redirect::to(route('main'));
 
@@ -24,7 +25,7 @@ $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
 
 $url = $_SERVER['REQUEST_URI'];
-$authUrl = str_replace('state', 'state='.$url, $authUrl);
+$authUrl = str_replace('state', 'state=' . $url, $authUrl);
 ?>
 {{--<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>--}}
 
@@ -36,7 +37,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
     .comButLogin {
         color: white;
     }
-    .comButLogin:hover{
+
+    .comButLogin:hover {
         color: white;
     }
 </style>
@@ -71,13 +73,17 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                          height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg">
                                         <g>
                                             <path fill="#EA4335"
-                                                  d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path
+                                                  d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                                            <path
                                                     fill="#4285F4"
-                                                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path
+                                                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                                            <path
                                                     fill="#FBBC05"
-                                                    d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path
+                                                    d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                                            <path
                                                     fill="#34A853"
-                                                    d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path
+                                                    d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                                            <path
                                                     fill="none" d="M0 0h48v48H0z"></path>
                                         </g>
                                     </svg>
@@ -95,7 +101,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         <div class="registerFSection">
             <div class="row">
                 <div class="col-md-6 loginInputDiv">
-                    <input type="text" id="emailPhone_register" class="loginInput" placeholder="{{__('تلفن همراه یا ایمیل')}}">
+                    <input type="text" id="emailPhone_register" class="loginInput"
+                           placeholder="{{__('تلفن همراه یا ایمیل')}}">
                 </div>
                 <div class="col-md-6 loginInputDiv">
                     <input type="password" id="password_register" class="loginInput" placeholder="{{__('رمز عبور')}}">
@@ -120,7 +127,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
             </div>
             <div class="row">
                 <div class="col-sm-5 loginInputDiv">
-                    <input type="text" id="username_main" class="loginInput" placeholder="{{__('تلفن همراه، ایمیل یا نام')}}">
+                    <input type="text" id="username_main" class="loginInput"
+                           placeholder="{{__('تلفن همراه، ایمیل یا نام')}}">
                 </div>
                 <div class="col-sm-5 loginInputDiv">
                     <input type="password" id="password_main" class="loginInput" placeholder="{{__('رمز عبور')}}">
@@ -129,7 +137,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     </div>
                 </div>
                 <div class="col-sm-2 loginInputDiv" style="margin-top: 0px">
-                    <button class="loginRegisterButton" style="background: var(--koochita-blue); width: 90px;" onclick="login($('#username_main').val(), $('#password_main').val())">{{__('ورود')}}</button>
+                    <button class="loginRegisterButton" style="background: var(--koochita-blue); width: 90px;"
+                            onclick="login($('#username_main').val(), $('#password_main').val())">{{__('ورود')}}</button>
                 </div>
             </div>
             <div class="row">
@@ -138,7 +147,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         </div>
     </div>
 
-    <div id="registerDiv" class="loginPopUpContent hidden" style="justify-content: space-between; flex-direction: row; padding: 15px;">
+    <div id="registerDiv" class="loginPopUpContent hidden"
+         style="justify-content: space-between; flex-direction: row; padding: 15px;">
         <div class="iconFamily iconClose closeLoginPopup" onclick="closeLoginPopup()"></div>
 
         <div class="registerRightSection">
@@ -153,56 +163,68 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                         <div class="header_text font-size-14Imp">{{__('عضو شوید:')}}</div>
                         <div>
                             <div class="loginPopUpLable">{{__('آدرس ایمیل خود را وارد کنید')}}</div>
-                            <input type="email" id="emailRegisterInput" class="loginInputTemp" style="width: 100%" maxlength="40" required autofocus>
+                            <input type="email" id="emailRegisterInput" class="loginInputTemp" style="width: 100%"
+                                   maxlength="40" required autofocus>
                         </div>
                         <div class="pd-tp-8">
                             <p id="loginErrEmail"></p>
                             <div style="display: flex;">
-                                <button type="button" onclick="emailRegister()" class="loginSubBtn btn btn-info active" style="margin-left: 10px">{{__('ثبت')}}</button>
-                                <button type="button" onclick="Return('EnterEmail-loginPopUp')" class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
+                                <button type="button" onclick="emailRegister()" class="loginSubBtn btn btn-info active"
+                                        style="margin-left: 10px">{{__('ثبت')}}</button>
+                                <button type="button" onclick="Return('EnterEmail-loginPopUp')"
+                                        class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                             </div>
                         </div>
                     </div>
                 </span>
 
-                <span id="sendVerifiedPhoneCodeSection" class="hidden" onkeyup="if(event.keyCode == 13) registerWithPhone()">
+                <span id="sendVerifiedPhoneCodeSection" class="hidden"
+                      onkeyup="if(event.keyCode == 13) registerWithPhone()">
                     <div class="col-xs-12 rtl mainContentInfos">
                         <div>{{__('لطفا کد اعتبار سنجی را وارد نمایید:')}}</div>
                         <div style="margin-top: 10px">
                             <span class="header_text font-size-12Imp">{{__('این کد به گوشی شما ارسال گردیده است.')}}</span>
                             <div>
                                 <div class="loginPopUpLable"> {{__('کد اعتبار سنجی')}} </div>
-                                <input class="loginInputTemp" type="text" maxlength="40" id="activationCode" required autofocus>
+                                <input class="loginInputTemp" type="text" maxlength="40" id="activationCode" required
+                                       autofocus>
                                 <p id="loginErrActivationCode" class="loginErrActivationCode"></p>
                             </div>
-                            <div id="reminderTimePane" class="reminderTimeDiv" style="font-size: 13px; margin-bottom: 0px">
+                            <div id="reminderTimePane" class="reminderTimeDiv"
+                                 style="font-size: 13px; margin-bottom: 0px">
                                 <span>{{__('زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :')}}</span>
                                 <span id="reminderTime" class="reminderTime"></span>
                             </div>
-                            <button onclick="resendActivationCode('register', this)" id="resendActivationCode" class="btn comButLogin resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
+                            <button onclick="resendActivationCode('register', this)" id="resendActivationCode"
+                                    class="btn comButLogin resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
                         </div>
                         <hr>
                         <div>
                             <span style="font-size: 12px">{{__('در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.')}}</span>
                             <div class="loginRowsPopup loginRowsPopupInline">
-                                <span  class="loginInputLabel">{{__('کد معرف')}}</span>
+                                <span class="loginInputLabel">{{__('کد معرف')}}</span>
                                 <input type="text" id="invitationCode" class="loginInputTemp" maxlength="6">
                             </div>
                         </div>
                         <div style="display: flex; margin: 10px 0px;">
-                            <input id='checked2' onchange='checkedCheckBox(this)' type='checkbox' value='-1' style="margin-left: 5px;">
+                            <input id='checked2' onchange='checkedCheckBox(this)' type='checkbox' value='-1'
+                                   style="margin-left: 5px;">
                             <label class='labelForCheckBox' for='checked2'>
                                 <span></span>&nbsp;
                             </label>
                             <div style="margin-right: 5px"> {{__('شرایط استفاده و')}}
-                                <a target="_blank" href="{{route('policies')}}" style="color: blue;">{{__('قوانین سایت')}}</a>
+                                <a target="_blank" href="{{route('policies')}}"
+                                   style="color: blue;">{{__('قوانین سایت')}}</a>
                                 {{__('را مطالعه کرده و با آن موافقم.')}}
                             </div>
                         </div>
                         <div class="phoneRegisterErr" style="color: red;"></div>
                         <div class="pd-tp-8">
-                            <button type="button" onclick="registerWithPhone()" class="loginSubBtn btn btn-info active submitAndFinishBtn" disabled>{{__('ثبت نام')}}</button>
-                            <button type="button" onclick="Return('sendVerifiedPhoneCodeSection')" class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
+                            <button type="button" onclick="registerWithPhone()"
+                                    class="loginSubBtn btn btn-info active submitAndFinishBtn"
+                                    disabled>{{__('ثبت نام')}}</button>
+                            <button type="button" onclick="Return('sendVerifiedPhoneCodeSection')"
+                                    class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                         </div>
                     </div>
                 </span>
@@ -214,25 +236,29 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             <div>
                                 <span style="font-size: 12px">{{__('در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.')}}</span>
                                 <div class="loginRowsPopup loginRowsPopupInline" style="margin-top: 5px">
-                                    <span  class="loginInputLabel">{{__('کد معرف')}}</span>
+                                    <span class="loginInputLabel">{{__('کد معرف')}}</span>
                                     <input type="text" id="invitationCode" class="loginInputTemp" maxlength="6">
                                 </div>
                             </div>
                             <div style="display: flex; margin: 10px 0px;">
-                                <input id='checked1' onchange='checkedCheckBox(this)' type='checkbox' value='-1' style="margin-left: 5px;">
+                                <input id='checked1' onchange='checkedCheckBox(this)' type='checkbox' value='-1'
+                                       style="margin-left: 5px;">
                                 <label class='labelForCheckBox' for='checked1'>
                                     <span></span>&nbsp;
                                 </label>
                                 <div style="margin-right: 5px"> {{__('شرایط استفاده و')}}
-                                    <a target="_blank" href="{{route('policies')}}" style="color: blue;">{{__('قوانین سایت')}}</a>
+                                    <a target="_blank" href="{{route('policies')}}"
+                                       style="color: blue;">{{__('قوانین سایت')}}</a>
                                     {{__('را مطالعه کرده و با آن موافقم.')}}
                                 </div>
                             </div>
                             <div>
-{{--                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>--}}
+                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
                                 <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
                             </div>
-                            <button type="button" onclick="checkRecaptcha()" class="loginSubBtn btn btn-info active submitAndFinishBtn" disabled>{{__('ثبت')}}</button>
+                            <button type="button" onclick="checkRecaptcha()"
+                                    class="loginSubBtn btn btn-info active submitAndFinishBtn"
+                                    disabled>{{__('ثبت')}}</button>
                             <p id="loginErrUserName"></p>
                     </div>
                 </span>
@@ -252,7 +278,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             </button>
                         </div>
                         <div class="pd-tp-8">
-                            <button type="button" onclick="Return('ForgetPassword')" class="returnBtnForgetPass btn btn-default">{{__('بازگشت')}}</button>
+                            <button type="button" onclick="Return('ForgetPassword')"
+                                    class="returnBtnForgetPass btn btn-default">{{__('بازگشت')}}</button>
                             <p id="loginErr"></p>
                         </div>
                     </div>
@@ -263,15 +290,20 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     <div class="col-xs-12 rtl mainContentInfos">
                         <div>
                             <span class="pd-tp-8"> {{__('ایمیل')}} </span>
-                            <input class="loginInputTemp" type="email" id="forget_email" maxlength="40" required autofocus>
+                            <input class="loginInputTemp" type="email" id="forget_email" maxlength="40" required
+                                   autofocus>
                         </div>
-                        <div id="reminderTimeEmailForgetPassDiv" class="reminderTimeDiv hidden" style="font-size: 13px; margin-bottom: 0px">
+                        <div id="reminderTimeEmailForgetPassDiv" class="reminderTimeDiv hidden"
+                             style="font-size: 13px; margin-bottom: 0px">
                             <span>{{__('زمان باقی مانده برای ارسال مجدد لینک بازیابی رمز عبور :')}}</span>
                             <span id="reminderTimeEmailForgetPass" class="reminderTime"></span>
                         </div>
-                        <button onclick="retrievePasByEmail()" id="resendForgetPassEmailButton" class="btn comButLogin resendActivationCode" style="margin-top: 15px;"> {{__('ارسال لینک بازیابی')}} </button>
+                        <button onclick="retrievePasByEmail()" id="resendForgetPassEmailButton"
+                                class="btn comButLogin resendActivationCode"
+                                style="margin-top: 15px;"> {{__('ارسال لینک بازیابی')}} </button>
                         <div class="pd-tp-8">
-                            <button type="button" onclick="Return('Email_ForgetPass')" class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
+                            <button type="button" onclick="Return('Email_ForgetPass')"
+                                    class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                             <p id="loginErrResetPasByEmail"></p>
                         </div>
                     </div>
@@ -282,10 +314,13 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     <div class="col-xs-12 mainContentInfos">
                         <div>
                             <span class="pd-tp-8"> {{__('شماره موبایل خود را وارد نمایید')}} </span>
-                            <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneForgetPass" maxlength="40" required autofocus>
+                            <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneForgetPass"
+                                   maxlength="40" required autofocus>
                             <div class="pd-tp-8">
-                                <button type="button" onclick="sendForgetPassPhone()" class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
-                                <button type="button" onclick="Return('Phone_ForgetPass')" class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
+                                <button type="button" onclick="sendForgetPassPhone()"
+                                        class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
+                                <button type="button" onclick="Return('Phone_ForgetPass')"
+                                        class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                                 <p id="loginErrResetPasByPhone"></p>
                             </div>
                         </div>
@@ -299,18 +334,24 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             <span class="header_text font-size-12Imp">{{__('این کد به گوشی شما ارسال گردیده است.')}}</span>
                             <div>
                                 <div class="loginPopUpLable"> {{__('کد اعتبار سنجی')}} </div>
-                                <input class="loginInputTemp" type="text" maxlength="40" id="activationCodeForgetPass" required autofocus>
-                                <p id="loginErrActivationCodeForgetPass" class="loginErrActivationCode" style="color: #963019"></p>
+                                <input class="loginInputTemp" type="text" maxlength="40" id="activationCodeForgetPass"
+                                       required autofocus>
+                                <p id="loginErrActivationCodeForgetPass" class="loginErrActivationCode"
+                                   style="color: #963019"></p>
                             </div>
-                            <div id="reminderTimePaneForgetPass" class="reminderTimeDiv" style="font-size: 13px; margin-bottom: 0px">
+                            <div id="reminderTimePaneForgetPass" class="reminderTimeDiv"
+                                 style="font-size: 13px; margin-bottom: 0px">
                                 <span>  {{__('زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :')}}</span>
                                 <span id="reminderTimeForgetPass" class="reminderTime"></span>
                             </div>
-                            <button onclick="resendActivationCode('forget', this)" id="resendActivationCodeForgetPass" class="btn comButLogin resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
+                            <button onclick="resendActivationCode('forget', this)" id="resendActivationCodeForgetPass"
+                                    class="btn comButLogin resendActivationCode hidden"> {{__('ارسال مجدد کد اعتبار سنجی')}} </button>
                         </div>
                         <div class="pd-tp-8">
-                            <button type="button" onclick="checkValidateForgetPass()" class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
-                            <button type="button" onclick="Return('PhoneCodePasswordForget')" class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
+                            <button type="button" onclick="checkValidateForgetPass()"
+                                    class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
+                            <button type="button" onclick="Return('PhoneCodePasswordForget')"
+                                    class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                         </div>
                     </div>
                 </span>
@@ -326,7 +367,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             </div>
                         </div>
                         <div class="pd-tp-8">
-                            <button type="button" onclick="submitNewPassword()" class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
+                            <button type="button" onclick="submitNewPassword()"
+                                    class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
                         </div>
                     </div>
                 </span>
@@ -335,7 +377,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         </div>
 
         <div class="registerLeftSection">
-            <img data-src="{{URL::asset('images/mainPics/bck.webp')}}" class="lazyload resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+            <img data-src="{{URL::asset('images/mainPics/bck.webp')}}" class="lazyload resizeImgClass"
+                 style="width: 100%;" onload="fitThisImg(this)">
         </div>
 
     </div>
@@ -365,18 +408,18 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         $('#EnterEmail-loginPopUp').removeClass('hidden');
     }
 
-    function firstRegisterStep(){
+    function firstRegisterStep() {
         let name = $('#username_register').val();
         let emailPhone = $('#emailPhone_register').val();
         let password = $('#password_register').val();
         $('.registerErr').html('');
 
-        if(name.trim().length > 0 && emailPhone.trim().length > 0 && password.trim().length > 0){
+        if (name.trim().length > 0 && emailPhone.trim().length > 0 && password.trim().length > 0) {
 
             let kind = 'email';
-            if(!emailPhone.includes('@')){
+            if (!emailPhone.includes('@')) {
                 let phone = fixNumbers(emailPhone);
-                if(!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)){
+                if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
                     $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
                     return;
                 }
@@ -392,11 +435,11 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     name: name,
                     emailPhone: emailPhone,
                 },
-                success: function(response){
-                    try{
+                success: function (response) {
+                    try {
                         response = JSON.parse(response);
-                        if(response.status == 'ok'){
-                            if(response.nameErr || response.phoneErr || response.emailErr) {
+                        if (response.status == 'ok') {
+                            if (response.nameErr || response.phoneErr || response.emailErr) {
                                 closeLoading();
 
                                 if (response.nameErr)
@@ -405,39 +448,36 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                                     $('.registerErr').append('<div>شماره تماس وارد شده تکراری می باشد.</div>');
                                 if (response.emailErr)
                                     $('.registerErr').append('<div>ایمیل وارد شده تکراری می باشد.</div>');
-                            }
-                            else{
-                                if(kind == 'phone')
+                            } else {
+                                if (kind == 'phone')
                                     checkInputPhoneRegister();
                                 else
                                     openUserRegisterationPage();
                             }
                         }
-                    }
-                    catch (e) {
+                    } catch (e) {
                         closeLoading();
                         showSuccessNotifi('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
                     }
                 },
-                error: function(err){
+                error: function (err) {
                     closeLoading();
                     showSuccessNotifi('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش نمایید.', 'left', 'red');
                 }
             })
 
-        }
-        else
+        } else
             $('.registerErr').html('پر کردن تمامی فیلد ها الزامی است.');
 
     }
 
-    function openRegisterSection(_kind){
+    function openRegisterSection(_kind) {
         $('#registerDiv').removeClass('hidden');
         $('#loginPopUp').addClass('hidden');
 
-        if(_kind == 'email')
+        if (_kind == 'email')
             $('#EnterEmail-loginPopUp').removeClass('hidden');
-        else if(_kind == 'ForgetPassword')
+        else if (_kind == 'ForgetPassword')
             $('#ForgetPassword').removeClass('hidden');
         else
             $('#EnterPhone-loginPopUp').removeClass('hidden');
@@ -467,43 +507,42 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         }
     }
 
-    function closeLoginPopup(){
+    function closeLoginPopup() {
         $('#mainLoginPopUp').addClass('hidden');
     }
 
-    function closeRegister(){
+    function closeRegister() {
         $('#registerDiv').addClass('hidden');
         $('#loginPopUp').removeClass('hidden');
     }
 
-    function emailRegister(){
+    function emailRegister() {
         let email = $('#emailRegisterInput').val();
-        if(email.trim().length > 0 && validateEmail(email)){
+        if (email.trim().length > 0 && validateEmail(email)) {
             openLoading();
             $.ajax({
                 type: 'post',
                 url: checkEmailDir,
-                data:{
+                data: {
                     _token: '{{csrf_token()}}',
                     email: email
                 },
-                success: function(response){
+                success: function (response) {
                     closeLoading();
-                    if(response == 'ok')
+                    if (response == 'ok')
                         openUserRegisterationPage();
-                    else if(response == 'nok')
+                    else if (response == 'nok')
                         $('#loginErrEmail').empty().append('{{__('ایمیل وارد شده در سامانه موجود است')}}');
                     else
                         $('#loginErrEmail').empty().append('{{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید')}}');
                 },
-                error: function(err){
+                error: function (err) {
                     console.log(err);
                     closeLoading();
                     $('#loginErrEmail').empty().append('{{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید')}}');
                 }
             })
-        }
-        else
+        } else
             $('#loginErrEmail').empty().append('{{__('ایمیل خود را به درستی وارد کنید.')}}');
     }
 
@@ -518,7 +557,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
             },
             success: function (response) {
                 closeLoading();
-                if(phoneCodeRegister != null)
+                if (phoneCodeRegister != null)
                     clearTimeout(phoneCodeRegister);
 
                 response = JSON.parse(response);
@@ -531,8 +570,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                         $(".reminderTimeDiv").removeClass('hidden');
                         $(".resendActivationCode").addClass('hidden');
                         phoneCodeRegister = setInterval("decreaseTime()", 1000);
-                    }
-                    else {
+                    } else {
                         $(".reminderTimeDiv").addClass('hidden');
                         $(".resendActivationCode").removeClass('hidden');
                     }
@@ -541,15 +579,14 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     $('#loginPopUp').addClass('hidden');
                     $('#registerDiv').removeClass('hidden');
                     $('#sendVerifiedPhoneCodeSection').removeClass('hidden');
-                }
-                else if (response.status == "nok")
+                } else if (response.status == "nok")
                     $("#loginErrPhonePass1").empty().append('{{__('شماره شما پیش از این در سامانه ثبت گردیده است.')}}');
                 else if (response.status == "nok3")
                     $("#loginErrPhonePass1").empty().append('{{__('اشکالی در ارسال پیام رخ داده است')}}');
                 else
                     $("#loginErrPhonePass1").empty().append('{{__('کد اعتبار سنجی برای شما ارسال شده است. برای ارسال مجدد کد منتظر بمانید')}}');
             },
-            error: function(err){
+            error: function (err) {
                 closeLoading();
                 console.log(err);
             }
@@ -558,7 +595,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
     function resendActivationCode(_kind) {
         let phoneNum;
-        if(_kind == 'forget')
+        if (_kind == 'forget')
             phoneNum = $('#phoneForgetPass').val();
         else
             phoneNum = $('#emailPhone_register').val();
@@ -574,7 +611,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
             success: function (response) {
 
                 response = JSON.parse(response);
-                if(phoneCodeRegister != null)
+                if (phoneCodeRegister != null)
                     clearTimeout(phoneCodeRegister);
 
                 reminderTime = response.reminder;
@@ -584,8 +621,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                         $(".reminderTimeDiv").removeClass('hidden');
                         $(".resendActivationCode").addClass('hidden');
                         phoneCodeRegister = setInterval("decreaseTime()", 1000);
-                    }
-                    else {
+                    } else {
                         $(".reminderTimeDiv").addClass('hidden');
                         $(".resendActivationCode").removeClass('hidden');
                     }
@@ -611,7 +647,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         inviteCode = fixNumbers(inviteCode);
         $(".phoneRegisterErr").html('');
 
-        if(actCode.trim().length > 2) {
+        if (actCode.trim().length > 2) {
             openLoading();
             $.ajax({
                 type: 'post',
@@ -647,14 +683,14 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
     }
 
-    function checkValidationPhoneCode(_phoneId, _codeId, _callback = ''){
+    function checkValidationPhoneCode(_phoneId, _codeId, _callback = '') {
         let phoneNum = $('#' + _phoneId).val();
         let code = $('#' + _codeId).val();
 
         phoneNum = fixNumbers(phoneNum);
         code = fixNumbers(code);
 
-        if(code.trim().length > 0) {
+        if (code.trim().length > 0) {
             openLoading();
             $.ajax({
                 type: 'post',
@@ -665,14 +701,13 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 },
                 success: function (response) {
                     closeLoading();
-                    if (response == "ok"){
-                        if(typeof _callback === 'function')
+                    if (response == "ok") {
+                        if (typeof _callback === 'function')
                             _callback();
-                    }
-                    else
+                    } else
                         $(".loginErrActivationCode").empty().append('{{__('کد وارد شده معتبر نمی باشد')}}');
                 },
-                error: function(err){
+                error: function (err) {
                     closeLoading();
                     console.log(err);
                     showSuccessNotifi(' {{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
@@ -697,7 +732,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         let username = $('#username_register').val();
         let password = $('#password_register').val();
 
-        if(username.trim().length > 0 && password.trim().length > 0) {
+        if (username.trim().length > 0 && password.trim().length > 0) {
             openLoading();
             $.ajax({
                 type: 'post',
@@ -714,8 +749,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     }
                 }
             });
-        }
-        else{
+        } else {
             closeLoading();
             $("#loginErrUserName").empty().append('{{__('لطفا نام کاربری و رمز عبور خود را مشخص کنید')}}');
         }
@@ -728,32 +762,31 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         let inviteCode = $("#invitationCode").val();
 
         $.ajax({
-                type: 'post',
-                url: '{{route('registerAndLogin')}}',
-                data: {
-                    username: username,
-                    password: password,
-                    email: email,
-                    invitationCode: inviteCode
-                },
-                success: function (response) {
-                    if (response == "ok")
-                        login(username, password);
-                    else if (response == "nok1") {
-                        closeLoading();
-                        $("#loginErrUserName").empty().append('{{__('نام کاربری وارد شده در سامانه موجود است')}}');
-                    }
-                    else {
-                        closeLoading();
-                        $("#loginErrUserName").empty().append('{{__('کد معرف وارد شده نامعتبر است')}}');
-                    }
-                },
-                error: function (err) {
-                    console.log(err);
+            type: 'post',
+            url: '{{route('registerAndLogin')}}',
+            data: {
+                username: username,
+                password: password,
+                email: email,
+                invitationCode: inviteCode
+            },
+            success: function (response) {
+                if (response == "ok")
+                    login(username, password);
+                else if (response == "nok1") {
                     closeLoading();
-                    showSuccessNotifi('{{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
+                    $("#loginErrUserName").empty().append('{{__('نام کاربری وارد شده در سامانه موجود است')}}');
+                } else {
+                    closeLoading();
+                    $("#loginErrUserName").empty().append('{{__('کد معرف وارد شده نامعتبر است')}}');
                 }
-            });
+            },
+            error: function (err) {
+                console.log(err);
+                closeLoading();
+                showSuccessNotifi('{{__('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
+            }
+        });
     }
 
     function validateEmail(email) {
@@ -770,15 +803,15 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         }
     }
 
-    function openUserRegisterationPage(){
+    function openUserRegisterationPage() {
         $('#loginPopUp').addClass('hidden');
         $('#registerDiv').removeClass('hidden');
         $('#EnterUsername-loginPopUp').removeClass('hidden');
         closeLoading();
     }
 
-    function showForgatenPassInput(_id){
-        $('#'+_id).removeClass('hidden');
+    function showForgatenPassInput(_id) {
+        $('#' + _id).removeClass('hidden');
         $('#ForgetPassword').addClass('hidden');
     }
 
@@ -798,12 +831,10 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                         $('#form_pass').val(password);
                         $('#redirectUrl').val(selectedUrl);
                         $('#second_login').submit();
-                    }
-                    else if (response == "nok2") {
+                    } else if (response == "nok2") {
                         closeLoading();
                         $(".loginErr").empty().append('{{__('حساب کاربری شما غیر فعال شده است')}}');
-                    }
-                    else {
+                    } else {
                         closeLoading();
                         $(".loginErr").empty().append('{{__('نام کاربری و یا رمز عبور اشتباه وارد شده است')}}');
                     }
@@ -818,11 +849,11 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         }
     }
 
-    function sendForgetPassPhone(){
+    function sendForgetPassPhone() {
         let phoneNum = $('#phoneForgetPass').val();
         phoneNum = fixNumbers(phoneNum);
 
-        if(phoneNum.trim().length == 11 && phoneNum[0] == 0 && phoneNum[1] == 9){
+        if (phoneNum.trim().length == 11 && phoneNum[0] == 0 && phoneNum[1] == 9) {
             openLoading();
             $.ajax({
                 type: 'post',
@@ -833,7 +864,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 success: function (response) {
                     closeLoading();
 
-                    if(phoneCodeRegister != null)
+                    if (phoneCodeRegister != null)
                         clearTimeout(phoneCodeRegister);
 
                     response = JSON.parse(response);
@@ -843,46 +874,43 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                             $(".reminderTimeDiv").removeClass('hidden');
                             $(".resendActivationCode").addClass('hidden');
                             phoneCodeRegister = setInterval("decreaseTime()", 1000);
-                        }
-                        else {
+                        } else {
                             $(".reminderTimeDiv").addClass('hidden');
                             $(".resendActivationCode").removeClass('hidden');
                         }
                         $("#activationCodeForgetPass").val("");
                         $('#Phone_ForgetPass').addClass('hidden');
                         $('#PhoneCodePasswordForget').removeClass('hidden');
-                    }
-                    else if (response.status == "nok")
+                    } else if (response.status == "nok")
                         $("#loginErrActivationCodeForgetPass").empty().append('{{__('شماره شما پیش از این در سامانه ثبت گردیده است.')}}');
                     else if (response.status == "nok3")
                         $("#loginErrActivationCodeForgetPass").empty().append('{{__('اشکالی در ارسال پیام رخ داده است')}}');
                     else
                         $("#loginErrActivationCodeForgetPass").empty().append('{{__('کد اعتبار سنجی برای شما ارسال شده است. برای ارسال مجدد کد باید 5 دقیقه منتظر بمانید')}}');
                 },
-                error: function(err){
+                error: function (err) {
                     closeLoading();
                     console.log(err);
                     showSuccessNotifi('{{__('در فرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             });
-        }
-        else
+        } else
             $("#loginErrActivationCodeForgetPass").empty().append('{{__('شماره موبایل خود را به درستی وارد نمایید.')}}');
     }
 
-    function checkValidateForgetPass(){
-        checkValidationPhoneCode('phoneForgetPass', 'activationCodeForgetPass', function(){
+    function checkValidateForgetPass() {
+        checkValidationPhoneCode('phoneForgetPass', 'activationCodeForgetPass', function () {
             $('#setNewPassword').removeClass('hidden');
             $('#PhoneCodePasswordForget').addClass('hidden');
         })
     }
 
-    function submitNewPassword(){
+    function submitNewPassword() {
         let newPass = $('#newPassword').val();
         let phone = $('#phoneForgetPass').val();
         let code = $('#activationCodeForgetPass').val();
         phone = fixNumbers(phone);
-        if(newPass.trim().length > 0){
+        if (newPass.trim().length > 0) {
             openLoading();
             $.ajax({
                 type: 'post',
@@ -893,22 +921,21 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     phone: phone,
                     code: code
                 },
-                success: function(response){
+                success: function (response) {
                     closeLoading();
-                    if(response == 'ok'){
+                    if (response == 'ok') {
                         showSuccessNotifi('{{__('رمز شما با موفقیت تغییر یافت')}}', 'left', 'var(--koochita-blue)');
 
                         $("#setNewPassword").addClass('hidden');
                         closeRegister();
-                    }
-                    else if(response == 'nok5'){
+                    } else if (response == 'nok5') {
                         $('#setNewPassword').addClass('hidden');
                         $('#Phone_ForgetPass').removeClass('hidden');
                         showSuccessNotifi('{{__('لطفا دوباره شماره تماس خود را تایید کنید')}}', 'left', 'red');
                         closeLoading();
                     }
                 },
-                error: function(err){
+                error: function (err) {
                     closeLoading();
                     console.log(err);
                     showSuccessNotifi('{{__('در هنگام تغییر رمز مشکلی پیش امده لظفا دوباره تلاش نمایید')}}', 'left', 'red');
@@ -924,9 +951,9 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         $('#mainLoginPopUp').removeClass('hidden');
     }
 
-    function retrievePasByEmail(){
+    function retrievePasByEmail() {
         let email = $('#forget_email').val();
-        if(email.trim().length > 0){
+        if (email.trim().length > 0) {
             openLoading();
             $.ajax({
                 type: 'post',
@@ -935,37 +962,35 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     _token: '{{csrf_token()}}',
                     email: email
                 },
-                success:function(response){
+                success: function (response) {
                     closeLoading();
-                    try{
+                    try {
                         response = JSON.parse(response);
-                        if(response.status == 'ok'){
+                        if (response.status == 'ok') {
                             showSuccessNotifi('{{__('لینک بازیابی به لینک شما ارسال شد')}}', 'left', 'red');
                             $('#reminderTimeEmailForgetPassDiv').removeClass('hidden');
                             $('#resendForgetPassEmailButton').addClass('hidden');
                             reminderTime = response.remainder;
                             phoneCodeRegister = setInterval("decreaseTime()", 1000);
-                        }
-                        else if(response.status == 'nok')
+                        } else if (response.status == 'nok')
                             showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
-                        else if(response.status == 'nok1')
+                        else if (response.status == 'nok1')
                             $('#loginErrResetPasByEmail').text('{{__('کاربری با این ایمیل در سامانه ثبت نشده است')}}');
-                        else if(response.status == 'nok2')
+                        else if (response.status == 'nok2')
                             showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
-                        else if(response.status == 'nok3') {
+                        else if (response.status == 'nok3') {
                             reminderTime = response.remainder;
                             phoneCodeRegister = setInterval("decreaseTime()", 1000);
                             $('#reminderTimeEmailForgetPassDiv').removeClass('hidden');
                             $('#resendForgetPassEmailButton').addClass('hidden');
                         }
 
-                    }
-                    catch (e) {
+                    } catch (e) {
                         console.log(e)
                         showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
                     }
                 },
-                error: function(err){
+                error: function (err) {
                     console.log(err);
                     closeLoading();
                     showSuccessNotifi('{{__('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
@@ -974,10 +999,10 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         }
     }
 
-    function fixNumbers(str){
+    function fixNumbers(str) {
         let persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
-        let arabicNumbers  = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
-        if(typeof str === 'string') {
+        let arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
+        if (typeof str === 'string') {
             for (var i = 0; i < 10; i++)
                 str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
         }

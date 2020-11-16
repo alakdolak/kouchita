@@ -451,6 +451,7 @@ class UserLoginController extends Controller
                 $code = createCode();
                 while (ActivationCode::where('code', $code)->count() > 0)
                     $code = createCode();
+
                 $msgId = sendSMS($user->phone, $code, 'sms');
                 if ($msgId != -1) {
                     $activeCode = ActivationCode::where('userId', $user->id)->where('phoneNum', $phoneNum)->first();

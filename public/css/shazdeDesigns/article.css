@@ -1764,11 +1764,11 @@ textarea:hover{
 }
 .safarnamehTags .tag{
     color: var(--koochita-blue);
-    padding: 4px 0px;
-    font-size: 16px;
+    /*padding: 4px 0px;*/
+    font-size: 13px;
     border-radius: 15px;
     cursor: pointer;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 .commentFeedbackChoices{
