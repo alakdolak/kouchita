@@ -15473,7 +15473,7 @@ DIV.ppr_rup.ppr_priv_location_detail_overview .staticMap {
 }
 
 DIV.ppr_rup.ppr_priv_location_detail_overview .staticMap .clickable, DIV.prw_rup.prw_common_ratings_histogram_overview .chart_row.clickable {
-    cursor: pointer
+    /*cursor: pointer*/
 }
 
 DIV.ppr_rup.ppr_priv_location_detail_overview .overviewHistogram {
@@ -15611,7 +15611,7 @@ DIV.prw_rup.prw_common_ratings_histogram_overview .chart_row.clickable:hover .fi
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .chart_row.clickable:hover .row_count, DIV.prw_rup.prw_common_ratings_histogram_overview .chart_row.clickable:hover .row_label {
-    text-decoration: underline
+    /*text-decoration: underline*/
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .row_cell {
@@ -15626,7 +15626,7 @@ DIV.prw_rup.prw_common_ratings_histogram_overview .row_label {
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .highlighted .row_label {
-    color: var(--koochita-light-green)
+    /*color: var(--koochita-light-green)*/
 }
 
 DIV.prw_rup.prw_common_ratings_histogram_overview .row_bar {

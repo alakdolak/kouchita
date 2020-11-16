@@ -921,7 +921,7 @@ if(Auth::check()) {
         }
 
         function openUploadPost(){
-            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
+            openUploadPhotoModal('کوچیتا', '{{route('addPhotoToPlace')}}', 0, 0, '');
         }
     </script>
 @endif

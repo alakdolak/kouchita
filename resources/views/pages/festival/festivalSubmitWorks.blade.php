@@ -50,11 +50,11 @@
                 </div>
                 <div class="indicator">
                     <div class="twoBackGround threeBackGround circle"></div>
-                    <div class="twoLine threeLine name">بارگزاری محتوا</div>
+                    <div class="twoLine threeLine name">آپلود محتوا</div>
                 </div>
                 <div class="indicator">
                     <div class="threeBackGround circle"></div>
-                    <div class="threeLine name">بارگزاری محتوا</div>
+                    <div class="threeLine name">آپلود محتوا</div>
                 </div>
                 <div class="lines">
                     <div class="firstLine twoBackGround threeBackGround"></div>
@@ -719,7 +719,7 @@
             else if(lessData)
                 alert('برای تمامی فایل ها باید عنوان و شهر را مشخص کنید');
             else if(inProcess)
-                alert('بعضی از فایل ها در حال بارگزاری می باشند تا زمان بارگزاری کامل باید صبر کنید');
+                alert('بعضی از فایل ها در حال آپلود می باشند تا زمان آپلود کامل باید صبر کنید');
             else
                 return false;
         }

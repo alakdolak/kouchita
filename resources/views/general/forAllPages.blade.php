@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/generalFolder.css?v='.$fileVersions)}}">
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/proSearch.css?v='.$fileVersions)}}'/>
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 

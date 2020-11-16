@@ -274,16 +274,16 @@ footer li > img, .small-ico {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: white;
+    background-color: var(--koochita-yellow);
+    border-radius: 20px 20px 0px 0px;
     box-shadow: -1px 0 6px 1px #cccccc;
-    border-bottom: 2px solid #30b4a6;
     z-index: 1000;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-weight: 700;
     font-size: initial;
-    direction: ltr;
+    direction: rtl;
 }
 
 .footerPhoneMenuBar > div {
@@ -294,12 +294,16 @@ footer li > img, .small-ico {
     padding: 15px 0px;
     height: 70px;
     width: 100%;
+    text-align: left;
+    direction: ltr;
 }
 
+.footerPhoneMenuBar > div.profileBtn{
+    direction: rtl;
+}
 .footerPhoneMenuBar > div > div.profileBtnText {
     flex-direction: column;
     display: flex;
-    text-align: right;
 }
 
 .profileBtnText > span:nth-child(1){
@@ -322,7 +326,7 @@ footer li > img, .small-ico {
     width: 35px;
     height: 35px;
     background: #ccc;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .profilePicFooter.circleBase > img {

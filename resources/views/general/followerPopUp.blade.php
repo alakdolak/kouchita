@@ -74,7 +74,7 @@
                                 '   <div class="buttonP placeHolderAnime resultLineAnim"></div>\n' +
                                 '</div>';
 
-    openFromInPageFollowe = _kind =>  openFollowerModal(_kind, getUserFollowerInPage);
+    openFromInPageFollower = _kind =>  openFollowerModal(_kind, getUserFollowerInPage);
 
     function openFollowerModal(_kind, _forWho = 0){
         lastFollowerModalOpenPage = _kind;

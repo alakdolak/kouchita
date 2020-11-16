@@ -945,19 +945,19 @@ section .conditionFestival .leftSec > img{
     flex-direction: column;
 }
 .mainSectionSubmitWork .uploadPercent .text:before{
-    content: 'در حال بارگزاری';
+    content: 'در حال آپلود';
     color: var(--yellow);
 }
 .mainSectionSubmitWork .uploadPercent.done .text:before{
-    content: 'فایل با موفقیت بارگزاری شد';
+    content: 'فایل با موفقیت آپلود شد';
     color: var(--koochita-light-green);
 }
 .mainSectionSubmitWork .uploadPercent.error .text:before{
-    content: 'بارگزاری با مشکل مواجه شد';
+    content: 'آپلود با مشکل مواجه شد';
     color: var(--koochita-red);
 }
 .mainSectionSubmitWork .uploadPercent.inQueue .text:before{
-    content: 'در انتظار بارگزاری';
+    content: 'در انتظار آپلود';
     color: var(--koochita-blue);
 }
 .mainSectionSubmitWork .uploadPercent.cancel .text:before{

@@ -425,13 +425,13 @@ body {
 
 .activityNumbers {
     position: absolute;
-    /*font-size: 14px;*/
+    cursor: default;
     color: var(--koochita-blue);
     top: 10px;
     left: 0;
-    cursor: pointer;
     padding: 0 5px;
     background-color: white;
+    direction: rtl;
 }
 
 /*posts page styles*/

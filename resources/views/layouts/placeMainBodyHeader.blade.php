@@ -49,7 +49,7 @@
                     <div id="share_box_mobile" class="display-none">
                         <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
                         href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
-                            <img src="{{URL::asset("images/shareBoxImg/facebook.webp")}}" class="display-inline-block float-right">
+                            <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}" class="display-inline-block float-right">
                             <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه در فیسبوک')}}</div>
                         </a>
                         <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
@@ -70,7 +70,7 @@
                         </a>
                         <a target="_blank" class="link mg-tp-5" {{($config->instagramFollow) ? 'rel="nofollow"' : ''}}
                         href="https://instagram.com/share?url={{ str_replace('%20', '', Request::url())}}">
-                            <img src="{{URL::asset("images/shareBoxImg/instagram.webp")}}" class="display-inline-block float-right">
+                            <img src="{{URL::asset("images/shareBoxImg/instagram.png")}}" class="display-inline-block float-right">
                             <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه اینستاگرام')}}</div>
                         </a>
                         <a target="_blank" class="link mg-tp-5" {{($config->pinterestFollow) ? 'rel="nofollow"' : ''}}
