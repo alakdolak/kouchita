@@ -30,7 +30,7 @@
             <div class="imgMapMoreDiv">
                 <a class="linkMapMore" target="_blank">
                     <div>
-                        <img id="extendedMapMoreInfoImg" class="mapMoreInfoImg" src=""  onload="fitThisImg(this)">
+                        <img id="extendedMapMoreInfoImg" class="mapMoreInfoImg" src="#"  onload="fitThisImg(this)">
                     </div>
                 </a>
 
