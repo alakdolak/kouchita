@@ -309,7 +309,8 @@
 
             {{--banner_2--}}
             <div class="siteArticlesMainDiv">
-                @if(isset($articleBanner) && count($articleBanner) > 0)
+{{--                @if(isset($articleBanner) && count($articleBanner) > 0)--}}
+                @if(false)
                     <div class="mainArticlaSwiperMainPage swiper-container">
                         <div class="swiper-wrapper position-relative">
                             @foreach($articleBanner as $item)
@@ -943,7 +944,7 @@
     }
 
     // this run function for mainArticlaSwiperMainPage
-    runMainSwiper('mainArticlaSwiperMainPage');
+    // runMainSwiper('mainArticlaSwiperMainPage');
 
     function showAlt(elm) {
         $(elm).parent().next().removeClass('display-none')
