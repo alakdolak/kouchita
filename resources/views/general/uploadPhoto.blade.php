@@ -160,7 +160,7 @@
 
                              <div id="photographerLoadingPic" class="progressScreen infoScreen hidden">
                                  <div class="inner">
-                                     <img src="{{URL::asset('images/loading.gif')}}">
+                                     <img alt="loading" src="{{URL::asset('images/loading.gif')}}">
                                  </div>
                              </div>
 
@@ -177,7 +177,7 @@
                                      <div class="epPicBox">
                                          <div class="epPic">
                                              <div class="imgContainer">
-                                                 <img id="rectanglePicUploadPhoto">
+                                                 <img alt="loading" id="rectanglePicUploadPhoto">
                                              </div>
                                          </div>
                                          <div class="step6picText epicText">{{__('قاب مستطیل')}}</div>
@@ -186,7 +186,7 @@
                                      <div class="epPicBox">
                                          <div class="epPic">
                                              <div class="imgContainer">
-                                                 <img id="squarePicUploadPhoto">
+                                                 <img alt="loading" id="squarePicUploadPhoto">
                                              </div>
                                          </div>
                                          <div class="epPicText">{{__('قاب مربع')}}</div>
@@ -313,7 +313,7 @@
          </div>
 
          <div class="iconFamily iconClose closeAddPhotographer" onclick="$('#addPhotographerModal').addClass('hidden');"></div>
-        <img src="" id="mainPicUploadPhotoImg" style="display: none">
+        <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="" id="mainPicUploadPhotoImg" style="display: none">
     </span>
 
 </div>
@@ -675,7 +675,7 @@
         var picWidth = Math.floor(100/mainFilesUploaded.length);
         for (var i = 0; i < mainFilesUploaded.length; i++){
             text += '<div class="uploadedImgShowDiv" style=" width: ' + picWidth + '%">\n' +
-                    ' <img src="' + mainFilesUploaded[i] + '" class="uploadedImgPic" style="height: 100%; width: auto; ">\n' +
+                    ' <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="' + mainFilesUploaded[i] + '" class="uploadedImgPic" style="height: 100%; width: auto; ">\n' +
                     '</div>';
         }
 

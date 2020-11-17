@@ -3,7 +3,7 @@
     <div id="ansDiv_##random##" style="margin-bottom: 15px; direction: rtl">
         <div class="eachCommentMainBox" style="margin-bottom: 0px">
             <div class="circleBase commentsWriterProfilePic">
-                <img src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
             </div>
             <div class="commentsContentMainBox">
                 <b class="userProfileName userProfileNameFullReview">
@@ -35,7 +35,7 @@
         </div>
         <div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">
             <div class="circleBase newCommentWriterProfilePic">
-                <img src="##userPic##" style="width: 100%; border-radius: 50%;">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="##userPic##" style="width: 100%; border-radius: 50%;">
             </div>
             <div class="inputBox setButtonToBot">
                 <b class="replyCommentTitle">در پاسخ به ##userName##</b>
@@ -52,7 +52,7 @@
                     {{__("ارسال")}}
                 </button>
                 <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
-                    <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
+                    <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
                     {{__("در حال ثبت")}}
                 </div>
             </div>
@@ -66,7 +66,7 @@
     <div id="ansOfAns_##random##" style="margin-bottom: 15px; direction: rtl;">
         <div class="eachCommentMainBox"  style="margin-bottom: 0px">
             <div class="circleBase commentsWriterProfilePic">
-                <img src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                <img alt="userPic" src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
             </div>
             <div class="commentsContentMainBox">
                 <div class="userProfileName userProfileNameFullReview">
@@ -101,7 +101,7 @@
         </div>
         <div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv hidden" style="margin-top: 0px;">
             <div class="circleBase newCommentWriterProfilePic">
-                <img src="##userPic##" style="width: 100%; border-radius: 50%;">
+                <img alt="userPic" src="##userPic##" style="width: 100%; border-radius: 50%;">
             </div>
             <div class="inputBox setButtonToBot">
                 <b class="replyCommentTitle">در پاسخ به ##userName##</b>
@@ -117,7 +117,7 @@
                     {{__("ارسال")}}
                 </button>
                 <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
-                    <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
+                    <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
                     {{__("در حال ثبت")}}
                 </div>
             </div>

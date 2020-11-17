@@ -677,7 +677,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 /*banner_2*/
 
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,200");
+/*@import url("https://fonts.googleapis.com/css?family=Raleway:400,200");*/
 .transition {
     transition: 1s cubic-bezier(0.3, 0, 0, 1.3);
 }
@@ -812,7 +812,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 }
 
 /*banner_4 */
-@import url("https://fonts.googleapis.com/css?family=Heebo:800");
+/*@import url("https://fonts.googleapis.com/css?family=Heebo:800");*/
 .parent {
     width: 100%;
     height: 384px;
@@ -1027,7 +1027,7 @@ circle {
 
 /*banner_5*/
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,800);
+/*@import url(https://fonts.googleapis.com/css?family=Raleway:400,800);*/
 
 .banner4Style {
     display: flex;
@@ -1162,7 +1162,7 @@ figure.snip1091.hover figcaption:after {
 
 /*banner_6*/
 
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400");
+/*@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400");*/
 
 .dropping-texts {
     padding-left: 10px;

@@ -9,7 +9,7 @@
 <div id="suggestionSample" style="display: none;">
     <div class="suggestionPackDiv">
         <div class="suggestionPackContent">
-            <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+            <img alt="pin" src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
             <div class="suggestionPackMainBody" style="display: none">
                 <a href="##url##" class="suggestionPackPicLink">
                     <div class="suggestionPackPicDiv">
@@ -52,7 +52,7 @@
 <div id="suggestionPlaceHolderSample" style="display: none;">
     <div class="suggestionPackDiv" style="width: 250px">
         <div class="suggestionPackContent">
-            <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+            <img alt="pin" src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
             <div class="suggestionPackMainBody suggestionPlaceHolderDiv">
                 <div class="suggestionPackPicLink">
                     <div class="placeHolderAnime"></div>

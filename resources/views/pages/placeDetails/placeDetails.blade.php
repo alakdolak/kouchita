@@ -92,7 +92,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 {{--    <script defer src= {{URL::asset("js/calendar.js") }}></script>--}}
 {{--    <script defer src= {{URL::asset("js/jalali.js") }}></script>--}}
 {{--    <script defer src="{{URL::asset('js/adv.js')}}"></script>--}}
-    <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+{{--    <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>--}}
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
     <script defer src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>

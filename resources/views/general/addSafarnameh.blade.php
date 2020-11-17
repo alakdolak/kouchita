@@ -51,7 +51,7 @@
                             <span class="plus2" style="font-size: 40px; line-height: 20px;"></span>
                             <span>افزودن عکس </span>
                         </div>
-                        <img id="newSafarnamehPic" src="#" style=" height: 120px; display: none">
+                        <img alt="addSafarnameh" id="newSafarnamehPic" src="#" style=" height: 120px; display: none">
                     </label>
                 </div>
             </div>
@@ -343,7 +343,7 @@
         _result.forEach((item, index) => {
             text += '<div id="place_' + item.id + '" class="suggEach" onclick="chooseThisSuggestion(' + index + ')">\n' +
                 '    <div class="suggPic">\n' +
-                '        <img src="' + item.pic + '" style="height: 100%">\n' +
+                '        <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="' + item.pic + '" style="height: 100%">\n' +
                 '    </div>\n' +
                 '    <div class="suggInfo">\n' +
                 '        <div style="font-size: 12px; color: #666666;">' + item.kindPlaceName + '</div>\n' +
@@ -371,7 +371,7 @@
             text += '<div id="place_' + item.id + '" class="suggEach">\n' +
                 '    <div class="iconClose deletePickPlace" onclick="deleteFromPickPlace(' + index + ')"></div>' +
                 '    <div class="suggPic">\n' +
-                '        <img src="' + item.pic + '" style="height: 100%">\n' +
+                '        <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="' + item.pic + '" style="height: 100%">\n' +
                 '    </div>\n' +
                 '    <div class="suggInfo">\n' +
                 '        <div style="font-size: 12px; color: #666666;">' + item.kindPlaceName + '</div>\n' +

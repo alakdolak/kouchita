@@ -43,7 +43,7 @@
                             </div>
                         </span>
                     </div>
-
+nan
                     <div id="share_box_mobile" class="display-none">
                         <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
                         href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">

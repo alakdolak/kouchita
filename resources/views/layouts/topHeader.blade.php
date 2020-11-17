@@ -24,9 +24,9 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/components.css?v='.$fileVersions)}}" media="all">
 
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
-<script async src="{{URL::asset('js/defualt/bootstrap.min.js')}}"></script>
-<script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 <script src="{{URL::asset('js/defualt/autosize.min.js')}}"></script>
+<script async src="{{URL::asset('js/defualt/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 <script async src="{{URL::asset('js/defualt/lazysizes.min.js')}}"></script>
 
 {{--<script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
