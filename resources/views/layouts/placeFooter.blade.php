@@ -17,8 +17,8 @@
     <div class="hideOnPhone screenFooterStyle">
         <div class="footerLogoSocialBox">
             <a href="{{route('main')}}" class="footerLogo" style="display: flex; align-items: center;">
-                <img src="{{URL::asset('images/camping/undp.svg')}}" style="height: 60px">
-                <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/undp.svg')}}" style="height: 60px">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
@@ -186,7 +186,7 @@
 {{--                    <div class="iconClose" onclick="closeLoginHelperSection()"></div>--}}
 {{--                </div>--}}
                 <div class="pic">
-                    <img src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 100%;">
+                    <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 100%;">
                 </div>
             </div>
 
@@ -329,7 +329,7 @@
                                             <li class="im-widget clearfix">
                                                 <figure class="im-widget-thumb im-widget-thumb_rightSide">
                                                     <a  href="{{route('safarnameh.show', ['id' => $post->id])}}" title="{{$post->title}}">
-                                                        <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
+                                                        <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{$post->pic}}" alt="{{$post->keyword}}"/>
                                                     </a>
                                                 </figure>
                                                 <div class="im-widget-entry im-widget-entry_rightSide">
@@ -604,7 +604,7 @@
                                         @if(\auth()->check())
                                             <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
                                                 <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
-                                                    <img src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+                                                    <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
                                                 </div>
                                                 <div class="col-xs-4 placeDetailsLeftBar">
                                                     <div class="">##placeName##</div>

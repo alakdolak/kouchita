@@ -313,7 +313,7 @@
          </div>
 
          <div class="iconFamily iconClose closeAddPhotographer" onclick="$('#addPhotographerModal').addClass('hidden');"></div>
-        <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="" id="mainPicUploadPhotoImg" style="display: none">
+        <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="#" id="mainPicUploadPhotoImg" style="display: none">
     </span>
 
 </div>

@@ -427,7 +427,6 @@
 
 {{--                                <div class="hometown"></div>--}}
 {{--                            </div>--}}
-                            <script !src="">alert('hello')</script>
                         </div>
 
 

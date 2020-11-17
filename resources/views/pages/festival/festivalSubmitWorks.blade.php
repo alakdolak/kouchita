@@ -190,7 +190,7 @@
                     شما برای بارگذاری ویدیو خود یک عکس باید از ویدیوی خود انتخاب کنید.
                 </div>
                 <div class="videoSec">
-                    <video id="snapShotVideo" src="" controls muted ></video>
+                    <video id="snapShotVideo" src="#" controls muted ></video>
                     <div class="buts">
                         <button class="btn submit" onclick="takeSnapShot(this)" disabled>گرفتن عکس</button>
                     </div>

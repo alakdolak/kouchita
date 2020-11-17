@@ -191,7 +191,7 @@
                 <div class="headerLoginHelper loginHelperSection hidden" onclick="closeLoginHelperSection()">
                     <div class="pic">
                         <div class="login-button mainLoginButton" style="font-size: 30px;margin-bottom: 20px;"> {{__('auth.ورود / ثبت نام')}}</div>
-                        <img src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 500px;">
+                        <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 500px;">
                     </div>
                 </div>
 
@@ -231,15 +231,15 @@
     <div class="headerCampaignModalBody">
         <span class="iconClose closeLanding" onclick="$('#campingHeader').hide();"></span>
         <div class="headerCampingTop" onclick="goToLanding()">
-            <img src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 60px; top: 10px; right: 2%;">
-            <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.webp')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+            <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 60px; top: 10px; right: 2%;">
+            <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.webp')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
         <div class="headerCampingBottom">
             <div onclick="goToSafarnameh()">
-                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div onclick="$('#campingHeader').hide(); openUploadPost()">
-                <img src="{{URL::asset('images/camping/' . app()->getLocale() . '/nAxasi.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/nAxasi.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
         </div>
     </div>
@@ -347,7 +347,7 @@
 
                                 newElement +=   '<div class="alertMsgHeaderContent" style="background: ' + item.color + '" onclick="setSeenAlert(' + item.id + ', this)">\n' +
                                                 '<div class="alertMsgHeaderContentImgDiv">\n' +
-                                                '<img src="' + item.pic + '" alt="" class="resizeImgClass" onload="fitThisImg(this)" style="width: 100%">\n' +
+                                                '<img src="' + item.pic + '"  alt="کوچیتا، سامانه جامع گردشگری ایران" class="resizeImgClass" onload="fitThisImg(this)" style="width: 100%">\n' +
                                                 '</div>\n' +
                                                 '<div class="alertMsgHeaderContentTextDiv">\n' +
                                                 '<div class="alertMsgHeaderContentText">' + item.msg + '</div>\n' +
@@ -463,7 +463,7 @@
                         for (i = 0; i < response.length; i++) {
                             element +=  '<a class="headerBookMarkLink" target="_blank" href="' + response[i].placeRedirect + '">\n' +
                                         '<div class="headerBookMarContentImgDiv">\n' +
-                                        '<img src="' + response[i].placePic + '" class="headerBookMarContentImg">' +
+                                        '<img alt="کوچیتا، سامانه جامع گردشگری ایران" src="' + response[i].placePic + '" class="headerBookMarContentImg">' +
                                         '</div>\n' +
                                         '<div class="bookMarkContent">\n' +
                                         '<div class="bookMarkContentTitle">' + response[i].placeName + '</div>\n' +
