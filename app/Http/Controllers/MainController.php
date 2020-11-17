@@ -42,12 +42,12 @@ class MainController extends Controller
     public function showMainPage($mode = "mainPage") {
 
         $kindPlaceId= 0;
-        $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
-        $articleBanner = Safarnameh::whereIn('id', $articleBannerId)->get();
-        foreach ($articleBanner as $item){
-            $item->url = route('safarnameh.show', ['id' => $item->id]);
-            $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-        }
+//        $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
+//        $articleBanner = Safarnameh::whereIn('id', $articleBannerId)->get();
+//        foreach ($articleBanner as $item){
+//            $item->url = route('safarnameh.show', ['id' => $item->id]);
+//            $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+//        }
 
         $sliderPic = MainSliderPic::all();
         foreach ($sliderPic as $item) {
@@ -68,51 +68,53 @@ class MainController extends Controller
         }
         $middleBan['1']  = $middleBan1;
 
-        $middleBan2 = BannerPics::where('page', 'mainPage')->where('section', 2)->first();
-        if($middleBan2 != null) {
-            $middleBan2->pic = URL::asset('_images/bannerPic/' . $middleBan2->page . '/' . $middleBan2->pic);
-            if ($middleBan2->text == null)
-                $middleBan2->text = '';
-            if ($middleBan2->link == 'https://')
-                $middleBan2->link = '';
-        }
-        $middleBan['2'] = $middleBan2;
-
-        $middleBan4 = BannerPics::where('page', 'mainPage')->where('section', 4)->get();
-        foreach ($middleBan4 as $item){
-            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
-            if($item->text == null)
-                $item->text = '';
-            if($item->link == 'https://')
-                $item->link = '';
-        }
-        $middleBan['4']  = $middleBan4;
-
-        $middleBan5 = BannerPics::where('page', 'mainPage')->where('section', 5)->get();
-        foreach ($middleBan5 as $item){
-            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
-            if($item->text == null)
-                $item->text = '';
-            if($item->link == 'https://')
-                $item->link = '';
-        }
-        $middleBan['5']  = $middleBan5;
-
-        $middleBan6 = BannerPics::where('page', 'mainPage')->where('section', 6)->first();
-        if($middleBan6 != null){
-            $middleBan6->pic = URL::asset('_images/bannerPic/' . $middleBan6->page . '/' . $middleBan6->pic);
-            if($middleBan6->text == null)
-                $middleBan6->text = '';
-            if($middleBan6->link == 'https://')
-                $middleBan6->link = '';
-        }
-        $middleBan['6']  = $middleBan6;
+//        $middleBan2 = BannerPics::where('page', 'mainPage')->where('section', 2)->first();
+//        if($middleBan2 != null) {
+//            $middleBan2->pic = URL::asset('_images/bannerPic/' . $middleBan2->page . '/' . $middleBan2->pic);
+//            if ($middleBan2->text == null)
+//                $middleBan2->text = '';
+//            if ($middleBan2->link == 'https://')
+//                $middleBan2->link = '';
+//        }
+//        $middleBan['2'] = $middleBan2;
+//
+//        $middleBan4 = BannerPics::where('page', 'mainPage')->where('section', 4)->get();
+//        foreach ($middleBan4 as $item){
+//            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+//            if($item->text == null)
+//                $item->text = '';
+//            if($item->link == 'https://')
+//                $item->link = '';
+//        }
+//        $middleBan['4']  = $middleBan4;
+//
+//        $middleBan5 = BannerPics::where('page', 'mainPage')->where('section', 5)->get();
+//        foreach ($middleBan5 as $item){
+//            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+//            if($item->text == null)
+//                $item->text = '';
+//            if($item->link == 'https://')
+//                $item->link = '';
+//        }
+//        $middleBan['5']  = $middleBan5;
+//
+//        $middleBan6 = BannerPics::where('page', 'mainPage')->where('section', 6)->first();
+//        if($middleBan6 != null){
+//            $middleBan6->pic = URL::asset('_images/bannerPic/' . $middleBan6->page . '/' . $middleBan6->pic);
+//            if($middleBan6->text == null)
+//                $middleBan6->text = '';
+//            if($middleBan6->link == 'https://')
+//                $middleBan6->link = '';
+//        }
+//        $middleBan['6']  = $middleBan6;
 //        $counts
+
         return view('pages.main', ['placeMode' => $mode, 'kindPlaceId' => $kindPlaceId,
                                     'sliderPic' => $sliderPic,
-                                    'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),
-                                    'articleBanner' => $articleBanner,
-                                    'middleBan' => $middleBan ]);
+                                    'middleBan' => $middleBan,
+//                                    'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),
+//                                    'articleBanner' => $articleBanner,
+                                     ]);
     }
 
     public function getTrip()
