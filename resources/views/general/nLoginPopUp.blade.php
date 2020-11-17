@@ -102,7 +102,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
             <div class="row">
                 <div class="col-md-6 loginInputDiv">
                     <input type="text" id="emailPhone_register" class="loginInput"
-                           placeholder="{{__('تلفن همراه یا ایمیل')}}">
+                           placeholder="{{__('تلفن همراه')}}">
                 </div>
                 <div class="col-md-6 loginInputDiv">
                     <input type="password" id="password_register" class="loginInput" placeholder="{{__('رمز عبور')}}">
@@ -128,11 +128,12 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
             <div class="row">
                 <div class="col-sm-5 loginInputDiv">
                     <input type="text" id="username_main" class="loginInput"
-                           placeholder="{{__('تلفن همراه، ایمیل یا نام')}}">
+                           placeholder="{{__('تلفن همراه یا نام کاربری')}}">
                 </div>
                 <div class="col-sm-5 loginInputDiv">
                     <input type="password" id="password_main" class="loginInput" placeholder="{{__('رمز عبور')}}">
-                    <div class="bottomLoginText forgetPassBut" onclick="openRegisterSection('ForgetPassword')">
+                    <div class="bottomLoginText forgetPassBut"
+                         onclick="openRegisterSection('ForgetPassword'); showForgatenPassInput('Phone_ForgetPass')">
                         {{__('رمز عبور خود را فراموش کردید؟')}}
                     </div>
                 </div>
@@ -169,8 +170,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                         <div class="pd-tp-8">
                             <p id="loginErrEmail"></p>
                             <div style="display: flex;">
-                                <button type="button" onclick="emailRegister()" class="loginSubBtn btn btn-info active"
-                                        style="margin-left: 10px">{{__('ثبت')}}</button>
+                                <button type="button" onclick="emailRegister()" class="loginSubBtn btn btn-info active" style="margin-left: 10px">{{__('ثبت')}}</button>
                                 <button type="button" onclick="Return('EnterEmail-loginPopUp')"
                                         class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                             </div>
@@ -253,7 +253,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                                 </div>
                             </div>
                             <div>t
-                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
+{{--                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>--}}
                                 <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
                             </div>
                             <button type="button" onclick="checkRecaptcha()"
@@ -268,10 +268,10 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                     <div class="col-xs-12 mainContentInfos">
                         <div style="margin-bottom: 10px">{{__('برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:')}}</div>
                         <div>
-                            <button class="btn showDetailsBtn" onclick="showForgatenPassInput('Email_ForgetPass')">
-                                <div class="emailLogo"></div>
-                                <span class="float-right">{{__('ایمیل')}}</span>
-                            </button>
+{{--                            <button class="btn showDetailsBtn" onclick="showForgatenPassInput('Email_ForgetPass')">--}}
+{{--                                <div class="emailLogo"></div>--}}
+{{--                                <span class="float-right">{{__('ایمیل')}}</span>--}}
+{{--                            </button>--}}
                             <button class="btn showDetailsBtn" onclick="showForgatenPassInput('Phone_ForgetPass')">
                                 <div class="phoneLogo"></div>
                                 <span class="float-right">{{__('تلفن همراه')}}</span>
@@ -314,14 +314,14 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                     <div class="col-xs-12 mainContentInfos">
                         <div>
                             <span class="pd-tp-8"> {{__('شماره موبایل خود را وارد نمایید')}} </span>
-                            <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneForgetPass"
-                                   maxlength="40" required autofocus>
+                            <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneForgetPass" maxlength="12" required autofocus>
+                            <p id="loginErrResetPasByPhone" style="color: red"></p>
                             <div class="pd-tp-8">
-                                <button type="button" onclick="sendForgetPassPhone()"
-                                        class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
-                                <button type="button" onclick="Return('Phone_ForgetPass')"
+                                <button type="button" onclick="sendForgetPassPhone()" class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
+                                <button type="button"
+                                        onclick="Return('ForgetPassword')"
+{{--                                        onclick="Return('Phone_ForgetPass')" --}}
                                         class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
-                                <p id="loginErrResetPasByPhone"></p>
                             </div>
                         </div>
                     </div>
@@ -403,10 +403,10 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
     var retrievePasByEmailDir = '{{route('retrievePasByEmail')}}';
     var resendActivationCodeForgetDir = '{{route('resendActivationCodeForget')}}';
 
-    function showLoginEmail() {
-        $('#loginPopUp').addClass('hidden');
-        $('#EnterEmail-loginPopUp').removeClass('hidden');
-    }
+    // function showLoginEmail() {
+    //     $('#loginPopUp').addClass('hidden');
+    //     $('#EnterEmail-loginPopUp').removeClass('hidden');
+    // }
 
     function firstRegisterStep() {
         let name = $('#username_register').val();
@@ -416,15 +416,21 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
 
         if (name.trim().length > 0 && emailPhone.trim().length > 0 && password.trim().length > 0) {
 
-            let kind = 'email';
-            if (!emailPhone.includes('@')) {
-                let phone = fixNumbers(emailPhone);
-                if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
-                    $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
-                    return;
-                }
-                kind = 'phone';
+            let kind = 'phone';
+            let phone = fixNumbers(emailPhone);
+            if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
+                $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
+                return;
             }
+
+            // if (!emailPhone.includes('@')) {
+            //     let phone = fixNumbers(emailPhone);
+            //     if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
+            //         $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
+            //         return;
+            //     }
+            //     kind = 'phone';
+            // }
 
             openLoading();
             $.ajax({
@@ -451,8 +457,8 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                             } else {
                                 if (kind == 'phone')
                                     checkInputPhoneRegister();
-                                else
-                                    openUserRegisterationPage();
+                                // else
+                                //     openUserRegisterationPage();
                             }
                         }
                     } catch (e) {
@@ -867,26 +873,31 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                     if (phoneCodeRegister != null)
                         clearTimeout(phoneCodeRegister);
 
-                    response = JSON.parse(response);
                     if (response.status == "ok") {
                         reminderTime = response.reminder;
                         if (reminderTime > 0) {
                             $(".reminderTimeDiv").removeClass('hidden');
                             $(".resendActivationCode").addClass('hidden');
                             phoneCodeRegister = setInterval("decreaseTime()", 1000);
-                        } else {
+                        }
+                        else {
                             $(".reminderTimeDiv").addClass('hidden');
                             $(".resendActivationCode").removeClass('hidden');
                         }
                         $("#activationCodeForgetPass").val("");
                         $('#Phone_ForgetPass').addClass('hidden');
                         $('#PhoneCodePasswordForget').removeClass('hidden');
-                    } else if (response.status == "nok")
-                        $("#loginErrActivationCodeForgetPass").empty().append('{{__('شماره شما پیش از این در سامانه ثبت گردیده است.')}}');
+                    }
+                    else if (response.status == "nok")
+                        $("#loginErrResetPasByPhone").empty().append('Server error');
+                    else if (response.status == "nok1")
+                        $("#loginErrResetPasByPhone").empty().append('کاربری با این شماره یافت نشد');
+                    else if (response.status == "nok2")
+                        $("#loginErrResetPasByPhone").empty().append('مشکلی در ارسال پیامک پیش امده');
                     else if (response.status == "nok3")
-                        $("#loginErrActivationCodeForgetPass").empty().append('{{__('اشکالی در ارسال پیام رخ داده است')}}');
+                        $("#loginErrResetPasByPhone").empty().append('{{__('اشکالی در ارسال پیام رخ داده است')}}');
                     else
-                        $("#loginErrActivationCodeForgetPass").empty().append('{{__('کد اعتبار سنجی برای شما ارسال شده است. برای ارسال مجدد کد باید 5 دقیقه منتظر بمانید')}}');
+                        $("#loginErrResetPasByPhone").empty().append('{{__('کد اعتبار سنجی برای شما ارسال شده است. برای ارسال مجدد کد باید 5 دقیقه منتظر بمانید')}}');
                 },
                 error: function (err) {
                     closeLoading();
@@ -894,8 +905,9 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                     showSuccessNotifi('{{__('در فرایند بازبابی رمز عبور مشکلی پیش امده لطفا دوباره تلاش کنید.')}}', 'left', 'red');
                 }
             });
-        } else
-            $("#loginErrActivationCodeForgetPass").empty().append('{{__('شماره موبایل خود را به درستی وارد نمایید.')}}');
+        }
+        else
+            $("#loginErrResetPasByPhone").empty().append('{{__('شماره موبایل خود را به درستی وارد نمایید.')}}');
     }
 
     function checkValidateForgetPass() {

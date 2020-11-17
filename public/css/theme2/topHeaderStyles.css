@@ -128,6 +128,13 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     /*background-color: var(--koochita-yellow)90;*/
 }
 
+.userPictureDiv{
+    overflow: hidden;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
 .placeHolderAnime{
     background: radial-gradient(circle,white 0%, #d2d2d242 35%);
     background-size: 400% 400%;

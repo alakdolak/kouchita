@@ -549,6 +549,7 @@ h3{
 }
 
 .cityImgSlider{
+    cursor: pointer;
     overflow: hidden;
     height: 330px;
 }

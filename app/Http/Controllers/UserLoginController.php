@@ -439,14 +439,12 @@ class UserLoginController extends Controller
         if (isset($_POST["phone"])) {
             $phoneNum = convertNumber('en', $_POST["phone"]);
             $user = User::wherePhone(makeValidInput($phoneNum))->first();
-
             if ($user != null) {
-
-                $activeCode = ActivationCode::where('userId', $user->id)->where('phoneNum', $phoneNum)->first();
-                if ($activeCode != null && (90 - time() + $activeCode->sendTime) > 0) {
-                    echo json_encode(['status' => 'ok', 'reminder' => 90 - time() + $activeCode->sendTime]);
-                    return;
-                }
+                $activeCode = ActivationCode::where('userId', $user->id)
+                                            ->where('phoneNum', $phoneNum)
+                                            ->first();
+                if ($activeCode != null && (90 - time() + $activeCode->sendTime) > 0)
+                    return response()->json(['status' => 'ok', 'reminder' => 90 - time() + $activeCode->sendTime]);
 
                 $code = createCode();
                 while (ActivationCode::where('code', $code)->count() > 0)
@@ -464,18 +462,16 @@ class UserLoginController extends Controller
                     $activeCode->code = $code;
                     $activeCode->save();
 
-                    echo json_encode(['status' => 'ok', 'reminder' => 90]);
+                    return response()->json(['status' => 'ok', 'reminder' => 90]);
                 }
                 else
-                    echo json_encode(['status' => 'nok2', 'reminder' => 90]);
-
-                return;
+                    return response()->json(['status' => 'nok2']);
             }
             else
-                echo json_encode(['status' => 'nok1', 'reminder' => 90]);
+                return response()->json(['status' => 'nok1']);
         }
-        echo json_encode(['status' => 'nok', 'reminder' => 90]);
-        return;
+        else
+            return response()->json(['status' => 'nok']);
     }
 
     public function registerAndLogin(Request $request)

@@ -61,6 +61,22 @@ use Illuminate\Http\Request;
 
 class PlaceController extends Controller {
 
+    public function setPlaceDetailsURL($kindPlaceId, $placeId)
+    {
+        $kindPlace = Place::find($kindPlaceId);
+        if($kindPlaceId == null)
+            return \redirect(\url('/'));
+        else
+            $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'slug'])->find($placeId);
+
+        if($place == null)
+            return \redirect(\url('/'));
+
+        if($place->slug != null)
+            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug));
+        else
+            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->id));
+    }
 
     public function showPlaceDetails($kindPlaceName, $slug, Request $request){
         deleteReviewPic();  // common.php
