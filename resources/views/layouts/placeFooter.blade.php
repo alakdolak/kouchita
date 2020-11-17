@@ -21,24 +21,24 @@
                 <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
-                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
-                    <div class="footerIconHor linkedin"></div>
-                </a>
+{{--                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
+{{--                    <div class="footerIconHor linkedin"></div>--}}
+{{--                </a>--}}
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
                     <div class="footerIconHor facebook"></div>
                 </a>
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
                     <div class="footerIconHor twitter"></div>
                 </a>
-                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.instagram.com/koochita_com/">
                     <div class="footerIconHor instagram"></div>
                 </a>
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
                     <div class="footerIconHor telegram"></div>
                 </a>
-                <a class="socialLink" rel="nofollow" target="_blank" href="https://koochitatv.com">
-                    <div class="footerIconHor aparat"></div>
-                </a>
+{{--                <a class="socialLink" rel="nofollow" target="_blank" href="https://koochitatv.com">--}}
+{{--                    <div class="footerIconHor aparat"></div>--}}
+{{--                </a>--}}
             </div>
         </div>
         <div>
@@ -747,9 +747,6 @@
 {{--                    <a rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">--}}
 {{--                        <div class="footerIconHor twitter"></div>--}}
 {{--                    </a>--}}
-{{--                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">--}}
-{{--                        <div class="footerIconHor facebook"></div>--}}
-{{--                    </a>--}}
 {{--                    <a rel="nofollow" target="_blank" href="#">--}}
 {{--                        <div class="footerIconHor youtubeBackground"></div>--}}
 {{--                    </a>--}}
@@ -762,14 +759,18 @@
 {{--                    <a rel="nofollow" target="_blank" href="#">--}}
 {{--                        <div class="footerIconHor newsBackground"></div>--}}
 {{--                    </a>--}}
-                    <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
-                        <div class="footerIconHor linkedin"></div>
+{{--                    <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
+{{--                        <div class="footerIconHor linkedin"></div>--}}
+{{--                    </a>--}}
+{{--                    <a class="socialLink" rel="nofollow" target="_blank" href="https://aparat.com">--}}
+{{--                        <div class="footerIconHor aparat"></div>--}}
+{{--                    </a>--}}
+
+                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
+                        <div class="footerIconHor facebook"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="#">
                         <div class="footerIconHor whatsappBackground"></div>
-                    </a>
-                    <a class="socialLink" rel="nofollow" target="_blank" href="https://aparat.com">
-                        <div class="footerIconHor aparat"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
                         <div class="footerIconHor instagram"></div>
