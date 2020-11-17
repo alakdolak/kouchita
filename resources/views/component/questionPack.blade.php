@@ -39,7 +39,7 @@
     
     <div class="commentWriterDetailsShow">
         <div class="circleBase commentWriterPicShow">
-            <img src="##userPic##" style="height: 100%; width: 100%; border-radius: 50%;">
+            <img alt="userPic" src="##userPic##" style="height: 100%; width: 100%; border-radius: 50%;">
         </div>
         <div class="commentWriterExperienceDetails">
             <a href="{{url('profile/index')}}/##userName##" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">##userName##</a>
@@ -64,7 +64,7 @@
     </div>
     <div id="ansToQuestion##id##" class="hidden last newAnswerPlaceMainDiv" style="margin-top: 0px;">
         <div class="circleBase type2 newCommentWriterProfilePic">
-            <img src="##userPic##}" style="height: 100%; border-radius: 50%;">
+            <img alt="userPic" src="##userPic##" style="height: 100%; border-radius: 50%;">
         </div>
         <div class="inputBox" style="flex-direction: column">
             <b class="replyAnswerTitle">{{__("در پاسخ به سوال")}} ##userName##</b>
@@ -72,7 +72,7 @@
                 <textarea id="QanswerInputBox##id##" class="inputBoxInput inputBoxInputAnswer" placeholder="{{__("شما چه پاسخی دارید؟")}}"></textarea>
                 <div class="sendQuestionBtn" onclick="sendAnswerOfQuestion(##id##, $('#QanswerInputBox##id##').val())">{{__(("ارسال"))}}</div>
                 <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>
-                    <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
+                    <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
                     {{__("در حال ثبت سوال")}}
                 </div>
             </div>

@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<script src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>
+<script defer src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>
 <script>
 
     function createSearchInput(_doFuncName, _placeHolderTxt){

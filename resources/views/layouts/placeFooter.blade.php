@@ -24,7 +24,7 @@
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                     <div class="footerIconHor linkedin"></div>
                 </a>
-                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
                     <div class="footerIconHor facebook"></div>
                 </a>
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
@@ -1136,7 +1136,7 @@
         }
     </script>
 
-    <script src="{{URL::asset('js/pages/placeFooter.js?v='.$fileVersions)}}"></script>
+    <script async src="{{URL::asset('js/pages/placeFooter.js?v='.$fileVersions)}}"></script>
     @if(Auth::check())
         <script>
             let profileUrl = '{{route("profile")}}';

@@ -15,7 +15,7 @@
 
             <div class="userInfoPhotoAlbum hideOnScreen">
                 <div class="fullyCenterContent userPictureDiv circleBase type2">
-                    <img class="photoAlbumUserPic resizeImgClass" src="" style="width: 100%" onload="fitThisImg(this)">
+                    <img class="photoAlbumUserPic resizeImgClass" alt="کوچیتا، سامانه جامع گردشگری ایران" src="" style="width: 100%" onload="fitThisImg(this)">
                 </div>
                 <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                     <a href="#" class="userProfileName photoAlbumUserName"></a>
@@ -31,7 +31,7 @@
                     <div id="leftColPhotosModalMainDiv" class="selectedPhotoShowingModal" style="position: relative;">
                         <div style="position: relative; width: 100%;">
                             <div class="albumContent">
-                                <img id="mainPhotoAlbum" src="" style="max-width: 100%; max-height: 100%;">
+                                <img id="mainPhotoAlbum" alt="کوچیتا، سامانه جامع گردشگری ایران" src="" style="max-width: 100%; max-height: 100%;">
                                 <video id="mainVideoPhotoAlbum" src="" controls style="max-width: 100%; max-height: 100%;"></video>
                             </div>
                             <div style="position: absolute; bottom: -25px; right: 0px; margin-top: 7px; display: flex; justify-content: center;">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div id="deletePicIconsPhotoAlbum" class="deletePicIconsPhotoAlbum" dataValue="0" onclick="openDeletePhotoModal()">
-                                <img src="{{URL::asset('images/icons/recycle-bin3.webp')}}" style="width: 35px; height: 35px">
+                                <img alt="delete" src="{{URL::asset('images/icons/recycle-bin3.webp')}}" style="width: 35px; height: 35px">
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                 <div id="rightColPhotosModalMainDiv" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" style="max-height: 85vh; overflow: hidden;">
                     <div class="userInfoPhotoAlbum hideOnPhone">
                         <div class="fullyCenterContent userPictureDiv circleBase type2">
-                            <img class="photoAlbumUserPic resizeImgClass" src="" style="width: 100%" onload="fitThisImg(this)">
+                            <img alt="کوچیتا، سامانه جامع گردشگری ایران" class="photoAlbumUserPic resizeImgClass" src="" style="width: 100%" onload="fitThisImg(this)">
                         </div>
                         <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                             <a href="#" class="userProfileName photoAlbumUserName"></a>

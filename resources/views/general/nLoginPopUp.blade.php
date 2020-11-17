@@ -56,7 +56,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
     <div id="loginPopUp" class="loginPopUpContent">
         <div class="loginHeader row">
             <div class="iconFamily iconClose loginCloseIcon" onclick="closeLoginPopup()"></div>
-            <img class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
+            <img alt="کوچیتا، سامانه جامع گردشگری ایران class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
         </div>
 
         <div class="loginTextHeader row">
@@ -155,7 +155,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         <div class="registerRightSection">
 
             <div id="registerMainLogo">
-                <img class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
+                <img alt="کوچیتا، سامانه جامع گردشگری ایران class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
             </div>
 
             <div>
@@ -203,7 +203,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                             <span style="font-size: 12px">{{__('در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.')}}</span>
                             <div class="loginRowsPopup loginRowsPopupInline">
                                 <span class="loginInputLabel">{{__('کد معرف')}}</span>
-                                <input type="text" id="invitationCode" class="loginInputTemp" maxlength="6">
+{{--                                <input type="text" id="invitationCode" class="loginInputTemp" maxlength="6">--}}
                             </div>
                         </div>
                         <div style="display: flex; margin: 10px 0px;">
@@ -377,7 +377,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         </div>
 
         <div class="registerLeftSection">
-            <img data-src="{{URL::asset('images/mainPics/bck.webp')}}" class="lazyload resizeImgClass"
+            <img alt="کوچیتا، سامانه جامع گردشگری ایران" data-src="{{URL::asset('images/mainPics/bck.webp')}}" class="lazyload resizeImgClass"
                  style="width: 100%;" onload="fitThisImg(this)">
         </div>
 

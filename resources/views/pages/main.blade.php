@@ -18,7 +18,6 @@
 
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v='.$fileVersions)}}'/>
 
-
     @if(\App::getLocale() == 'en')
         <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPage.css?v='.$fileVersions)}}">
     @endif
@@ -27,6 +26,11 @@
         .backgroundColorForSlider{
             background-size: cover;
             background-position: right;
+        }
+        .mainH1{
+            text-align: center;
+            font-family: IRANSans;
+            margin: 12px 0px;
         }
     </style>
 
@@ -85,6 +89,8 @@
 
         </div>
     </div>
+
+    <h1 class="mainH1">کوچیتا، سامانه جامع گردشگری ایران</h1>
 
     @include('layouts.middleBanner')
 

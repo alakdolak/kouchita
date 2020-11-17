@@ -106,9 +106,6 @@
                                 <div class="slide__img-wrapper"></div>
                             </div>
                             <div class="slide__bg-dark"></div>
-                            <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-                                <img src="{{URL::asset('images/icons/instagram.png')}}" alt="instagramIcon" loading="lazy">
-                            </a>
                         </div>
                     @endfor
 

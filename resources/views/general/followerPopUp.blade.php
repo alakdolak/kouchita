@@ -124,7 +124,7 @@
         let text = '';
         if(_follower.length == 0) {
             text =  '<div class="emptyPeople">\n' +
-                    '   <img src="{{URL::asset('images/mainPics/noData.png')}}" >\n' +
+                    '   <img alt="noData" src="{{URL::asset('images/mainPics/noData.png')}}" >\n' +
                     '   <span class="text">هیچ کاربری ثبت نشده است</span>\n' +
                     '</div>';
         }
@@ -136,7 +136,7 @@
 
                 text += '<div class="peopleRow">\n' +
                     '   <a href="' + item.url + '" class="pic">\n' +
-                    '       <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
+                    '       <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
                     '   </a>\n' +
                     '   <a href="' + item.url + '" class="name">' + item.username + '</a>\n';
 
