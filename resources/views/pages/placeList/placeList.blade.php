@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css?v='.$fileVersions)}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v='.$fileVersions)}}'/>
 
+    <script src="{{URL::asset('js/angular.js')}}"></script>
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
 
@@ -123,8 +124,6 @@
                 @if($mode != 'country')
                     @if($mode == 'state')
                         {{__('استان')}}
-                    @else
-                        {{__('شهر')}}
                     @endif
                     {{$city->name}}
                 @else
@@ -189,10 +188,7 @@
                                         </a>
 
                                         @if(auth()->check())
-                                            <div id="moreMapHeart" class="heartOnPic" onclick="saveToTripList(this)" value="[[place.id]]">
-                                                {{--fill-heart--}}
-                                                <span class="empty-heart [[place.inTrip]]"></span>
-                                            </div>
+                                            <div class="bookMarkIconOnPic [[place.bookMark]]" onclick="bookMarkThisPlace(this)" value="[[place.id]]"></div>
                                         @endif
                                     </div>
 
@@ -622,10 +618,7 @@
                     $scope.packets[$scope.packets.length] = response.data.places[j];
 
                     $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
-                    if($scope.packets[k].inTrip == 1)
-                        $scope.packets[k].inTrip = 'red-heart-fill';
-                    else
-                        $scope.packets[k].inTrip = '';
+                    $scope.packets[k].bookMark = $scope.packets[k].bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
                 }
 
                 if (response.data.places.length != 4) {
@@ -658,10 +651,7 @@
                         $scope.packets[$scope.packets.length] = response.data.places[j];
 
                         $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
-                        if($scope.packets[k].inTrip == 1)
-                            $scope.packets[k].inTrip = 'red-heart-fill';
-                        else
-                            $scope.packets[k].inTrip = '';
+                        $scope.packets[k].bookMark = $scope.packets[k].bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
                     }
 
                     if (response.data.places.length != 4) {
@@ -697,10 +687,7 @@
                             $scope.packets[$scope.packets.length] = response.data.places[j];
 
                             $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
-                            if($scope.packets[k].inTrip == 1)
-                                $scope.packets[k].inTrip = 'red-heart-fill';
-                            else
-                                $scope.packets[k].inTrip = '';
+                            $scope.packets[k].bookMark = $scope.packets[k].bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
                         }
 
                         $scope.$broadcast('finalizeReceive');
@@ -1104,6 +1091,31 @@
         inSearch = false;
 
         angular.element($('.PlaceController')).scope().myPagingFunction();
+    }
+
+    function bookMarkThisPlace(_element){
+        if(!checkLogin())
+            return;
+
+        var placeId = $(_element).attr('value');
+        $.ajax({
+            type: 'post',
+            url: '{{route("setBookMark")}}',
+            data: {
+                placeId,
+                kindPlaceId
+            },
+            success: function (response) {
+                if (response == "ok-del"){
+                    $(_element).addClass('BookMarkIconEmpty').removeClass('BookMarkIcon');
+                    showSuccessNotifi('این صفحه از حالت ذخیره خارج شد', 'left', 'red');
+                }
+                else if(response == 'ok-add'){
+                    $(_element).addClass('BookMarkIcon').removeClass('BookMarkIconEmpty');
+                    showSuccessNotifi('این صفحه ذخیره شد', 'left', 'var(--koochita-blue)');
+                }
+            }
+        })
     }
 
     function saveToTripList(element){

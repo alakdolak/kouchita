@@ -11,12 +11,6 @@ body{
 /*    display: none !important;*/
 /*}*/
 
-.fullyCenterContent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .mainAllBody{
     direction: rtl;
     text-align: right;

@@ -63,7 +63,7 @@
                 <div class="swiper-wrapper">
                     @foreach($sliderPic as $item)
                         <div class="swiper-slide mobileHeight imgOfSliderBox">
-                            <img data-src="{{$item->pic}}" class="lazyload imgOfSlider">
+                            <img data-src="{{$item->pic}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload imgOfSlider">
                         </div>
                     @endforeach
                 </div>

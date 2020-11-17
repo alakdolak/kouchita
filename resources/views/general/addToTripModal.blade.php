@@ -43,8 +43,8 @@
             </div>
         </div>
         <div class="submitOptions rtl">
-            <button onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
-            <input type="submit" onclick="closeMyModal('addPlaceToTripPrompt')" value="بستن" class="btn btn-default">
+            <button onclick="assignPlaceToTrip()" class="btn" style="background: var(--koochita-blue); color: white;">تایید</button>
+            <input type="button" onclick="closeMyModal('addPlaceToTripPrompt')" value="بستن" class="btn btn-default">
             <p id="errorAssignPlace"></p>
         </div>
         <div class="iconClose tripCloseIcon" onclick="closeMyModal('addPlaceToTripPrompt')"></div>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="modal-card-foot">
-                    <button id="saves-create-trip-button" onclick="nextStep()" class="btn btn-success saves-create-trip-button disabled">ایجاد سفر</button>
+                    <button id="saves-create-trip-button" onclick="nextStep()" class="btn saves-create-trip-button disabled" style="background: var(--koochita-blue); color: white">ایجاد سفر</button>
                 </div>
             </div>
         </div>
@@ -88,16 +88,16 @@
                 <div class="tripDates">
                     <div>
                         <div id="date_btn_start_edit">تاریخ شروع</div>
-                        <label>
+                        <label class="tripCalenderSection">
                             <span class="calendarIcon"></span>
-                            <input id="date_input_start" class="tripDateInput" placeholder="روز/ماه/سال" required readonly type="text">
+                            <input id="date_input_start" class="tripDateInput" placeholder="13xx/xx/xx" required readonly type="text">
                         </label>
                     </div>
                     <div>
                         <div id="date_btn_end_edit">تاریخ اتمام</div>
-                        <label>
+                        <label class="tripCalenderSection">
                             <span class="calendarIcon"></span>
-                            <input id="date_input_end" class="tripDateInput" placeholder="روز/ماه/سال" required readonly type="text">
+                            <input id="date_input_end" class="tripDateInput" placeholder="13xx/xx/xx" required readonly type="text">
                         </label>
                     </div>
                     <div class="clear-both"></div>
@@ -105,7 +105,7 @@
             </div>
             <div class="tripDateFooter">
                 <button id="add-dates-cta-cancel" onclick="backToNewTripName()" class="btn btn-success saves-create-trip-button" style="background: #d6d6d6; border: none; margin-left: 15px">بازگشت </button>
-                <button id="add-dates-cta-save" onclick="saveTrip()" class="btn btn-success saves-create-trip-button">ذخیره</button>
+                <button id="add-dates-cta-save" onclick="saveTrip()" class="btn saves-create-trip-button" style="background: var(--koochita-blue); color: white">ذخیره</button>
             </div>
 
             <div >
@@ -136,15 +136,13 @@
                 type: 'post',
                 url: '{{route('placeTrips')}}',
                 data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId
+                    placeId: placeId,
+                    kindPlaceId: kindPlaceId
                 },
                 success: function (response) {
                     closeLoading();
                     selectedTrips = [];
                     response = JSON.parse(response);
-                    console.log(response);
-
                     var newElement = "<center class='row'>";
                     for (i = 0; i < response.length; i++) {
                         newElement += "<div class='addPlaceBoxes cursor-pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
@@ -222,9 +220,9 @@
                 type: 'post',
                 url: '{{route('assignPlaceToTrip')}}',
                 data: {
-                    'checkedValuesTrips': checkedValuesTrips,
-                    'placeId': selectedPlaceId,
-                    'kindPlaceId': selectedKindPlaceId
+                    checkedValuesTrips,
+                    placeId: selectedPlaceId,
+                    kindPlaceId: selectedKindPlaceId
                 },
                 success: function (response) {
                     if (response == "ok"){
@@ -232,10 +230,8 @@
                         showSuccessNotifi('تغییرات شما با موفقیت اعمال شد.', 'left', 'var(--koochita-blue)');
                     }
                     else {
-                        err = "<p>به جز سفر های زیر که اجازه ی افزودن مکان به آنها را نداشتید بقیه به درستی اضافه شدند</p>";
-                        response = JSON.parse(response);
-                        for (i = 0; i < response.length; i++)
-                            err += "<p>" + response[i] + "</p>";
+                        var err = "<p>به جز سفر های زیر که اجازه ی افزودن مکان به آنها را نداشتید بقیه به درستی اضافه شدند</p>";
+                        JSON.parse(response).map(error => err += `<p>${error}</p>`);
                         $("#errorAssignPlace").append(err);
                     }
                 }
@@ -261,7 +257,6 @@
         checkEmpty();
         $("#my-trips-not").hide();
         openMyModal('newTripModal');
-        // $("#newTripModal").css("display", "flex");
         if(typeof _callBack === 'function')
             callBackCreateTrip = _callBack;
     }
@@ -296,13 +291,11 @@
     }
 
     function saveTrip() {
-
-        date_input_start = $("#date_input_start").val();
-        date_input_end = $("#date_input_end").val();
+        var dateInputStart = $("#date_input_start").val();
+        var dateInputEnd = $("#date_input_end").val();
         $("#error").hide();
-        if(date_input_start > date_input_end && date_input_start != '' && date_input_end != '') {
-            $("#error").show();
-            $("#error").empty().append("تاریخ پایان از تاریخ شروع باید بزرگ تر باشد");
+        if(dateInputStart > dateInputEnd && dateInputEnd != '' && dateInputEnd != '') {
+            $("#error").show().empty().append("تاریخ پایان از تاریخ شروع باید بزرگ تر باشد");
             return;
         }
 
@@ -310,9 +303,9 @@
             type: 'post',
             url: '{{route('addTrip')}}',
             data: {
-                'tripName': tripName,
-                'dateInputStart' : date_input_start,
-                'dateInputEnd' : date_input_end
+                tripName,
+                dateInputStart,
+                dateInputEnd
             },
             success: function (response) {
                 $("#error").hide();

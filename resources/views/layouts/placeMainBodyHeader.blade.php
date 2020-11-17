@@ -3,9 +3,7 @@
     <div class="atf_header container is-mobile full_width">
 
         <div class="ppr_rup ppr_priv_location_detail_header">
-            <h1 id="HEADING" class="heading_title" property="name">
-                {{$place->name}}
-            </h1>
+            <h1 id="HEADING" class="heading_title" property="name">{{$place->name}}</h1>
 
             <div class="rating_and_popularity">
                 <span class="header_rating">
@@ -19,12 +17,12 @@
                        </div>
                    </div>
                 </span>
-                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                    <span>
-                        {{$place->reviewCount}}
-                        {{__('نقد')}}
-                    </span>
-                </span>
+{{--                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">--}}
+{{--                    <span>--}}
+{{--                        {{$place->reviewCount}}--}}
+{{--                        {{__('دیدگاه')}}--}}
+{{--                    </span>--}}
+{{--                </span>--}}
             </div>
 
             <div>
@@ -84,13 +82,13 @@
                         </div>
                     </div>
                     <div id="share_pic_mobile" class="targets float-left col-xs-6 pd-0">
-                            <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
-                                <div class="sharePageIcon first"></div>
-                                <div class="sharePageLabel">
-                                    {{__('اشتراک‌گذاری صفحه')}}
-                                </div>
-                            </span>
-                        </div>
+                        <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
+                            <div class="sharePageIcon first"></div>
+                            <div class="sharePageLabel">
+                                {{__('اشتراک‌گذاری صفحه')}}
+                            </div>
+                        </span>
+                    </div>
 
                     <span class="btnoverlay loading">
                         <span class="bubbles small">

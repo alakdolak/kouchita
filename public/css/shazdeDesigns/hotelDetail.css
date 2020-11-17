@@ -2583,6 +2583,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #666666;
 }
 
+.postsMainDivFooter{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
 .questionsMainDivFooter {
     margin-bottom: 10px;
 }
@@ -4103,6 +4109,100 @@ td > div {
     display: inline-flex;
     justify-content: center;
 }
+
+.tvVideoPic.fullHeight{
+    height: 100%;
+}
+.albumInfo{
+    width: 100%;
+    text-align: right !important;
+}
+.affix {
+    max-width: 100%;
+    left: 0px;
+    box-shadow: 20px -10px 20px 20px darkgrey;
+}
+.truePhone {
+    display: flex;
+    align-items: center;
+    direction: ltr;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+}
+.changeWidth {
+@if(session('goDate'))
+width: 14% !important;
+@endif
+}
+.rtl .ui_bubble_rating:after, .rtl .ui_bubble_rating:before {
+    transform: scale(1, 1);
+}
+.sharePageIcon:before {
+    content: '\e1f5' !important;
+    font-family: Shazde_Regular2 !important;
+    font-size: 18px;
+    position: absolute;
+    right: 15px;
+    top: 4px;
+}
+.commentOptionsBoxes label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add360VideoCommentIcon, .tagFriendCommentIcon, .addPhotoCommentIcon, .addVideoCommentIcon {
+    position: relative;
+    line-height: 10px;
+    right: auto;
+    top: auto;
+}
+.commentOptionsText {
+    margin-right: 10px;
+}
+.commentMoreSettingBar {
+    justify-content: space-evenly;
+}
+.commentOptionsBoxes {
+    display: flex;
+    align-items: center;
+}
+DIV.prw_rup.prw_common_centered_image .imgWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(0%, 0%);
+    -webkit-transform: translate(0%, 0%);
+    -moz-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+}
+#share_box_mobile{
+    bottom: -190px;
+}
+#share_box{
+    bottom: -205px !important;
+}
+#share_box::before{
+    left: 50% !important;
+}
+.introductionShowMore{
+    cursor: pointer;
+    color: var(--koochita-light-green);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    padding: 0px 17px;
+}
+.introductionShowMoreLess{
+    position: relative;
+    padding: 0px;
+}
+
 /*responsive for tablets*/
 @media only screen and (min-width: 992px) {
 

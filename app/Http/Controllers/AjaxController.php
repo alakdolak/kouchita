@@ -760,33 +760,31 @@ class AjaxController extends Controller {
             $item->section = 'مقالات';
         }
 
-        $today = getToday()['date'];
-        $activityId1 = Activity::where('name', 'نظر')->first()->id;
-        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
 
-        $commentCount = 0;
-        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
-        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
-        $commentCount += SafarnamehComments::where('confirm', 1)->count();
-        $userCount = \App\models\User::all()->count();
-
-        $counts = [ 'hotel' => Hotel::all()->count(),
-                    'restaurant' => Restaurant::all()->count(),
-                    'amaken' => Amaken::all()->count(),
-                    'sogatSanaie' => SogatSanaie::all()->count(),
-                    'mahaliFood' => MahaliFood::all()->count(),
-                    'safarnameh' => Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->count(),
-                    'comment' => $commentCount,
-                    'userCount' => $userCount,
-                    'boomgardy' => Boomgardy::all()->count()
-                ];
-
-        echo json_encode(['result' => $result, 'safarnameh' => $safarnameh,
-                        'topFood' => $topFood, 'majara' => $topMajara,
-                        'restaurant' => $topRestuarant, 'amaken' => $topAmaken,
-                        'bazar' => $topBazar, 'count' => $counts]);
-
-        return;
+//        $today = getToday()['date'];
+//        $activityId1 = Activity::where('name', 'نظر')->first()->id;
+//        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
+//        $commentCount = 0;
+//        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
+//        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
+//        $commentCount += SafarnamehComments::where('confirm', 1)->count();
+//        $userCount = \App\models\User::all()->count();
+//
+//        $counts = [ 'hotel' => Hotel::all()->count(),
+//                    'restaurant' => Restaurant::all()->count(),
+//                    'amaken' => Amaken::all()->count(),
+//                    'sogatSanaie' => SogatSanaie::all()->count(),
+//                    'mahaliFood' => MahaliFood::all()->count(),
+//                    'safarnameh' => Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->count(),
+//                    'comment' => $commentCount,
+//                    'userCount' => $userCount,
+//                    'boomgardy' => Boomgardy::all()->count()
+//                ];
+        $counts = [];
+        return response()->json(['result' => $result, 'safarnameh' => $safarnameh,
+                                'topFood' => $topFood, 'majara' => $topMajara,
+                                'restaurant' => $topRestuarant, 'amaken' => $topAmaken,
+                                'bazar' => $topBazar, 'count' => $counts]);
     }
 
     private function getMainPageSuggestionPackWithCityIds($cityIds, $getCount){

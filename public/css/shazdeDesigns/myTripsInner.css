@@ -247,13 +247,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin-top: 10px;
     color: red
 }
-
-#date_input {
-    width: 50%;
-    border-radius: 6px;
-    border: 1px solid #CCC;
-}
-
 #errorText {
     margin-top: 10px;
     text-align: center;
@@ -828,6 +821,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     padding: 5px 15px;
     border-radius: 25px;
     width: max-content;
+    opacity: .3;
 }
 .placeDetailsToggleBar .leftSec .userComments{
     overflow-y: auto;

@@ -403,6 +403,9 @@ function saveToTrip() {
     selectedPlaceId = placeId;
     selectedKindPlaceId = kindPlaceId;
 
+    if(!checkLogin())
+        return;
+
     saveToTripPopUp(placeId, kindPlaceId);
 }
 function addToSelectedTrips(id) {
@@ -418,32 +421,6 @@ function addToSelectedTrips(id) {
     if (allow) {
         $("#trip_" + id).css('border', '2px solid var(--koochita-light-green)');
         selectedTrips[selectedTrips.length] = id;
-    }
-}
-function assignPlaceToTrip() {
-    if (selectedPlaceId != -1) {
-        var checkedValuesTrips = selectedTrips;
-        if (checkedValuesTrips == null || checkedValuesTrips.length == 0)
-            checkedValuesTrips = "empty";
-        $.ajax({
-            type: 'post',
-            url: assignPlaceToTripDir,
-            data: {
-                'checkedValuesTrips': checkedValuesTrips,
-                'placeId': selectedPlaceId,
-                'kindPlaceId': selectedKindPlaceId
-            },
-            success: function (response) {
-                if (response == "ok")
-                    document.location.href = hotelDetails;
-                else {
-                    err = "<p>به جز سفر های زیر که اجازه ی افزودن مکان به آنها را نداشتید بقیه به درستی اضافه شدند</p>";response = JSON.parse(response);
-                    for (i = 0; i < response.length; i++)
-                        err += "<p>" + response[i] + "</p>";
-                    $("#errorAssignPlace").append(err);
-                }
-            }
-        });
     }
 }
 

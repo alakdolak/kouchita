@@ -559,6 +559,17 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     font-size: 0.75em;
     color: #666666;
 }
+.bookMarkIconOnPic{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+}
+.bookMarkIconOnPic:hover{
+    color: var(--koochita-yellow);
+}
 
 .heartOnPic{
     position: absolute;
