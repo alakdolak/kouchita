@@ -14,8 +14,8 @@
             </div>
 
             <div class="userInfoPhotoAlbum hideOnScreen">
-                <div class="circleBase type2 commentWriterPicShow">
-                    <img class="koochitaCircleLogo photoAlbumUserPic" src="" style="border-radius: 50%;">
+                <div class="fullyCenterContent userPictureDiv circleBase type2">
+                    <img class="photoAlbumUserPic resizeImgClass" src="" style="width: 100%" onload="fitThisImg(this)">
                 </div>
                 <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                     <a href="#" class="userProfileName photoAlbumUserName"></a>
@@ -54,8 +54,8 @@
                 </div>
                 <div id="rightColPhotosModalMainDiv" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" style="max-height: 85vh; overflow: hidden;">
                     <div class="userInfoPhotoAlbum hideOnPhone">
-                        <div class="circleBase type2 commentWriterPicShow">
-                            <img class="koochitaCircleLogo photoAlbumUserPic" src="" style="border-radius: 50%;">
+                        <div class="fullyCenterContent userPictureDiv circleBase type2">
+                            <img class="photoAlbumUserPic resizeImgClass" src="" style="width: 100%" onload="fitThisImg(this)">
                         </div>
                         <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                             <a href="#" class="userProfileName photoAlbumUserName"></a>

@@ -157,7 +157,7 @@
         $('#mainSearchInput').focus();
 
         myLocation = '<a href="{{route('myLocation')}}" class="mainSearchResultRow"><div class="icons location spIcons"></div>\n';
-        myLocation += "<p class='suggest cursor-pointer'>اطراف من</p></a>";
+        myLocation += "<p class='suggest cursor-pointer' style='margin: 0px'>اطراف من</p></a>";
 
         if(_kindPlaceId == 0) {
             $('#result').removeClass('hidden');

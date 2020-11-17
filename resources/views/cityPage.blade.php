@@ -92,7 +92,7 @@
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
                                 @for($i = 0; $i < count($place->pic) && $i < 5; $i++)
                                     <div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
-                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}" onload="fitThisImg(this)">
+                                        <img src="{{$place->pic[$i]['mainPic']}}" class="resizeImgClass" style="width: 100%;" alt="{{ $place->pic[$i]['alt'] }}" onload="fitThisImg(this)">
                                     </div>
                                 @endfor
                             </div>
@@ -367,22 +367,21 @@
     setSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
 
     @if(isset($place->pic))
-        var cityPic = JSON.parse('{!! $place->pic !!}');
+        var cityPic = {!! json_encode($place->pic) !!};
 
         function showSliderPic(){
             var cityPicForAlbum = [];
-
-            for(var i = 0; i < cityPic.length; i++){
-                cityPicForAlbum[i] = {
-                    'id' : cityPic[i]['id'],
-                    'sidePic' : cityPic[i]['pic'],
-                    'mainPic' : cityPic[i]['pic'],
-                    'userPic' : '',
+            cityPic.map((pic, index) => {
+                cityPicForAlbum[index] = {
+                    'id' : pic['id'],
+                    'sidePic' : pic['smallPic'],
+                    'mainPic' : pic['mainPic'],
+                    'userPic' : '{{getUserPic(0)}}',
                     'userName' : 'کوچیتا',
                     'uploadTime' : '',
                     'showInfo' : false,
                 }
-            }
+            });
 
             createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum); // in general.photoAlbumModal.blade.php
         };
@@ -408,9 +407,9 @@
                 if (changeSliderNum == 3) {
                     let nuum = 0;
                     while (nuum < 5 && showCityPicNumber < cityPic.length) {
-                        slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
-                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '" onload="fitThisImg(this)">\n' +
-                            '                                    </div>';
+                        slide = `<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
+                                    <img src="${cityPic[showCityPicNumber]['mainPic']}" class="resizeImgClass" style="width: 100%;" alt="${cityPic[showCityPicNumber]['alt']}" onload="fitThisImg(this)">
+                                </div>`;
                         picSwiper.addSlide(showCityPicNumber + 1, slide);
                         nuum++;
                         showCityPicNumber++;

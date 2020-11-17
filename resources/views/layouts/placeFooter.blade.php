@@ -744,24 +744,26 @@
                 @endif
 
                 <div class="footerSocialDivPhone">
-
-                    <a rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
-                        <div class="footerIconHor twitter"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
-                        <div class="footerIconHor facebook"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="#">
-                        <div class="footerIconHor youtubeBackground"></div>
-                    </a>
-                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
-                        <div class="footerIconHor telegram"></div>
-                    </a>
+{{--                    <a rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">--}}
+{{--                        <div class="footerIconHor twitter"></div>--}}
+{{--                    </a>--}}
+{{--                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">--}}
+{{--                        <div class="footerIconHor facebook"></div>--}}
+{{--                    </a>--}}
+{{--                    <a rel="nofollow" target="_blank" href="#">--}}
+{{--                        <div class="footerIconHor youtubeBackground"></div>--}}
+{{--                    </a>--}}
+{{--                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">--}}
+{{--                        <div class="footerIconHor telegram"></div>--}}
+{{--                    </a>--}}
+{{--                    <a rel="nofollow" target="_blank" href="#">--}}
+{{--                        <div class="footerIconHor pinterest"></div>--}}
+{{--                    </a>--}}
+{{--                    <a rel="nofollow" target="_blank" href="#">--}}
+{{--                        <div class="footerIconHor newsBackground"></div>--}}
+{{--                    </a>--}}
                     <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                         <div class="footerIconHor linkedin"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="#">
-                        <div class="footerIconHor pinterest"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="#">
                         <div class="footerIconHor whatsappBackground"></div>
@@ -771,9 +773,6 @@
                     </a>
                     <a rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
                         <div class="footerIconHor instagram"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="#">
-                        <div class="footerIconHor newsBackground"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">
                         <div class="footerIconHor bogenBackground"></div>

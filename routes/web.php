@@ -314,17 +314,17 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 //detailsPage
 Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 
-    Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
+    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails')->middleware('shareData');;
 
     Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details')->middleware('shareData');
 
-    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage')->middleware('shareData');
+    Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage')->middleware('shareData');
 
-    Route::get('getCityPageReview', 'HomeController@getCityPageReview')->name('getCityPageReview');
+    Route::get('getCityPageReview', 'CityController@getCityPageReview')->name('getCityPageReview');
 
-    Route::post('getCityPageTopPlace', 'HomeController@getCityPageTopPlace')->name('getCityPageTopPlace');
+    Route::post('getCityPageTopPlace', 'CityController@getCityPageTopPlace')->name('getCityPageTopPlace');
 
-    Route::post('getCityAllPlaces', 'HomeController@getCityAllPlaces')->name('getCityAllPlaces');
+    Route::post('getCityAllPlaces', 'CityController@getCityAllPlaces')->name('getCityAllPlaces');
 
     Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
     Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'RestaurantController@showRestaurantDetail')->name('restaurantDetails');
