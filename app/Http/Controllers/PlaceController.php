@@ -209,7 +209,7 @@ class PlaceController extends Controller {
         $jsonRoom = '';
 
         $articleUrl = \url('/safarnameh/list/place/' . $kindPlaceId . '_' . $place->id);
-        $cityName = 'شهر ' . $city->name;
+        $cityName = $city->name;
         $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
 
         $mainWebSiteUrl = \url('/');
@@ -3066,8 +3066,7 @@ class PlaceController extends Controller {
                     return "نتیجه ای یافت نشد";
 
                 $articleUrl = route('safarnameh.list', ['type' => 'city', 'search' => $city->name]);
-                $n = ' شهر ' . $city->name;
-                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n,
+                $locationName = ["name" => $city->name, 'state' => $state->name, 'cityName' => $city->name,
                                 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl,
                                 'kindState' => 'city', 'kindPage' => 'list'];
 
@@ -3371,26 +3370,29 @@ class PlaceController extends Controller {
         else
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('fullRate')->skip(($page - 1) * $take)->take($take)->get();
 
+        $bookMarkReferenceId = BookMarkReference::where('tableName', $table)->first();
+
         foreach ($places as $place) {
             $place->pic = getPlacePic($place->id, $kindPlace->id);
             $place->reviews = $place->reviewCount;
             $cityObj = Cities::whereId($place->cityId);
             if($cityObj != null) {
                 $place->city = $cityObj->name;
-                $place->state = State::whereId($cityObj->stateId)->name;
+                $place->state = $cityObj->getState->name;
             }
             else{
                 $place->city = '';
                 $place->state = '';
             }
             $place->avgRate = (int)$place->fullRate;
-            $place->inTrip = 0;
+            $place->bookMark = 0;
             $place->redirect = createUrl($kindPlace->id, $place->id, 0, 0);
             if(\auth()->check()){
                 $u = \auth()->user();
-                $trips = DB::select('SELECT trip.id FROM tripPlace, trip WHERE trip.uId = ' . $u->id . ' AND trip.id = tripPlace.tripId AND tripPlace.placeId = ' . $place->id . ' AND tripPlace.kindPlaceId = ' . $request->kindPlaceId);
-                if(count($trips) != 0)
-                    $place->inTrip = 1;
+                $place->bookMark = BookMark::where('userId', $u->id)
+                                            ->where('bookMarkReferenceId', $bookMarkReferenceId->id)
+                                            ->where('referenceId', $place->id)
+                                            ->count();
             }
         }
 

@@ -316,6 +316,7 @@ class HomeController extends Controller
         $locationPic = __DIR__ . '/../../../../assets/_images/city';
 
         if($kind == 'city') {
+
             $place->state = State::whereId($place->stateId)->name;
             $place->listName = $place->name;
             $place->name = 'شهر ' . $place->name;
@@ -330,6 +331,7 @@ class HomeController extends Controller
             $allMahaliFood = MahaliFood::where('cityId', $place->id)->count();
             $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->count();
             $allBoomgardy = Boomgardy::where('cityId', $place->id)->count();
+            $allSafarnamehCount = SafarnamehCityRelations::where('cityId', $place->id)->count();
 
             $pics = CityPic::where('cityId', $place->id)->get();
             if(count($pics) == 0){
@@ -386,6 +388,7 @@ class HomeController extends Controller
             $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->count();
             $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->count();
             $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->count();
+            $allSafarnamehCount = SafarnamehCityRelations::where('stateId', $place->id)->count();
 
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
@@ -412,6 +415,7 @@ class HomeController extends Controller
             else
                 $place->image = URL::asset('_images/city/' . $place->id . '/'.$place->image);
         }
+
         $placeCounts = [
             'amaken' => $allAmaken,
             'majara' => $allMajara,
@@ -420,6 +424,7 @@ class HomeController extends Controller
             'mahaliFood' => $allMahaliFood,
             'sogatSanaie' => $allSogatSanaie,
             'boomgardy' => $allBoomgardy,
+            'safarnameh' => $allSafarnamehCount,
         ];
 
         $safarnameh = [];
@@ -466,16 +471,18 @@ class HomeController extends Controller
 
     public function getCityPageReview(Request $request)
     {
+        $kind = $_GET['kind'];
+        $placeId = $_GET['placeId'];
         $take = 15;
-        $reviews = $this->getCityReviews($request->kind, $request->placeId, $take);
+        $reviews = $this->getCityReviews($kind, $placeId, $take);
         if(count($reviews) != $take){
             $lessReview = [];
             $notIn = [];
             foreach ($reviews as $item)
                 array_push($notIn, $item->id);
 
-            if($request->kind == 'city'){
-                $place = Cities::find($request->placeId);
+            if($kind == 'city'){
+                $place = Cities::find($placeId);
                 $less = $take - count($reviews);
                 $lessReview = $this->getCityReviews('state', $place->stateId, $less, $notIn);
                 foreach ($lessReview as $item)
@@ -995,7 +1002,6 @@ class HomeController extends Controller
 
     public function totalSearch(Request $request)
     {
-
         if ((isset($_POST["key"]) && isset($_POST["kindPlaceId"])) || (isset($request->key) && isset($request->kindPlaceId))) {
 
             $kindPlaceId = isset($_POST["kindPlaceId"]) ? makeValidInput($_POST["kindPlaceId"]) : makeValidInput($request->kindPlaceId);
@@ -1668,8 +1674,7 @@ class HomeController extends Controller
 //        dd('send to ' . $email);
     }
 
-    private function getCityReviews($kind, $id, $take, $notIn = []){
-
+    private function getCityReviews($kind, $id, $take, $notIn = [0]){
         $reviewActivity = Activity::whereName('نظر')->first();
 
         if($kind == 'city') {

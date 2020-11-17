@@ -41,6 +41,11 @@ a:link {
     z-index: 998;
     backdrop-filter: blur(2px);
 }
+.fullyCenterContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .languageIcon:before{
     content: "\E017";
 }

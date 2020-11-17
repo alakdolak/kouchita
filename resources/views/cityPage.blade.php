@@ -39,9 +39,6 @@
     <meta property="article:tag" content="صنایع دستی {{$placeTitleName}}"/>
     <meta property="article:tag" content="روستاهای {{$placeTitleName}}"/>
 
-
-    <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-
     <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v=1')}}">
     <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css?v=1')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
@@ -79,7 +76,7 @@
     </div>
 
     <div class="row">
-        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnPhone">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnTablet">
             <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
                 {{__('تازه ترین پست ها')}}
             </div>
@@ -87,7 +84,7 @@
             <div id="reviewPlaceHolderSection" class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom" style="width: 100%"></div>
         </div>
 
-        <div id="cpBorderLeft" class="col-lg-9 col-sm-9">
+        <div id="cpBorderLeft" class="col-lg-9 col-md-12">
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp">
                     @if(isset($place->pic))
@@ -202,10 +199,11 @@
                             <div class="cityPageIcon estelah"></div>
                             <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>
                         </div>
-                        <div class="col-xs-4 cpLittleMenu">
+                        <a href="{{route('safarnameh.list', ['type' => $kind, 'search' => $place->listName])}}" class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon safarnameIcon"></div>
                             <div class="textCityPageIcon">{{__('سفر نامه')}}</div>
-                        </div>
+                            <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['safarnameh']}}</div>
+                        </a>
                     </div>
                     <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="#">
@@ -276,8 +274,8 @@
                 <div class="row">
                     <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="{{$safarnameh[0]->url}}" title="{{$safarnameh[0]->slug}}">
-                                <img class="lazy-img" src="{{$safarnameh[0]->pic}}" alt="{{$safarnameh[0]->keyword}}" style="opacity: 1;">
+                            <a class="im-entry-thumb-link" href="{{$safarnameh[0]->url}}" title="{{$safarnameh[0]->slug}}" style="height: 275px;">
+                                <img class="lazy-img resizeImgClass" src="{{$safarnameh[0]->pic}}" alt="{{$safarnameh[0]->keyword}}" style="opacity: 1;" onload="fitThisImg(this)">
                             </a>
                             <header class="im-entry-header">
                                 <div class="im-entry-category">
@@ -515,13 +513,8 @@
 
     function getReviews(){
         $.ajax({
-            type: 'post',
-            url : '{{route("getCityPageReview")}}',
-            data: {
-                _token: '{{csrf_token()}}',
-                placeId: '{{$place->id}}',
-                kind: '{{$kind}}'
-            },
+            type: 'get',
+            url : '{{route("getCityPageReview")}}?placeId={{$place->id}}&kind={{$kind}}',
             success: function(response){
                 reviews = JSON.parse(response);
                 createReviewSections();

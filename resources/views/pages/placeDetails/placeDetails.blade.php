@@ -37,17 +37,14 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
     <title>{{isset($place->seoTitle) ? $place->seoTitle : $place->name}} </title>
 
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v=1')}}">
-
-    <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-    <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v='.$fileVersions)}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v='.$fileVersions)}}">
+    <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v='.$fileVersions)}}">
 
     {{--vr--}}
     @if(isset($video) && $video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v=1')}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v=1')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v='.$fileVersions)}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v='.$fileVersions)}}">
         <script defer src="{{URL::asset('vr2/video.js')}}"></script>
         <script defer src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
     @endif
@@ -92,118 +89,15 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
     </script>
 
+{{--    <script defer src= {{URL::asset("js/calendar.js") }}></script>--}}
+{{--    <script defer src= {{URL::asset("js/jalali.js") }}></script>--}}
+{{--    <script defer src="{{URL::asset('js/adv.js')}}"></script>--}}
+    <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+    <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
+
     <script defer src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
-    <script defer src= {{URL::asset("js/calendar.js") }}></script>
-    <script defer src= {{URL::asset("js/jalali.js") }}></script>
-    <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
     <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
-    <script async src="{{URL::asset('js/album.js')}}"></script>
-    <script defer src="{{URL::asset('js/adv.js')}}"></script>
 
-    <style>
-        .tvVideoPic.fullHeight{
-            height: 100%;
-        }
-        .albumInfo{
-            width: 100%;
-            text-align: right !important;
-        }
-        .affix {
-            max-width: 100%;
-            left: 0px;
-            box-shadow: 20px -10px 20px 20px darkgrey;
-        }
-
-        .truePhone {
-            display: flex;
-            align-items: center;
-            direction: ltr;
-            justify-content: flex-start;
-            flex-direction: row-reverse;
-        }
-
-        .changeWidth {
-            @if(session('goDate'))
-             width: 14% !important;
-        @endif
-        }
-
-        .rtl .ui_bubble_rating:after, .rtl .ui_bubble_rating:before {
-            transform: scale(1, 1);
-        }
-
-        .sharePageIcon:before {
-            content: '\e1f5' !important;
-            font-family: Shazde_Regular2 !important;
-            font-size: 18px;
-            position: absolute;
-            right: 15px;
-            top: 4px;
-        }
-
-        .commentOptionsBoxes label {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .add360VideoCommentIcon, .tagFriendCommentIcon, .addPhotoCommentIcon, .addVideoCommentIcon {
-            position: relative;
-            line-height: 10px;
-            right: auto;
-            top: auto;
-        }
-
-        .commentOptionsText {
-            margin-right: 10px;
-        }
-
-        .commentMoreSettingBar {
-            justify-content: space-evenly;
-        }
-
-        .commentOptionsBoxes {
-            display: flex;
-            align-items: center;
-        }
-        DIV.prw_rup.prw_common_centered_image .imgWrap{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
-            position: relative;
-            top: 0;
-            left: 0;
-            transform: translate(0%, 0%);
-            -webkit-transform: translate(0%, 0%);
-            -moz-transform: translate(0%, 0%);
-            -ms-transform: translate(0%, 0%);
-        }
-
-        #share_box_mobile{
-            bottom: -190px;
-        }
-        #share_box{
-            bottom: -205px !important;
-        }
-        #share_box::before{
-            left: 50% !important;
-        }
-        .introductionShowMore{
-            cursor: pointer;
-            color: var(--koochita-light-green);
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            background-color: white;
-            padding: 0px 17px;
-        }
-        .introductionShowMoreLess{
-            position: relative;
-            padding: 0px;
-        }
-    </style>
 @stop
 
 
@@ -431,20 +325,15 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                 {{__('دیدگاه شما')}}
                             </div>
                             <div id="commentInputMainDiv">
-                                <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox">
-                                    <div id="profilePicForComment" class="profilePicForPost circleBase type2">
-                                        <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox" onclick="newPostModal('textarea')">
+                                    <div id="profilePicForComment" class="fullyCenterContent profilePicForPost circleBase type2" style="overflow: hidden; border-radius: 50%;">
+                                        <img src="{{ $userPic }}" alt="userPicture" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
                                     </div>
-                                    @if(auth()->check())
-                                        <textarea class="inputBoxInput inputBoxInputComment showNewTextReviewArea" type="text"
-                                                  placeholder="{{auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
-                                                  onclick="newPostModal('textarea')" readonly></textarea>
-                                    @else
-                                        <textarea class="inputBoxInput inputBoxInputComment showNewTextReviewArea" type="text"
-                                                  placeholder=" چه فکر یا احساسی داری.....؟"
-                                                  onclick="newPostModal('textarea')" readonly></textarea>
-                                    @endif
-                                    <img class="commentSmileyIcon" src="{{URL::asset('images/smile.png')}}">
+                                    <textarea type="text"
+                                              class="inputBoxInput inputBoxInputComment showNewTextReviewArea"
+                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}}، چه فکر یا احساسی داری.....؟"
+                                              onclick="newPostModal('textarea')" readonly></textarea>
+                                    <img src="{{URL::asset('images/smile.png')}}" class="commentSmileyIcon" alt="emoji"/>
                                 </div>
                             </div>
                             <div class="commentMoreSettingBar">
@@ -665,7 +554,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                             <div class="block_header">
                                                                 <h3 class="block_title">نظر شما </h3>
                                                             </div>
-                                                            <span class="overallRating">{{$avgRate}} </span>
+{{--                                                            <span class="overallRating">{{$avgRate}} </span>--}}
                                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
                                                         <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
                                                               property="ratingValue" content="{{$avgRate}}"
@@ -791,7 +680,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                             <div class="block_header">
                                                                 <h3 class="block_title">نظر شما </h3>
                                                             </div>
-                                                            <span class="overallRating">{{$avgRate}} </span>
+{{--                                                            <span class="overallRating">{{$avgRate}} </span>--}}
                                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
                                                                 <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
                                                                       property="ratingValue" content="{{$avgRate}}"
@@ -926,10 +815,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     </div>
 
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
-                        <div id="phoneReviewFilterHeader" class="topHeaderBarPosts display-none">
-                            <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
-                            <span class="float-left">مشاهده همه پست‌ها</span>
-                        </div>
 
                         <div class="topBarContainerPosts display-none"></div>
 

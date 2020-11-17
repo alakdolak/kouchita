@@ -85,7 +85,6 @@ class MessageController extends Controller {
 
                 array_unshift($contacts, $cont);
             }
-
             $specUser = $cont->id;
         }
 

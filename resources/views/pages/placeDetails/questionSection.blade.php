@@ -1,3 +1,11 @@
+<style>
+    @media (max-width: 767px) {
+        .newQuestionContainer > div{
+            font-size: 12px;
+        }
+    }
+</style>
+
 
 <div id="QAndAMainDivId" class="tabContentMainWrap" style="display: flex; flex-direction: column; margin-top: 15px">
     <div class="topBarContainerQAndAs display-none"></div>
@@ -8,11 +16,11 @@
             </div>
             <div class="askQuestionMainDiv">
                 <div class="newQuestionContainer">
-                    <b class="direction-rtl text-align-right float-right full-width mg-bt-10">
+                    <div class="direction-rtl text-align-right float-right full-width mg-bt-10" style="font-weight: bold;">
                         سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با
                         پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک
                         بگذارید.
-                    </b>
+                    </div>
                     <div class="display-inline-block float-right direction-rtl mg-lt-5">
                         در حال حاضر
                         <span class="color-blue" id="questionCount"></span>
@@ -20,11 +28,6 @@
                         <span class="color-blue" id="answerCount"></span>
                         پاسخ موجود می‌باشد.
                     </div>
-                    <a class="seeAllQMainLink" href="#">
-                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">
-                            مشاهده همه سؤالات و پاسخ‌ها
-                        </div>
-                    </a>
 
                     <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
                         <div class="questionInputBoxMainDiv">

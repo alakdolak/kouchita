@@ -320,7 +320,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage')->middleware('shareData');
 
-    Route::post('getCityPageReview', 'HomeController@getCityPageReview')->name('getCityPageReview');
+    Route::get('getCityPageReview', 'HomeController@getCityPageReview')->name('getCityPageReview');
 
     Route::post('getCityPageTopPlace', 'HomeController@getCityPageTopPlace')->name('getCityPageTopPlace');
 
@@ -408,16 +408,16 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 //safarnameh
-Route::group(['middleware' => ['SafarnamehShareData']], function () {
+Route::group(['middleware' => ['SafarnamehShareData', 'shareData']], function () {
     Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
 
     Route::get('/article/list/{type}/{search}', 'SafarnamehController@safarnamehListRedirect');
 
-    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index')->middleware('shareData');
+    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
 
-    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show')->middleware('shareData');
+    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
 
-    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list')->middleware('shareData');
+    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
 
     Route::post('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
 

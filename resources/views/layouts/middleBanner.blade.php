@@ -1,4 +1,4 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css?v=1')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css?v='.$fileVersions)}}'/>
 
 <div class="container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
@@ -107,7 +107,7 @@
                             </div>
                             <div class="slide__bg-dark"></div>
                             <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-                                <img src="{{URL::asset('images/icons/instagram.webp')}}">
+                                <img src="{{URL::asset('images/icons/instagram.png')}}" alt="instagramIcon" loading="lazy">
                             </a>
                         </div>
                     @endfor
@@ -294,7 +294,7 @@
 
             <div id="newKoochita">
                 <div class="shelf_title">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('تازه‌های کوچیتا')}}</h3>
                     </div>
@@ -326,7 +326,7 @@
                                             <a href="{{$item->url}}" class="cta">{{__('مشاهده مقاله')}}</a>
                                         </div>
                                         <div class="card_circle transition">
-                                            <img data-src="{{$item->pic}}" class="lazyload resizeImgClass" style="width: 100%;">
+                                            <img data-src="{{$item->pic}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload resizeImgClass" style="width: 100%;">
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +340,7 @@
 
             <div id="foodSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('محبوب‌ترین غذا‌ها')}}</h3>
                     </div>
@@ -371,17 +371,17 @@
                 <div class="middleBannerPhotoBanner middleBannerPB">
                     @if($middleBan['2']['link'] != '')
                         <a href="{{$middleBan['2']['link']}}" target="_blank" >
-                            <img data-src="{{$middleBan['2']['pic']}}" class="lazyload" style="width: 100%;">
+                            <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
                         </a>
                     @else
-                        <img data-src="{{$middleBan['2']['pic']}}" class="lazyload" style="width: 100%;">
+                        <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
                     @endif
                 </div>
             @endif
 
             <div id="tabiatSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('سفر طبیعت‌گردی')}}</h3>
                     </div>
@@ -575,7 +575,7 @@
 
             <div id="restaurantSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('محبوب‌ترین رستوران‌ها')}}</h3>
                     </div>
@@ -600,7 +600,7 @@
 
             <div id="tarikhiSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('سفر تاریخی-فرهنگی')}}</h3>
                     </div>
@@ -616,7 +616,7 @@
                 </div>
             </div>
 
-            <center class="mainPageStatistics">
+            <div class="mainPageStatistics" style="display: none;">
                 <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons articleStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
@@ -624,72 +624,72 @@
                         <span class="safarnamehCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('مقاله')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons friendStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="userCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('دوست')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons commentStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="commentCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('نظر')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons traditionalFoodStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="mahaliFoodCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('غذای محلی')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons souvenirStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="sogatSanaieCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('سوغات')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons handcraftStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="sogatSanaieCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('صنایع‌دستی')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons attractionStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="amakenCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('جاذبه')}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons restaurantStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="restaurantCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__("رستوران")}}</div>
-                </div>{{--
-    --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons residenceStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
                         <span class="hotelCountMiddleBanner"></span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('اقامتگاه')}}</div>
-                </div>{{--
-                --}}<div class="eachPartStatistic">
+                </div>
+                <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons boom"></div>
                     <div class="eachPartStatisticNums">
                         <span>{{__('بیش از')}}</span>
@@ -697,11 +697,11 @@
                     </div>
                     <div class="eachPartStatisticTitle">{{__('بوم گردی')}}</div>
                 </div>
-            </center>
+            </div>
 
             <div id="kharidSuggestion">
                 <div class="shelf_title">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('مراکز خرید')}}</h3>
                     </div>
@@ -721,17 +721,17 @@
                 <div class="middleBannerPhotoBanner middleBannerPB">
                     @if($middleBan['6']['link'] != '')
                         <a href="{{$middleBan['6']['link']}}" target="_blank" >
-                            <img data-src="{{$middleBan['6']['pic']}}" class="lazyload" style="width: 100%;">
+                            <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
                         </a>
                     @else
-                        <img data-src="{{$middleBan['6']['pic']}}" class="lazyload" style="width: 100%;">
+                        <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
                     @endif
                 </div>
             @endif
 
             <div id="articleSuggestion">
                 <a class="shelf_title" href="{{route('safarnameh.index')}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
+                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('محبوب‌ترین سفرنامه‌ها')}}</h3>
                     </div>
@@ -779,9 +779,8 @@
                 lastPage: lastPageForSuggestion
             },
             success: function(response){
-                response = JSON.parse(response);
                 createMainPageSuggestion(response);
-                fillCountNumber(response.count);
+                // fillCountNumber(response.count);
             }
         })
     }
@@ -793,7 +792,7 @@
             middleBan5.map((item, index) => {
                 text += `<div class="swiper-slide position-relative">
                                    <figure class="snip1091 ${middleBan5Color[index%3]}">
-                                       <img src="${item.pic}" class="resizeImgClass" style="width: 100%"/>
+                                       <img src="${item.pic}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="resizeImgClass" style="width: 100%"/>
                                        <figcaption>
                                            <h2>${item.text}</h2>
                                        </figcaption>

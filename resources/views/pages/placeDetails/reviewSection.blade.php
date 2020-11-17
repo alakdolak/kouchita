@@ -2,23 +2,11 @@
 
     <div id="showReviewsMain"></div>
 
-    <div id="reviewsPagination" class="col-xs-12 postsMainDivFooter position-relative">
-
-        <div class="col-xs-12 postsMainDivFooter position-relative">
-            <div class="col-xs-5 font-size-13 line-height-2">
-                نمایش
-                <span id="showReviewPerPage"></span>
-                پست در هر صفحه
-            </div>
-            <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
-{{--                <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>--}}
-            </a>
-            <div class="col-xs-4 font-size-13 line-height-2 text-align-right" style="display: flex; direction: rtl;">
-                صفحه
-                <div id="reviewPagination" style="margin-right: 10px;"></div>
-            </div>
+    <div id="reviewsPagination" class="col-xs-12 postsMainDivFooter position-relative" style="margin-top: 10px;">
+        <div class="col-xs-4 font-size-13 line-height-2 text-align-right" style="display: flex; direction: rtl; margin-left: auto">
+            صفحه
+            <div id="reviewPagination" style="margin-right: 10px;"></div>
         </div>
-
     </div>
 </div>
 
@@ -42,7 +30,7 @@
 
 <script>
     var reviewPage = 1;
-    var reviewPerPage = 0;
+    var reviewPerPageIndex = 2;
     var loadShowReview = false;
     var firstTimeFilterShow = 1;
     var reviewPerPageNum = [3, 5, 10];
@@ -55,7 +43,7 @@
             data:{
                 'placeId' : placeId,
                 'kindPlaceId' : kindPlaceId,
-                'count' : reviewPerPageNum[reviewPerPage],
+                'count' : reviewPerPageNum[reviewPerPageIndex],
                 'num' : reviewPage,
                 'filters' : reviewFilters
             },
@@ -106,9 +94,9 @@
 
     function changePerPage(_count){
 
-        document.getElementById('reviewPerView' + reviewPerPage).classList.remove('color-blue');
+        document.getElementById('reviewPerView' + reviewPerPageIndex).classList.remove('color-blue');
         document.getElementById('reviewPerView' + _count).classList.add('color-blue');
-        reviewPerPage = _count;
+        reviewPerPageIndex = _count;
         reviewPage = 1;
 
         loadReviews();
@@ -124,7 +112,7 @@
 
     function createReviewPagination(reviewsCount){
         var text = '';
-        var page = Math.round(reviewsCount/reviewPerPageNum[reviewPerPage]);
+        var page = Math.round(reviewsCount/reviewPerPageNum[reviewPerPageIndex]);
 
         createReviewPerPage();
 
@@ -197,7 +185,7 @@
         var text = '';
 
         for(var i = 0; i < reviewPerPageNum.length; i++){
-            if(i == reviewPerPage)
+            if(i == reviewPerPageIndex)
                 text += '<span id="reviewPerView' + i + '" class="mg-lt-5 cursor-pointer color-blue" onclick="changePerPage(' + i + ')">' + reviewPerPageNum[i] + '</span>';
             else
                 text += '<span id="reviewPerView' + i + '" class="mg-lt-5 cursor-pointer" onclick="changePerPage(' + i + ')">' + reviewPerPageNum[i] + '</span>';
@@ -206,7 +194,7 @@
                 text += '-';
         }
 
-        document.getElementById('showReviewPerPage').innerHTML = text;
+        // document.getElementById('showReviewPerPage').innerHTML = text;
     }
 
 </script>

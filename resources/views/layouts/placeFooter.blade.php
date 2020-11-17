@@ -59,10 +59,16 @@
                         {{__('شاید بخواهید در خصوص')}}
                         <a href="{{route('policies')}}"> {{__('حریم خصوصی و قوانین سایت')}} </a>
                         {{__('بیشتر بدانید.')}}
-                        {{__('در صورت نیاز به کمک، صفحه')}}
-                        <a href="#"> {{__('راهنما')}} </a>
-                        {{__('را بخوانید و در صورت نیاز')}}
-                        <a href="{{route('policies')}}"> {{__('با ما تماس بگیرید.')}} </a>
+                        {{__('در صورت نیاز به کمک،')}}
+                        <a id="contactToUsFooter" href="#">{{__('به ما پیام دهید')}}</a>
+                        <script>
+                            $('#contactToUsFooter').on('click', e => {
+                                e.preventDefault();
+                                if(!checkLogin())
+                                    return;
+                                window.location.href = '{{route('profile.message.page')}}';
+                            });
+                        </script>
                     </div>
                     <div class="aboutShazdeLink">
                         {{__('این سایت متعلق به مجموعه کوچیتا می باشد؛')}}
@@ -160,9 +166,12 @@
                 <div class="profileBtnText">
                     <span>{{__('سلام')}}</span>
                     <span>{{$userNamename}}</span>
+                    @if($newMsgCount > 0)
+                        <span class="newMsgMainFooterCount">{{$newMsgCount}}</span>
+                    @endif
                 </div>
-                <div class="profilePicFooter circleBase type2">
-                    <img src="{{isset($buPic) ? $buPic : ''}}" style="width: 100%; border-radius: 50%">
+                <div class="fullyCenterContent profilePicFooter circleBase type2">
+                    <img src="{{isset($buPic) ? $buPic : ''}}" class="resizeImgClass" onload="fitThisImg(this)" alt="user picture" style="width: 100%;">
                 </div>
             </div>
         @else
@@ -195,7 +204,7 @@
         <div class="modal fade" id="profilePossibilities">
             @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
                 <div class="mainPopUp rightPopUp" style="padding: 7px">
-                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('profilePossibilities')"></div>
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
                     <div class="lp_ar_filters">
@@ -355,7 +364,7 @@
                 </div>
             @elseif(Request::is('placeList/*'))
                 <div ng-app="mainApp" class="mainPopUp rightPopUp PlaceController" style="padding: 7px">
-                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('profilePossibilities')"></div>
                     <div style="min-height: 60px">
                         <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
@@ -562,7 +571,7 @@
                 </div>
             @else
                 <div class="mainPopUp rightPopUp recentViewLeftBar">
-                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('profilePossibilities')"></div>
 
                     {{--each menu--}}
                     <div>
@@ -658,7 +667,7 @@
 
         <div class="modal fade" id="otherPossibilities">
             <div class="mainPopUp rightPopUp" style="overflow-y: auto">
-                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#otherPossibilities').modal('hide')"></div>
+                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('otherPossibilities')"></div>
                 @if(isset($locationName))
                     <div class="pSC_tilte">
                         <div style="text-align: center">
@@ -791,7 +800,7 @@
 
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
-                        <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
+                        <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا سامانه جامع گردشگری ایران" class="content-icon" width="100%">
                     </div>
                     <div class="phoneDescription">
                         <div class="phoneDescriptionText" style="overflow: hidden">
@@ -859,17 +868,18 @@
                         <div class="name">صندوق پیام</div>
                         <div class="num">1</div>
                     </a>
-                    <img src="{{URL::asset('images/icons/thankyou0.svg')}}" alt="">
+                    <img src="{{URL::asset('images/icons/thankyou0.svg')}}" alt="thankYou">
                 </div>
+
                 <div class="mainPopUp leftPopUp profileFooterPopUp">
                     <div class="closeFooterPopupIcon iconFamily iconClose"
-                         onclick="$('#profileFooterModal').modal('hide')"
+                         onclick="closeFooterBotstrapModal('profileFooterModal')"
                          style="top: -10px; z-index: 999"></div>
                     <div id="lp_register">
                         <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
                             <div class="firsLine">
                                 <div class="pic">
-                                    <img src="{{isset($buPic) ? $buPic : ''}}"/>
+                                    <img src="{{isset($buPic) ? $buPic : ''}}" alt="userPic"/>
                                 </div>
                                 <div class="infos">
                                     <div class="inf">
@@ -1121,6 +1131,10 @@
             })
         }
         sendSeenPageLog();
+
+        function closeFooterBotstrapModal(_id){
+            $(`#${_id}`).modal('hide');
+        }
     </script>
 
     <script src="{{URL::asset('js/pages/placeFooter.js?v='.$fileVersions)}}"></script>

@@ -327,6 +327,20 @@ footer li > img, .small-ico {
     height: 35px;
     background: #ccc;
     margin-right: 10px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.newMsgMainFooterCount{
+    position: absolute;
+    background: var(--koochita-red);
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    left: -25px;
 }
 
 .profilePicFooter.circleBase > img {

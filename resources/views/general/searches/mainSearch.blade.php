@@ -1,6 +1,5 @@
-{{--<link rel="stylesheet" href="{{URL::asset('css/mainSearch.css?v=1')}}">--}}
 @if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css?v='.$fileVersions)}}">
 @endif
 
 <style>
@@ -78,6 +77,18 @@
 </div>
 
 <script>
+    var mainSearchIcon = {
+        amaken: 'touristAttractions',
+        restaurant: 'restaurantIcon',
+        hotels: 'hotelIcon',
+        sogatSanaies: 'souvenirIcon',
+        mahaliFood: 'traditionalFood',
+        majara: 'adventureIcon',
+        boomgardies: 'boomIcon',
+        state: 'location',
+        city: 'location',
+    };
+    var mainSearchAjax = null;
     var numOfMainSearchResult = 0;
     var searchDir = '{{route('totalSearch')}}';
     var lastTimeMainSearch = 0;
@@ -162,7 +173,7 @@
             $('#mainSearchResult').show();
             $("#mainSearchResult").html(newElement);
         }
-    }
+    };
 
     function redirect() {
         "" != $("#placeId").val() && (document.location.href = $("#placeId").val())
@@ -229,9 +240,11 @@
 
             if ("ا" == val[0]) {
                 for (val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
+                if(mainSearchAjax != null)
+                    mainSearchAjax.abort();
 
                 numOfMainSearchResult++;
-                $.ajax({
+                mainSearchAjax = $.ajax({
                     type: "post",
                     url: searchDir,
                     data: {
@@ -250,7 +263,10 @@
             }
             else {
                 numOfMainSearchResult++;
-                $.ajax({
+                if(mainSearchAjax != null)
+                    mainSearchAjax.abort();
+
+                mainSearchAjax = $.ajax({
                     type: "post",
                     url: searchDir,
                     data: {
@@ -270,8 +286,10 @@
     }
 
     function createSearchResponse(response){
+        var placeListUrl = '{{url('placeList')}}';
         let newElement = "";
         let searchText = $('#mainSearchInput').val();
+        var kindPlaceId = $('#kindPlaceIdForMainSearch').val();
 
         if(searchText.trim().length < 3){
             $('#result').addClass('hidden');
@@ -295,43 +313,35 @@
         response = resutl[1];
         if(lastTimeMainSearch == 0 || lastTimeMainSearch <= resutl[0]) {
             lastTimeMainSearch = resutl[0];
-            var icon;
-            for (i = 0; i < response.length; i++) {
-                if (response[i].mode == "state") {
-                    newElement += '<a href="' + response[i].url + '" class="mainSearchResultRow"><div class="icons location spIcons"></div>\n';
-                    newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "'>استان " + response[i].targetName + "</p></a>";
+
+            response.map(item => {
+                var url = '';
+                var name1 = '';
+                var name2 = '';
+
+                if (item.mode == "state") {
+                    url = kindPlaceId == 0 ? item.url : placeListUrl + `/${kindPlaceId}/state/${item.targetName}`;
+                    name1 = 'استان '+item.targetName;
                 }
-                else if (response[i].mode == "city") {
-                    newElement += '<a href="' + response[i].url + '" class="mainSearchResultRow"><div class="icons location spIcons"></div>\n';
-                    newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
-                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].stateName + "</p></a>";
+                else if (item.mode == "city") {
+                    url = kindPlaceId == 0 ? item.url : placeListUrl + `/${kindPlaceId}/city/${item.targetName}`;
+                    name1 = 'شهر '+item.targetName;
+                    name2 = item.stateName;
                 }
                 else {
-                    if (response[i].mode == 'amaken')
-                        icon = 'touristAttractions';
-                    else if (response[i].mode == 'restaurant')
-                        icon = 'restaurantIcon';
-                    else if (response[i].mode == 'hotels')
-                        icon = 'hotelIcon';
-                    else if (response[i].mode == 'sogatSanaies')
-                        icon = 'souvenirIcon';
-                    else if (response[i].mode == 'mahaliFood')
-                        icon = 'traditionalFood';
-                    else if (response[i].mode == 'majara')
-                        icon = 'adventureIcon';
-                    else if (response[i].mode == 'boomgardies')
-                        icon = 'boomIcon';
-
-                    newElement += '<a href="' + response[i].url + '" class="mainSearchResultRow"><div class="icons ' + icon + ' spIcons"></div>\n';
-                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' style='margin: 0px'>" + response[i].targetName + "</p>";
-                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].cityName + " در " + response[i].stateName + "</p></a>";
+                    url = item.url;
+                    name1 = item.targetName;
+                    name2 = item.cityName+'در'+item.stateName;
                 }
-            }
 
-            if (response.length != 0)
-                $('#result').removeClass('hidden');
-            else
-                $('#result').addClass('hidden');
+                newElement += `<a href="${url}" class="mainSearchResultRow">
+                                        <div class="icons ${mainSearchIcon[item.mode]} spIcons"></div>
+                                        <p class='suggest cursor-pointer' style='margin: 0px'>${name1}</p>
+                                        <p class='suggest cursor-pointer stateName'>${name2}</p>
+                                    </a>`;
+            });
+
+            response.length != 0 ? $('#result').removeClass('hidden') : $('#result').addClass('hidden');
 
             $("#mainSearchResult").empty().append(newElement);
             $('#placeHolderResult').hide();

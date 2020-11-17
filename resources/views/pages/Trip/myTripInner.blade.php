@@ -391,7 +391,7 @@
                     </div>
                 </div>
                 <div class="submitOptions direction-rtl mg-tp-20">
-                    <button id="submitInvite" class="btn btn-success successBtn" onclick="inviteFriend()" disabled>ارسال</button>
+                    <button id="submitInvite" class="btn successBtn" onclick="inviteFriend()" disabled>ارسال</button>
                     <button class="btn btn-default" onclick="closeMyModal('inviteMember')">بازگشت</button>
                     <p id="errorInvite"></p>
                 </div>
@@ -514,13 +514,13 @@
                 <div onclick="closeMyModal('addDateToPlaceModal')" class="iconClose closeModal"></div>
                 <div class="find_location_modal">
                     <div class="header_text addDateToPlaceTitle" style="margin: 0px !important;">اختصاص زمان به مکان</div>
-                    <div class="ui_typeahead direction-rtl">
-                        <label for="date_input"></label>
-                        <input type="text" name="date" id="date_input" style="width: 100%;" readonly>
-                    </div>
+                    <label class="tripCalenderSection">
+                        <span class="calendarIcon"></span>
+                        <input id="date_input" class="tripDateInput" placeholder="13xx/xx/xx" readonly type="text">
+                    </label>
                 </div>
                 <div class="submitOptions direction-rtl mg-tp-20">
-                    <button id="submitInvite" class="btn btn-success successBtn" onclick="doAssignDateToPlace()">ثبت</button>
+                    <button id="submitInvite" class="btn successBtn" onclick="doAssignDateToPlace()">ثبت</button>
                     <button class="btn btn-default" onclick="closeMyModal('addDateToPlaceModal')">بستن</button>
                 </div>
             </div>
@@ -539,7 +539,7 @@
                 </div>
                 <br>
                 <div class="submitOptions direction-rtl">
-                    <button onclick="doAddNote()" class="btn btn-success successBtn">تایید</button>
+                    <button onclick="doAddNote()" class="btn successBtn">تایید</button>
                     <button onclick="closeMyModal('noteModal')" class="btn btn-default">خیر</button>
                 </div>
             </div>
@@ -865,17 +865,14 @@
                         }
                         else if(response == 'nok2' || response == 'nok1') {}
                         else{
-
                             $("#inviteResult").removeClass('hidden');
-                            let result = JSON.parse(response);
                             let text = '';
-                            if(result[0].length == 0 && result[1].length == 0)
+                            let result = JSON.parse(response);
+                            if(result.email.length == 0 && result.userName.length == 0)
                                 text = '<div class="notFind">موردی یافت نشد</div>';
                             else {
-                                for (let i = 0; i < result[0].length; i++)
-                                    text += '<div class="result" onclick="chooseMember(this)" dataName="' + result[0][i].email + '"  dataId="' + result[0][i].id + '">' + result[0][i].email + '</div>';
-                                for (let i = 0; i < result[1].length; i++)
-                                    text += '<div class="result" onclick="chooseMember(this)" dataName="' + result[1][i].username + '"  dataId="' + result[1][i].id + '">' + result[1][i].username + '</div>';
+                                result.email.map(item => text += `<div class="result" onclick="chooseMember(this)" dataName="${item.email}" dataId="${item.id}">${item.email}</div>`);
+                                result.userName.map(item => text += `<div class="result" onclick="chooseMember(this)" dataName="${item.username}" dataId="${item.id}">${item.username}</div>`);
                             }
                             $("#inviteResult").html(text);
                         }
@@ -1029,7 +1026,6 @@
             let sug = searchResultPlacessMyTrip[_index];
             $('#searchResultPlacess').html('');
             $('#searchResultPlacess').hide();
-
             openLoading();
             $.ajax({
                 type: 'post',
@@ -1046,16 +1042,20 @@
                         location.reload();
                     }
                     else{
+                        var errorText = '';
                         closeLoading();
                         if(response == 'notAccess')
-                            showSuccessNotifi('{{__('شما دسترسی به تغییر محل های سفر ندارید.')}}', 'left', 'red');
+                            errorText = "{{__('شما دسترسی به تغییر محل های سفر ندارید.')}}";
+                        else if(response == 'nok')
+                            errorText = 'این محل در لیست سفر موجود می باشد';
                         else
-                            showSuccessNotifi('{{__('مشکلی در ثبت به وجود امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
+                            errorText = '{{__('مشکلی در ثبت به وجود امده لطفا دوباره تلاش نمایید')}}';
+
+                        showSuccessNotifi(errorText, 'left', 'red');
                     }
                 },
                 error: function(err){
                     closeLoading();
-                    console.log(err);
                     showSuccessNotifi('{{__('مشکلی در ثبت به وجود امده لطفا دوباره تلاش نمایید')}}', 'left', 'red');
                 }
             })
