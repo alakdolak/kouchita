@@ -56,7 +56,7 @@
 @include('general.followerPopUp')
 
 @if(!Auth::check())
-    @include('general.nLoginPopUp')
+{{--    @include('general.nLoginPopUp')--}}
 @else
     @include('general.adminInPage')
 
@@ -74,10 +74,43 @@
     var hasLogin = {{auth()->check() ? 1 : 0}};
     window.userPic = '{{getUserPic(auth()->check() ? auth()->user()->id : 0)}}';
     window.gearIcon = '{{URL::asset("images/icons/mGear.svg")}}';
+    window.getPages = [];
+
+    $(document).ready(function () {
+        $(".login-button").click(() => {
+            if(window.getPages.indexOf('login') == -1)
+                getPagesHtml('login', () => showLoginPrompt('{{Request::url()}}'));
+            else
+                showLoginPrompt('{{Request::url()}}')
+        })
+    });
+
+    function getPagesHtml(_page, _callBack){
+        openLoading(() => {
+            $.ajax({
+                type: 'get',
+                url: '{{route("getPage")}}',
+                success: response => {
+                    closeLoading();
+                    $('body').append(response);
+                    window.getPages.push(_page);
+                    if(typeof _callBack === 'function')
+                        _callBack();
+                },
+                error: err => {
+                    closeLoading();
+                    console.error(err);
+                }
+            });
+        });
+    }
 
     function checkLogin(redirect = '{{Request::url()}}'){
         if (!hasLogin) {
-            showLoginPrompt(redirect);
+            if(window.getPages.indexOf('login') == -1)
+                getPagesHtml('login', () => showLoginPrompt(redirect));
+            else
+                showLoginPrompt(redirect);
             return false;
         }
         else

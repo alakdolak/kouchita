@@ -834,6 +834,8 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
     Route::get('userActivitiesProfile', 'NotUseController@userActivitiesProfile');
 });
 
+Route::get('/getPages', 'GetPagesController@getPages')->name('getPage');
+
 Route::get('seenLogExport/{num}', 'MainController@seenLogExport');
 
 Route::get('/getVideosFromKoochitaTv', 'AjaxController@getVideosFromKoochitaTv')->name('getVideosFromKoochitaTv');

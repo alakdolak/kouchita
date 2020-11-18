@@ -73,6 +73,11 @@ footer li > img, .small-ico {
     font-size: 14px;
     color: #16174f;
 }
+.socialLink .koochiatTvIcon{
+    background-image: url('../../images/icons/social/kooTvBIcon.svg');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
 
 .footerIcon {
     background-image: url('../../images/footer.png');

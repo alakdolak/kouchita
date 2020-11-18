@@ -27,7 +27,6 @@ $authUrl = $client->createAuthUrl();
 $url = $_SERVER['REQUEST_URI'];
 $authUrl = str_replace('state', 'state=' . $url, $authUrl);
 ?>
-{{--<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css?v=1')}}'/>--}}
 
 @if(\App::getLocale() == 'en')
     <link rel="stylesheet" href="{{URL::asset('css/ltr/loginPopUpLtr.css?v=2')}}">
@@ -56,7 +55,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
     <div id="loginPopUp" class="loginPopUpContent">
         <div class="loginHeader row">
             <div class="iconFamily iconClose loginCloseIcon" onclick="closeLoginPopup()"></div>
-            <img alt="کوچیتا، سامانه جامع گردشگری ایران class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
+            <img alt="کوچیتا، سامانه جامع گردشگری ایران" class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
         </div>
 
         <div class="loginTextHeader row">
@@ -101,8 +100,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         <div class="registerFSection">
             <div class="row">
                 <div class="col-md-6 loginInputDiv">
-                    <input type="text" id="emailPhone_register" class="loginInput"
-                           placeholder="{{__('تلفن همراه')}}">
+                    <input type="text" id="emailPhone_register" class="loginInput" placeholder="{{__('تلفن همراه یا ایمیل')}}">
                 </div>
                 <div class="col-md-6 loginInputDiv">
                     <input type="password" id="password_register" class="loginInput" placeholder="{{__('رمز عبور')}}">
@@ -123,17 +121,16 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         </div>
 
         <div class="loginFSection">
-            <div class="headerTextF">{{__('اگر در کوچیتا عضو هستید؛')}}
+            <div class="headerTextF">{{__('اگر در کوچیتا عضو هستید:')}}
             </div>
             <div class="row">
                 <div class="col-sm-5 loginInputDiv">
-                    <input type="text" id="username_main" class="loginInput"
-                           placeholder="{{__('تلفن همراه یا نام کاربری')}}">
+                    <input type="text" id="username_main" class="loginInput" placeholder="{{__('تلفن همراه ، ایمیل یا نام کاربری')}}">
                 </div>
                 <div class="col-sm-5 loginInputDiv">
                     <input type="password" id="password_main" class="loginInput" placeholder="{{__('رمز عبور')}}">
                     <div class="bottomLoginText forgetPassBut"
-                         onclick="openRegisterSection('ForgetPassword'); showForgatenPassInput('Phone_ForgetPass')">
+                         onclick="openRegisterSection('ForgetPassword');">
                         {{__('رمز عبور خود را فراموش کردید؟')}}
                     </div>
                 </div>
@@ -148,14 +145,13 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         </div>
     </div>
 
-    <div id="registerDiv" class="loginPopUpContent hidden"
-         style="justify-content: space-between; flex-direction: row; padding: 15px;">
+    <div id="registerDiv" class="loginPopUpContent hidden" style="justify-content: space-between; flex-direction: row; padding: 15px;">
         <div class="iconFamily iconClose closeLoginPopup" onclick="closeLoginPopup()"></div>
 
         <div class="registerRightSection">
 
             <div id="registerMainLogo">
-                <img alt="کوچیتا، سامانه جامع گردشگری ایران class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
+                <img alt="کوچیتا" class="loginMainLogo" src="{{URL::asset('images/icons/KOFAV0.svg')}}">
             </div>
 
             <div>
@@ -252,8 +248,8 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                                     {{__('را مطالعه کرده و با آن موافقم.')}}
                                 </div>
                             </div>
-                            <div>t
-{{--                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>--}}
+                            <div>
+                                <script defer src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
                                 <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
                             </div>
                             <button type="button" onclick="checkRecaptcha()"
@@ -268,10 +264,10 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                     <div class="col-xs-12 mainContentInfos">
                         <div style="margin-bottom: 10px">{{__('برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:')}}</div>
                         <div>
-{{--                            <button class="btn showDetailsBtn" onclick="showForgatenPassInput('Email_ForgetPass')">--}}
-{{--                                <div class="emailLogo"></div>--}}
-{{--                                <span class="float-right">{{__('ایمیل')}}</span>--}}
-{{--                            </button>--}}
+                            <button class="btn showDetailsBtn" onclick="showForgatenPassInput('Email_ForgetPass')">
+                                <div class="emailLogo"></div>
+                                <span class="float-right">{{__('ایمیل')}}</span>
+                            </button>
                             <button class="btn showDetailsBtn" onclick="showForgatenPassInput('Phone_ForgetPass')">
                                 <div class="phoneLogo"></div>
                                 <span class="float-right">{{__('تلفن همراه')}}</span>
@@ -319,8 +315,8 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                             <div class="pd-tp-8">
                                 <button type="button" onclick="sendForgetPassPhone()" class="loginSubBtn btn btn-info active">{{__('ثبت')}}</button>
                                 <button type="button"
-                                        onclick="Return('ForgetPassword')"
-{{--                                        onclick="Return('Phone_ForgetPass')" --}}
+{{--                                        onclick="Return('ForgetPassword')"--}}
+                                        onclick="Return('Phone_ForgetPass')"
                                         class="loginReturnBtn btn btn-default">{{__('بازگشت')}}</button>
                             </div>
                         </div>
@@ -403,10 +399,10 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
     var retrievePasByEmailDir = '{{route('retrievePasByEmail')}}';
     var resendActivationCodeForgetDir = '{{route('resendActivationCodeForget')}}';
 
-    // function showLoginEmail() {
-    //     $('#loginPopUp').addClass('hidden');
-    //     $('#EnterEmail-loginPopUp').removeClass('hidden');
-    // }
+    function showLoginEmail() {
+        $('#loginPopUp').addClass('hidden');
+        $('#EnterEmail-loginPopUp').removeClass('hidden');
+    }
 
     function firstRegisterStep() {
         let name = $('#username_register').val();
@@ -416,21 +412,22 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
 
         if (name.trim().length > 0 && emailPhone.trim().length > 0 && password.trim().length > 0) {
 
-            let kind = 'phone';
-            let phone = fixNumbers(emailPhone);
-            if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
-                $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
-                return;
-            }
-
-            // if (!emailPhone.includes('@')) {
-            //     let phone = fixNumbers(emailPhone);
-            //     if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
-            //         $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
-            //         return;
-            //     }
-            //     kind = 'phone';
+            // let kind = 'phone';
+            // let phone = fixNumbers(emailPhone);
+            // if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
+            //     $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
+            //     return;
             // }
+
+            let kind = 'email';
+            if (!emailPhone.includes('@')) {
+                let phone = fixNumbers(emailPhone);
+                if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
+                    $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
+                    return;
+                }
+                kind = 'phone';
+            }
 
             openLoading();
             $.ajax({
@@ -457,8 +454,8 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
                             } else {
                                 if (kind == 'phone')
                                     checkInputPhoneRegister();
-                                // else
-                                //     openUserRegisterationPage();
+                                else
+                                    openUserRegisterationPage();
                             }
                         }
                     } catch (e) {
@@ -1020,10 +1017,4 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         }
         return str;
     };
-
-    $(document).ready(function () {
-        $(".login-button").click(function () {
-            showLoginPrompt('{{Request::url()}}')
-        })
-    });
 </script>

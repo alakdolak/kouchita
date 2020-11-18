@@ -378,6 +378,8 @@
                     'mainPic' : pic['mainPic'],
                     'userPic' : '{{getUserPic(0)}}',
                     'userName' : 'کوچیتا',
+                    'where' : pic['name'],
+                    'whereUrl' : pic['url'],
                     'uploadTime' : '',
                     'showInfo' : false,
                 }
