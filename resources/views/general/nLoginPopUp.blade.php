@@ -25,7 +25,7 @@ $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
 
 $url = $_SERVER['REQUEST_URI'];
-$authUrl = str_replace('state', 'state=' . $url, $authUrl);
+$authUrl = str_replace('state', 'state='.$url, $authUrl);
 ?>
 
 @if(\App::getLocale() == 'en')
@@ -60,7 +60,7 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
 
         <div class="loginTextHeader row">
             <div class="text">{{__('در کوچیتا ثبت نام کنید')}}</div>
-            <a href="{{$authUrl}}" class="googleA">
+            <a href="{{$authUrl}}" id="googleUrlRedirector" class="googleA">
                 <div class="g-signin2">
                     <div style="height:36px;" class="abcRioButton abcRioButtonLightBlue">
                         <div class="abcRioButtonContentWrapper"
@@ -953,11 +953,19 @@ $authUrl = str_replace('state', 'state=' . $url, $authUrl);
         }
     }
 
-    function showLoginPrompt(url = '{{Request::url()}}') {
+    function showLoginPrompt(url) {
         selectedUrl = url;
         $("#username_main").val("");
         $("#password_main").val("");
         $('#mainLoginPopUp').removeClass('hidden');
+
+        var googleUrl = $('#googleUrlRedirector').attr('href');
+        var indexOfState = googleUrl.search('state=');
+        var urlState = googleUrl.slice(indexOfState);
+        var indexOfEndState = urlState.search('&');
+        var findedUrl = googleUrl.slice(indexOfState, indexOfState+indexOfEndState);
+        googleUrl = googleUrl.replace(findedUrl, url);
+        $('#googleUrlRedirector').attr('href', googleUrl);
     }
 
     function retrievePasByEmail() {
