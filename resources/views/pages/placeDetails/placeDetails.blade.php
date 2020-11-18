@@ -986,15 +986,13 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             function createSuggestionRowWithData(_result){
                 let fk = Object.keys(_result);
                 for (let x of fk) {
-                    if(_result[x].length > 4) {
-                        createSuggestionPack('nearDiv' + x + 'Content', _result[x], function () { // in suggestionPack.blade.php
-                            $('#nearDiv' + x + 'Content').find('.suggestionPackDiv').addClass('swiper-slide');
-                        });
-                    }
+                    if(_result[x].length > 4)
+                        createSuggestionPack(`nearDiv${x}Content`,
+                                            _result[x],
+                                            () => $(`#nearDiv${x}Content`).find('.suggestionPackDiv').addClass('swiper-slide') /**in suggestionPack.blade.php**/);
                     else
-                        $('#' + x).hide();
+                        $(`#nearDiv${x}Content`).remove();
                 }
-
                 initNearbySwiper();
             }
 
