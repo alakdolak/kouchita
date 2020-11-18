@@ -79,21 +79,21 @@
     $(document).ready(function () {
         $(".login-button").click(() => {
             if(window.getPages.indexOf('login') == -1)
-                getPagesHtml('login', () => showLoginPrompt('{{Request::url()}}'));
+                getLoginPages(() => showLoginPrompt('{{Request::url()}}'));
             else
                 showLoginPrompt('{{Request::url()}}')
         })
     });
 
-    function getPagesHtml(_page, _callBack){
+    function getLoginPages(_callBack){
         openLoading(() => {
             $.ajax({
                 type: 'get',
-                url: '{{route("getPage")}}',
+                url: '{{route("getPage.login")}}',
                 success: response => {
                     closeLoading();
                     $('body').append(response);
-                    window.getPages.push(_page);
+                    window.getPages.push('login');
                     if(typeof _callBack === 'function')
                         _callBack();
                 },
@@ -108,7 +108,7 @@
     function checkLogin(redirect = '{{Request::url()}}'){
         if (!hasLogin) {
             if(window.getPages.indexOf('login') == -1)
-                getPagesHtml('login', () => showLoginPrompt(redirect));
+                getLoginPages(() => showLoginPrompt(redirect));
             else
                 showLoginPrompt(redirect);
             return false;

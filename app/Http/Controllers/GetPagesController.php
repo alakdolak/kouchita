@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class GetPagesController extends Controller
 {
-    public function getPages(){
+    public function getLoginPage(){
         return view('general.nLoginPopUp');
     }
 }

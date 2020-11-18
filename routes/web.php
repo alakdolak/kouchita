@@ -834,7 +834,7 @@ Route::group(array('middleware' => ['nothing', 'notUse']), function () {
     Route::get('userActivitiesProfile', 'NotUseController@userActivitiesProfile');
 });
 
-Route::get('/getPages', 'GetPagesController@getPages')->name('getPage');
+Route::get('/getPages/login', 'GetPagesController@getLoginPage')->name('getPage.login');
 
 Route::get('seenLogExport/{num}', 'MainController@seenLogExport');
 
