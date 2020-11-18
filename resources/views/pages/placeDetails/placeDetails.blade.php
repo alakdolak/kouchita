@@ -1006,7 +1006,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 });
             }
 
-            getNearbyToPlace();
+           $(document).ready(() => {
+               getNearbyToPlace();
+           });
 
         </script>
     @endif
