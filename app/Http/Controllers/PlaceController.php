@@ -394,15 +394,22 @@ class PlaceController extends Controller {
         $lngBetween = [$D + $lngDeg, $D - $lngDeg];
 
         $tableNames = ['hotels', 'restaurant', 'amaken', 'majara', 'boomgardies'];
+        $s1Time = microtime(true);
+        foreach ($tableNames as $tableName){
+            $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
+        }
+        $s2Time = microtime(true);
+        foreach ($tableNames as $tableName){
+            $nearbys = DB::select("SELECT id, `name`, reviewCount, fullRate, slug, alt, cityId, `C`, `D` FROM $tableName WHERE `C` > $latBetween[1] AND `C` < $latBetween[0] AND `D` > $lngBetween[1] AND `D` < $lngBetween[0] limit 0, $count" );
+        }
+        $s3Time = microtime(true);
+        dd($s3Time-$s2Time, $s2Time - $s1Time);
+
         foreach ($tableNames as $tableName){
             $kindPlace = Place::where('tableName', $tableName)->first();
             if($kindPlace != null) {
-                $s1Time = microtime(true);
-                $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
-                $s2Time = microtime(true);
+//                $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
                 $nearbys = DB::select("SELECT id, `name`, reviewCount, fullRate, slug, alt, cityId, `C`, `D` FROM $tableName WHERE `C` > $latBetween[1] AND `C` < $latBetween[0] AND `D` > $lngBetween[1] AND `D` < $lngBetween[0] limit 0, $count" );
-                $s3Time = microtime(true);
-                dd($s3Time-$s2Time, $s2Time - $s1Time);
 
                 foreach ($nearbys as $nearby) {
 //                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
