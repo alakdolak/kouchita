@@ -144,7 +144,7 @@ class CityController extends Controller
         $DBpic = PlacePic::join('amaken', 'amaken.id', 'placePics.placeId')
                         ->where('placePics.kindPlaceId', 1)
                         ->whereIn('placePics.placeId', $allAmakenId)
-                        ->select(['placePics.id', 'amaken.picNumber AS mainPic', 'amaken.keyword', 'amaken.file', 'placePics.alt', 'placePics.picNumber'])
+                        ->select(['placePics.id', 'amaken.picNumber AS mainPic', 'amaken.keyword', 'amaken.name', 'amaken.file', 'placePics.alt', 'placePics.picNumber'])
                         ->get();
 
         $location = __DIR__ . '/../../../../assets/_images/amaken/';
@@ -163,6 +163,8 @@ class CityController extends Controller
                     'mainPic' => $mainPic,
                     'smallPic' => $smallPic,
                     'alt' => $item->keyword,
+                    'name' => $item->name,
+                    'url' => route('placeDetails', ['kindPlaceId' => 1, 'placeId' => $item->id])
                 ]);
         }
 

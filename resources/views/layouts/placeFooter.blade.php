@@ -27,14 +27,20 @@
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
                     <div class="footerIconHor facebook"></div>
                 </a>
-                <a class="socialLink" rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://twitter.com/Koochita_Com">
                     <div class="footerIconHor twitter"></div>
                 </a>
                 <a class="socialLink" rel="nofollow" target="_blank" href="https://www.instagram.com/koochita_com/">
                     <div class="footerIconHor instagram"></div>
                 </a>
-                <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/koochita">
                     <div class="footerIconHor telegram"></div>
+                </a>
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://wa.me/989120239315">
+                    <div class="footerIconHor whatsappBackground"></div>
+                </a>
+                <a class="socialLink" rel="nofollow" target="_blank" href="https://koochitatv.com">
+                    <div class="footerIconHor koochiatTvIcon"></div>
                 </a>
 {{--                <a class="socialLink" rel="nofollow" target="_blank" href="https://koochitatv.com">--}}
 {{--                    <div class="footerIconHor aparat"></div>--}}
@@ -744,14 +750,11 @@
                 @endif
 
                 <div class="footerSocialDivPhone">
-{{--                    <a rel="nofollow" target="_blank" href="https://twitter.com/shazdemosafer">--}}
+{{--                    <a rel="nofollow" target="_blank" href="https://twitter.com/Koochita_Com">--}}
 {{--                        <div class="footerIconHor twitter"></div>--}}
 {{--                    </a>--}}
 {{--                    <a rel="nofollow" target="_blank" href="#">--}}
 {{--                        <div class="footerIconHor youtubeBackground"></div>--}}
-{{--                    </a>--}}
-{{--                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/shazdehmosafer">--}}
-{{--                        <div class="footerIconHor telegram"></div>--}}
 {{--                    </a>--}}
 {{--                    <a rel="nofollow" target="_blank" href="#">--}}
 {{--                        <div class="footerIconHor pinterest"></div>--}}
@@ -765,14 +768,16 @@
 {{--                    <a class="socialLink" rel="nofollow" target="_blank" href="https://aparat.com">--}}
 {{--                        <div class="footerIconHor aparat"></div>--}}
 {{--                    </a>--}}
-
+                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/koochita">
+                        <div class="footerIconHor telegram"></div>
+                    </a>
                     <a rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
                         <div class="footerIconHor facebook"></div>
                     </a>
-                    <a rel="nofollow" target="_blank" href="#">
+                    <a rel="nofollow" target="_blank" href="https://wa.me/989120239315">
                         <div class="footerIconHor whatsappBackground"></div>
                     </a>
-                    <a rel="nofollow" target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                    <a rel="nofollow" target="_blank" href="https://www.instagram.com/koochita_com/">
                         <div class="footerIconHor instagram"></div>
                     </a>
                     <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">
