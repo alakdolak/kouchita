@@ -346,7 +346,7 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div id="mainSuggestion" class="mainSuggestion swiper-container">
                         <div id="topFood" class="swiper-wrapper suggestionBody">
-                            {{--                            fill with createMainPageSuggestion function--}}
+                            {{-- fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -439,19 +439,13 @@
                             <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
                             <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
                         </svg>
-
-                        <div id="middleBan4Body">
-{{--                            <div id='slide1' class='mainBlubSlider up1' style="background-image: url('{{$middleBan['4'][0]['pic']}}'); ">{{$middleBan['4'][0]['text']}}</div>--}}
-{{--                            @for($i = 1; $i < count($middleBan['4']); $i++)--}}
-{{--                                <div id='slide{{$i+1}}' class='mainBlubSlider' style="background-image: url('{{$middleBan['4'][$i]['pic']}}'); ">{{$middleBan['4'][$i]['text']}}</div>--}}
-{{--                            @endfor--}}
-                        </div>
+                        <div id="middleBan4Body"></div>
                     </div>
                 </div>
                 <script>
+                    var totalPageSlide = {{isset($middleBan['4']) ? count($middleBan['4']) : 0}};
                     var Baner4isLoaded = false;
                     var curpage = 1;
-                    var totalPageSlide = {{isset($middleBan['4']) ? count($middleBan['4']) : 0}};
                     var sliding = false;
                     var click = true;
                     var left = document.getElementById("banner3_left");
@@ -556,11 +550,8 @@
                             }, 1700);
                         }
                     }
-
                     left.onmousedown = () => leftSlide();
-
                     right.onmousedown = () =>  rightSlide();
-
                     document.onkeydown = e => {
                         if (e.keyCode == 37)
                             leftSlide();

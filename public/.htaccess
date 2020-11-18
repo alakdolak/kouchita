@@ -2,7 +2,7 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
-
+AddDefaultCharset utf-8
     RewriteEngine On
 
     # Redirect Trailing Slashes If Not A Folder...
