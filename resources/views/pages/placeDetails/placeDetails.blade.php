@@ -13,6 +13,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     <meta property="title" content="{{$seoTitle}}"/>
     <meta name="twitter:title" content="{{$seoTitle}}"/>
     <meta name="twitter:card" content="{{$place->meta}}"/>
+    <meta name="description" content="{{$place->meta}}"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
     <meta property="og:description" content="{{$place->meta}}"/>
     <meta property="article:section" content="{{$placeMode}}"/>

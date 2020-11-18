@@ -472,13 +472,15 @@ class PlaceController extends Controller {
 
                 if(count($safarnamehId) != 0) {
                     $allSafarnameh = Safarnameh::whereRaw('(date <= ' . $today . ' OR (date = ' . $today . ' AND (time < ' . $nowTime . ' || time IS NULL)))')
-                                    ->where('release', '!=','draft')
-                                    ->whereIn('id', $safarnamehId)
-                                    ->where('confirm', 1)
-                                    ->select(['userId', 'id', 'title', 'meta',
-                                            'slug', 'seen', 'date', 'created_at',
-                                            'pic', 'keyword'])
-                                    ->orderBy('date', 'DESC')->get();
+                                                ->where('release', '!=','draft')
+                                                ->whereIn('id', $safarnamehId)
+                                                ->where('confirm', 1)
+                                                ->take(10)
+                                                ->select(['userId', 'id', 'title', 'meta',
+                                                        'slug', 'seen', 'date', 'created_at',
+                                                        'pic', 'keyword'])
+                                                ->orderBy('date', 'DESC')
+                                                ->get();
 
                     foreach ($allSafarnameh as $i)
                         array_push($safarnameh, $i);
@@ -489,11 +491,13 @@ class PlaceController extends Controller {
                                     ->where('release', '!=','draft')
                                     ->whereNotIn('id', $safarnamehId)
                                     ->where('confirm', 1)
+                                    ->take(10 - count($safarnameh))
                                     ->select(['userId', 'id', 'title',
                                               'meta', 'slug', 'seen',
                                               'date', 'created_at',
                                                'pic', 'keyword'])
-                                    ->orderBy('date', 'DESC')->get();
+                                    ->orderBy('date', 'DESC')
+                                    ->get();
 
                     if(count($safarnameh) == 0)
                         $safarnameh = $alP;
