@@ -75,24 +75,24 @@
         }
 
 
-        .filtersSec .filKind .icons{
+        .filtersSec .filKind .icon{
             font-size: 1em;
         }
 
-        .filtersSec .filKind .icons.touristAttractions  {
-            color: #ec008c;
+        .filtersSec .filKind .icon.touristAttractions  {
+            background: #ec008c;
         }
-        .filtersSec .filKind .icons.hotelIcon {
-            color: #00516f;
+        .filtersSec .filKind .icon.hotelIcon {
+            background: #00516f;
         }
-        .filtersSec .filKind .icons.restaurantIcon {
-            color: #fff200;
+        .filtersSec .filKind .icon.restaurantIcon {
+            background: #fff200;
         }
-        .filtersSec .filKind .icons.adventureIcon {
-            color: #ed1c24;
+        .filtersSec .filKind .icon.adventureIcon {
+            background: #ed1c24;
         }
-        .filtersSec .filKind .icons.boomIcon {
-            color: #00aeef;
+        .filtersSec .filKind .icon.boomIcon {
+            background: #00aeef;
         }
     </style>
 
@@ -198,7 +198,7 @@
             var text = '';
             filterButtons.map(item => {
                 text += `<div class="filKind" onclick="toggleFilter(${item.id})">
-                            <div class="icon ${item.icon}"></div>
+                            <div class="fullyCenterContent icon ${item.icon}"></div>
                             <div class="name">${item.name}</div>
                         </div>`;
             });
