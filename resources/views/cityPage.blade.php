@@ -229,8 +229,8 @@
                             {{--<div class="textCityPageIcon" style="color: var(--koochita-blue)">1000</div>--}}
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="#">
-                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قتادی')}}">
-                            <div class="textCityPageIcon">{{__('قتادی')}}</div>
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قنادی')}}">
+                            <div class="textCityPageIcon">{{__('قنادی')}}</div>
                             {{--<div class="textCityPageIcon" style="color: var(--koochita-blue)">1000</div>--}}
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="#">
