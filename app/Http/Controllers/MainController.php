@@ -7,6 +7,7 @@ use App\models\Amaken;
 use App\models\BannerPics;
 use App\models\Boomgardy;
 use App\models\Cities;
+use App\models\ConfigModel;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\logs\UserSeenLog;
@@ -32,6 +33,57 @@ class MainController extends Controller
     public function myLocation()
     {
         return view('pages.placeList.myLocation');
+    }
+
+    public function getPlacesWithLocation()
+    {
+        // Latitude: 1 deg = 110.574 km
+        // Longitude: 1 deg = 111.320*cos(latitude) km
+        $places = [];
+        $lat = (float)$_GET['lat'];
+        $lng = (float)$_GET['lng'];
+
+        $radius = 2;
+        $latDeg = $radius/110.574;
+        $lngDeg = $radius/(111.320*cos(deg2rad($lat)));
+
+        $latBetween = [$lat+$latDeg, $lat-$latDeg];
+        $lngBetween = [$lng+$lngDeg, $lng-$lngDeg];
+        $kindPlaceIds = [1, 3, 4, 6, 12];
+
+        foreach ($kindPlaceIds as $kId){
+            $kindPlace = Place::find($kId);
+            if($kindPlace != null) {
+                $DBPlace = DB::select("SELECT id, `name`, reviewCount, fullRate, slug, cityId, `C`, `D` FROM $kindPlace->tableName WHERE `C` > $latBetween[1] AND `C` < $latBetween[0] AND `D` > $lngBetween[1] AND `D` < $lngBetween[0]" );
+                foreach ($DBPlace as $place) {
+                    $place->kindPlaceId = $kindPlace->id;
+                    $place->pic = getPlacePic($place->id, $kindPlace->id);
+                    $place->review = $place->reviewCount;
+                    $place->rate = floor($place->fullRate);
+                    $place->url =  createUrl($kindPlace->id, $place->id, 0, 0, 0);
+                    $place->distance = distanceBetweenCoordination($lat, $lng, $place->C, $place->D);
+
+                    if($kindPlace->id == 6)
+                        $place->address = DB::table($kindPlace->tableName)->find($place->id)->dastresi;
+                    else
+                        $place->address = DB::table($kindPlace->tableName)->find($place->id)->address;
+
+                    array_push($places, $place);
+                }
+            }
+        }
+
+        for ($i = 0; $i < count($places); $i++){
+            for ($j = $i+1; $j < count($places); $j++){
+                if($places[$i]->distance > $places[$j]->distance){
+                    $dd = $places[$i];
+                    $places[$i] = $places[$j];
+                    $places[$j] = $dd;
+                }
+            }
+        }
+
+        return response()->json(['status' => 'ok', 'result' => $places]);
     }
 
     public function landingPage()

@@ -338,6 +338,7 @@ Route::post('log/storeSeen', 'LogController@storeUserSeenLog')->name('log.storeS
 
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
+    Route::get('searchPlace', 'AjaxController@searchPlace')->name('search.place');
 
     Route::get('searchForFoodMaterial', 'AjaxController@searchForFoodMaterial')->name('search.foodMaterial');
 
@@ -360,8 +361,6 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('getGoyesh', array('as' => 'getGoyesh', 'uses' => 'AjaxController@getGoyesh'));
 
     Route::post('getPlaceKinds', array('as' => 'getPlaceKinds', 'uses' => 'AjaxController@getPlaceKinds'));
-
-    Route::post('searchPlace', array('as' => 'searchPlace', 'uses' => 'AjaxController@searchPlace'));
 
     Route::post('getPlacePic', array('as' => 'getPlacePic', 'uses' => 'AjaxController@getPlacePic'));
 
@@ -440,6 +439,8 @@ Route::group(['middleware' => ['SafarnamehShareData', 'shareData']], function ()
 Route::group(array('middleware' => ['nothing', 'shareData']), function () {
 
     Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
+
+    Route::get('getPlacesWithLocation', 'MainController@getPlacesWithLocation')->name('getPlaces.location');
 
     Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 

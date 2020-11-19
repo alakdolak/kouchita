@@ -49,7 +49,6 @@
             },
             success: function(response){
                 document.getElementById('showReviewsMain').innerHTML = '';
-
                 if(response == 'nok1') {
                     if(firstTimeFilterShow == 1){
                         document.getElementById('postFilters').style.display = 'none';
@@ -68,7 +67,7 @@
 
                     if(reviewsCount < reviewPerPageNum[0] && firstTimeFilterShow == 1) {
                         document.getElementById('postFilters').style.display = 'none';
-                        document.getElementById('phoneReviewFilterHeader').style.display = 'none';
+                        // document.getElementById('phoneReviewFilterHeader').style.display = 'none';
                     }
                     else
                         document.getElementById('postFilters').style.display = 'block';

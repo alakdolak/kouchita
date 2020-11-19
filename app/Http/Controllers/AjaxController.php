@@ -216,44 +216,22 @@ class AjaxController extends Controller {
     }
 
     public function searchPlace() {
+        $places = [];
+        $value = $_GET['value'];
+        $kindPlace = Place::whereIn('id', [1, 3, 4, 6, 12])->get();
+        foreach ($kindPlace as $kind){
+            $pds = \DB::select("SELECT `id`, `name`, `C`, `D`, `cityId` FROM $kind->tableName WHERE `name` LIKE '%".$value."%'");
 
-        $cityId = makeValidInput($_POST["cityId"]);
-        $stateId = makeValidInput($_POST["stateId"]);
-        $key = makeValidInput($_POST["key"]);
-        $placeKind = makeValidInput($_POST["placeKind"]);
+            foreach ($pds as $item){
+                $city = Cities::find($item->cityId);
+                $item->city = $city->name;
+                $item->state = $city->getState->name;
+                $item->kindPlaceId = $kind->id;
+                array_push($places, $item);
+            }
+        }
 
-        $subQuery = "";
-
-        if($cityId == -1 && $stateId != -1)
-            $subQuery .= " ci.stateId = " . $stateId . " and ";
-        else if($cityId != -1 && $stateId != -1)
-            $subQuery .= " ci.id = " . $cityId . " and ci.stateId = " . $stateId . " and ";
-
-        if($placeKind == 3) {
-            $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `restaurant` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
-            echo json_encode($places);
-            return;
-        }
-        else if($placeKind == 1) {
-            $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `amaken` target, cities ci, state s WHERE " . $subQuery ." ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
-            echo json_encode($places);
-            return;
-        }
-        else if($placeKind == 4) { // hotel
-            $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `hotels` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
-            echo json_encode($places);
-            return;
-        }
-        else if($placeKind == 6) {
-            $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `majara` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
-            echo json_encode($places);
-            return;
-        }
-        else if($placeKind == 8) {
-            $places = DB::select("SELECT target.name, address, target.id, ci.name as cityName, s.name as stateName FROM `adab` target, cities ci, state s WHERE " . $subQuery . " ci.stateId = s.id and ci.id = cityId and target.`name` LIKE '%$key%' ");
-            echo json_encode($places);
-            return;
-        }
+        return response()->json(['status' => 'ok', 'result' => $places]);
     }
 
     public function searchForCity(Request $request) {

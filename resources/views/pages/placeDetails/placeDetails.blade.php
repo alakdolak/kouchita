@@ -964,9 +964,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     type: 'post',
                     url: '{{route("getNearby")}}',
                     data: {
-                        'placeId': placeId,
-                        'kindPlaceId' : kindPlaceId,
-                        'count' : 10,
+                        placeId: placeId,
+                        kindPlaceId : kindPlaceId,
+                        count : 10,
                     },
                     success: function(response){
                         response = JSON.parse(response);
@@ -988,7 +988,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 for (let x of fk) {
                     if(_result[x].length > 4)
                         createSuggestionPack(`nearDiv${x}Content`, _result[x], () => {
-                            $(`#nearDiv${x}Content`).find('.suggestionPackDiv').addClass('swiper-slide') /**in suggestionPack.blade.php**/
+                            $(`#nearDiv${x}Content`).find('.suggestionPackDiv').addClass('swiper-slide'); /**in suggestionPack.blade.php**/
                         });
                     else
                         $(`#nearDiv${x}`).remove();
