@@ -386,7 +386,7 @@ class PlaceController extends Controller {
 
         $radius = ConfigModel::first()->radius;
         $latDeg = $radius/110.574;
-        $lngDeg = $radius/(111.320*cos($C));
+        $lngDeg = $radius/(111.320*cos(deg2rad($C)));
 
 //        $D = (float)$D * 3.14 / 180;
 //        $C = (float)$C * 3.14 / 180;

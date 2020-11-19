@@ -120,6 +120,11 @@
 }
 .location:before {
     content: '\E019';
+    font-family: 'Shazde_Regular' !important
+}
+.locationIcon:before {
+    content: '\E019';
+    font-family: 'Shazde_Regular' !important
 }
 .downArrow {
     font-size: 40px;
