@@ -274,12 +274,17 @@
                 item.marker = new google.maps.Marker({
                                     position: new google.maps.LatLng(item.C, item.D),
                                     map: mainMap,
+                                    lat: item.C,
+                                    lng: item.D,
                                     title: item.name,
                                     icon: {
                                         url: filterButtons[item.kindPlaceId].mapIcon,
                                         scaledSize: new google.maps.Size(30, 35), // scaled size
                                     },
                                 });
+                item.marker.addListener('click', function(){
+                    setMarkerToMap(this.lat, this.lng)
+                });
             });
 
             nearPlaces = _result;
