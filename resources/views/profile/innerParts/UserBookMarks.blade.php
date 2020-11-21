@@ -5,7 +5,7 @@
         flex-wrap: wrap;
     }
     .placeBookMarkProfile > div{
-        margin-bottom: 10px;
+        margin: 15px 0px;
         width: 300px;
     }
     @media (max-width: 767px) {

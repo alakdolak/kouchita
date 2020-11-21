@@ -746,10 +746,18 @@
     var middleBan5 = {!! isset($middleBan['5']) ? $middleBan['5'] : json_encode([]) !!};
     var middleBan4 = {!! isset($middleBan['4']) ? $middleBan['4'] : json_encode([]) !!};
 
+    var sugg4PlaceHolder = getSuggestionPackPlaceHolder();
+    sugg4PlaceHolder += sugg4PlaceHolder+sugg4PlaceHolder+sugg4PlaceHolder;
+
     let loadSuggestion = false;
     let lastPageForSuggestion = null;
     let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topSafarnameh'];
-    divNames.forEach(item => createSuggestionPackPlaceHolder(item));
+    divNames.forEach(item => {
+        $(`#${item}`).html(sugg4PlaceHolder);
+        $(`#${item}`).find('.suggestionPackDiv').addClass('swiper-slide');
+        $(`#${item}`).css('direction', 'ltr');
+    });
+    runMainSwiper('mainSuggestion');
 
     if (typeof(Storage) !== "undefined") {
         let lastPages;
@@ -767,7 +775,7 @@
                 _token: '{{csrf_token()}}',
                 lastPage: lastPageForSuggestion
             },
-            success: function(response){
+            success: response => {
                 createMainPageSuggestion(response);
                 // fillCountNumber(response.count);
             }
