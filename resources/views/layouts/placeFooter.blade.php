@@ -1150,13 +1150,15 @@
             let usrnme = '{{$userFooter->username}}';
             window.user = '{!! $userFooter !!}';
 
-            showBookMarksPhone();
-
             function initialProgressFooter() {
                 var b = "{{$userTotalPointFooter / $userLevelFooter[1]->floor}}" * 100;
                 $("#progressIdPhone").css("width", b + "%");
             }
             initialProgressFooter();
+
+            $(document).ready(() => {
+                showBookMarksPhone();
+            });
 
             @if($newRegisterOpen)
                 if($(window).width() <= 767) {

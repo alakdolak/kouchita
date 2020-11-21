@@ -331,7 +331,7 @@
                 else {
                     url = item.url;
                     name1 = item.targetName;
-                    name2 = item.cityName+'در'+item.stateName;
+                    name2 = item.cityName+' در '+item.stateName;
                 }
 
                 newElement += `<a href="${url}" class="mainSearchResultRow">

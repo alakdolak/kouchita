@@ -429,7 +429,7 @@
     </div>
 
     @if(isset($myPage) && $myPage)
-        <div id="userTripStyle" class="modalBlackBack hidden">
+        <div id="userTripStyle" class="modalBlackBack">
             <div class="userTripMainBody">
                 <div class="closeFullReview iconClose" onclick="closeMyModal('userTripStyle');"></div>
                 <div>
