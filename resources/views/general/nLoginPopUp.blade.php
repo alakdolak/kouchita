@@ -964,7 +964,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         var urlState = googleUrl.slice(indexOfState);
         var indexOfEndState = urlState.search('&');
         var findedUrl = googleUrl.slice(indexOfState, indexOfState+indexOfEndState);
-        googleUrl = googleUrl.replace(findedUrl, url);
+        googleUrl = googleUrl.replace(findedUrl, 'state='+url);
         $('#googleUrlRedirector').attr('href', googleUrl);
     }
 

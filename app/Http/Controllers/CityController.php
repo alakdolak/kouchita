@@ -56,46 +56,6 @@ class CityController extends Controller
             $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->count();
             $allBoomgardy = Boomgardy::where('cityId', $place->id)->count();
             $allSafarnamehCount = SafarnamehCityRelations::where('cityId', $place->id)->count();
-
-
-            $pics = CityPic::where('cityId', $place->id)->get();
-            if(count($pics) == 0){
-                $seenActivity = Activity::whereName('مشاهده')->first();
-                $ala = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
-                $mostSeen = [];
-                if(count($ala) != 0)
-                    $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
-
-                if(count($mostSeen) != 0){
-                    foreach ($mostSeen as $item){
-                        $p = Amaken::find($item->placeId);
-                        $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
-                        if(file_exists($location)) {
-                            $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
-                            break;
-                        }
-                    }
-                    if($place->image == null || $place->image == '')
-                        $place->image = URL::asset('_images/nopic/blank.jpg');
-                }
-                else
-                    $place->image = URL::asset('_images/nopic/blank.jpg');
-            }
-            else{
-                foreach ($pics as $pic)
-                    $pic->pic = URL::asset('_images/city/'.$place->id.'/'.$pic->pic);
-
-                $place->pic = $pics;
-                if($place->image != null){
-                    $locationPic1 = $locationPic .'/' . $place->id . '/' . $place->image;
-                    if(is_file($locationPic1))
-                        $place->image = URL::asset('_images/city/' . $place->id  . '/' . $place->image);
-                    else
-                        $place->image = $place->pic[0]->pic;
-                }
-                $place->image = $place->pic[0]->pic;
-            }
-
         }
         else {
             $place->listName = $place->name;
@@ -115,6 +75,7 @@ class CityController extends Controller
             $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->count();
             $allSafarnamehCount = SafarnamehCityRelations::where('stateId', $place->id)->count();
         }
+
         if($place->image == null){
             $seenActivity = Activity::whereName('مشاهده')->first();
             $mostSeen = [];
@@ -122,6 +83,7 @@ class CityController extends Controller
                 $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
             else
                 $place->image = URL::asset('_images/nopic/blank.jpg');
+
             if(count($mostSeen) != 0){
                 foreach ($mostSeen as $item){
                     $p = Amaken::find($item->placeId);
