@@ -133,6 +133,10 @@
     content: '\E04A';
     color: #30b4a6;
 }
+.topArrowFull:before {
+    content: '\E044';
+    font-family: 'Shazde_Regular' !important
+}
 .plus:before {
     content: '\E031';
     font-family: 'Shazde_Regular' !important

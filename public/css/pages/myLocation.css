@@ -95,7 +95,7 @@
     background: #00516f;
 }
 .filtersSec .filKind.restaurantFilter .icon {
-    background: #e4d900;
+    background: #fcee23;
 }
 .filtersSec .filKind.advantureFilter .icon {
     background: #ed1c24;
@@ -192,6 +192,7 @@
     align-items: center;
     padding-bottom: 10px;
     border-bottom: solid #efefef 1px;
+    position: relative;
 }
 .placeList .placeCard .img{
     width: 75px;
@@ -277,6 +278,40 @@
     display: none;
 }
 
+.showPlacePage{
+    display: block;
+    font-size: 10px;
+    text-align: center;
+    margin-top: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+}
+
+.mobileListContent .showPlacePage{
+    position: relative;
+}
+.selectedPlace .showPlacePage{
+    position: absolute;
+    left: 0;
+}
+
+.bodySec .mobileListSection .fingerTopListSec.topArrowFull:before{
+    color: #c5c5c5;
+    font-size: 50px;
+    position: absolute;
+    top: -10px;
+    right: 25px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mobileListSection.fullMobileList .fingerTopListSec.topArrowFull:before {
+    transform: rotate(-180deg);
+    top: 5px;
+}
+
 @media (max-width: 767px) {
     body{
         overflow: hidden;
@@ -327,13 +362,14 @@
         border-bottom: solid #e6e6e6 1px;
     }
     .bodySec .mobileListSection .fingerTopListSec{
-        width: 35px;
-        height: 5px;
+        width: 97px;
+        height: 4px;
         background: #c5c5c5;
         border-radius: 20px;
-        margin-top: 5px;
+        margin-top: 15px;
         margin-right: auto;
         margin-left: auto;
+        position: relative;
     }
     .bodySec .mobileListSection .nearName{
         text-align: center;
@@ -389,7 +425,7 @@
     }
     .sideSection .filtersSec .filKind{
         flex-direction: row-reverse;
-        color: white;
+        color: black;
         border-radius: 20px;
         padding: 5px;
         min-width: 85px;
@@ -403,8 +439,11 @@
         height: 20px;
         margin-bottom: 0px;
     }
+
     .sideSection .filtersSec .filKind .name{
         margin-left: 5px;
+        font-size: .45em;
+        font-weight: bold;
     }
     .sideSection .filtersSec .filKind.offFilter{
         background: white;
@@ -412,18 +451,23 @@
     }
     .filtersSec .filKind.amakenFilter {
         background: #ec008c;
+        background: white;
     }
     .filtersSec .filKind.hotelFilter{
         background: #00516f;
+        background: white;
     }
     .filtersSec .filKind.restaurantFilter{
         background: #e4d900;
+        background: white;
     }
     .filtersSec .filKind.advantureFilter{
         background: #ed1c24;
+        background: white;
     }
     .filtersSec .filKind.boomgardyFilter{
         background: #00aeef;
+        background: white;
     }
 
     .mobileListContent .typesList{
