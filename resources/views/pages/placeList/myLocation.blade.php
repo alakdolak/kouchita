@@ -4,163 +4,6 @@
     @include('layouts.topHeader')
     <title>اطراف من</title>
     <link rel="stylesheet" href="{{URL::asset('css/pages/myLocation.css?v='.$fileVersions)}}">
-
-    <style>
-        .mobileListSection{
-            display: none;
-        }
-
-        @media (max-width: 767px) {
-            body{
-                overflow: hidden;
-            }
-            .gapForMobileFooter{
-                display: none;
-            }
-            .placeSearchMapResults{
-                width: 85%;
-                right: 30px;
-            }
-            .hideOnScreen.mobileHeader{
-                display: none;
-            }
-            .bodySec{
-                overflow: hidden;
-                height: 100vh;
-                position: unset;
-            }
-            .gmnoprint{
-                display: none;
-            }
-            .mapSection{
-                width: 100%;
-            }
-            .bodySec .listSection{
-                display: none;
-            }
-            .bodySec .mobileListSection{
-                display: block;
-                background: white;
-                position: absolute;
-                bottom: 50px;
-                right: 0px;
-                width: 100%;
-                height: 75vh;
-                height: 70px;
-                z-index: 8;
-                border-radius: 20px 20px 0px 0px;
-                box-shadow: 0px 0px 4px 1px #c1c1c1;
-            }
-            .bodySec .mobileListSection.fullMobileList{
-                border-radius: 0px;
-            }
-            .bodySec .mobileListSection .topSecMobileList{
-                margin: 0px 10px;
-                padding-bottom: 5px;
-                border-bottom: solid #e6e6e6 1px;
-            }
-            .bodySec .mobileListSection .fingerTopListSec{
-                width: 35px;
-                height: 5px;
-                background: #c5c5c5;
-                border-radius: 20px;
-                margin-top: 5px;
-                margin-right: auto;
-                margin-left: auto;
-            }
-            .bodySec .mobileListSection .nearName{
-                text-align: center;
-                font-size: 18px;
-                margin-top: 10px;
-                font-weight: bold;
-            }
-            .bodySec .mobileListSection .mobileListContent{
-                overflow-y: auto;
-                max-height: 100%;
-                background: white;
-                padding-bottom: 60px;
-            }
-            .bodySec .mobileListSection .mobileListContent .testSS{
-                width: 100%;
-                background: red;
-                font-size: 20px;
-                height: 20px;
-                margin-bottom: 20px;
-            }
-
-
-            .searchSec input{
-                width: 100%;
-            }
-            .sideSection{
-                transition: .3s;
-                height: 100px;
-                width: 100%;
-            }
-            .sideSection.fullMobileList{
-                background: white;
-            }
-
-            .sideSection > div{
-                width: 96%;
-                border-radius: 35px;
-            }
-            .sideSection .filtersSec{
-                background: transparent;
-                box-shadow: none;
-                overflow-x: auto;
-                border-radius: 0px;
-                margin: 0;
-                width: 100%;
-                padding: 0;
-                white-space: nowrap;
-                display: block;
-                padding-bottom: 5px
-            }
-            .sideSection .filtersSec::-webkit-scrollbar {
-                display: none;
-            }
-            .sideSection .filtersSec .filKind{
-                flex-direction: row-reverse;
-                color: white;
-                border-radius: 20px;
-                padding: 5px;
-                min-width: 85px;
-                justify-content: space-around;
-                margin-right: 10px;
-                display: inline-flex;
-            }
-            .sideSection .filtersSec .filKind .icon{
-                font-size: 12px;
-                width: 20px;
-                height: 20px;
-                margin-bottom: 0px;
-            }
-            .sideSection .filtersSec .filKind .name{
-                margin-left: 5px;
-            }
-            .sideSection .filtersSec .filKind.offFilter{
-                background: white;
-                color: #757575;
-            }
-            .filtersSec .filKind.amakenFilter {
-                background: #ec008c;
-            }
-            .filtersSec .filKind.hotelFilter{
-                background: #00516f;
-            }
-            .filtersSec .filKind.restaurantFilter{
-                background: #e4d900;
-            }
-            .filtersSec .filKind.advantureFilter{
-                background: #ed1c24;
-            }
-            .filtersSec .filKind.boomgardyFilter{
-                background: #00aeef;
-            }
-        }
-    </style>
-
 </head>
 <body>
     @include('general.forAllPages')
@@ -204,183 +47,17 @@
                 <div class="placeList pcPlaceList"></div>
             </div>
         </div>
-        <style>
-            .mobileListContent .typesList{
-                padding: 0px 10px;
-            }
-            .mobileListContent .typesList .typeRow{
-                margin-bottom: 5px;
-                padding-bottom: 5px;
-                border-bottom: solid 1px #f1f1f1;
-            }
-            .mobileListContent .typesList .typeRow .header{
-                font-size: 16px;
-                font-weight: bold;
-            }
-            .mobileListContent .typesList .typeRow .header:before{
-                margin-left: 5px;
-                font-weight: normal;
-            }
-            .mobileListContent .typesList .typeRow .body{
-                white-space: nowrap;
-                display: block;
-                width: 100%;
-                overflow-x: auto;
-                overflow-y: hidden;
-                border-bottom: none;
-            }
-            .mobileListContent .typesList .typeRow .body::-webkit-scrollbar {
-                display: none;
-            }
-            .mobileListContent .typesList .placeCard{
-                display: inline-flex;
-                flex-direction: column;
-                width: 160px;
-                justify-content: center;
-                align-items: center;
-            }
-            .mobileListContent .typesList .placeCard .info{
-                text-align: center;
-                margin: 0;
-                width: 90%;
-                overflow: hidden;
-            }
-            .mobileListContent .typesList .placeCard .img{
-                width: 150px;
-                height: 120px;
-                overflow: hidden;
-                border-radius: 10px;
-            }
-        </style>
         <div id="mobileListSection" class="mobileListSection">
             <div class="topSecMobileList">
                 <div class="fingerTopListSec"></div>
                 <div class="nearName">اطراف من</div>
             </div>
             <div class="placeList mobileListContent">
-                <div class="specialSelectedPlace">
-                    <div class="placeCard">
-                        <div class="fullyCenterContent img">
-                            <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
-                        </div>
-                        <div class="info">
-                            <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
-                            <div class="star">
-                                <div class="ui_bubble_rating bubble_30"></div>
-                                |
-                                2 نقد
-                            </div>
-                            <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
-                        </div>
-                    </div>
+                <div class="fullyCenterContent placeListLoading hidden">
+                    <img alt="loading" data-src="{{URL::asset('images/loading.gif')}}" class="lazyload" style="width: 100px;" />
                 </div>
-                <div class="typesList">
-                    <div class="typeRow">
-                        <div class="header touristAttractions">جاهای دیدنی نزدیک</div>
-                        <div class="body">
-                            @for($i = 0; $i < 20; $i++)
-                                <div class="placeCard">
-                                    <div class="fullyCenterContent img">
-                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
-                                        <div class="star">
-                                            <div class="ui_bubble_rating bubble_30"></div>
-                                            |
-                                            2 نقد
-                                        </div>
-                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                    <div class="typeRow">
-                        <div class="header restaurantIcon">رستوران های نزدیک</div>
-                        <div class="body">
-                            @for($i = 0; $i < 20; $i++)
-                                <div class="placeCard">
-                                    <div class="fullyCenterContent img">
-                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
-                                        <div class="star">
-                                            <div class="ui_bubble_rating bubble_30"></div>
-                                            |
-                                            2 نقد
-                                        </div>
-                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                    <div class="typeRow">
-                        <div class="header hotelIcon">اقامتگاه های نزدیک</div>
-                        <div class="body">
-                            @for($i = 0; $i < 20; $i++)
-                                <div class="placeCard">
-                                    <div class="fullyCenterContent img">
-                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
-                                        <div class="star">
-                                            <div class="ui_bubble_rating bubble_30"></div>
-                                            |
-                                            2 نقد
-                                        </div>
-                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                    <div class="typeRow">
-                        <div class="header adventureIcon">طبیعت گردی های نزدیک</div>
-                        <div class="body">
-                            @for($i = 0; $i < 20; $i++)
-                                <div class="placeCard">
-                                    <div class="fullyCenterContent img">
-                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
-                                        <div class="star">
-                                            <div class="ui_bubble_rating bubble_30"></div>
-                                            |
-                                            2 نقد
-                                        </div>
-                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                    <div class="typeRow">
-                        <div class="header boomIcon">بوم گردی های نزدیک</div>
-                        <div class="body">
-                            @for($i = 0; $i < 20; $i++)
-                                <div class="placeCard">
-                                    <div class="fullyCenterContent img">
-                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
-                                        <div class="star">
-                                            <div class="ui_bubble_rating bubble_30"></div>
-                                            |
-                                            2 نقد
-                                        </div>
-                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                </div>
+                <div class="specialSelectedPlace selectedPlace"></div>
+                <div id="mobileShowList" class="typesList"></div>
             </div>
         </div>
         <div class="mapSection">
@@ -402,28 +79,13 @@
         $('.topSecMobileList').on('touchend', e => {
             var height = $('#mobileListSection').height();
             var windowHeight = $(window).height();
-            var changeBackGround = false;
             var resultHeight;
 
-            if(height > windowHeight/2) {
-                if(height > startMobileListHeight)
-                    changeBackGround = true;
-
+            if(height > windowHeight/2)
                 resultHeight = height > startMobileListHeight ? "full" : "middle";
-            }
             else
                 resultHeight = height > startMobileListHeight ? "middle" : "min";
-
-            if(changeBackGround){
-                $('.sideSection').addClass('fullMobileList');
-                $('#mobileListSection').addClass('fullMobileList');
-            }
-            else {
-                $('.sideSection').removeClass('fullMobileList');
-                $('#mobileListSection').removeClass('fullMobileList');
-            }
-
-            toggleMobileList(resultHeight);
+            toggleMobileListNearPlace(resultHeight);
         });
         $('.topSecMobileList').on('touchmove', e => {
             var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
@@ -440,7 +102,8 @@
                 $('#mobileListSection').height(75);
         });
 
-        function toggleMobileList(_kind){
+        function toggleMobileListNearPlace(_kind){
+            console.log(_kind);
             var windowHeight = $(window).height();
             var maxHeight = windowHeight-150;
             var middleHeight = windowHeight/2-100;
@@ -454,12 +117,19 @@
             else
                 resultHeight = minHeight;
 
+            if(_kind == "full"){
+                $('.sideSection').addClass('fullMobileList');
+                $('#mobileListSection').addClass('fullMobileList');
+            }
+            else {
+                $('.sideSection').removeClass('fullMobileList');
+                $('#mobileListSection').removeClass('fullMobileList');
+            }
+
             $('#mobileListSection').animate({ height: resultHeight}, 300);
-
         }
-    </script>
 
-    <script>
+        var selectedPlaceId = '';
         var dontShowfilters = [];
         var nearPlacesMapMarker = [];
         var nearPlaces = [];
@@ -476,6 +146,7 @@
                 icon: 'touristAttractions',
                 mapIcon: '{{URL::asset('images/mapIcon/att.png')}}',
                 name: 'جای دیدنی',
+                nameTitle: 'جاهای دیدنی نزدیک',
             },
             3: {
                 id: 3,
@@ -483,6 +154,7 @@
                 icon: 'restaurantIcon',
                 mapIcon: '{{URL::asset('images/mapIcon/res.png')}}',
                 name: 'رستوران',
+                nameTitle: 'رستوران های نزدیک',
             },
             4: {
                 id: 4,
@@ -490,6 +162,7 @@
                 icon: 'hotelIcon',
                 mapIcon: '{{URL::asset('images/mapIcon/hotel.png')}}',
                 name: 'اقامتگاه',
+                nameTitle: 'اقامتگاه های نزدیک',
             },
             6: {
                 id: 6,
@@ -497,6 +170,7 @@
                 icon: 'adventureIcon',
                 mapIcon: '{{URL::asset('images/mapIcon/adv.png')}}',
                 name: 'طبیعت گردی',
+                nameTitle: 'طبیعت گردی های نزدیک',
             },
             12: {
                 id: 12,
@@ -504,18 +178,26 @@
                 icon: 'boomIcon',
                 mapIcon: '{{URL::asset('images/mapIcon/boom.png')}}',
                 name: 'بوم گردی',
+                nameTitle: 'بوم گردی های نزدیک',
             },
         };
 
         function createFilterHtml(){
             var text = '';
+            var mobile = '';
             for(var item in filterButtons){
                 text += `<div class="filKind ${filterButtons[item].enName}" onclick="toggleFilter(${filterButtons[item].id}, this)">
                             <div class="fullyCenterContent icon ${filterButtons[item].icon}"></div>
                             <div class="name">${filterButtons[item].name}</div>
                         </div>`;
+
+                mobile += `<div id="mobileResultRow_${filterButtons[item].id}" class="typeRow hidden">
+                                <div class="header ${filterButtons[item].icon}">${filterButtons[item].nameTitle}</div>
+                                <div class="body"></div>
+                           </div>`
             }
             $('.filtersSec').html(text);
+            $('#mobileShowList').html(mobile);
         }
 
         createFilterHtml();
@@ -551,7 +233,7 @@
             });
         }
 
-        function setMarkerToMap(_lat, _lng){
+        function setMarkerToMap(_lat, _lng, _id = 0, _name = ''){
             _lat = parseFloat(_lat);
             _lng = parseFloat(_lng);
             if(yourPosition != 0)
@@ -560,6 +242,11 @@
                 position:  new google.maps.LatLng(_lat, _lng),
                 map: mainMap,
             });
+
+            if(_name != '')
+                $('.nearName').text(_name);
+
+            selectedPlaceId = _id;
 
             mainMap.setCenter({
                 lat : _lat,
@@ -592,6 +279,7 @@
 
         function chooseFromMap(){
             $('.nearName').text('محل را روی نقشه انتخاب کنید');
+            toggleMobileListNearPlace("min");
             canChooseFromMap = true;
         }
 
@@ -641,10 +329,8 @@
             $('#resultMapSearch').find('.resSec').empty();
             $('#searchPlaceInput').val('');
             searchPlaceResult.map(item => {
-                if(item.id == _id){
-                    $('.nearName').text(item.name);
-                    setMarkerToMap(item.C, item.D);
-                }
+                if(item.id == _id)
+                    setMarkerToMap(item.C, item.D, item.id, item.name);
             })
         }
 
@@ -666,17 +352,21 @@
         }
 
         function createListElement(_result){
-            var text = '';
+            var elements = '';
 
             nearPlaces.map(place => place.marker.setMap(null));
 
+            $('.typeRow .body').empty();
+            $('.selectedPlace').empty();
+            $('.mobileListContent').scrollTop();
+
             _result.map(item => {
-                text += `<div id="listPlaceCard_${item.kindPlaceId}_${item.id}" class="placeCard">
+                text = `<div class="placeCard listPlaceCard_${item.kindPlaceId}_${item.id}" onclick="setMarkerToMap(${item.C}, ${item.D}, ${item.id}, '${item.name}')">
                             <div class="fullyCenterContent img">
                                 <img src="${item.pic}" class="resizeImgClass" onload="fitThisImg(this)">
                             </div>
                             <div class="info">
-                                <div class="name" onclick="setMarkerToMap(${item.C}, ${item.D})">${item.name}</div>
+                                <div class="name">${item.name}</div>
                                 <div class="star">
                                     <div class="ui_bubble_rating bubble_${item.rate}0"></div>
                                     |
@@ -685,38 +375,53 @@
                                 <div class="address">${item.address}</div>
                             </div>
                         </div>`;
+                elements += text;
                 item.marker = new google.maps.Marker({
                                     position: new google.maps.LatLng(item.C, item.D),
                                     map: mainMap,
                                     lat: item.C,
                                     lng: item.D,
                                     title: item.name,
+                                    id: item.id,
                                     icon: {
                                         url: filterButtons[item.kindPlaceId].mapIcon,
                                         scaledSize: new google.maps.Size(30, 35), // scaled size
                                     },
                                 });
                 item.marker.addListener('click', function(){
-                    setMarkerToMap(this.lat, this.lng)
+                    setMarkerToMap(this.lat, this.lng, this.id, this.title)
                 });
+
+                $(`#mobileResultRow_${item.kindPlaceId}`).find('.body').append(text);
+
+                if(selectedPlaceId == item.id)
+                    $('.selectedPlace').html(text);
             });
+
+            for(var kindPlaceId in filterButtons){
+                if($(`#mobileResultRow_${kindPlaceId}`).find('.body').html() == '')
+                    $(`#mobileResultRow_${kindPlaceId}`).addClass('hidden');
+                else
+                    $(`#mobileResultRow_${kindPlaceId}`).removeClass('hidden');
+            }
 
             nearPlaces = _result;
 
-            $('.pcPlaceList').html(text);
+            $('.pcPlaceList').html(elements);
             $('.placeListLoading').addClass('hidden');
             togglePlaces();
+            toggleMobileListNearPlace("middle");
         }
 
         function togglePlaces(){
             nearPlaces.map(item =>{
                 if(dontShowfilters.indexOf(item.kindPlaceId) == -1){
                     item.marker.setMap(mainMap);
-                    $(`#listPlaceCard_${item.kindPlaceId}_${item.id}`).removeClass('hidden');
+                    $(`.pcPlaceList .listPlaceCard_${item.kindPlaceId}_${item.id}`).removeClass('hidden');
                 }
                 else{
                     item.marker.setMap(null);
-                    $(`#listPlaceCard_${item.kindPlaceId}_${item.id}`).addClass('hidden');
+                    $(`.pcPlaceList .listPlaceCard_${item.kindPlaceId}_${item.id}`).addClass('hidden');
                 }
             })
         }
@@ -724,6 +429,7 @@
 
         $(window).ready(() => {
             initMap();
+            toggleMobileListNearPlace("middle");
         })
     </script>
 </body>
