@@ -19,7 +19,8 @@
             }
             .bodySec{
                 overflow: hidden;
-                height: calc(100vh - 35px);
+                height: 100vh;
+                position: unset;
             }
             .gmnoprint{
                 display: none;
@@ -34,7 +35,7 @@
                 display: block;
                 background: white;
                 position: absolute;
-                bottom: 20px;
+                bottom: 50px;
                 right: 0px;
                 width: 100%;
                 height: 75vh;
@@ -45,6 +46,11 @@
             }
             .bodySec .mobileListSection.fullMobileList{
                 border-radius: 0px;
+            }
+            .bodySec .mobileListSection .topSecMobileList{
+                margin: 0px 10px;
+                margin-bottom: 10px;
+                border-bottom: solid #e6e6e6 1px;
             }
             .bodySec .mobileListSection .fingerTopListSec{
                 width: 35px;
@@ -221,7 +227,7 @@
             var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             var height = $('#mobileListSection').height();
             var windowHeight = $(window).height();
-            var maxHeight = windowHeight - 155;
+            var maxHeight = windowHeight - 150;
             var resultHeight;
             var changeBackGround = false;
 
@@ -247,7 +253,7 @@
         });
         $('.topSecMobileList').on('touchmove', e => {
             var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-            var maxHeight = $(window).height() - 155;
+            var maxHeight = $(window).height() - 150;
             var height = startMobileListHeight + startTouchY - touch.pageY;
 
             if(height > 75 && height < maxHeight)
