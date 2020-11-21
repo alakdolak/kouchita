@@ -118,6 +118,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>
 
     <script>
+        var mobileListIsFull = false;
+        var mobileListScrollIsTop = false;
+        var movePositionMobileList = 0;
+        var isFullMobileList = true;
         var startTouchY = 0;
         var startMobileListHeight = $('#mobileListSection').height();
         $('.topSecMobileList').on('touchstart', e => {
@@ -149,6 +153,19 @@
                 $('#mobileListSection').height(maxHeight);
             else
                 $('#mobileListSection').height(75);
+        });
+
+        $('.mobileListContent').on('touchstart', e => {
+            var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+            movePositionMobileList = touch.pageY;
+            mobileListScrollIsTop = $('.mobileListContent').scrollTop() == 0;
+        });
+        $('.mobileListContent').on('touchend', e => {
+            var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+            if(mobileListIsFull && mobileListScrollIsTop && movePositionMobileList < touch.pageY)
+                toggleMobileListNearPlace("middle");
+            else if(!mobileListIsFull && movePositionMobileList > touch.pageY)
+                toggleMobileListNearPlace("full");
         });
 
         var selectedPlaceId = '';
@@ -221,10 +238,12 @@
             if(_kind == "full"){
                 $('.sideSection').addClass('fullMobileList');
                 $('#mobileListSection').addClass('fullMobileList');
+                mobileListIsFull = true;
             }
             else {
                 $('.sideSection').removeClass('fullMobileList');
                 $('#mobileListSection').removeClass('fullMobileList');
+                mobileListIsFull = false;
             }
 
             $('#mobileListSection').animate({ height: resultHeight}, 300);
@@ -265,7 +284,7 @@
         function initMap(){
             var mapOptions = {
                 center: new google.maps.LatLng(32.42056639964595, 54.00537109375),
-                zoom: 5,
+                zoom: 7,
                 styles: window.googleMapStyle,
                 gestureHandling: 'greedy',
             };
