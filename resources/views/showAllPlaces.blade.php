@@ -154,7 +154,7 @@
         }
 
         .loader {
-            background-image: url("{{URL::asset('images/loading.gif')}}");
+            background-image: url("{{URL::asset("images/loading.gif?v=".$fileVersions)}}");
             width: 100px;
             height: 100px;
         }

@@ -43,7 +43,7 @@
             <div class="leftArrowIcon" onclick="$('.bodySec').toggleClass('fullMap');"></div>
             <div class="content">
                 <div class="fullyCenterContent placeListLoading hidden">
-                    <img alt="loading" data-src="{{URL::asset('images/loading.gif')}}" class="lazyload" style="width: 100px;" />
+                    <img alt="loading" data-src="{{URL::asset('images/loading.gif?v'.$fileVersions)}}" class="lazyload" style="width: 100px;" />
                 </div>
                 <div class="placeList pcPlaceList"></div>
             </div>
@@ -103,7 +103,7 @@
             </div>
             <div class="placeList mobileListContent">
                 <div class="fullyCenterContent placeListLoading hidden">
-                    <img alt="loading" data-src="{{URL::asset('images/loading.gif')}}" class="lazyload" style="width: 100px;" />
+                    <img alt="loading" data-src="{{URL::asset('images/loading.gif?v'.$fileVersions)}}" class="lazyload" style="width: 100px;" />
                 </div>
                 <div class="specialSelectedPlace selectedPlace"></div>
                 <div id="mobileShowList" class="typesList"></div>

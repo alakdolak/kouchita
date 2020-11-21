@@ -84,7 +84,7 @@
                     .loader {
                         /*border: 16px solid #f3f3f3;*/
                         /*border-radius: 50%;*/
-                        background-image: url("{{URL::asset('images/loading.gif')}}");
+                        background-image: url("{{URL::asset("images/loading.gif?v=".$fileVersions)}}");
                         /*border-top: 16px solid blue;*/
                         /*border-right: 16px solid green;*/
                         /*border-bottom: 16px solid red;*/

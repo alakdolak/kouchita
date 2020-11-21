@@ -88,7 +88,7 @@
         let lastId = 0;
         let updateInterval = null;
         let loadingMsg ='<div class="loading">\n' +
-                        '<img src="{{URL::asset("images/loading.gif")}}" style="width: 200px;">\n' +
+                        '<img src="{{URL::asset("images/loading.gif?v=".$fileVersions)}}" style="width: 200px;">\n' +
                         '</div>';
 
         autosize($('textarea'));

@@ -160,7 +160,7 @@
 
                              <div id="photographerLoadingPic" class="progressScreen infoScreen hidden">
                                  <div class="inner">
-                                     <img alt="loading" src="{{URL::asset('images/loading.gif')}}">
+                                     <img alt="loading" src="{{URL::asset('images/loading.gif?v='.$fileVersions)}}">
                                  </div>
                              </div>
 

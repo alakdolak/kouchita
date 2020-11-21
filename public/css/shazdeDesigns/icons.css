@@ -325,6 +325,10 @@
     content: '\E016' !important;
     font-family: Shazde_Regular2 !important;
 }
+.emptyShareIcon:before{
+    content: '\e1f5' !important;
+    font-family: Shazde_Regular2 !important;
+}
 .emptyShareIconAfter:after{
     content: '\e1f5' !important;
     font-family: Shazde_Regular2 !important;

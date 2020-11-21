@@ -1,6 +1,6 @@
 <div class="loaderDiv" id="fullPageLoader" style="display: none">
     <div class="loader_200">
-        <img alt="loading" data-src="{{URL::asset('images/loading.gif')}}" class="lazyload" style="width: 300px;">
+        <img alt="loading" data-src="{{URL::asset('images/loading.gif?v='.$fileVersions)}}" class="lazyload" style="width: 300px;">
     </div>
 </div>
 
