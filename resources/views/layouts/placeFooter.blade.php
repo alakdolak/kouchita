@@ -144,7 +144,7 @@
         <div class="clear-both"></div>
     </div>
 
-    <div class="hideOnScreen" style="width: 100%; height: 100px;"></div>
+    <div class="hideOnScreen gapForMobileFooter"></div>
 
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
