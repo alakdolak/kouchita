@@ -4,6 +4,7 @@
     @include('layouts.topHeader')
     <title>اطراف من</title>
     <link rel="stylesheet" href="{{URL::asset('css/pages/myLocation.css?v='.$fileVersions)}}">
+
 </head>
 <body>
     @include('general.forAllPages')
@@ -97,7 +98,7 @@
         </style>
         <div id="mobileListSection" class="mobileListSection">
             <div class="topSecMobileList">
-                <div class="fingerTopListSec"></div>
+                <div class="fingerTopListSec topArrowFull"></div>
                 <div class="nearName">اطراف من</div>
             </div>
             <div class="placeList mobileListContent">
@@ -150,33 +151,6 @@
                 $('#mobileListSection').height(75);
         });
 
-        function toggleMobileListNearPlace(_kind){
-            console.log(_kind);
-            var windowHeight = $(window).height();
-            var maxHeight = windowHeight-150;
-            var middleHeight = windowHeight/2-100;
-            var minHeight = 75;
-            var resultHeight;
-
-            if(_kind == "full")
-                resultHeight = maxHeight;
-            else if(_kind == "middle")
-                resultHeight = middleHeight;
-            else
-                resultHeight = minHeight;
-
-            if(_kind == "full"){
-                $('.sideSection').addClass('fullMobileList');
-                $('#mobileListSection').addClass('fullMobileList');
-            }
-            else {
-                $('.sideSection').removeClass('fullMobileList');
-                $('#mobileListSection').removeClass('fullMobileList');
-            }
-
-            $('#mobileListSection').animate({ height: resultHeight}, 300);
-        }
-
         var selectedPlaceId = '';
         var dontShowfilters = [];
         var nearPlacesMapMarker = [];
@@ -193,7 +167,7 @@
                 enName: 'amakenFilter',
                 icon: 'touristAttractions',
                 mapIcon: '{{URL::asset('images/mapIcon/att.png')}}',
-                name: 'جای دیدنی',
+                name: 'جاذبه',
                 nameTitle: 'جاهای دیدنی نزدیک',
             },
             3: {
@@ -229,6 +203,32 @@
                 nameTitle: 'بوم گردی های نزدیک',
             },
         };
+
+        function toggleMobileListNearPlace(_kind){
+            var windowHeight = $(window).height();
+            var maxHeight = windowHeight-150;
+            var middleHeight = windowHeight/2-100;
+            var minHeight = 75;
+            var resultHeight;
+
+            if(_kind == "full")
+                resultHeight = maxHeight;
+            else if(_kind == "middle")
+                resultHeight = middleHeight;
+            else
+                resultHeight = minHeight;
+
+            if(_kind == "full"){
+                $('.sideSection').addClass('fullMobileList');
+                $('#mobileListSection').addClass('fullMobileList');
+            }
+            else {
+                $('.sideSection').removeClass('fullMobileList');
+                $('#mobileListSection').removeClass('fullMobileList');
+            }
+
+            $('#mobileListSection').animate({ height: resultHeight}, 300);
+        }
 
         function createFilterHtml(){
             var text = '';
@@ -406,7 +406,9 @@
 
             $('.typeRow .body').empty();
             $('.selectedPlace').empty();
+
             $('.mobileListContent').scrollTop();
+            $('.pcPlaceList').scrollTop();
 
             _result.map(item => {
                 text = `<div class="placeCard listPlaceCard_${item.kindPlaceId}_${item.id}" onclick="setMarkerToMap(${item.C}, ${item.D}, ${item.id}, '${item.name}')">
@@ -422,6 +424,7 @@
                                 </div>
                                 <div class="address">${item.address}</div>
                             </div>
+                            <a href="${item.url}" class="showPlacePage" >اطلاعات بیشتر</a>
                         </div>`;
                 elements += text;
                 item.marker = new google.maps.Marker({
@@ -465,11 +468,13 @@
             nearPlaces.map(item =>{
                 if(dontShowfilters.indexOf(item.kindPlaceId) == -1){
                     item.marker.setMap(mainMap);
-                    $(`.pcPlaceList .listPlaceCard_${item.kindPlaceId}_${item.id}`).removeClass('hidden');
+                    $(`#mobileResultRow_${item.kindPlaceId}`).removeClass('hidden');
+                    $(`.listPlaceCard_${item.kindPlaceId}_${item.id}`).removeClass('hidden');
                 }
                 else{
                     item.marker.setMap(null);
-                    $(`.pcPlaceList .listPlaceCard_${item.kindPlaceId}_${item.id}`).addClass('hidden');
+                    $(`#mobileResultRow_${item.kindPlaceId}`).addClass('hidden');
+                    $(`.listPlaceCard_${item.kindPlaceId}_${item.id}`).addClass('hidden');
                 }
             })
         }

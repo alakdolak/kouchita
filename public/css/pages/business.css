@@ -211,7 +211,8 @@ body{
 .fastAccess .tab{
     padding: 10px;
     margin: 0px 10px;
-    color: #a0a0a0;
+    /*color: #a0a0a0;*/
+    color: black;
     cursor: pointer;
     transition: .3s;
     font-size: 18px;
@@ -222,7 +223,7 @@ body{
     padding-bottom: 0px;
 }
 .fastAccess .tab .text{
-    font-size: .6em;
+    font-size: 1em;
 }
 .fastAccess .tab.selected{
     color: var(--koochita-blue);
