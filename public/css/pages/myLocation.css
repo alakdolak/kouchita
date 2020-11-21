@@ -378,19 +378,14 @@
         font-weight: bold;
     }
     .bodySec .mobileListSection .mobileListContent{
-        overflow-y: auto;
         max-height: 100%;
         background: white;
         padding-bottom: 60px;
+        overflow-y: hidden;
     }
-    .bodySec .mobileListSection .mobileListContent .testSS{
-        width: 100%;
-        background: red;
-        font-size: 20px;
-        height: 20px;
-        margin-bottom: 20px;
+    .bodySec .mobileListSection.fullMobileList .mobileListContent{
+        overflow-y: auto;
     }
-
 
     .searchSec input{
         width: 100%;
