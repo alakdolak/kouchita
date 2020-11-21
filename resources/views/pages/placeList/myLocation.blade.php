@@ -398,26 +398,27 @@
                             <a href="${item.url}" class="showPlacePage" >اطلاعات بیشتر</a>
                         </div>`;
                 elements += text;
-                item.marker = new google.maps.Marker({
-                                    position: new google.maps.LatLng(item.C, item.D),
-                                    map: mainMap,
-                                    lat: item.C,
-                                    lng: item.D,
-                                    title: item.name,
-                                    id: item.id,
-                                    icon: {
-                                        url: filterButtons[item.kindPlaceId].mapIcon,
-                                        scaledSize: new google.maps.Size(30, 35), // scaled size
-                                    },
-                                });
-                item.marker.addListener('click', function(){
-                    setMarkerToMap(this.lat, this.lng, this.id, this.title)
-                });
-
-                $(`#mobileResultRow_${item.kindPlaceId}`).find('.body').append(text);
-
                 if(selectedPlaceId == item.id)
                     $('.selectedPlace').html(text);
+                else {
+                    item.marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(item.C, item.D),
+                        map: mainMap,
+                        lat: item.C,
+                        lng: item.D,
+                        title: item.name,
+                        id: item.id,
+                        icon: {
+                            url: filterButtons[item.kindPlaceId].mapIcon,
+                            scaledSize: new google.maps.Size(30, 35), // scaled size
+                        },
+                    });
+                    item.marker.addListener('click', function () {
+                        setMarkerToMap(this.lat, this.lng, this.id, this.title)
+                    });
+                }
+
+                $(`#mobileResultRow_${item.kindPlaceId}`).find('.body').append(text);
             });
 
             for(var kindPlaceId in filterButtons){
