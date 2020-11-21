@@ -11,8 +11,15 @@
         }
 
         @media (max-width: 767px) {
+            body{
+                overflow: hidden;
+            }
             .gapForMobileFooter{
                 display: none;
+            }
+            .placeSearchMapResults{
+                width: 85%;
+                right: 30px;
             }
             .hideOnScreen.mobileHeader{
                 display: none;
@@ -49,7 +56,7 @@
             }
             .bodySec .mobileListSection .topSecMobileList{
                 margin: 0px 10px;
-                margin-bottom: 10px;
+                padding-bottom: 5px;
                 border-bottom: solid #e6e6e6 1px;
             }
             .bodySec .mobileListSection .fingerTopListSec{
@@ -70,6 +77,7 @@
             .bodySec .mobileListSection .mobileListContent{
                 overflow-y: auto;
                 max-height: 100%;
+                background: white;
                 padding-bottom: 60px;
             }
             .bodySec .mobileListSection .mobileListContent .testSS{
@@ -193,18 +201,186 @@
                 <div class="fullyCenterContent placeListLoading hidden">
                     <img alt="loading" data-src="{{URL::asset('images/loading.gif')}}" class="lazyload" style="width: 100px;" />
                 </div>
-                <div class="placeList"></div>
+                <div class="placeList pcPlaceList"></div>
             </div>
         </div>
+        <style>
+            .mobileListContent .typesList{
+                padding: 0px 10px;
+            }
+            .mobileListContent .typesList .typeRow{
+                margin-bottom: 5px;
+                padding-bottom: 5px;
+                border-bottom: solid 1px #f1f1f1;
+            }
+            .mobileListContent .typesList .typeRow .header{
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .mobileListContent .typesList .typeRow .header:before{
+                margin-left: 5px;
+                font-weight: normal;
+            }
+            .mobileListContent .typesList .typeRow .body{
+                white-space: nowrap;
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                border-bottom: none;
+            }
+            .mobileListContent .typesList .typeRow .body::-webkit-scrollbar {
+                display: none;
+            }
+            .mobileListContent .typesList .placeCard{
+                display: inline-flex;
+                flex-direction: column;
+                width: 160px;
+                justify-content: center;
+                align-items: center;
+            }
+            .mobileListContent .typesList .placeCard .info{
+                text-align: center;
+                margin: 0;
+                width: 90%;
+                overflow: hidden;
+            }
+            .mobileListContent .typesList .placeCard .img{
+                width: 150px;
+                height: 120px;
+                overflow: hidden;
+                border-radius: 10px;
+            }
+        </style>
         <div id="mobileListSection" class="mobileListSection">
             <div class="topSecMobileList">
                 <div class="fingerTopListSec"></div>
                 <div class="nearName">اطراف من</div>
             </div>
-            <div class="mobileListContent">
-                @for($i = 0; $i < 100; $i++)
-                    <div class="testSS">{{$i}}</div>
-                 @endfor
+            <div class="placeList mobileListContent">
+                <div class="specialSelectedPlace">
+                    <div class="placeCard">
+                        <div class="fullyCenterContent img">
+                            <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                        </div>
+                        <div class="info">
+                            <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
+                            <div class="star">
+                                <div class="ui_bubble_rating bubble_30"></div>
+                                |
+                                2 نقد
+                            </div>
+                            <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="typesList">
+                    <div class="typeRow">
+                        <div class="header touristAttractions">جاهای دیدنی نزدیک</div>
+                        <div class="body">
+                            @for($i = 0; $i < 20; $i++)
+                                <div class="placeCard">
+                                    <div class="fullyCenterContent img">
+                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
+                                        <div class="star">
+                                            <div class="ui_bubble_rating bubble_30"></div>
+                                            |
+                                            2 نقد
+                                        </div>
+                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="typeRow">
+                        <div class="header restaurantIcon">رستوران های نزدیک</div>
+                        <div class="body">
+                            @for($i = 0; $i < 20; $i++)
+                                <div class="placeCard">
+                                    <div class="fullyCenterContent img">
+                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
+                                        <div class="star">
+                                            <div class="ui_bubble_rating bubble_30"></div>
+                                            |
+                                            2 نقد
+                                        </div>
+                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="typeRow">
+                        <div class="header hotelIcon">اقامتگاه های نزدیک</div>
+                        <div class="body">
+                            @for($i = 0; $i < 20; $i++)
+                                <div class="placeCard">
+                                    <div class="fullyCenterContent img">
+                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
+                                        <div class="star">
+                                            <div class="ui_bubble_rating bubble_30"></div>
+                                            |
+                                            2 نقد
+                                        </div>
+                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="typeRow">
+                        <div class="header adventureIcon">طبیعت گردی های نزدیک</div>
+                        <div class="body">
+                            @for($i = 0; $i < 20; $i++)
+                                <div class="placeCard">
+                                    <div class="fullyCenterContent img">
+                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
+                                        <div class="star">
+                                            <div class="ui_bubble_rating bubble_30"></div>
+                                            |
+                                            2 نقد
+                                        </div>
+                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="typeRow">
+                        <div class="header boomIcon">بوم گردی های نزدیک</div>
+                        <div class="body">
+                            @for($i = 0; $i < 20; $i++)
+                                <div class="placeCard">
+                                    <div class="fullyCenterContent img">
+                                        <img src="http://localhost/assets/_images/amaken/pol_shah_abbas/f-1.jpg" class="resizeImgClass" onload="fitThisImg(this)">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name" onclick="setMarkerToMap(37.0530866, 50.3808052)">پل شاه عباسی املش</div>
+                                        <div class="star">
+                                            <div class="ui_bubble_rating bubble_30"></div>
+                                            |
+                                            2 نقد
+                                        </div>
+                                        <div class="address">گیلان-12 کیلومتری شهرستان املش-روستای بلوردکان-پل شاه عباس املش</div>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="mapSection">
@@ -224,21 +400,19 @@
             startMobileListHeight = $('#mobileListSection').height();
         });
         $('.topSecMobileList').on('touchend', e => {
-            var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             var height = $('#mobileListSection').height();
             var windowHeight = $(window).height();
-            var maxHeight = windowHeight - 150;
-            var resultHeight;
             var changeBackGround = false;
+            var resultHeight;
 
             if(height > windowHeight/2) {
                 if(height > startMobileListHeight)
                     changeBackGround = true;
 
-                resultHeight = height > startMobileListHeight ? maxHeight : windowHeight / 2;
+                resultHeight = height > startMobileListHeight ? "full" : "middle";
             }
             else
-                resultHeight = height > startMobileListHeight ? windowHeight/2 : 75;
+                resultHeight = height > startMobileListHeight ? "middle" : "min";
 
             if(changeBackGround){
                 $('.sideSection').addClass('fullMobileList');
@@ -249,7 +423,7 @@
                 $('#mobileListSection').removeClass('fullMobileList');
             }
 
-            $('#mobileListSection').animate({ height: resultHeight}, 300);
+            toggleMobileList(resultHeight);
         });
         $('.topSecMobileList').on('touchmove', e => {
             var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
@@ -264,7 +438,25 @@
                 $('#mobileListSection').height(maxHeight);
             else
                 $('#mobileListSection').height(75);
-        })
+        });
+
+        function toggleMobileList(_kind){
+            var windowHeight = $(window).height();
+            var maxHeight = windowHeight-150;
+            var middleHeight = windowHeight/2-100;
+            var minHeight = 75;
+            var resultHeight;
+
+            if(_kind == "full")
+                resultHeight = maxHeight;
+            else if(_kind == "middle")
+                resultHeight = middleHeight;
+            else
+                resultHeight = minHeight;
+
+            $('#mobileListSection').animate({ height: resultHeight}, 300);
+
+        }
     </script>
 
     <script>
@@ -353,10 +545,10 @@
             getMyLocation();
             google.maps.event.addListener(mainMap, 'click', event => {
                 if(canChooseFromMap) {
+                    $('.nearName').text('محل روی نقشه');
                     setMarkerToMap(event.latLng.lat(), event.latLng.lng());
                 }
             });
-
         }
 
         function setMarkerToMap(_lat, _lng){
@@ -380,8 +572,10 @@
         }
 
         function getMyLocation(){
-            if (navigator.geolocation)
+            if (navigator.geolocation) {
+                $('.nearName').text('اطراف من');
                 navigator.geolocation.getCurrentPosition((position) => setMarkerToMap(position.coords.latitude, position.coords.longitude));
+            }
             else
                 console.log("Geolocation is not supported by this browser.");
         }
@@ -397,6 +591,7 @@
         }
 
         function chooseFromMap(){
+            $('.nearName').text('محل را روی نقشه انتخاب کنید');
             canChooseFromMap = true;
         }
 
@@ -447,6 +642,7 @@
             $('#searchPlaceInput').val('');
             searchPlaceResult.map(item => {
                 if(item.id == _id){
+                    $('.nearName').text(item.name);
                     setMarkerToMap(item.C, item.D);
                 }
             })
@@ -507,7 +703,7 @@
 
             nearPlaces = _result;
 
-            $('.placeList').html(text);
+            $('.pcPlaceList').html(text);
             $('.placeListLoading').addClass('hidden');
             togglePlaces();
         }
