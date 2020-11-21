@@ -251,8 +251,8 @@
     z-index: 99;
 }
 .placeSearchMapResults .res{
-    padding: 3px 5px;
-    margin: 3px 0px;
+    padding: 7px 5px;
+    margin: 7px 0px;
     font-size: 14px;
     cursor: pointer;
     display: flex;
@@ -273,6 +273,207 @@
     font-weight: bold;
     border-bottom: solid 1px #d5d5d5;
 }
-.placeSearchMapResults .resSec{
+.mobileListSection{
+    display: none;
+}
 
+@media (max-width: 767px) {
+    body{
+        overflow: hidden;
+    }
+    .gapForMobileFooter{
+        display: none;
+    }
+    .placeSearchMapResults{
+        width: 85%;
+        right: 30px;
+    }
+    .hideOnScreen.mobileHeader{
+        display: none;
+    }
+    .bodySec{
+        overflow: hidden;
+        height: 100vh;
+        position: unset;
+    }
+    .gmnoprint{
+        display: none;
+    }
+    .mapSection{
+        width: 100%;
+    }
+    .bodySec .listSection{
+        display: none;
+    }
+    .bodySec .mobileListSection{
+        display: block;
+        background: white;
+        position: absolute;
+        bottom: 50px;
+        right: 0px;
+        width: 100%;
+        height: 75vh;
+        height: 70px;
+        z-index: 8;
+        border-radius: 20px 20px 0px 0px;
+        box-shadow: 0px 0px 4px 1px #c1c1c1;
+    }
+    .bodySec .mobileListSection.fullMobileList{
+        border-radius: 0px;
+    }
+    .bodySec .mobileListSection .topSecMobileList{
+        margin: 0px 10px;
+        padding-bottom: 5px;
+        border-bottom: solid #e6e6e6 1px;
+    }
+    .bodySec .mobileListSection .fingerTopListSec{
+        width: 35px;
+        height: 5px;
+        background: #c5c5c5;
+        border-radius: 20px;
+        margin-top: 5px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .bodySec .mobileListSection .nearName{
+        text-align: center;
+        font-size: 18px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .bodySec .mobileListSection .mobileListContent{
+        overflow-y: auto;
+        max-height: 100%;
+        background: white;
+        padding-bottom: 60px;
+    }
+    .bodySec .mobileListSection .mobileListContent .testSS{
+        width: 100%;
+        background: red;
+        font-size: 20px;
+        height: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .searchSec input{
+        width: 100%;
+    }
+    .sideSection{
+        transition: .3s;
+        height: 100px;
+        width: 100%;
+    }
+    .sideSection.fullMobileList{
+        background: white;
+    }
+
+    .sideSection > div{
+        width: 96%;
+        border-radius: 35px;
+    }
+    .sideSection .filtersSec{
+        background: transparent;
+        box-shadow: none;
+        overflow-x: auto;
+        border-radius: 0px;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        white-space: nowrap;
+        display: block;
+        padding-bottom: 5px
+    }
+    .sideSection .filtersSec::-webkit-scrollbar {
+        display: none;
+    }
+    .sideSection .filtersSec .filKind{
+        flex-direction: row-reverse;
+        color: white;
+        border-radius: 20px;
+        padding: 5px;
+        min-width: 85px;
+        justify-content: space-around;
+        margin-right: 10px;
+        display: inline-flex;
+    }
+    .sideSection .filtersSec .filKind .icon{
+        font-size: 12px;
+        width: 20px;
+        height: 20px;
+        margin-bottom: 0px;
+    }
+    .sideSection .filtersSec .filKind .name{
+        margin-left: 5px;
+    }
+    .sideSection .filtersSec .filKind.offFilter{
+        background: white;
+        color: #757575;
+    }
+    .filtersSec .filKind.amakenFilter {
+        background: #ec008c;
+    }
+    .filtersSec .filKind.hotelFilter{
+        background: #00516f;
+    }
+    .filtersSec .filKind.restaurantFilter{
+        background: #e4d900;
+    }
+    .filtersSec .filKind.advantureFilter{
+        background: #ed1c24;
+    }
+    .filtersSec .filKind.boomgardyFilter{
+        background: #00aeef;
+    }
+
+    .mobileListContent .typesList{
+        padding: 0px 10px;
+    }
+    .mobileListContent .typesList .typeRow{
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        border-bottom: solid 1px #f1f1f1;
+    }
+    .mobileListContent .typesList .typeRow .header{
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .mobileListContent .typesList .typeRow .header:before{
+        margin-left: 5px;
+        font-weight: normal;
+    }
+    .mobileListContent .typesList .typeRow .body{
+        white-space: nowrap;
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .mobileListContent .typesList .typeRow .body::-webkit-scrollbar {
+        display: none;
+    }
+    .mobileListContent .typesList .placeCard{
+        display: inline-flex;
+        flex-direction: column;
+        width: 160px;
+        justify-content: center;
+        align-items: center;
+        border-bottom: none;
+    }
+    .mobileListContent .typesList .placeCard .info{
+        text-align: center;
+        margin: 0;
+        width: 90%;
+        overflow: hidden;
+    }
+    .mobileListContent .typesList .placeCard .img{
+        width: 150px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    .mobileListContent .placeListLoading{
+        top: 50px;
+        height: 100%;
+    }
 }
