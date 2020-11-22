@@ -3051,8 +3051,7 @@ class PlaceController extends Controller {
     public function showPlaceList($kindPlaceId, $mode, $city = '')
     {
         $kindPlace = Place::find($kindPlaceId);
-//        if($kindPlace != null){
-        if(true){
+        if($kindPlace != null){
             $meta = [];
             $mode = strtolower($mode);
 
