@@ -15,7 +15,7 @@
 {
     "@context": "https://schema.org",
     @if($kindPlaceId == 1)
-        "@type": "TouristAttraction",
+        "@type": "LocalBusiness",
     @elseif($kindPlaceId == 3)
         "@type": "Restaurant",
     @elseif($kindPlaceId == 4)
@@ -25,7 +25,7 @@
 {{--        "checkoutTime":	"hh:mm:ss[Z|(+)03:30]",--}}
 {{--        "numberOfRooms":"تعداد اتاق",--}}
     @elseif($kindPlaceId == 6)
-        "@type": "TouristAttraction",
+        "@type": "LocalBusiness",
     @elseif($kindPlaceId == 10)
         "@type": "Product",
     @elseif($kindPlaceId == 11)
