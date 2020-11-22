@@ -1,5 +1,4 @@
 <?php
-
     if(isset($place->address))
         $schemaAddress = $place->address;
     else if(isset($place->dastresi))
@@ -10,13 +9,16 @@
     $schemaPhone = false;
     if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
             $schemaPhone = true;
+
 ?>
 
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     @if($kindPlaceId == 1)
+        "@type": "TouristAttraction",
     @elseif($kindPlaceId == 3)
+        "@type": "Restaurant",
     @elseif($kindPlaceId == 4)
         "@type": "Hotel",
         "starRating":"{{$place->rate}}",
@@ -24,9 +26,39 @@
 {{--        "checkoutTime":	"hh:mm:ss[Z|(+)03:30]",--}}
 {{--        "numberOfRooms":"تعداد اتاق",--}}
     @elseif($kindPlaceId == 6)
+        "@type": "TouristAttraction",
     @elseif($kindPlaceId == 10)
+        "@type": "Product",
     @elseif($kindPlaceId == 11)
+        "@type": "CookAction",
+        "recipe" : {
+            "@type": "Recipe",
+            @if(isset($place->material))
+            "recipeIngredient": [
+                @foreach($place->material as $key => $mateial)
+                    "{{$mateial->name}}" {{$key == count($place->material)-1 ? '' : ','}}
+                @endforeach
+            ],
+            @endif
+            "nutrition":{
+                "@type": "NutritionInformation",
+                "calories": "{{$place->energy}} calories"
+            },
+            "suitableForDiet" : [
+                @if($place->vegetarian == 1)
+                    "https://schema.org/VegetarianDiet",
+                @endif
+                @if($place->vegan == 1)
+                    "https://schema.org/VeganDiet",
+                @endif
+                @if($place->diabet == 1)
+                    "https://schema.org/DiabeticDiet",
+                @endif
+                "https://schema.org/HalalDiet"
+            ]
+        },
     @elseif($kindPlaceId == 12)
+        "@type": "BedAndBreakfast",
     @endif
 
     "image": [
