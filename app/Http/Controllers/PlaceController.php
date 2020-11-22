@@ -225,6 +225,8 @@ class PlaceController extends Controller {
         if($place->firstQuestion != null)
             $place->firstQuestion = questionTrueType($place->firstQuestion);
 
+        $place->mainPic = $mainPic;
+
         $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => \Request::url()];
         session(['inPage' => 'place_' . $kindPlaceId . '_' . $place->id]);
 
