@@ -9,7 +9,6 @@
     $schemaPhone = false;
     if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
             $schemaPhone = true;
-
 ?>
 
 <script type="application/ld+json">
