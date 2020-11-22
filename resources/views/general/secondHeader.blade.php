@@ -280,7 +280,8 @@
 				"@type": "Thing",
 				"name": "استان {{$locationName['state']}}",
 				"alternateName": "استان {{$locationName['state']}}",
-				"url": "{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}"
+				"url": "{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}",
+                "id":"state"
 			},
 			"position": "{{++$schemaPosition}}"
 		},
@@ -293,7 +294,8 @@
 				"@type": "Thing",
 				"name": "{{$locationName['cityNameUrl']}}",
 				"alternateName": "{{$locationName['cityNameUrl']}}",
-				"url": "{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}"
+				"url": "{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}",
+                "id":"city"
 			},
 			"position": "{{++$schemaPosition}}"
 		},
@@ -301,12 +303,13 @@
 
         {
         "@type": "ListItem",
-        "item":  {
-            "@type": "Thing",
-            "name": "{{$kindPlace->title}}",
-				"alternateName": "{{$kindPlace->title}}",
-				"url": "{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}"
-			},
+            "item":  {
+                "@type": "Thing",
+                "name": "{{$kindPlace->title}}",
+                "alternateName": "{{$kindPlace->title}}",
+                "url": "{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}",
+                "id":"list"
+            },
 			"position": "{{++$schemaPosition}}"
 		},
 
@@ -317,14 +320,13 @@
                    "@type": "Thing",
                    "name": "{{$place->name}}",
                     "alternateName": "{{$place->name}}",
+                    "url": "{{Request::url()}}",
                     @if(isset($photos[0]))
-                        "url": "{{Request::url()}}",
-                        "image": "{{$photos[0]}}"
-                    @else
-                        "url": "{{Request::url()}}"
+                        "image": "{{$photos[0]}}",
                     @endif
-                },
-                "position": "{{++$schemaPosition}}"
+                    "id":"place"
+               },
+               "position": "{{++$schemaPosition}}"
             },
         @endif
 
@@ -334,11 +336,11 @@
 				"@type": "Thing",
 				"name": "خانه",
 				"alternateName": "کوچیتا | سامانه جامع گردشگری",
-				"url": "{{url('/main')}}"
+				"url": "{{url('/main')}}",
+				"id":"home"
 			},
 			"position": "1"
-		},
-
+		}
    ]
 }
 </script>
