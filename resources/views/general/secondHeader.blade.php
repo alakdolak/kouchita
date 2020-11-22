@@ -266,24 +266,13 @@
 
 <script type="application/ld+json">
 <?php
-  $schemaPosition = 2;
+  $schemaPosition = 1;
 ?>
 {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
 	"itemListElement":
 	[
-		{
-			"@type": "ListItem",
-			"item":  {
-				"@type": "Thing",
-				"name": "خانه",
-				"alternateName": "کوچیتا | سامانه جامع گردشگری",
-				"url": "{{url('/main')}}"
-			},
-			"position": "1"
-		},
-
         @if($locationName['kindState'] != 'country')
         {
 			"@type": "ListItem",
@@ -338,7 +327,18 @@
                 "position": "{{++$schemaPosition}}"
             },
         @endif
-        "itemListOrder": "Ascending"
+
+        {
+			"@type": "ListItem",
+			"item":  {
+				"@type": "Thing",
+				"name": "خانه",
+				"alternateName": "کوچیتا | سامانه جامع گردشگری",
+				"url": "{{url('/main')}}"
+			},
+			"position": "1"
+		},
+
    ]
 }
 </script>
