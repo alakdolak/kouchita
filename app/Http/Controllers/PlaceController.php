@@ -378,18 +378,19 @@ class PlaceController extends Controller {
         $latDeg = $radius/110.574;
         $lngDeg = $radius/(111.320*cos(deg2rad($C)));
 
-//        $D = (float)$D * 3.14 / 180;
-//        $C = (float)$C * 3.14 / 180;
         $latBetween = [$C + $latDeg, $C - $latDeg];
         $lngBetween = [$D + $lngDeg, $D - $lngDeg];
+
+        $D = (float)$D * 3.14 / 180;
+        $C = (float)$C * 3.14 / 180;
 
         $tableNames = ['hotels', 'restaurant', 'amaken', 'majara', 'boomgardies'];
 
         foreach ($tableNames as $tableName){
             $kindPlace = Place::where('tableName', $tableName)->first();
             if($kindPlace != null) {
-//                $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
-                $nearbys = DB::select("SELECT id, `name`, reviewCount, fullRate, slug, alt, cityId, `C`, `D` FROM $tableName WHERE `C` > $latBetween[1] AND `C` < $latBetween[0] AND `D` > $lngBetween[1] AND `D` < $lngBetween[0] limit 0, $count" );
+                $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
+//                $nearbys = DB::select("SELECT id, `name`, reviewCount, fullRate, slug, alt, cityId, `C`, `D` FROM $tableName WHERE `C` > $latBetween[1] AND `C` < $latBetween[0] AND `D` > $lngBetween[1] AND `D` < $lngBetween[0] limit 0, $count" );
 
                 foreach ($nearbys as $nearby) {
 //                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
