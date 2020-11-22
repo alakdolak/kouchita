@@ -124,10 +124,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 @else
                     <script>
                         function newPostModal(kind = '') {
-                            if (!hasLogin) {
-                                showLoginPrompt('{{Request::url()}}');
-                                return;
-                            }
+                            checkLogin();
                         }
                     </script>
                 @endif

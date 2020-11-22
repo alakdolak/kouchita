@@ -289,10 +289,8 @@
         rateQuestionAns[i] = 0;
 
     function newPostModal(kind = '') {
-        if (!hasLogin) {
-            showLoginPrompt('{{Request::url()}}');
+        if (!checkLogin())
             return;
-        }
 
         $('html, body').animate({
             scrollTop: $('#mainStoreReviewDiv').offset().top
