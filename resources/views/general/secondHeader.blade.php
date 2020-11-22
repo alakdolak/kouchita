@@ -263,88 +263,86 @@
 
 @if(isset($kindPlace))
     <div class="container-fluid fluidPlacePath secHeadMain">
-
-<script type="application/ld+json">
-<?php
-  $schemaPosition = 1;
-?>
-{
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-	"itemListElement":
-	[
-        @if($locationName['kindState'] != 'country')
-        {
-			"@type": "ListItem",
-			"item":  {
-				"@type": "Thing",
-				"name": "استان {{$locationName['state']}}",
-				"alternateName": "استان {{$locationName['state']}}",
-				"url": "{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}",
-                "id":"state"
-			},
-			"position": "{{++$schemaPosition}}"
-		},
-		@endif
-
-        @if($locationName['kindState'] == 'city')
-        {
-			"@type": "ListItem",
-			"item":  {
-				"@type": "Thing",
-				"name": "{{$locationName['cityNameUrl']}}",
-				"alternateName": "{{$locationName['cityNameUrl']}}",
-				"url": "{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}",
-                "id":"city"
-			},
-			"position": "{{++$schemaPosition}}"
-		},
-		@endif
-
-        {
-        "@type": "ListItem",
-            "item":  {
-                "@type": "Thing",
-                "name": "{{$kindPlace->title}}",
-                "alternateName": "{{$kindPlace->title}}",
-                "url": "{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}",
-                "id":"list"
-            },
-			"position": "{{++$schemaPosition}}"
-		},
-
-        @if($locationName['kindPage'] == 'place')
+        <script type="application/ld+json">
+    <?php
+      $schemaPosition = 1;
+    ?>
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            @if($locationName['kindState'] != 'country')
             {
-               "@type": "ListItem",
-               "item":  {
-                   "@type": "Thing",
-                   "name": "{{$place->name}}",
-                    "alternateName": "{{$place->name}}",
-                    "url": "{{Request::url()}}",
-                    @if(isset($photos[0]))
-                        "image": "{{$photos[0]}}",
-                    @endif
-                    "id":"place"
-               },
-               "position": "{{++$schemaPosition}}"
+                "@type": "ListItem",
+                "item":  {
+                    "@type": "Thing",
+                    "name": "استان {{$locationName['state']}}",
+                    "alternateName": "استان {{$locationName['state']}}",
+                    "url": "{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}",
+                    "id":"state"
+                },
+                "position": "{{++$schemaPosition}}"
             },
-        @endif
+            @endif
 
-        {
-			"@type": "ListItem",
-			"item":  {
-				"@type": "Thing",
-				"name": "خانه",
-				"alternateName": "کوچیتا | سامانه جامع گردشگری",
-				"url": "{{url('/main')}}",
-				"id":"home"
-			},
-			"position": "1"
-		}
-   ]
-}
-</script>
+            @if($locationName['kindState'] == 'city')
+            {
+                "@type": "ListItem",
+                "item":  {
+                    "@type": "Thing",
+                    "name": "{{$locationName['cityNameUrl']}}",
+                    "alternateName": "{{$locationName['cityNameUrl']}}",
+                    "url": "{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}",
+                    "id":"city"
+                },
+                "position": "{{++$schemaPosition}}"
+            },
+            @endif
 
+            {
+            "@type": "ListItem",
+                "item":  {
+                    "@type": "Thing",
+                    "name": "{{$kindPlace->title}}",
+                    "alternateName": "{{$kindPlace->title}}",
+                    "url": "{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}",
+                    "id":"list"
+                },
+                "position": "{{++$schemaPosition}}"
+            },
+
+            @if($locationName['kindPage'] == 'place')
+                {
+                   "@type": "ListItem",
+                   "item":  {
+                       "@type": "Thing",
+                       "name": "{{$place->name}}",
+                        "alternateName": "{{$place->name}}",
+                        "url": "{{Request::url()}}",
+                        @if(isset($photos[0]))
+                            "image": "{{$photos[0]}}",
+                        @endif
+                        "id":"place"
+                   },
+                   "position": "{{++$schemaPosition}}"
+                },
+            @endif
+
+            {
+                "@type": "ListItem",
+                "item":  {
+                    "@type": "Thing",
+                    "name": "خانه",
+                    "alternateName": "کوچیتا | سامانه جامع گردشگری",
+                    "url": "{{url('/main')}}",
+                    "id":"home"
+                },
+                "position": "1"
+            }
+       ]
+    }
+    </script>
         <div class="container listSecHeadContainer secHeadNavs spanMarginSecHead">
             <a class="linkRoute" href="{{url('/main')}}">
                 {{__('صفحه اصلی')}}
@@ -389,11 +387,5 @@
             @endif
 
         </div>
-
-{{--        @if($locationName['kindPage'] == 'place')--}}
-            {{--<div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">--}}
-                {{--<div style="background: red; width: 728px; height: 90px;"></div>--}}
-            {{--</div>--}}
-{{--        @endif--}}
     </div>
 @endif

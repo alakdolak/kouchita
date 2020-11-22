@@ -84,6 +84,7 @@ class PlaceController extends Controller {
         $kindPlace = Place::where('fileName', $kindPlaceName)->first();
         if($kindPlace == null)
             return \redirect(\url('/'));
+
         $kindPlaceId = $kindPlace->id;
         switch ($kindPlaceId){
             case 1:
@@ -129,8 +130,7 @@ class PlaceController extends Controller {
         $hasLogin = true;
         $uId = -1;
         if(auth()->check()){
-            $u = Auth::user();
-            $uId = $u->id;
+            $uId = Auth::user()->id;
             $userCode = $uId . '_' . rand(10000,99999);
             $uPic = getUserPic(\auth()->user()->id); // common.php
         }
@@ -170,21 +170,14 @@ class PlaceController extends Controller {
         $state = State::whereId($city->stateId);
 
         $photos = [];
-
         $photos[count($photos)] = getPlacePic($place->id, $kindPlaceId, 'f');
         $thumbnail = getPlacePic($place->id, $kindPlaceId, 's');
 
-        $allState = State::all();
-
         $pics = getAllPlacePicsByKind($kindPlaceId, $place->id); // common.php
         $sitePics = $pics[0];
-        $sitePicsJSON = $pics[1];
         $photographerPics = $pics[2];
-        $photographerPicsJSON = $pics[3];
         $userPhotos = $pics[4];
-        $userPhotosJson = $pics[5];
         $userVideo = $pics[6];
-        $userVideoJson = $pics[7];
 
         $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);  // common.php
         $reviewCount = $result[0];
@@ -193,13 +186,6 @@ class PlaceController extends Controller {
         $multiQuestion = $result[3];
         $textQuestion = $result[4];
         $rateQuestion = $result[5];
-
-        $multiQuestionJSON = json_encode($multiQuestion);
-        $textQuestionJSON = json_encode($textQuestion);
-        $rateQuestionJSON = json_encode($rateQuestion);
-
-        $inPage = 'place_' . $kindPlaceId . '_' . $place->id;
-        session(['inPage' => $inPage]);
 
         $features = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
         $featId = array();
@@ -215,41 +201,44 @@ class PlaceController extends Controller {
         else if($kindPlace->tableName == 'mahaliFood')
             $place = $this->mahaliFoodDet($place);
 
-        $video = '';
-        if(isset($place->video))
-            $video = $place->video;
+        $articleUrl = route('safarnameh.list', ['type' => 'place', 'search' => $kindPlaceId . '_' . $place->id]);
+        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $city->name, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
 
-        $mode = 'city';
-        $err = '';
-        $rooms = '';
-        $jsonRoom = '';
+        $mainPic = count($sitePics) > 0 ? $mainPic = $sitePics[0]['f'] : $mainPic = URL::asset('images/mainPics/nopicv01.jpg');
+        $video = isset($place->video) ? $place->video : '';
 
-        $articleUrl = \url('/safarnameh/list/place/' . $kindPlaceId . '_' . $place->id);
-        $cityName = $city->name;
-        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
+        $reviewAction = Activity::where('name', 'نظر')->first();
+        $place->firstReview = \DB::table($reviewAction->tableName)
+                    ->where('activityId', $reviewAction->id)
+                    ->where('kindPlaceId', $kindPlaceId)
+                    ->where('placeId', $place->id)
+                    ->first();
+        if($place->firstReview != null)
+            $place->firstReview = reviewTrueType($place->firstReview);
 
-        $mainWebSiteUrl = \url('/');
-        $mainWebSiteUrl .= '/' . $request->path();
+        $questionAction = Activity::where('name', 'سوال')->first();
+        $place->firstQuestion = \DB::table($questionAction->tableName)
+                    ->where('activityId', $questionAction->id)
+                    ->where('kindPlaceId', $kindPlaceId)
+                    ->where('placeId', $place->id)
+                    ->first();
+        if($place->firstQuestion != null)
+            $place->firstQuestion = questionTrueType($place->firstQuestion);
 
-        if(count($sitePics) > 0)
-            $mainPic = $sitePics[0]['f'];
-        else
-            $mainPic = URL::asset('images/mainPics/nopicv01.jpg');
-
-        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => $mainWebSiteUrl];
+        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => \Request::url()];
+        session(['inPage' => 'place_' . $kindPlaceId . '_' . $place->id]);
 
         return view('pages.placeDetails.placeDetails', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
             'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
-            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
+            'photographerPics' => $photographerPics,'userPic' => $uPic,
             'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
-            'rateQuestionJSON' => $rateQuestionJSON, 'textQuestionJSON' => $textQuestionJSON, 'multiQuestionJSON' => $multiQuestionJSON,
-            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState, 'userCode' => $userCode,
-            'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0],
-            'photos' => $photos, 'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson, 'userVideo' => $userVideo, 'userVideoJson' => $userVideoJson,
-            'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
+            'sitePics' => $sitePics, 'userCode' => $userCode,
+            'kindPlaceId' => $kindPlaceId, 'mode' => 'city', 'rates' => $rates[0],
+            'photos' => $photos, 'userPhotos' => $userPhotos, 'userVideo' => $userVideo,
+            'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => '',
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'kindPlace' => $kindPlace,
-            'placeMode' => $kindPlace->tableName, 'rooms' => $rooms, 'jsonRoom' => $jsonRoom, 'video' => $video,
+            'placeMode' => $kindPlace->tableName, 'video' => $video,
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
     }
 

@@ -57,6 +57,51 @@
     <div class="cpBorderBottom cpHeader">
 
         <div class="cpHeaderRouteOfCityName">
+            <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement":
+                    [
+                        @if(isset($place->state))
+                        {
+                            "@type": "ListItem",
+                            "item":  {
+                                "@type": "Thing",
+                                "name": "استان {{$place->state}}",
+                                "alternateName": "استان {{$place->state}}",
+                                "url": "{{url('cityPage/state/'.$place->state)}}",
+                                "id":"state"
+                            },
+                            "position": "2"
+                        },
+                        @endif
+                        {
+                            "@type": "ListItem",
+                            "item":  {
+                                "@type": "Thing",
+                                "name": "{{$place->name}}",
+                                "alternateName": "{{$place->name}}",
+                                "url": "{{Request::url()}}",
+                                "id":"city"
+                            },
+                            "position": "3"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "item":  {
+                                "@type": "Thing",
+                                "name": "خانه",
+                                "alternateName": "کوچیتا | سامانه جامع گردشگری",
+                                "url": "{{url('/')}}",
+                                "id":"home"
+                            },
+                            "position": "1"
+                        }
+                    ]
+                }
+            </script>
+
             <a href="{{url('/')}}" class="navigatorLinks">
                 <span>{{__('صفحه اصلی')}}</span>
             </a>
