@@ -61,29 +61,28 @@
 	"alternateName":"Koochita",
 	"url":"https://koochita.com",
 	"sameAs": [
-	         "https://www.facebook.com/Koochita-115157527076374",
-	         "https://twitter.com/Koochita_Com",
-	         "https://www.instagram.com/koochita_com/",
-	         "https://t.me/koochita",
-	         "https://wa.me/989120239315",
-     ],
+         "https://www.facebook.com/Koochita-115157527076374",
+         "https://twitter.com/Koochita_Com",
+         "https://www.instagram.com/koochita_com/",
+         "https://t.me/koochita",
+         "https://wa.me/989120239315"
+    ],
 	"address":[
-			{
-	        "@type": "PostalAddress",
-			"addressCountry": "IR",
-			"addressRegion": "شهر",
-			"streetAddress": "میدان ونک ، قبل از چهارراه جهان کودک ، ساختمان دانشگاه علامه طبابایی، طبقه سوم ، سیسوتک",
-			},
-   ],
-{{--    "address":"آدرس",--}}
+        {
+            "@type": "PostalAddress",
+            "addressCountry": "IR",
+            "addressRegion": "تهران",
+            "streetAddress": "میدان ونک ، قبل از چهارراه جهان کودک ، ساختمان دانشگاه علامه طبابایی، طبقه سوم ، سیسوتک"
+        }
+    ],
     "email":"info@koochita.com",
     "logo":"{{URL::asset('images/icons/KOFAV0.svg')}}",
-	"founder": [
+	"founder":[
 		{
 			"@type": "Person",
-			"name": "Soore Vahedzade",
-        },
-    ],
+			"name": "Soore Vahedzade"
+        }
+    ]
 },
 </script>
 

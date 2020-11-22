@@ -99,8 +99,6 @@
         min-width: 60px;
     }
 
-
-
     @media (max-width: 889px) {
         .secHeadTabs{
             margin-right: 13px;
@@ -266,6 +264,84 @@
 @if(isset($kindPlace))
     <div class="container-fluid fluidPlacePath secHeadMain">
 
+<script type="application/ld+json">
+<?php
+  $schemaPosition = 2;
+?>
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"item":  {
+				"@type": "Thing",
+				"name": "خانه",
+				"alternateName": "کوچیتا | سامانه جامع گردشگری",
+				"url": "{{url('/main')}}"
+			},
+			"position": "1"
+		},
+
+        @if($locationName['kindState'] != 'country')
+        {
+			"@type": "ListItem",
+			"item":  {
+				"@type": "Thing",
+				"name": "استان {{$locationName['state']}}",
+				"alternateName": "استان {{$locationName['state']}}",
+				"url": "{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}"
+			},
+			"position": "{{++$schemaPosition}}"
+		},
+		@endif
+
+        @if($locationName['kindState'] == 'city')
+        {
+			"@type": "ListItem",
+			"item":  {
+				"@type": "Thing",
+				"name": "{{$locationName['cityNameUrl']}}",
+				"alternateName": "{{$locationName['cityNameUrl']}}",
+				"url": "{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}"
+			},
+			"position": "{{++$schemaPosition}}"
+		},
+		@endif
+
+        {
+        "@type": "ListItem",
+        "item":  {
+            "@type": "Thing",
+            "name": "{{$kindPlace->title}}",
+				"alternateName": "{{$kindPlace->title}}",
+				"url": "{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}"
+			},
+			"position": "{{++$schemaPosition}}"
+		},
+
+        @if($locationName['kindPage'] == 'place')
+            {
+               "@type": "ListItem",
+               "item":  {
+                   "@type": "Thing",
+                   "name": "{{$place->name}}",
+                    "alternateName": "{{$place->name}}",
+                    @if(isset($photos[0]))
+                        "url": "{{Request::url()}}",
+                        "image": "{{$photos[0]}}"
+                    @else
+                        "url": "{{Request::url()}}"
+                    @endif
+                },
+                "position": "{{++$schemaPosition}}"
+            },
+        @endif
+        "":""
+   ]
+}
+</script>
+
         <div class="container listSecHeadContainer secHeadNavs spanMarginSecHead">
             <a class="linkRoute" href="{{url('/main')}}">
                 {{__('صفحه اصلی')}}
@@ -283,7 +359,7 @@
                 <div class="secHeaderPathDiv lessShowText">
                     <span class="yelCol"> > </span>
                     <a class="linkRoute" href="{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}">
-                        شهر {{$locationName['cityNameUrl']}}
+                        {{$locationName['cityNameUrl']}}
                     </a>
                 </div>
             @endif
@@ -293,17 +369,13 @@
                 <a class="linkRoute" href="{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}">
                     {{$kindPlace->title}}
                     @if($mode != 'country')
-                        @if($mode == 'state')
-                            استان
-                        @else
-                            شهر
-                        @endif
-                        {{$city->name}}
+                        {{$mode == 'state' ? ' استان '.$city->name : $city->name}}
                     @else
                         ایران من
                     @endif
                 </a>
             </div>
+
             @if($locationName['kindPage'] == 'place')
                 <div class="secHeaderPathDiv lessShowText">
                     <span class="yelCol"> > </span>
@@ -315,10 +387,10 @@
 
         </div>
 
-        @if($locationName['kindPage'] == 'place')
+{{--        @if($locationName['kindPage'] == 'place')--}}
             {{--<div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">--}}
                 {{--<div style="background: red; width: 728px; height: 90px;"></div>--}}
             {{--</div>--}}
-        @endif
+{{--        @endif--}}
     </div>
 @endif
