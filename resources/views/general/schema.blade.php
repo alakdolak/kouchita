@@ -42,6 +42,7 @@
             "@type": "ImageObject",
             "caption": "{{$sitePics[0]['alt']}}",
             "contentUrl": "{{$sitePics[0]['s']}}",
+            "url": "{{$sitePics[0]['s']}}",
             "accountablePerson": {
                 "@type": "Person",
                 "additionalName": "{{$sitePics[0]['name']}}",
@@ -66,6 +67,7 @@
             "ratingCount": "{{$total}}",
             "reviewCount": "{{$reviewCount}}",
             "bestRating": "5",
+            "ratingValue": "{{$avgRate}}",
             "worstRating": "1"
         }
     ],
@@ -104,10 +106,10 @@
                     "interactionType": "https://schema.org/DislikeActin",
                     "userInteractionCount": "{{$place->firstReview->disLike}}"
                 }
-            ]
-            "dateCreated": "{{$place->firstReview->created_at}} +3:30"
+            ],
+            "dateCreated": "{{$place->firstReview->created_at}} +3:30",
             "sameAs": "{{$place->firstReview->placeUrl}}"
-        },
+        }
     ],
     @endif
     @if(isset($place->firstQuestion))
