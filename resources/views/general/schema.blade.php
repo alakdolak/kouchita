@@ -81,7 +81,7 @@
     ],
     @endif
 
-    @if(isset($place->firstReview))
+    @if(isset($place->firstReview) && $place->firstReview != null)
     "review":[
         {
             "@type": "Review",
@@ -116,7 +116,7 @@
     ],
     @endif
 
-    @if(isset($place->firstQuestion))
+    @if(isset($place->firstQuestion) && $place->firstQuestion != null)
     "Question":[
         {
             "about": "{{$place->firstQuestion->placeName}}",
