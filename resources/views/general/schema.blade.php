@@ -29,29 +29,14 @@
     @elseif($kindPlaceId == 12)
     @endif
 
-	@if($schemaPhone)
-    "telephone": [
-    @foreach($place->phone as $key => $phone)
-        "{{$phone}}" {{$key != count($place->phone)-1 ? ',': ''}}
-    @endforeach
-    ],
-	@endif
-    @if(count($sitePics) > 0)
     "image": [
         {
             "@type": "ImageObject",
-            "caption": "{{$sitePics[0]['alt']}}",
-            "contentUrl": "{{$sitePics[0]['s']}}",
-            "url": "{{$sitePics[0]['s']}}",
-            "accountablePerson": {
-                "@type": "Person",
-                "additionalName": "{{$sitePics[0]['name']}}",
-                "image": "{{$sitePics[0]['s']}}"
-            }
-{{--                "uploadDate": "{{$photographerPics[$i]['fromUpload']}}"--}}
+            "caption": "{{$place->keyword}}",
+            "contentUrl": "{{$mainPic}}",
+            "url": "{{$mainPic}}",
         }
     ],
-    @endif
     @if($schemaAddress != false)
     "address":[
         {
@@ -65,18 +50,12 @@
     "aggregateRating":[
         {
             "ratingCount": "{{$total}}",
-            "reviewCount": "{{$reviewCount}}",
+            "reviewCount": "{{$reviewCount == 0 ? 1 : $reviewCount}}",
             "bestRating": "5",
             "ratingValue": "{{$avgRate}}",
             "worstRating": "1"
         }
     ],
-    @if(isset($place->C))
-    "latitude":	"{{$place->C}}",
-    @endif
-    @if(isset($place->D))
-        "longitude": "{{$place->D}}",
-    @endif
     "description":"{{$place->meta}}",
     @if(isset($place->firstReview))
     "review":[
