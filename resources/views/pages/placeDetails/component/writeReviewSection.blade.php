@@ -266,7 +266,7 @@
 
 <script>
 
-    var rateQuestion = {!! $rateQuestionJSON !!} ;
+    var rateQuestion = {!! json_encode($rateQuestion) !!} ;
     var textQuestions = {!! json_encode($textQuestion) !!};
     var rateQuestionAns = [];
     var allReviews;

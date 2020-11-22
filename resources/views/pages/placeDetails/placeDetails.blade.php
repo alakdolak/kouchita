@@ -54,8 +54,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var thisUrl = '{{Request::url()}}';
         var userCode = '{{$userCode}}';
         var userPic = '{{$userPic}}';
-        var userPhotos = {!! $userPhotosJson !!};
-        var userVideo = {!! $userVideoJson !!};
+        var userPhotos = {!! json_encode($userPhotos) !!};
+        var userVideo = {!! json_encode($userVideo) !!};
         var placeMode = '{{$placeMode}}';
         var getQuestions = '{{route('getQuestions')}}';
         var likeLog = '{{route('likeLog')}}';
@@ -67,8 +67,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
         var soon = '{{route('soon')}}';
         var placeMode = '{{$placeMode}}';
-        var photographerPics = {!! $photographerPicsJSON !!};
-        var sitePics = {!! $sitePicsJSON !!};
+        var photographerPics = {!! json_encode($photographerPics) !!};
+        var sitePics = {!! json_encode($sitePics) !!};
         var hotelDetails;
         var hotelDetailsInAskQuestionMode;
         var hotelDetailsInAnsMode;
@@ -103,6 +103,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
 
 @section('main')
+    @include('general.schema')
 
     @include('general.secondHeader')
 
@@ -227,8 +228,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                                         <div class="circleBase type2"
                                                                              id="photographerIdPic"
                                                                              style="background-color: var(--koochita-light-green);">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}"
-                                                                                 style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
                                                                         <div class="display-inline-block mg-rt-10 mg-tp-2">
                                                                             <span class="display-block font-size-12">عکس از</span>
@@ -1582,28 +1582,5 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             document.onkeydown = null;
         }
     </script>
-
-    @if(session('room') != null || session('backDate') != null)
-        <script>
-            var room = 0;
-            var adult = 0;
-            var children = 0;
-            @if(session('room') != null)
-                room = parseInt('{{session('room')}}');
-            adult = parseInt('{{session('adult')}}');
-            children = parseInt('{{session('children')}}');
-            @endif
-        </script>
-        @if(session('backDate') != null)
-            <script defer src="{{URL::asset('js/hotelDetails/roomReservation.js')}}"></script>
-            <script>
-                var updateSession = '{{route("updateSession")}}';
-                document.getElementById('backDate').value = '{{session("backDate")}}';
-                var rooms = '{!! $jsonRoom !!}';
-            </script>
-        @endif
-
-    @endif
-
 @stop
 

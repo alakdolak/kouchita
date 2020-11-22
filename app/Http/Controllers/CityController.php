@@ -38,10 +38,8 @@ class CityController extends Controller
         if($place == null)
             return Redirect::route('home');
 
-        $locationPic = __DIR__ . '/../../../../assets/_images/city';
 
         if($kind == 'city') {
-
             $place->state = State::whereId($place->stateId)->name;
             $place->listName = $place->name;
             $articleUrl = route('safarnameh.list', ['type' => 'city', 'search' => $place->listName]);
@@ -106,7 +104,7 @@ class CityController extends Controller
         $DBpic = PlacePic::join('amaken', 'amaken.id', 'placePics.placeId')
                         ->where('placePics.kindPlaceId', 1)
                         ->whereIn('placePics.placeId', $allAmakenId)
-                        ->select(['placePics.id', 'amaken.picNumber AS mainPic', 'amaken.keyword', 'amaken.name', 'amaken.file', 'placePics.alt', 'placePics.picNumber'])
+                        ->select(['amaken.id', 'amaken.picNumber AS mainPic', 'amaken.keyword', 'amaken.name', 'amaken.file', 'placePics.alt', 'placePics.picNumber'])
                         ->get();
 
         $location = __DIR__ . '/../../../../assets/_images/amaken/';
@@ -115,11 +113,12 @@ class CityController extends Controller
             $smallPic = null;
             if(is_file($location.$item->file.'/s-'.$item->picNumber))
                 $mainPic= URL::asset("_images/amaken/$item->file/s-$item->picNumber");
+
             if(is_file($location.$item->file.'/l-'.$item->picNumber))
                 $smallPic = URL::asset("_images/amaken/$item->file/l-$item->picNumber");
             else
                 $smallPic = $mainPic;
-
+            
             if($mainPic != null)
                 array_push($pics, [
                     'mainPic' => $mainPic,
@@ -131,7 +130,6 @@ class CityController extends Controller
         }
 
         $place->pic = $pics;
-
 
         $placeCounts = [
             'amaken' => $allAmaken,
