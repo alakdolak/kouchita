@@ -44,6 +44,8 @@
             "@type": "NutritionInformation",
             "calories": "{{$place->energy}} calories"
         },
+        "recipeCategory" : "{{$place->kindName}}",
+        "recipeCuisine" : "Persian food",
         "suitableForDiet" : [
             @if($place->vegetarian == 1)
                 "https://schema.org/VegetarianDiet",

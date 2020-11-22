@@ -204,7 +204,7 @@ class PlaceController extends Controller {
         $articleUrl = route('safarnameh.list', ['type' => 'place', 'search' => $kindPlaceId . '_' . $place->id]);
         $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $city->name, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
 
-        $mainPic = count($sitePics) > 0 ? $mainPic = $sitePics[0]['f'] : $mainPic = URL::asset('images/mainPics/nopicv01.jpg');
+        $mainPic = count($sitePics) > 0 ? $sitePics[0]['f'] : URL::asset('images/mainPics/nopicv01.jpg');
         $video = isset($place->video) ? $place->video : '';
 
         $reviewAction = Activity::where('name', 'نظر')->first();
@@ -229,7 +229,6 @@ class PlaceController extends Controller {
 
         $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => \Request::url()];
         session(['inPage' => 'place_' . $kindPlaceId . '_' . $place->id]);
-
         return view('pages.placeDetails.placeDetails', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
             'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
