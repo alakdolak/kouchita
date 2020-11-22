@@ -208,7 +208,7 @@ class PlaceController extends Controller {
         $video = isset($place->video) ? $place->video : '';
 
         $reviewAction = Activity::where('name', 'نظر')->first();
-        $place->firstReview = \DB::table($reviewAction->tableName)
+        $place->firstReview = \DB::table('log')
                     ->where('activityId', $reviewAction->id)
                     ->where('kindPlaceId', $kindPlaceId)
                     ->where('placeId', $place->id)
@@ -217,7 +217,7 @@ class PlaceController extends Controller {
             $place->firstReview = reviewTrueType($place->firstReview);
 
         $questionAction = Activity::where('name', 'سوال')->first();
-        $place->firstQuestion = \DB::table($questionAction->tableName)
+        $place->firstQuestion = \DB::table('log')
                     ->where('activityId', $questionAction->id)
                     ->where('kindPlaceId', $kindPlaceId)
                     ->where('placeId', $place->id)
