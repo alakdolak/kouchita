@@ -271,7 +271,8 @@
 {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-	"itemListElement": [
+	"itemListElement":
+	[
 		{
 			"@type": "ListItem",
 			"item":  {
@@ -337,7 +338,7 @@
                 "position": "{{++$schemaPosition}}"
             },
         @endif
-        "":""
+        "itemListOrder": "Ascending"
    ]
 }
 </script>
