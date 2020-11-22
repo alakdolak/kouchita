@@ -374,10 +374,8 @@ function hideElement(element) {
 
 function bookMark() {
 
-    if (!hasLogin) {
-        showLoginPrompt(thisUrl);
+    if (!checkLogin())
         return;
-    }
 
     $.ajax({
         type: 'post',
@@ -464,10 +462,9 @@ function showChildBox(val, childAge) {
 // }
 
 function showAskQuestion() {
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInAskQuestionMode);
+    if (!checkLogin())
         return;
-    }
+
     $(".askQuestionForm").removeClass('hidden');
     document.href = ".askQuestionForm";
 }
@@ -477,10 +474,8 @@ function hideAskQuestion() {
 }
 
 function askQuestion() {
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInAskQuestionMode);
+    if (!checkLogin())
         return;
-    }
     if ($("#questionTextId").val() == "")
         return;
     $.ajax({
@@ -571,7 +566,7 @@ function photoRoundRobin2(val) {
 
 function startHelp() {
     setGreenBackLimit(7);
-    if (hasLogin) {
+    if (checkLogin()) {
         if (noAns)
             initHelp2(16, [0, 4, 15], 'MAIN', 100, 400, [14, 15], [50, 100]);
         else
@@ -703,10 +698,9 @@ function hideAnsPane() {
 }
 
 function sendAns(logId) {
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInAnsMode);
+    if (!checkLogin())
         return;
-    }
+
     if ($("#answerText_" + logId).val() == "")
         return;
     $.ajax({
@@ -910,10 +904,8 @@ function filter() {
 }
 
 function showAddPhotoPane() {
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInAddPhotoMode);
+    if (!checkLogin())
         return;
-    }
     // $('.dark').show();
     showElement('photoEditor');
     getPhotoFilters();
@@ -1121,9 +1113,8 @@ function showLessReview(idx) {
 }
 
 function showAddReviewPageHotel(url) {
-    if (!hasLogin) {
-        showLoginPrompt(url);
-    }
+    if (!checkLogin())
+        return;
     else {
         document.location.href = url;
     }

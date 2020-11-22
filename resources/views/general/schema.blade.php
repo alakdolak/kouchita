@@ -116,8 +116,9 @@
     @endif
 
     @if(isset($place->firstQuestion) && $place->firstQuestion != null)
-    "Question":[
+    "question":[
         {
+            "@type":"Question",
             "about": "{{$place->firstQuestion->placeName}}",
             "abstract": "{{$place->firstQuestion->text}}",
             "answerCount": "{{$place->firstQuestion->answersCount}}",
