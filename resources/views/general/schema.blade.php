@@ -34,7 +34,7 @@
             "@type": "ImageObject",
             "caption": "{{$place->keyword}}",
             "contentUrl": "{{$place->mainPic}}",
-            "url": "{{$place->mainPic}}",
+            "url": "{{$place->mainPic}}"
         }
     ],
     @if($schemaAddress != false)
