@@ -93,16 +93,18 @@
                 "image": "{{$place->firstReview->userPic}}"
             },
             "commentCount": "Integer ",
-            "interactionStatistic": {
-                "@type": "InteractionCounter",
-                "interactionType": "https://schema.org/LikeActin",
-                "userInteractionCount": "{{$place->firstReview->like}}"
-            },
-            "interactionStatistic": {
-                "@type": "InteractionCounter",
-                "interactionType": "https://schema.org/DislikeActin",
-                "userInteractionCount": "{{$place->firstReview->disLike}}"
-            },
+            "interactionStatistic": [
+                {
+                    "@type": "InteractionCounter",
+                    "interactionType": "https://schema.org/LikeActin",
+                    "userInteractionCount": "{{$place->firstReview->like}}"
+                },
+                {
+                    "@type": "InteractionCounter",
+                    "interactionType": "https://schema.org/DislikeActin",
+                    "userInteractionCount": "{{$place->firstReview->disLike}}"
+                }
+            ]
             "dateCreated": "{{$place->firstReview->created_at}} +3:30"
             "sameAs": "{{$place->firstReview->placeUrl}}"
         },
