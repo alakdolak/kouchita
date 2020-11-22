@@ -53,6 +53,40 @@
 {{--<meta name="google-signin-scope" content="profile email">--}}
 {{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
 
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name":"سامانه جامع گردشگری کوچیتا",
+	"alternateName":"Koochita",
+	"url":"https://koochita.com",
+	"sameAs": [
+	         "https://www.facebook.com/Koochita-115157527076374",
+	         "https://twitter.com/Koochita_Com",
+	         "https://www.instagram.com/koochita_com/",
+	         "https://t.me/koochita",
+	         "https://wa.me/989120239315",
+     ],
+	"address":[
+			{
+	        "@type": "PostalAddress",
+			"addressCountry": "IR",
+			"addressRegion": "شهر",
+			"streetAddress": "میدان ونک ، قبل از چهارراه جهان کودک ، ساختمان دانشگاه علامه طبابایی، طبقه سوم ، سیسوتک",
+			},
+   ],
+{{--    "address":"آدرس",--}}
+    "email":"info@koochita.com",
+    "logo":"{{URL::asset('images/icons/KOFAV0.svg')}}",
+	"founder": [
+		{
+			"@type": "Person",
+			"name": "Soore Vahedzade",
+        },
+    ],
+},
+</script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
     window.googleMapStyle = [
