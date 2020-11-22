@@ -65,8 +65,8 @@
 	         "https://twitter.com/Koochita_Com",
 	         "https://www.instagram.com/koochita_com/",
 	         "https://t.me/koochita",
-	         "https://wa.me/989120239315",
-     ],
+	         "https://wa.me/989120239315"
+    ],
 	"address":[
 			{
 	        "@type": "PostalAddress",
@@ -74,11 +74,11 @@
 			"addressRegion": "شهر",
 			"streetAddress": "میدان ونک ، قبل از چهارراه جهان کودک ، ساختمان دانشگاه علامه طبابایی، طبقه سوم ، سیسوتک",
 			},
-   ],
-{{--    "address":"آدرس",--}}
+    ],
     "email":"info@koochita.com",
     "logo":"{{URL::asset('images/icons/KOFAV0.svg')}}",
-	"founder": [
+	"founder":
+	[
 		{
 			"@type": "Person",
 			"name": "Soore Vahedzade",
