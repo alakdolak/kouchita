@@ -419,6 +419,7 @@
             cityPic.map((pic, index) => {
                 cityPicForAlbum[index] = {
                     'id' : pic['id'],
+                    'alt' : pic['alt'],
                     'sidePic' : pic['smallPic'],
                     'mainPic' : pic['mainPic'],
                     'userPic' : '{{getUserPic(0)}}',
