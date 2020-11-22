@@ -137,6 +137,7 @@
                 }
             },
             @endif
+        "dateCreated": "{{$place->firstQuestion->created_at}} +3:30"
 {{--            "interactionStatistic": {--}}
 {{--                "@type": "InteractionCounter",--}}
 {{--                "interactionType": "https://schema.org/LikeActin",--}}
@@ -147,7 +148,6 @@
 {{--                "interactionType": "https://schema.org/DislikeActin",--}}
 {{--                "userInteractionCount": "تعداد"--}}
 {{--            },--}}
-            "dateCreated": "{{$place->firstReview->created_at}} +3:30"
         }
     ],
     @endif
