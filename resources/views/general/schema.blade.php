@@ -31,6 +31,8 @@
         "@type": "Product",
     @elseif($kindPlaceId == 11)
         "@type": "Recipe",
+        "author": "koochita",
+        "keywords": "{{$place->keyword}}",
         @if(isset($place->material))
         "recipeIngredient": [
             @foreach($place->material as $key => $mateial)
@@ -53,7 +55,7 @@
                 "https://schema.org/DiabeticDiet",
             @endif
             "https://schema.org/HalalDiet"
-        ]
+        ],
     @elseif($kindPlaceId == 12)
         "@type": "BedAndBreakfast",
     @endif
@@ -150,6 +152,14 @@
     @endif
 
     @if($kindPlaceId != 11)
+    "availableLanguage": [
+        "en",
+        "pr",
+        "fr",
+        "ar"
+    ],
+    @endif
+
     "aggregateRating":[
         {
             "ratingCount": "{{$total}}",
@@ -165,13 +175,7 @@
             "audienceType": "tourist"
         }
     ],
-    "availableLanguage": [
-            "en",
-            "pr",
-            "fr",
-            "ar"
-    ],
-    @endif
+
 
     "description":"{{$place->meta}}",
     "name": "{{$place->name}}",
