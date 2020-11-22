@@ -30,33 +30,30 @@
     @elseif($kindPlaceId == 10)
         "@type": "Product",
     @elseif($kindPlaceId == 11)
-        "@type": "CookAction",
-        "recipe" : {
-            "@type": "Recipe",
-            @if(isset($place->material))
-            "recipeIngredient": [
-                @foreach($place->material as $key => $mateial)
-                    "{{$mateial->name}}" {{$key == count($place->material)-1 ? '' : ','}}
-                @endforeach
-            ],
-            @endif
-            "nutrition":{
-                "@type": "NutritionInformation",
-                "calories": "{{$place->energy}} calories"
-            },
-            "suitableForDiet" : [
-                @if($place->vegetarian == 1)
-                    "https://schema.org/VegetarianDiet",
-                @endif
-                @if($place->vegan == 1)
-                    "https://schema.org/VeganDiet",
-                @endif
-                @if($place->diabet == 1)
-                    "https://schema.org/DiabeticDiet",
-                @endif
-                "https://schema.org/HalalDiet"
-            ]
+        "@type": "Recipe",
+        @if(isset($place->material))
+        "recipeIngredient": [
+            @foreach($place->material as $key => $mateial)
+                "{{$mateial->name}}" {{$key == count($place->material)-1 ? '' : ','}}
+            @endforeach
+        ],
+        @endif
+        "nutrition":{
+            "@type": "NutritionInformation",
+            "calories": "{{$place->energy}} calories"
         },
+        "suitableForDiet" : [
+            @if($place->vegetarian == 1)
+                "https://schema.org/VegetarianDiet",
+            @endif
+            @if($place->vegan == 1)
+                "https://schema.org/VeganDiet",
+            @endif
+            @if($place->diabet == 1)
+                "https://schema.org/DiabeticDiet",
+            @endif
+            "https://schema.org/HalalDiet"
+        ]
     @elseif($kindPlaceId == 12)
         "@type": "BedAndBreakfast",
     @endif
@@ -79,16 +76,7 @@
         }
     ],
     @endif
-    "aggregateRating":[
-        {
-            "ratingCount": "{{$total}}",
-            "reviewCount": "{{$reviewCount == 0 ? 1 : $reviewCount}}",
-            "bestRating": "5",
-            "ratingValue": "{{$avgRate}}",
-            "worstRating": "1"
-        }
-    ],
-    "description":"{{$place->meta}}",
+
     @if(isset($place->firstReview))
     "review":[
         {
@@ -123,6 +111,7 @@
         }
     ],
     @endif
+
     @if(isset($place->firstQuestion))
     "Question":[
         {
@@ -160,6 +149,16 @@
     ],
     @endif
 
+    @if($kindPlaceId != 11)
+    "aggregateRating":[
+        {
+            "ratingCount": "{{$total}}",
+            "reviewCount": "{{$reviewCount == 0 ? 1 : $reviewCount}}",
+            "bestRating": "5",
+            "ratingValue": "{{$avgRate}}",
+            "worstRating": "1"
+        }
+    ],
     "audience": [
         {
             "@type": "Audience",
@@ -172,6 +171,9 @@
             "fr",
             "ar"
     ],
+    @endif
+
+    "description":"{{$place->meta}}",
     "name": "{{$place->name}}",
 	"url": "{{Request::url()}}"
 },
