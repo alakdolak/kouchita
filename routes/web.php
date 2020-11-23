@@ -26,7 +26,7 @@ Route::group(array(), function(){
 
 });
 
-Route::group(array('middleware' => ['throttle:30', 'web']), function () {
+Route::group(array('middleware' => ['throttle:60', 'web']), function () {
 
     Route::get('/', 'MainController@showMainPage')->name('home')->middleware('shareData');
 
@@ -647,6 +647,8 @@ Route::group(array('middleware' => ['auth']), function(){
 Route::group(['middleware' => 'web'], function(){
 
     Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival')->middleware('shareData');
+
+    Route::get('/festival/cook', 'FestivalController@cookFestival')->name('festival.cook')->middleware('shareData');
 
     Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main')->middleware('shareData');
 

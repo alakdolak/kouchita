@@ -180,6 +180,10 @@
     font-family: 'Shazde_Regular' !important;
     content: '\E02C';
 }
+.iconFullClose:before {
+    font-family: 'Shazde_Regular' !important;
+    content: '\E02E';
+}
 .iconCloseAfter:after {
     font-family: 'Shazde_Regular' !important;
     content: '\E02C';

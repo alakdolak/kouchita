@@ -823,7 +823,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
             openLoading();
             $.ajax({
                 type: 'post',
-                url: mainLoginDir,
+                url: '{{route('login2')}}',
                 data: {
                     username: username,
                     password: password

@@ -247,7 +247,7 @@ footer li > img, .small-ico {
 .phoneFooterStyle {
     position: relative;
     bottom: 0;
-    background-color: var(--koochita-yellow);
+    /*background-color: var(--koochita-yellow);*/
     color: #16174f;
     direction: rtl;
     padding: 20px 10px;
@@ -257,12 +257,17 @@ footer li > img, .small-ico {
 }
 
 .phoneFooterLogo {
-    width: 190px;
+    width: 170px;
     position: absolute;
-    top: -22px;
+    top: -8px;
+    z-index: 9;
 }
 
 .phoneDescription {
+    width: 100%;
+    padding-top: 10px;
+    background: var(--koochita-yellow);
+
     font-size: 1em;
     font-weight: 500;
     text-align: justify;
@@ -412,11 +417,11 @@ footer li > img, .small-ico {
     box-shadow: 0px -5px 15px #cccccc;
     background-color: white;
     border-bottom: 2px solid #30b4a6;
-    /*font-size: 1.15em;*/
     font-weight: 700;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 0px 5px;
 }
 
 .recentViewLeftBar > div:nth-child(1) {
@@ -425,18 +430,20 @@ footer li > img, .small-ico {
 }
 
 .lp_eachMenu {
-    width: 25%;
+    width: 23%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 0 15px;
+    padding: 0px 0 9px;
     border-top: 5px solid white;
+    border: solid 1px gray;
+    border-radius: 8px;
+    margin: 5px 0px;
 }
 
 .lp_selectedMenu {
-    color: var(--koochita-light-green);
-    padding: 10px 0 15px;
-    border-top: 5px solid var(--koochita-light-green);
+    background: var(--koochita-yellow);
+    color: white;
 }
 
 .lp_selectedMenu > div:nth-child(2) {
@@ -504,7 +511,7 @@ footer li > img, .small-ico {
     width: 300px;
     height: 300px;
     background-color: #e5e5e5;
-    color: var(--koochita-light-green);
+    color: var(--koochita-blue);
     font-size: 3em;
     display: flex;
     justify-content: center;
@@ -981,9 +988,9 @@ footer .activityNumbers {
 }
 
 .pSC_choiseDetailsText {
-    font-size: 12px;
+    font-size: 18px;
     border-bottom: 2px solid #a1a1a1;
-    color: #e08700;
+    color: var(--koochita-blue);
 }
 
 .pSC_boxOfCityDetailsText:hover {
@@ -1022,7 +1029,7 @@ footer .activityNumbers {
     border-radius: 5px;
 }
 .pSC_cityDetails {
-    width: 50%;
+    width: 100%;
     padding: 10px 12px;
     text-align: right;
     border-width: 2px 2px 2px 0;
@@ -1041,7 +1048,7 @@ footer .activityNumbers {
 }
 
 .pSC_cityDetails:nth-of-type(even){
-    border-right: solid #a1a1a1 1px;
+    /*border-right: solid #a1a1a1 1px;*/
 }
 .koochitaTvRowPhoneFooter{
     width: 100%;
@@ -1252,14 +1259,19 @@ footer .profileMenuLinks {
     display: flex;
     margin-top: 11px;
     padding: 0px 10px;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
 .footerLanguageDivPhone{
+    width: 65px;
+    margin: 10px;
     display: flex;
+    margin-right: 14px;
+    margin-bottom: 10px;
     direction: ltr;
     justify-content: center;
     align-items: center;
-    background-color: #ffdd9e;
+    background: white;
     border-radius: 5px;
     padding: 0px 5px;
     font-size: 12px;
@@ -1281,11 +1293,23 @@ footer .profileMenuLinks {
 
 .closeFooterPopupIcon{
     position: absolute;
-    left: 5px;
-    top: 0px;
-    font-size: 40px;
-    /*color: var(--koochita-light-green);*/
-    color: var(--koochita-red);
+    top: 5px;
+    font-size: 30px;
+    line-height: 28px;
+    width: 30px;
+    left: 8px;
+    height: auto !important;
+    color: var(--koochita-yellow);
+    border: solid 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.closeFooterPopupIcon:before{
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 }
 
 .eatery_filters{
@@ -1331,7 +1355,7 @@ footer .profileMenuLinks {
     border-bottom: solid 1px #dcdcdc75;
 }
 .footerSafarnmaehCategoryRow .safarnamehRow.back{
-    background: var(--koochita-light-green);
+    background: var(--koochita-blue);
     justify-content: center;
     align-items: center;
     width: fit-content;
@@ -1339,7 +1363,7 @@ footer .profileMenuLinks {
 }
 .footerSafarnmaehCategoryRow .safarnamehRow.back .name{
     font-weight: bold;
-    background: var(--koochita-light-green);
+    background: var(--koochita-blue);
     color: white;
     margin: 0px;
 }
@@ -1705,6 +1729,36 @@ footer .footerMsgCountNumber{
         align-items: center;
         border-radius: 50%;
     }
+
+    .headerSearchBar{
+        width: calc(100% - 23px);
+        justify-content: space-evenly;
+        background: none;
+        display: flex;
+        height: auto;
+        padding: 5px 9px 5px 5px;
+        border: solid 1px gray;
+        margin: 0px 12px;
+    }
+    .headerSearchBar .footerSearchBar{
+        width: 48%;
+        border-radius: 5px;
+        color: white;
+        padding: 12px 0px;
+        box-shadow: 2px 2px 1px 1px #bfbfbf;
+        border: solid 2px wheat;
+        margin: 0px;
+        margin-bottom: 2px;
+    }
+    .headerSearchBar .footerSearchBar .icc{
+        font-size: 15px;
+        text-align: center;
+        width: 100%;
+        color: white;
+    }
+    .headerSearchBar .footerSearchBar .icc:before{
+        font-size: 20px;
+    }
 }
 
 @media (max-height: 700px) {
@@ -1725,9 +1779,13 @@ footer .footerMsgCountNumber{
 }
 
 @media (max-width: 630px) {
+    .lp_icons {
+        font-weight: normal;
+    }
 
     .lp_eachMenu > div:nth-child(2) {
         font-size: 13px;
+        font-weight: normal;
     }
 
     .lp_others_titles, .lp_others_titles .trips-header {
@@ -1795,13 +1853,6 @@ footer .footerMsgCountNumber{
         font-size: 10px;
     }
 
-    .lp_eachMenu:nth-child(even) {
-        width: 30%;
-    }
-
-    .lp_eachMenu:nth-child(3) {
-        width: 15%;
-    }
 
     .lp_others_recentView {
         flex-direction: column;

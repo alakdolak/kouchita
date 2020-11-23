@@ -12,6 +12,15 @@
         justify-content: space-between;
         align-items: center
     }
+
+    .phoneMainFooter{
+        padding: 0;
+        padding-top: 12px;
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        margin-top: 0;
+    }
 </style>
 <footer>
     <div class="hideOnPhone screenFooterStyle">
@@ -147,24 +156,31 @@
     <div class="hideOnScreen gapForMobileFooter"></div>
 
     <div class="footerPhoneMenuBar hideOnScreen">
-        <div data-toggle="modal" data-target="#otherPossibilities">
+{{--        <div data-toggle="modal" data-target="#otherPossibilities">--}}
+        <div data-toggle="modal" data-target="#mainMenuFooter"  onclick="showLastPages();// this function in mainSearch.blade.php">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
             <span class="threeLineIcon"></span>
         </div>
-        <div data-toggle="modal" data-target="#profilePossibilities" onclick="showLastPages();// this function in mainSearch.blade.php">
+        <div data-toggle="modal" data-target="#otherPossibilities">
+            <span class="footerMenuBarLinks"> {{__('دسته بندی')}} </span>
+            <span class="ui_icon memberPossibilities"></span>
+        </div>
+        <div onclick="
+                    @if(Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*'))
+                        $('#profilePossibilities').modal('show');
+                    @else
+                        showCampingModal(); // in header1.blade.php
+                    @endif
+                    ">
             <span class="footerMenuBarLinks">
                 @if(Request::is('placeList/*'))
                     {{__('اعمال فیلتر')}}
                 @elseif(Request::is('safarnameh/*') || Request::is('safarnameh'))
-                    {{__('دسته بندی')}}
+                    {{__('سفرنامه ها')}}
                 @else
-                    {{__('امکانات ویژه')}}
+                    {{__('کمپین')}}
                 @endif
             </span>
-            <span class="ui_icon memberPossibilities"></span>
-        </div>
-        <div onclick="showCampingModal() // in header1.blade.php">
-            <span class="footerMenuBarLinks">{{__('کمپین')}}</span>
             <span class="iconFamily iconFamily addPostIcon" style="font-size: 20px;"></span>
         </div>
         @if(Auth::check())
@@ -206,6 +222,110 @@
     </div>
 
     <div class="container">
+
+        <div class="modal fade" id="mainMenuFooter">
+            <div class="mainPopUp rightPopUp recentViewLeftBar">
+                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('mainMenuFooter')"></div>
+                <div class="footerLanguageDivPhone">
+                    {{--<div class="footerLanguageTextPhone">زبان</div>--}}
+                    <div class="footerLanguageInputPhone">
+                        <select class="chooseLanguagePhone" onchange="goToLanguage(this.value)">
+                            <option value="fa" selected>فارسی</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="headerSearchBar">
+                    <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
+                        <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
+                    </span>
+
+                    <span class="headerSearchIcon footerSearchBar" style="background: var(--koochita-red);">
+                        <a href="{{route('myLocation')}}" class="icc locationIcon" style="word-spacing: -4px;">اطراف من</a>
+                    </span>
+                </div>
+
+                <div>
+                    <div class="lp_others_content" id="lp_others_recentlyViews">
+                        <div class="mainContainerBookmarked" style="height: calc(100vh - 170px); border-top: 1px solid #cccccc; padding-top: 3px;">
+{{--                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px; margin-bottom: 5px;"> {{__('بازدید قبلی')}} </div>--}}
+                            <div id="phoneRecentlyView">
+                                <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap; margin-top: 0px"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: hidden; padding: 25px 10px; height: calc(100vh - 100px);">
+{{--                        <div class="lp_others_titles"> {{__('چه خبر ...!')}} </div>--}}
+                        <div id="noMessagePhone" class="lp_others_noMessages alertMsgResultDiv" style="height: 100%; overflow-y: auto">{{__('هیچ پیام جدیدی موجود نیست')}}</div>
+                    </div>
+
+                    <div class="lp_others_content hidden" id="lp_others_mark">
+{{--                        <div class="lp_others_titles"> {{__('نشون‌کرده')}} </div>--}}
+                        <div class="mainContainerBookmarked" style="height: calc(100vh - 170px);">
+                            <div id="phoneBookMarks">
+                                <div class="masthead-recent-class">
+                                    @if(\auth()->check())
+                                        <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                            <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
+                                                <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+                                            </div>
+                                            <div class="col-xs-4 placeDetailsLeftBar">
+                                                <div class="">##placeName##</div>
+                                                <div class="lp_others_rating" style="display: flex; align-items: center; justify-content: center">
+                                                    <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                    ##placeReviews## نقد
+                                                </div>
+                                                <div class="">##placeCity##</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <div style="display: flex; justify-content: center; align-items: center; height: 50vh; background: white;">
+                                            <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}" style="text-align: center;"> {{__('auth.ورود / ثبت نام')}}</div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lp_others_content hidden" id="lp_others_myTravel">
+{{--                        <div class="lp_others_titles">--}}
+{{--                            <a href="{{URL('myTrips')}}" target="_self" style="color: #333">{{__('سفرهای من')}} </a>--}}
+{{--                        </div>--}}
+                        @if(\auth()->check())
+                            <div style="display: flex; justify-content: center; align-items: center; height: 75vh;">
+                                <a href="{{route('myTrips')}}" class="mainLoginButton" style="text-align: center;"> {{__('رفتن به صفحه سفرهای من')}}</a>
+                            </div>
+                        @else
+                            <div style="display: flex; justify-content: center; align-items: center; height: 75vh;">
+                                <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}" style="text-align: center;"> {{__('auth.ورود / ثبت نام')}}</div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="lp_phoneMenuBar">
+                    <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_myTravel', this);;">
+                        <div class="iconFamily MyTripsIcon lp_icons"></div>
+                        <div>{{__('سفرهای من')}}</div>
+                    </div>
+                    <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_mark', this)">
+                        <div class="ui_icon casino lp_icons"></div>
+                        <div>{{__('نشون‌کرده')}}</div>
+                    </div>
+                    <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this)">
+                        <div class="lp_icons iconFamily MsgIcon"></div>
+                        <div>{{__('چه خبر ...!')}}</div>
+                    </div>
+                    <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this);">
+                        <div class="lp_icons iconFamily searchIcon"></div>
+                        <div>{{__('بازدید اخیر')}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id="profilePossibilities">
             @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
@@ -578,12 +698,10 @@
             @else
                 <div class="mainPopUp rightPopUp recentViewLeftBar">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('profilePossibilities')"></div>
-
-                    {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
-                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px; margin-bottom: 5px;"> {{__('بازدیدهای اخیر')}} </div>
-                            <div class="headerSearchBar" style="width: 100%; margin-bottom: 10px">
+                            <div class="lp_others_titles" style="padding-bottom: 2px; border: none; font-size: 18px;"> {{__('بازدید قبلی')}} </div>
+                            <div class="headerSearchBar">
                                 <span class="headerSearchIcon iconFamily footerSearchBar searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php">
                                     <span style="font-size: 15px; text-align: center; width: 100%;">
                                         {{__('به کجا می روید؟')}}
@@ -598,7 +716,7 @@
                         </div>
 
                         <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: hidden; padding: 25px 10px; height: calc(100vh - 100px);">
-                            <div id="phoneMessages" class="lp_others_titles"> {{__('اعلانات')}} </div>
+                            <div class="lp_others_titles"> {{__('چه خبر ...!')}} </div>
                             <div id="noMessagePhone" class="lp_others_noMessages alertMsgResultDiv" style="height: 100%; overflow-y: auto">{{__('هیچ پیام جدیدی موجود نیست')}}</div>
                         </div>
 
@@ -632,15 +750,14 @@
                         </div>
 
                         <div class="lp_others_content hidden" id="lp_others_myTravel">
-
                             <div class="lp_others_titles">
                                 <a href="{{URL('myTrips')}}" target="_self" style="color: #333">{{__('سفرهای من')}} </a>
                             </div>
-
                             @if(\auth()->check())
                                 <div style="display: flex; justify-content: center; align-items: center; height: 75vh;">
                                     <a href="{{route('myTrips')}}" class="mainLoginButton" style="text-align: center;"> {{__('رفتن به صفحه سفرهای من')}}</a>
                                 </div>
+
                             @else
                                 <div style="display: flex; justify-content: center; align-items: center; height: 75vh;">
                                     <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}" style="text-align: center;"> {{__('auth.ورود / ثبت نام')}}</div>
@@ -660,11 +777,11 @@
                     </div>
                     <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this)">
                         <div class="lp_icons iconFamily MsgIcon"></div>
-                        <div>{{__('اعلانات')}}</div>
+                        <div>{{__('چه خبر ...!')}}</div>
                     </div>
                     <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this);">
                         <div class="lp_icons iconFamily searchIcon"></div>
-                        <div>{{__('بازدیدهای اخیر')}}</div>
+                        <div>{{__('بازدید قبلی')}}</div>
                     </div>
                 </div>
                 </div>
@@ -674,58 +791,56 @@
         <div class="modal fade" id="otherPossibilities">
             <div class="mainPopUp rightPopUp" style="overflow-y: auto">
                 <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeFooterBotstrapModal('otherPossibilities')"></div>
-                @if(isset($locationName))
-                    <div class="pSC_tilte">
-                        <div style="text-align: center">
-                            {{__('در')}}
-                            <span class="pSC_cityTilte" >{{$locationName['name']}}</span>
-                            {{__('بیشتر مشاهده کنید')}}
-                        </div>
+                <div class="pSC_boxOfDetails" style="margin-top: 20px;">
+                    <div class="pSC_choiseDetailsText">
+                        <span class="pSC_cityTilte" >
+                            {{isset($locationName['cityNameUrl']) ? $locationName['cityNameUrl'] : 'ایران'}}
+                        </span>
+                        را بهتر بشناسید
                     </div>
-                    <div class="pSC_boxOfDetails">
-                        <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
-                        <div>
-                            <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
-                                <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                    {{__('اطالاعات')}} {{$locationName['cityNameUrl']}}
-                                </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails">{{__('اقامتگاه ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('رستوران ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('صنایع دستی')}} </a>
-                                <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
-                                    {{__('تلویزیون گردشگری کوچیتا')}}
-                                    <img src="{{URL::asset('images/mainPics/vodLoboMobile.webp')}}" alt="koochitatv" style="height: 25px">
-                                </a>
+                    <div>
+                        @if(isset($locationName))
+                        <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
+                            <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}"
+                               class="pSC_cityDetails" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                اطلاعات جامع گردشگری شهر {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails">
+                                اقامتگاه های {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">
+                                بوم گردی های {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">
+                                رستوران های {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">
+                                جاذبه های {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">
+                                طبیعت گردی ‌های {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">
+                                غذاهای محلی {{$locationName['cityNameUrl']}}
+                            </a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">
+                                صنایع دستی {{$locationName['cityNameUrl']}}
+                            </a>
 
-                                @if($locationName['kindState'] == 'city')
-                                    <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder" style="border-top: solid #a1a1a1 1px !important;">
-                                        {{__('مشاهده')}}
-                                        {{__('استان')}}
-                                        {{$locationName['state']}}
-                                    </a>
-                                @endif
-                            </div>
-                            <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
-                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: var(--koochita-green)">{{__('جستجو کنید')}}</button>
-                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
-                            </div>
-                        </div>
-                        <div class="overflowOptimizer"></div>
-                    </div>
+                            @if($locationName['kindState'] == 'city')
+                                <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder" style="border-top: solid #a1a1a1 1px !important;">
+                                    {{__('مشاهده')}}
+                                    {{__('استان')}}
+                                    {{$locationName['state']}}
+                                </a>
+                            @endif
 
-                @else
-                    <div class="pSC_tilte">
-                        <div>
-                            {{__('در کل ایران بیشتر مشاهده کنید')}}
+                            <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
+                                {{__('تلویزیون گردشگری کوچیتا')}}
+                                <img src="{{URL::asset('images/mainPics/vodLoboMobile.webp')}}" alt="koochitatv" style="height: 25px">
+                            </a>
                         </div>
-                    </div>
-                    <div class="pSC_boxOfDetails">
-                        <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
-                        <div>
+                        @else
                             <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
                                 <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('اقامتگاه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
@@ -740,126 +855,34 @@
                                     <img src="{{URL::asset('images/mainPics/vodLoboMobile.webp')}}" alt="koochitatv" style="height: 25px">
                                 </a>
                             </div>
-                            <div style="margin-top: 15px; text-align: left;display: flex; justify-content: space-between;">
-                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php" style="background: var(--koochita-green)">{{__('جستجو کنید')}}</button>
-                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
-                            </div>
-                        </div>
-                        <div class="overflowOptimizer"></div>
-                    </div>
-                @endif
-
-                <div class="footerSocialDivPhone">
-{{--                    <a rel="nofollow" target="_blank" href="https://twitter.com/Koochita_Com">--}}
-{{--                        <div class="footerIconHor twitter"></div>--}}
-{{--                    </a>--}}
-{{--                    <a rel="nofollow" target="_blank" href="#">--}}
-{{--                        <div class="footerIconHor youtubeBackground"></div>--}}
-{{--                    </a>--}}
-{{--                    <a rel="nofollow" target="_blank" href="#">--}}
-{{--                        <div class="footerIconHor pinterest"></div>--}}
-{{--                    </a>--}}
-{{--                    <a rel="nofollow" target="_blank" href="#">--}}
-{{--                        <div class="footerIconHor newsBackground"></div>--}}
-{{--                    </a>--}}
-{{--                    <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
-{{--                        <div class="footerIconHor linkedin"></div>--}}
-{{--                    </a>--}}
-{{--                    <a class="socialLink" rel="nofollow" target="_blank" href="https://aparat.com">--}}
-{{--                        <div class="footerIconHor aparat"></div>--}}
-{{--                    </a>--}}
-                    <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/koochita">
-                        <div class="footerIconHor telegram"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
-                        <div class="footerIconHor facebook"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="https://wa.me/989120239315">
-                        <div class="footerIconHor whatsappBackground"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="https://www.instagram.com/koochita_com/">
-                        <div class="footerIconHor instagram"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">
-                        <div class="footerIconHor bogenBackground"></div>
-                    </a>
-                    <a rel="nofollow" target="_blank" href="http://www.sisootech.com/">
-                        <div class="footerIconHor sisootechBackground"></div>
-                    </a>
-
-                </div>
-                <div class="footerLanguageSectionPhone">
-                    <div class="footerLanguageDivPhone">
-                        <div class="footerLanguageTextPhone">
-                            {{__('زبان')}}
-                        </div>
-                        <div class="footerLanguageInputPhone">
-                            <select class="chooseLanguagePhone" onchange="goToLanguage(this.value)">
-                                <option value="0">انتخاب زبان</option>
-                                <option value="fa">فارسی</option>
-                                <option value="en">English</option>
-                            </select>
-                        </div>
+                        @endif
                     </div>
                 </div>
 
-                <div class="hideOnScreen phoneFooterStyle">
+                <div class="hideOnScreen phoneFooterStyle phoneMainFooter">
                     <div class="phoneFooterLogo">
                         <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا سامانه جامع گردشگری ایران" class="content-icon" width="100%">
                     </div>
-                    <div class="phoneDescription">
-                        <div class="phoneDescriptionText" style="overflow: hidden">
-                            کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر
-                            و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
-                            ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در
-                            زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها
-                            ، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع‌دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات
-                            محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر
-                            گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی
-                            به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛
-                            اطلاعات و تجربیات خود در خصوص هریک از اطلاعات گردشگری را به اشتراک بگذارند؛ پرسش خود را در خصوص
-                            هریک از اطلاعات گردشگری مطرح نمایند و به یکدیگر پاسخ دهند؛ عکس‌ها و اطلاعات به اشتراک گذاشته
-                            شده توسط سایر کاربران را بپسندند و در خصوص آن دیدگاه مطرح نمایند و یکدیگر را دنبال نمایند
-                            و امکان مقایسه قیمت، خرید و رزرو خدمات تسهیلگر سفر از جمله رزرو وسایل نقلیه شامل هواپیما
-                            ، قطار و اتوبوس، رزرو مراکز اقامتی، رزرو رستوران، خرید تورهای گردشگری، خرید سوغات و صنابع
-                            دستی، خرید اقلام سفر، خرید بلیت اماکن و جاذبه‌های گردشگری و خرید بلیت جشنواره‌ها، آئین‌ها
-                            و رویدادهای فرهنگی از مهم‌ترین امکاناتی است که این پلتفرم در اختیار کاربران قرار می‌دهد.
-
-                        </div>
-                        <div class="phoneDescriptionSelects">
-                            {{--language--}}
-                            {{--<div class="inputBox" id="">--}}
-                                {{--<div class="inputBoxText">--}}
-                                    {{--<div>--}}
-                                        {{--زبان--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<select class="inputBoxInput styled-select" id="" name="">--}}
-                                    {{--<option value="">--}}
-                                        {{--English--}}
-                                    {{--</option>--}}
-                                    {{--<option value="">--}}
-                                        {{--فارسی--}}
-                                    {{--</option>--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-
-                            {{--<div class="inputBox" id="">--}}
-                                {{--<div class="inputBoxText">--}}
-                                    {{--<div>--}}
-                                        {{--واحد پول--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<select class="inputBoxInput styled-select" id="" name="">--}}
-                                    {{--<option value="fast">--}}
-                                        {{--ریال--}}
-                                    {{--</option>--}}
-                                    {{--<option value="call">--}}
-                                        {{--USD--}}
-                                    {{--</option>--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-
+                    <div class="phoneDescription" style="width: 100%;">
+                        <div class="footerSocialDivPhone">
+                            <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/koochita">
+                                <div class="footerIconHor telegram"></div>
+                            </a>
+                            <a rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">
+                                <div class="footerIconHor facebook"></div>
+                            </a>
+                            <a rel="nofollow" target="_blank" href="https://wa.me/989120239315">
+                                <div class="footerIconHor whatsappBackground"></div>
+                            </a>
+                            <a rel="nofollow" target="_blank" href="https://www.instagram.com/koochita_com/">
+                                <div class="footerIconHor instagram"></div>
+                            </a>
+                            <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">
+                                <div class="footerIconHor bogenBackground"></div>
+                            </a>
+                            <a rel="nofollow" target="_blank" href="http://www.sisootech.com/">
+                                <div class="footerIconHor sisootechBackground"></div>
+                            </a>
                         </div>
                     </div>
                 </div>
