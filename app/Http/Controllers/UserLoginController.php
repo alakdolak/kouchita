@@ -44,7 +44,7 @@ class UserLoginController extends Controller
                     RetrievePas::whereUId(Auth::user()->id)->delete();
                     if(!Auth::check())
                         Auth::login($user);
-
+                    session(['kiavash' => 1]);
                     echo "ok";
                 }
                 else {
@@ -60,6 +60,7 @@ class UserLoginController extends Controller
     }
 
     public function checkLogin() {
+
         if(!Auth::check()) {
             if (isset($_POST["username"]) && isset($_POST["password"])) {
                 $username = makeValidInput($_POST['username']);

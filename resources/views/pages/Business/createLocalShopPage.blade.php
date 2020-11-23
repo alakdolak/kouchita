@@ -34,7 +34,6 @@
             }
         }
         @media (max-width: 767px) {
-
             .footerPhoneMenuBar.hideOnScreen{
                 display: none;
             }

@@ -518,4 +518,10 @@ class FestivalController extends Controller
         echo json_encode(['status' => 'ok', 'result' => $myWorks]);
         return;
     }
+
+
+    public function cookFestival()
+    {
+        return view('pages.festival.cookFestival.mainCookFestivalPage');
+    }
 }
