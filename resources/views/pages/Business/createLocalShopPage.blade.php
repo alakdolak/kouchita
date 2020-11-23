@@ -34,6 +34,10 @@
             }
         }
         @media (max-width: 767px) {
+
+            .footerPhoneMenuBar.hideOnScreen{
+                display: none;
+            }
             div[class^="col-sm"]{
                 /*float: unset;*/
                 width: 100%;
