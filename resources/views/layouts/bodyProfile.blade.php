@@ -99,7 +99,7 @@
     </div>
 </div>
 
-@include('layouts.placeFooter')
+@include('layouts.footer.layoutFooter')
 
 </body>
 

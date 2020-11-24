@@ -294,7 +294,7 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
 
     <span class='ui_overlay ui_popover arrow_right img_popUp' style='position: absolute; left: auto; right: 355px; bottom: auto; direction: rtl; display: none; margin: -25px 20px 0 0'></span>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 
     <div class="ui_backdrop dark" style="display: none;"></div>
 

@@ -402,7 +402,7 @@
     </div>
 </div>
 
-@include('layouts.placeFooter')
+@include('layouts.footer.layoutFooter')
 
 @include('component.mapMenu')
 

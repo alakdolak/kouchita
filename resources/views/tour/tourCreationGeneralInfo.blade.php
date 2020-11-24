@@ -467,7 +467,7 @@ $state = 'تهران';
         </div>
     </div>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 
 <script src="{{URL::asset('js/tour/create/stageOne.js')}}"></script>

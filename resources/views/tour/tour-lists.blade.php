@@ -1508,7 +1508,7 @@
         <input type="hidden" name="mode" value="">
     </form>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 
 @if(!Auth::check())

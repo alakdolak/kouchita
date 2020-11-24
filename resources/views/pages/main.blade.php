@@ -94,7 +94,7 @@
 
     @include('layouts.middleBanner')
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 
     <script>
     var mainSliderPics = {!! $sliderPic !!};

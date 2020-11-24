@@ -136,7 +136,7 @@ $kindPlaceId = 10; ?>
     </div>
 </div>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 
 @if(!Auth::check())

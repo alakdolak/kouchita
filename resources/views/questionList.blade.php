@@ -277,7 +277,7 @@
             </div>
         </div>
 
-        @include('layouts.placeFooter')
+        @include('layouts.footer.layoutFooter')
     </div>
 
     <div class="ui_backdrop dark" style="display: none;"></div>

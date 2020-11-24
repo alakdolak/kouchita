@@ -2565,7 +2565,7 @@ $state = "تهران"; ?>
     </script>
 
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 
 @if(!Auth::check())

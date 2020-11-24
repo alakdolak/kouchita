@@ -851,7 +851,7 @@ $kindPlaceId = 10; ?>
         @include('layouts.middleBanner')
     </div>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 
     @if(!Auth::check())
         @include('layouts.loginPopUp')

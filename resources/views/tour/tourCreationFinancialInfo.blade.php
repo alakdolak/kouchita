@@ -517,7 +517,7 @@ $kindPlaceId = 10; ?>
 
     <div class="errorDiv" id="errorDiv"></div>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 
 
