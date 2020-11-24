@@ -145,6 +145,10 @@
     content: '\E02F';
     font-family: 'Shazde_Regular' !important
 }
+.plusIconAfter:after {
+    content: '\E02F';
+    font-family: 'Shazde_Regular' !important
+}
 .calendarIcon:before{
     content: "\e015";
     font-family: 'Shazde_Regular' !important
@@ -379,6 +383,10 @@
     content: "\e0dd" !important;
     font-family: Shazde_Regular2 !important;
 }
+.suitCaseIcon:before{
+    content: "\E0C3" !important;
+    font-family: Shazde_Regular2 !important;
+}
 .addMemberIcon:before{
     content: "\E087" !important;
     font-family: Shazde_Regular2 !important;
@@ -393,6 +401,14 @@
 }
 .questionIcon:before{
     content: "\E054" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.addSafarnamehIcon:before{
+    content: "\E09C" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.addressBarIcon:before{
+    content: "\E01A" !important;
     font-family: Shazde_Regular2 !important;
 }
 .medalsIcon:before{

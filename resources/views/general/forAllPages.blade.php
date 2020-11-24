@@ -168,12 +168,18 @@
     function openMyModal(_id){
         $('#'+_id).addClass('showModal');
     }
-
     function closeMyModal(_id){
         $('#'+_id).removeClass('showModal');
     }
+    function closeMyModalClass(_class){
+        $('.'+_class).removeClass('showModal');
+    }
 
     $(window).on('click', e => {
+        if($('.modalBlackBack.closeWithClick.showModal:not(.notCloseOnClick)').length > 0){
+            if($(e.target).is('.modalBlackBack, .showModal, .closeWithClick'))
+                closeMyModal($(e.target).attr('id'));
+        }
         if($('.modalBlackBack.fullCenter.showModal:not(.notCloseOnClick)').length > 0){
             if($(e.target).is('.modalBlackBack, .showModal, .fullCenter'))
                 closeMyModal($(e.target).attr('id'));
