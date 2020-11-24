@@ -47,7 +47,7 @@ $kindPlaceId = 10; ?>
 </div>
 </div>
 
-@include('layouts.placeFooter')
+@include('layouts.footer.layoutFooter')
 
 @if(!Auth::check())
     @include('layouts.loginPopUp')

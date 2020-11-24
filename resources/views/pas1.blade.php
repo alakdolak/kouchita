@@ -105,7 +105,7 @@ $kindPlaceId = 10; ?>
 
 </div>
 
-@include('layouts.placeFooter')
+@include('layouts.footer.layoutFooter')
 
 </body>
 </html>

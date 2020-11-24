@@ -29,7 +29,7 @@
         @yield('body')
     </div>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 
     @yield('script')
 </body>

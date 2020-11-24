@@ -377,7 +377,7 @@ $kindPlaceId = 10; ?>
         </form>
     </div>
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 <script>
 

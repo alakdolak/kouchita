@@ -42,14 +42,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v='.$fileVersions)}}">
     <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v='.$fileVersions)}}">
 
-    {{--vr--}}
-    @if(isset($video) && $video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v='.$fileVersions)}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v='.$fileVersions)}}">
-        <script defer src="{{URL::asset('vr2/video.js')}}"></script>
-        <script defer src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
-    @endif
-
     <script>
         var thisUrl = '{{Request::url()}}';
         var userCode = '{{$userCode}}';
@@ -839,8 +831,14 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     </div>
 
 
-    @if(isset($video) && $video != null)
-        <div class="modal" id="myModal">
+    @if(isset($video) && $video != null && false)
+        {{--vr--}}
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css?v='.$fileVersions)}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css?v='.$fileVersions)}}">
+        <script defer src="{{URL::asset('vr2/video.js')}}"></script>
+        <script defer src="{{URL::asset('vr2/videojs-vr.js')}}" onload="loadVRPlayer();"></script>
+
+        <div class="modal" id="videojsModal">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Modal body -->
@@ -856,21 +854,20 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
         <script>
             var player;
-            (function (window, videojs) {
-                player = window.player = videojs('my-video');
-                player.mediainfo = player.mediainfo || {};
-                player.mediainfo.projection = '360';
+            function loadVRPlayer() {
+                (function (window, videojs) {
+                    player = window.player = videojs('my-video');
+                    player.mediainfo = player.mediainfo || {};
+                    player.mediainfo.projection = '360';
 
-                // AUTO is the default and looks at mediainfo
-                var vr = window.vr = player.vr({projection: '360', debug: false, forceCardboard: false});
-            }(window, window.videojs));
-            //
-            $('#myModal').on('hidden.bs.modal', function () {
-                player.pause();
-            });
+                    // AUTO is the default and looks at mediainfo
+                    var vr = window.vr = player.vr({projection: '360', debug: false, forceCardboard: false});
+                }(window, window.videojs));
+            }
+            $('#videojsModal').on('hidden.bs.modal', () => player.pause());
 
             function showModal() {
-                $('#myModal').modal('toggle');
+                $('#videojsModal').modal('toggle');
                 player.play();
             }
         </script>

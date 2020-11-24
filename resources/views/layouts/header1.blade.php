@@ -1,10 +1,4 @@
 
-<link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=.'.$fileVersions)}}">
-<link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v='.$fileVersions)}}">
-
-@if(\App::getLocale() == 'en')
-    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css?v='.$fileVersions)}}">
-@endif
 
 @if(!Request::is('main') && !Request::is('main/*') && !Request::is('/'))
     <style>

@@ -23,6 +23,15 @@
 <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css?v='.$fileVersions)}}" media="all">
 <link rel="stylesheet" href="{{URL::asset('css/component/components.css?v='.$fileVersions)}}" media="all">
 
+<link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=.'.$fileVersions)}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v='.$fileVersions)}}">
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v='.$fileVersions)}}' />
+
+@if(\App::getLocale() == 'en')
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css?v='.$fileVersions)}}">
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v='.$fileVersions)}}">
+@endif
+
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{URL::asset('js/defualt/autosize.min.js')}}"></script>
 <script async src="{{URL::asset('js/defualt/bootstrap.min.js')}}"></script>

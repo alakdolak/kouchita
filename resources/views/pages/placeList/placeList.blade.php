@@ -433,7 +433,7 @@
 
 {{--    @include('hotelDetailsPopUp')--}}
 
-    @include('layouts.placeFooter')
+    @include('layouts.footer.layoutFooter')
 </div>
 
 <script>

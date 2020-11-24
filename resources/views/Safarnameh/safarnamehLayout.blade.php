@@ -164,7 +164,7 @@
         </div>
 
 
-        @include('layouts.placeFooter')
+        @include('layouts.footer.layoutFooter')
 
     </div>
 
