@@ -33,13 +33,6 @@ function backToSafarnamehCategoryFooter(_element){
     }, 300);
 }
 
-function lp_selectMenu(id , element) {
-    $('.lp_eachMenu').removeClass('lp_selectedMenu');
-    $(element).addClass('lp_selectedMenu');
-    $('.lp_others_content').addClass('hidden');
-    $('#' + id).removeClass('hidden');
-}
-
 function toggleEditInfoMenu(elm) {
     $(elm).children('div.glyphicon-chevron-down').toggleClass('display-none');
     $(elm).children('div.glyphicon-chevron-up').toggleClass('display-none');

@@ -310,7 +310,8 @@ footer li > img, .small-ico {
     height: 60px;
     /* margin: 100%; */
     /* flex-direction: column-reverse; */
-    text-align: left;
+    text-align: right;
+    direction: ltr;
 }
 
 .footerPhoneMenuBar > div.profileBtn{
@@ -331,7 +332,8 @@ footer li > img, .small-ico {
 }
 
 .profileBtnText > span:nth-child(1){
-    font-size: 11px;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .profileBtnText > span:nth-child(2){
@@ -410,7 +412,7 @@ footer li > img, .small-ico {
 footer .mainPopUp {
     direction: rtl;
     width: 80%;
-    height: calc(100vh - 60px);
+    height: calc(100% - 60px);
     z-index: 200;
     position: fixed;
     background-color: white;
@@ -432,6 +434,8 @@ footer .mainPopUp {
     justify-content: space-around;
     align-items: center;
     padding: 0px 5px;
+    border-radius: 15px 0px 0px 0px;
+    right: 0px;
 }
 
 .lp_eachMenu {
@@ -675,7 +679,7 @@ footer .profileBtnActionMobile {
 }
 
 footer .profileScoreMainDiv {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 footer #myHonorsText .class > div {
@@ -711,7 +715,11 @@ footer .memberPointInfo {
     display: flex;
     flex-direction: column;
     margin-top: 0px;
-    /*border-top: 1px solid #c4c4c4;*/
+    border: solid 1px gray;
+    /* border-color: var(--koochita-red); */
+    border-radius: 5px;
+    padding-bottom: 5px;
+    box-shadow: 1px 1px 4px 1px #0000005e;
 }
 
 footer .memberPointInfo .modules-membercenter-total-points {
@@ -720,7 +728,7 @@ footer .memberPointInfo .modules-membercenter-total-points {
     justify-content: center;
     padding: 13px 0;
     flex-direction: column;
-    border-bottom: 1px solid #c4c4c4;
+    /*border-bottom: 1px solid #c4c4c4;*/
 }
 
 footer .modules-membercenter-total-points .label {
@@ -763,7 +771,7 @@ footer .mainDivTotalPoint {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 footer .mainDivTotalPoint a {
@@ -802,12 +810,12 @@ footer .modules-membercenter-level-progress .progress_info {
 }
 
 footer .modules-membercenter-level-progress .labels {
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     display: flex;
 }
 
 footer .modules-membercenter-level-progress .label {
-    font-size: 17px;
+    font-size: 11px;
     color: #666;
     padding: 10px 0 0;
     width: 50%;
@@ -815,16 +823,19 @@ footer .modules-membercenter-level-progress .label {
 
 footer .modules-membercenter-level-progress .label:first-child {
     text-align: right;
+    padding-right: 10px;
 }
 
 footer .modules-membercenter-level-progress .label:last-child {
     text-align: left;
+    padding-left: 15px;
 }
 
 footer .modules-membercenter-level-progress .progress_indicator {
-    height: 30px;
+    height: 28px;
     position: relative;
     padding: 17px 20px;
+    padding-bottom: 0px;
 }
 
 footer .modules-membercenter-level-progress .myBadge {
@@ -975,6 +986,8 @@ footer .activityNumbers {
 
 .pSC_cityTilte {
     font-weight: bold;
+    word-spacing: -2px;
+    color: var(--koochita-green);
 }
 
 .pSC_cityDescription {
@@ -988,14 +1001,17 @@ footer .activityNumbers {
 .pSC_boxOfDetails {
     font-size: 1em;
     text-align: center;
-    padding: 20px 10px;
+    padding: 12px 10px;
     padding-bottom: 10px;
 }
 
 .pSC_choiseDetailsText {
     font-size: 18px;
     border-bottom: 2px solid #a1a1a1;
-    color: var(--koochita-blue);
+    border-bottom: 1px solid var(--koochita-green);
+    color: #444444;
+    padding-bottom: 6px;
+    word-spacing: -2px;
 }
 
 .pSC_boxOfCityDetailsText:hover {
@@ -1023,7 +1039,7 @@ footer .activityNumbers {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    border-bottom: solid #a1a1a1 1px;
+    /*border-bottom: solid #a1a1a1 1px;*/
 }
 
 .newCityInPhoneFooter{
@@ -1039,9 +1055,22 @@ footer .activityNumbers {
     text-align: right;
     border-width: 2px 2px 2px 0;
     cursor: pointer;
-    color: black;
     border: none;
     border-bottom: solid #a1a1a1 1px;
+    border-bottom: solid 1px #0d66501f;
+    color: #2d2d2d;
+}
+
+.pSC_cityDetails:before{
+    font-size: 21px;
+    line-height: 10px;
+    margin-left: 8px;
+    color: var(--koochita-green);
+}
+
+.mobileFooterCategoryBottom{
+    width: 100%;
+    margin-top: 15px;
 }
 
 .pSC_cityDetails.pSC_cityDetails_selected {
@@ -1061,10 +1090,11 @@ footer .activityNumbers {
     align-items: center;
     justify-content: space-between;
     border: none !important;
+    flex-direction: column-reverse;
 }
 
 .pSC_boxOfCityDetails:last-child  {
-    border-bottom: 2px solid #a1a1a1;
+    /*border-bottom: 2px solid #a1a1a1;*/
 }
 
 .rightPopUp {
@@ -1465,7 +1495,7 @@ footer .profileFooterPopUp .firsLine .infos .inf .number{
     color: var(--koochita-blue);
 }
 footer .profileFooterPopUp .firsLine .infos .inf .name{
-    font-size: 14px;
+    font-size: 11px;
     color: black
 }
 footer .profileFooterPopUp .firsLine .pic > img{
@@ -1473,8 +1503,9 @@ footer .profileFooterPopUp .firsLine .pic > img{
 }
 footer .profileFooterPopUp .secondLine {
     padding: 5px 25px;
-    font-weight: bold;
     font-size: 18px;
+    padding-right: 5px;
+    font-weight: normal;
 }
 footer .profileFooterPopUp .buttonsLine {
 
@@ -1491,6 +1522,10 @@ footer .profileFooterPopUp .buttonsLine .bLine > div{
     justify-content: center;
     align-items: center;
     padding: 10px 0px;
+    border: solid 1px var(--koochita-blue);
+    border-radius: 10px;
+    border-color: gray;
+    color: var(--koochita-blue);
 }
 footer .profileFooterPopUp .buttonsLine .bLine > div:nth-of-type(1){
     border-right: none;
@@ -1513,6 +1548,7 @@ footer .profileFooterPopUp .buttonsLine .mBLine > div .icon{
     font-size: 32px;
     line-height: 19px;
     margin: 8px 0px;
+    color: gray;
 }
 footer .logoutButton{
     /*position: absolute;*/
@@ -1560,6 +1596,51 @@ footer .footerMsgCountNumber{
     right: 10px;
     left: auto;
     top: auto;
+}
+
+footer .newMyTripFooterButton{
+    position: absolute;
+    bottom: 70px;
+    right: 24px;
+    background: white;
+    padding: 51px 5px;
+    box-shadow: 0px -3px 6px #cccccc;
+    border-radius: 25px 25px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 14px;
+    padding-top: 3px;
+    border: solid 1px gray;
+    color: black;
+    font-size: 12px;
+}
+footer .newMyTripFooterButton:before{
+    font-size: 43px;
+    line-height: 35px;
+    padding-top: 7px;
+    color: black;
+    padding-bottom: 1px;
+}
+footer .newMyTripFooterButton:after{
+    position: absolute;
+    left: 14px;
+    font-size: 19px;
+    font-weight: bold;
+}
+footer .notInfoFooterModalImg{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    filter: grayscale(1);
+}
+footer .notInfoFooterModalImg .text{
+    margin: 11px 0px;
+    opacity: .3;
+    text-align: center;
 }
 
 
@@ -1766,6 +1847,11 @@ footer .footerMsgCountNumber{
     .headerSearchBar .footerSearchBar .icc:before{
         font-size: 20px;
     }
+
+    .footerMenuBarLinks {
+        font-size: 14px;
+        font-weight: normal;
+    }
 }
 
 @media (max-height: 700px) {
@@ -1923,11 +2009,6 @@ footer .footerMsgCountNumber{
 
     .profileBtnActionMobile {
         width: 35%;
-    }
-
-    .footerMenuBarLinks {
-        font-size: 14px;
-        font-weight: normal;
     }
 
     .modules-membercenter-member-profile .aboutMeDesc {
