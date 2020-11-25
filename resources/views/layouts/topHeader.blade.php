@@ -97,6 +97,48 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
+    window.mainIconsPlaces = {
+        amaken: {
+            icon: 'touristAttractions',
+            nameFa: 'جاذبه'
+        },
+        restaurant: {
+            icon: 'restaurantIcon',
+            nameFa: 'رستوران'
+        },
+        hotels: {
+            icon: 'hotelIcon',
+            nameFa: 'هتل'
+        },
+        sogatSanaies:{
+            icon: 'souvenirIcon',
+            nameFa: 'سوغات و صنایع دستی'
+        },
+        mahaliFood:{
+            icon: 'traditionalFood',
+            nameFa: 'غذای محلی'
+        },
+        majara: {
+            icon: 'adventureIcon',
+            nameFa: 'طبیعت گردی'
+        },
+        boomgardies: {
+            icon: 'boomIcon',
+            nameFa: 'بوم گردی'
+        },
+        safarnameh: {
+            icon: 'safarnameIcon',
+            nameFa: 'سفرنامه'
+        },
+        state: {
+            icon: 'location',
+            nameFa: 'استان'
+        },
+        city:  {
+            icon: 'location',
+            nameFa: 'شهر'
+        },
+    };
     window.googleMapStyle = [
         {
             "elementType": "geometry",

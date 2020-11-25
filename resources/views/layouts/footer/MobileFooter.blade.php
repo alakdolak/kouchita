@@ -103,30 +103,12 @@
 
                 <div class="lp_others_content hidden" id="lp_others_mark">
                     <div class="mainContainerBookmarked" style="height: 100%">
-                        <div class="notInfoFooterModalImg">
+                        <div class="notInfoFooterModalImg hidden">
                             <div class="text">جایی رو نشون نکردی...!!</div>
                             <img src="{{URL::asset('images/icons/notBookMark.svg')}}" alt="koochitaNotBookMark" style="width: 100%; opacity: .3; margin-right: 14px;">
                             <div class="text">بگرد ، نشون کن ، به کارت میاد...</div>
                         </div>
-                        <div id="phoneBookMarks">
-                            <div class="masthead-recent-class">
-                                @if(\auth()->check())
-                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
-                                        <div class="lp_others_rvPicBox col-xs-8" style="display: flex; justify-content: center; align-items: center;">
-                                            <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="##placePic##" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
-                                        </div>
-                                        <div class="col-xs-4 placeDetailsLeftBar">
-                                            <div class="">##placeName##</div>
-                                            <div class="lp_others_rating" style="display: flex; align-items: center; justify-content: center">
-                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
-                                                ##placeReviews## نقد
-                                            </div>
-                                            <div class="">##placeCity##</div>
-                                        </div>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
+                        <div id="phoneBookMarks" class="headerFooterBookMarkTab" style="display: flex; flex-wrap: wrap; justify-content: space-between;"></div>
                     </div>
                 </div>
 
@@ -833,83 +815,7 @@
 </div>
 
 <script>
-
-    function lp_selectMenu(id , element) {
-
-
-        $('.lp_eachMenu').removeClass('lp_selectedMenu');
-        $(element).addClass('lp_selectedMenu');
-        $('.lp_others_content').addClass('hidden');
-        $('#' + id).removeClass('hidden');
-
-        if(id == 'lp_others_myTravel'){
-            $('.newMyTripFooterButton').removeClass('hidden');
-            $('.seeAllBookMarkFooter').addClass('hidden');
-        }
-        else if(id == 'lp_others_mark'){
-            $('.newMyTripFooterButton').addClass('hidden');
-            $('.seeAllBookMarkFooter').removeClass('hidden');
-        }
-        else{
-            $('.newMyTripFooterButton').addClass('hidden');
-            $('.seeAllBookMarkFooter').addClass('hidden');
-        }
-    }
-
-    function closeMobileFooterPopUps(_id){
-        $(`#${_id}`).modal('hide');
-    }
-
-    function createTripFromMobileFooter(){
-        if(!checkLogin())
-            return;
-        createNewTrip();
-    }
-
-    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';
     var opnedMobileFooterId = null;
-
-    function openMobileFooterPopUps(_id){
-        showLastPages();
-
-        closeMyModalClass('footerModals');
-        if(_id == 'profilePossibilities' && openCampingInMobileFooter == '')
-                showCampingModal(); // in header1.blade.php
-        else if(opnedMobileFooterId != _id) {
-            opnedMobileFooterId = _id;
-            openMyModal(_id);
-        }
-        else
-            opnedMobileFooterId = null;
-    }
-
-    function mobileFooterProfileButton(_kind){
-        let windowUrl = window.location;
-        let url = windowUrl.origin + windowUrl.pathname;
-
-        if(url == profileUrl || url == profileUrl+'/'+usrnme) {
-            if (_kind == 'review')
-                mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review'); // in mainProfile.blade.php
-            else if (_kind == 'photo')
-                mobileChangeProfileTab($('#photoProfileMoblieTab'), 'photo'); // in mainProfile.blade.php
-            else if (_kind == 'safarnameh')
-                mobileChangeProfileTab($('#safarnamehProfileMoblieTab'), 'safarnameh'); // in mainProfile.blade.php
-            else if (_kind == 'medal')
-                mobileChangeProfileTab($('#medalProfileMoblieTab'), 'medal'); // in mainProfile.blade.php
-            else if (_kind == 'question')
-                chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion')); // in mainProfile.blade.php
-            else if (_kind == 'bookMark')
-                chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
-            else if (_kind == 'festival')
-                chooseFromMobileMenuTab('festival', $('#myMenuMoreTabFestivalMark')); // in mainProfile.blade.php
-            closeMyModalClass('footerModals');
-        }
-        else if(_kind == 'setting')
-            window.location.href = "{{route('profile.accountInfo')}}";
-        else if(_kind == 'follower')
-            openFollowerModal('resultFollowers', window.user.id); // in general.followerPopUp.blade.php
-        else
-            window.location.href = profileUrl+'#'+_kind;
-    }
-
+    var userSettingPageUrl = "{{route('profile.accountInfo')}}";
+    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';
 </script>
