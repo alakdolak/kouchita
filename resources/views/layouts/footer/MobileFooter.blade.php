@@ -108,7 +108,48 @@
                             <img src="{{URL::asset('images/icons/notBookMark.svg')}}" alt="koochitaNotBookMark" style="width: 100%; opacity: .3; margin-right: 14px;">
                             <div class="text">بگرد ، نشون کن ، به کارت میاد...</div>
                         </div>
-                        <div id="phoneBookMarks" class="headerFooterBookMarkTab" style="display: flex; flex-wrap: wrap; justify-content: space-between;"></div>
+                        <div id="phoneBookMarks" class="headerFooterBookMarkTab" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                            <div class="bookMarkSSec">
+                                <div class="imgSec placeHolderAnime"></div>
+                                <div class="infoSec">
+                                    <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
+                                    <div class="name placeHolderAnime resultLineAnim"></div>
+                                    <div class="state placeHolderAnime resultLineAnim"></div>
+                                </div>
+                            </div>
+                            <div class="bookMarkSSec">
+                                <div class="imgSec placeHolderAnime"></div>
+                                <div class="infoSec">
+                                    <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
+                                    <div class="name placeHolderAnime resultLineAnim"></div>
+                                    <div class="state placeHolderAnime resultLineAnim"></div>
+                                </div>
+                            </div>
+                            <div class="bookMarkSSec">
+                                <div class="imgSec placeHolderAnime"></div>
+                                <div class="infoSec">
+                                    <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
+                                    <div class="name placeHolderAnime resultLineAnim"></div>
+                                    <div class="state placeHolderAnime resultLineAnim"></div>
+                                </div>
+                            </div>
+                            <div class="bookMarkSSec">
+                                <div class="imgSec placeHolderAnime"></div>
+                                <div class="infoSec">
+                                    <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
+                                    <div class="name placeHolderAnime resultLineAnim"></div>
+                                    <div class="state placeHolderAnime resultLineAnim"></div>
+                                </div>
+                            </div>
+                            <div class="bookMarkSSec">
+                                <div class="imgSec placeHolderAnime"></div>
+                                <div class="infoSec">
+                                    <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
+                                    <div class="name placeHolderAnime resultLineAnim"></div>
+                                    <div class="state placeHolderAnime resultLineAnim"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -303,7 +303,7 @@
                             }
                             if(add) {
                                 text += `<div class="bookMarkSSec">
-                                            <div class="BookMarkIcon" onclick="deleteBookMarkState(${item.bmId}, this)"></div>
+                                            <div class="BookMarkIcon BookMarkIconEmptyAfter" onclick="deleteBookMarkState(${item.bmId}, this)"></div>
                                             <div class="imgSec" onclick="goToBookMarkSelected('${item.url}')">
                                                 <img src="${pic}" class="resizeImgClass" alt="${name}" onload="fitThisImg(this)">
                                             </div>
@@ -316,8 +316,8 @@
                             }
                         });
 
-                        if(text != '')
-                            $('.headerFooterBookMarkTab').html(text);
+                        // if(text != '')
+                        //     $('.headerFooterBookMarkTab').html(text);
                     }
                 },
                 error: err => {
