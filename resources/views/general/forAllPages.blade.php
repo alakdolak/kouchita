@@ -316,8 +316,13 @@
                             }
                         });
 
-                        // if(text != '')
-                        //     $('.headerFooterBookMarkTab').html(text);
+                        if(text != '')
+                            $('.headerFooterBookMarkTab').html(text);
+                        else{
+                            $('.headerFooterBookMarkTab').find('.bookMarkSSec').remove();
+                            $('.headerFooterBookMarkTab').find('.notInfoFooterModalImg').removeClass('hidden');
+                        }
+
                     }
                 },
                 error: err => {
