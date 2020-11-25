@@ -830,7 +830,6 @@
 </div>
 
 <script>
-    var opnedMobileFooterId = null;
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
     var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
     var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';

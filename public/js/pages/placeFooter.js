@@ -1,4 +1,4 @@
-let getPhoneBookMarks = false;
+var opnedMobileFooterId = null;
 
 function showSafarnamehFooterSearch(_element, _kind){
     $(_element).parent().find('.selected').removeClass('selected');
@@ -29,13 +29,6 @@ function backToSafarnamehCategoryFooter(_element){
     }, 300);
 }
 
-function toggleEditInfoMenu(elm) {
-    $(elm).children('div.glyphicon-chevron-down').toggleClass('display-none');
-    $(elm).children('div.glyphicon-chevron-up').toggleClass('display-none');
-    $(elm).next().toggleClass('display-none');
-    $(elm).next().toggleClass('display-flex');
-}
-
 function lp_selectArticleFilter(id , element) {
     $('.lp_ar_eachFilters').removeClass('lp_ar_selectedMenu');
     $(element).addClass('lp_ar_selectedMenu');
@@ -62,8 +55,10 @@ function openMobileFooterPopUps(_id){
     showLastPages();
 
     closeMyModalClass('footerModals');
-    if(_id == 'profilePossibilities' && openCampingInMobileFooter == '')
+    if(_id == 'profilePossibilities' && openCampingInMobileFooter == '') {
         showCampingModal(); // in header1.blade.php
+        opnedMobileFooterId = null;
+    }
     else if(opnedMobileFooterId != _id) {
         opnedMobileFooterId = _id;
         openMyModal(_id);
@@ -102,8 +97,6 @@ function mobileFooterProfileButton(_kind){
 }
 
 function lp_selectMenu(id , element) {
-
-
     $('.lp_eachMenu').removeClass('lp_selectedMenu');
     $(element).addClass('lp_selectedMenu');
     $('.lp_others_content').addClass('hidden');
@@ -114,6 +107,7 @@ function lp_selectMenu(id , element) {
         $('.seeAllBookMarkFooter').addClass('hidden');
     }
     else if(id == 'lp_others_mark'){
+        getBookMarkForHeaderAndFooter();
         $('.newMyTripFooterButton').addClass('hidden');
         $('.seeAllBookMarkFooter').removeClass('hidden');
     }
