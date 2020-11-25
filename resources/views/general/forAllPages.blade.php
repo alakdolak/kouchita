@@ -356,8 +356,10 @@
 
     $(window).on('click', e => {
         if($('.modalBlackBack.closeWithClick.showModal:not(.notCloseOnClick)').length > 0){
-            if($(e.target).is('.modalBlackBack, .showModal, .closeWithClick'))
+            if($(e.target).is('.modalBlackBack, .showModal, .closeWithClick')) {
                 closeMyModal($(e.target).attr('id'));
+                opnedMobileFooterId = null; // for placeFooter.js
+            }
         }
         if($('.modalBlackBack.fullCenter.showModal:not(.notCloseOnClick)').length > 0){
             if($(e.target).is('.modalBlackBack, .showModal, .fullCenter'))
