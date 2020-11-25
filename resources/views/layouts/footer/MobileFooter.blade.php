@@ -813,7 +813,7 @@
                             <img src="{{URL::asset('images/icons/addPhotoIcon.svg')}}" class="profileMobileFooterImg" alt="addPicture">
                             <div>{{__('افزودن عکس')}}</div>
                         </div>
-                        <div class="lp_eachMenu">
+                        <div class="lp_eachMenu" onclick="goToAddPlacePageInFooter()">
                             <img src="{{URL::asset('images/icons/koochit.svg')}}" class="profileMobileFooterImg" alt="koochitaSho">
                             <div>{{__('کوچیت کن')}}</div>
                         </div>
@@ -832,5 +832,6 @@
 <script>
     var opnedMobileFooterId = null;
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
+    var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
     var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';
 </script>

@@ -133,5 +133,12 @@ function createTripFromMobileFooter(){
     createNewTrip();
 }
 
+function goToAddPlacePageInFooter(){
+    if(!checkLogin())
+        return;
+
+    window.location.href = addPlaceByUserUrl;
+}
+
 
 
