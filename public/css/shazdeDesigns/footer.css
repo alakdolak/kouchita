@@ -449,6 +449,7 @@ footer .mainPopUp {
     border: solid 1px gray;
     border-radius: 8px;
     margin: 5px 0px;
+    position: relative;
 }
 
 .lp_selectedMenu {
@@ -680,11 +681,11 @@ footer .profileBtnActionMobile {
 }
 
 footer .profileScoreMainDiv {
-    position: absolute;
-    width: calc(100% - 48px);
     background: white;
-    right: 24px;
-    bottom: 163px;
+    right: 25px;
+    position: fixed;
+    bottom: 150px;
+    width: calc(80% - 50px);
 }
 
 footer #myHonorsText .class > div {
@@ -1608,7 +1609,7 @@ footer .profileMobileFooterImg{
     margin-bottom: 5px;
 }
 
-footer .newMyTripFooterButton{
+footer .overallMobileFooterModal{
     position: absolute;
     bottom: 70px;
     right: 24px;
@@ -1625,18 +1626,24 @@ footer .newMyTripFooterButton{
     color: black;
     font-size: 12px;
 }
-footer .newMyTripFooterButton:before{
+footer .overallMobileFooterModal:before{
     font-size: 43px;
     line-height: 35px;
     padding-top: 7px;
-    color: black;
+    color: #333;
     padding-bottom: 1px;
 }
-footer .newMyTripFooterButton:after{
+footer .overallMobileFooterModal:after{
     position: absolute;
     left: 14px;
     font-size: 19px;
     font-weight: bold;
+    color: #333;
+}
+footer .overallMobileFooterModal.BookMarkIconEmpty:before{
+    font-size: 30px;
+    color: #333;
+    padding-bottom: 1px;
 }
 footer .notInfoFooterModalImg{
     height: 100%;
