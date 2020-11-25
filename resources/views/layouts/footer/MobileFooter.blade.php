@@ -103,22 +103,24 @@
 
                 <div class="lp_others_content hidden" id="lp_others_mark">
                     <div class="mainContainerBookmarked headerFooterBookMarkTab" style="height: 100%; display: flex; flex-wrap: wrap; justify-content: space-between;">
-                        <div class="notInfoFooterModalImg hidden">
+                        <div class="notInfoFooterModalImg {{auth()->check() ? 'hidden' : ''}}">
                             <div class="text">جایی رو نشون نکردی...!!</div>
                             <img src="{{URL::asset('images/icons/notBookMark.svg')}}" alt="koochitaNotBookMark" style="width: 100%; opacity: .3; margin-right: 14px;">
                             <div class="text">بگرد ، نشون کن ، به کارت میاد...</div>
                         </div>
 
-                        @for($i = 0; $i < 6; $i++)
-                            <div class="bookMarkSSec">
-                                <div class="imgSec placeHolderAnime"></div>
-                                <div class="infoSec">
-                                    <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
-                                    <div class="name placeHolderAnime resultLineAnim"></div>
-                                    <div class="state placeHolderAnime resultLineAnim"></div>
+                        @if(auth()->check())
+                            @for($i = 0; $i < 6; $i++)
+                                <div class="bookMarkSSec">
+                                    <div class="imgSec placeHolderAnime"></div>
+                                    <div class="infoSec">
+                                        <div class="type placeHolderAnime resultLineAnim" style="height: 20px"></div>
+                                        <div class="name placeHolderAnime resultLineAnim"></div>
+                                        <div class="state placeHolderAnime resultLineAnim"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        @endfor
+                            @endfor
+                        @endif
                     </div>
                 </div>
 
@@ -134,9 +136,12 @@
             <div class="overallMobileFooterModal newMyTripFooterButton plusIconAfter suitCaseIcon hidden" onclick="createTripFromMobileFooter()">
                 ایجاد سفر جدید
             </div>
-            <div class="overallMobileFooterModal seeAllBookMarkFooter BookMarkIconEmpty hidden" onclick="mobileFooterProfileButton('bookMark')">
-                تمام نشان کرده ها
-            </div>
+            @if(auth()->check())
+                <div class="overallMobileFooterModal seeAllBookMarkFooter BookMarkIconEmpty hidden" onclick="mobileFooterProfileButton('bookMark')">
+                    تمام نشان کرده ها
+                </div>
+            @endif
+
             <div class="lp_phoneMenuBar">
                 <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_myTravel', this)">
                     <div class="iconFamily MyTripsIcon lp_icons"></div>
