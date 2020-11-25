@@ -136,20 +136,14 @@
                         <img src="{{URL::asset('images/icons/mytrip0.svg')}}" alt="سفر ندارید" style="width: 100%;opacity: .3;">
                         <div class="text">بیا برای یه سفر خوب برنامه ریزی کنیم.</div>
                     </div>
-                    {{--                    @if(\auth()->check())--}}
-                    {{--                        <div class="fullyCenterContent" style="height: 100%">--}}
-                    {{--                            <a href="{{route('myTrips')}}" class="mainLoginButton" style="text-align: center;"> {{__('رفتن به صفحه سفرهای من')}}</a>--}}
-                    {{--                        </div>--}}
-                    {{--                    @else--}}
-                    {{--                        <div style="display: flex; justify-content: center; align-items: center; height: 75vh;">--}}
-                    {{--                            <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}" style="text-align: center;"> {{__('auth.ورود / ثبت نام')}}</div>--}}
-                    {{--                        </div>--}}
-                    {{--                    @endif--}}
                 </div>
             </div>
 
-            <div class="newMyTripFooterButton plusIconAfter suitCaseIcon hidden" onclick="createTripFromMobileFooter()">
+            <div class="overallMobileFooterModal newMyTripFooterButton plusIconAfter suitCaseIcon hidden" onclick="createTripFromMobileFooter()">
                 ایجاد سفر جدید
+            </div>
+            <div class="overallMobileFooterModal seeAllBookMarkFooter BookMarkIconEmpty hidden" onclick="mobileFooterProfileButton('bookMark')">
+                تمام نشان کرده ها
             </div>
             <div class="lp_phoneMenuBar">
                 <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_myTravel', this)">
@@ -163,6 +157,7 @@
                 <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this);setSeenAlert(0, '')/**in forAllPages**/;">
                     <div class="lp_icons iconFamily MsgIcon"></div>
                     <div>{{__('چه خبر ...!')}}</div>
+                    <span class="newMsgMainFooterCount newAlertNumber hidden" style="left: 0; top: 5px;">0</span>
                 </div>
                 <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this)">
                     <div class="lp_icons iconFamily searchIcon"></div>
@@ -562,10 +557,6 @@
                         </span>
                     را بهتر بشناسید
                 </div>
-                <style>
-
-                </style>
-
                 <div>
                     @if(isset($locationName))
                         <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
@@ -783,21 +774,6 @@
                     </div>
                     <div class="profileScoreMainDiv">
                         <div class="memberPointInfo">
-{{--                            <div class="head">--}}
-{{--                                <div>--}}
-{{--                                    {{__('امتیازات من')}}--}}
-{{--                                </div>--}}
-{{--                                <div style="font-size: 10px">--}}
-{{--                                    <a href="">{{__('سیستم امتیازدهی')}}</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="modules-membercenter-total-points" style="padding-top: 2px; padding-bottom: 0;">--}}
-{{--                                <div class="mainDivTotalPoint">--}}
-{{--                                    <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>--}}
-{{--                                    <div class="points">{{$userTotalPointFooter}}</div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
                             <div class="modules-membercenter-level-progress">
                                 <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
                                     <div>
@@ -866,10 +842,18 @@
         $('.lp_others_content').addClass('hidden');
         $('#' + id).removeClass('hidden');
 
-        if(id == 'lp_others_myTravel')
+        if(id == 'lp_others_myTravel'){
             $('.newMyTripFooterButton').removeClass('hidden');
-        else
+            $('.seeAllBookMarkFooter').addClass('hidden');
+        }
+        else if(id == 'lp_others_mark'){
             $('.newMyTripFooterButton').addClass('hidden');
+            $('.seeAllBookMarkFooter').removeClass('hidden');
+        }
+        else{
+            $('.newMyTripFooterButton').addClass('hidden');
+            $('.seeAllBookMarkFooter').addClass('hidden');
+        }
     }
 
     function closeMobileFooterPopUps(_id){
@@ -918,7 +902,7 @@
                 chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
             else if (_kind == 'festival')
                 chooseFromMobileMenuTab('festival', $('#myMenuMoreTabFestivalMark')); // in mainProfile.blade.php
-            $('#profileFooterModal').modal('hide');
+            closeMyModalClass('footerModals');
         }
         else if(_kind == 'setting')
             window.location.href = "{{route('profile.accountInfo')}}";
