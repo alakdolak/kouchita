@@ -38,7 +38,7 @@
             @if(isset($locationName['cityNameUrl']))
                 <div class="mainHeaderSearch arrowAfter" onclick="openMainSearch(0)">
                     <span class="iconFamily searchIcon mirorIcon" style="font-size: 17px"></span>
-                    {{$locationName['cityName']}}
+                    {{$locationName['cityNameUrl']}}
                 </div>
             @endif
         @endif
@@ -114,9 +114,9 @@
                     <div class="nameOfIconHeaders">
                         {{__('پیام‌ها')}}
                     </div>
-                    <div id="alertPane" class="headerAlertNumber">0</div>
+                    <div class="headerAlertNumber newAlertNumber hidden">0</div>
 
-                    <div id="alert" class="arrowTopDiv headerSubMenu">
+                    <div id="alert" class="arrowTopDiv headerSubMenu ">
                         <div class="headerBookMarkBody">
                             <div class="headerBookMarkHeader">
                                 <a class="headerBookMarkHeaderName" href="#" target="_self"> {{__('تمامی پیام ها')}}</a>
@@ -229,7 +229,7 @@
             <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.webp')}}" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
         </div>
         <div class="headerCampingBottom">
-            <div onclick="goToSafarnameh()">
+            <div onclick="writeNewSafaranmeh()">
                 <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div onclick="$('#campingHeader').hide(); openUploadPost()">
@@ -261,13 +261,11 @@
         else
             openUploadPhotoModal('کوچیتا', '{{route('addPhotoToPlace')}}', 0, 0, '');
     }
-    function goToSafarnameh(){
-        if(checkLogin('{{route("addPlaceByUser.index")}}')) {
+    function writeNewSafaranmeh(){
+        if(checkLogin()) {
             $('#campingHeader').hide();
             openNewSafarnameh();
         }
-
-        return;
     }
     function hideAllTopNavs(){
         openHeadersTab = false;
@@ -296,99 +294,14 @@
 @if(Auth::check())
     <script>
         let bookMarksData = null;
-        let msgHeaderData = null;
 
         var locked = false;
         var superAccess = false;
         var getRecentlyPath = '{{route('recentlyViewed')}}';
 
-        $(document).ready(function () {
-            getAlertsCount();
-            getAlertItems();
-        });
 
         function openHeaderTabsVariable(){
             setTimeout(() => openHeadersTab = true, 500);
-        }
-
-        function getAlertsCount() {
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('getAlertsNum')}}',
-                success: function (response) {
-                    $('#alertPane').empty().append(response);
-
-                    if(response == 0)
-                        $("#showMoreItemsAlert").addClass('hidden');
-                }
-            });
-        }
-
-        function getAlertItems() {
-            if(msgHeaderData == null) {
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('getAlerts')}}',
-                    success: function (response) {
-                        response = JSON.parse(response);
-                        var newElement = "";
-                        if (response.length > 0)
-                            response.forEach(item => {
-
-                                if(item.click != 0)
-                                    item.color = 'white';
-
-                                newElement +=   '<div class="alertMsgHeaderContent" style="background: ' + item.color + '" onclick="setSeenAlert(' + item.id + ', this)">\n' +
-                                                '<div class="alertMsgHeaderContentImgDiv">\n' +
-                                                '<img src="' + item.pic + '"  alt="کوچیتا، سامانه جامع گردشگری ایران" class="resizeImgClass" onload="fitThisImg(this)" style="width: 100%">\n' +
-                                                '</div>\n' +
-                                                '<div class="alertMsgHeaderContentTextDiv">\n' +
-                                                '<div class="alertMsgHeaderContentText">' + item.msg + '</div>\n' +
-                                                '<div class="alertMsgHeaderContentTime">' + item.time + '</div>\n' +
-                                                '</div>\n' +
-                                                '</div>';
-                            });
-                        else
-                            newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">{{__('هیچ پیامی موجود نیست')}} </div></div></div>';
-
-                            $('.alertMsgResultDiv').html(newElement);
-                    }
-                });
-            }
-        }
-
-        let seenToZero = false;
-        function setSeenAlert(_id = 0, _element = ''){
-            let kind;
-            if(_id == 0)
-                kind = 'seen';
-            else
-                kind = 'click';
-
-            if(kind == 'seen' && seenToZero)
-                return;
-
-            $.ajax({
-                type: 'post',
-                url: '{{route("alert.seen")}}',
-                data: {
-                    _token: '{{csrf_token()}}',
-                    id: _id,
-                    kind: kind
-                },
-                success: function(response){
-                    response = JSON.parse(response);
-                    if(response.status == 'ok'){
-                        if(kind == 'seen') {
-                            $('#alertPane').html(0);
-                            seenToZero = true;
-                        }
-                        else
-                            $(_element).css('background', 'white');
-                    }
-                }
-            })
         }
 
         $('#memberTop').click(function(e) {
@@ -443,43 +356,6 @@
             }
         });
 
-        function showBookMarks(containerId) {
-            if(bookMarksData == null) {
-                $("#" + containerId).empty();
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('getBookMarks')}}',
-                    success: function (response) {
-                        let element = '';
-                        response = JSON.parse(response);
-                        $('#headerBookMarkPlaceHolder').hide();
-                        $('#' + containerId).show();
-                        for (i = 0; i < response.length; i++) {
-                            element +=  '<a class="headerBookMarkLink" target="_blank" href="' + response[i].placeRedirect + '">\n' +
-                                        '<div class="headerBookMarContentImgDiv">\n' +
-                                        '<img alt="کوچیتا، سامانه جامع گردشگری ایران" src="' + response[i].placePic + '" class="headerBookMarContentImg">' +
-                                        '</div>\n' +
-                                        '<div class="bookMarkContent">\n' +
-                                        '<div class="bookMarkContentTitle">' + response[i].placeName + '</div>\n' +
-                                        '<div class="bookMarkContentRating">\n' +
-                                        '<div class="ui_bubble_rating bubble_' + response[i].placeRate + '0"></div>\n' +
-                                        '<div>' + response[i].seen + ' {{__('نقد')}}</div>\n' +
-                                        '</div>\n' +
-                                        '<div class="bookMarkContentCity">' + response[i].placeCity + '</div>\n' +
-                                        '</div>\n' +
-                                        '</a>';
-                        }
-                        if(bookMarksData == null) {
-                            bookMarksData = element;
-                            $("#" + containerId).append(bookMarksData);
-                        }
-                    }
-                });
-            }
-            $("#" + containerId).empty();
-            $("#" + containerId).append(bookMarksData);
-        }
-
         function getRecentlyViews(containerId) {
             $("#" + containerId).empty();
 
@@ -533,8 +409,6 @@
             else
                 hideAllTopNavs();
         }
-
-
 
     </script>
 @endif

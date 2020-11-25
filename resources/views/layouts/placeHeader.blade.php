@@ -415,7 +415,6 @@ if(Auth::check()) {
                                                 <div class="nameOfIconHeaders" style="color: white; ">
                                                     سفرهای من
                                                 </div>
-                                                {{--onclick="showRecentlyViews('recentlyViewed')"--}}
                                             </a>
                                         </div>
 
@@ -650,7 +649,6 @@ if(Auth::check()) {
 </div>
 
 <script>
-    var getBookMarksPath = '{{route('getBookMarks')}}';
 
     function hideAllTopNavs(){
         $("#alert").hide();
@@ -711,82 +709,6 @@ if(Auth::check()) {
         var superAccess = false;
         var getRecentlyPath = '{{route('recentlyViewed')}}';
 
-        $(document).ready(function () {
-            getAlertsCount();
-        });
-
-        function getAlertsCount() {
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('getAlertsNum')}}',
-                success: function (response) {
-                    $('#alertPane').empty().append(response);
-
-                    if(response == 0)
-                        $("#showMoreItemsAlert").addClass('hidden');
-                }
-            });
-        }
-
-        function scrolled(o) {
-            //visible height + pixel scrolled = total height
-            if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
-                if(!locked) {
-                    superAccess = true;
-                    getAlertItems();
-                }
-            }
-        }
-
-        function getAlertItems() {
-
-            var items = $('#alertItems');
-            var pane = $('#alert');
-
-            if(!superAccess && !pane.hasClass('hidden')) {
-                pane.addClass('hidden');
-                return;
-            }
-
-            locked = true;
-            items.empty();
-            $("#alertLoader").removeClass('hidden');
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('getAlerts')}}',
-                success: function (response) {
-
-                    response = JSON.parse(response);
-                    var newElement = "";
-
-                    if(response.length < 5 && response.length > 0)
-                        $("#showMoreItemsAlert").removeClass('hidden');
-                    else
-                        $("#showMoreItemsAlert").addClass('hidden');
-                    for(i = 0; i < response.length; i++) {
-
-                        if(response[i].url != -1)
-                            newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                        else
-                            newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                    }
-
-                    if(response.length == 0)
-                        newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>';
-                    else
-                        getAlertsCount();
-
-                    locked = false;
-                    superAccess = false;
-                    pane.removeClass('hidden');
-                    $("#alertLoader").addClass('hidden');
-                    items.empty().append(newElement);
-                }
-            });
-        }
-
         $('#nameTop').click(function(e) {
 
             if( $("#profile-drop").is(":hidden")) {
@@ -833,92 +755,6 @@ if(Auth::check()) {
             }
         });
 
-        function showBookMarks(containerId) {
-
-            $("#" + containerId).empty();
-
-            $.ajax({
-                type: 'post',
-                url: getBookMarksPath,
-                success: function (response) {
-
-                    response = JSON.parse(response);
-
-                    for(i = 0; i < response.length; i++) {
-                        element = "<div>";
-                        element += "<a class='masthead-recent-card' target='_self' href='" + response[i].placeRedirect + "'>";
-                        element += "<div class='media-left'>";
-                        element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
-                        element += "</div>";
-                        element += "<div class='content-right'>";
-                        element += "<div class='poi-title'>" + response[i].placeName + "</div>";
-                        element += "<div class='rating'>";
-                        element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + response[i].placeReviews + " مشاهده ";
-                        element += "</div>";
-                        element += "<div class='geo'>" + response[i].placeCity + "</div>";
-                        element += "</div>";
-                        element += "</a></div>";
-
-                        $("#" + containerId).append(element);
-                    }
-
-                }
-            });
-        }
-
-        function getRecentlyViews(containerId) {
-            $("#" + containerId).empty();
-
-            $.ajax({
-                type: 'post',
-                url: getRecentlyPath,
-                success: function (response) {
-
-                    response = JSON.parse(response);
-
-                    for(i = 0; i < response.length; i++) {
-                        element = "<div>";
-                        element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + response[i].placeRedirect + "'>";
-                        element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>";
-                        element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
-                        element += "</div>";
-                        element += "<div class='content-right'>";
-                        element += "<div class='poi-title'>" + response[i].placeName + "</div>";
-                        element += "<div class='rating'>";
-
-                        if (response[i].placeRate == 5)
-                            element += "<div class='ui_bubble_rating bubble_50'></div>";
-                        else if (response[i].placeRate == 4)
-                            element += "<div class='ui_bubble_rating bubble_40'></div>";
-                        else if (response[i].placeRate == 3)
-                            element += "<div class='ui_bubble_rating bubble_30'></div>";
-                        else if (response[i].placeRate == 2)
-                            element += "<div class='ui_bubble_rating bubble_20'></div>";
-                        else
-                            element += "<div class='ui_bubble_rating bubble_10'></div>";
-
-                        element += "<br/>" + response[i].placeReviews + " نقد ";
-                        element += "</div>";
-                        element += "<div class='geo'>" + response[i].placeCity + "/ " + response[i].placeState + "</div>";
-                        element += "</div>";
-                        element += "</a></div>";
-
-                        $("#" + containerId).append(element);
-                    }
-
-                }
-            });
-        }
-
-        function showRecentlyViews(element) {
-            if( $("#my-trips-not").is(":hidden")){
-                hideAllTopNavs();
-                $("#my-trips-not").show();
-                getRecentlyViews(element);
-            }
-            else
-                hideAllTopNavs();
-        }
 
         function openUploadPost(){
             openUploadPhotoModal('کوچیتا', '{{route('addPhotoToPlace')}}', 0, 0, '');

@@ -794,12 +794,6 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
         right: 2%
     }
 
-    .mainContainerSearch {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
     #result {
         display: block;
         width: auto;

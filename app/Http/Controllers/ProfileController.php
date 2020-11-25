@@ -523,15 +523,15 @@ class ProfileController extends Controller {
 
     public function getBookMarks(Request $request)
     {
-        if(isset($request->kind)){
+        if(\auth()->check()){
             $bookmarks = [];
-            $kindIds = BookMarkReference::where('group', $request->kind)->pluck('id')->toArray();
+            $kindIds = BookMarkReference::all()->pluck('id')->toArray();
 
             if(count($kindIds) > 0){
                 $bookmarksKinds = BookMark::where('userId', \auth()->user()->id)
-                                        ->whereIn('bookMarkReferenceId', $kindIds)
-                                        ->get()
-                                        ->groupBy('bookMarkReferenceId');
+                                            ->whereIn('bookMarkReferenceId', $kindIds)
+                                            ->get()
+                                            ->groupBy('bookMarkReferenceId');
                 foreach($bookmarksKinds as $kind){
                     if(count($kind) > 0){
                         $kk = BookMarkReference::find($kind[0]->bookMarkReferenceId);
@@ -549,15 +549,17 @@ class ProfileController extends Controller {
                                     $bm->username = $us->username;
                                     $bm->userPic = getUserPic($us->id);
                                     $bm->url = url("/safarnameh/show/" . $bm->id);
-
+                                    $bm->kind = 'safarnameh';
                                     if ($bm->summery == null)
                                         $bm->summery = $bm->meta;
                                 }
                             }
                             else if($kk->group == 'review'){
                                 $bm = \DB::table($kk->tableName)->find($item->referenceId);
-                                if($bm != null)
+                                if($bm != null) {
                                     $bm = reviewTrueType($bm); // in common.php
+                                    $bm->kind = 'review';
+                                }
                             }
                             else if($kk->group == 'place'){
                                 $bm = \DB::table($kk->tableName)->find($item->referenceId);
@@ -575,7 +577,7 @@ class ProfileController extends Controller {
                                     }
                                     $plcSug->logId = $item->id;
                                     $plcSug->kindPlaceId = $kindPlace->id;
-
+                                    $plcSug->kind = 'place';
                                     $bm = $plcSug;
                                 }
                             }
@@ -586,12 +588,10 @@ class ProfileController extends Controller {
                 }
             }
 
-            echo json_encode(['status' => 'ok', 'result' => $bookmarks]);
+           return response()->json(['status' => 'ok', 'result' => $bookmarks]);
         }
         else
-            echo json_encode(['status' => 'nok']);
-
-        return;
+            return response()->json(['status' => 'notAuth']);
     }
 
 

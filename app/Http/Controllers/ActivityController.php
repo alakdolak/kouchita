@@ -129,32 +129,4 @@ class ActivityController extends Controller {
         echo json_encode($activities);
     }
 
-    public function getBookMarks() {
-        $uId = Auth::user()->id;
-        $book = BookMark::join('bookMarkReferences', 'bookMarkReferences.id', 'bookMarks.bookMarkReferenceId')
-                            ->join('place', 'place.tableName', 'bookMarkReferences.tableName')
-                            ->where('bookMarks.userId', $uId)
-                            ->where('bookMarkReferences.group', 'place')
-                            ->select(['bookMarks.referenceId', 'bookMarkReferences.tableName', 'place.id'])
-                            ->get();
-
-        $bookMarks = [];
-        foreach ($book as $item){
-            $itr = \DB::table($item->tableName)->find($item->referenceId);
-            if($itr != null) {
-                $pack = createSuggestionPack($item->id, $item->referenceId);
-                $itr->placePic = $pack->pic;
-                $itr->placeRedirect = $pack->url;
-                $itr->placeCity = $pack->city;
-                $itr->placeState = $pack->state;
-                $itr->placeName = $pack->name;
-                $itr->placeRate = $pack->rate;
-                $itr->placeReviews = $pack->review;
-
-                array_push($bookMarks, $itr);
-            }
-        }
-
-        echo json_encode($bookMarks);
-    }
 }

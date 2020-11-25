@@ -320,7 +320,7 @@ footer li > img, .small-ico {
 .footerPhoneMenuBar > div.profileBtn .profilePicFooter.type2{
     position: absolute;
     top: -18px;
-    left: 10px;
+    right: 10px;
     border: solid 3px var(--koochita-yellow);
     width: 45px;
     height: 45px;
@@ -366,7 +366,8 @@ footer li > img, .small-ico {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    left: -25px;
+    right: 15px;
+    top: 0px;
 }
 
 .profilePicFooter.circleBase > img {
@@ -493,7 +494,7 @@ footer .mainPopUp {
 
 .lp_others_content {
     padding: 10px;
-    height: inherit;
+    height: 100%;
 }
 
 .lp_others_titles {
@@ -679,7 +680,11 @@ footer .profileBtnActionMobile {
 }
 
 footer .profileScoreMainDiv {
-    margin-top: 20px;
+    position: absolute;
+    width: calc(100% - 48px);
+    background: white;
+    right: 24px;
+    bottom: 163px;
 }
 
 footer #myHonorsText .class > div {
@@ -1124,7 +1129,7 @@ footer .activityNumbers {
 }
 
 footer .mainContainerBookmarked {
-    height: calc(100vh - 235px);
+    height: 100%;
     border-top: 1px solid #cccccc;
     padding-top: 3px;
 }
@@ -1598,6 +1603,11 @@ footer .footerMsgCountNumber{
     top: auto;
 }
 
+footer .profileMobileFooterImg{
+    height: 40px;
+    margin-bottom: 5px;
+}
+
 footer .newMyTripFooterButton{
     position: absolute;
     bottom: 70px;
@@ -1847,6 +1857,24 @@ footer .notInfoFooterModalImg .text{
     .headerSearchBar .footerSearchBar .icc:before{
         font-size: 20px;
     }
+
+    .headerSearchBar.cityButtonsSec{
+        border: none;
+        margin: 0px 0px;
+        width: calc(100% - 20px);
+        padding: 0;
+        justify-content: space-between;
+        flex-direction: column;
+        line-height: 30px;
+        position: absolute;
+        bottom: 27px;
+    }
+    .headerSearchBar.cityButtonsSec .footerSearchBar.cityButton{
+        background: white;
+        border: solid 1px gray;
+        width: 100%;
+    }
+
 
     .footerMenuBarLinks {
         font-size: 14px;

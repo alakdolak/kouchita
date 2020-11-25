@@ -43,7 +43,6 @@
 
         <script >
             var getRecentlyPath = '{{route('recentlyViewed')}}';
-            var getBookMarksPath = '{{route('getBookMarks')}}';
         </script>
 
 
