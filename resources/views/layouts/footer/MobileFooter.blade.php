@@ -833,4 +833,18 @@
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
     var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
     var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';
+    var touchRigthForFooterMobile = 0;
+
+    $('.footerModals').on('touchstart', e => {
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        touchRigthForFooterMobile = touch.pageX;
+    });
+    $('.footerModals').on('touchend', e => {
+        var windowWidth = $(window).width();
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        if((touch.pageX - touchRigthForFooterMobile) > (windowWidth/2) ) {
+            closeMyModalClass('footerModals');
+            opnedMobileFooterId = null;
+        }
+    });
 </script>
