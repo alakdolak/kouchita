@@ -525,64 +525,63 @@ class ProfileController extends Controller {
     {
         if(\auth()->check()){
             $bookmarks = [];
-            $kindIds = BookMarkReference::all()->pluck('id')->toArray();
 
-            if(count($kindIds) > 0){
-                $bookmarksKinds = BookMark::where('userId', \auth()->user()->id)
-                                            ->whereIn('bookMarkReferenceId', $kindIds)
-                                            ->get()
-                                            ->groupBy('bookMarkReferenceId');
-                foreach($bookmarksKinds as $kind){
-                    if(count($kind) > 0){
-                        $kk = BookMarkReference::find($kind[0]->bookMarkReferenceId);
+            $bookmarksKinds = BookMark::where('userId', \auth()->user()->id)
+                                        ->get()
+                                        ->groupBy('bookMarkReferenceId');
+            foreach($bookmarksKinds as $kind){
+                if(count($kind) > 0){
+                    $kk = BookMarkReference::find($kind[0]->bookMarkReferenceId);
 
-                        foreach ($kind as $item){
-                            if($kk->group == 'safarnameh'){
-                                $bm = \DB::table($kk->tableName)
-                                    ->select(['title', 'id', 'userId', 'summery', 'meta', 'pic', 'created_at'])
-                                    ->find($item->referenceId);
+                    foreach ($kind as $item){
+                        if($kk->group == 'safarnameh'){
+                            $bm = \DB::table($kk->tableName)
+                                ->select(['title', 'id', 'userId', 'summery', 'meta', 'pic', 'created_at'])
+                                ->find($item->referenceId);
 
-                                if($bm != null) {
-                                    $us = User::find($bm->userId);
-                                    $bm->pic = \URL::asset('_images/posts/' . $bm->id . '/' . $bm->pic);
-                                    $bm->time = verta($bm->created_at)->format('Y/m/d');
-                                    $bm->username = $us->username;
-                                    $bm->userPic = getUserPic($us->id);
-                                    $bm->url = url("/safarnameh/show/" . $bm->id);
-                                    $bm->kind = 'safarnameh';
-                                    if ($bm->summery == null)
-                                        $bm->summery = $bm->meta;
-                                }
+                            if($bm != null) {
+                                $us = User::find($bm->userId);
+                                $bm->pic = \URL::asset('_images/posts/' . $bm->id . '/' . $bm->pic);
+                                $bm->time = verta($bm->created_at)->format('Y/m/d');
+                                $bm->username = $us->username;
+                                $bm->userPic = getUserPic($us->id);
+                                $bm->url = url("/safarnameh/show/" . $bm->id);
+                                $bm->kind = 'safarnameh';
+                                if ($bm->summery == null)
+                                    $bm->summery = $bm->meta;
                             }
-                            else if($kk->group == 'review'){
-                                $bm = \DB::table($kk->tableName)->find($item->referenceId);
-                                if($bm != null) {
-                                    $bm = reviewTrueType($bm); // in common.php
-                                    $bm->kind = 'review';
-                                }
+                        }
+                        else if($kk->group == 'review'){
+                            $bm = \DB::table($kk->tableName)->find($item->referenceId);
+                            if($bm != null) {
+                                $bm = reviewTrueType($bm); // in common.php
+                                $bm->kind = 'review';
                             }
-                            else if($kk->group == 'place'){
-                                $bm = \DB::table($kk->tableName)->find($item->referenceId);
-                                if($bm != null) {
-                                    $kindPlace = Place::where('tableName', $kk->tableName)->first();
-                                    $plcSug = createSuggestionPack($kindPlace->id, $bm->id);
-                                    if (isset($bm->dastresi))
-                                        $plcSug->address = $bm->dastresi;
-                                    else if (isset($bm->address))
-                                        $plcSug->address = $bm->address;
+                        }
+                        else if($kk->group == 'place'){
+                            $bm = \DB::table($kk->tableName)->find($item->referenceId);
+                            if($bm != null) {
+                                $kindPlace = Place::where('tableName', $kk->tableName)->first();
+                                $plcSug = createSuggestionPack($kindPlace->id, $bm->id);
+                                if (isset($bm->dastresi))
+                                    $plcSug->address = $bm->dastresi;
+                                else if (isset($bm->address))
+                                    $plcSug->address = $bm->address;
 
-                                    if (isset($bm->D) && isset($bm->C)) {
-                                        $plcSug->D = $bm->D;
-                                        $plcSug->C = $bm->C;
-                                    }
-                                    $plcSug->logId = $item->id;
-                                    $plcSug->kindPlaceId = $kindPlace->id;
-                                    $plcSug->kind = 'place';
-                                    $bm = $plcSug;
+                                if (isset($bm->D) && isset($bm->C)) {
+                                    $plcSug->D = $bm->D;
+                                    $plcSug->C = $bm->C;
                                 }
+                                $plcSug->logId = $item->id;
+                                $plcSug->kindPlaceId = $kindPlace->id;
+                                $plcSug->kindPlaceName = $kindPlace->tableName;
+                                $plcSug->kind = 'place';
+                                $bm = $plcSug;
                             }
-                            if($bm != null)
-                                array_push($bookmarks, $bm);
+                        }
+                        if($bm != null) {
+                            $bm->bmId = $item->id;
+                            array_push($bookmarks, $bm);
                         }
                     }
                 }
@@ -592,6 +591,19 @@ class ProfileController extends Controller {
         }
         else
             return response()->json(['status' => 'notAuth']);
+    }
+
+    public function deleteBookMarkWithId(Request $request)
+    {
+        if(isset($request->id)){
+            BookMark::where('id', $request->id)
+                    ->where('userId', \auth()->user()->id)
+                    ->delete();
+
+            return response()->json(['status' => 'ok']);
+        }
+        else
+            return response()->json(['status' => 'error1']);
     }
 
 

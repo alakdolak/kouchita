@@ -277,13 +277,75 @@
                 type: 'GET',
                 url: '{{route("profile.getBookMarks")}}',
                 success: response => {
-                    console.log(response);
+                    if(response.status == 'ok'){
+                        var text = '';
+                        response.result.map(item =>{
+                            var add = false;
+                            var name = '';
+                            var pic = '';
+                            var state = '';
+                            var kind = '';
+                            var kindIcon = '';
+                            if(item.kind == 'place'){
+                                name = item.name;
+                                pic = item.pic;
+                                state = item.city + ' در ' + item.state;
+                                kindIcon = window.mainIconsPlaces[item.kindPlaceName].icon;
+                                kind = window.mainIconsPlaces[item.kindPlaceName].nameFa;
+                                add = true;
+                            }
+                            else if(item.kind == 'safarnameh'){
+                                name = item.title;
+                                pic = item.pic;
+                                kind = 'سفرنامه';
+                                kindIcon = window.mainIconsPlaces['safarnameh'].icon;
+                                add = true;
+                            }
+                            if(add) {
+                                text += `<div class="bookMarkSSec">
+                                            <div class="BookMarkIcon" onclick="deleteBookMarkState(${item.bmId}, this)"></div>
+                                            <div class="imgSec" onclick="goToBookMarkSelected('${item.url}')">
+                                                <img src="${pic}" class="resizeImgClass" alt="${name}" onload="fitThisImg(this)">
+                                            </div>
+                                            <div class="infoSec" onclick="goToBookMarkSelected('${item.url}')">
+                                                <div class="type ${kindIcon}">${kind}</div>
+                                                <div class="name">${name}</div>
+                                                <div class="state">${state}</div>
+                                            </div>
+                                        </div>`;
+                            }
+                        });
+
+                        if(text != '')
+                            $('.headerFooterBookMarkTab').html(text);
+                    }
                 },
                 error: err => {
                     console.log(err);
                 }
             });
         }
+    }
+
+    function deleteBookMarkState(_id, _element){
+        $.ajax({
+            type: 'post',
+            url: '{{route("profile.bookMark.delete")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id: _id
+            },
+            success: response =>{
+                if(response.status == 'ok')
+                    $(_element).parent().remove();
+                else
+                    showSuccessNotifi('مشکلی در حذف نشان کرده پیش امده', 'left', 'red');
+            },
+            error: err => showSuccessNotifi('مشکلی در حذف نشان کرده پیش امده', 'left', 'red')
+    })
+    }
+    function goToBookMarkSelected(_url){
+        window.location.href = _url;
     }
 
 
@@ -302,6 +364,10 @@
 
         if(openHeadersTab)
             hideAllTopNavs();
+    });
+
+    $(window).on('resize', e => {
+        resizeFitImg('resizeImgClass');
     });
 
     $(document, window).ready(() => {

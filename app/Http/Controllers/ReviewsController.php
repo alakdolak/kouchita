@@ -522,7 +522,7 @@ class ReviewsController extends Controller
     public function addReviewToBookMark(Request $request)
     {
         if(\auth()->check()){
-            if($request->id){
+            if(isset($request->id)){
                 $bookmarkKind = BookMarkReference::where('group', 'review')->first();
                 $bookmark = BookMark::where('userId', \auth()->user()->id)
                                     ->where('referenceId', $request->id)

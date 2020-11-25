@@ -77,17 +77,7 @@
 </div>
 
 <script>
-    var mainSearchIcon = {
-        amaken: 'touristAttractions',
-        restaurant: 'restaurantIcon',
-        hotels: 'hotelIcon',
-        sogatSanaies: 'souvenirIcon',
-        mahaliFood: 'traditionalFood',
-        majara: 'adventureIcon',
-        boomgardies: 'boomIcon',
-        state: 'location',
-        city: 'location',
-    };
+
     var mainSearchAjax = null;
     var numOfMainSearchResult = 0;
     var searchDir = '{{route('totalSearch')}}';
@@ -337,7 +327,7 @@
                 }
 
                 newElement += `<a href="${url}" class="mainSearchResultRow">
-                                        <div class="icons ${mainSearchIcon[item.mode]} spIcons"></div>
+                                        <div class="icons ${window.mainIconsPlaces[item.mode].icon  } spIcons"></div>
                                         <p class='suggest cursor-pointer' style='margin: 0px'>${name1}</p>
                                         <p class='suggest cursor-pointer stateName'>${name2}</p>
                                     </a>`;

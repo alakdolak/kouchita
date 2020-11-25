@@ -514,6 +514,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
+        Route::post('profile/bookMark/delete', 'ProfileController@deleteBookMarkWithId')->name('profile.bookMark.delete');
+
         Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
 
         Route::post('profile/updateUserPhoto', 'ProfileController@updateUserPhoto')->name('profile.updateUserPhoto');
