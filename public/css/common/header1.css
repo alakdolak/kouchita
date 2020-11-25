@@ -87,12 +87,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_inbox .ui_jewel {
     vertical-align: middle;
 }
 
-#alert {
-    z-index: 9;
-    left: -10px !important;
-    top: 55px !important;
-}
-
 #alertItem {
     max-height: 405px;
     overflow: auto;

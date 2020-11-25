@@ -808,17 +808,11 @@ class HomeController extends Controller
         return view('alaki', array('tripId' => $tripId));
     }
 
-    public function getAlertsCount()
-    {
-        $sum = Alert::where('userId', Auth::user()->id)->where('seen', 0)->count();
-        echo $sum;
-    }
-
     public function getAlerts()
     {
+        $result = [];
         $greenColor = '#4dc7bc47';
         $redColor = '#ffe1e1';
-        $result = [];
         $alerts = Alert::where('userId', \auth()->user()->id)->orderByDesc('id')->get();
 
         foreach ($alerts as $item) {
@@ -1096,28 +1090,21 @@ class HomeController extends Controller
                 break;
         }
 
-        echo \GuzzleHttp\json_encode($result);
-        return;
-
+        return response()->json(['status' => 'ok', 'result' => $result]);
     }
 
     public function seenAlerts(Request $request)
     {
         if(isset($request->id) && isset($request->kind)){
-            if($request->kind == 'seen'){
+            if($request->kind == 'seen')
                 Alert::where('userId', \auth()->user()->id)->where('seen', 0)->update(['seen' => 1]);
-                echo json_encode(['status' => 'ok']);
-            }
-            else{
+            else
                 Alert::find($request->id)->update(['click' => 1]);
-//                dd(Alert::find($request->id));
-                echo json_encode(['status' => 'ok']);
-            }
+
+            return response()->json(['status' => 'ok']);
         }
         else
-            echo json_encode(['status' => 'nok']);
-
-        return;
+            return response()->json(['status' => 'nok']);
     }
 
 

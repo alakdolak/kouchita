@@ -104,8 +104,6 @@ Route::group(array('middleware' => ['throttle:60', 'web']), function () {
     Route::post('getNumsActivities', array('as' => 'ajaxRequestToGetActivitiesNum', 'uses' => 'ActivityController@getNumsActivities'));
 
     Route::post('getRecentlyActivities', array('as' => 'recentlyViewed', 'uses' => 'ActivityController@getRecentlyActivities'));
-
-    Route::post('getBookMarks', array('as' => 'getBookMarks', 'uses' => 'ActivityController@getBookMarks'));
 });
 
 //hotel reservation
@@ -312,13 +310,13 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'shareData']), function (){
 
-    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails')->middleware('shareData');;
+    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
-    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details')->middleware('shareData');
+    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
 
-    Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage')->middleware('shareData');
+    Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage');
 
     Route::get('getCityPageReview', 'CityController@getCityPageReview')->name('getCityPageReview');
 
@@ -488,9 +486,9 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index')->middleware('shareData');
 
-    Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
+    Route::get('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
 
-        Route::post('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
+    Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
         Route::post('profile/safarnameh/placeSuggestion', 'ProfileController@placeSuggestion')->name('profile.safarnameh.placeSuggestion');
 
@@ -583,8 +581,6 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
 
-        Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
-
         Route::get('seeTrip/{tripId}', array('as' => 'seeTrip', 'uses' => 'MyTripsController@tripHistory'));
 
         Route::get('acceptTrip/{tripId}', array('as' => 'acceptTrip', 'uses' => 'MyTripsController@acceptTrip'));
@@ -619,11 +615,9 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
         Route::post('setBookMark', array('as' => 'setBookMark', 'uses' => 'PlaceController@setBookMark'));
 
-        Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
+        Route::get('/alert/get', 'HomeController@getAlerts')->name('getAlerts');
 
         Route::post('/alert/seen', 'HomeController@seenAlerts')->name('alert.seen');
-
-        Route::post('getAlertsNum', array('as' => 'getAlertsNum', 'uses' => 'HomeController@getAlertsCount'));
 
         Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
 

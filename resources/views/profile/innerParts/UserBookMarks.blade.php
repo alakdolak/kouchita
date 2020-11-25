@@ -79,14 +79,9 @@
         $('#profileBMSection').find('.notData').addClass('hidden');
 
         $.ajax({
-            type: 'post',
+            type: 'GET',
             url: '{{route('profile.getBookMarks')}}',
-            data: {
-                _token: '{{csrf_token()}}',
-                kind: bookMarkProfileKind
-            },
             success: function(response){
-                response = JSON.parse(response);
                 if(response.status == 'ok')
                     createBookMarkRow(response.result);
             },
@@ -97,33 +92,31 @@
     function createBookMarkRow(_result){
         let text = '';
         if(_result.length > 0){
+            var bookMarkToShow = [];
+            _result.map(item => {
+                if(item.kind == bookMarkProfileKind)
+                    bookMarkToShow.push(item);
+            });
             if(bookMarkProfileKind == 'place') {
                 $('#profileBookMarkBody').html('<div id="placeBookMarkProfile" class="placeBookMarkProfile"></div>');
-                createSuggestionPack('placeBookMarkProfile', _result); //suggestionPack.blade.php
+                createSuggestionPack('placeBookMarkProfile', bookMarkToShow); //suggestionPack.blade.php
             }
             else if(bookMarkProfileKind == 'review'){
-                let left = '';
-                let right = '';
-
-                _result.map((item, index) => {
-                    if(index % 2 == 0)
-                        right += createSmallReviewHtml(item); // in component.smallShowReview.blade.php;
-                    else
-                        left += createSmallReviewHtml(item);
-                });
+                var sec = ['', ''];
+                bookMarkToShow.map((item, index) => sec[index % 2] += createSmallReviewHtml(item)/**in component.smallShowReview.blade.php**/);
 
                 text = '<div class="row notPadding">';
                 text += '<div class="col-md-6 pd-rt-0">';
-                text += right;
+                text += sec[0];
                 text += '</div>';
                 text += '<div class="col-md-6 pd-lt-0">';
-                text += left;
+                text += sec[1];
                 text += '</div>';
                 text += '</div>';
                 $('#profileBookMarkBody').html(text);
             }
             else if(bookMarkProfileKind == 'safarnameh'){
-                _result.map(item => {
+                bookMarkToShow.map(item => {
                     item.editAble = false;
                     text += getSafarnamehRow(item); // in component.safarnamehRow.blade.php
                 });

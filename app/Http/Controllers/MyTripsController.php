@@ -918,43 +918,6 @@ class MyTripsController extends Controller {
         return view('recentlyView', array('placesCount' => LogModel::where($condition)->count()));
     }
 
-    public function getBookmarkElems() {
-
-        $user = Auth::user();
-        $uId = $user->id;
-
-        $activityId  = Activity::whereName('نشانه گذاری')->first();
-        if($activityId != null) {
-
-            $activityId = $activityId->id;
-            $condition = ['visitorId' => $uId, 'activityId' => $activityId];
-            $amakens = LogModel::where($condition)->get();
-
-            if($amakens != null) {
-                foreach ($amakens as $amaken) {
-                    $kindPlaceId = $amaken->kindPlaceId;
-                    $kindPlace = Place::find($kindPlaceId);
-                    $target = \DB::table($kindPlace->tableName)->find($amaken->placeId);
-                    if($target == null) {
-                        $amaken->delete();
-                        break;
-                    }
-                    $amaken->name = $target->name;
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $target->file . '/f-1.jpg')))
-                        $amaken->placePic = URL::asset('_images/' . $kindPlace->fileName . '/' . $target->file . '/f-1.jpg');
-                    else
-                        $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                    $amaken->x = $target->C;
-                    $amaken->y = $target->D;
-                    $amaken->url = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $target->slug]);
-
-                }
-
-                echo \GuzzleHttp\json_encode(['places' => $amakens]);
-            }
-        }
-    }
 
     public function changeDateTrip() {
         if(isset($_POST["tripId"]) && isset($_POST["dateInputStart"]) && isset($_POST["dateInputEnd"])) {

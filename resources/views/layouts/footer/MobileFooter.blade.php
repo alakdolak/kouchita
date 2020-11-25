@@ -1,13 +1,15 @@
+
 <div class="gapForMobileFooter hideOnScreen"></div>
 
 <div class="footerPhoneMenuBar hideOnScreen">
-    <div onclick="openMobileFooterPopUps('otherPossibilities'); showLastPages();// this function in mainSearch.blade.php">
+    <div onclick="openMobileFooterPopUps('otherPossibilities');">
         <span class="footerMenuBarLinks">{{__('منو')}}</span>
         <span class="threeLineIcon"></span>
     </div>
-    <div onclick="openMobileFooterPopUps('mainMenuFooter')">
+    <div onclick="openMobileFooterPopUps('mainMenuFooter')" style="position: relative;">
         <span class="footerMenuBarLinks" style="direction: rtl;"> {{__('دیگه چه خبر...')}} </span>
         <span class="ui_icon questionIcon" style="font-size: 20px; font-weight: normal;"></span>
+        <span class="newMsgMainFooterCount newAlertNumber hidden" style="left: 0; top: 5px;">0</span>
     </div>
     <div onclick="openMobileFooterPopUps('profilePossibilities');">
         <span class="footerMenuBarLinks">
@@ -22,28 +24,25 @@
         <span class="iconFamily addPostIcon" style="font-size: 20px;"></span>
     </div>
     @if(Auth::check())
-        <div class="profileBtn" style="flex-direction: column;" onclick="openMobileFooterPopUps('profileFooterModal')">
+        <div class="profileBtn" style="flex-direction: column; position: relative" onclick="openMobileFooterPopUps('profileFooterModal')">
             <div class="profileBtnText">
                 <span>صفحه من</span>
-                @if($newMsgCount > 0)
-                    <span class="newMsgMainFooterCount">{{$newMsgCount}}</span>
-                @endif
             </div>
             <div class="fullyCenterContent profilePicFooter circleBase type2">
                 <img src="{{isset($buPic) ? $buPic : ''}}" class="resizeImgClass" onload="fitThisImg(this)" alt="user picture" style="width: 100%;">
             </div>
+            @if($newMsgCount > 0)
+                <span class="newMsgMainFooterCount">{{$newMsgCount}}</span>
+            @endif
         </div>
     @else
         <div class="loginHelperSection footerLoginHelperSection hidden" onclick="closeLoginHelperSection()">
             <div class="login-button">
-                    <span class="footerMenuBarLinks" style="display: flex; align-items: center">
-                        {{__('ورود')}}
-                        <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
-                    </span>
+                <span class="footerMenuBarLinks" style="display: flex; align-items: center">
+                    {{__('ورود')}}
+                    <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
+                </span>
             </div>
-            {{--                <div class="helperDescriptionDiv rightBottomArrow">--}}
-            {{--                    <div class="iconClose" onclick="closeLoginHelperSection()"></div>--}}
-            {{--                </div>--}}
             <div class="pic">
                 <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/icons/firstTimeRegisterMsg.svg')}}" style="width: 100%;">
             </div>
@@ -83,31 +82,26 @@
                     </span>
             </div>
 
-            <div style="height: calc(100% - 170px);">
+            <div style="height: calc(100% - 170px); overflow-y: auto">
                 <div class="lp_others_content" id="lp_others_recentlyViews">
-                    <div class="mainContainerBookmarked">
-
+                    <div id="phoneRecentlyView" class="mainContainerBookmarked recentlyRowMainSearch" style="display: flex; flex-wrap: wrap;">
                         <div class="notInfoFooterModalImg" style="height: 95%;">
                             <div class="text">تازه کاری.....</div>
                             <img src="{{URL::asset('images/icons/notRecentlyKoochita.svg')}}" alt="cryKoochita" style="width: 100%;opacity: .3;">
                             <div class="text">بازدیدهای اخیرت رو اینجا ببین ...</div>
                         </div>
-{{--                        <div id="phoneRecentlyView">--}}
-{{--                            <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap; margin-top: 0px"></div>--}}
-{{--                        </div>--}}
                     </div>
                 </div>
 
-                <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: hidden; padding: 25px 10px; height: 100%;">
+                <div class="lp_others_content alertMsgResultDiv hidden" id="lp_others_messages">
                     <div class="notInfoFooterModalImg" style="height: 95%;">
                         <div class="text">ناراحتم.....</div>
                         <img src="{{URL::asset('images/icons/crykoochita.svg')}}" alt="cryKoochita" style="width: 70%;opacity: .3;">
                         <div class="text">فعالیتت کمه ، لایکی ، پیامی ...</div>
                     </div>
-{{--                    <div id="noMessagePhone" class="lp_others_noMessages alertMsgResultDiv" style="height: 100%; overflow-y: auto">{{__('هیچ پیام جدیدی موجود نیست')}}</div>--}}
                 </div>
 
-                <div class="lp_others_content hidden" id="lp_others_mark" style="height: 100%">
+                <div class="lp_others_content hidden" id="lp_others_mark">
                     <div class="mainContainerBookmarked" style="height: 100%">
                         <div class="notInfoFooterModalImg">
                             <div class="text">جایی رو نشون نکردی...!!</div>
@@ -136,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="lp_others_content hidden" id="lp_others_myTravel" style="height: 100%; position: relative;">
+                <div class="lp_others_content hidden" id="lp_others_myTravel" style="position: relative;">
                     <div class="notInfoFooterModalImg">
                         <div class="text">برنامه سفرت چیه ؟</div>
                         <img src="{{URL::asset('images/icons/mytrip0.svg')}}" alt="سفر ندارید" style="width: 100%;opacity: .3;">
@@ -162,11 +156,11 @@
                     <div class="iconFamily MyTripsIcon lp_icons"></div>
                     <div>{{__('سفرهای من')}}</div>
                 </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_mark', this)">
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_mark', this);">
                     <div class="lp_icons BookMarkIconEmpty"></div>
                     <div>{{__('نشون‌کرده')}}</div>
                 </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this)">
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this);setSeenAlert(0, '')/**in forAllPages**/;">
                     <div class="lp_icons iconFamily MsgIcon"></div>
                     <div>{{__('چه خبر ...!')}}</div>
                 </div>
@@ -639,16 +633,20 @@
                 </div>
 
                 <div class="fullyCenterContent mobileFooterCategoryBottom">
-                    <div class="headerSearchBar" style="border: none; margin: 0px 0px; width: 100%; padding: 0; justify-content: space-between;flex-direction: column; line-height: 30px;">
-                        <span class="headerSearchIcon footerSearchBar" style="background: white; border: solid 1px gray; width: 100%; margin-bottom: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
-                            <a class="icc " style="word-spacing: -4px; color: black;">
-                                <img src="{{URL::asset('images/icons/iranIcon.svg')}}" style="width: 20px">
-                                استان اصفهان
+                    <div class="headerSearchBar cityButtonsSec">
+                        @if(isset($locationName['stateNameUrl']))
+                            <a href="{{route('cityPage', ['kine' => 'state', 'city' => $locationName['stateNameUrl']])}}" class="headerSearchIcon footerSearchBar cityButton" style="margin-bottom: 6px;">
+                                <div class="icc fullyCenterContent" style="word-spacing: -4px;  color: black;">
+                                    <img src="{{URL::asset('images/icons/iranIcon.svg')}}" style="width: 20px">
+                                    استان {{$locationName['stateNameUrl']}}
+                                </div>
                             </a>
-                        </span>
-                        <span class="headerSearchIcon footerSearchBar" style="background: white; border: solid 1px gray; width: 100%;">
-                            <a href="#" class="icc locationIcon" style="word-spacing: -4px;  color: black;">شهر کاشان</a>
-                        </span>
+                        @endif
+                        @if(isset($locationName['cityNameUrl']) && $locationName['kindState'] == 'city')
+                            <a href="{{route('cityPage', ['kine' => 'city', 'city' => $locationName['cityNameUrl']])}}" class="headerSearchIcon footerSearchBar cityButton">
+                                <div class="icc locationIcon" style="word-spacing: -4px;  color: black;">شهر {{$locationName['cityNameUrl']}}</div>
+                            </a>
+                        @endif
                     </div>
 {{--                    <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter" style="width: 49%;">--}}
 {{--                        {{__('تلویزیون گردشگری')}}--}}
@@ -834,22 +832,22 @@
                     </div>
 
                     <div class="lp_phoneMenuBar">
-                        <div class="lp_eachMenu">
-                            <img src="{{URL::asset('images/icons/addSafarnamehIcon.svg')}}" alt="koochitaKon" style="width: 60%;">
+                        <div class="lp_eachMenu" onclick="writeNewSafaranmeh()">
+                            <img src="{{URL::asset('images/icons/addSafarnamehIcon.svg')}}" class="profileMobileFooterImg" alt="addSafarnameh">
                             <div>{{__('نوشتن سفرنامه')}}</div>
                         </div>
-                        <div class="lp_eachMenu">
-                            <img src="{{URL::asset('images/icons/addPhotoIcon.svg')}}" alt="koochitaKon" style="width: 65%;">
+                        <div class="lp_eachMenu" onclick="openUploadPost()">
+                            <img src="{{URL::asset('images/icons/addPhotoIcon.svg')}}" class="profileMobileFooterImg" alt="addPicture">
                             <div>{{__('افزودن عکس')}}</div>
                         </div>
                         <div class="lp_eachMenu">
-                            <img src="{{URL::asset('images/icons/koochit.svg')}}" alt="koochitaKon" style="width: 90%;">
+                            <img src="{{URL::asset('images/icons/koochit.svg')}}" class="profileMobileFooterImg" alt="koochitaSho">
                             <div>{{__('کوچیت کن')}}</div>
                         </div>
-                        <a href="{{route('logout')}}" class="lp_eachMenu" style="color: #333">
+                        <div class="lp_eachMenu" onclick="mobileFooterProfileButton('setting')">
                             <div class="settingIcon lp_icons"></div>
                             <div>{{__('تنظیمات')}}</div>
-                        </a>
+                        </div>
                     </div>
                 </div>
 
@@ -861,6 +859,8 @@
 <script>
 
     function lp_selectMenu(id , element) {
+
+
         $('.lp_eachMenu').removeClass('lp_selectedMenu');
         $(element).addClass('lp_selectedMenu');
         $('.lp_others_content').addClass('hidden');
@@ -879,20 +879,53 @@
     function createTripFromMobileFooter(){
         if(!checkLogin())
             return;
-
         createNewTrip();
     }
 
+    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';
+    var opnedMobileFooterId = null;
+
     function openMobileFooterPopUps(_id){
+        showLastPages();
+
         closeMyModalClass('footerModals');
-        if(_id == 'profilePossibilities'){
-{{--            @if(Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*'))--}}
-{{--                openMyModal(_id);--}}
-{{--            @else--}}
+        if(_id == 'profilePossibilities' && openCampingInMobileFooter == '')
                 showCampingModal(); // in header1.blade.php
-{{--            @endif--}}
+        else if(opnedMobileFooterId != _id) {
+            opnedMobileFooterId = _id;
+            openMyModal(_id);
         }
         else
-            openMyModal(_id);
+            opnedMobileFooterId = null;
     }
+
+    function mobileFooterProfileButton(_kind){
+        let windowUrl = window.location;
+        let url = windowUrl.origin + windowUrl.pathname;
+
+        if(url == profileUrl || url == profileUrl+'/'+usrnme) {
+            if (_kind == 'review')
+                mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review'); // in mainProfile.blade.php
+            else if (_kind == 'photo')
+                mobileChangeProfileTab($('#photoProfileMoblieTab'), 'photo'); // in mainProfile.blade.php
+            else if (_kind == 'safarnameh')
+                mobileChangeProfileTab($('#safarnamehProfileMoblieTab'), 'safarnameh'); // in mainProfile.blade.php
+            else if (_kind == 'medal')
+                mobileChangeProfileTab($('#medalProfileMoblieTab'), 'medal'); // in mainProfile.blade.php
+            else if (_kind == 'question')
+                chooseFromMobileMenuTab('question', $('#myMenuMoreTabQuestion')); // in mainProfile.blade.php
+            else if (_kind == 'bookMark')
+                chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark')); // in mainProfile.blade.php
+            else if (_kind == 'festival')
+                chooseFromMobileMenuTab('festival', $('#myMenuMoreTabFestivalMark')); // in mainProfile.blade.php
+            $('#profileFooterModal').modal('hide');
+        }
+        else if(_kind == 'setting')
+            window.location.href = "{{route('profile.accountInfo')}}";
+        else if(_kind == 'follower')
+            openFollowerModal('resultFollowers', window.user.id); // in general.followerPopUp.blade.php
+        else
+            window.location.href = profileUrl+'#'+_kind;
+    }
+
 </script>

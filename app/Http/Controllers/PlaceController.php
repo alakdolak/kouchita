@@ -202,7 +202,9 @@ class PlaceController extends Controller {
             $place = $this->mahaliFoodDet($place);
 
         $articleUrl = route('safarnameh.list', ['type' => 'place', 'search' => $kindPlaceId . '_' . $place->id]);
-        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $city->name, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
+        $locationName = ["name" => $place->name, 'state' => $state->name, "stateNameUrl" => $state->name,
+                        'cityName' => $city->name, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl,
+                        'kindState' => 'city', 'kindPage' => 'place'];
 
         $mainPic = count($sitePics) > 0 ? $sitePics[0]['f'] : URL::asset('images/mainPics/nopicv01.jpg');
         $video = isset($place->video) ? $place->video : '';
@@ -3067,7 +3069,7 @@ class PlaceController extends Controller {
 
                 $articleUrl = \url('/safarnameh/list/city/' . $state->name);
                 $n = ' استان ' . $state->name;
-                $locationName = ['name' => $n, 'state' => $state->name,
+                $locationName = ['name' => $n, 'state' => $state->name, "stateNameUrl" => $state->name,
                                 'cityName' => $n, 'cityNameUrl' => $state->name,
                                 'articleUrl' => $articleUrl, 'kindState' => 'state',
                                 'kindPage' => 'list'];
@@ -3087,7 +3089,7 @@ class PlaceController extends Controller {
                     return "نتیجه ای یافت نشد";
 
                 $articleUrl = route('safarnameh.list', ['type' => 'city', 'search' => $city->name]);
-                $locationName = ["name" => $city->name, 'state' => $state->name, 'cityName' => $city->name,
+                $locationName = ["name" => $city->name, 'state' => $state->name, 'stateNameUrl' => $state->name, 'cityName' => $city->name,
                                 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl,
                                 'kindState' => 'city', 'kindPage' => 'list'];
 

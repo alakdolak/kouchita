@@ -43,7 +43,9 @@ class CityController extends Controller
             $place->state = State::whereId($place->stateId)->name;
             $place->listName = $place->name;
             $articleUrl = route('safarnameh.list', ['type' => 'city', 'search' => $place->listName]);
-            $locationName = ["name" => $place->name, 'state' => $place->state, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
+            $locationName = [ "name" => $place->name, "state" => $place->state, "stateNameUrl" => $place->state,
+                              "cityName" => $place->name, "cityNameUrl" => $place->listName, "articleUrl" => $articleUrl,
+                              "kindState" => 'city'];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
             $allAmaken = Amaken::where('cityId', $place->id)->count();
@@ -59,7 +61,9 @@ class CityController extends Controller
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
             $articleUrl = route('safarnameh.list', ['type' => 'state', 'search' => $place->listName]);
-            $locationName = ["name" => $place->name, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
+            $locationName = ["name" => $place->name, 'cityName' => $place->name, 'cityNameUrl' => $place->listName,
+                            "state" => $place->name, "stateNameUrl" => $place->listName,
+                            'articleUrl' => $articleUrl, 'kindState' => 'state'];
 
             $allCities = Cities::where('stateId', $place->id)->where('isVillage',0)->pluck('id')->toArray();
 

@@ -113,7 +113,7 @@
                 <div class="col-md-5">
                     <div class="bodySec infoSec">
                         <div class="iWasHere flagIcon">من اینجا بودم</div>
-                        <div class="boldText">سوپر مارکت دریانی</div>
+                        <div class="boldText">{{$localShop->name}}</div>
                         <div class="normText">{{$localShop->address}}</div>
                         <div class="phone telephoneIconAfter">
                             @foreach($localShop->telephone as $telephone)

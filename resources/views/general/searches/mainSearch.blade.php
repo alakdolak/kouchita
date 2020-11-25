@@ -100,11 +100,11 @@
 
 
     function openMainSearch(_kindPlaceId){
-        showLastPages();
-
         var fpst;
         var pn;
         var countryIcon = '';
+
+        showLastPages();
 
         switch (_kindPlaceId){
             case 0:
@@ -173,6 +173,8 @@
             $('#mainSearchResult').show();
             $("#mainSearchResult").html(newElement);
         }
+
+
     };
 
     function redirect() {
@@ -373,48 +375,8 @@
 
             localStorage.setItem('lastPages', JSON.stringify(lastPages));
         }
-
     } else
         console.log('your browser not support localStorage');
 
-    function showLastPages(){
-        let lastPages = localStorage.getItem('lastPages');
-        lastPages = JSON.parse(lastPages);
 
-        if(recentlyMainSearchSample == 0)
-            recentlyMainSearchSample = $('.recentlyRowMainSearch').html();
-
-        $('.recentlyRowMainSearch').html('');
-
-        if(lastPages != null){
-            for(i = 0; i < lastPages.length; i++){
-                var text = recentlyMainSearchSample;
-                var fk = Object.keys(lastPages[i]);
-
-                var name = lastPages[i]['name'];
-                t = '##name##';
-                re = new RegExp(t, "g");
-
-                if(lastPages[i]['kind'] == 'city')
-                    name +=' در ' + lastPages[i]['state'];
-                else if(lastPages[i]['kind'] == 'place')
-                    name +=' در ' + lastPages[i]['city'];
-                else if(lastPages[i]['kind'] == 'article')
-                    name = 'مقاله ' + lastPages[i]['name'];
-                text = text.replace(re, name);
-
-                for (var x of fk) {
-                    var t = '##' + x + '##';
-                    var re = new RegExp(t, "g");
-
-                    if(x == 'city' && lastPages[i]['state'] != '')
-                        text = text.replace(re, lastPages[i][x] + ' در ');
-                    else
-                        text = text.replace(re, lastPages[i][x]);
-                }
-
-                $('.recentlyRowMainSearch').append(text);
-            }
-        }
-    }
 </script>

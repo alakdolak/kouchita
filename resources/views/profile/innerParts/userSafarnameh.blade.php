@@ -68,7 +68,7 @@
                 </div>
                 <div class="sai">
                     خاطراتت رو مرور کن و
-                    <button class="butt" onclick="goToSafarnameh()">سفرنامه بنویس</button>
+                    <button class="butt" onclick="writeNewSafaranmeh()">سفرنامه بنویس</button>
                 </div>
             @else
                 <div class="firstLine">

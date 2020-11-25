@@ -116,12 +116,6 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
     align-items: center;
 }
 
-#alert {
-    left: -10px !important;
-    top: 48px !important;
-    display: none;
-}
-
 #targetHelp_4 {
     display: flex;
 }

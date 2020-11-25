@@ -67,7 +67,6 @@
     @if(Auth::check())
         <script>
             let profileUrl = '{{route("profile")}}';
-            let getBookMarkFooterUrl = '{{route('getBookMarks')}}';
             let usrnme = '{{$userFooter->username}}';
             window.user = '{!! $userFooter !!}';
 
@@ -76,10 +75,6 @@
                 $("#progressIdPhone").css("width", b + "%");
             }
             initialProgressFooter();
-
-            $(document).ready(() => {
-                showBookMarksPhone();
-            });
 
             @if($newRegisterOpen)
             if($(window).width() <= 767) {
