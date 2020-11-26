@@ -70,6 +70,7 @@
 <script defer src="{{URL::asset('js/component/load-image.all.min.js')}}"></script>
 
 <script>
+    var openHeadersTab = false;
     var seenToZero = false;
     var csrfTokenGlobal = '{{csrf_token()}}';
     var hasLogin = {{auth()->check() ? 1 : 0}};
