@@ -233,7 +233,7 @@
                 <div class="bigText">پیش از شروع عضو شوید</div>
                 <div class="smallText">
                     اگر عضو هستید
-                    <span class="loginButton login-button" >وارد شوید</span>
+                    <span class="loginButton" onclick="checkLogin(window.location.href)">وارد شوید</span>
                 </div>
             </div>
             <div class="registerBody">
