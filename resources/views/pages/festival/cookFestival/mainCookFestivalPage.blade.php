@@ -43,7 +43,7 @@
             background-size: contain;
             height: 65%;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: bottom;
         }
         .sideMainPic img{
             width: 100%;
@@ -110,17 +110,17 @@
             margin-top: 30px;
         }
 
-        .firstStep{
+        .step1{
             width: 50%;
             padding-top: 5%;
         }
-        .firstStep > div{
+        .step1 > div{
             width: 80%;
         }
-        .firstStep > div > img{
+        .step1 > div > img{
             width: 100%;
         }
-        .firstStep .registerInCook{
+        .step1 .registerInCook{
             color: #707070;
             text-align: center;
             justify-content: center;
@@ -129,14 +129,25 @@
             flex-direction: column;
             margin-top: 40px;
         }
-        .firstStep .registerInCook .text{
+        .step1 .registerInCook .text{
             font-size: 25px;
         }
-        .firstStep .registerInCook .orangeButton{
+        .step1 .registerInCook .orangeButton{
             margin: 0;
             margin-top: 5px;
         }
         
+        
+        @media (max-width: 1100px) {
+            .commonBody .inputCol{
+                margin-bottom: 10px;
+            }
+            .commonBody .inputCol input{
+                font-size: 18px;
+                padding: 10px 5%;
+            }
+
+        }
         
         @media (max-width: 767px) {
 
@@ -154,23 +165,29 @@
                 position: relative;
             }
             .koochitaTitleSidePic img{
-                width: 70%;
+                max-height: 150px;
+                width: auto;
             }
-            .firstStep{
+            .commonBody{
                 width: 100%;
             }
+            .loginBody{
+                padding: 0px 20px;
+                max-width: 400px;
+                margin: 0px auto;
+            }
+
             .sideMainPic{
                 width: 100%;
-                background-position: bottom;
                 z-index: 1;
                 opacity: .3;
             }
-            .firstStep > div{
+            .step1 > div{
                 width: 90%;
                 max-width: 400px;
                 margin: 0px auto;
             }
-            .firstStep .registerInCook .text{
+            .step1 .registerInCook .text{
                 color: #3a3a3a;
                 font-weight: bold;
             }
@@ -192,7 +209,7 @@
         </div>
         <div class="sideMainPic"></div>
 
-        <div id="firstStep" class="commonBody firstStep" >
+        <div id="step1" class="commonBody step1" >
             <div class="topPic">
                 <img src="{{URL::asset('images/festival/cookFestival/doCook.svg')}}" alt="doCook">
             </div>
@@ -203,14 +220,15 @@
                 <div class="text" >
                     از اینجا برای ما بفرستید
                 </div>
-                <button class="orangeButton" onclick="goToNextStep('step2Body')">شرکت کنید</button>
+                <button class="orangeButton" onclick="goToNextStep(2)">شرکت کنید</button>
             </div>
         </div>
 
-        @if(auth()->check())
-            <div class="commonBody step2Body hidden"></div>
+{{--        @if(auth()->check())--}}
+        @if(false)
+            <div class="commonBody step2 hidden"></div>
         @else
-            <div class="commonBody step2Body loginBody hidden">
+            <div class="commonBody step2 loginBody hidden">
             <div class="topText">
                 <div class="bigText">پیش از شروع عضو شوید</div>
                 <div class="smallText">
@@ -244,8 +262,19 @@
     </div>
 
     <script>
-        function goToNextStep(_firstStep) {
+        var nowStep = 'step1';
+        var url = window.location;
+        function goToNextStep(_nextStep) {
+            window.history.replaceState(null, null, '?page='+_nextStep);
+            
+            $(`.${nowStep}`).addClass('hidden');
+            $(`.step${_nextStep}`).removeClass('hidden');
+            nowStep = `step${_nextStep}`;
+        }
 
+        if(url.search.includes('?page=')){
+            showStep = url.search.split('?page=')[1];
+            goToNextStep(showStep);
         }
     </script>
 </body>
