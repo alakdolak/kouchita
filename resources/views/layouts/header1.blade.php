@@ -241,8 +241,6 @@
 
 
 <script>
-    let openHeadersTab = false;
-
     function showCampingModal(){
         $('#campingHeader').css('display', 'flex');
         resizeFitImg('resizeImgClass');

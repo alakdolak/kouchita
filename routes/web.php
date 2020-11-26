@@ -264,7 +264,7 @@ Route::get('provider2', function (){
 })->middleware('shareData');
 
 //authenticated controller
-Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
+Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), function(){
 //    Route::get('login', 'UserLoginController@login');
     Route::get('newPasswordEmail/{code}', 'UserLoginController@newPasswordEmailPage')->name('newPasswordEmail');
 

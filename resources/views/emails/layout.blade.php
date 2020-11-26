@@ -56,7 +56,7 @@
         .headerPicDiv{
             height: 100%;
             width: 100px;
-            background: var(--koochita-light-green);
+            background: #4dc7bc;
             margin-left: 20px;
             margin-right: auto;
             z-index: 9;
@@ -81,7 +81,7 @@
         .footer{
             width: 100%;
             margin-top: 20px;
-            background: var(--koochita-yellow);
+            background: #fcc156;
             display: block;
             padding-bottom: 20px;
         }
