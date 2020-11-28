@@ -6,6 +6,9 @@
 
 
     <style>
+        :root{
+            --cook-orange: #FD7B5C;
+        }
         .mainBody{
             width: 100%;
             min-height: 100vh;
@@ -77,16 +80,20 @@
         }
         .commonBody .inputCol input{
             background: white;
-            border: solid 1px #FD7B5C;
+            border: solid 1px var(--cook-orange);
             font-size: 22px;
             border-radius: 100px;
             padding: 15px 5%;
             width: 100%;
             box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
-            color: #FD7B5C;
+            color: var(--cook-orange);
         }
         .commonBody .inputCol input::placeholder{
-            color: #FD7B5C;
+            color: #fd7b5c73;
+        }
+
+        .inputCol.hasError input{
+            background: #ffd3d3;
         }
         .inputCol .smallText{
             font-size: 14px;
@@ -95,7 +102,7 @@
             padding-bottom: 0px;
         }
         .orangeButton{
-            background: #FD7B5C;
+            background: var(--cook-orange);
             border: none;
             color: white;
             border-radius: 100px;
@@ -108,6 +115,10 @@
             padding: 10px 0px;
             box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
             margin-top: 30px;
+        }
+        .orangeButton:disabled{
+            opacity: .5;
+            cursor: not-allowed;
         }
 
         .step1{
@@ -157,15 +168,80 @@
             height: 50vh;
             border-radius: 20px;
             background: #fd7b5c69;
-            border: solid 2px #FD7B5C;
+            border: solid 2px var(--cook-orange);
+            overflow: auto;
         }
-        .uploadButton.orangeButton{
+        .uploadSec .uploadeShowResults{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .uploadSec.highlight{
+            box-shadow: 0px 0px 8px 5px var(--cook-orange);
+        }
+        .uploadSec .uploadButton{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--cook-orange);
+        }
+        .uploadSec .uploadButton:before{
+            font-size: 50px;
+        }
+        .submitUploadButton.orangeButton{
             width: 300px;
             margin-left: auto;
             margin-right: 0;
         }
-        
-        
+
+        .commonBody.step3{
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .registerBody .remaindSec{
+            display: flex;
+            align-items: center;
+        }
+        .registerBody .remaindSec .text{
+            color: #707070;
+            font-size: 18px;
+        }
+        .registerBody .remaindSec .remaindeTimer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-right: 15px;
+        }
+        .registerBody .remaindSec .remaindeTimer .numberSec{
+            background: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            border: solid 1px var(--cook-orange);
+            color: var(--cook-orange);
+        }
+        .registerBody .remaindSec .remaindeTimer .againButton{
+            color: var(--cook-orange);
+        }
+        .registerBody .remaindSec .remaindSecButton{
+            font-size: 10px;
+            padding: 6px 10px;
+            width: auto;
+            margin: 0px 7px;
+        }
+
+
+        .foodSearchResult{
+            padding: 2px 10px;
+        }
+        .foodSearchResult:hover{
+            background: var(--cook-orange);
+            color: white;
+        }
         @media (max-width: 1100px) {
             .commonBody .inputCol{
                 margin-bottom: 10px;
@@ -193,8 +269,9 @@
                 position: relative;
             }
             .koochitaTitleSidePic img{
-                max-height: 150px;
+                max-height: 100px;
                 width: auto;
+                margin-top: 10px;
             }
             .commonBody{
                 width: 100%;
@@ -237,6 +314,8 @@
 
         }
     </style>
+
+    <script defer src="{{URL::asset('js/uploadLargFile.js')}}"></script>
 </head>
 <body>
 
@@ -274,10 +353,17 @@
                     سلام {{auth()->user()->username}}
                 </div>
                 <div class="inputCol">
-                    <input type="text" placeholder="نام غذا">
+                    <input id="foodNameInput" type="text" placeholder="نام غذا" readonly onclick="createSearchInput('searchInFoods', 'نام غذا را وارد نمایید')">
                 </div>
-                <div class="uploadSec"></div>
-                <button class="uploadButton orangeButton">ارسال</button>
+                <div id="uploadSec" class="uploadSec">
+                    <div class="uploadeShowResults">
+                        <label for="uploadedFileInput" class="uploadFileCard uploadButton plus2">
+                            افزودن عکس یا فیلم
+                        </label>
+                    </div>
+                </div>
+                <input type="file" id="uploadedFileInput" data-multiple-caption="{count} files selected" multiple style="display: none" onchange="uploadPicClickHandler(this)">
+                <button id="submitWorkButton" class="submitUploadButton orangeButton" onclick="submitFiles()" disabled>ارسال</button>
             </div>
         @else
             <div class="commonBody step2 loginBody hidden">
@@ -290,24 +376,44 @@
                 </div>
                 <div class="registerBody">
                     <div class="inputCol">
-                        <input type="text" placeholder="نام">
+                        <input type="text" id="firstNameCInput" class="mustFill" placeholder="نام">
                     </div>
                     <div class="inputCol">
-                        <input type="text" placeholder="نام خانوادگی">
+                        <input type="text" id="lastNameCInput" class="mustFill" placeholder="نام خانوادگی">
                     </div>
                     <div class="inputCol">
-                        <input type="text" placeholder="شماره تلفن همراه">
+                        <input type="text" id="phoneCInput" class="mustFill" placeholder="شماره تلفن همراه">
                     </div>
                     <div class="inputCol">
-                        <input type="text" placeholder="نام کاربری">
+                        <input type="text" id="userNameCInput" class="mustFill" placeholder="نام کاربری">
                         <div class="smallText">
                             دوستانتان شما را با این نام می شناسند
                         </div>
                     </div>
                     <div class="inputCol">
-                        <input type="text" placeholder="رمز عبور">
+                        <input type="password" id="passwordCInput" class="mustFill" placeholder="رمز عبور">
                     </div>
-                    <button class="orangeButton">تایید</button>
+                    <button class="orangeButton" onclick="firstStepRegisterCook()">تایید</button>
+                </div>
+            </div>
+            <div class="commonBody step3 loginBody hidden">
+                <div class="topText">
+                    <div class="bigText">کدی که به گوشی شما پیامک شده است را وارد کنید</div>
+                </div>
+                <div class="registerBody">
+                    <div class="inputCol">
+                        <input type="text" id="phoneCodeCInput" placeholder="کد ارسالی" onkeyup="checkCodeCount(this)">
+                    </div>
+                    <div class="remaindSec">
+                        <div class="text">هنوز کد به شما ارسال نشده است؟</div>
+                        <div class="remaindeTimer">
+                            <div id="codeTimer" class="numberSec">00:00</div>
+                            <div class="againButton">تا ارسال مجدد</div>
+                        </div>
+
+                        <div class="orangeButton remaindSecButton hidden" onclick="resendPhoneCode()"> ارسال مجدد کد </div>
+                    </div>
+                    <button id="checkCodeButton" class="orangeButton" onclick="checkPhoneCode()" style="margin-top: 100px" disabled>ثبت</button>
                 </div>
             </div>
         @endif
@@ -326,8 +432,549 @@
 
         if(url.search.includes('?page=')){
             showStep = url.search.split('?page=')[1];
+            if(showStep == 3)
+                showStep = 2;
             goToNextStep(showStep);
         }
     </script>
+
+    @if(!auth()->check())
+        <script>
+            function firstStepRegisterCook(){
+
+                var firstName = $('#firstNameCInput');
+                var lastName = $('#lastNameCInput');
+                var phone = $('#phoneCInput');
+                var userName = $('#userNameCInput');
+                var passwordInput = $('#passwordCInput');
+                var errorText = '<ul><li>پر کردن تمامی فیلدها اجباری است</li>';
+                var hasError = false;
+
+                var phoneNumber = convertNumberToEn(phone.val());
+
+                if(firstName.val().trim().length < 2) {
+                    firstName.parent().addClass('hasError');
+                    hasError = true;
+                }
+                if(lastName.val().trim().length < 2) {
+                    lastName.parent().addClass('hasError');
+                    hasError = true;
+                }
+                if(phoneNumber.trim().length != 11 || phoneNumber[0] != 0 || phoneNumber[1] != 9){
+                    phone.parent().addClass('hasError');
+                    errorText += '<li>شماره تلفن خود را به درست وارد نمایید</li>';
+                    hasError = true;
+                }
+                if(userName.val().trim().length < 2){
+                    userName.parent().addClass('hasError');
+                    hasError = true;
+                }
+                if(passwordInput.val().trim().length < 2){
+                    passwordInput.parent().addClass('hasError');
+                    hasError = true;
+                }
+
+                if(hasError) {
+                    errorText += '</ul>';
+                    openErrorAlert(errorText);
+                }
+                else{
+                    openLoading(() => sendActivationCode());
+                }
+            }
+
+            function sendActivationCode(){
+                var userName = $('#userNameCInput').val();
+                var phone = $('#phoneCInput').val();
+                phone = convertNumberToEn(phone);
+
+                $('.remaindSecButton').addClass('hidden');
+                $('.remaindeTimer').removeClass('hidden');
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("festival.cook.firstStepRegister")}}',
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        phone: phone,
+                        username: userName
+                    },
+                    success: response => {
+                        closeLoading();
+                        if(response.status == 'ok' || response.status == 'remaining'){
+                            timer(response.result);
+                            goToNextStep(3);
+                        }
+                        else if(response.status == 'auth')
+                            location.reload();
+                        else if(response.status == 'error2'){
+                            var nErr = '';
+                            response.result.map(err => nErr += `<li>${err}</li>`);
+                            openErrorAlert(`<ul>${nErr}</ul>`);
+                        }
+                    },
+                    error: err => {
+                        showSuccessNotifi('Server error', 'left', 'red');
+                        closeLoading();
+                    }
+                });
+            }
+
+            function timer(_sTimer){
+                var second = _sTimer%60;
+                var min = Math.floor(_sTimer/60);
+
+                second = second < 10 ? '0'+second : second;
+                min = min < 10 ? '0'+min : min;
+
+                $('#codeTimer').text(min+':'+second);
+                _sTimer--;
+                if(_sTimer > 0)
+                    setTimeout(() => timer(_sTimer), 1000);
+                else{
+                    $('.remaindSecButton').removeClass('hidden');
+                    $('.remaindeTimer').addClass('hidden');
+                }
+            }
+
+            function checkPhoneCode(){
+                var activationCode = $('#phoneCodeCInput').val();
+                var phoneNum = $('#phoneCInput').val();
+                phoneNum = convertNumberToEn(phoneNum);
+
+                if(activationCode.trim().length > 2) {
+                    openLoading(() => {
+                        $.ajax({
+                            type: 'post',
+                            url: '{{route("register.checkActivationCode")}}',
+                            data: {
+                                _token: '{{csrf_token()}}',
+                                phoneNum,
+                                activationCode
+                            },
+                            success: response => {
+                                if (response == "ok")
+                                    completeRegisteration();
+                                else{
+                                    closeLoading();
+                                    openErrorAlert("کد وارد شده اشتباه می باشد.");
+                                }
+                            },
+                            error: err => {
+                                closeLoading();
+                            }
+                        });
+                    });
+                }
+            }
+
+            function completeRegisteration(){
+                var firstName = $('#firstNameCInput').val();
+                var lastName = $('#lastNameCInput').val();
+                var phone = $('#phoneCInput').val();
+                var userName = $('#userNameCInput').val();
+                var password = $('#passwordCInput').val();
+                var activationCode = $('#phoneCodeCInput').val();
+                phone = convertNumberToEn(phone);
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("festival.cook.fullRegister")}}',
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        firstName,
+                        lastName,
+                        phone,
+                        userName,
+                        password,
+                        activationCode,
+                    },
+                    success: response => {
+                        if(response.status == "ok" || response.status == "auth")
+                            location.reload();
+                        else if(response.status == "error2"){
+                            closeLoading();
+                            goToNextStep(2);
+
+                            var nErr = '';
+                            response.result.map(err => nErr += `<li>${err}</li>`);
+                            openErrorAlert(`<ul>${nErr}</ul>`);
+                        }
+                        else if(response.status == "error3"){
+                            closeLoading();
+                            openErrorAlert("کد وارد شده اشتباه می باشد.");
+                        }
+                    },
+                })
+            }
+
+            function checkCodeCount(_element){
+                if($(_element).val().trim().length > 3)
+                    $('#checkCodeButton').prop('disabled', false);
+                else
+                    $('#checkCodeButton').prop('disabled', true);
+            }
+
+            function resendPhoneCode(){
+                openLoading(() => sendActivationCode());
+            }
+
+            $('.mustFill').on('change', e => {
+                var target = $(e.target);
+                if(target.val().trim().length < 2)
+                    target.parent().addClass('hasError');
+                else
+                    target.parent().removeClass('hasError');
+            })
+
+        </script>
+    @else
+        <script>
+            var foodName = {
+                name: '',
+                id: 0
+            };
+            var uploadPicAjax = null;
+            var uploadProcess = false;
+            var searchFoodAjax = false;
+            var fileImages = [];
+            var dropArea = document.getElementById('uploadSec');
+
+
+            function preventDefaults (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false)
+            });
+            dropArea.addEventListener('dragenter', () => $('.uploadSec').addClass('highlight'), false);
+            dropArea.addEventListener('dragleave', () => $('.uploadSec').removeClass('highlight'), false);
+            dropArea.addEventListener('dragover', () => $('.uploadSec').addClass('highlight'), false);
+            dropArea.addEventListener('drop', (e) => {
+                let files = e.dataTransfer.files;
+                ([...files]).forEach(createAndUploadFilePic);
+            }, false);
+
+            function uploadPicClickHandler(_input){
+                if(_input.files && _input.files[0])
+                    createAndUploadFilePic(_input.files[0]);
+                $(_input).val('');
+            }
+
+            function createAndUploadFilePic(_files) {
+
+                if(_files.type.search('image') > -1) {
+                    console.log('this is image', _files);
+
+                    var reader = new FileReader();
+                    reader.onload = e => {
+                        var index = fileImages.push({
+                            file: _files,
+                            image: e.target.result,
+                            thumbnailFileName: '',
+                            savedFile: '',
+                            uploaded: -1,
+                            type: 'image',
+                            code: Math.floor(Math.random() * 1000)
+                        });
+                        createNewImgUploadCard(index - 1);
+                        uploadQueuePictures();
+                    };
+                    reader.readAsDataURL(_files);
+                }
+                else if(_files.type.search('video') > -1){
+                    console.log('this is video', _files);
+                    var index = fileImages.push({
+                        file: _files,
+                        image: '',
+                        savedFile: '',
+                        thumbnailFileName: '',
+                        uploaded: -1,
+                        type: 'video',
+                        code: Math.floor(Math.random() * 1000)
+                    });
+                    convertVideoFileForConvert(index-1);
+                }
+            }
+
+            function convertVideoFileForConvert(_index){
+                var uFile = fileImages[_index];
+                window.URL = window.URL || window.webkitURL;
+
+                var video = document.createElement('video');
+                video.preload = 'metadata';
+                video.src = URL.createObjectURL(uFile.file);
+
+                var fileReader = new FileReader();
+                fileReader.onload = function() {
+                    var blob = new Blob([fileReader.result], {type: uFile.file.type});
+                    var url = URL.createObjectURL(blob);
+                    var timeupdate = function() {
+                        if (snapImage()) {
+                            video.removeEventListener('timeupdate', timeupdate);
+                            video.pause();
+                        }
+                    };
+                    video.addEventListener('loadeddata', function() {
+                        if (snapImage()) {
+                            video.removeEventListener('timeupdate', timeupdate);
+                        }
+                    });
+
+                    var snapImage = function() {
+                        var canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                        var image = canvas.toDataURL();
+                        var success = image.length > 100000;
+
+                        if (success) {
+                            fileImages[_index].image = image;
+                            URL.revokeObjectURL(url);
+                            createNewImgUploadCard(_index);
+                            uploadQueuePictures();
+                        }
+                        return success;
+                    };
+                    video.addEventListener('timeupdate', timeupdate);
+                    video.preload = 'metadata';
+                    video.src = url;
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.play();
+                };
+                fileReader.readAsArrayBuffer(uFile.file);
+            }
+
+            function createNewImgUploadCard(_index){
+                var file = fileImages[_index];
+                var text = `<div id="uplaodedImg_${file.code}" class="uploadFileCard">
+                            <div class="img">
+                                <img src="${file.image}" class="resizeImgClass" onload="fitThisImg(this)">
+                            </div>
+                            <div class="absoluteBackground tickIcon"></div>
+                            <div class="absoluteBackground warningIcon"> اشکال در بارگذاری</div>
+                            <div class="absoluteBackground process">
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                <div class="processCounter">0%</div>
+                            </div>
+                            <div class="hoverInfos">
+                                <div class="cancelButton closeIconWithCircle" onclick="deleteThisUploadedImage(${file.code})" >
+                                     حذف فایل
+                                </div>
+                            </div>
+                        </div>`;
+                $('.uploadeShowResults').append(text);
+            }
+
+            function uploadQueuePictures(){
+                if(uploadProcess == false){
+                    uploadProcess = true;
+                    var uploadIndex = null;
+                    fileImages.map((item, index) => {
+                        if(item.uploaded == -1 && uploadIndex == null)
+                            uploadIndex = index;
+                    });
+
+                    if(uploadIndex != null) {
+                        var uFile = fileImages[uploadIndex];
+                        var uploadImgElement = $(`#uplaodedImg_${uFile.code}`);
+                        uFile.uploaded = 0;
+                        uploadImgElement.addClass('process');
+
+                        uploadLargeFile('{{route("festival.cook.uploadFile")}}', uFile.file, [], (_percent, _fileName = '') => {
+                            if(_percent == 'done') {
+                                uploadProcess = false;
+                                uFile.savedFile = _fileName;
+                                if(uFile.type == 'image'){
+                                    uFile.uploaded = 1;
+                                    uploadImgElement.removeClass('process');
+                                    uploadImgElement.addClass('done');
+                                    uploadQueuePictures();
+                                }
+                                else
+                                    storeThumbnail(uploadIndex);
+                            }
+                            else if(_percent == 'error') {
+                                uploadProcess = false;
+                                uploadImgElement.removeClass('process');
+                                uploadImgElement.addClass('error');
+                                uFile.uploaded = -2;
+                                uploadQueuePictures();
+                            }
+                            else if(_percent == 'cancelUpload'){
+                                uploadImgElement.remove();
+                                uploadProcess = false;
+                                uploadQueuePictures();
+                            }
+                            else
+                                uploadImgElement.find('.processCounter').text(_percent + '%');
+                        });
+                    }
+                    else
+                        uploadProcess = false;
+                }
+            }
+
+            function storeThumbnail(_index){
+                var file = fileImages[_index];
+                var data = new FormData();
+                data.append('fileName', file.savedFile);
+                data.append('thumbnail', file.image);
+                data.append('_token', '{{csrf_token()}}');
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("festival.cook.uploadFile")}}',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function(response){
+                        if(response.status == 'ok')
+                            file.thumbnailFileName = response.fileName;
+
+                        file.uploaded = 1;
+                        $(`#uplaodedImg_${file.code}`).removeClass('process');
+                        $(`#uplaodedImg_${file.code}`).addClass('done');
+                        uploadQueuePictures();
+                    },
+                    error: err =>{
+                        file.uploaded = 1;
+                        uploadQueuePictures();
+                    }
+                });
+            }
+
+            function deleteThisUploadedImage(_code){
+                var index = null;
+                for(var i = 0; i < fileImages.length; i++){
+                    if(fileImages[i].code == _code){
+                        index = i;
+                        break;
+                    }
+                }
+
+                if(index != null){
+                    if(fileImages[index].uploaded == 0)
+                        cancelLargeUploadedFile();
+                    else if(fileImages[index].uploaded == -1 || fileImages[index].uploaded == -2){
+                        fileImages.splice(index, 1);
+                        $('#uplaodedImg_'+_code).remove();
+                    }
+                    else if(fileImages[index].uploaded == 1)
+                        doDeletePicServer(index);
+                }
+            }
+
+            function doDeletePicServer(_index){
+                var file = fileImages[_index];
+                $.ajax({
+                    type: 'delete',
+                    url: '{{route('festival.cook.deleteFile')}}',
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        fileName: file.savedFile,
+                    },
+                    success: response => {
+                        if(response.status == 'ok'){
+                            $('#uplaodedImg_'+file.code).remove();
+                            fileImages.splice(index, 1);
+                        }
+                    },
+                })
+            }
+
+            function searchInFoods(_element){
+                var value = $(_element).val();
+                if(value.trim().length > 2){
+
+                    if(searchFoodAjax != false)
+                        searchFoodAjax.abort();
+
+                    searchFoodAjax = $.ajax({
+                        type: 'get',
+                        url: `{{route("search.place")}}?value=${value}&kindPlaceId=11`,
+                        success: response =>{
+                            if(response.status == 'ok'){
+                                var result = response.result;
+                                var text = '';
+
+                                text += `<div onclick="chooseThisFood(this)" class="foodSearchResult" kindFood="new" foodName="${value}" style="color: blue">
+                                            <p class="suggest cursor-pointer font-weight-700" style="margin: 0px">${value}</p>
+                                        </div>`;
+
+                                result.map(item => {
+                                    text += `<div onclick="chooseThisFood(this)" class="foodSearchResult" kindFood="id" foodName="${item.name}" foodId="${item.id}">
+                                                <p class="suggest cursor-pointer font-weight-700" style="margin: 0px">${item.name}</p>
+                                            </div>`;
+                                });
+                                setResultToGlobalSearch(text);
+                            }
+                        },
+                    })
+                }
+            }
+
+            function chooseThisFood(_element){
+                var kind = $(_element).attr('kindFood');
+                foodName.name = $(_element).attr('foodName');
+                if(kind == 'id')
+                    foodName.id = $(_element).attr('foodId');
+                else
+                    foodName.id = 0;
+
+                $('#foodNameInput').val(foodName.name);
+                $('#submitWorkButton').prop('disabled', false);
+
+                closeSearchInput();
+            }
+
+            function submitFiles(){
+                if(foodName.name != ''){
+                    var inUpload = false;
+                    var filesName = [];
+                    fileImages.map(item => {
+                        if(item.uploaded == 0)
+                            inUpload = true;
+
+                        filesName.push(item.savedFile);
+                    });
+
+                    if(inUpload)
+                        openWarning('فایل در حال آپلود می باشد، صبر کنید.');
+                    else {
+                        openLoading(() => {
+                            $.ajax({
+                                type: 'post',
+                                url: '{{route("festival.cook.submitFiles")}}',
+                                data:{
+                                    _token: '{{csrf_token()}}',
+                                    filesName: JSON.stringify(filesName),
+                                    food: JSON.stringify(foodName)
+                                },
+                                success: response => {
+                                    if(response == 'ok'){
+                                        showSuccessNotifi('عکس و فیلم شما با موفقیت ثبت شد', 'left', 'var(--koochita-blue)');
+                                        window.location.href = '{{route("profile")}}#festival';
+                                    }
+                                    else{
+                                        closeLoading();
+                                    }
+                                },
+                                error: err => showSuccessNotifi('error 500', 'left', 'red')
+                            })
+                        });
+                    }
+                }
+                else
+                    openWarning('برای ثبت عکس و فیلم باید غذا را انتخاب کنید');
+            }
+
+        </script>
+    @endif
+
 </body>
 </html>

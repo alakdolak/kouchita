@@ -14,6 +14,7 @@ use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Medal;
+use App\models\Message;
 use App\models\Place;
 use App\models\PlacePic;
 use App\models\QuestionAns;
@@ -380,13 +381,10 @@ function makeValidInput($input) {
 }
 
 function createCode() {
-
     $str = "";
-
     while (true) {
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 6; $i++)
             $str .= rand(0, 9);
-        }
         if(ActivationCode::whereCode($str)->count() == 0)
             return $str;
     }
@@ -1313,7 +1311,7 @@ function resizeUploadedImage($pic, $size, $fileName = ''){
                     $height = $item['height'];
                 }
             }
-            else {
+            else if($item['height'] != null || $item['width'] != null) {
                 if ($item['width'] == null || $width > $item['width'])
                     $width = $item['width'];
 
@@ -1511,4 +1509,21 @@ function convertJalaliToText($date){
     $date = $v->createJalali($year,$month,$day)->format('%A %d %B %Y');
     return $date;
 
+}
+
+function createWelcomeMsg($userId){
+    $msg = '<div>مرسی از ثبت نامت دوست من.</div><div>شما بخش مهمی از کوچیتا هستید. ما سعی کردیم تا همه چیز برای شما خوب طراحی بشه. در کوچیتا شما می تونید شهر، روستا، غذای محلی،سوغات، بوم گردی ها، جاذبه ها، طبیعت گردی و هتل ها رو پیدا کنید و عکس و نظر خودتون و دوستانتون را ببینید و بهترین انتخاب رو داشته باشید.</div><a href="https://koochita.com/placeList/11/country" target="_blank" style="display: block; margin: 5px 0px;">لیست غذاهای محلی ایران</a><a href="https://koochita.com/placeList/1/country" target="_blank" style="display: block; margin: 5px 0px;">لیست جاذبه های ایران  </a><a href="https://koochita.com/placeList/12/country" target="_blank" style="display: block; margin: 5px 0px;">لیست بوم‌گردی های ایران</a><a href="https://koochita.com/placeList/6/country" target="_blank" style="display: block; margin: 5px 0px;">لیست طبیعت گردی (کمپینگ) های ایران</a><div>شما همیشه می تونید از صفحه اول سایت و یا دکمه منو، شهر یا مکان مورد نظرتون رو سریع پیدا کنید. هر جایی که رفتید در قسمت ارسال دیدگاه می تونید نظرتون رو به همراه عکس و یا فیلم برای دوستانتون به اشتراک بگذارید.اگر عکاس هستید می تونید در قسمت من عکاس هستم عکس هاتون رو آپلود کنید تا ما با اسم خودتون منتشر کنیم.  شما می تونید از لینک زیر صفحه پروفایلتون رو ببینید. به شما کمک  می‌کنه تا با دوستانتون در تماس باشید ، برنامه ریزی سفر کنید ، سفرنامه بنویسید و با دوستانتون به اشتراک بگذارید.  این امکان از منوی کناری در موبایل و منوی بالا در کامپیوتر هم در دسترسه.</div><a href="https://koochita.com/profile/index" target="_blank" style="display: block; margin: 5px 0px;">صفحه پروفایل من</a><div>هر وقت سوالی داشتید و یا نظرتون رو می خواستید به ما بگید به همین اکانت پیام بدید. ما مشتاق صحبت کردن با شما هستیم.</div>';
+
+    $newMsg = new Message();
+    $newMsg->senderId = 0;
+    $newMsg->receiverId = $userId;
+    $newMsg->message = $msg;
+    $newMsg->date = verta()->format('Y-m-d');
+    $newMsg->time = verta()->format('H:i');
+    $newMsg->seen = 0;
+    $newMsg->save();
+
+    \Session::put(['newRegister' => true]);
+
+    return true;
 }

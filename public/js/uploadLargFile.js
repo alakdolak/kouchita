@@ -29,7 +29,7 @@ function upload_fileLargeFile(start, _fileName) {
     let next_slice = start + sliceSizeLargeFileUploadedInJsFile + 1;
     let blob = fileLargeFileUploadedInJsFile.slice(start, next_slice);
 
-    if(next_slice > fileLargeFileUploadedInJsFile.size)
+    if(next_slice >= fileLargeFileUploadedInJsFile.size)
         isLast = true;
 
     readerLargeFileUploadedInJsFile.onloadend = function (event) {
@@ -52,7 +52,6 @@ function upload_fileLargeFile(start, _fileName) {
                 file_data: event.target.result,
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown);
                 errorCountInLargeFileUploadedInJsFile--;
                 if (errorCountInLargeFileUploadedInJsFile <= 0){
                     inProcessLargeFileUploadedInJsFile = false;

@@ -419,7 +419,7 @@
 
         $.ajax({
             type: 'post',
-            url: '{{route('checkActivationCode')}}',
+            url: '{{route('register.checkActivationCode')}}',
             data: {
                 'phoneNum': phoneNum,
                 'activationCode': $("#activationCode").val()

@@ -37,11 +37,7 @@
         $('#successNotifiAlert').addClass('topAlert');
 
         $('#successNotifiAlert').css('background', _color);
-
-        if(_side == 'right')
-            $('#successNotifiAlert').addClass('rightAlert');
-        else
-            $('#successNotifiAlert').addClass('leftAlert');
+        $('#successNotifiAlert').addClass(_side == 'right' ? 'rightAlert' : 'leftAlert');
 
         setTimeout(function(){
             $('#successNotifiAlert').removeClass('topAlert');
