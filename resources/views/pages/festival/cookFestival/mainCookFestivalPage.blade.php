@@ -136,6 +136,34 @@
             margin: 0;
             margin-top: 5px;
         }
+
+        .commonBody.uploadStep{
+            width: 80%;
+            margin-left: auto;
+            position: absolute;
+            bottom: 35px;
+        }
+        .uploadStep .helloText{
+            font-size: 25px;
+            color: #707070;
+            margin-bottom: 5px;
+        }
+        .uploadStep .inputCol input{
+            font-size: 16px;
+            width: 300px;
+            padding: 10px 20px;
+        }
+        .uploadSec{
+            height: 50vh;
+            border-radius: 20px;
+            background: #fd7b5c69;
+            border: solid 2px #FD7B5C;
+        }
+        .uploadButton.orangeButton{
+            width: 300px;
+            margin-left: auto;
+            margin-right: 0;
+        }
         
         
         @media (max-width: 1100px) {
@@ -191,6 +219,22 @@
                 color: #3a3a3a;
                 font-weight: bold;
             }
+            .commonBody.uploadStep{
+                width: 100%;
+                padding: 0px 30px;
+                bottom: 30px;
+                position: absolute;
+            }
+            .uploadSec{
+                height: 40vh;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .commonBody .inputCol input{
+                width: 100%;
+            }
+
         }
     </style>
 </head>
@@ -205,7 +249,7 @@
             </a>
         </div>
         <div class="koochitaTitleSidePic">
-            <img src="{{URL::asset('images/festival/cookFestival/cookKoochitaTitle.png')}}" alt="عنوان کوچیتا">
+            <img src="{{URL::asset('images/festival/cookFestival/cookKoochitaTitleText.svg')}}" alt="عنوان کوچیتا">
         </div>
         <div class="sideMainPic"></div>
 
@@ -224,40 +268,48 @@
             </div>
         </div>
 
-{{--        @if(auth()->check())--}}
-        @if(false)
-            <div class="commonBody step2 hidden"></div>
+        @if(auth()->check())
+            <div class="commonBody uploadStep step2 hidden">
+                <div class="helloText">
+                    سلام {{auth()->user()->username}}
+                </div>
+                <div class="inputCol">
+                    <input type="text" placeholder="نام غذا">
+                </div>
+                <div class="uploadSec"></div>
+                <button class="uploadButton orangeButton">ارسال</button>
+            </div>
         @else
             <div class="commonBody step2 loginBody hidden">
-            <div class="topText">
-                <div class="bigText">پیش از شروع عضو شوید</div>
-                <div class="smallText">
-                    اگر عضو هستید
-                    <span class="loginButton" onclick="checkLogin(window.location.href)">وارد شوید</span>
-                </div>
-            </div>
-            <div class="registerBody">
-                <div class="inputCol">
-                    <input type="text" placeholder="نام">
-                </div>
-                <div class="inputCol">
-                    <input type="text" placeholder="نام خانوادگی">
-                </div>
-                <div class="inputCol">
-                    <input type="text" placeholder="شماره تلفن همراه">
-                </div>
-                <div class="inputCol">
-                    <input type="text" placeholder="نام کاربری">
+                <div class="topText">
+                    <div class="bigText">پیش از شروع عضو شوید</div>
                     <div class="smallText">
-                        دوستانتان شما را با این نام می شناسند
+                        اگر عضو هستید
+                        <span class="loginButton" onclick="checkLogin(window.location.href)">وارد شوید</span>
                     </div>
                 </div>
-                <div class="inputCol">
-                    <input type="text" placeholder="رمز عبور">
+                <div class="registerBody">
+                    <div class="inputCol">
+                        <input type="text" placeholder="نام">
+                    </div>
+                    <div class="inputCol">
+                        <input type="text" placeholder="نام خانوادگی">
+                    </div>
+                    <div class="inputCol">
+                        <input type="text" placeholder="شماره تلفن همراه">
+                    </div>
+                    <div class="inputCol">
+                        <input type="text" placeholder="نام کاربری">
+                        <div class="smallText">
+                            دوستانتان شما را با این نام می شناسند
+                        </div>
+                    </div>
+                    <div class="inputCol">
+                        <input type="text" placeholder="رمز عبور">
+                    </div>
+                    <button class="orangeButton">تایید</button>
                 </div>
-                <button class="orangeButton">تایید</button>
             </div>
-        </div>
         @endif
     </div>
 
