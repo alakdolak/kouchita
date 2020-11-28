@@ -306,10 +306,6 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 
     Route::post('registerAndLogin', array('as' => 'registerAndLogin', 'uses' => 'UserLoginController@registerAndLogin'));
 
-//    Route::post('registerWithPhone', array('as' => 'registerWithPhone', 'uses' => 'UserLoginController@registerWithPhone'));
-
-//    Route::post('registerAndLogin2', array('as' => 'registerAndLogin2', 'uses' => 'UserLoginController@registerAndLogin2'));
-
     Route::post('retrievePasByEmail', array('as' => 'retrievePasByEmail', 'uses' => 'UserLoginController@retrievePasByEmail'));
 
     Route::post('retrievePasByPhone', array('as' => 'retrievePasByPhone', 'uses' => 'UserLoginController@retrievePasByPhone'));
@@ -320,7 +316,7 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 
     Route::post('checkRegisterData', 'UserLoginController@checkRegisterData')->name('checkRegisterData');
 
-    Route::post('checkActivationCode', array('as' => 'checkActivationCode', 'uses' => 'UserLoginController@checkActivationCode'));
+    Route::post('checkActivationCode', 'UserLoginController@checkActivationCode')->name('register.checkActivationCode');
 
     Route::post('resendActivationCode', array('as' => 'resendActivationCode', 'uses' => 'UserLoginController@resendActivationCode'));
 
@@ -494,6 +490,8 @@ Route::group(array('middleware' => 'nothing'), function(){
 Route::group(['middleware' => ['throttle:30']], function(){
     Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile')->middleware('shareData');
 
+    Route::get('/profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');
+
     Route::post('/profile/getFollower', 'FollowerController@getFollower')->name('profile.getFollower');
 
     Route::post('/profile/getUserReviews', 'ProfileController@getUserReviews')->name('profile.getUserReviews');
@@ -503,8 +501,6 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::post('/profile/getUserPicsAndVideo', 'ProfileController@getUserPicsAndVideo')->name('profile.getUserPicsAndVideo');
 
     Route::post('/profile/getSafarnameh', 'ProfileController@getSafarnameh')->name('profile.getSafarnameh');
-
-    Route::post('/profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');
 
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
@@ -664,19 +660,35 @@ Route::group(array('middleware' => ['auth']), function(){
 });
 
 //festival
-Route::group(['middleware' => 'web'], function(){
+Route::group(['middleware' => ['web', 'shareData']], function(){
 
-    Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival')->middleware('shareData');
+    Route::group(['middleware' => 'nothing'], function(){
+        Route::get('/festival/cook', 'CookController@cookFestival')->name('festival.cook');
 
-    Route::get('/festival/cook', 'FestivalController@cookFestival')->name('festival.cook')->middleware('shareData');
+        Route::post('/festival/cook/checkFirstStepRegister', 'CookController@checkFirstStepRegister')->name('festival.cook.firstStepRegister');
 
-    Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main')->middleware('shareData');
+        Route::post('/festival/cook/fullRegister', 'CookController@fullRegister')->name('festival.cook.fullRegister');
 
-    Route::get('/festival/uploadWorks', 'FestivalController@festivalUploadWorksPage')->name('festival.uploadWorks')->middleware('shareData');
+        Route::group(['middleware' => ['auth']], function() {
+            Route::post('/festival/cook/uploadFile', 'CookController@uploadFile')->name('festival.cook.uploadFile');
+
+            Route::delete('/festival/cook/deleteFile', 'CookController@deleteFile')->name('festival.cook.deleteFile');
+
+            Route::post('/festival/cook/submitFiles', 'CookController@submitFiles')->name('festival.cook.submitFiles');
+        });
+    });
+
+    Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival');
+
+    Route::get('/festival/main', 'FestivalController@mainPageFestival')->name('festival.main');
+
+    Route::get('/festival/uploadWorks', 'FestivalController@festivalUploadWorksPage')->name('festival.uploadWorks');
 
     Route::post('/festival/getContent', 'FestivalController@getFestivalContent')->name('festival.getContent');
 
     Route::group(['middleware' => ['auth']], function(){
+        Route::get('/festival/getMyWorks', 'FestivalController@getMyWorks')->name('festival.getMyWorks');
+
         Route::post('/festival/uploadFile', 'FestivalController@uploadFile')->name('festival.uploadFile');
 
         Route::post('/festival/uploadFile/delete', 'FestivalController@deleteUploadFile')->name('festival.uploadFile.delete');
@@ -686,8 +698,6 @@ Route::group(['middleware' => 'web'], function(){
         Route::post('/festival/likeWork', 'FestivalController@likeWork')->name('festival.likeWork');
 
         Route::post('/festival/getMySurvey', 'FestivalController@getMySurvey')->name('festival.getMySurvey');
-
-        Route::post('/festival/getMyWorks', 'FestivalController@getMyWorks')->name('festival.getMyWorks');
     });
 });
 

@@ -5,12 +5,7 @@
 
     <div class="SpecfestivalContent hidden">
         <div class="userProfilePostsFiltrationContainer">
-            <div class="userProfilePostsFiltration questionSecTab">
-                <span class="active" onclick="changeBookMarkShowKind('main', 'photo', this)">عکس بخش اصلی</span>
-                <span onclick="changeBookMarkShowKind('mobile', 'photo', this)">عکس بخش فرعی</span>
-                <span onclick="changeBookMarkShowKind('main', 'video', this)">فیلم بخش اصلی</span>
-                <span onclick="changeBookMarkShowKind('mobile', 'video', this)">فیلم بخش فرعی</span>
-            </div>
+            <div id="subFestivalTopMenu" class="userProfilePostsFiltration questionSecTab"></div>
         </div>
 
         <div class="col-xs-12 notData emptyFestival hidden">
@@ -98,6 +93,7 @@
     var nowFestivalSection = 'main';
     var nowFestivalKind = 'photo';
 
+    var festivalsInformations = [];
     var nowShowFestivalCode = 0;
     var thisFestivalContent = [];
     var nowShowFestivalPicIndex = 0;
@@ -108,11 +104,9 @@
         let sfpl = getSafaranmehPlaceHolderRow(); // component.safarnamehRow.blade.php
         $('#mainFestivalContentList').html(sfpl+sfpl);
         $.ajax({
-            type: 'post',
+            type: 'GET',
             url: '{{route("profile.getMainFestival")}}',
-            data: {_token: '{{csrf_token()}}'},
             success: response => {
-                response = JSON.parse(response);
                 if(response.status == 'ok')
                     createMainFestivalContent(response.result);
             },
@@ -122,45 +116,63 @@
 
     function createMainFestivalContent(_result){
         let text = '';
-
+        festivalsInformations = _result;
         _result.map(item => {
-            text +=  '<div class="usersArticlesMainDiv">\n' +
-                    '   <div class="articleImgMainDiv">\n' +
-                    '       <div onClick="getFestivalMyWorks('+item.id+')">' +
-                    '           <img src="' + item.pic + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">' +
-                    '       </div>\n' +
-                    '   </div>\n' +
-                    '       <div class="articleDetailsMainDiv">\n'+
-                    '           <div class="articleTitleMainDiv">\n' +
-                    '               <div onClick="getFestivalMyWorks('+item.id+')" style="cursor: pointer;">' + item.name + '</div>\n' +
-                    '           </div>\n'+
-                    '           <div class="articleSummarizedContentMainDiv">\n' +
-                    '               <span>' + item.description + '</span>\n' +
-                    '           </div>\n'+
-                    // '           <div class="articleSpecificationsMainDiv">\n' +
-                    // '               <div class="articleDateMainDiv">' + _safarnameh.time + '</div>\n' +
-                    // '               <div class="articleCommentsMainDiv">0</div>\n' +
-                    // '               <div class="articleWriterMainDiv">'+ _safarnameh.username +'</div>\n' +
-                    // '               <div class="articleWatchListMainDiv">0</div>\n' +
-                    // '           </div>\n' +
-                    '       <a href="{{route("festival")}}" class="readSafarnamehButton"> صفحه ی فستیوال</a>' +
-                    '   </div>\n' +
-                    '</div>';
+            text +=  `<div class="usersArticlesMainDiv">
+                        <div class="articleImgMainDiv">
+                            <div onClick="getFestivalMyWorks(${item.id})">
+                                <img src="${item.pic}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                            </div>
+                        </div>
+                        <div class="articleDetailsMainDiv">
+                            <div class="articleTitleMainDiv">
+                                <div onClick="getFestivalMyWorks(${item.id})" style="cursor: pointer;">${item.name}</div>
+                            </div>
+                            <div class="articleSummarizedContentMainDiv">
+                                <span>${item.description}</span>
+                            </div>
+                            <a href="${item.pageUrl}" class="readSafarnamehButton"> صفحه ی فستیوال</a>
+                        </div>
+                    </div>`;
         });
 
         $('#mainFestivalContentList').html(text);
     }
 
     function getFestivalMyWorks(_id){
+        var subMenus = '';
+        festivalsInformations.map(fest => {
+            if(fest.id == _id)
+                fest.subs.map(sub => subMenus += `<span class="active" onclick="changeBookMarkShowKind('${item.name}', this)">${sub.name}</span>`);
+        });
+        $('#subFestivalTopMenu').html(subMenus);
+
         $("#mainFestivalContentList").addClass('hidden');
         $(".SpecfestivalContent").removeClass('hidden');
 
-        let selectedEleme = $('#mainFestivalContent').find('.questionSecTab .active')[0];
-        changeBookMarkShowKind(nowFestivalSection, nowFestivalKind, selectedEleme);
+        // let selectedEleme = $('#mainFestivalContent').find('.questionSecTab .active')[0];
+        // changeBookMarkShowKind(_id);
+
+        getFestivalContents(_id);
+    }
+
+    function getFestivalContents(_id){
+        $.ajax({
+            type: 'GET',
+            url: '{{route("festival.getMyWorks")}}',
+            success: function(response){
+                if(response.status == 'ok')
+                    createFestivalPictures(response.result);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
     }
 
 
-    function changeBookMarkShowKind(_sec, _kind, _elem){
+    function changeBookMarkShowKind(_id, _elem){
         $(_elem).parent().find('.active').removeClass('active');
         $(_elem).addClass('active');
 
@@ -171,23 +183,6 @@
         $('#mainFestivalContent').find('.notData').addClass('hidden');
         $('#festivalContentId').addClass('hidden');
 
-        $.ajax({
-            type: 'post',
-            url: '{{route("festival.getMyWorks")}}',
-            data:{
-                _token: '{{csrf_token()}}',
-                section: _sec,
-                kind: _kind
-            },
-            success: function(response){
-                response = JSON.parse(response);
-                if(response.status == 'ok')
-                    createFestivalPictures(response.result);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })
     }
 
     function createFestivalPictures(_result){

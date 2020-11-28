@@ -486,15 +486,19 @@ class ProfileController extends Controller {
 
     public function getMainFestival()
     {
-        $festivals = Festival::where('parent', 0)->get();
+        $festivals = Festival::where('parent', 0)->where('status', 1)->get();
         foreach ($festivals as $item){
             if($item->picture == null)
                 $item->pic = \URL::asset('images/mainPics/noData.png');
             else
                 $item->pic = \URL::asset('_images/festival/'.$item->picture);
+
+            if($item->description == null)
+                $item->description = '';
+
+            $item->subs = Festival::where('parent', $item->id)->get();
         }
-        echo json_encode(['status' => 'ok', 'result' => $festivals]);
-        return;
+        return response()->json(['status' => 'ok', 'result' => $festivals]);
     }
 
     public function getFestivalContent(Request $request)

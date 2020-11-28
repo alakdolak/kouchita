@@ -335,8 +335,8 @@
 
                         for(i = 0; i < response.length; i++) {
                             newElement += '<div onclick="setCityNameInAccountInfo(\'' + response[i].cityName + '\', \'' + response[i].id + '\')"><div class="icons location spIcons"></div>' +
-                                '<p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">شهر ' + response[i].cityName + '</p>' +
-                                '<p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].stateName + '</p></div>';
+                                            '<p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">شهر ' + response[i].cityName + '</p>' +
+                                            '<p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].stateName + '</p></div>';
                         }
                         setResultToGlobalSearch(newElement);
                     }

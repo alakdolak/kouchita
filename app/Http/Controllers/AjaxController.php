@@ -218,9 +218,16 @@ class AjaxController extends Controller {
     public function searchPlace() {
         $places = [];
         $value = $_GET['value'];
-        $kindPlace = Place::whereIn('id', [1, 3, 4, 6, 12])->get();
+        if(isset($_GET['kindPlaceId']))
+            $kindPlace = Place::whereIn('id', [$_GET['kindPlaceId']])->get();
+        else
+            $kindPlace = Place::whereIn('id', [1, 3, 4, 6, 12])->get();
+
         foreach ($kindPlace as $kind){
-            $pds = \DB::select("SELECT `id`, `name`, `C`, `D`, `cityId` FROM $kind->tableName WHERE `name` LIKE '%".$value."%'");
+            if($kind->id == 11 || $kind->id == 10)
+                $pds = \DB::select("SELECT `id`, `name`, `cityId` FROM $kind->tableName WHERE `name` LIKE '%".$value."%'");
+            else
+                $pds = \DB::select("SELECT `id`, `name`, `C`, `D`, `cityId` FROM $kind->tableName WHERE `name` LIKE '%".$value."%'");
 
             foreach ($pds as $item){
                 $city = Cities::find($item->cityId);

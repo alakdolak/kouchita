@@ -413,7 +413,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         if (name.trim().length > 0 && emailPhone.trim().length > 0 && password.trim().length > 0) {
 
             // let kind = 'phone';
-            // let phone = fixNumbers(emailPhone);
+            // let phone = convertNumberToEn(emailPhone);
             // if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
             //     $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
             //     return;
@@ -421,7 +421,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
             let kind = 'email';
             if (!emailPhone.includes('@')) {
-                let phone = fixNumbers(emailPhone);
+                let phone = convertNumberToEn(emailPhone);
                 if (!(phone.trim().length == 11 && phone[0] == 0 && phone[1] == 9)) {
                     $('.registerErr').html('شماره تماس خود را به درستی وارد نمایید.');
                     return;
@@ -551,7 +551,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
     function checkInputPhoneRegister() {
         let phone = $('#emailPhone_register').val();
-        phone = fixNumbers(phone);
+        phone = convertNumberToEn(phone);
         $.ajax({
             type: 'post',
             url: '{{route('checkPhoneNum')}}',
@@ -603,7 +603,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         else
             phoneNum = $('#emailPhone_register').val();
 
-        phoneNum = fixNumbers(phoneNum);
+        phoneNum = convertNumberToEn(phoneNum);
 
         $.ajax({
             type: 'post',
@@ -645,9 +645,9 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         let actCode = $('#activationCode').val();
         let inviteCode = $('#invitationCode').val();
 
-        phone = fixNumbers(phone);
-        actCode = fixNumbers(actCode);
-        inviteCode = fixNumbers(inviteCode);
+        phone = convertNumberToEn(phone);
+        actCode = convertNumberToEn(actCode);
+        inviteCode = convertNumberToEn(inviteCode);
         $(".phoneRegisterErr").html('');
 
         if (actCode.trim().length > 2) {
@@ -690,14 +690,14 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         let phoneNum = $('#' + _phoneId).val();
         let code = $('#' + _codeId).val();
 
-        phoneNum = fixNumbers(phoneNum);
-        code = fixNumbers(code);
+        phoneNum = convertNumberToEn(phoneNum);
+        code = convertNumberToEn(code);
 
         if (code.trim().length > 0) {
             openLoading();
             $.ajax({
                 type: 'post',
-                url: '{{route('checkActivationCode')}}',
+                url: '{{route('register.checkActivationCode')}}',
                 data: {
                     'phoneNum': phoneNum,
                     'activationCode': code
@@ -707,7 +707,8 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                     if (response == "ok") {
                         if (typeof _callback === 'function')
                             _callback();
-                    } else
+                    }
+                    else
                         $(".loginErrActivationCode").empty().append('{{__('کد وارد شده معتبر نمی باشد')}}');
                 },
                 error: function (err) {
@@ -854,7 +855,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
 
     function sendForgetPassPhone() {
         let phoneNum = $('#phoneForgetPass').val();
-        phoneNum = fixNumbers(phoneNum);
+        phoneNum = convertNumberToEn(phoneNum);
 
         if (phoneNum.trim().length == 11 && phoneNum[0] == 0 && phoneNum[1] == 9) {
             openLoading();
@@ -918,7 +919,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
         let newPass = $('#newPassword').val();
         let phone = $('#phoneForgetPass').val();
         let code = $('#activationCodeForgetPass').val();
-        phone = fixNumbers(phone);
+        phone = convertNumberToEn(phone);
         if (newPass.trim().length > 0) {
             openLoading();
             $.ajax({
@@ -1015,14 +1016,4 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
             })
         }
     }
-
-    function fixNumbers(str) {
-        let persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
-        let arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
-        if (typeof str === 'string') {
-            for (var i = 0; i < 10; i++)
-                str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
-        }
-        return str;
-    };
 </script>
