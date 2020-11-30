@@ -927,7 +927,7 @@
         <div class="modal-dialog modal-lg" style="width: 95%; margin-top: 5px">
             <div class="modal-content">
                 <div class="modal-body" style="direction: rtl">
-                    <div style="width: 100%; height: calc(90vh - 100px); position: relative">
+                    <div style="width: 100%; height: calc(80vh - 100px); position: relative">
                         <div id="mapDiv" style="width: 100%; height: 100%"></div>
                         <div class="myLocationIcon" onclick="getMyLocation()">
                             محل من

@@ -20,7 +20,7 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 114;
+        $fileVersions = 115;
 
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
