@@ -67,8 +67,8 @@
     </div>
 </div>
 
-<script defer type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet.js')}}"></script>
-<script defer type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet-wms-header.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet-wms-header.js')}}"></script>
 
 <script>
     let mapDivs = $('#mapDivSample').html();
@@ -142,16 +142,12 @@
         let fk = Object.keys(mapData);
         for (let x of fk) {
             mapData[x].forEach(item => {
-                let iconMap = null;
-                if(mapIcon[x])
-                    iconMap = {
-                        iconUrl: mapIcon[x],
-                        iconSize: [30, 35],
-                    };
-                
                 var marker = L.marker([parseFloat(item['C']), parseFloat(item['D'])], {
                     title: item['name'],
-                    icon: L.icon(iconMap)
+                    icon: L.icon({
+                        iconUrl: mapIcon[x],
+                        iconSize: [30, 35],
+                    })
                 }).bindPopup(item['name']).on('click', () => openMapMarkerDescriptionInBlade(x, item['id']));
                 var mapMarkerInMap= marker.addTo(mainMapInBlade);
 
