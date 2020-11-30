@@ -17,10 +17,42 @@
     <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css?v=1')}}">
     <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css?v=1')}}">
 
+    <link rel="stylesheet" href="{{URL::asset('packages/leaflet/leaflet.css')}}">
 
     @if(app()->getLocale() == 'en')
         <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/addPlaceByUser.css?v=1')}}">
     @endif
+
+    <style>
+        .myLocationIcon{
+            background: var(--koochita-yellow);
+            color: white;
+            width: 60px;
+            display: flex;
+            height: 60px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            cursor: pointer;
+            z-index: 999;
+            animation: glowing 2s infinite;
+        }
+
+        @keyframes glowing {
+            0% {
+                background: #ffdda0;
+            }
+            50%{
+                background: var(--koochita-yellow);
+            }
+            100% {
+                background: #ffdda0;
+            }
+        }
+    </style>
 
 @stop
 
@@ -891,15 +923,18 @@
         </div>
     </div>
 
-
     <div class="modal fade" id="mapModal">
         <div class="modal-dialog modal-lg" style="width: 95%; margin-top: 5px">
-            <div class="modal-content" style="height: 97vh;">
+            <div class="modal-content">
                 <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: calc(100vh - 100px); background-color: red"></div>
+                    <div style="width: 100%; height: calc(90vh - 100px); position: relative">
+                        <div id="mapDiv" style="width: 100%; height: 100%"></div>
+                        <div class="myLocationIcon" onclick="getMyLocation()">
+                            محل من
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button class="btn btn-success" data-dismiss="modal">
                         {{__('تایید')}}
@@ -943,6 +978,9 @@
 
     <script src="{{URL::asset('packages/dropzone/dropzone.js')}}"></script>
     <script src="{{URL::asset('packages/dropzone/dropzone-amd-module.js')}}"></script>
+
+    <script type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet-wms-header.js')}}"></script>
 
     <script>
         $(document).ready(function() {
@@ -1740,66 +1778,58 @@
     </script>
 
     <script>
-        let marker = 0;
-        let map;
-        function init() {
-            var mapOptions = {
-                center: {lat: 32.427908, lng: 53.688046},
-                zoom: 5,
-                styles: [
+        let marker = null;
+        let map = null;
+        function initMap() {
+            // var mapOptions = {
+            //     center: {lat: 32.427908, lng: 53.688046},
+            //     zoom: 5,
+            //     styles: [
+            //         {
+            //             "featureType": "landscape",
+            //             "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+            //         }, {
+            //             "featureType": "road.highway",
+            //             "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
+            //         }, {
+            //             "featureType": "road.arterial",
+            //             "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+            //         }, {
+            //             "featureType": "road.local",
+            //             "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
+            //         }, {
+            //             "featureType": "water",
+            //             "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
+            //         }]
+            // };
+            //
+            // map = document.getElementById('map');
+            // map = new google.maps.Map(map, mapOptions);
+            // google.maps.event.addListener(map, 'click', function(event) {
+            //     getLat(event.latLng);
+            // });
+
+            if(map == null) {
+                map = L.map("mapDiv", {
+                    minZoom: 1,
+                    maxZoom: 20,
+                    crs: L.CRS.EPSG3857,
+                    center: [32.427908, 53.688046],
+                    zoom: 5
+                }).on('click', e => getLat(e.latlng));
+
+                L.TileLayer.wmsHeader(
+                    "https://map.ir/shiveh",
                     {
-                        "featureType": "landscape",
-                        "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-                    }, {
-                        "featureType": "road.highway",
-                        "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
-                    }, {
-                        "featureType": "road.arterial",
-                        "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-                    }, {
-                        "featureType": "road.local",
-                        "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
-                    }, {
-                        "featureType": "water",
-                        "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
-                    }]
-            };
+                        layers: "Shiveh:Shiveh",
+                        format: "image/png",
+                        minZoom: 1,
+                        maxZoom: 20
+                    },
+                    [{header: "x-api-key", value: window.mappIrToken}]
+                ).addTo(map);
+            }
 
-            map = document.getElementById('map');
-            map = new google.maps.Map(map, mapOptions);
-
-            google.maps.event.addListener(map, 'click', function(event) {
-                getLat(event.latLng);
-            });
-
-            setNewMarker();
-        }
-
-        function getLat(location){
-            if(marker != 0)
-                marker.setMap(null);
-            marker = new google.maps.Marker({
-                position: location,
-                map: map,
-            });
-
-            document.getElementById('lat').value = marker.getPosition().lat();
-            document.getElementById('lng').value = marker.getPosition().lng();
-        }
-
-        function setNewMarker(){
-            if(marker != 0)
-                marker.setMap(null);
-            let lat = document.getElementById('lat').value;
-            let lng = document.getElementById('lng').value;
-
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map,
-            });
-        }
-
-        function openMap(){
             let lat = 0;
             let lng = 0;
             let zoom = 10;
@@ -1810,9 +1840,9 @@
             if(cityId != 0 && cityId.match(numbers)){
                 for(city of cities){
                     if(city['id'] == cityId){
-                       lat = city['x'];
-                       lng = city['y'];
-                       zoom = 10;
+                        lat = city['x'];
+                        lng = city['y'];
+                        zoom = 10;
                         break;
                     }
                 }
@@ -1831,16 +1861,39 @@
                 zoom = 8;
             }
 
-            if(lat != 0 && lng != 0){
-                map.setZoom(zoom);
-                map.panTo({
-                    lat: parseFloat(lat),
-                    lng: parseFloat(lng)
-                });
-            }
+            if(lat != 0 && lng != 0)
+                map.setView([lat, lng], zoom);
 
-            $('#mapModal').modal('show');
+            if($('#lng').val() != 0 && $('#lat').val())
+                setNewMarker();
         }
+
+        function getLat(_location){
+            $('#lat').val(_location.lat);
+            $('#lng').val(_location.lng);
+            setNewMarker();
+        }
+
+        function setNewMarker(){
+            if(marker != null)
+                map.removeLayer(marker);
+            var latLng = [$('#lat').val(), $('#lng').val()];
+            marker = L.marker(latLng).addTo(map);
+            map.setView(latLng, 15);
+        }
+
+        function openMap(){
+            $('#mapModal').modal('show');
+            setTimeout(initMap, 500);
+        }
+
+        function getMyLocation(){
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(position => getLat({lat: position.coords.latitude, lng: position.coords.longitude}));
+            else
+                console.log("Geolocation is not supported by this browser.");
+        }
+
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
+
 @stop

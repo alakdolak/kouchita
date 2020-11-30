@@ -277,23 +277,18 @@ class CityController extends Controller
             switch ($key){
                 case 'amaken':
                     $kindPlace = Place::find(1);
-                    $kP = 1;
                     break;
                 case 'hotels':
                     $kindPlace = Place::find(4);
-                    $kP = 4;
                     break;
                 case 'restaurant':
                     $kindPlace = Place::find(3);
-                    $kP = 3;
                     break;
                 case 'majara':
                     $kindPlace = Place::find(6);
-                    $kP = 6;
                     break;
                 case 'boomgardy':
                     $kindPlace = Place::find(12);
-                    $kP = 12;
                     break;
             }
             foreach ($plac as $item){
@@ -307,23 +302,13 @@ class CityController extends Controller
                 $item->pic = null;
                 if(is_file($location . '/f-' . $item->picNumber))
                     $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $item->picNumber);
-                else{
-                    $placePics = PlacePic::where('placeId', $item->id)->where('kindPlaceId', $kP)->get();
-                    foreach ($placePics as $pp){
-                        if(is_file($location . '/f-' . $pp->picNumber)) {
-                            $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $pp->picNumber);
-                            $getPic = true;
-                            break;
-                        }
-                    }
-                }
                 if($item->pic == null)
                     $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
 
-                $item->url = route('placeDetails', ['kindPlaceId' => $kP, 'placeId' => $item->id]);
+                $item->url = route('placeDetails', ['kindPlaceId' => $kindPlace->id, 'placeId' => $item->id]);
                 $cit = Cities::find($item->cityId);
                 $item->cityName = $cit->name;
-                $item->stateName = State::whereId($cit->stateId)->name;
+                $item->stateName = $cit->getState->name;
                 $item->rate = $item->fullRate;
                 if($item->rate == 0)
                     $item->rate = 2;
@@ -334,6 +319,7 @@ class CityController extends Controller
                 $count++;
             }
         }
+
         if($count > 0) {
             $C /= $count;
             $D /= $count;
@@ -347,8 +333,7 @@ class CityController extends Controller
 
         $centerPlace = null;
 
-        echo json_encode(['map' => $map, 'allPlaces' => $allPlaces, 'centerPlace' => $centerPlace]);
-        return;
+        return response()->json(['map' => $map, 'allPlaces' => $allPlaces, 'centerPlace' => $centerPlace]);
     }
 
     private function getCityReviews($kind, $id, $take, $notIn = [0]){

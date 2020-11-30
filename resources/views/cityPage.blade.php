@@ -626,7 +626,6 @@
                 id: '{{$place->id}}'
             },
             success: function(response){
-                response = JSON.parse(response);
                 let map = response.map;
                 let allPlaces = response.allPlaces;
 
@@ -635,7 +634,7 @@
                     y: map.D
                 };
 
-                createMap('cpMap', center, allPlaces);
+                createMapInBlade('cpMap', center, allPlaces);
             }
         })
     }

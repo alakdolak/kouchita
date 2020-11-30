@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{URL::asset('packages/leaflet/leaflet.css')}}">
 
 <div id="mapDivSample" style="display: none">
 
@@ -45,32 +46,35 @@
     <div id="mapSection" style="width: 100%; height: 100%"></div>
 
     <div class="mapMenuList">
-        <span class="mapIconsCommon boomgardyMapIcon" title="{{__('بوم گردی ها')}}" onclick="toggleIconInMap(this, 'boomgardy')">
+        <span class="mapIconsCommon boomgardyMapIcon" title="{{__('بوم گردی ها')}}" onclick="toggleIconInMapInBlade(this, 'boomgardy')">
             <span class="mapIconIcon boomIcon"></span>
         </span>
-        <span class="mapIconsCommon hotelMapIcon" title="{{__('هتل ها')}}" onclick="toggleIconInMap(this, 'hotels')">
+        <span class="mapIconsCommon hotelMapIcon" title="{{__('هتل ها')}}" onclick="toggleIconInMapInBlade(this, 'hotels')">
             <span class="mapIconIcon hotelIcon"></span>
         </span>
-        <span class="mapIconsCommon amakenMapIcon" title="{{__('جاذبه ها')}}" onclick="toggleIconInMap(this, 'amaken')">
+        <span class="mapIconsCommon amakenMapIcon" title="{{__('جاذبه ها')}}" onclick="toggleIconInMapInBlade(this, 'amaken')">
             <span class="mapIconIcon atraction"></span>
         </span>
-        <span class="mapIconsCommon restaurantMapIcon" title="{{__('رستوران ها')}}" onclick="toggleIconInMap(this, 'restaurant')">
+        <span class="mapIconsCommon restaurantMapIcon" title="{{__('رستوران ها')}}" onclick="toggleIconInMapInBlade(this, 'restaurant')">
             <span class="mapIconIcon restaurantIcon"></span>
         </span>
-        <span class="mapIconsCommon majaraMapIcon" title="{{__('طبیعت گردی ها')}}" onclick="toggleIconInMap(this, 'majara')">
+        <span class="mapIconsCommon majaraMapIcon" title="{{__('طبیعت گردی ها')}}" onclick="toggleIconInMapInBlade(this, 'majara')">
             <span class="mapIconIcon majaraIcon"></span>
         </span>
-        <span class="mapIconsCommon moreInfoMapIcon" title="{{__('اطلاعات بیشتر')}}" onclick="toggleIconInMap(this, 'moreInfo')">
+        <span class="mapIconsCommon moreInfoMapIcon" title="{{__('اطلاعات بیشتر')}}" onclick="toggleIconInMapInBlade(this, 'moreInfo')">
             <span class="mapIconIcon moreInfoIcon">i</span>
         </span>
     </div>
 </div>
 
+<script defer type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet.js')}}"></script>
+<script defer type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet-wms-header.js')}}"></script>
+
 <script>
     let mapDivs = $('#mapDivSample').html();
     $('#mapDivSample').remove();
 
-    let mainMap;
+    let mainMapInBlade;
     let mapId;
     let mapData;
     let mapCenter;
@@ -93,59 +97,96 @@
         moreInfo: '{{URL::asset('images/mapIcon/info.png')}}',
     };
 
-    function createMap(_id, _center, _data, _forceCenter = false) {
+    function createMapInBlade(_id, _center, _data, _forceCenter = false) {
         mapId = _id;
         mapData = _data;
         mapCenter = _center;
         forceCenter = _forceCenter;
         $('#' + mapId).html(mapDivs);
-        initMap();
+        initMapInBlade();
     }
 
-    function initMap() {
-        var mapOptions = {
-            center: new google.maps.LatLng(mapCenter['x'],  mapCenter['y']),
-            zoom: 15,
-            styles: window.googleMapStyle
-        };
+    function initMapInBlade() {
+        // var mapOptions = {
+        //     center: new google.maps.LatLng(mapCenter['x'],  mapCenter['y']),
+        //     zoom: 15,
+        //     styles: window.googleMapStyle
+        // };
+        // var mapElementSmall = document.getElementById('mapSection');
+        // mainMapInBlade = new google.maps.Map(mapElementSmall, mapOptions);
+        // var bounds = new google.maps.LatLngBounds();
 
-        var mapElementSmall = document.getElementById('mapSection');
-        mainMap = new google.maps.Map(mapElementSmall, mapOptions);
-
-        var bounds = new google.maps.LatLngBounds();
+        mainMapInBlade = L.map("mapSection", {
+            minZoom: 1,
+            maxZoom: 20,
+            crs: L.CRS.EPSG3857,
+            center: [mapCenter['x'],  mapCenter['y']],
+            zoom: 15
+        });
+        L.TileLayer.wmsHeader(
+            "https://map.ir/shiveh",
+            {
+                layers: "Shiveh:Shiveh",
+                format: "image/png",
+                minZoom: 1,
+                maxZoom: 20
+            },
+            [
+                {
+                    header: "x-api-key",
+                    value: window.mappIrToken
+                }
+            ]
+        ).addTo(mainMapInBlade);
+        
         let fk = Object.keys(mapData);
         for (let x of fk) {
             mapData[x].forEach(item => {
                 let iconMap = null;
                 if(mapIcon[x])
                     iconMap = {
-                        url: mapIcon[x],
-                        scaledSize: new google.maps.Size(30, 35), // scaled size
+                        iconUrl: mapIcon[x],
+                        iconSize: [30, 35],
                     };
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(item['C'], item['D']),
-                    icon: iconMap,
-                    map: mainMap,
+                
+                var marker = L.marker([parseFloat(item['C']), parseFloat(item['D'])], {
                     title: item['name'],
-                    url: item['url'],
-                    id: item['id']
-                }).addListener('click', function () {
-                        openMapMarkerDescription(x, this.id);
-                    });
-                mapMarker[x].push(marker);
+                    icon: L.icon(iconMap)
+                }).bindPopup(item['name']).on('click', () => openMapMarkerDescriptionInBlade(x, item['id']));
+                var mapMarkerInMap= marker.addTo(mainMapInBlade);
 
-                loc = new google.maps.LatLng(item['C'], item['D']);
-                bounds.extend(loc);
+                mapMarker[x].push({
+                    markerInfo: marker,
+                    mapMarkerInMap: mapMarkerInMap,
+                });
+                
+                // if(mapIcon[x])
+                //     iconMap = {
+                //         url: mapIcon[x],
+                //         scaledSize: new google.maps.Size(30, 35), // scaled size
+                //     };
+                // var marker = new google.maps.Marker({
+                //     position: new google.maps.LatLng(item['C'], item['D']),
+                //     icon: iconMap,
+                //     map: mainMapInBlade,
+                //     title: item['name'],
+                //     url: item['url'],
+                //     id: item['id']
+                // }).addListener('click', function (){ openMapMarkerDescriptionInBlade(x, this.id) });
+                // mapMarker[x].push(marker);
+                // loc = new google.maps.LatLng(item['C'], item['D']);
+                // bounds.extend(loc);
+                
             });
         }
+        
         if(!forceCenter) {
-            mainMap.fitBounds(bounds);
-            mainMap.panToBounds(bounds);
+            // mainMapInBlade.fitBounds(bounds);
+            // mainMapInBlade.panToBounds(bounds);
         }
     }
 
-    function openMapMarkerDescription(_kind, _id){
+    function openMapMarkerDescriptionInBlade(_kind, _id){
 
         let place = null;
         mapData[_kind].forEach(item => {
@@ -168,25 +209,28 @@
         $('#mapMoreInfoPlace').addClass('showMapMoreInfo');
     }
 
-    function toggleIconInMap(_element, _kind) {
+    function toggleIconInMapInBlade(_element, _kind) {
         $(_element).toggleClass('offMapIcons');
-
-        if($(_element).hasClass('offMapIcons'))
-            setInMap(0, mapMarker[_kind]);
-        else
-            setInMap(1, mapMarker[_kind]);
+        var status = $(_element).hasClass('offMapIcons') ? 0 : 1;
+        setInMapInBlade(status, mapMarker[_kind]);
     }
 
-    function setInMap(isSet, marker) {
-        if (isSet == 1) {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['j'].setMap(mainMap)
-        } else {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['j'].setMap(null)
-        }
-
+    function setInMapInBlade(isSet, marker) {
+        marker.map(mar => {
+            if(isSet == 1)
+                mar.mapMarkerInMap = mar.markerInfo.addTo(mainMapInBlade);
+            else
+                mainMapInBlade.removeLayer(mar.mapMarkerInMap);
+        });
+        
+        // if (isSet == 1) {
+        //     for (var i = 0; i < marker.length; i++)
+        //         marker[i]['j'].setMap(mainMap)
+        // } else {
+        //     for (var i = 0; i < marker.length; i++)
+        //         marker[i]['j'].setMap(null)
+        // }
     }
 </script>
 
-<script async src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>
+{{--<script async src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>--}}

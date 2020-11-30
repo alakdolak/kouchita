@@ -5,6 +5,11 @@
     <title>اطراف من</title>
     <link rel="stylesheet" href="{{URL::asset('css/pages/myLocation.css?v='.$fileVersions)}}">
 
+
+{{--    <link rel="stylesheet" href="{{URL::asset('packages/map.ir/css/mapp.min.css')}}">--}}
+{{--    <link rel="stylesheet" href="{{URL::asset('packages/map.ir/css/fa/style.css')}}">--}}
+    <link rel="stylesheet" href="{{URL::asset('packages/leaflet/leaflet.css')}}">
+
 </head>
 <body>
     @include('general.forAllPages')
@@ -67,7 +72,13 @@
     </div>
 
     @include('layouts.footer.layoutFooter')
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>
+    {{--    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0"></script>--}}
+
+{{--    <script type="text/javascript" src="{{URL::asset('packages/map.ir/js/mapp.env.js')}}"></script>--}}
+{{--    <script type="text/javascript" src="{{URL::asset('packages/map.ir/js/mapp.min.js')}}"></script>--}}
+
+    <script type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('packages/leaflet/leaflet-wms-header.js')}}"></script>
 
     <script>
         var mobileListIsFull = false;
@@ -234,46 +245,96 @@
         }
 
         function initMap(){
-            var mapOptions = {
-                center: new google.maps.LatLng(32.42056639964595, 54.00537109375),
-                zoom: 7,
-                styles: window.googleMapStyle,
-                gestureHandling: 'greedy',
-            };
-            var mapElementSmall = document.getElementById('map');
-            mainMap = new google.maps.Map(mapElementSmall, mapOptions);
 
-            getMyLocation();
-            google.maps.event.addListener(mainMap, 'click', event => {
+            mainMap = L.map("map", {
+                minZoom: 1,
+                maxZoom: 20,
+                crs: L.CRS.EPSG3857,
+                center: [32.42056639964595, 54.00537109375],
+                zoom: 6
+            }).on('click', e => {
                 if(canChooseFromMap) {
                     $('.nearName').text('محل روی نقشه');
-                    setMarkerToMap(event.latLng.lat(), event.latLng.lng());
+                    setMarkerToMap(e.latlng.lat, e.latlng.lng);
                 }
             });
+            L.TileLayer.wmsHeader(
+                "https://map.ir/shiveh",
+                {
+                    layers: "Shiveh:Shiveh",
+                    format: "image/png",
+                    minZoom: 1,
+                    maxZoom: 20
+                },
+                [
+                    {
+                        header: "x-api-key",
+                        value: window.mappIrToken
+                    }
+                ]
+            ).addTo(mainMap);
+            getMyLocation();
+
+            // mainMap = new Mapp({
+            //     element: '#map',
+            //     presets: {
+            //         latlng: {
+            //             lat: 32,
+            //             lng: 52,
+            //         },
+            //         zoom: 6,
+            //     },
+            //     apiKey: window.mappIrToken
+            // });
+            // mainMap.addLayers();
+
+            // var mapOptions = {
+            //     center: new google.maps.LatLng(32.42056639964595, 54.00537109375),
+            //     zoom: 7,
+            //     styles: window.googleMapStyle,
+            //     gestureHandling: 'greedy',
+            // };
+            // var mapElementSmall = document.getElementById('map');
+            // mainMap = new google.maps.Map(mapElementSmall, mapOptions);
+            //
+            // getMyLocation();
+            // google.maps.event.addListener(mainMap, 'click', event => {
+            //     if(canChooseFromMap) {
+            //         $('.nearName').text('محل روی نقشه');
+            //         setMarkerToMap(event.latLng.lat(), event.latLng.lng());
+            //     }
+            // });
         }
 
         function setMarkerToMap(_lat, _lng, _id = 0, _name = ''){
             _lat = parseFloat(_lat);
             _lng = parseFloat(_lng);
+
             if(yourPosition != 0)
-                yourPosition.setMap(null);
-            yourPosition = new google.maps.Marker({
-                position:  new google.maps.LatLng(_lat, _lng),
-                map: mainMap,
-            });
+                mainMap.removeLayer(yourPosition);
+                // yourPosition.setMap(null);
 
             if(_name != '')
                 $('.nearName').text(_name);
 
             selectedPlaceId = _id;
-
-            mainMap.setCenter({
-                lat : _lat,
-                lng : _lng
-            });
-            mainMap.setZoom(16);
             canChooseFromMap = false;
             markerLocation = {lat: _lat, lng: _lng};
+
+            yourPosition = L.marker([markerLocation.lat, markerLocation.lng]).addTo(mainMap);
+            mainMap.setView([markerLocation.lat, markerLocation.lng], 16);
+
+            // google map
+            // yourPosition = new google.maps.Marker({
+            //     position:  new google.maps.LatLng(_lat, _lng),
+            //     map: mainMap,
+            // });
+            // mainMap.setCenter({
+            //     lat : _lat,
+            //     lng : _lng
+            // });
+            // mainMap.setZoom(16);
+
             getPlacesWithLocation();
         }
 
@@ -373,7 +434,10 @@
         function createListElement(_result){
             var elements = '';
 
-            nearPlaces.map(place => place.marker.setMap(null));
+            nearPlaces.map(place => {
+                if(place.marker)
+                    mainMap.removeLayer(place.marker)
+            });
 
             $('.typeRow .body').empty();
             $('.selectedPlace').empty();
@@ -381,7 +445,10 @@
             $('.mobileListContent').scrollTop();
             $('.pcPlaceList').scrollTop();
 
-            _result.map(item => {
+
+            nearPlaces = _result;
+
+            nearPlaces.map(item => {
                 text = `<div class="placeCard listPlaceCard_${item.kindPlaceId}_${item.id}" onclick="setMarkerToMap(${item.C}, ${item.D}, ${item.id}, '${item.name}')">
                             <div class="fullyCenterContent img">
                                 <img src="${item.pic}" class="resizeImgClass" onload="fitThisImg(this)">
@@ -401,21 +468,28 @@
                 if(selectedPlaceId == item.id)
                     $('.selectedPlace').html(text);
                 else {
-                    item.marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(item.C, item.D),
-                        map: mainMap,
-                        lat: item.C,
-                        lng: item.D,
+                    item.markerInfo = L.marker([item.C, item.D], {
                         title: item.name,
-                        id: item.id,
-                        icon: {
-                            url: filterButtons[item.kindPlaceId].mapIcon,
-                            scaledSize: new google.maps.Size(30, 35), // scaled size
-                        },
-                    });
-                    item.marker.addListener('click', function () {
-                        setMarkerToMap(this.lat, this.lng, this.id, this.title)
-                    });
+                        icon: L.icon({
+                            iconUrl: filterButtons[item.kindPlaceId].mapIcon,
+                            iconSize: [30, 35], // size of the icon
+                        })
+                    }).bindPopup(item.name).on('click', () => setMarkerToMap(item.C, item.D, item.id, item.name));
+                    // item.marker = new google.maps.Marker({
+                    //     position: new google.maps.LatLng(item.C, item.D),
+                    //     map: mainMap,
+                    //     lat: item.C,
+                    //     lng: item.D,
+                    //     title: item.name,
+                    //     id: item.id,
+                    //     icon: {
+                    //         url: filterButtons[item.kindPlaceId].mapIcon,
+                    //         scaledSize: new google.maps.Size(30, 35), // scaled size
+                    //     },
+                    // });
+                    // item.marker.addListener('click', function () {
+                    //     setMarkerToMap(this.lat, this.lng, this.id, this.title)
+                    // });
                 }
 
                 $(`#mobileResultRow_${item.kindPlaceId}`).find('.body').append(text);
@@ -428,23 +502,23 @@
                     $(`#mobileResultRow_${kindPlaceId}`).removeClass('hidden');
             }
 
-            nearPlaces = _result;
-
             $('.pcPlaceList').html(elements);
             $('.placeListLoading').addClass('hidden');
-            togglePlaces();
             toggleMobileListNearPlace("middle");
+            togglePlaces();
         }
 
         function togglePlaces(){
             nearPlaces.map(item =>{
                 if(dontShowfilters.indexOf(item.kindPlaceId) == -1){
-                    item.marker.setMap(mainMap);
+                    if(item.markerInfo)
+                        item.marker = item.markerInfo.addTo(mainMap);
                     $(`#mobileResultRow_${item.kindPlaceId}`).removeClass('hidden');
                     $(`.listPlaceCard_${item.kindPlaceId}_${item.id}`).removeClass('hidden');
                 }
                 else{
-                    item.marker.setMap(null);
+                    if(item.marker)
+                        mainMap.removeLayer(item.marker);
                     $(`#mobileResultRow_${item.kindPlaceId}`).addClass('hidden');
                     $(`.listPlaceCard_${item.kindPlaceId}_${item.id}`).addClass('hidden');
                 }
