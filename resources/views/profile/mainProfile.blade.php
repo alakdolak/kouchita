@@ -626,6 +626,12 @@
                 $('#myMenuMoreTab').addClass('hidden');
         });
 
+        $(window).on('ready', () => {
+            autosize(document.getElementsByClassName("inputBoxInputSearch"));
+            autosize(document.getElementsByClassName("inputBoxInputAnswer"));
+            autosize(document.getElementsByClassName("inputBoxInputComment"));
+        });
+
         function showFullUserInfoInMobile(_elems) {
             $(_elems).parent().toggleClass('show');
         }
@@ -657,7 +663,6 @@
                         $('.followingNumber').text(response.followingNumber);
                     }
                 },
-                error: err => console.log(err),
             })
         }
 
@@ -771,11 +776,15 @@
                 chooseFromMobileMenuTab('bookMark', $('#myMenuMoreTabBookMark'));
                 getProfileBookMarks(); // in profile.innerParts.UserBookMarks
             }
-            else if(_kind === 'festival') {
+            else if(_kind.search('festival') > -1) {
                 $('#festivalTab').addClass('active');
                 $('#festivalBody').removeClass('hidden');
                 chooseFromMobileMenuTab('festival', $('#myMenuMoreFestivalMark'));
                 getMainFestival(); // in profile.innerParts.userFestivalInner.blade.php
+
+                var showFestival = _kind.split('id=');
+                if(showFestival[1])
+                    getFestivalMyWorks(showFestival[1]);
             }
         }
 
@@ -919,18 +928,6 @@
             openLoading();
             startProfileCropper('circle', 1);
         }
-
-        var url = new URL(location.href);
-        if(url.hash === '')
-            changePages('review');
-        else if(url.hash != '')
-            changePages(url.hash.replace("#", ""));
-
-        $(window).on('ready', () => {
-            autosize(document.getElementsByClassName("inputBoxInputSearch"));
-            autosize(document.getElementsByClassName("inputBoxInputAnswer"));
-            autosize(document.getElementsByClassName("inputBoxInputComment"));
-        })
 
         function openBannerModal() {
             getBannerPic();
@@ -1261,6 +1258,12 @@
                 });
             }
         }
+
+        var url = new URL(location.href);
+        if(url.hash === '')
+            changePages('review');
+        else if(url.hash != '')
+            changePages(url.hash.replace("#", ""));
 
     </script>
 @stop

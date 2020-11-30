@@ -488,9 +488,9 @@ Route::group(array('middleware' => 'nothing'), function(){
 
 // profile common
 Route::group(['middleware' => ['throttle:30']], function(){
-    Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile')->middleware('shareData');
+    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index')->middleware('shareData');
 
-    Route::get('/profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');
+    Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile')->middleware('shareData');
 
     Route::post('/profile/getFollower', 'FollowerController@getFollower')->name('profile.getFollower');
 
@@ -504,11 +504,15 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
-    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index')->middleware('shareData');
-
     Route::get('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
 
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
+
+        Route::get('profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');
+
+        Route::get('profile/festival/getMyWorks', 'ProfileController@getFestivalContent')->name('profile.festival.getMyWorks');
+
+        Route::delete('profile/festival/deleteMyWork', 'ProfileController@deleteFestivalContent')->name('profile.festival.deleteMyWork');
 
         Route::post('profile/bookMark/delete', 'ProfileController@deleteBookMarkWithId')->name('profile.bookMark.delete');
 
@@ -687,8 +691,6 @@ Route::group(['middleware' => ['web', 'shareData']], function(){
     Route::post('/festival/getContent', 'FestivalController@getFestivalContent')->name('festival.getContent');
 
     Route::group(['middleware' => ['auth']], function(){
-        Route::get('/festival/getMyWorks', 'FestivalController@getMyWorks')->name('festival.getMyWorks');
-
         Route::post('/festival/uploadFile', 'FestivalController@uploadFile')->name('festival.uploadFile');
 
         Route::post('/festival/uploadFile/delete', 'FestivalController@deleteUploadFile')->name('festival.uploadFile.delete');
@@ -841,10 +843,6 @@ Route::get('exportToExcelTT', 'HomeController@exportExcel');
 Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 //    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
     Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'NotUseController@changeAddFriend'));
-
-    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllReview');
-
-    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetailAllQuestions');
 
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
 

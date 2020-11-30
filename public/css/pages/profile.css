@@ -1354,6 +1354,7 @@ body {
     height: 100%;
     border: solid 2px whitesmoke;
     cursor: pointer;
+    position: relative;
 }
 
 .profilePictureDiv img{

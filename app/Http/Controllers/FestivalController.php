@@ -445,23 +445,4 @@ class FestivalController extends Controller
 
         return true;
     }
-
-    public function getMyWorks(Request $request)
-    {
-        $user = auth()->user();
-        $user->pic = getUserPic($user->id);
-        $festivalId = $_GET['id'];
-        $festival = Festival::find($festivalId);
-        if($festival != null){
-            $myWorks = \DB::table($festival->tableName)->where('userId', $user->id)->get();
-            foreach ($myWorks as $item){
-
-            }
-        }
-        else
-            return response()->json(['status' => 'error1']);
-
-
-        return response()->json(['status' => 'ok', 'result' => $myWorks]);
-    }
 }
