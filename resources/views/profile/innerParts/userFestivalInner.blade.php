@@ -1,5 +1,27 @@
 <link rel="stylesheet" href="{{URL::asset('css/pages/festival.css')}}">
 
+<style>
+    .deleteContent{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        background: #445565;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        padding: 5px;
+        color: red;
+        font-size: 35px;
+    }
+    .deleteContent img{
+        width: 100%;
+    }
+</style>
+
 <div id="mainFestivalContent" class="userProfileArticles festivalContent">
     <div id="mainFestivalContentList"></div>
 
@@ -17,7 +39,7 @@
                     اینجا خالی است.هنوز در این بخش فستیوال شرکت نکرده اید...
                 </div>
                 <div class="sai" style="display: flex">
-                    <a href="{{route('festival.uploadWorks')}}"
+                    <a id="noDataFestivalLink" href="#"
                        target="_blank"
                        class="butt"
                        style="font-size: 10px; margin-right: auto;">شرکت در فستیوال</a>
@@ -41,6 +63,7 @@
     <div class="iconClose" onclick="closeShowPictureModal()"></div>
     <div id="showImgModalBody" class="body">
         <div id="modalImgSection" class="imgSec">
+            <div id="deleteThisFestivalContent" class="deleteContent trashIcon" data-id="" onclick="deleteMyFestivalContent(this)"></div>
             <img id="modalPicture" src="#">
             <video id="modalVideo" src="#" controls></video>
             <div class="nPButtons next leftArrowIcon" onclick="nextShowFestivalPicModal(-1)"></div>
@@ -55,13 +78,13 @@
                     </div>
                     <a href="#" target="_blank" class="username modalUserName"></a>
                 </div>
-                <div class="hideOnScreen showSLBInM">
-                    <button class="modalLike empty-heartAfter" onclick="likeWorks(this)" code="0"></button>
-                    <button class="codeButton" onclick="copyUrl(this)">
-                        اشتراک گذاری:
-                        <span class="modalCode"></span>
-                    </button>
-                </div>
+{{--                <div class="hideOnScreen showSLBInM">--}}
+{{--                    <button class="modalLike empty-heartAfter" onclick="likeWorks(this)" code="0"></button>--}}
+{{--                    <button class="codeButton" onclick="copyUrl(this)">--}}
+{{--                        اشتراک گذاری:--}}
+{{--                        <span class="modalCode"></span>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
             </div>
             <div class="picInfo">
                 <div class="inf">
@@ -72,31 +95,34 @@
                     <div class="title">محل: </div>
                     <a href="#" target="_blank" class="text modalPlace"></a>
                 </div>
-                <div id="modalDescription" class="inf">
-                    <div class="title">توضیحات عکس: </div>
-                    <div class="text" style="font-size: 12px;"></div>
+{{--                <div id="modalDescription" class="inf">--}}
+{{--                    <div class="title">توضیحات عکس: </div>--}}
+{{--                    <div class="text" style="font-size: 12px;"></div>--}}
+{{--                </div>--}}
+                <div id="modalFailedReason" class="inf hidden">
+                    <div class="title">دلیل عدم تایید عکس: </div>
+                    <div class="text" style="font-size: 12px; color: #ff6464"></div>
                 </div>
             </div>
 
-            <div class="liShButtons">
-                <div class="likeButton empty-heartAfter modalLike" onclick="likeWorks(this)" code="0"></div>
-                <div class="shareButton" onclick="copyUrl(this)">
-                    اشتراک گذاری:
-                    <span class="modalCode"></span>
-                </div>
-            </div>
+{{--            <div class="liShButtons">--}}
+{{--                <div class="likeButton empty-heartAfter modalLike" onclick="likeWorks(this)" code="0"></div>--}}
+{{--                <div class="shareButton" onclick="copyUrl(this)">--}}
+{{--                    اشتراک گذاری:--}}
+{{--                    <span class="modalCode"></span>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </div>
 </div>
 
 <script>
-    var nowFestivalSection = 'main';
-    var nowFestivalKind = 'photo';
-
     var festivalsInformations = [];
     var nowShowFestivalCode = 0;
     var thisFestivalContent = [];
     var nowShowFestivalPicIndex = 0;
+    var nowShowFestival;
+
     function getMainFestival(){
         $("#mainFestivalContentList").removeClass('hidden');
         $(".SpecfestivalContent").addClass('hidden');
@@ -110,7 +136,6 @@
                 if(response.status == 'ok')
                     createMainFestivalContent(response.result);
             },
-            error: err => console.log(err)
         })
     }
 
@@ -131,7 +156,7 @@
                             <div class="articleSummarizedContentMainDiv">
                                 <span>${item.description}</span>
                             </div>
-                            <a href="${item.pageUrl}" class="readSafarnamehButton"> صفحه ی فستیوال</a>
+                            <a href="${item.pageUrl}" class="readSafarnamehButton"> صفحه فستیوال</a>
                         </div>
                     </div>`;
         });
@@ -142,42 +167,34 @@
     function getFestivalMyWorks(_id){
         var subMenus = '';
         festivalsInformations.map(fest => {
-            if(fest.id == _id)
-                fest.subs.map(sub => subMenus += `<span class="active" onclick="changeBookMarkShowKind('${item.name}', this)">${sub.name}</span>`);
+            if(fest.id == _id) {
+                nowShowFestival = fest;
+                fest.subs.map(sub => subMenus += `<span class="active" onclick="changeFestivalSubTabs('${item.name}', this)">${sub.name}</span>`);
+                $('#noDataFestivalLink').attr('href', fest.pageUrl);
+            }
         });
         $('#subFestivalTopMenu').html(subMenus);
 
         $("#mainFestivalContentList").addClass('hidden');
         $(".SpecfestivalContent").removeClass('hidden');
 
-        // let selectedEleme = $('#mainFestivalContent').find('.questionSecTab .active')[0];
-        // changeBookMarkShowKind(_id);
+        $('#festivalContentPlaceHolder').removeClass('hidden');
+        $('#mainFestivalContent').find('.notData').addClass('hidden');
+        $('#festivalContentId').addClass('hidden');
 
-        getFestivalContents(_id);
-    }
-
-    function getFestivalContents(_id){
         $.ajax({
             type: 'GET',
-            url: '{{route("festival.getMyWorks")}}',
+            url: '{{route("profile.festival.getMyWorks")}}?id='+_id,
             success: function(response){
                 if(response.status == 'ok')
                     createFestivalPictures(response.result);
             },
-            error: function (err) {
-                console.log(err);
-            }
         })
-
     }
 
-
-    function changeBookMarkShowKind(_id, _elem){
+    function changeFestivalSubTabs(_id, _elem){
         $(_elem).parent().find('.active').removeClass('active');
         $(_elem).addClass('active');
-
-        nowFestivalSection = _sec;
-        nowFestivalKind = _kind;
 
         $('#festivalContentPlaceHolder').removeClass('hidden');
         $('#mainFestivalContent').find('.notData').addClass('hidden');
@@ -193,18 +210,20 @@
         $('#festivalContentId').empty().removeClass('hidden');
         $('#festivalContentPlaceHolder').addClass('hidden');
 
-        if (_result.length == 0)
+        if (thisFestivalContent.length == 0)
             $('#mainFestivalContent').find('.notData').removeClass('hidden');
         else
             $('#mainFestivalContent').find('.notData').addClass('hidden');
 
-        _result.map((item, index) => {
+        thisFestivalContent.map((item, index) => {
             if(addedPic == 0)
                 text += '<div class="profilePicturesRow kind2">';
 
-            text += '<div class="profilePictureDiv" style="width: 33%;" onclick="openFestivalPictureWithIndex('+index+')"> \n' +
-                    '   <img src="' + item.thumbnail + '" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">\n' +
-                    '</div>';
+            text +=  `<div class="profilePictureDiv" style="width: 33%;" onclick="openFestivalPictureWithIndex(${index})">
+                        <div class="confirmState ${item.confirm == 1 ? 'success' : (item.confirm == 0 ? 'waiting' : 'failed')}"></div>
+                        <div class="festivalContentTitle">${item.title}</div>
+                        <img src="${item.showPic}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                    </div>`;
             addedPic++;
 
             if(addedPic == 3) {
@@ -215,7 +234,6 @@
 
         $('#festivalContentId').html(text);
     }
-
 
     function nextShowFestivalPicModal(_kind){
         openFestivalPictureWithIndex(nowShowFestivalPicIndex+_kind);
@@ -235,43 +253,38 @@
         $('#modalPicture').attr('src', '#');
         $('#modalVideo').attr('src', '#');
 
-        if(_picture['isPic'] == 1){
+        if(_picture['type'] == 'image'){
             $('#modalVideo').hide();
-            $('#modalPicture').show();
-            $('#modalPicture').attr('src', _picture['pic']);
+            $('#modalPicture').show().attr('src', _picture['file']);
         }
         else{
-            $('#modalVideo').show();
             $('#modalPicture').hide();
-            $('#modalVideo').attr('src', _picture['video']);
+            $('#modalVideo').show().attr('src', _picture['file']);
         }
+
+        $('#deleteThisFestivalContent').attr('data-id', _picture['id']);
 
         $('.modalUserPic').attr('src', _picture['userPic']);
-        $('.modalUserName').text(_picture['username']);
-        $('.modalUserName').attr('href', _picture['userUrl']);
+        $('.modalUserName').text(_picture['username']).attr('href', _picture['userUrl']);
         $('.modalTitle').text(_picture['title']);
-        $('.modalPlace').attr('href', _picture['placeUrl']);
-        $('.modalPlace').text(_picture['place']);
-        $('.modalLike').text(_picture['like']);
-        $('.modalLike').attr('code', _picture['code']);
-        $('.modalCode').text(_picture['code']+'#');
-        if(_picture['description'] != null){
-            $('#modalDescription').show();
-            $('#modalDescription').find('.text').text(_picture['description']);
-        }
-        else{
-            $('#modalDescription').hide();
-            $('#modalDescription').find('.text').text('');
-        }
+        $('.modalPlace').attr('href', _picture['placeUrl']).text(_picture['place']);
 
-        if(_picture['youLike'] == 1){
-            $('.modalLike').removeClass('empty-heartAfter');
-            $('.modalLike').addClass('HeartIconAfter');
-        }
-        else{
-            $('.modalLike').removeClass('HeartIconAfter');
-            $('.modalLike').addClass('empty-heartAfter');
-        }
+        if(_picture['failedReason'] != null)
+            $('#modalFailedReason').removeClass('hidden').find('.text').text(_picture['failedReason']);
+        else
+            $('#modalFailedReason').addClass('hidden');
+
+        // $('.modalLike').text(_picture['like']).attr('code', _picture['code']);
+        // $('.modalCode').text(_picture['code']+'#');
+        // if(_picture['description'] != null)
+        //     $('#modalDescription').show().find('.text').text(_picture['description']);
+        // else
+        //     $('#modalDescription').hide().find('.text').text('');
+        //
+        // if(_picture['youLike'] == 1)
+        //     $('.modalLike').removeClass('empty-heartAfter').addClass('HeartIconAfter');
+        // else
+        //     $('.modalLike').removeClass('HeartIconAfter').addClass('empty-heartAfter');
 
         nowShowFestivalCode = _picture.code;
         $('#showFestivalImgModal').removeClass('hidden');
@@ -291,7 +304,35 @@
         let inputText = $(_elems).text();
         $(_elems).text('لینک کپی شد');
         setTimeout(() => $(_elems).text(inputText), 2000)
+    }
 
+    function deleteMyFestivalContent(_element){
+        var id = $(_element).attr('data-id');
+        openLoading(() => {
+            $.ajax({
+                type: 'delete',
+                url: '{{route("profile.festival.deleteMyWork")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    id: id,
+                    festivalId: nowShowFestival.id
+                },
+                success: response => {
+                    closeLoading();
+                    if(response.status == 'ok'){
+                        showSuccessNotifi('محتوای مورد نظر با موفقیت پاک شد', 'left', 'var(--koochita-blue)');
+                        getFestivalMyWorks(nowShowFestival.id);
+                        closeShowPictureModal();
+                    }
+                    else
+                        showSuccessNotifi('خطای در پاک کردن محتوا', 'left', 'red')
+                },
+                error: err => {
+                    closeLoading();
+                    showSuccessNotifi('خطای سرور', 'left', 'red')
+                }
+            })
+        })
     }
 
 </script>

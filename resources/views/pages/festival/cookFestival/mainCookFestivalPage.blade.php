@@ -186,6 +186,9 @@
             cursor: pointer;
             font-weight: bold;
             color: var(--cook-orange);
+            WIDTH: 120px;
+            text-align: center;
+            font-size: 10px;
         }
         .uploadSec .uploadButton:before{
             font-size: 50px;
@@ -646,9 +649,7 @@
                 e.stopPropagation();
             }
 
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                dropArea.addEventListener(eventName, preventDefaults, false)
-            });
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => dropArea.addEventListener(eventName, preventDefaults, false) );
             dropArea.addEventListener('dragenter', () => $('.uploadSec').addClass('highlight'), false);
             dropArea.addEventListener('dragleave', () => $('.uploadSec').removeClass('highlight'), false);
             dropArea.addEventListener('dragover', () => $('.uploadSec').addClass('highlight'), false);
@@ -658,8 +659,10 @@
             }, false);
 
             function uploadPicClickHandler(_input){
-                if(_input.files && _input.files[0])
-                    createAndUploadFilePic(_input.files[0]);
+                if(_input.files && _input.files.length > 0){
+                    for(var i = 0; i < _input.files.length; i++)
+                        createAndUploadFilePic(_input.files[i]);
+                }
                 $(_input).val('');
             }
 
@@ -958,7 +961,7 @@
                                 success: response => {
                                     if(response == 'ok'){
                                         showSuccessNotifi('عکس و فیلم شما با موفقیت ثبت شد', 'left', 'var(--koochita-blue)');
-                                        window.location.href = '{{route("profile")}}#festival';
+                                        window.location.href = '{{route("profile")}}#festival&id=4';
                                     }
                                     else{
                                         closeLoading();

@@ -17,6 +17,7 @@ use App\models\Followers;
 use App\models\InvitationCode;
 use App\models\Level;
 use App\models\LogModel;
+use App\models\MahaliFood;
 use App\models\Medal;
 use App\models\Message;
 use App\models\PhotographersLog;
@@ -160,7 +161,7 @@ class ProfileController extends Controller {
         }
 
         if($user->uploadBanner == 0) {
-            $user->banner = $user->banner == null ? '1.jpg' : $user->banner;
+            $user->banner = $user->banner == null ? '1.webp' : $user->banner;
             $user->banner = URL::asset('images/mainPics/background/' . $user->banner);
         }
         else
@@ -491,7 +492,7 @@ class ProfileController extends Controller {
             if($item->picture == null)
                 $item->pic = \URL::asset('images/mainPics/noData.png');
             else
-                $item->pic = \URL::asset('_images/festival/'.$item->picture);
+                $item->pic = \URL::asset('_images/festival/mainPics/'.$item->picture);
 
             if($item->description == null)
                 $item->description = '';
@@ -501,10 +502,65 @@ class ProfileController extends Controller {
         return response()->json(['status' => 'ok', 'result' => $festivals]);
     }
 
-    public function getFestivalContent(Request $request)
+    public function getFestivalContent()
     {
+        $user = auth()->user();
+        $user->pic = getUserPic($user->id);
+        $festivalId = $_GET['id'];
+        $festival = Festival::find($festivalId);
+        if($festival != null){
+            $myWorks = \DB::table($festival->tableName)->where('userId', $user->id)->get();
+            foreach ($myWorks as $item){
+                $item->file = URL::asset('_images/festival/'.$festival->folderName.'/'.$item->file);
+                $item->showPic = $item->file;
+                if($item->type == "video"){
+                    $item->thumbnail = URL::asset('_images/festival/'.$festival->folderName.'/'.$item->thumbnail);
+                    $item->showPic = $item->thumbnail;
+                }
 
+                $item->userPic = getUserPic($user->id);
+                $item->username = $user->username;
+                $item->userUrl = '#';
+
+                $item->title = $item->foodName;
+                $item->place = $item->foodName;
+                $item->placeUrl = '#';
+
+                if($item->foodId != null){
+                    $food = MahaliFood::find($item->foodId);
+                    if($food != null){
+                        $item->title = $food->name;
+                        $item->place = $food->name;
+                        $item->placeUrl = route('placeDetails', ['kindPlaceId' => 11, 'placeId' => $food->id]);
+                    }
+                }
+
+            }
+            return response()->json(['status' => 'ok', 'result' => $myWorks]);
+        }
+        else
+            return response()->json(['status' => 'error1']);
     }
+
+    public function deleteFestivalContent(Request $request)
+    {
+        if(isset($request->id) && isset($request->festivalId)){
+            $festival = Festival::find($request->festivalId);
+            $content = \DB::table($festival->tableName)->find($request->id);
+            $direction = __DIR__."/../../../../assets/_images/festival/$festival->folderName/";
+            if(is_file($direction.$content->file))
+                unlink($direction.$content->file);
+
+            if($direction.$content->thumbnail != null && is_file($direction.$content->thumbnail))
+                unlink($direction.$content->thumbnail);
+
+            \DB::table($festival->tableName)->where('id', $content->id)->delete();
+            return response()->json(['status' => 'ok']);
+        }
+        else
+            return response()->json(['status' => 'error1']);
+    }
+
 
     public function getBannerPics()
     {

@@ -1041,6 +1041,47 @@ section .conditionFestival .leftSec > img{
 
 }
 
+.festivalContentTitle{
+    z-index: 9;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    background: white;
+    padding: 0px 5px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+.confirmState{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border-radius: 5px;
+    padding: 0px 5px;
+    font-size: 10px;
+    z-index: 9;
+}
+.confirmState.success{
+    background: var(--koochita-green);
+    color: white;
+}
+.confirmState.success:before{
+    content: 'تایید شده';
+}
+.confirmState.waiting{
+    background: var(--koochita-yellow);
+    color: white;
+}
+.confirmState.waiting:before{
+    content: 'در انتظار تایید';
+}
+.confirmState.failed{
+    background: var(--koochita-red);
+    color: white;
+}
+.confirmState.failed:before{
+    content: 'رد شده';
+}
+
 @media (max-width: 1200px) {
     .smallFont{
         font-size: 16px;
