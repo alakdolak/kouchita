@@ -1,3 +1,4 @@
+
 <style>
     .mapState {
         position: fixed;
@@ -13,9 +14,13 @@
         height: 100%;
         position: absolute;
     }
+    #mapState1 .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+        margin-top: 50px;
+    }
     .extendedMapClose{
         left: 10px;
         top: 15px;
+        z-index: 999;
     }
     .extendedMapClose:before{
         font-size: 70px;
@@ -94,12 +99,12 @@
 </div>
 
 <script>
-
     let showFirstTime = false;
     let extendedMainMap;
     let extendedMapId;
     let extendedMapData;
     let extendedMapMarker = {
+        center: [],
         amaken: [],
         hotels: [],
         restaurant: [],
@@ -119,45 +124,84 @@
 
     function initExtendedMap(_data, _center, _centerPlace = '') {
         extendedMapData = _data;
-        var mapOptions = {
-            center: new google.maps.LatLng(_center['x'],  _center['y']),
-            zoom: 15,
-            styles: window.googleMapStyle
-        };
+        extendedMainMap = L.map("mapState1", {
+            minZoom: 1,
+            maxZoom: 20,
+            crs: L.CRS.EPSG3857,
+            center: [_center['x'],  _center['y']],
+            zoom: 15
+        });
+        L.TileLayer.wmsHeader(
+            "https://map.ir/shiveh",
+            {
+                layers: "Shiveh:Shiveh",
+                format: "image/png",
+                minZoom: 1,
+                maxZoom: 20
+            },
+            [
+                {
+                    header: "x-api-key",
+                    value: window.mappIrToken
+                }
+            ]
+        ).addTo(extendedMainMap);
 
-        var mapElementExtend = document.getElementById('mapState1');
-        extendedMainMap = new google.maps.Map(mapElementExtend, mapOptions);
+
+
+        // var mapOptions = {
+        //     center: new google.maps.LatLng(_center['x'],  _center['y']),
+        //     zoom: 15,
+        //     styles: window.googleMapStyle
+        // };
+        // extendedMainMap = new google.maps.Map(document.getElementById('mapState1'), mapOptions);
 
         if(_centerPlace != ''){
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(_centerPlace['C'], _centerPlace['D']),
-                map: extendedMainMap,
+            var marker = L.marker([_centerPlace['C'], _centerPlace['D']], {
                 title: _centerPlace['name'],
-                url: _centerPlace['url'],
-                id: _centerPlace['id']
-            }).addListener('click', function () {
-                openExtendedMapMarkerDescription(x, this.id);
-            });
-            mapMarker['center'].push(marker);
+            }).addTo(extendedMainMap).bindPopup(_centerPlace['name']).on('click', () => openExtendedMapMarkerDescription(x, _centerPlace['id']));
+            extendedMainMap.setView([_centerPlace['C'], _centerPlace['D']], 16);
+            extendedMapMarker.center.push(marker);
+
+            // var marker = new google.maps.Marker({
+            //     position: new google.maps.LatLng(_centerPlace['C'], _centerPlace['D']),
+            //     map: extendedMainMap,
+            //     title: _centerPlace['name'],
+            //     url: _centerPlace['url'],
+            //     id: _centerPlace['id']
+            // }).addListener('click', function () {
+            //     openExtendedMapMarkerDescription(x, this.id);
+            // });
         }
 
         let fk = Object.keys(extendedMapData);
         for (let x of fk) {
             extendedMapData[x].forEach(item => {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(item['C'], item['D']),
-                    icon: {
-                        url: mapIcon[x],
-                        scaledSize: new google.maps.Size(30, 35), // scaled size
-                    },
-                    map: extendedMainMap,
+                var marker = L.marker([parseFloat(item['C']), parseFloat(item['D'])], {
                     title: item['name'],
-                    url: item['url'],
-                    id: item['id']
-                }).addListener('click', function () {
-                    openExtendedMapMarkerDescription(x, this.id);
+                    icon: L.icon({
+                        iconUrl: mapIcon[x],
+                        iconSize: [30, 35], // size of the icon
+                    })
+                }).bindPopup(item['name']).on('click', () => openExtendedMapMarkerDescription(x, item['id']));
+                var mapMarkerInMap= marker.addTo(extendedMainMap);
+
+                extendedMapMarker[x].push({
+                    markerInfo: marker,
+                    mapMarkerInMap: mapMarkerInMap,
                 });
-                mapMarker[x].push(marker);
+
+                // var marker = new google.maps.Marker({
+                //     position: new google.maps.LatLng(item['C'], item['D']),
+                //     icon: {
+                //         url: mapIcon[x],
+                //         scaledSize: new google.maps.Size(30, 35), // scaled size
+                //     },
+                //     map: extendedMainMap,
+                //     title: item['name'],
+                //     url: item['url'],
+                //     id: item['id']
+                // }).addListener('click', function () { openExtendedMapMarkerDescription(x, this.id) });
             });
         }
     }
@@ -187,21 +231,24 @@
 
     function toggleIconInExtendedMap(_element, _kind) {
         $(_element).toggleClass('offMapIcons');
-
-        if($(_element).hasClass('offMapIcons'))
-            setInExtendedMap(0, mapMarker[_kind]);
-        else
-            setInExtendedMap(1, mapMarker[_kind]);
+        var showStatus = $(_element).hasClass('offMapIcons') ? 0 : 1;
+        setInExtendedMap(showStatus, extendedMapMarker[_kind]);
     }
 
     function setInExtendedMap(isSet, marker) {
-        if (isSet == 1) {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['j'].setMap(extendedMainMap)
-        } else {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['j'].setMap(null)
-        }
+        marker.map(mar => {
+            if(isSet == 1)
+                mar.mapMarkerInMap = mar.markerInfo.addTo(extendedMainMap);
+            else
+                extendedMainMap.removeLayer(mar.mapMarkerInMap);
+        });
+        // if (isSet == 1) {
+        //     for (var i = 0; i < marker.length; i++)
+        //         marker[i]['j'].setMap(extendedMainMap)
+        // } else {
+        //     for (var i = 0; i < marker.length; i++)
+        //         marker[i]['j'].setMap(null)
+        // }
     }
 
     function getStatePlaces(){
@@ -214,11 +261,7 @@
                 id: '{{$state->id}}'
             },
             success: function(response){
-                response = JSON.parse(response);
-                console.log(response);
-                // let map = response.map;
                 let allPlaces = response.allPlaces;
-
                 let center = {
                     x: '{{$place->C}}',
                     y: '{{$place->D}}'

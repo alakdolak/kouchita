@@ -373,8 +373,8 @@ class PlaceController extends Controller {
 
     private function getNearbies($C, $D, $count)
     {
-// Latitude: 1 deg = 110.574 km
-// Longitude: 1 deg = 111.320*cos(latitude) km
+    // Latitude: 1 deg = 110.574 km
+    // Longitude: 1 deg = 111.320*cos(latitude) km
 
         $radius = ConfigModel::first()->radius;
         $latDeg = $radius/110.574;
@@ -393,7 +393,6 @@ class PlaceController extends Controller {
             if($kindPlace != null) {
                 $nearbys = DB::select("SELECT acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance, id, name, reviewCount, fullRate, slug, alt, cityId, C, D FROM " . $tableName . " HAVING distance between -1 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
 //                $nearbys = DB::select("SELECT id, `name`, reviewCount, fullRate, slug, alt, cityId, `C`, `D` FROM $tableName WHERE `C` > $latBetween[1] AND `C` < $latBetween[0] AND `D` > $lngBetween[1] AND `D` < $lngBetween[0] limit 0, $count" );
-
                 foreach ($nearbys as $nearby) {
 //                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
 //                                  'activityId' => Activity::whereName('نظر')->first()->id];
@@ -444,10 +443,7 @@ class PlaceController extends Controller {
 
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {
 
-            if(isset($_POST["count"]))
-                $count = $_POST["count"];
-            else
-                $count = 4;
+            $count = isset($_POST["count"]) ? $_POST["count"] : 4;
 
             $kindPlace = Place::find($_POST["kindPlaceId"]);
             if($kindPlace == null){

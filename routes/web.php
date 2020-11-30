@@ -663,7 +663,7 @@ Route::group(array('middleware' => ['auth']), function(){
 Route::group(['middleware' => ['web', 'shareData']], function(){
 
     Route::group(['middleware' => 'nothing'], function(){
-        Route::get('/festival/cook', 'CookController@cookFestival')->name('festival.cook');
+        Route::get('/ashpazi', 'CookController@cookFestival')->name('festival.cook');
 
         Route::post('/festival/cook/checkFirstStepRegister', 'CookController@checkFirstStepRegister')->name('festival.cook.firstStepRegister');
 

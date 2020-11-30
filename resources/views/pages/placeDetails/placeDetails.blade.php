@@ -969,7 +969,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                             y: '{{$place->D}}'
                         };
 
-                        createMap('mainMap', center, response[0], true);
+                        createMapInBlade('mainMap', center, response[0], true);
 
                         createSuggestionRowWithData(response[0]);
                         createArticleRowWithData(response[1]);
