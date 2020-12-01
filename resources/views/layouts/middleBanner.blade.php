@@ -306,25 +306,14 @@
                 </div>
             </div>
 
-            {{--banner_6--}}
-            @if(!isset($middleBan['2']) || $middleBan['2'] == null)
-                <div class="middleBannerPhotoBanner">
-                    <div class="dropping-texts">
-                        <div>بشینیم</div>
-                        <div>برنامه ریزی کنیم</div>
-                        <div>سفر کنیم</div>
-                        <div>بخندیم</div>
-                    </div>
-                    با هم
-                </div>
-            @else
+            @if(isset($middleBan['6']))
                 <div class="middleBannerPhotoBanner middleBannerPB">
-                    @if($middleBan['2']['link'] != '')
-                        <a href="{{$middleBan['2']['link']}}" target="_blank" >
-                            <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
+                    @if($middleBan['6']['link'] != '')
+                        <a href="{{$middleBan['6']['link']}}" target="_blank" >
+                            <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
                         </a>
                     @else
-                        <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
+                        <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
                     @endif
                 </div>
             @endif
@@ -708,17 +697,27 @@
                 </div>
             </div>
 
-            @if(isset($middleBan['6']))
-                <div class="middleBannerPhotoBanner middleBannerPB">
-                    @if($middleBan['6']['link'] != '')
-                        <a href="{{$middleBan['6']['link']}}" target="_blank" >
-                            <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
-                        </a>
-                    @else
-                        <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
-                    @endif
-                </div>
-            @endif
+{{--            @if(!isset($middleBan['2']) || $middleBan['2'] == null)--}}
+{{--                <div class="middleBannerPhotoBanner">--}}
+{{--                    <div class="dropping-texts">--}}
+{{--                        <div>بشینیم</div>--}}
+{{--                        <div>برنامه ریزی کنیم</div>--}}
+{{--                        <div>سفر کنیم</div>--}}
+{{--                        <div>بخندیم</div>--}}
+{{--                    </div>--}}
+{{--                    با هم--}}
+{{--                </div>--}}
+{{--            @else--}}
+{{--                <div class="middleBannerPhotoBanner middleBannerPB">--}}
+{{--                    @if($middleBan['2']['link'] != '')--}}
+{{--                        <a href="{{$middleBan['2']['link']}}" target="_blank" >--}}
+{{--                            <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">--}}
+{{--                        </a>--}}
+{{--                    @else--}}
+{{--                        <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            @endif--}}
 
             <div id="articleSuggestion">
                 <a class="shelf_title" href="{{route('safarnameh.index')}}" target="_blank">
