@@ -688,6 +688,8 @@
                 </div>
             </div>
 
+            <div id="pos-article-text-16130"></div>
+
             <div id="kharidSuggestion">
                 <div class="shelf_title">
                     <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
@@ -705,8 +707,6 @@
                     </div>
                 </div>
             </div>
-
-            <div id="pos-article-text-16130"></div>
 
             @if(isset($middleBan['6']))
                 <div class="middleBannerPhotoBanner middleBannerPB">
