@@ -143,7 +143,7 @@
 
         <div id="BODYCON" class="row placeListBody" ng-app="mainApp">
             <div class=" col-md-9 col-sm-8 rightLightBorder placeListBodyContentSection PlaceController" ng-controller="PlaceController as cntr">
-                <div infinite-scroll="myPagingFunction()" class="coverpage">
+                <div id="listBody" infinite-scroll="myPagingFunction()" class="coverpage">
                     <div id="FilterTopController" class="placeListSortDiv bottomLightBorder hideOnPhone">
                         <div class="ordering sorting" style="font-weight: bold">
                             {{__('مرتب سازی بر اساس')}}:
@@ -271,7 +271,7 @@
                 <div id="EATERY_FILTERS_CONT" class="eatery_filters lhr">
 
                     <div class="filterGroupTitle bottomLightBorder">
-                        {{__('جستجو خود را محدود تر کنید')}}
+                        <div id="pos-article-display-card-16129"></div>
                     </div>
 
 {{--                    <a href="https://koochitatv.com" style="display: flex;justify-content: center;margin: 10px;">--}}
@@ -692,6 +692,8 @@
 
                         $scope.$broadcast('finalizeReceive');
                         inSearch = false;
+
+                        $('#listBody').append('<div id="pos-article-display-16123"></div>');
 
                     }).catch(function (err) {
                         if(errorNum != 0){
