@@ -737,7 +737,6 @@
                 </div>
             </div>
 
-            <div id="pos-article-display-16123"></div>
         </div>
 
         <div class="footerBarSpacer"></div>
