@@ -1714,6 +1714,94 @@ footer .bookMarkSSec .infoSec .state{
     font-size: 7px;
 }
 
+.myTripFooter .myTripCard{
+    color: black;
+    padding: 0px 0px;
+    margin: 0px 0px;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #808080a6;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 1px #00000061;
+    margin-bottom: 15px;
+}
+.myTripFooter .myTripCard .name{
+    padding: 2px 5px;
+    font-weight: bold;
+}
+.myTripFooter .myTripCard .date{
+    font-size: 10px;
+    display: flex;
+    font-style: normal;
+    color: black;
+    margin: 5px 0px;
+    padding: 0px 5px;
+    align-items: center;
+}
+.myTripFooter .myTripCard .date .from{
+    margin: 0px 5px;
+    font-size: 13px;
+}
+.myTripFooter .myTripCard .picsSec{
+    display: flex;
+    flex-wrap: wrap;
+}
+.myTripFooter .myTripCard .picsSec .pic{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.myTripFooter .myTripCard .picsSec .pic img{
+    width: 100%;
+}
+.myTripFooter .myTripCard .picsSec.pic_1 div{
+    height: 200px;
+}
+.myTripFooter .myTripCard .picsSec.pic_2 div{
+    height: 200px;
+}
+.myTripFooter .myTripCard .picsSec.pic_3 div{
+    height: 100px;
+}
+.myTripFooter .myTripCard .picsSec.pic_4 div{
+    height: 100px;
+}
+.myTripFooter .myTripCard .picsSec.pic_1 div:nth-of-type(1){
+    width: 100%;
+}
+.myTripFooter .myTripCard .picsSec.pic_2 div:nth-of-type(1){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_2 div:nth-of-type(2){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_3 div:nth-of-type(1){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_3 div:nth-of-type(2){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_3 div:nth-of-type(3){
+    width: 100%;
+}
+.myTripFooter .myTripCard .picsSec.pic_4 div:nth-of-type(1){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_4 div:nth-of-type(2){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_4 div:nth-of-type(3){
+    width: 50%;
+}
+.myTripFooter .myTripCard .picsSec.pic_4 div:nth-of-type(4){
+    width: 50%;
+}
+.myTripFooter .myTripCard .placeCount{
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
 
 @media (max-width: 1300px) {
     .footerRside {

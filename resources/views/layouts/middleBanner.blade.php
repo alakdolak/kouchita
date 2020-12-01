@@ -2,7 +2,6 @@
 
 <div class="container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
-
         <div class="mainSuggestionMainDiv">
             <div class="hideOnScreen row">
                 <div class="boxOFSquareDiv">
@@ -307,6 +306,7 @@
                 </div>
             </div>
 
+            <div id="pos-article-display-card-16129"></div>
             {{--banner_2--}}
             <div class="siteArticlesMainDiv">
 {{--                @if(isset($articleBanner) && count($articleBanner) > 0)--}}
@@ -706,6 +706,8 @@
                 </div>
             </div>
 
+            <div id="pos-article-text-16130"></div>
+
             @if(isset($middleBan['6']))
                 <div class="middleBannerPhotoBanner middleBannerPB">
                     @if($middleBan['6']['link'] != '')
@@ -735,6 +737,8 @@
                     </div>
                 </div>
             </div>
+
+            <div id="pos-article-display-16123"></div>
         </div>
 
         <div class="footerBarSpacer"></div>

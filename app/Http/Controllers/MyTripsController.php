@@ -20,6 +20,7 @@ use App\models\TripMember;
 use App\models\TripMembersLevelController;
 use App\models\TripPlace;
 use App\models\User;
+use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,50 +33,60 @@ use PhpParser\Node\Stmt\Echo_;
 class MyTripsController extends Controller {
 
     public function myTrips() {
+        return view('pages.Trip.myTrip');
+    }
 
-        $user = Auth::user();
-        $uId = $user->id;
+    public function getTrips()
+    {
+        if(\auth()->check()){
+            $user = Auth::user();
+            $uId = $user->id;
 
-        $trips = Trip::whereUId($uId)->get();
+            $trips = Trip::whereUId($uId)->get();
 
-        $condition = ['uId' => $uId, 'status' => 1];
-        $invitedTrips = TripMember::where($condition)->select('tripId')->get();
+            $condition = ['uId' => $uId, 'status' => 1];
+            $invitedTrips = TripMember::where($condition)->select('tripId')->get();
 
-        foreach ($invitedTrips as $invitedTrip)
-            $trips[count($trips)] = Trip::whereId($invitedTrip->tripId);
+            foreach ($invitedTrips as $invitedTrip)
+                $trips[count($trips)] = Trip::whereId($invitedTrip->tripId);
 
-        if($trips != null && count($trips) != 0) {
-            foreach ($trips as $trip) {
-                $trip->placeCount = TripPlace::whereTripId($trip->id)->count();
-                $limit = ($trip->placeCount > 4) ? 4 : $trip->placeCount;
-                $tripPlaces = TripPlace::whereTripId($trip->id)->take($limit)->get();
-                $tripPics = [];
-                foreach ($tripPlaces as $item){
-                    $kindPlaceId = $item->kindPlaceId;
+            if($trips != null && count($trips) != 0) {
+                foreach ($trips as $trip) {
+                    $trip->url = route('tripPlaces', ['tripId' => $trip->id]);
+                    $trip->placeCount = TripPlace::whereTripId($trip->id)->count();
+                    $limit = ($trip->placeCount > 4) ? 4 : $trip->placeCount;
+                    $tripPlaces = TripPlace::whereTripId($trip->id)->take($limit)->get();
+                    $tripPics = [];
+                    foreach ($tripPlaces as $item){
+                        $kindPlaceId = $item->kindPlaceId;
 
-                    $kindPlace = Place::find($kindPlaceId);
-                    $file = $kindPlace->fileName;
-                    $table = $kindPlace->tableName;
-                    $place = DB::table($table)->find($item->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
-                        $pic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-                    else
-                        $pic = URL::asset('_images/nopic/blank.jpg');
+                        $kindPlace = Place::find($kindPlaceId);
+                        $file = $kindPlace->fileName;
+                        $table = $kindPlace->tableName;
+                        $place = DB::table($table)->find($item->placeId);
+                        if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                            $pic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                        else
+                            $pic = URL::asset('_images/nopic/blank.jpg');
 
-                    array_push($tripPics, $pic);
+                        array_push($tripPics, $pic);
+                    }
+                    $trip->placePic = $tripPics;
+
+                    $trip->member = TripMember::where('tripId', $trip->id)->where('uId', '!=', $trip->uId)->count() + 1;
+
+                    $trip->from_ = $trip->from_ == null ? '': formatDate($trip->from_);
+                    $trip->to_ = $trip->to_ == null ? '': formatDate($trip->to_);
+
+                    $carbon = Carbon::createFromTimestamp($trip->lastSeen);
+                    $trip->lastSeen = $carbon->format('H:i').' '.\verta($carbon)->format('Y/m/d');
                 }
-                $trip->placePic = $tripPics;
-
-                $trip->member = TripMember::where('tripId', $trip->id)->where('uId', '!=', $trip->uId)->count() + 1;
-
-                if($trip->from_ != null)
-                    $trip->from_ = formatDate($trip->from_);
-
-                if($trip->to_ != null)
-                    $trip->to_ = formatDate($trip->to_);
             }
+
+            return response()->json(['status' => 'ok', 'result' => $trips]);
         }
-        return view('pages.Trip.myTrip', compact(['trips']));
+        else
+            return response()->json(['status' => 'error1']);
     }
 
     public function myTripsInner($tripId, $sortMode = "DESC") {

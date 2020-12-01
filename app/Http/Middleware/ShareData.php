@@ -20,7 +20,7 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 115;
+        $fileVersions = 117;
 
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
@@ -28,7 +28,6 @@ class ShareData
             $userLevelFooter = auth()->user()->nearestLevelInModel($userFooter->id);
             $userTotalPointFooter = auth()->user()->getUserPointInModel($userFooter->id);
             $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
-            $registerUser = verta($userFooter->created_at)->format('Y/m/d');
             $userInfo = User::getUserActivityCount($userFooter->id);
             $buPic = auth()->user()->getUserPicInModel($userFooter->id);
             $userNamename = $userFooter->username;
@@ -46,7 +45,7 @@ class ShareData
 
             View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount,
                         'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
-                        'registerUser' => $registerUser, 'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
+                        'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
                         'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions,
                         'newRegisterOpen' => $newRegisterOpen]);
         }

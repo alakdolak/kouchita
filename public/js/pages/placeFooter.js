@@ -105,6 +105,7 @@ function lp_selectMenu(id , element) {
     if(id == 'lp_others_myTravel'){
         $('.newMyTripFooterButton').removeClass('hidden');
         $('.seeAllBookMarkFooter').addClass('hidden');
+        getMyTripsPromiseFunc().then(response => createTripCardFooter(response));
     }
     else if(id == 'lp_others_mark'){
         getBookMarkForHeaderAndFooter();
@@ -133,6 +134,46 @@ function goToAddPlacePageInFooter(){
 
     window.location.href = addPlaceByUserUrl;
 }
+
+function createTripCardFooter(_response){
+    var card = '';
+    if(_response.length == 0){
+        $('#emptyTripMobileFooter').removeClass('hidden');
+        $('#myTripsFooter').addClass('hidden');
+    }
+    else {
+        _response.map(item => {
+            var placePicHtml = '';
+            var placePicCount = item.placePic.length;
+            if (placePicHtml == '') {
+                placePicHtml = `<div class="cardPics cardPics-1" style="height: 200px; background: gainsboro;">
+                                <img src="${window.notTrip}">
+                            </div>`;
+                placePicCount = 1;
+            } else {
+                item.placePic.map(item => {
+                    placePicHtml += `<div class="pic">
+                                <img src="${item}" class="resizeImgClass" onload="fitThisImg(this)">
+                            </div>`;
+                });
+            }
+            card += `<a href="${item.url}" class="myTripCard">
+                    <div class="name">${item.name}</div>
+                    <div class="date">
+                        <div class="from">${item.from_}</div>
+                        <div>تا</div>
+                        <div class="from">${item.to_}</div>
+                    </div>
+                    <div class="picsSec pic_${placePicCount}">${placePicHtml}</div>
+                    <div class="placeCount">
+                        تعداد اماکن: ${item.placeCount}
+                    </div>
+                </a>`;
+        });
+        $('#myTripsFooter').html(card);
+    }
+}
+
 
 
 

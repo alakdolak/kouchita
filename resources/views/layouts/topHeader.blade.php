@@ -39,9 +39,6 @@
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 <script async src="{{URL::asset('js/defualt/lazysizes.min.js')}}"></script>
 
-{{--<script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
-{{--<script defer src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>--}}
-
 <style>
 
 @if(\App::getLocale() == 'en')
@@ -58,11 +55,7 @@
 @endif
 </style>
 
-
-{{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
-{{--<meta name="google-signin-scope" content="profile email">--}}
-{{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -95,8 +88,6 @@
     ]
 },
 </script>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
     window.mappIrToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJiY2RjYzBiYjM4NTE3ZTk0N2YyNDBhZDI4YzE2ZjQ3YTQ4NGE3ZjQ4MjZjMjAxN2M5ZDFlMWQ0MDk1MmMwMzQ2YjJkYjMzOTZhMmNmZGI3In0.eyJhdWQiOiIxMTQ0NiIsImp0aSI6IjJiY2RjYzBiYjM4NTE3ZTk0N2YyNDBhZDI4YzE2ZjQ3YTQ4NGE3ZjQ4MjZjMjAxN2M5ZDFlMWQ0MDk1MmMwMzQ2YjJkYjMzOTZhMmNmZGI3IiwiaWF0IjoxNjA0OTk5NTAwLCJuYmYiOjE2MDQ5OTk1MDAsImV4cCI6MTYwNzUwNTEwMCwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.mEowCx8ITTK133c2xmLyl2O6ty0BR4_wrjCt1ZdtsRnlMc4lHyTpbSMbnww01vK9uO-tjEaYc_JSqM5NJPLugc_A4xfccsC9T-B0A8tNL7U0GeYih4KWSBhvvHEgsVR4X1HhMfl2OPpyhuC3ld4qe890jTxJpFOBejkW82VrvEl_rAxps60tENEK-rsG2n-sra6awouMC_-hgvuJD0L2Ma0Ha3mVm0uRNSyXhNcDQ1x3az_VlKjzijSLhFTnj_REifYiqMrNzzgZDaOkHcEdp4IoKplteWaN4iJPRSMn41w0k0UQEGlv4PH7JOFEnQhuye1fJCzufP8BwdLjWIlzyA';
     window.mainIconsPlaces = {
@@ -423,4 +414,26 @@
     }
 </script>
 
+{{--<script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
+{{--<script defer src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>--}}
+{{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
+{{--<meta name="google-signin-scope" content="profile email">--}}
+{{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
+
+@if(auth()->check())
+    @include('layouts.rotueURLs')
+    <script src="{{URL::asset('js/pages/ifLogin.js')}}"></script>
+@endif
+
+<script type="text/javascript">
+    (function(){
+        var now = new Date();
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.async = true;
+        var script_address = 'https://cdn.yektanet.com/js/koochita.com/native-koochita.com-14383.js';
+        script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();
+        head.appendChild(script);
+    })();
+</script>
 

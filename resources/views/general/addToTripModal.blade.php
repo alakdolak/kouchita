@@ -243,7 +243,6 @@
         $('#selectNewTripName').css('display', 'flex');
         $('#selectNewTripDate').css('display', 'none');
         closeMyModal('newTripModal');
-        // $('#newTripModal').css('display', 'none');
         $("#tripName").val("");
     }
 
@@ -311,10 +310,12 @@
                 $("#error").hide();
                 if(response == "ok") {
                     if(callBackCreateTrip != null){
+                        closeNewTrip();
                         callBackCreateTrip();
                         callBackCreateTrip = null;
                     }
-                    refreshThisAddTrip();
+                    else
+                        refreshThisAddTrip();
                     showSuccessNotifi('لیست سفر شما با موفقیت ایجاد شد', 'left', 'var(--koochita-blue)');
                 }
                 else {

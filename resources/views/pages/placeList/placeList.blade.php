@@ -590,7 +590,7 @@
                 kindPlaceId: '{{$kindPlace->id}}'
             });
 
-            var requestURL = '{{route('getPlaceListElems')}}';
+            var requestURL = '{{route('place.list.getElems')}}';
 
             const config = {
                 headers: {

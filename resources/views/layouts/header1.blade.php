@@ -148,9 +148,9 @@
                                 <li class="subItemHeaderNavBar">
                                     <a href="{{route('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('صفحه کاربری')}}</a>
                                 </li>
-                                <li class="subItemHeaderNavBar">
-                                    <a href="{{route('profile')}}#medal" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('جوایز و مدال ها')}}</a>
-                                </li>
+{{--                                <li class="subItemHeaderNavBar">--}}
+{{--                                    <a href="{{route('profile')}}#medal" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('جوایز و مدال ها')}}</a>--}}
+{{--                                </li>--}}
                                 <li class="subItemHeaderNavBar rule">
                                     <a href="{{route('profile.message.page')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">{{__('پیام‌ها')}}</a>
                                 </li>

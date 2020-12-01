@@ -454,15 +454,15 @@ Route::group(['middleware' => ['SafarnamehShareData', 'shareData']], function ()
 });
 
 // Lists
-Route::group(array('middleware' => ['nothing', 'shareData']), function () {
+Route::group(array('middleware' => ['nothing']), function () {
 
-    Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
+    Route::get('myLocation', 'MainController@myLocation')->name('myLocation')->middleware('shareData');
+
+    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list')->middleware('shareData');
 
     Route::get('getPlacesWithLocation', 'MainController@getPlacesWithLocation')->name('getPlaces.location');
 
-    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
-
-    Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
+    Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('place.list.getElems');
 });
 
 //reports
@@ -535,6 +535,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
         Route::post('profile/message/send', 'MessageController@sendMessages')->name('profile.message.send');
 
         Route::get('profile/myTrips', 'MyTripsController@myTrips')->name('myTrips')->middleware('shareData');
+
+        Route::get('profile/myTrips/getTrips', 'MyTripsController@getTrips')->name('myTrips.getTrips');
 
         Route::get('profile/tripPlaces/{tripId}/{sortMode?}', 'MyTripsController@myTripsInner')->name('tripPlaces')->middleware('shareData');
 
