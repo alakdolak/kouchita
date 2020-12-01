@@ -306,7 +306,6 @@
                 </div>
             </div>
 
-            <div id="pos-article-display-card-16129"></div>
             {{--banner_2--}}
             <div class="siteArticlesMainDiv">
 {{--                @if(isset($articleBanner) && count($articleBanner) > 0)--}}
