@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<?php
-    if(!isset($user))
-        $user = Auth::user();
-?>
-
 <head>
     @section('header')
 
@@ -18,18 +13,6 @@
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/bodyProfile.css?v=1')}}' data-rup='long_lived_global_legacy'/>
 
-    <?php if($mode == "badge"): ?>
-        <title>کوچیتا | مدال‌های گردشگری</title>
-    <?php endif; ?>
-    <?php if($mode == "profile"): ?>
-    <title>کوچیتا | صفحه کاربری</title>
-    <?php endif; ?>
-    <?php if($mode == "message"): ?>
-    <title>کوچیتا | پیام‌های من</title>
-    <?php endif; ?>
-    <?php if($mode == "message"): ?>
-        <title>کوچیتا | پیام‌های من</title>
-        <?php endif; ?>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
         <!--[if IE 6]>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css?v=1')}}" />

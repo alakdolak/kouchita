@@ -125,11 +125,12 @@
                 </div>
 
                 <div class="lp_others_content hidden" id="lp_others_myTravel" style="position: relative;">
-                    <div class="notInfoFooterModalImg">
+                    <div id="emptyTripMobileFooter" class="notInfoFooterModalImg hidden">
                         <div class="text">برنامه سفرت چیه ؟</div>
                         <img src="{{URL::asset('images/icons/mytrip0.svg')}}" alt="سفر ندارید" style="width: 100%;opacity: .3;">
                         <div class="text">بیا برای یه سفر خوب برنامه ریزی کنیم.</div>
                     </div>
+                    <div id="myTripsFooter" class="myTripFooter"></div>
                 </div>
             </div>
 
