@@ -375,9 +375,7 @@
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: center; align-items: center">
-                <div id='mediaad-Rvtf'></div>
-            </div>
+            <div id='mediaad-Rvtf' class="importantFullyCenterContent"></div>
 
             <div id="tabiatSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
