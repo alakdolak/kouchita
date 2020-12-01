@@ -274,12 +274,7 @@
                         <div id="pos-article-display-card-16129"></div>
                     </div>
 
-{{--                    <a href="https://koochitatv.com" style="display: flex;justify-content: center;margin: 10px;">--}}
-{{--                        <img src="{{URL::asset('images/mainPics/koochitatvdefault.webp')}}" alt="koochitatv" class="image">--}}
-{{--                    </a>--}}
-
                     <div class="bottomLightBorder headerFilter" >
-{{--                        <div class="col-md-12 hl_compareBtn" id="compareButton">{{__('هم‌اکنون مقایسه کنید')}}</div>--}}
                         <div id="filterBox" style="flex-direction: column; display: none;">
                             <div style="font-size: 15px; margin: 10px 0px;">
                                 <span>{{__('فیلترهای اعمال شده')}}</span>
@@ -416,8 +411,10 @@
                                 @endif
                             </div>
                         </div>
-
                     @endforeach
+                    
+
+                    <div id="pos-article-display-sticky-16137"></div>
 
                 </div>
                 <div class="ad iab_medRec">
