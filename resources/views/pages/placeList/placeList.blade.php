@@ -412,17 +412,9 @@
                             </div>
                         </div>
                     @endforeach
-                    
+                </div>
+                <div id="pos-article-display-sticky-16137"></div>
 
-                    <div id="pos-article-display-sticky-16137"></div>
-
-                </div>
-                <div class="ad iab_medRec">
-                    <div id="gpt-ad-300x250-300x600-bottom" class="adInner gptAd delayAd"></div>
-                </div>
-                <div class="ad iab_supSky">
-                    <div id="gpt-ad-160x600" class="adInner gptAd delayAd"></div>
-                </div>
             </div>
         </div>
 
