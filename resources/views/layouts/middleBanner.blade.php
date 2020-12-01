@@ -306,7 +306,29 @@
                 </div>
             </div>
 
-            {{--banner_2--}}
+            {{--banner_6--}}
+            @if(!isset($middleBan['2']) || $middleBan['2'] == null)
+                <div class="middleBannerPhotoBanner">
+                    <div class="dropping-texts">
+                        <div>بشینیم</div>
+                        <div>برنامه ریزی کنیم</div>
+                        <div>سفر کنیم</div>
+                        <div>بخندیم</div>
+                    </div>
+                    با هم
+                </div>
+            @else
+                <div class="middleBannerPhotoBanner middleBannerPB">
+                    @if($middleBan['2']['link'] != '')
+                        <a href="{{$middleBan['2']['link']}}" target="_blank" >
+                            <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
+                        </a>
+                    @else
+                        <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
+                    @endif
+                </div>
+            @endif
+
             <div class="siteArticlesMainDiv">
 {{--                @if(isset($articleBanner) && count($articleBanner) > 0)--}}
                 @if(false)
@@ -353,28 +375,9 @@
                 </div>
             </div>
 
-            {{--banner_6--}}
-            @if(!isset($middleBan['2']) || $middleBan['2'] == null)
-                <div class="middleBannerPhotoBanner">
-                    <div class="dropping-texts">
-                        <div>بشینیم</div>
-                        <div>برنامه ریزی کنیم</div>
-                        <div>سفر کنیم</div>
-                        <div>بخندیم</div>
-                    </div>
-                    با هم
-                </div>
-            @else
-                <div class="middleBannerPhotoBanner middleBannerPB">
-                    @if($middleBan['2']['link'] != '')
-                        <a href="{{$middleBan['2']['link']}}" target="_blank" >
-                            <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
-                        </a>
-                    @else
-                        <img data-src="{{$middleBan['2']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
-                    @endif
-                </div>
-            @endif
+            <div style="display: flex; justify-content: center; align-items: center">
+                <div id='mediaad-Rvtf'></div>
+            </div>
 
             <div id="tabiatSuggestion">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">

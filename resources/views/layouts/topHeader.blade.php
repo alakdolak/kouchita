@@ -436,4 +436,12 @@
         head.appendChild(script);
     })();
 </script>
+<script type="text/javascript">
+    var head = document.getElementsByTagName("head")[0];
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async=1;
+    script.src = "https://s1.mediaad.org/serve/koochita.com/loader.js" ;
+    head.appendChild(script);
+</script>
 
