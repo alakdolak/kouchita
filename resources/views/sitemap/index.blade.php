@@ -12,4 +12,7 @@
     <sitemap>
         <loc>{{url('/sitemap.xml/city')}}</loc>
     </sitemap>
+    <sitemap>
+        <loc>{{url('/sitemap.xml/village')}}</loc>
+    </sitemap>
 </sitemapindex>
