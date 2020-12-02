@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css?v='.$fileVersions)}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v='.$fileVersions)}}'/>
 
-    <script src="{{URL::asset('js/angular.js')}}"></script>
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
 
@@ -141,9 +140,9 @@
             </div>
         </div>
 
-        <div id="BODYCON" class="row placeListBody" ng-app="mainApp">
-            <div class=" col-md-9 col-sm-8 rightLightBorder placeListBodyContentSection PlaceController" ng-controller="PlaceController as cntr">
-                <div id="listBody" infinite-scroll="myPagingFunction()" class="coverpage">
+        <div id="BODYCON" class="row placeListBody">
+            <div class="col-md-9 col-sm-8 rightLightBorder placeListBodyContentSection PlaceController">
+                <div id="listBody" class="coverpage">
                     <div id="FilterTopController" class="placeListSortDiv bottomLightBorder hideOnPhone">
                         <div class="ordering sorting" style="font-weight: bold">
                             {{__('مرتب سازی بر اساس')}}:
@@ -178,68 +177,6 @@
                     </div>
                     <div class="option">
                         <div class="row">
-                            <div ng-repeat="place in packets" class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
-                                <div class="poi listBoxesMainDivs">
-                                    <div class="contentImgSection">
-                                        <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important; height: 100%">
-                                            <div class="contentImg">
-                                                <img ng-src='[[place.pic]]' class='resizeImgClass' alt='[[place.keyword]]' onload="fitThisImg(this)" style="width: 100%">
-                                            </div>
-                                        </a>
-
-                                        @if(auth()->check())
-                                            <div class="bookMarkIconOnPic [[place.bookMark]]" onclick="bookMarkThisPlace(this)" value="[[place.id]]"></div>
-                                        @endif
-                                    </div>
-
-                                    <div class="detail">
-                                        <div class="contentDetailName lessShowText" title="[[place.name]]">
-                                            <a class="poiTitle" target="_blank"
-                                               href="[[place.redirect]]">
-                                                [[place.name]]
-                                            </a>
-                                        </div>
-
-                                        <div class="item rating-count">
-                                            <div class="rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="[[place.ngClass]]"></span>
-                                                </div>
-                                            </div>
-                                            <div target="_blank" class="review_count">
-                                                [[place.reviews]]
-                                                <span>{{__('نقد')}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 5px">
-                                            {{__('استان')}}:
-                                            <span>[[place.state]]</span>
-                                        </div>
-                                        <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 3px">
-                                            {{__('شهر')}}:
-                                            <span>[[place.city]]</span>
-                                        </div>
-                                        <div class="booking"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="notingToShowFilter" class="notingToShowDiv hidden">
-                                <div class="notingToShowImgDiv">
-                                    <img src="{{URL::asset('images/mainPics/notElemList.png')}}" style="width: 100%;">
-                                </div>
-                                <div class="notingToShowTextDiv">
-                                    <span style="font-weight: bold; font-size: 1.5em;">
-                                        {{__('با توجه به فیلتر های اعمال شده نتیجه ای برای نمایش موجود نمی باشد.')}}
-                                    </span>
-                                    <span class="hideOnScreen">
-                                        {{__('لطفا از پنل اعمال فیلتر، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
-                                    </span>
-                                    <span class="hideOnPhone">
-                                        {{__('لطفا از پنل سمت چپ، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
-                                    </span>
-                                </div>
-                                {{--                                <div class="notingToShowClose iconClose"></div>--}}
-                            </div>
                             @if($contentCount == 0)
                                 <div id="notingToShowInPlace" class="notingToShowDiv">
                                     <div class="notingToShowImgDiv">
@@ -258,6 +195,69 @@
                                     </div>
                                     {{--                                <div class="notingToShowClose iconClose"></div>--}}
                                 </div>
+                            @else
+                                <div id="listElementSample" style="display: none">
+                                    <div class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
+                                        <div class="poi listBoxesMainDivs">
+                                            <div class="contentImgSection">
+                                                <a href="##url##" class="thumbnail" style="margin-bottom: 5px !important; height: 100%">
+                                                    <div class="contentImg">
+                                                        <img src='##pic##' class='resizeImgClass' alt='##keyword##' onload="fitThisImg(this)" style="width: 100%">
+                                                    </div>
+                                                </a>
+                                                @if(auth()->check())
+                                                    <div class="bookMarkIconOnPic ##bookMark##" onclick="bookMarkThisPlace(this)" value="##id##"></div>
+                                                @endif
+                                            </div>
+
+                                            <div class="detail">
+                                                <div class="contentDetailName lessShowText" title="##name##">
+                                                    <a class="poiTitle" target="_blank" href="##url##">##name##</a>
+                                                </div>
+
+                                                <div class="item rating-count">
+                                                    <div class="rating-widget">
+                                                        <div class="prw_rup prw_common_location_rating_simple">
+                                                            <span class="##ngClass##"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div target="_blank" class="review_count">
+                                                        ##reviews##
+                                                        <span>{{__('نقد')}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 5px">
+                                                    {{__('استان')}}:
+                                                    <span>##state##</span>
+                                                </div>
+                                                <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 3px">
+                                                    {{__('شهر')}}:
+                                                    <span>##city##</span>
+                                                </div>
+                                                <div class="booking"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="listBodyToShowCards"></div>
+                                <div id="notingToShowFilter" class="notingToShowDiv hidden">
+                                    <div class="notingToShowImgDiv">
+                                        <img src="{{URL::asset('images/mainPics/notElemList.png')}}" style="width: 100%;">
+                                    </div>
+                                    <div class="notingToShowTextDiv">
+                                    <span style="font-weight: bold; font-size: 1.5em;">
+                                        {{__('با توجه به فیلتر های اعمال شده نتیجه ای برای نمایش موجود نمی باشد.')}}
+                                    </span>
+                                        <span class="hideOnScreen">
+                                        {{__('لطفا از پنل اعمال فیلتر، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
+                                    </span>
+                                        <span class="hideOnPhone">
+                                        {{__('لطفا از پنل سمت چپ، فیلترها را برای رسیدن به نتیجه کاهش دهید')}}
+                                    </span>
+                                    </div>
+                                    {{--                                <div class="notingToShowClose iconClose"></div>--}}
+                                </div>
                             @endif
 
                         </div>
@@ -266,7 +266,7 @@
                 <div id="bottomMainList" style="width: 100%; height: 5px;"></div>
             </div>
 
-            <div class="col-md-3 col-sm-4 placeListBodyFilterSection hideOnPhone" id="FilterController" ng-controller="FilterController">
+            <div class="col-md-3 col-sm-4 placeListBodyFilterSection hideOnPhone" id="FilterController">
 
                 <div id="EATERY_FILTERS_CONT" class="eatery_filters lhr">
 
@@ -396,7 +396,7 @@
                             <div class="filterContent ui_label_group inline">
                                 @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
                                     <div class="filterItem lhrFilter filter selected">
-                                        <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                        <input onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                         <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                     </div>
                                 @endfor
@@ -404,7 +404,7 @@
                                 @if(count($feature->subFeat) > 5)
                                     @for($i = 5; $i < count($feature->subFeat); $i++)
                                         <div class="filterItem lhrFilter filter extraItem{{$feature->id}} hidden">
-                                            <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                            <input onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                             <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                         </div>
                                     @endfor
@@ -420,8 +420,6 @@
 
     </div>
 
-{{--    @include('hotelDetailsPopUp')--}}
-
     @include('layouts.footer.layoutFooter')
 </div>
 
@@ -436,35 +434,17 @@
         $('#searchspan').animate({height: '100vh'});
     });
 
-    var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {
-        $interpolateProvider.startSymbol('[[');
-        $interpolateProvider.endSymbol(']]');
-    });
-
     var specialFilters = [];
     var page = 1;
     var placeMode = '{{$placeMode}}';
     var floor = 1;
     var rateFilter = 0;
-    @if($kindPlaceId == 4 || $kindPlaceId == 1 || $kindPlaceId == 12 || $kindPlaceId == 3)
-        var sort = "seen";
-    @elseif($kindPlaceId == 6)
-        var sort = "review";
-    @elseif($kindPlaceId == 11)
-        var sort = "lessSeen";
-    @else
-        var sort = "alphabet";
-    @endif
-
     var featureFilter = [];
     var nameFilter = '';
     var materialFilter = [];
     var data;
     var init = true;
     var lock = false;
-    var take = 4;
-    var inSearch = false;
-    var isFinish = false;
     var nearPlaceIdFilter = 0;
     var nearKindPlaceIdFilter = 0;
     var kindPlaceId = '{{$kindPlace->id}}';
@@ -473,6 +453,16 @@
         var cityId = '{{$city->id}}';
     @else
         var cityId = 0;
+    @endif
+
+    @if($kindPlaceId == 4 || $kindPlaceId == 1 || $kindPlaceId == 12 || $kindPlaceId == 3)
+        var sort = "seen";
+    @elseif($kindPlaceId == 6)
+        var sort = "review";
+    @elseif($kindPlaceId == 11)
+        var sort = "lessSeen";
+    @else
+        var sort = "alphabet";
     @endif
 
     let url = window.location;
@@ -490,7 +480,6 @@
             'value' : 1
         };
     }
-
 
     if(placeMode == 'hotel'){
         specialFilters = [{
@@ -510,231 +499,8 @@
             newSearch();
     }
 
-
-    app.controller('FilterController', function ($scope, $rootScope) {
-
-        $scope.isDisable = function () {
-            return lock;
-        };
-
-        $scope.RateFilter = function(value) {
-            rateFilter = value;
-            page = 1;
-            floor = 1;
-            init = true;
-            isFinish = false;
-            inSearch = false;
-
-            $rootScope.$broadcast('myPagingFunctionAPI');
-        };
-
-    });
-
-    app.controller('PlaceController', function ($scope, $http) {
-
-        $scope.show = false;
-        $scope.packets = [];
-        $scope.oldScrollVal = 600;
-
-        $scope.sortFunc = function(value) {
-            sort = value;
-            page = 1;
-            floor = 1;
-            init = true;
-            isFinish = false;
-            inSearch = false;
-
-            $scope.$broadcast('myPagingFunctionAPI');
-        };
-
-        $scope.myPagingFunction = function () {
-            var errorNum = 3;
-
-            if(isFinish || inSearch)
-                return;
-
-            inSearch = true;
-            document.getElementById('fullPageLoader').style.display = 'flex';
-
-            createFilter();
-
-            if (page == 1)
-                $scope.packets = [];
-
-            var scroll = $(window).scrollTop();
-
-            data = $.param({
-                pageNum: page,
-                take: take,
-                specialFilters: specialFilters,
-                rateFilter: rateFilter,
-                nameFilter: nameFilter,
-                materialFilter: materialFilter,
-                sort: sort,
-                featureFilter: featureFilter,
-                nearPlaceIdFilter: nearPlaceIdFilter,
-                nearKindPlaceIdFilter: nearKindPlaceIdFilter,
-                city: cityId,
-                mode: '{{$mode}}',
-                kindPlaceId: '{{$kindPlace->id}}'
-            });
-
-            var requestURL = '{{route('place.list.getElems')}}';
-
-            const config = {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-                    'X-CSRF-TOKEN': '{{csrf_token()}}'
-                }
-            };
-
-            $http.post(requestURL, data, config).then(function (response) {
-
-                if (response.data != null && response.data.places != null && response.data.places.length > 0)
-                    $scope.show = true;
-
-                $('.totalPlaceCount').text(response.data.totalCount);
-                $('.filterShowCount').text(response.data.placeCount);
-
-                @if($contentCount > 0)
-                    $('#notingToShowFilter').addClass('hidden');
-                    if(response.data.placeCount == 0 && response.data.totalCount > 0)
-                        $('#notingToShowFilter').removeClass('hidden');
-                @endif
-
-                for(j = 0; j < response.data.places.length; j++){
-                    var k = $scope.packets.length;
-                    $scope.packets[$scope.packets.length] = response.data.places[j];
-
-                    $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
-                    $scope.packets[k].bookMark = $scope.packets[k].bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
-                }
-
-                if (response.data.places.length != 4) {
-                    isFinish = true;
-                    $scope.$broadcast('finalizeReceive');
-                    return;
-                }
-
-                data = $.param({
-                    pageNum: ++page,
-                    take: take,
-                    specialFilters: specialFilters,
-                    rateFilter: rateFilter,
-                    nameFilter: nameFilter,
-                    materialFilter: materialFilter,
-                    sort: sort,
-                    featureFilter: featureFilter,
-                    nearPlaceIdFilter: nearPlaceIdFilter,
-                    nearKindPlaceIdFilter: nearKindPlaceIdFilter,
-                    city: cityId,
-                    mode: '{{$mode}}',
-                    kindPlaceId: '{{$kindPlace->id}}'
-                });
-                $http.post(requestURL, data, config).then(function (response) {
-                    if (response.data != null && response.data.places != null && response.data.places.length > 0)
-                        $scope.show = true;
-
-                    for(j = 0; j < response.data.places.length; j++){
-                        var k = $scope.packets.length;
-                        $scope.packets[$scope.packets.length] = response.data.places[j];
-
-                        $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
-                        $scope.packets[k].bookMark = $scope.packets[k].bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
-                    }
-
-                    if (response.data.places.length != 4) {
-                        isFinish = true;
-                        $scope.$broadcast('finalizeReceive');
-                        return;
-                    }
-
-                    data = $.param({
-                        pageNum: ++page,
-                        take: take,
-                        specialFilters: specialFilters,
-                        rateFilter: rateFilter,
-                        nameFilter: nameFilter,
-                        materialFilter: materialFilter,
-                        sort: sort,
-                        featureFilter: featureFilter,
-                        nearPlaceIdFilter: nearPlaceIdFilter,
-                        nearKindPlaceIdFilter: nearKindPlaceIdFilter,
-                        city: cityId,
-                        mode: '{{$mode}}',
-                        kindPlaceId: '{{$kindPlace->id}}'
-                    });
-
-                    $http.post(requestURL, data, config).then(function (response) {
-
-                        if (response.data != null && response.data.places != null && response.data.places.length > 0)
-                            $scope.show = true;
-
-
-                        for(j = 0; j < response.data.places.length; j++){
-                            var k = $scope.packets.length;
-                            $scope.packets[$scope.packets.length] = response.data.places[j];
-
-                            $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
-                            $scope.packets[k].bookMark = $scope.packets[k].bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
-                        }
-
-                        $scope.$broadcast('finalizeReceive');
-                        inSearch = false;
-
-                        $('#listBody').append('<div id="pos-article-display-16123"></div>');
-
-                    }).catch(function (err) {
-                        if(errorNum != 0){
-                            errorNum--;
-                            $scope.myPagingFunction();
-                        }
-                        else{
-                            document.getElementById('fullPageLoader').style.display = 'none';
-                            console.log(err);
-                        }
-                    });
-
-                }).catch(function (err) {
-                    if(errorNum != 0){
-                        errorNum--;
-                        $scope.myPagingFunction();
-                    }
-                    else{
-                        document.getElementById('fullPageLoader').style.display = 'none';
-                        console.log(err);
-                    }
-                });
-
-            }).catch(function (err) {
-                if(errorNum != 0){
-                    errorNum--;
-                    $scope.myPagingFunction();
-                }
-                else{
-                    document.getElementById('fullPageLoader').style.display = 'none';
-                    console.log(err);
-                }
-            });
-        };
-
-        $scope.$on('finalizeReceive', function (event) {
-            page++;
-            document.getElementById('fullPageLoader').style.display = 'none';
-            floor = page;
-        });
-
-        $scope.$on('myPagingFunctionAPI', function (event) {
-            $scope.myPagingFunction();
-        });
-    });
-
     function nameFilterFunc(value){
-        if(value.trim().length > 2)
-            nameFilter = value;
-        else
-            nameFilter = '';
-
+        nameFilter = value.trim().length > 2 ? value : '';
         newSearch();
     }
 
@@ -794,11 +560,9 @@
 
     function materialFilterFunc(_value){
         _value = _value.trim();
-        if(_value.length > 2){
-            if(materialFilter.indexOf(_value) == -1) {
-                materialFilter.push(_value);
-                createChoosenMaterialBox();
-            }
+        if(_value.length > 2 &&materialFilter.indexOf(_value) == -1) {
+            materialFilter.push(_value);
+            createChoosenMaterialBox();
         }
         closeFoodMaterialSearch();
     }
@@ -809,9 +573,7 @@
     }
 
     function doKindFilter(_kind, _value){
-
         var is = false;
-
         for(var i = 0; i < specialFilters.length; i++){
             //this if for radioboxes
             if((_kind == 'eatable' && specialFilters[i]['kind'] == 'eatable') ||
@@ -880,9 +642,9 @@
         $('.filterShow').html('');
         if(rateFilter != 0) {
             text += '<div class="filtersExist">\n' +
-                '<div>امتیاز کاربر</div>\n' +
-                '<div onclick="cancelRateFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
-                '</div>';
+                    '<div>امتیاز کاربر</div>\n' +
+                    '<div onclick="cancelRateFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
+                    '</div>';
             hasFilter = true;
         }
 
@@ -925,10 +687,7 @@
         }
 
         $('.filterShow').html(text);
-        if(hasFilter)
-            $('#filterBox').css('display', 'block');
-        else
-            $('#filterBox').css('display', 'none');
+        $('#filterBox').css('display', hasFilter ? 'block' : 'none');
     }
 
     function cancelKindFilter(_kind, _value, _ref = 'refresh'){
@@ -1074,14 +833,100 @@
         newSearch();
     }
 
+    function showMoreItems(_id) {
+        $(".extraItem" + _id).removeClass('hidden').addClass('selected');
+        $(".moreItems" + _id).addClass('hidden');
+    }
+
+    function showLessItems(_id) {
+        $(".extraItem" + _id).addClass('hidden').removeClass('selected');
+        $(".moreItems" + _id).removeClass('hidden');
+    }
+
+</script>
+
+<script>
+    var getingListItemAjax = null;
+    var isFinish = false;
+    var inTake = false;
+    var take = 24;
+    var listElementSample = $('#listElementSample').html();
+    $('#listElementSample').remove();
+
+    function getPlaceListItems(){
+        if(!isFinish && !inTake){
+            inTake = true;
+            openLoading();
+            getingListItemAjax = $.ajax({
+                type: "POST",
+                url: `{{route("place.list.getElems")}}`,
+                data:{
+                    _token: '{{csrf_token()}}',
+                    pageNum: page,
+                    take: take,
+                    specialFilters: specialFilters,
+                    rateFilter: rateFilter,
+                    nameFilter: nameFilter,
+                    materialFilter: materialFilter,
+                    sort: sort,
+                    featureFilter: featureFilter,
+                    nearPlaceIdFilter: nearPlaceIdFilter,
+                    nearKindPlaceIdFilter: nearKindPlaceIdFilter,
+                    city: cityId,
+                    mode: '{{$mode}}',
+                    kindPlaceId: '{{$kindPlace->id}}'
+                },
+                complete: e =>{
+                    inTake = false;
+                    getingListItemAjax = null;
+                    closeLoading();
+                },
+                success: response => createListItemCard(response),
+                error: err => console.error(err)
+            });
+        }
+    }
+
+    function createListItemCard(_result){
+        var cards = '';
+        var places = _result.places;
+
+        if(places.length != take)
+            isFinish = true;
+        else
+            page++;
+
+
+        $('#notingToShowFilter').addClass('hidden');
+        if (_result.placeCount == 0 && _result.totalCount > 0)
+            $('#notingToShowFilter').removeClass('hidden');
+
+
+        $('.totalPlaceCount').text(_result.totalCount);
+        $('.filterShowCount').text(_result.placeCount);
+
+        places.map(item => {
+            var text = listElementSample;
+            item.ngClass = `ui_bubble_rating bubble_${item.avgRate}0`;
+            item.bookMark = item.bookMark == 1 ? 'BookMarkIcon' : 'BookMarkIconEmpty';
+            for (var x of Object.keys(item))
+                text = text.replace(new RegExp(`##${x}##`, "g"), item[x]);
+
+            cards += text;
+        });
+
+        $('#listBodyToShowCards').append(cards);
+    }
+
     function newSearch(){
         page = 1;
-        floor = 1;
-        init = true;
         isFinish = false;
-        inSearch = false;
-
-        angular.element($('.PlaceController')).scope().myPagingFunction();
+        inTake = false;
+        $('#listBodyToShowCards').html('');
+        if(getingListItemAjax != null)
+            getingListItemAjax.abort();
+        createFilter();
+        getPlaceListItems();
     }
 
     function bookMarkThisPlace(_element){
@@ -1109,44 +954,17 @@
         })
     }
 
-    function saveToTripList(element){
-        var placeId = $(element).attr('value');
-        saveToTripPopUp(placeId, kindPlaceId)
-    }
 
-    function showMoreItems(_id) {
-        $(".extraItem" + _id).removeClass('hidden').addClass('selected');
-        $(".moreItems" + _id).addClass('hidden');
-    }
-    function showLessItems(_id) {
-        $(".extraItem" + _id).addClass('hidden').removeClass('selected');
-        $(".moreItems" + _id).removeClass('hidden');
-    }
+    $(window).on('scroll', e => {
+        var bottomOfList = document.getElementById('bottomMainList').getBoundingClientRect().top;
+        var windowHeight = $(window).height();
 
+        if(bottomOfList-windowHeight < 0 && !inTake && !isFinish)
+            getPlaceListItems();
+    });
 
-    var mod;
-    mod = angular.module("infinite-scroll", []), mod.directive("infiniteScroll", ["$rootScope", "$window", "$timeout", function (i, n, e) {
-        return {
-            link: function (t, l, o) {
-                var r, c, f, a;
-                return n = angular.element(n), f = 0, null != o.infiniteScrollDistance && t.$watch(o.infiniteScrollDistance, function (i) {
-                    return f = parseInt(i, 10)
-                }), a = !0, r = !1, null != o.infiniteScrollDisabled && t.$watch(o.infiniteScrollDisabled, function (i) {
-                    return a = !i, a && r ? (r = !1, c()) : void 0
-                }), c = function () {
-                    var e, c, u, d;
-                    return d = n.height() + n.scrollTop(), e = l.offset().top + l.height(), c = e - d, u = n.height() * f >= c, u && a ? i.$$phase ? t.$eval(o.infiniteScroll) : t.$apply(o.infiniteScroll) : u ? r = !0 : void 0
-                }, n.on("scroll", c), t.$on("$destroy", function () {
-                    return n.off("scroll", c)
-                }), e(function () {
-                    return o.infiniteScrollImmediateCheck ? t.$eval(o.infiniteScrollImmediateCheck) ? c() : void 0 : c()
-                }, 0)
-            }
-        }
-    }])
-
+    $(window).ready(getPlaceListItems);
 </script>
-
 
 </body>
 </html>

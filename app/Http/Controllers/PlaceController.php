@@ -3224,6 +3224,8 @@ class PlaceController extends Controller {
 
     public function getPlaceListElems(Request $request)
     {
+        $startTime = microtime(true);
+
         $page = (int)$request->pageNum;
         $take = (int)$request->take;
         $reqFilter = $request->featureFilter;
@@ -3234,14 +3236,11 @@ class PlaceController extends Controller {
         $materialFilter = $request->materialFilter;
         $nearPlaceIdFilter = $request->nearPlaceIdFilter;
         $nearKindPlaceIdFilter = $request->nearKindPlaceIdFilter;
-        $featureFilters = array();
-        $placeIds = array();
-        $places = array();
-
-//        $materialFilter = null;
+        $featureFilters = [];
+        $placeIds = [];
+        $places = [];
 
         $kindPlace = Place::find($request->kindPlaceId);
-        $file = $kindPlace->fileName;
         $table = $kindPlace->tableName;
 
         $activityId = Activity::whereName('نظر')->first()->id;
@@ -3265,10 +3264,9 @@ class PlaceController extends Controller {
             $totalCount = DB::table($table)->where('cityId', $request->city)->count();
         }
 
-        if(count($placeIds) == 0){
-            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
-            return;
-        }
+        if(count($placeIds) == 0)
+            return response()->json(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
+
 
         //filter with material in mahalifood
         if($kindPlace->id == 11 && $materialFilter != null && count($materialFilter) > 0) {
@@ -3283,10 +3281,8 @@ class PlaceController extends Controller {
                     array_push($placeIds, $item->mahaliFoodId);
             }
 
-            if(count($placeIds) == 0){
-                echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
-                return;
-            }
+            if(count($placeIds) == 0)
+                return response()->json(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
         }
 
         //special filters for each kind place
@@ -3313,10 +3309,8 @@ class PlaceController extends Controller {
                                     ->toArray();
             }
         }
-        if(count($placeIds) == 0){
-            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
-            return;
-        }
+        if(count($placeIds) == 0)
+            return response()->json(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
 
         // second get places have selected features
         if($reqFilter != null && count($reqFilter) > 0){
@@ -3334,17 +3328,15 @@ class PlaceController extends Controller {
                 }
             }
         }
-        if(count($placeIds) == 0){
-            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
-            return;
-        }
+        if(count($placeIds) == 0)
+            return response()->json(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
 
         // if have rate filter
         if($rateFilter != 0){
             $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
             $p = DB::select('SELECT log.placeId as placeId, AVG(qua.ans) as rate FROM log INNER JOIN questionUserAns AS qua ON log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND qua.questionId IN (' . implode(",", $questionRate) . ') AND qua.logId = log.id GROUP BY log.placeId ORDER BY rate DESC');
 
-            $rateFP = array();
+            $rateFP = [];
             foreach ($placeIds as $item){
                 array_push($rateFP, ['id' => $item, 'rate' => 2]);
                 foreach ($p as $item2){
@@ -3354,22 +3346,21 @@ class PlaceController extends Controller {
                 }
             }
 
-            $placeIds = array();
+            $placeIds = [];
             foreach ($rateFP as $item){
                 if($item['rate'] > ($rateFilter-1))
                     array_push($placeIds, $item['id']);
             }
         }
-        if(count($placeIds) == 0){
-            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
-            return;
-        }
+        if(count($placeIds) == 0)
+            return response()->json(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
+
         $placeCount = count($placeIds);
 
+        $filterTime = microtime(true);
+
         // and sort results by kind
-        if($sort == 'alphabet')
-            $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
-        else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
+        if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
             $nearKind = Place::find($nearKindPlaceIdFilter);
             $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
             $C1 = (float)$nearPlace->C;
@@ -3380,6 +3371,8 @@ class PlaceController extends Controller {
 
             $places = \DB::select('SELECT *, acos(' . sin($D) . ' * sin(D / 180 * 3.14) + ' . cos($D) . ' * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - ' . ($C) . ')) * 6371 as distance FROM ' . $table . ' WHERE id IN (' . implode(",", $placeIds) . ') ORDER BY distance LIMIT ' . $take . ' OFFSET ' . ($page-1) * $take);
         }
+        else if($sort == 'alphabet')
+            $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
         else if($sort == 'review')
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('reviewCount')->skip(($page - 1) * $take)->take($take)->get();
         else if($sort == 'seen')
@@ -3390,6 +3383,12 @@ class PlaceController extends Controller {
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('fullRate')->skip(($page - 1) * $take)->take($take)->get();
 
         $bookMarkReferenceId = BookMarkReference::where('tableName', $table)->first();
+
+        $sortTime = microtime(true);
+
+        $uId = 0;
+        if(\auth()->check())
+            $uId = Auth::id();
 
         foreach ($places as $place) {
             $place->pic = getPlacePic($place->id, $kindPlace->id);
@@ -3403,20 +3402,27 @@ class PlaceController extends Controller {
                 $place->city = '';
                 $place->state = '';
             }
-            $place->avgRate = (int)$place->fullRate;
-            $place->bookMark = 0;
-            $place->redirect = createUrl($kindPlace->id, $place->id, 0, 0);
-            if(\auth()->check()){
-                $u = \auth()->user();
-                $place->bookMark = BookMark::where('userId', $u->id)
-                                            ->where('bookMarkReferenceId', $bookMarkReferenceId->id)
-                                            ->where('referenceId', $place->id)
-                                            ->count();
+            $place->avgRate = (int)$place->fullRate == 0 ? 2 : (int)$place->fullRate;
+            $place->url = route('placeDetails', ['kindPlaceId' => $kindPlace->id, 'placeId' => $place->id]);
+            if($uId != 0) {
+                $place->bookMark = BookMark::where('userId', $uId)
+                    ->where('bookMarkReferenceId', $bookMarkReferenceId->id)
+                    ->where('referenceId', $place->id)
+                    ->count();
             }
+            else
+                $place->bookMark = 0;
         }
 
-        echo json_encode(['places' => $places, 'placeCount' => $placeCount, 'totalCount' => $totalCount]);
-        return;
+        $formatTime = microtime(true);
+
+        $times = [
+            'filter' => $filterTime - $startTime,
+            'sort' => $sortTime - $filterTime,
+            'format' => $formatTime - $sortTime,
+        ];
+
+        return response()->json(['places' => $places, 'placeCount' => $placeCount, 'totalCount' => $totalCount, 'times' => $times]);
     }
 
 }
