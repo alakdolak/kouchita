@@ -22,6 +22,7 @@ class SitemapController extends Controller
     {
         $kindPlaces = Place::all();
         $pl = array();
+        $lists = [];
         $count = 0;
         foreach ($kindPlaces as $kindPlace) {
             if ($kindPlace->tableName != null) {
@@ -32,12 +33,14 @@ class SitemapController extends Controller
                         $place->url = url('show-place-details/' . $kindPlace->fileName . '/' . $slug);
                         $count++;
                         array_push($pl, $place);
+                        array_push($lists, $place->url);
                     }
                 }
             }
         }
 
-        return response()->view('sitemap.places', ['places' => $pl])->header('Content-Type', 'application/xml');
+//        return response()->view('sitemap.places', ['places' => $pl])->header('Content-Type', 'application/xml');
+        return response()->view('sitemap.siteMapUrls', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 
     public function lists()
@@ -63,20 +66,20 @@ class SitemapController extends Controller
                     array_push($lists, $l);
                 }
             }
+        }
 
-            $cities = Cities::where('stateId', $item->id)->where('isVillage', 0)->get();
-            foreach ($cities as $city) {
-                foreach ($kindPlaces as $kindPlace){
-                    if($kindPlace->tableName != null){
-                        $slug = urlencode($city->name);
-                        $l = url('placeList/' . $kindPlace->id . '/city/' . $slug);
-                        array_push($lists, $l);
-                    }
+        $cities = Cities::where('isVillage', 0)->get();
+        foreach ($cities as $city) {
+            foreach ($kindPlaces as $kindPlace){
+                if($kindPlace->tableName != null){
+                    $slug = urlencode($city->name);
+                    $l = url('placeList/' . $kindPlace->id . '/city/' . $slug);
+                    array_push($lists, $l);
                 }
             }
         }
 
-        return response()->view('sitemap.lists', ['lists' => $lists])->header('Content-Type', 'application/xml');
+        return response()->view('sitemap.siteMapUrls', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 
     public function posts()
@@ -89,11 +92,12 @@ class SitemapController extends Controller
         foreach ($post as $item) {
             if($item->slug != null && $item->slug != '') {
                 $l = url('/safarnameh/show/'.$item->id);
-                array_push($lists, [$l, $item->created_at]);
+//                array_push($lists, [$l, $item->created_at]);
+                array_push($lists, $l);
             }
         }
 
-        return response()->view('sitemap.posts', ['lists' => $lists])->header('Content-Type', 'application/xml');
+        return response()->view('sitemap.siteMapUrls', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 
     public function city()
@@ -104,17 +108,30 @@ class SitemapController extends Controller
 
         foreach ($state as $item){
             $slug = urlencode($item->name);
-            $l = url('cityPage/state/' . $slug);
+            $l = url('cityPage/state/'.$slug);
             array_push($lists, $l);
-
-            $cities = Cities::where('stateId', $item->id)->get();
-            foreach ($cities as $city) {
-                $slug = urlencode($city->name);
-                $l = url('cityPage/city/' . $slug);
-                array_push($lists, $l);
-            }
         }
 
-        return response()->view('sitemap.city', ['lists' => $lists])->header('Content-Type', 'application/xml');
+        $cities = Cities::where('isVillage', 0)->get();
+        foreach ($cities as $city) {
+            $slug = urlencode($city->name);
+            $l = url('cityPage/city/'.$slug);
+            array_push($lists, $l);
+        }
+
+        return response()->view('sitemap.siteMapUrls', ['lists' => $lists])->header('Content-Type', 'application/xml');
+    }
+
+    public function village()
+    {
+        $lists = [];
+        $cities = Cities::where('isVillage', '!=', 0)->get();
+        foreach ($cities as $city) {
+            $slug = urlencode($city->name);
+            $l = url('cityPage/city/'.$slug);
+            array_push($lists, $l);
+        }
+
+        return response()->view('sitemap.siteMapUrls', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 }

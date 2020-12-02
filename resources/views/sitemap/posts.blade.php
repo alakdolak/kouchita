@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     @foreach ($lists as $item)
         <url>
-            <loc>{{$item[0]}}</loc>
-            <lastmod>{{$item[1]}}</lastmod>
+            <loc>{{$item[0]}}/</loc>
+{{--            <lastmod>{{$item[1]}}</lastmod>--}}
             <changefreq>weekly</changefreq>
             <priority>0.9</priority>
         </url>

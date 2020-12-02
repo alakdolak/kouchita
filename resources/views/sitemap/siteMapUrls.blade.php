@@ -3,7 +3,6 @@
     @foreach ($lists as $item)
         <url>
             <loc>{{$item}}/</loc>
-{{--            <lastmod>2020-03-11 11:06:02</lastmod>--}}
             <changefreq>weekly</changefreq>
             <priority>0.9</priority>
         </url>

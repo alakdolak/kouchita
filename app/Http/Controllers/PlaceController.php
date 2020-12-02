@@ -73,9 +73,9 @@ class PlaceController extends Controller {
             return \redirect(\url('/'));
 
         if($place->slug != null)
-            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug));
+            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug), 301);
         else
-            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->id));
+            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->id), 301);
     }
 
     public function showPlaceDetails($kindPlaceName, $slug, Request $request){
