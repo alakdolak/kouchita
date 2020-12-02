@@ -3255,11 +3255,14 @@ class PlaceController extends Controller {
             $totalCount = DB::table($table)->count();
         }
         else if($request->mode == 'state'){
+            $state = State::find($request->city);
             $cities = Cities::where('stateId', $request->city)->pluck('id')->toArray();
             $placeIds = DB::table($table)->whereIn('cityId', $cities)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
             $totalCount = DB::table($table)->whereIn('cityId', $cities)->count();
         }
         else {
+            $city = Cities::find($request->city);
+            $state = $city->getState;
             $placeIds = DB::table($table)->where('cityId', $request->city)->where('name', 'LIKE', '%' . $nameFilter . '%')->pluck('id')->toArray();
             $totalCount = DB::table($table)->where('cityId', $request->city)->count();
         }
@@ -3390,17 +3393,34 @@ class PlaceController extends Controller {
         if(\auth()->check())
             $uId = Auth::id();
 
+        $nonePicUrl = URL::asset('images/mainPics/nopicv01.jpg');
         foreach ($places as $place) {
-            $place->pic = getPlacePic($place->id, $kindPlace->id);
-            $place->reviews = $place->reviewCount;
-            $cityObj = Cities::whereId($place->cityId);
-            if($cityObj != null) {
-                $place->city = $cityObj->name;
-                $place->state = $cityObj->getState->name;
+            $place->pic = $nonePicUrl;
+            if($place->file != 'none' && $place->file != null){
+                $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName/$place->file/f-$place->picNumber";
+                if (is_file($location))
+                    $place->pic = URL::asset("_images/$kindPlace->fileName/$place->file/f-$place->picNumber");
             }
-            else{
-                $place->city = '';
-                $place->state = '';
+            $place->reviews = $place->reviewCount;
+
+            $place->city = '';
+            $place->state = '';
+            if($request->mode == 'country') {
+                $cityObj = Cities::whereId($place->cityId);
+                if($cityObj != null) {
+                    $place->city = $cityObj->name;
+                    $place->state = $cityObj->getState->name;
+                }
+            }
+            else if($request->mode == 'state'){
+                $place->state = $state->name;
+                $cityObj = Cities::find($place->cityId);
+                if($cityObj != null)
+                    $place->city = $cityObj->name;
+            }
+            else if($request->mode == 'city'){
+                $place->state = $state->name;
+                $place->city = $city->name;
             }
             $place->avgRate = (int)$place->fullRate == 0 ? 2 : (int)$place->fullRate;
             $place->url = route('placeDetails', ['kindPlaceId' => $kindPlace->id, 'placeId' => $place->id]);
