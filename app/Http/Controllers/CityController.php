@@ -79,30 +79,32 @@ class CityController extends Controller
         }
 
         if($place->image == null){
-            $seenActivity = Activity::whereName('مشاهده')->first();
-            $mostSeen = [];
-            if($allAmakenId != null)
-                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
-            else
-                $place->image = URL::asset('_images/nopic/blank.jpg');
+            $place->image = URL::asset('_images/nopic/blank.jpg');
 
-            if(count($mostSeen) != 0){
-                foreach ($mostSeen as $item){
-                    $p = Amaken::find($item->placeId);
-                    $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
-                    if(file_exists($location)) {
-                        $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
-                        break;
-                    }
-                }
-                if($place->image == null || $place->image == '')
-                    $place->image = URL::asset('_images/nopic/blank.jpg');
-            }
-            else
-                $place->image = URL::asset('_images/nopic/blank.jpg');
+//            $mostSeen = [];
+//            $seenActivity = Activity::whereName('مشاهده')->first();
+//            if($allAmakenId != null)
+//                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
+//            else
+//                $place->image = URL::asset('_images/nopic/blank.jpg');
+//
+//            if(count($mostSeen) != 0){
+//                foreach ($mostSeen as $item){
+//                    $p = Amaken::find($item->placeId);
+//                    $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
+//                    if(file_exists($location)) {
+//                        $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+//                        break;
+//                    }
+//                }
+//                if($place->image == null || $place->image == '')
+//                    $place->image = URL::asset('_images/nopic/blank.jpg');
+//            }
+//            else
+//                $place->image = URL::asset('_images/nopic/blank.jpg');
         }
         else
-            $place->image = URL::asset('_images/city/' . $place->id . '/'.$place->image);
+            $place->image = URL::asset("_images/city/$place->id/$place->image");
 
         $pics = [];
         $DBpic = PlacePic::join('amaken', 'amaken.id', 'placePics.placeId')

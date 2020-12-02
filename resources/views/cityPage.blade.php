@@ -132,7 +132,7 @@
         <div id="cpBorderLeft" class="col-lg-9 col-md-12">
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp">
-                    @if(isset($place->pic))
+                    @if(isset($place->pic) && count($place->pic) > 0)
                         <div class="cityPagePics swiper-container">
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
                                 @for($i = 0; $i < count($place->pic) && $i < 5; $i++)
@@ -411,7 +411,7 @@
     setSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
     setSmallReviewPlaceHolder('reviewPlaceHolderSection'); // in component.smallShowReview.blade.php
 
-    @if(isset($place->pic))
+    @if(isset($place->pic) && count($place->pic) > 0)
         var cityPic = {!! json_encode($place->pic) !!};
 
         function showSliderPic(){

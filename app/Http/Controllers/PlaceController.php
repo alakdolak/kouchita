@@ -3385,7 +3385,6 @@ class PlaceController extends Controller {
         else
             $places = \DB::table($table)->whereIn('id', $placeIds)->orderByDesc('fullRate')->skip(($page - 1) * $take)->take($take)->get();
 
-        $bookMarkReferenceId = BookMarkReference::where('tableName', $table)->first();
 
         $sortTime = microtime(true);
 
@@ -3393,6 +3392,7 @@ class PlaceController extends Controller {
         if(\auth()->check())
             $uId = Auth::id();
 
+        $bookMarkReferenceId = BookMarkReference::where('tableName', $table)->first();
         $nonePicUrl = URL::asset('images/mainPics/nopicv01.jpg');
         foreach ($places as $place) {
             $place->pic = $nonePicUrl;
