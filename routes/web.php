@@ -332,9 +332,9 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 //detailsPage
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'shareData']), function (){
 
-    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
-
     Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
+
+    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage');
 
