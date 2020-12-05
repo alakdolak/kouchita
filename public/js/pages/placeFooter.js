@@ -53,18 +53,15 @@ function closeLoginHelperSection() {
 
 function openMobileFooterPopUps(_id){
     showLastPages();
-
     closeMyModalClass('footerModals');
-    if(_id == 'profilePossibilities' && openCampingInMobileFooter == '') {
-        showCampingModal(); // in header1.blade.php
-        opnedMobileFooterId = null;
-    }
-    else if(opnedMobileFooterId != _id) {
+    if(opnedMobileFooterId != _id) {
         opnedMobileFooterId = _id;
         openMyModal(_id);
     }
     else
         opnedMobileFooterId = null;
+
+    resizeFitImg('resizeImgClass');
 }
 
 function mobileFooterProfileButton(_kind){

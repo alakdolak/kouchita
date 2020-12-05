@@ -325,6 +325,10 @@
     content: '\E1F6';
     font-family: Shazde_Regular2 !important;
 }
+.tvIcon:before{
+    content: '\E01E' !important;
+    font-family: Shazde_Regular2 !important;
+}
 .earthIcon:before{
     content: '\E017' !important;
     font-family: Shazde_Regular2 !important;

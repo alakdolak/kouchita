@@ -159,23 +159,23 @@
                             </div>
                         </div>
                         <div class="ordering">
-                            <div class="orders" onclick="selectingOrder($(this), 'rate')" id="z2">
+                            <div class="orders" onclick="selectingOrder(this, 'rate')" id="z2">
                                 {{__('بهترین بازخورد')}}
                             </div>
                         </div>
                         <div class="ordering">
-                            <div class="orders" onclick="selectingOrder($(this), 'seen')" id="z3">
+                            <div class="orders" onclick="selectingOrder(this, 'seen')" id="z3">
                                 {{__('بیشترین بازدید')}}
                             </div>
                         </div>
                         <div class="ordering">
-                            <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                            <div class="orders" onclick="selectingOrder(this, 'alphabet')" id="z4" >
                                 {{__('حروف الفبا')}}
                             </div>
                         </div>
                         @if($kindPlace->id != 10 && $kindPlace->id != 11)
                             <div class="ordering"  >
-                                <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">{{__('کمترین فاصله تا')}}
+                                <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch(); selectingOrder(this, 'distance')">{{__('کمترین فاصله تا')}}
                                     <span id="selectDistance">__ __ __</span>
                                 </div>
                             </div>
@@ -496,7 +496,7 @@
         $(".orders").removeClass('selectOrder');
         $("#selectDistance").text('__ __ __');
         $("#selectDistanceMobile").text('__ __ __');
-        elem.addClass('selectOrder');
+        $(elem).addClass('selectOrder');
         sort = type;
 
         if(type != 'distance')

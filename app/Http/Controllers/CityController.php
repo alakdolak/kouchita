@@ -36,7 +36,7 @@ class CityController extends Controller
             $place = Cities::whereName($city)->first();
 
         if($place == null)
-            return Redirect::route('home');
+            return redirect(\url('/'));
 
 
         if($kind == 'city') {
