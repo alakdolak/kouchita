@@ -92,7 +92,6 @@ class MainController extends Controller
     }
 
     public function showMainPage($mode = "mainPage") {
-
         $kindPlaceId= 0;
 //        $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
 //        $articleBanner = Safarnameh::whereIn('id', $articleBannerId)->get();

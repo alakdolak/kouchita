@@ -1,4 +1,3 @@
-
 <meta content="43970F70216852DDFADD70BBB51A6A8D" name="jetseo-site-verification" rel="verify" />
 
 <meta charset="UTF-8">
@@ -424,6 +423,7 @@
     @include('layouts.rotueURLs')
     <script src="{{URL::asset('js/pages/ifLogin.js')}}"></script>
 @endif
+
 
 <script type="text/javascript">
     (function(){

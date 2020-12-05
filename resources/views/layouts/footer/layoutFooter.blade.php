@@ -13,7 +13,7 @@
         var seenLogStartTime = new Date().getTime();
         var lastSeenLogScroll = 0;
 
-        $(window).on('scroll', () => {
+       $(window).on('scroll', () => {
             var time = seenLogStartTime;
             seenLogStartTime = new Date().getTime();
             if(new Date().getTime() - time > 1000){

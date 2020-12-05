@@ -20,8 +20,7 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 119;
-
+        $fileVersions = 120;
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
             $userFooter = \Auth::user();
@@ -54,7 +53,6 @@ class ShareData
             $buPic = \URL::asset('_images/nopic/blank.jpg');
             View::share(['buPic' => $buPic, 'config' => $config, 'followingCount' => $followingCount, 'fileVersions' => $fileVersions]);
         }
-
         return $next($request);
     }
 }

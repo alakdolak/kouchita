@@ -136,7 +136,6 @@ class CityController extends Controller
         }
 
         $place->pic = $pics;
-
         $placeCounts = [
             'amaken' => $allAmaken,
             'majara' => $allMajara,
