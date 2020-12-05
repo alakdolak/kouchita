@@ -48,6 +48,7 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
 
 DIV.ppr_rup.ppr_priv_location_detail_header {
     margin: 35px 0 30px;
+    margin-top: 10px;
 }
 
 .ui_overlay:before {

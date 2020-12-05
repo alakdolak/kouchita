@@ -115,6 +115,9 @@ class PlaceController extends Controller {
                 $placeMode = 'boomgardy';
                 $kindPlace->title = 'بوم گردی های';
                 break;
+            case 13:
+                return \redirect(\url('/'));
+                break;
         }
 
         if(is_numeric($slug))
@@ -440,7 +443,6 @@ class PlaceController extends Controller {
 
     public function getNearby()
     {
-
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {
 
             $count = isset($_POST["count"]) ? $_POST["count"] : 4;
@@ -3040,6 +3042,9 @@ class PlaceController extends Controller {
     public function showPlaceList($kindPlaceId, $mode, $city = '')
     {
         $kindPlace = Place::find($kindPlaceId);
+        if($kindPlace->id == 13)
+            return \redirect(\url('/'));
+
         if($kindPlace != null){
             $meta = [];
             $mode = strtolower($mode);

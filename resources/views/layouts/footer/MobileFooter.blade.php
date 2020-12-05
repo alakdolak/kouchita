@@ -78,8 +78,8 @@
                     </span>
 
                 <span class="headerSearchIcon footerSearchBar" style="background: var(--koochita-red);">
-                        <a href="{{route('myLocation')}}" class="icc addressBarIcon" style="word-spacing: -4px;">اطراف من</a>
-                    </span>
+                    <a href="{{route('myLocation')}}" class="icc addressBarIcon" style="word-spacing: -4px;">اطراف من</a>
+                </span>
             </div>
 
             <div style="height: calc(100% - 170px); overflow-y: auto">
@@ -165,10 +165,205 @@
         </div>
     </div>
 
+    @if(Request::is('placeList/*'))
+        <div class="mobileFiltersButtonTabs hideOnScreen">
+            <div class="tabs">
+                <div class="tab filterIcon" onclick="openMyModal('placeListMobileFilter')">اعمال فیلتر</div>
+                <div class="tab twoHouseIcon" onclick="openMyModal('placeListMobileFilter')">مرتب سازی</div>
+            </div>
+        </div>
+
+        <div id="placeListMobileFilter" class="modalBlackBack fullCenter">
+            <div class="gombadi">
+                <div class="mobileFooterFilterPic" style="position: relative">
+                    <img src="{{URL::asset('images/test/amakenMobileFooter.jpg')}}" style="width: 100%">
+                    <div class="gradientWhite"></div>
+                </div>
+                <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters fil">
+                    <div class="filterBoxMobile filterBox">
+                        <div class="filterBoxShadow">
+                            <div class="clearAll" onclick="closeFilters()"> پاک کردن تمام فیلترها </div>
+                            <div class="filtersRows filterShow"></div>
+                        </div>
+                    </div>
+                    <div id="EATERY_FILTERS_CONT" class="eatery_filters">
+                        {{--<div class="prw_rup prw_restaurants_restaurant_filters">--}}
+                        {{--<div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">--}}
+                        {{--<div class="filterGroupTitle">{{__('جستجو‌ی نام')}}</div>--}}
+                        {{--<input id="p_nameSearch" class="hl_inputBox" placeholder="{{__('جستجو کنید')}}" onchange="nameFilterFunc(this.value)">--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        @if($kindPlace->id == 11)
+                            <div class="prw_rup prw_restaurants_restaurant_filters">
+                                <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                    <div class="filterGroupTitle">{{__('جستجو براساس مواد اولیه')}}</div>
+                                    <input id="p_foodMaterialSearch" class="hl_inputBox" placeholder="{{__('جستجو کنید')}}" onclick="openGlobalMaterialSearch()">
+                                    <div class="youMaterialSearchResult materialSearchSelected"></div>
+                                </div>
+                            </div>
+                            <script>
+                                function openGlobalMaterialSearch(){
+                                    createSearchInput('getGlobalInputMaterialSearchKeyUp', 'ماده اولبه مورد نظر خود را وارد کنید.');
+                                }
+
+                                function getGlobalInputMaterialSearchKeyUp(_element){
+                                    searchForMaterial($(_element).val())
+                                }
+                            </script>
+                        @endif
+
+{{--                        <div class="prw_rup prw_restaurants_restaurant_filters">--}}
+{{--                            <div id="jfy_filter_bar_establishmentTypeFilters"--}}
+{{--                                 class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">--}}
+{{--                                <div class="filterGroupTitle">{{__('امتیاز کاربران')}}</div>--}}
+{{--                                <div class="filterContent ui_label_group inline" style="font-size: 12px;">--}}
+{{--                                    <div class="filterItem lhrFilter filter selected squerRadioInputSec">--}}
+{{--                                        <input onclick="rateFilterFunc(5, this)" type="radio" name="AVGrate" id="p_c5" value="5"/>--}}
+{{--                                        <label for="p_c5" class="inputRadionSquer"></label>--}}
+{{--                                        <div class="rating-widget" style="font-size: 1.2em; display: inline-block">--}}
+{{--                                            <div class="prw_rup prw_common_location_rating_simple">--}}
+{{--                                                <span class="ui_bubble_rating bubble_50"></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="filterItem lhrFilter filter selected squerRadioInputSec">--}}
+{{--                                        <input onclick="rateFilterFunc(4, this)" type="radio" name="AVGrate" id="p_c4" value="4"/>--}}
+{{--                                        <label for="p_c4" class="inputRadionSquer"></label>--}}
+{{--                                        <div class="rating-widget"--}}
+{{--                                             style="font-size: 1.2em; display: inline-block">--}}
+{{--                                            <div class="prw_rup prw_common_location_rating_simple">--}}
+{{--                                                <span class="ui_bubble_rating bubble_40"></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <span> {{__('به بالا')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="filterItem lhrFilter filter selected squerRadioInputSec">--}}
+{{--                                        <input onclick="rateFilterFunc(3, this)" type="radio" name="AVGrate" id="p_c3" value="3"/>--}}
+{{--                                        <label for="p_c3" class="inputRadionSquer"></label>--}}
+{{--                                        <div class="rating-widget"--}}
+{{--                                             style="font-size: 1.2em; display: inline-block">--}}
+{{--                                            <div class="prw_rup prw_common_location_rating_simple">--}}
+{{--                                                <span class="ui_bubble_rating bubble_30"></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <span> {{__('به بالا')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="filterItem lhrFilter filter selected squerRadioInputSec">--}}
+{{--                                        <input onclick="rateFilterFunc(2, this)" type="radio" name="AVGrate" id="p_c2" value="2"/>--}}
+{{--                                        <label for="p_c2" class="inputRadionSquer"></label>--}}
+{{--                                        <div class="rating-widget"--}}
+{{--                                             style="font-size: 1.2em; display: inline-block">--}}
+{{--                                            <div class="prw_rup prw_common_location_rating_simple">--}}
+{{--                                                <span class="ui_bubble_rating bubble_20"></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <span> {{__('به بالا')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="filterItem lhrFilter filter selected squerRadioInputSec">--}}
+{{--                                        <input onclick="rateFilterFunc(1, this)" type="radio" name="AVGrate" id="p_c1" value="1"/>--}}
+{{--                                        <label for="p_c1" class="inputRadionSquer"></label>--}}
+{{--                                        <div class="rating-widget"--}}
+{{--                                             style="font-size: 1.2em; display: inline-block">--}}
+{{--                                            <div class="prw_rup prw_common_location_rating_simple">--}}
+{{--                                                <span class="ui_bubble_rating bubble_10"></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <span> {{__('به بالا')}}</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+                        @if($kindPlace->id == 4)
+                            @include('pages.placeList.filters.hotelFilters')
+                        @elseif($kindPlace->id == 10)
+                            @include('pages.placeList.filters.sogatSanaieFilters')
+                        @elseif($kindPlace->id == 11)
+                            @include('pages.placeList.filters.mahaliFoodFilters')
+                        @endif
+
+                        @foreach($features as $feature)
+                            <div class="prw_rup prw_restaurants_restaurant_filters">
+                                <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                    <div class="filterHeaderWithClose">
+                                        <div class="filterGroupTitle">{{$feature->name}}</div>
+{{--                                        @if(count($feature->subFeat) > 5)--}}
+{{--                                            <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">{{__('نمایش کامل فیلترها')}}</span>--}}
+{{--                                            <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">{{__('پنهان سازی فیلتر‌ها')}}</span>--}}
+{{--                                        @endif--}}
+                                    </div>
+
+                                    <div class="filterContent ui_label_group inline">
+                                        @for($i = 0; $i < count($feature->subFeat); $i++)
+                                            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                                                <input onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                <label for="p_feat{{$feature->subFeat[$i]->id}}" class="inputRadionSquer">
+                                                    <span class="labelBox"></span>
+                                                    <span class="name">{{$feature->subFeat[$i]->name}}</span>
+                                                </label>
+                                            </div>
+                                        @endfor
+
+{{--                                        @if(count($feature->subFeat) > 5)--}}
+{{--                                            @for($i = 5; $i < count($feature->subFeat); $i++)--}}
+{{--                                                <div class="filterItem lhrFilter filter hidden extraItem{{$feature->id}} squerRadioInputSec">--}}
+{{--                                                    <input onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>--}}
+{{--                                                    <label for="p_feat{{$feature->subFeat[$i]->id}}" class="inputRadionSquer">--}}
+{{--                                                        <span class="labelBox"></span>--}}
+{{--                                                        <span class="name">{{$feature->subFeat[$i]->name}}</span>--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
+{{--                                            @endfor--}}
+{{--                                        @endif--}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mainPopUp rightPopUp PlaceController hidden">
+            <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
+                <div id="FilterTopController" class="FilterTopController">
+                    <div class="ordering">
+                        <div class="orders" onclick="selectingOrder($(this),'review')" id="pz1">
+                            {{__('بیشترین نظر')}}
+                        </div>
+                    </div>
+                    <div class="ordering">
+                        <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="pz2">
+                            {{__('بهترین بازخورد')}}
+                        </div>
+                    </div>
+                    <div class="ordering">
+                        <div class="orders" onclick="selectingOrder($(this), 'seen')" id="pz3">
+                            {{__('بیشترین بازدید')}}
+                        </div>
+                    </div>
+                    <div class="ordering">
+                        <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
+                            {{__('حروف الفبا')}}
+                        </div>
+                    </div>
+                    @if($kindPlace->id != 10 && $kindPlace->id != 11)
+                        <div class="ordering">
+                            <div id="distanceNavMobile" class="orders" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">{{__('کمترین فاصله تا')}}
+                                <span id="selectDistanceMobile">__ __ __</span>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+    @endif
+
     <div id="profilePossibilities" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
         @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
             <div class="mainPopUp rightPopUp" style="padding: 7px">
-{{--                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeMobileFooterPopUps('profilePossibilities')"></div>--}}
                 <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
                 <div class="lp_ar_filters">
@@ -324,213 +519,6 @@
                             </div>
                         </div>
                     @endif
-                </div>
-            </div>
-        @elseif(Request::is('placeList/*'))
-            <div class="mainPopUp rightPopUp PlaceController" style="padding: 7px">
-
-{{--                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeMobileFooterPopUps('profilePossibilities')"></div>--}}
-
-                <div style="min-height: 60px">
-                    <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
-
-                    <div class="lp_ar_filters">
-                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('اعمال فیلتر')}}</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('نحوه مرتب‌سازی')}}</div>
-                    </div>
-                </div>
-
-                <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController" style="overflow: hidden; height: auto">
-
-                    <div class="bottomLightBorder prw_rup prw_restaurants_restaurant_filters">
-                        <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                            <div id="filterBox" style="flex-direction: column;">
-                                <div style="font-size: 15px; margin: 10px 0px;">
-                                    <span>{{__('فیلترهای اعمال شده')}}</span>
-                                    <span style="float: left">
-                                            <span class="filterShowCount">----</span>
-                                            <span style="margin: 0 5px">{{__('مورد از')}}</span>
-                                            <span class="totalPlaceCount">----</span>
-                                        </span>
-                                </div>
-                                <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
-                                    {{__('پاک کردن فیلترها')}}
-                                </div>
-                                <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="EATERY_FILTERS_CONT" class="eatery_filters">
-
-                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                            <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                <div class="filterGroupTitle">{{__('جستجو‌ی نام')}}</div>
-                                <input id="p_nameSearch" class="hl_inputBox" placeholder="{{__('جستجو کنید')}}" onchange="nameFilterFunc(this.value)">
-                            </div>
-                        </div>
-
-                        @if($kindPlace->id == 11)
-                            <div class="prw_rup prw_restaurants_restaurant_filters">
-                                <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                    <div class="filterGroupTitle">{{__('جستجو براساس مواد اولیه')}}</div>
-                                    <input id="p_foodMaterialSearch" class="hl_inputBox" placeholder="{{__('جستجو کنید')}}" onclick="openGlobalMaterialSearch()">
-                                    <div class="youMaterialSearchResult materialSearchSelected"></div>
-                                </div>
-                            </div>
-
-                            <script>
-                                function openGlobalMaterialSearch(){
-                                    createSearchInput('getGlobalInputMaterialSearchKeyUp', 'ماده اولبه مورد نظر خود را وارد کنید.');
-                                }
-
-                                function getGlobalInputMaterialSearchKeyUp(_element){
-                                    searchForMaterial($(_element).val())
-                                }
-                            </script>
-                        @endif
-
-                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                            <div id="jfy_filter_bar_establishmentTypeFilters"
-                                 class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                <div class="filterGroupTitle">{{__('امتیاز کاربران')}}</div>
-                                <div class="filterContent ui_label_group inline">
-                                    <div class="filterItem lhrFilter filter selected">
-                                        <input onclick="rateFilterFunc(5, this)" type="radio" name="AVGrate" id="p_c5" value="5"/>
-                                        <label for="p_c5"
-                                               style="display:inline-block;"><span></span></label>
-                                        <div class="rating-widget"
-                                             style="font-size: 1.2em; display: inline-block">
-                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                <span class="ui_bubble_rating bubble_50"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filterItem lhrFilter filter selected">
-                                        <input onclick="rateFilterFunc(4, this)" type="radio" name="AVGrate" id="p_c4" value="4"/>
-                                        <label for="p_c4"
-                                               style="display:inline-block;"><span></span></label>
-                                        <div class="rating-widget"
-                                             style="font-size: 1.2em; display: inline-block">
-                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                <span class="ui_bubble_rating bubble_40"></span>
-                                            </div>
-                                        </div>
-                                        <span> {{__('به بالا')}}</span>
-                                    </div>
-                                    <div class="filterItem lhrFilter filter selected">
-                                        <input onclick="rateFilterFunc(3, this)" type="radio" name="AVGrate" id="p_c3" value="3"/>
-                                        <label for="p_c3"
-                                               style="display:inline-block;"><span></span></label>
-                                        <div class="rating-widget"
-                                             style="font-size: 1.2em; display: inline-block">
-                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                <span class="ui_bubble_rating bubble_30"></span>
-                                            </div>
-                                        </div>
-                                        <span> {{__('به بالا')}}</span>
-                                    </div>
-                                    <div class="filterItem lhrFilter filter selected">
-                                        <input onclick="rateFilterFunc(2, this)" type="radio" name="AVGrate" id="p_c2" value="2"/>
-                                        <label for="p_c2"
-                                               style="display:inline-block;"><span></span></label>
-                                        <div class="rating-widget"
-                                             style="font-size: 1.2em; display: inline-block">
-                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                <span class="ui_bubble_rating bubble_20"></span>
-                                            </div>
-                                        </div>
-                                        <span> {{__('به بالا')}}</span>
-                                    </div>
-                                    <div class="filterItem lhrFilter filter selected">
-                                        <input onclick="rateFilterFunc(1, this)" type="radio" name="AVGrate" id="p_c1" value="1"/>
-                                        <label for="p_c1"
-                                               style="display:inline-block;"><span></span></label>
-                                        <div class="rating-widget"
-                                             style="font-size: 1.2em; display: inline-block">
-                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                <span class="ui_bubble_rating bubble_10"></span>
-                                            </div>
-                                        </div>
-                                        <span> {{__('به بالا')}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @if($kindPlace->id == 4)
-                            @include('pages.placeList.filters.hotelFilters')
-                        @elseif($kindPlace->id == 10)
-                            @include('pages.placeList.filters.sogatSanaieFilters')
-                        @elseif($kindPlace->id == 11)
-                            @include('pages.placeList.filters.mahaliFoodFilters')
-                        @endif
-
-                        @foreach($features as $feature)
-                            <div class="prw_rup prw_restaurants_restaurant_filters">
-                                <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <div class="filterGroupTitle">{{$feature->name}}</div>
-                                        @if(count($feature->subFeat) > 5)
-                                            <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">{{__('نمایش کامل فیلترها')}}</span>
-                                            <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">{{__('پنهان سازی فیلتر‌ها')}}</span>
-                                        @endif
-                                    </div>
-
-                                    <div class="filterContent ui_label_group inline">
-                                        @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
-                                            <div class="filterItem lhrFilter filter selected">
-                                                <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                                <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
-                                            </div>
-                                        @endfor
-
-                                        @if(count($feature->subFeat) > 5)
-                                            @for($i = 5; $i < count($feature->subFeat); $i++)
-                                                <div class="filterItem lhrFilter filter hidden extraItem{{$feature->id}}">
-                                                    <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                                    <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
-                                                </div>
-                                            @endfor
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-
-                    </div>
-                </div>
-
-                <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
-                    <div id="FilterTopController" class="FilterTopController">
-                        <div class="ordering">
-                            <div class="orders" onclick="selectingOrder($(this),'review')" id="pz1">
-                                {{__('بیشترین نظر')}}
-                            </div>
-                        </div>
-                        <div class="ordering">
-                            <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="pz2">
-                                {{__('بهترین بازخورد')}}
-                            </div>
-                        </div>
-                        <div class="ordering">
-                            <div class="orders" onclick="selectingOrder($(this), 'seen')" id="pz3">
-                                {{__('بیشترین بازدید')}}
-                            </div>
-                        </div>
-                        <div class="ordering">
-                            <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
-                                {{__('حروف الفبا')}}
-                            </div>
-                        </div>
-                        @if($kindPlace->id != 10 && $kindPlace->id != 11)
-                            <div class="ordering">
-                                <div id="distanceNavMobile" class="orders" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">{{__('کمترین فاصله تا')}}
-                                    <span id="selectDistanceMobile">__ __ __</span>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
                 </div>
             </div>
         @endif
@@ -848,4 +836,9 @@
             opnedMobileFooterId = null;
         }
     });
+
+    $('.gombadi').on('click', e => {
+        if($(e.target).hasClass('gombadi'))
+            closeMyModal('placeListMobileFilter');
+    })
 </script>

@@ -20,10 +20,10 @@ class SitemapController extends Controller
 
     public function places()
     {
-        $kindPlaces = Place::all();
-        $pl = array();
+        $pl = [];
         $lists = [];
         $count = 0;
+        $kindPlaces = Place::whereIn('id', [1, 3, 4, 6, 10, 11, 12])->get();
         foreach ($kindPlaces as $kindPlace) {
             if ($kindPlace->tableName != null) {
                 $places = \DB::table($kindPlace->tableName)->select(['id', 'slug', 'name'])->get();
@@ -45,7 +45,7 @@ class SitemapController extends Controller
 
     public function lists()
     {
-        $kindPlaces = Place::all();
+        $kindPlaces = [1, 3, 4, 6, 10, 11, 12];
         $state = State::all();
 
         $lists = [
@@ -60,22 +60,18 @@ class SitemapController extends Controller
 
         foreach ($state as $item){
             foreach ($kindPlaces as $kindPlace){
-                if($kindPlace->tableName != null){
-                    $slug = urlencode($item->name);
-                    $l = url('placeList/' . $kindPlace->id . '/state/' . $slug);
-                    array_push($lists, $l);
-                }
+                $slug = urlencode($item->name);
+                $l = url('placeList/' . $kindPlace->id . '/state/' . $slug);
+                array_push($lists, $l);
             }
         }
 
         $cities = Cities::where('isVillage', 0)->get();
         foreach ($cities as $city) {
             foreach ($kindPlaces as $kindPlace){
-                if($kindPlace->tableName != null){
-                    $slug = urlencode($city->name);
-                    $l = url('placeList/' . $kindPlace->id . '/city/' . $slug);
-                    array_push($lists, $l);
-                }
+                $slug = urlencode($city->name);
+                $l = url('placeList/' . $kindPlace->id . '/city/' . $slug);
+                array_push($lists, $l);
             }
         }
 
