@@ -646,21 +646,21 @@ Route::group(array('middleware' => ['auth']), function(){
 //festival
 Route::group(['middleware' => ['web', 'shareData']], function(){
 
-    Route::group(['middleware' => 'nothing'], function(){
-        Route::get('/ashpazi', 'CookController@cookFestival')->name('festival.cook');
-
-        Route::post('/festival/cook/checkFirstStepRegister', 'CookController@checkFirstStepRegister')->name('festival.cook.firstStepRegister');
-
-        Route::post('/festival/cook/fullRegister', 'CookController@fullRegister')->name('festival.cook.fullRegister');
-
-        Route::group(['middleware' => ['auth']], function() {
-            Route::post('/festival/cook/uploadFile', 'CookController@uploadFile')->name('festival.cook.uploadFile');
-
-            Route::delete('/festival/cook/deleteFile', 'CookController@deleteFile')->name('festival.cook.deleteFile');
-
-            Route::post('/festival/cook/submitFiles', 'CookController@submitFiles')->name('festival.cook.submitFiles');
-        });
-    });
+//    Route::group(['middleware' => 'nothing'], function(){
+//        Route::get('/ashpazi', 'CookController@cookFestival')->name('festival.cook');
+//
+//        Route::post('/festival/cook/checkFirstStepRegister', 'CookController@checkFirstStepRegister')->name('festival.cook.firstStepRegister');
+//
+//        Route::post('/festival/cook/fullRegister', 'CookController@fullRegister')->name('festival.cook.fullRegister');
+//
+//        Route::group(['middleware' => ['auth']], function() {
+//            Route::post('/festival/cook/uploadFile', 'CookController@uploadFile')->name('festival.cook.uploadFile');
+//
+//            Route::delete('/festival/cook/deleteFile', 'CookController@deleteFile')->name('festival.cook.deleteFile');
+//
+//            Route::post('/festival/cook/submitFiles', 'CookController@submitFiles')->name('festival.cook.submitFiles');
+//        });
+//    });
 
     Route::get('/festival', 'FestivalController@festivalIntroduction')->name('festival');
 
