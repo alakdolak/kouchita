@@ -26,6 +26,7 @@
 
 <link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=.'.$fileVersions)}}">
 <link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v='.$fileVersions)}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/Ad.css?v='.$fileVersions)}}">
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v='.$fileVersions)}}' />
 
 @if(\App::getLocale() == 'en')

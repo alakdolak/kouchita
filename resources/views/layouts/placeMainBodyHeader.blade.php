@@ -1,8 +1,8 @@
 
 <div class="atf_header_wrapper">
-    <div class="atf_header container is-mobile full_width">
+    <div class="atf_header container is-mobile full_width" style="padding-top: 0px;">
 
-        <div class="ppr_rup ppr_priv_location_detail_header">
+        <div class="ppr_rup ppr_priv_location_detail_header" style="margin-top: 0px;">
             <h1 id="HEADING" class="heading_title" property="name">{{$place->name}}</h1>
 
             <div class="rating_and_popularity">

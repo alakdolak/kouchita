@@ -3,6 +3,22 @@
 }
 
 /*....................*/
+.emptySquer:before{
+    content: '\E093';
+    font-family: 'Shazde_Regular2' !important;
+}
+.emptySquerTick:before{
+    content: '\E02A';
+    font-family: 'Shazde_Regular2' !important;
+}
+.twoHouseIcon:before{
+    content: '\E020';
+    font-family: 'Shazde_Regular2' !important;
+}
+.filterIcon:before{
+    content: '\E0DA';
+    font-family: 'Shazde_Regular2' !important;
+}
 .closeIconWithCircle:before{
     content: '\E02D';
     font-family: 'Shazde_Regular2' !important;

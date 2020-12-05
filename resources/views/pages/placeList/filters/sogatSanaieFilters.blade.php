@@ -2,15 +2,17 @@
 <div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div class="filterContent ui_label_group inline specialFiltersSection">
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="eatable0" onchange="doKindFilter('eatable', 0)" type="radio" name="eatableFilter" id="eatable0" value="صنایع دستی"/>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="eatable0" onchange="doKindFilter('eatable', 0)" type="radio" name="eatableFilter" id="eatable0" value="صنایع دستی"/>
                 {{--غیر خوراکی--}}
-                <label for="eatable0"><span></span>&nbsp;&nbsp; {{__('صنایع‌دستی')}}  </label>
+                <label for="eatable0" class="inputRadionSquer"></label>
+                <span>صنایع‌دستی</span>
             </div>
-            <div class="filterItem lhrFilter filter selected">
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
                 {{--خوراکی--}}
-                <input ng-disabled="isDisable()" class="eatable1" onchange="doKindFilter('eatable', 1)" type="radio" name="eatableFilter" id="eatable1" value="سوغات"/>
-                <label for="eatable1"><span></span>&nbsp;&nbsp; {{__('سوغات')}}  </label>
+                <input class="eatable1" onchange="doKindFilter('eatable', 1)" type="radio" name="eatableFilter" id="eatable1" value="سوغات"/>
+                <label for="eatable1" class="inputRadionSquer"></label>
+                <span>سوغات</span>
             </div>
         </div>
     </div>
@@ -21,13 +23,19 @@
     <div class="bottomLightBorder headerFilter">
         <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
             <div class="filterContent ui_label_group inline specialFiltersSection">
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="fragile1" name="fragile" onclick="doKindFilter('fragile', 1)" type="radio" id="fragile1" value="شکستنی"/>
-                    <label for="fragile1"><span></span>&nbsp;&nbsp; {{__('شکستنی')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="fragile1" name="fragile" onclick="doKindFilter('fragile', 1)" type="radio" id="fragile1" value="شکستنی"/>
+                    <label for="fragile1" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">شکستنی</span>
+                    </label>
                 </div>
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="fragile0" name="fragile" onclick="doKindFilter('fragile', 0)" type="radio" id="fragile0" value="غیرشکستنی"/>
-                    <label for="fragile0"><span></span>&nbsp;&nbsp; {{__('غیرشکستنی')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="fragile0" name="fragile" onclick="doKindFilter('fragile', 0)" type="radio" id="fragile0" value="غیرشکستنی"/>
+                    <label for="fragile0" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">غیرشکستنی</span>
+                    </label>
                 </div>
             </div>
 
@@ -40,21 +48,33 @@
                 <div class="filterGroupTitle">{{__('نوع')}}</div>
             </div>
             <div class="filterContent ui_label_group inline specialFiltersSection">
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="jewelry1" onclick="doKindFilter('jewelry', 1)" type="checkbox" id="jewelry1" value="زیورآلات"/>
-                    <label for="jewelry1"><span></span>&nbsp;&nbsp; {{__('زیورآلات')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="jewelry1" onclick="doKindFilter('jewelry', 1)" type="checkbox" id="jewelry1" value="زیورآلات"/>
+                    <label for="jewelry1" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">زیورآلات</span>
+                    </label>
                 </div>
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="cloth1" onclick="doKindFilter('cloth', 1)" type="checkbox" id="cloth1" value="پارچه و پوشیدنی"/>
-                    <label for="cloth1"><span></span>&nbsp;&nbsp; {{__('پارچه و پوشیدنی')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="cloth1" onclick="doKindFilter('cloth', 1)" type="checkbox" id="cloth1" value="پارچه و پوشیدنی"/>
+                    <label for="cloth1" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">پارچه و پوشیدنی</span>
+                    </label>
                 </div>
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="decorative1" onclick="doKindFilter('decorative', 1)" type="checkbox" id="decorative1" value="لوازم تزئینی"/>
-                    <label for="decorative1"><span></span>&nbsp;&nbsp; {{__('لوازم تزئینی')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="decorative1" onclick="doKindFilter('decorative', 1)" type="checkbox" id="decorative1" value="لوازم تزئینی"/>
+                    <label for="decorative1" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">لوازم تزئینی</span>
+                    </label>
                 </div>
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="applied1" onclick="doKindFilter('applied', 1)" type="checkbox" id="applied1" value="لوازم کاربردی منزل"/>
-                    <label for="applied1"><span></span>&nbsp;&nbsp; {{__('لوازم کاربردی منزل')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="applied1" onclick="doKindFilter('applied', 1)" type="checkbox" id="applied1" value="لوازم کاربردی منزل"/>
+                    <label for="applied1" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">لوازم کاربردی منزل</span>
+                    </label>
                 </div>
             </div>
 
@@ -67,17 +87,26 @@
                 <div class="filterGroupTitle">{{__('سبک')}}</div>
             </div>
             <div class="filterContent ui_label_group inline specialFiltersSection">
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="style1" onclick="doKindFilter('style', 1)" type="checkbox" id="style1" value="سنتی"/>
-                    <label for="style1"><span></span>&nbsp;&nbsp; {{__('سنتی')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="style1" onclick="doKindFilter('style', 1)" type="checkbox" id="style1" value="سنتی"/>
+                    <label for="style1" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">سنتی</span>
+                    </label>
                 </div>
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="style2" onclick="doKindFilter('style', 2)" type="checkbox" id="style2" value="مدرن"/>
-                    <label for="style2"><span></span>&nbsp;&nbsp; {{__('مدرن')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="style2" onclick="doKindFilter('style', 2)" type="checkbox" id="style2" value="مدرن"/>
+                    <label for="style2" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">مدرن</span>
+                    </label>
                 </div>
-                <div class="filterItem lhrFilter filter selected">
-                    <input ng-disabled="isDisable()" class="style3" onclick="doKindFilter('style', 3)" type="checkbox" id="style3" value="تلفیقی"/>
-                    <label for="style3"><span></span>&nbsp;&nbsp; {{__('تلفیقی')}}  </label>
+                <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                    <input class="style3" onclick="doKindFilter('style', 3)" type="checkbox" id="style3" value="تلفیقی"/>
+                    <label for="style3" class="inputRadionSquer">
+                        <span class="labelBox"></span>
+                        <span class="name">تلفیقی</span>
+                    </label>
                 </div>
             </div>
 
@@ -92,29 +121,47 @@
             <div class="filterGroupTitle">{{__('مزه')}}</div>
         </div>
         <div class="filterContent ui_label_group inline specialFiltersSection">
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="torsh1" onclick="doKindFilter('torsh', 1)" type="checkbox" id="torsh1" value="ترش"/>
-                <label for="torsh1"><span></span>&nbsp;&nbsp; {{__('ترش')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="torsh1" onclick="doKindFilter('torsh', 1)" type="checkbox" id="torsh1" value="ترش"/>
+                <label for="torsh1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">ترش</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="shirin1" onclick="doKindFilter('shirin', 1)" type="checkbox" id="shirin1" value="شیرین"/>
-                <label for="shirin1"><span></span>&nbsp;&nbsp; {{__('شیرین')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="shirin1" onclick="doKindFilter('shirin', 1)" type="checkbox" id="shirin1" value="شیرین"/>
+                <label for="shirin1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">شیرین</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="talkh1" onclick="doKindFilter('talkh', 1)" type="checkbox" id="talkh1" value="تلخ"/>
-                <label for="talkh1"><span></span>&nbsp;&nbsp; {{__('تلخ')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="talkh1" onclick="doKindFilter('talkh', 1)" type="checkbox" id="talkh1" value="تلخ"/>
+                <label for="talkh1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">تلخ</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="malas1" onclick="doKindFilter('malas', 1)" type="checkbox" id="malas1" value="ملس"/>
-                <label for="malas1"><span></span>&nbsp;&nbsp; {{__('ملس')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="malas1" onclick="doKindFilter('malas', 1)" type="checkbox" id="malas1" value="ملس"/>
+                <label for="malas1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">ملس</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="shor1" onclick="doKindFilter('shor', 1)" type="checkbox" id="shor1" value="شور"/>
-                <label for="shor1"><span></span>&nbsp;&nbsp; {{__('شور')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="shor1" onclick="doKindFilter('shor', 1)" type="checkbox" id="shor1" value="شور"/>
+                <label for="shor1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">شور</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="tond1" onclick="doKindFilter('tond', 1)" type="checkbox" id="tond1" value="تند"/>
-                <label for="tond1"><span></span>&nbsp;&nbsp; {{__('تند')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="tond1" onclick="doKindFilter('tond', 1)" type="checkbox" id="tond1" value="تند"/>
+                <label for="tond1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">تند</span>
+                </label>
             </div>
         </div>
 
@@ -130,17 +177,26 @@
             <div class="filterGroupTitle">{{__('ابعاد')}}</div>
         </div>
         <div class="filterContent ui_label_group inline specialFiltersSection">
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="size1" onclick="doKindFilter('size', 1)" type="checkbox" id="size1" value="کوچک"/>
-                <label for="size1"><span></span>&nbsp;&nbsp; {{__('کوچک')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="size1" onclick="doKindFilter('size', 1)" type="checkbox" id="size1" value="کوچک"/>
+                <label for="size1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">کوچک</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="size2" onclick="doKindFilter('size', 2)" type="checkbox" id="size2" value="متوسط"/>
-                <label for="size2"><span></span>&nbsp;&nbsp; {{__('متوسط')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="size2" onclick="doKindFilter('size', 2)" type="checkbox" id="size2" value="متوسط"/>
+                <label for="size2" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">متوسط</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="size3" onclick="doKindFilter('size', 3)" type="checkbox" id="size3" value="بزرگ"/>
-                <label for="size3"><span></span>&nbsp;&nbsp; {{__('بزرگ')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="size3" onclick="doKindFilter('size', 3)" type="checkbox" id="size3" value="بزرگ"/>
+                <label for="size3" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">بزرگ</span>
+                </label>
             </div>
         </div>
 
@@ -153,17 +209,26 @@
             <div class="filterGroupTitle">{{__('وزن')}}</div>
         </div>
         <div class="filterContent ui_label_group inline specialFiltersSection">
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="weight1" onclick="doKindFilter('weight', 1)" type="checkbox" id="weight1" value="سبک"/>
-                <label for="weight1"><span></span>&nbsp;&nbsp; {{__('سبک')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="weight1" onclick="doKindFilter('weight', 1)" type="checkbox" id="weight1" value="سبک"/>
+                <label for="weight1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">سبک</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="weight2" onclick="doKindFilter('weight', 2)" type="checkbox" id="weight2" value="متوسط"/>
-                <label for="weight2"><span></span>&nbsp;&nbsp; {{__('متوسط')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="weight2" onclick="doKindFilter('weight', 2)" type="checkbox" id="weight2" value="متوسط"/>
+                <label for="weight2" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">متوسط</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="weight3" onclick="doKindFilter('weight', 3)" type="checkbox" id="weight3" value="سنگین"/>
-                <label for="weight3"><span></span>&nbsp;&nbsp; {{__('سنگین')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="weight3" onclick="doKindFilter('weight', 3)" type="checkbox" id="weight3" value="سنگین"/>
+                <label for="weight3" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">سنگین</span>
+                </label>
             </div>
         </div>
 
@@ -176,17 +241,26 @@
             <div class="filterGroupTitle">{{__('کلاس قیمتی')}}</div>
         </div>
         <div class="filterContent ui_label_group inline specialFiltersSection">
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="price1" onclick="doKindFilter('price', 1)" type="checkbox" id="price1" value="ارزان"/>
-                <label for="price1"><span></span>&nbsp;&nbsp; {{__('ارزان')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="price1" onclick="doKindFilter('price', 1)" type="checkbox" id="price1" value="ارزان"/>
+                <label for="price1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">ارزان</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="price2" onclick="doKindFilter('price', 2)" type="checkbox" id="price2" value="متوسط"/>
-                <label for="price2"><span></span>&nbsp;&nbsp; {{__('متوسط')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="price2" onclick="doKindFilter('price', 2)" type="checkbox" id="price2" value="متوسط"/>
+                <label for="price2" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">متوسط</span>
+                </label>
             </div>
-            <div class="filterItem lhrFilter filter selected">
-                <input ng-disabled="isDisable()" class="price3" onclick="doKindFilter('price', 3)" type="checkbox" id="price3" value="گران"/>
-                <label for="price3"><span></span>&nbsp;&nbsp; {{__('گران')}}  </label>
+            <div class="filterItem lhrFilter filter selected squerRadioInputSec">
+                <input class="price3" onclick="doKindFilter('price', 3)" type="checkbox" id="price3" value="گران"/>
+                <label for="price3" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">گران</span>
+                </label>
             </div>
         </div>
 

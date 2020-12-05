@@ -105,6 +105,14 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative" style="margin-bottom: 10px">
 
+        <div style="background: white; width: 100%; padding-top: 15px;">
+            <div class="container">
+                <div class="topPageAd">
+                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                </div>
+            </div>
+        </div>
+
         @include('layouts.placeMainBodyHeader')
 
         <div class="atf_meta_and_photos_wrapper position-relative">
@@ -787,10 +795,17 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                 </div>
                                             </div>
                                             @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
+                                                <div class="topPageAd" style="margin: 10px auto">
+                                                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                                                </div>
+
                                                 <div class="topMainMapDiv">
                                                     <div id="mainMap" class="mainMap placeHolderAnime"></div>
                                                 </div>
 
+                                                <div class="topPageAd" style="margin: 10px auto">
+                                                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                                                </div>
                                                 @include('pages.placeDetails.component.extendedMap')
 
                                             @endif
@@ -819,7 +834,19 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                         @include('pages.placeDetails.reviewSection')
                     </div>
-                    <div class="clear-both"></div>
+
+                    <div class="Ad3InRowPc">
+                        <div class="ad">
+                            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                        </div>
+                        <div class="ad">
+                            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                        </div>
+                        <div class="ad">
+                            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                        </div>
+                    </div>
+
                     @include('pages.placeDetails.questionSection')
                 </div>
 

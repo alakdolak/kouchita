@@ -115,6 +115,12 @@
 
     @include('general.secondHeader')
 
+    <div style="background: white; width: 100%; padding: 15px 0px;">
+        <div class="topPageAd">
+            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+        </div>
+    </div>
+
     <div class="container listContainer">
 
         <div class="placeListHeader">
@@ -275,7 +281,7 @@
                     </div>
 
                     <div class="bottomLightBorder headerFilter" >
-                        <div id="filterBox" style="flex-direction: column; display: none;">
+                        <div class="filterBox" style="flex-direction: column; display: none;">
                             <div style="font-size: 15px; margin: 10px 0px;">
                                 <span>{{__('فیلترهای اعمال شده')}}</span>
                                 <span style="float: left">
@@ -344,10 +350,8 @@
                             </div>
                             <div class="filterItem lhrFilter filter selected">
                                 <input onclick="rateFilterFunc(2, this)" type="radio" name="AVGrate" id="c2" value="2"/>
-                                <label for="c2"
-                                       style="display:inline-block;"><span></span></label>
-                                <div class="rating-widget"
-                                     style="font-size: 1.2em; display: inline-block">
+                                <label for="c2" style="display:inline-block;"><span></span></label>
+                                <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
                                     <div class="prw_rup prw_common_location_rating_simple">
                                         <span class="ui_bubble_rating bubble_20"></span>
                                     </div>
@@ -379,7 +383,7 @@
 
                     @foreach($features as $feature)
                         <div class="bottomLightBorder headerFilter">
-                            <div style="display: flex; justify-content: space-between;">
+                            <div class="filterHeaderWithClose">
                                 <div class="filterGroupTitle">{{$feature->name}}</div>
                                 @if(count($feature->subFeat) > 5)
                                     <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">
@@ -641,28 +645,28 @@
 
         $('.filterShow').html('');
         if(rateFilter != 0) {
-            text += '<div class="filtersExist">\n' +
-                    '<div>امتیاز کاربر</div>\n' +
-                    '<div onclick="cancelRateFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
-                    '</div>';
+            text +=  `<div class="filters" onclick="cancelRateFilter()">
+                        <div class="lessShowText name">امتیاز کاربر</div>
+                        <div class="iconClose"></div>
+                      </div>`;
             hasFilter = true;
         }
 
         if(nameFilter.trim().length > 2) {
-            text += '<div class="filtersExist">\n' +
-                '<div>نام</div>\n' +
-                '<div onclick="cancelNameFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
-                '</div>';
+            text +=  `<div class="filters" onclick="cancelNameFilter()">
+                        <div class="lessShowText name">نام</div>
+                        <div class="iconClose"></div>
+                      </div>`;
             hasFilter = true;
         }
 
         for(i = 0; i < featureFilter.length; i++){
             if(featureFilter[i] != 0) {
                 var name = document.getElementById('feat' + featureFilter[i]).value;
-                text += '<div class="filtersExist">\n' +
-                        '<div>' + name + '</div>\n' +
-                        '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
-                        '</div>';
+                text +=  `<div class="filters" onclick="cancelFeatureFilter(${featureFilter[i]})">
+                            <div class="lessShowText name">${name}</div>
+                            <div class="iconClose"></div>
+                          </div>`;
                 hasFilter = true;
             }
         }
@@ -670,24 +674,24 @@
         for(i = 0; i < specialFilters.length; i++){
             if(specialFilters[i] != 0) {
                 var name = document.getElementById(specialFilters[i]['kind'] + specialFilters[i]['value']).value;
-                text += '<div class="filtersExist">\n' +
-                        '<div>' + name + '</div>\n' +
-                        '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
-                        '</div>';
+                text +=  `<div class="filters" onclick="cancelKindFilter('${specialFilters[i]['kind']}', '${specialFilters[i]['value']}')">
+                            <div class="lessShowText name">${name}</div>
+                            <div class="iconClose"></div>
+                          </div>`;
                 hasFilter = true;
             }
         }
 
         if(materialFilter.length > 0){
-            text += '<div class="filtersExist">\n' +
-                    '<div>مواد اولیه</div>\n' +
-                    '<div onclick="cancelKindFilter(\'foodMaterial\', [])" class="icons iconClose filterCloseIcon"></div>\n' +
-                    '</div>';
+            text +=  `<div class="filters" onclick="cancelKindFilter('foodMaterial', [])">
+                            <div class="lessShowText name">مواد اولیه</div>
+                            <div class="iconClose"></div>
+                          </div>`;
             hasFilter = true;
         }
 
         $('.filterShow').html(text);
-        $('#filterBox').css('display', hasFilter ? 'block' : 'none');
+        $('.filterBox').css('display', hasFilter ? 'block' : 'none');
     }
 
     function cancelKindFilter(_kind, _value, _ref = 'refresh'){
@@ -756,7 +760,7 @@
     }
 
     function closeFilters(){
-        cancelRateFilter('noRef');
+        // cancelRateFilter('noRef');
         cancelFeatureFilter(0, 'noRef');
         cancelKindFilter(0, 0, 'noRef');
         cancelMaterialSearch();
@@ -846,6 +850,9 @@
 </script>
 
 <script>
+    var ADElements = [];
+    var ADElementsId = [];
+    var lastShowAd = 0;
     var getingListItemAjax = null;
     var isFinish = false;
     var inTake = false;
@@ -916,6 +923,12 @@
         });
 
         $('#listBodyToShowCards').append(cards);
+
+        if(lastShowAd == ADElements.length)
+            lastShowAd = 0;
+
+        $('#listBodyToShowCards').append(ADElements[lastShowAd]);
+        lastShowAd++;
     }
 
     function newSearch(){
@@ -954,7 +967,6 @@
         })
     }
 
-
     $(window).on('scroll', e => {
         var bottomOfList = document.getElementById('bottomMainList').getBoundingClientRect().top;
         var windowHeight = $(window).height();
@@ -963,7 +975,10 @@
             getPlaceListItems();
     });
 
-    $(window).ready(getPlaceListItems);
+    $(window).ready(() => {
+        getPlaceListItems();
+        ADElementsId.map(item => ADElements.push($(`#${item}`).html()));
+    });
 </script>
 
 </body>

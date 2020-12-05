@@ -1,6 +1,7 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css?v='.$fileVersions)}}'/>
 
 <div class="container">
+
     <div class="ppr_rup ppr_priv_homepage_shelves">
         <div class="mainSuggestionMainDiv">
             <div class="hideOnScreen row">
@@ -39,6 +40,15 @@
                         <div class="phoneIcon restaurant"></div>
                         <div class="textIcon">{{__('سوغات و صنایع‌دستی')}}</div>
                     </div>
+                </div>
+            </div>
+
+            <div class="topADMainPage">
+                <div class="addd">
+                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}">
+                </div>
+                <div class="addd">
+                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}">
                 </div>
             </div>
 
