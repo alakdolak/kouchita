@@ -1,137 +1,5 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css?v='.$fileVersions)}}'/>
 
-
-<style>
-    .mapBoxMainPage{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        height: 400px;
-        position: relative;
-        width: 100%;
-    }
-    .mapBoxMainPage .imgg{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-    .mapBoxMainPage .clickMapBox{
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-         background: #0000001f;
-    }
-    .mapBoxMainPage .clickMapBox div:nth-of-type(1){
-        background: #720d19ad;
-        padding: 5px 15px;
-        border-radius: 30px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: solid 1px white;
-        margin-bottom: 3px;
-    }
-    .mapBoxMainPage .clickMapBox div:nth-of-type(2){
-        background: #720d19ad;
-        padding: 5px 15px;
-        border-radius: 30px;
-        text-align: center;
-        margin-top: 0px;
-        border: solid 1px white;
-    }
-    @media (max-width: 767px) {
-
-        .mapBoxMainPage{
-            height: 205px;
-        }
-        .marginBetweenMainPageMobileElements{
-            margin: 30px 0px;
-            padding: 20px 0px;
-            background: white;
-            border-top: solid 6px #bfbfbf3d;
-            border-bottom: solid 6px #bfbfbf3d;
-        }
-        .suggestRowsMainPage.marginBetweenMainPageMobileElements{
-            padding: 10px 0px;
-        }
-        .circleSliderMainPage .header{
-            position: absolute;
-            right: 0px;
-            z-index: 99;
-            background: white;
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px 15px;
-            border-radius: 0px 0px 10px 10px;
-        }
-        .circleSliderMainPage .header img{
-            margin-left: 10px;
-        }
-        .circleSliderMainPage .header h3{
-            margin: 0;
-        }
-        .citySliderMainPageItem{
-            width: 60%;
-        }
-        /*body{*/
-        /*    background: white !important;*/
-        /*}*/
-        .swiper-button-prev, .swiper-button-next{
-            display: none !important;
-        }
-        figure.snip1091{
-            max-width: 240px;
-            height: 240px;
-        }
-        .shelf_title_container.h3{
-            color: #333;
-        }
-        .fullWidthMainPageInMobile{
-            padding: 0px;
-            width: 100%;
-        }
-        .fullWidthMainPageInMobile .row{
-            padding: 0px;
-            margin: 0px;
-            width: 100%;
-        }
-        .fullWidthMainPageInMobile .topADMainPage .addd{
-            margin: 0 !important;
-        }
-        .fullWidthMainPageInMobile .suggestRowsMainPage{
-            background: white !important;
-        }
-        .fullWidthMainPageInMobile .suggestRowsMainPage .shelf_title{
-            padding: 0px 10px;
-        }
-        .fullWidthMainPageInMobile .suggestRowsMainPage .suggestionPackDiv{
-            margin-bottom: 15px;
-            width: 80%;
-        }
-        .fullWidthMainPageInMobile .suggestRowsMainPage .suggestionPackContent{
-            box-shadow: 3px 0px 8px 1px #00000052;
-        }
-        .fullWidthMainPageInMobile .parent{
-            margin: 0px;
-        }
-
-    }
-</style>
-
-
 <div class="container fullWidthMainPageInMobile">
     <div class="ppr_rup ppr_priv_homepage_shelves">
         <div class="mainSuggestionMainDiv">
@@ -589,11 +457,11 @@
             @if(isset($middleBan['4']) && count($middleBan['4']) > 0)
                 <div class="circleSliderMainPage marginBetweenMainPageMobileElements">
                     <div class='parent'>
-                        <div class="header hideOnScreen">
+                        <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class="header hideOnScreen">
                             {{__('سفر طبیعت‌گردی')}}
                             <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
-                        </div>
-                        <div class='slider' style="width: 100%;">
+                        </a>
+                        <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class='slider' style="width: 100%;">
                             <button type="button" id='banner3_right' class='rightButton sliderButton' name="button">
                                 <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                      viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
@@ -634,7 +502,7 @@
                                 <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
                             </svg>
                             <div id="middleBan4Body"></div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <script>
