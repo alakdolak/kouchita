@@ -380,7 +380,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('findUser', 'AjaxController@findUser')->name('findUser');
 
-    Route::post('getMainPageSuggestion', 'AjaxController@getMainPageSuggestion')->name('getMainPageSuggestion');
+    Route::get('getMainPageSuggestion', 'AjaxController@getMainPageSuggestion')->name('getMainPageSuggestion');
 });
 
 //review section

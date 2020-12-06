@@ -75,7 +75,7 @@
     let suggestionPlaceHolderSample = $('#suggestionPlaceHolderSample').html();
     $('#suggestionPlaceHolderSample').remove();
 
-    function createSuggestionPack(_id, _data, _callback = ''){
+    function createSuggestionPack(_id, _data, _callback = '', _isClass = false){
         // _data = [{
         //     'name'  : '',
         //     'url': '',
@@ -118,7 +118,10 @@
             res += text;
         });
 
-        $('#'+_id).html(res);
+        if(_isClass)
+            $(`.${_id}`).html(res);
+        else
+            $(`#${_id}`).html(res);
 
         if(typeof _callback === 'function')
             _callback();
