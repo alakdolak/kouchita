@@ -1591,7 +1591,7 @@ footer .footerMsgCountNumber{
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: 0;
+    left: 0;
     bottom: 0;
     height: 70px;
     width: 70px;
@@ -1814,6 +1814,9 @@ footer .bookMarkSSec .infoSec .state{
     width: 100%;
     right: 0;
     left: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .mobileFiltersButtonTabs .tabs{
     display: flex;
@@ -1821,6 +1824,8 @@ footer .bookMarkSSec .infoSec .state{
     overflow: hidden;
     border: solid 1px #ddd;
     box-shadow: 0px 0px 5px 1px #000000a1;
+    background: white;
+    z-index: 1;
 }
 .mobileFiltersButtonTabs .tabs .tab{
     padding: 10px 9px;
@@ -1837,6 +1842,10 @@ footer .bookMarkSSec .infoSec .state{
 }
 .mobileFiltersButtonTabs .tabs div:nth-of-type(2){
     border-right: solid 1px #ddd;
+}
+.mobileFiltersButtonTabs .tabs .twoHouseIcon.selected{
+    background: var(--koochita-blue) !important;
+    color: white;
 }
 .filterGroupTitle{
     color: gray !important;
@@ -1862,6 +1871,21 @@ footer .bookMarkSSec .infoSec .state{
     position: absolute;
     width: 100%;
     height: 84px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.gombadi .gradientWhite .closeThisModal{
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: var(--koochita-red);
+    border: solid 1px;
+    margin-left: 10px;
+    line-height: 16px;
+    width: 19px;
 }
 .squerRadioInputSec{
     display: flex;
@@ -1889,7 +1913,6 @@ footer .bookMarkSSec .infoSec .state{
     color: var(--koochita-green);
     background: none !important;
 }
-
 .squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .labelBox{
     border-color: var(--koochita-green);
     border-radius: 50%;
@@ -1904,6 +1927,84 @@ footer .bookMarkSSec .infoSec .state{
     color: var(--koochita-green);
     font-size: 18px;
 }
+
+
+.specialFooterRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 155px;
+    overflow: hidden;
+    margin: 5px 0px;
+}
+
+
+.minGombad{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: -33px;
+    transition: 1s;
+}
+.minGombad.open{
+    bottom: 51px;
+}
+.minGombad .gomb{
+    border-radius: 50px 50px 0px 0px;
+    background: white;
+    font-size: 12px;
+    height: 84px;
+    margin: 0px 4px;
+    display: flex;
+    border: solid 1px var(--koochita-yellow);
+    border-bottom: none;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    width: 60px;
+    text-align: center;
+    padding: 0px !important;
+    justify-content: end;
+}
+.minGombad .gomb .topGomb{
+    background: var(--koochita-blue);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    color: white;
+    font-size: 23px;
+}
+.minGombad .gomb .text{
+    width: 100%;
+    padding: 0px 5px;
+    height: 47%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+.minGombad .gomb.selectOrder .topGomb{
+    color: var(--koochita-yellow);
+}
+.minGombad .gomb.selectOrder .text{
+    background: var(--koochita-yellow);
+}
+
+.minGombad .gomb.selectOrder .offEye{
+    display: none;
+}
+.minGombad .gomb.selectOrder .onEye{
+    display: block;
+}
+.minGombad .gomb .offEye{
+    display: block;
+}
+.minGombad .gomb .onEye{
+    display: none;
+}
+
 
 .prw_rup{
     border-bottom: solid 1px #00000024;

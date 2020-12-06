@@ -32,6 +32,53 @@
             font-family: IRANSans;
             margin: 12px 0px;
         }
+
+        .mobileMainBanner{
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+
+            .mainSearchDivPcSize .mainPageMainSearchText{
+                text-align: center;
+                font-size: 17px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .mainDivSearchInputMainPage {
+                left: 30%;
+                right: 32%;
+            }
+            .mainDivSearchInputMainPage .mainSearchDivPcSize{
+                padding: 4px 0px;
+                border-radius: 30px !important;
+            }
+            .mainDivSearchInputMainPage .mainSearchDivPcSize .searchIcon:before{
+                transform: rotateZ(90deg);
+            }
+            .mainDivSearchInputMainPage.nearMe{
+                left: 34%;
+                right: 37%;
+                top: 65%;
+                border: none;
+            }
+            .mainDivSearchInputMainPage.nearMe .mainSearchDivPcSize{
+                padding: 7px 0px;
+                background: #101010cf;
+                border: none !important;
+            }
+            .mainDivSearchInputMainPage.nearMe .mainPageMainSearchText{
+                color: white;
+                font-size: 15px;
+                top: 65%;
+            }
+
+        }
     </style>
 
     {{--urls--}}
@@ -63,34 +110,49 @@
     <div id="mainDivContainerMainPage">
         <div class="mainBannerSlider">
 
-            <div id="mainSlider" class="swiper-container backgroundColorForSlider">
-                <div class="swiper-wrapper">
-                    @foreach($sliderPic as $item)
-                        <div class="swiper-slide mobileHeight imgOfSliderBox">
-                            <img data-src="{{$item->pic}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload imgOfSlider">
-                        </div>
-                    @endforeach
+            <div class="hideOnPhone" style="width: 100%; height: 100%;">
+                <div id="mainSlider" class="swiper-container backgroundColorForSlider">
+                    <div class="swiper-wrapper">
+                        @foreach($sliderPic as $item)
+                            <div class="swiper-slide mobileHeight imgOfSliderBox">
+                                <img data-src="{{$item->pic}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload imgOfSlider">
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-            <div class="mainDivSearchInputMainPage">
-                <div class="searchDivForScrollClass mainSearchDivPcSize">
-                    <div onclick="openMainSearch(0) // in mainSearch.blade.php" style="text-align: center; font-size: 25px;">{{__('به کجا می‌روید؟')}}</div>
+                <div class="mainDivSearchInputMainPage">
+                    <div class="searchDivForScrollClass mainSearchDivPcSize">
+                        <div onclick="openMainSearch(0) // in mainSearch.blade.php" style="text-align: center; font-size: 25px;">{{__('به کجا می‌روید؟')}}</div>
+                    </div>
+                    <div class="clear-both"></div>
                 </div>
-                <div class="clear-both"></div>
+                <div class="sliderTextBox">
+                    <div class="console-container">
+                        <span id='text' class="sliderText"></span>
+                    </div>
+                </div>
             </div>
-            <div class="sliderTextBox">
-                <div class="console-container">
-                    <span id='text' class="sliderText"></span>
+            <div class="hideOnScreen mobileMainBanner">
+                <img src="{{URL::asset('images/mainPics/mobileMainPic.jpeg')}}" alt="mobileKoochita" class="resizeImgClass" onload="fitThisImg(this)">
+                <div class="mainDivSearchInputMainPage">
+                    <div class="searchDivForScrollClass mainSearchDivPcSize">
+                        <div class="mainPageMainSearchText searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('به کجا می‌روید؟')}}</div>
+                    </div>
+                </div>
+                <div class="mainDivSearchInputMainPage nearMe">
+                    <div class="searchDivForScrollClass mainSearchDivPcSize">
+                        <a href="{{route("myLocation")}}" class="mainPageMainSearchText sendIconAfter locationIcon">اطراف من</a>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <h1 class="mainH1">کوچیتا، سامانه جامع گردشگری ایران</h1>
+    <h1 class="mainH1 hideOnPhone">کوچیتا، سامانه جامع گردشگری ایران</h1>
 
     @include('layouts.middleBanner')
 

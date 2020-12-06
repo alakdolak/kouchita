@@ -108,7 +108,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         <div style="background: white; width: 100%; padding-top: 15px;">
             <div class="container">
                 <div class="topPageAd">
-                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                 </div>
             </div>
         </div>
@@ -796,7 +796,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                             </div>
                                             @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
                                                 <div class="topPageAd" style="margin: 10px auto">
-                                                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                                                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                                                 </div>
 
                                                 <div class="topMainMapDiv">
@@ -804,7 +804,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                 </div>
 
                                                 <div class="topPageAd" style="margin: 10px auto">
-                                                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                                                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                                                 </div>
                                                 @include('pages.placeDetails.component.extendedMap')
 
@@ -837,13 +837,13 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                     <div class="Ad3InRowPc">
                         <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                         </div>
                         <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                         </div>
                         <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                         </div>
                     </div>
 

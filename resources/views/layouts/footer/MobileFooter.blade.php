@@ -1,4 +1,5 @@
 
+
 <div class="gapForMobileFooter hideOnScreen"></div>
 
 <div class="footerPhoneMenuBar hideOnScreen">
@@ -11,14 +12,12 @@
         <span class="ui_icon questionIcon" style="font-size: 20px; font-weight: normal;"></span>
         <span class="newMsgMainFooterCount newAlertNumber hidden" style="left: 0; top: 5px;">0</span>
     </div>
-    <div onclick="openMobileFooterPopUps('profilePossibilities');">
+    <div onclick="openMobileFooterPopUps('specialMenuMobileFooter');">
         <span class="footerMenuBarLinks">
-                @if(Request::is('placeList/*'))
-                    {{__('اعمال فیلتر')}}
-                @elseif(Request::is('safarnameh/*') || Request::is('safarnameh'))
+                @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
                     {{__('سفرنامه ها')}}
                 @else
-                    {{__('کمپین')}}
+                    {{__('برنامه های ویژه')}}
                 @endif
             </span>
         <span class="iconFamily addPostIcon" style="font-size: 20px;"></span>
@@ -73,10 +72,9 @@
             {{--                </div>--}}
 
             <div class="headerSearchBar">
-                    <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
-                        <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
-                    </span>
-
+                <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
+                    <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
+                </span>
                 <span class="headerSearchIcon footerSearchBar" style="background: var(--koochita-red);">
                     <a href="{{route('myLocation')}}" class="icc addressBarIcon" style="word-spacing: -4px;">اطراف من</a>
                 </span>
@@ -167,17 +165,35 @@
 
     @if(Request::is('placeList/*'))
         <div class="mobileFiltersButtonTabs hideOnScreen">
+            <div class="minGombad sortListMobileFooter">
+                <div class="gomb orders" onclick="selectingOrder(this, 'rate')">
+                    <div class="topGomb fullStarRating"></div>
+                    <div class="text">بهترین ها</div>
+                </div>
+                <div class="gomb orders" onclick="selectingOrder(this, 'review')">
+                    <div class="topGomb CommentIcon" style="font-size: 30px;"></div>
+                    <div class="text">بیشترین نظر</div>
+                </div>
+                <div class="gomb orders" onclick="selectingOrder(this, 'seen')">
+                    <div class="topGomb">
+                        <img class="offEye" src="{{URL::asset('images/icons/eye.svg')}}" style="width: 58%">
+                        <img class="onEye" src="{{URL::asset('images/icons/eyeYellow.svg')}}" style="width: 58%">
+                    </div>
+                    <div class="text">پربازدیدها</div>
+                </div>
+            </div>
             <div class="tabs">
                 <div class="tab filterIcon" onclick="openMyModal('placeListMobileFilter')">اعمال فیلتر</div>
-                <div class="tab twoHouseIcon" onclick="openMyModal('placeListMobileFilter')">مرتب سازی</div>
+                <div class="tab twoHouseIcon" onclick="openListSort(this)">مرتب سازی</div>
             </div>
         </div>
-
-        <div id="placeListMobileFilter" class="modalBlackBack fullCenter">
+        <div id="placeListMobileFilter" class="modalBlackBack fullCenter" style="transition: .7s">
             <div class="gombadi">
                 <div class="mobileFooterFilterPic" style="position: relative">
                     <img src="{{URL::asset('images/test/amakenMobileFooter.jpg')}}" style="width: 100%">
-                    <div class="gradientWhite"></div>
+                    <div class="gradientWhite">
+                        <div class="closeThisModal iconClose" onclick="closeMyModal('placeListMobileFilter')"></div>
+                    </div>
                 </div>
                 <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters fil">
                     <div class="filterBoxMobile filterBox">
@@ -324,44 +340,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="mainPopUp rightPopUp PlaceController hidden">
-            <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
-                <div id="FilterTopController" class="FilterTopController">
-                    <div class="ordering">
-                        <div class="orders" onclick="selectingOrder($(this),'review')" id="pz1">
-                            {{__('بیشترین نظر')}}
-                        </div>
-                    </div>
-                    <div class="ordering">
-                        <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="pz2">
-                            {{__('بهترین بازخورد')}}
-                        </div>
-                    </div>
-                    <div class="ordering">
-                        <div class="orders" onclick="selectingOrder($(this), 'seen')" id="pz3">
-                            {{__('بیشترین بازدید')}}
-                        </div>
-                    </div>
-                    <div class="ordering">
-                        <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
-                            {{__('حروف الفبا')}}
-                        </div>
-                    </div>
-                    @if($kindPlace->id != 10 && $kindPlace->id != 11)
-                        <div class="ordering">
-                            <div id="distanceNavMobile" class="orders" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">{{__('کمترین فاصله تا')}}
-                                <span id="selectDistanceMobile">__ __ __</span>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-
     @endif
 
-    <div id="profilePossibilities" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
+    <div id="specialMenuMobileFooter" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
         @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
             <div class="mainPopUp rightPopUp" style="padding: 7px">
                 <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
@@ -521,12 +502,65 @@
                     @endif
                 </div>
             </div>
+        @else
+            <div class="mainPopUp rightPopUp recentViewLeftBar" style="overflow: hidden; transition: .3s;">
+                <div class="headerSearchBar">
+                    <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
+                        <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
+                    </span>
+                    <span class="headerSearchIcon footerSearchBar" style="background: var(--koochita-red);">
+                        <a href="{{route('myLocation')}}" class="icc addressBarIcon" style="word-spacing: -4px;">اطراف من</a>
+                    </span>
+                </div>
+                <div style="height: calc(100% - 170px); overflow-y: auto">
+                    <div id="specRowsPage" class="lp_others_content specPages" style="position: relative;">
+                        <div class="specialFooterRow"  onclick="goToLanding()">
+                            <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/undp.svg')}}" style="position: absolute; width: 23px; top: 18px; right: 14px;">
+                            <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.webp')}}" class="resizeImgClass" style="width: 100%;">
+                        </div>
+                        <div class="specialFooterRow" onclick="writeNewSafaranmeh()">
+                            <img alt="koochitaCook" src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" class="resizeImgClass">
+                        </div>
+                        <div class="specialFooterRow" onclick="writeNewSafaranmeh()">
+                            <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.webp')}}" class="resizeImgClass">
+                        </div>
+                        <div class="specialFooterRow" onclick="$('#campingHeader').hide(); openUploadPost()">
+                            <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/nAxasi.webp')}}" class="resizeImgClass">
+                        </div>
+                    </div>
+
+                    <div id="calendarRowPage" class="lp_others_content specPages hidden" style="position: relative;">
+                        <input type="text" id="footerSpecialDayCalendar">
+                    </div>
+
+                    <div id="translateRowsPage" class="lp_others_content specPages hidden" style="position: relative;"></div>
+                </div>
+
+                <div class="lp_phoneMenuBar">
+                    <div class="lp_eachMenu specTabsFot" style="flex-direction: column;" onclick="specialMobileFooter('calendarRowPage', this)">
+                        <div class="lp_icons calendarIconA"></div>
+                        <div>{{__('تقویم گردشگری')}}</div>
+                    </div>
+                    <div class="lp_eachMenu specTabsFot lp_selectedMenu" onclick="specialMobileFooter('specRowsPage', this)">
+                        <div class="lp_icons medalsIcon"></div>
+                        <div>{{__('مسابقات')}}</div>
+                    </div>
+                    <div class="lp_eachMenu specTabsFot" onclick="specialMobileFooter('translateRowsPage', this)">
+                        <div class="lp_icons earthIcon"></div>
+                        <div>{{__('ترجمه')}}</div>
+                        <span class="newMsgMainFooterCount newAlertNumber hidden" style="left: 0; top: 5px;">0</span>
+                    </div>
+                    <div class="lp_eachMenu specTabsFot" onclick="specialMobileFooter('translateRowsPage', this)">
+                        <div class="lp_icons tvIcon"></div>
+                        <div>{{__('ببینیم')}}</div>
+                    </div>
+                </div>
+            </div>
         @endif
     </div>
 
     <div id="otherPossibilities" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
         <div class="mainPopUp rightPopUp" style="overflow-y: auto">
-
             <div class="headerSearchBar">
                 <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
                     <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
@@ -535,7 +569,6 @@
                     <a href="{{route('myLocation')}}" class="icc addressBarIcon" style="word-spacing: -4px;">اطراف من</a>
                 </span>
             </div>
-
             <div class="pSC_boxOfDetails" style="    height: calc(100% - 80px);">
                 <div class="pSC_choiseDetailsText">
                         <span class="pSC_cityTilte" >
@@ -631,34 +664,6 @@
 {{--                    </a>--}}
                 </div>
             </div>
-
-{{--            <div class="hideOnScreen phoneFooterStyle phoneMainFooter">--}}
-{{--                <div class="phoneFooterLogo">--}}
-{{--                    <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا سامانه جامع گردشگری ایران" class="content-icon" width="100%">--}}
-{{--                </div>--}}
-{{--                <div class="phoneDescription" style="width: 100%;">--}}
-{{--                    <div class="footerSocialDivPhone">--}}
-{{--                        <a class="socialLink" rel="nofollow" target="_blank" href="https://t.me/koochita">--}}
-{{--                            <div class="footerIconHor telegram"></div>--}}
-{{--                        </a>--}}
-{{--                        <a rel="nofollow" target="_blank" href="https://www.facebook.com/Koochita-115157527076374">--}}
-{{--                            <div class="footerIconHor facebook"></div>--}}
-{{--                        </a>--}}
-{{--                        <a rel="nofollow" target="_blank" href="https://wa.me/989120239315">--}}
-{{--                            <div class="footerIconHor whatsappBackground"></div>--}}
-{{--                        </a>--}}
-{{--                        <a rel="nofollow" target="_blank" href="https://www.instagram.com/koochita_com/">--}}
-{{--                            <div class="footerIconHor instagram"></div>--}}
-{{--                        </a>--}}
-{{--                        <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">--}}
-{{--                            <div class="footerIconHor bogenBackground"></div>--}}
-{{--                        </a>--}}
-{{--                        <a rel="nofollow" target="_blank" href="http://www.sisootech.com/">--}}
-{{--                            <div class="footerIconHor sisootechBackground"></div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     </div>
 
@@ -818,10 +823,16 @@
     @endif
 </div>
 
+<link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
+<script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
+
+{{--<link rel="stylesheet" href="{{URL::asset('packages/datePicker/jquery.datetimepicker.css')}}">--}}
+{{--<script async src="{{URL::asset('packages/datePicker/jquery.datetimepicker.full.min.js')}}"></script>--}}
+
 <script>
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
     var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
-    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh') || Request::is('placeList/*')}}';
+    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh')}}';
     var touchRigthForFooterMobile = 0;
 
     $('.footerModals').on('touchstart', e => {
@@ -840,5 +851,42 @@
     $('.gombadi').on('click', e => {
         if($(e.target).hasClass('gombadi'))
             closeMyModal('placeListMobileFilter');
+    });
+
+    function openListSort(_element){
+        $('.sortListMobileFooter').toggleClass('open');
+        $(_element).toggleClass('selected');
+
+
+    }
+
+    function specialMobileFooter(_id, _element){
+        resizeFitImg('resizeImgClass');
+        $('.specPages').addClass('hidden');
+        $(`#${_id}`).removeClass('hidden');
+
+        $('.specTabsFot').removeClass('lp_selectedMenu');
+        $(_element).addClass('lp_selectedMenu');
+
+        // if(_id = "calendarRowPage")
+        //     $('#footerSpecialDayCalendar').datetimepicker('show');
+        // else
+        //     $('#footerSpecialDayCalendar').datetimepicker('hide');
+    }
+
+
+    $(window).ready(() => {
+        // jQuery('#footerSpecialDayCalendar').datetimepicker({
+        //     closeOnDateSelect:false,
+        //     opened :true,
+        // });
+        // $.datetimepicker.setLocale('fa');
+
+
+        $("#footerSpecialDayCalendar").datepicker({
+            numberOfMonths: 1,
+            showButtonPanel: true,
+            dateFormat: "yy/mm/dd"
+        });
     })
 </script>

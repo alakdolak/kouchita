@@ -212,6 +212,10 @@
     content: "\E01B";
     font-family: 'Shazde_Regular' !important;
 }
+.sendIconAfter:after{
+    content: "\E01B";
+    font-family: 'Shazde_Regular' !important;
+}
 .redStar:before {
     content: '\E00B';
 }
@@ -323,6 +327,10 @@
 }
 .ShareIcon:before{
     content: '\E1F6';
+    font-family: Shazde_Regular2 !important;
+}
+.tvIcon:before{
+    content: '\E01E' !important;
     font-family: Shazde_Regular2 !important;
 }
 .earthIcon:before{
