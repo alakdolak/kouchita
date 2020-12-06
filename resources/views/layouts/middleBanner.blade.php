@@ -69,12 +69,13 @@
             position: absolute;
             right: 0px;
             z-index: 99;
-            background: #ffffff73;
+            background: white;
             color: black;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 5px 15px;
+            border-radius: 0px 0px 10px 10px;
         }
         .circleSliderMainPage .header img{
             margin-left: 10px;
@@ -432,6 +433,8 @@
                 </script>
             @endif
 
+            <div id="loadSuggestionLine"></div>
+
             <div id="articleSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements first">
                 <a class="shelf_title" href="{{route('safarnameh.index')}}" target="_blank">
                     <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
@@ -586,7 +589,10 @@
             @if(isset($middleBan['4']) && count($middleBan['4']) > 0)
                 <div class="circleSliderMainPage marginBetweenMainPageMobileElements">
                     <div class='parent'>
-                        <div class="header hideOnScreen">{{__('سفر طبیعت‌گردی')}}</div>
+                        <div class="header hideOnScreen">
+                            {{__('سفر طبیعت‌گردی')}}
+                            <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                        </div>
                         <div class='slider' style="width: 100%;">
                             <button type="button" id='banner3_right' class='rightButton sliderButton' name="button">
                                 <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -881,7 +887,7 @@
 
             <div id="pos-article-text-16130"></div>
 
-            <div id="kharidSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements">
+            <div id="kharidSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements hidden">
                 <div class="shelf_title">
                     <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
@@ -928,16 +934,16 @@
 </div>
 
 <script>
+    var bannerIsLoaded = false;
     var middleBan5Color = ['red', 'green', 'navy'];
     var middleBan5 = {!! isset($middleBan['5']) ? $middleBan['5'] : json_encode([]) !!};
     var middleBan4 = {!! isset($middleBan['4']) ? $middleBan['4'] : json_encode([]) !!};
-
+    let loadSuggestion = false;
+    let lastPageForSuggestion = null;
+    let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topSafarnameh']; /*'topKharid'*/
     var sugg4PlaceHolder = getSuggestionPackPlaceHolder();
     sugg4PlaceHolder += sugg4PlaceHolder+sugg4PlaceHolder+sugg4PlaceHolder;
 
-    let loadSuggestion = false;
-    let lastPageForSuggestion = null;
-    let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topSafarnameh'];
     divNames.forEach(item => {
         $(`.${item}`).html(sugg4PlaceHolder);
         $(`.${item}`).find('.suggestionPackDiv').addClass('swiper-slide');
@@ -953,14 +959,12 @@
         console.log('your browser not support localStorage');
 
     function ajaxToFillMainPageSuggestion(){
-        loadMainPageSliders();
+        if(!bannerIsLoaded)
+            loadMainPageSliders();
+
         $.ajax({
-            type: 'post',
-            url: '{{route("getMainPageSuggestion")}}',
-            data: {
-                _token: '{{csrf_token()}}',
-                lastPage: lastPageForSuggestion
-            },
+            type: 'GET',
+            url: '{{route("getMainPageSuggestion")}}?lastPage='+JSON.stringify(lastPageForSuggestion),
             success: response => {
                 createMainPageSuggestion(response);
                 // fillCountNumber(response.count);
@@ -969,6 +973,7 @@
     }
 
     function loadMainPageSliders(){
+        bannerIsLoaded = true;
         var text = '';
         if(middleBan5.length > 0){
             $('.cityMainPageSlider').parent().removeClass('hidden');
@@ -1017,6 +1022,7 @@
         }
         else
             $('#middleBan4Body').parent().parent().remove();
+
     }
 
     function fillCountNumber(_counts){
@@ -1044,38 +1050,38 @@
         createSuggestionPack('newInKoochita', _result.result, function() {
             $('.newInKoochita').find('.suggestionPackDiv').addClass('swiper-slide');
             $('.newInKoochita').css('direction', 'ltr');
-        });
+        }, true);
 
         createSuggestionPack('topFood', food, function() {
             $('.topFood').find('.suggestionPackDiv').addClass('swiper-slide');
             $('.topFood').css('direction', 'ltr');
-        });
+        }, true);
 
         createSuggestionPack('topTabiat', tabiat, function() {
             $('.topTabiat').find('.suggestionPackDiv').addClass('swiper-slide');
             $('.topTabiat').css('direction', 'ltr');
-        });
+        }, true);
 
         createSuggestionPack('topRestaurant', restaurant, function() {
             $('.topRestaurant').find('.suggestionPackDiv').addClass('swiper-slide');
             $('.topRestaurant').css('direction', 'ltr');
-        });
+        }, true);
 
         createSuggestionPack('topTarikhi', tarikhi, function() {
             $('.topTarikhi').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('.`topTarikhi').css('direction', 'ltr');
-        });
+            $('.topTarikhi').css('direction', 'ltr');
+        }, true);
 
-        createSuggestionPack('topKharid', kharid, function() {
-            $('.topKharid').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('.topKharid').css('direction', 'ltr');
-        });
+        // createSuggestionPack('topKharid', kharid, function() {
+        //     $('.topKharid').find('.suggestionPackDiv').addClass('swiper-slide');
+        //     $('.topKharid').css('direction', 'ltr');
+        // });
 
         createSuggestionPack('topSafarnameh', safarnameh, function() {
             $('.topSafarnameh').find('.suggestionPackDiv').addClass('swiper-slide');
             $('.topSafarnameh').css('direction', 'ltr');
             runMainSwiper('mainSuggestion')
-        });
+        }, true);
     }
 
     function runMainSwiper(_class){
@@ -1127,23 +1133,25 @@
     // this run function for mainArticlaSwiperMainPage
     // runMainSwiper('mainArticlaSwiperMainPage');
 
+    if($(window).width() <= 767 && !bannerIsLoaded)
+        loadMainPageSliders();
 
-    let newKoochitaTop = document.getElementById('newKoochita').offsetTop;
-    let windwoY = window.scrollY + $(window).height();
-    if (windwoY >= newKoochitaTop) {
-        loadSuggestion = true;
-        ajaxToFillMainPageSuggestion();
-    }
-
-    $(window).on('scroll', function(e){
-        if(!loadSuggestion) {
-            let newKoochitaTop = document.getElementById('newKoochita').offsetTop;
-            let windwoY = window.scrollY + $(window).height();
-            if (windwoY >= newKoochitaTop) {
-                loadSuggestion = true;
-                ajaxToFillMainPageSuggestion();
-            }
+    $(window).ready(() => {
+        let loadSuggestionLine = document.getElementById('loadSuggestionLine').getBoundingClientRect().top;
+        if (loadSuggestionLine - $(window).height() <= 0) {
+            loadSuggestion = true;
+            ajaxToFillMainPageSuggestion();
         }
+
+        $(window).on('scroll', function(e){
+            if(!loadSuggestion) {
+                let loadSuggestionLine = document.getElementById('loadSuggestionLine').getBoundingClientRect().top;
+                if (loadSuggestionLine - $(window).height() <= 0) {
+                    loadSuggestion = true;
+                    ajaxToFillMainPageSuggestion();
+                }
+            }
+        });
     })
 </script>
 

@@ -633,9 +633,9 @@ class AjaxController extends Controller {
     }
 
 
-    public function getMainPageSuggestion(Request $request)
+    public function getMainPageSuggestion()
     {
-        $lastPages = $request->lastPage;
+        $lastPages = json_decode($_GET['lastPage']);
         $lastState = [];
 
         $reviewId = Activity::where('name', 'نظر')->first()->id;
@@ -879,6 +879,9 @@ class AjaxController extends Controller {
     }
 
     private function getTopInIds($_kindPlaceId, $_placeIds, $getCount, $questionRate, $reviewId, $ansId, $quesActivityId, $seeActivityId = ''){
+
+        if (count($_placeIds) == 0)
+            $_placeIds = [0];
 
         $topIdInCity = [];
         if($seeActivityId != '')
