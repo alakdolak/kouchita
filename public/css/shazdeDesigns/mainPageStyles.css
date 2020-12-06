@@ -763,6 +763,41 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     .ui_modal.searchPanes {
         padding: 16px;
     }
+
+    .mainSearchDivPcSize .mainPageMainSearchText{
+        text-align: center;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .mainDivSearchInputMainPage {
+        left: 30%;
+        right: 32%;
+    }
+    .mainDivSearchInputMainPage .mainSearchDivPcSize{
+        padding: 4px 0px;
+        border-radius: 30px !important;
+    }
+    .mainDivSearchInputMainPage .mainSearchDivPcSize .searchIcon:before{
+        transform: rotateZ(90deg);
+    }
+    .mainDivSearchInputMainPage.nearMe{
+        left: 34%;
+        right: 37%;
+        top: 65%;
+        border: none;
+    }
+    .mainDivSearchInputMainPage.nearMe .mainSearchDivPcSize{
+        padding: 7px 0px;
+        background: #101010cf;
+        border: none !important;
+    }
+    .mainDivSearchInputMainPage.nearMe .mainPageMainSearchText{
+        color: white;
+        font-size: 15px;
+        top: 65%;
+    }
 }
 
 @media (min-width: 630px) and (max-width: 767px) {

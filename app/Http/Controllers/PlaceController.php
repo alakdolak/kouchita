@@ -3056,7 +3056,7 @@ class PlaceController extends Controller {
                 $city = '';
                 $articleUrl = \route('safarnameh.index');
                 $n = 'لیست ' . $kindPlace->title . ' ایران';
-                $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
+                $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => 'ایران من', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
                 $contentCount = \DB::table($kindPlace->tableName)->count();
                 $inHeaderName = 'ایران ';
             }

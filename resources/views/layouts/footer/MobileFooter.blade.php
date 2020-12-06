@@ -190,7 +190,7 @@
         <div id="placeListMobileFilter" class="modalBlackBack fullCenter" style="transition: .7s">
             <div class="gombadi">
                 <div class="mobileFooterFilterPic" style="position: relative">
-                    <img src="{{URL::asset('images/test/amakenMobileFooter.jpg')}}" style="width: 100%">
+                    <img src="{{URL::asset('images/mainPics/amakenMobileFooter.jpg')}}" style="width: 100%">
                     <div class="gradientWhite">
                         <div class="closeThisModal iconClose" onclick="closeMyModal('placeListMobileFilter')"></div>
                     </div>
