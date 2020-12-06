@@ -669,8 +669,8 @@ class AjaxController extends Controller {
 
         if($lastPages != null){
             foreach ($lastPages as $lp){
-                if(!in_array($lp['state'], $lastState) && $lp['state'] != null && count($lastState) < 3)
-                    array_push($lastState, $lp['state']);
+                if(!in_array($lp, $lastState) && $lp != null && count($lastState) < 3)
+                    array_push($lastState, $lp);
             }
         }
         $lastStateId = State::whereIn('name', $lastState)->pluck('id')->toArray();

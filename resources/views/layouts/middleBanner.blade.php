@@ -962,9 +962,12 @@
         if(!bannerIsLoaded)
             loadMainPageSliders();
 
+        var states = [];
+        lastPageForSuggestion.map(item => states.push(item.state));
+
         $.ajax({
             type: 'GET',
-            url: '{{route("getMainPageSuggestion")}}?lastPage='+JSON.stringify(lastPageForSuggestion),
+            url: '{{route("getMainPageSuggestion")}}?lastPage='+JSON.stringify(states),
             success: response => {
                 createMainPageSuggestion(response);
                 // fillCountNumber(response.count);
