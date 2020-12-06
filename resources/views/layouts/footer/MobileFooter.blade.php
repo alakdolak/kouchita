@@ -72,10 +72,9 @@
             {{--                </div>--}}
 
             <div class="headerSearchBar">
-                    <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
-                        <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
-                    </span>
-
+                <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
+                    <span class="icc searchIcon" style="word-spacing: -4px;">به کجا می روید؟</span>
+                </span>
                 <span class="headerSearchIcon footerSearchBar" style="background: var(--koochita-red);">
                     <a href="{{route('myLocation')}}" class="icc addressBarIcon" style="word-spacing: -4px;">اطراف من</a>
                 </span>
@@ -520,7 +519,7 @@
                             <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/landing.webp')}}" class="resizeImgClass" style="width: 100%;">
                         </div>
                         <div class="specialFooterRow" onclick="writeNewSafaranmeh()">
-                            <img alt="koochitaCook" src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" class="resizeImgClass">
+                            <img alt="koochitaCook" src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" class="resizeImgClass">
                         </div>
                         <div class="specialFooterRow" onclick="writeNewSafaranmeh()">
                             <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{URL::asset('images/camping/' . app()->getLocale() . '/nSafarnameh.webp')}}" class="resizeImgClass">
@@ -824,9 +823,11 @@
     @endif
 </div>
 
+<link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
+<script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
-<link rel="stylesheet" href="{{URL::asset('packages/datePicker/jquery.datetimepicker.css')}}">
-<script async src="{{URL::asset('packages/datePicker/jquery.datetimepicker.full.min.js')}}"></script>
+{{--<link rel="stylesheet" href="{{URL::asset('packages/datePicker/jquery.datetimepicker.css')}}">--}}
+{{--<script async src="{{URL::asset('packages/datePicker/jquery.datetimepicker.full.min.js')}}"></script>--}}
 
 <script>
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
@@ -860,6 +861,7 @@
     }
 
     function specialMobileFooter(_id, _element){
+        resizeFitImg('resizeImgClass');
         $('.specPages').addClass('hidden');
         $(`#${_id}`).removeClass('hidden');
 
@@ -874,17 +876,17 @@
 
 
     $(window).ready(() => {
-        jQuery('#footerSpecialDayCalendar').datetimepicker({
-            closeOnDateSelect:false,
-            opened :true,
-        });
-        $.datetimepicker.setLocale('fa');
-
-
-        // $("#footerSpecialDayCalendar").datepicker({
-        //     numberOfMonths: 1,
-        //     showButtonPanel: true,
-        //     dateFormat: "yy/mm/dd"
+        // jQuery('#footerSpecialDayCalendar').datetimepicker({
+        //     closeOnDateSelect:false,
+        //     opened :true,
         // });
+        // $.datetimepicker.setLocale('fa');
+
+
+        $("#footerSpecialDayCalendar").datepicker({
+            numberOfMonths: 1,
+            showButtonPanel: true,
+            dateFormat: "yy/mm/dd"
+        });
     })
 </script>

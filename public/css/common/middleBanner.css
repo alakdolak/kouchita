@@ -239,18 +239,28 @@ html {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    padding-top: 5px;
+    background: #EAFBFF;
 }
 
 .squareDiv {
-    width: 20%;
+    width: 19%;
     color: #30b4a6 !important;
     background-color: white;
-    border: solid lightgray;
+    border: 1px solid lightgray;
     display: inline-block;
     text-align: center;
     cursor: pointer;
-    border-width: 4px 3px;
+    border-radius: 6px;
+    margin: 1px 1px;
+}
+.squareDiv .phoneIcon{
+    color: #333;
+    font-weight: normal;
+}
+.squareDiv .textIcon{
+    color: #333;
+    font-weight: normal;
 }
 
 .squareDiv:hover {
@@ -320,13 +330,6 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 
 .shelf_item_container.ui_columns.is-mobile.is-multiline {
     margin: 0 !important;
-}
-
-#newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions,
-#restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion {
-    margin: 40px 0;
-    padding: 20px 20px;
-    background: var(--koochita-dark-green);
 }
 
 .poi_by_tag .ui_columns.is-multiline {
@@ -564,7 +567,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .footerBarSpacer {
     width: 100%;
-    height: 70px;
+    height: 0px;
     display: none;
 }
 
@@ -584,10 +587,6 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .titleAlt {
     position: absolute;
-}
-
-.mainSuggestionMainDiv #restaurantSuggestion {
-    margin-top: 35px;
 }
 
 .articleBoxes {
@@ -1229,6 +1228,15 @@ figure.snip1091.hover figcaption:after {
     font-size: 40px;
 }
 
+@media (min-width: 767px){
+    #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions,
+    #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion {
+        margin: 40px 0;
+        padding: 20px 20px;
+        background: var(--koochita-dark-green);
+    }
+}
+
 @media (max-width: 1188px) {
     .middleBannerPhotoDiv .clear-both {
         display: none;
@@ -1280,6 +1288,7 @@ figure.snip1091.hover figcaption:after {
 
 @media (max-width: 767px) {
     .mainBannerSlider{
+        height: 160px;
         margin-bottom: 0px;
     }
     DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .ui_icon.travelers-choice-badge {

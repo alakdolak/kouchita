@@ -215,7 +215,7 @@
 
 {{--mobile header--}}
 <div class="hideOnScreen mobileHeader">
-    <a href="{{route('main')}}" class="global-nav-logo" style="height: 100%">
+    <a href="{{route('main')}}" class="global-nav-logo" style="height: 100%; display: flex; align-items: center">
         <img src="{{URL::asset('images/camping/undp.svg')}}" alt="{{__('کوچیتا')}}" style="height: 50px; width: auto;"/>
         <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="{{__('کوچیتا')}}" style="height: 80%; width: auto;"/>
     </a>

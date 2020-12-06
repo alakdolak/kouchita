@@ -615,7 +615,9 @@ if(Auth::check()) {
                             <div class="sidebar-nav-close">
                                 <div class="ui_icon times"></div>
                             </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/icons/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
+                            <a href="/" class="global-nav-logo">
+                                <img src='{{URL::asset('images/icons/logo.png')}}' alt="کوچیتا" class="global-nav-img"/>
+                            </a>
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())

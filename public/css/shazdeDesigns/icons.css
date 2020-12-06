@@ -212,6 +212,10 @@
     content: "\E01B";
     font-family: 'Shazde_Regular' !important;
 }
+.sendIconAfter:after{
+    content: "\E01B";
+    font-family: 'Shazde_Regular' !important;
+}
 .redStar:before {
     content: '\E00B';
 }

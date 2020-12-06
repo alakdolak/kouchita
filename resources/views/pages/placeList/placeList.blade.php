@@ -117,7 +117,7 @@
 
     <div style="background: white; width: 100%; padding: 15px 0px;">
         <div class="topPageAd">
-            <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}" >
+            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
         </div>
     </div>
 

@@ -648,6 +648,8 @@ Route::group(['middleware' => ['web', 'shareData']], function(){
 
     Route::group(['middleware' => 'nothing'], function(){
         Route::get('/ashpazi', 'CookController@cookFestival')->name('festival.cook');
+        Route::get('/Ashpazi', 'CookController@cookFestival');
+        Route::get('/ASHPAZI', 'CookController@cookFestival');
 
         Route::post('/festival/cook/checkFirstStepRegister', 'CookController@checkFirstStepRegister')->name('festival.cook.firstStepRegister');
 

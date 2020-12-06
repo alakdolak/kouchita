@@ -1,7 +1,137 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css?v='.$fileVersions)}}'/>
 
-<div class="container">
 
+<style>
+    .mapBoxMainPage{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: 400px;
+        position: relative;
+        width: 100%;
+    }
+    .mapBoxMainPage .imgg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    .mapBoxMainPage .clickMapBox{
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+         background: #0000001f;
+    }
+    .mapBoxMainPage .clickMapBox div:nth-of-type(1){
+        background: #720d19ad;
+        padding: 5px 15px;
+        border-radius: 30px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid 1px white;
+        margin-bottom: 3px;
+    }
+    .mapBoxMainPage .clickMapBox div:nth-of-type(2){
+        background: #720d19ad;
+        padding: 5px 15px;
+        border-radius: 30px;
+        text-align: center;
+        margin-top: 0px;
+        border: solid 1px white;
+    }
+    @media (max-width: 767px) {
+
+        .mapBoxMainPage{
+            height: 205px;
+        }
+        .marginBetweenMainPageMobileElements{
+            margin: 30px 0px;
+            padding: 20px 0px;
+            background: white;
+            border-top: solid 6px #bfbfbf3d;
+            border-bottom: solid 6px #bfbfbf3d;
+        }
+        .suggestRowsMainPage.marginBetweenMainPageMobileElements{
+            padding: 10px 0px;
+        }
+        .circleSliderMainPage .header{
+            position: absolute;
+            right: 0px;
+            z-index: 99;
+            background: #ffffff73;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 15px;
+        }
+        .circleSliderMainPage .header img{
+            margin-left: 10px;
+        }
+        .circleSliderMainPage .header h3{
+            margin: 0;
+        }
+        .citySliderMainPageItem{
+            width: 60%;
+        }
+        /*body{*/
+        /*    background: white !important;*/
+        /*}*/
+        .swiper-button-prev, .swiper-button-next{
+            display: none !important;
+        }
+        figure.snip1091{
+            max-width: 240px;
+            height: 240px;
+        }
+        .shelf_title_container.h3{
+            color: #333;
+        }
+        .fullWidthMainPageInMobile{
+            padding: 0px;
+            width: 100%;
+        }
+        .fullWidthMainPageInMobile .row{
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+        }
+        .fullWidthMainPageInMobile .topADMainPage .addd{
+            margin: 0 !important;
+        }
+        .fullWidthMainPageInMobile .suggestRowsMainPage{
+            background: white !important;
+        }
+        .fullWidthMainPageInMobile .suggestRowsMainPage .shelf_title{
+            padding: 0px 10px;
+        }
+        .fullWidthMainPageInMobile .suggestRowsMainPage .suggestionPackDiv{
+            margin-bottom: 15px;
+            width: 80%;
+        }
+        .fullWidthMainPageInMobile .suggestRowsMainPage .suggestionPackContent{
+            box-shadow: 3px 0px 8px 1px #00000052;
+        }
+        .fullWidthMainPageInMobile .parent{
+            margin: 0px;
+        }
+
+    }
+</style>
+
+
+<div class="container fullWidthMainPageInMobile">
     <div class="ppr_rup ppr_priv_homepage_shelves">
         <div class="mainSuggestionMainDiv">
             <div class="hideOnScreen row">
@@ -28,7 +158,7 @@
                     </div>
 
 
-                    <div class="squareDiv" onclick="openMainSearch(6)" style="width: 40%">
+                    <div class="squareDiv" onclick="openMainSearch(6)" style="width: 39%">
                         <div class="phoneIcon adventureIcon"></div>
                         <div class="textIcon">{{__('طبیعت گردی')}}</div>
                     </div>
@@ -36,19 +166,25 @@
                         <div class="phoneIcon safarnameIcon"></div>
                         <div class="textIcon">{{__('سفرنامه')}}</div>
                     </div>
-                    <div class="squareDiv" onclick="openMainSearch(10)" style="width: 40%">
+                    <div class="squareDiv" onclick="openMainSearch(10)" style="width: 39%">
                         <div class="phoneIcon restaurant"></div>
                         <div class="textIcon">{{__('سوغات و صنایع‌دستی')}}</div>
                     </div>
                 </div>
             </div>
 
-            <div class="topADMainPage">
-                <div class="addd">
-                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}">
+            <div class="threeSlider swiper-container marginBetweenMainPageMobileElements hideOnScreen hidden">
+                <div class="cityMainPageSlider swiper-wrapper position-relative"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <div class="topADMainPage marginBetweenMainPageMobileElements">
+                <div class="addd" style="margin-top: 5px;">
+                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
                 </div>
-                <div class="addd">
-                    <img src="{{URL::asset('images/festival/cookFestival/bannerCook.gif')}}">
+                <div class="addd hideOnPhone">
+                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
                 </div>
             </div>
 
@@ -96,7 +232,6 @@
                     }
                 </style>
                 <div class="cont hideOnPhone">
-
                     @for($i = 1; $i <= count($middleBan['1']); $i++)
                         <div data-target='{{$i}}' class="slide slide--{{$i}}">
                             @if($middleBan['1'][$i-1]['link'] != '')
@@ -117,7 +252,6 @@
                             <div class="slide__bg-dark"></div>
                         </div>
                     @endfor
-
                 </div>
                 <script>
                     const $cont = $('.cont');
@@ -298,16 +432,17 @@
                 </script>
             @endif
 
-            <div id="newKoochita">
-                <div class="shelf_title">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+            <div id="articleSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements first">
+                <a class="shelf_title" href="{{route('safarnameh.index')}}" target="_blank">
+                    <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
-                        <h3>{{__('تازه‌های کوچیتا')}}</h3>
+                        <h3>{{__('جدیدترین سفرنامه‌ها')}}</h3>
                     </div>
-                </div>
-                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                </a>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
-                        <div id="newInKoochita" class="swiper-wrapper suggestionBody">
+                        <div class="topSafarnameh swiper-wrapper suggestionBody">
                             {{--fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
@@ -316,8 +451,39 @@
                 </div>
             </div>
 
+            <div class="mapBoxMainPage marginBetweenMainPageMobileElements">
+                <div class="imgg">
+                    <img src="{{URL::asset('images/mainPics/mapPicture.jpg')}}" class="resizeImgClass" onload="fitThisImg(this)">
+                    <a href="{{route('myLocation')}}" class="clickMapBox">
+                        <div>لوکیشن بده</div>
+                        <div>جاهای جالب اطرافت رو ببین</div>
+                    </a>
+                </div>
+            </div>
+
+            <div id="newKoochita" class="suggestRowsMainPage hideOnPhone">
+                <div class="shelf_title">
+                    <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <div class="shelf_title_container h3">
+{{--                        color: #333;--}}
+                        <h3>{{__('تازه‌های کوچیتا')}}</h3>
+                    </div>
+                </div>
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                    <div class="mainSuggestion swiper-container">
+                        <div class="newInKoochita swiper-wrapper suggestionBody">
+                            {{--fill with createMainPageSuggestion function--}}
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+
+
             @if(isset($middleBan['6']))
-                <div class="middleBannerPhotoBanner middleBannerPB">
+                <div class="middleBannerPhotoBanner middleBannerPB hideOnPhone">
                     @if($middleBan['6']['link'] != '')
                         <a href="{{$middleBan['6']['link']}}" target="_blank" >
                             <img data-src="{{$middleBan['6']['pic']}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload" style="width: 100%;">
@@ -328,64 +494,86 @@
                 </div>
             @endif
 
-            <div class="siteArticlesMainDiv">
-{{--                @if(isset($articleBanner) && count($articleBanner) > 0)--}}
-                @if(false)
-                    <div class="mainArticlaSwiperMainPage swiper-container">
-                        <div class="swiper-wrapper position-relative">
-                            @foreach($articleBanner as $item)
-                                <div class="swiper-slide position-relative">
-                                    <div class="card transition">
-                                        <h2 class="h2MidBanerArticle transition" onmouseenter="showAlt(this)" onmouseleave="hideAlt(this)" title="{{$item->title}}">{{$item->title}}</h2>
-                                        <p class="pMidBanerArticle">
-                                            {{$item->meta}}
-                                        </p>
-                                        <div class="cta-container transition" style="left: 0px">
-                                            <a href="{{$item->url}}" class="cta">{{__('مشاهده مقاله')}}</a>
-                                        </div>
-                                        <div class="card_circle transition">
-                                            <img data-src="{{$item->pic}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload resizeImgClass" style="width: 100%;">
-                                        </div>
+            @if(isset($articleBanner) && count($articleBanner) > 0 && false)
+                <div class="siteArticlesMainDiv ">
+                <div class="mainArticlaSwiperMainPage swiper-container">
+                    <div class="swiper-wrapper position-relative">
+                        @foreach($articleBanner as $item)
+                            <div class="swiper-slide position-relative">
+                                <div class="card transition">
+                                    <h2 class="h2MidBanerArticle transition" onmouseenter="$(this).parent().next().removeClass('display-none')" onmouseleave="$(this).parent().next().addClass('display-none')" title="{{$item->title}}">{{$item->title}}</h2>
+                                    <p class="pMidBanerArticle">
+                                        {{$item->meta}}
+                                    </p>
+                                    <div class="cta-container transition" style="left: 0px">
+                                        <a href="{{$item->url}}" class="cta">{{__('مشاهده مقاله')}}</a>
+                                    </div>
+                                    <div class="card_circle transition">
+                                        <img data-src="{{$item->pic}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="lazyload resizeImgClass" style="width: 100%;">
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                            </div>
+                        @endforeach
                     </div>
-                @endif
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
             </div>
+            @endif
 
-            <div id="foodSuggestion">
-                <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
-                    <div class="shelf_title_container h3">
-                        <h3>{{__('محبوب‌ترین غذا‌ها')}}</h3>
-                    </div>
-                </a>
-                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                    <div id="mainSuggestion" class="mainSuggestion swiper-container">
-                        <div id="topFood" class="swiper-wrapper suggestionBody">
-                            {{-- fill with createMainPageSuggestion function--}}
+            <div id="foodSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements">
+                <div>
+                    <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
+                        <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                        <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                        <div class="shelf_title_container h3">
+                            <h3>{{__('محبوب‌ترین غذا‌ها')}}</h3>
                         </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                    </a>
+                    <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                        <div id="mainSuggestion" class="mainSuggestion swiper-container">
+                            <div class="topFood swiper-wrapper suggestionBody">
+                                {{-- fill with createMainPageSuggestion function--}}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hideOnScreen">
+                    <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
+                        <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                        <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                        <div class="shelf_title_container h3">
+                            <h3>{{__('سفر تاریخی-فرهنگی')}}</h3>
+                        </div>
+                    </a>
+                    <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                        <div class="mainSuggestion swiper-container">
+                            <div class="swiper-wrapper topTarikhi suggestionBody">
+                                {{--fill with createMainPageSuggestion function--}}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div id='mediaad-Rvtf' class="importantFullyCenterContent"></div>
+            <div id='mediaad-Rvtf' class="importantFullyCenterContent marginBetweenMainPageMobileElements"></div>
 
-            <div id="tabiatSuggestion">
+            <div id="tabiatSuggestion" class="suggestRowsMainPage hideOnPhone">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('سفر طبیعت‌گردی')}}</h3>
                     </div>
                 </a>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div id="topTabiat" class="swiper-wrapper suggestionBody">
+                        <div class="topTabiat swiper-wrapper suggestionBody">
                             {{--fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
@@ -396,49 +584,51 @@
 
             {{--banner_3--}}
             @if(isset($middleBan['4']) && count($middleBan['4']) > 0)
-                <div class='parent'>
-                    <div class='slider' style="width: 100%;">
-                        <button type="button" id='banner3_right' class='rightButton sliderButton' name="button">
-                            <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                <div class="circleSliderMainPage marginBetweenMainPageMobileElements">
+                    <div class='parent'>
+                        <div class="header hideOnScreen">{{__('سفر طبیعت‌گردی')}}</div>
+                        <div class='slider' style="width: 100%;">
+                            <button type="button" id='banner3_right' class='rightButton sliderButton' name="button">
+                                <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
                                <g>
                                    <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/>
                                </g>
-
                             </svg>
-                        </button>
-                        <button type="button" id='banner3_left' class='leftButton sliderButton' name="button">
-                            <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                            </button>
+                            <button type="button" id='banner3_left' class='leftButton sliderButton' name="button">
+                                <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
                                <g>
                                    <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/>
                                </g>
                             </svg>
-                        </button>
+                            </button>
 
-                        <svg id='svg2' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
-                            <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
-                            <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
-                            <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
-                            <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
-                            <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
-                            <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
-                            <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
-                            <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
-                        </svg>
-                        <svg id='svg1' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
-                            <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
-                            <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
-                            <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
-                            <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
-                            <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
-                            <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
-                            <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
-                            <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
-                        </svg>
-                        <div id="middleBan4Body"></div>
+                            <svg id='svg2' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
+                                <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
+                                <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
+                                <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
+                                <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
+                                <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
+                                <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
+                                <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
+                                <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
+                            </svg>
+                            <svg id='svg1' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
+                                <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
+                                <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
+                                <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
+                                <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
+                                <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
+                                <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
+                                <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
+                                <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
+                            </svg>
+                            <div id="middleBan4Body"></div>
+                        </div>
                     </div>
                 </div>
                 <script>
@@ -561,16 +751,17 @@
                 </script>
             @endif
 
-            <div id="restaurantSuggestion">
+            <div id="restaurantSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('محبوب‌ترین رستوران‌ها')}}</h3>
                     </div>
                 </a>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div id="topRestaurant" class="swiper-wrapper suggestionBody">
+                        <div class="topRestaurant swiper-wrapper suggestionBody">
                             {{--fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
@@ -580,22 +771,23 @@
             </div>
 
             {{--banner_5--}}
-            <div class="threeSlider swiper-container hidden">
-                <div id="cityMainPageSlider" class="swiper-wrapper position-relative"></div>
+            <div class="threeSlider swiper-container hideOnPhone hidden">
+                <div id="cityMainPageSlider" class="cityMainPageSlider swiper-wrapper position-relative"></div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
 
-            <div id="tarikhiSuggestion">
+            <div id="tarikhiSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements hideOnPhone">
                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('سفر تاریخی-فرهنگی')}}</h3>
                     </div>
                 </a>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div id="topTarikhi" class="swiper-wrapper suggestionBody">
+                        <div class="swiper-wrapper topTarikhi suggestionBody">
                             {{--fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
@@ -689,16 +881,17 @@
 
             <div id="pos-article-text-16130"></div>
 
-            <div id="kharidSuggestion">
+            <div id="kharidSuggestion" class="suggestRowsMainPage marginBetweenMainPageMobileElements">
                 <div class="shelf_title">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
+                    <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
                         <h3>{{__('مراکز خرید')}}</h3>
                     </div>
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div id="topKharid" class="swiper-wrapper suggestionBody">
+                        <div class="topKharid swiper-wrapper suggestionBody">
                             {{--                            fill with createMainPageSuggestion function--}}
                         </div>
                         <div class="swiper-button-next"></div>
@@ -728,25 +921,6 @@
 {{--                    @endif--}}
 {{--                </div>--}}
 {{--            @endif--}}
-
-            <div id="articleSuggestion">
-                <a class="shelf_title" href="{{route('safarnameh.index')}}" target="_blank">
-                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
-                    <div class="shelf_title_container h3">
-                        <h3>{{__('محبوب‌ترین سفرنامه‌ها')}}</h3>
-                    </div>
-                </a>
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                    <div class="mainSuggestion swiper-container">
-                        <div id="topSafarnameh" class="swiper-wrapper suggestionBody">
-                            {{--fill with createMainPageSuggestion function--}}
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div class="footerBarSpacer"></div>
@@ -765,9 +939,9 @@
     let lastPageForSuggestion = null;
     let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topSafarnameh'];
     divNames.forEach(item => {
-        $(`#${item}`).html(sugg4PlaceHolder);
-        $(`#${item}`).find('.suggestionPackDiv').addClass('swiper-slide');
-        $(`#${item}`).css('direction', 'ltr');
+        $(`.${item}`).html(sugg4PlaceHolder);
+        $(`.${item}`).find('.suggestionPackDiv').addClass('swiper-slide');
+        $(`.${item}`).css('direction', 'ltr');
     });
     runMainSwiper('mainSuggestion');
 
@@ -797,56 +971,48 @@
     function loadMainPageSliders(){
         var text = '';
         if(middleBan5.length > 0){
-            $('#cityMainPageSlider').parent().removeClass('hidden');
+            $('.cityMainPageSlider').parent().removeClass('hidden');
             middleBan5.map((item, index) => {
-                text += `<div class="swiper-slide position-relative">
-                                   <figure class="snip1091 ${middleBan5Color[index%3]}">
-                                       <img src="${item.pic}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="resizeImgClass" style="width: 100%"/>
-                                       <figcaption>
-                                           <h2>${item.text}</h2>
-                                       </figcaption>
-                                       ${ item.link != '' ? `<a href="${item.link}"></a>` : '' }
-                                   </figure>
-                                </div>`
+                text += `<div class="swiper-slide position-relative citySliderMainPageItem">
+                           <figure class="snip1091 ${middleBan5Color[index%3]}">
+                               <img src="${item.pic}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" class="resizeImgClass" style="width: 100%"/>
+                               <figcaption>
+                                   <h2>${item.text}</h2>
+                               </figcaption>
+                               ${ item.link != '' ? `<a href="${item.link}"></a>` : '' }
+                           </figure>
+                        </div>`
             });
-            $('#cityMainPageSlider').html(text);
+            $('.cityMainPageSlider').html(text);
 
             new Swiper('.threeSlider', {
-                slidesPerGroup: 1,
                 loop: true,
-                loopFillGroupWithBlank: true,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
                 breakpoints: {
-                    450: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    520: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
                     768: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
+                        slidesPerView: 'auto',
+                        centeredSlides: true,
+                        spaceBetween: 10,
                     },
                     10000: {
+                        loopFillGroupWithBlank: true,
                         slidesPerView: 3,
                         spaceBetween: 20,
                     }
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 }
             });
         }
         else
-            $('#cityMainPageSlider').parent().remove();
+            $('.cityMainPageSlider').parent().remove();
 
 
         if(middleBan4.length > 0){
             Baner4isLoaded = true;
             var Ban4Text = '';
-            middleBan4.map((item, index) => Ban4Text += `<div id='slide${index+1}' class='mainBlubSlider ${index == 0 ? 'up1' : ''}' style="background-image: url('${item.pic}'); ">${item.text}</div>`)
+            middleBan4.map((item, index) => Ban4Text += `<a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" id='slide${index+1}' class='mainBlubSlider ${index == 0 ? 'up1' : ''}' style="background-image: url('${item.pic}'); ">${item.text}</a>`)
             $('#middleBan4Body').html(Ban4Text);
         }
         else
@@ -876,44 +1042,45 @@
 
         // createSuggestionPack in suggestionPack.blade.php
         createSuggestionPack('newInKoochita', _result.result, function() {
-            $('#newInKoochita').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#newInKoochita').css('direction', 'ltr');
+            $('.newInKoochita').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.newInKoochita').css('direction', 'ltr');
         });
 
         createSuggestionPack('topFood', food, function() {
-            $('#topFood').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topFood').css('direction', 'ltr');
+            $('.topFood').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.topFood').css('direction', 'ltr');
         });
 
         createSuggestionPack('topTabiat', tabiat, function() {
-            $('#topTabiat').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topTabiat').css('direction', 'ltr');
+            $('.topTabiat').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.topTabiat').css('direction', 'ltr');
         });
 
         createSuggestionPack('topRestaurant', restaurant, function() {
-            $('#topRestaurant').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topRestaurant').css('direction', 'ltr');
+            $('.topRestaurant').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.topRestaurant').css('direction', 'ltr');
         });
 
         createSuggestionPack('topTarikhi', tarikhi, function() {
-            $('#topTarikhi').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topTarikhi').css('direction', 'ltr');
+            $('.topTarikhi').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.`topTarikhi').css('direction', 'ltr');
         });
 
         createSuggestionPack('topKharid', kharid, function() {
-            $('#topKharid').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topKharid').css('direction', 'ltr');
+            $('.topKharid').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.topKharid').css('direction', 'ltr');
         });
 
         createSuggestionPack('topSafarnameh', safarnameh, function() {
-            $('#topSafarnameh').find('.suggestionPackDiv').addClass('swiper-slide');
-            $('#topSafarnameh').css('direction', 'ltr');
+            $('.topSafarnameh').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('.topSafarnameh').css('direction', 'ltr');
             runMainSwiper('mainSuggestion')
         });
     }
 
     function runMainSwiper(_class){
         new Swiper('.' + _class, {
+
             loop: true,
             updateOnWindowResize: true,
             navigation: {
@@ -930,17 +1097,20 @@
                 },
             },
             breakpoints: {
-                450: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                },
-                520: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
+                // 450: {
+                //     slidesPerView: 1,
+                //     spaceBetween: 20,
+                // },
+                // 520: {
+                //     slidesPerView: 2,
+                //     spaceBetween: 20,
+                // },
                 768: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
+                    slidesPerView: 'auto',
+                    spaceBetween: 10,
+                    loop: false,
+                    // slidesPerView: 2,
+                    // spaceBetween: 20,
                 },
                 992: {
                     slidesPerView: 3,
@@ -956,14 +1126,6 @@
 
     // this run function for mainArticlaSwiperMainPage
     // runMainSwiper('mainArticlaSwiperMainPage');
-
-    function showAlt(elm) {
-        $(elm).parent().next().removeClass('display-none')
-    }
-
-    function hideAlt(elm) {
-        $(elm).parent().next().addClass('display-none')
-    }
 
 
     let newKoochitaTop = document.getElementById('newKoochita').offsetTop;
