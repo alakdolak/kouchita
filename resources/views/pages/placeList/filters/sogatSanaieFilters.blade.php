@@ -5,14 +5,18 @@
             <div class="filterItem lhrFilter filter selected squerRadioInputSec">
                 <input class="eatable0" onchange="doKindFilter('eatable', 0)" type="radio" name="eatableFilter" id="eatable0" value="صنایع دستی"/>
                 {{--غیر خوراکی--}}
-                <label for="eatable0" class="inputRadionSquer"></label>
-                <span>صنایع‌دستی</span>
+                <label for="eatable0" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">صنایع‌دستی</span>
+                </label>
             </div>
             <div class="filterItem lhrFilter filter selected squerRadioInputSec">
                 {{--خوراکی--}}
                 <input class="eatable1" onchange="doKindFilter('eatable', 1)" type="radio" name="eatableFilter" id="eatable1" value="سوغات"/>
-                <label for="eatable1" class="inputRadionSquer"></label>
-                <span>سوغات</span>
+                <label for="eatable1" class="inputRadionSquer">
+                    <span class="labelBox"></span>
+                    <span class="name">سوغات</span>
+                </label>
             </div>
         </div>
     </div>

@@ -3061,6 +3061,7 @@ class PlaceController extends Controller {
                 $inHeaderName = 'ایران ';
             }
             else if ($mode == "state") {
+                $city = str_replace('+', ' ', $city);
                 $state = State::whereName($city)->first();
                 $city = $state;
                 if ($state == null)
