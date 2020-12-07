@@ -422,7 +422,7 @@
 {{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
 
 @if(auth()->check())
-    @include('layouts.rotueURLs')
+    @include('layouts.urlAuthed')
     <script src="{{URL::asset('js/pages/ifLogin.js')}}"></script>
 @endif
 

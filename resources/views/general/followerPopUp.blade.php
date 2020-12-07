@@ -50,7 +50,7 @@
                 <span>follower</span>
             </div>
             <div id="ifYouCanSeeFollowing" class="resultFollowingTab hidden" onclick="openFromInPageFollower('resultFollowing')">
-                <span class="followingNumber" style="font-weight: bold;">{{isset($followingCount) ? $followingCount : ''}}</span>
+                <span class="followingNumber" style="font-weight: bold;">{{isset($authUserInfos->followingCount) ? $authUserInfos->followingCount : ''}}</span>
                 <span>following</span>
             </div>
         </div>

@@ -63,29 +63,30 @@ class DeleteContentController extends Controller
                     $alert->save();
 
                     $rates = getRate($place->id, $kindPlace->id)[1];
-                    switch ($kindPlace->id){
-                        case 1:
-                            Amaken::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                        case 3:
-                            Restaurant::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                        case 4:
-                            Hotel::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                        case 6:
-                            Majara::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                        case 10:
-                            SogatSanaie::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                        case 11:
-                            MahaliFood::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                        case 12:
-                            Boomgardy::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
-                            break;
-                    }
+                    \DB::table($kindPlace->tableName)->where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                    switch ($kindPlace->id){
+//                        case 1:
+//                            Amaken::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                        case 3:
+//                            Restaurant::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                        case 4:
+//                            Hotel::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                        case 6:
+//                            Majara::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                        case 10:
+//                            SogatSanaie::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                        case 11:
+//                            MahaliFood::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                        case 12:
+//                            Boomgardy::where('id', $place->id)->update(['reviewCount' => $place->reviewCount-1, 'fullRate' => $rates]);
+//                            break;
+//                    }
 
                     $review->delete();
                     echo 'ok';

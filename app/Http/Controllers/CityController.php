@@ -28,6 +28,7 @@ class CityController extends Controller
 {
     public function cityPage($kind, $city, Request $request) {
 
+        $city = str_replace('+', ' ', $city);
         $today = getToday()["date"];
         $nowTime = getToday()["time"];
         if($kind == 'state')
@@ -37,7 +38,6 @@ class CityController extends Controller
 
         if($place == null)
             return redirect(\url('/'));
-
 
         if($kind == 'city') {
             $place->state = State::whereId($place->stateId)->name;

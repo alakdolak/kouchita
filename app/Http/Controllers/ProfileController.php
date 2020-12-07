@@ -596,8 +596,8 @@ class ProfileController extends Controller {
                     foreach ($kind as $item){
                         if($kk->group == 'safarnameh'){
                             $bm = \DB::table($kk->tableName)
-                                ->select(['title', 'id', 'userId', 'summery', 'meta', 'pic', 'created_at'])
-                                ->find($item->referenceId);
+                                    ->select(['title', 'id', 'userId', 'summery', 'meta', 'pic', 'created_at'])
+                                    ->find($item->referenceId);
 
                             if($bm != null) {
                                 $us = User::find($bm->userId);
@@ -643,6 +643,8 @@ class ProfileController extends Controller {
                             $bm->bmId = $item->id;
                             array_push($bookmarks, $bm);
                         }
+                        else
+                            $item->delete();
                     }
                 }
             }

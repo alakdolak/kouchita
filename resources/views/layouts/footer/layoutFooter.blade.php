@@ -64,11 +64,9 @@
     @if(Auth::check())
         <script>
             let profileUrl = '{{route("profile")}}';
-            let usrnme = '{{$userFooter->username}}';
-            window.user = '{!! $userFooter !!}';
 
             function initialProgressFooter() {
-                var b = "{{$userTotalPointFooter / $userLevelFooter[1]->floor}}" * 100;
+                var b = "{{$authUserInfos->userTotalPoint / $authUserInfos->userLevel[1]->floor}}" * 100;
                 $("#progressIdPhone").css("width", b + "%");
             }
             initialProgressFooter();

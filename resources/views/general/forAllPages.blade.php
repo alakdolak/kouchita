@@ -285,36 +285,32 @@
 
     function getBookMarkForHeaderAndFooter(){
         if(checkLogin()){
-            $.ajax({
-                type: 'GET',
-                url: '{{route("profile.getBookMarks")}}',
-                success: response => {
-                    if(response.status == 'ok'){
-                        var text = '';
-                        response.result.map(item =>{
-                            var add = false;
-                            var name = '';
-                            var pic = '';
-                            var state = '';
-                            var kind = '';
-                            var kindIcon = '';
-                            if(item.kind == 'place'){
-                                name = item.name;
-                                pic = item.pic;
-                                state = item.city + ' در ' + item.state;
-                                kindIcon = window.mainIconsPlaces[item.kindPlaceName].icon;
-                                kind = window.mainIconsPlaces[item.kindPlaceName].nameFa;
-                                add = true;
-                            }
-                            else if(item.kind == 'safarnameh'){
-                                name = item.title;
-                                pic = item.pic;
-                                kind = 'سفرنامه';
-                                kindIcon = window.mainIconsPlaces['safarnameh'].icon;
-                                add = true;
-                            }
-                            if(add) {
-                                text += `<div class="bookMarkSSec">
+            getMyBookMarkPromiseFunc().then(response => {
+                var text = '';
+                response.map(item =>{
+                    var add = false;
+                    var name = '';
+                    var pic = '';
+                    var state = '';
+                    var kind = '';
+                    var kindIcon = '';
+                    if(item.kind == 'place'){
+                        name = item.name;
+                        pic = item.pic;
+                        state = item.city + ' در ' + item.state;
+                        kindIcon = window.mainIconsPlaces[item.kindPlaceName].icon;
+                        kind = window.mainIconsPlaces[item.kindPlaceName].nameFa;
+                        add = true;
+                    }
+                    else if(item.kind == 'safarnameh'){
+                        name = item.title;
+                        pic = item.pic;
+                        kind = 'سفرنامه';
+                        kindIcon = window.mainIconsPlaces['safarnameh'].icon;
+                        add = true;
+                    }
+                    if(add) {
+                        text += `<div class="bookMarkSSec">
                                             <div class="BookMarkIcon BookMarkIconEmptyAfter" onclick="deleteBookMarkState(${item.bmId}, this)"></div>
                                             <div class="imgSec" onclick="goToBookMarkSelected('${item.url}')">
                                                 <img src="${pic}" class="resizeImgClass" alt="${name}" onload="fitThisImg(this)">
@@ -325,22 +321,16 @@
                                                 <div class="state">${state}</div>
                                             </div>
                                         </div>`;
-                            }
-                        });
-
-                        if(text != '')
-                            $('.headerFooterBookMarkTab').html(text);
-                        else{
-                            $('.headerFooterBookMarkTab').find('.bookMarkSSec').remove();
-                            $('.headerFooterBookMarkTab').find('.notInfoFooterModalImg').removeClass('hidden');
-                        }
-
                     }
-                },
-                error: err => {
-                    console.log(err);
+                });
+
+                if(text != '')
+                    $('.headerFooterBookMarkTab').html(text);
+                else{
+                    $('.headerFooterBookMarkTab').find('.bookMarkSSec').remove();
+                    $('.headerFooterBookMarkTab').find('.notInfoFooterModalImg').removeClass('hidden');
                 }
-            });
+            })
         }
     }
 

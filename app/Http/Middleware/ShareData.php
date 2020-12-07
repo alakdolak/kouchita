@@ -20,39 +20,38 @@ class ShareData
      */
     public function handle($request, Closure $next)
     {
-        $fileVersions = 124;
+        $fileVersions = 125;
 
         $config = \App\models\ConfigModel::first();
         if(auth()->check()){
-            $userFooter = \Auth::user();
-            $userLevelFooter = auth()->user()->nearestLevelInModel($userFooter->id);
-            $userTotalPointFooter = auth()->user()->getUserPointInModel($userFooter->id);
-            $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
-            $userInfo = User::getUserActivityCount($userFooter->id);
-            $buPic = auth()->user()->getUserPicInModel($userFooter->id);
-            $userNamename = $userFooter->username;
-
-            $newMsgCount = Message::where('seen', 0)
-                                    ->where('receiverId', $userFooter->id)
+            $authUserInfos = User::select(['id', 'username', 'first_name', 'last_name'])->find(auth()->user()->id);
+            $authUserInfos->userLevel = auth()->user()->nearestLevelInModel($authUserInfos->id);
+            $authUserInfos->userTotalPoint = auth()->user()->getUserPointInModel($authUserInfos->id);
+            $authUserInfos->nextLevel = $authUserInfos->userLevel[1]->floor - $authUserInfos->userTotalPoint;
+            $authUserInfos->pic = getUserPic($authUserInfos->id);
+            $authUserInfos->newMsg = Message::where('seen', 0)
+                                    ->where('receiverId', $authUserInfos->id)
                                     ->count();
 
-            $followersCount = Followers::where('followedId', $userFooter->id)->count();
-            $followingCount = Followers::where('userId', $userFooter->id)->count();
+            $authUserInfos->followerCount = Followers::where('followedId', $authUserInfos->id)->count();
+            $authUserInfos->followingCount = Followers::where('userId', $authUserInfos->id)->count();
 
             $newRegisterOpen = false;
             if(\Session::get('newRegister'))
                 $newRegisterOpen = true;
 
-            View::share(['newMsgCount' => $newMsgCount, 'followingCount' => $followingCount, 'followersCount' => $followersCount,
-                        'userNamename' => $userNamename, 'userInfo' => $userInfo, 'buPic' => $buPic, 'config' => $config,
-                        'nextLevelFooter' => $nextLevelFooter, 'userTotalPointFooter' => $userTotalPointFooter,
-                        'userLevelFooter' => $userLevelFooter, 'userFooter' => $userFooter, 'fileVersions' => $fileVersions,
-                        'newRegisterOpen' => $newRegisterOpen]);
+            //            $userInfo = User::getUserActivityCount($authUserInfos->id);
+
+            View::share([
+                'authUserInfos' => $authUserInfos,
+                'config' => $config,
+                'fileVersions' => $fileVersions,
+                'newRegisterOpen' => $newRegisterOpen
+            ]);
         }
         else {
-            $followingCount = 0;
-            $buPic = \URL::asset('_images/nopic/blank.jpg');
-            View::share(['buPic' => $buPic, 'config' => $config, 'followingCount' => $followingCount, 'fileVersions' => $fileVersions]);
+//            $buPic = \URL::asset('_images/nopic/blank.jpg');
+            View::share(['config' => $config, 'fileVersions' => $fileVersions]);
         }
 
         return $next($request);

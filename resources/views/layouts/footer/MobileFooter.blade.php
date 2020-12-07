@@ -1,5 +1,14 @@
+<style>
+    .submitFiltersInMobile{
+        display: none;
+    }
 
-
+    @media (max-width: 767px) {
+        .submitFiltersInMobile{
+            display: block;
+        }
+    }
+</style>
 <div class="gapForMobileFooter hideOnScreen"></div>
 
 <div class="footerPhoneMenuBar hideOnScreen">
@@ -28,10 +37,10 @@
                 <span>صفحه من</span>
             </div>
             <div class="fullyCenterContent profilePicFooter circleBase type2">
-                <img src="{{isset($buPic) ? $buPic : ''}}" class="resizeImgClass" onload="fitThisImg(this)" alt="user picture" style="width: 100%;">
+                <img src="{{isset($authUserInfos->pic) ? $authUserInfos->pic : ''}}" class="resizeImgClass" onload="fitThisImg(this)" alt="user picture" style="width: 100%;">
             </div>
-            @if($newMsgCount > 0)
-                <span class="newMsgMainFooterCount">{{$newMsgCount}}</span>
+            @if($authUserInfos->newMsg > 0)
+                <span class="newMsgMainFooterCount">{{$authUserInfos->newMsg}}</span>
             @endif
         </div>
     @else
@@ -199,7 +208,10 @@
                     <div class="filterBoxMobile filterBox">
                         <div class="filterBoxShadow">
                             <div class="clearAll" onclick="closeFilters()"> پاک کردن تمام فیلترها </div>
-                            <div class="filtersRows filterShow"></div>
+                            <div class="filtersRows">
+                                <div class="filterShow"></div>
+                            </div>
+                            <div class="submitFiltersInMobile ">اعمال فیلتر</div>
                         </div>
                     </div>
                     <div id="EATERY_FILTERS_CONT" class="eatery_filters">
@@ -672,18 +684,17 @@
             <div class="welcomeMsgModalFooter hidden" onclick="$(this).remove()">
                 <a href="{{route("profile.message.page")}}" class="showMsgButton">
                     <div class="name">صندوق پیام</div>
-                    <div class="num">1</div>
+                    <div class="num">0</div>
                 </a>
                 <img src="{{URL::asset('images/icons/thankyou0.svg')}}" alt="thankYou">
             </div>
 
             <div class="mainPopUp rightPopUp profileFooterPopUp">
-{{--                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="closeMobileFooterPopUps('profileFooterModal')" style="top: -10px; z-index: 999"></div>--}}
                 <div class="userInfoMobileFooterBody">
                     <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
                         <div class="firsLine">
                             <div class="pic">
-                                <img src="{{isset($buPic) ? $buPic : ''}}" alt="userPic"/>
+                                <img src="{{isset($authUserInfos->pic) ? $authUserInfos->pic : ''}}" alt="userPic"/>
                             </div>
                             <div class="infos">
                                 <div class="inf">
@@ -695,23 +706,21 @@
                                     <div class="name">امتیاز</div>
                                 </div>
                                 <div class="inf" onclick="mobileFooterProfileButton('follower')">
-                                    <div class="number">{{$followersCount}}</div>
+                                    <div class="number">{{$authUserInfos->followerCount}}</div>
                                     <div class="name">دنبال کننده</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="secondLine">
-                            {{$userFooter->username}}
-                        </div>
+                        <div class="secondLine">{{auth()->user()->username}}</div>
                         <div class="buttonsLine">
                             <div class="mBLine bLine">
                                 <div onclick="window.location.href='{{route("profile")}}'">
                                     <div class="name" style="font-size: 16px; font-weight: bold; color: gray">صفحه من</div>
                                 </div>
                                 <div onclick="window.location.href='{{route("profile.message.page")}}'">
-                                    <div class="name" style="font-size: 16px; font-weight: bold; color: {{$newMsgCount > 0 ? 'var(--koochita-red)' : ''}};">صندوق پیام</div>
-                                    @if($newMsgCount > 0)
-                                        <div class="footerMsgCountNumber">{{$newMsgCount}}</div>
+                                    <div class="name" style="font-size: 16px; font-weight: bold; color: {{$authUserInfos->newMsg > 0 ? 'var(--koochita-red)' : ''}};">صندوق پیام</div>
+                                    @if($authUserInfos->newMsg > 0)
+                                        <div class="footerMsgCountNumber">{{$authUserInfos->newMsg}}</div>
                                     @endif
                                 </div>
                             </div>
@@ -774,15 +783,15 @@
                                         </div>
                                         <div class="progress_indicator">
 
-                                            <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
+                                            <div class="next_badge myBadge">{{$authUserInfos->userLevel[0]->name}} </div>
                                             <div class="meter">
                                                 <span id="progressIdPhone" class="progress"></span>
                                             </div>
-                                            <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+                                            <div class="current_badge myBadge">{{$authUserInfos->userLevel[1]->name}} </div>
                                         </div>
 
                                         <div class="points_to_go" style="text-align: center; font-size: 10px;">
-                                            <span style="color: var(--koochita-red); font-size: 14px"> {{$nextLevelFooter}} </span>
+                                            <span style="color: var(--koochita-red); font-size: 14px"> {{$authUserInfos->nextLevel}} </span>
                                             امتیاز
                                             <span style="color: var(--koochita-red);">کم داری</span>
                                             تا مرحله

@@ -213,9 +213,9 @@
                     <div class="userInfo">
                         <div style="display: flex; align-items: center;">
                             <div class="userPic">
-                                <img class="modalUserPic" src="{{$buPic}}" style="height: 100%;">
+                                <img class="modalUserPic" src="{{$authUserInfos->pic}}" style="height: 100%;">
                             </div>
-                            <a href="{{route('profile', ['username' => $userFooter->username])}}" target="_blank" class="username modalUserName">{{$userFooter->username}}</a>
+                            <a href="{{route('profile', ['username' => $authUserInfos->username])}}" target="_blank" class="username modalUserName">{{$authUserInfos->username}}</a>
                         </div>
                     </div>
                     <div class="picInfo">
