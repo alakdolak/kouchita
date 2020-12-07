@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css?v=2')}}">
 
-<div class="modal showingPhotosModal" id="photoAlbumModal" role="dialog" style="display: none">
+<div class="modal showingPhotosModal" id="photoAlbumModal" role="dialog" style="display: none; z-index: 10000;">
     <div class="modal-dialog" style="margin-top: 2%">
         <div class="modal-content" style="background-color: #141518; border: none;">
             <div id="showingPhotosMainDivHeader">

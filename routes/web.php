@@ -506,9 +506,9 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
-    Route::get('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
-
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
+
+        Route::get('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
 
         Route::get('profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');
 

@@ -68,7 +68,7 @@ function mobileFooterProfileButton(_kind){
     let windowUrl = window.location;
     let url = windowUrl.origin + windowUrl.pathname;
 
-    if(url == profileUrl || url == profileUrl+'/'+usrnme) {
+    if(url == profileUrl || url == profileUrl+'/'+window.user.username) {
         if (_kind == 'review')
             mobileChangeProfileTab($('#reviewProfileMoblieTab'), 'review'); // in mainProfile.blade.php
         else if (_kind == 'photo')

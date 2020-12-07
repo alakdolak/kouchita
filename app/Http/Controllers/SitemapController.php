@@ -61,7 +61,7 @@ class SitemapController extends Controller
         foreach ($state as $item){
             foreach ($kindPlaces as $kindPlace){
                 $slug = urlencode($item->name);
-                $l = url('placeList/' . $kindPlace->id . '/state/' . $slug);
+                $l = url('placeList/' . $kindPlace . '/state/' . $slug);
                 array_push($lists, $l);
             }
         }
@@ -70,7 +70,7 @@ class SitemapController extends Controller
         foreach ($cities as $city) {
             foreach ($kindPlaces as $kindPlace){
                 $slug = urlencode($city->name);
-                $l = url('placeList/' . $kindPlace->id . '/city/' . $slug);
+                $l = url('placeList/' . $kindPlace . '/city/' . $slug);
                 array_push($lists, $l);
             }
         }
@@ -82,7 +82,7 @@ class SitemapController extends Controller
     {
         $today = getToday()["date"];
         $nowTime = getToday()["time"];
-        $post = Safarnameh::whereRaw('(Safarnameh.date < ' . $today . ' OR (Safarnameh.date = ' . $today . ' AND  (Safarnameh.time <= ' . $nowTime . ' OR Safarnameh.time IS NULL)))')->select(['id', 'title', 'slug', 'created_at'])->get();
+        $post = Safarnameh::whereRaw('(safarnameh.date < ' . $today . ' OR (safarnameh.date = ' . $today . ' AND  (safarnameh.time <= ' . $nowTime . ' OR safarnameh.time IS NULL)))')->select(['id', 'title', 'slug', 'created_at'])->get();
 
         $lists = array();
         foreach ($post as $item) {

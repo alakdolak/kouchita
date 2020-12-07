@@ -175,31 +175,6 @@ class User extends Authenticatable{
 //        return $points[0]->total;
     }
 
-    public function getUserPicInModel($id = 0)
-    {
-        $user = User::find($id);
-        if($user != null){
-            if(strpos($user->picture, 'http') !== false)
-                return $user->picture;
-            else{
-                if($user->uploadPhoto == 0){
-                    $deffPic = DefaultPic::find($user->picture);
-
-                    if($deffPic != null)
-                        $uPic = \URL::asset('defaultPic/' . $deffPic->name);
-                    else
-                        $uPic = \URL::asset('_images/nopic/blank.jpg');
-                }
-                else
-                    $uPic = \URL::asset('userProfile/' . $user->picture);
-            }
-        }
-        else
-            $uPic = \URL::asset('_images/nopic/blank.jpg');
-
-        return $uPic;
-    }
-
     public function deleteUser(){
 //        $uId = \Auth::user()->id;
 //        ActivationCode::where('userId', $uId)->delete();

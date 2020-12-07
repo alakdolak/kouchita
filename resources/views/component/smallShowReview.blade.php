@@ -608,23 +608,21 @@
         text += '</div>';
 
         // new ans
-        text += '<div class="newCommentPlaceMainDiv">\n' +
-                '   <div class="circleBase type2 newCommentWriterProfilePic">' +
-                '       <img src="' + window.userPic + '">\n' +
-                '   </div>\n' +
-                '   <div class="inputBox setButtonToBot">\n' +
-                '       <textarea id="ansForReviews_' + _reviews["id"] + '" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)" style="padding-bottom: 10px"></textarea>\n' +
-                `       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(${_reviews["id"]}, $('#ansForReviews_${_reviews["id"]}').val())" > {{__("ارسال")}}</button>\n` +
-                '       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>\n' +
-                '           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">\n' +
-                '           {{__("در حال ثبت نظر")}}\n' +
-                '       </div>'+
-                '   </div>\n' +
-                '<div>'+
-                '</div>\n' +
-                '</div>\n' +
-                '</div>' +
-                '</div>';
+        text += `<div class="newCommentPlaceMainDiv">
+                   <div class="circleBase type2 newCommentWriterProfilePic">
+                       <img src="${window.userPic}">
+                   </div>
+                   <div class="inputBox setButtonToBot">
+                       <textarea id="ansForReviews_${_reviews["id"]}" class="inputBoxInput inputBoxInputComment inputTextWithEmoji" rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()" onchange="checkFullSubmitFullReview(this)" style="padding-bottom: 10px"></textarea>
+                       <button class="btn submitAnsInReview" onclick="sendAnsOfReviewsFullReview(${_reviews["id"]}, $('#ansForReviews_${_reviews["id"]}').val())" > {{__("ارسال")}}</button>
+                       <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>
+                           <img src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
+                           {{__("در حال ثبت نظر")}}
+                       </div>
+                   </div>
+                <div>`;
+
+        text += '</div></div></div></div>';
 
         $('#showReview_' + _reviews["id"]).html(text);
 

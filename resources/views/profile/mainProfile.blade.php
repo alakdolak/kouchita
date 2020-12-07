@@ -73,8 +73,8 @@
                                 </a>
                                 <a href="{{route("profile.message.page")}}" class="msgHeaderButton">
                                     صندوق پیام
-                                    @if(isset($newMsgCount) && $newMsgCount > 0)
-                                        <span class="newMsgCount">{{$newMsgCount}}</span>
+                                    @if(isset($authUserInfos->newMsg) && $authUserInfos->newMsg > 0)
+                                        <span class="newMsgCount">{{$authUserInfos->newMsg}}</span>
                                     @endif
                                 </a>
                             @else

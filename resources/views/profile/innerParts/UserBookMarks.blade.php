@@ -78,15 +78,7 @@
         $('#profileBookMarkBody').html(pll);
         $('#profileBMSection').find('.notData').addClass('hidden');
 
-        $.ajax({
-            type: 'GET',
-            url: '{{route('profile.getBookMarks')}}',
-            success: function(response){
-                if(response.status == 'ok')
-                    createBookMarkRow(response.result);
-            },
-            error: err => console.log(err),
-        });
+        getMyBookMarkPromiseFunc().then(response => createBookMarkRow(response));
     }
 
     function createBookMarkRow(_result){
