@@ -1909,11 +1909,14 @@ footer .bookMarkSSec .infoSec .state{
     width: auto;
 }
 
-.squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .name{
+.squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .name,
+.squerRadioInputSec input[type="radio"]:checked + .inputRadionSquer .name{
     color: var(--koochita-green);
     background: none !important;
 }
-.squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .labelBox{
+
+.squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .labelBox,
+.squerRadioInputSec input[type="radio"]:checked + .inputRadionSquer .labelBox{
     border-color: var(--koochita-green);
     border-radius: 50%;
     display: flex;
@@ -1921,7 +1924,9 @@ footer .bookMarkSSec .infoSec .state{
     align-items: center;
     background: none !important;
 }
-.squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .labelBox:before{
+
+.squerRadioInputSec input[type="checkbox"]:checked + .inputRadionSquer .labelBox:before,
+.squerRadioInputSec input[type="radio"]:checked + .inputRadionSquer .labelBox:before{
     content: '\E02B';
     font-family: 'Shazde_Regular2' !important;
     color: var(--koochita-green);
@@ -2009,59 +2014,6 @@ footer .bookMarkSSec .infoSec .state{
 .prw_rup{
     border-bottom: solid 1px #00000024;
 }
-
-.filterBoxMobile{
-    display: none;
-    position: absolute;
-    left: 0px;
-    z-index: 9;
-    height: calc(100% - 170px);
-    top: 30px;
-}
-.filterBoxShadow{
-    background: white;
-    border: solid 1px gray;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 3px 4px 9px 1px #0000005e;
-    width: 150px;
-    max-height: 93%;
-    overflow: auto;
-}
-.filterBoxShadow .clearAll{
-    font-size: 12px;
-    text-align: center;
-    color: var(--koochita-red);
-    border-bottom: solid 1px;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-.filterBoxShadow .filtersRows{
-    max-height: calc(100% - 20px);
-    overflow: auto;
-    padding: 0px 5px;
-}
-.filterBoxShadow .filtersRows .filters{
-    display: flex;
-    font-size: 14px;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    margin-top: 10px;
-    border: solid 1px lightgray;
-    border-radius: 26px;
-    background: #fcc1564f;
-    position: relative;
-}
-.filterBoxShadow .filtersRows .filters .iconClose{
-    color: var(--koochita-red);
-    position: absolute;
-    right: -11px;
-    font-size: 20px;
-    z-index: 99;
-}
-
 
 @media (max-width: 1300px) {
     .footerRside {
@@ -2288,6 +2240,65 @@ footer .bookMarkSSec .infoSec .state{
     .footerMenuBarLinks {
         font-size: 14px;
         font-weight: normal;
+    }
+
+    .filterBoxMobile{
+        display: none;
+        position: absolute;
+        left: 0px;
+        z-index: 9;
+        height: calc(100% - 170px);
+        top: 30px;
+    }
+    .filterBoxShadow{
+        background: white;
+        border: solid 1px gray;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 3px 4px 9px 1px #0000005e;
+        width: 150px;
+        max-height: 93%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    .filterBoxShadow .clearAll{
+        font-size: 12px;
+        text-align: center;
+        color: var(--koochita-red);
+        border-bottom: solid 1px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .filterBoxShadow .filtersRows{
+        max-height: calc(100% - 55px);
+        overflow: auto;
+        padding: 0px 5px;
+        padding-left: 0px;
+        position: relative;
+    }
+    .filterBoxShadow .filtersRows .filters{
+        display: flex;
+        font-size: 14px;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        margin-top: 10px;
+        border: solid 1px lightgray;
+        border-radius: 26px;
+        background: #fcc1564f;
+        position: relative;
+    }
+    .filterBoxShadow .filtersRows .filters .name{
+        color: black;
+    }
+    .filterBoxShadow .filtersRows .filters .iconClose{
+        color: var(--koochita-red);
+        position: absolute;
+        right: -11px;
+        font-size: 20px;
+        z-index: 99;
     }
 }
 

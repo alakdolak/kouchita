@@ -691,6 +691,18 @@ div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper{
     overflow: hidden;
 }
 
+
+.filterShow .filters{
+    display: flex;
+    color: white;
+    background: var(--koochita-light-green);
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+
 @media (min-width: 992px) and (max-width: 1189px) {
     .lhr .filterGroupTitle {
         font-size: 18px !important;

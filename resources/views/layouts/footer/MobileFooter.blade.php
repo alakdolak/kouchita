@@ -6,6 +6,14 @@
     @media (max-width: 767px) {
         .submitFiltersInMobile{
             display: block;
+            position: absolute;
+            bottom: 0px;
+            background: var(--koochita-blue);
+            color: white;
+            width: 100%;
+            right: 0px;
+            text-align: center;
+            padding: 5px 0px;
         }
     }
 </style>
@@ -207,11 +215,11 @@
                 <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters fil">
                     <div class="filterBoxMobile filterBox">
                         <div class="filterBoxShadow">
-                            <div class="clearAll" onclick="closeFilters()"> پاک کردن تمام فیلترها </div>
+                            <div class="clearAll" onclick="closeFilters(); closeMyModal('placeListMobileFilter');"> پاک کردن تمام فیلترها </div>
                             <div class="filtersRows">
                                 <div class="filterShow"></div>
                             </div>
-                            <div class="submitFiltersInMobile ">اعمال فیلتر</div>
+                            <div class="submitFiltersInMobile" onclick="closeMyModal('placeListMobileFilter')">اعمال فیلتر</div>
                         </div>
                     </div>
                     <div id="EATERY_FILTERS_CONT" class="eatery_filters">

@@ -399,17 +399,23 @@
 
                             <div class="filterContent ui_label_group inline">
                                 @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
-                                    <div class="filterItem lhrFilter filter selected">
+                                    <div class="filterItem lhrFilter filter squerRadioInputSec selected">
                                         <input onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                        <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
+                                        <label for="feat{{$feature->subFeat[$i]->id}}" class="inputRadionSquer">
+                                            <span class="labelBox"></span>
+                                            <span class="name">{{$feature->subFeat[$i]->name}}</span>
+                                        </label>
                                     </div>
                                 @endfor
 
                                 @if(count($feature->subFeat) > 5)
                                     @for($i = 5; $i < count($feature->subFeat); $i++)
-                                        <div class="filterItem lhrFilter filter extraItem{{$feature->id}} hidden">
+                                        <div class="filterItem lhrFilter filter extraItem{{$feature->id}} squerRadioInputSec hidden">
                                             <input onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                            <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
+                                            <label for="feat{{$feature->subFeat[$i]->id}}" class="inputRadionSquer">
+                                                <span class="labelBox"></span>
+                                                <span class="name">{{$feature->subFeat[$i]->name}}</span>
+                                            </label>
                                         </div>
                                     @endfor
                                 @endif
