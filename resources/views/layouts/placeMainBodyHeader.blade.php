@@ -152,21 +152,21 @@
             <div class="circlePlaceDetailButtons" onclick="addPlaceToBookMark();">
                 <div class="icon saveAsBookmarkIcon {{auth()->check() && $bookMark ? "BookMarkIcon" : "BookMarkIconEmpty"}}"></div>
             </div>
-            <div class="circlePlaceDetailButtons" onclick="setTimeout(() => $(this).find('.sharesButtons').toggleClass('open'), 100)">
+            <div class="circlePlaceDetailButtons" onclick="$(this).find('.sharesButtons').toggleClass('open')">
                 <div class="icon" style="z-index: 10">
                     <img src="{{URL::asset('images/icons/shareIcon.svg')}}" style="margin-right: 3px;width: 18px;">
                 </div>
                 <div class="sharesButtons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" class="share">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank" class="share">
                         <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}">
                     </a>
-                    <a href="https://twitter.com/home?status={{Request::url()}}" class="share">
+                    <a href="https://twitter.com/home?status={{Request::url()}}" target="_blank" class="share">
                         <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}">
                     </a>
                     <a href="#" class="share whatsappLink">
                         <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}">
                     </a>
-                    <a href="https://telegram.me/share/url?url={{Request::url()}}" class="share">
+                    <a href="https://telegram.me/share/url?url={{Request::url()}}" target="_blank" class="share">
                         <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}">
                     </a>
                     <span class="share" style="color: black;" onclick="copyLinkAddress()"> کپی </span>
