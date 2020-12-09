@@ -91,21 +91,114 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     <script defer src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
     <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
 
+    <style>
+        DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .photos{
+            overflow: unset;
+        }
+        .sharesButtons{
+             background: white;
+             position: absolute;
+             top: 50%;
+             z-index: 9;
+             right: 0px;
+             max-height: 0px;
+             width: 100%;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             box-shadow: 2px 6px 4px 0px #333;
+             border-radius: 0px 0px 30px 30px;
+             -webkit-transition: max-height 0.8s;
+             -moz-transition: max-height 0.8s;
+             transition: max-height 0.8s;
+             padding: 0px;
+         }
+        .sharesButtons.open{
+            max-height: 300px;
+            padding-top: 20px;
+        }
+        .sharesButtons .share{
+            z-index: 11;
+            background: white;
+            box-shadow: 2px 2px 4px 0px #333;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-bottom: 7px;
+            overflow: hidden;
+        }
+        .sharesButtons .share img{
+            width: 100%;
+        }
+    </style>
+
 @stop
 
 
 @section('main')
     @include('general.schema')
 
-    @include('general.secondHeader')
-
+    <div class="hideOnPhone">
+        @include('general.secondHeader')
+    </div>
     @include('component.mapMenu')
 
     @include('component.smallShowReview')
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative" style="margin-bottom: 10px">
+    <div id="comeDownHeader" class="topHeaderShowDown hideOnScreen">
+        <div class="inOneRow">
+            <div class="name">{{$place->name}}</div>
+            <div class="buttonsH">
+            <div class="circlePlaceDetailButtons" onclick="addPlaceToBookMark()">
+                <div class="icon saveAsBookmarkIcon  {{auth()->check() && $bookMark ? "BookMarkIcon" : "BookMarkIconEmpty"}}"></div>
+            </div>
+            <div class="circlePlaceDetailButtons" onclick="$(this).find('.sharesButtons').toggleClass('open')">
+                <div class="icon" style="z-index: 10;">
+                    <img src="{{URL::asset('images/icons/shareIcon.svg')}}" style="margin-right: 3px;width: 18px;">
+                </div>
+                <div class="sharesButtons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}">
+                    </a>
+                    <a href="https://twitter.com/home?status={{Request::url()}}" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}">
+                    </a>
+                    <a href="#" class="share whatsappLink">
+                        <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}">
+                    </a>
+                    <a href="https://telegram.me/share/url?url={{Request::url()}}" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}">
+                    </a>
+                    <span class="share" style="color: black;" onclick="copyLinkAddress()"> کپی </span>
+                </div>
+            </div>
+            <div class="circlePlaceDetailButtons" onclick="addThisPlaceToTrip()" >
+                <div class="icon MyTripsIcon"></div>
+            </div>
+        </div>
+        </div>
+        <div class="tabs">
+            @if($placeMode == 'mahaliFood')
+                <div class="tabLinkMainWrap generalDescBtnTopBar" onclick="colorThisNav(this, 'generalDescLinkRel')">دستور پخت</div>
+            @else
+                <div class="tabLinkMainWrap generalDescBtnTopBar" onclick="colorThisNav(this, 'generalDescLinkRel')">معرفی کلی</div>
+                <div class="tabLinkMainWrap mapBtnTopBar" onclick="colorThisNav(this, 'goToMapSection')">نقشه</div>
+            @endif
+            <div class="tabLinkMainWrap postsBtnTopBar" onclick="colorThisNav(this, 'mainDivPlacePost')">نظرات</div>
+            <div class="tabLinkMainWrap QAndAsBtnTopBar" onclick="colorThisNav(this,'QAndAMainDivId')">سوالات</div>
+            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
+                <div class="tabLinkMainWrap similarLocationsBtnTopBar" onclick="colorThisNav(this,'topPlacesSection')">مکان های مشابه</div>
+            @endif
+        </div>
+    </div>
 
-        <div style="background: white; width: 100%; padding-top: 15px;">
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
+
+        <div class="hideOnPhone" style="background: white; width: 100%; padding-top: 15px;">
             <div class="container">
                 <div class="topPageAd">
                     <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
@@ -113,7 +206,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             </div>
         </div>
 
-        @include('layouts.placeMainBodyHeader')
+        <div class="hideOnPhone">
+            @include('layouts.placeMainBodyHeader')
+        </div>
 
         <div class="atf_meta_and_photos_wrapper position-relative">
             <div class="greyBackground"></div>
@@ -130,7 +225,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 @endif
 
                 <div id="bestPrice" class="meta koochitaTvSection position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
-                    <div id="targetHelp_9" class="targets  float-left">
+                    <div id="targetHelp_9" class="targets float-left">
                         <div id="bestPriceInnerDiv" class="tvSection">
                             <a href="https://koochitatv.com" class="tvLogoDiv" target="_blank">
                                 <img src="{{URL::asset('images/mainPics/vodLobo.webp')}}" style="max-height: 100%; max-width: 100%;">
@@ -183,9 +278,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     </div>
                     <div class="clear-both"></div>
                     <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                        <span onclick="bookMark();"
-                              class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
-                            <div id="bookMarkIcon" class="saveAsBookmarkIcon {{auth()->check() && ($bookMark) ? "castle-fill" : "castles"}}"></div>
+                        <span onclick="addPlaceToBookMark()" class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                            <div id="bookMarkIcon" class="saveAsBookmarkIcon {{auth()->check() && $bookMark ? "BookMarkIcon" : "BookMarkIconEmpty"}}"></div>
                             <div class="saveAsBookmarkLabel">
                                 {{__('ذخیره این صفحه')}}
                             </div>
@@ -203,8 +297,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     @include('layouts.shareBox')
 
                 </div>
+
                 <div class="prw_rup prw_common_location_photos photos position-relative">
-                    <div id="targetHelp_10" class="targets">
+                    <div id="targetHelp_10" class="targets mainSliderPlaceDetails">
                         <div class="inner">
                             <div class="primaryWrap">
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
@@ -213,14 +308,13 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                             <div id="photographerAlbum" {{count($photographerPics) > 0 ? "onclick=showPhotoAlbum('photographer')" : ''}}>
                                                 <div id="mainSlider" class="swiper-container">
                                                     <div id="mainSliderWrapper" class="swiper-wrapper">
-
                                                         @for($i = 0; $i < count($photographerPics); $i++)
                                                             <div class="swiper-slide" style="overflow: hidden">
                                                                 <img class="eachPicOfSlider resizeImgClass"
                                                                      src="{{$photographerPics[$i]['s']}}"
                                                                      alt="{{$photographerPics[$i]['alt']}}"
                                                                      style="width: 100%;"  onload="fitThisImg(this)">
-                                                                <div class="see_all_count_wrap">
+                                                                <div class="see_all_count_wrap hideOnPhone">
                                                                     <span class="see_all_count">
                                                                         <div class="circleBase type2"
                                                                              id="photographerIdPic"
@@ -236,11 +330,13 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                                                             </div>
                                                         @endfor
-
                                                     </div>
                                                 </div>
+                                                <div class="hideOnScreen fullCameraIcon allPictureOnMainSlider">
+                                                    {{count($photographerPics)}}
+                                                </div>
                                             </div>
-                                            <a id="photographersLink" onclick="isPhotographer()">
+                                            <a id="photographersLink" class="hideOnPhone" onclick="isPhotographer()">
                                                 عکاس هستید؟ کلیک کنید
                                             </a>
                                         </div>
@@ -249,7 +345,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </div>
                                 </div>
                             </div>
-                            <div class="secondaryWrap">
+
+                            <div class="secondaryWrap hideOnPhone">
                                 <div class="tileWrap" onclick="showPhotoAlbum('sitePics')">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
@@ -315,12 +412,29 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <a class="postLink" href="#reviewMainDivDetails">
+                    <div class="hSectionInPlaceDetail hideOnScreen">
+                    @if($placeMode == 'mahaliFood')
+                        <div class="tabLinkMainWrap generalDescBtnTopBar tab" onclick="colorThisNav(this, 'generalDescLinkRel')">دستور پخت</div>
+                    @else
+                        <div class="tabLinkMainWrap generalDescBtnTopBar tab" onclick="colorThisNav(this, 'generalDescLinkRel')">معرفی کلی</div>
+                        <div class="tabLinkMainWrap mapBtnTopBar tab" onclick="colorThisNav(this, 'goToMapSection')">نقشه</div>
+                    @endif
+                        <div class="tabLinkMainWrap postsBtnTopBar tab" onclick="colorThisNav(this, 'mainDivPlacePost')">نظرات</div>
+                        <div class="tabLinkMainWrap QAndAsBtnTopBar tab" onclick="colorThisNav(this, 'QAndAMainDivId')">سوالات</div>
+                    @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
+                        <div class="tabLinkMainWrap similarLocationsBtnTopBar tab" onclick="colorThisNav(this, 'topPlacesSection')">مکان های مشابه</div>
+                    @endif
+                    </div>
+
+                    <div id="indicForShowDown" class="hideOnScreen">
+                        @include('layouts.placeMainBodyHeader')
+                    </div>
+
+                    <a class="postLink topAndBottomBorderAndMargin hideOnPhone" href="#reviewMainDivDetails">
                         <div id="mainStoreReviewDiv" class="postMainDiv">
                             <div class="postMainDivHeader">
-                                {{__('دیدگاه شما')}}
+                                {{__('نظر شما')}}
                             </div>
                             <div id="commentInputMainDiv">
                                 <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox" onclick="newPostModal('textarea')">
@@ -329,7 +443,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </div>
                                     <textarea type="text"
                                               class="inputBoxInput inputBoxInputComment showNewTextReviewArea"
-                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}}، چه فکر یا احساسی داری.....؟"
+                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}} نظرت رو نسبت به این {{$kindPlace->name}} به اشتراک بگذار"
                                               onclick="newPostModal('textarea')" readonly></textarea>
                                     <img src="{{URL::asset('images/smile.png')}}" class="commentSmileyIcon" alt="emoji"/>
                                 </div>
@@ -337,26 +451,35 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                             <div class="commentMoreSettingBar">
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=picReviewInput0 onclick=newPostModal()' : 'onclick=newPostModal()'}}>
-                                        <span class="addPhotoCommentIcon"></span>
-                                        <span class="commentOptionsText">{{__('عکس اضافه کنید.')}}</span>
+                                        <span class="icons addPhotoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن عکس')}}</span>
                                     </label>
                                 </div>
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=videoReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
-                                        <span class="addVideoCommentIcon"></span>
-                                        <span class="commentOptionsText">{{__('ویدیو اضافه کنید.')}}</span>
+                                        <span class="icons addVideoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو')}}</span>
                                     </label>
                                 </div>
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=video360ReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
                                         <span class="add360VideoCommentIcon"></span>
-                                        <span class="commentOptionsText">{{__('ویدیو 360 اضافه کنید.')}}</span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو 360')}}</span>
                                     </label>
                                 </div>
-                                <div class="commentOptionsBoxes" id="bodyLinks" onclick="newPostModal('tag')">
-                                    <span class="tagFriendCommentIcon"></span>
-                                    <span class="commentOptionsText">{{__('دوستانتان را tag کنید.')}}</span>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? '' : 'onclick=newPostModal("tag")'}}>
+                                        <span class="tagFriendCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>
+                                    </label>
                                 </div>
+
+{{--                                <div class="commentOptionsBoxes">--}}
+{{--                                    <label {{auth()->check() ? ' onclick=newPostModal("tag")' : 'onclick=newPostModal("tag")'}}>--}}
+{{--                                        <span class="icons addMemberIcon"></span>--}}
+{{--                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
                                 <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
                                     <span class="moreSettingPost"></span>
                                 </div>
@@ -373,7 +496,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
                 @if($placeMode == 'mahaliFood')
-                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse"   >
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse hideOnPhone"   >
                         <div class="container-fluid tabLinkMainWrapMainDiv tabLinkMainWrapMainDiv_Food">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
@@ -384,7 +507,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </li>
                                     <li>
                                         <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
-                                            پست
+                                            نظرات
                                         </a>
                                     </li>
                                     <li>
@@ -397,12 +520,12 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         </div>
                     </nav>
                 @else
-                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse">
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse hideOnPhone">
                         <div class="container-fluid tabLinkMainWrapMainDiv">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#topPlacesSection" onclick="colorThisNav(this)">
+                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar similarLocationsBtnTopBar" href="#topPlacesSection" onclick="colorThisNav(this)">
                                             مکان‌های مشابه
                                         </a>
                                     </li>
@@ -413,7 +536,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </li>
                                     <li>
                                         <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
-                                            پست
+                                            نظرات
                                         </a>
                                     </li>
                                     <li>
@@ -428,13 +551,13 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 @endif
 
                 <div class="exceptQAndADiv" id="generalDescLinkRel" style="display: inline-block">
-                    <div class="hr_btf_wrap position-relative">
+                    <div class="hr_btf_wrap position-relative topAndBottomBorderAndMargin">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
+                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap ">
                                         @if($placeMode == 'mahaliFood')
-                                            <div class="tabLinkMainDiv">
+                                            <div class="tabLinkMainDiv hideOnPhone">
                                                 <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     دستور پخت
                                                 </button><!--
@@ -451,7 +574,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                 </button>
                                             </div>
                                         @else
-                                            <div class="tabLinkMainDiv">
+                                            <div class="tabLinkMainDiv hideOnPhone">
                                                 <button class="tabLink"
                                                         onclick="openCity('commentsAndAddressMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     نظرات و آدرس
@@ -505,8 +628,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                                         @endif
                                                                     @endforeach
                                                                 </div>
-                                                                <div class="col-sm-6"
-                                                                     style="border-left: 1px solid #eee;">
+                                                                <div class="col-sm-6" style="border-left: 1px solid #eee;">
                                                                     @foreach($place->material as $key => $item)
                                                                         @if($key%2 != 0)
                                                                             <div class="row font-size-20">
@@ -525,8 +647,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                                                 <div id="detailsAndFeaturesMobile"
                                                      class="ui_column is-4 details tabContent {{$mainInfoClass}}">
-                                                    <div class="direction-rtl featureOfPlaceMiddleContent row"
-                                                         style="margin: 0px">
+                                                    <div class="direction-rtl featureOfPlaceMiddleContent row" style="margin: 0px">
                                                         @include('pages.placeDetails.tables.mahalifood-details-table')
                                                     </div>
                                                 </div>
@@ -545,87 +666,89 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                     </div>
                                                 </div>
 
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-4 reviews tabContent">
+                                                <div id="commentsAndAddressMobile" class="ui_column is-4 reviews tabContent hideOnPhone">
                                                     <div class="rateOfPlaceMiddleContent">
                                                         <div class="rating">
                                                             <div class="block_header">
-                                                                <h3 class="block_title">نظر شما </h3>
+                                                                <div class="titlesPlaceDetail">
+                                                                    <h3 class="block_title">{{__('امتیاز کاربران')}} </h3>
+                                                                </div>
                                                             </div>
-{{--                                                            <span class="overallRating">{{$avgRate}} </span>--}}
-                                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                        <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
-                                                              property="ratingValue" content="{{$avgRate}}"
-                                                              alt='{{$avgRate}} of 5 bubbles'></span>
-                                                            </div>
-                                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                         </div>
-                                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                            <ul class="ratings_chart">
-                                                                <li class="chart_row highlighted clickable">
-                                                                    <span class="row_label row_cell">عالی</span>
-                                                                    <span class="row_bar row_cell">
+                                                        <div class="ratingBoxDetails">
+                                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
+                                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                      property="ratingValue" content="{{$avgRate}}"
+                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                                                            </div>
+                                                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                                <ul class="ratings_chart">
+                                                                    <li class="chart_row highlighted clickable">
+                                                                        <span class="row_label row_cell">عالی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">خوب</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">خوب</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">معمولی</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">معمولی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">ضعیف</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">ضعیف</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row">
-                                                                    <span class="row_label row_cell">خیلی بد </span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row">
+                                                                        <span class="row_label row_cell">خیلی بد </span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div id="tagsName">
-                                                            <h3>برچسب‌ها:</h3>
-                                                            @foreach($place->tags as $key => $item)
-                                                                @if($key <= 5)
-                                                                    <span class="tag">{{$item}}</span>
-                                                                @endif
-                                                            @endforeach
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            {{--<div id="tagsName">--}}
+                                                            {{--<h3>برچسب‌ها:</h3>--}}
+                                                            {{--@foreach($place->tags as $key => $item)--}}
+                                                            {{--@if($key <= 5)--}}
+                                                            {{--<span class="tag">{{$item}}</span>--}}
+                                                            {{--@endif--}}
+                                                            {{--@endforeach--}}
+                                                            {{--</div>--}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -636,7 +759,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                 <div id="generalDescriptionMobile"
                                                      class="ui_column is-{{$showInfo}} generalDescription tabContent">
                                                     <div class="block_header">
-                                                        <h3 class="block_title">{{__('معرفی کلی')}} </h3>
+                                                        <div class="titlesPlaceDetail">
+                                                            <h3 class="block_title">{{__('معرفی کلی')}} </h3>
+                                                        </div>
                                                     </div>
                                                     <div class="toggleDescription" style="position: relative">
                                                         <div class="unselectedText overviewContent descriptionOfPlaceMiddleContent"
@@ -671,144 +796,128 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-{{$showReviewRate}} reviews tabContent rateOfPlaceMiddle">
+                                                <div id="commentsAndAddressMobile" class="ui_column is-{{$showReviewRate}} reviews tabContent hideOnPhone rateOfPlaceMiddle">
                                                     <div class="rateOfPlaceMiddleContent row" style="margin: 0px;">
                                                         <div class="rating">
                                                             <div class="block_header">
-                                                                <h3 class="block_title">نظر شما </h3>
+                                                                <div class="titlesPlaceDetail">
+                                                                    <h3 class="block_title">{{__('امتیاز کاربران')}} </h3>
+                                                                </div>
                                                             </div>
-{{--                                                            <span class="overallRating">{{$avgRate}} </span>--}}
+                                                        </div>
+                                                        <div class="ratingBoxDetails">
                                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
-                                                                      property="ratingValue" content="{{$avgRate}}"
-                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28" property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of 5 bubbles'></span>
                                                             </div>
                                                             <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                                        </div>
-                                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                            <ul class="ratings_chart">
-                                                                <li class="chart_row highlighted clickable">
-                                                                    <span class="row_label row_cell">عالی</span>
-                                                                    <span class="row_bar row_cell">
+                                                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                                <ul class="ratings_chart">
+                                                                    <li class="chart_row highlighted clickable">
+                                                                        <span class="row_label row_cell">عالی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill" style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">خوب</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">خوب</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"  style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">معمولی</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">معمولی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill" style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">ضعیف</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">ضعیف</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill" style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row">
-                                                                    <span class="row_label row_cell">خیلی بد </span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row">
+                                                                        <span class="row_label row_cell">خیلی بد </span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="prw_rup prw_common_atf_header_bl"
-                                                             id="clientConnectionsLines">
-                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
-                                                                <span class="ui_icon map-pin"></span>
-                                                                @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
-                                                                    <span class="street-address">آدرس : </span>
-                                                                    <span>{{$place->address}}</span>
-                                                                @elseif( $placeMode == 'majara')
-                                                                    <span class="street-address">آدرس : </span>
-                                                                    <span>{{$place->dastresi}}</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="prw_rup prw_common_atf_header_bl hideOnPhone" id="clientConnectionsLines">
+                                                                <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
+                                                                    <span class="ui_icon map-pin"></span>
+                                                                    @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
+                                                                        <span class="street-address">آدرس : </span>
+                                                                        <span>{{$place->address}}</span>
+                                                                    @elseif( $placeMode == 'majara')
+                                                                        <span class="street-address">آدرس : </span>
+                                                                        <span>{{$place->dastresi}}</span>
+                                                                    @endif
+                                                                </div>
+
+                                                                @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
+                                                                    <div class="blEntry blEn phone truePhone">
+                                                                        <span class="ui_icon phone"></span>
+                                                                        @foreach($place->phone as $key => $phone)
+                                                                            <a href="tel:{{$phone}}">
+                                                                                {{$phone}}
+                                                                            </a>
+                                                                            @if($key != count($place->phone)-1)
+                                                                                -
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                @endif
+
+                                                                @if(!empty($place->site))
+                                                                    <div class="blEntry website mg-bt-10"
+                                                                         id="clientConnectionsWebsite">
+                                                                        <span class="ui_icon laptop"></span>
+                                                                        <?php
+                                                                        if (strpos($place->site, 'http') === false)
+                                                                            $place->site = 'http://' . $place->site;
+                                                                        ?>
+                                                                        <a target="_blank"
+                                                                           href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
+                                                                            <span class="font-size-12">{{$place->site}}</span>
+                                                                        </a>
+                                                                    </div>
                                                                 @endif
                                                             </div>
-
-                                                            @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
-                                                                <div class="blEntry blEn phone truePhone">
-                                                                    <span class="ui_icon phone"></span>
-                                                                    @foreach($place->phone as $key => $phone)
-                                                                        <a href="tel:{{$phone}}">
-                                                                            {{$phone}}
-                                                                        </a>
-                                                                        @if($key != count($place->phone)-1)
-                                                                            -
-                                                                        @endif
-                                                                    @endforeach
-                                                                </div>
-                                                            @endif
-
-                                                            @if(!empty($place->site))
-                                                                <div class="blEntry website mg-bt-10"
-                                                                     id="clientConnectionsWebsite">
-                                                                    <span class="ui_icon laptop"></span>
-                                                                    <?php
-                                                                    if (strpos($place->site, 'http') === false)
-                                                                        $place->site = 'http://' . $place->site;
-                                                                    ?>
-                                                                    <a target="_blank"
-                                                                       href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                                        <span class="font-size-12">{{$place->site}}</span>
-                                                                    </a>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                        <div id="tagsName">
-                                                            <h3>برچسب‌ها:</h3>
-                                                            @foreach($place->tags as $key => $item)
-                                                                @if($key <= 5)
-                                                                    <span class="tag">{{$item}}</span>
-                                                                @endif
-                                                            @endforeach
+                                                            {{--<div id="tagsName">--}}
+                                                            {{--<h3>برچسب‌ها:</h3>--}}
+                                                            {{--@foreach($place->tags as $key => $item)--}}
+                                                            {{--@if($key <= 5)--}}
+                                                            {{--<span class="tag">{{$item}}</span>--}}
+                                                            {{--@endif--}}
+                                                            {{--@endforeach--}}
+                                                            {{--</div>--}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                                                <div class="topPageAd" style="margin: 10px auto">
-                                                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                                                </div>
-
-                                                <div class="topMainMapDiv">
-                                                    <div id="mainMap" class="mainMap placeHolderAnime"></div>
-                                                </div>
-
-                                                <div class="topPageAd" style="margin: 10px auto">
-                                                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                                                </div>
-                                                @include('pages.placeDetails.component.extendedMap')
-
-                                            @endif
                                         @endif
 
                                     </div>
@@ -816,26 +925,169 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                             </div>
 
                         </div>
-{{--                        @include('pages.placeDetails.component.roomReservation')--}}
                     </div>
 
-                    <div id="mainDivPlacePost" class="tabContentMainWrap">
+                    <div class="rateOfPlaceMiddleContent topAndBottomBorderAndMargin seperateRates hideOnScreen">
+                        <div class="rating">
+                            <div class="block_header">
+                                <div class="titlesPlaceDetail">
+                                    <h3 class="block_title">{{__('امتیاز کاربران')}} </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ratingBoxDetails" style="margin-top: 15px;">
+                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
+                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                      property="ratingValue" content="{{$avgRate}}"
+                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                            </div>
+                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram" style="width: 80%; direction: rtl; margin-top: 15px;">
+                                <ul class="ratings_chart">
+                                    <li class="chart_row highlighted clickable">
+                                        <span class="row_label row_cell">عالی</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row clickable">
+                                        <span class="row_label row_cell">خوب</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row clickable">
+                                        <span class="row_label row_cell">معمولی</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row clickable">
+                                        <span class="row_label row_cell">ضعیف</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row">
+                                        <span class="row_label row_cell">خیلی بد </span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}%</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            {{--<div id="tagsName">--}}
+                            {{--<h3>برچسب‌ها:</h3>--}}
+                            {{--@foreach($place->tags as $key => $item)--}}
+                            {{--@if($key <= 5)--}}
+                            {{--<span class="tag">{{$item}}</span>--}}
+                            {{--@endif--}}
+                            {{--@endforeach--}}
+                            {{--</div>--}}
+                        </div>
+                    </div>
+
+                    @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
+                        <div class="topAndBottomBorderAndMargin">
+                            <div class="topPageAd " style="margin: 10px auto">
+                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
+                            </div>
+                        </div>
+
+                        <div id="goToMapSection" class="topMainMapDiv topAndBottomBorderAndMargin">
+                            <div id="mainMap" class="mainMap placeHolderAnime"></div>
+                        </div>
+
+                        <div class="topAndBottomBorderAndMargin">
+                            <div class="topPageAd" style="margin: 10px auto">
+                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
+                            </div>
+                        </div>
+                        @include('pages.placeDetails.component.extendedMap')
+
+                    @endif
+
+                    <div id="mainDivPlacePost" class="tabContentMainWrap" style="display: flex; direction: rtl; flex-direction: column;">
+
+                        <div class="postMainDiv hideOnScreen">
+                            <div class="postMainDivHeader">
+                                {{__('نظر شما')}}
+                            </div>
+                            <div id="commentInputMainDiv">
+                                <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox" onclick="newPostModal('textarea')">
+                                    <div id="profilePicForComment" class="fullyCenterContent profilePicForPost circleBase type2" style="overflow: hidden; border-radius: 50%;">
+                                        <img src="{{ $userPic }}" alt="userPicture" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+                                    </div>
+                                    <textarea type="text"
+                                              class="inputBoxInput inputBoxInputComment showNewTextReviewArea"
+                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}} نظرت رو نسبت به این {{$kindPlace->name}} به اشتراک بگذار"
+                                              onclick="newPostModal('textarea')" readonly></textarea>
+                                    <img src="{{URL::asset('images/smile.png')}}" class="commentSmileyIcon" alt="emoji"/>
+                                </div>
+                            </div>
+                            <div class="commentMoreSettingBar">
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? 'for=picReviewInput0 onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="icons addPhotoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن عکس')}}</span>
+                                    </label>
+                                </div>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? 'for=videoReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="icons addVideoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو')}}</span>
+                                    </label>
+                                </div>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? 'for=video360ReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="add360VideoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو 360')}}</span>
+                                    </label>
+                                </div>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? '' : 'onclick=newPostModal("tag")'}}>
+                                        <span class="tagFriendCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>
+                                    </label>
+                                </div>
+
+                                {{--                                <div class="commentOptionsBoxes">--}}
+                                {{--                                    <label {{auth()->check() ? ' onclick=newPostModal("tag")' : 'onclick=newPostModal("tag")'}}>--}}
+                                {{--                                        <span class="icons addMemberIcon"></span>--}}
+                                {{--                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>--}}
+                                {{--                                    </label>--}}
+                                {{--                                </div>--}}
+                                <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
+                                    <span class="moreSettingPost"></span>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="topBarContainerPosts display-none"></div>
 
-                        <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
-
+                        <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap" style="display: none;">
                             @include('pages.placeDetails.filterSection')
-
-                            <center id="advertiseDiv" class="col-xs-12 adsMainDiv" style="display: none;">
-                                {{--@include('features.advertise3D')--}}
-                            </center>
                         </div>
 
                         @include('pages.placeDetails.reviewSection')
                     </div>
 
-                    <div class="Ad3InRowPc">
+                    <div class="Ad3InRowPc" style="display: none;">
                         <div class="ad">
                             <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
                         </div>
@@ -856,7 +1108,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             </div>
         </div>
     </div>
-
 
     @if(isset($video) && $video != null && false)
         {{--vr--}}
@@ -938,44 +1189,51 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             initPlaceRowSection(topPlacesSections); // component.rowSuggestion
 
             function initNearbySwiper() {
-                var swiper = new Swiper('.mainSuggestion', {
-                    slidesPerGroup: 1,
-                    loop: true,
-                    loopFillGroupWithBlank: true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
+                new Swiper('.mainSuggestion', {
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 'auto',
+                            spaceBetween: 10,
+                            loop: false,
+                        },
+                         992: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                        },
+                        10000: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        }
                     },
                     autoplay: {
                         delay: 4000,
                     },
-                    breakpoints: {
-
-                        450: {
-                            slidesPerView: 1,
-                            spaceBetween: 15,
-                        },
-
-                        520: {
-                            slidesPerView: 2,
-                            spaceBetween: 15,
-                        },
-
-                        768: {
-                            slidesPerView: 2,
-                            spaceBetween: 30,
-                        },
-
-                        992: {
-                            slidesPerView: 3,
-                            spaceBetween: 30,
-                        },
-
-                        10000: {
-                            slidesPerView: 4,
-                            spaceBetween: 30,
-                        }
-                    }
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    // breakpoints: {
+                    //     450: {
+                    //         slidesPerView: 1,
+                    //         spaceBetween: 15,
+                    //     },
+                    //     520: {
+                    //         slidesPerView: 2,
+                    //         spaceBetween: 15,
+                    //     },
+                    //     768: {
+                    //         slidesPerView: 2,
+                    //         spaceBetween: 30,
+                    //     },
+                    //     992: {
+                    //         slidesPerView: 3,
+                    //         spaceBetween: 30,
+                    //     },
+                    //     10000: {
+                    //         slidesPerView: 4,
+                    //         spaceBetween: 30,
+                    //     }
+                    // }
                 });
             }
 
@@ -1093,46 +1351,57 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             else if(topOfSticky >= 25 && $('#sticky').hasClass('stickyFixTop'))
                 $('#sticky').removeClass('stickyFixTop');
 
-            let topOfInfo = document.getElementById('generalDescLinkRel').getBoundingClientRect().top;
-            let topOfQA = document.getElementById('QAndAMainDivId').getBoundingClientRect().top;
-            let topOfPost = document.getElementById('mainDivPlacePost').getBoundingClientRect().top;
+            $('.tabLinkMainWrap').css('color', 'black');
 
-            if(topOfInfo < 0) {
-                $('.tabLinkMainWrap').css('color', 'black');
-                $('.generalDescBtnTopBar').css('color', 'var(--koochita-light-green)');
-            }
-            else
-                $('.generalDescBtnTopBar').css('color', 'black');
+            var showWhatId = null;
+            var sum = $(window).width() <= 767 ? 120 : 0;
 
-            if(topOfPost < 0) {
-                $('.tabLinkMainWrap').css('color', 'black');
-                $('.postsBtnTopBar').css('color', 'var(--koochita-light-green)');
-            }
-            else
-                $('.postsBtnTopBar').css('color', 'black');
-
-            if(topOfQA < 0) {
-                $('.tabLinkMainWrap').css('color', 'black');
-                $('.QAndAsBtnTopBar').css('color', 'var(--koochita-light-green)');
-            }
-            else
-                $('.QAndAsBtnTopBar').css('color', 'black');
-
+            let topOfInfo = document.getElementById('generalDescLinkRel').getBoundingClientRect().top - sum;
+            let topOfQA = document.getElementById('QAndAMainDivId').getBoundingClientRect().top - sum;
+            let topOfPost = document.getElementById('mainDivPlacePost').getBoundingClientRect().top - sum;
+            let topOfMap = document.getElementById('goToMapSection').getBoundingClientRect().top - sum;
             let topOfSimilar = document.getElementById('topPlacesSection');
+
             if(topOfSimilar){
                 topOfSimilar = topOfSimilar.getBoundingClientRect().top;
-                if(topOfSimilar < 0) {
-                    $('.tabLinkMainWrap').css('color', 'black');
-                    $('.similarLocationsBtnTopBar').css('color', 'var(--koochita-light-green)');
-                }
+                if(topOfSimilar < 0)
+                    showWhatId = 'similarLocationsBtnTopBar';
+            }
+
+            if(topOfQA < 0 && showWhatId == null)
+                showWhatId = 'QAndAsBtnTopBar';
+
+            if(topOfPost < 0 && showWhatId == null)
+                showWhatId = 'postsBtnTopBar';
+
+            if(topOfMap < 0 && showWhatId == null)
+                showWhatId = 'mapBtnTopBar';
+
+            if(topOfInfo < 0 && showWhatId == null)
+                showWhatId = 'generalDescBtnTopBar';
+
+            if(showWhatId != null)
+                $(`.${showWhatId}`).css('color', 'var(--koochita-light-green)');
+
+            if($(window).width() <= 767){
+                var indecTop = document.getElementById('indicForShowDown').getBoundingClientRect().top;
+                indecTop += $('#indicForShowDown').height();
+                if(indecTop < 0)
+                    $('#comeDownHeader').addClass('show');
                 else
-                    $('.similarLocationsBtnTopBar').css('color', 'black');
+                    $('#comeDownHeader').removeClass('show');
             }
         });
 
-        function colorThisNav(_elemnt){
+        function colorThisNav(_elemnt, _section){
+            if($(window).width() < 767){
+                $('html, body').animate({
+                    scrollTop: $(`#${_section}`).offset().top-100
+                }, 300);
+            }
+
+            $('.tabLinkMainWrap').css('color', 'black');
             setTimeout(() => {
-                $('.tabLinkMainWrap').css('color', 'black');
                 $(_elemnt).css('color', 'var(--koochita-light-green)');
             }, 100)
         }
@@ -1329,21 +1598,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 $('.eachCommentMainBox').removeClass('mg-rt-45')
             }
 
-            @if($mode == "bookMark")
-            bookMark();
-            @elseif($mode == "saveToTrip")
-            saveToTrip();
-            @elseif($mode == "question")
-            showAskQuestion();
-            @elseif($mode == "addPhotoSuccessfully")
-            $(".dark").css('display', '');
-            $("#photoSubmitted").removeClass('hidden');
-            @elseif($mode == 'err')
-            showAddPhotoPane();
-            $("#errMsgAddPhoto").append('{{$err}}');
-            @elseif($mode == "addPhoto")
-            showAddPhotoPane();
-            @endif
             // $("#date_input").datepicker({
             //     numberOfMonths: 2,
             //     showButtonPanel: true,

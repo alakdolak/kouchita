@@ -52,7 +52,7 @@
     bottom: 0px;
     left: 0;
     max-width: 100%;
-    z-index: 9999;
+    z-index: 999;
     background-color: #00000073;
 }
 .mapMoreInfoPlace{
@@ -693,8 +693,8 @@
 .fullReviewCommentPhotosShow{
     font-size: 12px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #e5e5e5;
     display: flex;
+    /*border-bottom: 1px solid #e5e5e5;*/
 }
 
 .commentRatingHeader {
@@ -1092,6 +1092,7 @@
 }
 
 .newCommentPlaceMainDiv button, .replyToCommentMainDiv button {
+    background: none;
     float: left;
     margin-bottom: 8px;
 }
@@ -1460,6 +1461,7 @@
     .commentWriterExperienceParticipation, .userProfileName, .userProfileNameAnswers{
         margin-top: 10px;
     }
+
     .fullReviewLikeAnsSeeAllSection{
         width: 100%;
     }
@@ -1479,6 +1481,7 @@
 
     .eachCommentMainBox{
         background-color: #f2f2f2;
+        background-color: #fcc15617;
         border-radius: 10px;
         padding: 5px 5px 0px 0px;
     }
@@ -1497,12 +1500,16 @@
         border-radius: 5px;
     }
 
-    .newCommentPlaceMainDiv .inputBox{
+    .newCommentPlaceMainDiv .inputBox {
+        background: none;
         border: none;
     }
+
     .replyToCommentMainDiv .inputBox{
+        background: none;
         border: none;
     }
+
     .commentWriterPicShow{
         width: 45px;
         height: 45px;
@@ -1512,6 +1519,47 @@
         width: calc(100% + 60px);
         margin-right: -40px;
         margin-top: 15px;
+    }
+
+    .newCommentPlaceMainDiv, .answerPlaceMainDiv, .newAnswerPlaceMainDiv, .ansTextAreaReview{
+        background: #4dc7bc1a;
+    }
+
+    .commentsContentMainBox{
+        background: none;
+    }
+
+    .suggestionPackDiv{
+        margin-bottom: 15px;
+        width: 80%;
+    }
+
+    .mainSuggestion .swiper-button-prev, .swiper-button-next{
+        display: none;
+    }
+
+    .suggestionPackDiv .suggestionPackContent{
+        box-shadow: 3px 0px 8px 1px #00000052;
+    }
+
+    .topPlacesDivInCity{
+        background: white;
+        border-top: solid 1px #4dc7bc52;
+        border-bottom: solid 1px #4dc7bc52;
+        margin: 15px 0px;
+        padding: 10px 0px;
+    }
+
+    .topPlacesDivInCityHeader{
+        margin-bottom: 5px;
+    }
+
+    .topPlacesDivInCityHeader a{
+        color: #333;
+    }
+
+    .topPlacesDivInCityHeader a h3{
+        font-weight: normal;
     }
 }
 

@@ -337,7 +337,6 @@
                     <img class="hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <img class="hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="کوچیتا، سامانه جامع گردشگری ایران" loading="lazy" style="width: 50px;">
                     <div class="shelf_title_container h3">
-{{--                        color: #333;--}}
                         <h3>{{__('تازه‌های کوچیتا')}}</h3>
                     </div>
                 </div>

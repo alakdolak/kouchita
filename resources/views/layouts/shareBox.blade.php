@@ -42,21 +42,22 @@ $config = \App\models\ConfigModel::first();
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه پین ترست</div>
     </a>
     <div class="position-relative inputBoxSharePage mg-tp-5">
-        <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress(this)" style="cursor: pointer;">
+        <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress()" style="cursor: pointer;">
         <img src="{{URL::asset("images/shareBoxImg/copy.png")}}" id="copyImgInputShareLink">
     </div>
 </div>
 
+<input id="hiddenInputWithThisPageUrl" type="text" value="{{Request::url()}}" style="display: none;">
 <script>
     var openShareBox = false;
 
-    function copyLinkAddress(_element){
-        var copyText = _element;
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
+    function copyLinkAddress(){
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($('#hiddenInputWithThisPageUrl').val()).select();
         document.execCommand("copy");
-
-        alert('لینک مورد نظر کپی شد.')
+        $temp.remove();
+        alert('آدرس صفحه کپی شد.');
     }
 
     function toggleShareIcon(elmt) {

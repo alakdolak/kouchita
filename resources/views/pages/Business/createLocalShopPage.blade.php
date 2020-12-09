@@ -58,7 +58,7 @@
         <div class="container">
             <div class="bodySec bodd row">
                 <div class="col-sm-12 MainHeader">
-                    <div>ثبت اطلاعات مغازه</div>
+                    <div>ثبت اطلاعات کسب و کار</div>
                     <div class="indicator">
                         <div class="squer level3"> بارگذاری عکس </div>
                         <div class="line level3" style="right: 49px;"></div>
@@ -70,7 +70,7 @@
 
                 <div class="sectionPages section1">
                     <div class="descInputSec col-sm-12">
-                        <div class="descriptionText">شما در اینجا می توانید اطلاعات مغازه خود را وارد نمایید.</div>
+                        <div class="descriptionText">شما در اینجا می توانید اطلاعات کسب و کار خود را وارد نمایید.</div>
                         <div class="descriptionText">توجه نمایید پر کردن تمامی اطلاعات این بخش ضروری می باشد.</div>
                         <div style="color: red; margin-top: 5px;">کامل کردن موارد ستاره دار اجباری است</div>
                     </div>
@@ -78,13 +78,13 @@
                         <input type="hidden" id="shopId" value="0">
                         <div class="row">
                             <div class="col-sm-6 form-group importantInput">
-                                <label for="shopName">نام مغازه</label>
-                                <input type="text" class="form-control mustFull" id="shopName" placeholder="نام مغازه خود را وارد نمایید...">
+                                <label for="shopName">نام کسب و کار</label>
+                                <input type="text" class="form-control mustFull" id="shopName" placeholder="نام کسب و کار خود را وارد نمایید...">
                             </div>
                             <div class="col-sm-6 form-group importantInput">
-                                <label for="shopCategory">نوع مغازه</label>
+                                <label for="shopCategory">نوع کسب و کار</label>
                                 <select class="form-control mustFull" id="shopCategory">
-                                    <option disabled selected>نوع مغازه خود را مشخص کنید.</option>
+                                    <option disabled selected>نوع کسب و کار خود را مشخص کنید.</option>
                                     @foreach($localShopCategories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
@@ -102,12 +102,12 @@
                                 <input type="hidden" id="shopCityId" value="0">
                             </div>
                             <div class="col-sm-12 form-group importantInput">
-                                <label for="shopAddress">آدرس مغازه</label>
-                                <input type="text" class="form-control mustFull" id="shopAddress" placeholder="آدرس مغازه خود را دقیق وارد نمایید...">
+                                <label for="shopAddress">آدرس کسب و کار</label>
+                                <input type="text" class="form-control mustFull" id="shopAddress" placeholder="آدرس کسب و کار خود را دقیق وارد نمایید...">
                             </div>
                             <div class="col-sm-12 form-group">
-                                <label for="shopInPlace">نام محل مغازه</label>
-                                <div class="descriptionText"> اگر مغازه شما داخل محل خاصی می باشد (مثلا پاساژ) ، نام محل را وارد نمایید.</div>
+                                <label for="shopInPlace">نام محل کسب و کار</label>
+                                <div class="descriptionText"> اگر کسب و کار شما داخل محل خاصی می باشد (مثلا پاساژ) ، نام محل را وارد نمایید.</div>
                                 <input type="text" class="form-control" id="shopInPlace" placeholder="نام محل خاص را وارد نمایید...">
                                 <input type="hidden" id="shopInPlaceId" value="0">
                             </div>
@@ -132,7 +132,7 @@
                     <div class="container" style="width: 100%;">
                         <div class="row">
                             <div class="col-sm-12 headerRowInput">
-                                ساعات کاری مغازه
+                                ساعات کاری کسب و کار
                                 <div class="checkboxDiv">
                                     <label for="allDay24">شبانه روزی هستم</label>
                                     <input type="checkbox" id="allDay24" onchange="iAm24Hour()">
@@ -200,10 +200,10 @@
                             </div>
                             <div class="col-sm-12 form-group">
                                 <label for="shopDescription">توضیحات</label>
-{{--                                <div class="descriptionText">شما در این قسمت می توانید در مورد مغازه ، شغل و یا نوع فعالیت خود توضیحاتی بنویسید.</div>--}}
+{{--                                <div class="descriptionText">شما در این قسمت می توانید در مورد کسب و کار ، شغل و یا نوع فعالیت خود توضیحاتی بنویسید.</div>--}}
                                 <textarea class="autoResizeTextArea form-control"
                                           id="shopDescription"
-                                          placeholder="شما در این قسمت می توانید در مورد مغازه ، شغل و یا نوع فعالیت خود توضیحاتی بنویسید."></textarea>
+                                          placeholder="شما در این قسمت می توانید در مورد کسب و کار ، شغل و یا نوع فعالیت خود توضیحاتی بنویسید."></textarea>
                             </div>
 
                         </div>
@@ -217,8 +217,8 @@
                                 بارگذاری عکس
                             </div>
                             <div class="col-md-12">
-                                <div class="boldDescriptionText" style="color: var(--koochita-green);">اطلاعات مغازه شما با موفقیت ثبت شد</div>
-                                <div class="descriptionText">شما در این بخش می توانید عکس هایی از مغازه و یا کسب کار خود قرار دهید تا مردم شما را بهتر بشناسند.</div>
+                                <div class="boldDescriptionText" style="color: var(--koochita-green);">اطلاعات کسب و کار شما با موفقیت ثبت شد</div>
+                                <div class="descriptionText">شما در این بخش می توانید عکس هایی از کسب و کار و یا کسب کار خود قرار دهید تا مردم شما را بهتر بشناسند.</div>
                                 <div id="uploadedSection" class="uploadPicSection">
                                     <div id="showUploadPicsSection" class="showUploadedFiles"></div>
                                     <div id="uploadPicInfoText" class="uploadPic">
@@ -426,7 +426,7 @@
             var errorText = '';
 
             if(name.trim().length < 2) {
-                errorText += '<li>پر کردن نام مغازه اجباری است</li>';
+                errorText += '<li>پر کردن نام کسب و کار اجباری است</li>';
                 $('#shopName').addClass('wrongInput');
             }
             else{
@@ -435,7 +435,7 @@
             }
 
             if(category == null) {
-                errorText += '<li>نوع مغازه خود را مشخص کنید</li>';
+                errorText += '<li>نوع کسب و کار خود را مشخص کنید</li>';
                 $('#shopCategory').addClass('wrongInput');
             }
             else{
@@ -444,7 +444,7 @@
             }
 
             if(phone.trim().length < 2){
-                errorText += '<li>نوشتن شماره تماس برای مغازه اجباری است</li>';
+                errorText += '<li>نوشتن شماره تماس برای کسب و کار اجباری است</li>';
                 $('#shopPhone').addClass('wrongInput');
             }
             else{
@@ -462,7 +462,7 @@
             }
 
             if(address == 0){
-                errorText += '<li>نوشتن آدرس مغازه اجباری است</li>';
+                errorText += '<li>نوشتن آدرس کسب و کار اجباری است</li>';
                 $('#shopAddress').addClass('wrongInput');
             }
             else{
@@ -471,7 +471,7 @@
             }
 
             if(lat == 0 || lng == 0)
-                errorText += '<li>مشخص کردن محل مغازه روی نقشه اجباری است.</li>';
+                errorText += '<li>مشخص کردن محل کسب و کار روی نقشه اجباری است.</li>';
 
             if(errorText == '')
                 return true;
@@ -521,7 +521,7 @@
                     closeLoading();
                     if(response.status == 'ok'){
                         $('#shopId').val(response.result);
-                        showSuccessNotifi('مغازه شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
+                        showSuccessNotifi('کسب و کار شما با موفقیت ثبت شد.', 'left', 'var(--koochita-blue)');
                         goToPage(1, true)
                     }
                 },

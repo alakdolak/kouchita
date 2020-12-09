@@ -372,18 +372,15 @@ function hideElement(element) {
     $("#" + element).addClass('hidden');
 }
 
-function bookMark() {
+function addPlaceToBookMark() {
 
     if (!checkLogin())
         return;
 
     $.ajax({
-        type: 'post',
+        type: 'POST',
         url: bookMarkDir,
-        data: {
-            'placeId': placeId,
-            'kindPlaceId': kindPlaceId
-        },
+        data: {placeId, kindPlaceId},
         success: function (response) {
             if (response == "ok-del"){
                 changeBookmarkIcon();
@@ -397,7 +394,7 @@ function bookMark() {
     })
 }
 
-function saveToTrip() {
+function addThisPlaceToTrip() {
     selectedPlaceId = placeId;
     selectedKindPlaceId = kindPlaceId;
 
@@ -406,6 +403,7 @@ function saveToTrip() {
 
     saveToTripPopUp(placeId, kindPlaceId);
 }
+
 function addToSelectedTrips(id) {
     allow = true;
     for (i = 0; i < selectedTrips.length; i++) {

@@ -456,31 +456,31 @@
         }
 
         text += '<div class="quantityOfLikes">\n' +
-            '</div>\n' +
-            '</div>\n' +
-            '<div class="fullReviewRatingsDetailsShow">\n' +
-            '   <div class="fullReviewMiddle">\n' +
-            '       <div style="width: 100%;">' +
-            '           <div class="commentRatingHeader">\n' +
-            'بازدید ';
-
-        if(_reviews["assigned"].length != 0)
-            text +='<span> با دوستان</span>\n';
-
-        text +='در فصل\n' +
-            '<span>بهار</span>\n' +
-            'و از مبدأ\n' +
-            '<span>تهران</span>\n' +
-            'انجام شده است\n' +
-            '</div>\n';
-
-        if(_reviews["questionAns"].length != 0) {
-            text +='<div class="commentRatingsDetailsBtn" onclick="showRatingDetailsInFullReview(this)">مشاهده جزئیات امتیازدهی\n' +
-                '   <div class="commentRatingsDetailsBtnIcon">\n' +
-                '       <i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
-                '   </div>\n' +
                 '</div>\n' +
                 '</div>\n';
+        //         '<div class="fullReviewRatingsDetailsShow">\n' +
+        //         '   <div class="fullReviewMiddle">\n' +
+        //         '       <div style="width: 100%;">' +
+        //         '           <div class="commentRatingHeader">\n' +
+        //         'بازدید ';
+
+        // if(_reviews["assigned"].length != 0)
+        //     text +='<span> با دوستان</span>\n';
+
+        // text +='در فصل\n' +
+        //     '<span>بهار</span>\n' +
+        //     'و از مبدأ\n' +
+        //     '<span>تهران</span>\n' +
+        //     'انجام شده است\n' +
+        //     '</div>\n';
+
+        if(_reviews["questionAns"].length != 0) {
+            text += '<div class="commentRatingsDetailsBtn" onclick="showRatingDetailsInFullReview(this)">مشاهده جزئیات امتیازدهی\n' +
+                    '   <div class="commentRatingsDetailsBtnIcon">\n' +
+                    '       <i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
+                    '   </div>\n' +
+                    '</div>\n' +
+                    '</div>\n';
 
             text +='<div class="commentRatingsDetailsBox hidden">\n';
 

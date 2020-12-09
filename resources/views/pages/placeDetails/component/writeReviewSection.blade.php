@@ -82,13 +82,13 @@
                     <div class="commentOptionsBoxes">
                         <label for="video360ReviewInput">
                             <span class="add360VideoCommentIcon"></span>
-                            <span class="commentOptionsText">{{__('ویدیو 360 اضافه کنید.')}}</span>
+                            <span class="commentOptionsText">{{__('افزودن ویدیو 360')}}</span>
                         </label>
                     </div>
                     <input type="file" id="video360ReviewInput" accept="video/*" style="display: none" onchange="uploadReviewVideo(this, 1)">
                     <div class="commentOptionsBoxes">
                         <span class="tagFriendCommentIcon"></span>
-                        <span class="commentOptionsText">{{__('دوستانتان را TAG کنید.')}}</span>
+                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>
                     </div>
                 </center>
 

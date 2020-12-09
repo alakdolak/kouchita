@@ -32,10 +32,10 @@
 @if(isset($place->kind_id) && $place->kind_id == 1)
     <div class="descriptionSections">
         <div class="titleSection">
-        <span class="titleSectionSpan">
-            {{__('درجه')}}
-            {{$placeKindName}}
-        </span>
+            <span class="titleSectionSpan">
+                {{__('درجه')}}
+                {{$placeKindName}}
+            </span>
         </div>
         <div class="contentSection col-xs-3">{{$place->rate}}
             @if($place->momtaz == 1)

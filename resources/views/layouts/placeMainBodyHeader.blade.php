@@ -1,6 +1,6 @@
 
 <div class="atf_header_wrapper">
-    <div class="atf_header container is-mobile full_width" style="padding-top: 0px;">
+    <div class="atf_header container is-mobile full_width" style="padding-top: 0px; position: relative">
 
         <div class="ppr_rup ppr_priv_location_detail_header" style="margin-top: 0px;">
             <h1 id="HEADING" class="heading_title" property="name">{{$place->name}}</h1>
@@ -13,7 +13,7 @@
                        </div>
                        <div class="more" id="moreTaLnkReviewHeader" href="#REVIEWS">
                            <span property="v:count" id="commentCount"></span>
-                           {{__('امتیاز')}}
+                           امتیاز کاربران
                        </div>
                    </div>
                 </span>
@@ -26,9 +26,9 @@
             </div>
 
             <div>
-                <span class="ui_button_overlay position-relative float-left">
+                <span class="ui_button_overlay position-relative float-left hideOnPhone">
                     <div id="targetHelp_7" class="targets position-relative float-right">
-                        <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon">
+                        <span onclick="addThisPlaceToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon">
                             <div class="circleBase type2 addToFavouriteTripsIcon {{($save) ? "red-heart-fill" : "red-heart"}}"></div>
                             <div class="addToFavouriteTripsLabel">
                                 {{__('افزودن به لیست سفر')}}
@@ -36,29 +36,28 @@
                         </span>
                     </div>
                     <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0 mobile-mode">
-                        <span onclick="bookMark();" class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                        <span onclick="addPlaceToBookMark();" class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
                             <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castles"}} "></div>
                             <div class="saveAsBookmarkLabel">
                                 {{__('ذخیره این صفحه')}}
                             </div>
                         </span>
                     </div>
-nan
+
                     <div id="share_box_mobile" class="display-none">
                         <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
                         href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
                             <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}" class="display-inline-block float-right">
                             <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه در فیسبوک')}}</div>
                         </a>
-                        <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
-                        href="https://twitter.com/home?status={{Request::url()}}">
+                        <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/home?status={{Request::url()}}">
                             <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}" class="display-inline-block float-right">
                             <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه در توییتر')}}</div>
                         </a>
                         {{-- whatsapp link create in shareBox.blade.php--}}
                         <a target="_blank" class="link mg-tp-5 whatsappLink" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}} href="#">
-                                <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
-                                <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه واتس اپ')}}</div>
+                            <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
+                            <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه واتس اپ')}}</div>
                         </a>
 
                         <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
@@ -77,7 +76,7 @@ nan
                             <div class="display-inline-block float-right mg-rt-5">{{__('اشتراک صفحه پین ترست')}}</div>
                         </a>
                         <div class="position-relative inputBoxSharePage mg-tp-5">
-                            <input id="shareLinkInputPlaceDetailsHeader" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress(this)" style="cursor: pointer;">
+                            <input id="shareLinkInputPlaceDetailsHeader" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress()" style="cursor: pointer;">
                             <img src="{{URL::asset("images/shareBoxImg/copy.png")}}" id="copyImgInputShareLink">
                         </div>
                     </div>
@@ -98,6 +97,7 @@ nan
                         </span>
                     </span>
                 </span>
+
                 <div class="prw_rup prw_common_atf_header_bl headerBL">
                     <div class="blRow">
                             @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
@@ -105,11 +105,11 @@ nan
                                 <span class="ui_icon map-pin"></span>
                                     <span class="street-address">{{__('آدرس')}} : </span>
                                     @if($placeMode == 'majara')
-                                        <span>
+                                        <span class="placeDetailAddressHeader">
                                             {{$place->dastresi}}
                                         </span>
                                     @else
-                                        <span>
+                                        <span class="placeDetailAddressHeader">
                                             {{$place->address}}
                                         </span>
                                     @endif
@@ -117,7 +117,9 @@ nan
                             @endif
                         @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
                             <div class="blEntry blEn phone truePhone">
-                                <span class="ui_icon phone"></span>
+{{--                                <span>--}}
+{{--                                    <img src="{{URL::asset('images/icons/phoneIcon.svg')}}" style="width: 30px">--}}
+{{--                                </span>--}}
                                 @foreach($place->phone as $key => $phone)
                                     <a href="tel:{{$phone}}">
                                         {{$phone}}
@@ -126,6 +128,8 @@ nan
                                         -
                                     @endif
                                 @endforeach
+                                <span class="ui_icon phone"></span>
+
                             </div>
                         @endif
                         @if(!empty($place->site))
@@ -144,6 +148,34 @@ nan
                 </div>
             </div>
         </div>
+        <div class="hideOnScreen topHeaderPlaceDetailMobileButtons">
+            <div class="circlePlaceDetailButtons" onclick="addPlaceToBookMark();">
+                <div class="icon saveAsBookmarkIcon {{auth()->check() && $bookMark ? "BookMarkIcon" : "BookMarkIconEmpty"}}"></div>
+            </div>
+            <div class="circlePlaceDetailButtons" onclick="setTimeout(() => $(this).find('.sharesButtons').toggleClass('open'), 100)">
+                <div class="icon" style="z-index: 10">
+                    <img src="{{URL::asset('images/icons/shareIcon.svg')}}" style="margin-right: 3px;width: 18px;">
+                </div>
+                <div class="sharesButtons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}">
+                    </a>
+                    <a href="https://twitter.com/home?status={{Request::url()}}" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}">
+                    </a>
+                    <a href="#" class="share whatsappLink">
+                        <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}">
+                    </a>
+                    <a href="https://telegram.me/share/url?url={{Request::url()}}" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}">
+                    </a>
+                    <span class="share" style="color: black;" onclick="copyLinkAddress()"> کپی </span>
+                </div>
+            </div>
+            <div class="circlePlaceDetailButtons" onclick="addThisPlaceToTrip()">
+                <div class="icon MyTripsIcon"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -151,12 +183,12 @@ nan
 <script>
 
     function changeBookmarkIcon() {
-        var icon = $('.saveAsBookmarkIcon').hasClass('castles');
+        var icon = $('.saveAsBookmarkIcon').hasClass('BookMarkIcon');
 
         if(icon)
-            $('.saveAsBookmarkIcon').addClass('castle-fill').removeClass('castles');
+            $('.saveAsBookmarkIcon').addClass('BookMarkIconEmpty').removeClass('BookMarkIcon');
         else
-            $('.saveAsBookmarkIcon').addClass('castles').removeClass('castle-fill');
+            $('.saveAsBookmarkIcon').addClass('BookMarkIcon').removeClass('BookMarkIconEmpty');
     }
 
     $('#share_pic_mobile').click(function () {
