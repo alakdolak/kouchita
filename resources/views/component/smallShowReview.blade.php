@@ -475,14 +475,15 @@
         //     '</div>\n';
 
         if(_reviews["questionAns"].length != 0) {
-            text += '<div class="commentRatingsDetailsBtn" onclick="showRatingDetailsInFullReview(this)">مشاهده جزئیات امتیازدهی\n' +
-                    '   <div class="commentRatingsDetailsBtnIcon">\n' +
-                    '       <i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
-                    '   </div>\n' +
-                    '</div>\n' +
-                    '</div>\n';
+            text += `<div class="commentRatingsDetailsBtn" onclick="showRatingDetailsInFullReview(this)">
+                       <div class="commentRatingsDetailsBtnIcon">
+                            مشاهده جزئیات امتیازدهی
+                           <i class="glyphicon glyphicon-triangle-bottom"></i>
+                       </div>
+                    </div>
+                    </div>`;
 
-            text +='<div class="commentRatingsDetailsBox hidden">\n';
+            text += '<div class="commentRatingsDetailsBox hidden">\n';
 
             let textAnsHtml = '';
             let multiAnsHtml = '';
@@ -779,11 +780,11 @@
     }
 
     function showRatingDetailsInFullReview(element) {
-        if ($(element).parent().next().hasClass('commentRatingsDetailsBox')) {
-            $(element).parent().next().toggleClass('hidden');
+        if ($(element).next().hasClass('commentRatingsDetailsBox')) {
+            $(element).next().toggleClass('hidden');
             $(element).children().children().toggleClass('glyphicon-triangle-bottom');
-            $(element).children().children().toggleClass('glyphicon-triangle-top')
-            $(element).parent().toggleClass('mg-bt-10');
+            $(element).children().children().toggleClass('glyphicon-triangle-top');
+            $(element).toggleClass('mg-bt-10');
         }
     }
 

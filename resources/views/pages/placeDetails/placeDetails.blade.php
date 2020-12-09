@@ -1103,7 +1103,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 </div>
 
                 @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                    @include('component.rowSuggestion')
+                    <div id="topPlacesSection">
+                        @include('component.rowSuggestion')
+                    </div>
                 @endif
             </div>
         </div>
@@ -1363,7 +1365,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             let topOfSimilar = document.getElementById('topPlacesSection');
 
             if(topOfSimilar){
-                topOfSimilar = topOfSimilar.getBoundingClientRect().top;
+                topOfSimilar = document.getElementById('topPlacesSection').getBoundingClientRect().top;
                 if(topOfSimilar < 0)
                     showWhatId = 'similarLocationsBtnTopBar';
             }

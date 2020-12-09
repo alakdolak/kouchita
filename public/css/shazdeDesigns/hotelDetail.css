@@ -2147,32 +2147,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 12px;
 }
 
-.commentRatingsDetailsBtn {
-    display: inline-block;
-    width: 35%;
-    float: left;
-    text-align: left;
-    padding-left: 30px;
-    font-size: 13px;
-    position: relative;
-    cursor: pointer;
-}
-
-.commentRatingsDetailsBtnIcon {
-    width: auto;
-    display: inline-block;
-    pointer-events: none;
-    position: absolute;
-    left: 10px;
-    top: 4px;
-}
-
-.commentRatingsDetailsBtnIcon > i {
-    float: left;
-    color: #666666;
-    font-size: 10px;
-}
-
 .commentRatingsDetailsBox {
     background: #e5e5e5;
     padding: 15px 9px;
@@ -5201,9 +5175,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     .commentRatingHeader{
         width: 100%;
     }
-    .commentRatingsDetailsBtn{
-        width: 100%;
-    }
 
     DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
         font-size: 10px;
@@ -5266,15 +5237,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     .mobileIntroductionMainDiv #generalDescriptionMobile .block_title,
     .mobileIntroductionMainDiv #commentsAndAddressMobile .block_title {
         top: 3px;
-    }
-
-    .commentRatingsDetailsBtn {
-        padding-left: 15px;
-        font-size: 12px;
-    }
-
-    .commentRatingsDetailsBtnIcon {
-        left: 0;
     }
 
     .filterBarDivs {
@@ -5389,9 +5351,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 
 @media (max-width: 400px) {
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
-        font-size: 10px;
-    }
-    .commentRatingHeader,.commentRatingsDetailsBtn{
         font-size: 10px;
     }
     .traditionalFoodDescription > div {

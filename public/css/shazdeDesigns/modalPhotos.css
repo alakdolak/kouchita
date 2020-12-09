@@ -397,6 +397,13 @@
     .showingPhotosModal .selectedPhotoShowingModal {
         height: 55vh;
     }
+
+    .showingPhotosModal .userPictureDiv{
+        overflow: hidden;
+        border-radius: 50% !important;
+        width: 45px !important;
+        height: 45px !important;
+    }
 }
 
 @media (max-width:630px)  {

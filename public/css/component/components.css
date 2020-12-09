@@ -1561,6 +1561,22 @@
     .topPlacesDivInCityHeader a h3{
         font-weight: normal;
     }
+
+    .commentRatingHeader,.commentRatingsDetailsBtn{
+        font-size: 10px;
+        padding: 10px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .commentRatingsDetailsBtnIcon{
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        display: flex;
+        align-items: center;
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -1727,12 +1743,6 @@
     .answersActionsQp{
         left: 5px;
         top: 5px !important;
-    }
-}
-
-@media (max-width: 400px) {
-    .commentRatingHeader,.commentRatingsDetailsBtn{
-        font-size: 10px;
     }
 }
 
