@@ -661,13 +661,15 @@ h3{
     }
 
     .cpDescription{
-        padding: 25px 5px;
-
+        padding: 25px 20px;
         background: white;
         border-top: solid 1px #4dc7bc52;
         border-bottom: solid 1px #4dc7bc52;
         margin-top: 15px;
         margin-bottom: 15px;
+        padding-top: 0px;
+        font-weight: normal;
+        font-size: 14px;
     }
     .im-entry-title{
         padding-bottom: 50px !important;
@@ -694,10 +696,12 @@ h3{
     .cpShowOnSlider .cpStateName{
         background: white;
         font-size: 25px;
-        padding: 3px 20px;
+        padding: 3px 12px;
         border-radius: 40px;
         border: solid 3px lightgray;
         box-shadow: 2px 2px 5px 2px #00000073;
+        display: flex;
+        align-items: center;
     }
     .cpShowOnSlider .cpCityName{
         margin-top: 13px;
@@ -706,6 +710,9 @@ h3{
         color: white;
         padding: 5px 13px;
         border-radius: 30px;
+        display: flex;
+        align-items: center;
+        border: solid 1px;
     }
     .cpBody{
         width: 100% !important;
@@ -732,6 +739,7 @@ h3{
         justify-content: center;
         align-items: center;
         width: 100%;
+        padding-top: 5px;
     }
     .cityImgSlider{
         display: flex;

@@ -177,10 +177,11 @@ class PlaceController extends Controller {
         $thumbnail = getPlacePic($place->id, $kindPlaceId, 's');
 
         $pics = getAllPlacePicsByKind($kindPlaceId, $place->id); // common.php
-        $sitePics = $pics[0];
-        $photographerPics = $pics[2];
-        $userPhotos = $pics[4];
-        $userVideo = $pics[6];
+        $sitePics = $pics['sitePics'];
+        $photographerPics = $pics['photographerPics'];
+        $userPhotos = $pics['userPhotos'];
+        $userVideo = $pics['userVideo'];
+        $allPlacePics = $pics['allPics'];
 
         $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);  // common.php
         $reviewCount = $result[0];
@@ -535,12 +536,11 @@ class PlaceController extends Controller {
 
                 $places['selected'] = [$selectedPlace];
 
-                echo json_encode([$places, $safarnameh]);
-                return;
+                return response()->json(['places' => $places, 'safarnameh' => $safarnameh]);
             }
         }
 
-        echo \GuzzleHttp\json_encode([]);
+        return response()->json([]);
     }
 
     public function setBookMark()

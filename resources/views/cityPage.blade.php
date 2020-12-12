@@ -43,6 +43,14 @@
     <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css?v=1')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
 
+
+    <style>
+        .cpNameLabel{
+            font-size: 10px;
+            margin-left: 4px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -148,10 +156,19 @@
 
                             <div class="hideOnScreen cpShowOnSlider">
                                 @if(isset($place->state))
-                                    <div class="cpStateName">{{$place->state}}</div>
-                                    <div class="cpCityName">{{$place->name}}</div>
+                                    <div class="cpStateName">
+                                        <span class="cpNameLabel">استان :</span>
+                                        {{$place->state}}
+                                    </div>
+                                    <div class="cpCityName">
+                                        <span class="cpNameLabel">شهر :</span>
+                                        {{$place->name}}
+                                    </div>
                                 @else
-                                    <div class="cpStateName">{{$place->name}}</div>
+                                    <div class="cpStateName">
+                                        <span class="cpNameLabel">استان :</span>
+                                        {{$place->name}}
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -362,10 +379,10 @@
                         <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
                         <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['boomgardy']}}</div>
                     </a>
-                    <div class="cpLittleMenu">
-                        <div class="cityPageIcon estelah"></div>
-                        <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>
-                    </div>
+{{--                    <div class="cpLittleMenu">--}}
+{{--                        <div class="cityPageIcon estelah"></div>--}}
+{{--                        <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>--}}
+{{--                    </div>--}}
                     <a href="{{route('safarnameh.list', ['type' => $kind, 'search' => $place->listName])}}" class="cpLittleMenu">
                         <div class="cityPageIcon safarnameIcon"></div>
                         <div class="textCityPageIcon">{{__('سفر نامه')}}</div>
@@ -422,6 +439,9 @@
             <div class="row cpMainBody">
                 @if(strlen($place->description) > 10)
                     <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
+                        <h1 style="margin: 0; line-height: 10px; text-align: center;">
+                            معرفی و تاریخچه  {{$place->name}}
+                        </h1>
                         {{$place->description}}
                     </div>
                 @endif

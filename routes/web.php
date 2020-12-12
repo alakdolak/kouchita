@@ -484,6 +484,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
 
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
 
+        Route::get('profile/getUserInfoFooter', 'ProfileController@getUserInfoFooter')->name('profile.getUserInfoFooter');
+
         Route::get('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
 
         Route::get('profile/getMainFestival', 'ProfileController@getMainFestival')->name('profile.getMainFestival');

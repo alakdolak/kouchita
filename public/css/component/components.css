@@ -1534,7 +1534,7 @@
         width: 80%;
     }
 
-    .mainSuggestion .swiper-button-prev, .swiper-button-next{
+    .mainSuggestion .swiper-button-prev, .mainSuggestion .swiper-button-next{
         display: none;
     }
 
@@ -1552,6 +1552,7 @@
 
     .topPlacesDivInCityHeader{
         margin-bottom: 5px;
+        padding: 0px 10px;
     }
 
     .topPlacesDivInCityHeader a{

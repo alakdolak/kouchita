@@ -54,10 +54,10 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
         var reviewUploadVideo = '{{route('reviewUploadVideo')}}';
-        var bookMarkDir = '{{route('setBookMark')}}';
-        var getPlaceTrips = '{{route('placeTrips')}}';
-        var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
-        var soon = '{{route('soon')}}';
+{{--        var bookMarkDir = '{{route('setBookMark')}}';--}}
+{{--        var getPlaceTrips = '{{route('placeTrips')}}';--}}
+        {{--var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';--}}
+        {{--var soon = '{{route('soon')}}';--}}
         var placeMode = '{{$placeMode}}';
         var photographerPics = {!! json_encode($photographerPics) !!};
         var sitePics = {!! json_encode($sitePics) !!};
@@ -134,6 +134,50 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         .sharesButtons .share img{
             width: 100%;
         }
+
+        .userRateToPlaceModal{
+
+        }
+        .userRateToPlaceModal .header{
+
+        }
+        .userRateToPlaceModal .body{
+
+        }
+        .userRateToPlaceModal .footer{
+
+        }
+
+        @media (max-width: 767px) {
+            .setScoreForThisPlaceComeUp{
+                position: fixed;
+                left: 10px;
+                background: var(--koochita-light-green);
+                z-index: 1000;
+                color: white;
+                padding: 10px;
+                border-radius: 20px;
+                transition: .3s;
+                bottom: 0px;
+                animation: glowRatingButton 2s infinite;
+            }
+            .setScoreForThisPlaceComeUp.open{
+                bottom: 70px;
+            }
+        }
+
+        @keyframes glowRatingButton {
+            0% {
+                background: var(--koochita-blue);
+            }
+            50%{
+                background: #24c2ff;
+            }
+            100%{
+                background: var(--koochita-blue);
+            }
+
+        }
     </style>
 
 @stop
@@ -193,6 +237,22 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
                 <div class="tabLinkMainWrap similarLocationsBtnTopBar" onclick="colorThisNav(this,'topPlacesSection')">مکان های مشابه</div>
             @endif
+        </div>
+    </div>
+
+    <div class="setScoreForThisPlaceComeUp hidden hideOnScreen" onclick="openMyModal('userRateToPlaceModal')">
+        به  {{$place->name}} امتیاز دهید
+    </div>
+
+    <div id="userRateToPlaceModal" class="userRateToPlaceModal modalBlackBack fullCenter">
+        <div class="header">
+            امتیاز شما به {{$place->name}} چیست؟
+        </div>
+        <div class="body">
+            <div class="ui_star_rating star_3"></div>
+        </div>
+        <div class="footer">
+            <button>ثبت امتیاز</button>
         </div>
     </div>
 
@@ -308,37 +368,32 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                             <div id="photographerAlbum" {{count($photographerPics) > 0 ? "onclick=showPhotoAlbum('photographer')" : ''}}>
                                                 <div id="mainSlider" class="swiper-container">
                                                     <div id="mainSliderWrapper" class="swiper-wrapper">
-                                                        @for($i = 0; $i < count($photographerPics); $i++)
+                                                        @foreach($photographerPics as $pics)
                                                             <div class="swiper-slide" style="overflow: hidden">
                                                                 <img class="eachPicOfSlider resizeImgClass"
-                                                                     src="{{$photographerPics[$i]['s']}}"
-                                                                     alt="{{$photographerPics[$i]['alt']}}"
-                                                                     style="width: 100%;"  onload="fitThisImg(this)">
+                                                                     src="{{$pics['s']}}"
+                                                                     alt="{{$pics['alt']}}"
+                                                                     style="width: 100%;"
+                                                                     onload="fitThisImg(this)">
                                                                 <div class="see_all_count_wrap hideOnPhone">
                                                                     <span class="see_all_count">
-                                                                        <div class="circleBase type2"
-                                                                             id="photographerIdPic"
-                                                                             style="background-color: var(--koochita-light-green);">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: var(--koochita-light-green);">
+                                                                            <img src="{{$pics['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
                                                                         <div class="display-inline-block mg-rt-10 mg-tp-2">
                                                                             <span class="display-block font-size-12">عکس از</span>
-                                                                            <span class="display-block">{{$photographerPics[$i]['name']}}</span>
+                                                                            <span class="display-block">{{$pics['name']}}</span>
                                                                         </div>
                                                                     </span>
                                                                 </div>
 
                                                             </div>
-                                                        @endfor
+                                                        @endforeach
                                                     </div>
                                                 </div>
-                                                <div class="hideOnScreen fullCameraIcon allPictureOnMainSlider">
-                                                    {{count($photographerPics)}}
-                                                </div>
+                                                <div id="allPlacePicturesCount" class="hideOnScreen fullCameraIcon allPictureOnMainSlider"> {{count($photographerPics)}} </div>
                                             </div>
-                                            <a id="photographersLink" class="hideOnPhone" onclick="isPhotographer()">
-                                                عکاس هستید؟ کلیک کنید
-                                            </a>
+                                            <a id="photographersLink" class="hideOnPhone" onclick="isPhotographer()"> عکاس هستید؟ کلیک کنید </a>
                                         </div>
                                         <div class="left-nav left-nav-header swiper-button-next mainSliderNavBut"></div>
                                         <div class="right-nav right-nav-header swiper-button-prev mainSliderNavBut"></div>
@@ -1066,12 +1121,12 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </label>
                                 </div>
 
-                                {{--                                <div class="commentOptionsBoxes">--}}
-                                {{--                                    <label {{auth()->check() ? ' onclick=newPostModal("tag")' : 'onclick=newPostModal("tag")'}}>--}}
-                                {{--                                        <span class="icons addMemberIcon"></span>--}}
-                                {{--                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>--}}
-                                {{--                                    </label>--}}
-                                {{--                                </div>--}}
+                                {{--<div class="commentOptionsBoxes">--}}
+                                {{--    <label {{auth()->check() ? ' onclick=newPostModal("tag")' : 'onclick=newPostModal("tag")'}}>--}}
+                                {{--        <span class="icons addMemberIcon"></span>--}}
+                                {{--        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>--}}
+                                {{--    </label>--}}
+                                {{--</div>--}}
                                 <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
                                     <span class="moreSettingPost"></span>
                                 </div>
@@ -1188,8 +1243,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 },
             ];
 
-            initPlaceRowSection(topPlacesSections); // component.rowSuggestion
-
             function initNearbySwiper() {
                 new Swiper('.mainSuggestion', {
                     breakpoints: {
@@ -1250,15 +1303,14 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         count : 10,
                     },
                     success: function(response){
-                        response = JSON.parse(response);
                         let center = {
                             x: '{{$place->C}}',
                             y: '{{$place->D}}'
                         };
-                        createSuggestionRowWithData(response[0]);
-                        createArticleRowWithData(response[1]);
+                        createSuggestionRowWithData(response.places);
+                        createArticleRowWithData(response.safarnameh);
 
-                        createMapInBlade('mainMap', center, response[0], true);
+                        createMapInBlade('mainMap', center, response.places, true);
                     }
                 });
             }
@@ -1285,6 +1337,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             }
 
            $(document).ready(() => {
+               initPlaceRowSection(topPlacesSections); // component.rowSuggestion
                getNearbyToPlace();
            });
 
@@ -1292,6 +1345,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     @endif
 
     <script>
+        var isOpenRateButton = false;
 
         function getVideoFromTv(){
             $.ajax({
@@ -1387,9 +1441,15 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
             if($(window).width() <= 767){
                 var indecTop = document.getElementById('indicForShowDown').getBoundingClientRect().top;
-                indecTop += $('#indicForShowDown').height();
-                if(indecTop < 0)
+                indecTop += $('#indicForShowDown').height() - 110;
+                if(indecTop < 0){
+                    if(!isOpenRateButton){
+                        isOpenRateButton = true;
+                        // $('.setScoreForThisPlaceComeUp').removeClass('hidden');
+                        // setTimeout(() => $('.setScoreForThisPlaceComeUp').addClass('open'), 100);
+                    }
                     $('#comeDownHeader').addClass('show');
+                }
                 else
                     $('#comeDownHeader').removeClass('show');
             }
@@ -1520,343 +1580,99 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var sitePicsForAlbum = [];
         var userPhotosForAlbum = [];
         var userVideoForAlbum = [];
+        var allPlacePics = [];
 
-        for (var i = 0; i < photographerPics.length; i++) {
-            photographerPicsForAlbum[i] = {
-                'id': photographerPics[i]['id'],
-                'sidePic': photographerPics[i]['l'],
-                'mainPic': photographerPics[i]['s'],
-                'userPic': photographerPics[i]['userPic'],
-                'userName': photographerPics[i]['name'],
-                'picName': photographerPics[i]['picName'],
-                'like': photographerPics[i]['like'],
-                'dislike': photographerPics[i]['dislike'],
-                'alt': photographerPics[i]['alt'],
-                'description': photographerPics[i]['description'],
-                'uploadTime': photographerPics[i]['fromUpload'],
-                'showInfo': photographerPics[i]['showInfo'],
-                'userLike': photographerPics[i]['userLike'],
-            }
-        }
+        photographerPics.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['l'],
+                'mainPic': item['s'],
+                'userPic': item['userPic'],
+                'userName': item['name'],
+                'picName': item['picName'],
+                'like': item['like'],
+                'dislike': item['dislike'],
+                'alt': item['alt'],
+                'description': item['description'],
+                'uploadTime': item['fromUpload'],
+                'showInfo': item['showInfo'],
+                'userLike': item['userLike'],
+            };
+            photographerPicsForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
-        for (var i = 0; i < sitePics.length; i++) {
-            sitePicsForAlbum[i] = {
-                'id': sitePics[i]['id'],
-                'sidePic': sitePics[i]['l'],
-                'mainPic': sitePics[i]['s'],
-                'userPic': sitePics[i]['userPic'],
-                'userName': sitePics[i]['name'],
-                'like': sitePics[i]['like'],
-                'dislike': sitePics[i]['dislike'],
-                'alt': sitePics[i]['alt'],
-                'description': sitePics[i]['description'],
-                'uploadTime': sitePics[i]['fromUpload'],
-                'showInfo': sitePics[i]['showInfo'],
-                'userLike': sitePics[i]['userLike'],
-            }
-        }
+        sitePics.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['l'],
+                'mainPic': item['s'],
+                'userPic': item['userPic'],
+                'userName': item['name'],
+                'like': item['like'],
+                'dislike': item['dislike'],
+                'alt': item['alt'],
+                'description': item['description'],
+                'uploadTime': item['fromUpload'],
+                'showInfo': item['showInfo'],
+                'userLike': item['userLike'],
+            };
+            sitePicsForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
-        for (var i = 0; i < userPhotos.length; i++) {
-            userPhotosForAlbum[i] = {
-                'id': userPhotos[i]['id'],
-                'sidePic': userPhotos[i]['pic'],
-                'mainPic': userPhotos[i]['pic'],
-                'userPic': userPhotos[i]['userPic'],
-                'userName': userPhotos[i]['username'],
-                'uploadTime': userPhotos[i]['time'],
+        userPhotos.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['pic'],
+                'mainPic': item['pic'],
+                'userPic': item['userPic'],
+                'userName': item['username'],
+                'uploadTime': item['time'],
                 'showInfo': false,
-            }
-        }
+            };
+            userPhotosForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
-        for (var i = 0; i < userVideo.length; i++) {
-            userVideoForAlbum[i] = {
-                'id': userVideo[i]['id'],
-                'sidePic': userVideo[i]['picName'],
-                'mainPic': userVideo[i]['picName'],
-                'userPic': userVideo[i]['userPic'],
-                'userName': userVideo[i]['username'],
-                'video': userVideo[i]['video'],
-                'uploadTime': userVideo[i]['time'],
+        userVideo.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['picName'],
+                'mainPic': item['picName'],
+                'userPic': item['userPic'],
+                'userName': item['username'],
+                'video': item['video'],
+                'uploadTime': item['time'],
                 'showInfo': false,
-            }
-        }
+            };
+            userVideoForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
         function showPhotoAlbum(_kind) {
-            if (_kind == 'photographer' && photographerPicsForAlbum.length > 0)
-                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);// in general.photoAlbumModal.blade.php
-            else if (_kind == 'sitePics' && sitePicsForAlbum.length > 0)
-                createPhotoModal('عکس های سایت', sitePicsForAlbum);// in general.photoAlbumModal.blade.php
-            else if (_kind == 'userPics' && userPhotosForAlbum.length > 0)
-                createPhotoModal('عکس های کاربران', userPhotosForAlbum);// in general.photoAlbumModal.blade.php
-            else if (_kind == 'userVideo' && userVideoForAlbum.length > 0)
-                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
+            if($(window).width() <= 767)
+                createPhotoModal('آلبوم عکس', allPlacePics);// in general.photoAlbumModal.blade.php
+            else {
+                if (_kind == 'photographer' && photographerPicsForAlbum.length > 0)
+                    createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);// in general.photoAlbumModal.blade.php
+                else if (_kind == 'sitePics' && sitePicsForAlbum.length > 0)
+                    createPhotoModal('عکس های سایت', sitePicsForAlbum);// in general.photoAlbumModal.blade.php
+                else if (_kind == 'userPics' && userPhotosForAlbum.length > 0)
+                    createPhotoModal('عکس های کاربران', userPhotosForAlbum);// in general.photoAlbumModal.blade.php
+                else if (_kind == 'userVideo' && userVideoForAlbum.length > 0)
+                    createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
+            }
         }
 
-        $(document).ready(function () {
+        $(document).ready(() => {
+            $('#allPlacePicturesCount').text(allPlacePics.length);
             autosize($(".inputBoxInputComment"));
             autosize($(".inputBoxInputAnswer"));
 
-            if (window.matchMedia('(max-width: 373px)').matches) {
+            if (window.matchMedia('(max-width: 373px)').matches)
                 $('.eachCommentMainBox').removeClass('mg-rt-45')
-            }
-
-            // $("#date_input").datepicker({
-            //     numberOfMonths: 2,
-            //     showButtonPanel: true,
-            //     dateFormat: "yy/mm/dd"
-            // });
-            //
-            // $("#date_input_end_inHotel").datepicker({
-            //     numberOfMonths: 2,
-            //     showButtonPanel: true,
-            //     dateFormat: "yy/mm/dd"
-            // });
         });
-    </script>
-
-    <script>
-        var total;
-        var filterRateAns = [];
-        var filterMultiAns = [];
-        var reviewFilters = [];
-
-        var filters = [];
-        var hasFilter = false;
-        var topContainer;
-        var marginTop;
-        var helpWidth;
-        var greenBackLimit = 5;
-        var pageHeightSize = window.innerHeight;
-        var additional = [];
-        var indexes = [];
-        $(".nextBtnsHelp").click(function () {
-            show(parseInt($(this).attr('data-val')) + 1, 1);
-        });
-        $(".backBtnsHelp").click(function () {
-            show(parseInt($(this).attr('data-val')) - 1, -1);
-        });
-        $(".exitBtnHelp").click(function () {
-            myQuit();
-        });
-
-        function myQuit() {
-            clear();
-            $(".dark").hide();
-            enableScroll();
-        }
-
-        function setGreenBackLimit(val) {
-            greenBackLimit = val;
-        }
-
-        function initHelp(t, sL, topC, mT, hW) {
-            total = t;
-            filters = sL;
-            topContainer = topC;
-            marginTop = mT;
-            helpWidth = hW;
-            if (sL.length > 0)
-                hasFilter = true;
-            $(".dark").show();
-            show(1, 1);
-        }
-
-        function initHelp2(t, sL, topC, mT, hW, i, a) {
-            total = t;
-            filters = sL;
-            topContainer = topC;
-            marginTop = mT;
-            helpWidth = hW;
-            additional = a;
-            indexes = i;
-            if (sL.length > 0)
-                hasFilter = true;
-            $(".dark").show();
-            show(1, 1);
-        }
-
-        function isInFilters(key) {
-            key = parseInt(key);
-            for (j = 0; j < filters.length; j++) {
-                if (filters[j] == key)
-                    return true;
-            }
-            return false;
-        }
-
-        function getBack(curr) {
-            for (i = curr - 1; i >= 0; i--) {
-                if (!isInFilters(i))
-                    return i;
-            }
-            return -1;
-        }
-
-        function getFixedFromLeft(elem) {
-            if (elem.prop('id') == topContainer || elem.prop('id') == 'PAGE') {
-                return parseInt(elem.css('margin-left').split('px')[0]);
-            }
-            return elem.position().left +
-                parseInt(elem.css('margin-left').split('px')[0]) +
-                getFixedFromLeft(elem.parent());
-        }
-
-        function getFixedFromTop(elem) {
-            if (elem.prop('id') == topContainer) {
-                return marginTop;
-            }
-            if (elem.prop('id') == "PAGE") {
-                return 0;
-            }
-            return elem.position().top +
-                parseInt(elem.css('margin-top').split('px')[0]) +
-                getFixedFromTop(elem.parent());
-        }
-
-        function getNext(curr) {
-            curr = parseInt(curr);
-            for (i = curr + 1; i < total; i++) {
-                if (!isInFilters(i))
-                    return i;
-            }
-            return total;
-        }
-
-        function bubbles(curr) {
-            if (total <= 1)
-                return "";
-            t = total - filters.length;
-            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles pd-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
-            for (i = 1; i < total; i++) {
-                if (!isInFilters(i)) {
-                    if (i == curr)
-                        newElement += "<div id='notInFiltersDiv'></div>";
-                    else
-                        newElement += "<div id='isInFilterDiv' onclick='show(\"" + i + "\", 1)' class='helpBubble'></div>";
-                }
-            }
-            newElement += "</div></div>";
-            return newElement;
-        }
-
-        function clear() {
-            $('.bubbles').remove();
-            $(".targets").css({
-                'position': '',
-                'border': '',
-                'padding': '',
-                'background-color': '',
-                'z-index': '',
-                'cursor': '',
-                'pointer-events': 'auto'
-            });
-            $(".helpSpans").addClass('hidden');
-            $(".backBtnsHelp").attr('disabled', 'disabled');
-            $(".nextBtnsHelp").attr('disabled', 'disabled');
-        }
-
-        function show(curr, inc) {
-            clear();
-            if (hasFilter) {
-                while (isInFilters(curr)) {
-                    curr += inc;
-                }
-            }
-            if (getBack(curr) <= 0) {
-                $("#backBtnHelp_" + curr).attr('disabled', 'disabled');
-            } else {
-                $("#backBtnHelp_" + curr).removeAttr('disabled');
-            }
-            if (getNext(curr) > total - 1) {
-                $("#nextBtnHelp_" + curr).attr('disabled', 'disabled');
-            } else {
-                $("#nextBtnHelp_" + curr).removeAttr('disabled');
-            }
-            if (curr < greenBackLimit) {
-                $("#targetHelp_" + curr).css({
-                    'position': 'relative',
-                    'border': '5px solid #333',
-                    'padding': '10px',
-                    'background-color': 'var(--koochita-light-green)',
-                    'z-index': 1000001,
-                    'cursor': 'auto'
-                });
-            } else {
-                $("#targetHelp_" + curr).css({
-                    'position': 'relative',
-                    'border': '5px solid #333',
-                    'padding': '10px',
-                    'background-color': 'white',
-                    'z-index': 100000001,
-                    'cursor': 'auto'
-                });
-            }
-            var targetWidth = $("#targetHelp_" + curr).css('width').split('px')[0];
-            var targetHeight = parseInt($("#targetHelp_" + curr).css('height').split('px')[0]);
-            for (j = 0; j < indexes.length; j++) {
-                if (curr == indexes[j]) {
-                    targetHeight += additional[j];
-                    break;
-                }
-            }
-            if ($("#targetHelp_" + curr).offset().top > 200) {
-                $("html, body").scrollTop($("#targetHelp_" + curr).offset().top - 100);
-                $("#helpSpan_" + curr).css({
-                    'left': $("#targetHelp_" + curr).offset().left + targetWidth / 2 - helpWidth / 2 + "px",
-                    'top': targetHeight + 120 + "px"
-                }).removeClass('hidden').append(bubbles(curr));
-            } else {
-                $("#helpSpan_" + curr).css({
-                    'left': $("#targetHelp_" + curr).offset().left + targetWidth / 2 - helpWidth / 2 + "px",
-                    'top': ($("#targetHelp_" + curr).offset().top + targetHeight + 20) % pageHeightSize + "px"
-                }).removeClass('hidden').append(bubbles(curr));
-            }
-            $(".helpBubble").on({
-                mouseenter: function () {
-                    $(this).css('background-color', '#ccc');
-                },
-                mouseleave: function () {
-                    $(this).css('background-color', '#333');
-                }
-            });
-            disableScroll();
-        }
-
-        // left: 37, up: 38, right: 39, down: 40,
-        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-        var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-
-        function preventDefault(e) {
-            e = e || window.event;
-            if (e.preventDefault)
-                e.preventDefault();
-            e.returnValue = false;
-        }
-
-        function preventDefaultForScrollKeys(e) {
-            if (keys[e.keyCode]) {
-                preventDefault(e);
-                return false;
-            }
-        }
-
-        function disableScroll() {
-            if (window.addEventListener) // older FF
-                window.addEventListener('DOMMouseScroll', preventDefault, false);
-            window.onwheel = preventDefault; // modern standard
-            window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-            window.ontouchmove = preventDefault; // mobile
-            document.onkeydown = preventDefaultForScrollKeys;
-        }
-
-        function enableScroll() {
-            if (window.removeEventListener)
-                window.removeEventListener('DOMMouseScroll', preventDefault, false);
-            window.onmousewheel = document.onmousewheel = null;
-            window.onwheel = null;
-            window.ontouchmove = null;
-            document.onkeydown = null;
-        }
     </script>
 @stop
 
