@@ -79,6 +79,22 @@
             .articleDiv .im-entry-thumb-link{
                 height: 190px !important;
             }
+            .widget{
+                margin-bottom: 15px;
+            }
+            .articleDiv{
+                border-top: none;
+                margin-bottom: 20px;
+                border-bottom: none;
+                padding-top: 0px;
+                background: #f8f8f8;
+                padding-bottom: 8px;
+            }
+            .articleDiv .topPlacesDivInCity{
+                background: white;
+                margin-top: 0px;
+                padding-top: 25px;
+            }
 
         }
     </style>
@@ -509,7 +525,7 @@
             </div>
 
             <div class="col-xs-12 articleDiv">
-                <div class="row">
+                <div class="row topPlacesDivInCity">
                     <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
                             <a class="im-entry-thumb-link" href="{{$safarnameh[0]->url}}" title="{{$safarnameh[0]->slug}}" style="height: 275px;">
@@ -587,7 +603,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 cpBorderBottom" style="padding: 0px">
+            <div class="col-xs-12 topPlacesDivInCity cpBorderBottom" style="padding: 0px">
                 <div id="cpMap" class="cpMap placeHolderAnime" style="height: 500px"></div>
             </div>
 
