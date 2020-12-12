@@ -299,11 +299,11 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             if(lastSelected == 0)
                 alert('برای ثبت امتیاز باید روی ستاره مورد نظر کلیک کنید');
             else{
-                openLoading();
-                $.ajax({
-                    type: 'POST',
-                    url: '{{route("")}}'
-                })
+                // openLoading();
+                {{--$.ajax({--}}
+                {{--    type: 'POST',--}}
+                {{--    url: '{{route("")}}'--}}
+                {{--})--}}
             }
         }
     </script>
