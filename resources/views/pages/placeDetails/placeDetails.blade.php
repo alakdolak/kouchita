@@ -1142,16 +1142,21 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         @include('pages.placeDetails.reviewSection')
                     </div>
 
-                    <div class="Ad3InRowPc" style="display: none;">
-                        <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                        </div>
-                        <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                        </div>
-                        <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                        </div>
+                    <div>
+                        <div id="pos-article-display-16123"></div>
+                    </div>
+
+                    <div class="Ad3InRowPc" style="display: none">
+                        <div id="pos-article-display-16123"></div>
+{{--                        <div class="ad">--}}
+{{--                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                        </div>--}}
+{{--                        <div class="ad">--}}
+{{--                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                        </div>--}}
+{{--                        <div class="ad">--}}
+{{--                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                        </div>--}}
                     </div>
 
                     @include('pages.placeDetails.questionSection')

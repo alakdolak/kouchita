@@ -757,6 +757,7 @@ h3{
     }
     .cpBody .cpMainBox .cpListsInPhone .cpLittleMenu .cityPageIcon{
         color: #333 !important;
+        height: 50px;
     }
     .cpBody .cpMainBox .cpListsInPhone .cpLittleMenu .textCityPageIcon{
         font-weight: normal;

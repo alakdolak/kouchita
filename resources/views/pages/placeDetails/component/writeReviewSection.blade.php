@@ -17,7 +17,7 @@
     }
 </style>
 
-<div class="postModalMainDiv hidden" id="reviewMainDivDetails">
+<div id="reviewMainDivDetails" class="postModalMainDiv hidden" style="z-index: 9999;">
     <div class="modal-dialog">
         <div>
             <input type="hidden" id="storeReviewKindPlaceId" name="kindPlaceId" value="{{$kindPlaceId}}">

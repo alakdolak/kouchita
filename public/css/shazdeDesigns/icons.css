@@ -3,6 +3,22 @@
 }
 
 /*....................*/
+.foodIcon:before{
+    content: '\E0A1';
+    font-family: 'Shazde_Regular2' !important;
+}
+.caltureIcon:before{
+    content: '\E0E9';
+    font-family: 'Shazde_Regular2' !important;
+}
+.manSportIcon:before{
+    content: '\E0EB';
+    font-family: 'Shazde_Regular2' !important;
+}
+.fullWalletIcon:before{
+    content: '\E0AD';
+    font-family: 'Shazde_Regular2' !important;
+}
 .emptySquer:before{
     content: '\E093';
     font-family: 'Shazde_Regular2' !important;
