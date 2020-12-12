@@ -553,6 +553,10 @@
     content: '\E00B';
     font-family: Shazde_Regular2 !important;
 }
+.emptyStarRating::before {
+    content: '\e00d';
+    font-family: Shazde_Regular2 !important;
+}
 .fullStarRatingAfter::after {
     content: '\E00B';
     font-family: Shazde_Regular2 !important;

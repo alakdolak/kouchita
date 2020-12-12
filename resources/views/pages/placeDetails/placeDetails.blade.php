@@ -147,6 +147,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             justify-content: center;
             align-items: center;
             height: 150px;
+            font-size: 46px;
+            color: var(--koochita-light-green);
         }
         .userRateToPlaceModal .footer{
             display: flex;
@@ -263,13 +265,48 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 امتیاز شما به {{$place->name}} چیست؟
             </div>
             <div class="body">
-                <div class="bubble_40w"></div>
+                <div class="emptyStarRating ratingStar1" data-star="1" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar2" data-star="2" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar3" data-star="3" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar4" data-star="4" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar5" data-star="5" data-selected="0" onclick="ratingToPlace(this)"></div>
             </div>
             <div class="footer">
-                <button>ثبت امتیاز</button>
+                <button onclick="submitRating()">ثبت امتیاز</button>
             </div>
         </div>
     </div>
+    <script>
+        function ratingToPlace(_element){
+            var clickStar = $(_element).attr('data-star');
+            for(var i = 1; i <= 5; i++){
+                if(i <= clickStar)
+                    $(`.ratingStar${i}`).addClass('fullStarRating').removeClass('emptyStarRating').attr('data-selected', 1);
+                else
+                    $(`.ratingStar${i}`).addClass('emptyStarRating').removeClass('fullStarRating').attr('data-selected', 0);
+            }
+        }
+
+        function submitRating(){
+            var lastSelected = 0;
+            for(i = 5; i > 0; i--){
+                if($(`.ratingStar${i}`).attr('data-selected') == 1){
+                    lastSelected = $(`.ratingStar${i}`).attr('data-star');
+                    break;
+                }
+            }
+
+            if(lastSelected == 0)
+                alert('برای ثبت امتیاز باید روی ستاره مورد نظر کلیک کنید');
+            else{
+                openLoading();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("")}}'
+                })
+            }
+        }
+    </script>
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 

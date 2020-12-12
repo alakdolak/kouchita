@@ -229,25 +229,30 @@ class CityController extends Controller
         return;
     }
 
-    public function getCityPageTopPlace(Request $request)
+    public function getCityPageTopPlace()
     {
-        $topAmaken = $this->getTopPlaces(1, $request->kind, $request->id);
-        $topRestaurant = $this->getTopPlaces(3, $request->kind, $request->id);
-        $topHotel = $this->getTopPlaces(4, $request->kind, $request->id);
-        $topMajra = $this->getTopPlaces(6, $request->kind, $request->id);
-        $topSogatSanaies = $this->getTopPlaces(10, $request->kind, $request->id);
-        $topMahaliFood = $this->getTopPlaces(11, $request->kind, $request->id);
-        $topBoomgardy = $this->getTopPlaces(12, $request->kind, $request->id);
-        $topPlaces = [  'topBoomgardyCityPage' => $topBoomgardy,
+        $kind = $_GET['kind'];
+        $id = $_GET['id'];
+
+        $topAmaken = $this->getTopPlaces(1, $kind, $id);
+        $topRestaurant = $this->getTopPlaces(3, $kind, $id);
+        $topHotel = $this->getTopPlaces(4, $kind, $id);
+        $topMajra = $this->getTopPlaces(6, $kind, $id);
+        $topSogatSanaies = $this->getTopPlaces(10, $kind, $id);
+        $topMahaliFood = $this->getTopPlaces(11, $kind, $id);
+        $topBoomgardy = $this->getTopPlaces(12, $kind, $id);
+
+        $topPlaces = [
+            'topBoomgardyCityPage' => $topBoomgardy,
             'topAmakenCityPage' => $topAmaken,
             'topRestaurantInCity' => $topRestaurant,
             'topHotelCityPage' => $topHotel,
             'topMajaraCityPage' => $topMajra,
             'topSogatCityPage' => $topSogatSanaies,
-            'topFoodCityPage' => $topMahaliFood];
+            'topFoodCityPage' => $topMahaliFood
+        ];
 
-        echo json_encode($topPlaces);
-        return;
+        return response()->json(['topPlaces' => $topPlaces]);
     }
 
     public function getCityAllPlaces(Request $request)

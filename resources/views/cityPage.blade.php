@@ -49,6 +49,23 @@
             font-size: 10px;
             margin-left: 4px;
         }
+
+        @media (max-width: 767px) {
+            .articleDiv .widget ul{
+                border: solid 2px #4dc7bc52;
+                margin: 0px 5px;
+                padding: 5px;
+                border-top: 0px;
+                padding-top: 20px;
+            }
+            .im-widget-entry-header .im-widget-entry-title{
+                font-size: 16px;
+            }
+            .articleDiv .im-entry-thumb-link{
+                height: 190px !important;
+            }
+
+        }
     </style>
 
 </head>
@@ -347,9 +364,11 @@
                         <div class="textCityPageIcon">{{__('هتل')}}</div>
                         <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['hotel']}}</div>
                     </a>
-                    <a class="cpLittleMenu" href="#">
-                        <div class="cityPageIcon ticket"></div>
-                        <div class="textCityPageIcon">{{__('بلیط')}}</div>
+
+                    <a class="cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
+                        <div class="cityPageIcon boom"></div>
+                        <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
+                        <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['boomgardy']}}</div>
                     </a>
                     <a class="cpLittleMenu" href="{{url('placeList/1/' . $kind . '/' . $place->listName)}}">
                         <div class="cityPageIcon atraction"></div>
@@ -368,7 +387,8 @@
                     </a>
                     <a class="cpLittleMenu" href="{{url('placeList/11/' . $kind . '/' . $place->listName)}}">
 {{--                        <div class="cityPageIcon foodIcon"></div>--}}
-                        <div class="cityPageIcon fas fa-utensils"></div>
+{{--                        <div class="cityPageIcon fas fa-utensils"></div>--}}
+                        <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/pan.svg')}}" alt="{{__('غذای محلی')}}" style="width: 44px; margin-bottom: 2px;">
                         <div class="textCityPageIcon">{{__('غذای محلی')}}</div>
                         <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['mahaliFood']}}</div>
                     </a>
@@ -386,17 +406,19 @@
                         <div class="cityPageIcon lebas"></div>
                         <div class="textCityPageIcon">{{__('لباس محلی')}}</div>
                     </div>
-                    <a class="cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
-                        <div class="cityPageIcon boom"></div>
-                        <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
-                        <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['boomgardy']}}</div>
+
+                    <a class="cpLittleMenu" href="#">
+                        <div class="cityPageIcon ticket"></div>
+                        <div class="textCityPageIcon">{{__('بلیط')}}</div>
                     </a>
+
 {{--                    <div class="cpLittleMenu">--}}
 {{--                        <div class="cityPageIcon estelah"></div>--}}
 {{--                        <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>--}}
 {{--                    </div>--}}
                     <a href="{{route('safarnameh.list', ['type' => $kind, 'search' => $place->listName])}}" class="cpLittleMenu">
-                        <div class="cityPageIcon safarnameIcon"></div>
+{{--                        <div class="cityPageIcon safarnameIcon"></div>--}}
+                        <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/magazine.svg')}}" alt="{{__('سفر نامه')}}" style="width: 34px; margin-bottom: 9px; margin-top: 10px;">
                         <div class="textCityPageIcon">{{__('سفر نامه')}}</div>
                         <div class="textCityPageIcon" style="color: var(--koochita-blue)">{{$placeCounts['safarnameh']}}</div>
                     </a>
@@ -443,7 +465,7 @@
                         {{--<div class="textCityPageIcon" style="color: var(--koochita-blue)">1000</div>--}}
                     </a>
                     <a class="cpLittleMenu" href="#">
-                        <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/barbershop.png')}}" alt="{{__('آرایشگاه')}}">
+                        <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/hairCut.svg')}}" alt="{{__('آرایشگاه')}}" style="width: 44px; margin-bottom: 2px;">
                         <div class="textCityPageIcon">{{__('آرایشگاه')}}</div>
                         {{--<div class="textCityPageIcon" style="color: var(--koochita-blue)">1000</div>--}}
                     </a>
@@ -516,33 +538,33 @@
                             <ul>
                                 @for($i = 1; $i <= 4 && $i < count($safarnameh); $i++)
                                     <li class="widget-10104im-widgetclearfix">
-                                    <figure class="im-widget-thumb">
-                                        <a href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}" style="height: 100%;">
-                                            <img src="{{$safarnameh[$i]->pic}}" alt="{{$safarnameh[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
-                                        </a>
-                                    </figure>
-                                    <div class="im-widget-entry">
-                                        <header class="im-widget-entry-header">
-                                            <a class="im-widget-entry-title lessShowText" href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}">
-                                                {{$safarnameh[$i]->title}}
+                                        <figure class="im-widget-thumb">
+                                            <a href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}" style="height: 100%;">
+                                                <img src="{{$safarnameh[$i]->pic}}" alt="{{$safarnameh[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                             </a>
-                                        </header>
-                                        <div class="iranomag-meta clearfix marg5">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">{{$safarnameh[$i]->date}}</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <i class="fa fa-comment-o"></i>{{$safarnameh[$i]->msgs}}
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <i class="fa fa-user"></i>{{$safarnameh[$i]->username}}
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>{{$safarnameh[$i]->seen}}
+                                        </figure>
+                                        <div class="im-widget-entry">
+                                            <header class="im-widget-entry-header">
+                                                <a class="im-widget-entry-title lessShowText" href="{{$safarnameh[$i]->url}}" title="{{$safarnameh[$i]->title}}">
+                                                    {{$safarnameh[$i]->title}}
+                                                </a>
+                                            </header>
+                                            <div class="iranomag-meta clearfix marg5">
+                                                <div class="posted-on im-meta-item">
+                                                    <span class="entry-date published updated">{{$safarnameh[$i]->date}}</span>
+                                                </div>
+                                                <div class="comments-link im-meta-item">
+                                                    <i class="fa fa-comment-o"></i>{{$safarnameh[$i]->msgs}}
+                                                </div>
+                                                <div class="author vcard im-meta-item">
+                                                    <i class="fa fa-user"></i>{{$safarnameh[$i]->username}}
+                                                </div>
+                                                <div class="post-views im-meta-item">
+                                                    <i class="fa fa-eye"></i>{{$safarnameh[$i]->seen}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 @endfor
                             </ul>
                         </div>
@@ -745,20 +767,12 @@
     }
 
     function getTopPlaces(){
-
+        var kind = '{{$kind}}';
+        var id = '{{$place->id}}';
         $.ajax({
-            type: 'post',
-            url : '{{route("getCityPageTopPlace")}}',
-            data: {
-                _token: '{{csrf_token()}}',
-                id: '{{$place->id}}',
-                kind: '{{$kind}}',
-                city: '{{$locationName['cityNameUrl']}}'
-            },
-            success: function(response){
-                response = JSON.parse(response);
-                createTopPlacesDiv(response)
-            }
+            type: 'GET',
+            url : `{{route("cityPage.topPlaces")}}?id=${id}&kind=${kind}&city={{$locationName['cityNameUrl']}}`,
+            success: response => createTopPlacesDiv(response.topPlaces)
         })
     }
     function createTopPlacesDiv(_result){
