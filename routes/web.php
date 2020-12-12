@@ -854,3 +854,5 @@ Route::get('/getPages/login', 'GetPagesController@getLoginPage')->name('getPage.
 Route::get('seenLogExport/{num}', 'MainController@seenLogExport');
 
 Route::get('/getVideosFromKoochitaTv', 'AjaxController@getVideosFromKoochitaTv')->name('getVideosFromKoochitaTv');
+
+Route::post('testGitHub', 'AjaxController@testGitHub');

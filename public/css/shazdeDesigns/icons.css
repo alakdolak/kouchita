@@ -660,21 +660,31 @@
 }
 
 
+.bubble_50:after {
+    content: "\e00b\e00b\e00b\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
+}
 .bubble_40:after {
     content: "\e00d\e00b\e00b\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
-
 .bubble_30:after {
     content: "\e00d\e00d\e00b\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
-
 .bubble_20:after {
     content: "\e00d\e00d\e00d\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
-
 .bubble_10:after {
     content: "\e00d\e00d\e00d\e00d\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
+.bubble_0:after {
+    content: "\e00d\e00d\e00d\e00d\e00d" !important;
+    font-family: 'Shazde_Regular2' !important;
+}
+
 
 
 .ui_star_rating {

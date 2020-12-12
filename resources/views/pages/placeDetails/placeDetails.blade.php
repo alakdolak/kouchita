@@ -139,13 +139,26 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
         }
         .userRateToPlaceModal .header{
-
+            font-size: 18px;
+            font-weight: bold;
         }
         .userRateToPlaceModal .body{
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
         }
         .userRateToPlaceModal .footer{
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .userRateToPlaceModal .footer button{
+            width: 100%;
+            color: var(--koochita-blue);
+            border: solid 1px;
+            border-radius: 20px;
+            padding: 10px 0px;
         }
 
         @media (max-width: 767px) {
@@ -245,14 +258,16 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     </div>
 
     <div id="userRateToPlaceModal" class="userRateToPlaceModal modalBlackBack fullCenter">
-        <div class="header">
-            امتیاز شما به {{$place->name}} چیست؟
-        </div>
-        <div class="body">
-            <div class="ui_star_rating star_3"></div>
-        </div>
-        <div class="footer">
-            <button>ثبت امتیاز</button>
+        <div class="modalBody">
+            <div class="header">
+                امتیاز شما به {{$place->name}} چیست؟
+            </div>
+            <div class="body">
+                <div class="bubble_40w"></div>
+            </div>
+            <div class="footer">
+                <button>ثبت امتیاز</button>
+            </div>
         </div>
     </div>
 
@@ -1450,8 +1465,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 if(indecTop < 0){
                     if(!isOpenRateButton){
                         isOpenRateButton = true;
-                        // $('.setScoreForThisPlaceComeUp').removeClass('hidden');
-                        // setTimeout(() => $('.setScoreForThisPlaceComeUp').addClass('open'), 100);
+                        $('.setScoreForThisPlaceComeUp').removeClass('hidden');
+                        setTimeout(() => $('.setScoreForThisPlaceComeUp').addClass('open'), 100);
                     }
                     $('#comeDownHeader').addClass('show');
                 }

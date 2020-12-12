@@ -1008,4 +1008,12 @@ class AjaxController extends Controller {
         echo json_encode(['status' => 'ok', 'result' => $inPlace]);
         return ;
     }
+
+
+    public function testGitHub(Request $request)
+    {
+        $myfile = fopen("gitHubTest.txt", "w");
+        fwrite($myfile, json_encode($request));
+        fclose($myfile);
+    }
 }
