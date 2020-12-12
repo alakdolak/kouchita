@@ -51,6 +51,21 @@
         }
 
         @media (max-width: 767px) {
+            .articleDiv .widget ul li{
+                list-style: none !important;
+                margin-bottom: 10px !important;
+                position: relative !important;
+                border-bottom: solid 1px #4dc7bc52 ;
+                padding-bottom: 10px !important;
+                height: auto;
+            }
+            .articleDiv .widget ul li:last-of-type{
+                border-bottom: none !important;
+                margin-bottom: 0px !important;
+            }
+            .im-widget-thumb{
+                height: 70px;
+            }
             .articleDiv .widget ul{
                 border: solid 2px #4dc7bc52;
                 margin: 0px 5px;
