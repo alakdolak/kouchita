@@ -2,7 +2,7 @@ JalaliDate = {
     g_days_in_month: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     j_days_in_month: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
 };
-var calendarIsOpen =false
+var calendarIsOpen =false;
 
 /** Adds the number of days array to the Date object. */
 Date._MD = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
@@ -1113,7 +1113,6 @@ function nowCalendar() {
     }
     else {
         document.getElementById('calendarModal').style.display = 'flex';
-        // document.getElementById('container1').style.display = 'block';
     }
 }
 

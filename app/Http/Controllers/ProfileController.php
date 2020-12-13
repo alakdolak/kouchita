@@ -211,6 +211,11 @@ class ProfileController extends Controller {
         return ;
     }
 
+    public function getUserInfoFooter()
+    {
+
+    }
+
     public function getQuestions(Request $request)
     {
         $activityId = Activity::whereName('سوال')->first()->id;

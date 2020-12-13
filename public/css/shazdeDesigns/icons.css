@@ -3,8 +3,28 @@
 }
 
 /*....................*/
+.foodIcon:before{
+    content: '\E0A1';
+    font-family: 'Shazde_Regular2' !important;
+}
+.caltureIcon:before{
+    content: '\E0E9';
+    font-family: 'Shazde_Regular2' !important;
+}
+.manSportIcon:before{
+    content: '\E0EB';
+    font-family: 'Shazde_Regular2' !important;
+}
+.fullWalletIcon:before{
+    content: '\E0AD';
+    font-family: 'Shazde_Regular2' !important;
+}
 .emptySquer:before{
     content: '\E093';
+    font-family: 'Shazde_Regular2' !important;
+}
+.emptyRightArrowLine:before{
+    content: '\E03B';
     font-family: 'Shazde_Regular2' !important;
 }
 .emptySquerTick:before{
@@ -533,6 +553,10 @@
     content: '\E00B';
     font-family: Shazde_Regular2 !important;
 }
+.emptyStarRating::before {
+    content: '\e00d';
+    font-family: Shazde_Regular2 !important;
+}
 .fullStarRatingAfter::after {
     content: '\E00B';
     font-family: Shazde_Regular2 !important;
@@ -640,21 +664,31 @@
 }
 
 
+.bubble_50:after {
+    content: "\e00b\e00b\e00b\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
+}
 .bubble_40:after {
     content: "\e00d\e00b\e00b\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
-
 .bubble_30:after {
     content: "\e00d\e00d\e00b\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
-
 .bubble_20:after {
     content: "\e00d\e00d\e00d\e00b\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
-
 .bubble_10:after {
     content: "\e00d\e00d\e00d\e00d\e00b" !important;
+    font-family: 'Shazde_Regular2' !important;
 }
+.bubble_0:after {
+    content: "\e00d\e00d\e00d\e00d\e00d" !important;
+    font-family: 'Shazde_Regular2' !important;
+}
+
 
 
 .ui_star_rating {

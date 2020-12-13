@@ -1,7 +1,10 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/calendar.css?v=1')}}' data-rup='long_lived_global_legacy'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/calendar.css?v=1')}}'/>
+<script src= {{URL::asset("js/calendar.js") }}></script>
+<script src= {{URL::asset("js/jalali.js") }}></script>
+<script src= {{URL::asset("js/component/myCalendar.js") }}></script>
 
-<div id="calendarModal" class="modalBack calendarModal">
-    <div id="container1" class="calenderBase">
+<div id="myCalendarHtml">
+    <div id="container1" class="calenderBase" style="width: 100%">
         <div id="calendarJalali">
             <div id="calendarJalali1">
                 <div class="calendar">
@@ -13,15 +16,7 @@
                     </header>
                     <table>
                         <thead>
-                        <tr>
-                            <td>شنبه</td>
-                            <td>یک شنبه</td>
-                            <td>دو شنبه</td>
-                            <td>سه شنبه</td>
-                            <td>چهار شنبه</td>
-                            <td>پنج شنبه</td>
-                            <td>جمعه</td>
-                        </tr>
+                            <tr class="myCalendarJalaliHeader"></tr>
                         </thead>
                         <tbody>
                         <tr id="row_go_0"></tr>
@@ -66,7 +61,6 @@
                 </div>
             </div>
         </div>
-
         <div id="calendarGregorian">
             <div id="calendarGregorian1">
                 <div class="calendarGre">
@@ -131,7 +125,6 @@
                 </div>
             </div>
         </div>
-
         <div id="JalaliButton" class="bottomBtn">
             <button type="button" class="cancelBtn" onclick="closeCalender()">انصراف</button>
             <button type="button" class="differentCalendarBtn" onclick="changeDateKind(1)">Gregorian</button>
@@ -144,9 +137,8 @@
 </div>
 
 <script>
-
+    var myCalendarDateName = ['شنبه', 'یک شنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه'];
     var calendarIsOpen = false;
-
     var date = new Date();
     var numClick = 2;
     var checkOpen = true;
@@ -154,7 +146,6 @@
     var numOfCalendar = 1;
     var nowYear = date.getJalaliFullYear();
     var nowMonth = date.getJalaliMonth();
-
     var nowDate = date.getJalaliDate();
     var backYear = nowYear;
     var backMonth = parseInt(nowMonth) + 1;
@@ -191,25 +182,23 @@
         if (num == 1) {
             numClick = 0;
             numOfCalendar = 1;
-            document.getElementById('calendarJalali2').style.display = 'none';
-            document.getElementById('calendarGregorian2').style.display = 'none';
+            $('#calendarJalali2').hide();
+            $('#calendarGregorian2').hide();
+            $('#calendarJalali1').css('width', '100%');
+            $('#calendarGregorian1').css('width', '100%');
 
-            document.getElementById('calendarJalali1').style.width = '100%';
-            document.getElementById('calendarGregorian1').style.width = '100%';
-            document.getElementById('container1').style.width = '35%';
-
-            document.getElementById('backDate').value = '';
+            // document.getElementById('backDate').value = '';
             selectDays[1][1] = null;
             checkOpen = true;
         }
         else {
             numOfCalendar = 2;
-            document.getElementById('calendarJalali2').style.display = 'inline-block';
-            document.getElementById('calendarGregorian2').style.display = 'inline-block';
+            $('#calendarJalali2').css('display', 'inline-block');
+            $('#calendarGregorian2').css('display', 'inline-block');
+            $('#calendarJalali1').css('width', '49%');
+            $('#calendarGregorian1').css('width', '49%');
 
-            document.getElementById('calendarJalali1').style.width = '49%';
-            document.getElementById('calendarGregorian1').style.width = '49%';
-            document.getElementById('container1').style.width = '65%';
+            // document.getElementById('container1').style.width = '65%';
             checkOpen = true;
 
         }
@@ -230,5 +219,17 @@
             minDate: from,
             dateFormat: "yy/mm/dd"
         });
+    }
+
+    var cal0;
+    var cal1;
+    function initMyCalendar(_id, _dateName = myCalendarDateName){
+        // $('#myCalendarJalaliDateNameRow').html(text);
+        nowCalendar();
+
+        // $(`#${_id}`).myCalendar({
+        //     jDateName: _dateName,
+        //     show: true,
+        // });
     }
 </script>

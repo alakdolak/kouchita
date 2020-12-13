@@ -332,17 +332,17 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'shareData']), function (){
+Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
 
-    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
+    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details')->middleware('shareData');
 
     Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
-    Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage');
+    Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage')->middleware('shareData');
 
     Route::get('getCityPageReview', 'CityController@getCityPageReview')->name('getCityPageReview');
 
-    Route::post('getCityPageTopPlace', 'CityController@getCityPageTopPlace')->name('getCityPageTopPlace');
+    Route::get('getCityPageTopPlace', 'CityController@getCityPageTopPlace')->name('cityPage.topPlaces');
 
     Route::post('getCityAllPlaces', 'CityController@getCityAllPlaces')->name('getCityAllPlaces');
 
@@ -507,6 +507,8 @@ Route::group(['middleware' => ['throttle:30']], function(){
     Route::post('/profile/getQuestions', 'ProfileController@getQuestions')->name('profile.getQuestions');
 
     Route::group(array('middleware' => ['throttle:60', 'auth']), function () {
+
+        Route::get('profile/getUserInfoFooter', 'ProfileController@getUserInfoFooter')->name('profile.getUserInfoFooter');
 
         Route::get('profile/getBookMarks', 'ProfileController@getBookMarks')->name('profile.getBookMarks');
 

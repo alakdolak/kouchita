@@ -5,17 +5,21 @@
         <div class="row">
             <div class="col-xs-6" style="float: right">
                 <div class="titleSection">
-                    <span class="titleSectionSpan">
-                        نوع غذا
-                    </span>
+                    <div class="titlesPlaceDetail">
+                        <span class="titleSectionSpan">
+                            نوع غذا
+                        </span>
+                    </div>
                 </div>
                 <div class="contentSection">{{$place->kindName}}</div>
             </div>
             <div class="col-xs-6" style="float: right">
                 <div class="titleSection">
-                    <span class="titleSectionSpan">
-                        نوع سرو
-                    </span>
+                    <div class="titlesPlaceDetail">
+                        <span class="titleSectionSpan">
+                            نوع سرو
+                        </span>
+                    </div>
                 </div>
                 <div class="contentSection">{{$place->hotOrCold}}</div>
             </div>
@@ -24,9 +28,11 @@
 
 
         <div class="titleSection">
-            <span class="titleSectionSpan">
-                مناسب برای
-            </span>
+            <div class="titlesPlaceDetail">
+                <span class="titleSectionSpan">
+                    مناسب برای
+                </span>
+            </div>
         </div>
         <div class="contentSection col-xs-12">افراد گیاه خوار
             <span style=" color: {{$place->vegetarian == 1 ? 'green' : 'red'}};">
@@ -45,9 +51,11 @@
         </div>
 
         <div class="titleSection">
-            <span class="titleSectionSpan">
-                کالری
-            </span>
+            <div class="titlesPlaceDetail">
+                <span class="titleSectionSpan">
+                    کالری
+                </span>
+            </div>
         </div>
         <div class="contentSection col-xs-12">
             <span style="float: right"> : {{$place->name}} </span>

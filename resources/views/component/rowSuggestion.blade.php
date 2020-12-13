@@ -1,8 +1,9 @@
 
-<div id="topPlacesSection" class="mainSuggestionMainDiv cpBorderBottom ng-scope" style="display: none;">
+<div id="topPlacesSection22" class="mainSuggestionMainDiv cpBorderBottom ng-scope" style="display: none;">
     <div id="##id##" class="topPlacesDivInCity">
         <div class="topPlacesDivInCityHeader">
-            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogoRowSuggestion" alt="کوچیتا">
+            <img class="nagLogoRowSuggestion hideOnPhone" src="{{URL::asset('images/icons/iconneg.svg')}}" alt="koochita" loading="lazy">
+            <img class="nagLogoRowSuggestion hideOnScreen" src="{{URL::asset('images/icons/iconnegBlack.svg')}}" alt="koochita" loading="lazy">
             <a href="##url##">
                 <div class="shelf_title_container h3">
                     <h3>##name##</h3>
@@ -21,20 +22,11 @@
 <script>
     let topPlacesSample = 0;
     let rowSectionInfos;
-    {{--rowSectionInfos = [
-        {
-            name: headerTxt,
-            id: rowId,
-            url: headerLink
-        }
-    ];--}}
 
     createSuggestionPackPlaceHolderClassName('thisfirsPlaceHolder');
 
-    topPlacesSample = $('#topPlacesSection').html();
-    $('#topPlacesSection').html('');
-    $('#topPlacesSection').show();
-
+    topPlacesSample = $('#topPlacesSection22').html();
+    $('#topPlacesSection22').html('');
 
     function initPlaceRowSection(_headers){
         rowSectionInfos = _headers;
@@ -46,12 +38,12 @@
             let text = topPlacesSample;
             let fk = Object.keys(item);
             for (let x of fk) {
-                let t = '##' + x + '##';
-                let re = new RegExp(t, "g");
+                let re = new RegExp(`##${x}##`, "g");
                 text = text.replace(re, item[x]);
             }
-            $('#topPlacesSection').append(text);
+            $('#topPlacesSection22').append(text);
         });
+        $('#topPlacesSection22').show();
     }
 
 </script>

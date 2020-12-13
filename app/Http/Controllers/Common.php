@@ -730,8 +730,8 @@ function compressImage($source, $destination, $quality){
 
 function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
-    $sitePics = array();
-    $userVideo = [];
+    $sitePics = [];
+    $allPics = [];
 
     if(auth()->check())
         $user = auth()->user();
@@ -749,7 +749,6 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         $item->time = getDifferenceTimeString($item->created_at);
         $item->id = 'review_' . $item->id;
     }
-    $userPhotosJSON = json_encode($userPhotos);
 
     $userVideo = DB::select('SELECT pic.*, users.username, users.id as userId FROM reviewPics AS pic, log, users WHERE pic.isVideo = 1 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
     foreach ($userVideo as $item){
@@ -768,7 +767,6 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         $item->time = getDifferenceTimeString($item->created_at);
         $item->id = 'review_' . $item->id;
     }
-    $userVideoJSON = json_encode($userVideo);
 
     $koochitaPic = URL::asset('images/icons/KOFAV0.svg');
     if(is_file(__DIR__ .'/../../../../assets/_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber)) {
@@ -808,7 +806,6 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
             array_push($sitePics, $s);
         }
     }
-    $sitePicsJSON = json_encode($sitePics);
 
     if(\auth()->check())
         $photographerPic = DB::select('SELECT photo.* FROM photographersPics AS photo WHERE photo.kindPlaceId = ' . $kindPlaceId . ' AND photo.placeId  = ' . $placeId . ' AND ((photo.userId = ' . $user->id . ') OR ( photo.status = 1)) ORDER BY created_at');
@@ -840,7 +837,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         }
     }
 
-    $photographerPics = array();
+    $photographerPics = [];
     if(count($photographerPic) < 5)
         $photographerPics = $sitePics;
 
@@ -869,11 +866,11 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
             ];
 
             array_unshift($photographerPics, $s);
+            array_unshift($allPics, $s);
         }
     }
-    $photographerPicsJSON = json_encode($photographerPics);
 
-    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON, $userVideo, $userVideoJSON];
+    return ['sitePics' => $sitePics, 'photographerPics' => $photographerPics, 'userPhotos' => $userPhotos, 'userVideo' => $userVideo, 'allPics' => $allPics];
 }
 
 function deleteReviewPic(){

@@ -2147,32 +2147,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 12px;
 }
 
-.commentRatingsDetailsBtn {
-    display: inline-block;
-    width: 35%;
-    float: left;
-    text-align: left;
-    padding-left: 30px;
-    font-size: 13px;
-    position: relative;
-    cursor: pointer;
-}
-
-.commentRatingsDetailsBtnIcon {
-    width: auto;
-    display: inline-block;
-    pointer-events: none;
-    position: absolute;
-    left: 10px;
-    top: 4px;
-}
-
-.commentRatingsDetailsBtnIcon > i {
-    float: left;
-    color: #666666;
-    font-size: 10px;
-}
-
 .commentRatingsDetailsBox {
     background: #e5e5e5;
     padding: 15px 9px;
@@ -2422,19 +2396,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     right: 9px;
 }
 
-.newCommentPlaceMainDiv, .answerPlaceMainDiv, .newAnswerPlaceMainDiv {
-    margin: 10px 0 5px;
-    display: inline-block;
-    width: 100%;
-}
 .ansTextAreaReview{
     width: calc(100% - 55px) !important;
     margin-right: 50px !important;
-}
-
-.newCommentPlaceMainDiv button, .replyToCommentMainDiv button {
-    float: left;
-    margin-bottom: 8px;
 }
 
 .newCommentWriterProfilePic > img {
@@ -2443,30 +2407,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-radius: 50%;
 }
 
-.replyToCommentMainDiv {
-    display: inline-block;
-    width: 99%;
-    margin: 30px 0 15px;
-}
-
 .newCommentWriterProfilePic, .answerWriterProfilePic, .newAnswerWriterProfilePic {
     display: inline-block;
     width: 45px;
     height: 45px;
     float: right;
     margin-left: 5px;
-}
-
-.newCommentPlaceMainDiv .inputBox, .newAnswerPlaceMainDiv .inputBox {
-    width: calc(100% - 60px);
-    float: right;
-    position: relative;
-}
-
-.replyToCommentMainDiv .inputBox {
-    width: calc(100% - 50px);
-    float: right;
-    position: relative;
 }
 
 .newCommentPlaceMainDiv .emojionearea .emojionearea-editor{
@@ -2501,14 +2447,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     right: 0 !important;
 }
 
-.newCommentPlaceMainDiv .inputBoxInput, .newAnswerPlaceMainDiv .inputBoxInput {
-    text-align: right;
-    font-size: 12px;
-    border: none;
-    /*height: 39px;*/
-    background: inherit;
-    position: unset !important;
-}
 
 .replyToCommentMainDiv .inputBoxInput {
     text-align: right;
@@ -3944,7 +3882,7 @@ td > div {
     position: fixed;
     top: 0px;
     width: 100vw;
-    z-index: 9;
+    z-index: 1000;
     box-shadow: 0px 7px 20px 0px #cccccc;
 }
 
@@ -4156,6 +4094,7 @@ width: 14% !important;
     line-height: 10px;
     right: auto;
     top: auto;
+    margin-left: 10px;
 }
 .commentOptionsText {
     margin-right: 10px;
@@ -4202,6 +4141,12 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 .introductionShowMoreLess{
     position: relative;
     padding: 0px;
+}
+
+.topHeaderShowDown{
+    position: fixed;
+    top: -200px;
+    display: none;
 }
 
 /*responsive for tablets*/
@@ -4598,13 +4543,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 }
 
 @media only screen and (max-width: 767px) {
-
-    .newCommentPlaceMainDiv, .answerPlaceMainDiv, .newAnswerPlaceMainDiv{
-        background-color: #f2f2f2;
-        padding: 5px 5px 0px 0px;
-        border-radius: 5px;
-    }
-
     #helpBtnMainDiv {
         top: -105px;
     }
@@ -4751,10 +4689,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
         float: left;
     }
 
-    .replyToCommentMainDiv {
-        width: 99%;
-        margin: 40px 0 0px;
-    }
 
     .navbar-collapse.collapse {
         display: block!important;
@@ -4768,16 +4702,280 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     .navbar-nav>li {
         float: left;
     }
+
+    .commentOptionsBoxes label{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: SPACE-BETWEEN;
+        padding: 0px 15px;
+    }
+
+    .commentOptionsBoxes{
+        width: 48%;
+        display: inline-block;
+        float: right;
+        direction: rtl;
+        margin: 0.5%;
+        padding: 5px 10px;
+        font-size: 13px;
+        font-weight: 600;
+        position: relative;
+        cursor: pointer;
+        background: white;
+        border: solid 1px #333;
+        border-radius: 0px;
+    }
+    .postMainDiv{
+        text-align: right;
+        padding: 10px 0px;
+        background: white;
+        border-top: solid 1px #4dc7bc52;
+        border-bottom: solid 1px #4dc7bc52;
+    }
+    .mobileIntroductionMainDiv.tabContentMainWrap{
+        padding-top: 0px;
+    }
+    .tabLink{
+        width: 30%;
+        color: #666;
+        font-size: 23px;
+        font-weight: 700;
+        padding: 30px 0;
+        outline: none;
+        background: white;
+        border: solid 1px #333;
+        border-radius: 10px;
+        margin: 0px 4px;
+    }
+    .tabLink:nth-child(2){
+        width: 33%;
+    }
+    .tabLinkMainDiv{
+        background: white;
+        display: flex;
+        justify-content: space-around;
+    }
+    #introductionText{
+        color: #000000c9;
+    }
+    .titleSection{
+        border-color: #4dc7bc52;
+    }
+    .titleSectionSpan{
+        font-weight: normal;
+    }
+    .contentSection{
+        color: #000000c9;
+    }
+
+    .topAndBottomBorderAndMargin{
+        background: white;
+        border-top: solid 1px #4dc7bc52;
+        border-bottom: solid 1px #4dc7bc52;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+    }
+    .ratingBoxDetails{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .greyBackground{
+        top: 0px;
+    }
+    .mainSliderNavBut{
+        top: 150px !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .mainSliderPlaceDetails{
+        height: 225px !important;
+        margin-bottom: 0 !important;
+        border: none;
+    }
+    .mainSliderPlaceDetails .primaryWrap{
+        margin-bottom: 0px !important;
+    }
+    .allPictureOnMainSlider{
+        position: absolute;
+        bottom: 0px;
+        z-index: 9;
+        color: white;
+        font-size: 30px;
+        margin-left: 15px;
+    }
+    .ppr_rup.ppr_priv_location_detail_header{
+        padding-left: 40px !important;
+        margin-bottom: 0px !important;
+    }
+    .placeDetailAddressHeader{
+        white-space: normal;
+    }
+
+    .commentOptionsText{
+        margin: 0px;
+        font-size: 11px;
+    }
+    .commentMoreSettingBar{
+        margin-top: 0;
+    }
+    .hSectionInPlaceDetail{
+        width: 100%;
+        padding: 10px 0px;
+        margin: 3px 0px;
+        direction: rtl;
+        display: flex;
+        justify-content: space-around;
+        border-bottom: solid 2px #bfbfbf3d;
+        background: white;
+        margin-top: 0;
+        padding-bottom: 13px;
+        margin-bottom: 0px;
+    }
+    .hSectionInPlaceDetail .tab{
+        font-size: 13px;
+        color: black;
+        font-weight: bold;
+    }
+
+    .topHeaderPlaceDetailMobileButtons{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    .circlePlaceDetailButtons{
+        font-size: 11px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: white;
+        color: #333;
+        box-shadow: 2px 2px 4px 0px #333;
+        margin: 5px 0px;
+        margin-left: 10px;
+        position: relative;
+    }
+    .circlePlaceDetailButtons .icon{
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .circlePlaceDetailButtons .name{
+        font-size: 8px;
+    }
+    .prw_rup.prw_common_mercury_photo_carousel{
+        background: white;
+        border: none;
+    }
+    .atf_header_wrapper{
+        min-height: 160px;
+        border-bottom: solid 1px #4dc7bc52;
+        padding-top: 13px;
+    }
+    .showNewTextReviewArea::placeholder{
+        font-weight: normal;
+        font-size: 13px;
+        padding-top: 8px;
+    }
+    .titlesPlaceDetail{
+        padding: 10px;
+        color: var(--koochita-blue);
+        width: 100%;
+        margin-bottom: 15px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        border: none;
+        position: absolute;
+        bottom: -15px;
+        border-color: #4dc7bc52;
+    }
+    .titlesPlaceDetail .block_title{
+        padding: 0px 10px;
+        font-weight: normal;
+    }
+    .block_header{
+        border-color: #4dc7bc52 !important;
+    }
+    #generalDescriptionMobile .block_title{
+        font-weight: normal;
+    }
+    #clientConnectionsLines{
+        display: none !important;
+    }
+    .seperateRates{
+        background: white;
+    }
+    .mainMap{
+        height: 300px;
+    }
+    .mainMap .leaflet-control-zoom{
+        display: none;
+    }
+    .topMainMapDiv{
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic{
+        margin-bottom: 0px;
+    }
+    .topHeaderShowDown {
+        width: 100%;
+        background: white;
+        top: -300px;
+        display: flex;
+        z-index: 1009;
+        border-bottom: solid 1px #4dc7bc52;
+        box-shadow: 0px 3px 4px 2px #0000005e;
+        flex-direction: column;
+        transition: .3s;
+    }
+    .topHeaderShowDown.show{
+        top: 0px;
+    }
+    .topHeaderShowDown .inOneRow{
+        display: flex;
+        direction: rtl;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 5px;
+        padding-right: 10px;
+    }
+    .topHeaderShowDown .name{
+        text-align: right;
+        font-weight: bold;
+        font-size: 18px;
+        color: var(--koochita-light-green);
+    }
+    .topHeaderShowDown .buttonsH{
+        display: flex;
+    }
+    .topHeaderShowDown .tabs{
+        display: flex;
+        justify-content: space-around;
+        direction: rtl;
+        color: black;
+        margin-top: 14px;
+    }
+    .topHeaderShowDown .tabs .tabLinkMainWrap{
+        color: black;
+    }
 }
 
 @media only screen and (max-width: 630px) {
 
     .commentFeedbackChoices{
         padding: 5px 0px 0px 0px;
-    }
-    /*bottomBarHeader*/
-    .replyToCommentMainDiv {
-        width: 100%;
     }
 
     #helpBtnMainDiv {
@@ -4836,24 +5034,19 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
         float: right;
     }
 
-    /*new post*/
-    .postMainDiv {
-        margin-top: 135px;
-    }
-
     .addParticipantInputBoxPostModal {
         width: 95%;
     }
 
-    .postLink .commentOptionsBoxes:not(:last-child) {
-        width: 48%;
-        display: flex;
-        justify-content: center;
-    }
+    /*.postLink .commentOptionsBoxes:not(:last-child) {*/
+    /*    width: 48%;*/
+    /*    display: flex;*/
+    /*    justify-content: center;*/
+    /*}*/
 
-    .modal-details-content .commentOptionsBoxes {
-        width: 44%;
-    }
+    /*.modal-details-content .commentOptionsBoxes {*/
+    /*    width: 44%;*/
+    /*}*/
 
     .commentQuestionsRatingsBox > div > b, .visitKindCommentModalHeader, .visitTimeCommentModalHeader, .addOriginCity {
         font-size: 13px;
@@ -4934,10 +5127,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
     }
-    .newCommentPlaceMainDiv .inputBox {
-        width: calc(100% - 50px);
-    }
-
     .commentRatingsDetailsBox > div > b {
         font-size: 13px;
         line-height: 2.5;
@@ -4984,9 +5173,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 
 @media only screen and (max-width: 480px) {
     .commentRatingHeader{
-        width: 100%;
-    }
-    .commentRatingsDetailsBtn{
         width: 100%;
     }
 
@@ -5051,15 +5237,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     .mobileIntroductionMainDiv #generalDescriptionMobile .block_title,
     .mobileIntroductionMainDiv #commentsAndAddressMobile .block_title {
         top: 3px;
-    }
-
-    .commentRatingsDetailsBtn {
-        padding-left: 15px;
-        font-size: 12px;
-    }
-
-    .commentRatingsDetailsBtnIcon {
-        left: 0;
     }
 
     .filterBarDivs {
@@ -5174,9 +5351,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 
 @media (max-width: 400px) {
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
-        font-size: 10px;
-    }
-    .commentRatingHeader,.commentRatingsDetailsBtn{
         font-size: 10px;
     }
     .traditionalFoodDescription > div {

@@ -550,7 +550,9 @@
                     </div>
 
                     <div id="calendarRowPage" class="lp_others_content specPages hidden" style="position: relative;">
-                        <input type="text" id="footerSpecialDayCalendar">
+                        <div id="showMyCalTourism"></div>
+                        <div id="showMyCalTourism1"></div>
+                        @include('layouts.calendar')
                     </div>
 
                     <div id="translateRowsPage" class="lp_others_content specPages hidden" style="position: relative;"></div>
@@ -840,12 +842,6 @@
     @endif
 </div>
 
-<link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-<script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
-
-{{--<link rel="stylesheet" href="{{URL::asset('packages/datePicker/jquery.datetimepicker.css')}}">--}}
-{{--<script async src="{{URL::asset('packages/datePicker/jquery.datetimepicker.full.min.js')}}"></script>--}}
-
 <script>
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
     var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
@@ -884,26 +880,18 @@
 
         $('.specTabsFot').removeClass('lp_selectedMenu');
         $(_element).addClass('lp_selectedMenu');
-
-        // if(_id = "calendarRowPage")
-        //     $('#footerSpecialDayCalendar').datetimepicker('show');
-        // else
-        //     $('#footerSpecialDayCalendar').datetimepicker('hide');
     }
 
-
     $(window).ready(() => {
-        // jQuery('#footerSpecialDayCalendar').datetimepicker({
-        //     closeOnDateSelect:false,
-        //     opened :true,
-        // });
-        // $.datetimepicker.setLocale('fa');
-
-
-        $("#footerSpecialDayCalendar").datepicker({
-            numberOfMonths: 1,
-            showButtonPanel: true,
-            dateFormat: "yy/mm/dd"
-        });
+        initMyCalendar('showMyCalTourism', [
+            'ش',
+            'ی',
+            'د',
+            'س',
+            'چ',
+            'پ',
+            'ج',
+        ]);
     })
+
 </script>

@@ -54,10 +54,10 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
         var reviewUploadVideo = '{{route('reviewUploadVideo')}}';
-        var bookMarkDir = '{{route('setBookMark')}}';
-        var getPlaceTrips = '{{route('placeTrips')}}';
-        var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
-        var soon = '{{route('soon')}}';
+{{--        var bookMarkDir = '{{route('setBookMark')}}';--}}
+{{--        var getPlaceTrips = '{{route('placeTrips')}}';--}}
+        {{--var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';--}}
+        {{--var soon = '{{route('soon')}}';--}}
         var placeMode = '{{$placeMode}}';
         var photographerPics = {!! json_encode($photographerPics) !!};
         var sitePics = {!! json_encode($sitePics) !!};
@@ -91,21 +91,226 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     <script defer src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
     <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
 
+    <style>
+        DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .photos{
+            overflow: unset;
+        }
+        .sharesButtons{
+             background: white;
+             position: absolute;
+             top: 50%;
+             z-index: 9;
+             right: 0px;
+             max-height: 0px;
+             width: 100%;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             box-shadow: 2px 6px 4px 0px #333;
+             border-radius: 0px 0px 30px 30px;
+             -webkit-transition: max-height 0.8s;
+             -moz-transition: max-height 0.8s;
+             transition: max-height 0.8s;
+             padding: 0px;
+         }
+        .sharesButtons.open{
+            max-height: 300px;
+            padding-top: 20px;
+        }
+        .sharesButtons .share{
+            z-index: 11;
+            background: white;
+            box-shadow: 2px 2px 4px 0px #333;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-bottom: 7px;
+            overflow: hidden;
+        }
+        .sharesButtons .share img{
+            width: 100%;
+        }
+
+        .userRateToPlaceModal{
+
+        }
+        .userRateToPlaceModal .header{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .userRateToPlaceModal .body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            font-size: 46px;
+            color: var(--koochita-light-green);
+        }
+        .userRateToPlaceModal .footer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .userRateToPlaceModal .footer button{
+            width: 100%;
+            color: var(--koochita-blue);
+            border: solid 1px;
+            border-radius: 20px;
+            padding: 10px 0px;
+        }
+
+        @media (max-width: 767px) {
+            .setScoreForThisPlaceComeUp{
+                position: fixed;
+                left: 10px;
+                background: var(--koochita-light-green);
+                z-index: 1000;
+                color: white;
+                padding: 10px;
+                border-radius: 20px;
+                transition: .3s;
+                bottom: 0px;
+                animation: glowRatingButton 2s infinite;
+            }
+            .setScoreForThisPlaceComeUp.open{
+                bottom: 70px;
+            }
+        }
+
+        @keyframes glowRatingButton {
+            0% {
+                background: var(--koochita-blue);
+            }
+            50%{
+                background: #24c2ff;
+            }
+            100%{
+                background: var(--koochita-blue);
+            }
+
+        }
+    </style>
+
 @stop
 
 
 @section('main')
     @include('general.schema')
 
-    @include('general.secondHeader')
-
+    <div class="hideOnPhone">
+        @include('general.secondHeader')
+    </div>
     @include('component.mapMenu')
 
     @include('component.smallShowReview')
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative" style="margin-bottom: 10px">
+    <div id="comeDownHeader" class="topHeaderShowDown hideOnScreen">
+        <div class="inOneRow">
+            <div class="name">{{$place->name}}</div>
+            <div class="buttonsH">
+            <div class="circlePlaceDetailButtons" onclick="addPlaceToBookMark()">
+                <div class="icon saveAsBookmarkIcon  {{auth()->check() && $bookMark ? "BookMarkIcon" : "BookMarkIconEmpty"}}"></div>
+            </div>
+            <div class="circlePlaceDetailButtons" onclick="$(this).find('.sharesButtons').toggleClass('open')">
+                <div class="icon" style="z-index: 10;">
+                    <img src="{{URL::asset('images/icons/shareIcon.svg')}}" style="margin-right: 3px;width: 18px;">
+                </div>
+                <div class="sharesButtons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}">
+                    </a>
+                    <a href="https://twitter.com/home?status={{Request::url()}}" target="_blank" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}">
+                    </a>
+                    <a href="#" class="share whatsappLink">
+                        <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}">
+                    </a>
+                    <a href="https://telegram.me/share/url?url={{Request::url()}}" target="_blank" class="share">
+                        <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}">
+                    </a>
+                    <span class="share" style="color: black;" onclick="copyLinkAddress()"> کپی </span>
+                </div>
+            </div>
+            <div class="circlePlaceDetailButtons" onclick="addThisPlaceToTrip()" >
+                <div class="icon MyTripsIcon"></div>
+            </div>
+        </div>
+        </div>
+        <div class="tabs">
+            @if($placeMode == 'mahaliFood')
+                <div class="tabLinkMainWrap generalDescBtnTopBar" onclick="colorThisNav(this, 'generalDescLinkRel')">دستور پخت</div>
+            @else
+                <div class="tabLinkMainWrap generalDescBtnTopBar" onclick="colorThisNav(this, 'generalDescLinkRel')">معرفی کلی</div>
+                <div class="tabLinkMainWrap mapBtnTopBar" onclick="colorThisNav(this, 'goToMapSection')">نقشه</div>
+            @endif
+            <div class="tabLinkMainWrap postsBtnTopBar" onclick="colorThisNav(this, 'mainDivPlacePost')">نظرات</div>
+            <div class="tabLinkMainWrap QAndAsBtnTopBar" onclick="colorThisNav(this,'QAndAMainDivId')">سوالات</div>
+            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
+                <div class="tabLinkMainWrap similarLocationsBtnTopBar" onclick="colorThisNav(this,'topPlacesSection')">مکان های مشابه</div>
+            @endif
+        </div>
+    </div>
 
-        <div style="background: white; width: 100%; padding-top: 15px;">
+    <div class="setScoreForThisPlaceComeUp hidden hideOnScreen" onclick="openMyModal('userRateToPlaceModal')">
+        به  {{$place->name}} امتیاز دهید
+    </div>
+
+    <div id="userRateToPlaceModal" class="userRateToPlaceModal modalBlackBack fullCenter">
+        <div class="modalBody">
+            <div class="header">
+                امتیاز شما به {{$place->name}} چیست؟
+            </div>
+            <div class="body">
+                <div class="emptyStarRating ratingStar1" data-star="1" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar2" data-star="2" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar3" data-star="3" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar4" data-star="4" data-selected="0" onclick="ratingToPlace(this)"></div>
+                <div class="emptyStarRating ratingStar5" data-star="5" data-selected="0" onclick="ratingToPlace(this)"></div>
+            </div>
+            <div class="footer">
+                <button onclick="submitRating()">ثبت امتیاز</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function ratingToPlace(_element){
+            var clickStar = $(_element).attr('data-star');
+            for(var i = 1; i <= 5; i++){
+                if(i <= clickStar)
+                    $(`.ratingStar${i}`).addClass('fullStarRating').removeClass('emptyStarRating').attr('data-selected', 1);
+                else
+                    $(`.ratingStar${i}`).addClass('emptyStarRating').removeClass('fullStarRating').attr('data-selected', 0);
+            }
+        }
+
+        function submitRating(){
+            var lastSelected = 0;
+            for(i = 5; i > 0; i--){
+                if($(`.ratingStar${i}`).attr('data-selected') == 1){
+                    lastSelected = $(`.ratingStar${i}`).attr('data-star');
+                    break;
+                }
+            }
+
+            if(lastSelected == 0)
+                alert('برای ثبت امتیاز باید روی ستاره مورد نظر کلیک کنید');
+            else{
+                // openLoading();
+                {{--$.ajax({--}}
+                {{--    type: 'POST',--}}
+                {{--    url: '{{route("")}}'--}}
+                {{--})--}}
+            }
+        }
+    </script>
+
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
+
+        <div class="hideOnPhone" style="background: white; width: 100%; padding-top: 15px;">
             <div class="container">
                 <div class="topPageAd">
                     <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
@@ -113,7 +318,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             </div>
         </div>
 
-        @include('layouts.placeMainBodyHeader')
+        <div class="hideOnPhone">
+            @include('layouts.placeMainBodyHeader')
+        </div>
 
         <div class="atf_meta_and_photos_wrapper position-relative">
             <div class="greyBackground"></div>
@@ -130,7 +337,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 @endif
 
                 <div id="bestPrice" class="meta koochitaTvSection position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
-                    <div id="targetHelp_9" class="targets  float-left">
+                    <div id="targetHelp_9" class="targets float-left">
                         <div id="bestPriceInnerDiv" class="tvSection">
                             <a href="https://koochitatv.com" class="tvLogoDiv" target="_blank">
                                 <img src="{{URL::asset('images/mainPics/vodLobo.webp')}}" style="max-height: 100%; max-width: 100%;">
@@ -183,9 +390,8 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     </div>
                     <div class="clear-both"></div>
                     <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                        <span onclick="bookMark();"
-                              class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
-                            <div id="bookMarkIcon" class="saveAsBookmarkIcon {{auth()->check() && ($bookMark) ? "castle-fill" : "castles"}}"></div>
+                        <span onclick="addPlaceToBookMark()" class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                            <div id="bookMarkIcon" class="saveAsBookmarkIcon {{auth()->check() && $bookMark ? "BookMarkIcon" : "BookMarkIconEmpty"}}"></div>
                             <div class="saveAsBookmarkLabel">
                                 {{__('ذخیره این صفحه')}}
                             </div>
@@ -203,8 +409,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     @include('layouts.shareBox')
 
                 </div>
+
                 <div class="prw_rup prw_common_location_photos photos position-relative">
-                    <div id="targetHelp_10" class="targets">
+                    <div id="targetHelp_10" class="targets mainSliderPlaceDetails">
                         <div class="inner">
                             <div class="primaryWrap">
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
@@ -213,43 +420,40 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                             <div id="photographerAlbum" {{count($photographerPics) > 0 ? "onclick=showPhotoAlbum('photographer')" : ''}}>
                                                 <div id="mainSlider" class="swiper-container">
                                                     <div id="mainSliderWrapper" class="swiper-wrapper">
-
-                                                        @for($i = 0; $i < count($photographerPics); $i++)
+                                                        @foreach($photographerPics as $pics)
                                                             <div class="swiper-slide" style="overflow: hidden">
                                                                 <img class="eachPicOfSlider resizeImgClass"
-                                                                     src="{{$photographerPics[$i]['s']}}"
-                                                                     alt="{{$photographerPics[$i]['alt']}}"
-                                                                     style="width: 100%;"  onload="fitThisImg(this)">
-                                                                <div class="see_all_count_wrap">
+                                                                     src="{{$pics['s']}}"
+                                                                     alt="{{$pics['alt']}}"
+                                                                     style="width: 100%;"
+                                                                     onload="fitThisImg(this)">
+                                                                <div class="see_all_count_wrap hideOnPhone">
                                                                     <span class="see_all_count">
-                                                                        <div class="circleBase type2"
-                                                                             id="photographerIdPic"
-                                                                             style="background-color: var(--koochita-light-green);">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: var(--koochita-light-green);">
+                                                                            <img src="{{$pics['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
                                                                         <div class="display-inline-block mg-rt-10 mg-tp-2">
                                                                             <span class="display-block font-size-12">عکس از</span>
-                                                                            <span class="display-block">{{$photographerPics[$i]['name']}}</span>
+                                                                            <span class="display-block">{{$pics['name']}}</span>
                                                                         </div>
                                                                     </span>
                                                                 </div>
 
                                                             </div>
-                                                        @endfor
-
+                                                        @endforeach
                                                     </div>
                                                 </div>
+                                                <div id="allPlacePicturesCount" class="hideOnScreen fullCameraIcon allPictureOnMainSlider"> {{count($photographerPics)}} </div>
                                             </div>
-                                            <a id="photographersLink" onclick="isPhotographer()">
-                                                عکاس هستید؟ کلیک کنید
-                                            </a>
+                                            <a id="photographersLink" class="hideOnPhone" onclick="isPhotographer()"> عکاس هستید؟ کلیک کنید </a>
                                         </div>
                                         <div class="left-nav left-nav-header swiper-button-next mainSliderNavBut"></div>
                                         <div class="right-nav right-nav-header swiper-button-prev mainSliderNavBut"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="secondaryWrap">
+
+                            <div class="secondaryWrap hideOnPhone">
                                 <div class="tileWrap" onclick="showPhotoAlbum('sitePics')">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
@@ -315,12 +519,29 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <a class="postLink" href="#reviewMainDivDetails">
+                    <div class="hSectionInPlaceDetail hideOnScreen">
+                    @if($placeMode == 'mahaliFood')
+                        <div class="tabLinkMainWrap generalDescBtnTopBar tab" onclick="colorThisNav(this, 'generalDescLinkRel')">دستور پخت</div>
+                    @else
+                        <div class="tabLinkMainWrap generalDescBtnTopBar tab" onclick="colorThisNav(this, 'generalDescLinkRel')">معرفی کلی</div>
+                        <div class="tabLinkMainWrap mapBtnTopBar tab" onclick="colorThisNav(this, 'goToMapSection')">نقشه</div>
+                    @endif
+                        <div class="tabLinkMainWrap postsBtnTopBar tab" onclick="colorThisNav(this, 'mainDivPlacePost')">نظرات</div>
+                        <div class="tabLinkMainWrap QAndAsBtnTopBar tab" onclick="colorThisNav(this, 'QAndAMainDivId')">سوالات</div>
+                    @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
+                        <div class="tabLinkMainWrap similarLocationsBtnTopBar tab" onclick="colorThisNav(this, 'topPlacesSection')">مکان های مشابه</div>
+                    @endif
+                    </div>
+
+                    <div id="indicForShowDown" class="hideOnScreen">
+                        @include('layouts.placeMainBodyHeader')
+                    </div>
+
+                    <a class="postLink topAndBottomBorderAndMargin hideOnPhone" href="#reviewMainDivDetails">
                         <div id="mainStoreReviewDiv" class="postMainDiv">
                             <div class="postMainDivHeader">
-                                {{__('دیدگاه شما')}}
+                                {{__('نظر شما')}}
                             </div>
                             <div id="commentInputMainDiv">
                                 <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox" onclick="newPostModal('textarea')">
@@ -329,7 +550,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </div>
                                     <textarea type="text"
                                               class="inputBoxInput inputBoxInputComment showNewTextReviewArea"
-                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}}، چه فکر یا احساسی داری.....؟"
+                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}} نظرت رو نسبت به این {{$kindPlace->name}} به اشتراک بگذار"
                                               onclick="newPostModal('textarea')" readonly></textarea>
                                     <img src="{{URL::asset('images/smile.png')}}" class="commentSmileyIcon" alt="emoji"/>
                                 </div>
@@ -337,26 +558,35 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                             <div class="commentMoreSettingBar">
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=picReviewInput0 onclick=newPostModal()' : 'onclick=newPostModal()'}}>
-                                        <span class="addPhotoCommentIcon"></span>
-                                        <span class="commentOptionsText">{{__('عکس اضافه کنید.')}}</span>
+                                        <span class="icons addPhotoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن عکس')}}</span>
                                     </label>
                                 </div>
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=videoReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
-                                        <span class="addVideoCommentIcon"></span>
-                                        <span class="commentOptionsText">{{__('ویدیو اضافه کنید.')}}</span>
+                                        <span class="icons addVideoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو')}}</span>
                                     </label>
                                 </div>
                                 <div class="commentOptionsBoxes">
                                     <label {{auth()->check() ? 'for=video360ReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
                                         <span class="add360VideoCommentIcon"></span>
-                                        <span class="commentOptionsText">{{__('ویدیو 360 اضافه کنید.')}}</span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو 360')}}</span>
                                     </label>
                                 </div>
-                                <div class="commentOptionsBoxes" id="bodyLinks" onclick="newPostModal('tag')">
-                                    <span class="tagFriendCommentIcon"></span>
-                                    <span class="commentOptionsText">{{__('دوستانتان را tag کنید.')}}</span>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? '' : 'onclick=newPostModal("tag")'}}>
+                                        <span class="tagFriendCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>
+                                    </label>
                                 </div>
+
+{{--                                <div class="commentOptionsBoxes">--}}
+{{--                                    <label {{auth()->check() ? ' onclick=newPostModal("tag")' : 'onclick=newPostModal("tag")'}}>--}}
+{{--                                        <span class="icons addMemberIcon"></span>--}}
+{{--                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
                                 <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
                                     <span class="moreSettingPost"></span>
                                 </div>
@@ -373,7 +603,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
                 @if($placeMode == 'mahaliFood')
-                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse"   >
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse hideOnPhone"   >
                         <div class="container-fluid tabLinkMainWrapMainDiv tabLinkMainWrapMainDiv_Food">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
@@ -384,7 +614,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </li>
                                     <li>
                                         <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
-                                            پست
+                                            نظرات
                                         </a>
                                     </li>
                                     <li>
@@ -397,12 +627,12 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         </div>
                     </nav>
                 @else
-                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse">
+                    <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse hideOnPhone">
                         <div class="container-fluid tabLinkMainWrapMainDiv">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#topPlacesSection" onclick="colorThisNav(this)">
+                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar similarLocationsBtnTopBar" href="#topPlacesSection" onclick="colorThisNav(this)">
                                             مکان‌های مشابه
                                         </a>
                                     </li>
@@ -413,7 +643,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     </li>
                                     <li>
                                         <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost" onclick="colorThisNav(this)">
-                                            پست
+                                            نظرات
                                         </a>
                                     </li>
                                     <li>
@@ -428,13 +658,13 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 @endif
 
                 <div class="exceptQAndADiv" id="generalDescLinkRel" style="display: inline-block">
-                    <div class="hr_btf_wrap position-relative">
+                    <div class="hr_btf_wrap position-relative topAndBottomBorderAndMargin">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
+                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap ">
                                         @if($placeMode == 'mahaliFood')
-                                            <div class="tabLinkMainDiv">
+                                            <div class="tabLinkMainDiv hideOnPhone">
                                                 <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     دستور پخت
                                                 </button><!--
@@ -451,7 +681,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                 </button>
                                             </div>
                                         @else
-                                            <div class="tabLinkMainDiv">
+                                            <div class="tabLinkMainDiv hideOnPhone">
                                                 <button class="tabLink"
                                                         onclick="openCity('commentsAndAddressMobile', this, 'white', 'var(--koochita-light-green)')">
                                                     نظرات و آدرس
@@ -505,8 +735,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                                         @endif
                                                                     @endforeach
                                                                 </div>
-                                                                <div class="col-sm-6"
-                                                                     style="border-left: 1px solid #eee;">
+                                                                <div class="col-sm-6" style="border-left: 1px solid #eee;">
                                                                     @foreach($place->material as $key => $item)
                                                                         @if($key%2 != 0)
                                                                             <div class="row font-size-20">
@@ -525,8 +754,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                                                 <div id="detailsAndFeaturesMobile"
                                                      class="ui_column is-4 details tabContent {{$mainInfoClass}}">
-                                                    <div class="direction-rtl featureOfPlaceMiddleContent row"
-                                                         style="margin: 0px">
+                                                    <div class="direction-rtl featureOfPlaceMiddleContent row" style="margin: 0px">
                                                         @include('pages.placeDetails.tables.mahalifood-details-table')
                                                     </div>
                                                 </div>
@@ -545,87 +773,89 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                     </div>
                                                 </div>
 
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-4 reviews tabContent">
+                                                <div id="commentsAndAddressMobile" class="ui_column is-4 reviews tabContent hideOnPhone">
                                                     <div class="rateOfPlaceMiddleContent">
                                                         <div class="rating">
                                                             <div class="block_header">
-                                                                <h3 class="block_title">نظر شما </h3>
+                                                                <div class="titlesPlaceDetail">
+                                                                    <h3 class="block_title">{{__('امتیاز کاربران')}} </h3>
+                                                                </div>
                                                             </div>
-{{--                                                            <span class="overallRating">{{$avgRate}} </span>--}}
-                                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                        <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
-                                                              property="ratingValue" content="{{$avgRate}}"
-                                                              alt='{{$avgRate}} of 5 bubbles'></span>
-                                                            </div>
-                                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                         </div>
-                                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                            <ul class="ratings_chart">
-                                                                <li class="chart_row highlighted clickable">
-                                                                    <span class="row_label row_cell">عالی</span>
-                                                                    <span class="row_bar row_cell">
+                                                        <div class="ratingBoxDetails">
+                                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
+                                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                      property="ratingValue" content="{{$avgRate}}"
+                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                                                            </div>
+                                                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                                <ul class="ratings_chart">
+                                                                    <li class="chart_row highlighted clickable">
+                                                                        <span class="row_label row_cell">عالی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">خوب</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">خوب</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">معمولی</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">معمولی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">ضعیف</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">ضعیف</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row">
-                                                                    <span class="row_label row_cell">خیلی بد </span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row">
+                                                                        <span class="row_label row_cell">خیلی بد </span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div id="tagsName">
-                                                            <h3>برچسب‌ها:</h3>
-                                                            @foreach($place->tags as $key => $item)
-                                                                @if($key <= 5)
-                                                                    <span class="tag">{{$item}}</span>
-                                                                @endif
-                                                            @endforeach
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            {{--<div id="tagsName">--}}
+                                                            {{--<h3>برچسب‌ها:</h3>--}}
+                                                            {{--@foreach($place->tags as $key => $item)--}}
+                                                            {{--@if($key <= 5)--}}
+                                                            {{--<span class="tag">{{$item}}</span>--}}
+                                                            {{--@endif--}}
+                                                            {{--@endforeach--}}
+                                                            {{--</div>--}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -636,7 +866,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                 <div id="generalDescriptionMobile"
                                                      class="ui_column is-{{$showInfo}} generalDescription tabContent">
                                                     <div class="block_header">
-                                                        <h3 class="block_title">{{__('معرفی کلی')}} </h3>
+                                                        <div class="titlesPlaceDetail">
+                                                            <h3 class="block_title">{{__('معرفی کلی')}} </h3>
+                                                        </div>
                                                     </div>
                                                     <div class="toggleDescription" style="position: relative">
                                                         <div class="unselectedText overviewContent descriptionOfPlaceMiddleContent"
@@ -671,144 +903,128 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-{{$showReviewRate}} reviews tabContent rateOfPlaceMiddle">
+                                                <div id="commentsAndAddressMobile" class="ui_column is-{{$showReviewRate}} reviews tabContent hideOnPhone rateOfPlaceMiddle">
                                                     <div class="rateOfPlaceMiddleContent row" style="margin: 0px;">
                                                         <div class="rating">
                                                             <div class="block_header">
-                                                                <h3 class="block_title">نظر شما </h3>
+                                                                <div class="titlesPlaceDetail">
+                                                                    <h3 class="block_title">{{__('امتیاز کاربران')}} </h3>
+                                                                </div>
                                                             </div>
-{{--                                                            <span class="overallRating">{{$avgRate}} </span>--}}
+                                                        </div>
+                                                        <div class="ratingBoxDetails">
                                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
-                                                                      property="ratingValue" content="{{$avgRate}}"
-                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28" property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of 5 bubbles'></span>
                                                             </div>
                                                             <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                                        </div>
-                                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                            <ul class="ratings_chart">
-                                                                <li class="chart_row highlighted clickable">
-                                                                    <span class="row_label row_cell">عالی</span>
-                                                                    <span class="row_bar row_cell">
+                                                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                                <ul class="ratings_chart">
+                                                                    <li class="chart_row highlighted clickable">
+                                                                        <span class="row_label row_cell">عالی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill" style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">خوب</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">خوب</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"  style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">معمولی</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">معمولی</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill" style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row clickable">
-                                                                    <span class="row_label row_cell">ضعیف</span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row clickable">
+                                                                        <span class="row_label row_cell">ضعیف</span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill" style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                                <li class="chart_row">
-                                                                    <span class="row_label row_cell">خیلی بد </span>
-                                                                    <span class="row_bar row_cell">
+                                                                    </li>
+                                                                    <li class="chart_row">
+                                                                        <span class="row_label row_cell">خیلی بد </span>
+                                                                        <span class="row_bar row_cell">
                                                                         <span class="bar">
                                                                             <span class="fill"
                                                                                   style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
                                                                 %</span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="prw_rup prw_common_atf_header_bl"
-                                                             id="clientConnectionsLines">
-                                                            <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
-                                                                <span class="ui_icon map-pin"></span>
-                                                                @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
-                                                                    <span class="street-address">آدرس : </span>
-                                                                    <span>{{$place->address}}</span>
-                                                                @elseif( $placeMode == 'majara')
-                                                                    <span class="street-address">آدرس : </span>
-                                                                    <span>{{$place->dastresi}}</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="prw_rup prw_common_atf_header_bl hideOnPhone" id="clientConnectionsLines">
+                                                                <div class="blEntry address mg-bt-10 clickable" id="clientConnectionsAddress" onclick="showExtendedMap()">
+                                                                    <span class="ui_icon map-pin"></span>
+                                                                    @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
+                                                                        <span class="street-address">آدرس : </span>
+                                                                        <span>{{$place->address}}</span>
+                                                                    @elseif( $placeMode == 'majara')
+                                                                        <span class="street-address">آدرس : </span>
+                                                                        <span>{{$place->dastresi}}</span>
+                                                                    @endif
+                                                                </div>
+
+                                                                @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
+                                                                    <div class="blEntry blEn phone truePhone">
+                                                                        <span class="ui_icon phone"></span>
+                                                                        @foreach($place->phone as $key => $phone)
+                                                                            <a href="tel:{{$phone}}">
+                                                                                {{$phone}}
+                                                                            </a>
+                                                                            @if($key != count($place->phone)-1)
+                                                                                -
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                @endif
+
+                                                                @if(!empty($place->site))
+                                                                    <div class="blEntry website mg-bt-10"
+                                                                         id="clientConnectionsWebsite">
+                                                                        <span class="ui_icon laptop"></span>
+                                                                        <?php
+                                                                        if (strpos($place->site, 'http') === false)
+                                                                            $place->site = 'http://' . $place->site;
+                                                                        ?>
+                                                                        <a target="_blank"
+                                                                           href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
+                                                                            <span class="font-size-12">{{$place->site}}</span>
+                                                                        </a>
+                                                                    </div>
                                                                 @endif
                                                             </div>
-
-                                                            @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
-                                                                <div class="blEntry blEn phone truePhone">
-                                                                    <span class="ui_icon phone"></span>
-                                                                    @foreach($place->phone as $key => $phone)
-                                                                        <a href="tel:{{$phone}}">
-                                                                            {{$phone}}
-                                                                        </a>
-                                                                        @if($key != count($place->phone)-1)
-                                                                            -
-                                                                        @endif
-                                                                    @endforeach
-                                                                </div>
-                                                            @endif
-
-                                                            @if(!empty($place->site))
-                                                                <div class="blEntry website mg-bt-10"
-                                                                     id="clientConnectionsWebsite">
-                                                                    <span class="ui_icon laptop"></span>
-                                                                    <?php
-                                                                    if (strpos($place->site, 'http') === false)
-                                                                        $place->site = 'http://' . $place->site;
-                                                                    ?>
-                                                                    <a target="_blank"
-                                                                       href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                                        <span class="font-size-12">{{$place->site}}</span>
-                                                                    </a>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                        <div id="tagsName">
-                                                            <h3>برچسب‌ها:</h3>
-                                                            @foreach($place->tags as $key => $item)
-                                                                @if($key <= 5)
-                                                                    <span class="tag">{{$item}}</span>
-                                                                @endif
-                                                            @endforeach
+                                                            {{--<div id="tagsName">--}}
+                                                            {{--<h3>برچسب‌ها:</h3>--}}
+                                                            {{--@foreach($place->tags as $key => $item)--}}
+                                                            {{--@if($key <= 5)--}}
+                                                            {{--<span class="tag">{{$item}}</span>--}}
+                                                            {{--@endif--}}
+                                                            {{--@endforeach--}}
+                                                            {{--</div>--}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                                                <div class="topPageAd" style="margin: 10px auto">
-                                                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                                                </div>
-
-                                                <div class="topMainMapDiv">
-                                                    <div id="mainMap" class="mainMap placeHolderAnime"></div>
-                                                </div>
-
-                                                <div class="topPageAd" style="margin: 10px auto">
-                                                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                                                </div>
-                                                @include('pages.placeDetails.component.extendedMap')
-
-                                            @endif
                                         @endif
 
                                     </div>
@@ -816,47 +1032,196 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                             </div>
 
                         </div>
-{{--                        @include('pages.placeDetails.component.roomReservation')--}}
                     </div>
 
-                    <div id="mainDivPlacePost" class="tabContentMainWrap">
+                    <div class="rateOfPlaceMiddleContent topAndBottomBorderAndMargin seperateRates hideOnScreen">
+                        <div class="rating">
+                            <div class="block_header">
+                                <div class="titlesPlaceDetail">
+                                    <h3 class="block_title">{{__('امتیاز کاربران')}} </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ratingBoxDetails" style="margin-top: 15px;">
+                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
+                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                      property="ratingValue" content="{{$avgRate}}"
+                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                            </div>
+                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram" style="width: 80%; direction: rtl; margin-top: 15px;">
+                                <ul class="ratings_chart">
+                                    <li class="chart_row highlighted clickable">
+                                        <span class="row_label row_cell">عالی</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row clickable">
+                                        <span class="row_label row_cell">خوب</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row clickable">
+                                        <span class="row_label row_cell">معمولی</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row clickable">
+                                        <span class="row_label row_cell">ضعیف</span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}%</span>
+                                    </li>
+                                    <li class="chart_row">
+                                        <span class="row_label row_cell">خیلی بد </span>
+                                        <span class="row_bar row_cell">
+                                            <span class="bar">
+                                                <span class="fill" style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
+                                            </span>
+                                        </span>
+                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}%</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            {{--<div id="tagsName">--}}
+                            {{--<h3>برچسب‌ها:</h3>--}}
+                            {{--@foreach($place->tags as $key => $item)--}}
+                            {{--@if($key <= 5)--}}
+                            {{--<span class="tag">{{$item}}</span>--}}
+                            {{--@endif--}}
+                            {{--@endforeach--}}
+                            {{--</div>--}}
+                        </div>
+                    </div>
+
+                    @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
+                        <div class="topAndBottomBorderAndMargin">
+                            <div class="topPageAd " style="margin: 10px auto">
+                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
+                            </div>
+                        </div>
+
+                        <div id="goToMapSection" class="topMainMapDiv topAndBottomBorderAndMargin">
+                            <div id="mainMap" class="mainMap placeHolderAnime"></div>
+                        </div>
+
+                        <div class="topAndBottomBorderAndMargin">
+                            <div class="topPageAd" style="margin: 10px auto">
+                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
+                            </div>
+                        </div>
+                        @include('pages.placeDetails.component.extendedMap')
+
+                    @endif
+
+                    <div id="mainDivPlacePost" class="tabContentMainWrap" style="display: flex; direction: rtl; flex-direction: column;">
+
+                        <div class="postMainDiv hideOnScreen">
+                            <div class="postMainDivHeader">
+                                {{__('نظر شما')}}
+                            </div>
+                            <div id="commentInputMainDiv">
+                                <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox" onclick="newPostModal('textarea')">
+                                    <div id="profilePicForComment" class="fullyCenterContent profilePicForPost circleBase type2" style="overflow: hidden; border-radius: 50%;">
+                                        <img src="{{ $userPic }}" alt="userPicture" class="resizeImgClass" style="width: 100%;" onload="fitThisImg(this)">
+                                    </div>
+                                    <textarea type="text"
+                                              class="inputBoxInput inputBoxInputComment showNewTextReviewArea"
+                                              placeholder="{{auth()->check() ? auth()->user()->username : ''}} نظرت رو نسبت به این {{$kindPlace->name}} به اشتراک بگذار"
+                                              onclick="newPostModal('textarea')" readonly></textarea>
+                                    <img src="{{URL::asset('images/smile.png')}}" class="commentSmileyIcon" alt="emoji"/>
+                                </div>
+                            </div>
+                            <div class="commentMoreSettingBar">
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? 'for=picReviewInput0 onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="icons addPhotoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن عکس')}}</span>
+                                    </label>
+                                </div>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? 'for=videoReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="icons addVideoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو')}}</span>
+                                    </label>
+                                </div>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? 'for=video360ReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="add360VideoCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن ویدیو 360')}}</span>
+                                    </label>
+                                </div>
+                                <div class="commentOptionsBoxes">
+                                    <label {{auth()->check() ? '' : 'onclick=newPostModal("tag")'}}>
+                                        <span class="tagFriendCommentIcon"></span>
+                                        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>
+                                    </label>
+                                </div>
+
+                                {{--<div class="commentOptionsBoxes">--}}
+                                {{--    <label {{auth()->check() ? ' onclick=newPostModal("tag")' : 'onclick=newPostModal("tag")'}}>--}}
+                                {{--        <span class="icons addMemberIcon"></span>--}}
+                                {{--        <span class="commentOptionsText">{{__('افزودن دوست')}}</span>--}}
+                                {{--    </label>--}}
+                                {{--</div>--}}
+                                <div class="commentOptionsBoxes moreSettingPostManDiv" onclick="newPostModal()">
+                                    <span class="moreSettingPost"></span>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="topBarContainerPosts display-none"></div>
 
-                        <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
-
+                        <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap" style="display: none;">
                             @include('pages.placeDetails.filterSection')
-
-                            <center id="advertiseDiv" class="col-xs-12 adsMainDiv" style="display: none;">
-                                {{--@include('features.advertise3D')--}}
-                            </center>
                         </div>
 
                         @include('pages.placeDetails.reviewSection')
                     </div>
 
-                    <div class="Ad3InRowPc">
-                        <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                        </div>
-                        <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                        </div>
-                        <div class="ad">
-                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                        </div>
+                    <div>
+                        <div id="pos-article-display-16123"></div>
+                    </div>
+
+                    <div class="Ad3InRowPc" style="display: none">
+                        <div id="pos-article-display-16123"></div>
+{{--                        <div class="ad">--}}
+{{--                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                        </div>--}}
+{{--                        <div class="ad">--}}
+{{--                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                        </div>--}}
+{{--                        <div class="ad">--}}
+{{--                            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                        </div>--}}
                     </div>
 
                     @include('pages.placeDetails.questionSection')
                 </div>
 
                 @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
-                    @include('component.rowSuggestion')
+                    <div id="topPlacesSection">
+                        @include('component.rowSuggestion')
+                    </div>
                 @endif
             </div>
         </div>
     </div>
-
 
     @if(isset($video) && $video != null && false)
         {{--vr--}}
@@ -935,47 +1300,52 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                 },
             ];
 
-            initPlaceRowSection(topPlacesSections); // component.rowSuggestion
-
             function initNearbySwiper() {
-                var swiper = new Swiper('.mainSuggestion', {
-                    slidesPerGroup: 1,
-                    loop: true,
-                    loopFillGroupWithBlank: true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
+                new Swiper('.mainSuggestion', {
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 'auto',
+                            spaceBetween: 10,
+                            loop: false,
+                        },
+                         992: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                        },
+                        10000: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        }
                     },
                     autoplay: {
                         delay: 4000,
                     },
-                    breakpoints: {
-
-                        450: {
-                            slidesPerView: 1,
-                            spaceBetween: 15,
-                        },
-
-                        520: {
-                            slidesPerView: 2,
-                            spaceBetween: 15,
-                        },
-
-                        768: {
-                            slidesPerView: 2,
-                            spaceBetween: 30,
-                        },
-
-                        992: {
-                            slidesPerView: 3,
-                            spaceBetween: 30,
-                        },
-
-                        10000: {
-                            slidesPerView: 4,
-                            spaceBetween: 30,
-                        }
-                    }
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    // breakpoints: {
+                    //     450: {
+                    //         slidesPerView: 1,
+                    //         spaceBetween: 15,
+                    //     },
+                    //     520: {
+                    //         slidesPerView: 2,
+                    //         spaceBetween: 15,
+                    //     },
+                    //     768: {
+                    //         slidesPerView: 2,
+                    //         spaceBetween: 30,
+                    //     },
+                    //     992: {
+                    //         slidesPerView: 3,
+                    //         spaceBetween: 30,
+                    //     },
+                    //     10000: {
+                    //         slidesPerView: 4,
+                    //         spaceBetween: 30,
+                    //     }
+                    // }
                 });
             }
 
@@ -990,15 +1360,14 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         count : 10,
                     },
                     success: function(response){
-                        response = JSON.parse(response);
                         let center = {
                             x: '{{$place->C}}',
                             y: '{{$place->D}}'
                         };
-                        createSuggestionRowWithData(response[0]);
-                        createArticleRowWithData(response[1]);
+                        createSuggestionRowWithData(response.places);
+                        createArticleRowWithData(response.safarnameh);
 
-                        createMapInBlade('mainMap', center, response[0], true);
+                        createMapInBlade('mainMap', center, response.places, true);
                     }
                 });
             }
@@ -1025,6 +1394,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             }
 
            $(document).ready(() => {
+               initPlaceRowSection(topPlacesSections); // component.rowSuggestion
                getNearbyToPlace();
            });
 
@@ -1032,6 +1402,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
     @endif
 
     <script>
+        var isOpenRateButton = false;
 
         function getVideoFromTv(){
             $.ajax({
@@ -1093,46 +1464,63 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             else if(topOfSticky >= 25 && $('#sticky').hasClass('stickyFixTop'))
                 $('#sticky').removeClass('stickyFixTop');
 
-            let topOfInfo = document.getElementById('generalDescLinkRel').getBoundingClientRect().top;
-            let topOfQA = document.getElementById('QAndAMainDivId').getBoundingClientRect().top;
-            let topOfPost = document.getElementById('mainDivPlacePost').getBoundingClientRect().top;
+            $('.tabLinkMainWrap').css('color', 'black');
 
-            if(topOfInfo < 0) {
-                $('.tabLinkMainWrap').css('color', 'black');
-                $('.generalDescBtnTopBar').css('color', 'var(--koochita-light-green)');
-            }
-            else
-                $('.generalDescBtnTopBar').css('color', 'black');
+            var showWhatId = null;
+            var sum = $(window).width() <= 767 ? 120 : 0;
 
-            if(topOfPost < 0) {
-                $('.tabLinkMainWrap').css('color', 'black');
-                $('.postsBtnTopBar').css('color', 'var(--koochita-light-green)');
-            }
-            else
-                $('.postsBtnTopBar').css('color', 'black');
-
-            if(topOfQA < 0) {
-                $('.tabLinkMainWrap').css('color', 'black');
-                $('.QAndAsBtnTopBar').css('color', 'var(--koochita-light-green)');
-            }
-            else
-                $('.QAndAsBtnTopBar').css('color', 'black');
-
+            let topOfInfo = document.getElementById('generalDescLinkRel').getBoundingClientRect().top - sum;
+            let topOfQA = document.getElementById('QAndAMainDivId').getBoundingClientRect().top - sum;
+            let topOfPost = document.getElementById('mainDivPlacePost').getBoundingClientRect().top - sum;
+            let topOfMap = document.getElementById('goToMapSection').getBoundingClientRect().top - sum;
             let topOfSimilar = document.getElementById('topPlacesSection');
+
             if(topOfSimilar){
-                topOfSimilar = topOfSimilar.getBoundingClientRect().top;
-                if(topOfSimilar < 0) {
-                    $('.tabLinkMainWrap').css('color', 'black');
-                    $('.similarLocationsBtnTopBar').css('color', 'var(--koochita-light-green)');
+                topOfSimilar = document.getElementById('topPlacesSection').getBoundingClientRect().top;
+                if(topOfSimilar < 0)
+                    showWhatId = 'similarLocationsBtnTopBar';
+            }
+
+            if(topOfQA < 0 && showWhatId == null)
+                showWhatId = 'QAndAsBtnTopBar';
+
+            if(topOfPost < 0 && showWhatId == null)
+                showWhatId = 'postsBtnTopBar';
+
+            if(topOfMap < 0 && showWhatId == null)
+                showWhatId = 'mapBtnTopBar';
+
+            if(topOfInfo < 0 && showWhatId == null)
+                showWhatId = 'generalDescBtnTopBar';
+
+            if(showWhatId != null)
+                $(`.${showWhatId}`).css('color', 'var(--koochita-light-green)');
+
+            if($(window).width() <= 767){
+                var indecTop = document.getElementById('indicForShowDown').getBoundingClientRect().top;
+                indecTop += $('#indicForShowDown').height() - 110;
+                if(indecTop < 0){
+                    if(!isOpenRateButton){
+                        isOpenRateButton = true;
+                        $('.setScoreForThisPlaceComeUp').removeClass('hidden');
+                        setTimeout(() => $('.setScoreForThisPlaceComeUp').addClass('open'), 100);
+                    }
+                    $('#comeDownHeader').addClass('show');
                 }
                 else
-                    $('.similarLocationsBtnTopBar').css('color', 'black');
+                    $('#comeDownHeader').removeClass('show');
             }
         });
 
-        function colorThisNav(_elemnt){
+        function colorThisNav(_elemnt, _section){
+            if($(window).width() < 767){
+                $('html, body').animate({
+                    scrollTop: $(`#${_section}`).offset().top-100
+                }, 300);
+            }
+
+            $('.tabLinkMainWrap').css('color', 'black');
             setTimeout(() => {
-                $('.tabLinkMainWrap').css('color', 'black');
                 $(_elemnt).css('color', 'var(--koochita-light-green)');
             }, 100)
         }
@@ -1249,358 +1637,99 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         var sitePicsForAlbum = [];
         var userPhotosForAlbum = [];
         var userVideoForAlbum = [];
+        var allPlacePics = [];
 
-        for (var i = 0; i < photographerPics.length; i++) {
-            photographerPicsForAlbum[i] = {
-                'id': photographerPics[i]['id'],
-                'sidePic': photographerPics[i]['l'],
-                'mainPic': photographerPics[i]['s'],
-                'userPic': photographerPics[i]['userPic'],
-                'userName': photographerPics[i]['name'],
-                'picName': photographerPics[i]['picName'],
-                'like': photographerPics[i]['like'],
-                'dislike': photographerPics[i]['dislike'],
-                'alt': photographerPics[i]['alt'],
-                'description': photographerPics[i]['description'],
-                'uploadTime': photographerPics[i]['fromUpload'],
-                'showInfo': photographerPics[i]['showInfo'],
-                'userLike': photographerPics[i]['userLike'],
-            }
-        }
+        photographerPics.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['l'],
+                'mainPic': item['s'],
+                'userPic': item['userPic'],
+                'userName': item['name'],
+                'picName': item['picName'],
+                'like': item['like'],
+                'dislike': item['dislike'],
+                'alt': item['alt'],
+                'description': item['description'],
+                'uploadTime': item['fromUpload'],
+                'showInfo': item['showInfo'],
+                'userLike': item['userLike'],
+            };
+            photographerPicsForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
-        for (var i = 0; i < sitePics.length; i++) {
-            sitePicsForAlbum[i] = {
-                'id': sitePics[i]['id'],
-                'sidePic': sitePics[i]['l'],
-                'mainPic': sitePics[i]['s'],
-                'userPic': sitePics[i]['userPic'],
-                'userName': sitePics[i]['name'],
-                'like': sitePics[i]['like'],
-                'dislike': sitePics[i]['dislike'],
-                'alt': sitePics[i]['alt'],
-                'description': sitePics[i]['description'],
-                'uploadTime': sitePics[i]['fromUpload'],
-                'showInfo': sitePics[i]['showInfo'],
-                'userLike': sitePics[i]['userLike'],
-            }
-        }
+        sitePics.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['l'],
+                'mainPic': item['s'],
+                'userPic': item['userPic'],
+                'userName': item['name'],
+                'like': item['like'],
+                'dislike': item['dislike'],
+                'alt': item['alt'],
+                'description': item['description'],
+                'uploadTime': item['fromUpload'],
+                'showInfo': item['showInfo'],
+                'userLike': item['userLike'],
+            };
+            sitePicsForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
-        for (var i = 0; i < userPhotos.length; i++) {
-            userPhotosForAlbum[i] = {
-                'id': userPhotos[i]['id'],
-                'sidePic': userPhotos[i]['pic'],
-                'mainPic': userPhotos[i]['pic'],
-                'userPic': userPhotos[i]['userPic'],
-                'userName': userPhotos[i]['username'],
-                'uploadTime': userPhotos[i]['time'],
+        userPhotos.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['pic'],
+                'mainPic': item['pic'],
+                'userPic': item['userPic'],
+                'userName': item['username'],
+                'uploadTime': item['time'],
                 'showInfo': false,
-            }
-        }
+            };
+            userPhotosForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
-        for (var i = 0; i < userVideo.length; i++) {
-            userVideoForAlbum[i] = {
-                'id': userVideo[i]['id'],
-                'sidePic': userVideo[i]['picName'],
-                'mainPic': userVideo[i]['picName'],
-                'userPic': userVideo[i]['userPic'],
-                'userName': userVideo[i]['username'],
-                'video': userVideo[i]['video'],
-                'uploadTime': userVideo[i]['time'],
+        userVideo.map(item => {
+            var arr = {
+                'id': item['id'],
+                'sidePic': item['picName'],
+                'mainPic': item['picName'],
+                'userPic': item['userPic'],
+                'userName': item['username'],
+                'video': item['video'],
+                'uploadTime': item['time'],
                 'showInfo': false,
-            }
-        }
+            };
+            userVideoForAlbum.push(arr);
+            allPlacePics.push(arr);
+        });
 
         function showPhotoAlbum(_kind) {
-            if (_kind == 'photographer' && photographerPicsForAlbum.length > 0)
-                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);// in general.photoAlbumModal.blade.php
-            else if (_kind == 'sitePics' && sitePicsForAlbum.length > 0)
-                createPhotoModal('عکس های سایت', sitePicsForAlbum);// in general.photoAlbumModal.blade.php
-            else if (_kind == 'userPics' && userPhotosForAlbum.length > 0)
-                createPhotoModal('عکس های کاربران', userPhotosForAlbum);// in general.photoAlbumModal.blade.php
-            else if (_kind == 'userVideo' && userVideoForAlbum.length > 0)
-                createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
+            if($(window).width() <= 767)
+                createPhotoModal('آلبوم عکس', allPlacePics);// in general.photoAlbumModal.blade.php
+            else {
+                if (_kind == 'photographer' && photographerPicsForAlbum.length > 0)
+                    createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);// in general.photoAlbumModal.blade.php
+                else if (_kind == 'sitePics' && sitePicsForAlbum.length > 0)
+                    createPhotoModal('عکس های سایت', sitePicsForAlbum);// in general.photoAlbumModal.blade.php
+                else if (_kind == 'userPics' && userPhotosForAlbum.length > 0)
+                    createPhotoModal('عکس های کاربران', userPhotosForAlbum);// in general.photoAlbumModal.blade.php
+                else if (_kind == 'userVideo' && userVideoForAlbum.length > 0)
+                    createPhotoModal('ویدیو های کاربران', userVideoForAlbum);// in general.photoAlbumModal.blade.php
+            }
         }
 
-        $(document).ready(function () {
+        $(document).ready(() => {
+            $('#allPlacePicturesCount').text(allPlacePics.length);
             autosize($(".inputBoxInputComment"));
             autosize($(".inputBoxInputAnswer"));
 
-            if (window.matchMedia('(max-width: 373px)').matches) {
+            if (window.matchMedia('(max-width: 373px)').matches)
                 $('.eachCommentMainBox').removeClass('mg-rt-45')
-            }
-
-            @if($mode == "bookMark")
-            bookMark();
-            @elseif($mode == "saveToTrip")
-            saveToTrip();
-            @elseif($mode == "question")
-            showAskQuestion();
-            @elseif($mode == "addPhotoSuccessfully")
-            $(".dark").css('display', '');
-            $("#photoSubmitted").removeClass('hidden');
-            @elseif($mode == 'err')
-            showAddPhotoPane();
-            $("#errMsgAddPhoto").append('{{$err}}');
-            @elseif($mode == "addPhoto")
-            showAddPhotoPane();
-            @endif
-            // $("#date_input").datepicker({
-            //     numberOfMonths: 2,
-            //     showButtonPanel: true,
-            //     dateFormat: "yy/mm/dd"
-            // });
-            //
-            // $("#date_input_end_inHotel").datepicker({
-            //     numberOfMonths: 2,
-            //     showButtonPanel: true,
-            //     dateFormat: "yy/mm/dd"
-            // });
         });
-    </script>
-
-    <script>
-        var total;
-        var filterRateAns = [];
-        var filterMultiAns = [];
-        var reviewFilters = [];
-
-        var filters = [];
-        var hasFilter = false;
-        var topContainer;
-        var marginTop;
-        var helpWidth;
-        var greenBackLimit = 5;
-        var pageHeightSize = window.innerHeight;
-        var additional = [];
-        var indexes = [];
-        $(".nextBtnsHelp").click(function () {
-            show(parseInt($(this).attr('data-val')) + 1, 1);
-        });
-        $(".backBtnsHelp").click(function () {
-            show(parseInt($(this).attr('data-val')) - 1, -1);
-        });
-        $(".exitBtnHelp").click(function () {
-            myQuit();
-        });
-
-        function myQuit() {
-            clear();
-            $(".dark").hide();
-            enableScroll();
-        }
-
-        function setGreenBackLimit(val) {
-            greenBackLimit = val;
-        }
-
-        function initHelp(t, sL, topC, mT, hW) {
-            total = t;
-            filters = sL;
-            topContainer = topC;
-            marginTop = mT;
-            helpWidth = hW;
-            if (sL.length > 0)
-                hasFilter = true;
-            $(".dark").show();
-            show(1, 1);
-        }
-
-        function initHelp2(t, sL, topC, mT, hW, i, a) {
-            total = t;
-            filters = sL;
-            topContainer = topC;
-            marginTop = mT;
-            helpWidth = hW;
-            additional = a;
-            indexes = i;
-            if (sL.length > 0)
-                hasFilter = true;
-            $(".dark").show();
-            show(1, 1);
-        }
-
-        function isInFilters(key) {
-            key = parseInt(key);
-            for (j = 0; j < filters.length; j++) {
-                if (filters[j] == key)
-                    return true;
-            }
-            return false;
-        }
-
-        function getBack(curr) {
-            for (i = curr - 1; i >= 0; i--) {
-                if (!isInFilters(i))
-                    return i;
-            }
-            return -1;
-        }
-
-        function getFixedFromLeft(elem) {
-            if (elem.prop('id') == topContainer || elem.prop('id') == 'PAGE') {
-                return parseInt(elem.css('margin-left').split('px')[0]);
-            }
-            return elem.position().left +
-                parseInt(elem.css('margin-left').split('px')[0]) +
-                getFixedFromLeft(elem.parent());
-        }
-
-        function getFixedFromTop(elem) {
-            if (elem.prop('id') == topContainer) {
-                return marginTop;
-            }
-            if (elem.prop('id') == "PAGE") {
-                return 0;
-            }
-            return elem.position().top +
-                parseInt(elem.css('margin-top').split('px')[0]) +
-                getFixedFromTop(elem.parent());
-        }
-
-        function getNext(curr) {
-            curr = parseInt(curr);
-            for (i = curr + 1; i < total; i++) {
-                if (!isInFilters(i))
-                    return i;
-            }
-            return total;
-        }
-
-        function bubbles(curr) {
-            if (total <= 1)
-                return "";
-            t = total - filters.length;
-            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles pd-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
-            for (i = 1; i < total; i++) {
-                if (!isInFilters(i)) {
-                    if (i == curr)
-                        newElement += "<div id='notInFiltersDiv'></div>";
-                    else
-                        newElement += "<div id='isInFilterDiv' onclick='show(\"" + i + "\", 1)' class='helpBubble'></div>";
-                }
-            }
-            newElement += "</div></div>";
-            return newElement;
-        }
-
-        function clear() {
-            $('.bubbles').remove();
-            $(".targets").css({
-                'position': '',
-                'border': '',
-                'padding': '',
-                'background-color': '',
-                'z-index': '',
-                'cursor': '',
-                'pointer-events': 'auto'
-            });
-            $(".helpSpans").addClass('hidden');
-            $(".backBtnsHelp").attr('disabled', 'disabled');
-            $(".nextBtnsHelp").attr('disabled', 'disabled');
-        }
-
-        function show(curr, inc) {
-            clear();
-            if (hasFilter) {
-                while (isInFilters(curr)) {
-                    curr += inc;
-                }
-            }
-            if (getBack(curr) <= 0) {
-                $("#backBtnHelp_" + curr).attr('disabled', 'disabled');
-            } else {
-                $("#backBtnHelp_" + curr).removeAttr('disabled');
-            }
-            if (getNext(curr) > total - 1) {
-                $("#nextBtnHelp_" + curr).attr('disabled', 'disabled');
-            } else {
-                $("#nextBtnHelp_" + curr).removeAttr('disabled');
-            }
-            if (curr < greenBackLimit) {
-                $("#targetHelp_" + curr).css({
-                    'position': 'relative',
-                    'border': '5px solid #333',
-                    'padding': '10px',
-                    'background-color': 'var(--koochita-light-green)',
-                    'z-index': 1000001,
-                    'cursor': 'auto'
-                });
-            } else {
-                $("#targetHelp_" + curr).css({
-                    'position': 'relative',
-                    'border': '5px solid #333',
-                    'padding': '10px',
-                    'background-color': 'white',
-                    'z-index': 100000001,
-                    'cursor': 'auto'
-                });
-            }
-            var targetWidth = $("#targetHelp_" + curr).css('width').split('px')[0];
-            var targetHeight = parseInt($("#targetHelp_" + curr).css('height').split('px')[0]);
-            for (j = 0; j < indexes.length; j++) {
-                if (curr == indexes[j]) {
-                    targetHeight += additional[j];
-                    break;
-                }
-            }
-            if ($("#targetHelp_" + curr).offset().top > 200) {
-                $("html, body").scrollTop($("#targetHelp_" + curr).offset().top - 100);
-                $("#helpSpan_" + curr).css({
-                    'left': $("#targetHelp_" + curr).offset().left + targetWidth / 2 - helpWidth / 2 + "px",
-                    'top': targetHeight + 120 + "px"
-                }).removeClass('hidden').append(bubbles(curr));
-            } else {
-                $("#helpSpan_" + curr).css({
-                    'left': $("#targetHelp_" + curr).offset().left + targetWidth / 2 - helpWidth / 2 + "px",
-                    'top': ($("#targetHelp_" + curr).offset().top + targetHeight + 20) % pageHeightSize + "px"
-                }).removeClass('hidden').append(bubbles(curr));
-            }
-            $(".helpBubble").on({
-                mouseenter: function () {
-                    $(this).css('background-color', '#ccc');
-                },
-                mouseleave: function () {
-                    $(this).css('background-color', '#333');
-                }
-            });
-            disableScroll();
-        }
-
-        // left: 37, up: 38, right: 39, down: 40,
-        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-        var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-
-        function preventDefault(e) {
-            e = e || window.event;
-            if (e.preventDefault)
-                e.preventDefault();
-            e.returnValue = false;
-        }
-
-        function preventDefaultForScrollKeys(e) {
-            if (keys[e.keyCode]) {
-                preventDefault(e);
-                return false;
-            }
-        }
-
-        function disableScroll() {
-            if (window.addEventListener) // older FF
-                window.addEventListener('DOMMouseScroll', preventDefault, false);
-            window.onwheel = preventDefault; // modern standard
-            window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-            window.ontouchmove = preventDefault; // mobile
-            document.onkeydown = preventDefaultForScrollKeys;
-        }
-
-        function enableScroll() {
-            if (window.removeEventListener)
-                window.removeEventListener('DOMMouseScroll', preventDefault, false);
-            window.onmousewheel = document.onmousewheel = null;
-            window.onwheel = null;
-            window.ontouchmove = null;
-            document.onkeydown = null;
-        }
     </script>
 @stop
 

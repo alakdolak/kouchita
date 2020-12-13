@@ -219,7 +219,8 @@ class ReviewsController extends Controller
                             rename($file, $dest);
                     }
                 }
-            } else if ($request->text == null) {
+            }
+            else if ($request->text == null) {
                 $log->subject = 'dontShowThisText';
                 $log->confirm = 1;
                 $log->save();
