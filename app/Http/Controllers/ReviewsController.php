@@ -188,7 +188,7 @@ class ReviewsController extends Controller
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
-            \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
+            ReviewPic::where('code', $request->code)->update(['logId' => $log->id]);
 
             if (count($reviewPic) > 0) {
                 $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
