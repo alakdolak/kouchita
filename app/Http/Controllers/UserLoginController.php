@@ -606,6 +606,7 @@ class UserLoginController extends Controller
             $client_id = '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com';
             $client_secret = '8NM4weptz-Pz-6gbolI5J0yi';
             $redirect_uri = route('loginWithGoogle');
+            $redirect_uri = str_replace('http://', 'https://', $redirect_uri);
 
             /************************************************
              * Make an API request on behalf of a user. In
