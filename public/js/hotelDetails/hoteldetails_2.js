@@ -372,38 +372,6 @@ function hideElement(element) {
     $("#" + element).addClass('hidden');
 }
 
-function addPlaceToBookMark() {
-
-    if (!checkLogin())
-        return;
-
-    $.ajax({
-        type: 'POST',
-        url: bookMarkDir,
-        data: {placeId, kindPlaceId},
-        success: function (response) {
-            if (response == "ok-del"){
-                changeBookmarkIcon();
-                showSuccessNotifi('این صفحه از حالت ذخیره خارج شد', 'left', 'red');
-            }
-            else if(response == 'ok-add'){
-                changeBookmarkIcon();
-                showSuccessNotifi('این صفحه ذخیره شد', 'left', 'var(--koochita-blue)');
-            }
-        }
-    })
-}
-
-function addThisPlaceToTrip() {
-    selectedPlaceId = placeId;
-    selectedKindPlaceId = kindPlaceId;
-
-    if(!checkLogin())
-        return;
-
-    saveToTripPopUp(placeId, kindPlaceId);
-}
-
 function addToSelectedTrips(id) {
     allow = true;
     for (i = 0; i < selectedTrips.length; i++) {

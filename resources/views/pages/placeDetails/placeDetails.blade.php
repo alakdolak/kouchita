@@ -1373,6 +1373,39 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
             }
         }
 
+        function addPlaceToBookMark() {
+
+            if (!checkLogin())
+                return;
+
+            $.ajax({
+                type: 'POST',
+                url: bookMarkDir,
+                data: {placeId, kindPlaceId},
+                success: function (response) {
+                    if (response == "ok-del"){
+                        changeBookmarkIcon();
+                        showSuccessNotifi('این صفحه از حالت ذخیره خارج شد', 'left', 'red');
+                    }
+                    else if(response == 'ok-add'){
+                        changeBookmarkIcon();
+                        showSuccessNotifi('این صفحه ذخیره شد', 'left', 'var(--koochita-blue)');
+                    }
+                }
+            })
+        }
+
+        function addThisPlaceToTrip() {
+            selectedPlaceId = placeId;
+            selectedKindPlaceId = kindPlaceId;
+
+            if(!checkLogin())
+                return;
+
+            saveToTripPopUp(placeId, kindPlaceId);
+        }
+
+
         $(document).ready(() => {
             $('#allPlacePicturesCount').text(allPlacePics.length);
             autosize($(".inputBoxInputComment"));
@@ -1448,6 +1481,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     $('#comeDownHeader').removeClass('show');
             }
         });
+
     </script>
 @stop
 

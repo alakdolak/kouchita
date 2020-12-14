@@ -331,7 +331,7 @@ class ReviewsController extends Controller
             $ans = array();
             $isFilter = false;
             $isPicFilter = false;
-            $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
+            $sqlQuery = '';
             $onlyPic = 0;
 
             $count = 0;
@@ -346,9 +346,11 @@ class ReviewsController extends Controller
             else
                 $uId = 0;
 
-            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject != "dontShowThisText"';
+            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject NOT LIKE "dontShowThisText"';
 
             if (isset($request->filters)) {
+                $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
+
                 foreach ($request->filters as $item) {
                     if ($item != null && $item['kind'] != 'onlyPic' && $item['kind'] != 'textSearch') {
                         array_push($ques, $item['id']);
