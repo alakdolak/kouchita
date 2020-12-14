@@ -1357,7 +1357,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
         function filterChoices(element) {
             $(element).toggleClass('bg-color-yellowImp')
         }
-        
+
         function showPhotoAlbum(_kind) {
             if($(window).width() <= 767)
                 createPhotoModal('آلبوم عکس', allPlacePics);// in general.photoAlbumModal.blade.php
@@ -1380,7 +1380,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
             $.ajax({
                 type: 'POST',
-                url: bookMarkDir,
+                url: '{{route("setBookMark")}}',
                 data: {placeId, kindPlaceId},
                 success: function (response) {
                     if (response == "ok-del"){
