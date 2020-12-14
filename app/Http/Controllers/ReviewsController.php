@@ -346,7 +346,7 @@ class ReviewsController extends Controller
             else
                 $uId = 0;
 
-            $sqlQuery = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND (`visitorId` = ' . $uId . ' OR `confirm` = 1) ';
+            $sqlQuery = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND (visitorId = ' . $uId . ' OR confirm = 1) ';
 
             if (isset($request->filters)) {
                 $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
@@ -460,9 +460,9 @@ class ReviewsController extends Controller
 
             $logCount = LogModel::whereRaw($sqlQuery)->count();
             if ($num == 0 && $count == 0)
-                $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
+                $logs = LogModel::whereRaw($sqlQuery)->where('subject', '!=', 'dontShowThisText')->orderByDesc('date')->orderByDesc('time')->get();
             else
-                $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($num - 1) * $count)->take($count)->get();
+                $logs = LogModel::whereRaw($sqlQuery)->where('subject', '!=', 'dontShowThisText')->orderByDesc('date')->orderByDesc('time')->skip(($num - 1) * $count)->take($count)->get();
 
             if (count($logs) == 0)
                 echo 'nok1';
