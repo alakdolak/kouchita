@@ -346,7 +346,7 @@ class ReviewsController extends Controller
             else
                 $uId = 0;
 
-            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject NOT LIKE "dontShowThisText"';
+            $sqlQuery = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject NOT LIKE "dontShowThisText"';
 
             if (isset($request->filters)) {
                 $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
@@ -381,7 +381,7 @@ class ReviewsController extends Controller
                 if (count($ques) > 0) {
                     $isFilter = true;
 
-                    $logs = LogModel::whereRaw($sqlQuery1)->get();
+                    $logs = LogModel::whereRaw($sqlQuery)->get();
 
                     $logId = array();
                     for ($i = 0; $i < count($logs); $i++)
@@ -416,7 +416,7 @@ class ReviewsController extends Controller
                     if ($sqlQuery == '')
                         $sqlQuery = '1';
 
-                    $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->get();
+                    $logs = LogModel::whereRaw($sqlQuery)->get();
 
                     $loo = array();
                     foreach ($logs as $item)
@@ -443,9 +443,7 @@ class ReviewsController extends Controller
                             }
                         }
                     }
-
                     $isFilter = true;
-
                 }
 
                 if (count($lo) > 0) {
@@ -460,14 +458,11 @@ class ReviewsController extends Controller
 
             }
 
-            if ($sqlQuery == '')
-                $sqlQuery = '1';
-
-            $logCount = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->count();
+            $logCount = LogModel::whereRaw($sqlQuery)->count();
             if ($num == 0 && $count == 0)
-                $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
+                $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
             else
-                $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($num - 1) * $count)->take($count)->get();
+                $logs = LogModel::whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($num - 1) * $count)->take($count)->get();
 
             if (count($logs) == 0)
                 echo 'nok1';
