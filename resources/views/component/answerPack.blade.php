@@ -34,7 +34,7 @@
             </div>
         </div>
         <div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">
-            <div class="circleBase newCommentWriterProfilePic">
+            <div class="circleBase newCommentWriterProfilePic hideOnPhone">
                 <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="##userPic##" style="width: 100%; border-radius: 50%;">
             </div>
             <div class="inputBox setButtonToBot">
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv hidden" style="margin-top: 0px;">
-            <div class="circleBase newCommentWriterProfilePic">
+            <div class="circleBase newCommentWriterProfilePic hideOnPhone">
                 <img alt="userPic" src="##userPic##" style="width: 100%; border-radius: 50%;">
             </div>
             <div class="inputBox setButtonToBot">

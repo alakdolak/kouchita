@@ -1468,6 +1468,7 @@
 
     .replyToCommentMainDiv{
         background-color: #f2f2f2;
+        background-color: #4dc7bc1a;
         border-radius: 10px;
         padding: 5px 5px 0px 0px;
         width: 99%;
@@ -1508,6 +1509,7 @@
     .replyToCommentMainDiv .inputBox{
         background: none;
         border: none;
+        width: 100%;
     }
 
     .commentWriterPicShow{
@@ -1577,6 +1579,11 @@
         left: auto;
         display: flex;
         align-items: center;
+    }
+
+    .mainFullReviewDiv{
+        border-top: solid 1px #4dc7bc52;
+        border-bottom: solid 1px #4dc7bc52;
     }
 }
 

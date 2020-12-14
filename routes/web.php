@@ -352,6 +352,10 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
     Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
     Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
     Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
+
+    Route::middleware(['auth'])->group(function(){
+        Route::post('places/setRateToPlace', 'PlaceController@setRateToPlace')->name('places.setRateToPlaces');
+    });
 });
 
 Route::post('log/storeSeen', 'LogController@storeUserSeenLog')->name('log.storeSeen');

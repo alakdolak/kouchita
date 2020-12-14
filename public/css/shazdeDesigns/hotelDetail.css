@@ -2407,14 +2407,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-radius: 50%;
 }
 
-.newCommentWriterProfilePic, .answerWriterProfilePic, .newAnswerWriterProfilePic {
-    display: inline-block;
-    width: 45px;
-    height: 45px;
-    float: right;
-    margin-left: 5px;
-}
-
 .newCommentPlaceMainDiv .emojionearea .emojionearea-editor{
     min-height: 20px;
 }
@@ -4149,6 +4141,100 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     display: none;
 }
 
+DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .photos{
+    overflow: unset;
+}
+.sharesButtons{
+    background: white;
+    position: absolute;
+    top: 50%;
+    z-index: 9;
+    right: 0px;
+    max-height: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 6px 4px 0px #333;
+    border-radius: 0px 0px 30px 30px;
+    -webkit-transition: max-height 0.8s;
+    -moz-transition: max-height 0.8s;
+    transition: max-height 0.8s;
+    padding: 0px;
+}
+.sharesButtons.open{
+    max-height: 300px;
+    padding-top: 20px;
+}
+.sharesButtons .share{
+    z-index: 11;
+    background: white;
+    box-shadow: 2px 2px 4px 0px #333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+.sharesButtons .share img{
+    width: 100%;
+}
+
+.userRateToPlaceModal{
+
+}
+.userRateToPlaceModal .header{
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    padding: 0px 40px;
+    color: white;
+}
+.userRateToPlaceModal .body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 78px;
+    font-size: 40px;
+    color: white;
+}
+.userRateToPlaceModal .body .fullStarRating{
+    color: #ffc71f;
+}
+.userRateToPlaceModal .footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.userRateToPlaceModal .footer button{
+    width: 100%;
+    background: white;
+    border: solid 1px #ffc71f;
+    border-radius: 20px;
+    padding: 7px 0px;
+    font-size: 18px;
+    color: black;
+}
+.userRateToPlaceModal .modalBody{
+    border-radius: 200px 200px 0px 0px !important;
+    padding-top: 55px !important;
+    background: black;
+    border: solid 1px #ffc71f;
+}
+.userRateToPlaceModal .modalBody .topIcon{
+    position: absolute;
+    top: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    right: 0;
+}
+
 /*responsive for tablets*/
 @media only screen and (min-width: 992px) {
 
@@ -4436,7 +4522,7 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
         right: inherit;
     }
 
-    #generalDescriptionMobile, #detailsAndFeaturesMobile, #commentsAndAddressMobile {
+    #generalDescriptionMobile, #detailsAndFeaturesMobile, #commentsAndAddressMobile, #recepieForFood {
         width: 100%;
         padding: 10px;
     }
@@ -4730,8 +4816,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
         text-align: right;
         padding: 10px 0px;
         background: white;
-        border-top: solid 1px #4dc7bc52;
-        border-bottom: solid 1px #4dc7bc52;
     }
     .mobileIntroductionMainDiv.tabContentMainWrap{
         padding-top: 0px;
@@ -4771,10 +4855,7 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 
     .topAndBottomBorderAndMargin{
         background: white;
-        border-top: solid 1px #4dc7bc52;
-        border-bottom: solid 1px #4dc7bc52;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin: 0px 0px;
         padding-top: 10px;
         padding-bottom: 10px;
 
@@ -4879,7 +4960,6 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     }
     .atf_header_wrapper{
         min-height: 160px;
-        border-bottom: solid 1px #4dc7bc52;
         padding-top: 13px;
     }
     .showNewTextReviewArea::placeholder{
@@ -4955,7 +5035,7 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
         text-align: right;
         font-weight: bold;
         font-size: 18px;
-        color: var(--koochita-light-green);
+        color: black;
     }
     .topHeaderShowDown .buttonsH{
         display: flex;
@@ -4969,6 +5049,62 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
     }
     .topHeaderShowDown .tabs .tabLinkMainWrap{
         color: black;
+    }
+
+    .mahaliFoodSeperator{
+        background: #f8f8f8;
+        padding: 0;
+        height: 15px;
+    }
+    .setScoreForThisPlaceComeUp{
+        position: fixed;
+        left: 10px;
+        background: var(--koochita-light-green);
+        z-index: 1000;
+        color: white;
+        padding: 10px;
+        border-radius: 20px;
+        transition: .3s;
+        bottom: 0px;
+        animation: glowRatingButton 2s infinite;
+    }
+    .setScoreForThisPlaceComeUp.open{
+        bottom: 70px;
+    }
+
+    .materialRows{
+        font-size: 15px !important;
+        display: flex;
+        margin-bottom: 5px;
+        border-bottom: solid 1px #d3d3d342;
+        padding-bottom: 5px;
+    }
+    .materialRows .materialName{
+
+    }
+    .materialRows .materialVolume{
+        color: var(--koochita-red);
+    }
+
+    .materSection hr{
+        display: none;
+    }
+
+    .foodKindMob{
+        padding: 0px 30px;
+        font-size: 14px;
+        box-shadow: 2px 2px 4px 0px #333;
+        border-radius: 5px;
+    }
+    .foodKindMob .title{
+        font-weight: bold;
+        color: var(--koochita-green);
+    }
+    .foodKindMob .val{
+
+    }
+    .goodForSec{
+        margin: 7px 0px;
     }
 }
 
@@ -5510,5 +5646,17 @@ DIV.prw_rup.prw_common_centered_image .imgWrap .centeredImg:not(.lte_ie8){
 
     .postPlaceAndTime .commentWriterExperiencePlace {
         font-size: 10px;
+    }
+}
+
+@keyframes glowRatingButton {
+    0% {
+        background: black;
+    }
+    50%{
+        background: #542626;
+    }
+    100%{
+        background: black;
     }
 }

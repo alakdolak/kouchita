@@ -39,64 +39,13 @@
     <meta property="article:tag" content="صنایع دستی {{$placeTitleName}}"/>
     <meta property="article:tag" content="روستاهای {{$placeTitleName}}"/>
 
-    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v=1')}}">
-    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css?v=1')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css?v='.$fileVersions)}}">
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css?v='.$fileVersions)}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v='.$fileVersions)}}'/>
 
 
     <style>
-        .cpNameLabel{
-            font-size: 10px;
-            margin-left: 4px;
-        }
 
-        @media (max-width: 767px) {
-            .articleDiv .widget ul li{
-                list-style: none !important;
-                margin-bottom: 10px !important;
-                position: relative !important;
-                border-bottom: solid 1px #4dc7bc52 ;
-                padding-bottom: 10px !important;
-                height: auto;
-            }
-            .articleDiv .widget ul li:last-of-type{
-                border-bottom: none !important;
-                margin-bottom: 0px !important;
-            }
-            .im-widget-thumb{
-                height: 70px;
-            }
-            .articleDiv .widget ul{
-                border: solid 2px #4dc7bc52;
-                margin: 0px 5px;
-                padding: 5px;
-                border-top: 0px;
-                padding-top: 20px;
-            }
-            .im-widget-entry-header .im-widget-entry-title{
-                font-size: 16px;
-            }
-            .articleDiv .im-entry-thumb-link{
-                height: 190px !important;
-            }
-            .widget{
-                margin-bottom: 15px;
-            }
-            .articleDiv{
-                border-top: none;
-                margin-bottom: 20px;
-                border-bottom: none;
-                padding-top: 0px;
-                background: #f8f8f8;
-                padding-bottom: 8px;
-            }
-            .articleDiv .topPlacesDivInCity{
-                background: white;
-                margin-top: 0px;
-                padding-top: 25px;
-            }
-
-        }
     </style>
 
 </head>
@@ -603,7 +552,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 topPlacesDivInCity cpBorderBottom" style="padding: 0px">
+            <div class="col-xs-12 topPlacesDivInCity cpBorderBottom cpMapSec">
                 <div id="cpMap" class="cpMap placeHolderAnime" style="height: 500px"></div>
             </div>
 

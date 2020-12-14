@@ -5,11 +5,11 @@
         <div class="ppr_rup ppr_priv_location_detail_header" style="margin-top: 0px;">
             <h1 id="HEADING" class="heading_title" property="name">{{$place->name}}</h1>
 
-            <div class="rating_and_popularity">
+            <div class="rating_and_popularity" style="margin-top: 5px;">
                 <span class="header_rating">
                    <div class="rs rating" rel="v:rating">
                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                           <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-16" property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of {{$avgRate}} bubbles'></span>
+                           <span class="ui_bubble_rating bubble_{{$avgRate}}0 placeRateStars font-size-16" property="ratingValue" content="{{$avgRate}}"></span>
                        </div>
                        <div class="more" id="moreTaLnkReviewHeader" href="#REVIEWS">
                            <span property="v:count" id="commentCount"></span>
@@ -100,21 +100,67 @@
 
                 <div class="prw_rup prw_common_atf_header_bl headerBL">
                     <div class="blRow">
-                            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
-                                <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap({{$place->C}}, {{$place->D}})" style="min-height: 20px">
+                        @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
+                            <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap({{$place->C}}, {{$place->D}})" style="min-height: 20px">
                                 <span class="ui_icon map-pin"></span>
-                                    <span class="street-address">{{__('آدرس')}} : </span>
-                                    @if($placeMode == 'majara')
-                                        <span class="placeDetailAddressHeader">
-                                            {{$place->dastresi}}
-                                        </span>
-                                    @else
-                                        <span class="placeDetailAddressHeader">
-                                            {{$place->address}}
-                                        </span>
-                                    @endif
+                                <span class="street-address">{{__('آدرس')}} : </span>
+                                @if($placeMode == 'majara')
+                                    <span class="placeDetailAddressHeader">
+                                        {{$place->dastresi}}
+                                    </span>
+                                @else
+                                    <span class="placeDetailAddressHeader">
+                                        {{$place->address}}
+                                    </span>
+                                @endif
+                            </div>
+                        @endif
+                        @if($placeMode == 'mahaliFood')
+                            <div class="hideOnScreen">
+                                <div class="goodForSec">
+                                    <div class="isGoodFood">
+                                        <span>مناسب افراد گیاه خوار</span>
+                                        <span style=" color: {{$place->vegetarian == 1 ? 'green' : 'red'}};">
+                                        {{$place->vegetarian == 1 ? 'هست' : 'نیست'}}
+                                    </span>
+                                    </div>
+                                    <div class="isGoodFood">
+                                        <span>مناسب افراد وگان</span>
+                                        <span style=" color: {{$place->vegan == 1 ? 'green' : 'red'}};">
+                                        {{$place->vegan == 1 ? 'هست' : 'نیست'}}
+                                    </span>
+                                    </div>
+                                    <div class="isGoodFood">
+                                        <span>مناسب افراد دیابتی</span>
+                                        <span style=" color: {{$place->diabet == 1 ? 'green' : 'red'}};">
+                                        {{$place->diabet == 1 ? 'هست' : 'نیست'}}
+                                    </span>
+                                    </div>
                                 </div>
-                            @endif
+                                <div class="caloryMobileSec">
+                                    <span style="font-weight: bold; color: black;">کالری : </span>
+                                    <span class="caleryInMobileHeader"> {{$place->energy}} </span>
+                                    <span class="caleryInMobileHeader"> کالری در هر</span>
+                                    <span class="caleryInMobileHeader"> {{$place->volume}} </span>
+                                    <span class="caleryInMobileHeader"> {{$place->source}} </span>
+                                </div>
+                            </div>
+                        @elseif($placeMode == 'sogatSanaies')
+                            <div class="sogatFeature hideOnScreen">
+                                <div class="feat">
+                                    <div class="title">ابعاد: </div>
+                                    <div class="value">{{$place->size}}</div>
+                                </div>
+                                <div class="feat">
+                                    <div class="title">وزن: </div>
+                                    <div class="value">{{$place->weight}}</div>
+                                </div>
+                                <div class="feat">
+                                    <div class="title">کلاس قیمتی: </div>
+                                    <div class="value">{{$place->price}}</div>
+                                </div>
+                            </div>
+                        @endif
                         @if(isset($place->phone) && is_array($place->phone) && count($place->phone) > 0)
                             <div class="blEntry blEn phone truePhone">
 {{--                                <span>--}}

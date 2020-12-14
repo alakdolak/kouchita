@@ -1,6 +1,73 @@
-<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/placeDetailsTable.css?v=1')}}">
+<style>
+    .centeredTitle{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    .centeredTitle .title{
+        color: var(--koochita-blue);
+        z-index: 2;
+        background: white;
+        padding: 0px 10px;
+        font-size: 22px !important;
+        font-weight: normal;
+    }
+    .centeredTitle .line{
+        position: absolute;
+        height: 1px;
+        background: #4dc7bc52;
+        width: 100%;
+        z-index: 1;
+    }
+</style>
+<div id="goToMapSection" class="row hideOnScreen">
+    <div class="seperatorSections"></div>
+    <div class="sogatSanieMobileFeatures">
+        <div class="centeredTitle">
+            <h3 class="title">ویژگی ها</h3>
+            <div class="line"></div>
+        </div>
+        @if($place->eatable == 0)
+            <div class="featureBox">
+                <div class="title"> سبک </div>
+                <div class="value">
+                    <div class="val">{{$place->style}}</div>
+                    <div class="val">{{$place->fragile}}</div>
+                </div>
+            </div>
+            <div class="featureBox">
+                <div class="title"> جنس </div>
+                <div class="value">
+                    @if($place->material != null)
+                        <div class="val">{{$place->material}}</div>
+                    @endif
+                </div>
+            </div>
+            <div class="featureBox">
+                <div class="title"> نوع </div>
+                <div class="value">
+                    @foreach($place->kind as $kind)
+                        <div class="val">{{$kind}}</div>
+                    @endforeach
+                </div>
+            </div>
+        @else
+            <div class="featureBox">
+                <div class="title"> مزه </div>
+                <div class="value">
+                    @foreach($place->taste as $test)
+                        <div class="val">{{$test}}</div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+    </div>
+</div>
 
-<div class="row" style="font-size: 15px">
+<div class="row hideOnPhone" style="font-size: 15px">
 
     @if($place->eatable == 0)
         <div class="descriptionSections">
@@ -72,10 +139,8 @@
                 <div class="contentSection col-xs-3">{{$place->material}}</div>
             @endif
         </div>
-
     @endif
 </div>
-
 
 <script>
     var checkFeatures = $('.descriptionSections');

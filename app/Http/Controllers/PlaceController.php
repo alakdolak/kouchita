@@ -29,6 +29,7 @@ use App\models\PicItem;
 use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
+use App\models\places\PlaceRates;
 use App\models\PlaceStyle;
 use App\models\PlaceTag;
 use App\models\Question;
@@ -144,16 +145,18 @@ class PlaceController extends Controller {
         }
         saveViewPerPage($kindPlaceId, $place->id); // common.php
 
-        $bookMark = false;
         $bmcheck = BookMark::join('bookMarkReferences', 'bookMarkReferences.id', 'bookMarks.bookMarkReferenceId')
                             ->where('userId', $uId)
                             ->where('bookMarks.referenceId', $place->id)
                             ->where('bookMarkReferences.tableName', $kindPlace->tableName)
                             ->count();
-        if ($bmcheck > 0)
-            $bookMark = true;
+        $bookMark = $bmcheck > 0;
 
-        $rates = getRate($place->id, $kindPlaceId); // common.php
+        $youRate = PlaceRates::where('kindPlaceId', $kindPlace->id)->where('placeId', $place->id)->where('userId', $uId)->first();
+        $youRate = $youRate != null ? $youRate->rate : 0;
+
+        $getRates = getRate($place->id, $kindPlace->id);
+        $rates = ['numOfRate' => $getRates[0], 'avg' => $getRates[1], 'yourRate' => $youRate];
 
         $save = false;
         $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
@@ -235,13 +238,12 @@ class PlaceController extends Controller {
 
         $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => \Request::url()];
         session(['inPage' => 'place_' . $kindPlaceId . '_' . $place->id]);
+
         return view('pages.placeDetails.placeDetails', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
-            'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
-            'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
-            'photographerPics' => $photographerPics,'userPic' => $uPic,
-            'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
-            'sitePics' => $sitePics, 'userCode' => $userCode,
-            'kindPlaceId' => $kindPlaceId, 'mode' => 'city', 'rates' => $rates[0],
+            'state' => $state, 'avgRate' => $rates['avg'], 'rates' => $rates['numOfRate'], 'yourRate' => $rates['yourRate'], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
+            'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount, 'photographerPics' => $photographerPics,
+            'userPic' => $uPic, 'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
+            'sitePics' => $sitePics, 'userCode' => $userCode, 'kindPlaceId' => $kindPlaceId, 'mode' => 'city',
             'photos' => $photos, 'userPhotos' => $userPhotos, 'userVideo' => $userVideo,
             'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => '',
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'kindPlace' => $kindPlace,
@@ -400,7 +402,6 @@ class PlaceController extends Controller {
                 foreach ($nearbys as $nearby) {
 //                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
 //                                  'activityId' => Activity::whereName('نظر')->first()->id];
-//                    $nearby->rate = getRate($nearby->id, $kindPlace->id)[1];
 //                    $nearby->review = LogModel::where($condition)->count();
 //                    $nearby->distance = round($nearby->distance, 2);
                     $nearby->pic = getPlacePic($nearby->id, $kindPlace->id);
@@ -1168,7 +1169,6 @@ class PlaceController extends Controller {
 
     public function seeAllAns($questionId, $mode = "", $logId = -1)
     {
-
         $hasLogin = true;
         if (!Auth::check())
             $hasLogin = false;
@@ -1298,7 +1298,7 @@ class PlaceController extends Controller {
         return view('questionList', array('placePic' => $placePic, 'city' => $city->name,
             'state' => State::whereId($city->stateId)->name, 'placeId' => $placeId, 'placeName' => $place->name,
             'kindPlaceId' => $kindPlaceId, 'answers' => $answers, 'mode' => $mode, 'logId' => $logId,
-            'rate' => getRate($placeId, $kindPlaceId)[1], 'hasLogin' => $hasLogin,
+            'rate' => $place->fullRate, 'hasLogin' => $hasLogin,
             'reviews' => $reviews, 'question' => $question, 'placeMode' => $placeMode));
     }
 
@@ -1326,7 +1326,6 @@ class PlaceController extends Controller {
 
     public function showAllPlaces($placeId1, $kindPlaceId1, $placeId2 = "", $kindPlaceId2 = "", $placeId3 = "", $kindPlaceId3 = "", $placeId4 = "", $kindPlaceId4 = "", $mode = "", $err = "")
     {
-
         $hasLogin = true;
         $kindPlaceIds = [$kindPlaceId1, $kindPlaceId2, $kindPlaceId3, $kindPlaceId4];
 
@@ -1436,7 +1435,7 @@ class PlaceController extends Controller {
 
             $bookMarks[$i] = $bookMark;
 
-            $ratesArr[$i] = getRate($placeIds[$i], $kindPlaceId);
+            $ratesArr[$i] = $place->fullRate;
 
             $save = false;
             $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $placeIds[$i] . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
@@ -1724,7 +1723,9 @@ class PlaceController extends Controller {
         $tags = DB::select('SELECT DISTINCT(subject), id FROM log WHERE confirm = 1 and activityId = ' . $activityId . ' and placeId = ' . $log->placeId . ' and kindPlaceId = ' . $log->kindPlaceId . ' ORDER BY date DESC LIMIT 0, 10');
 
         return view('showReview', array('log' => $log, 'comment' => $comment, 'hasLogin' => $hasLogin, 'state' => $state,
-            'placeName' => $place->name, 'placePic' => $placePic, 'address' => $address, 'phone' => $phone, 'site' => $site, 'userPhotosCount' => $userPhotosCount, 'sitePhotosCount' => $placePhotosCount, 'likes' => $likes, 'dislikes' => $dislikes, 'rate' => getRate($log->placeId, $log->kindPlaceId)[1], 'tags' => $tags, 'placeMode' => $placeMode));
+            'placeName' => $place->name, 'placePic' => $placePic, 'address' => $address, 'phone' => $phone,
+            'site' => $site, 'userPhotosCount' => $userPhotosCount, 'sitePhotosCount' => $placePhotosCount,
+            'likes' => $likes, 'dislikes' => $dislikes, 'rate' => 0, 'tags' => $tags, 'placeMode' => $placeMode));
     }
 
     public function getPhotos()
@@ -2663,10 +2664,10 @@ class PlaceController extends Controller {
         }
 
 
-        $nearbyHotels = DB::select("SELECT id, name, C, D, file, pic_1, alt1, address, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM hotels WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . " and NOT id IN(" . implode(",", $hotelId) . ")  order by distance ASC ");
-        $majaras = DB::select("SELECT id, name, C, D, file, pic_1, alt1, dastresi, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM majara WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . " and NOT id IN(" . implode(",", $majaraId) . ")  order by distance ASC ");
-        $nearbyRestaurants = DB::select("SELECT id, name, C, D, kind_id, file, address, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM restaurant WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . "and NOT id IN(" . implode(",", $restId) . ")  order by distance ASC ");
-        $nearbyAmakens = DB::select("SELECT id, name, address, mooze, tarikhi, tafrihi, tabiatgardi, markazkharid,  C, D, file, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM amaken WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . " and NOT id IN(" . implode(",", $amakenId) . ")   order by distance ASC ");
+        $nearbyHotels = DB::select("SELECT id, fullRate, name, C, D, file, pic_1, alt1, address, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM hotels WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . " and NOT id IN(" . implode(",", $hotelId) . ")  order by distance ASC ");
+        $majaras = DB::select("SELECT id, fullRate, name, C, D, file, pic_1, alt1, dastresi, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM majara WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . " and NOT id IN(" . implode(",", $majaraId) . ")  order by distance ASC ");
+        $nearbyRestaurants = DB::select("SELECT id, fullRate, name, C, D, kind_id, file, address, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM restaurant WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . "and NOT id IN(" . implode(",", $restId) . ")  order by distance ASC ");
+        $nearbyAmakens = DB::select("SELECT id, fullRate, name, address, mooze, tarikhi, tafrihi, tabiatgardi, markazkharid,  C, D, file, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM amaken WHERE C between " . $swLat . " and " . $neLat . " and D between " . $swLng . " and " . $neLng . " and NOT id IN(" . implode(",", $amakenId) . ")   order by distance ASC ");
 
         foreach ($nearbyHotels as $nearbyHotel) {
 
@@ -2674,7 +2675,7 @@ class PlaceController extends Controller {
                 'activityId' => Activity::whereName('نظر')->first()->id];
             $nearbyHotel->reviews = LogModel::where($condition)->count();
             $nearbyHotel->distance = round($nearbyHotel->distance, 2);
-            $nearbyHotel->rate = getRate($nearbyHotel->id, 4)[1];
+            $nearbyHotel->rate = $nearbyHotel->fullRate;
 
         }
 
@@ -2684,18 +2685,15 @@ class PlaceController extends Controller {
                 'activityId' => Activity::whereName('نظر')->first()->id];
             $majara->reviews = LogModel::where($condition)->count();
             $majara->distance = round($majara->distance, 2);
-            $majara->rate = getRate($majara->id, 6)[1];
-
+            $majara->rate = $majara->fullRate;
         }
 
         $restaurantPlaceId = Place::whereName('رستوران')->first()->id;
         foreach ($nearbyRestaurants as $nearbyRestaurant) {
-
-            $condition = ['placeId' => $nearbyRestaurant->id, 'kindPlaceId' => $restaurantPlaceId, 'confirm' => 1,
-                'activityId' => Activity::whereName('نظر')->first()->id];
+            $condition = ['placeId' => $nearbyRestaurant->id, 'kindPlaceId' => $restaurantPlaceId, 'confirm' => 1, 'activityId' => Activity::whereName('نظر')->first()->id];
             $nearbyRestaurant->reviews = LogModel::where($condition)->count();
             $nearbyRestaurant->distance = round($nearbyRestaurant->distance, 2);
-            $nearbyRestaurant->rate = getRate($nearbyRestaurant->id, $restaurantPlaceId)[1];
+            $nearbyRestaurant->rate = $nearbyRestaurant->fullRate;
         }
 
         $amakenPlaceId = Place::whereName('اماکن')->first()->id;
@@ -2706,14 +2704,12 @@ class PlaceController extends Controller {
                 'activityId' => Activity::whereName('نظر')->first()->id];
             $nearbyAmaken->reviews = LogModel::where($condition)->count();
             $nearbyAmaken->distance = round($nearbyAmaken->distance, 2);
-            $nearbyAmaken->rate = getRate($nearbyAmaken->id, $amakenPlaceId)[1];
+            $nearbyAmaken->rate = $nearbyAmaken->fullRate;
         }
 
 
         echo json_encode(array('hotel' => $nearbyHotels, 'rest' => $nearbyRestaurants, 'amaken' => $nearbyAmakens, 'majara' => $majaras));
         return;
-
-
     }
 
     public function getPlacePicture()
@@ -3428,7 +3424,7 @@ class PlaceController extends Controller {
                 $place->state = $state->name;
                 $place->city = $city->name;
             }
-            $place->avgRate = (int)$place->fullRate == 0 ? 2 : (int)$place->fullRate;
+            $place->avgRate = (int)$place->fullRate;
             $place->url = route('placeDetails', ['kindPlaceId' => $kindPlace->id, 'placeId' => $place->id]);
             if($uId != 0) {
                 $place->bookMark = BookMark::where('userId', $uId)
@@ -3449,6 +3445,51 @@ class PlaceController extends Controller {
         ];
 
         return response()->json(['places' => $places, 'placeCount' => $placeCount, 'totalCount' => $totalCount, 'times' => $times]);
+    }
+
+
+    public function setRateToPlace(Request $request)
+    {
+        if(isset($request->kindPlaceId) && isset($request->placeId) && isset($request->rate)){
+            if($request->rate <= 0)
+                return response()->json(['status' => 'error3']);
+
+            $kindPlace = Place::find($request->kindPlaceId);
+            $place = \DB::table($kindPlace->tableName)->find($request->placeId);
+            $user = \auth()->user();
+
+            if($place != null) {
+                $rate = PlaceRates::where('kindPlaceId', $kindPlace->id)
+                        ->where('placeId', $place->id)
+                        ->where('userId', $user->id)
+                        ->first();
+
+                if($rate == null){
+                    $rate = new PlaceRates();
+                    $rate->kindPlaceId = $kindPlace->id;
+                    $rate->placeId = $place->id;
+                    $rate->userId = $user->id;
+                }
+
+                if($request->rate > 5)
+                    $request->rate = 5;
+
+                $rate->rate = $request->rate;
+                $rate->save();
+
+                $avgRate = PlaceRates::where('kindPlaceId', $kindPlace->id)->where('placeId', $place->id)->avg('rate');
+
+                \DB::table($kindPlace->tableName)->where('id', $place->id)->update(['fullRate' => $avgRate]);
+
+                $rates = getRate($place->id, $kindPlace->id);
+
+                return response()->json(['status' => 'ok', 'rates' => ['avg' => $rates[1], 'rate' => $rates[0]]]);
+            }
+            else
+                return response()->json(['status' => 'error2']);
+        }
+        else
+            return response()->json(['status' => 'error1']);
     }
 
 }

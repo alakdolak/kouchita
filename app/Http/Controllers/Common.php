@@ -17,6 +17,7 @@ use App\models\Medal;
 use App\models\Message;
 use App\models\Place;
 use App\models\PlacePic;
+use App\models\places\PlaceRates;
 use App\models\QuestionAns;
 use App\models\BookMarkReference;
 use App\models\Restaurant;
@@ -450,67 +451,14 @@ function getRate($placeId, $kindPlaceId) {
         $kindPlace = Place::find($kindPlaceId);
         $place = \DB::table($kindPlace->tableName)->find($placeId);
 
-        $city = Cities::find($place->cityId);
-        $state = State::find($city->stateId);
+        $avgRate = $place->fullRate;
+        $numOfRate = ['1' => 0, '2' => 0, '3' => 0, '4' => 0, '5' => 0];
 
-        $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ' ) AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+        $numOfRateDB = PlaceRates::where('kindPlaceId', $kindPlace->id)->where('placeId', $place->id)->select(['id', 'rate'])->get()->groupBy('rate');
+        foreach ($numOfRateDB as $key => $item)
+            $numOfRate[$key] = count($item);
 
-        $questionId = array();
-        foreach ($section as $item)
-            array_push($questionId, $item->questionId);
-
-        if($questionId != null && count($questionId) != 0)
-            $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
-        else
-            $questions = array();
-
-        $questionId = array();
-        foreach ($questions as $item)
-            array_push($questionId, $item->id);
-
-        $avgRate = 0;
-
-
-        if($questionId != null && count($questionId) != 0)
-            $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and  log.confirm = 1 and log.kindPlaceId = " . $kindPlaceId . " and  qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
-        else
-            $rates = array();
-
-
-        $separatedRates = [0, 0, 0, 0, 0];
-        foreach ($rates as $rate) {
-            $avgRate += $rate->avgRate;
-
-            if($rate->avgRate > 4)
-                $separatedRates[4] = $separatedRates[4] + 1;
-            elseif($rate->avgRate > 3)
-                $separatedRates[3] = $separatedRates[3] + 1;
-            elseif($rate->avgRate > 2)
-                $separatedRates[2] = $separatedRates[2] + 1;
-            elseif($rate->avgRate > 1)
-                $separatedRates[1] = $separatedRates[1] + 1;
-            else
-                $separatedRates[0] = $separatedRates[0] + 1;
-        }
-
-        if(count($rates) != 0)
-            $avgRate /= count($rates);
-
-        if($avgRate == 0)
-            $avgRate = 2;
-
-        elseif($avgRate > 4)
-            $avgRate = 5;
-        elseif($avgRate > 3)
-            $avgRate = 4;
-        elseif($avgRate > 2)
-            $avgRate = 3;
-        elseif($avgRate > 1)
-            $avgRate = 2;
-        else
-            $avgRate = 1;
-
-        return [$separatedRates, $avgRate];
+        return [$numOfRate, $avgRate];
     }
     catch (\Exception $exception){
         return [[0, 0, 0, 0, 0], 0];
