@@ -26,6 +26,7 @@ $authUrl = $client->createAuthUrl();
 
 $url = $_SERVER['REQUEST_URI'];
 $authUrl = str_replace('state', 'state='.$url, $authUrl);
+$authUrl = str_replace('http://', 'https://', $authUrl);
 ?>
 
 @if(\App::getLocale() == 'en')
