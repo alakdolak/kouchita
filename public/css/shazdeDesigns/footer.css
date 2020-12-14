@@ -1817,6 +1817,7 @@ footer .bookMarkSSec .infoSec .state{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 99;
 }
 .mobileFiltersButtonTabs .tabs{
     display: flex;
@@ -1834,6 +1835,7 @@ footer .bookMarkSSec .infoSec .state{
     color: #333;
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 120px;
 }
 .mobileFiltersButtonTabs .tabs div:nth-of-type(1){

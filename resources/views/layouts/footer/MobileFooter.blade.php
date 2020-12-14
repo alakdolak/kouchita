@@ -15,6 +15,41 @@
             text-align: center;
             padding: 5px 0px;
         }
+        .safarnamehMainCategoryListMobile{
+            overflow-y: auto;
+            background: white;
+            position: relative;
+            border: solid 2px black;
+            border-top: 0px;
+        }
+        .safarnamehMainCategoryListMobile .list{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .safarnamehMainCategoryListMobile .categ{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 23%;
+            border: solid 1px lightgrey;
+            margin: 3px;
+            color: #333;
+            border-radius: 10px;
+        }
+        .safarnamehMainCategoryListMobile .categ .categIcon{
+            margin: 10px 0px;
+        }
+        .safarnamehMainCategoryListMobile .categ .categIcon img{
+            width: 35px;
+        }
+        .safarnamehMainCategoryListMobile .categ .title{
+            font-size: 12px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
     }
 </style>
 <div class="gapForMobileFooter hideOnScreen"></div>
@@ -31,12 +66,8 @@
     </div>
     <div onclick="openMobileFooterPopUps('specialMenuMobileFooter');">
         <span class="footerMenuBarLinks">
-                @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
-                    {{__('سفرنامه ها')}}
-                @else
-                    {{__('برنامه های ویژه')}}
-                @endif
-            </span>
+           {{__('برنامه های ویژه')}}
+        </span>
         <span class="iconFamily addPostIcon" style="font-size: 20px;"></span>
     </div>
     @if(Auth::check())
@@ -360,169 +391,209 @@
                 </div>
             </div>
         </div>
+    @elseif(Request::is('safarnameh/*') || Request::is('safarnameh'))
+        <div class="mobileFiltersButtonTabs hideOnScreen">
+            <div class="tabs">
+                <div class="tab filterIcon" onclick="openMyModal('safarnamehMobileCategory')">دسته بندی</div>
+                <div class="tab searchIcon" onclick="">جستجو</div>
+            </div>
+        </div>
+        <div id="safarnamehMobileCategory" class="modalBlackBack fullCenter" style="transition: .7s">
+            <div class="gombadi">
+                <div class="mobileFooterFilterPic">
+                    <img src="{{URL::asset('images/mainPics/naser.jpg')}}" style="width: 100%">
+                    <div class="gradientWhite">
+                        <div class="closeThisModal iconClose" onclick="closeMyModal('safarnamehMobileCategory')"></div>
+                    </div>
+                </div>
+                <div class="safarnamehMainCategoryListMobile">
+                    <div class="list">
+                        @foreach($category as $cat)
+                            <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $cat->name])}}" class="categ">
+                                <div class="categIcon">
+                                    <img src="{{URL::asset('images/icons/hairCut.svg')}}" alt="{{$cat->name}}">
+                                </div>
+                                <div class="title">{{$cat->name}}</div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(window).on('resize', resizeMobileListHeight);
+            function resizeMobileListHeight(){
+                var height = $('#safarnamehMobileCategory').find('.mobileFooterFilterPic').height() + 5;
+                $('#safarnamehMobileCategory').find('.safarnamehMainCategoryListMobile').css('height', `calc(100% - ${height}px)`);
+            }
+            $(window).ready(() =>{
+                resizeMobileListHeight();
+            })
+        </script>
     @endif
 
     <div id="specialMenuMobileFooter" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
-        @if(Request::is('safarnameh/*') || Request::is('safarnameh'))
-            <div class="mainPopUp rightPopUp" style="padding: 7px">
-                <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
+{{--        @if(Request::is('safarnameh/*') || Request::is('safarnameh'))--}}
+{{--            <div class="mainPopUp rightPopUp" style="padding: 7px">--}}
+{{--                <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>--}}
 
-                <div class="lp_ar_filters">
-                    @if(Request::is('safarnameh/list/*'))
-                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)" style="width: 100%; border-left: none">{{__('دسته‌بندی مطالب')}}</div>
-                    @else
-                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('دسته‌بندی مطالب')}}</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('مطالب مشابه')}}</div>
-                    @endif
-                </div>
+{{--                <div class="lp_ar_filters">--}}
+{{--                    @if(Request::is('safarnameh/list/*'))--}}
+{{--                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)" style="width: 100%; border-left: none">{{__('دسته‌بندی مطالب')}}</div>--}}
+{{--                    @else--}}
+{{--                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('دسته‌بندی مطالب')}}</div>--}}
+{{--                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('مطالب مشابه')}}</div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
 
-                <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
-                    <div class="gnContentsCategory footerSafarnmaehCategoryRow">
-                        <div class="mainSafarnamehCategory">
-                            @foreach($category as $cat)
-                                @if(count($cat->subCategory) > 0)
-                                    <div class="safarnamehRow" onclick="showSafarnamehSubCategory({{$cat->id}})">
-                                        <div class="next leftArrowIcon"></div>
-                                        <div class="name">{{$cat->name}}</div>
-                                    </div>
-                                @else
-                                    <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $cat->name])}}" class="safarnamehRow">
-                                        <div class="name">{{$cat->name}}</div>
-                                    </a>
-                                @endif
-                            @endforeach
-                        </div>
-                        <div class="subSafarnamehCategory">
-                            @foreach($category as $cat)
-                                <div id="subSafarnamehCategory_{{$cat->id}}" class="subSec">
-                                    <div class="safarnamehRow back" onclick="backToSafarnamehCategoryFooter(this)">
-                                        <div class="name" style="font-weight: bold">بازگشت</div>
-                                        <div class="leftArrowIcon" style="color: white; font-size: 30px; line-height: 10px; width: 20px"></div>
-                                    </div>
-                                    @foreach($cat->subCategory as $item)
-                                        <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $item->name])}}" class="safarnamehRow">
-                                            <div class="name">{{$item->name}}</div>
-                                        </a>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
+{{--                <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">--}}
+{{--                    <div class="gnContentsCategory footerSafarnmaehCategoryRow">--}}
+{{--                        <div class="mainSafarnamehCategory">--}}
+{{--                            @foreach($category as $cat)--}}
+{{--                                @if(count($cat->subCategory) > 0)--}}
+{{--                                    <div class="safarnamehRow" onclick="showSafarnamehSubCategory({{$cat->id}})">--}}
+{{--                                        <div class="next leftArrowIcon"></div>--}}
+{{--                                        <div class="name">{{$cat->name}}</div>--}}
+{{--                                    </div>--}}
+{{--                                @else--}}
+{{--                                    <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $cat->name])}}" class="safarnamehRow">--}}
+{{--                                        <div class="name">{{$cat->name}}</div>--}}
+{{--                                    </a>--}}
+{{--                                @endif--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                        <div class="subSafarnamehCategory">--}}
+{{--                            @foreach($category as $cat)--}}
+{{--                                <div id="subSafarnamehCategory_{{$cat->id}}" class="subSec">--}}
+{{--                                    <div class="safarnamehRow back" onclick="backToSafarnamehCategoryFooter(this)">--}}
+{{--                                        <div class="name" style="font-weight: bold">بازگشت</div>--}}
+{{--                                        <div class="leftArrowIcon" style="color: white; font-size: 30px; line-height: 10px; width: 20px"></div>--}}
+{{--                                    </div>--}}
+{{--                                    @foreach($cat->subCategory as $item)--}}
+{{--                                        <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $item->name])}}" class="safarnamehRow">--}}
+{{--                                            <div class="name">{{$item->name}}</div>--}}
+{{--                                        </a>--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <div class="safarnamehSearchRowFooter">
-                        <div class="header">
-                            <div class="title">جستجو بر اساس</div>
-                            <div class="tab selected" onclick="showSafarnamehFooterSearch(this, 'place')">مکان</div>
-                            <div class="tab" onclick="showSafarnamehFooterSearch(this, 'text')">عبارت</div>
-                        </div>
-                        <div class="inputs">
-                            <input type="text"
-                                   id="safarnamehPlaceSearchFooter"
-                                   class="safarnamehInput searchCityInArticleInput"
-                                   placeholder="نام محل را وارد نمایید"
-                                   readonly> {{--open in safarnamehLayout.blade.php--}}
-                            <div id="safarnamehContentSearchFooter" style="display: none; background-color: #f2f2f2; position: relative; margin-top: 10px;">
-                                <input type="text"
-                                       id="safarnamehContentSF"
-                                       class="safarnamehInput searchInputElemsText"
-                                       placeholder="عبارت مورد نظر را وارد نمایید"
-                                       style="margin: 0;">
-                                <button class="iconFamily searchIcon" onclick="searchInArticle('safarnamehContentSF')// open in safarnamehLayout.blade.php"></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                    <div class="safarnamehSearchRowFooter">--}}
+{{--                        <div class="header">--}}
+{{--                            <div class="title">جستجو بر اساس</div>--}}
+{{--                            <div class="tab selected" onclick="showSafarnamehFooterSearch(this, 'place')">مکان</div>--}}
+{{--                            <div class="tab" onclick="showSafarnamehFooterSearch(this, 'text')">عبارت</div>--}}
+{{--                        </div>--}}
+{{--                        <div class="inputs">--}}
+{{--                            <input type="text"--}}
+{{--                                   id="safarnamehPlaceSearchFooter"--}}
+{{--                                   class="safarnamehInput searchCityInArticleInput"--}}
+{{--                                   placeholder="نام محل را وارد نمایید"--}}
+{{--                                   readonly> --}}{{--open in safarnamehLayout.blade.php--}}
+{{--                            <div id="safarnamehContentSearchFooter" style="display: none; background-color: #f2f2f2; position: relative; margin-top: 10px;">--}}
+{{--                                <input type="text"--}}
+{{--                                       id="safarnamehContentSF"--}}
+{{--                                       class="safarnamehInput searchInputElemsText"--}}
+{{--                                       placeholder="عبارت مورد نظر را وارد نمایید"--}}
+{{--                                       style="margin: 0;">--}}
+{{--                                <button class="iconFamily searchIcon" onclick="searchInArticle('safarnamehContentSF')// open in safarnamehLayout.blade.php"></button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                {{--left menu--}}
-                <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
-                    @if(isset($similarSafarnameh))
-                        @foreach($similarSafarnameh as $item)
-                            <div class="content-2col">
-                                <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-2079" href="{{route('safarnameh.list', ['type' => 'category', 'search' => $item->category])}}">{{$item->category}}</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="{{$item->url}}" rel="bookmark">
-                                            <h1 class="im-entry-title" style="color: white;">
-                                                {{$item->title}}
-                                            </h1>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="im-entry">
-                                    <div class="im-entry-footer">
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">{{$item->date}}</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <i class="fa fa-comment-o"></i>{{$item->msgs}}
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <i class="fa fa-user"></i>
-                                                {{$item->username}}
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>{{$item->seen}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @elseif(isset($mostSeenPost))
-                        <div class="widget widget_impv_display_widget ">
-                            <div class="widget-head"><strong class="widget-title">
-                                    {{__('پربازدیدترین ها')}}
-                                </strong>
-                                <div class="widget-head-bar"></div>
-                                <div class="widget-head-line"></div>
-                            </div>
-                            <div id="impv_display_widget-4-tab2" class="widget_pop_body">
-                                <ul class="popular_by_views_list">
-                                    @foreach($mostSeenPost as $post)
-                                        <li class="im-widget clearfix">
-                                            <figure class="im-widget-thumb im-widget-thumb_rightSide">
-                                                <a  href="{{route('safarnameh.show', ['id' => $post->id])}}" title="{{$post->title}}">
-                                                    <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{$post->pic}}" alt="{{$post->keyword}}"/>
-                                                </a>
-                                            </figure>
-                                            <div class="im-widget-entry im-widget-entry_rightSide">
-                                                <header class="im-widget-entry-header">
-                                                    <h4 class='im-widget-entry-title'>
-                                                        <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
-                                                            {{$post->title}}
-                                                        </a>
-                                                    </h4>
-                                                </header>
-                                                <p class="im-widget-entry-footer">
-                                                <div class="iranomag-meta clearfix">
-                                                    <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">
-                                                                    {{$post->date}}
-                                                                </span>
-                                                    </div>
-                                                    <div class="post-views im-meta-item">
-                                                        <i class="fa fa-eye"></i>
-                                                        {{$post->seen}}
-                                                    </div>
-                                                </div>
-                                                </p>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        @else
+{{--                --}}{{--left menu--}}
+{{--                <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">--}}
+{{--                    @if(isset($similarSafarnameh))--}}
+{{--                        @foreach($similarSafarnameh as $item)--}}
+{{--                            <div class="content-2col">--}}
+{{--                                <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">--}}
+{{--                                    <div class="im-entry-header">--}}
+{{--                                        <div class="im-entry-category">--}}
+{{--                                            <div class="iranomag-meta clearfix">--}}
+{{--                                                <div class="cat-links im-meta-item">--}}
+{{--                                                    <a class="im-catlink-color-2079" href="{{route('safarnameh.list', ['type' => 'category', 'search' => $item->category])}}">{{$item->category}}</a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <a href="{{$item->url}}" rel="bookmark">--}}
+{{--                                            <h1 class="im-entry-title" style="color: white;">--}}
+{{--                                                {{$item->title}}--}}
+{{--                                            </h1>--}}
+{{--                                        </a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="im-entry">--}}
+{{--                                    <div class="im-entry-footer">--}}
+{{--                                        <div class="iranomag-meta clearfix">--}}
+{{--                                            <div class="posted-on im-meta-item">--}}
+{{--                                                <span class="entry-date published updated">{{$item->date}}</span>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="comments-link im-meta-item">--}}
+{{--                                                <i class="fa fa-comment-o"></i>{{$item->msgs}}--}}
+{{--                                            </div>--}}
+{{--                                            <div class="author vcard im-meta-item">--}}
+{{--                                                <i class="fa fa-user"></i>--}}
+{{--                                                {{$item->username}}--}}
+{{--                                            </div>--}}
+{{--                                            <div class="post-views im-meta-item">--}}
+{{--                                                <i class="fa fa-eye"></i>{{$item->seen}}--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    @elseif(isset($mostSeenPost))--}}
+{{--                        <div class="widget widget_impv_display_widget ">--}}
+{{--                            <div class="widget-head"><strong class="widget-title">--}}
+{{--                                    {{__('پربازدیدترین ها')}}--}}
+{{--                                </strong>--}}
+{{--                                <div class="widget-head-bar"></div>--}}
+{{--                                <div class="widget-head-line"></div>--}}
+{{--                            </div>--}}
+{{--                            <div id="impv_display_widget-4-tab2" class="widget_pop_body">--}}
+{{--                                <ul class="popular_by_views_list">--}}
+{{--                                    @foreach($mostSeenPost as $post)--}}
+{{--                                        <li class="im-widget clearfix">--}}
+{{--                                            <figure class="im-widget-thumb im-widget-thumb_rightSide">--}}
+{{--                                                <a  href="{{route('safarnameh.show', ['id' => $post->id])}}" title="{{$post->title}}">--}}
+{{--                                                    <img  alt="کوچیتا، سامانه جامع گردشگری ایران" src="{{$post->pic}}" alt="{{$post->keyword}}"/>--}}
+{{--                                                </a>--}}
+{{--                                            </figure>--}}
+{{--                                            <div class="im-widget-entry im-widget-entry_rightSide">--}}
+{{--                                                <header class="im-widget-entry-header">--}}
+{{--                                                    <h4 class='im-widget-entry-title'>--}}
+{{--                                                        <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">--}}
+{{--                                                            {{$post->title}}--}}
+{{--                                                        </a>--}}
+{{--                                                    </h4>--}}
+{{--                                                </header>--}}
+{{--                                                <p class="im-widget-entry-footer">--}}
+{{--                                                <div class="iranomag-meta clearfix">--}}
+{{--                                                    <div class="posted-on im-meta-item">--}}
+{{--                                                                <span class="entry-date published updated">--}}
+{{--                                                                    {{$post->date}}--}}
+{{--                                                                </span>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="post-views im-meta-item">--}}
+{{--                                                        <i class="fa fa-eye"></i>--}}
+{{--                                                        {{$post->seen}}--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                </p>--}}
+{{--                                            </div>--}}
+{{--                                        </li>--}}
+{{--                                    @endforeach--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @else--}}
             <div class="mainPopUp rightPopUp recentViewLeftBar" style="overflow: hidden; transition: .3s;">
                 <div class="headerSearchBar">
                     <span class="headerSearchIcon iconFamily footerSearchBar" style="background: var(--koochita-green); margin-left: 6px;" onclick="openMainSearch(0) // in mainSearch.blade.php">
@@ -578,7 +649,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+{{--        @endif--}}
     </div>
 
     <div id="otherPossibilities" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
@@ -845,7 +916,7 @@
 <script>
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
     var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
-    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh')}}';
+{{--    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh')}}';--}}
     var touchRigthForFooterMobile = 0;
 
     $('.footerModals').on('touchstart', e => {
@@ -862,8 +933,9 @@
     });
 
     $('.gombadi').on('click', e => {
-        if($(e.target).hasClass('gombadi'))
-            closeMyModal('placeListMobileFilter');
+        if($(e.target).hasClass('gombadi')) {
+            closeMyModal($(e.target).parent().attr('id'));
+        }
     });
 
     function openListSort(_element){

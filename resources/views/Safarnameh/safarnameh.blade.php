@@ -26,7 +26,7 @@
 @endsection
 
 @section('beforeBody')
-    <div class="gnTopPics">
+    <div class="gnTopPics hideOnPhone">
         <div class="container">
             <div class="im_post_grid_box clearfix">
                 <div class="clearfix">
@@ -81,36 +81,277 @@
                                         @endif
                                         <?php $i++; ?>
                                         @endforeach
-                                    </div>
                             </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <style>
+        @media (max-width: 767px) {
+            .mainTopPicture{
+                position: relative;
+            }
+            .mainTopPicture .content{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                font-size: 28px;
+                text-align: center;
+            }
+            .mainTopPicture .content .text{
+                /*font-size: 40vw;*/
+                font-size: 140px;
+                padding: 0px 5px;
+                padding-bottom: 10px;
+                color: white;
+                margin-bottom: 57px;
+            }
+            .mainTopPicture .content .withBack{
+                background: #00000040;
+                height: 80%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .mainTopPicture .content .trans{
+                background: linear-gradient(180deg, #00000040, transparent);
+                width: 100%;
+                height: 20%;
+            }
+            .mainTopPicture .content .text > div{
+                font-family: Shin !important;
+                line-height: 25px;
+                padding: 0px 17px;
+            }
+            .safarnamehList{
+
+            }
+            .safarnamehList .title{
+
+            }
+            .safarnamehList .list{
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .safarnCardMobile{
+                position: relative;
+                width: 200px;
+                height: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border-radius: 23px;
+                margin-bottom: 10px;
+            }
+            .safarnCardMobile .contents{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+            .safarnCardMobile .contents .icon{
+                position: absolute;
+                right: 10px;
+                top: 5px;
+                font-size: 30px;
+                color: black;
+            }
+            .safarnCardMobile .contents .userPic{
+                position: absolute;
+                width: 50px;
+                border-radius: 50%;
+                overflow: hidden;
+                left: -3px;
+                top: -3px;
+                border: solid 3px white;
+            }
+            .safarnCardMobile .contents .name{
+                position: absolute;
+                bottom: 0px;
+                color: white;
+                width: 100%;
+                font-weight: normal;
+                text-align: center;
+                padding: 0px 10px;
+                padding-bottom: 30px;
+                font-size: 18px;
+                height: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                background: linear-gradient(0deg, black, transparent);
+            }
+        }
+    </style>
+
+    <div class="hideOnScreen">
+        <div class="mainTopPicture">
+            <img src="{{URL::asset('images/mainPics/safarname.webp')}}" alt="koochita" style="width: 100%">
+            <div class="content">
+                <div class="withBack">
+                    <div class="text">
+                        <div style="margin-bottom: 9px;">سفرنامه</div>
+                        <div style="line-height: 38px; padding-bottom: 12px; padding-top: 19px;">کوچیتا</div>
+                    </div>
+                </div>
+                <div class="trans"></div>
+            </div>
+        </div>
+        <div class="safarnamehList">
+            <div class="title">پیشنهاد کوچیتا</div>
+            <div class="list safarnamehHorizontalList swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($mostLike as $item)
+                        <a href="#" class="swiper-slide safarnCardMobile">
+                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
+                            <div class="contents">
+                                <div class="icon BookMarkIconEmpty"></div>
+                                <div class="userPic">
+                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="name">{{$item->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Swiper('.safarnamehHorizontalList', {
+            loop: true,
+            slidesPerView: 'auto',
+            centeredSlides: true,
+            spaceBetween: 10,
+        });
+    </script>
 @endsection
 
 @section('body')
-{{--    <div class="col-md-12 col-sm-12 gnWhiteBox gnAdvertise">--}}
-{{--        <div class="gnAdvertiseText">تبلیغات</div>--}}
-{{--        <div>--}}
-{{--            <img class="gnAdvertiseImage" src="{{URL::asset('images/adv1.jpg')}}" alt="">--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
-    @if(isset($relatedSafarnameh))
+    <div class="hideOnPhone">
+        @if(isset($relatedSafarnameh))
+            <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
+                <div class="widget-head widget-head-45">
+                    <strong class="widget-title">مطالب مرتبط با ...</strong>
+                    <div class="widget-head-bar"></div>
+                    <div class="widget-head-line"></div>
+                </div>
+                <div class="row">
+                    <?php $i = 0; ?>
+                    @foreach($relatedSafarnameh as $safarnameh)
+                        @if($i == 0)
+                            <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
+                                <div class="im-entry-thumb">
+                                    <a class="im-entry-thumb-link" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                        <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}"/>
+                                    </a>
+                                    <header class="im-entry-header">
+                                        <div class="im-entry-category">
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="cat-links im-meta-item">
+                                                    {{--                                                    <a style="background-color: #666; color: #fff !important;" href="" title="{{$safarnameh->category}}">{{$safarnameh->category}}</a>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3 class="im-entry-title">
+                                            <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" rel="bookmark">{{$safarnameh->title}}</a>
+                                        </h3>
+                                    </header>
+                                </div>
+                                <div class="im-entry">
+                                    <div class="iranomag-meta clearfix">
+                                        <div class="posted-on im-meta-item">
+                                            <span class="entry-date published updated">{{$safarnameh->date}}</span>
+                                        </div>
+
+                                        <div class="comments-link im-meta-item">
+                                            <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
+                                        </div>
+
+                                        <div class="author vcard im-meta-item">
+                                            <i class="fa fa-user"></i>{{$safarnameh->username}}
+                                        </div>
+
+                                        <div class="post-views im-meta-item">
+                                            <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        @else
+                            @if($i == 1)
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="widget">
+                                        <ul>
+                                            @endif
+                                            <li class="widget-10104im-widget clearfix">
+                                                <figure class="im-widget-thumb">
+                                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                                        <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
+                                                    </a>
+                                                </figure>
+                                                <div class="im-widget-entry">
+                                                    <header class="im-widget-entry-header">
+                                                        <h6 class='im-widget-entry-title'>
+                                                            <a style="color: #fff !important;" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
+                                                        </h6>
+                                                    </header>
+                                                    <div class="iranomag-meta clearfix">
+                                                        <div class="posted-on im-meta-item">
+                                                            <span class="entry-date published updated">{{$safarnameh->date}}</span>
+                                                        </div>
+                                                        <div class="comments-link im-meta-item">
+                                                            <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
+                                                        </div>
+                                                        <div class="author vcard im-meta-item">
+                                                            <i class="fa fa-user"></i>{{$safarnameh->username}}
+                                                        </div>
+                                                        <div class="post-views im-meta-item">
+                                                            <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @if($i == count($mostSeenSafarnameh) - 1)
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
+                        <?php $i++; ?>
+
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
             <div class="widget-head widget-head-45">
-                <strong class="widget-title">مطالب مرتبط با ...</strong>
+                <strong class="widget-title">پرطرفدار ها</strong>
                 <div class="widget-head-bar"></div>
                 <div class="widget-head-line"></div>
             </div>
             <div class="row">
                 <?php $i = 0; ?>
-                @foreach($relatedSafarnameh as $safarnameh)
+                @foreach($mostLike as $safarnameh)
                     @if($i == 0)
                         <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
                             <div class="im-entry-thumb">
-                                <a class="im-entry-thumb-link" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                <a class="im-entry-thumb-link" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}" style="max-height: 300px">
                                     <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}"/>
                                 </a>
                                 <header class="im-entry-header">
@@ -152,16 +393,16 @@
                                 <div class="widget">
                                     <ul>
                                         @endif
-                                        <li class="widget-10104im-widget clearfix">
+                                        <li class="widget-10104 im-widget clearfix safarnamehMinRows">
                                             <figure class="im-widget-thumb">
-                                                <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                                <a href="{{route('safarnameh.show', ['id' => $safarnameh->id] )}}" title="{{$safarnameh->title}}">
                                                     <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
                                                 </a>
                                             </figure>
                                             <div class="im-widget-entry">
                                                 <header class="im-widget-entry-header">
                                                     <h6 class='im-widget-entry-title'>
-                                                        <a style="color: #fff !important;" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
+                                                        <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" rel="bookmark">{{$safarnameh->title}}</a>
                                                     </h6>
                                                 </header>
                                                 <div class="iranomag-meta clearfix">
@@ -180,405 +421,310 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        @if($i == count($mostSeenSafarnameh) - 1)
+                                        @if($i == count($mostLike) - 1)
                                     </ul>
                                 </div>
                             </div>
                         @endif
                     @endif
-
                     <?php $i++; ?>
-
                 @endforeach
             </div>
         </div>
-    @endif
 
-    <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
-        <div class="widget-head widget-head-45">
-            <strong class="widget-title">پرطرفدار ها</strong>
-            <div class="widget-head-bar"></div>
-            <div class="widget-head-line"></div>
-        </div>
-        <div class="row">
-            <?php $i = 0; ?>
-            @foreach($mostLike as $safarnameh)
-                @if($i == 0)
-                    <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
-                        <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}" style="max-height: 300px">
-                                <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}"/>
-                            </a>
-                            <header class="im-entry-header">
-                                <div class="im-entry-category">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="cat-links im-meta-item">
-                                            {{--                                                    <a style="background-color: #666; color: #fff !important;" href="" title="{{$safarnameh->category}}">{{$safarnameh->category}}</a>--}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3 class="im-entry-title">
-                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" rel="bookmark">{{$safarnameh->title}}</a>
-                                </h3>
-                            </header>
-                        </div>
-                        <div class="im-entry">
-                            <div class="iranomag-meta clearfix">
-                                <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated">{{$safarnameh->date}}</span>
-                                </div>
+        <div class="col-md-12 col-sm-12 gnWhiteBox" style="padding: 0;">
+            <div class="col-md-6 col-sm-12">
+                <div class="category-element-holder style2">
+                    <div class="widget-head widget-head-46">
+                        <strong class="widget-title">تازه ها</strong>
+                        <div class="widget-head-bar"></div>
+                        <div class="widget-head-line"></div>
+                    </div>
+                    <div class="row">
 
-                                <div class="comments-link im-meta-item">
-                                    <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
-                                </div>
+                        <?php $i = 0; ?>
+                        @foreach($recentlySafarnameh as $safarnameh)
+                            @if($i == 0)
+                                <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
+                                    <div class="im-entry-thumb">
+                                        <a class="im-entry-thumb-link"
+                                           href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
+                                           title="{{$safarnameh->title}}"
+                                           style="height: 300px;">
 
-                                <div class="author vcard im-meta-item">
-                                    <i class="fa fa-user"></i>{{$safarnameh->username}}
-                                </div>
-
-                                <div class="post-views im-meta-item">
-                                    <i class="fa fa-eye"></i>{{$safarnameh->seen}}
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                @else
-                    @if($i == 1)
-                        <div class="col-md-6 col-sm-12">
-                            <div class="widget">
-                                <ul>
-                                    @endif
-                                    <li class="widget-10104 im-widget clearfix safarnamehMinRows">
-                                        <figure class="im-widget-thumb">
-                                            <a href="{{route('safarnameh.show', ['id' => $safarnameh->id] )}}" title="{{$safarnameh->title}}">
-                                                <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h6 class='im-widget-entry-title'>
-                                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" rel="bookmark">{{$safarnameh->title}}</a>
-                                                </h6>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">{{$safarnameh->date}}</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <i class="fa fa-user"></i>{{$safarnameh->username}}
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>{{$safarnameh->seen}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @if($i == count($mostLike) - 1)
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                @endif
-                <?php $i++; ?>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="col-md-12 col-sm-12 gnWhiteBox" style="padding: 0;">
-        <div class="col-md-6 col-sm-12">
-            <div class="category-element-holder style2">
-                <div class="widget-head widget-head-46">
-                    <strong class="widget-title">تازه ها</strong>
-                    <div class="widget-head-bar"></div>
-                    <div class="widget-head-line"></div>
-                </div>
-                <div class="row">
-
-                    <?php $i = 0; ?>
-                    @foreach($recentlySafarnameh as $safarnameh)
-                        @if($i == 0)
-                            <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
-                                <div class="im-entry-thumb">
-                                    <a class="im-entry-thumb-link"
-                                       href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
-                                       title="{{$safarnameh->title}}"
-                                       style="height: 300px;">
-
-                                        <img src="{{$safarnameh->pic}}"
-                                             class="resizeImgClass"
-                                             onload="fitThisImg(this)"
-                                             alt="{{$safarnameh->keyword}}"/>
-                                    </a>
-                                    <header class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    {{--<a style="background-color: #666; color: #fff !important;" href="" title="{{$safarnameh->category}}">{{$safarnameh->category}}</a>--}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a style="color: #fff !important"
-                                               href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
-                                               rel="bookmark">{{$safarnameh->title}}</a>
-                                        </h3>
-                                    </header>
-                                </div>
-
-                                <div class="im-entry">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">{{$safarnameh->date}}</span>
-                                        </div>
-
-                                        <div class="comments-link im-meta-item">
-                                            <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
-                                        </div>
-
-                                        <div class="author vcard im-meta-item">
-                                            <i class="fa fa-user"></i>{{$safarnameh->username}}
-                                        </div>
-
-                                        <div class="post-views im-meta-item">
-                                            <i class="fa fa-eye"></i>{{$safarnameh->seen}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        @else
-
-                            @if($i == 1)
-                                <div class="col-md-12">
-                                    <div class="widget">
-                                        <ul>
-                            @endif
-                                            <li class="widget-10104 im-widget clearfix safarnamehMinRows">
-                                                <figure class="im-widget-thumb">
-                                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
-                                                        <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
-                                                    </a>
-                                                </figure>
-                                                <div class="im-widget-entry">
-                                                    <header class="im-widget-entry-header">
-                                                        <h6 class='im-widget-entry-title'>
-                                                            <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
-                                                                    title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
-                                                        </h6>
-                                                    </header>
-                                                    <div class="im-widget-entry-footer">
-                                                        <div class="iranomag-meta clearfix">
-                                                            <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">{{$safarnameh->date}}</span>
-                                                            </div>
-
-                                                            <div class="comments-link im-meta-item">
-                                                                <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
-                                                            </div>
-
-                                                            <div class="author vcard im-meta-item">
-                                                                <i class="fa fa-user"></i>{{$safarnameh->username}}
-                                                            </div>
-
-                                                            <div class="post-views im-meta-item">
-                                                                <i class="fa fa-eye"></i>{{$safarnameh->seen}}
-                                                            </div>
-                                                        </div>
-                                                        </p>
+                                            <img src="{{$safarnameh->pic}}"
+                                                 class="resizeImgClass"
+                                                 onload="fitThisImg(this)"
+                                                 alt="{{$safarnameh->keyword}}"/>
+                                        </a>
+                                        <header class="im-entry-header">
+                                            <div class="im-entry-category">
+                                                <div class="iranomag-meta clearfix">
+                                                    <div class="cat-links im-meta-item">
+                                                        {{--<a style="background-color: #666; color: #fff !important;" href="" title="{{$safarnameh->category}}">{{$safarnameh->category}}</a>--}}
                                                     </div>
-                                            </li>
-                            @if($i == count($recentlySafarnameh) - 1)
-                                        </ul>
+                                                </div>
+                                            </div>
+                                            <h3 class="im-entry-title">
+                                                <a style="color: #fff !important"
+                                                   href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
+                                                   rel="bookmark">{{$safarnameh->title}}</a>
+                                            </h3>
+                                        </header>
                                     </div>
-                                </div>
+
+                                    <div class="im-entry">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">{{$safarnameh->date}}</span>
+                                            </div>
+
+                                            <div class="comments-link im-meta-item">
+                                                <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
+                                            </div>
+
+                                            <div class="author vcard im-meta-item">
+                                                <i class="fa fa-user"></i>{{$safarnameh->username}}
+                                            </div>
+
+                                            <div class="post-views im-meta-item">
+                                                <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            @else
+
+                                @if($i == 1)
+                                    <div class="col-md-12">
+                                        <div class="widget">
+                                            <ul>
+                                                @endif
+                                                <li class="widget-10104 im-widget clearfix safarnamehMinRows">
+                                                    <figure class="im-widget-thumb">
+                                                        <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                                            <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
+                                                        </a>
+                                                    </figure>
+                                                    <div class="im-widget-entry">
+                                                        <header class="im-widget-entry-header">
+                                                            <h6 class='im-widget-entry-title'>
+                                                                <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
+                                                                   title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
+                                                            </h6>
+                                                        </header>
+                                                        <div class="im-widget-entry-footer">
+                                                            <div class="iranomag-meta clearfix">
+                                                                <div class="posted-on im-meta-item">
+                                                                    <span class="entry-date published updated">{{$safarnameh->date}}</span>
+                                                                </div>
+
+                                                                <div class="comments-link im-meta-item">
+                                                                    <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
+                                                                </div>
+
+                                                                <div class="author vcard im-meta-item">
+                                                                    <i class="fa fa-user"></i>{{$safarnameh->username}}
+                                                                </div>
+
+                                                                <div class="post-views im-meta-item">
+                                                                    <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                                                </div>
+                                                            </div>
+                                                            </p>
+                                                        </div>
+                                                </li>
+                                                @if($i == count($recentlySafarnameh) - 1)
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
-                        @endif
 
 
-                        <?php $i++; ?>
+                            <?php $i++; ?>
 
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <div class="category-element-holder style2">
-                <div class="widget-head widget-head-46">
-                    <strong class="widget-title">داغ ترین ها</strong>
-                    <div class="widget-head-bar"></div>
-                    <div class="widget-head-line"></div>
-                </div>
-                <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="category-element-holder style2">
+                    <div class="widget-head widget-head-46">
+                        <strong class="widget-title">داغ ترین ها</strong>
+                        <div class="widget-head-bar"></div>
+                        <div class="widget-head-line"></div>
+                    </div>
+                    <div class="row">
 
-                    <?php $i = 0; ?>
-                    @foreach($mostCommentSafarnameh as $safarnameh)
-                        @if($i == 0)
-                            <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
-                                <div class="im-entry-thumb">
+                        <?php $i = 0; ?>
+                        @foreach($mostCommentSafarnameh as $safarnameh)
+                            @if($i == 0)
+                                <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
+                                    <div class="im-entry-thumb">
 
-                                    <a class="im-entry-thumb-link"
-                                       href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
-                                       title="{{$safarnameh->title}}"
-                                       style="height: 300px;">
+                                        <a class="im-entry-thumb-link"
+                                           href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
+                                           title="{{$safarnameh->title}}"
+                                           style="height: 300px;">
 
-                                        <img src="{{$safarnameh->pic}}"
-                                             class="resizeImgClass"
-                                             onload="fitThisImg(this)"
-                                             alt="{{$safarnameh->keyword}}"/>
-                                    </a>
-                                    <header class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    {{--<a style="background-color: #666; color: #fff !important;" href="" title="{{$safarnameh->category}}">{{$safarnameh->category}}</a>--}}
+                                            <img src="{{$safarnameh->pic}}"
+                                                 class="resizeImgClass"
+                                                 onload="fitThisImg(this)"
+                                                 alt="{{$safarnameh->keyword}}"/>
+                                        </a>
+                                        <header class="im-entry-header">
+                                            <div class="im-entry-category">
+                                                <div class="iranomag-meta clearfix">
+                                                    <div class="cat-links im-meta-item">
+                                                        {{--<a style="background-color: #666; color: #fff !important;" href="" title="{{$safarnameh->category}}">{{$safarnameh->category}}</a>--}}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a style="color: #fff !important;"
-                                               href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
-                                               rel="bookmark">{{$safarnameh->title}}</a>
-                                        </h3>
-                                    </header>
-                                </div>
+                                            <h3 class="im-entry-title">
+                                                <a style="color: #fff !important;"
+                                                   href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}"
+                                                   rel="bookmark">{{$safarnameh->title}}</a>
+                                            </h3>
+                                        </header>
+                                    </div>
 
-                                <div class="im-entry">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">{{$safarnameh->date}}</span>
-                                        </div>
+                                    <div class="im-entry">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">{{$safarnameh->date}}</span>
+                                            </div>
 
-                                        <div class="comments-link im-meta-item">
-                                            <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
-                                        </div>
+                                            <div class="comments-link im-meta-item">
+                                                <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
+                                            </div>
 
-                                        <div class="author vcard im-meta-item">
-                                            <i class="fa fa-user"></i>{{$safarnameh->username}}
-                                        </div>
+                                            <div class="author vcard im-meta-item">
+                                                <i class="fa fa-user"></i>{{$safarnameh->username}}
+                                            </div>
 
-                                        <div class="post-views im-meta-item">
-                                            <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                            <div class="post-views im-meta-item">
+                                                <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                        @else
-                            @if($i == 1)
-                                <div class="col-md-12">
-                                    <div class="widget">
-                                        <ul>
-                                            @endif
-                                            <li class="widget-10104 im-widget clearfix safarnamehMinRows">
-                                                <figure class="im-widget-thumb">
-                                                    <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
-                                                        <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
-                                                    </a>
-                                                </figure>
-                                                <div class="im-widget-entry">
-                                                    <header class="im-widget-entry-header">
-                                                        <h6 class='im-widget-entry-title'>
-                                                            <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
-                                                        </h6>
-                                                    </header>
-                                                    <div class="im-widget-entry-footer">
-                                                        <div class="iranomag-meta clearfix">
-                                                            <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">{{$safarnameh->date}}</span>
-                                                            </div>
-                                                            <div class="comments-link im-meta-item">
-                                                                <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
-                                                            </div>
+                                </article>
+                            @else
+                                @if($i == 1)
+                                    <div class="col-md-12">
+                                        <div class="widget">
+                                            <ul>
+                                                @endif
+                                                <li class="widget-10104 im-widget clearfix safarnamehMinRows">
+                                                    <figure class="im-widget-thumb">
+                                                        <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title="{{$safarnameh->title}}">
+                                                            <img src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}" class="resizeImgClass" onload="fitThisImg(this)"/>
+                                                        </a>
+                                                    </figure>
+                                                    <div class="im-widget-entry">
+                                                        <header class="im-widget-entry-header">
+                                                            <h6 class='im-widget-entry-title'>
+                                                                <a href="{{route('safarnameh.show', ['id' => $safarnameh->id])}}" title='{{$safarnameh->title}}'>{{$safarnameh->title}}</a>
+                                                            </h6>
+                                                        </header>
+                                                        <div class="im-widget-entry-footer">
+                                                            <div class="iranomag-meta clearfix">
+                                                                <div class="posted-on im-meta-item">
+                                                                    <span class="entry-date published updated">{{$safarnameh->date}}</span>
+                                                                </div>
+                                                                <div class="comments-link im-meta-item">
+                                                                    <i class="fa fa-comment-o"></i>{{$safarnameh->msgs}}
+                                                                </div>
 
-                                                            <div class="author vcard im-meta-item">
-                                                                <i class="fa fa-user"></i>{{$safarnameh->username}}
-                                                            </div>
+                                                                <div class="author vcard im-meta-item">
+                                                                    <i class="fa fa-user"></i>{{$safarnameh->username}}
+                                                                </div>
 
-                                                            <div class="post-views im-meta-item">
-                                                                <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                                                <div class="post-views im-meta-item">
+                                                                    <i class="fa fa-eye"></i>{{$safarnameh->seen}}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            @if($i == count($mostCommentSafarnameh) - 1)
-                                        </ul>
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                        <?php $i++; ?>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-12 col-sm-12 gnWhiteBox">
-        <div class="widget-head light">
-            <strong class="widget-title">همه مطالب</strong>
-            <div class="widget-head-bar"></div>
-            <div class="widget-head-line"></div>
-        </div>
-        <div class="row im-blog">
-
-            <div id="samplePost" class="clearfix" style="display: none">
-                <div class="small-12 columns">
-                    <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
-                        <div class="im-entry-thumb col-md-5 col-sm-12">
-                            <a class="im-entry-thumb-link" href="##url##" title="##title##" style="max-height: 200px;">
-                                <img data-src="##pic##" src="##pic##" alt="##keyword##"/>
-                            </a>
-                        </div>
-                        <div class="im-entry col-md-7 col-sm-12">
-                            <header class="im-entry-header">
-                                <div class="im-entry-category">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="cat-links im-meta-item">
-                                            <a style="background-color: #666; color: #fff !important;" href="{{url('/safarnameh/list/category/')}}/##category##" title="##category##">##category##</a>
+                                                </li>
+                                                @if($i == count($mostCommentSafarnameh) - 1)
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <h3 class="im-entry-title">
-                                    <a href="##url##"
-                                       rel="bookmark">##title##</a>
-                                </h3>
-                            </header>
-
-                            <div style="max-height: 100px !important; overflow: hidden"
-                                 class="im-entry-content">
-                                <p>##meta##</p>
-                            </div>
-
-                            <div style="margin-top: 7px"
-                                 class="iranomag-meta clearfix">
-                                <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated">##date##</span>
-                                </div>
-                                <div class="comments-link im-meta-item">
-                                    <i class="fa fa-comment-o"></i>##msgs##
-                                </div>
-                                <div class="author vcard im-meta-item">
-                                    <i class="fa fa-user"></i>##username##
-                                </div>
-                                <div class="post-views im-meta-item">
-                                    <i class="fa fa-eye"></i>##seen##
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                                @endif
+                            @endif
+                            <?php $i++; ?>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-
-            <div class="clearfix">
-                <nav class="navigation pagination">
-                    <div id="allPostPagination" class="nav-links"></div>
-                </nav>
-            </div>
-
         </div>
-        <div class="gap cf" style="height:30px;"></div>
+
+        <div class="col-md-12 col-sm-12 gnWhiteBox">
+            <div class="widget-head light">
+                <strong class="widget-title">همه مطالب</strong>
+                <div class="widget-head-bar"></div>
+                <div class="widget-head-line"></div>
+            </div>
+            <div class="row im-blog">
+
+                <div id="samplePost" class="clearfix" style="display: none">
+                    <div class="small-12 columns">
+                        <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
+                            <div class="im-entry-thumb col-md-5 col-sm-12">
+                                <a class="im-entry-thumb-link" href="##url##" title="##title##" style="max-height: 200px;">
+                                    <img data-src="##pic##" src="##pic##" alt="##keyword##"/>
+                                </a>
+                            </div>
+                            <div class="im-entry col-md-7 col-sm-12">
+                                <header class="im-entry-header">
+                                    <div class="im-entry-category">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="cat-links im-meta-item">
+                                                <a style="background-color: #666; color: #fff !important;" href="{{url('/safarnameh/list/category/')}}/##category##" title="##category##">##category##</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 class="im-entry-title">
+                                        <a href="##url##"
+                                           rel="bookmark">##title##</a>
+                                    </h3>
+                                </header>
+
+                                <div style="max-height: 100px !important; overflow: hidden"
+                                     class="im-entry-content">
+                                    <p>##meta##</p>
+                                </div>
+
+                                <div style="margin-top: 7px"
+                                     class="iranomag-meta clearfix">
+                                    <div class="posted-on im-meta-item">
+                                        <span class="entry-date published updated">##date##</span>
+                                    </div>
+                                    <div class="comments-link im-meta-item">
+                                        <i class="fa fa-comment-o"></i>##msgs##
+                                    </div>
+                                    <div class="author vcard im-meta-item">
+                                        <i class="fa fa-user"></i>##username##
+                                    </div>
+                                    <div class="post-views im-meta-item">
+                                        <i class="fa fa-eye"></i>##seen##
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <nav class="navigation pagination">
+                        <div id="allPostPagination" class="nav-links"></div>
+                    </nav>
+                </div>
+
+            </div>
+            <div class="gap cf" style="height:30px;"></div>
+        </div>
     </div>
 @endsection
 
