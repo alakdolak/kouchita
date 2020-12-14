@@ -13,6 +13,7 @@ require_once(__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/a
 $client_id = '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com';
 $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
 $redirect_uri = route('loginWithGoogle');
+$authUrl = str_replace('http://', 'https://', $redirect_uri);
 
 $client = new \Google_Client();
 $client->setClientId($client_id);
@@ -26,7 +27,6 @@ $authUrl = $client->createAuthUrl();
 
 $url = $_SERVER['REQUEST_URI'];
 $authUrl = str_replace('state', 'state='.$url, $authUrl);
-$authUrl = str_replace('http://', 'https://', $redirect_uri);
 ?>
 
 @if(\App::getLocale() == 'en')
