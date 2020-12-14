@@ -346,7 +346,7 @@ class ReviewsController extends Controller
             else
                 $uId = 0;
 
-            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject != "dontShowThisText"';
+            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND (visitorId = ' . $uId . ' OR confirm = 1) AND subject <> "dontShowThisText"';
 
             if (isset($request->filters)) {
                 foreach ($request->filters as $item) {
