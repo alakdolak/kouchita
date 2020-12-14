@@ -346,7 +346,7 @@ class ReviewsController extends Controller
             else
                 $uId = 0;
 
-            $sqlQuery = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1)) AND subject NOT LIKE "dontShowThisText"';
+            $sqlQuery = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND (`visitorId` = ' . $uId . ' OR `confirm` = 1) ';
 
             if (isset($request->filters)) {
                 $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
