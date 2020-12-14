@@ -292,9 +292,8 @@
         if (!checkLogin())
             return;
 
-        $('html, body').animate({
-            scrollTop: $('#mainStoreReviewDiv').offset().top
-        }, 800);
+        if($(window).width() > 767)
+            $('html, body').animate({ scrollTop: $('#mainStoreReviewDiv').offset().top }, 800);
 
         $("#darkModal").show();
         $(".postModalMainDiv").removeClass('hidden');

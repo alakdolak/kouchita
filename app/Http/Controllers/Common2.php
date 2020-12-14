@@ -72,7 +72,7 @@ function createSuggestionPack($_kindPlaceId, $_placeId){
     $activityId = Activity::whereName('نظر')->first()->id;
 
     $kindPlace = Place::find($_kindPlaceId);
-    $place = \DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($_placeId);
+    $place = \DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId', 'fullRate'])->find($_placeId);
     if($place != null) {
         $city = Cities::whereId($place->cityId);
 
@@ -86,7 +86,7 @@ function createSuggestionPack($_kindPlaceId, $_placeId){
             $place->city = '';
             $place->state = '';
         }
-        $place->rate = getRate($place->id, $_kindPlaceId)[1];
+        $place->rate = $place->fullRate;
         $condition = ['placeId' => $place->id, 'kindPlaceId' => $_kindPlaceId, 'activityId' => $activityId, 'confirm' => 1];
         $place->review = LogModel::where($condition)->count();
         return $place;

@@ -450,12 +450,9 @@ class AjaxController extends Controller {
     {
         $placeId = Place::where('name', 'رستوران')->first()->id;
         if(isset($request->cityId)){
-
-            $resturant = Restaurant::where('cityId', $request->cityId)->select(['name', 'address', 'C', 'D', 'food_irani', 'food_mahali', 'food_farangi', 'cityId', 'id', 'file'])->get();
+            $resturant = Restaurant::where('cityId', $request->cityId)->select(['name', 'address', 'fullRate', 'C', 'D', 'food_irani', 'food_mahali', 'food_farangi', 'cityId', 'id', 'file'])->get();
             foreach ($resturant as $item){
-                $item->rate = getRate($placeId, $item->id);
-
-
+                $item->rate = $item->fullRate;
                 if(file_exists(__DIR__ . '/../../../../assets/_images/restaurant/' . $item->file . '/l-1.jpg'))
                     $item->pic = URL::asset('_images/restaurant/' . $item->file . '/l-1.jpg');
                 else
@@ -473,11 +470,11 @@ class AjaxController extends Controller {
     {
         $placeId = Place::where('name', 'اماکن')->first()->id;
         if(isset($request->cityId)){
-            $amaken = Amaken::where('cityId', $request->cityId)->select(['name', 'address', 'C', 'D', 'cityId', 'id', 'file', 'pic_1'])->get();
+            $amaken = Amaken::where('cityId', $request->cityId)->select(['name', 'fullRate', 'address', 'C', 'D', 'cityId', 'id', 'file', 'pic_1'])->get();
 
             if(count($amaken) != 0){
                 foreach ($amaken as $item){
-                    $item->rate = getRate($placeId, $item->id);
+                    $item->rate = $item->fullRate;
 
                     if(file_exists(__DIR__ . '/../../../../assets/_images/amaken/' . $item->file . '/l-1.jpg'))
                         $item->pic = URL::asset('_images/amaken/' . $item->file . '/l-1.jpg');
@@ -501,8 +498,6 @@ class AjaxController extends Controller {
 
             if(count($hotel) != 0){
                 foreach ($hotel as $item){
-//                    $item->rate = getRate($placeId, $item->id);
-
                     if(file_exists(__DIR__ . '/../../../../assets/_images/hotels/' . $item->file . '/l-1.jpg'))
                         $item->pic = URL::asset('_images/hotels/' . $item->file . '/l-1.jpg');
                     else

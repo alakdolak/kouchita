@@ -610,7 +610,7 @@
 
         // new ans
         text += `<div class="newCommentPlaceMainDiv">
-                   <div class="circleBase type2 newCommentWriterProfilePic">
+                   <div class="circleBase type2 newCommentWriterProfilePic hideOnPhone">
                        <img src="${window.userPic}">
                    </div>
                    <div class="inputBox setButtonToBot">

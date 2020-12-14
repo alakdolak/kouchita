@@ -71,7 +71,7 @@ class MajaraController extends Controller {
                 'activityId' => Activity::whereName('نظر')->first()->id];
 
             $out[$i]->reviews = LogModel::where($condition)->count();
-            $out[$i]->rate = getRate($out[$i]->id, $kindPlaceId)[1];
+            $out[$i]->rate = $out[$i]->fullRate;
         }
 
         return $out;

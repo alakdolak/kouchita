@@ -6,8 +6,9 @@
     }
 </style>
 
+<div class="seperatorSections"></div>
 
-<div id="QAndAMainDivId" class="tabContentMainWrap" style="display: flex; flex-direction: column; margin-top: 15px">
+<div id="QAndAMainDivId" class="tabContentMainWrap" style="display: flex; flex-direction: column;">
     <div class="topBarContainerQAndAs display-none"></div>
     <div class="col-md-12 col-xs-12 QAndAMainDiv" style="margin-bottom: 10px;">
         <div class="mainDivQuestions">
@@ -67,7 +68,6 @@
             <span id="questionPagination"></span>
         </div>
     </div>
-
 </div>
 
 
