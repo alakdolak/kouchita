@@ -439,17 +439,19 @@ class SafarnamehController extends Controller
     {
         $page = $_GET['page'];
         $take = $_GET['take'];
-        $today = getToday()["date"];
-        $nowTime = getToday()["time"];
+
+        $func = getToday();
+        $today = $func["date"];
+        $nowTime = $func["time"];
 
         $allSafarnameh = Safarnameh::whereRaw('(date <= ' . $today . ' OR (date = ' . $today . ' AND (time <= ' . $nowTime . ' || time IS NULL)))')
                                     ->where('release', '!=', 'draft')
                                     ->where('confirm', 1)
-                                    ->select('userId', 'id', 'title', 'meta',
-                                                    'slug', 'seen', 'date', 'created_at',
-                                                    'pic', 'keyword', 'release')
+                                    ->select('userId', 'id', 'title', 'meta', 'slug', 'seen', 'date', 'created_at', 'pic', 'keyword', 'release')
                                     ->orderBy('date', 'DESC')
-                                    ->skip(($page-1) * $take)->take($take)->get();
+                                    ->skip(($page-1) * $take)
+                                    ->take($take)
+                                    ->get();
 
         foreach ($allSafarnameh as $item)
             $item = SafarnamehMinimalData($item);

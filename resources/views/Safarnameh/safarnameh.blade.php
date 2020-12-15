@@ -136,11 +136,30 @@
             .safarnamehList{
                 margin-bottom: 40px;
             }
-            .safarnamehList .title{
+            .safarnamehList .titleSec{
                 color: #333;
                 font-size: 20px;
                 margin-right: 10px;
                 margin-bottom: 10px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+            }
+            .safarnamehList .titleSec:before{
+                content: '';
+                position: absolute;
+                background: var(--koochita-green);
+                width: 100%;
+                top: 50%;
+                height: 2px;
+                right: 0px;
+            }
+            .safarnamehList .titleSec .title{
+                background: white;
+                z-index: 2;
+                font-weight: bold;
+                padding: 0px 10px;
+                color: #101010;
             }
             .safarnamehList .list{
                 display: flex;
@@ -195,93 +214,19 @@
                 align-items: flex-end;
                 background: linear-gradient(0deg, black, transparent);
             }
-        }
-    </style>
 
-    <div class="hideOnScreen">
-        <div class="mainTopPicture">
-            <img src="{{URL::asset('images/mainPics/safarname.webp')}}" alt="koochita" style="width: 100%">
-            <div class="content">
-                <div class="withBack">
-                    <div class="text">
-                        <div style="margin-bottom: 9px;">سفرنامه</div>
-                        <div style="line-height: 38px; padding-bottom: 12px; padding-top: 19px;">کوچیتا</div>
-                    </div>
-                </div>
-                <div class="trans"></div>
-            </div>
-        </div>
-        <div class="safarnamehList">
-            <div class="title">پیشنهاد کوچیتا</div>
-            <div class="list safarnamehHorizontalList swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($mostLike as $item)
-                        <a href="#" class="swiper-slide safarnCardMobile">
-                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
-                            <div class="contents">
-                                <div class="icon BookMarkIconEmpty"></div>
-                                <div class="userPic">
-                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
-                                </div>
-                                <div class="name">{{$item->title}}</div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
 
-        <div class="safarnamehList">
-            <div class="title">پرطرفدارها</div>
-            <div class="list safarnamehHorizontalList swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($mostLike as $item)
-                        <a href="#" class="swiper-slide safarnCardMobile">
-                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
-                            <div class="contents">
-                                <div class="icon BookMarkIconEmpty"></div>
-                                <div class="userPic">
-                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
-                                </div>
-                                <div class="name">{{$item->title}}</div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-        <div class="safarnamehList">
-            <div class="title">داغترین ها</div>
-            <div class="list safarnamehHorizontalList swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($mostLike as $item)
-                        <a href="#" class="swiper-slide safarnCardMobile">
-                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
-                            <div class="contents">
-                                <div class="icon BookMarkIconEmpty"></div>
-                                <div class="userPic">
-                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
-                                </div>
-                                <div class="name">{{$item->title}}</div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-        <style>
             body{
                 background: white;
             }
-            .safarnamehList .colList{
-
-            }
             .rowSafarnamehCard{
                 display: flex;
-                width: 98%;
+                width: 99%;
                 margin: 20px auto;
+                margin-left: 0px;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: solid #d3d3d330 1px;
             }
             .rowSafarnamehCard .imgSec{
                 position: relative;
@@ -295,7 +240,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                border-radius: 25px;
+                border-radius: 15px;
                 z-index: 1;
             }
             .rowSafarnamehCard .imgSec .icon{
@@ -303,7 +248,7 @@
                 left: 7px;
                 top: 7px;
                 color: black;
-                font-size: 30px;
+                font-size: 18px;
             }
             .rowSafarnamehCard .imgSec .userInfos{
                 width: 40px;
@@ -321,16 +266,19 @@
             }
             .rowSafarnamehCard .content{
                 color: black;
-                width: calc(100% - 210px);
+                width: calc(100% - 165px);
                 margin-right: 10px;
+                font-size: 10px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
             }
             .rowSafarnamehCard .content .title{
                 color: black;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 1.5em;
                 margin: 0px;
                 margin-bottom: 5px;
-
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
@@ -341,11 +289,97 @@
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
+
+                font-size: 1em;
             }
-        </style>
+        }
+    </style>
+
+    <div class="hideOnScreen">
+        <div class="mainTopPicture">
+            <img src="{{URL::asset('images/mainPics/safarname.webp')}}" alt="koochita" style="width: 100%">
+            <div class="content">
+                <div class="withBack">
+                    <div class="text">
+                        <div style="margin-bottom: 9px;">سفرنامه</div>
+                        <div style="line-height: 38px; padding-bottom: 12px; padding-top: 19px;">کوچیتا</div>
+                    </div>
+                </div>
+                <div class="trans"></div>
+            </div>
+        </div>
+        <div class="safarnamehList">
+            <div class="titleSec">
+                <div class="title">
+                    پیشنهاد کوچیتا
+                </div>
+            </div>
+            <div class="list safarnamehHorizontalList swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($mostLike as $item)
+                        <a href="#" class="swiper-slide safarnCardMobile">
+                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
+                            <div class="contents">
+                                <div class="icon BookMarkIconEmpty"></div>
+                                <div class="userPic">
+                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="name">{{$item->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
         <div class="safarnamehList">
-            <div class="title">تازه ها</div>
+            <div class="titleSec">
+                <div class="title">پرطرفدارها</div>
+            </div>
+            <div class="list safarnamehHorizontalList swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($mostLike as $item)
+                        <a href="#" class="swiper-slide safarnCardMobile">
+                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
+                            <div class="contents">
+                                <div class="icon BookMarkIconEmpty"></div>
+                                <div class="userPic">
+                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="name">{{$item->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="safarnamehList">
+            <div class="titleSec">
+                <div class="title">داغترین ها</div>
+            </div>
+            <div class="list safarnamehHorizontalList swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($mostLike as $item)
+                        <a href="#" class="swiper-slide safarnCardMobile">
+                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
+                            <div class="contents">
+                                <div class="icon BookMarkIconEmpty"></div>
+                                <div class="userPic">
+                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="name">{{$item->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="safarnamehList">
+            <div class="titleSec">
+                <div class="title">تازه ها</div>
+            </div>
             <div id="allSafarnamehListMobile" class="colList">
                 <a href="##url##" class="rowSafarnamehCard">
                     <div class="imgSec">
@@ -364,19 +398,9 @@
                 </a>
             </div>
         </div>
+
+        <div id="loaderFloorMobile" style="height: 1px; width: 100%;"></div>
     </div>
-
-    <script>
-        var mobileListSample = $('#allSafarnamehListMobile').html();
-        $('#allSafarnamehListMobile').empty();
-
-        new Swiper('.safarnamehHorizontalList', {
-            loop: true,
-            slidesPerView: 'auto',
-            centeredSlides: true,
-            spaceBetween: 10,
-        });
-    </script>
 @endsection
 
 @section('body')
@@ -854,15 +878,18 @@
                     </div>
                 </div>
 
-                <div class="clearfix">
-                    <nav class="navigation pagination">
-                        <div id="allPostPagination" class="nav-links"></div>
-                    </nav>
-                </div>
+                <div id="loaderFloorPc" style="height: 1px; width: 100%;"></div>
+
+{{--                <div class="clearfix">--}}
+{{--                    <nav class="navigation pagination">--}}
+{{--                        <div id="allPostPagination" class="nav-links"></div>--}}
+{{--                    </nav>--}}
+{{--                </div>--}}
 
             </div>
             <div class="gap cf" style="height:30px;"></div>
         </div>
+
     </div>
 @endsection
 
@@ -870,8 +897,10 @@
     <script type='text/javascript' src='{{URL::asset('js/article/mainArticle.js')}}'></script>
 
     <script>
+        var inAjaxSafarnameh = false;
         var allPostSample = 0;
         var takeSafarnameh = 5;
+        var nowPageTaken = 1;
         var page = 1;
         var getLisPostUrl = '{{route("safarnameh.list")}}';
         var totalPage = {{$pageLimit}};
@@ -882,21 +911,22 @@
         $('#samplePost').show();
 
         function getAllPost(page){
-            $.ajax({
-                type: 'GET',
-                url: `{{route("safarnameh.pagination")}}?page=${page}&take=${takeSafarnameh}`,
-                success: function(response){
-                    if(response.status == 'ok') {
-                        createPostRow(response.result);
-                        createPagination(page);
+            if(!inAjaxSafarnameh) {
+                inAjaxSafarnameh = true;
+                $.ajax({
+                    type: 'GET',
+                    url: `{{route("safarnameh.pagination")}}?page=${page}&take=${takeSafarnameh}`,
+                    success: function (response) {
+                        if (response.status == 'ok') {
+                            createPostRow(response.result);
+                            // createPagination(page);
+                        }
                     }
-                }
-            })
+                });
+            }
         }
 
         function createPostRow(_safarnameh){
-            console.log(_safarnameh);
-            $('#samplePost').empty();
             _safarnameh.map(item => {
                 var text = allPostSample;
                 var mobile = mobileListSample;
@@ -909,41 +939,64 @@
                 $('#samplePost').append(text);
                 $('#allSafarnamehListMobile').append(mobile);
             });
-        }
 
-        function createPagination(page){
-
-            var beforeMore = false;
-            var afterMore = false;
-            var text = '';
-            $('#allPostPagination').html('');
-
-            for(var i = 1; i <= totalPage; i++){
-                text = '';
-                if(page == i)
-                    text = "<span aria-current='page' class='page-numbers current' style='cursor: pointer'>" + i + "</span>";
-                else if(Math.abs(i - page) <= 2)
-                    text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
-                else if(i == 1)
-                    text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
-                else if(!beforeMore && i < page){
-                    beforeMore = true;
-                    text = '<span class="page-numbers dots">&hellip;</span>';
-                }
-                else if(i == totalPage)
-                    text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
-                else if(!afterMore && i > page){
-                    afterMore = true;
-                    text = '<span class="page-numbers dots">&hellip;</span>';
-                }
-                $('#allPostPagination').append(text);
+            if(_safarnameh.length == takeSafarnameh) {
+                inAjaxSafarnameh = false;
+                nowPageTaken++;
             }
         }
 
-        $(window).ready(() =>{
-            getAllPost(1);
+        var mobileListSample = $('#allSafarnamehListMobile').html();
+        $('#allSafarnamehListMobile').empty();
+
+        new Swiper('.safarnamehHorizontalList', {
+            loop: true,
+            slidesPerView: 'auto',
+            centeredSlides: true,
+            spaceBetween: 10,
         });
 
+        $(window).on('scroll', e => {
+            var stayToLoad;
+            if($(window).width() <= 767)
+                stayToLoad = document.getElementById('loaderFloorMobile').getBoundingClientRect().top - 100;
+            else
+                stayToLoad = document.getElementById('loaderFloorPc').getBoundingClientRect().top - 400;
+
+            stayToLoad -= $(window).height();
+            if(stayToLoad <= 0 && !inAjaxSafarnameh){
+                getAllPost(nowPageTaken);
+            }
+        });
+
+        // function createPagination(page){
+        //
+        //     var beforeMore = false;
+        //     var afterMore = false;
+        //     var text = '';
+        //     $('#allPostPagination').html('');
+        //
+        //     for(var i = 1; i <= totalPage; i++){
+        //         text = '';
+        //         if(page == i)
+        //             text = "<span aria-current='page' class='page-numbers current' style='cursor: pointer'>" + i + "</span>";
+        //         else if(Math.abs(i - page) <= 2)
+        //             text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
+        //         else if(i == 1)
+        //             text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
+        //         else if(!beforeMore && i < page){
+        //             beforeMore = true;
+        //             text = '<span class="page-numbers dots">&hellip;</span>';
+        //         }
+        //         else if(i == totalPage)
+        //             text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
+        //         else if(!afterMore && i > page){
+        //             afterMore = true;
+        //             text = '<span class="page-numbers dots">&hellip;</span>';
+        //         }
+        //         $('#allPostPagination').append(text);
+        //     }
+        // }
     </script>
 @endSection
 
