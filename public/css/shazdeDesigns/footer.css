@@ -1859,6 +1859,7 @@ footer .bookMarkSSec .infoSec .state{
     bottom: 0px;
     direction: rtl;
     position: absolute;
+    max-width: 500px;
 }
 .gombadi .mobileFooterFilterPic{
     position: relative;

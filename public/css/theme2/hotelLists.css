@@ -692,6 +692,65 @@ div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper{
 }
 
 
+.searchBox{
+    position: absolute;
+    top: 70px;
+    z-index: 9;
+    width: 100%;
+    background: #ebebeb;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0px 6px 12px 0px #e0e0e08a;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.searchBox .result{
+    font-size: 13px;
+    margin: 3px 0px;
+    padding: 5px 10px;
+    border-bottom: solid 1px gainsboro;
+    cursor: pointer;
+    transition: .3s;
+}
+.searchBox .result:hover{
+    background: white;
+    border-radius: 14px;
+    color: var(--koochita-light-green);
+}
+.searchBox .loading{
+    width: 30px;
+    margin: 0px auto;
+}
+.searchBox .loading svg{
+    width: 100%;
+    height: auto;
+}
+.searchBox .loading path{
+    fill: var(--koochita-blue);
+}
+
+.globalSearchResult .result{
+    padding: 5px 10px;
+    margin: 5px 10px;
+    border-bottom: solid 1px #e4e4e4;
+}
+
+.materialSearchSelected{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.materialSearchSelected .matSel{
+    color: white;
+    background: var(--koochita-light-green);
+    border-radius: 5px;
+    padding: 5px 7px;
+    margin: 5px 0px;
+    cursor: pointer;
+}
+
 .filterShow .filters{
     display: flex;
     color: white;
@@ -845,6 +904,36 @@ div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper{
     .selectOrder {
         background-color: var(--koochita-light-green);
         color: white;
+    }
+
+    .placeListMobileTopPic{
+        position: relative;
+    }
+    .placeListMobileTopPic .listTitle{
+        position: absolute;
+        top: 0px;
+        background: #0000006e;
+        height: 80%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        direction: rtl;
+        flex-direction: column;
+    }
+    .placeListMobileTopPic .listTitle div{
+        font-family: 'Shin' !important;
+        text-align: center;
+        font-size: 90px;
+        line-height: 48px;
+    }
+    .placeListMobileTopPic .botGradient{
+        position: absolute;
+        background: linear-gradient(180deg, #0000006e, transparent);
+        width: 100%;
+        height: 20%;
+        top: 80%;
     }
 }
 

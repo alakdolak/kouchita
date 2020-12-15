@@ -420,8 +420,6 @@
 @endsection
 
 @section('script')
-    <script type='text/javascript' src='{{URL::asset('js/article/mainArticle.js')}}'></script>
-
     <script>
         var inAjaxSafarnameh = false;
         var takeSafarnameh = 5;

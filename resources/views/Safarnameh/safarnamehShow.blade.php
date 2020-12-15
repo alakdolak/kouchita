@@ -129,7 +129,9 @@
 @section('body')
     <div class="gnWhiteBox">
         <div class="gnMainPicOfArticle">
-            <img class="gnAdvertiseImage" src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}">
+            <div class="mainImg">
+                <img class="gnAdvertiseImage" src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}">
+            </div>
             <div class="gnMainPicOfArticleText">
                 <a href="{{route('profile', ['username' => $safarnameh->user->username])}}" target="_blank" class="mainUserPicSafarnameh">
                     <img src="{{$safarnameh->user->pic}}"  style="height: 100%;">
@@ -201,8 +203,8 @@
             <div>
                 <div class="col-md-12 col-sm-12 gnUserDescription">
                     <div>
-                        <div class="circleBase type2 newCommentWriterProfilePic">
-                            <img src="{{$safarnameh->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                        <div class="circleBase type2 newCommentWriterProfilePic" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden">
+                            <img src="{{$safarnameh->user->pic}}" style="height: 100%;">
                         </div>
                         <a href="{{route('profile', ['username' => $safarnameh->user->username])}}" target="_blank" class="gnLabels">{{$safarnameh->user->username}}</a>
                     </div>
@@ -213,21 +215,18 @@
                 <div id="safarnamehCommentDiv" class="commentsMainBox" style="display: none;"></div>
 
                 <div class="newCommentPlaceMainDiv">
-                    <div class="circleBase type2 newCommentWriterProfilePic">
-                        <img src="{{$uPic}}" style="">
+                    <div class="circleBase type2 newCommentWriterProfilePic hideOnPhone" style="width: 50px; height: 50px;">
+                        <img src="{{$uPic}}">
                     </div>
                     <div class="inputBox">
                         <div class="replyCommentTitle" style="font-weight: bold">نظر خود را در مورد سفرنامه با ما در میان بگذارید</div>
-                        <textarea id="textareaForAns"
-                                  class="inputBoxInput inputBoxInputComment"
-                                  rows="1" placeholder="شما چه نظری دارید؟"
-                                  onclick="checkLogin()"
+                        <textarea id="textareaForAns" class="inputBoxInput inputBoxInputComment"
+                                  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"
                                   onchange="checkNotEmptyTextArea(this)// answerPack"
                                   onkeydown="checkNotEmptyTextArea(this)// answerPack"></textarea>
                         <button id="mainBtnAnswer" class="btn submitAnsInReview"
                                 onclick="sendCommentText(0, $('#textareaForAns').val()); $(this).hide(); $(this).next().show()"
-                                style="height: fit-content"
-                                disabled>
+                                style="height: fit-content" disabled>
                             {{__("ارسال")}}
                         </button>
                         <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>

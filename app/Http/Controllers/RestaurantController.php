@@ -92,8 +92,4 @@ class RestaurantController extends Controller {
         echo \GuzzleHttp\json_encode([]);
     }
 
-    public function showRestaurantDetail($placeId, $placeName = "", $mode = "", $err = "") {
-        $url = createUrl(3, $placeId, 0, 0, 0);
-        return Redirect::to($url);
-    }
 }

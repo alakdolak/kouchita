@@ -287,4 +287,13 @@
 
         font-size: 1em;
     }
+
+
+    .gnMainPicOfArticle .mainImg{
+        height: 300px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
