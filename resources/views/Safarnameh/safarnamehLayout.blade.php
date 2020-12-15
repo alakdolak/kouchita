@@ -11,8 +11,11 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v='.$fileVersions)}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css?v='.$fileVersions)}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}"/>
-    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/safarnameh.css?v='.$fileVersions)}}">
+
     <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
+
+    <link rel="profile" href="http://gmpg.org/xfn/11">
 
     @yield('head')
 
@@ -162,7 +165,6 @@
                 @yield('body')
             </div>
         </div>
-
 
         @include('layouts.footer.layoutFooter')
 

@@ -88,213 +88,6 @@
         </div>
     </div>
 
-
-    <style>
-        @media (max-width: 767px) {
-            .mainTopPicture{
-                position: relative;
-            }
-            .mainTopPicture .content{
-                position: absolute;
-                top: 0px;
-                right: 0px;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                font-size: 28px;
-                text-align: center;
-            }
-            .mainTopPicture .content .text{
-                /*font-size: 40vw;*/
-                font-size: 140px;
-                padding: 0px 5px;
-                padding-bottom: 10px;
-                color: white;
-                margin-bottom: 57px;
-            }
-            .mainTopPicture .content .withBack{
-                background: #00000040;
-                height: 80%;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .mainTopPicture .content .trans{
-                background: linear-gradient(180deg, #00000040, transparent);
-                width: 100%;
-                height: 20%;
-            }
-            .mainTopPicture .content .text > div{
-                font-family: Shin !important;
-                line-height: 25px;
-                padding: 0px 17px;
-            }
-            .safarnamehList{
-                margin-bottom: 40px;
-            }
-            .safarnamehList .titleSec{
-                color: #333;
-                font-size: 20px;
-                margin-right: 10px;
-                margin-bottom: 10px;
-                position: relative;
-                display: flex;
-                justify-content: center;
-            }
-            .safarnamehList .titleSec:before{
-                content: '';
-                position: absolute;
-                background: var(--koochita-green);
-                width: 100%;
-                top: 50%;
-                height: 2px;
-                right: 0px;
-            }
-            .safarnamehList .titleSec .title{
-                background: white;
-                z-index: 2;
-                font-weight: bold;
-                padding: 0px 10px;
-                color: #101010;
-            }
-            .safarnamehList .list{
-                display: flex;
-                flex-wrap: wrap;
-            }
-
-            .safarnCardMobile{
-                position: relative;
-                width: 200px;
-                height: 250px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                border-radius: 23px;
-                margin-bottom: 10px;
-            }
-            .safarnCardMobile .contents{
-                position: absolute;
-                width: 100%;
-                height: 100%;
-            }
-            .safarnCardMobile .contents .icon{
-                position: absolute;
-                right: 10px;
-                top: 5px;
-                font-size: 30px;
-                color: black;
-            }
-            .safarnCardMobile .contents .userPic{
-                position: absolute;
-                width: 50px;
-                border-radius: 50%;
-                overflow: hidden;
-                left: -3px;
-                top: -3px;
-                border: solid 3px white;
-            }
-            .safarnCardMobile .contents .name{
-                position: absolute;
-                bottom: 0px;
-                color: white;
-                width: 100%;
-                font-weight: normal;
-                text-align: center;
-                padding: 0px 10px;
-                padding-bottom: 30px;
-                font-size: 18px;
-                height: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: flex-end;
-                background: linear-gradient(0deg, black, transparent);
-            }
-
-
-            body{
-                background: white;
-            }
-            .rowSafarnamehCard{
-                display: flex;
-                width: 99%;
-                margin: 20px auto;
-                margin-left: 0px;
-                margin-bottom: 15px;
-                padding-bottom: 10px;
-                border-bottom: solid #d3d3d330 1px;
-            }
-            .rowSafarnamehCard .imgSec{
-                position: relative;
-                width: 150px;
-                height: 100px;
-            }
-            .rowSafarnamehCard .imgSec .safarPic{
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 15px;
-                z-index: 1;
-            }
-            .rowSafarnamehCard .imgSec .icon{
-                position: absolute;
-                left: 7px;
-                top: 7px;
-                color: black;
-                font-size: 18px;
-            }
-            .rowSafarnamehCard .imgSec .userInfos{
-                width: 40px;
-                height: 40px;
-                overflow: hidden;
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: absolute;
-                bottom: -3px;
-                right: -3px;
-                z-index: 2;
-                border: solid 4px white;
-            }
-            .rowSafarnamehCard .content{
-                color: black;
-                width: calc(100% - 165px);
-                margin-right: 10px;
-                font-size: 10px;
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-            }
-            .rowSafarnamehCard .content .title{
-                color: black;
-                font-weight: bold;
-                font-size: 1.5em;
-                margin: 0px;
-                margin-bottom: 5px;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-            .rowSafarnamehCard .content .summery{
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-
-                font-size: 1em;
-            }
-        }
-    </style>
-
     <div class="hideOnScreen">
         <div class="mainTopPicture">
             <img src="{{URL::asset('images/mainPics/safarname.webp')}}" alt="koochita" style="width: 100%">
@@ -308,27 +101,13 @@
                 <div class="trans"></div>
             </div>
         </div>
+
         <div class="safarnamehList">
             <div class="titleSec">
-                <div class="title">
-                    پیشنهاد کوچیتا
-                </div>
+                <div class="title"> پیشنهاد کوچیتا </div>
             </div>
             <div class="list safarnamehHorizontalList swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($mostLike as $item)
-                        <a href="#" class="swiper-slide safarnCardMobile">
-                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
-                            <div class="contents">
-                                <div class="icon BookMarkIconEmpty"></div>
-                                <div class="userPic">
-                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
-                                </div>
-                                <div class="name">{{$item->title}}</div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                <div id="mainSuggestionSafarnamehMobile" class="swiper-wrapper"></div>
             </div>
         </div>
 
@@ -337,42 +116,16 @@
                 <div class="title">پرطرفدارها</div>
             </div>
             <div class="list safarnamehHorizontalList swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($mostLike as $item)
-                        <a href="#" class="swiper-slide safarnCardMobile">
-                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
-                            <div class="contents">
-                                <div class="icon BookMarkIconEmpty"></div>
-                                <div class="userPic">
-                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
-                                </div>
-                                <div class="name">{{$item->title}}</div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                <div id="popularSafarnamehMobile" class="swiper-wrapper"></div>
             </div>
         </div>
 
         <div class="safarnamehList">
             <div class="titleSec">
-                <div class="title">داغترین ها</div>
+                <div class="title">داغ ترین ها</div>
             </div>
             <div class="list safarnamehHorizontalList swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($mostLike as $item)
-                        <a href="#" class="swiper-slide safarnCardMobile">
-                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
-                            <div class="contents">
-                                <div class="icon BookMarkIconEmpty"></div>
-                                <div class="userPic">
-                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
-                                </div>
-                                <div class="name">{{$item->title}}</div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                <div id="hotSafarnamehMobile" class="swiper-wrapper"></div>
             </div>
         </div>
 
@@ -380,31 +133,93 @@
             <div class="titleSec">
                 <div class="title">تازه ها</div>
             </div>
-            <div id="allSafarnamehListMobile" class="colList">
-                <a href="##url##" class="rowSafarnamehCard">
-                    <div class="imgSec">
-                        <div class="safarPic">
-                            <img src="##pic##" alt="##title##" class="resizeImgClass" onload="fitThisImg(this)">
-                        </div>
-                        <div class="userInfos">
-                            <img src="##writerPic##" alt="userPicture" style="height: 100%;">
-                        </div>
-                        <div class="icon BookMarkIconEmpty"></div>
-                    </div>
-                    <div class="content">
-                        <div class="title">##title##</div>
-                        <div class="summery">##summery##</div>
-                    </div>
-                </a>
+            <div id="allSafarnamehListMobile" class="colList"></div>
+        </div>
+
+        <div id="safarnamehRowCardPlaceHolderMobile" class="hidden">
+            <div class="rowSafarnamehCard placeHolderCard">
+                <div class="imgSec">
+                    <div class="safarPic placeHolderAnime"></div>
+                </div>
+                <div class="content">
+                    <div class="title placeHolderAnime resultLineAnim" style="width: 50%; height: 10px; margin-bottom: 15px;"></div>
+                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                </div>
             </div>
         </div>
+        <div id="safarnamehMainCardPlaceHolderMobile" class="hidden">
+            <div class="swiper-slide safarnCardMobile">
+                <div class="contents placeHolderAnime">
+                    <div class="userPic" style="background: white"></div>
+                </div>
+            </div>
+        </div>
+        <div id="safarnamehMainCardMobile" class="hidden">
+            <a href="#" class="swiper-slide safarnCardMobile">
+                <img src="##pic##" alt="##title##" class="resizeImgClass" onload="fitThisImg(this)">
+                <div class="contents">
+                    <div class="icon BookMarkIconEmpty"></div>
+                    <div class="userPic">
+                        <img src="##writerPic##" alt="userPic" style="width: 100%">
+                    </div>
+                    <div class="name">##title##</div>
+                </div>
+            </a>
+        </div>
+        <div id="safarnamehRowCardMobile" class="hidden">
+            <a href="##url##" class="rowSafarnamehCard">
+                <div class="imgSec">
+                    <div class="safarPic">
+                        <img src="##pic##" alt="##title##" class="resizeImgClass" onload="fitThisImg(this)">
+                    </div>
+                    <div class="userInfos">
+                        <img src="##writerPic##" alt="userPicture" style="height: 100%;">
+                    </div>
+                    <div class="icon BookMarkIconEmpty"></div>
+                </div>
+                <div class="content">
+                    <div class="title">##title##</div>
+                    <div class="summery">##summery##</div>
+                </div>
+            </a>
+        </div>
+
 
         <div id="loaderFloorMobile" style="height: 1px; width: 100%;"></div>
     </div>
+
+    <script>
+        var mobileMainListPlaceHolderSample = $('#safarnamehMainCardPlaceHolderMobile').html();
+        var mobileMainListSample = $('#safarnamehMainCardMobile').html();
+        var mobileListSample = $('#safarnamehRowCardMobile').html();
+        var mobileRowListPlaceHolderSample = $('#safarnamehRowCardPlaceHolderMobile').html();
+
+        $('#safarnamehRowCardPlaceHolderMobile').remove();
+        $('#safarnamehRowCardMobile').empty();
+        $('#safarnamehMainCardPlaceHolderMobile').remove();
+        $('#safarnamehMainCardMobile').remove();
+
+        var fiveMobilePlaceHolder = '';
+        for(var i = 0; i < 5; i++)
+            fiveMobilePlaceHolder += mobileMainListPlaceHolderSample;
+
+        $('#mainSuggestionSafarnamehMobile').html(fiveMobilePlaceHolder);
+        $('#hotSafarnamehMobile').html(fiveMobilePlaceHolder);
+        $('#popularSafarnamehMobile').html(fiveMobilePlaceHolder);
+
+        new Swiper('.safarnamehHorizontalList', {
+            loop: true,
+            slidesPerView: 'auto',
+            centeredSlides: true,
+            spaceBetween: 10,
+        });
+    </script>
 @endsection
 
 @section('body')
-
     <div class="hideOnPhone">
         @if(isset($relatedSafarnameh))
             <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
@@ -502,6 +317,25 @@
                 </div>
             </div>
         @endif
+
+        <div id="safarnamehRowCardPlaceHolderPC" class="hidden">
+            <div class="small-12 columns placeHolderCard">
+                <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <div class="im-entry-thumb col-md-5 col-sm-12">
+                        <div class="im-entry-thumb-link placeHolderAnime" style="height: 200px;"></div>
+                    </div>
+                    <div class="im-entry col-md-7 col-sm-12">
+                        <header class="im-entry-header">
+                            <div class="placeHolderAnime resultLineAnim" style="width: 50%; height: 10px; margin-bottom: 15px;"></div>
+                        </header>
+                        <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                        <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                        <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                        <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                    </div>
+                </article>
+            </div>
+        </div>
 
         <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
             <div class="widget-head widget-head-45">
@@ -832,7 +666,7 @@
             </div>
             <div class="row im-blog">
 
-                <div id="samplePost" class="clearfix" style="display: none">
+                <div id="pcRowListSafarnameh" class="clearfix" style="display: none">
                     <div class="small-12 columns">
                         <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
                             <div class="im-entry-thumb col-md-5 col-sm-12">
@@ -880,12 +714,6 @@
 
                 <div id="loaderFloorPc" style="height: 1px; width: 100%;"></div>
 
-{{--                <div class="clearfix">--}}
-{{--                    <nav class="navigation pagination">--}}
-{{--                        <div id="allPostPagination" class="nav-links"></div>--}}
-{{--                    </nav>--}}
-{{--                </div>--}}
-
             </div>
             <div class="gap cf" style="height:30px;"></div>
         </div>
@@ -898,37 +726,73 @@
 
     <script>
         var inAjaxSafarnameh = false;
-        var allPostSample = 0;
         var takeSafarnameh = 5;
         var nowPageTaken = 1;
-        var page = 1;
-        var getLisPostUrl = '{{route("safarnameh.list")}}';
-        var totalPage = {{$pageLimit}};
-        if(allPostSample == 0)
-            allPostSample = $('#samplePost').html();
 
-        $('#samplePost').empty();
-        $('#samplePost').show();
+        var pcRowListSample = $('#pcRowListSafarnameh').html();
+        var pcRowListPlaceHolderSample = $('#safarnamehRowCardPlaceHolderPC').html();
+
+        $('#safarnamehRowCardPlaceHolderPC').remove();
+        $('#pcRowListSafarnameh').empty().show();
+
+
+        function getMainDataSafarnameh(){
+            getBanners();
+            getOther();
+        }
+
+        function getBanners(){
+            $.ajax({
+                type: 'GET',
+                url: '{{route("safarnameh.getMainPageData")}}?banner=1',
+                success: response => {
+                    if(response.status == 'ok')
+                        createMobileSections('mainSuggestionSafarnamehMobile', response.bannerPosts);
+                },
+                error: err => {
+
+                }
+            });
+        }
+
+        function getOther(){
+            $.ajax({
+                type: 'GET',
+                url: '{{route("safarnameh.getMainPageData")}}?other=1',
+                success: response => {
+                    if(response.status == 'ok'){
+                        createMobileSections('hotSafarnamehMobile', response.mostCommentSafarnameh);
+                        createMobileSections('popularSafarnamehMobile', response.mostCommentSafarnameh);
+
+                    }
+                },
+                error: err => {
+
+                }
+            });
+        }
 
         function getAllPost(page){
             if(!inAjaxSafarnameh) {
                 inAjaxSafarnameh = true;
+                createPlaceHolderSafarnameh(5);
                 $.ajax({
                     type: 'GET',
-                    url: `{{route("safarnameh.pagination")}}?page=${page}&take=${takeSafarnameh}`,
+                    url: `{{route("safarnameh.getListElement")}}?page=${page}&take=${takeSafarnameh}`,
                     success: function (response) {
-                        if (response.status == 'ok') {
+                        if (response.status == 'ok')
                             createPostRow(response.result);
-                            // createPagination(page);
-                        }
                     }
                 });
             }
         }
 
         function createPostRow(_safarnameh){
+            $('#pcRowListSafarnameh').find('.placeHolderCard').remove();
+            $('#allSafarnamehListMobile').find('.placeHolderCard').remove();
+
             _safarnameh.map(item => {
-                var text = allPostSample;
+                var text = pcRowListSample;
                 var mobile = mobileListSample;
 
                 for (var x of Object.keys(item)) {
@@ -936,7 +800,7 @@
                     mobile = mobile.replace(new RegExp(`##${x}##`, "g"), item[x]);
                 }
 
-                $('#samplePost').append(text);
+                $('#pcRowListSafarnameh').append(text);
                 $('#allSafarnamehListMobile').append(mobile);
             });
 
@@ -946,20 +810,43 @@
             }
         }
 
-        var mobileListSample = $('#allSafarnamehListMobile').html();
-        $('#allSafarnamehListMobile').empty();
+        function createPlaceHolderSafarnameh(_number){
+            var pc = '';
+            var mobile = '';
 
-        new Swiper('.safarnamehHorizontalList', {
-            loop: true,
-            slidesPerView: 'auto',
-            centeredSlides: true,
-            spaceBetween: 10,
-        });
+            for(var i = 0; i < _number; i++){
+                mobile += mobileRowListPlaceHolderSample;
+                pc += pcRowListPlaceHolderSample;
+            }
+
+            $('#pcRowListSafarnameh').append(pc);
+            $('#allSafarnamehListMobile').append(mobile);
+        }
+
+        function createMobileSections(_id, _result){
+            var text = '';
+            _result.map(item => {
+                var nText = mobileMainListSample;
+                for (var x of Object.keys(item))
+                    nText = nText.replace(new RegExp(`##${x}##`, "g"), item[x]);
+
+                text += nText;
+            });
+
+            $(`#${_id}`).html(text);
+
+            new Swiper($(`#${_id}`).parents(), {
+                loop: true,
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                spaceBetween: 10,
+            });
+        }
 
         $(window).on('scroll', e => {
             var stayToLoad;
             if($(window).width() <= 767)
-                stayToLoad = document.getElementById('loaderFloorMobile').getBoundingClientRect().top - 100;
+                stayToLoad = document.getElementById('loaderFloorMobile').getBoundingClientRect().top - 150;
             else
                 stayToLoad = document.getElementById('loaderFloorPc').getBoundingClientRect().top - 400;
 
@@ -969,34 +856,9 @@
             }
         });
 
-        // function createPagination(page){
-        //
-        //     var beforeMore = false;
-        //     var afterMore = false;
-        //     var text = '';
-        //     $('#allPostPagination').html('');
-        //
-        //     for(var i = 1; i <= totalPage; i++){
-        //         text = '';
-        //         if(page == i)
-        //             text = "<span aria-current='page' class='page-numbers current' style='cursor: pointer'>" + i + "</span>";
-        //         else if(Math.abs(i - page) <= 2)
-        //             text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
-        //         else if(i == 1)
-        //             text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
-        //         else if(!beforeMore && i < page){
-        //             beforeMore = true;
-        //             text = '<span class="page-numbers dots">&hellip;</span>';
-        //         }
-        //         else if(i == totalPage)
-        //             text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
-        //         else if(!afterMore && i > page){
-        //             afterMore = true;
-        //             text = '<span class="page-numbers dots">&hellip;</span>';
-        //         }
-        //         $('#allPostPagination').append(text);
-        //     }
-        // }
+        $(window).ready(() => {
+            getMainDataSafarnameh();
+        })
     </script>
 @endSection
 

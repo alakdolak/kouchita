@@ -297,7 +297,7 @@ class SafarnamehController extends Controller
             return redirect(route('safarnameh.show', ['id' => $safarnmeh->id]));
     }
 
-    public function safarnamehMainPage($page = 1) {
+    public function safarnamehMainPage() {
 
         $today = getToday()["date"];
         $todayTime = getToday()["time"];
@@ -430,12 +430,10 @@ class SafarnamehController extends Controller
         }
         //end mostComment Post
 
-        $pageLimit = ceil(Safarnameh::where('date', '<=', $today)->where('release', '!=', 'draft')->where('confirm', 1)->count() / 5);
-
-        return view('Safarnameh.safarnameh',compact(['bannerPosts', 'mostLike', 'recentlySafarnameh', 'mostCommentSafarnameh', 'mostSeenSafarnameh', 'page', 'pageLimit']) );
+        return view('Safarnameh.safarnameh',compact(['bannerPosts', 'mostLike', 'recentlySafarnameh', 'mostCommentSafarnameh', 'mostSeenSafarnameh']) );
     }
 
-    public function paginationSafarnameh()
+    public function getSafarnamehListElements()
     {
         $page = $_GET['page'];
         $take = $_GET['take'];
@@ -457,6 +455,148 @@ class SafarnamehController extends Controller
             $item = SafarnamehMinimalData($item);
 
         return response()->json(['status' => 'ok', 'result' => $allSafarnameh]);
+    }
+
+    public function safarnamehMainPageData()
+    {
+        $timeFunc = getToday();
+        $today = $timeFunc["date"];
+        $todayTime = $timeFunc["time"];
+
+        $lastMonthDate = \verta(Carbon::now()->subMonth())->format('Y/m/%d');
+        $lastMonthDate = convertDateToString($lastMonthDate);
+
+        if(isset($_GET['banner']) && $_GET['banner'] == 1){
+            //this section we get banner posts
+            $bSafarnameh = \DB::table('safarnameh')
+                ->join('bannerPosts', 'postId', 'safarnameh.id')
+                ->where('date', '<=', $today)
+                ->select(['userId', 'safarnameh.id', 'safarnameh.title',
+                    'safarnameh.seen', 'safarnameh.created_at', 'safarnameh.pic',
+                    'safarnameh.date', 'safarnameh.title', 'safarnameh.keyword',
+                    'safarnameh.slug', 'safarnameh.summery', 'safarnameh.meta'])
+                ->take(5)
+                ->get();
+            if(count($bSafarnameh) == 3)
+                $countBanner = 2;
+            else if(count($bSafarnameh) == 4 || count($bSafarnameh) == 5 || count($bSafarnameh) == 2 || count($bSafarnameh) == 1)
+                $countBanner = count($bSafarnameh);
+            else if(count($bSafarnameh) > 5)
+                $countBanner = 5;
+            $bannerPosts = array();
+            foreach ($bSafarnameh as $item) {
+                $item = SafarnamehMinimalData($item);
+                if($countBanner != 0) {
+                    array_push($bannerPosts, $item);
+                    $countBanner--;
+                }
+            }
+
+            $time = microtime(true) - LARAVEL_START;
+            return response()->json(['status' => 'ok', 'bannerPosts' => $bannerPosts, 'time' => $time]);
+        }
+        else if(isset($_GET['other']) &&$_GET['other'] == 1){
+            //this section get all safarnameh released in last month
+            $lastMonthSafarnameh = [];
+            $lastMonthSafarnamehId = [];
+            $lms = \DB::select('SELECT safarnameh.id, safarnameh.title, safarnameh.summery, safarnameh.meta, safarnameh.slug, `date`, safarnameh.time, safarnameh.keyword, safarnameh.pic, safarnameh.seen, safarnameh.userId, u.username AS username FROM safarnameh LEFT JOIN `users` AS u ON safarnameh.userId = u.id WHERE (`date` > ' . $lastMonthDate . ' OR (safarnameh.date = ' . $lastMonthDate . ' AND safarnameh.time <= ' . $todayTime . ' )) AND safarnameh.release <> "draft" AND safarnameh.confirm = 1 ORDER By safarnameh.date DESC ');
+            foreach ($lms as $item) {
+                $item = SafarnamehMinimalData($item);
+                array_push($lastMonthSafarnameh, $item);
+                array_push($lastMonthSafarnamehId, $item->id);
+            }
+
+            if(count($lastMonthSafarnamehId) < 10){
+                $take = 10 - count($lastMonthSafarnamehId);
+                $lms2 = Safarnameh::whereNotIn('id', $lastMonthSafarnamehId)
+                    ->where('release', '!=', 'draft')
+                    ->where('confirm', 1)
+                    ->orderByDesc('date')
+                    ->take($take)
+                    ->get();
+                foreach ($lms2 as $item) {
+                    $item = SafarnamehMinimalData($item);
+                    array_push($lastMonthSafarnameh, $item);
+                    array_push($lastMonthSafarnamehId, $item->id);
+                }
+            }
+            // end get lastMonthSafarnameh
+
+            //this section get 5 most like post from lastMonthSafarnameh
+            $likePost = [];
+            if(count($lastMonthSafarnamehId) > 0)
+                $likePost = \DB::select('SELECT safarnameh.id, COUNT(safarnamehLike.id) as likeCount FROM safarnameh JOIN safarnamehLike ON safarnamehLike.like = 1 AND safarnamehLike.safarnamehId = safarnameh.id AND safarnameh.id IN (' . implode(",", $lastMonthSafarnamehId) . ')  GROUP BY safarnameh.id ORDER BY likeCount DESC');
+
+            $mostLike = array();
+            $mostLikeId = array();
+            foreach ($likePost as $item){
+                foreach ($lastMonthSafarnameh as $item2){
+                    if($item->id == $item2->id){
+                        $item2->likes = $item->likeCount;
+                        array_push($mostLike, $item2);
+                        array_push($mostLikeId, $item->id);
+                        break;
+                    }
+                }
+            }
+            foreach ($lastMonthSafarnameh as $item){
+                if(!in_array($item->id, $mostLikeId) && count($mostLikeId) < 5){
+                    array_push($mostLike, $item);
+                    array_push($mostLikeId, $item->id);
+                }
+            }
+            // end mostLikePost
+
+            //this section get 5 newest post from lastMonthSafarnameh
+            $recentlySafarnameh = array();
+            for($i = 0; $i < 5 && $i < count($lastMonthSafarnameh); $i++)
+                array_push($recentlySafarnameh, $lastMonthSafarnameh[$i]);
+            //end newest Post
+
+            //this section get mostSeen Post from lastMonthSafarnameh
+            $mostSeenSafarnameh = array();
+            for($i = 0; $i < count($lastMonthSafarnameh); $i++){
+                for($j = $i + 1; $j < count($lastMonthSafarnameh); $j++){
+                    if($lastMonthSafarnameh[$i]->seen < $lastMonthSafarnameh[$j]->seen){
+                        $c = $lastMonthSafarnameh[$i];
+                        $lastMonthSafarnameh[$i] = $lastMonthSafarnameh[$j];
+                        $lastMonthSafarnameh[$j] = $c;
+                    }
+                }
+            }
+            for($i = 0; $i < 5 && $i < count($lastMonthSafarnameh); $i++)
+                array_push($mostSeenSafarnameh, $lastMonthSafarnameh[$i]);
+            //end mostSeen Post
+
+            //this section get mostComment Post from lastMonthSafarnameh
+            $commentPost = [];
+            if(count($lastMonthSafarnamehId) > 0)
+                $commentPost = \DB::select('SELECT safarnameh.id, COUNT(safarnamehComment.id) as CommentCount FROM safarnameh JOIN safarnamehComment ON safarnamehComment.confirm = 1 AND safarnamehComment.safarnamehId = safarnameh.id AND safarnameh.id IN (' . implode(",", $lastMonthSafarnamehId) . ')  GROUP BY safarnameh.id ORDER BY CommentCount DESC');
+            $mostCommentSafarnameh = [];
+            $mostCommentSafarnamehId = [];
+            foreach ($commentPost as $item){
+                foreach ($lastMonthSafarnameh as $item2){
+                    if($item->id == $item2->id){
+                        $item2->msgs = $item->CommentCount;
+                        array_push($mostCommentSafarnameh, $item2);
+                        array_push($mostCommentSafarnamehId, $item->id);
+                        break;
+                    }
+                }
+            }
+            foreach ($lastMonthSafarnameh as $item){
+                if(!in_array($item->id, $mostCommentSafarnamehId) && count($mostCommentSafarnamehId) < 5){
+                    array_push($mostCommentSafarnameh, $item);
+                    array_push($mostCommentSafarnamehId, $item->id);
+                }
+            }
+            //end mostComment Post
+
+            $time = microtime(true) - LARAVEL_START;
+            return response()->json(['status' => 'ok', 'mostLike' => $mostLike, 'recentlySafarnameh' => $recentlySafarnameh,
+                                    'mostCommentSafarnameh' => $mostCommentSafarnameh, 'mostSeenSafarnameh' => $mostSeenSafarnameh,
+                                    'time' => $time]);
+        }
     }
 
     public function safarnamehList($type = '',$search = '')

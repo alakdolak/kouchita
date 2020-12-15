@@ -308,7 +308,7 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
+Route::group(array('middleware' => ['throttle:60', 'nothing']), function (){
 
     Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details')->middleware('shareData');
 
@@ -407,21 +407,19 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 //safarnameh
-Route::group(['middleware' => ['SafarnamehShareData', 'shareData']], function () {
-    Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
+Route::group([], function () {
+    Route::middleware(['shareData', 'SafarnamehShareData'])->group(function(){
+        Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
+        Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
+        Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
+    });
 
+    Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
     Route::get('/article/list/{type}/{search}', 'SafarnamehController@safarnamehListRedirect');
 
-    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
-
-    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
-
-    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
-
-    Route::get('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
-
+    Route::get('/safarnameh/mainPageData', 'SafarnamehController@safarnamehMainPageData')->name('safarnameh.getMainPageData');
+    Route::get('/safarnameh/getListElement', 'SafarnamehController@getSafarnamehListElements')->name('safarnameh.getListElement');
     Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
-
     Route::post('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
 
     Route::group(['middleware' => ['auth']], function (){
@@ -469,7 +467,7 @@ Route::group(array('middleware' => 'nothing'), function(){
 });
 
 // profile common
-Route::group(['middleware' => ['throttle:30']], function(){
+Route::group(['middleware' => ['throttle:60']], function(){
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index')->middleware('shareData');
 
     Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile')->middleware('shareData');
@@ -732,7 +730,7 @@ Route::group(array('middleware' => ['auth']), function(){
 
 
 // admin access
-Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
+Route::group(array('middleware' => ['throttle:60', 'auth', 'adminAccess']), function () {
 
     Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
 

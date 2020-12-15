@@ -1,6 +1,6 @@
 
-<div id="safarnamehPlaceHolderRow" style="display: none;">
-    <div class="usersArticlesMainDiv">
+<div id="safarnamehPlaceHolderRow" class="hidden">
+    <div class="usersArticlesMainDiv placeHolderCard">
         <div class="articleImgMainDiv placeHolderAnime" style="border: none"></div>
         <div class="articleDetailsMainDiv">
             <div class="articleTagsMainDiv" style="cursor: default;">
