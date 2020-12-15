@@ -435,10 +435,10 @@ class SafarnamehController extends Controller
         return view('Safarnameh.safarnameh',compact(['bannerPosts', 'mostLike', 'recentlySafarnameh', 'mostCommentSafarnameh', 'mostSeenSafarnameh', 'page', 'pageLimit']) );
     }
 
-    public function paginationSafarnameh(Request $request)
+    public function paginationSafarnameh()
     {
-        $page = $request->page;
-        $take = $request->take;
+        $page = $_GET['page'];
+        $take = $_GET['take'];
         $today = getToday()["date"];
         $nowTime = getToday()["time"];
 
@@ -454,8 +454,7 @@ class SafarnamehController extends Controller
         foreach ($allSafarnameh as $item)
             $item = SafarnamehMinimalData($item);
 
-        echo json_encode($allSafarnameh);
-        return;
+        return response()->json(['status' => 'ok', 'result' => $allSafarnameh]);
     }
 
     public function safarnamehList($type = '',$search = '')

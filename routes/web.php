@@ -418,7 +418,7 @@ Route::group(['middleware' => ['SafarnamehShareData', 'shareData']], function ()
 
     Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
 
-    Route::post('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
+    Route::get('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
 
     Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
 

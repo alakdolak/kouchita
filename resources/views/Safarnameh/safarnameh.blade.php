@@ -134,10 +134,13 @@
                 padding: 0px 17px;
             }
             .safarnamehList{
-
+                margin-bottom: 40px;
             }
             .safarnamehList .title{
-
+                color: #333;
+                font-size: 20px;
+                margin-right: 10px;
+                margin-bottom: 10px;
             }
             .safarnamehList .list{
                 display: flex;
@@ -227,9 +230,146 @@
                 </div>
             </div>
         </div>
+
+        <div class="safarnamehList">
+            <div class="title">پرطرفدارها</div>
+            <div class="list safarnamehHorizontalList swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($mostLike as $item)
+                        <a href="#" class="swiper-slide safarnCardMobile">
+                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
+                            <div class="contents">
+                                <div class="icon BookMarkIconEmpty"></div>
+                                <div class="userPic">
+                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="name">{{$item->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="safarnamehList">
+            <div class="title">داغترین ها</div>
+            <div class="list safarnamehHorizontalList swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($mostLike as $item)
+                        <a href="#" class="swiper-slide safarnCardMobile">
+                            <img src="{{$item->pic}}" alt="{{$item->title}}" class="resizeImgClass" onload="fitThisImg(this)">
+                            <div class="contents">
+                                <div class="icon BookMarkIconEmpty"></div>
+                                <div class="userPic">
+                                    <img src="{{$item->writerPic}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="name">{{$item->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <style>
+            body{
+                background: white;
+            }
+            .safarnamehList .colList{
+
+            }
+            .rowSafarnamehCard{
+                display: flex;
+                width: 98%;
+                margin: 20px auto;
+            }
+            .rowSafarnamehCard .imgSec{
+                position: relative;
+                width: 150px;
+                height: 100px;
+            }
+            .rowSafarnamehCard .imgSec .safarPic{
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 25px;
+                z-index: 1;
+            }
+            .rowSafarnamehCard .imgSec .icon{
+                position: absolute;
+                left: 7px;
+                top: 7px;
+                color: black;
+                font-size: 30px;
+            }
+            .rowSafarnamehCard .imgSec .userInfos{
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                bottom: -3px;
+                right: -3px;
+                z-index: 2;
+                border: solid 4px white;
+            }
+            .rowSafarnamehCard .content{
+                color: black;
+                width: calc(100% - 210px);
+                margin-right: 10px;
+            }
+            .rowSafarnamehCard .content .title{
+                color: black;
+                font-weight: bold;
+                font-size: 14px;
+                margin: 0px;
+                margin-bottom: 5px;
+
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .rowSafarnamehCard .content .summery{
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        </style>
+
+        <div class="safarnamehList">
+            <div class="title">تازه ها</div>
+            <div id="allSafarnamehListMobile" class="colList">
+                <a href="##url##" class="rowSafarnamehCard">
+                    <div class="imgSec">
+                        <div class="safarPic">
+                            <img src="##pic##" alt="##title##" class="resizeImgClass" onload="fitThisImg(this)">
+                        </div>
+                        <div class="userInfos">
+                            <img src="##writerPic##" alt="userPicture" style="height: 100%;">
+                        </div>
+                        <div class="icon BookMarkIconEmpty"></div>
+                    </div>
+                    <div class="content">
+                        <div class="title">##title##</div>
+                        <div class="summery">##summery##</div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
     <script>
+        var mobileListSample = $('#allSafarnamehListMobile').html();
+        $('#allSafarnamehListMobile').empty();
+
         new Swiper('.safarnamehHorizontalList', {
             loop: true,
             slidesPerView: 'auto',
@@ -686,13 +826,11 @@
                                         </div>
                                     </div>
                                     <h3 class="im-entry-title">
-                                        <a href="##url##"
-                                           rel="bookmark">##title##</a>
+                                        <a href="##url##" rel="bookmark">##title##</a>
                                     </h3>
                                 </header>
 
-                                <div style="max-height: 100px !important; overflow: hidden"
-                                     class="im-entry-content">
+                                <div style="max-height: 100px !important; overflow: hidden" class="im-entry-content">
                                     <p>##meta##</p>
                                 </div>
 
@@ -732,17 +870,79 @@
     <script type='text/javascript' src='{{URL::asset('js/article/mainArticle.js')}}'></script>
 
     <script>
+        var allPostSample = 0;
+        var takeSafarnameh = 5;
         var page = 1;
-        var _token = '{{csrf_token()}}';
-        var getAllSafarnamehUrl = '{{route("safarnameh.pagination")}}';
         var getLisPostUrl = '{{route("safarnameh.list")}}';
         var totalPage = {{$pageLimit}};
         if(allPostSample == 0)
             allPostSample = $('#samplePost').html();
 
-        $('#samplePost').html('');
+        $('#samplePost').empty();
         $('#samplePost').show();
-        getAllPost(1);
+
+        function getAllPost(page){
+            $.ajax({
+                type: 'GET',
+                url: `{{route("safarnameh.pagination")}}?page=${page}&take=${takeSafarnameh}`,
+                success: function(response){
+                    if(response.status == 'ok') {
+                        createPostRow(response.result);
+                        createPagination(page);
+                    }
+                }
+            })
+        }
+
+        function createPostRow(_safarnameh){
+            console.log(_safarnameh);
+            $('#samplePost').empty();
+            _safarnameh.map(item => {
+                var text = allPostSample;
+                var mobile = mobileListSample;
+
+                for (var x of Object.keys(item)) {
+                    text = text.replace(new RegExp(`##${x}##`, "g"), item[x]);
+                    mobile = mobile.replace(new RegExp(`##${x}##`, "g"), item[x]);
+                }
+
+                $('#samplePost').append(text);
+                $('#allSafarnamehListMobile').append(mobile);
+            });
+        }
+
+        function createPagination(page){
+
+            var beforeMore = false;
+            var afterMore = false;
+            var text = '';
+            $('#allPostPagination').html('');
+
+            for(var i = 1; i <= totalPage; i++){
+                text = '';
+                if(page == i)
+                    text = "<span aria-current='page' class='page-numbers current' style='cursor: pointer'>" + i + "</span>";
+                else if(Math.abs(i - page) <= 2)
+                    text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
+                else if(i == 1)
+                    text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
+                else if(!beforeMore && i < page){
+                    beforeMore = true;
+                    text = '<span class="page-numbers dots">&hellip;</span>';
+                }
+                else if(i == totalPage)
+                    text = "<a class='page-numbers' onclick='getAllPost(" + i + ")' style='cursor: pointer'>" + i + "</a>\n";
+                else if(!afterMore && i > page){
+                    afterMore = true;
+                    text = '<span class="page-numbers dots">&hellip;</span>';
+                }
+                $('#allPostPagination').append(text);
+            }
+        }
+
+        $(window).ready(() =>{
+            getAllPost(1);
+        });
 
     </script>
 @endSection
