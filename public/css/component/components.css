@@ -1504,6 +1504,7 @@
     .newCommentPlaceMainDiv .inputBox {
         background: none;
         border: none;
+        width: 100%;
     }
 
     .replyToCommentMainDiv .inputBox{
@@ -1626,10 +1627,6 @@
 
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
-    }
-
-    .newCommentPlaceMainDiv .inputBox {
-        width: calc(100% - 50px);
     }
 
     .commentRatingsDetailsBox > div > b {

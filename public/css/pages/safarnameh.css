@@ -1,3 +1,88 @@
+.pcBannerPic{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.pcSafarnamehMainBig{
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+.pcSafarnamehMainBig .imgSec{
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pcSafarnamehMainBig .content{
+    position: absolute;
+    width: calc(100% - 30px);
+    height: 100%;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+}
+.pcSafarnamehMainBig .content .name{
+    color: white;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+.pcSafarnamehMainBig .content .icons{
+    color: lightgray;
+    margin-right: 15px;
+    display: flex;
+}
+.pcSafarnamehMainBig .content .icons div{
+    margin-left: 10px;
+    font-size: .9em !important;
+}
+.pcSafarnamehMainBig .content .icons div i{
+    margin-left: 3px
+}
+
+
+.pcSafarnamehMainSmall{
+    display: flex;
+    height: 70px;
+    margin-bottom: 20px;
+}
+.pcSafarnamehMainSmall .imgSec{
+    width: 90px;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+.pcSafarnamehMainSmall .content{
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: calc(100% - 110px);
+}
+.pcSafarnamehMainSmall .content .name{
+    color: rgba(0, 0, 0, .75)
+}
+.pcSafarnamehMainSmall .content .icons{
+    color: gray;
+    display: flex;
+}
+.pcSafarnamehMainSmall .content .icons div{
+    margin-left: 14px;
+    font-size: .7em !important;
+}
+.pcSafarnamehMainSmall .content .icons div i{
+    margin-left: 3px;
+}
+
 @media (max-width: 767px) {
     .mainTopPicture{
         position: relative;
@@ -84,17 +169,19 @@
         border-radius: 23px;
         margin-bottom: 10px;
     }
+    .safarnCardMobile .icon{
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-size: 22px;
+        color: black;
+        z-index: 2;
+    }
     .safarnCardMobile .contents{
         position: absolute;
         width: 100%;
         height: 100%;
-    }
-    .safarnCardMobile .contents .icon{
-        position: absolute;
-        right: 10px;
-        top: 5px;
-        font-size: 30px;
-        color: black;
+        z-index: 1;
     }
     .safarnCardMobile .contents .userPic{
         position: absolute;

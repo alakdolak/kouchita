@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('layouts.topHeader')
     <meta property="og:locale" content="fa_IR" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @include('layouts.topHeader')
 
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v='.$fileVersions)}}' data-rup='hr_north_star_v1'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v='.$fileVersions)}}"/>
@@ -251,10 +251,41 @@
             }
         }
 
+        function bookMarkSafarnameh(_id, _element){
+
+            if(!checkLogin())
+                return;
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("safarnameh.bookMark")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                success: response => {
+                    if(response.status == 'store') {
+                        showSuccessNotifi('سفرنامه به نشان کرده اضافه شد', 'left', 'var(--koochita-blue)');
+                        $(_element).addClass('BookMarkIcon').removeClass('BookMarkIconEmpty');
+                    }
+                    else if(response.status == 'delete'){
+                        showSuccessNotifi('سفرنامه به نشان کرده اضافه شد', 'left', 'var(--koochita-blue)');
+                        $(_element).addClass('BookMarkIconEmpty').removeClass('BookMarkIcon');
+                    }
+                    else
+                        showSuccessNotifi('نشان کردن سفرنامه با مشکل مواجه شد', 'left', 'red');
+                },
+                error: err =>{
+                    showSuccessNotifi('Connection Error', 'left', 'red');
+                }
+            })
+        }
+
         $('.searchInputElemsText').keyup(function(event) {
             if (event.keyCode === 13)
                 $(event.target).next().click();
         });
+
     </script>
 
 </body>
