@@ -762,8 +762,7 @@
                 success: response => {
                     if(response.status == 'ok'){
                         createMobileSections('hotSafarnamehMobile', response.mostCommentSafarnameh);
-                        createMobileSections('popularSafarnamehMobile', response.mostCommentSafarnameh);
-
+                        createMobileSections('popularSafarnamehMobile', response.mostSeenSafarnameh);
                     }
                 },
                 error: err => {
