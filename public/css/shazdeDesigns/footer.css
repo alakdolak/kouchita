@@ -370,12 +370,6 @@ footer li > img, .small-ico {
     top: 0px;
 }
 
-.profilePicFooter.circleBase > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
 .ui_icon.more-horizontal {
     font-size: 30px;
 }

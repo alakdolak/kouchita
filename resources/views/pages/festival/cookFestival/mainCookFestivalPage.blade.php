@@ -482,7 +482,7 @@
                     openErrorAlert(errorText);
                 }
                 else{
-                    openLoading(() => sendActivationCode());
+                    openLoading(false, () => sendActivationCode());
                 }
             }
 
@@ -546,7 +546,7 @@
                 phoneNum = convertNumberToEn(phoneNum);
 
                 if(activationCode.trim().length > 2) {
-                    openLoading(() => {
+                    openLoading(false, () => {
                         $.ajax({
                             type: 'post',
                             url: '{{route("register.checkActivationCode")}}',
@@ -619,7 +619,7 @@
             }
 
             function resendPhoneCode(){
-                openLoading(() => sendActivationCode());
+                openLoading(false, () => sendActivationCode());
             }
 
             $('.mustFill').on('change', e => {
@@ -949,7 +949,7 @@
                     if(inUpload)
                         openWarning('فایل در حال آپلود می باشد، صبر کنید.');
                     else {
-                        openLoading(() => {
+                        openLoading(false, () => {
                             $.ajax({
                                 type: 'post',
                                 url: '{{route("festival.cook.submitFiles")}}',

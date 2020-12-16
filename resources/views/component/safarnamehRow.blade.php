@@ -89,7 +89,7 @@
 
         function doDeleteSafarnameh(){
             if(deletedSafarnamehId != null){
-                openLoading(function(){
+                openLoading(false, function(){
                     $.ajax({
                         type: 'post',
                         url: '{{route("safarnameh.delete")}}',

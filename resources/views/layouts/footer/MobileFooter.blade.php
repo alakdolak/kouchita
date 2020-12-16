@@ -41,7 +41,7 @@
                 <span>صفحه من</span>
             </div>
             <div class="fullyCenterContent profilePicFooter circleBase type2">
-                <img src="{{isset($authUserInfos->pic) ? $authUserInfos->pic : ''}}" class="resizeImgClass" onload="fitThisImg(this)" alt="user picture" style="width: 100%;">
+                <img src="{{isset($authUserInfos->pic) ? $authUserInfos->pic : ''}}" class="resizeImgClass" onload="fitThisImg(this)" alt="user_picture">
             </div>
             @if($authUserInfos->newMsg > 0)
                 <span class="newMsgMainFooterCount">{{$authUserInfos->newMsg}}</span>
@@ -700,7 +700,7 @@
                     <div class="row" style="width: 100%; margin: 0px; flex-direction: column;">
                         <div class="firsLine">
                             <div class="pic">
-                                <img src="{{isset($authUserInfos->pic) ? $authUserInfos->pic : ''}}" alt="userPic"/>
+                                <img src="{{isset($authUserInfos->pic) ? $authUserInfos->pic : ''}}" alt="userPic" class="resizeImgClass" onload="fitThisImg(this)"/>
                             </div>
                             <div class="infos">
                                 <div class="inf">
@@ -841,7 +841,6 @@
 <script>
     var userSettingPageUrl = "{{route('profile.accountInfo')}}";
     var addPlaceByUserUrl = "{{route('addPlaceByUser.index')}}";
-{{--    var openCampingInMobileFooter = '{{Request::is('safarnameh/*') || Request::is('safarnameh')}}';--}}
     var touchRigthForFooterMobile = 0;
 
     $('.footerModals').on('touchstart', e => {

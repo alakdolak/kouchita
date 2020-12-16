@@ -468,9 +468,7 @@
                     </div>
 
                     <div class="uploadSection">
-                        <label for="newImage" class="newImageButton">
-                            آپلود عکس
-                        </label>
+                        <label for="newImage" class="newImageButton"> آپلود عکس </label>
                         <div class="oldBrowser">
                             عکس شما می‌بایست در فرمت‌های jpg یا png یا gif بوده و از 3MB بیشتر نباشید. حتما دقت کنید اندازه عکس 80*80 پیکسل باشد تا زیبا به نظر برسد. در غیر اینصورت ممکن است نتیجه نهایی باب میل شما نباشد.
                         </div>
@@ -863,33 +861,43 @@
         }
 
         function updateUserPic(){
-            openLoading();
+            openLoading(true, () => {
+                let formDa = new FormData();
+                formDa.append('_token', '{{csrf_token()}}');
+                formDa.append('id', $('#uploadImgMode').val());
 
-            let formDa = new FormData();
-            formDa.append('_token', '{{csrf_token()}}');
-            formDa.append('id', $('#uploadImgMode').val());
+                if(choosenPic == 'uploaded')
+                    formDa.append('pic', uploadedPic);
 
-            if(choosenPic == 'uploaded')
-                formDa.append('pic', uploadedPic);
-
-            $.ajax({
-                type: 'post',
-                url: '{{route("profile.updateUserPhoto")}}',
-                data: formDa,
-                processData: false,
-                contentType: false,
-                success: function(response){
-                    if(response == 'ok')
-                        location.reload();
-                    else{
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("profile.updateUserPhoto")}}',
+                    data: formDa,
+                    processData: false,
+                    contentType: false,
+                    xhr: function () {
+                        let xhr = new XMLHttpRequest();
+                        xhr.upload.onprogress = function (e) {
+                            if (e.lengthComputable) {
+                                percent = Math.round((e.loaded / e.total) * 100);
+                                updatePercentLoadingBar(percent);
+                            }
+                        };
+                        return xhr;
+                    },
+                    success: function(response){
+                        if(response == 'ok')
+                            location.reload();
+                        else{
+                            closeLoading();
+                        }
+                    },
+                    error: function(err){
                         closeLoading();
                     }
-                },
-                error: function(err){
-                    closeLoading();
-                }
 
-            })
+                })
+            });
         }
 
         function openCropProfile(){
