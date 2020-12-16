@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v='.$fileVersions)}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTripsInner.css?v='.$fileVersions)}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}'/>
+
     <style>
         .modalBody{
             border-radius: 10px;
@@ -563,14 +564,14 @@
                             <div id="date_btn_start_edit">تاریخ شروع</div>
                             <label id="date_btn_start_label">
                                 <span class="ui_icon calendar" id="date_btn_start"></span>
-                                <input type="text" id="date_input_start_edit" placeholder="روز/ماه/سال" value="{{$trip->from_}}" required readonly type="text">
+                                <input type="text" id="date_input_start_edit" placeholder="روز/ماه/سال" value="{{$trip->from_}}" readonly>
                             </label>
                         </div>
                         <div class="ui_column">
                             <div id="date_btn_end_edit">تاریخ اتمام</div>
                             <label id="date_btn_end_label">
                                 <span class="ui_icon calendar" id="date_btn_start"></span>
-                                <input type="text" id="date_input_end_edit" placeholder="روز/ماه/سال" value="{{$trip->to_}}" required readonly type="text">
+                                <input type="text" id="date_input_end_edit" placeholder="روز/ماه/سال" value="{{$trip->to_}}" readonly>
                             </label>
                         </div>
                     </div>

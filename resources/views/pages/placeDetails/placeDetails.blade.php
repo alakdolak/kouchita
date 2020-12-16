@@ -796,7 +796,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                     @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
 
-                        <div class="topAndBottomBorderAndMargin">
+                        <div class="topAndBottomBorderAndMargin" style="margin-top: 15px">
                             <div id='mediaad-Rvtf' class="importantFullyCenterContent marginBetweenMainPageMobileElements"></div>
                         </div>
 
@@ -884,7 +884,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                         @include('pages.placeDetails.reviewSection')
                     </div>
 
-                    <div>
+                    <div style="margin-top: 15px">
                         <div id="pos-article-display-16123"></div>
                     </div>
 
