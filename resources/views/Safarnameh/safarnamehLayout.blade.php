@@ -166,6 +166,43 @@
             </div>
         </div>
 
+        <div class="mobileFiltersButtonTabs hideOnScreen">
+            <div class="tabs">
+                <div class="tab filterIcon" onclick="openMyModal('safarnamehMobileCategory')">دسته بندی</div>
+                <div class="tab searchIcon" onclick="">جستجو</div>
+            </div>
+        </div>
+
+        <div id="safarnamehMobileCategory" class="modalBlackBack fullCenter hideOnScreen" style="transition: .7s">
+            <div class="gombadi">
+                <div class="mobileFooterFilterPic" style="max-height: 400px">
+                    <img src="{{URL::asset('images/mainPics/naser.jpg')}}" style="width: 100%">
+                    <div class="gradientWhite">
+                        <div class="closeThisModal iconClose" onclick="closeMyModal('safarnamehMobileCategory')"></div>
+                    </div>
+                </div>
+                <div class="safarnamehMainCategoryListMobile">
+                    <div class="list">
+                        @foreach($category as $cat)
+                            <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $cat->name])}}" class="categ">
+                                <div class="categIcon">
+                                    <img src="{{URL::asset('_images/safarnamehIcon/'.$cat->icon)}}" alt="{{$cat->name}}">
+                                </div>
+                                <div class="title">{{$cat->name}}</div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="safarnamehSearchMobile" class="modalBlackBack hideOnScreen">
+            <div class="modalBody">
+
+            </div>
+        </div>
+
+
         @include('layouts.footer.layoutFooter')
 
     </div>
@@ -280,6 +317,15 @@
                 }
             })
         }
+
+
+        function resizeMobileListHeight(){
+            var height = $('#safarnamehMobileCategory').find('.mobileFooterFilterPic').height() + 5;
+            $('#safarnamehMobileCategory').find('.safarnamehMainCategoryListMobile').css('height', `calc(100% - ${height}px)`);
+        }
+
+        $(window).on('resize', resizeMobileListHeight);
+        $(window).ready(() => resizeMobileListHeight());
 
         $('.searchInputElemsText').keyup(function(event) {
             if (event.keyCode === 13)

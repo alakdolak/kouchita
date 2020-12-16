@@ -15,41 +15,6 @@
             text-align: center;
             padding: 5px 0px;
         }
-        .safarnamehMainCategoryListMobile{
-            overflow-y: auto;
-            background: white;
-            position: relative;
-            border: solid 2px black;
-            border-top: 0px;
-        }
-        .safarnamehMainCategoryListMobile .list{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        }
-        .safarnamehMainCategoryListMobile .categ{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 23%;
-            border: solid 1px lightgrey;
-            margin: 3px;
-            color: #333;
-            border-radius: 10px;
-        }
-        .safarnamehMainCategoryListMobile .categ .categIcon{
-            margin: 10px 0px;
-        }
-        .safarnamehMainCategoryListMobile .categ .categIcon img{
-            width: 35px;
-        }
-        .safarnamehMainCategoryListMobile .categ .title{
-            font-size: 12px;
-            margin-bottom: 5px;
-            text-align: center;
-        }
     }
 </style>
 <div class="gapForMobileFooter hideOnScreen"></div>
@@ -391,46 +356,6 @@
                 </div>
             </div>
         </div>
-    @elseif(Request::is('safarnameh/*') || Request::is('safarnameh'))
-        <div class="mobileFiltersButtonTabs hideOnScreen">
-            <div class="tabs">
-                <div class="tab filterIcon" onclick="openMyModal('safarnamehMobileCategory')">دسته بندی</div>
-                <div class="tab searchIcon" onclick="">جستجو</div>
-            </div>
-        </div>
-        <div id="safarnamehMobileCategory" class="modalBlackBack fullCenter" style="transition: .7s">
-            <div class="gombadi">
-                <div class="mobileFooterFilterPic">
-                    <img src="{{URL::asset('images/mainPics/naser.jpg')}}" style="width: 100%">
-                    <div class="gradientWhite">
-                        <div class="closeThisModal iconClose" onclick="closeMyModal('safarnamehMobileCategory')"></div>
-                    </div>
-                </div>
-                <div class="safarnamehMainCategoryListMobile">
-                    <div class="list">
-                        @foreach($category as $cat)
-                            <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $cat->name])}}" class="categ">
-                                <div class="categIcon">
-                                    <img src="{{URL::asset('images/icons/hairCut.svg')}}" alt="{{$cat->name}}">
-                                </div>
-                                <div class="title">{{$cat->name}}</div>
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            $(window).on('resize', resizeMobileListHeight);
-            function resizeMobileListHeight(){
-                var height = $('#safarnamehMobileCategory').find('.mobileFooterFilterPic').height() + 5;
-                $('#safarnamehMobileCategory').find('.safarnamehMainCategoryListMobile').css('height', `calc(100% - ${height}px)`);
-            }
-            $(window).ready(() =>{
-                resizeMobileListHeight();
-            })
-        </script>
     @endif
 
     <div id="specialMenuMobileFooter" class="modalBlackBack closeWithClick footerModals" style="z-index: 1050;">
@@ -700,7 +625,7 @@
                                class="pSC_cityDetails adventureIcon">
                                 طبیعت گردی ‌های {{$locationName['cityNameUrl']}}
                             </a>
-                            <a href="{{route('safarnameh.list', ['type' => 'city', 'search' => $locationName['cityNameUrl'] ])}}"
+                            <a href="{{route('safarnameh.list', ['type' => $locationName['kindState'], 'search' => $locationName['cityNameUrl'] ])}}"
                                class="pSC_cityDetails safarnameIcon">
                                 سفرنامه های {{$locationName['cityNameUrl']}}
                             </a>
@@ -941,8 +866,6 @@
     function openListSort(_element){
         $('.sortListMobileFooter').toggleClass('open');
         $(_element).toggleClass('selected');
-
-
     }
 
     function specialMobileFooter(_id, _element){

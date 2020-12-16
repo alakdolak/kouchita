@@ -287,8 +287,6 @@
 
         font-size: 1em;
     }
-
-
     .gnMainPicOfArticle .mainImg{
         height: 300px;
         overflow: hidden;
@@ -296,4 +294,42 @@
         justify-content: center;
         align-items: center;
     }
+
+
+    .safarnamehMainCategoryListMobile{
+        overflow-y: auto;
+        background: white;
+        position: relative;
+        border: solid 2px black;
+        border-top: 0px;
+    }
+    .safarnamehMainCategoryListMobile .list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .safarnamehMainCategoryListMobile .categ{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 23%;
+        border: solid 1px lightgrey;
+        margin: 3px;
+        color: #333;
+        border-radius: 10px;
+    }
+    .safarnamehMainCategoryListMobile .categ .categIcon{
+        margin: 10px 0px;
+    }
+    .safarnamehMainCategoryListMobile .categ .categIcon img{
+        height: 40px;
+    }
+    .safarnamehMainCategoryListMobile .categ .title{
+        font-size: 12px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
 }

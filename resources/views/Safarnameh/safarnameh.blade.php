@@ -140,20 +140,6 @@
         <div id="loaderFloorMobile" style="height: 1px; width: 100%;"></div>
     </div>
 
-    <div id="safarnamehRowCardPlaceHolderMobile" class="hidden">
-        <div class="rowSafarnamehCard placeHolderCard">
-            <div class="imgSec">
-                <div class="safarPic placeHolderAnime"></div>
-            </div>
-            <div class="content">
-                <div class="title placeHolderAnime resultLineAnim" style="width: 50%; height: 10px; margin-bottom: 15px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-            </div>
-        </div>
-    </div>
     <div id="safarnamehMainCardPlaceHolderMobile" class="hidden">
         <div class="swiper-slide safarnCardMobile">
             <div class="contents placeHolderAnime">
@@ -171,6 +157,21 @@
                 </div>
                 <div class="name">##title##</div>
             </a>
+        </div>
+    </div>
+
+    <div id="safarnamehRowCardPlaceHolderMobile" class="hidden">
+        <div class="rowSafarnamehCard placeHolderCard">
+            <div class="imgSec">
+                <div class="safarPic placeHolderAnime"></div>
+            </div>
+            <div class="content">
+                <div class="title placeHolderAnime resultLineAnim" style="width: 50%; height: 10px; margin-bottom: 15px;"></div>
+                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
+            </div>
         </div>
     </div>
     <div id="safarnamehRowCardMobile" class="hidden">
@@ -477,7 +478,7 @@
             });
         }
 
-        function getAllPost(page){
+        function getSafarnamehMainPage(page){
             if(!inAjaxSafarnameh) {
                 inAjaxSafarnameh = true;
                 createPlaceHolderSafarnameh(5);
@@ -490,7 +491,7 @@
                     },
                     error: (error, status) => {
                         console.log(status);
-                        if(status == "timeout") getAllPost(page);
+                        if(status == "timeout") getSafarnamehMainPage(page);
                     }
                 });
             }
@@ -526,7 +527,7 @@
                     stayToLoad = document.getElementById('loaderFloorPc').getBoundingClientRect().top - 400;
                 stayToLoad -= $(window).height();
                 if(stayToLoad <= 0)
-                    getAllPost(nowPageTaken);
+                    getSafarnamehMainPage(nowPageTaken);
             }
         }
 
@@ -631,7 +632,7 @@
 
             stayToLoad -= $(window).height();
             if(stayToLoad <= 0 && !inAjaxSafarnameh){
-                getAllPost(nowPageTaken);
+                getSafarnamehMainPage(nowPageTaken);
             }
         });
 

@@ -21,6 +21,7 @@ use App\models\Tag;
 use App\models\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class SafarnamehController extends Controller
@@ -513,6 +514,9 @@ class SafarnamehController extends Controller
                 }
                 else if($type == 'state') {
                     $place = State::whereName($search)->first();
+                    if($place == null)
+                        return redirect(route('safarnameh.list', ['type' => 'content', 'search' => $search]));
+
                     $safarnamehId = SafarnamehCityRelations::where('stateId', $place->id)->pluck('safarnamehId')->toArray();
                     $headerList = 'استان ' . $search;
                     $search = $place->id;
@@ -522,6 +526,9 @@ class SafarnamehController extends Controller
                         return redirect(route('safarnameh.index'));
 
                     $place = Cities::whereName($search)->first();
+                    if($place == null)
+                        return redirect(route('safarnameh.list', ['type' => 'content', 'search' => $search]));
+
                     $safarnamehId = SafarnamehCityRelations::where('cityId', $place->id)->pluck('safarnamehId')->toArray();
                     $headerList = 'شهر ' . $search;
                     $search = $place->id;
@@ -543,17 +550,15 @@ class SafarnamehController extends Controller
 
     public function paginationInSafarnamehList(Request $request){
 
-        if(isset($request->type) && isset($request->search) &&
-            isset($request->take) && isset($request->page) &&
-            $request->search != '')
-        {
-            $type = $request->type;
-            $search = $request->search;
-            $take = $request->take;
-            $page = $request->page;
+        if(isset($_GET['type']) && isset($_GET['search']) && isset($_GET['take']) && isset($_GET['page']) && $_GET['search'] != ''){
+            $type = $_GET['type'];
+            $search = $_GET['search'];
+            $take = $_GET['take'];
+            $page = $_GET['page'];
 
-            $today = getToday()['date'];
-            $nowTime = getToday()['time'];
+            $Tfunc = getToday();
+            $today = $Tfunc['date'];
+            $nowTime = $Tfunc['time'];
             $safaranmeh = [];
             $safarnamehId = [0];
 
@@ -561,33 +566,33 @@ class SafarnamehController extends Controller
                 if($type == 'content' || $type == 'category'){
                     if($type == 'content'){
                         $tagRelId = SafarnamehTagRelations::join('safarnamehTags', 'safarnamehTags.id', 'safarnamehTagRelations.tagId')
-                                        ->where('safarnamehTags.tag', 'LIKE', '%'. $search .'%')
-                                        ->pluck('safarnamehTagRelations.safarnamehId')
-                                        ->toArray();
+                                                            ->where('safarnamehTags.tag', 'LIKE', '%'. $search .'%')
+                                                            ->pluck('safarnamehTagRelations.safarnamehId')
+                                                            ->toArray();
 
                         $safarnamehId = Safarnameh::whereRaw('(title LIKE "%' . $search . '%" OR slug LIKE "%' . $search . '%" OR keyword LIKE "%' . $search . '%")')
-                                            ->orWhereIn('id', $tagRelId)
-                                            ->where('release', '!=', 'draft')
-                                            ->pluck('id')
-                                            ->toArray();
+                                                    ->orWhereIn('id', $tagRelId)
+                                                    ->where('release', '!=', 'draft')
+                                                    ->pluck('id')
+                                                    ->toArray();
 
                         $safarnamehId = array_merge($safarnamehId, $tagRelId);
                     }
-                        $cateId = [0];
-                        $category = SafarnamehCategories::where('name', $search)->first();
-                        if($category != null){
-                            if($category->parent == 0)
-                                $cateId = SafarnamehCategories::where('id', $category->id)
-                                    ->orWhere('parent', $category->id)
-                                    ->pluck('id')
-                                    ->toArray();
-                            else
-                                $cateId = [$category->id];
-                        }
+                    $cateId = [0];
+                    $category = SafarnamehCategories::where('name', $search)->first();
+                    if($category != null){
+                        if($category->parent == 0)
+                            $cateId = SafarnamehCategories::where('id', $category->id)
+                                        ->orWhere('parent', $category->id)
+                                        ->pluck('id')
+                                        ->toArray();
+                        else
+                            $cateId = [$category->id];
+                    }
 
-                        $safarnamehId2 = SafarnamehCategoryRelations::whereIn('categoryId', $cateId)
-                                            ->pluck('safarnamehId')
-                                            ->toArray();
+                    $safarnamehId2 = SafarnamehCategoryRelations::whereIn('categoryId', $cateId)
+                                        ->pluck('safarnamehId')
+                                        ->toArray();
 
                     $safarnamehId = array_merge($safarnamehId, $safarnamehId2);
 
@@ -630,9 +635,9 @@ class SafarnamehController extends Controller
                                                 ->where('confirm', 1)
                                                 ->where('release', '!=', 'draft')
                                                 ->whereRaw('(date < ' . $today . ' OR (date = ' . $today . ' AND (time <= ' . $nowTime . ' OR time IS NULL) ))')
-                                                ->select(['userId', 'id', 'title', 'meta',
-                                                        'slug', 'seen', 'date', 'created_at',
-                                                        'pic', 'keyword'])
+                                                ->select([  'userId', 'id', 'title', 'meta',
+                                                            'slug', 'seen', 'date', 'created_at',
+                                                            'pic', 'keyword'])
                                                 ->orderBy('date', 'DESC')
                                                 ->skip(($page - 1) * $take)
                                                 ->take($take)
@@ -643,15 +648,13 @@ class SafarnamehController extends Controller
                 foreach ($safaranmeh as $item)
                     $item = SafarnamehMinimalData($item);
 
-                echo json_encode($safaranmeh);
+                return response()->json(['status' => 'ok', 'result' => $safaranmeh]);
             }
             else
-                echo 'nok2';
+                return response()->json(['status' => 'error2']);
         }
         else
-            echo 'nok1';
-
-        return;
+            return response()->json(['status' => 'error1']);
     }
 
     public function showSafarnameh($id)

@@ -265,8 +265,8 @@ Route::group([], function () {
 
     Route::get('/safarnameh/mainPageData', 'SafarnamehController@safarnamehMainPageData')->name('safarnameh.getMainPageData');
     Route::get('/safarnameh/getListElement', 'SafarnamehController@getSafarnamehListElements')->name('safarnameh.getListElement');
+    Route::get('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
     Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
-    Route::post('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
 
     Route::group(['middleware' => ['auth']], function (){
         Route::post('/safarnameh/like', 'SafarnamehController@LikeSafarnameh')->name('safarnameh.like');
