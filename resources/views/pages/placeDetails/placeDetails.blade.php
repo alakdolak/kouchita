@@ -37,7 +37,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
     <title>{{isset($place->seoTitle) ? $place->seoTitle : $place->name}} </title>
 
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v='.$fileVersions)}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v='.$fileVersions)}}">
     <link rel="stylesheet" href="{{URL::asset('js/emoji/area/emojionearea.css?v='.$fileVersions)}}">
 
@@ -82,7 +81,6 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 {{--    <script defer src= {{URL::asset("js/jalali.js") }}></script>--}}
 {{--    <script defer src="{{URL::asset('js/adv.js')}}"></script>--}}
 {{--    <script async src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>--}}
-    <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
     <script defer src="{{URL::asset('js/emoji/area/emojionearea.js')}}"></script>
     <script defer src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>

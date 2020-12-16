@@ -26,9 +26,10 @@
 
 <link rel="stylesheet" href="{{URL::asset('css/common/header.css?v=.'.$fileVersions)}}">
 <link rel="stylesheet" href="{{URL::asset('css/common/header1.css?v='.$fileVersions)}}">
-<link rel="stylesheet" href="{{URL::asset('css/common/Ad.css?v='.$fileVersions)}}">
+<link rel="stylesheet" href="{{URL::asset('css/common/DA.css?v='.$fileVersions)}}">
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css?v='.$fileVersions)}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('packages/fontAwesom/css/all.min.css')}}' />
+<link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css')}}">
 
 <script async src="{{URL::asset('packages/fontAwesom/js/all.min.js')}}"></script>
 
@@ -37,6 +38,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v='.$fileVersions)}}">
 @endif
 
+<script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{URL::asset('js/defualt/autosize.min.js')}}"></script>
 <script async src="{{URL::asset('js/defualt/bootstrap.min.js')}}"></script>
