@@ -32,17 +32,21 @@ self.addEventListener('activate', event => {
 
 
 self.addEventListener('fetch', event => {
+    console.log('fetch');
+    console.log(event);
 
         event.respondWith(
             caches.match(event.request)
                 .then(response => {
+                    console.log('response');
+                    console.log(response);
                     // if (response) {
                     //     console.log('Found ', event.request.url, ' in cache');
                     //     return response;
                     // }
                     return fetch(event.request)
                 }).catch(error => {
-                    console.log(error)
+                    console.log(error);
                     if(event.request.mode == 'navigate') {
                         return caches.match('./offlineMode/offline.html');
                     }

@@ -138,7 +138,6 @@
                             <div class="bioText">
                                 @if(isset($sideInfos['introduction']))
                                     {{$sideInfos['introduction']}}
-                                    {{$sideInfos['introduction']}}
                                 @endif
                             </div>
                         </div>

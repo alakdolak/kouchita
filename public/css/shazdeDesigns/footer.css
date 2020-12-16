@@ -444,6 +444,7 @@ footer .mainPopUp {
     border-radius: 8px;
     margin: 5px 0px;
     position: relative;
+    font-weight: normal;
 }
 
 .lp_selectedMenu {
