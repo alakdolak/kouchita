@@ -32,9 +32,9 @@
     <div class="hideOnPhone">
         @include('general.secondHeader')
         <div style="background: white; width: 100%; padding: 15px 0px;">
-            <div class="topPageAd">
-                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-            </div>
+            <a href="{{route('festival.cook')}}" class="topPageAd">
+                <img src="{{URL::asset('images/esitrevda/bannerlong.webp')}}" >
+            </a>
         </div>
     </div>
 
