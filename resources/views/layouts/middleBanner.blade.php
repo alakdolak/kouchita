@@ -49,11 +49,11 @@
             </div>
 
             <div class="topDAMainPage marginBetweenMainPageMobileElements">
-                <a href="https://www.pasargadoil.com/" class="dddda" style="margin-top: 5px;">
+                <a href="https://www.pasargadoil.com" class="dddda" style="margin-top: 5px;">
                     <img src="{{URL::asset('images/esitrevda/pasargardda.gif')}}">
                 </a>
-                <a href="https://www.pasargadoil.com/" class="dddda hideOnPhone" style="margin-top: 5px;">
-                    <img src="{{URL::asset('images/esitrevda/pasargardda.gif')}}">
+                <a href="{{route('festival.cook')}}" class="dddda hideOnPhone" style="margin-top: 5px;">
+                    <img src="{{URL::asset('images/esitrevda/COOKmain.webp')}}">
                 </a>
             </div>
 

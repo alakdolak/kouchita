@@ -243,9 +243,9 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
         <div class="hideOnPhone" style="background: white; width: 100%; padding-top: 15px;">
             <div class="container">
-                <div class="topPageAd">
-                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                </div>
+                <a href="{{route('festival.cook')}}" class="topPageAd">
+                    <img src="{{URL::asset('images/esitrevda/bannerlong.webp')}}" >
+                </a>
             </div>
         </div>
 
@@ -797,9 +797,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                     @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
 
                         <div class="topAndBottomBorderAndMargin">
-                            <div class="topPageAd " style="margin: 10px auto">
-                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                            </div>
+                            <div id='mediaad-Rvtf' class="importantFullyCenterContent marginBetweenMainPageMobileElements"></div>
                         </div>
 
                         <div class="seperatorSections"></div>
@@ -810,11 +808,11 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
 
                         <div class="seperatorSections"></div>
 
-                        <div class="topAndBottomBorderAndMargin">
-                            <div class="topPageAd" style="margin: 10px auto">
-                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
-                            </div>
-                        </div>
+{{--                        <div class="topAndBottomBorderAndMargin">--}}
+{{--                            <div class="topPageAd" style="margin: 10px auto">--}}
+{{--                                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         @include('pages.placeDetails.component.extendedMap')
                         <div class="seperatorSections"></div>
 
