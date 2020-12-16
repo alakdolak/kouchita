@@ -468,9 +468,7 @@
                     </div>
 
                     <div class="uploadSection">
-                        <label for="newImage" class="newImageButton">
-                            آپلود عکس
-                        </label>
+                        <label for="newImage" class="newImageButton"> آپلود عکس </label>
                         <div class="oldBrowser">
                             عکس شما می‌بایست در فرمت‌های jpg یا png یا gif بوده و از 3MB بیشتر نباشید. حتما دقت کنید اندازه عکس 80*80 پیکسل باشد تا زیبا به نظر برسد. در غیر اینصورت ممکن است نتیجه نهایی باب میل شما نباشد.
                         </div>
@@ -482,7 +480,7 @@
                     <div id="ourPic" class="ourPic"></div>
 
                     <div class="bioClassSection">
-                        <button class="saveBioButton" onclick="updateUserPic()" >ذخیره تغییرات</button>
+                        <button class="saveBioButton" onclick="updateUserPic(true)" >ذخیره تغییرات</button>
                         <button class="cancelBioButton" onclick=" closeMyModal('userImages')">لغو</button>
                     </div>
 
@@ -634,36 +632,6 @@
 
         function showFullUserInfoInMobile(_elems) {
             $(_elems).parent().toggleClass('show');
-        }
-
-        function followUser(_elem, _id){
-            if(!checkLogin())
-                return;
-
-            $.ajax({
-                type: 'post',
-                url: '{{route("profile.setFollower")}}',
-                data: {
-                    _token: '{{csrf_token()}}',
-                    id: _id,
-                    userPageId: userPageId
-                },
-                success: function(response){
-                    response = JSON.parse(response);
-                    if(response.status == 'store') {
-                        $(_elem).addClass('followed');
-                        showSuccessNotifi('شما به لیست دنبال کنندگان افزوده شدید', 'left', 'var(--koochita-blue)');
-                        $('.followerNumber').text(response.followerNumber);
-                        $('.followingNumber').text(response.followingNumber);
-                    }
-                    else if(response.status == 'delete'){
-                        $(_elem).removeClass('followed');
-                        showSuccessNotifi('شما از لیست دنبال کنندگان خارج شدید', 'left', 'red');
-                        $('.followerNumber').text(response.followerNumber);
-                        $('.followingNumber').text(response.followingNumber);
-                    }
-                },
-            })
         }
 
         function showAllPicUser(){
@@ -892,35 +860,115 @@
             $('#cropButton').hide();
         }
 
-        function updateUserPic(){
-            openLoading();
+        function updateUserPic(_resizeImg = false){
+            openLoading(true, () => {
 
-            let formDa = new FormData();
-            formDa.append('_token', '{{csrf_token()}}');
-            formDa.append('id', $('#uploadImgMode').val());
+                let formDa = new FormData();
+                formDa.append('_token', '{{csrf_token()}}');
+                formDa.append('id', $('#uploadImgMode').val());
 
-            if(choosenPic == 'uploaded')
-                formDa.append('pic', uploadedPic);
-
-            $.ajax({
-                type: 'post',
-                url: '{{route("profile.updateUserPhoto")}}',
-                data: formDa,
-                processData: false,
-                contentType: false,
-                success: function(response){
-                    if(response == 'ok')
-                        location.reload();
-                    else{
-                        closeLoading();
+                if(choosenPic == 'uploaded') {
+                    if(_resizeImg) {
+                        resizeProfilePicUpload();
+                        return;
                     }
-                },
-                error: function(err){
-                    closeLoading();
+                    formDa.append('pic', uploadedPic);
                 }
 
-            })
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("profile.updateUserPhoto")}}',
+                    data: formDa,
+                    processData: false,
+                    contentType: false,
+                    xhr: function () {
+                        let xhr = new XMLHttpRequest();
+                        xhr.upload.onprogress = function (e) {
+                            if (e.lengthComputable) {
+                                percent = Math.round((e.loaded / e.total) * 100);
+                                updatePercentLoadingBar(percent);
+                            }
+                        };
+                        return xhr;
+                    },
+                    success: function(response){
+                        if(response == 'ok')
+                            location.reload();
+                        else{
+                            closeLoading();
+                        }
+                    },
+                    error: function(err){
+                        closeLoading();
+                    }
+
+                })
+            });
         }
+
+        function resizeProfilePicUpload() {
+            var file = uploadedPic;
+
+            if(file.type.match(/image.*/)) {
+                var reader = new FileReader();
+                reader.onload = function (readerEvent) {
+                    console.log('img loaded');
+                    var image = new Image();
+                    image.onload = function (imageEvent) {
+                        var canvas = document.createElement('canvas'),
+                            max_size = 1080,// TODO : pull max size from a site config
+                            width = image.width,
+                            height = image.height;
+
+                        if (width > height) {
+                            if (width > max_size) {
+                                height *= max_size / width;
+                                width = max_size;
+                            }
+                        } else {
+                            if (height > max_size) {
+                                width *= max_size / height;
+                                height = max_size;
+                            }
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                        var dataUrl = canvas.toDataURL('image/jpeg');
+                        uploadedPic = dataURLToBlob(dataUrl);
+                        console.log('process complate');
+                        updateUserPic(false);
+                    };
+                    image.src = readerEvent.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function dataURLToBlob(dataURL) {
+            var BASE64_MARKER = ';base64,';
+            if (dataURL.indexOf(BASE64_MARKER) == -1) {
+                var parts = dataURL.split(',');
+                var contentType = parts[0].split(':')[1];
+                var raw = parts[1];
+
+                return new Blob([raw], {type: contentType});
+            }
+
+            var parts = dataURL.split(BASE64_MARKER);
+            var contentType = parts[0].split(':')[1];
+            var raw = window.atob(parts[1]);
+            var rawLength = raw.length;
+
+            var uInt8Array = new Uint8Array(rawLength);
+
+            for (var i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+
+            return new Blob([uInt8Array], {type: contentType});
+        }
+
 
         function openCropProfile(){
             $('#cropModal').removeClass('hidden');

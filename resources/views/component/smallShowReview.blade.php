@@ -31,7 +31,7 @@
     <div id="smallReviewHtml_##id##" class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow">
             <div class="circleBase type2 commentWriterPicShow">
-                <img src="##userPic##" alt="##userName##" style="width: 100%; height: 100%; border-radius: 50%;">
+                <img src="##userPic##" alt="##userName##" class="resizeImgClass" onload="fitThisImg(this)">
             </div>
             <div class="commentWriterExperienceDetails" style="width: 100%">
                 <div style="display: flex; align-items: center">
@@ -374,7 +374,7 @@
             text += '</div>\n'+
             '<div class="commentWriterDetailsShow">\n' +
             '   <div class="circleBase commentWriterPicShow">' +
-            '       <img src="' + _reviews["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">' +
+            '       <img src="' + _reviews["userPic"] + '" class="resizeImgClass" onload="fitThisImg(this)">' +
             '   </div>\n' +
             '   <div class="commentWriterExperienceDetails">\n' +
             '       <a href="{{url('profile/index')}}/' + _reviews["userName"] + '" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">' + _reviews["userName"] + '</a>\n' +

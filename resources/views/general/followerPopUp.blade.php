@@ -206,4 +206,35 @@
             $('#searchResultFollower').addClass('hidden');
         }
     }
+
+    function followUser(_elem, _id){
+        if(!checkLogin())
+            return;
+
+        $.ajax({
+            type: 'post',
+            url: '{{route("profile.setFollower")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                id: _id,
+                // userPageId: userPageId
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                if(response.status == 'store') {
+                    $(_elem).addClass('followed');
+                    showSuccessNotifi('شما به لیست دنبال کنندگان افزوده شدید', 'left', 'var(--koochita-blue)');
+                    $('.followerNumber').text(response.followerNumber);
+                    $('.followingNumber').text(response.followingNumber);
+                }
+                else if(response.status == 'delete'){
+                    $(_elem).removeClass('followed');
+                    showSuccessNotifi('شما از لیست دنبال کنندگان خارج شدید', 'left', 'red');
+                    $('.followerNumber').text(response.followerNumber);
+                    $('.followingNumber').text(response.followingNumber);
+                }
+            },
+        })
+    }
+
 </script>

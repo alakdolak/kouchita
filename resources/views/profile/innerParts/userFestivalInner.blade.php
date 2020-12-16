@@ -308,7 +308,7 @@
 
     function deleteMyFestivalContent(_element){
         var id = $(_element).attr('data-id');
-        openLoading(() => {
+        openLoading(false, () => {
             $.ajax({
                 type: 'delete',
                 url: '{{route("profile.festival.deleteMyWork")}}',

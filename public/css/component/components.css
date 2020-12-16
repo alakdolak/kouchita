@@ -428,9 +428,13 @@
     width: 55px;
     height: 55px;
     background-color: #E5E5E5;
-    display: inline-block;
+    display: flex;
     float: right;
     margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .commentWriterExperienceDetails{
@@ -1504,6 +1508,7 @@
     .newCommentPlaceMainDiv .inputBox {
         background: none;
         border: none;
+        width: 100%;
     }
 
     .replyToCommentMainDiv .inputBox{
@@ -1626,10 +1631,6 @@
 
     .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
-    }
-
-    .newCommentPlaceMainDiv .inputBox {
-        width: calc(100% - 50px);
     }
 
     .commentRatingsDetailsBox > div > b {

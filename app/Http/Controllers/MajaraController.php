@@ -91,8 +91,4 @@ class MajaraController extends Controller {
         echo \GuzzleHttp\json_encode([]);
     }
 
-    public function showMajaraDetail($placeId, $placeName = "", $mode = "", $err = "") {
-        $url = createUrl(6, $placeId, 0, 0, 0);
-        return Redirect::to($url);
-    }
 }

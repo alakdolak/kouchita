@@ -26,6 +26,34 @@ use Illuminate\Http\Request;
 
 class NotUseController extends Controller
 {
+    public function showAmakenDetail($placeId, $placeName = "", $mode = "", $err = "") {
+        $url = createUrl(1, $placeId, 0, 0, 0);
+        return Redirect::to($url);
+    }
+
+    public function showHotelDetail($placeId, $placeName = "", $mode = "", $err = "") {
+        $url = createUrl(4, $placeId, 0, 0, 0);
+        return Redirect::to($url);
+    }
+    public function showMajaraDetail($placeId, $placeName = "", $mode = "", $err = "") {
+        $url = createUrl(6, $placeId, 0, 0, 0);
+        return Redirect::to($url);
+    }
+    public function showSogatSanaieDetails($placeId, $placeName = "", $mode = "", $err = "")
+    {
+        $url = createUrl(10, $placeId, 0, 0, 0);
+        return Redirect::to($url);
+    }
+    public function showMahaliFoodDetails($placeId, $placeName = "", $mode = "", $err = "")
+    {
+        $url = createUrl(11, $placeId, 0, 0, 0);
+        return Redirect::to($url);
+    }
+    public function showRestaurantDetail($placeId, $placeName = "", $mode = "", $err = "") {
+        $url = createUrl(3, $placeId, 0, 0, 0);
+        return Redirect::to($url);
+    }
+
     public function showHotelDetailAllReview($placeId, $placeName = "", $mode = "", $err = "")
     {
         return \redirect(route('placeDetails', ['kindPlaceId' => 4, 'placeId' => $placeId]));

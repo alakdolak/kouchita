@@ -129,7 +129,9 @@
 @section('body')
     <div class="gnWhiteBox">
         <div class="gnMainPicOfArticle">
-            <img class="gnAdvertiseImage" src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}">
+            <div class="mainImg">
+                <img class="gnAdvertiseImage" src="{{$safarnameh->pic}}" alt="{{$safarnameh->keyword}}">
+            </div>
             <div class="gnMainPicOfArticleText">
                 <a href="{{route('profile', ['username' => $safarnameh->user->username])}}" target="_blank" class="mainUserPicSafarnameh">
                     <img src="{{$safarnameh->user->pic}}"  style="height: 100%;">
@@ -193,17 +195,16 @@
                             <span class="icon commentsShareIconFeedback"></span>
                             @include('layouts.shareBox')
                         </div>
-                        <div class="postsActionsChoices col-xs-6 col-md-3" onclick="bookMarkSafarnameh(this)" style="cursor: pointer;">
-                            <span class="icon {{$safarnameh->bookMark ? 'BookMarkIcon' : 'BookMarkIconEmpty'}}" style="font-size: 1.3em;"></span>
-                        </div>
+                        <div class="postsActionsChoices col-xs-6 col-md-3 {{$safarnameh->bookMark ? 'BookMarkIcon' : 'BookMarkIconEmpty'}}"
+                             onclick="bookMarkSafarnameh({{$safarnameh->id}}, this)" style="cursor: pointer; font-size: 1.3em;"></div>
                     </div>
                 </div>
             </div>
             <div>
                 <div class="col-md-12 col-sm-12 gnUserDescription">
                     <div>
-                        <div class="circleBase type2 newCommentWriterProfilePic">
-                            <img src="{{$safarnameh->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                        <div class="circleBase type2 newCommentWriterProfilePic" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden">
+                            <img src="{{$safarnameh->user->pic}}" style="height: 100%;">
                         </div>
                         <a href="{{route('profile', ['username' => $safarnameh->user->username])}}" target="_blank" class="gnLabels">{{$safarnameh->user->username}}</a>
                     </div>
@@ -214,21 +215,18 @@
                 <div id="safarnamehCommentDiv" class="commentsMainBox" style="display: none;"></div>
 
                 <div class="newCommentPlaceMainDiv">
-                    <div class="circleBase type2 newCommentWriterProfilePic">
-                        <img src="{{$uPic}}" style="">
+                    <div class="circleBase type2 newCommentWriterProfilePic hideOnPhone" style="width: 50px; height: 50px;">
+                        <img src="{{$uPic}}">
                     </div>
                     <div class="inputBox">
                         <div class="replyCommentTitle" style="font-weight: bold">نظر خود را در مورد سفرنامه با ما در میان بگذارید</div>
-                        <textarea id="textareaForAns"
-                                  class="inputBoxInput inputBoxInputComment"
-                                  rows="1" placeholder="شما چه نظری دارید؟"
-                                  onclick="checkLogin()"
+                        <textarea id="textareaForAns" class="inputBoxInput inputBoxInputComment"
+                                  rows="1" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"
                                   onchange="checkNotEmptyTextArea(this)// answerPack"
                                   onkeydown="checkNotEmptyTextArea(this)// answerPack"></textarea>
                         <button id="mainBtnAnswer" class="btn submitAnsInReview"
                                 onclick="sendCommentText(0, $('#textareaForAns').val()); $(this).hide(); $(this).next().show()"
-                                style="height: fit-content"
-                                disabled>
+                                style="height: fit-content" disabled>
                             {{__("ارسال")}}
                         </button>
                         <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
@@ -250,38 +248,38 @@
         var _token= '{{csrf_token()}}';
         var userPic = '{{$uPic}}';
 
-        function bookMarkSafarnameh(_element){
-            if(!checkLogin())
-                return;
+        {{--function bookMarkSafarnameh(_element){--}}
+        {{--    if(!checkLogin())--}}
+        {{--        return;--}}
 
-            let child = $($(_element).children()[0]);
-            $.ajax({
-                type: 'post',
-                url: '{{route("safarnameh.bookMark")}}',
-                data: {
-                    _token: '{{csrf_token()}}',
-                    id: safarnameh.id
-                },
-                success: function(response){
-                    if(response == 'delete'){
-                        child.addClass('BookMarkIconEmpty');
-                        child.removeClass('BookMarkIcon');
-                        showSuccessNotifi('سفرنامه از نشون کرده حذف شد.', 'left', 'red');
-                    }
-                    else if(response == 'store'){
-                        child.removeClass('BookMarkIconEmpty');
-                        child.addClass('BookMarkIcon');
-                        showSuccessNotifi('سفرنامه به نشون کرده اضافه شد', 'left', 'var(--koochita-blue)');
-                    }
-                    else
-                        showSuccessNotifi('مشکلی در ثبت فرایند پیش امده', 'left', 'red');
-                },
-                error: function(err){
-                    console.log(err);
-                    showSuccessNotifi('مشکلی در ثبت فرایند پیش امده', 'left', 'red');
-                }
-            });
-        }
+        {{--    let child = $($(_element).children()[0]);--}}
+        {{--    $.ajax({--}}
+        {{--        type: 'post',--}}
+        {{--        url: '{{route("safarnameh.bookMark")}}',--}}
+        {{--        data: {--}}
+        {{--            _token: '{{csrf_token()}}',--}}
+        {{--            id: safarnameh.id--}}
+        {{--        },--}}
+        {{--        success: function(response){--}}
+        {{--            if(response == 'delete'){--}}
+        {{--                child.addClass('BookMarkIconEmpty');--}}
+        {{--                child.removeClass('BookMarkIcon');--}}
+        {{--                showSuccessNotifi('سفرنامه از نشون کرده حذف شد.', 'left', 'red');--}}
+        {{--            }--}}
+        {{--            else if(response == 'store'){--}}
+        {{--                child.removeClass('BookMarkIconEmpty');--}}
+        {{--                child.addClass('BookMarkIcon');--}}
+        {{--                showSuccessNotifi('سفرنامه به نشون کرده اضافه شد', 'left', 'var(--koochita-blue)');--}}
+        {{--            }--}}
+        {{--            else--}}
+        {{--                showSuccessNotifi('مشکلی در ثبت فرایند پیش امده', 'left', 'red');--}}
+        {{--        },--}}
+        {{--        error: function(err){--}}
+        {{--            console.log(err);--}}
+        {{--            showSuccessNotifi('مشکلی در ثبت فرایند پیش امده', 'left', 'red');--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--}--}}
 
         function likePost(_like, _id, _element){
             if(!checkLogin())

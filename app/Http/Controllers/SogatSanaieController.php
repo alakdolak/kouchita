@@ -21,9 +21,5 @@ use Illuminate\Support\Facades\URL;
 
 class SogatSanaieController extends Controller
 {
-    public function showSogatSanaieDetails($placeId, $placeName = "", $mode = "", $err = "")
-    {
-        $url = createUrl(10, $placeId, 0, 0, 0);
-        return Redirect::to($url);
-    }
+
 }

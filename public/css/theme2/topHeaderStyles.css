@@ -136,6 +136,7 @@ input[type="checkbox"] + label, input[type="radio"] + label{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-color: #000000c7;
 }
 .loader_200 {

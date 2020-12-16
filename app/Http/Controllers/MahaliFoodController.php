@@ -20,9 +20,5 @@ use Illuminate\Support\Facades\URL;
 
 class MahaliFoodController extends Controller
 {
-    public function showMahaliFoodDetails($placeId, $placeName = "", $mode = "", $err = "")
-    {
-        $url = createUrl(11, $placeId, 0, 0, 0);
-        return Redirect::to($url);
-    }
+
 }

@@ -48,13 +48,13 @@
                 <div class="swiper-button-prev"></div>
             </div>
 
-            <div class="topADMainPage marginBetweenMainPageMobileElements">
-                <div class="addd" style="margin-top: 5px;">
-                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
-                </div>
-                <div class="addd hideOnPhone">
-                    <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" class="resizeImgClass" onload="fitThisImg(this)">
-                </div>
+            <div class="topDAMainPage marginBetweenMainPageMobileElements">
+                <a href="https://www.pasargadoil.com/" class="dddda" style="margin-top: 5px;">
+                    <img src="{{URL::asset('images/esitrevda/pasargardda.gif')}}">
+                </a>
+                <a href="https://www.pasargadoil.com/" class="dddda hideOnPhone" style="margin-top: 5px;">
+                    <img src="{{URL::asset('images/esitrevda/pasargardda.gif')}}">
+                </a>
             </div>
 
             {{--banner_1--}}

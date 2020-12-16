@@ -18,19 +18,6 @@
             .glyphicon {
                 font-family: 'Glyphicons Halflings' !important;
             }
-
-            .loaderDiv{
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                z-index: 99999;
-                left: 0px;
-                top: 0px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #000000c7;
-            }
         </style>
     @show
 </head>

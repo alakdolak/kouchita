@@ -90,7 +90,7 @@
     }
 
     function getLoginPages(_callBack){
-        openLoading(() => {
+        openLoading(false, () => {
             $.ajax({
                 type: 'get',
                 url: '{{route("getPage.login")}}',
@@ -122,7 +122,7 @@
     }
 
     function cleanImgMetaData(_input, _callBack){
-        openLoading(function(){
+        openLoading(false, function(){
             options = { canvas: true };
             loadImage.parseMetaData(_input.files[0], function(data) {
                 if (data.exif)

@@ -3,10 +3,7 @@
 <head>
     @include('layouts.topHeader')
     <meta property="og:type" content="website" />
-    <title>
-        کوچیتا |
-        {{$meta['title']}}
-    </title>
+    <title> کوچیتا | {{$meta['title']}} </title>
 
     <meta name="title" content="{{$meta['title']}}" />
     <meta name="og:title" content="{{$meta['title']}}" />
@@ -22,84 +19,6 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css?v='.$fileVersions)}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css?v='.$fileVersions)}}'/>
 
-    <title>
-        {{$kindPlace->name}}
-
-        @if($mode != 'country')
-            @if($mode == "state")
-                استان
-            @else
-                شهر
-            @endif
-            {{$city->name}}
-        @else
-            ایران من
-        @endif
-    </title>
-
-    <style>
-
-        .searchBox{
-            position: absolute;
-            top: 70px;
-            z-index: 9;
-            width: 100%;
-            background: #ebebeb;
-            padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 0px 0px 5px 5px;
-            box-shadow: 0px 6px 12px 0px #e0e0e08a;
-            border-top: none;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .searchBox .result{
-            font-size: 13px;
-            margin: 3px 0px;
-            padding: 5px 10px;
-            border-bottom: solid 1px gainsboro;
-            cursor: pointer;
-            transition: .3s;
-        }
-        .searchBox .result:hover{
-            background: white;
-            border-radius: 14px;
-            color: var(--koochita-light-green);
-        }
-        .searchBox .loading{
-            width: 30px;
-            margin: 0px auto;
-        }
-        .searchBox .loading svg{
-            width: 100%;
-            height: auto;
-        }
-        .searchBox .loading path{
-            fill: var(--koochita-blue);
-        }
-
-        .globalSearchResult .result{
-            padding: 5px 10px;
-            margin: 5px 10px;
-            border-bottom: solid 1px #e4e4e4;
-        }
-
-        .materialSearchSelected{
-            display: flex;
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-        }
-        .materialSearchSelected .matSel{
-            color: white;
-            background: var(--koochita-light-green);
-            border-radius: 5px;
-            padding: 5px 7px;
-            margin: 5px 0px;
-            cursor: pointer;
-        }
-
-    </style>
-
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW">
@@ -110,17 +29,38 @@
 
     @include('layouts.header1')
 
-    @include('general.secondHeader')
-
-    <div style="background: white; width: 100%; padding: 15px 0px;">
-        <div class="topPageAd">
-            <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
+    <div class="hideOnPhone">
+        @include('general.secondHeader')
+        <div style="background: white; width: 100%; padding: 15px 0px;">
+            <div class="topPageAd">
+                <img src="{{URL::asset('images/festival/cookFestival/gitcooking.webp')}}" >
+            </div>
         </div>
+    </div>
+
+    <div class="hideOnScreen placeListMobileTopPic">
+        <div class="topListImg">
+            <img src="{{URL::asset('images/mainPics/placeList/'.$topPic)}}" alt="listPic" style="width: 100%">
+        </div>
+        <div class="listTitle">
+            <div>{{$kindPlace->title}}</div>
+            <div>
+                @if($mode != 'country')
+                    @if($mode == 'state')
+                        {{__('استان')}}
+                    @endif
+                    {{$city->name}}
+                @else
+                    {{__('ایران من')}}
+                @endif
+            </div>
+        </div>
+        <div class="botGradient"></div>
     </div>
 
     <div class="container listContainer">
 
-        <div class="placeListHeader">
+        <div class="placeListHeader hideOnPhone">
             <div class="placeListTitle">
                 {{$kindPlace->title}}
                 @if($mode != 'country')

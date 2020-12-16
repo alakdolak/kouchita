@@ -132,162 +132,6 @@ Route::group(array('middleware' => ['throttle:60', 'web']), function () {
     Route::post('getRecentlyActivities', array('as' => 'recentlyViewed', 'uses' => 'ActivityController@getRecentlyActivities'));
 });
 
-//hotel reservation
-Route::group(array('middleware' => ['throttle:30']), function () {
-
-    Route::get('buyHotel', function(){
-        session()->forget(['orderId', 'reserveRequestId', 'expiryDateTime', 'remain']);
-        if(auth()->check())
-            return redirect(url('hotelPas'));
-        else
-            return view('pishHotel');
-    });
-    Route::get('hotelPas/{mode?}', function($mode = ''){
-        $now = \Carbon\Carbon::now();
-        if(session('expiryDateTime') == null){
-            session()->forget(['orderId', 'reserveRequestId', 'expiryDateTime', 'remain']);
-        }
-        else{
-            $expireTime = \Carbon\Carbon::createFromTimeString(session('expiryDateTime'));
-            if($expireTime <= $now) {
-                session()->forget(['orderId', 'reserveRequestId', 'expiryDateTime', 'remain']);
-            }
-            else {
-                $now = $now->timestamp;
-                $expireTime = $expireTime->timestamp;
-                $remain = $expireTime - $now;
-                session(['remain' => $remain]);
-            }
-        }
-        return view('hotelPas1', compact('mode'));
-    });
-    Route::post('updateSession', function (){
-        session()->forget(['reserve_room']);
-
-        $rooms = json_encode(request()->all());
-
-        session(['reserve_room' => $rooms]);
-        session(['backURL' => request('backURL')]);
-        session(['hotel_name' => request('hotel_name')]);
-        return;
-    })->name('updateSession');
-    Route::post('searchPlaceHotelList2', 'HotelReservationController@searchPlaceHotelList2')->name('searchPlaceHotelList2');
-    Route::post('/makeSessionHotel', 'HotelReservationController@makeSessionHotel')->name('makeSessionHotel');
-    Route::post('sendReserveRequest', 'HotelReservationController@sendReserveRequest')->name('sendReserveRequest');
-    Route::post('GetReserveStatus', 'HotelReservationController@GetReserveStatus')->name('GetReserveStatus');
-    Route::get('paymentPage', function (){
-        dd('صفحه ی پرداخت');
-    })->name('paymentPage');
-    Route::get('voucherHotel', function(){
-        dd('صدور واچر') ;
-    })->name('voucherHotel');
-    Route::post('getHotelPassengerInfo', 'HotelReservationController@getHotelPassengerInfo')->name('getHotelPassengerInfo');
-    Route::post('getAccessTokenHotel', 'HotelReservationController@getAccessTokenHotel')->name('getAccessTokenHotel');
-    Route::post('checkUserNameAndPassHotelReserve', 'HotelReservationController@checkUserNameAndPassHotelReserve')->name('checkUserNameAndPassHotelReserve');
-
-    Route::post('getHotelWarning', 'HotelReservationController@getHotelWarning')->name('getHotelWarning');
-    Route::get('AlibabaInfo', 'HotelReservationController@AlibabaInfo')->name('AlibabaInfo');
-    Route::post('saveAlibabaInfo', 'HotelReservationController@saveAlibabaInfo')->name('saveAlibabaInfo');
-
-});
-
-Route::group(array('middleware' => ['throttle:30']), function () {
-    Route::get('fillTable', function(){
-
-        $ch = curl_init();
-
-        $passengers = ['authToken' => 'bb9726149db593a2b098bb223ee1f520'];
-
-        curl_setopt($ch, CURLOPT_URL, "https://api.blitbin.com/ext/countries");
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $passengers);
-
-//	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-//			'Content-Type: application/json')
-//	);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $content = json_decode(curl_exec($ch));
-
-        curl_close ($ch);
-
-        foreach ($content as $key => $value) {
-
-            if($key == "countries") {
-                foreach ($value as $k2 => $v2) {
-                    $tmp = new \App\models\CountryCode();
-                    foreach ($v2 as $k3 => $v3) {
-                        if($k3 == "name")
-                            $tmp->name = $v3;
-                        else if($k3 == "name_en")
-                            $tmp->nameEn = $v3;
-                        else if($k3 == "code")
-                            $tmp->code = $v3;
-                    }
-                    $tmp->save();
-                }
-
-            }
-
-        }
-    });
-
-    Route::post('checkUserNameAndPass', ['as' => 'checkUserNameAndPass', 'uses' => 'HomeController@checkUserNameAndPass']);
-
-    Route::get('pay/{forWhat}/{additionalId}', ['as' => 'pay', 'uses' => 'PayController@doPayment']);
-
-    Route::post('getMinPrice', ['as' => 'getMinPrice', 'uses' => 'TicketController@getMinPrice']);
-
-    Route::post('getProvidersOfSpecificFlight', ['as' => 'getProvidersOfSpecificFlight', 'uses' => 'TicketController@getProvidersOfSpecificFlight']);
-
-    Route::post('sendJavaRequest', ['as' => 'sendJavaRequest', 'uses' => 'TicketController@sendJavaRequest']);
-
-    Route::post('getMyPassengers', ['as' => 'getMyPassengers', 'uses' => 'TicketController@getMyPassengers']);
-
-    Route::post('getMyTicketInfo', ['as' => 'getMyTicketInfo', 'uses' => 'TicketController@getMyTicketInfo']);
-
-    Route::post('searchCountryCode', ['as' => 'searchCountryCode', 'uses' => 'TicketController@searchCountryCode']);
-
-    Route::post('sendPassengersInfo/{ticketId}', ['as' => 'sendPassengersInfo', 'uses' => 'TicketController@sendPassengersInfo']);
-
-    Route::post('checkInnerFlightCapacity', ['as' => 'checkInnerFlightCapacity', 'uses' => 'TicketController@checkInnerFlightCapacity']);
-
-    Route::any('totalSearch', 'HomeController@totalSearch')->name('totalSearch');
-
-    Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
-
-    Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
-
-    Route::post('notifyFlight/{code}', ['as' => 'notifyFlight', 'uses' => 'TicketController@notifyFlight']);
-
-    Route::get('preBuyInnerFlight/{ticketId}/{adult}/{child}/{infant}/{ticketId2?}', ['as' => 'preBuyInnerFlight', 'uses' => 'TicketController@preBuyInnerFlight']);
-
-    Route::get('buyInnerFlight/{mode}/{ticketId}/{adult}/{child}/{infant}/{ticketId2?}', ['as' => 'buyInnerFlight', 'uses' => 'TicketController@buyInnerFlight']);
-
-    Route::get('testHotel', 'HomeController@testHotel');
-
-    Route::get('tickets', array('as' => 'tickets', 'uses' => 'TicketController@tickets'));
-
-    Route::get('getTickets/{mode}/{src}/{dest}/{adult}/{child}/{infant}/{additional}/{sDate}/{eDate?}/{back?}/{ticketId?}', array('as' => 'getTickets', 'uses' => 'TicketController@getTickets'));
-
-    Route::post('getInnerFlightTicket', ['as' => 'getInnerFlightTicket', 'uses' => 'TicketController@getInnerFlightTicket']);
-
-    Route::post('getTicketWarning', ['as' => 'getTicketWarning', 'uses' => 'TicketController@getTicketWarning']);
-
-    Route::post('newPlaceForMap' ,array('as' => 'newPlaceForMap' , 'uses' =>'PlaceController@newPlaceForMap'));
-
-    Route::post('getPlacePicture' ,array('as' => 'getPlacePicture' , 'uses' =>'PlaceController@getPlacePicture'));
-
-    Route::get('video360' , array('as' => 'video360' , 'uses' => 'PlaceController@video360'));
-
-});
-
-Route::get('provider', function (){
-    return view('provider-details');
-})->middleware('shareData');
-Route::get('provider2', function (){
-    return view('provider-details2');
-})->middleware('shareData');
 
 //authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), function(){
@@ -332,26 +176,28 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
+Route::group(array('middleware' => ['throttle:60', 'nothing']), function (){
 
-    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details')->middleware('shareData');
+    Route::middleware(['shareData'])->group(function (){
+        Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
+        Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
+        Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
+        Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage');
+    });
+
+
+
+    Route::get('getPlacesWithLocation', 'MainController@getPlacesWithLocation')->name('getPlaces.location');
+
+    Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('place.list.getElems');
 
     Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
-
-    Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage')->middleware('shareData');
 
     Route::get('getCityPageReview', 'CityController@getCityPageReview')->name('getCityPageReview');
 
     Route::get('getCityPageTopPlace', 'CityController@getCityPageTopPlace')->name('cityPage.topPlaces');
 
     Route::post('getCityAllPlaces', 'CityController@getCityAllPlaces')->name('getCityAllPlaces');
-
-    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
-    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'RestaurantController@showRestaurantDetail')->name('restaurantDetails');
-    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetail')->name('hotelDetails');
-    Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
-    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
-    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
 
     Route::middleware(['auth'])->group(function(){
         Route::post('places/setRateToPlace', 'PlaceController@setRateToPlace')->name('places.setRateToPlaces');
@@ -431,44 +277,32 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 //safarnameh
-Route::group(['middleware' => ['SafarnamehShareData', 'shareData']], function () {
-    Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
+Route::group([], function () {
+    Route::middleware(['shareData', 'SafarnamehShareData'])->group(function(){
+        Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
+        Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
+        Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
+    });
 
+    Route::get('/article/{slug}', 'SafarnamehController@safarnamehRedirect');
     Route::get('/article/list/{type}/{search}', 'SafarnamehController@safarnamehListRedirect');
 
-    Route::get('/safarnameh', 'SafarnamehController@safarnamehMainPage')->name('safarnameh.index');
-
-    Route::get('/safarnameh/show/{id}', 'SafarnamehController@showSafarnameh')->name('safarnameh.show');
-
-    Route::get('/safarnameh/list/{type?}/{search?}', 'SafarnamehController@safarnamehList')->name('safarnameh.list');
-
-    Route::post('/paginationSafarnameh', 'SafarnamehController@paginationSafarnameh')->name('safarnameh.pagination');
-
+    Route::get('/safarnameh/mainPageData', 'SafarnamehController@safarnamehMainPageData')->name('safarnameh.getMainPageData');
+    Route::get('/safarnameh/getListElement', 'SafarnamehController@getSafarnamehListElements')->name('safarnameh.getListElement');
+    Route::get('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
     Route::post('/getSafarnamehComments', 'SafarnamehController@getSafarnamehComments')->name('safarnameh.comment.get');
-
-    Route::post('/paginationInSafarnamehList', 'SafarnamehController@paginationInSafarnamehList')->name('safarnameh.list.pagination');
 
     Route::group(['middleware' => ['auth']], function (){
         Route::post('/safarnameh/like', 'SafarnamehController@LikeSafarnameh')->name('safarnameh.like');
-
         Route::post('/safarnameh/comment/store', 'SafarnamehController@StoreSafarnamehComment')->name('safarnameh.comment.store');
-
         Route::post('/safarnameh/comment/like', 'SafarnamehController@likeSafarnamehComment')->name('safarnameh.comment.like');
-
         Route::post('/safarnameh/bookMark', 'SafarnamehController@addSafarnamehBookMark')->name('safarnameh.bookMark');
+
+        Route::post('safarnameh/store', 'SafarnamehController@storeSafarnameh')->name('safarnameh.store');
+        Route::post('safarnameh/getForEdit', 'SafarnamehController@getSafarnameh')->name('safarnameh.get');
+        Route::post('safarnameh/delete', 'SafarnamehController@deleteSafarnameh')->name('safarnameh.delete');
+        Route::post('safarnameh/storePic', 'SafarnamehController@storeSafarnamehPics')->name('safarnameh.storePic');
     });
-});
-
-// Lists
-Route::group(array('middleware' => ['nothing']), function () {
-
-    Route::get('myLocation', 'MainController@myLocation')->name('myLocation')->middleware('shareData');
-
-    Route::get('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list')->middleware('shareData');
-
-    Route::get('getPlacesWithLocation', 'MainController@getPlacesWithLocation')->name('getPlaces.location');
-
-    Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('place.list.getElems');
 });
 
 //reports
@@ -493,7 +327,7 @@ Route::group(array('middleware' => 'nothing'), function(){
 });
 
 // profile common
-Route::group(['middleware' => ['throttle:30']], function(){
+Route::group(['middleware' => ['throttle:60']], function(){
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index')->middleware('shareData');
 
     Route::get('profile/index/{username?}', 'ProfileController@showProfile')->name('profile')->middleware('shareData');
@@ -662,16 +496,6 @@ Route::group(['middleware' => ['throttle:30']], function(){
     });
 });
 
-//safarnameh
-Route::group(array('middleware' => ['auth']), function(){
-    Route::post('safarnameh/store', 'SafarnamehController@storeSafarnameh')->name('safarnameh.store');
-
-    Route::post('safarnameh/getForEdit', 'SafarnamehController@getSafarnameh')->name('safarnameh.get');
-
-    Route::post('safarnameh/delete', 'SafarnamehController@deleteSafarnameh')->name('safarnameh.delete');
-
-    Route::post('safarnameh/storePic', 'SafarnamehController@storeSafarnamehPics')->name('safarnameh.storePic');
-});
 
 //festival
 Route::group(['middleware' => ['web', 'shareData']], function(){
@@ -756,7 +580,7 @@ Route::group(array('middleware' => ['auth']), function(){
 
 
 // admin access
-Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
+Route::group(array('middleware' => ['throttle:60', 'auth', 'adminAccess']), function () {
 
     Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
 
@@ -838,6 +662,161 @@ Route::group(array('middleware' => 'auth'), function () {
     });
 });
 
+//hotel reservation
+Route::group(array('middleware' => ['throttle:30']), function () {
+
+    Route::get('buyHotel', function(){
+        session()->forget(['orderId', 'reserveRequestId', 'expiryDateTime', 'remain']);
+        if(auth()->check())
+            return redirect(url('hotelPas'));
+        else
+            return view('pishHotel');
+    });
+    Route::get('hotelPas/{mode?}', function($mode = ''){
+        $now = \Carbon\Carbon::now();
+        if(session('expiryDateTime') == null){
+            session()->forget(['orderId', 'reserveRequestId', 'expiryDateTime', 'remain']);
+        }
+        else{
+            $expireTime = \Carbon\Carbon::createFromTimeString(session('expiryDateTime'));
+            if($expireTime <= $now) {
+                session()->forget(['orderId', 'reserveRequestId', 'expiryDateTime', 'remain']);
+            }
+            else {
+                $now = $now->timestamp;
+                $expireTime = $expireTime->timestamp;
+                $remain = $expireTime - $now;
+                session(['remain' => $remain]);
+            }
+        }
+        return view('hotelPas1', compact('mode'));
+    });
+    Route::post('updateSession', function (){
+        session()->forget(['reserve_room']);
+
+        $rooms = json_encode(request()->all());
+
+        session(['reserve_room' => $rooms]);
+        session(['backURL' => request('backURL')]);
+        session(['hotel_name' => request('hotel_name')]);
+        return;
+    })->name('updateSession');
+    Route::post('searchPlaceHotelList2', 'HotelReservationController@searchPlaceHotelList2')->name('searchPlaceHotelList2');
+    Route::post('/makeSessionHotel', 'HotelReservationController@makeSessionHotel')->name('makeSessionHotel');
+    Route::post('sendReserveRequest', 'HotelReservationController@sendReserveRequest')->name('sendReserveRequest');
+    Route::post('GetReserveStatus', 'HotelReservationController@GetReserveStatus')->name('GetReserveStatus');
+    Route::get('paymentPage', function (){
+        dd('صفحه ی پرداخت');
+    })->name('paymentPage');
+    Route::get('voucherHotel', function(){
+        dd('صدور واچر') ;
+    })->name('voucherHotel');
+    Route::post('getHotelPassengerInfo', 'HotelReservationController@getHotelPassengerInfo')->name('getHotelPassengerInfo');
+    Route::post('getAccessTokenHotel', 'HotelReservationController@getAccessTokenHotel')->name('getAccessTokenHotel');
+    Route::post('checkUserNameAndPassHotelReserve', 'HotelReservationController@checkUserNameAndPassHotelReserve')->name('checkUserNameAndPassHotelReserve');
+
+    Route::post('getHotelWarning', 'HotelReservationController@getHotelWarning')->name('getHotelWarning');
+    Route::get('AlibabaInfo', 'HotelReservationController@AlibabaInfo')->name('AlibabaInfo');
+    Route::post('saveAlibabaInfo', 'HotelReservationController@saveAlibabaInfo')->name('saveAlibabaInfo');
+
+});
+Route::group(array('middleware' => ['throttle:30']), function () {
+    Route::get('fillTable', function(){
+
+        $ch = curl_init();
+
+        $passengers = ['authToken' => 'bb9726149db593a2b098bb223ee1f520'];
+
+        curl_setopt($ch, CURLOPT_URL, "https://api.blitbin.com/ext/countries");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $passengers);
+
+//	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//			'Content-Type: application/json')
+//	);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $content = json_decode(curl_exec($ch));
+
+        curl_close ($ch);
+
+        foreach ($content as $key => $value) {
+
+            if($key == "countries") {
+                foreach ($value as $k2 => $v2) {
+                    $tmp = new \App\models\CountryCode();
+                    foreach ($v2 as $k3 => $v3) {
+                        if($k3 == "name")
+                            $tmp->name = $v3;
+                        else if($k3 == "name_en")
+                            $tmp->nameEn = $v3;
+                        else if($k3 == "code")
+                            $tmp->code = $v3;
+                    }
+                    $tmp->save();
+                }
+
+            }
+
+        }
+    });
+
+    Route::post('checkUserNameAndPass', ['as' => 'checkUserNameAndPass', 'uses' => 'HomeController@checkUserNameAndPass']);
+
+    Route::get('pay/{forWhat}/{additionalId}', ['as' => 'pay', 'uses' => 'PayController@doPayment']);
+
+    Route::post('getMinPrice', ['as' => 'getMinPrice', 'uses' => 'TicketController@getMinPrice']);
+
+    Route::post('getProvidersOfSpecificFlight', ['as' => 'getProvidersOfSpecificFlight', 'uses' => 'TicketController@getProvidersOfSpecificFlight']);
+
+    Route::post('sendJavaRequest', ['as' => 'sendJavaRequest', 'uses' => 'TicketController@sendJavaRequest']);
+
+    Route::post('getMyPassengers', ['as' => 'getMyPassengers', 'uses' => 'TicketController@getMyPassengers']);
+
+    Route::post('getMyTicketInfo', ['as' => 'getMyTicketInfo', 'uses' => 'TicketController@getMyTicketInfo']);
+
+    Route::post('searchCountryCode', ['as' => 'searchCountryCode', 'uses' => 'TicketController@searchCountryCode']);
+
+    Route::post('sendPassengersInfo/{ticketId}', ['as' => 'sendPassengersInfo', 'uses' => 'TicketController@sendPassengersInfo']);
+
+    Route::post('checkInnerFlightCapacity', ['as' => 'checkInnerFlightCapacity', 'uses' => 'TicketController@checkInnerFlightCapacity']);
+
+    Route::any('totalSearch', 'HomeController@totalSearch')->name('totalSearch');
+
+    Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
+
+    Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
+
+    Route::post('notifyFlight/{code}', ['as' => 'notifyFlight', 'uses' => 'TicketController@notifyFlight']);
+
+    Route::get('preBuyInnerFlight/{ticketId}/{adult}/{child}/{infant}/{ticketId2?}', ['as' => 'preBuyInnerFlight', 'uses' => 'TicketController@preBuyInnerFlight']);
+
+    Route::get('buyInnerFlight/{mode}/{ticketId}/{adult}/{child}/{infant}/{ticketId2?}', ['as' => 'buyInnerFlight', 'uses' => 'TicketController@buyInnerFlight']);
+
+    Route::get('testHotel', 'HomeController@testHotel');
+
+    Route::get('tickets', array('as' => 'tickets', 'uses' => 'TicketController@tickets'));
+
+    Route::get('getTickets/{mode}/{src}/{dest}/{adult}/{child}/{infant}/{additional}/{sDate}/{eDate?}/{back?}/{ticketId?}', array('as' => 'getTickets', 'uses' => 'TicketController@getTickets'));
+
+    Route::post('getInnerFlightTicket', ['as' => 'getInnerFlightTicket', 'uses' => 'TicketController@getInnerFlightTicket']);
+
+    Route::post('getTicketWarning', ['as' => 'getTicketWarning', 'uses' => 'TicketController@getTicketWarning']);
+
+    Route::post('newPlaceForMap' ,array('as' => 'newPlaceForMap' , 'uses' =>'PlaceController@newPlaceForMap'));
+
+    Route::post('getPlacePicture' ,array('as' => 'getPlacePicture' , 'uses' =>'PlaceController@getPlacePicture'));
+
+    Route::get('video360' , array('as' => 'video360' , 'uses' => 'PlaceController@video360'));
+
+});
+Route::get('provider', function (){
+    return view('provider-details');
+})->middleware('shareData');
+Route::get('provider2', function (){
+    return view('provider-details2');
+})->middleware('shareData');
+
 // delete contents
 Route::group(['middleware' => 'auth'], function () {
 
@@ -855,26 +834,22 @@ Route::get('exportToExcelTT', 'HomeController@exportExcel');
 Route::group(array('middleware' => ['nothing', 'notUse']), function () {
 //    Route::post('removeReview', array('as' => 'removeReview', 'uses' => 'NotUseController@removeReview'));
     Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'NotUseController@changeAddFriend'));
-
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
-
     Route::any('restaurantList/{city}/{mode}/{chert?}', array('as' => 'restaurantList', 'uses' => 'NotUseController@showRestaurantList'));
-
     Route::any('hotelList/{city}/{mode}/{chert?}', array('as' => 'hotelList', 'uses' => 'NotUseController@showHotelList'));
-
     Route::any('amakenList/{city}/{mode}/{chert?}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
-
     Route::get('userQuestions', 'NotUseController@userQuestions');
-
     Route::get('userPosts', 'NotUseController@userPosts');
-
     Route::get('userPhotosAndVideos', 'NotUseController@userPhotosAndVideos');
-
     Route::get('gardeshnameEdit', 'NotUseController@gardeshnameEdit');
-
     Route::get('myTripInner', 'NotUseController@myTripInner');
-
     Route::get('userActivitiesProfile', 'NotUseController@userActivitiesProfile');
+    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'NotUseController@showAmakenDetail');
+    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'NotUseController@showRestaurantDetail');
+    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', 'NotUseController@showHotelDetail');
+    Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'NotUseController@showMajaraDetail');
+    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'NotUseController@showSogatSanaieDetails');
+    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'NotUseController@showMahaliFoodDetails');
 });
 
 Route::get('/getPages/login', 'GetPagesController@getLoginPage')->name('getPage.login');

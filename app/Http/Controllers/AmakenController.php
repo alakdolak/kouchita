@@ -25,11 +25,6 @@ use Illuminate\Support\Facades\URL;
 
 class AmakenController extends Controller {
 
-    public function showAmakenDetail($placeId, $placeName = "", $mode = "", $err = "") {
-        $url = createUrl(1, $placeId, 0, 0, 0);
-        return Redirect::to($url);
-    }
-
     private function getSimilarAmakens($place)
     {
 

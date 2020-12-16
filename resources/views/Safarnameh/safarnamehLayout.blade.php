@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('layouts.topHeader')
     <meta property="og:locale" content="fa_IR" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @include('layouts.topHeader')
 
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v='.$fileVersions)}}' data-rup='hr_north_star_v1'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css?v='.$fileVersions)}}"/>
@@ -11,8 +11,11 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v='.$fileVersions)}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css?v='.$fileVersions)}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css?v='.$fileVersions)}}"/>
-    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="stylesheet" href="{{URL::asset('css/pages/safarnameh.css?v='.$fileVersions)}}">
+
     <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
+
+    <link rel="profile" href="http://gmpg.org/xfn/11">
 
     @yield('head')
 
@@ -163,6 +166,42 @@
             </div>
         </div>
 
+        <div class="mobileFiltersButtonTabs hideOnScreen">
+            <div class="tabs">
+                <div class="tab filterIcon" onclick="openMyModal('safarnamehMobileCategory')">دسته بندی</div>
+                <div class="tab searchIcon" onclick="">جستجو</div>
+            </div>
+        </div>
+
+        <div id="safarnamehMobileCategory" class="modalBlackBack fullCenter hideOnScreen" style="transition: .7s">
+            <div class="gombadi">
+                <div class="mobileFooterFilterPic" style="max-height: 400px">
+                    <img src="{{URL::asset('images/mainPics/naser.jpg')}}" style="width: 100%">
+                    <div class="gradientWhite">
+                        <div class="closeThisModal iconClose" onclick="closeMyModal('safarnamehMobileCategory')"></div>
+                    </div>
+                </div>
+                <div class="safarnamehMainCategoryListMobile">
+                    <div class="list">
+                        @foreach($category as $cat)
+                            <a href="{{route('safarnameh.list', ['type' => 'category', 'search' => $cat->name])}}" class="categ">
+                                <div class="categIcon">
+                                    <img src="{{URL::asset('_images/safarnamehIcon/'.$cat->icon)}}" alt="{{$cat->name}}">
+                                </div>
+                                <div class="title">{{$cat->name}}</div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="safarnamehSearchMobile" class="modalBlackBack hideOnScreen">
+            <div class="modalBody">
+
+            </div>
+        </div>
+
 
         @include('layouts.footer.layoutFooter')
 
@@ -249,10 +288,50 @@
             }
         }
 
+        function bookMarkSafarnameh(_id, _element){
+
+            if(!checkLogin())
+                return;
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("safarnameh.bookMark")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                success: response => {
+                    if(response.status == 'store') {
+                        showSuccessNotifi('سفرنامه به نشان کرده اضافه شد', 'left', 'var(--koochita-blue)');
+                        $(_element).addClass('BookMarkIcon').removeClass('BookMarkIconEmpty');
+                    }
+                    else if(response.status == 'delete'){
+                        showSuccessNotifi('سفرنامه به نشان کرده اضافه شد', 'left', 'var(--koochita-blue)');
+                        $(_element).addClass('BookMarkIconEmpty').removeClass('BookMarkIcon');
+                    }
+                    else
+                        showSuccessNotifi('نشان کردن سفرنامه با مشکل مواجه شد', 'left', 'red');
+                },
+                error: err =>{
+                    showSuccessNotifi('Connection Error', 'left', 'red');
+                }
+            })
+        }
+
+
+        function resizeMobileListHeight(){
+            var height = $('#safarnamehMobileCategory').find('.mobileFooterFilterPic').height() + 5;
+            $('#safarnamehMobileCategory').find('.safarnamehMainCategoryListMobile').css('height', `calc(100% - ${height}px)`);
+        }
+
+        $(window).on('resize', resizeMobileListHeight);
+        $(window).ready(() => resizeMobileListHeight());
+
         $('.searchInputElemsText').keyup(function(event) {
             if (event.keyCode === 13)
                 $(event.target).next().click();
         });
+
     </script>
 
 </body>

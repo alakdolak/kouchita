@@ -3098,6 +3098,7 @@ class PlaceController extends Controller {
 
             switch ($kindPlaceId){
                 case 1:
+                    $topPic = 'amaken.webp';
                     $errorTxt = [];
                     $errorTxt[0] = 'جاذبه ای برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
@@ -3111,6 +3112,7 @@ class PlaceController extends Controller {
                     $meta['description'] = 'جاهای دیدنی '.$inHeaderName.' و جاذبه های دیدنی '.$inHeaderName.' و مکان های زیارتی '.$inHeaderName.'، آثار تاریخی '.$inHeaderName.' و مکان های تفریحی '.$inHeaderName.' و پاساژهای '.$inHeaderName.' را در کوچیتا ببینید. در این صفحه می توانید تمامی جاذبه های '.$inHeaderName.' را به همراه آدرس و عکس و نظرات کاربران در کوچیتا مشاهده کنید.';
                     break;
                 case 3:
+                    $topPic = 'restaurant.webp';
                     $errorTxt = [];
                     $errorTxt[0] = 'رستورانی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
@@ -3126,6 +3128,7 @@ class PlaceController extends Controller {
                     $meta['description'] .= 'رستوران های سنتی '.$inHeaderName.' :معرفی رستوران های سنتی معروف '.$inHeaderName.' بهمراه آدرس و تلفن را در وب سایت کوچیتا مشاهده کنید. رستوران های سنتی خوب '.$inHeaderName.' بهمراه آدرس و موقعیت نقشه  و تلفن رستوران های سنتی '.$inHeaderName.' به همراه نظرات مشتریان و منو رستوران های سنتی '.$inHeaderName;
                     break;
                 case 4:
+                    $topPic = 'hotel.webp';
                     $errorTxt = [];
                     $errorTxt[0] = 'هتلی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
@@ -3139,6 +3142,7 @@ class PlaceController extends Controller {
                     $meta['description'] = 'معرفی هتل های '.$inHeaderName.' با کوچیتا. تلفن هتل '.$inHeaderName.' با بررسی عکس ها، قیمت، نظرات میهمانان، مقایسه هتل های '.$inHeaderName.' و موقعیت نقشه هتل های '.$inHeaderName.'معرفی هتل آپارتمان و مهمان سراهای '.$inHeaderName.' با کوچیتا. تلفن هتل آپارتمان و مهمان سراهای '.$inHeaderName.' با بررسی عکس ها، قیمت، نظرات میهمانان، مقایسه هتل آپارتمان و مهمان سراهای '.$inHeaderName.' و موقعیت نقشه هتل آپارتمان و مهمان سراهای '.$inHeaderName.'';
                     break;
                 case 6:
+                    $topPic = 'majara.webp';
                     $errorTxt = [];
                     $errorTxt[0] = 'طبیعت گردی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
@@ -3151,6 +3155,7 @@ class PlaceController extends Controller {
                     $meta['description'] = 'جاهای مناسب برای طبیعت گردی در '.$inHeaderName.' ، زیباترین روستاها '.$inHeaderName.'، ییلاق های '.$inHeaderName.' و جاذبه های طبیعی ' . $inHeaderName . ' در سایت کوچیتا می توانید تمامی جاهای بکر '.$inHeaderName.' و روستاهای '.$inHeaderName.' را به همراه آدرس و موقعیت نقشه و عکس و نظرات کاربران مشاهده کنید.';
                     break;
                 case 10:
+                    $topPic = 'soghat.webp';
                     $errorTxt = [];
                     $errorTxt[0] = 'سوغات و صنایع دستی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
@@ -3163,6 +3168,7 @@ class PlaceController extends Controller {
                     $meta['description'] = 'صنایع دستی و سوغات ' . $inHeaderName . ' و معرفی صنایع دستی '.$inHeaderName.' و معرفی سوغات '.$inHeaderName.' با کوچیتا. معرفی فروشندگان صنایع دستی و سوغات '.$inHeaderName.' همراه با عکس ، قیمت، نظرات کاربران، مقایسه سوغات و صنایع دستی '.$inHeaderName.' و موقعیت نقشه فروشندگان سوغات وصنایع دستی '.$inHeaderName;
                     break;
                 case 11:
+                    $topPic = 'food.webp';
                     if(isset($_GET['filter'])){
                         if($_GET['filter'] == 'diabet') {
                             $kindSearch = ' مناسب برای افراد دیابتی';
@@ -3199,6 +3205,7 @@ class PlaceController extends Controller {
                     $meta['description'] = 'ما برای شما غذاهای محلی '.$inHeaderName.' و غذاهای سنتی '.$inHeaderName.' همراه با دستور پخت و عکس و میزان کالری که شامل آش های '.$inHeaderName.'، سوپ های '.$inHeaderName.'، خورشت های '.$inHeaderName.' ، خوراک های '.$inHeaderName.' ،شیرینی ها '.$inHeaderName.'، نان ها '.$inHeaderName.'، مربا های '.$inHeaderName.' و سالاد های '.$inHeaderName.' را جمع اوری کرده ایم.';
                     break;
                 case 12:
+                    $topPic = 'boom.webp';
                     $errorTxt = [];
                     $errorTxt[0] = 'بوم گردی برای نمایش در ' . $locationName['cityName'] . ' موجود نمی باشد.';
                     $errorTxt[1] = 'برای شما اطلاعات ' . $locationName['cityName'] . ' را نمایش داده ایم.';
@@ -3218,7 +3225,7 @@ class PlaceController extends Controller {
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
 
-            return view('pages.placeList.placeList', compact(['features', 'meta', 'errorTxt', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state', 'contentCount']));
+            return view('pages.placeList.placeList', compact(['features', 'meta', 'errorTxt', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state', 'contentCount', 'topPic']));
         }
         else
             return \redirect(\url('/'));

@@ -56,6 +56,7 @@ function SafarnamehMinimalData($safarnameh){
         $safarnameh->category = null;
         $safarnameh->categoryId = 0;
     }
+
     if($safarnameh->category == null)
         $safarnameh->category = '';
     if ($safarnameh->summery == null) {
@@ -63,6 +64,17 @@ function SafarnamehMinimalData($safarnameh){
             $safarnameh->summery = $safarnameh->meta;
         else
             $safarnameh->summery = '';
+    }
+
+    $safarnameh->bookMark = false;
+    if(auth()->check()){
+        $bookMarkKind = BookMarkReference::where('group', 'safarnameh')->first();
+        $bookMark = BookMark::where('userId', auth()->user()->id)
+                            ->where('referenceId', $safarnameh->id)
+                            ->where('bookMarkReferenceId', $bookMarkKind->id)->first();
+
+        if($bookMark != null)
+            $safarnameh->bookMark = true;
     }
 
     return $safarnameh;
