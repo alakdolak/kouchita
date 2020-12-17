@@ -245,7 +245,7 @@ $kindPlaceId = 10; ?>
                                         <b>اضافه کنید</b>
                                     </div>
                                     <div id="showPic0" class="imgUploadsTourCreation" style="width: 100%; display: none;">
-                                        <img id="imgPic0" src="#">
+                                        <img id="imgPic0" >
                                         <button type="button" class="deleteBtnImgTourCreation" onclick="deletePicFunc(0)">
                                             <img src="{{URL::asset("images/tourCreation/delete.png")}}">
                                         </button>

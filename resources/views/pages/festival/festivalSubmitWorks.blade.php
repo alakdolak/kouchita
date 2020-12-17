@@ -190,7 +190,7 @@
                     شما برای بارگذاری ویدیو خود یک عکس باید از ویدیوی خود انتخاب کنید.
                 </div>
                 <div class="videoSec">
-                    <video id="snapShotVideo" src="#" controls muted ></video>
+                    <video id="snapShotVideo"  controls muted ></video>
                     <div class="buts">
                         <button class="btn submit" onclick="takeSnapShot(this)" disabled>گرفتن عکس</button>
                     </div>
@@ -203,8 +203,8 @@
             <div class="iconClose" onclick="closeShowPictureModal()"></div>
             <div id="showImgModalBody" class="body">
                 <div id="modalImgSection" class="imgSec">
-                    <img id="modalPicture" src="#">
-                    <video id="modalVideo" src="#" controls></video>
+                    <img id="modalPicture" >
+                    <video id="modalVideo"  controls></video>
                     <div class="nPButtons next leftArrowIcon" onclick="nextShowPicModal(-1)"></div>
                     <div class="nPButtons prev leftArrowIcon" onclick="nextShowPicModal(1)"></div>
                 </div>

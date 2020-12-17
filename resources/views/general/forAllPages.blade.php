@@ -177,9 +177,6 @@
         let lastPages = localStorage.getItem('lastPages');
         lastPages = JSON.parse(lastPages);
 
-        if(recentlyMainSearchSample == 0)
-            recentlyMainSearchSample = $('#recentlyRowMainSearch').html();
-
         $('#recentlyRowMainSearch').html('');
 
         if(lastPages != null){

@@ -40,13 +40,12 @@
     <link rel="stylesheet" href="{{URL::asset('css/ltr/ltrFooter.css?v='.$fileVersions)}}">
 @endif
 
-<script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
+<script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 <script src="{{URL::asset('js/defualt/autosize.min.js')}}"></script>
 <script async src="{{URL::asset('js/defualt/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 <script async src="{{URL::asset('js/defualt/lazysizes.min.js')}}"></script>
-
 <style>
 
 @if(\App::getLocale() == 'en')
@@ -55,6 +54,9 @@
         font-family: enFonts;
         direction: ltr;
         text-align: left;
+    }
+    .suggestionPackDetailDiv{
+        direction: ltr;
     }
 @else
     *{
@@ -426,7 +428,7 @@
 {{--<script defer src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>--}}
 {{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
 {{--<meta name="google-signin-scope" content="profile email">--}}
-{{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
+{{--<meta name="google-signin-clienwindow.pict_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
 
 @if(auth()->check())
     @include('layouts.urlAuthed')
@@ -452,4 +454,6 @@
     script.src = "https://s1.mediaad.org/serve/koochita.com/loader.js" ;
     head.appendChild(script);
 </script>
+
+
 

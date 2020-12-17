@@ -22,8 +22,13 @@
     }
 </style>
 
-<div id="questionSample" style="display: none">
-    <div class="isConfirmed">
+
+<div id="questionOptionMenuBar" class="modalBlackBack fullCenter questionOptionMenuBar">
+    <div class="modalBody"></div>
+</div>
+
+<script>
+    var questionSample = `<div class="isConfirmed">
         <div class="moreOptionFullReview" onclick="showAnswersActionBoxQ(this)">
             <span class="threeDotIconVertical"></span>
         </div>
@@ -32,17 +37,17 @@
             <a target="_blank" href="{{url("profile/index")}}/##userName##">{{__("مشاهده صفحه")}} ##userName##</a>
             <a href="{{route("policies")}}" target="_blank">{{__("صفحه قوانین و مقررات")}}</a>
             @if(auth()->check())
-                <span class="yourPost" onclick="deleteQuestionByUser(##id##)" style="color: red">{{__('حذف سوال')}}</span>
+    <span class="yourPost" onclick="deleteQuestionByUser(##id##)" style="color: red">{{__('حذف سوال')}}</span>
             @endif
-        </div>
     </div>
-    
-    <div class="commentWriterDetailsShow">
-        <div class="circleBase commentWriterPicShow">
-            <img alt="userPic" src="##userPic##" style="height: 100%; width: 100%; border-radius: 50%;">
-        </div>
-        <div class="commentWriterExperienceDetails">
-            <a href="{{url('profile/index')}}/##userName##" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">##userName##</a>
+</div>
+
+<div class="commentWriterDetailsShow">
+    <div class="circleBase commentWriterPicShow">
+        <img alt="userPic" src="##userPic##" style="height: 100%; width: 100%; border-radius: 50%;">
+    </div>
+    <div class="commentWriterExperienceDetails">
+        <a href="{{url('profile/index')}}/##userName##" class="userProfileName userProfileNameFullReview" target="_blank" style="font-weight:bold">##userName##</a>
             <div class="fullReviewPlaceAndTime">
                 <div class="display-inline-block">
                     در
@@ -74,16 +79,15 @@
                 <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;"  disabled>
                     <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
                     {{__("در حال ثبت سوال")}}
-                </div>
-            </div>
-        </div>
     </div>
-
-    <div id="ansOfQuestion##id##" class="hidden ansOfQuestion"></div>
+</div>
+</div>
 </div>
 
-<div id="questionPlaceHolderSample">
-    <div class="smallReviewMainDivShown float-right position-relative">
+<div id="ansOfQuestion##id##" class="hidden ansOfQuestion"></div>`;
+
+    var questionPlaceHolderSample = `
+            <div class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow" style="display: flex;">
             <div class="placeHolderAnime" style="width: 55px; height: 55px; float: right; border-radius: 50%"></div>
             <div class="commentWriterExperienceDetails" style="display: flex; flex-direction: column; padding-right: 10px">
@@ -98,21 +102,11 @@
             <div class="userProfileName placeHolderAnime resultLineAnim reviewPlaceHolderTextLineSmallReview" style="width: 60%"></div>
         </div>
     </div>
-</div>
+    `;
+</script>
 
-<div id="questionOptionMenuBar" class="modalBlackBack fullCenter questionOptionMenuBar">
-    <div class="modalBody"></div>
-</div>
-
-{{--<script src="{{URL::asset('js/component/AnswerComponent.js')}}"></script>--}}
 
 <script>
-    let questionSample = $('#questionSample').html();
-    $('#questionSample').remove();
-
-    let questionPlaceHolderSample = $('#questionPlaceHolderSample').html();
-    $('#questionPlaceHolderSample').remove();
-
     function getQuestionPlaceHolder(){
         return questionPlaceHolderSample;
     }

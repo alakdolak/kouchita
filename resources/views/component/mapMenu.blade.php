@@ -7,7 +7,7 @@
         <div class="imgMapMoreDiv">
             <a class="linkMapMore" target="_blank">
                 <div>
-                    <img id="mapMoreInfoImg" class="mapMoreInfoImg" src="#"  onload="fitThisImg(this)">
+                    <img id="mapMoreInfoImg" class="mapMoreInfoImg"   onload="fitThisImg(this)">
                 </div>
             </a>
 

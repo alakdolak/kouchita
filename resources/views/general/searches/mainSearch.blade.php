@@ -48,25 +48,7 @@
                     <div class="visitSuggestionDiv">
                             <div class="visitSuggestionText">{{__('بازدید های اخیر شما')}}</div>
 
-                            <div id="recentlyRowMainSearch" class="visitSuggestion4Box recentlyRowMainSearch">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion">
-                                    <div class="mainSearchpoi">
-                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive prw_common_thumbnail_no_style_responsive22">
-                                            <div class="prv_thumb has_image" style="height: 100%">
-                                                <div class="image_wrapper spImageWrapper landscape landscapeWide mainSearchImgTop">
-                                                    <img src="##mainPic##" alt="##name##" class="image" style="height: 100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="##redirect##" class="textsOfRecently">
-                                            <div class="detail direction-rtl" style="width: 100%;">
-                                                <div class="textsOfRecently_text">##name##</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <div id="recentlyRowMainSearch" class="visitSuggestion4Box recentlyRowMainSearch"></div>
                         </div>
                 </div>
 
@@ -77,12 +59,33 @@
 </div>
 
 <script>
+    var recentlyMainSearchSample = `
+        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion">
+            <div class="mainSearchpoi">
+                <div class="prw_rup prw_common_thumbnail_no_style_responsive prw_common_thumbnail_no_style_responsive22">
+                    <div class="prv_thumb has_image" style="height: 100%">
+                        <div class="image_wrapper spImageWrapper landscape landscapeWide mainSearchImgTop">
+                            <img src="##mainPic##" alt="##name##" class="image" style="height: 100%">
+                        </div>
+                    </div>
+                </div>
+                <a href="##redirect##" class="textsOfRecently">
+                    <div class="detail direction-rtl" style="width: 100%;">
+                        <div class="textsOfRecently_text">##name##</div>
+                    </div>
+                </a>
+            </div>
+        </div>`;
+
+</script>
+
+
+<script>
 
     var mainSearchAjax = null;
     var numOfMainSearchResult = 0;
     var searchDir = '{{route('totalSearch')}}';
     var lastTimeMainSearch = 0;
-    var recentlyMainSearchSample = 0;
     var localStorageData = 0;
     @if(isset($localStorageData))
         localStorageData = {!! json_encode($localStorageData) !!}

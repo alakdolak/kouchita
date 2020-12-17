@@ -27,8 +27,30 @@
         }
     }
 </style>
-<div id="reviewSmallSection" style="display: none">
-    <div id="smallReviewHtml_##id##" class="smallReviewMainDivShown float-right position-relative">
+
+
+<div id="fullReviewModal" class="fullReviewModal modalBlackBack">
+    <div id="fullReview" class="fullReviewBody"></div>
+</div>
+
+<div id="reviewOptionMenuBar" class="modalBlackBack fullCenter reviewOptionMenuBar">
+    <div class="modalBody">
+        <div class="reportReviwInOptionModal">گزارش پست</div>
+        <a class="profileNameInReviewOptionModal" href="#"></a>
+        <a href="{{route("policies")}}" target="_blank">
+            صفحه قوانین و مقررات
+        </a>
+        @if(auth()->check())
+            <div id="deleteReviewOptionInModal" style="color: red; border-bottom: none">
+                حذف پست
+            </div>
+        @endif
+    </div>
+</div>
+
+<script>
+    var reviewSmallSample = `
+        <div id="smallReviewHtml_##id##" class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow">
             <div class="circleBase type2 commentWriterPicShow">
                 <img src="##userPic##" alt="##userName##" class="resizeImgClass" onload="fitThisImg(this)">
@@ -39,22 +61,22 @@
                     <span class="label label-success inConfirmLabel" style="display: ##isConfrim##">{{__('در انتظار تایید')}}</span>
                 </div>
                 <div style="font-size: 10px">{{__('در')}}
-                    <a href="##placeUrl##" target="_blank">
-                        <span class="commentWriterExperiencePlace">##where##</span>
-                    </a>
-                </div>
-                <div class="userAssignedSmall" style="font-size: 11px">##userAssigned##</div>
-                <div style="font-size: 12px;">##timeAgo##</div>
-            </div>
-        </div>
-        <div class="commentContentsShow position-relative">
-            <p class="SummarizedPostTextShown" style="display: ##haveSummery##">
-                ##summery##
-                <span class="smallReviewshowMoreText" onclick="showSmallReviewMoreText(this)"></span>
-            </p>
-            <p class="compvarePostTextShown" style="display: none">
-                ##text##
-                <span class="showLessText" onclick="showSmallReviewLessText(this)">{{__('کمتر')}}</span>
+    <a href="##placeUrl##" target="_blank">
+        <span class="commentWriterExperiencePlace">##where##</span>
+    </a>
+</div>
+<div class="userAssignedSmall" style="font-size: 11px">##userAssigned##</div>
+<div style="font-size: 12px;">##timeAgo##</div>
+</div>
+</div>
+<div class="commentContentsShow position-relative">
+<p class="SummarizedPostTextShown" style="display: ##haveSummery##">
+##summery##
+<span class="smallReviewshowMoreText" onclick="showSmallReviewMoreText(this)"></span>
+</p>
+<p class="compvarePostTextShown" style="display: none">
+##text##
+<span class="showLessText" onclick="showSmallReviewLessText(this)">{{__('کمتر')}}</span>
             </p>
             <p class="compvarePostTextShown" style="display: ##notSummery##">
                 ##text##
@@ -84,10 +106,9 @@
             </div>
         </div>
     </div>
-</div>
+    `;
 
-<div id="reviewSmallPlaceHolder" style="display: none">
-    <div class="smallReviewMainDivShown float-right position-relative">
+    var smallReviewPlaceHolder = `    <div class="smallReviewMainDivShown float-right position-relative">
         <div class="commentWriterDetailsShow" style="display: flex;">
             <div class="placeHolderAnime" style="width: 55px; height: 55px; float: right; border-radius: 50%"></div>
             <div class="commentWriterExperienceDetails" style="display: flex; flex-direction: column; padding-right: 10px">
@@ -109,38 +130,12 @@
             <div class=" placeHolderAnime reviewPicPlaceHolder"></div>
         </div>
     </div>
-</div>
-
-<div id="fullReviewModal" class="fullReviewModal modalBlackBack">
-    <div id="fullReview" class="fullReviewBody"></div>
-</div>
-
-<div id="reviewOptionMenuBar" class="modalBlackBack fullCenter reviewOptionMenuBar">
-    <div class="modalBody">
-        <div class="reportReviwInOptionModal">گزارش پست</div>
-        <a class="profileNameInReviewOptionModal" href="#"></a>
-        <a href="{{route("policies")}}" target="_blank">
-            صفحه قوانین و مقررات
-        </a>
-        @if(auth()->check())
-            <div id="deleteReviewOptionInModal" style="color: red; border-bottom: none">
-                حذف پست
-            </div>
-        @endif
-    </div>
-</div>
+`;
+</script>
 
 <script>
     let nowOpenReviewOption = null;
     let allReviewsCreated = [];
-    let smallReviewPlaceHolder = $('#reviewSmallPlaceHolder').html();
-    $('#reviewSmallPlaceHolder').remove();
-
-    let reviewSmallSample = $('#reviewSmallSection').html();
-    $('#reviewSmallSection').remove();
-
-    let reviewBigPlaceHolder = $('#reviewBigPlaceHolder').html();
-    $('#reviewBigPlaceHolder').remove();
 
     function getReviewPlaceHolder(){
         return smallReviewPlaceHolder;

@@ -301,7 +301,7 @@ $seoTitle = isset($place->seoTitle) ? $place->seoTitle : "کوچیتا | " . $ci
                                     <a href="#" class="tvVideoName showLessText" target="_blank"></a>
                                     <div class="tvUserContentDiv hidden">
                                         <div class="tvUserPic">
-                                            <img src="#" class="koochitaTvUserImg resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
+                                            <img  class="koochitaTvUserImg resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                                         </div>
                                         <div class="tvUserInfo">
                                             <div class="tvUserName"></div>
