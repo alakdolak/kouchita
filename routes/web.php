@@ -176,7 +176,7 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:60', 'nothing']), function (){
+Route::group(array('middleware' => ['throttle:60']), function (){
 
     Route::middleware(['shareData'])->group(function (){
         Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
