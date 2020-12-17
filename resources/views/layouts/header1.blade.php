@@ -83,21 +83,7 @@
                             <div class="headerBookMarkHeader">
                                 <a class="headerBookMarkHeaderName" href="{{route('profile')}}#bookMark" target="_self"> {{__('نشون کرده ها')}} </a>
                             </div>
-                            <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
-                            <div id="headerBookMarkPlaceHolder">
-
-                                <div class="headerBookMarkLink">
-                                    <div class="headerBookMarContentImgDiv">
-                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                    </div>
-                                    <div class="bookMarkContent" style="width: 90px">
-                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <div id="bookMarksDiv" class="headerBookMarkContentDiv headerFooterBookMarkTab"></div>
                         </div>
                     </div>
                 </div>
@@ -317,7 +303,6 @@
             if( $("#bookmarkmenu").is(":hidden")){
                 hideAllTopNavs();
                 $("#bookmarkmenu").css('display', 'block');
-                showBookMarks('bookMarksDiv');
                 openHeaderTabsVariable()
             }
             else

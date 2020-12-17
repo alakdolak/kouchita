@@ -100,7 +100,7 @@
 
     <script>
         var serviceWorkerUrl = '{{URL::asset("ServiceWorker.js")}}';
-        // serviceWorkerUrl = serviceWorkerUrl.replace('http://', 'https://');
+        serviceWorkerUrl = serviceWorkerUrl.replace('http://', 'https://');
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function(){

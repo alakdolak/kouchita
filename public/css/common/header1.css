@@ -519,6 +519,45 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     flex-grow: 1;
     border-bottom: 1px solid #e5e5e5;
 }
+.headerBookMarkContentDiv .bookMarkSSec{
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0px 5px;
+    border-bottom: solid 1px #ececec;
+    padding-bottom: 10px;
+}
+.headerBookMarkContentDiv .bookMarkSSec .BookMarkIcon{
+    display: none;
+}
+.headerBookMarkContentDiv .bookMarkSSec .imgSec{
+    width: 40%;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 80px;
+}
+.headerBookMarkContentDiv .bookMarkSSec .infoSec{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 5px;
+    text-align: right;
+}
+.headerBookMarkContentDiv .bookMarkSSec .infoSec .type{
+    color: gray;
+}
+.headerBookMarkContentDiv .bookMarkSSec .infoSec .name{
+    font-size: 14px;
+    margin: 5px 0px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.headerBookMarkContentDiv .bookMarkSSec .infoSec .state{
+    font-size: 8px;
+}
 
 .headerBookMarkLink{
     display: flex;

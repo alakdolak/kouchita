@@ -734,7 +734,7 @@ if(Auth::check()) {
             if( $("#bookmarkmenu").is(":hidden")){
                 hideAllTopNavs();
                 $("#bookmarkmenu").show();
-                showBookMarks('bookMarksDiv');
+                // showBookMarks('bookMarksDiv');
             }
             else
                 hideAllTopNavs();
