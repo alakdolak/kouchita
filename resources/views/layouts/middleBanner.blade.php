@@ -805,9 +805,9 @@
     var middleBan5Color = ['red', 'green', 'navy'];
     var middleBan5 = {!! isset($middleBan['5']) ? $middleBan['5'] : json_encode([]) !!};
     var middleBan4 = {!! isset($middleBan['4']) ? $middleBan['4'] : json_encode([]) !!};
-    let loadSuggestion = false;
-    let lastPageForSuggestion = null;
-    let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topSafarnameh']; /*'topKharid'*/
+    var loadSuggestion = false;
+    var lastPageForSuggestion = [];
+    var divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topSafarnameh']; /*'topKharid'*/
     var sugg4PlaceHolder = getSuggestionPackPlaceHolder();
     sugg4PlaceHolder += sugg4PlaceHolder+sugg4PlaceHolder+sugg4PlaceHolder;
 
@@ -821,7 +821,8 @@
     if (typeof(Storage) !== "undefined") {
         let lastPages;
         lastPages = localStorage.getItem('lastPages');
-        lastPageForSuggestion = JSON.parse(lastPages);
+        if(lastPages != null)
+            lastPageForSuggestion = JSON.parse(lastPages);
     } else
         console.log('your browser not support localStorage');
 

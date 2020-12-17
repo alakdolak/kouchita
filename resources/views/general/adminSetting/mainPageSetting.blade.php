@@ -464,7 +464,7 @@
             '                            <div class="col-md-10">\n' +
             '                            <div class="row">\n' +
             '                                <div class="col-md-6">\n' +
-            '                                    <img src="#" class="settingImg" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px;">\n' +
+            '                                    <img  class="settingImg" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px;">\n' +
             '                                </div>\n' +
             '                                <div class="col-md-6">\n' +
             '                                    <input type="file" id="uploadImgBanner' + kind + '' + ss + '" accept="image/*" onchange="showPicInput(this, \'showMiddleBannerInput' + kind + '' + ss + '\')">\n' +

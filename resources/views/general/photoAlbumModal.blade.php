@@ -15,7 +15,7 @@
 
             <div class="userInfoPhotoAlbum hideOnScreen">
                 <div class="fullyCenterContent userPictureDiv circleBase type2">
-                    <img class="photoAlbumUserPic resizeImgClass" alt="کوچیتا، سامانه جامع گردشگری ایران" src="#" style="width: 100%" onload="fitThisImg(this)">
+                    <img class="photoAlbumUserPic resizeImgClass" alt="کوچیتا، سامانه جامع گردشگری ایران"  style="width: 100%" onload="fitThisImg(this)">
                 </div>
                 <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                     <a href="#" class="userProfileName photoAlbumUserName"></a>
@@ -31,8 +31,8 @@
                     <div id="leftColPhotosModalMainDiv" class="selectedPhotoShowingModal" style="position: relative;">
                         <div style="position: relative; width: 100%;">
                             <div class="albumContent">
-                                <img id="mainPhotoAlbum" alt="کوچیتا، سامانه جامع گردشگری ایران" src="#" style="max-width: 100%; max-height: 100%;">
-                                <video id="mainVideoPhotoAlbum" src="#" controls style="max-width: 100%; max-height: 100%;"></video>
+                                <img id="mainPhotoAlbum" alt="کوچیتا، سامانه جامع گردشگری ایران" style="max-width: 100%; max-height: 100%;">
+                                <video id="mainVideoPhotoAlbum" controls style="max-width: 100%; max-height: 100%;"></video>
                             </div>
                             <div style="position: absolute; bottom: -25px; right: 0px; margin-top: 7px; display: flex; justify-content: center;">
                                 <div id="photoAlbumLikeSection" class="photoAlbumLikeSection" style="display:none;">
@@ -55,7 +55,7 @@
                 <div id="rightColPhotosModalMainDiv" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" style="max-height: 85vh; overflow: hidden;">
                     <div class="userInfoPhotoAlbum hideOnPhone">
                         <div class="fullyCenterContent userPictureDiv circleBase type2">
-                            <img alt="کوچیتا، سامانه جامع گردشگری ایران" class="photoAlbumUserPic resizeImgClass" src="#" style="width: 100%" onload="fitThisImg(this)">
+                            <img alt="کوچیتا، سامانه جامع گردشگری ایران" class="photoAlbumUserPic resizeImgClass" style="width: 100%" onload="fitThisImg(this)">
                         </div>
                         <div class="commentWriterExperienceDetails" style="width: calc(100% - 60px)">
                             <a href="#" class="userProfileName photoAlbumUserName"></a>
@@ -66,11 +66,7 @@
                         </div>
                     </div>
 
-                    <div id="sidePhotoModal" class="sidePhotoAlbumDiv">
-                        <div id="sideAlbumPic##index##" class="rightColPhotosShowingModal" onclick="##picIndex##">
-                            <img src="##sidePic##" alt="##alt##" class="mainAlbumPic resizeImgClass" onload="fitThisImg(this)">
-                        </div>
-                    </div>
+                    <div id="sidePhotoModal" class="sidePhotoAlbumDiv"></div>
 
                 </div>
             </div>
@@ -103,9 +99,11 @@
 
 <script>
     var sidePics;
-    var srcSidePic = 0;
     var choosenIndex;
     var userInPhoto = '{{auth()->check() ? auth()->user()->username : false}}';
+    var srcSidePic = `<div id="sideAlbumPic##index##" class="rightColPhotosShowingModal" onclick="##picIndex##">
+                            <img src="##sidePic##" alt="##alt##" class="mainAlbumPic resizeImgClass" onload="fitThisImg(this)">
+                        </div>`;
 
     function createPhotoModal(_title, _pics, _choosenIndex = 0){
         // _pics = [
@@ -127,11 +125,6 @@
         //         'userLike' : if user like this img?,     (optional)
         //     }
         // ]
-
-        if(srcSidePic == 0)
-            srcSidePic = $('#sidePhotoModal').html();
-
-        $('#sidePhotoModal').html('');
 
         sidePics = _pics;
         $('#photoAlbumTitle').text(_title);
@@ -257,7 +250,7 @@
     var deletedPhotoInAlbum = false;
     function openDeletePhotoModal(){
         deletedPhotoInAlbum = $('#deletePicIconsPhotoAlbum').attr('dataValue');
-        text = 'آیا از حذف عکس خود اطمینان دارید؟ در صورت حذف محتوای مورد نظر قابل بازیابی نمی باشد.';
+        var text = 'آیا از حذف عکس خود اطمینان دارید؟ در صورت حذف محتوای مورد نظر قابل بازیابی نمی باشد.';
         openWarning(text, doPhotoDeleteInAlbum); // in general.alert.blade.php
     }
 

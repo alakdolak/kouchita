@@ -64,8 +64,8 @@
     <div id="showImgModalBody" class="body">
         <div id="modalImgSection" class="imgSec">
             <div id="deleteThisFestivalContent" class="deleteContent trashIcon" data-id="" onclick="deleteMyFestivalContent(this)"></div>
-            <img id="modalPicture" src="#">
-            <video id="modalVideo" src="#" controls></video>
+            <img id="modalPicture" >
+            <video id="modalVideo"  controls></video>
             <div class="nPButtons next leftArrowIcon" onclick="nextShowFestivalPicModal(-1)"></div>
             <div class="nPButtons prev leftArrowIcon" onclick="nextShowFestivalPicModal(1)"></div>
         </div>
@@ -74,7 +74,7 @@
             <div class="userInfo">
                 <div style="display: flex; align-items: center;">
                     <div class="userPic">
-                        <img class="modalUserPic" src="#" style="height: 100%;">
+                        <img class="modalUserPic"  style="height: 100%;">
                     </div>
                     <a href="#" target="_blank" class="username modalUserName"></a>
                 </div>

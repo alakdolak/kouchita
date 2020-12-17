@@ -4,7 +4,6 @@
     @include('layouts.topHeader')
     <title>مسابقه آشپزی با کوچیتا</title>
 
-
     <style>
         :root{
             --cook-orange: #FD7B5C;

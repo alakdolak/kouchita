@@ -1,6 +1,6 @@
-
-<div id="ansSample" style="display: none">
-    <div id="ansDiv_##random##" style="margin-bottom: 15px; direction: rtl">
+<script>
+    var answerPackSample = `
+        <div id="ansDiv_##random##" style="margin-bottom: 15px; direction: rtl">
         <div class="eachCommentMainBox" style="margin-bottom: 0px">
             <div class="circleBase commentsWriterProfilePic">
                 <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
@@ -26,44 +26,44 @@
                 </span>
                 <span class="replayBtn replayReview" onclick="showReplyToAnswerHandle(##random##)">
                     {{__("پاسخ دهید")}}
-                </span>
-            </div>
-            <div class="fullReviewSeeAnses" onclick="showAnswersOfAns(##random##, this)" style="display: ##hasAns##">
-                <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">##answersCount##</span>
-                <span class="seeAllText">مشاهده پاسخ‌ها</span>
-            </div>
-        </div>
-        <div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">
-            <div class="circleBase newCommentWriterProfilePic hideOnPhone">
-                <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="##userPic##" style="width: 100%; border-radius: 50%;">
-            </div>
-            <div class="inputBox setButtonToBot">
-                <b class="replyCommentTitle">در پاسخ به ##userName##</b>
-                <textarea id="textareaForAns_##random##"
-                          class="inputBoxInput inputBoxInputComment"
-                          rows="1" placeholder="شما چه نظری دارید؟"
-                          onclick="checkLogin()"
-                          onkeydown="checkNotEmptyTextArea(this)"
-                          onchange="checkNotEmptyTextArea(this)"></textarea>
-                <button class="btn submitAnsInReview"
-                        onclick="##sendAnswerFunction##(##id##, $('#textareaForAns_##random##').val()); $(this).hide(); $(this).next().show()"
-                        style="height: fit-content"
-                        disabled>
-                    {{__("ارسال")}}
-                </button>
-                <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
-                    <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
+    </span>
+</div>
+<div class="fullReviewSeeAnses" onclick="showAnswersOfAns(##random##, this)" style="display: ##hasAns##">
+    <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue" style="margin-left: 20px">##answersCount##</span>
+    <span class="seeAllText">مشاهده پاسخ‌ها</span>
+</div>
+</div>
+<div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv ansTextAreaReview hidden" style="margin-top: 5px">
+<div class="circleBase newCommentWriterProfilePic hideOnPhone">
+    <img alt="کوچیتا، سامانه جامع گردشگری ایران" src="##userPic##" style="width: 100%; border-radius: 50%;">
+</div>
+<div class="inputBox setButtonToBot">
+    <b class="replyCommentTitle">در پاسخ به ##userName##</b>
+    <textarea id="textareaForAns_##random##"
+              class="inputBoxInput inputBoxInputComment"
+              rows="1" placeholder="شما چه نظری دارید؟"
+              onclick="checkLogin()"
+              onkeydown="checkNotEmptyTextArea(this)"
+              onchange="checkNotEmptyTextArea(this)"></textarea>
+    <button class="btn submitAnsInReview"
+            onclick="##sendAnswerFunction##(##id##, $('#textareaForAns_##random##').val()); $(this).hide(); $(this).next().show()"
+            style="height: fit-content"
+            disabled>
+{{__("ارسال")}}
+    </button>
+    <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
+        <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
                     {{__("در حال ثبت")}}
-                </div>
-            </div>
-        </div>
     </div>
-
-    <div class="borderInMobile hidden answerSectionAns_##random##" style="margin-top: 0px">##answersHtml##</div>
+</div>
+</div>
 </div>
 
-<div id="ansToAnswersSample" style="display: none;">
-    <div id="ansOfAns_##random##" style="margin-bottom: 15px; direction: rtl;">
+<div class="borderInMobile hidden answerSectionAns_##random##" style="margin-top: 0px">##answersHtml##</div>
+`;
+
+
+    var answerAnsPackSample = `<div id="ansOfAns_##random##" style="margin-bottom: 15px; direction: rtl;">
         <div class="eachCommentMainBox"  style="margin-bottom: 0px">
             <div class="circleBase commentsWriterProfilePic">
                 <img alt="userPic" src="##writerPic##" style="width: 100%; height: 100%; border-radius: 50%;">
@@ -92,50 +92,42 @@
                 </span>
                 <span class="replayBtn replayReview" onclick="showReplyToAnswerHandle(##random##)">
                     {{__("پاسخ دهید")}}
-                </span>
-            </div>
-            <div class="fullReviewSeeAnses" onclick="showAnswersOfAns(##random##, this)" style="display: ##hasAns##">
-                <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">##answersCount##</span>
-                <span class="seeAllText">مشاهده پاسخ‌ها</span>
-            </div>
-        </div>
-        <div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv hidden" style="margin-top: 0px;">
-            <div class="circleBase newCommentWriterProfilePic hideOnPhone">
-                <img alt="userPic" src="##userPic##" style="width: 100%; border-radius: 50%;">
-            </div>
-            <div class="inputBox setButtonToBot">
-                <b class="replyCommentTitle">در پاسخ به ##userName##</b>
-                <textarea id="textareaForAns_##random##"
-                          class="inputBoxInput inputBoxInputComment"
-                          rows="1" placeholder="شما چه نظری دارید؟"
-                          onclick="checkLogin()"
-                          onkeydown="checkNotEmptyTextArea(this)"></textarea>
-                <button class="btn submitAnsInReview"
-                        onclick="##sendAnswerFunction##(##id##, $('#textareaForAns_##random##').val()); $(this).hide(); $(this).next().show()"
-                        style="height: fit-content"
-                        disabled>
-                    {{__("ارسال")}}
-                </button>
-                <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
-                    <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
-                    {{__("در حال ثبت")}}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="hidden answerSectionAns_##random##" style="width: 100%">##answersHtml##</div>
+    </span>
 </div>
+<div class="fullReviewSeeAnses" onclick="showAnswersOfAns(##random##, this)" style="display: ##hasAns##">
+    <span class="numberOfCommentsIcon commentsStatisticSpan dark-blue">##answersCount##</span>
+    <span class="seeAllText">مشاهده پاسخ‌ها</span>
+</div>
+</div>
+<div id="textAreaAnsDiv_##random##" class="replyToCommentMainDiv hidden" style="margin-top: 0px;">
+<div class="circleBase newCommentWriterProfilePic hideOnPhone">
+    <img alt="userPic" src="##userPic##" style="width: 100%; border-radius: 50%;">
+</div>
+<div class="inputBox setButtonToBot">
+    <b class="replyCommentTitle">در پاسخ به ##userName##</b>
+    <textarea id="textareaForAns_##random##"
+              class="inputBoxInput inputBoxInputComment"
+              rows="1" placeholder="شما چه نظری دارید؟"
+              onclick="checkLogin()"
+              onkeydown="checkNotEmptyTextArea(this)"></textarea>
+    <button class="btn submitAnsInReview"
+            onclick="##sendAnswerFunction##(##id##, $('#textareaForAns_##random##').val()); $(this).hide(); $(this).next().show()"
+            style="height: fit-content"
+            disabled>
+{{__("ارسال")}}
+    </button>
+    <div class="sendQuestionBtn sendingQuestionLoading" style="display: none;" disabled>
+        <img alt="loading" src="{{URL::asset("images/icons/mGear.svg")}}" style="width: 30px; height: 30px;">
+                    {{__("در حال ثبت")}}
+    </div>
+</div>
+</div>
+</div>
+<div class="hidden answerSectionAns_##random##" style="width: 100%">##answersHtml##</div>`;
 
+</script>
 
 <script>
-    let answerPackSample = $('#ansSample').html();
-    let answerAnsPackSample = $('#ansToAnswersSample').html();
-
-    $('#ansSample').remove();
-    $('#ansToAnswersSample').remove();
-
-
     function createMainAnswer(_ans){
         // _ans = {
         //     id,

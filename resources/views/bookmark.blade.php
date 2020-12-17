@@ -205,7 +205,7 @@
             <div class="rightSec show">
                 <div class="placeInfo">
                     <div class="img">
-                        <img src="#" class="moreInfoPic" style="width: 100%">
+                        <img  class="moreInfoPic" style="width: 100%">
                     </div>
                     <div class="info">
                         <div class="name">

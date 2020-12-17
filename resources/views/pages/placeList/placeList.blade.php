@@ -139,50 +139,6 @@
                                     {{--                                <div class="notingToShowClose iconClose"></div>--}}
                                 </div>
                             @else
-                                <div id="listElementSample" style="display: none">
-                                    <div class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
-                                        <div class="poi listBoxesMainDivs">
-                                            <div class="contentImgSection">
-                                                <a href="##url##" class="thumbnail" style="margin-bottom: 5px !important; height: 100%">
-                                                    <div class="contentImg">
-                                                        <img src='##pic##' class='resizeImgClass' alt='##keyword##' onload="fitThisImg(this)" style="width: 100%">
-                                                    </div>
-                                                </a>
-                                                @if(auth()->check())
-                                                    <div class="bookMarkIconOnPic ##bookMark##" onclick="bookMarkThisPlace(this)" value="##id##"></div>
-                                                @endif
-                                            </div>
-
-                                            <div class="detail">
-                                                <div class="contentDetailName lessShowText" title="##name##">
-                                                    <a class="poiTitle" target="_blank" href="##url##">##name##</a>
-                                                </div>
-
-                                                <div class="item rating-count">
-                                                    <div class="rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="##ngClass##"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div target="_blank" class="review_count">
-                                                        ##reviews##
-                                                        <span>{{__('نقد')}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 5px">
-                                                    {{__('استان')}}:
-                                                    <span>##state##</span>
-                                                </div>
-                                                <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 3px">
-                                                    {{__('شهر')}}:
-                                                    <span>##city##</span>
-                                                </div>
-                                                <div class="booking"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div id="listBodyToShowCards"></div>
                                 <div id="notingToShowFilter" class="notingToShowDiv hidden">
                                     <div class="notingToShowImgDiv">
@@ -369,6 +325,56 @@
 
     @include('layouts.footer.layoutFooter')
 </div>
+
+
+<script>
+    var listElementSample = `
+                                            <div class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
+                                        <div class="poi listBoxesMainDivs">
+                                            <div class="contentImgSection">
+                                                <a href="##url##" class="thumbnail" style="margin-bottom: 5px !important; height: 100%">
+                                                    <div class="contentImg">
+                                                        <img src='##pic##' class='resizeImgClass' alt='##keyword##' onload="fitThisImg(this)" style="width: 100%">
+                                                    </div>
+                                                </a>
+                                                @if(auth()->check())
+    <div class="bookMarkIconOnPic ##bookMark##" onclick="bookMarkThisPlace(this)" value="##id##"></div>
+@endif
+    </div>
+
+    <div class="detail">
+        <div class="contentDetailName lessShowText" title="##name##">
+            <a class="poiTitle" target="_blank" href="##url##">##name##</a>
+        </div>
+
+        <div class="item rating-count">
+            <div class="rating-widget">
+                <div class="prw_rup prw_common_location_rating_simple">
+                    <span class="##ngClass##"></span>
+                </div>
+            </div>
+            <div target="_blank" class="review_count">
+                ##reviews##
+                <span>{{__('نقد')}}</span>
+                    </div>
+                </div>
+                <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 5px">
+                    {{__('استان')}}:
+                    <span>##state##</span>
+                </div>
+                <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 3px">
+                    {{__('شهر')}}:
+                    <span>##city##</span>
+                </div>
+                <div class="booking"></div>
+            </div>
+        </div>
+    </div>
+
+    `;
+
+
+</script>
 
 <script>
     function goToCampain(){
@@ -800,8 +806,6 @@
     var isFinish = false;
     var inTake = false;
     var take = 24;
-    var listElementSample = $('#listElementSample').html();
-    $('#listElementSample').remove();
 
     function getPlaceListItems(){
         if(!isFinish && !inTake){

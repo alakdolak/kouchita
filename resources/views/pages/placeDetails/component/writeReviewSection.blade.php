@@ -467,7 +467,7 @@
                 '<div id="reviewPicLoaderBackGround_' + reviewPicNumber + '" class="loaderReviewBackGround"></div>' +
                 '<div id="reviewPicLoaderPercent_' + reviewPicNumber + '" class="loaderReviewPercent"></div>' +
                 '</div>\n' +
-                '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
+                '<img id="showPic' + reviewPicNumber + '"  style="width: 100%; height: 100px;">\n' +
                 '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
                 '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
                 '<div class="editUploadPhotoComment" onclick="openEditReviewPic(' + reviewPicNumber + ')"></div>\n' +
@@ -565,7 +565,7 @@
             '<div id="reviewPicLoaderBackGround_' + reviewPicNumber + '" class="loaderReviewBackGround"></div>' +
             '<div id="reviewPicLoaderPercent_' + reviewPicNumber + '" class="loaderReviewPercent"></div>' +
             '</div>\n' +
-            '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
+            '<img id="showPic' + reviewPicNumber + '"  style="width: 100%; height: 100px;">\n' +
             '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
             '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
             '<div class="videoTimeDuration" id="videoDuration_' + reviewPicNumber + '"></div>\n' +

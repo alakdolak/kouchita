@@ -23,6 +23,7 @@
         var mainUploadedPic = null;
 
         let bannerPics = null;
+        let bannerPicsHtml = '';
         let chosenBannerPic = null;
         let mainUploadedBanner = false;
         let uploadedBanner = false;
@@ -977,7 +978,8 @@
         }
 
         function openBannerModal() {
-            getBannerPic();
+            if(bannerPicsHtml == '')
+                getBannerPic();
             openMyModal('userBannerModal');
         }
 
@@ -993,9 +995,9 @@
                         $('#bannerPics').empty();
                         bannerPics = JSON.parse(response);
                         bannerPics.map((item, index) => {
-                            text = '<div onclick="choseBannerPic(\'' + index + '\', this)" class="bannerPicItem"><img src="' + item.url + '"></div>';
-                            $('#bannerPics').append(text);
+                            bannerPicsHtml += '<div onclick="choseBannerPic(\'' + index + '\', this)" class="bannerPicItem"><img src="' + item.url + '"></div>';
                         });
+                        $('#bannerPics').append(bannerPicsHtml);
                     },
                     error: function (err) {
                     }
@@ -1050,8 +1052,8 @@
                     closeLoading();
                     response = JSON.parse(response);
                     if(response.status == 'ok') {
-                        $('#userBannerModal').addClass('hidden');
-                        $('.userProfilePageCoverImg').css('background-image', 'url(' + response.url + ')');
+                        closeMyModal('userBannerModal');
+                        $('.userProfilePageCoverImg').css('background-image', `url(${response.url})`);
                     }
                 },
                 error: function(err){

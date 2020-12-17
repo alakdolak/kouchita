@@ -177,9 +177,6 @@
         let lastPages = localStorage.getItem('lastPages');
         lastPages = JSON.parse(lastPages);
 
-        if(recentlyMainSearchSample == 0)
-            recentlyMainSearchSample = $('#recentlyRowMainSearch').html();
-
         $('#recentlyRowMainSearch').html('');
 
         if(lastPages != null){
@@ -311,16 +308,16 @@
                     }
                     if(add) {
                         text += `<div class="bookMarkSSec">
-                                            <div class="BookMarkIcon BookMarkIconEmptyAfter" onclick="deleteBookMarkState(${item.bmId}, this)"></div>
-                                            <div class="imgSec" onclick="goToBookMarkSelected('${item.url}')">
-                                                <img src="${pic}" class="resizeImgClass" alt="${name}" onload="fitThisImg(this)">
-                                            </div>
-                                            <div class="infoSec" onclick="goToBookMarkSelected('${item.url}')">
-                                                <div class="type ${kindIcon}">${kind}</div>
-                                                <div class="name">${name}</div>
-                                                <div class="state">${state}</div>
-                                            </div>
-                                        </div>`;
+                                    <div class="BookMarkIcon BookMarkIconEmptyAfter" onclick="deleteBookMarkState(${item.bmId}, this)"></div>
+                                    <div class="imgSec" onclick="goToBookMarkSelected('${item.url}')">
+                                        <img src="${pic}" class="resizeImgClass" alt="${name}" onload="fitThisImg(this)">
+                                    </div>
+                                    <div class="infoSec" onclick="goToBookMarkSelected('${item.url}')">
+                                        <div class="type ${kindIcon}">${kind}</div>
+                                        <div class="name">${name}</div>
+                                        <div class="state">${state}</div>
+                                    </div>
+                                </div>`;
                     }
                 });
 

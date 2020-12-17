@@ -46,119 +46,10 @@
         <div class="gap cf height-30"></div>
     </div>
 
-    <div id="safarnamehRowCardPlaceHolderMobile" class="hidden">
-        <div class="rowSafarnamehCard placeHolderCard">
-            <div class="imgSec">
-                <div class="safarPic placeHolderAnime"></div>
-            </div>
-            <div class="content">
-                <div class="title placeHolderAnime resultLineAnim" style="width: 50%; height: 10px; margin-bottom: 15px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-            </div>
-        </div>
-    </div>
-    <div id="safarnamehRowCardMobile" class="hidden">
-        <div class="rowSafarnamehCard">
-            <div class="imgSec">
-                <a href="##url##" class="safarPic">
-                    <img src="##pic##" alt="##title##" class="resizeImgClass" onload="fitThisImg(this)">
-                </a>
-                <div class="userInfos">
-                    <img src="##writerPic##" alt="userPicture" style="height: 100%;">
-                </div>
-                <div class="icon ##bookmark##" onclick="bookMarkSafarnameh(##id##, this)"></div>
-            </div>
-            <a href="##url##" class="content">
-                <div class="title">##title##</div>
-                <div class="summery">##summery##</div>
-            </a>
-        </div>
-    </div>
-
-    <div id="pcSafarnamehRowCard" class="hidden">
-        <div class="small-12 columns">
-            <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
-                <div class="im-entry-thumb col-md-5 col-sm-12">
-                    <a class="im-entry-thumb-link" href="##url##" title="##title##" style="max-height: 200px;">
-                        <img data-src="##pic##" src="##pic##" alt="##keyword##"/>
-                    </a>
-                </div>
-                <div class="im-entry col-md-7 col-sm-12">
-                    <header class="im-entry-header">
-                        <div class="im-entry-category">
-                            <div class="iranomag-meta clearfix">
-                                <div class="cat-links im-meta-item">
-                                    <a style="background-color: #666; color: #fff !important;" href="{{url('/safarnameh/list/category/')}}/##category##" title="##category##">##category##</a>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="im-entry-title">
-                            <a href="##url##" rel="bookmark">##title##</a>
-                        </h3>
-                    </header>
-
-                    <div style="max-height: 100px !important; overflow: hidden" class="im-entry-content">
-                        <p>##meta##</p>
-                    </div>
-
-                    <div style="margin-top: 7px"
-                         class="iranomag-meta clearfix">
-                        <div class="posted-on im-meta-item">
-                            <span class="entry-date published updated">##date##</span>
-                        </div>
-                        <div class="comments-link im-meta-item">
-                            <i class="fa fa-comment-o"></i>##msgs##
-                        </div>
-                        <div class="author vcard im-meta-item">
-                            <i class="fa fa-user"></i>##username##
-                        </div>
-                        <div class="post-views im-meta-item">
-                            <i class="fa fa-eye"></i>##seen##
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </div>
-    <div id="safarnamehRowCardPlaceHolderPC" class="hidden">
-        <div class="small-12 columns placeHolderCard">
-            <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
-                <div class="im-entry-thumb col-md-5 col-sm-12">
-                    <div class="im-entry-thumb-link placeHolderAnime" style="height: 200px;"></div>
-                </div>
-                <div class="im-entry col-md-7 col-sm-12">
-                    <header class="im-entry-header">
-                        <div class="placeHolderAnime resultLineAnim" style="width: 50%; height: 10px; margin-bottom: 15px;"></div>
-                    </header>
-                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                    <div class="summery placeHolderAnime resultLineAnim" style="width: 90%; height: 6px; margin-bottom: 5px;"></div>
-                </div>
-            </article>
-        </div>
-    </div>
-
-
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
 @endsection
 
 @section('script')
-
-    <script>
-        var mobileListSample = $('#safarnamehRowCardMobile').html();
-        var mobileRowListPlaceHolderSample = $('#safarnamehRowCardPlaceHolderMobile').html();
-        var pcRowListPlaceHolderSample = $('#safarnamehRowCardPlaceHolderPC').html();
-        var pcRowListSample = $('#pcSafarnamehRowCard').html();
-
-        $('#pcSafarnamehRowCard').remove();
-        $('#safarnamehRowCardPlaceHolderPC').remove();
-        $('#safarnamehRowCardPlaceHolderMobile').remove();
-        $('#safarnamehRowCardMobile').empty();
-    </script>
 
     <script>
         var inAjaxSafarnameh = false;
@@ -190,8 +81,8 @@
             $('#mainListBodyMobile').find('.placeHolderCard').remove();
 
             _safarnameh.map(item => {
-                var text = pcRowListSample;
-                var mobile = mobileListSample;
+                var text = pcRowListSafarnamehSample;
+                var mobile = mobileListSafarnamehSample;
 
                 for (var x of Object.keys(item)) {
                     text = text.replace(new RegExp(`##${x}##`, "g"), item[x]);
@@ -227,8 +118,8 @@
             var mobile = '';
 
             for(var i = 0; i < _number; i++){
-                mobile += mobileRowListPlaceHolderSample;
-                pc += pcRowListPlaceHolderSample;
+                mobile += mobileRowListSafarnamehPlaceHolderSample;
+                pc += pcRowListSafarnamehPlaceHolderSample;
             }
 
             $('#mainListBodyPc').append(pc);
