@@ -185,13 +185,11 @@ Route::group(array('middleware' => ['throttle:60']), function (){
         Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage');
     });
 
-
+    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('getPlacesWithLocation', 'MainController@getPlacesWithLocation')->name('getPlaces.location');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('place.list.getElems');
-
-    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('getCityPageReview', 'CityController@getCityPageReview')->name('getCityPageReview');
 
