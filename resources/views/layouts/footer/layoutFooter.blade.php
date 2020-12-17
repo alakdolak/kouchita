@@ -99,21 +99,20 @@
 
 
     <script>
-        var serviceWorkerUrl = '{{URL::asset("ServiceWorker.js")}}';
-        serviceWorkerUrl = serviceWorkerUrl.replace('http://', 'https://');
+        {{--var serviceWorkerUrl = '{{URL::asset("ServiceWorker.js")}}';--}}
+        {{--serviceWorkerUrl = serviceWorkerUrl.replace('http://', 'https://');--}}
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function(){
-                navigator.serviceWorker.register(serviceWorkerUrl).then(
-                    registration => {
-                        console.log('Service Worker is registered', registration);
-                    }).catch(
-                    err => {
-                        console.error('Registration failed:', err);
-                    });
-            })
-        }
-
+        {{--if ('serviceWorker' in navigator) {--}}
+        {{--    window.addEventListener('load', function(){--}}
+        {{--        navigator.serviceWorker.register(serviceWorkerUrl).then(--}}
+        {{--            registration => {--}}
+        {{--                console.log('Service Worker is registered', registration);--}}
+        {{--            }).catch(--}}
+        {{--            err => {--}}
+        {{--                console.error('Registration failed:', err);--}}
+        {{--            });--}}
+        {{--    })--}}
+        {{--}--}}
     </script>
 
 </footer>

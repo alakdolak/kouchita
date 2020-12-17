@@ -152,7 +152,7 @@ Route::group(array('middleware' => ['nothing', 'throttle:30', 'shareData']), fun
 });
 
 //detailsPage
-Route::group(array('middleware' => ['throttle:60', 'nothing']), function (){
+Route::group(array('middleware' => ['throttle:60']), function (){
 
     Route::middleware(['shareData'])->group(function (){
         Route::get('myLocation', 'MainController@myLocation')->name('myLocation');
@@ -161,13 +161,11 @@ Route::group(array('middleware' => ['throttle:60', 'nothing']), function (){
         Route::get('cityPage/{kind}/{city}', 'CityController@cityPage')->name('cityPage');
     });
 
-
+    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('getPlacesWithLocation', 'MainController@getPlacesWithLocation')->name('getPlaces.location');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('place.list.getElems');
-
-    Route::get('place-details/{kindPlaceId}/{placeId}', 'PlaceController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('getCityPageReview', 'CityController@getCityPageReview')->name('getCityPageReview');
 
