@@ -398,11 +398,11 @@
     gtag('config', 'UA-158914626-1');
 
     var homeURL = "{{route('home')}}";
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-    });
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     },
+    // });
 
     function isNumber(evt) {
         evt = (evt) ? evt : window.event;

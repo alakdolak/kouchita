@@ -493,10 +493,9 @@ class MyTripsController extends Controller {
                                 ->where('tripId', $tripId)
                                 ->where('editPlace', 1)
                                 ->first();
-            if(!($trip->uId == $user->id || $uInT != null)){
-                echo 'notAccess';
-                return;
-            }
+            if(!($trip->uId == $user->id || $uInT != null))
+                return response('notAccess');
+
 
             $condition = ['tripId' => $tripId, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId];
 
@@ -511,10 +510,10 @@ class MyTripsController extends Controller {
                 $trip->lastSeen = time();
                 $trip->save();
 
-                echo 'ok';
+                return response('ok');
             }
             else
-                echo "nok";
+                return response('nok');
         }
     }
 

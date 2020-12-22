@@ -1037,17 +1037,17 @@
                     kindPlaceId: sug.kindPlaceId,
                     placeId: sug.placeId,
                 },
-                success: function(response){
-                    if(response == 'ok') {
+                success: response => {
+                    if(response.trim() == 'ok') {
                         showSuccessNotifi('{{__('محل مورد نظر به لیست سفر اضافه شد')}}', 'left', 'var(--koochita-blue)');
                         location.reload();
                     }
                     else{
                         var errorText = '';
                         closeLoading();
-                        if(response == 'notAccess')
+                        if(response.trim() == 'notAccess')
                             errorText = "{{__('شما دسترسی به تغییر محل های سفر ندارید.')}}";
-                        else if(response == 'nok')
+                        else if(response.trim() == 'nok')
                             errorText = 'این محل در لیست سفر موجود می باشد';
                         else
                             errorText = '{{__('مشکلی در ثبت به وجود امده لطفا دوباره تلاش نمایید')}}';
@@ -1077,7 +1077,7 @@
                 },
                 success: function (response) {
                     closeLoading();
-                    if(response == "ok"){
+                    if(response.trim() == "ok"){
                         showSuccessNotifi('{{__('محل مورد نظر از لیست سفر حذف شد')}}', 'left', 'var(--koochita-blue)');
                         $('#place_' + deletedPlaceId).remove();
                     }

@@ -705,7 +705,7 @@ $authUrl = str_replace('state', 'state='.$url, $authUrl);
                 },
                 success: function (response) {
                     closeLoading();
-                    if (response == "ok") {
+                    if (response.status == "ok") {
                         if (typeof _callback === 'function')
                             _callback();
                     }

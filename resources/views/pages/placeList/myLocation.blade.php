@@ -348,13 +348,12 @@
         }
 
         function showSearchResultSec(_kind){
+            toggleMobileListNearPlace("min");
+
             if(_kind)
                 $('#resultMapSearch').addClass('showResult');
-            else{
-                setTimeout(() => {
-                    $('#resultMapSearch').removeClass('showResult');
-                }, 100);
-            }
+            else
+                setTimeout(() => $('#resultMapSearch').removeClass('showResult'), 100);
         }
 
         function chooseFromMap(){

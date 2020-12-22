@@ -1708,17 +1708,21 @@ footer .bookMarkSSec .infoSec .state{
     color: gray;
     font-size: 7px;
 }
-
+.myTripFooter{
+    display: flex;
+    flex-wrap: wrap;
+ }
 .myTripFooter .myTripCard{
     color: black;
     padding: 0px 0px;
-    margin: 0px 0px;
     display: flex;
     flex-direction: column;
     border: solid 1px #808080a6;
     border-radius: 10px;
     box-shadow: 0px 0px 8px 1px #00000061;
     margin-bottom: 15px;
+    width: 230px;
+    margin: 15px;
 }
 .myTripFooter .myTripCard .name{
     padding: 2px 5px;
@@ -1740,6 +1744,9 @@ footer .bookMarkSSec .infoSec .state{
 .myTripFooter .myTripCard .picsSec{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 .myTripFooter .myTripCard .picsSec .pic{
     display: inline-flex;

@@ -142,30 +142,30 @@ function createTripCardFooter(_response){
         _response.map(item => {
             var placePicHtml = '';
             var placePicCount = item.placePic.length;
+            item.placePic.map(item => {
+                placePicHtml += `<div class="pic">
+                                        <img src="${item}" class="resizeImgClass" onload="fitThisImg(this)" >
+                                    </div>`;
+            });
+
             if (placePicHtml == '') {
                 placePicHtml = `<div class="cardPics cardPics-1" style="height: 200px; background: gainsboro;">
-                                <img src="${window.notTrip}">
-                            </div>`;
+                                    <img src="${window.notTrip}" class="resizeImgClass" onload="fitThisImg(this)">
+                                </div>`;
                 placePicCount = 1;
-            } else {
-                item.placePic.map(item => {
-                    placePicHtml += `<div class="pic">
-                                <img src="${item}" class="resizeImgClass" onload="fitThisImg(this)">
-                            </div>`;
-                });
             }
             card += `<a href="${item.url}" class="myTripCard">
-                    <div class="name">${item.name}</div>
-                    <div class="date">
-                        <div class="from">${item.from_}</div>
-                        <div>تا</div>
-                        <div class="from">${item.to_}</div>
-                    </div>
-                    <div class="picsSec pic_${placePicCount}">${placePicHtml}</div>
-                    <div class="placeCount">
-                        تعداد اماکن: ${item.placeCount}
-                    </div>
-                </a>`;
+                        <div class="name">${item.name}</div>
+                        <div class="date">
+                            <div class="from">${item.from_}</div>
+                            <div>تا</div>
+                            <div class="from">${item.to_}</div>
+                        </div>
+                        <div class="picsSec pic_${placePicCount}">${placePicHtml}</div>
+                        <div class="placeCount">
+                            تعداد اماکن: ${item.placeCount}
+                        </div>
+                    </a>`;
         });
         $('#myTripsFooter').html(card);
     }
