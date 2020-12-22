@@ -54,10 +54,10 @@
         var url;
 
         var config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-                'X-CSRF-TOKEN': '{{csrf_token()}}'
-            }
+            {{--headers: {--}}
+            {{--    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',--}}
+            {{--    'X-CSRF-TOKEN': '{{csrf_token()}}'--}}
+            {{--}--}}
         };
 
     </script>

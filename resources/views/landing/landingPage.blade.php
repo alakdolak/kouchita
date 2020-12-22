@@ -426,7 +426,7 @@
             },
             success: function (response) {
                 closeLoading();
-                if (response == "ok") {
+                if (response.status == "ok") {
                     $('#phoneRegister').hide();
                     $('#registerSection').show();
                 }

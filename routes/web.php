@@ -554,7 +554,7 @@ Route::group(array('middleware' => ['auth']), function(){
 
     Route::post('trip/invite/result', 'MyTripsController@inviteResult')->name('trip.invite.result');
 
-    Route::post('trip/editUserAccess', 'MyTripsController@editUserAccess')->name('trip.editUserAccess');
+    Route::post('trip/editUserAccestrip.addPlaces', 'MyTripsController@editUserAccess')->name('trip.editUserAccess');
 
     Route::post('trip/deleteMember', 'MyTripsController@deleteMember')->name('deleteMember');
 

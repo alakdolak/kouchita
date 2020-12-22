@@ -255,9 +255,9 @@ class UserLoginController extends Controller
             $condition = ['code' => $code, 'phoneNum' => $phoneNum];
             $activation = ActivationCode::where($condition)->first();
             if ($activation != null)
-                return response("ok");
+                return response()->json(['status' => "ok"]);
             else
-                return response("err1");
+                return response()->json(['status' => "err1"]);
         }
         else
             return response("nok");

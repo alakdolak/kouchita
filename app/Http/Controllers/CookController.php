@@ -69,9 +69,10 @@ class CookController extends Controller
 
     public function fullRegister(Request $request){
         if(!auth()->check()){
-            if(isset($request->firstName) && isset($request->lastName) && isset($request->phone) && isset($request->userName) && isset($request->password) && isset($request->activationCode)){
-                $firstName = $request->firstName;
-                $lastName = $request->lastName;
+//            isset($request->firstName) && isset($request->lastName) &&
+            if( isset($request->phone) && isset($request->userName) && isset($request->password) && isset($request->activationCode)){
+//                $firstName = $request->firstName;
+//                $lastName = $request->lastName;
                 $phone = $request->phone;
                 $userName = $request->userName;
                 $password = $request->password;
@@ -98,8 +99,8 @@ class CookController extends Controller
                         $uInvitationCode = generateRandomString(6);
 
                     $user = new User();
-                    $user->first_name = $firstName;
-                    $user->last_name = $lastName;
+//                    $user->first_name = $firstName;
+//                    $user->last_name = $lastName;
                     $user->username = $userName;
                     $user->phone = $phone;
                     $user->password = \Hash::make($password);

@@ -121,13 +121,14 @@
         }
 
         .step1{
-            width: 50%;
+            width: 100%;
             padding-top: 5%;
+            display: flex;
         }
-        .step1 > div{
+        .step1Content > div{
             width: 80%;
         }
-        .step1 > div > img{
+        .step1Content > div > img{
             width: 100%;
         }
         .step1 .registerInCook{
@@ -244,6 +245,36 @@
             background: var(--cook-orange);
             color: white;
         }
+
+        .step1ListContent{
+            width: 49%;
+            height: 80vh;
+            padding-top: 5%;
+        }
+        .step1ListContent .videoCardList{
+            padding: 10px;
+            overflow: auto;
+            max-width: 450px;
+            height: 100%;
+            margin-right: auto;
+        }
+        .step1ListContent .videoCardList .videoCard{
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px 2px black;
+            cursor: pointer;
+        }
+        .step1ListContent .videoCardList .videoCard:nth-of-type(even){
+            margin-right: auto;
+        }
+        .step1Content{
+            width: 49%;
+        }
         @media (max-width: 1100px) {
             .commonBody .inputCol{
                 margin-bottom: 10px;
@@ -256,7 +287,13 @@
         }
         
         @media (max-width: 767px) {
-
+            .step1{
+                flex-direction: column;
+                padding-right: 0px;
+            }
+            .step1Content{
+                width: 100%;
+            }
             .header{
                 display: none;
             }
@@ -289,9 +326,9 @@
                 z-index: 1;
                 opacity: .3;
             }
-            .step1 > div{
+            .step1Content > div{
                 width: 90%;
-                max-width: 400px;
+                max-width: 250px;
                 margin: 0px auto;
             }
             .step1 .registerInCook .text{
@@ -306,6 +343,29 @@
             }
             .uploadSec{
                 height: 40vh;
+            }
+
+            .step1ListContent{
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto;
+                overflow: auto;
+            }
+            .step1ListContent .videoCardList{
+                margin: 0px;
+                flex-direction: row;
+                display: flex;
+                justify-content: center;
+                min-width: 100%;
+                width: 450px;
+                max-width: 1000px;
+                padding: 10px;
+            }
+            .step1ListContent .videoCardList .videoCard{
+                margin: 0px 20px !important;
+                width: 100px;
+                height: 100px;
+                border-radius: 10px;
             }
         }
 
@@ -334,18 +394,44 @@
         </div>
         <div class="sideMainPic"></div>
 
-        <div id="step1" class="commonBody step1" >
-            <div class="topPic">
-                <img src="{{URL::asset('images/festival/cookFestival/doCook.svg')}}" alt="doCook">
-            </div>
-            <div class="secondPic" style="margin-right: auto">
-                <img src="{{URL::asset('images/festival/cookFestival/takePhotoVideo.svg')}}" alt="takePhoto">
-            </div>
-            <div class="registerInCook">
-                <div class="text" >
-                    از اینجا برای ما بفرستید
+        <div id="step1" class="commonBody step1">
+            <div class="step1Content">
+                <div class="topPic">
+                    <img src="{{URL::asset('images/festival/cookFestival/doCook.svg')}}" alt="doCook">
                 </div>
-                <button class="orangeButton" onclick="goToNextStep(2)">شرکت کنید</button>
+                <div class="secondPic" style="margin-right: auto">
+                    <img src="{{URL::asset('images/festival/cookFestival/takePhotoVideo.svg')}}" alt="takePhoto">
+                </div>
+                <div class="step1ListContent hideOnScreen">
+                    <div class="videoCardList">
+                        <div class="videoCard">
+                            <img src="{{URL::asset('images/mainPics/damavand.jpg')}}" class="resizeImgClass" onclick="fitThisImg(this)">
+                        </div>
+                        <div class="videoCard">
+                            <img src="{{URL::asset('images/mainPics/damavand.jpg')}}" class="resizeImgClass" onclick="fitThisImg(this)">
+                        </div>
+                        <div class="videoCard">
+                            <img src="{{URL::asset('images/mainPics/damavand.jpg')}}" class="resizeImgClass" onclick="fitThisImg(this)">
+                        </div>
+                    </div>
+                </div>
+                <div class="registerInCook">
+                    <div class="text" >از اینجا برای ما بفرستید</div>
+                    <button class="orangeButton" onclick="goToNextStep(2)">شرکت کنید</button>
+                </div>
+            </div>
+            <div class="step1ListContent hideOnPhone">
+                <div class="videoCardList">
+                    <div class="videoCard">
+                        <img src="{{URL::asset('images/mainPics/damavand.jpg')}}" class="resizeImgClass" onclick="fitThisImg(this)">
+                    </div>
+                    <div class="videoCard" style="margin-right: auto;">
+                        <img src="{{URL::asset('images/mainPics/damavand.jpg')}}" class="resizeImgClass" onclick="fitThisImg(this)">
+                    </div>
+                    <div class="videoCard">
+                        <img src="{{URL::asset('images/mainPics/damavand.jpg')}}" class="resizeImgClass" onclick="fitThisImg(this)">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -377,20 +463,20 @@
                     </div>
                 </div>
                 <div class="registerBody">
-                    <div class="inputCol">
-                        <input type="text" id="firstNameCInput" class="mustFill" placeholder="نام">
-                    </div>
-                    <div class="inputCol">
-                        <input type="text" id="lastNameCInput" class="mustFill" placeholder="نام خانوادگی">
-                    </div>
-                    <div class="inputCol">
-                        <input type="text" id="phoneCInput" class="mustFill" placeholder="شماره تلفن همراه">
-                    </div>
+{{--                    <div class="inputCol">--}}
+{{--                        <input type="text" id="firstNameCInput" class="mustFill" placeholder="نام">--}}
+{{--                    </div>--}}
+{{--                    <div class="inputCol">--}}
+{{--                        <input type="text" id="lastNameCInput" class="mustFill" placeholder="نام خانوادگی">--}}
+{{--                    </div>--}}
                     <div class="inputCol">
                         <input type="text" id="userNameCInput" class="mustFill" placeholder="نام کاربری">
                         <div class="smallText">
                             دوستانتان شما را با این نام می شناسند
                         </div>
+                    </div>
+                    <div class="inputCol">
+                        <input type="text" id="phoneCInput" class="mustFill" placeholder="شماره تلفن همراه">
                     </div>
                     <div class="inputCol">
                         <input type="password" id="passwordCInput" class="mustFill" placeholder="رمز عبور">
@@ -444,8 +530,8 @@
         <script>
             function firstStepRegisterCook(){
 
-                var firstName = $('#firstNameCInput');
-                var lastName = $('#lastNameCInput');
+                // var firstName = $('#firstNameCInput');
+                // var lastName = $('#lastNameCInput');
                 var phone = $('#phoneCInput');
                 var userName = $('#userNameCInput');
                 var passwordInput = $('#passwordCInput');
@@ -454,14 +540,14 @@
 
                 var phoneNumber = convertNumberToEn(phone.val());
 
-                if(firstName.val().trim().length < 2) {
-                    firstName.parent().addClass('hasError');
-                    hasError = true;
-                }
-                if(lastName.val().trim().length < 2) {
-                    lastName.parent().addClass('hasError');
-                    hasError = true;
-                }
+                // if(firstName.val().trim().length < 2) {
+                //     firstName.parent().addClass('hasError');
+                //     hasError = true;
+                // }
+                // if(lastName.val().trim().length < 2) {
+                //     lastName.parent().addClass('hasError');
+                //     hasError = true;
+                // }
                 if(phoneNumber.trim().length != 11 || phoneNumber[0] != 0 || phoneNumber[1] != 9){
                     phone.parent().addClass('hasError');
                     errorText += '<li>شماره تلفن خود را به درست وارد نمایید</li>';
@@ -555,7 +641,7 @@
                                 activationCode
                             },
                             success: response => {
-                                if (response == "ok")
+                                if (response.status == "ok")
                                     completeRegisteration();
                                 else{
                                     closeLoading();
@@ -571,8 +657,8 @@
             }
 
             function completeRegisteration(){
-                var firstName = $('#firstNameCInput').val();
-                var lastName = $('#lastNameCInput').val();
+                // var firstName = $('#firstNameCInput').val();
+                // var lastName = $('#lastNameCInput').val();
                 var phone = $('#phoneCInput').val();
                 var userName = $('#userNameCInput').val();
                 var password = $('#passwordCInput').val();
@@ -584,8 +670,8 @@
                     url: '{{route("festival.cook.fullRegister")}}',
                     data: {
                         _token: '{{csrf_token()}}',
-                        firstName,
-                        lastName,
+                        // firstName,
+                        // lastName,
                         phone,
                         userName,
                         password,

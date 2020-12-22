@@ -4201,6 +4201,7 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .photos{
     height: 78px;
     font-size: 40px;
     color: white;
+    direction: ltr;
 }
 .userRateToPlaceModal .body .fullStarRating{
     color: #ffc71f;
